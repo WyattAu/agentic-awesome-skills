@@ -1,12 +1,12 @@
 # Naming and discovery
 
-A sub-workflow nobody can find gets rebuilt. The community MCP can't read, write, or filter by tags; tags are a UI-only concept; so the **only searchable surface is the workflow's name and description**, via `n8n_list_workflows` (scan the library) and `n8n_get_workflow` (read a candidate's inputs/outputs and body). That makes naming the discovery mechanism, not a cosmetic nicety. Put your discovery hooks in the name and description deliberately.
+A sub-workflow nobody can find gets rebuilt. The community MCP can't read, write, or filter by tags — tags are a UI-only concept — so the **only searchable surface is the workflow's name and description**, via `n8n_list_workflows` (scan the library) and `n8n_get_workflow` (read a candidate's inputs/outputs and body). That makes naming the discovery mechanism, not a cosmetic nicety. Put your discovery hooks in the name and description deliberately.
 
 ---
 
 ## Tags don't help here
 
-n8n has tags in the UI, but the MCP can't see them. Don't rely on tags for AI-side discovery; anything you want re-found later has to be findable by name or description.
+n8n has tags in the UI, but the MCP can't see them. Don't rely on tags for AI-side discovery — anything you want re-found later has to be findable by name or description.
 
 ---
 
@@ -53,15 +53,15 @@ n8n_get_workflow({ id: "<candidate>" })       # read description + inputs/output
 
 When to look: any time you're about to build something that fits a domain or an operation keyword. About to parse a date? Look for `date`. Format an invoice? `invoice`. Send a Slack notification? `Slack` and `Notification`. Two scans is cheap; a duplicate is not.
 
-If a candidate matches, fetch it with `n8n_get_workflow` and read the `description` first; that's the contract. If the inputs/outputs fit, use it. If it's close-but-not-quite, decide whether to extend the existing one or build a deliberate variant (and name the variant so *it* is findable too).
+If a candidate matches, fetch it with `n8n_get_workflow` and read the `description` first — that's the contract. If the inputs/outputs fit, use it. If it's close-but-not-quite, decide whether to extend the existing one or build a deliberate variant (and name the variant so *it* is findable too).
 
-If you expected to find a workflow and it isn't showing up, the most common cause isn't naming; it's that the workflow isn't exposed to the MCP at all. Confirm it exists and is reachable before assuming it's missing.
+If you expected to find a workflow and it isn't showing up, the most common cause isn't naming — it's that the workflow isn't exposed to the MCP at all. Confirm it exists and is reachable before assuming it's missing.
 
 ---
 
 ## The description as a discoverability tool
 
-After a name match, the reader reads the `description`. Make it scan well; what it does, the output shape, the typical caller:
+After a name match, the reader reads the `description`. Make it scan well — what it does, the output shape, the typical caller:
 
 ```
 Parses an RFC2822-formatted date string into ISO format.
@@ -69,7 +69,7 @@ Returns { ok: true, iso: "..." } or { ok: false, error: "invalid_format" }.
 Used by webhook handlers that receive email-style timestamps.
 ```
 
-The description also feeds name/description matching, so seed it with representative keywords ("RFC2822", "date", "ISO", "webhook") so varied scans surface it. A sub-workflow with no description forces the reader to open and inspect every node to figure out what it is; which usually ends in them rebuilding it.
+The description also feeds name/description matching, so seed it with representative keywords ("RFC2822", "date", "ISO", "webhook") so varied scans surface it. A sub-workflow with no description forces the reader to open and inspect every node to figure out what it is — which usually ends in them rebuilding it.
 
 ---
 
@@ -111,10 +111,10 @@ On Cloud or project-enabled instances, sub-workflows live inside a project, and 
 
 Only share cross-project when **both** hold:
 
-- **Stateless**; no project-scoped credentials, Data Tables, or other state that wouldn't make sense outside the owning project.
-- **Generic problem**; date parsing, ID generation, signature validation, formatting. Clearly not coupled to one project's domain.
+- **Stateless** — no project-scoped credentials, Data Tables, or other state that wouldn't make sense outside the owning project.
+- **Generic problem** — date parsing, ID generation, signature validation, formatting. Clearly not coupled to one project's domain.
 
-A stateful sub-workflow (`Customer: get by id`) shared across projects would pull one project's data into another's workflows, which is almost never intended. Keep those in-project and let each project own its repository layer. For ones that meet the bar, tell the user; they share via the n8n UI; and note the cross-project intent in the description.
+A stateful sub-workflow (`Customer: get by id`) shared across projects would pull one project's data into another's workflows, which is almost never intended. Keep those in-project and let each project own its repository layer. For ones that meet the bar, tell the user — they share via the n8n UI — and note the cross-project intent in the description.
 
 ---
 
@@ -123,5 +123,5 @@ A stateful sub-workflow (`Customer: get by id`) shared across projects would pul
 For duplicates or poorly-named sub-workflows:
 
 - **Renaming preserves the workflow ID**, so existing Execute Workflow callers (which reference the ID, not the name) keep working. The new name shows up in scans immediately.
-- n8n has no alias mechanism; just rename, update any sticky-note references inside callers, and move on.
+- n8n has no alias mechanism — just rename, update any sticky-note references inside callers, and move on.
 - For a mass rename, audit callers first: `n8n_list_workflows` to find candidates, then `n8n_get_workflow` on each to check its Execute Workflow node for the old workflow ID before you touch anything.

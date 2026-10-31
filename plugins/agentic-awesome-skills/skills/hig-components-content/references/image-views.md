@@ -5,7 +5,7 @@ source: https://developer.apple.com/design/human-interface-guidelines/image-view
 
 # Image views
 
-An image view displays a single image; or in some cases, an animated sequence of images; on a transparent or opaque background.
+An image view displays a single image — or in some cases, an animated sequence of images — on a transparent or opaque background.
 
 ![A stylized representation of a photo. The image is tinted red to subtly reflect the red in the original six-color Apple logo.](https://docs-assets.developer.apple.com/published/75a4736b08754bbd37dad68ddd0048b9/components-image-view-intro%402x.png)
 
@@ -63,11 +63,11 @@ For guidance on presenting other 3D content in a window or volume, see [Windows 
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/image-views#Developer-documentation)
 
-[`Image`](https://developer.apple.com/documentation/SwiftUI/Image); SwiftUI
+[`Image`](https://developer.apple.com/documentation/SwiftUI/Image) — SwiftUI
 
-[`UIImageView`](https://developer.apple.com/documentation/UIKit/UIImageView); UIKit
+[`UIImageView`](https://developer.apple.com/documentation/UIKit/UIImageView) — UIKit
 
-[`NSImageView`](https://developer.apple.com/documentation/AppKit/NSImageView); AppKit
+[`NSImageView`](https://developer.apple.com/documentation/AppKit/NSImageView) — AppKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/image-views#Videos)
 

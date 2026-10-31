@@ -24,7 +24,7 @@ This document defines how `lore` evolves without breaking existing user projects
 ```
 
 - IDs (`LAYER-DATE-HASH`) are stable as long as the entry text is unchanged. Editing an entry produces a new ID; old ID stays in history (via git) for `history` queries. `sync`'s `[REFINED]` respects this: tags-only updates keep the ID, body rewrites create a new ID and link the old entry via `#superseded-by`.
-- Tag set is a closed set today: `#added`, `#verified`, `#stale`, `#superseded-by`. Adding a new tag is allowed; old skills' tag parsers (which match `(added|verified|stale|superseded-by)`) silently ignore unknown tags. The previous `#archived` tag is no longer part of the vocabulary; old entries carrying it are treated as unknown tags (still parse, semantic meaning is lost; use `#superseded-by` going forward).
+- Tag set is a closed set today: `#added`, `#verified`, `#stale`, `#superseded-by`. Adding a new tag is allowed; old skills' tag parsers (which match `(added|verified|stale|superseded-by)`) silently ignore unknown tags. The previous `#archived` tag is no longer part of the vocabulary; old entries carrying it are treated as unknown tags (still parse, semantic meaning is lost — use `#superseded-by` going forward).
 - **Never make a tag required.** Required tags break every old entry in every old `.lore/`.
 
 ### Layer 3: `.lore/` directory structure
@@ -38,14 +38,14 @@ Current canonical layout:
 ├── _global/
 ├── scopes/
 ├── .archive/      (My notes backups before a user-requested wipe)
-├── draft/        (init only; temporary)
+├── draft/        (init only — temporary)
 └── audit/        (audit only)
 ```
 
 Rules:
 - Adding a new top-level directory (e.g., `rejected/` for rejected entries) is non-breaking.
-- Renaming an existing directory is breaking; every reference in `references/*.md`, every script, and every user's project breaks.
-- Removing a directory is non-breaking if it was never actually written. The previous `archive/` directory fell into this category and has been removed from the layout. Note: when the user asks to wipe a mirror's My notes, lore archives the old content to `.lore/.archive/` first (see `references/platform-mirrors.md`); that directory is part of the layout above and is **not** an entries archive; it is a user-confirmed backup location only.
+- Renaming an existing directory is breaking — every reference in `references/*.md`, every script, and every user's project breaks.
+- Removing a directory is non-breaking if it was never actually written. The previous `archive/` directory fell into this category and has been removed from the layout. Note: when the user asks to wipe a mirror's My notes, lore archives the old content to `.lore/.archive/` first (see `references/platform-mirrors.md`); that directory is part of the layout above and is **not** an entries archive — it is a user-confirmed backup location only.
 
 ### Layer 4: Python scripts
 

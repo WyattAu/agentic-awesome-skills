@@ -7,7 +7,7 @@ for all language-specific behavior across the harness system.
 
 1. **Discover, don't assume**: Adapters define detection rules, not the core system
 2. **One adapter, one language**: Each adapter is self-contained for one language ecosystem
-3. **Graceful degradation**: Every field is optional; missing fields fall back to generic behavior
+3. **Graceful degradation**: Every field is optional — missing fields fall back to generic behavior
 4. **Extensibility**: Adding a new language = adding one adapter file, zero core changes
 
 ## Schema Definition
@@ -158,9 +158,9 @@ adapter:
 
 When the harness system needs language-specific behavior, it follows this resolution chain:
 
-1. **Project-level override**; verified existing consumer configuration and `DEVELOPMENT.md` commands
-2. **Adapter defaults**; The matching adapter's `commands` section
-3. **Generic fallback**; `generic.md` adapter (discovers from Makefile/README)
+1. **Project-level override** — verified existing consumer configuration and `DEVELOPMENT.md` commands
+2. **Adapter defaults** — The matching adapter's `commands` section
+3. **Generic fallback** — `generic.md` adapter (discovers from Makefile/README)
 
 ## Adding a New Language
 
@@ -169,7 +169,7 @@ To add support for a new language (e.g., Kotlin):
 1. Create `references/adapters/kotlin.md` following this schema
 2. Fill in detection rules, commands, route patterns
 3. Optionally add a linter template section to `linter-templates.md`
-4. No changes to core scripts needed; `detect_adapter.py` auto-discovers adapters
+4. No changes to core scripts needed — `detect_adapter.py` auto-discovers adapters
 
 ## Adapter File Format
 

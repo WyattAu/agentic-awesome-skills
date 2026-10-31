@@ -31,10 +31,10 @@ report_count: 26
 
 ## Crown Jewel Targets
 
-GraphQL vulnerabilities are high-value because the attack surface is both broad and deep; a poorly authorized endpoint may expose data models, privilege escalation paths, and cross-API state confusion. Potentially important surfaces include (no payout guarantee):
+GraphQL vulnerabilities are high-value because the attack surface is both broad and deep — a poorly authorized endpoint may expose data models, privilege escalation paths, and cross-API state confusion. Potentially important surfaces include (no payout guarantee):
 
 - **Platform APIs** (GitHub, Shopify, Stripe-tier targets) where GraphQL mutations interact with REST APIs managing the same resources
-- **Race conditions between GraphQL mutations and REST endpoints** where state synchronization is non-atomic; severity depends on demonstrated impact and program policy
+- **Race conditions between GraphQL mutations and REST endpoints** where state synchronization is non-atomic — severity depends on demonstrated impact and program policy
 - **Authorization persistence bugs** where team/org/repo membership state is controlled by one API but readable/writable by another
 - **B2B SaaS platforms** where one tenant affecting another via schema traversal = critical
 - **Internal admin GraphQL endpoints** accidentally exposed to lower-privilege users
@@ -93,34 +93,34 @@ X-Request-Id + no REST-style path params = likely GraphQL
 
 ## Step-by-Step Hunting Methodology
 
-1. **Discover the endpoint**; spider JS bundles, check `/graphql`, `/api/graphql`, review Burp passive scan hits for `application/json` POST with query fields
+1. **Discover the endpoint** — spider JS bundles, check `/graphql`, `/api/graphql`, review Burp passive scan hits for `application/json` POST with query fields
 
-2. **Test introspection**; send the full introspection query. Even if blocked, try field-level enumeration:
+2. **Test introspection** — send the full introspection query. Even if blocked, try field-level enumeration:
    ```graphql
    { __typename }
    ```
    A valid __typename response identifies the runtime object type; it does not demonstrate applicable schema introspection or discoverability.
 
-3. **Map the applicable schema**; use `InQL` (Burp extension) or `graphql-voyager` to visualize relationships. Specifically look for:
+3. **Map the applicable schema** — use `InQL` (Burp extension) or `graphql-voyager` to visualize relationships. Specifically look for:
    - Mutations that modify ownership, permissions, or membership
    - Mutations that mirror REST API functionality
 
-4. **Identify REST/GraphQL overlap**; document every resource that can be modified via BOTH REST and GraphQL. These dual-write surfaces are your RC targets.
+4. **Identify REST/GraphQL overlap** — document every resource that can be modified via BOTH REST and GraphQL. These dual-write surfaces are your RC targets.
 
-5. **Test authorization boundaries per mutation**; replay mutations as lower-privilege users. Does the server enforce the same authz as the equivalent REST call?
+5. **Test authorization boundaries per mutation** — replay mutations as lower-privilege users. Does the server enforce the same authz as the equivalent REST call?
 
-6. **Hunt cross-API state desync**; find sequences where:
+6. **Hunt cross-API state desync** — find sequences where:
    - REST action should revoke access
    - GraphQL mutation re-grants or preserves it
    - Test the ordering: REST first → GraphQL → check state; then GraphQL first → REST → check state
 
-7. **Test for persistent privilege after role/membership changes**; remove a user via REST, then call the corresponding GraphQL mutation for that resource. Query current state via both APIs and compare.
+7. **Test for persistent privilege after role/membership changes** — remove a user via REST, then call the corresponding GraphQL mutation for that resource. Query current state via both APIs and compare.
 
-8. **Probe for IDOR in node IDs**; GraphQL global IDs often encode object type + ID. Swap IDs across object boundaries and across account contexts.
+8. **Probe for IDOR in node IDs** — GraphQL global IDs often encode object type + ID. Swap IDs across object boundaries and across account contexts.
 
-9. **Check batch query abuse**; send arrays of operations to bypass rate limiting or amplify enumeration.
+9. **Check batch query abuse** — send arrays of operations to bypass rate limiting or amplify enumeration.
 
-10. **Document the exact reproduction chain**; for RC bugs, time-based steps must be reproducible deterministically.
+10. **Document the exact reproduction chain** — for RC bugs, time-based steps must be reproducible deterministically.
 
 ---
 
@@ -161,7 +161,7 @@ curl -s -X POST https://target.com/graphql \
 ```graphql
 { unknownField }
 ```
-If response returns `"Did you mean: [realFieldName]?"`; schema is enumerable despite introspection being disabled.
+If response returns `"Did you mean: [realFieldName]?"` — schema is enumerable despite introspection being disabled.
 
 **Batch query amplification:**
 ```json
@@ -217,13 +217,13 @@ grep -Eo '"(/[a-z0-9/_-]*graphql[a-z0-9/_-]*)"' bundle.js
 
 **GraphQL introspection & audit tooling:**
 ```bash
-# InQL (Burp extension): visualize GraphQL schema and relationships
+# InQL (Burp extension) — visualize GraphQL schema and relationships
 inql -t https://target/graphql --generate-queries
 
-# Clairvoyance: brute-force field names when introspection is disabled
+# Clairvoyance — brute-force field names when introspection is disabled
 python3 clairvoyance.py -u https://target/graphql -H "Authorization: Bearer TOKEN" -w wordlist.txt -o schema.json
 
-# GraphQL Cop: scan for common misconfigurations (introspection enabled, no depth limits, etc.)
+# GraphQL Cop — scan for common misconfigurations (introspection enabled, no depth limits, etc.)
 graphql-cop -t https://target/graphql
 ```
 
@@ -231,24 +231,24 @@ graphql-cop -t https://target/graphql
 
 ## Common Root Causes
 
-1. **Dual-write without atomic locking**; developers implement the same resource modification in both REST and GraphQL independently. Neither system is aware the other exists for that resource. State updates aren't serialized or compared.
+1. **Dual-write without atomic locking** — developers implement the same resource modification in both REST and GraphQL independently. Neither system is aware the other exists for that resource. State updates aren't serialized or compared.
 
-2. **Inconsistent authorization middleware**; REST endpoints go through one auth layer (e.g., middleware chain), GraphQL resolvers go through a different resolver-level check. The same action, different enforcement.
+2. **Inconsistent authorization middleware** — REST endpoints go through one auth layer (e.g., middleware chain), GraphQL resolvers go through a different resolver-level check. The same action, different enforcement.
 
-3. **GraphQL as "new REST" migration**; teams add GraphQL mutations that mirror REST functionality without auditing the permission model. The GraphQL version is less mature and skips checks the REST version accumulated over time.
+3. **GraphQL as "new REST" migration** — teams add GraphQL mutations that mirror REST functionality without auditing the permission model. The GraphQL version is less mature and skips checks the REST version accumulated over time.
 
-4. **Introspection left on in production**; default framework settings (Apollo, Graphene) enable introspection in all environments. Developers forget to disable it, treating it as "just documentation."
+4. **Introspection left on in production** — default framework settings (Apollo, Graphene) enable introspection in all environments. Developers forget to disable it, treating it as "just documentation."
 
-5. **Node ID trust without re-authorization**; GraphQL global IDs (`base64("ObjectType:123")`) are decoded and trusted without verifying the requesting user has access to that specific object.
+5. **Node ID trust without re-authorization** — GraphQL global IDs (`base64("ObjectType:123")`) are decoded and trusted without verifying the requesting user has access to that specific object.
 
-6. **Mutation side effects not mirrored**; when a REST action triggers cascading effects (e.g., team removal cascades to permission revocation), the GraphQL equivalent mutation doesn't trigger the same cascades.
+6. **Mutation side effects not mirrored** — when a REST action triggers cascading effects (e.g., team removal cascades to permission revocation), the GraphQL equivalent mutation doesn't trigger the same cascades.
 
 ---
 
 ## Bypass Techniques
 
 **Defense: Introspection disabled**
-- Bypass via field suggestion errors; send invalid field names and parse "did you mean X?" responses
+- Bypass via field suggestion errors — send invalid field names and parse "did you mean X?" responses
 - Use `clairvoyance` to brute-force field names against a wordlist
 - Check JS bundles for hardcoded query strings that reveal the schema
 
@@ -265,8 +265,8 @@ fragment F on User { repos { teams { members { id } } } }
 
 **Defense: Auth checks on mutations**
 - Test with tokens at different privilege tiers (viewer, member, admin)
-- Test unauthenticated; some mutations don't check session at all
-- Test with tokens from *different organizations*; multi-tenant IDOR
+- Test unauthenticated — some mutations don't check session at all
+- Test with tokens from *different organizations* — multi-tenant IDOR
 
 **Defense: WAF blocking `__schema`**
 - Alias the introspection field:
@@ -288,7 +288,7 @@ GraphQL requires top-level fields of one mutation operation to execute serially.
 ## Gate 0 Validation
 
 1. **What can the attacker DO right now?**
-   Must be a concrete action: access data they shouldn't see, retain privileges after revocation, modify another user's resources. "The schema is visible" alone is not enough; what does the schema unlock?
+   Must be a concrete action: access data they shouldn't see, retain privileges after revocation, modify another user's resources. "The schema is visible" alone is not enough — what does the schema unlock?
 
 2. **What does the victim LOSE?**
    Must be a real asset: data confidentiality, access control integrity, org security guarantees. For the RC pattern: an org admin loses the guarantee that removing a team revokes all access. That's a security contract violation.
@@ -300,70 +300,70 @@ GraphQL requires top-level fields of one mutation operation to execute serially.
 
 ## Illustrative Impact Scenarios (not verified current vulnerabilities)
 
-**Scenario A; Covert Persistent Admin After Team Removal (GitHub-pattern)**
-An attacker who legitimately had admin access to a repository via team membership gets removed by the org admin through the REST API. The attacker, before removal completes, calls the `updateTeamsRepository` GraphQL mutation to re-associate their team with admin permissions. The REST removal and GraphQL re-grant create a desync where the UI shows the team as removed, but the GraphQL state preserves admin-level access. The attacker retains covert write access to the repository for the observed tested interval; potential code-write impact requires separate proof, reading secrets in CI/CD; without appearing in the team's member list. Do not infer persistence through audits without evidence.
+**Scenario A — Covert Persistent Admin After Team Removal (GitHub-pattern)**
+An attacker who legitimately had admin access to a repository via team membership gets removed by the org admin through the REST API. The attacker, before removal completes, calls the `updateTeamsRepository` GraphQL mutation to re-associate their team with admin permissions. The REST removal and GraphQL re-grant create a desync where the UI shows the team as removed, but the GraphQL state preserves admin-level access. The attacker retains covert write access to the repository for the observed tested interval — potential code-write impact requires separate proof, reading secrets in CI/CD — without appearing in the team's member list. Do not infer persistence through audits without evidence.
 
-**Scenario B; Covert Access via Repo Transfer Race (GitHub-pattern)**
+**Scenario B — Covert Access via Repo Transfer Race (GitHub-pattern)**
 An attacker with admin access initiates a repository transfer to another organization via the REST API. During or after the transfer, they invoke `updateTeamsRepository` on the now-transferred repo's ID. Because the GraphQL mutation doesn't validate current org ownership state consistently with the REST transfer event, the original attacker's team retains admin access on a repo now owned by a different organization. The receiving org has no visibility into this team association. The attacker can exfiltrate intellectual property from an org they have no legitimate relationship with.
 
-**Scenario C; Introspection as Reconnaissance Prerequisite (Shopify-pattern)**
-On a platform where introspection is intentionally enabled (per-program rules), a hunter maps the applicable schema and discovers undocumented mutations for `fulfillmentOrderMove` and `inventoryAdjust` that are not surfaced in public docs. These mutations accept merchant IDs as arguments with no scoping validation visible in the schema. This recon directly enables targeted IDOR testing against merchant-to-merchant data isolation; the introspection itself is zero-severity, but it is the entry point to critical findings.
+**Scenario C — Introspection as Reconnaissance Prerequisite (Shopify-pattern)**
+On a platform where introspection is intentionally enabled (per-program rules), a hunter maps the applicable schema and discovers undocumented mutations for `fulfillmentOrderMove` and `inventoryAdjust` that are not surfaced in public docs. These mutations accept merchant IDs as arguments with no scoping validation visible in the schema. This recon directly enables targeted IDOR testing against merchant-to-merchant data isolation — the introspection itself is zero-severity, but it is the entry point to critical findings.
 
 ---
 
-## Disclosed Report Citations (Backfill +9: 2019-2024)
+## Disclosed Report Citations (Backfill +9 — 2019-2024)
 
 The following upstream reference leads are retained for provenance. Their titles, payloads, amounts, dates and report reach have not been independently verified by this import; open the primary report/advisory before citing a case as evidence. No internal report/test artifact is bundled.
 
-4. **HackerOne; Confidential user-data exposure via GraphQL `User` type** ([H1 #489146](https://hackerone.com/reports/489146))
+4. **HackerOne — Confidential user-data exposure via GraphQL `User` type** ([H1 #489146](https://hackerone.com/reports/489146))
     - Subclass: broken field-level authorization (PII exposure)
     - Payload: direct `user(id:...)` query returning `email`, `backup_codes_hash`, `facebook_user_id`, `account_recovery_phone_number_verified_at`, `totp_enabled`
     - Root cause: backend migration introduced a GraphQL `User` type with no field-level authz; any authenticated user could enumerate PII of all users
     - Historical case details: verify the linked primary source before reuse.
 
-5. **HackerOne; `DestroyLlmConversation` mutation IDOR (Copilot pre-release)** ([H1 #2218334](https://hackerone.com/reports/2218334))
+5. **HackerOne — `DestroyLlmConversation` mutation IDOR (Copilot pre-release)** ([H1 #2218334](https://hackerone.com/reports/2218334))
     - Subclass: mutation IDOR on AI/LLM feature
     - Payload: `mutation { destroyLlmConversation(input:{id:"<victim_conv_id>"}) { … } }`
     - Root cause: new LLM-conversation mutation shipped without authorization decorator; any user could destroy any conversation
     - Historical case details: verify the linked primary source before reuse.
 
-6. **Shopify; `BillingDocumentDownload` cross-tenant IDOR** ([H1 #2207248](https://hackerone.com/reports/2207248))
+6. **Shopify — `BillingDocumentDownload` cross-tenant IDOR** ([H1 #2207248](https://hackerone.com/reports/2207248))
     - Subclass: IDOR on relay GID across tenants
     - Payload: `query { billingDocumentDownload(id:"gid://shopify/BillingInvoice/<other_shop_id>") { url } }`
     - Root cause: `BillingInvoice` resolver authorized the requester's shop but did not verify the invoice belonged to that shop
     - Historical case details: verify the linked primary source before reuse.
 
-7. **Shopify; Rate-limit bypass via negative cost** ([H1 #481518](https://hackerone.com/reports/481518))
+7. **Shopify — Rate-limit bypass via negative cost** ([H1 #481518](https://hackerone.com/reports/481518))
     - Subclass: query-cost-calc abuse (sibling pattern to alias batching)
-    - Payload: `query { products(first:-100) { … } }`; negative `first` produced a negative query-cost contribution, refilling the leaky-bucket each call
+    - Payload: `query { products(first:-100) { … } }` — negative `first` produced a negative query-cost contribution, refilling the leaky-bucket each call
     - Root cause: query-cost calculator did not floor at zero; negative values subtracted from the consumed budget
     - Historical case details: verify the linked primary source before reuse.
 
-8. **Stripe; Cross-tenant IDOR via `UpdateAtlasApplicationPerson`** ([H1 #1066203](https://hackerone.com/reports/1066203))
+8. **Stripe — Cross-tenant IDOR via `UpdateAtlasApplicationPerson`** ([H1 #1066203](https://hackerone.com/reports/1066203))
     - Subclass: cross-tenant IDOR on mutation
-    - Payload: `mutation { updateAtlasApplicationPerson(input:{personId:"<victim_person_id>", …}) }`; adding/modifying a co-founder on another merchant's Stripe Atlas application
+    - Payload: `mutation { updateAtlasApplicationPerson(input:{personId:"<victim_person_id>", …}) }` — adding/modifying a co-founder on another merchant's Stripe Atlas application
     - Root cause: mutation scoped only to "is admin of some merchant," not "is admin of the merchant owning this person"
     - Historical case details: verify the linked primary source before reuse.
 
-9. **EXNESS; SSRF in GraphQL `allTicks` query** ([H1 #1864188](https://hackerone.com/reports/1864188))
+9. **EXNESS — SSRF in GraphQL `allTicks` query** ([H1 #1864188](https://hackerone.com/reports/1864188))
     - Subclass: SSRF via GraphQL argument
-    - Payload: `query { allTicks(source:"http://169.254.169.254/latest/meta-data/") { … } }`; `source` arg fed into a server-side HTTP client
+    - Payload: `query { allTicks(source:"http://169.254.169.254/latest/meta-data/") { … } }` — `source` arg fed into a server-side HTTP client
     - Root cause: GraphQL field accepted a URL arg and dereferenced it without scheme/host allowlist
     - Historical case details: verify the linked primary source before reuse.
 
-10. **EXNESS; GraphQL attribute-batching DoS** ([H1 #2293642](https://hackerone.com/reports/2293642))
+10. **EXNESS — GraphQL attribute-batching DoS** ([H1 #2293642](https://hackerone.com/reports/2293642))
     - Subclass: DoS via batching / deep-attribute amplification on unauth endpoint
     - Payload: single HTTP request containing N batched operations, each requesting deeply nested attribute trees, sustained until origin OOM
     - Root cause: no query-depth, query-complexity, or batch-size limits on unauthenticated `/graphql`
     - Historical case details: verify the linked primary source before reuse.
 
-11. **GitLab; Malicious-runner attach via `runnerUpdate` (CVE-2023-2478)** ([Advisory](https://about.gitlab.com/releases/2023/05/05/critical-security-release-gitlab-15-11-2-released/))
+11. **GitLab — Malicious-runner attach via `runnerUpdate` (CVE-2023-2478)** ([Advisory](https://about.gitlab.com/releases/2023/05/05/critical-security-release-gitlab-15-11-2-released/))
     - Subclass: auth bypass on mutation / project-scope missing
     - Payload: `mutation { runnerUpdate(input:{id:"<attacker_runner_gid>", associatedProjects:["<victim_project_gid>"]}) }`
-    - Root cause: `runnerUpdate` did not check that the caller had Maintainer on the target project; any user could bind their malicious runner and intercept CI jobs (build secrets, code execution)
+    - Root cause: `runnerUpdate` did not check that the caller had Maintainer on the target project — any user could bind their malicious runner and intercept CI jobs (build secrets, code execution)
     - Historical case details: verify the linked primary source before reuse.
 
-12. **AS Watson; Auth bypass via unrestricted `createAdminUser` mutation** ([HackerOne blog](https://www.hackerone.com/blog/how-graphql-bug-resulted-authentication-bypass))
+12. **AS Watson — Auth bypass via unrestricted `createAdminUser` mutation** ([HackerOne blog](https://www.hackerone.com/blog/how-graphql-bug-resulted-authentication-bypass))
     - Subclass: sensitive mutation reachable without authentication (introspection-aided discovery)
     - Payload: `mutation { createAdminUser(input:{email:"x@x", role:"ADMIN", password:"…"}) { token } }` invoked unauthenticated after schema enumeration via introspection
     - Root cause: schema lacked per-field authorization directives; `createAdminUser` exposed to public role
@@ -373,17 +373,17 @@ The following upstream reference leads are retained for provenance. Their titles
 
 ## Related Skills & Chains
 
-- **`hunt-idor`**; Review object-level authorization on node/global-ID resolvers; their existence does not imply missing scoping. Chain primitive: GraphQL introspection + IDOR (`node()` resolver) → cross-tenant data via base64-decoded type:id replay.
-- **`hunt-api-misconfig`**; GraphQL mutations are mass-assignment magnets: clients send full input objects, server merges. Chain primitive: GraphQL mutation + extra fields (`isAdmin:true`, `verified:true`) → mass assignment → role escalation.
-- **`hunt-business-logic`**; GraphQL aliases can call the same mutation multiple times; assess actual per-user/operation limits. Chain primitive: aliased mutation + business-logic flaw → coupon redeemed N times in single network round-trip.
-- **`hunt-race-condition`**; Separate concurrent HTTP requests may test backend atomicity; top-level mutation aliases execute serially. Chain primitive: GraphQL batch + race → atomic-update missing → double-spend balance.
-- **`security-arsenal`**; Load the GraphQL Payload Pack: introspection query, schema-suggestion error probe, alias amplification template, depth-bomb DoS payload, batch-attack template.
-- **`triage-validation`**; Apply the Body-Diff Rule: introspection alone is informational; require a concrete cross-tenant read or mutation-with-impact PoC before submitting.
+- **`hunt-idor`** — Review object-level authorization on node/global-ID resolvers; their existence does not imply missing scoping. Chain primitive: GraphQL introspection + IDOR (`node()` resolver) → cross-tenant data via base64-decoded type:id replay.
+- **`hunt-api-misconfig`** — GraphQL mutations are mass-assignment magnets: clients send full input objects, server merges. Chain primitive: GraphQL mutation + extra fields (`isAdmin:true`, `verified:true`) → mass assignment → role escalation.
+- **`hunt-business-logic`** — GraphQL aliases can call the same mutation multiple times; assess actual per-user/operation limits. Chain primitive: aliased mutation + business-logic flaw → coupon redeemed N times in single network round-trip.
+- **`hunt-race-condition`** — Separate concurrent HTTP requests may test backend atomicity; top-level mutation aliases execute serially. Chain primitive: GraphQL batch + race → atomic-update missing → double-spend balance.
+- **`security-arsenal`** — Load the GraphQL Payload Pack: introspection query, schema-suggestion error probe, alias amplification template, depth-bomb DoS payload, batch-attack template.
+- **`triage-validation`** — Apply the Body-Diff Rule: introspection alone is informational; require a concrete cross-tenant read or mutation-with-impact PoC before submitting.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

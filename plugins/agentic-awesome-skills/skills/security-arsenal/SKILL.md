@@ -62,7 +62,7 @@ Use a unique canary in an owned test session. Do not collect live cookies or tok
 // fetch does not bypass script-src: an inline onerror remains blocked.
 // connect-src also governs fetch destinations. Test an authorized canary under the real policy.
 
-// If script-src nonce present; find nonce reflection
+// If script-src nonce present — find nonce reflection
 <script nonce="NONCE_FROM_PAGE">alert(1)</script>
 
 // Angular template injection (bypasses many CSPs)
@@ -127,9 +127,9 @@ http://169.254.169.254/metadata/instance?api-version=2021-02-01
 ```bash
 http://localhost:6379      # Redis (unauthenticated, RESP protocol)
 http://localhost:9200      # Elasticsearch (/_cat/indices)
-http://localhost:27017     # MongoDB (binary; check for connection refused vs timeout)
+http://localhost:27017     # MongoDB (binary — check for connection refused vs timeout)
 http://localhost:8080      # Admin panel
-http://localhost:2375      # Docker API; GET /containers/json
+http://localhost:2375      # Docker API — GET /containers/json
 https://10.96.0.1:443  # Kubernetes API server
 ```
 
@@ -422,8 +422,8 @@ test`id`.jpg
 - [MFA / 2FA BYPASS PAYLOADS](references/details.md)
 - [SAML ATTACKS](references/details.md)
 - [GF PATTERN NAMES (tomnomnom/gf)](references/details.md)
-- [ALWAYS REJECTED; NEVER SUBMIT](references/details.md)
-- [CONDITIONALLY VALID; REQUIRES CHAIN](references/details.md)
+- [ALWAYS REJECTED — NEVER SUBMIT](references/details.md)
+- [CONDITIONALLY VALID — REQUIRES CHAIN](references/details.md)
 - [WORDLISTS (Installed in ~/wordlists/)](references/details.md)
 - [Related Skills & Chains](references/details.md)
 - [Operator Notes (Claude-BugHunter)](references/details.md)
@@ -431,7 +431,7 @@ test`id`.jpg
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

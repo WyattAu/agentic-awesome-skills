@@ -254,8 +254,8 @@ capacity = poller.result()
 3. **Start with smaller SKUs** and scale up as needed
 4. **Use tags** for cost tracking and organization
 5. **Check name availability** before creating capacities
-6. **Handle LRO properly**; don't assume immediate completion
-7. **Set up capacity admins**; specify users who can manage workspaces
+6. **Handle LRO properly** — don't assume immediate completion
+7. **Set up capacity admins** — specify users who can manage workspaces
 8. **Monitor capacity usage** via Azure Monitor metrics
 
 ## When to Use

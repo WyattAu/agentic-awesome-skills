@@ -30,9 +30,9 @@ Do NOT use this skill when:
 
 1. Determine the tenancy model. Ask the user about their scale expectations and isolation requirements. For most SaaS apps under 1000 tenants, shared-schema with a `tenant_id` column on every table is the correct default. Schema-per-tenant adds operational overhead (migrations run N times). Database-per-tenant can also be justified by isolation, noisy-neighbor, recovery, customer-managed keys or operational needs; compare actual requirements.
 
-2. Add `tenant_id` to every tenant-scoped table. The column must be `NOT NULL`, type `UUID` or `TEXT`, and included in every composite index. Never allow a tenant-scoped table to exist without this column; a missing `tenant_id` is a data leak waiting to happen.
+2. Add `tenant_id` to every tenant-scoped table. The column must be `NOT NULL`, type `UUID` or `TEXT`, and included in every composite index. Never allow a tenant-scoped table to exist without this column — a missing `tenant_id` is a data leak waiting to happen.
 
-3. Set up PostgreSQL Row-Level Security (RLS). Create a policy on each tenant-scoped table that filters rows by `current_setting('app.current_tenant_id')`. This acts as a database-level safety net; even if application code forgets a WHERE clause, RLS blocks cross-tenant reads.
+3. Set up PostgreSQL Row-Level Security (RLS). Create a policy on each tenant-scoped table that filters rows by `current_setting('app.current_tenant_id')`. This acts as a database-level safety net — even if application code forgets a WHERE clause, RLS blocks cross-tenant reads.
 
 4. Build tenant-aware middleware. At the start of every request, extract the `tenant_id` from the authenticated session or JWT claims. Set it on the database connection using `SET LOCAL app.current_tenant_id = '...'` inside a transaction. Every subsequent query in that request inherits the tenant scope automatically.
 
@@ -40,7 +40,7 @@ Do NOT use this skill when:
 
 6. Handle tenant-aware migrations. Every new table migration must include `tenant_id` as a column. Write a linting rule or CI check that rejects any migration creating a table without `tenant_id` unless the table is explicitly marked as global (e.g., `plans`, `feature_flags`).
 
-7. Build cross-tenant admin routes separately. Admin endpoints that aggregate data across tenants must bypass RLS explicitly using `SET LOCAL role = 'admin_bypass'` or a dedicated database role. These routes must be protected by a separate admin authentication flow; never reuse tenant user sessions for admin access.
+7. Build cross-tenant admin routes separately. Admin endpoints that aggregate data across tenants must bypass RLS explicitly using `SET LOCAL role = 'admin_bypass'` or a dedicated database role. These routes must be protected by a separate admin authentication flow — never reuse tenant user sessions for admin access.
 
 8. Implement tenant provisioning. When a new customer signs up, create their tenant record, seed default data (roles, settings, onboarding state), and assign the founding user. Wrap this in a database transaction so partial provisioning never leaves orphan records.
 
@@ -105,11 +105,11 @@ function createTenantPrisma(tenantId: string): PrismaClient {
   prisma.$use(async (params, next) => {
     if (GLOBAL_TABLES.has(params.model ?? "")) return next(params);
 
-    // Initialize args.where; Prisma passes undefined args for calls like findMany()
+    // Initialize args.where — Prisma passes undefined args for calls like findMany()
     params.args = params.args ?? {};
     params.args.where = params.args.where ?? {};
 
-    // Inject tenant filter on reads (skip findUnique; it only accepts unique-field selectors)
+    // Inject tenant filter on reads (skip findUnique — it only accepts unique-field selectors)
     if (["findMany", "findFirst", "count", "aggregate"].includes(params.action)) {
       params.args.where = { ...params.args.where, tenantId };
     }
@@ -156,9 +156,9 @@ function createTenantPrisma(tenantId: string): PrismaClient {
 
 2. **Tenant data export for GDPR/compliance.** When a tenant requests a full data export, you need to query every tenant-scoped table for that `tenant_id` and package it. Build a registry of all tenant-scoped tables (parse your migration files or maintain a manifest) so the export job doesn't miss tables added after the export feature was built.
 
-3. **Shared resources between tenants.** Some features require shared state; e.g., a marketplace where Tenant A's products are visible to Tenant B's users. These tables need a different RLS policy: read access is public (no tenant filter), but write access is still scoped to the owning tenant. Model these as `owner_tenant_id` instead of `tenant_id`.
+3. **Shared resources between tenants.** Some features require shared state — e.g., a marketplace where Tenant A's products are visible to Tenant B's users. These tables need a different RLS policy: read access is public (no tenant filter), but write access is still scoped to the owning tenant. Model these as `owner_tenant_id` instead of `tenant_id`.
 
-4. **Tenant-aware background jobs.** When a cron job or queue worker processes tasks, there is no HTTP request to extract `tenant_id` from. The job payload must include `tenant_id`, and the worker must set the database session variable before processing. Never run background jobs without tenant context; they will either fail on RLS or bypass it entirely.
+4. **Tenant-aware background jobs.** When a cron job or queue worker processes tasks, there is no HTTP request to extract `tenant_id` from. The job payload must include `tenant_id`, and the worker must set the database session variable before processing. Never run background jobs without tenant context — they will either fail on RLS or bypass it entirely.
 
 5. **Connection pool exhaustion with schema-per-tenant.** If you use one PostgreSQL schema per tenant and each schema requires its own connection pool, 500 tenants means 500 pools. This exhausts `max_connections` fast. Use a connection pooler like PgBouncer in transaction mode, or switch to shared-schema before hitting this wall.
 
@@ -168,7 +168,7 @@ function createTenantPrisma(tenantId: string): PrismaClient {
 
 2. **Index `tenant_id` as the first column in every composite index.** PostgreSQL uses leftmost prefix matching for composite indexes. An index on `(tenant_id, created_at)` serves both "all items for tenant X" and "items for tenant X sorted by date." An index on `(created_at, tenant_id)` only helps date-range queries across all tenants.
 
-3. **Use subdomains or path prefixes for tenant routing.** `acme.yourapp.com` or `yourapp.com/org/acme`; both work. Map the subdomain or path to a `tenant_id` lookup at the edge (middleware or reverse proxy). This lookup should be cached (Redis or in-memory with 60s TTL) since it runs on every single request.
+3. **Use subdomains or path prefixes for tenant routing.** `acme.yourapp.com` or `yourapp.com/org/acme` — both work. Map the subdomain or path to a `tenant_id` lookup at the edge (middleware or reverse proxy). This lookup should be cached (Redis or in-memory with 60s TTL) since it runs on every single request.
 
 4. **Separate tenant-scoped tables from global tables explicitly.** Maintain a list (code constant or database table) of which tables are global (no `tenant_id`) and which are tenant-scoped. Use this list in your ORM middleware, your migration linter, and your data export job. If a table isn't in either list, the CI check should fail.
 

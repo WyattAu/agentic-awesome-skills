@@ -225,7 +225,7 @@ export const api = onRequest({ cors: true, region: "us-central1" }, async (req, 
   res.json({ posts });
 });
 
-// Firestore trigger; runs when a new message is created
+// Firestore trigger — runs when a new message is created
 export const onMessageCreated = onDocumentCreated(
   "channels/{channelId}/messages/{messageId}",
   async (event) => {
@@ -291,7 +291,7 @@ firebase emulators:start --import=./emulator-data
 ```
 
 ```json
-// firebase.json; emulator config
+// firebase.json — emulator config
 {
   "emulators": {
     "auth": { "port": 9099 },
@@ -379,9 +379,9 @@ firebase hosting:channel:delete pr-123
 
 ## Related Skills
 
-- gcp-cloud-functions (`gcp-cloud-functions`); Function runtime patterns
-- vercel-deployments (`vercel-deployments`); Alternative frontend hosting
-- convex-backend (`convex-backend`); Alternative managed backend
+- gcp-cloud-functions (`gcp-cloud-functions`) — Function runtime patterns
+- vercel-deployments (`vercel-deployments`) — Alternative frontend hosting
+- convex-backend (`convex-backend`) — Alternative managed backend
 
 ## Limitations
 

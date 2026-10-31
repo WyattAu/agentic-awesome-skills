@@ -93,7 +93,7 @@ String name = optional.orElse("default");
 // ❌ Optional as a field or parameter (anti-pattern)
 class User { private Optional<String> nickname; }
 
-// ✅; Optional is for return types only
+// ✅ — Optional is for return types only
 class User { private String nickname; } // nullable field
 public Optional<String> getNickname() { return Optional.ofNullable(nickname); }
 ```
@@ -120,7 +120,7 @@ record Point(int x, int y) {}
 // ❌ Builder pattern for a 2-field object
 User user = new User.Builder().name("Alice").age(30).build();
 
-// ✅; use record or constructor directly for small objects
+// ✅ — use record or constructor directly for small objects
 record User(String name, int age) {}
 var user = new User("Alice", 30);
 ```
@@ -199,7 +199,7 @@ try {
     log.error("error", e);
 }
 
-// ✅; rethrow as unchecked if you can't handle it
+// ✅ — rethrow as unchecked if you can't handle it
 try {
     risky();
 } catch (IOException e) {
@@ -211,7 +211,7 @@ try {
 // ❌ Checked exceptions declared on every method
 public void process() throws IOException, SQLException, ParseException { ... }
 
-// ✅; wrap at the boundary; internal methods throw unchecked
+// ✅ — wrap at the boundary; internal methods throw unchecked
 ```
 
 ---

@@ -56,8 +56,8 @@ for (int candidate = 0; candidate < 65536; candidate++) {
 **Key insight:** Multi-layer decryption challenges are fundamentally about building fast brute-force engines. JIT execution (mapping binary memory into solver, running code directly as function calls) is orders of magnitude faster than ptrace. Fork-based COW only separates process memory; it is not isolation from host files, devices, credentials or networking.
 
 **Gotchas:**
-- Real binary may use `call` (0xe8) instead of `jmp` (0xe9) for layer transitions; adjust tail patching
-- BSS may extend beyond ELF MemSiz via kernel brk mapping; map extra space
+- Real binary may use `call` (0xe8) instead of `jmp` (0xe9) for layer transitions — adjust tail patching
+- BSS may extend beyond ELF MemSiz via kernel brk mapping — map extra space
 - Check actual CPU instruction support; unsupported SHA-NI can fault; do not assume hidden support
 
 ---
@@ -68,7 +68,7 @@ for (int candidate = 0; candidate < 65536; candidate++) {
 
 **Recognition:**
 - `strings` reveals `EMBEDDED_ZIP` and `ENCRYPTED_MESSAGE` symbols
-- Binary is not stripped; `nm` or `readelf -s` shows data symbols in `.rodata`
+- Binary is not stripped — `nm` or `readelf -s` shows data symbols in `.rodata`
 - `file` shows PIE executable, source file named `licensed.c`
 
 **Analysis workflow:**
@@ -105,10 +105,10 @@ flag = bytes(a ^ b for a, b in zip(enc_msg, license))
 print(flag.decode())
 ```
 
-**Key insight:** No need to run the binary or bypass the expiry date check. The embedded ZIP and encrypted message are both in `.rodata`; extract and XOR offline.
+**Key insight:** No need to run the binary or bypass the expiry date check. The embedded ZIP and encrypted message are both in `.rodata` — extract and XOR offline.
 
 **Disassembly confirms:**
-- `memcmp(user_license, decompressed_embedded_zip, size)`; license validation
+- `memcmp(user_license, decompressed_embedded_zip, size)` — license validation
 - Date parsing with `sscanf("%d-%d-%d")` on `EXPIRY_DATE=` field
 - XOR loop: `ENCRYPTED_MESSAGE[i] ^ license[i]` → `putc()` per byte
 
@@ -194,7 +194,7 @@ LLL alone does not solve closest-vector search. The previous `L * L.solve_left(t
 2. First N characters become AES key → decrypt `file.bin` (XOR last 16 bytes + AES-256-CBC + zlib decompress)
 3. **Phase 2 (custom VM):** Decrypted bytecode runs in custom VM, validates remaining characters via another linear system (mod 2^32)
 
-**Modular linear system solving (Phase 2; VM validation):**
+**Modular linear system solving (Phase 2 — VM validation):**
 ```python
 from z3 import BitVec, Solver, sat
 width = 32
@@ -254,7 +254,7 @@ for func in fm.getFunctions(True):
 3. Tree root equation pins down remaining free variables
 4. Recognize English words in partial flag to disambiguate multiple solutions
 
-**Key insight:** Auto-generated decision trees look overwhelming but are repetitive by construction. Script the extraction (Ghidra, Binary Ninja, radare2) rather than reversing each function manually. The tree is just a dispatcher; the real logic is in the leaf function and its constraints.
+**Key insight:** Auto-generated decision trees look overwhelming but are repetitive by construction. Script the extraction (Ghidra, Binary Ninja, radare2) rather than reversing each function manually. The tree is just a dispatcher — the real logic is in the leaf function and its constraints.
 
 **Detection:** Binary with hundreds of similarly-structured functions, 3-5 input position references per function, branching to two other functions or a common leaf.
 
@@ -314,7 +314,7 @@ for col in range(N):
 flag = bytes(aug[i][N] for i in range(N))
 ```
 
-**Key insight:** GF(2^8) is NOT regular integer arithmetic; addition is XOR, multiplication uses polynomial reduction. The AES polynomial (0x11b) is the most common; look for the constant `0x1b` in disassembly. The binary may encrypt the result with AES-GCM afterward, but the raw solution vector (pre-encryption) is the flag.
+**Key insight:** GF(2^8) is NOT regular integer arithmetic — addition is XOR, multiplication uses polynomial reduction. The AES polynomial (0x11b) is the most common; look for the constant `0x1b` in disassembly. The binary may encrypt the result with AES-GCM afterward, but the raw solution vector (pre-encryption) is the flag.
 
 **Detection:** Binary with a large matrix in `.rodata` (N² bytes), XOR-based row operations, constants `0x1b` or `0x11b`, and flag length matching sqrt of matrix size.
 
@@ -326,7 +326,7 @@ flag = bytes(aug[i][N] for i in range(N))
 
 **Analysis approach:**
 
-1. **Detect the ROP dispatch:** Look for `mov esp, eax; ret` or similar stack pivot; this redirects execution into the ROP chain
+1. **Detect the ROP dispatch:** Look for `mov esp, eax; ret` or similar stack pivot — this redirects execution into the ROP chain
 2. **Dump the ROP chain:** Script GDB to disassemble instructions after each return address in the chain:
 ```python
 # GDB script to trace ROP gadgets
@@ -368,7 +368,7 @@ for s in range(128 * 0x35):  # max sum of printable chars * key_length
 flag = bytes(v ^ md5_key[i % 16] for i, v in enumerate(embedded_values))
 ```
 
-**Key insight:** ROP chain obfuscation ("ROPfuscation") hides algorithms in chains of return-oriented gadgets. The chain looks incomprehensible as raw addresses but becomes analyzable when you: (a) dump each gadget's disassembly, (b) filter repetitions and skip regions, (c) annotate register effects. The chain is functionally equivalent to normal code; it just uses `ret` instead of sequential execution. Large chains (100K+ gadgets) often contain unrolled loops that compress to ~1000 lines of pseudocode.
+**Key insight:** ROP chain obfuscation ("ROPfuscation") hides algorithms in chains of return-oriented gadgets. The chain looks incomprehensible as raw addresses but becomes analyzable when you: (a) dump each gadget's disassembly, (b) filter repetitions and skip regions, (c) annotate register effects. The chain is functionally equivalent to normal code — it just uses `ret` instead of sequential execution. Large chains (100K+ gadgets) often contain unrolled loops that compress to ~1000 lines of pseudocode.
 
 See also: [patterns-ctf.md](patterns-ctf.md) for Part 1 (hidden emulator opcodes, SPN static extraction, image XOR smoothness, byte-at-a-time cipher, mathematical convergence bitmap, Windows PE XOR bitmap OCR, two-stage RC4+VM loaders, kernel module maze solving, multi-threaded VM channels). [patterns-ctf-3.md](patterns-ctf-3.md) for Part 3 (Z3 single-line Python circuit, sliding window popcount, keyboard LED Morse code, C++ destructor-hidden validation, syscall side-effect memory corruption, MFC dialog event handlers, VM sequential key-chain brute-force, Burrows-Wheeler transform inversion, OpenType font ligature exploitation, GLSL shader VM with self-modifying code, instruction counter as cryptographic state).
 

@@ -1,10 +1,10 @@
 # longbridge-hedging
 
-Design and evaluate hedging strategies for a portfolio or single position using Longbridge market data; from simple Beta hedges to options-based protection and cross-asset tail-risk hedges.
+Design and evaluate hedging strategies for a portfolio or single position using Longbridge market data — from simple Beta hedges to options-based protection and cross-asset tail-risk hedges.
 
 ## Workflow
 
-### Step 1: Identify hedge objective
+### Step 1 — Identify hedge objective
 
 Clarify with the user:
 
@@ -13,7 +13,7 @@ Clarify with the user:
 - Hedge horizon: days, weeks, or months?
 - Cost tolerance: zero-cost (collar) or willing to pay premium?
 
-### Step 2: Fetch data
+### Step 2 — Fetch data
 
 ```bash
 longbridge kline --help
@@ -29,7 +29,7 @@ longbridge option chain <SYMBOL> --format json
 longbridge positions --format json
 ```
 
-### Step 3: Beta hedge
+### Step 3 — Beta hedge
 
 **Portfolio Beta**:
 
@@ -47,7 +47,7 @@ Contracts needed = (Portfolio Value × β_portfolio) / (Futures Price × Contrac
 
 Present: number of contracts, hedge cost, and residual Beta after hedge.
 
-### Step 4: Options-based protection
+### Step 4 — Options-based protection
 
 **Protective Put** (保护性看跌期权介绍):
 
@@ -70,7 +70,7 @@ Present: number of contracts, hedge cost, and residual Beta after hedge.
 | Cost | Premium paid | Near zero |
 | Best for | Bullish with hedge need | Neutral/mild bearish |
 
-### Step 5: Tail risk hedges
+### Step 5 — Tail risk hedges
 
 | Tool                     | Instrument            | Mechanism                          |
 | ------------------------ | --------------------- | ---------------------------------- |
@@ -81,7 +81,7 @@ Present: number of contracts, hedge cost, and residual Beta after hedge.
 
 Note: fetch current price and recent kline for any hedge instrument before recommending.
 
-### Step 6: Currency hedge
+### Step 6 — Currency hedge
 
 For HK/US cross-currency portfolios:
 
@@ -91,7 +91,7 @@ For HK/US cross-currency portfolios:
 
 Present notional hedge amount, instrument, tenor, and estimated cost.
 
-### Step 7: Hedge cost assessment
+### Step 7 — Hedge cost assessment
 
 ```
 Cost efficiency = Protection value / Premium paid

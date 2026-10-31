@@ -1,4 +1,4 @@
-# Decision Frameworks: Energy Procurement
+# Decision Frameworks — Energy Procurement
 
 This reference provides detailed decision trees, evaluation matrices, financial models,
 and strategic frameworks for electricity and gas procurement, tariff optimization,
@@ -16,8 +16,8 @@ forward curves, and facility-specific tariff structures.
 
 ### 1.1 Pre-Procurement Intelligence Gathering
 
-Before entering any procurement decision; contract renewal, new facility onboarding,
-or mid-term restructuring; assemble a comprehensive data package.
+Before entering any procurement decision — contract renewal, new facility onboarding,
+or mid-term restructuring — assemble a comprehensive data package.
 
 #### Data Assembly Checklist
 
@@ -36,7 +36,7 @@ or mid-term restructuring; assemble a comprehensive data package.
 
 ### 1.2 Fixed vs. Index vs. Block-and-Index Decision Tree
 
-Use this decision tree for each facility or portfolio segment independently; one
+Use this decision tree for each facility or portfolio segment independently — one
 strategy does not fit all sites.
 
 ```
@@ -94,30 +94,30 @@ Standard approaches:
 | 12 | Monthly | ~8% | Very large portfolios with dedicated procurement staff |
 
 **Step 3: Execution rules.**
-- Execute each tranche at the prevailing market price on the scheduled date; do not try to time within the tranche window.
+- Execute each tranche at the prevailing market price on the scheduled date — do not try to time within the tranche window.
 - Exception: if the forward curve drops into the bottom 20 th percentile of the 5-year range, accelerate by buying 2 tranches immediately ("buy the dip" rule).
 - Exception: if the forward curve spikes into the top 20 th percentile, defer the current tranche by 30 days (skip and catch up later).
-- Never defer more than 2 consecutive tranches; rolling deferrals leave you unhedged.
+- Never defer more than 2 consecutive tranches — rolling deferrals leave you unhedged.
 
 **Step 4: Document and report.**
 Maintain a procurement log showing: tranche date, volume procured, price locked,
 forward curve price at execution, cumulative weighted average price, and remaining
 open position. Report to finance quarterly.
 
-**Example; 10 MW peak load, 60 M kWh annual consumption:**
+**Example — 10 MW peak load, 60 M kWh annual consumption:**
 
 ```
 Delivery year: 2028
 Hedging start: July 2026
 Tranches: 6 (bimonthly, 10 million kWh =10,000 MWh each)
 
-Tranche 1 (Jul 2026): 10 M kWh @ $44.50/MWh ; Forward was $45.20
-Tranche 2 (Sep 2026): 10 M kWh @ $42.80/MWh ; Forward was $43.10
-Tranche 3 (Nov 2026): 10 M kWh @ $46.30/MWh ; Forward was $46.30
-Tranche 4 (Jan 2027): 10 M kWh @ $41.20/MWh ; Forward was $41.50 (buy-the-dip rule:
+Tranche 1 (Jul 2026): 10 M kWh @ $44.50/MWh  — Forward was $45.20
+Tranche 2 (Sep 2026): 10 M kWh @ $42.80/MWh  — Forward was $43.10
+Tranche 3 (Nov 2026): 10 M kWh @ $46.30/MWh  — Forward was $46.30
+Tranche 4 (Jan 2027): 10 M kWh @ $41.20/MWh  — Forward was $41.50 (buy-the-dip rule:
                                                  also executed Tranche 5 early)
-Tranche 5 (Jan 2027): 10 M kWh @ $41.40/MWh ; Accelerated from March
-Tranche 6 (May 2027): 10 M kWh @ $43.80/MWh ; Forward was $44.00
+Tranche 5 (Jan 2027): 10 M kWh @ $41.40/MWh  — Accelerated from March
+Tranche 6 (May 2027): 10 M kWh @ $43.80/MWh  — Forward was $44.00
 
 Weighted average: $43.33/MWh
 Range of execution prices: $41.20 - $46.30 ($5.10 spread)
@@ -194,7 +194,7 @@ Year N PPA Net Value = (Market Price at Hub - PPA Strike Price) × Expected Gene
                      + REC Value (if RECs would otherwise be purchased separately)
 ```
 
-**Step 3: Sensitivity analysis; run these scenarios at minimum:**
+**Step 3: Sensitivity analysis — run these scenarios at minimum:**
 
 | Scenario | Market Price Assumption | Generation Assumption | Basis Assumption |
 |----------|----------------------|----------------------|-----------------|
@@ -210,7 +210,7 @@ for a mid-size C&I buyer).
 
 ### 2.2 Virtual PPA (VPPA) Evaluation
 
-VPPAs are financial instruments; no physical energy delivery. The key risks differ:
+VPPAs are financial instruments — no physical energy delivery. The key risks differ:
 
 #### Basis Risk Analysis
 
@@ -258,7 +258,7 @@ transmission constraints or oversupply.
 **Contract protection:** Negotiate a curtailment threshold (e.g., first 5% is developer
 risk) and a compensation mechanism for excess curtailment (developer provides
 replacement RECs or a price adjustment). Never accept "buyer bears all curtailment
-risk" on a VPPA; this transfers a risk the buyer cannot manage or influence.
+risk" on a VPPA — this transfers a risk the buyer cannot manage or influence.
 
 #### Credit and Accounting Requirements
 
@@ -337,7 +337,7 @@ Annual ratchet cost = (3,840 - 3,500) × $15/kW × 11 months = $56,100
    For demand charge management, 1-2 hours of duration is typically sufficient.
 3. Account separately for discharge efficiency, usable depth of discharge, reserve, degradation, temperature, inverterpower and chargingopportunity; round-trip efficiency alone does not determine installed capacity.
 
-**Example; 500 kW peak shaving at a manufacturing plant:**
+**Example — 500 kW peak shaving at a manufacturing plant:**
 
 ```
 Target reduction: 500 kW
@@ -382,7 +382,7 @@ Not all DR programs are equal. Evaluate on these dimensions:
 
 ### 3.3 Staggered Startup Protocol
 
-The single lowest-cost demand charge reduction strategy; no capital required:
+The single lowest-cost demand charge reduction strategy — no capital required:
 
 **Problem:** Morning startup creates a demand spike when HVAC, compressors, lighting,
 and production equipment all energize simultaneously between 5:30-6:30 AM.
@@ -390,12 +390,12 @@ and production equipment all energize simultaneously between 5:30-6:30 AM.
 **Solution:** Stagger equipment startup over a 60-90 minute window:
 
 ```
-5:00 AM ; Lighting (50-100 kW)
-5:15 AM ; HVAC pre-cooling/heating (500-800 kW, ramps over 30 min)
-5:45 AM ; Compressed air system (200-400 kW, staged compressor starts)
-6:00 AM ; Production Line 1 (300-500 kW)
-6:15 AM ; Production Line 2 (300-500 kW)
-6:30 AM ; Auxiliary systems, battery chargers, water heating
+5:00 AM  — Lighting (50-100 kW)
+5:15 AM  — HVAC pre-cooling/heating (500-800 kW, ramps over 30 min)
+5:45 AM  — Compressed air system (200-400 kW, staged compressor starts)
+6:00 AM  — Production Line 1 (300-500 kW)
+6:15 AM  — Production Line 2 (300-500 kW)
+6:30 AM  — Auxiliary systems, battery chargers, water heating
 
 Result: Peak during startup drops from 2,200 kW (simultaneous) to 1,600 kW (staggered)
 Savings: 600 kW × $15/kW × 12 months = $108,000/year at zero capital cost
@@ -428,7 +428,7 @@ prior system has reached steady state.
 - Year-over-year price trajectory (escalation or decline)
 
 **What the forward curve does NOT tell you:**
-- Actual future spot prices (forwards are not forecasts; they include a risk premium)
+- Actual future spot prices (forwards are not forecasts — they include a risk premium)
 - Short-term price spikes (forwards are averages, not tails)
 - Regulatory changes, plant retirements, or transmission additions not yet priced in
 
@@ -436,16 +436,16 @@ prior system has reached steady state.
 
 | Forward Curve Position | Procurement Action |
 |-----------------------|-------------------|
-| Bottom 20% of 5-year range | Accelerate buying; lock more volume at favorable prices |
-| 20 th-40 th percentile | Proceed with scheduled layering; prices are reasonable |
+| Bottom 20% of 5-year range | Accelerate buying — lock more volume at favorable prices |
+| 20 th-40 th percentile | Proceed with scheduled layering — prices are reasonable |
 | 40 th-60 th percentile | Maintain default layering schedule |
-| 60 th-80 th percentile | Slow buying; defer non-critical tranches 30 days |
+| 60 th-80 th percentile | Slow buying — defer non-critical tranches 30 days |
 | Top 20% of 5-year range | Defer where possible, increase index exposure, evaluate financial hedges instead of physical locks |
 
 ### 4.3 Capacity Market Exposure
 
 In organized capacity markets (PJM, ISO-NE, NYISO), capacity charges are a significant
-cost component; $30–$120/kW-yr depending on the zone and auction results.
+cost component — $30–$120/kW-yr depending on the zone and auction results.
 
 **PJM Reliability Pricing Model (RPM):**
 - Auction held 3 years ahead of delivery year (Base Residual Auction)
@@ -460,7 +460,7 @@ cost component; $30–$120/kW-yr depending on the zone and auction results.
 3. **Behind-the-meter generation.** Running backup generators during coincident peak hours reduces your metered load and thus your PLC. Ensure generators are permitted for non-emergency operation and emissions-compliant.
 4. **Capacity tag trading.** In some markets, capacity obligations can be traded or offset through financial instruments. Your supplier may offer capacity tag management as a service.
 
-**Example; capacity charge impact:**
+**Example — capacity charge impact:**
 
 ```
 Facility peak: 5,000 kW
@@ -488,7 +488,7 @@ Savings: $15,512/year from 5 hours of load curtailment
 | Financial swap (through broker/bank) | Medium | ISDA + possible margin | Converts floating price to fixed on specified volume |
 | Purchased matched call option (subject to contract) | Medium-High | Premium ($/MWh upfront) | Price ceiling at strike + premium; unlimited downside benefit retained |
 | Heat rate call option | High | Premium | Protects against gas-to-power price spike (useful when gas drives marginal power price) |
-| Collar (sell put, buy call) | Medium-High | Reduced premium (put proceeds offset call cost) | Ceiling and floor; limits both upside and downside |
+| Collar (sell put, buy call) | Medium-High | Reduced premium (put proceeds offset call cost) | Ceiling and floor — limits both upside and downside |
 
 ### 5.2 Hedging Strategy by Risk Profile
 
@@ -510,7 +510,7 @@ Illustrative matched cash-settled call payoff = max(0, settlement index−strike
 Cost: Premium per MWh × Contracted Volume
 Annual premium for a $50/MWh cap on day-ahead pricing: $2-5/MWh (varies by market volatility)
 
-Example; protecting 50,000 MWh annual index volume:
+Example — protecting 50,000 MWh annual index volume:
   Call option strike: $50/MWh
   Premium: $3/MWh
   Total premium cost: $150,000/year
@@ -542,7 +542,7 @@ Acceptable renewable MWh sources (in order of additionality):
 2. Physical PPA with new project (strong additionality)
 3. Virtual PPA with RECs from new project (good additionality)
 4. Utility green tariff (varies by program design)
-5. Unbundled RECs (weakest claim; RE100 tightening requirements)
+5. Unbundled RECs (weakest claim — RE100 tightening requirements)
 ```
 
 **SBTi trajectory alignment:**
@@ -608,7 +608,7 @@ With limited capital for demand charge mitigation, prioritize sites using this s
 
 **Investment priority: highest composite score first.** A site scoring >80 is a strong
 candidate for battery storage or demand response. A site scoring <40 has limited
-demand charge optimization potential; focus on supply-side procurement instead.
+demand charge optimization potential — focus on supply-side procurement instead.
 
 ---
 
@@ -647,7 +647,7 @@ local city gate or utility delivery point.
 **Key insight:** A facility in New England on index pricing faces dramatically different
 winter risk than a facility in Texas. Basis in New England during a cold snap can
 exceed $15/MMBtu, tripling the delivered gas cost. New England gas procurement
-requires winter hedging with firm pipeline capacity or LNG backup; index pricing
+requires winter hedging with firm pipeline capacity or LNG backup — index pricing
 without protection is reckless in that market.
 
 ### 8.3 Gas-Electric Interdependency
@@ -670,7 +670,7 @@ For facilities with both electricity and natural gas loads, recognize the coupli
   cross-commodity basis risk. If gas prices drop but electricity stays high (due to
   transmission constraints or non-gas generation tightness), your gas hedge
   underperforms while your electric bill remains high. Consider hedging both
-  commodities on a correlated basis; many energy suppliers offer combined
+  commodities on a correlated basis — many energy suppliers offer combined
   gas+electric portfolio management.
 
 ---
@@ -721,7 +721,7 @@ Where:
 
 | Impact Level | Annual Cost Increase | Recommended Action |
 |-------------|---------------------|-------------------|
-| <$50 K | Negligible for large C&I | Monitor only; track filing through settlement |
+| <$50 K | Negligible for large C&I | Monitor only — track filing through settlement |
 | $50 K-$200 K | Material but not critical | Join existing intervenor group (OIEC, etc.) |
 | $200 K-$500 K | Significant | Individual intervention with regulatory counsel |
 | >$500 K | Critical | Full intervention with expert witnesses, rate design testimony |
@@ -765,7 +765,7 @@ If your retail energy provider files for bankruptcy or fails to perform:
 2. Determine the POLR rate. In most states, the POLR rate is set quarterly based on
    wholesale market prices plus a premium (10-20% above competitive supply). This may
    be higher or lower than your current contract rate.
-3. Contact 2-3 alternative suppliers immediately. Explain the situation; they will
+3. Contact 2-3 alternative suppliers immediately. Explain the situation — they will
    offer expedited enrollment (5-10 business days vs. normal 30-60 day switch process).
 4. Review your contract for supplier default provisions, including any deposits or
    prepayments that may be at risk in the bankruptcy estate.
@@ -773,7 +773,7 @@ If your retail energy provider files for bankruptcy or fails to perform:
 **Medium-term (2-4 weeks):**
 1. Execute a new supply contract with the best available alternative supplier.
 2. File a claim in the bankruptcy proceeding for any prepayments, deposits, or damages.
-3. Review your supplier qualification criteria; consider adding financial covenants
+3. Review your supplier qualification criteria — consider adding financial covenants
    (minimum credit rating, tangible net worth requirements) to future contracts.
 
 ### 10.2 Force Majeure Events
@@ -787,7 +787,7 @@ your energy supply or operations:
 |-----------|--------------|---------------------|
 | Hurricane/severe weather | Physical damage to generation/T&D, price spikes | Activate backup generation, curtail non-essential load, document for insurance |
 | Grid emergency (EEA3) | Rolling blackouts, extreme prices | Maximum load curtailment, DR activation, generator deployment |
-| Supplier force majeure claim | Supplier attempts to suspend contract | Review FM clause narrowly; "market price increase" is NOT force majeure; "physical inability to deliver" may be |
+| Supplier force majeure claim | Supplier attempts to suspend contract | Review FM clause narrowly — "market price increase" is NOT force majeure; "physical inability to deliver" may be |
 | Pandemic/operational shutdown | Facility closed, consumption drops dramatically | Invoke volume tolerance provisions, negotiate contract suspension, evaluate early termination |
 
 ### 10.3 Contract Termination Decision Matrix
@@ -804,12 +804,12 @@ If contract price > current market:
 
 If contract price < current market:
   Any termination payment depends on the actual signed contract, eligible closeout method and law; favorable pricing does not itself entitle you to payment
-  You would NOT terminate; the contract is in-the-money
+  You would NOT terminate — the contract is in-the-money
 
 Decision: Terminate if ETF < cumulative savings from alternative contract + risk reduction value
 ```
 
-**Example; mid-term exit evaluation:**
+**Example — mid-term exit evaluation:**
 
 ```
 Current contract: $0.062/kWh, 18 months remaining, 50 GWh remaining
@@ -838,16 +838,16 @@ procurement activities align with market conditions.
 | Month | Activity | Deadline |
 |-------|----------|----------|
 | January | Annual energy budget review, lock natural gas hedges for next winter | Jan 31 for winter gas |
-| February | Q1 forward curve review, PPA pipeline assessment | - |
-| March | Begin RFP preparation for contracts expiring in Q4 or Q1 next year | - |
+| February | Q1 forward curve review, PPA pipeline assessment | — |
+| March | Begin RFP preparation for contracts expiring in Q4 or Q1 next year | — |
 | April | Issue RFPs for fall contract starts, review summer DR enrollment | Apr 15 for PJM DR enrollment |
 | May | Evaluate bids, begin summer peak preparation (generator testing, BAS settings) | May 31 for summer rate elections |
-| June | Summer peak demand management begins, monitor 5 CP forecasts (PJM) | - |
+| June | Summer peak demand management begins, monitor 5 CP forecasts (PJM) | — |
 | July | Peak season monitoring, execute Q3 procurement tranches | Jul 15 for ERCOT 4 CP mgmt |
 | August | Peak season monitoring, finalize fall contract awards | Aug 31 for ISO-NE FCA positions |
 | September | Post-summer review, capacity tag assessment, RE100 progress check | Sep 30 for Q4 procurement |
 | October | Begin winter gas hedging, review heating load forecasts | Oct 31 for winter gas locks |
-| November | Budget season; prepare next year's energy cost forecast | Nov 15 for budget submission |
+| November | Budget season — prepare next year's energy cost forecast | Nov 15 for budget submission |
 | December | Year-end RE100 reconciliation, REC inventory check, contract renewals | Dec 31 for REC vintage retirement |
 
 ## Financial and technical qualifications

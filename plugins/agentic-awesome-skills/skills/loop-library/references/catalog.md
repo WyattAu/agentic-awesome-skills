@@ -12,7 +12,7 @@ Search by outcome, trigger, artifact, evidence, category, or keyword. Treat
 adaptations and new designs as unpublished unless they appear at the live catalog
 URL above.
 
-## 001: [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/)
+## 001 — [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/)
 
 - Category: Engineering
 - Use when: Use this whenever implementation changes may have left READMEs, setup guides, API references, examples, or runbooks behind.
@@ -21,7 +21,7 @@ URL above.
 - Keywords: AI coding agent, documentation audit, documentation drift, documentation maintenance, pull request workflow
 - Related: [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/), [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/)
 
-## 002: [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/)
+## 002 — [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/)
 
 - Category: Engineering
 - Use when: Use this for a deliberate architectural refactor where the destination can be stated in concrete terms and the current system can be tested after each meaningful change.
@@ -30,7 +30,7 @@ URL above.
 - Keywords: AI coding agent, architecture refactor, autoreview, incremental refactoring, coding agent workflow
 - Related: [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/), [The sub-50 ms page-load loop](https://signals.forwardfuture.ai/loop-library/loops/sub-50ms-page-load-loop/)
 
-## 003: [The sub-50 ms page-load loop](https://signals.forwardfuture.ai/loop-library/loops/sub-50ms-page-load-loop/)
+## 003 — [The sub-50 ms page-load loop](https://signals.forwardfuture.ai/loop-library/loops/sub-50ms-page-load-loop/)
 
 - Category: Engineering
 - Use when: Use this when a product has a defined set of routes, a stable performance harness, and a 50 ms target that maps to a specific metric and environment.
@@ -39,7 +39,7 @@ URL above.
 - Keywords: AI coding agent, page load optimization, performance benchmark, web performance workflow, 50 ms page load
 - Related: [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/), [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/)
 
-## 004: [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/)
+## 004 — [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/)
 
 - Category: Engineering
 - Use when: Use this as a scheduled reliability pass when an agent can read production telemetry, trace failures into the repository, run the relevant tests, and prepare a reviewable fix.
@@ -48,7 +48,7 @@ URL above.
 - Keywords: AI coding agent, production log review, error triage, root cause analysis, reliability workflow
 - Related: [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/), [The sub-50 ms page-load loop](https://signals.forwardfuture.ai/loop-library/loops/sub-50ms-page-load-loop/)
 
-## 005: [The 100% test coverage loop](https://signals.forwardfuture.ai/loop-library/loops/100-percent-test-coverage-loop/)
+## 005 — [The 100% test coverage loop](https://signals.forwardfuture.ai/loop-library/loops/100-percent-test-coverage-loop/)
 
 - Category: Engineering
 - Use when: Use this when 100% coverage is an explicit project requirement and the repository has a trustworthy coverage command, clear exclusions, and a test suite that can be run repeatedly.
@@ -57,7 +57,7 @@ URL above.
 - Keywords: AI coding agent, 100 percent test coverage, test coverage workflow, automated testing, coding agent prompt
 - Related: [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/), [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/)
 
-## 006: [The SEO/GEO visibility loop](https://signals.forwardfuture.ai/loop-library/loops/seo-geo-visibility-loop/)
+## 006 — [The SEO/GEO visibility loop](https://signals.forwardfuture.ai/loop-library/loops/seo-geo-visibility-loop/)
 
 - Category: Content
 - Use when: Use this when a site has a defined set of priority pages and target questions, and you can rerun the same technical crawl and search visibility checks after each change.
@@ -66,7 +66,7 @@ URL above.
 - Keywords: SEO audit, generative engine optimization, GEO workflow, AI search visibility, answer engine optimization
 - Related: [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/), [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/)
 
-## 007: [The logging coverage loop](https://signals.forwardfuture.ai/loop-library/loops/exhaustive-logging-coverage-loop/)
+## 007 — [The logging coverage loop](https://signals.forwardfuture.ai/loop-library/loops/exhaustive-logging-coverage-loop/)
 
 - Category: Engineering
 - Use when: Use this when important user flows, service boundaries, background jobs, or failure paths are difficult to trace because the system's logging is incomplete or inconsistent.
@@ -75,7 +75,7 @@ URL above.
 - Keywords: AI coding agent, structured logging, observability coverage, logging tests, production diagnostics
 - Related: [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/), [The 100% test coverage loop](https://signals.forwardfuture.ai/loop-library/loops/100-percent-test-coverage-loop/)
 
-## 008: [The nightly changelog loop](https://signals.forwardfuture.ai/loop-library/loops/nightly-changelog-sweep/)
+## 008 — [The nightly changelog loop](https://signals.forwardfuture.ai/loop-library/loops/nightly-changelog-sweep/)
 
 - Category: Engineering
 - Use when: Use this when a project changes frequently enough that user-facing release notes can drift from merged pull requests, commits, deployments, and product changes.
@@ -84,7 +84,7 @@ URL above.
 - Keywords: AI coding agent, nightly changelog, release notes workflow, changelog automation, daily repository review
 - Related: [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/), [The repository cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/repository-cleanup-loop/)
 
-## 009: [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/)
+## 009 — [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/)
 
 - Category: Evaluation
 - Use when: Use this when product quality needs a strict consecutive-success bar and failures should permanently improve the test and benchmark suite.
@@ -93,7 +93,7 @@ URL above.
 - Keywords: AI product evaluation, quality streak, regression testing, benchmark coverage, realistic scenarios
 - Related: [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/), [The 100% test coverage loop](https://signals.forwardfuture.ai/loop-library/loops/100-percent-test-coverage-loop/)
 
-## 010: [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/)
+## 010 — [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/)
 
 - Category: Evaluation
 - Use when: Use this for an end-to-end product evaluation when quality must be measured across the full feature set rather than a narrow regression or a few hand-picked examples.
@@ -102,7 +102,7 @@ URL above.
 - Keywords: AI product evaluation, full product testing, response scoring, quality benchmark, feature coverage
 - Related: [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/), [The production data cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/production-data-cleanup-loop/)
 
-## 011: [The test-suite speed loop](https://signals.forwardfuture.ai/loop-library/loops/test-suite-speed-loop/)
+## 011 — [The test-suite speed loop](https://signals.forwardfuture.ai/loop-library/loops/test-suite-speed-loop/)
 
 - Category: Engineering
 - Use when: Use this when slow tests are delaying local feedback or continuous integration and the project has stable commands for measuring runtime and coverage.
@@ -111,7 +111,7 @@ URL above.
 - Keywords: AI coding agent, test suite performance, faster CI, test optimization, coverage preservation
 - Related: [The 100% test coverage loop](https://signals.forwardfuture.ai/loop-library/loops/100-percent-test-coverage-loop/), [The sub-50 ms page-load loop](https://signals.forwardfuture.ai/loop-library/loops/sub-50ms-page-load-loop/)
 
-## 012: [The repository cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/repository-cleanup-loop/)
+## 012 — [The repository cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/repository-cleanup-loop/)
 
 - Category: Engineering
 - Use when: Use this when abandoned branches, old worktrees, unclear pull requests, or unmerged commits make it difficult to know which repository state still matters.
@@ -120,7 +120,7 @@ URL above.
 - Keywords: AI coding agent, repository cleanup, git worktree audit, branch hygiene, pull request triage
 - Related: [The stale-safe batch release loop](https://signals.forwardfuture.ai/loop-library/loops/stale-safe-batch-release-loop/), [The nightly changelog loop](https://signals.forwardfuture.ai/loop-library/loops/nightly-changelog-sweep/)
 
-## 013: [The stale-safe batch release loop](https://signals.forwardfuture.ai/loop-library/loops/stale-safe-batch-release-loop/)
+## 013 — [The stale-safe batch release loop](https://signals.forwardfuture.ai/loop-library/loops/stale-safe-batch-release-loop/)
 
 - Category: Operations
 - Use when: Use this when several branches or pull requests may be ready at once and the release must avoid stale worktrees, partial overlays, and incomplete changes.
@@ -129,7 +129,7 @@ URL above.
 - Keywords: AI release operations, batch release, stale code prevention, pull request coordination, deployment safety
 - Related: [The repository cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/repository-cleanup-loop/), [The post-release baseline loop](https://signals.forwardfuture.ai/loop-library/loops/post-release-baseline-loop/)
 
-## 014: [The production data cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/production-data-cleanup-loop/)
+## 014 — [The production data cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/production-data-cleanup-loop/)
 
 - Category: Operations
 - Use when: Use this when a production dataset contains records that no longer match a product, policy, taxonomy, or quality definition and the classifier allowed them through.
@@ -138,7 +138,7 @@ URL above.
 - Keywords: AI data operations, production data cleanup, classification logic, data quality audit, regression examples
 - Related: [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/), [The logging coverage loop](https://signals.forwardfuture.ai/loop-library/loops/exhaustive-logging-coverage-loop/)
 
-## 015: [The post-release baseline loop](https://signals.forwardfuture.ai/loop-library/loops/post-release-baseline-loop/)
+## 015 — [The post-release baseline loop](https://signals.forwardfuture.ai/loop-library/loops/post-release-baseline-loop/)
 
 - Category: Operations
 - Use when: Use this immediately after a release when future regressions or improvements need to be measured against the exact version now in production.
@@ -147,7 +147,7 @@ URL above.
 - Keywords: AI release operations, post-release benchmark, performance baseline, release verification, benchmark history
 - Related: [The stale-safe batch release loop](https://signals.forwardfuture.ai/loop-library/loops/stale-safe-batch-release-loop/), [The test-suite speed loop](https://signals.forwardfuture.ai/loop-library/loops/test-suite-speed-loop/)
 
-## 016: [The ticket-to-PR-ready loop](https://signals.forwardfuture.ai/loop-library/loops/ticket-to-pr-ready-loop/)
+## 016 — [The ticket-to-PR-ready loop](https://signals.forwardfuture.ai/loop-library/loops/ticket-to-pr-ready-loop/)
 
 - Category: Engineering
 - Use when: Use this when a real but loosely written ticket, bug report, or customer complaint needs to become a bounded engineering change with enough proof for a fast review.
@@ -156,7 +156,7 @@ URL above.
 - Keywords: AI coding agent, ticket to pull request, bug reproduction, root cause analysis, review-ready patch
 - Related: [The production error sweep](https://signals.forwardfuture.ai/loop-library/loops/production-error-sweep/), [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/)
 
-## 017: [The customer AI deployment loop](https://signals.forwardfuture.ai/loop-library/loops/customer-ai-deployment-loop/)
+## 017 — [The customer AI deployment loop](https://signals.forwardfuture.ai/loop-library/loops/customer-ai-deployment-loop/)
 
 - Category: Operations
 - Use when: Use this when an AI workflow must live inside a real customer process and needs validation, approval, gradual rollout, monitoring, and a clear business outcome.
@@ -165,7 +165,7 @@ URL above.
 - Keywords: customer AI deployment, AI workflow rollout, approval gates, production monitoring, AI ROI
 - Related: [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/), [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/)
 
-## 018: [The product update podcast loop](https://signals.forwardfuture.ai/loop-library/loops/product-update-podcast-loop/)
+## 018 — [The product update podcast loop](https://signals.forwardfuture.ai/loop-library/loops/product-update-podcast-loop/)
 
 - Category: Content
 - Use when: Use this when a product ships frequently enough that users would benefit from a short recurring audio explanation of what changed and how to use it.
@@ -174,7 +174,7 @@ URL above.
 - Keywords: AI podcast workflow, product update podcast, Jellypod MCP, release communication, editorial automation
 - Related: [The nightly changelog loop](https://signals.forwardfuture.ai/loop-library/loops/nightly-changelog-sweep/), [The post-release baseline loop](https://signals.forwardfuture.ai/loop-library/loops/post-release-baseline-loop/)
 
-## 019: [The Clodex adversarial-review loop](https://signals.forwardfuture.ai/loop-library/loops/clodex-adversarial-review-loop/)
+## 019 — [The Clodex adversarial-review loop](https://signals.forwardfuture.ai/loop-library/loops/clodex-adversarial-review-loop/)
 
 - Category: Engineering
 - Use when: Use Clodex when Claude is building a meaningful code change and Codex should independently review each repair round.
@@ -183,7 +183,7 @@ URL above.
 - Keywords: Clodex, Codex adversarial review, Claude Code plugin, review fix loop, pull request automation
 - Related: [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/), [The stale-safe batch release loop](https://signals.forwardfuture.ai/loop-library/loops/stale-safe-batch-release-loop/)
 
-## 020: [The Loop Harness verification loop](https://signals.forwardfuture.ai/loop-library/loops/loop-harness-verification-loop/)
+## 020 — [The Loop Harness verification loop](https://signals.forwardfuture.ai/loop-library/loops/loop-harness-verification-loop/)
 
 - Category: Engineering
 - Use when: Use this when a recurring repository task should run unattended but one agent must not be allowed to generate and approve the same output.
@@ -192,7 +192,7 @@ URL above.
 - Keywords: Loop Harness, scheduled coding agent, git worktree isolation, second-agent verification, autonomous agent workflow
 - Related: [The Clodex adversarial-review loop](https://signals.forwardfuture.ai/loop-library/loops/clodex-adversarial-review-loop/), [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/)
 
-## 021: [The Boeing 747 benchmark](https://signals.forwardfuture.ai/loop-library/loops/boeing-747-benchmark/)
+## 021 — [The Boeing 747 benchmark](https://signals.forwardfuture.ai/loop-library/loops/boeing-747-benchmark/)
 
 - Category: Design
 - Use when: Use this as a concrete Three.js vision benchmark, or adapt the same capture-and-critic pattern to another rendered subject.
@@ -201,7 +201,7 @@ URL above.
 - Keywords: Boeing 747 benchmark, Three.js agent workflow, vision self-verification, 3D reconstruction loop, camera inspection system
 - Related: [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/), [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/)
 
-## 022: [War Loops: frontend reconstruction](https://signals.forwardfuture.ai/loop-library/loops/war-loops-frontend-designer/)
+## 022 — [War Loops: frontend reconstruction](https://signals.forwardfuture.ai/loop-library/loops/war-loops-frontend-designer/)
 
 - Category: Design
 - Use when: Use War Loops when an authorized interface must be rebuilt from a URL or image and judged on appearance, motion, and responsive behavior.
@@ -210,7 +210,7 @@ URL above.
 - Keywords: War Loops, autonomous frontend designer, frontend fidelity, visual evaluation loop, responsive motion matching
 - Related: [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/), [The sub-50 ms page-load loop](https://signals.forwardfuture.ai/loop-library/loops/sub-50ms-page-load-loop/)
 
-## 023: [The self-improving champion loop](https://signals.forwardfuture.ai/loop-library/loops/self-improving-champion-loop/)
+## 023 — [The self-improving champion loop](https://signals.forwardfuture.ai/loop-library/loops/self-improving-champion-loop/)
 
 - Category: Evaluation
 - Use when: Use this to tune a prompt, policy, or configuration when cheap iteration is useful but final acceptance must use fresh examples.
@@ -219,7 +219,7 @@ URL above.
 - Keywords: self-improving loop, champion challenger evaluation, Goodhart prevention, independent evaluation gate, bounded optimization workflow
 - Related: [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/), [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/)
 
-## 024: [The devil's-advocate loop](https://signals.forwardfuture.ai/loop-library/loops/devils-advocate-design-loop/)
+## 024 — [The devil's-advocate loop](https://signals.forwardfuture.ai/loop-library/loops/devils-advocate-design-loop/)
 
 - Category: Evaluation
 - Use when: Use this before committing to an architecture, interface, rollout plan, or other consequential design that benefits from structured adversarial review.
@@ -228,7 +228,7 @@ URL above.
 - Keywords: devil's advocate loop, adversarial design review, critic builder workflow, architecture objection log, red team design process
 - Related: [The architecture satisfaction loop](https://signals.forwardfuture.ai/loop-library/loops/architecture-satisfaction-loop/), [The Clodex adversarial-review loop](https://signals.forwardfuture.ai/loop-library/loops/clodex-adversarial-review-loop/)
 
-## 025: [The fresh-clone loop](https://signals.forwardfuture.ai/loop-library/loops/fresh-clone-loop/)
+## 025 — [The fresh-clone loop](https://signals.forwardfuture.ai/loop-library/loops/fresh-clone-loop/)
 
 - Category: Engineering
 - Use when: Use this to test whether a repository's onboarding instructions work in a clean environment without undocumented help.
@@ -237,7 +237,7 @@ URL above.
 - Keywords: fresh clone loop, README verification, developer onboarding test, clean environment setup, repository documentation workflow
 - Related: [The docs sweep](https://signals.forwardfuture.ai/loop-library/loops/overnight-docs-sweep/), [The repository cleanup loop](https://signals.forwardfuture.ai/loop-library/loops/repository-cleanup-loop/)
 
-## 026: [The Infinite Clickbait thumbnail loop](https://signals.forwardfuture.ai/loop-library/loops/infinite-clickbait-loop/)
+## 026 — [The Infinite Clickbait thumbnail loop](https://signals.forwardfuture.ai/loop-library/loops/infinite-clickbait-loop/)
 
 - Category: Design
 - Use when: Use this when a video topic and asset set are ready but the thumbnail needs several structured ideation and critique rounds before production.
@@ -246,7 +246,7 @@ URL above.
 - Keywords: Infinite Clickbait, YouTube thumbnail loop, thumbnail iteration workflow, clickbait scoring rubric, AI visual design
 - Related: [The Boeing 747 benchmark](https://signals.forwardfuture.ai/loop-library/loops/boeing-747-benchmark/), [The full product evaluation loop](https://signals.forwardfuture.ai/loop-library/loops/full-product-evaluation-loop/)
 
-## 027: [The autonomy-loop builder-reviewer loop](https://signals.forwardfuture.ai/loop-library/loops/autonomy-loop/)
+## 027 — [The autonomy-loop builder-reviewer loop](https://signals.forwardfuture.ai/loop-library/loops/autonomy-loop/)
 
 - Category: Engineering
 - Use when: Use autonomy-loop when a repository has deterministic test, build, and lint gates plus a task suited to repeated builder-reviewer handoffs.
@@ -255,7 +255,7 @@ URL above.
 - Keywords: autonomy-loop, adversarial code review, mutation testing, builder reviewer workflow, Claude Code loop
 - Related: [The Clodex adversarial-review loop](https://signals.forwardfuture.ai/loop-library/loops/clodex-adversarial-review-loop/), [The Loop Harness verification loop](https://signals.forwardfuture.ai/loop-library/loops/loop-harness-verification-loop/)
 
-## 028: [The Codex completion-contract loop](https://signals.forwardfuture.ai/loop-library/loops/codex-completion-contract-loop/)
+## 028 — [The Codex completion-contract loop](https://signals.forwardfuture.ai/loop-library/loops/codex-completion-contract-loop/)
 
 - Category: Engineering
 - Use when: Use this for long-running Codex work, pull requests, runtime checks, or user-visible artifacts where a plausible partial result could be mistaken for completion.
@@ -264,7 +264,7 @@ URL above.
 - Keywords: Codex Goal, completion contract, evidence audit, definition of done, false completion prevention
 - Related: [The ticket-to-PR-ready loop](https://signals.forwardfuture.ai/loop-library/loops/ticket-to-pr-ready-loop/), [The quality streak loop](https://signals.forwardfuture.ai/loop-library/loops/quality-streak-loop/)
 
-## 029: [The Revolve versioned-experiment loop](https://signals.forwardfuture.ai/loop-library/loops/revolve-self-improvement-loop/)
+## 029 — [The Revolve versioned-experiment loop](https://signals.forwardfuture.ai/loop-library/loops/revolve-self-improvement-loop/)
 
 - Category: Evaluation
 - Use when: Use Revolve to improve a prompt, policy, workflow, model configuration, code path, or dataset when experiments must remain comparable and resumable across sessions.

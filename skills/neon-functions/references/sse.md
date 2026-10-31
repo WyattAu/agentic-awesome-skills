@@ -1,8 +1,8 @@
 # Server-sent events (SSE) on Neon Functions
 
-SSE is the one-way (server → client) streaming counterpart to WebSockets: the browser opens a long-lived `GET` with [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) and the server pushes text frames down it. On Neon Functions there's **no adapter or extra library to install**; unlike the [Hono WebSocket helper](hono-websockets.md), an SSE endpoint is just a normal `fetch` handler that returns a `Response` whose body is a `ReadableStream` with `Content-Type: text/event-stream`. The runtime holds the response open as long as bytes keep flowing (15-minute heartbeat, see [Timeouts](../SKILL.md#timeouts-and-runtime-limits)).
+SSE is the one-way (server → client) streaming counterpart to WebSockets: the browser opens a long-lived `GET` with [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) and the server pushes text frames down it. On Neon Functions there's **no adapter or extra library to install** — unlike the [Hono WebSocket helper](hono-websockets.md), an SSE endpoint is just a normal `fetch` handler that returns a `Response` whose body is a `ReadableStream` with `Content-Type: text/event-stream`. The runtime holds the response open as long as bytes keep flowing (15-minute heartbeat, see [Timeouts](../SKILL.md#timeouts-and-runtime-limits)).
 
-Reach for SSE over WebSockets when you only need server → client updates (live counters, notifications, progress, token streams); it's simpler to run (plain HTTP, no `upgrade`), and `EventSource` **reconnects on its own**, so there's no client backoff to write.
+Reach for SSE over WebSockets when you only need server → client updates (live counters, notifications, progress, token streams) — it's simpler to run (plain HTTP, no `upgrade`), and `EventSource` **reconnects on its own**, so there's no client backoff to write.
 
 ## Minimal SSE endpoint (no framework)
 
@@ -21,7 +21,7 @@ export default {
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
         // An SSE frame is `data: <payload>\n\n`. A line starting with `:` is a
-        // comment; used here as a heartbeat to keep the stream from going idle.
+        // comment — used here as a heartbeat to keep the stream from going idle.
         controller.enqueue(encoder.encode("data: hello\n\n"));
         timer = setInterval(
           () => controller.enqueue(encoder.encode(": ping\n\n")),
@@ -73,7 +73,7 @@ export default app;
 
 ## Push to every client, across isolates
 
-The fan-out rule is identical to WebSockets ([Fan-out across isolates](../SKILL.md#fan-out-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers, and fan out across isolates with Postgres `LISTEN`/`NOTIFY`. Keep the source-of-truth state in Postgres; module state doesn't survive eviction.
+The fan-out rule is identical to WebSockets ([Fan-out across isolates](../SKILL.md#fan-out-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers, and fan out across isolates with Postgres `LISTEN`/`NOTIFY`. Keep the source-of-truth state in Postgres — module state doesn't survive eviction.
 
 ```typescript
 import { Pool, Client } from "pg";
@@ -84,7 +84,7 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
 const CHANNEL = "events";
 
 // One dedicated DIRECT connection per isolate to receive events (LISTEN needs a
-// real session; use DATABASE_URL_UNPOOLED, not the pooled URL).
+// real session — use DATABASE_URL_UNPOOLED, not the pooled URL).
 const listener = new Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
 listener.connect().then(() => listener.query(`LISTEN ${CHANNEL}`));
 listener.on("notification", (msg) => {
@@ -92,7 +92,7 @@ listener.on("notification", (msg) => {
   const frame = encoder.encode(`data: ${msg.payload}\n\n`);
   for (const controller of clients) {
     try {
-      controller.enqueue(frame); // enqueue is synchronous; no concurrent-await hazard
+      controller.enqueue(frame); // enqueue is synchronous — no concurrent-await hazard
     } catch {
       clients.delete(controller); // controller already closed
     }
@@ -130,14 +130,14 @@ source.onerror = () => {/* EventSource auto-reconnects; nothing to do */};
 // source.close() to stop.
 ```
 
-`EventSource` **reconnects automatically** with the server's `retry:` interval, sending `Last-Event-ID` if you set `id:`; the server must implement durable replay itself; so unlike WebSockets you don't write a reconnect loop. Its constraints: it's **GET-only and can't set request headers**, so authenticate the same way as a [WebSocket](../SKILL.md#websocket-servers); a `?token=` query param (verify with `jwtVerify` before streaming) or a cookie. (Use the modern `eventsource` polyfill if you need `Authorization` headers.)
+`EventSource` **reconnects automatically** with the server's `retry:` interval, sending `Last-Event-ID` if you set `id:`; the server must implement durable replay itself — so unlike WebSockets you don't write a reconnect loop. Its constraints: it's **GET-only and can't set request headers**, so authenticate the same way as a [WebSocket](../SKILL.md#websocket-servers) — a `?token=` query param (verify with `jwtVerify` before streaming) or a cookie. (Use the modern `eventsource` polyfill if you need `Authorization` headers.)
 
 ## Caveats
 
-- **Heartbeat or it dies.** Streams stay open only while bytes flow; Neon's window is 15 min ([Timeouts](../SKILL.md#timeouts-and-runtime-limits)), but intermediary proxies are usually far stricter (tens of seconds). Emit a `: ping\n\n` comment every ~25–30s so the stream never goes quiet.
+- **Heartbeat or it dies.** Streams stay open only while bytes flow — Neon's window is 15 min ([Timeouts](../SKILL.md#timeouts-and-runtime-limits)), but intermediary proxies are usually far stricter (tens of seconds). Emit a `: ping\n\n` comment every ~25–30s so the stream never goes quiet.
 - **`no-transform`.** Set `Cache-Control: no-cache, no-transform` so proxies don't buffer or rewrite the stream.
-- **Enqueue is synchronous.** `controller.enqueue()` doesn't return a promise, so broadcasting from the `LISTEN` handler can't interleave awaits mid-write; wrap each in `try/catch` and drop dead controllers.
+- **Enqueue is synchronous.** `controller.enqueue()` doesn't return a promise, so broadcasting from the `LISTEN` handler can't interleave awaits mid-write — wrap each in `try/catch` and drop dead controllers.
 - **CORS.** A SPA hits the function cross-origin, so set `Access-Control-Allow-Origin`. `EventSource` sends no credentials by default, so `*` is fine for public streams.
 - **One-way only.** SSE is server → client. For client → server, the browser makes normal `fetch`/`POST` calls (often to the same function); reach for [WebSockets](../SKILL.md#websocket-servers) only when you need bidirectional, low-latency frames.
 
-Together; a Hono `fetch` SSE endpoint, `LISTEN`/`NOTIFY` fan-out, heartbeat, a counter persisted in Postgres, and a client-only TanStack Router SPA consuming it with `EventSource`; these illustrate a realtime backend; add auth, tenant isolation, listener reconnection, replay and backpressure before production on a single function.
+Together — a Hono `fetch` SSE endpoint, `LISTEN`/`NOTIFY` fan-out, heartbeat, a counter persisted in Postgres, and a client-only TanStack Router SPA consuming it with `EventSource` — these illustrate a realtime backend; add auth, tenant isolation, listener reconnection, replay and backpressure before production on a single function.

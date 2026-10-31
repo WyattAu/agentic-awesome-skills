@@ -1,4 +1,4 @@
-# Instagram Graph API: Referência de Endpoints
+# Instagram Graph API — Referência de Endpoints
 
 > Historical reference, not current Meta documentation. This bundle implements Facebook Login with a linked Page for both Business and Creator accounts. Verify the selected API version, permissions, media types, metrics, quotas and app-review requirements before use. Local scripts and their documented limitations take precedence over examples below.
 
@@ -73,7 +73,7 @@ Detalhes de uma mídia específica.
 
 ### GET /{media-id}/children
 
-Para CAROUSEL_ALBUM; retorna itens do carrossel.
+Para CAROUSEL_ALBUM — retorna itens do carrossel.
 
 ---
 
@@ -81,7 +81,7 @@ Para CAROUSEL_ALBUM; retorna itens do carrossel.
 
 ### Processo de 2 Etapas
 
-**Etapa 1; Criar Container:**
+**Etapa 1 — Criar Container:**
 
 ```
 POST /{user-id}/media
@@ -99,7 +99,7 @@ POST /{user-id}/media
 
 **Resposta:** `{"id": "container_id"}`
 
-**Etapa 1.5; Verificar Status (vídeos):**
+**Etapa 1.5 — Verificar Status (vídeos):**
 
 ```
 GET /{container-id}?fields=status_code
@@ -109,7 +109,7 @@ Status: `IN_PROGRESS`, `FINISHED`, `ERROR`
 
 Aguardar até `FINISHED` antes de publicar. Poll a cada 5-10s.
 
-**Etapa 2; Publicar:**
+**Etapa 2 — Publicar:**
 
 ```
 POST /{user-id}/media_publish
@@ -162,14 +162,14 @@ Ocultar/mostrar comentário.
 ### GET /{media-id}/insights
 
 **Métricas para IMAGE/CAROUSEL:**
-- `impressions`; Vezes que a mídia foi exibida
-- `reach`; Contas únicas que viram
-- `engagement`; Likes + comments + saves
-- `saved`; Vezes que foi salva
+- `impressions` — Vezes que a mídia foi exibida
+- `reach` — Contas únicas que viram
+- `engagement` — Likes + comments + saves
+- `saved` — Vezes que foi salva
 
 **Métricas adicionais para VIDEO/REELS:**
-- `video_views`; Visualizações do vídeo
-- `plays`; Vezes que o reel foi reproduzido
+- `video_views` — Visualizações do vídeo
+- `plays` — Vezes que o reel foi reproduzido
 
 **Parâmetros:**
 ```
@@ -199,10 +199,10 @@ metric=impressions,reach,engagement,saved
 Métricas agregadas da conta.
 
 **Métricas por período `day`:**
-- `impressions`; Total de impressões
-- `reach`; Contas únicas alcançadas
-- `follower_count`; Total de seguidores (só `day`)
-- `profile_views`; Visualizações do perfil
+- `impressions` — Total de impressões
+- `reach` — Contas únicas alcançadas
+- `follower_count` — Total de seguidores (só `day`)
+- `profile_views` — Visualizações do perfil
 
 **Métricas por período `week` / `days_28`:**
 - `impressions`, `reach`

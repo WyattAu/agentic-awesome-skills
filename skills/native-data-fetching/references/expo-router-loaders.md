@@ -64,8 +64,8 @@ Bind these examples to the installed SDK. The [official loader guide](https://do
 
 Loaders use two packages:
 
-- **`expo-router`**; `useLoaderData` hook
-- **`expo-router/server`**; current `LoaderFunction` type; **`expo-server`**; runtime utilities such as `StatusError` and `setResponseHeaders`. Verify installed exports.
+- **`expo-router`** — `useLoaderData` hook
+- **`expo-router/server`** — current `LoaderFunction` type; **`expo-server`** — runtime utilities such as `StatusError` and `setResponseHeaders`. Verify installed exports.
 
 ## Basic Loader
 
@@ -105,7 +105,7 @@ export default function Posts() {
 }
 ```
 
-`useLoaderData` is typed via `typeof loader`; the generic parameter infers the return type.
+`useLoaderData` is typed via `typeof loader` — the generic parameter infers the return type.
 
 ## Dynamic Routes
 
@@ -335,9 +335,9 @@ When a loader throws (including `StatusError`), the nearest `ErrorBoundary` catc
 ## Best Practices
 
 - Loaders are web-only; use client-side fetching (React Query, fetch) for native
-- Loaders cannot be used in `_layout` files; only in route files
+- Loaders cannot be used in `_layout` files — only in route files
 - Use the installed SDK’s `LoaderFunction<T>` (currently `expo-router/server`) to type loaders that use params
-- The request object is immutable; use optional chaining (`request?.headers`) as it may be `undefined` in static mode
+- The request object is immutable — use optional chaining (`request?.headers`) as it may be `undefined` in static mode
 - Return only JSON-serializable values (no `Date`, `Map`, `Set`, class instances, functions)
 - Use non-prefixed `process.env` vars for secrets in loaders, not `EXPO_PUBLIC_` (which is embedded in the client bundle)
 - Use `StatusError` from `expo-server` for HTTP error responses

@@ -1,10 +1,10 @@
 # longbridge-factor-research
 
-A systematic framework for testing whether a quantitative factor adds predictive value for future returns; covering IC analysis, information ratio, decile portfolio construction, and factor decay.
+A systematic framework for testing whether a quantitative factor adds predictive value for future returns — covering IC analysis, information ratio, decile portfolio construction, and factor decay.
 
 ## Workflow
 
-### Step 1: Define the factor
+### Step 1 — Define the factor
 
 Clarify with the user:
 
@@ -13,7 +13,7 @@ Clarify with the user:
 - Test period (e.g. 2020-01-01 to 2024-12-31).
 - Holding period (e.g. monthly rebalance).
 
-### Step 2: Fetch universe constituents
+### Step 2 — Fetch universe constituents
 
 ```bash
 longbridge constituent --help
@@ -22,7 +22,7 @@ longbridge constituent <INDEX> --format json
 
 Extract the `stocks` array. Common indices: `000300.SH` (CSI 300), `HSI.HK`, `SPX.US`.
 
-### Step 3: Fetch factor values and returns
+### Step 3 — Fetch factor values and returns
 
 The current `calc-index` snapshot and current constituent list are not historical point-in-time data. If dated factor releases and historical membership are unavailable, stop the historical backtest and offer a current descriptive screen. Respect reporting lags, delistings, survivorship and corporate-action adjustments.
 
@@ -35,13 +35,13 @@ longbridge kline <SYMBOL> --period day --count 252 --format json   # price histo
 
 Run `--help` on each command to verify available fields before parsing.
 
-### Step 4: Compute IC at each rebalance date
+### Step 4 — Compute IC at each rebalance date
 
 `IC_t = rank_correlation(factor_value_t, forward_return_t+h)`
 
 Where `h` = holding period. Use Spearman rank correlation (robust to outliers). Winsorize factor values at 1%/99% before ranking.
 
-### Step 5: Summary statistics
+### Step 5 — Summary statistics
 
 | Metric                 | Formula                   | Illustrative heuristic (not a validity test) |
 | ---------------------- | ------------------------- | --------------------- |
@@ -51,14 +51,14 @@ Where `h` = holding period. Use Spearman rank correlation (robust to outliers). 
 | IC > 0 hit rate        | % of periods IC > 0       | > 55%                 |
 | ICIR (annualised)      | IR × √(periods per year)  | > 1.0 strong          |
 
-### Step 6: Decile portfolio backtest
+### Step 6 — Decile portfolio backtest
 
 1. At each rebalance date, sort universe into 10 deciles by factor value.
 2. Track equal-weighted returns for each decile over the holding period.
 3. Key output: decile 1 vs decile 10 spread (long-short portfolio return).
 4. Compute cumulative return, Sharpe ratio, and max drawdown for the long-short portfolio.
 
-### Step 7: IC decay analysis
+### Step 7 — IC decay analysis
 
 Compute IC for multiple forward horizons (1M, 2M, 3M, 6M, 12M). Plot IC vs horizon. Fast decay = short-term factor; slow decay = longer-term signal.
 

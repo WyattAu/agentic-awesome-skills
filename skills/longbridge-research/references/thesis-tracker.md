@@ -53,7 +53,7 @@ Structure the tracker output as follows:
 
 **Overall verdict**:
 
-> **Thesis confidence: Medium**; 2 of 4 pillars intact. Core AI-driven revenue growth on track; margin expansion lagging. No thesis-breaking events in filings. Next review trigger: the next earnings release; no trade instruction follows from this evidence alone.
+> **Thesis confidence: Medium** — 2 of 4 pillars intact. Core AI-driven revenue growth on track; margin expansion lagging. No thesis-breaking events in filings. Next review trigger: the next earnings release; no trade instruction follows from this evidence alone.
 
 ## Error handling
 

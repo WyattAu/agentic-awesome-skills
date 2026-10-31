@@ -13,7 +13,7 @@ tools: [claude, cursor]
 
 ## Overview
 
-A structured 7-stage super workflow for comprehensive GitHub repository management. This skill automates repository auditing, cleanup, competitor benchmarking, and optimization; turning a messy repo into a clean, well-documented, production-ready project.
+A structured 7-stage super workflow for comprehensive GitHub repository management. This skill automates repository auditing, cleanup, competitor benchmarking, and optimization — turning a messy repo into a clean, well-documented, production-ready project.
 
 ## When to Use This Skill
 
@@ -29,7 +29,7 @@ A structured 7-stage super workflow for comprehensive GitHub repository manageme
 Clone the target repository, define success criteria, and establish baseline metrics.
 
 ### Stage 2: Execution
-Run `bash scripts/repo-audit.sh <repo-path>` from this skill directory; automated read-only checks for:
+Run `bash scripts/repo-audit.sh <repo-path>` from this skill directory — automated read-only checks for:
 - Hardcoded secrets (`ghp_`, `sk-`, `AKIA`, etc.)
 - Tracked `node_modules/` or build artifacts
 - Empty directories
@@ -65,7 +65,7 @@ Runs all 7 stages and produces a detailed before/after report.
 ### Example 2: Quick Cleanup
 
 ```
-Clean up my GitHub repo; remove junk files, fix secrets, add .gitignore
+Clean up my GitHub repo — remove junk files, fix secrets, add .gitignore
 ```
 
 ### Example 3: Competitor Benchmarking
@@ -79,7 +79,7 @@ Compare my skill repo with the top 5 similar repos on GitHub
 - ✅ Always run Stage 7 validation before pushing
 - ✅ Use semantic commit messages: `chore:`, `fix:`, `docs:`
 - ✅ Check the `pr_todo.json` file for pending reviewer requests
-- ❌ Don't skip Stage 4; competitor analysis reveals blind spots
+- ❌ Don't skip Stage 4 — competitor analysis reveals blind spots
 - ❌ Don't commit `node_modules/` or `.env` files
 
 ## Security & Safety Notes
@@ -88,7 +88,7 @@ The helper distinguishes a clean no-match from scanner failure and reports failu
 
 - The audit script scans for common secret patterns but excludes `.github/workflows/` to avoid false positives
 - The bundled script is read-only: it reports findings and never deletes, rewrites, stages, commits, or pushes files
-- All `gh` CLI operations use the user's existing authentication; no credentials are stored by this skill
+- All `gh` CLI operations use the user's existing authentication — no credentials are stored by this skill
 - The skill never modifies files without explicit user confirmation in Stage 6
 
 ## Source Attribution

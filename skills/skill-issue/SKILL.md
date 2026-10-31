@@ -1,7 +1,7 @@
 ---
 id: skill-issue
 name: skill-issue
-description: "Find out why a coding-agent skill won't fire; grade each SKILL.md A–F on activation, simulate which skill a prompt triggers, and flag collisions where one silently shadows another."
+description: "Find out why a coding-agent skill won't fire — grade each SKILL.md A–F on activation, simulate which skill a prompt triggers, and flag collisions where one silently shadows another."
 category: meta
 risk: safe
 source: community
@@ -15,7 +15,7 @@ license: "MIT"
 license_source: "https://github.com/mishanefedov/skill-issue/blob/main/LICENSE"
 ---
 
-# skill-issue: skill activation audit
+# skill-issue — skill activation audit
 
 ## Overview
 
@@ -53,7 +53,7 @@ Offline heuristic by default; add `--llm` to judge with a local `claude`/`codex`
 
 ```bash
 skill-issue ~/.claude/skills
-# F  deploy-helper  ✗ no description: can never fire
+# F  deploy-helper  ✗ no description — can never fire
 # C  shipit         ! no "use when …" trigger clause
 # A  rollback-prod  heuristic: trigger wording present; actual activation unverified
 ```
@@ -63,7 +63,7 @@ skill-issue ~/.claude/skills
 ```bash
 skill-issue ~/.claude/skills --why "deploy the app to prod"
 #  1. shipit       0.74  ← would fire
-#  2. land-deploy  0.69  (margin 0.05: ambiguous, likely collision)
+#  2. land-deploy  0.69  (margin 0.05 — ambiguous, likely collision)
 ```
 
 ## Limitations

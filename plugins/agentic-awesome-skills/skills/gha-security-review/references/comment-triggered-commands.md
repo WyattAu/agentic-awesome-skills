@@ -11,7 +11,7 @@ Workflows triggered by `issue_comment` that parse commands from comment bodies (
 ## The Vulnerability
 
 ```yaml
-# VULNERABLE: No author check: any GitHub user can trigger
+# VULNERABLE: No author check — any GitHub user can trigger
 on:
   issue_comment:
     types: [created]
@@ -57,7 +57,7 @@ jobs:
 When the comment body is both the trigger AND used in a `run:` block:
 
 ```yaml
-# VULNERABLE: Double risk: no auth + expression injection
+# VULNERABLE: Double risk — no auth + expression injection
 on: issue_comment
 jobs:
   greet:
@@ -88,7 +88,7 @@ jobs:
       - run: npm test  # Runs fork's test suite
 ```
 
-This combines the `issue_comment` authorization problem with a pwn request; the comment triggers execution of untrusted fork code.
+This combines the `issue_comment` authorization problem with a pwn request — the comment triggers execution of untrusted fork code.
 
 ---
 
@@ -185,7 +185,7 @@ ENTRY: Attacker comments on a public issue/PR
 PAYLOAD: Comment body containing "/[command]" [+ optional injection]
 TRIGGER: issue_comment workflow at [file:line], condition at line [N]
   matches without checking author_association
-EXECUTION: [What runs; script execution, fork checkout, etc.]
+EXECUTION: [What runs — script execution, fork checkout, etc.]
 IMPACT: [RCE, deployment trigger, secret access, etc.]
 ```
 
@@ -193,5 +193,5 @@ IMPACT: [RCE, deployment trigger, secret access, etc.]
 
 ## References
 
-- [GitHub Docs: Events that trigger workflows; issue_comment](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#issue_comment)
-- [HackerBot Claw; project-akri /version command exploit](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)
+- [GitHub Docs: Events that trigger workflows — issue_comment](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#issue_comment)
+- [HackerBot Claw — project-akri /version command exploit](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)

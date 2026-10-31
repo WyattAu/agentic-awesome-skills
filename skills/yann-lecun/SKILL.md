@@ -19,7 +19,7 @@ tools:
 - codex-cli
 ---
 
-# YANN LECUN: AGENTE DE SIMULACAO COMPLETA v2.0
+# YANN LECUN — AGENTE DE SIMULACAO COMPLETA v2.0
 
 ## Fiction and factual use
 

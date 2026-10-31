@@ -18,7 +18,7 @@ plugin:
     claude: blocked
 ---
 
-# MockHunter: Live Page Reality Check
+# MockHunter — Live Page Reality Check
 
 ## Overview
 
@@ -33,7 +33,7 @@ Because this workflow drives a real browser against live pages, treat it as an i
 - Use when auditing an AI-generated UI to find out which values are actually wired up
 - Use when reviewing a contractor or teammate's deliverable before sign-off
 - Use before showing a vibe-coded MVP to a customer or investor
-- Use when a dashboard "looks too clean"; every metric uniformly round, all timestamps clustered, no variance; and you suspect seeded data
+- Use when a dashboard "looks too clean" — every metric uniformly round, all timestamps clustered, no variance — and you suspect seeded data
 
 ## How It Works
 
@@ -66,7 +66,7 @@ For every visible value, run this decision tree:
 
 ```
 Did any network request return this value?
-├── YES; found in a response:
+├── YES — found in a response:
 │   ├── Status 4xx/5xx → BROKEN
 │   ├── Endpoint name suggests AI → UNKNOWN until implementation or provider evidence establishes provenance
 │   ├── Response shape matches mock library (faker, MSW, mockoon) → MOCK
@@ -75,7 +75,7 @@ Did any network request return this value?
 │   │   ├── Run read-only SELECT, value matches DB row → REAL
 │   │   └── Value not in this DB/query → UNKNOWN (could be computed, cached or sourced elsewhere)
 │   └── No DB → UNKNOWN (best-guess)
-└── NO; value not in any network response:
+└── NO — value not in any network response:
     ├── Verified literal in application source → HARDCODED; rendered DOM text alone does not establish this
     ├── Computed from Math.random / Date.now / faker → MOCK
     └── Cannot determine → UNKNOWN
@@ -127,18 +127,18 @@ Skill: ...
 
 - ✅ Use approved read-only DB access when useful; a matching row establishes a source match, not real-world truth, and a missing row remains UNKNOWN
 - ✅ Use a dedicated test account for form-login auth
-- ✅ Run cold-start tests (zero data); many vibe-coded apps fail there
+- ✅ Run cold-start tests (zero data) — many vibe-coded apps fail there
 - ✅ Tell the skill if specific sections are intentionally AI-generated, so it doesn't false-flag them
-- ❌ Don't run active interaction on apps you don't own without permission; live clicks and form submissions can mutate state
-- ❌ Don't trust a destructive-button exclusion list by itself; localized labels, icons, aria text, and backend routes can hide mutating actions
-- ❌ Don't trust the audit if the page failed to load; check console first
+- ❌ Don't run active interaction on apps you don't own without permission — live clicks and form submissions can mutate state
+- ❌ Don't trust a destructive-button exclusion list by itself — localized labels, icons, aria text, and backend routes can hide mutating actions
+- ❌ Don't trust the audit if the page failed to load — check console first
 
 ## Limitations
 
-- Single-page audit per run; no multi-page crawl in v0.1.0
-- Form-login only for auth; no OAuth, magic-link, or 2FA in v0.1.0
+- Single-page audit per run — no multi-page crawl in v0.1.0
+- Form-login only for auth — no OAuth, magic-link, or 2FA in v0.1.0
 - Caps at ~30 most-prominent buttons per page
-- Markdown report only; no JSON output yet
+- Markdown report only — no JSON output yet
 - DB verification supports any DB reachable via shell command (psql, mysql, mongosh, wrangler, supabase REST), but not Firestore directly
 
 ## Security & Safety Notes
@@ -147,4 +147,4 @@ Skill: ...
 - Skips destructive-looking, ambiguous, icon-only, localized, or external-write controls unless the user has explicitly allowlisted the exact control and environment
 - Never submits forms that look like payment, account deletion, external write operations, account changes, invites, publishing, deployment, messaging, or money movement
 - Uses placeholder credentials (`mockhunter@example.com`) for any throwaway form tests, never the user's real credentials
-- All Playwright actions happen in a controlled MCP browser context; no headless escalation
+- All Playwright actions happen in a controlled MCP browser context — no headless escalation

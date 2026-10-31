@@ -1,6 +1,6 @@
 ---
 name: analytics-product
-description: Analytics de produto; PostHog, Mixpanel, eventos, funnels, cohorts, retencao, north star metric, OKRs e dashboards de produto.
+description: Analytics de produto — PostHog, Mixpanel, eventos, funnels, cohorts, retencao, north star metric, OKRs e dashboards de produto.
 metadata:
   aas-risk: none
   aas-source: community
@@ -10,11 +10,11 @@ metadata:
   aas-tools: '["claude-code","antigravity","cursor","gemini-cli","codex-cli"]'
 ---
 
-# ANALYTICS-PRODUCT: Decida com Dados
+# ANALYTICS-PRODUCT — Decida com Dados
 
 ## Overview
 
-Analytics de produto; PostHog, Mixpanel, eventos, funnels, cohorts, retencao, north star metric, OKRs e dashboards de produto. Ativar para: configurar tracking de eventos, criar funil de conversao, analise de cohort, retencao, DAU/MAU, feature flags, A/B testing, north star metric, OKRs, dashboard de produto.
+Analytics de produto — PostHog, Mixpanel, eventos, funnels, cohorts, retencao, north star metric, OKRs e dashboards de produto. Ativar para: configurar tracking de eventos, criar funil de conversao, analise de cohort, retencao, DAU/MAU, feature flags, A/B testing, north star metric, OKRs, dashboard de produto.
 
 ## When to Use This Skill
 
@@ -36,9 +36,9 @@ Correto:   user_signed_up, conversation_started, upgrade_completed
 Errado:    signup, click, conversion
 ```
 
-## Analytics-Product: Decida Com Dados
+## Analytics-Product — Decida Com Dados
 
-> "In God we trust. All others must bring data."; W. Edwards Deming
+> "In God we trust. All others must bring data." — W. Edwards Deming
 
 ---
 

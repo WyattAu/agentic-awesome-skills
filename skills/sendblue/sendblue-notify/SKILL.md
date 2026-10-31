@@ -1,6 +1,6 @@
 ---
 name: sendblue-notify
-description: "Text the user's phone when a long-running task, agent turn, or scheduled job finishes; via @sendblue/cli for outbound, optionally wired to a Claude Code Stop hook for automatic fire."
+description: "Text the user's phone when a long-running task, agent turn, or scheduled job finishes — via @sendblue/cli for outbound, optionally wired to a Claude Code Stop hook for automatic fire."
 category: automation
 risk: critical
 source: community
@@ -26,7 +26,7 @@ Outbound, fire-and-forget notifications from a local Claude Code session, script
 - Use when the user says "text me when X is done", "ping my phone", "notify me on completion", "let me know when the build/deploy/migration finishes", or "send me an iMessage when…".
 - Use when the user asks to wire a hook that texts on agent stop, `/loop` iteration, or `/schedule` completion.
 - Use for a long-running task only when the user has explicitly requested phone notification.
-- Do **not** use for short, interactive tasks where the user is watching the terminal; the notify is noise.
+- Do **not** use for short, interactive tasks where the user is watching the terminal — the notify is noise.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ npx @sendblue/cli whoami        # confirms creds
 npx @sendblue/cli setup
 ```
 
-The user's phone number must be a verified contact on the account. On the free plan, the contact has to text the Sendblue number once before outbound sends work; confirm with `sendblue contacts` before relying on notify in an unattended workflow.
+The user's phone number must be a verified contact on the account. On the free plan, the contact has to text the Sendblue number once before outbound sends work — confirm with `sendblue contacts` before relying on notify in an unattended workflow.
 
 Cache the destination number once per project rather than re-asking. A `NOTIFY_NUMBER` env var or a one-line `.notify-number` file is fine; defer storage strategy to whatever the surrounding project already does.
 
@@ -54,7 +54,7 @@ Do not circumvent provider anti-abuse limits by distributing sends across lines.
 
 ### Step 1: Decide whether notify is appropriate
 
-Notify is for **long, unattended work**; not chatter. Good triggers:
+Notify is for **long, unattended work** — not chatter. Good triggers:
 
 - Agent turns over ~2 minutes (build, large refactor, migration, dataset crunch).
 - `/loop` and `/schedule` jobs that produce a discrete result.
@@ -63,7 +63,7 @@ Notify is for **long, unattended work**; not chatter. Good triggers:
 
 Bad triggers (do not silently wire these):
 
-- Every `Stop` event, regardless of duration; produces spam, trains the user to ignore.
+- Every `Stop` event, regardless of duration — produces spam, trains the user to ignore.
 - Read-only or sub-second commands.
 - Anything inside a tight loop.
 
@@ -71,25 +71,25 @@ If the user asks for "notify me when done" on a short task, do the obvious one-s
 
 ### Step 2: Pick a delivery pattern
 
-- **One-shot inline send**; default for a single ad-hoc task. No config changes.
-- **`Stop` hook**; opt-in, project-scoped, for sessions the user explicitly wants on automatic notify. Always gate by duration.
-- **End-of-`/loop` or `/schedule` ping**; append the send to the routine's body.
+- **One-shot inline send** — default for a single ad-hoc task. No config changes.
+- **`Stop` hook** — opt-in, project-scoped, for sessions the user explicitly wants on automatic notify. Always gate by duration.
+- **End-of-`/loop` or `/schedule` ping** — append the send to the routine's body.
 
 ### Step 3: Compose the notification copy
 
-- **One line, under ~140 chars**; fits in the lock-screen preview.
-- **Lead with outcome**; ✅/❌, "done", "failed", "needs review".
-- **Include something actionable**; branch name, error tail, PR number, duration.
+- **One line, under ~140 chars** — fits in the lock-screen preview.
+- **Lead with outcome** — ✅/❌, "done", "failed", "needs review".
+- **Include something actionable** — branch name, error tail, PR number, duration.
 - **No emojis the user didn't ask for** beyond a single status glyph.
-- **No agent self-narration** ("I have completed the task as requested"; just say what happened).
+- **No agent self-narration** ("I have completed the task as requested" — just say what happened).
 
 ## Examples
 
 ### Example 1: One-shot inline send
 
-For a single task, append the send to the command. This is the default; no config changes, no surprise behavior later.
+For a single task, append the send to the command. This is the default — no config changes, no surprise behavior later.
 
-Branch on the task's exit status with an `if`/`else`. Do **not** use a `task && send-success || send-failure` chain: if the task succeeds but the success-send itself returns non-zero, the `||` fires the failure message; so the user sees ❌ even though the task completed. The `if`/`else` keeps the outcome tied solely to the task.
+Branch on the task's exit status with an `if`/`else`. Do **not** use a `task && send-success || send-failure` chain: if the task succeeds but the success-send itself returns non-zero, the `||` fires the failure message — so the user sees ❌ even though the task completed. The `if`/`else` keeps the outcome tied solely to the task.
 
 ```bash
 if long_running_thing; then
@@ -111,18 +111,18 @@ fi
 
 ### Example 2: Claude Code `Stop` hook (opt-in, scoped)
 
-Register a `Stop` hook in `.claude/settings.json` (project-scoped); never in global settings unless asked. Defer the actual file edit to [[update-config]]. The hook command itself should:
+Register a `Stop` hook in `.claude/settings.json` (project-scoped) — never in global settings unless asked. Defer the actual file edit to [[update-config]]. The hook command itself should:
 
 1. Run cheaply (it fires on *every* `Stop`).
-2. Gate on duration; skip sends for turns under a threshold (e.g. 90s).
-3. Never fail the parent; pipe to `|| true` so a notify error doesn't surface as a hook failure.
+2. Gate on duration — skip sends for turns under a threshold (e.g. 90s).
+3. Never fail the parent — pipe to `|| true` so a notify error doesn't surface as a hook failure.
 
 ```bash
 [ "$CLAUDE_TURN_DURATION_SECONDS" -ge 90 ] && \
   npx @sendblue/cli send "$NOTIFY_NUMBER" "turn done in ${CLAUDE_TURN_DURATION_SECONDS}s" || true
 ```
 
-(Adjust the env var names to whatever the hook contract actually provides; verify against the current Claude Code hooks reference before writing the config; the harness owns those names, not this skill.)
+(Adjust the env var names to whatever the hook contract actually provides — verify against the current Claude Code hooks reference before writing the config; the harness owns those names, not this skill.)
 
 Show the proposed hook config to the user and get confirmation before invoking [[update-config]]. Automated outbound messages are a footgun if the threshold is wrong.
 
@@ -136,7 +136,7 @@ For `/schedule`, the routine itself can shell out at the end. Same copy rules ap
 
 ## Composing with textme
 
-If the user has `@textme` installed (njerschow/textme; daemon that lets you *text Claude* from your phone), notify is still useful and not redundant. They run in opposite directions:
+If the user has `@textme` installed (njerschow/textme — daemon that lets you *text Claude* from your phone), notify is still useful and not redundant. They run in opposite directions:
 
 - **textme**: phone → Claude (user initiates from the phone).
 - **sendblue-notify**: local Claude → phone (Claude initiates from a local session).
@@ -163,7 +163,7 @@ You can install both: textme on a server for inbound, notify as a local `Stop`-h
 - **Lock-screen previews leak.** Anyone holding the phone can read notification copy. Do not embed secrets, customer data, full error stacks, or auth tokens. Link to a log, dashboard, or PR instead.
 - **Confirm before sending or wiring hooks.** Preview the destination, message template, trigger, and duration gate; wait for explicit user confirmation before running `sendblue send` or editing hook config.
 - **Automated outbound is a footgun.** A misconfigured `Stop` hook can fire dozens of messages a minute. Always gate by duration and prove the threshold in a dry run before committing.
-- **Per-user numbers.** The destination phone number is a personal identifier; keep it in user-local config (env var, gitignored file), not in committed repo files or CI logs.
+- **Per-user numbers.** The destination phone number is a personal identifier — keep it in user-local config (env var, gitignored file), not in committed repo files or CI logs.
 - **Free-plan verification is silent.** If the destination contact hasn't texted in once, sends return an API error but the user just sees "no text arrived". Confirm verification before wiring an unattended hook.
 
 ## Common Pitfalls
@@ -172,15 +172,15 @@ You can install both: textme on a server for inbound, notify as a local `Stop`-h
 - **Hardcoding the destination number in committed files.** Use an env var or gitignored file; the number is per-user, not per-repo.
 - **Letting a failed notify fail the parent.** Always trail with `|| true` in hooks; surface the failure in logs, not by aborting the agent turn.
 - **Free-plan contact gotcha.** If the destination contact hasn't texted in once on a free-plan account, the send silently fails for the user's purposes. Verify with `sendblue contacts` before wiring an unattended hook. Or `sendblue upgrade` to the AI Agent plan.
-- **PII in notification copy.** Lock-screen previews are visible to anyone holding the phone. Don't embed secrets, customer data, or full error stacks; link to a log or PR instead.
+- **PII in notification copy.** Lock-screen previews are visible to anyone holding the phone. Don't embed secrets, customer data, or full error stacks — link to a log or PR instead.
 - **Burying the outcome.** "Task complete. Here is a summary of what I did…" wastes the preview line. Lead with ✅/❌ and the verb.
 
 ## Related Skills
 
-- `@sendblue-cli`; Owns the actual send mechanism. This skill calls into it.
-- `@sendblue-api`; HTTP alternative for app code where notify lives inside a long-running service.
-- `@update-config`; Wires the `Stop` hook into `.claude/settings.json`. This skill owns the *what* and *when*; update-config owns the *where*.
-- `@textme`; Inbound counterpart (phone → Claude). Composes well with notify.
+- `@sendblue-cli` — Owns the actual send mechanism. This skill calls into it.
+- `@sendblue-api` — HTTP alternative for app code where notify lives inside a long-running service.
+- `@update-config` — Wires the `Stop` hook into `.claude/settings.json`. This skill owns the *what* and *when*; update-config owns the *where*.
+- `@textme` — Inbound counterpart (phone → Claude). Composes well with notify.
 
 ## Links
 

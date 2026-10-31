@@ -1,6 +1,6 @@
 ---
 name: dos-verify-done-claims
-description: "Before accepting an agent's 'done / shipped / fixed' claim, verify it against ground truth (git ancestry + the commit's own diff) using the DOS kernel's `dos verify` and `dos commit-audit`; never the agent's own narration."
+description: "Before accepting an agent's 'done / shipped / fixed' claim, verify it against ground truth (git ancestry + the commit's own diff) using the DOS kernel's `dos verify` and `dos commit-audit` — never the agent's own narration."
 category: quality
 risk: critical
 source: community
@@ -27,11 +27,11 @@ plugin:
 ## Overview
 
 When an AI agent says "done", "shipped", or "fixed", that is a **claim**, not a
-fact; and a claim the agent checks by re-reading its own work is *consistency,
+fact — and a claim the agent checks by re-reading its own work is *consistency,
 not grounding*. This skill replaces that self-report with a verdict from a
 witness the agent did not author: it shells the **DOS kernel** (`dos verify`,
 `dos commit-audit`) to confirm the claimed effect from git ancestry and the
-commit's actual diff. DOS is deterministic; no API key, no LLM. The verdict is
+commit's actual diff. DOS is deterministic — no API key, no LLM. The verdict is
 git-only and offline as used here; the one exception is `dos verify` in a
 workspace that wires a CI oracle, which `--no-ci` suppresses (see Security &
 Safety Notes).
@@ -46,9 +46,9 @@ This skill adapts the DOS reference "witness-claim" pattern
 - Use right after a commit, to confirm the commit's **message matches its diff**
   (catch a `fix:` that only touched a README, or a "tests pass" that deleted the
   assertions).
-- Use when folding many sub-agents' results; verify each claimed effect instead
+- Use when folding many sub-agents' results — verify each claimed effect instead
   of trusting the return string.
-- **Do not** use it to judge whether code is *correct*; that is what the test
+- **Do not** use it to judge whether code is *correct* — that is what the test
   suite is for. This skill checks did-the-claimed-thing-actually-ship.
 
 ## How It Works
@@ -71,13 +71,13 @@ dos commit-audit --workspace . HEAD --json
 ```
 
 `commit-audit --json` prints a JSON **array** of audited commits (one element
-even for a single `HEAD`), so read `verdict` from the first element; e.g.
+even for a single `HEAD`), so read `verdict` from the first element — e.g.
 `dos commit-audit --workspace . HEAD --json | jq -r '.[0].verdict'`. (Without
 `--json` the same verdict prints as a one-line text row: `· OK …`,
 `⚑ UNWITNESSED …`, or `· abstain …`.) The verdicts are: `OK` (the diff backs the
 claim's *kind*), `CLAIM_UNWITNESSED` (the subject's claim is not evidenced by the
-diff; treat the "done" as unproven), or `ABSTAIN`. This judges the *kind* of
-change, never correctness; run the tests for that.
+diff — treat the "done" as unproven), or `ABSTAIN`. This judges the *kind* of
+change, never correctness — run the tests for that.
 
 ### Step 3: Verify a named phase actually shipped
 
@@ -90,25 +90,25 @@ dos verify --workspace . PLAN PHASE --json --no-ci
 
 `--no-ci` keeps the verdict git-only (see the Security note below). With `--json`
 you get the `shipped` and `source` fields. (The default text form prints
-`SHIPPED PLAN PHASE (via grep)` or `NOT_SHIPPED PLAN PHASE (via none)`; the same
+`SHIPPED PLAN PHASE (via grep)` or `NOT_SHIPPED PLAN PHASE (via none)` — the same
 verdict, and the process exit code is non-zero when not shipped.)
 
 Grade `shipped: true` by the `source`, because git fallback grades itself by
-**forgeability**; and forgeable evidence is exactly what this skill exists to
+**forgeability** — and forgeable evidence is exactly what this skill exists to
 distrust:
 
-- `registry` or `grep-artifact`; **artifact-backed, still authored** (a registry row or artifact/diff match). Inspect the artifact and its provenance; presence alone does not close a behavioral claim.
-- `grep-subject` (or bare `grep`); **forgeable**: a commit *subject* or body
+- `registry` or `grep-artifact` — **artifact-backed, still authored** (a registry row or artifact/diff match). Inspect the artifact and its provenance; presence alone does not close a behavioral claim.
+- `grep-subject` (or bare `grep`) — **forgeable**: a commit *subject* or body
   carried the phase token, which an agent can write without doing the work (even
-  on an empty commit). Treat this as *shipped-per-the-subject*, not confirmed -
+  on an empty commit). Treat this as *shipped-per-the-subject*, not confirmed —
   corroborate it (run `dos commit-audit` on that commit, below) before you close.
-- `none`; no positive evidence; accept as "not shipped", not as a tool failure.
+- `none` — no positive evidence; accept as "not shipped", not as a tool failure.
 
 ### Step 4: Fold only confirmed effects
 
 Accept the agent's "done" **only** when Step 2/3 corroborate it. If
 `CLAIM_UNWITNESSED` or `shipped: false`, the work is not done regardless of how
-confidently the agent narrated it; send it back.
+confidently the agent narrated it — send it back.
 
 ## Examples
 
@@ -138,15 +138,15 @@ dos verify --workspace . AUTH AUTH2 --json --no-ci
 - ✅ Treat `source: none` / `CLAIM_UNWITNESSED` as "not done", not as a tool error.
 - ✅ Inspect an **artifact-backed, still authored** `source` (`registry`, `grep-artifact`).
   Treat `grep-subject` / bare `grep` as forgeable (an agent can write the subject
-  text); corroborate before closing.
-- ✅ Keep the test suite as the separate correctness gate; this skill checks shipping, not correctness.
+  text) — corroborate before closing.
+- ✅ Keep the test suite as the separate correctness gate — this skill checks shipping, not correctness.
 - ❌ Don't accept a "done" because the agent's prose was confident.
 - ❌ Don't use this to replace code review or testing.
 
 ## Limitations
 
 - This skill does not replace environment-specific validation, testing, or expert review.
-- It checks whether a claimed change *shipped* / matches its diff; not whether the code is *correct*.
+- It checks whether a claimed change *shipped* / matches its diff — not whether the code is *correct*.
 - `dos verify` reads git history; in a repo with no commits there is nothing to witness (it will honestly report `source: none`).
 - Stop and ask for clarification if required inputs (a git repo, the `dos` CLI) are missing.
 
@@ -158,10 +158,10 @@ dos verify --workspace . AUTH AUTH2 --json --no-ci
   the repo or push. `dos commit-audit` only reads git history and the working
   tree (no network). `dos verify` is also git-only **unless** the workspace has
   wired a CI oracle (`[verify] non_git_oracle` in its `dos.toml`), in which case
-  it may shell a network check (e.g. `gh api`) for the verdict; pass `--no-ci`
+  it may shell a network check (e.g. `gh api`) for the verdict — pass `--no-ci`
   (as the examples above do) to force the git-only path and guarantee no network.
 - `pip install dos-kernel` installs from PyPI. The distribution name is
-  `dos-kernel` (the bare `dos` on PyPI is an unrelated package; do not install
+  `dos-kernel` (the bare `dos` on PyPI is an unrelated package — do not install
   it). Pin a reviewed version; do not install an unpinned latest release into a
   global Python environment.
 - Run in the repository you intend to adjudicate; the `--workspace .` argument
@@ -170,7 +170,7 @@ dos verify --workspace . AUTH AUTH2 --json --no-ci
 ## Common Pitfalls
 
 - **Problem:** `dos verify` returns `source: none` and it looks like a failure.
-  **Solution:** That is the honest "no evidence" verdict; it means the phase has
+  **Solution:** That is the honest "no evidence" verdict — it means the phase has
   no ship commit, so the claim is unproven. Re-stamp the real commit or keep the
   task open.
 - **Problem:** Installing the wrong package.

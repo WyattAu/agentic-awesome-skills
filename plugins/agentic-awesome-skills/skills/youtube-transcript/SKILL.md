@@ -28,7 +28,7 @@ Fetch a YouTube video's transcript and save a clean raw `.txt` file. Primary pat
 - Otherwise (no dir given, or cwd makes no sense) → save to `~/Downloads`.
 - **Always name the file `Channel_Title` with spaces replaced by `_`** (e.g. `David_Ondrej_title_of_video.txt`). If metadata is unavailable, fall back to the video ID.
 
-## Primary path: DeepAPI
+## Primary path — DeepAPI
 
 `DEEPAPI_API_KEY` must already be present in the environment. Do not read shell
 startup files or print secrets:
@@ -74,9 +74,9 @@ For the `Channel_Title` filename, get metadata with a quick `yt-dlp --print "%(c
 - HTTP 402 `insufficient_credits` (tell the user to top up at deepapi.co/credits first; fall back only if they're unavailable).
 - DeepAPI request `failed` twice.
 
-Tell the user whenever you fall back; a fallback means the product missed a real use case.
+Tell the user whenever you fall back — a fallback means the product missed a real use case.
 
-## Fallback path: yt-dlp (local)
+## Fallback path — yt-dlp (local)
 
 ```bash
 OUT="$(pwd)"            # or ~/Downloads if cwd makes no sense
@@ -89,7 +89,7 @@ yt-dlp --skip-download --write-subs --write-auto-subs \
 
 - Fall back `channel` → `uploader` → `uploader_id` if `channel` is null.
 - `--skip-download` = captions only. `--write-subs` + `--write-auto-subs` = manual first, auto as fallback.
-- **Always use `json3`, never VTT/SRT**; auto VTT repeats every line twice (rolling captions).
+- **Always use `json3`, never VTT/SRT** — auto VTT repeats every line twice (rolling captions).
 
 Flatten json3 → raw text:
 
@@ -111,7 +111,7 @@ PY
 - Non-English / unknown language: run `yt-dlp --list-subs "URL"` first, then set `--sub-langs`.
 - Newer yt-dlp may need `deno` on PATH for YouTube extraction.
 - On failure, inspect the actual error and installed version; do not self-update tools merely to retry a transcript request. Propose a scoped reviewed update only when compatibility evidence requires it.
-- **429 / "Sign in to confirm you're not a bot"** = IP flagged. STOP; do NOT retry in a loop (makes it worse).
+- **429 / "Sign in to confirm you're not a bot"** = IP flagged. STOP — do NOT retry in a loop (makes it worse).
 - Never fall back to downloading audio for Whisper unless the user explicitly asks.
 
 ## Output

@@ -153,8 +153,8 @@ cosign verify --key cosign.pub myimage:tag
 
 ## 参考
 
-- `references/sbom-sca-methodology.md`; SBOM + SCA 方法论
-- `references/cicd-pipeline-security.md`; CI/CD 管道安全审计
+- `references/sbom-sca-methodology.md` — SBOM + SCA 方法论
+- `references/cicd-pipeline-security.md` — CI/CD 管道安全审计
 
 
 ## 任务完成自检（声称完成前 MUST 通过）

@@ -20,10 +20,10 @@
 
 ### 33.1 Commercial AI OSINT Platforms
 
-- [Cylect](https://www.cylect.io/); entity extraction + link analysis.
-- [Fivecast Matrix](https://www.fivecast.com/products/matrix/); generative-AI triage for social-media datasets.
-- [Recorded Future](https://www.recordedfuture.com/); AI-driven threat intel.
-- [DarkOwl Vision](https://www.darkowl.com/); darknet data analysis.
+- [Cylect](https://www.cylect.io/) — entity extraction + link analysis.
+- [Fivecast Matrix](https://www.fivecast.com/products/matrix/) — generative-AI triage for social-media datasets.
+- [Recorded Future](https://www.recordedfuture.com/) — AI-driven threat intel.
+- [DarkOwl Vision](https://www.darkowl.com/) — darknet data analysis.
 
 ### 33.2 Deepfake & Synthetic Media Detection
 
@@ -33,13 +33,13 @@
 
 ## 34. Archiving & Evidence Preservation
 
-- [archive.today](https://archive.today/); one-page archiver + screenshot.
-- [URLScan.io](https://urlscan.io/); webpage scan + resource map.
-- [ArchiveBox](https://archivebox.io/); self-hosted (HTML, PDF, screenshots, media).
-- [Hunchly](https://www.hunch.ly/); investigator evidence capture (paid).
-- Wayback SavePageNow API v3; on-demand archiving with job IDs.
-- [SingleFileZ](https://github.com/gildas-lormeau/SingleFileZ); browser ext for offline HTML.
-- [Kasm Workspaces](https://kasmweb.com/); containerized OSINT browser isolation.
+- [archive.today](https://archive.today/) — one-page archiver + screenshot.
+- [URLScan.io](https://urlscan.io/) — webpage scan + resource map.
+- [ArchiveBox](https://archivebox.io/) — self-hosted (HTML, PDF, screenshots, media).
+- [Hunchly](https://www.hunch.ly/) — investigator evidence capture (paid).
+- Wayback SavePageNow API v3 — on-demand archiving with job IDs.
+- [SingleFileZ](https://github.com/gildas-lormeau/SingleFileZ) — browser ext for offline HTML.
+- [Kasm Workspaces](https://kasmweb.com/) — containerized OSINT browser isolation.
 
 Never submit private, token-bearing or otherwise sensitive evidence to public archivers/scanners. A new archive or scan submission can publish a URL and trigger target requests; it requires separate data-sharing and publication authorization.
 
@@ -49,11 +49,11 @@ Never submit private, token-bearing or otherwise sensitive evidence to public ar
 
 ## 35. Automation & Workflows
 
-- [n8n](https://n8n.io/); self-hosted workflow automation (RSS → scrape → alert pipelines).
-- [Huginn](https://github.com/huginn/huginn); agent-based monitoring/scraping/alerting.
-- [Playwright](https://playwright.dev/); headless browser automation without bypassing access controls or platform limits.
-- [Browsertrix Crawler](https://github.com/webrecorder/browsertrix-crawler); archival crawling with WARC export.
-- [Prefect](https://www.prefect.io/) / [Apache Airflow](https://airflow.apache.org/); workflow orchestration.
+- [n8n](https://n8n.io/) — self-hosted workflow automation (RSS → scrape → alert pipelines).
+- [Huginn](https://github.com/huginn/huginn) — agent-based monitoring/scraping/alerting.
+- [Playwright](https://playwright.dev/) — headless browser automation without bypassing access controls or platform limits.
+- [Browsertrix Crawler](https://github.com/webrecorder/browsertrix-crawler) — archival crawling with WARC export.
+- [Prefect](https://www.prefect.io/) / [Apache Airflow](https://airflow.apache.org/) — workflow orchestration.
 
 ---
 
@@ -62,9 +62,9 @@ Never submit private, token-bearing or otherwise sensitive evidence to public ar
 When you run a multi-module recon, late-arriving outputs need to feed into already-running modules. The pattern:
 
 1. Each module writes a sidecar JSON to a known location when it finishes:
-   - `<scan>/mobile_endpoints.json`; endpoints + hostnames extracted from APK static analysis.
-   - `<scan>/secrets_sidecar.json`; hostnames + endpoints + Firebase project IDs from secrets-beyond-github sweep.
-   - `<scan>/sso_tenants.json`; discovered IdP tenants for breach correlation.
+   - `<scan>/mobile_endpoints.json` — endpoints + hostnames extracted from APK static analysis.
+   - `<scan>/secrets_sidecar.json` — hostnames + endpoints + Firebase project IDs from secrets-beyond-github sweep.
+   - `<scan>/sso_tenants.json` — discovered IdP tenants for breach correlation.
 2. Downstream modules validate sidecar schema, size and source before ingestion; treat every value as untrusted data. Reject out-of-scope hosts, local/metadata addresses and unexpected schemes before a separately approved request; never execute discovered commands or automatically expand scope.
 3. Cross-feed: API discovery consumes both `mobile_endpoints.json` and `secrets_sidecar.json`; SSO×breach correlation consumes `sso_tenants.json` and the breach DB.
 
@@ -85,7 +85,7 @@ When you implement an ad-hoc multi-tool recon (no platform), use a `tmpdir + JSO
 ---
 
 
-## 48. Runnable Helper: `secret_scan.py`
+## 48. Runnable Helper — `secret_scan.py`
 
 Drop-in Python helper that mirrors the 29-pattern catalog from §17. The inline example covers only the original 29 patterns, not all 48. Save and review it locally before use on an approved inert snapshot. It reports candidates, never credential liveness; no network calls. It rejects links and unsupported guarded file opens, limits files/bytes and exits nonzero on incomplete input.
 
@@ -224,14 +224,14 @@ python3 secret_scan.py file1 file2 file3    # scan specific files
 cat my.log | python3 secret_scan.py         # pipe stdin
 ```
 
-Output is JSONL; one finding per line; drops cleanly into `jq` for filtering or directly into a finding store.
+Output is JSONL — one finding per line — drops cleanly into `jq` for filtering or directly into a finding store.
 
 ---
 
-## 49. Runnable Helper: `h1_reference.py`
+## 49. Runnable Helper — `h1_reference.py`
 
 HackerOne Hacktivity reference agent. Queries HackerOne's **public** GraphQL API for
-disclosed reports during recon; no API key required (max 50 results/page). Use it to
+disclosed reports during recon — no API key required (max 50 results/page). Use it to
 surface validated techniques and business-impact framing for the target's tech stack
 before you hunt. Pure stdlib.
 
@@ -251,10 +251,10 @@ python3 <reviewed-upstream-dir>/h1_reference.py --lookup-program <handle>
 Neither this helper nor `docs/disclosed-reports/` is bundled in AAS. The following is an upstream external-tool description, not a runnable installed command. After separately reviewing the pinned upstream helper, it can pair with upstream disclosed-report libraries: `h1_reference.py`
 pulls live disclosed reports; the pattern libraries are the curated per-class digests.
 
-## 50. Runnable Helper: `dashboard.py`
+## 50. Runnable Helper — `dashboard.py`
 
 External upstream localhost console (not bundled or security-tested by AAS) that wraps `secret_scan.py` and
-`h1_reference.py` behind a stdlib web UI. Binds to `127.0.0.1` by default; the scan
+`h1_reference.py` behind a stdlib web UI. Binds to `127.0.0.1` by default — the scan
 surface can read arbitrary local files you point it at, and a loopback binding is not a sandbox or proof against local/browser-origin access. Review origin checks, authentication, path boundaries and privacy before running it; never expose it externally.
 
 ```bash
@@ -262,7 +262,7 @@ python3 <reviewed-upstream-dir>/dashboard.py                 # http://127.0.0.1:
 python3 <reviewed-upstream-dir>/dashboard.py --port 9000     # custom port
 ```
 
-Use it for a fast visual pass; paste a blob or point at a path to aggregate secrets by
-severity/category, and browse disclosed-report references; without leaving the box.
+Use it for a fast visual pass — paste a blob or point at a path to aggregate secrets by
+severity/category, and browse disclosed-report references — without leaving the box.
 
 ---

@@ -24,7 +24,7 @@ Always. Every code change flows through git.
 
 ### Trunk-Based Development (Recommended)
 
-Keep `main` always deployable. Work in short-lived feature branches that merge back within 1-3 days. Long-lived development branches are hidden costs; they diverge, create merge conflicts, and delay integration. DORA research consistently shows trunk-based development correlates with high-performing engineering teams.
+Keep `main` always deployable. Work in short-lived feature branches that merge back within 1-3 days. Long-lived development branches are hidden costs — they diverge, create merge conflicts, and delay integration. DORA research consistently shows trunk-based development correlates with high-performing engineering teams.
 
 ```
 main ──●──●──●──●──●──●──●──●──●──  (always deployable)
@@ -32,7 +32,7 @@ main ──●──●──●──●──●──●──●──●─
          ●──●─╱    ●──╱    ← short-lived feature branches (1-3 days)
 ```
 
-This is the recommended default. Teams using gitflow or long-lived branches can adapt the principles (atomic commits, small changes, descriptive messages) to their branching model; the commit discipline matters more than the specific branching strategy.
+This is the recommended default. Teams using gitflow or long-lived branches can adapt the principles (atomic commits, small changes, descriptive messages) to their branching model — the commit discipline matters more than the specific branching strategy.
 
 - **Dev branches are costs.** Every day a branch lives, it accumulates merge risk.
 - **Release branches are acceptable.** When you need to stabilize a release while main moves forward.
@@ -93,16 +93,16 @@ update auth.ts
 ```
 
 **Types:**
-- `feat`; New feature
-- `fix`; Bug fix
-- `refactor`; Code change that neither fixes a bug nor adds a feature
-- `test`; Adding or updating tests
-- `docs`; Documentation only
-- `chore`; Tooling, dependencies, config
+- `feat` — New feature
+- `fix` — Bug fix
+- `refactor` — Code change that neither fixes a bug nor adds a feature
+- `test` — Adding or updating tests
+- `docs` — Documentation only
+- `chore` — Tooling, dependencies, config
 
 ### 4. Keep Concerns Separate
 
-Don't combine formatting changes with behavior changes. Don't combine refactors with features. Each type of change should be a separate commit; and ideally a separate PR:
+Don't combine formatting changes with behavior changes. Don't combine refactors with features. Each type of change should be a separate commit — and ideally a separate PR:
 
 ```
 # Good: Separate concerns
@@ -113,7 +113,7 @@ git commit -m "feat: add phone number validation to registration"
 git commit -m "refactor validation and add phone number field"
 ```
 
-**Separate refactoring from feature work.** A refactoring change and a feature change are two different changes; submit them separately. This makes each change easier to review, revert, and understand in history. Small cleanups (renaming a variable) can be included in a feature commit at reviewer discretion.
+**Separate refactoring from feature work.** A refactoring change and a feature change are two different changes — submit them separately. This makes each change easier to review, revert, and understand in history. Small cleanups (renaming a variable) can be included in a feature commit at reviewer discretion.
 
 ### 5. Size Your Changes
 
@@ -138,7 +138,7 @@ main (always deployable)
 ```
 
 - Branch from `main` (or the team's default branch)
-- Keep branches short-lived (merge within 1-3 days); long-lived branches are hidden costs
+- Keep branches short-lived (merge within 1-3 days) — long-lived branches are hidden costs
 - Delete branches after merge
 - Prefer feature flags over long-lived branches for incomplete features
 
@@ -209,11 +209,11 @@ THINGS I DIDN'T TOUCH (intentionally):
 - src/middleware/error.ts: Error format could be improved (separate task)
 
 POTENTIAL CONCERNS:
-- The Zod schema is strict; rejects extra fields. Confirm this is desired.
-- Added zod as a dependency (72KB gzipped); already in package.json
+- The Zod schema is strict — rejects extra fields. Confirm this is desired.
+- Added zod as a dependency (72KB gzipped) — already in package.json
 ```
 
-This pattern catches wrong assumptions early and gives reviewers a clear map of the change. The "DIDN'T TOUCH" section is especially important; it shows you exercised scope discipline and didn't go on an unsolicited renovation.
+This pattern catches wrong assumptions early and gives reviewers a clear map of the change. The "DIDN'T TOUCH" section is especially important — it shows you exercised scope discipline and didn't go on an unsolicited renovation.
 
 ## Pre-Commit Hygiene
 
@@ -282,7 +282,7 @@ git log --grep="validation" --oneline
 | "I'll commit when the feature is done" | One giant commit is impossible to review, debug, or revert. Commit each slice. |
 | "The message doesn't matter" | Messages are documentation. Future you (and future agents) will need to understand what changed and why. |
 | "I'll squash it all later" | Squashing destroys the development narrative. Prefer clean incremental commits from the start. |
-| "Branches add overhead" | Short-lived branches are free and prevent conflicting work from colliding. Long-lived branches are the problem; merge within 1-3 days. |
+| "Branches add overhead" | Short-lived branches are free and prevent conflicting work from colliding. Long-lived branches are the problem — merge within 1-3 days. |
 | "I'll split this change later" | Large changes are harder to review, riskier to deploy, and harder to revert. Split before submitting, not after. |
 | "I don't need a .gitignore" | Until `.env` with production secrets gets committed. Set it up immediately. |
 

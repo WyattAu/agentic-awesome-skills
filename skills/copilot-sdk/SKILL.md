@@ -17,7 +17,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 ## Prerequisites
 
 - **GitHub Copilot CLI** installed and authenticated (`copilot --version` to verify)
-- **GitHub Copilot subscription** (Individual, Business, or Enterprise); not required for BYOK
+- **GitHub Copilot subscription** (Individual, Business, or Enterprise) — not required for BYOK
 - **Runtime:** Node.js 18+ / Python 3.8+ / Go 1.21+ / .NET 8.0+
 
 ## When to Use

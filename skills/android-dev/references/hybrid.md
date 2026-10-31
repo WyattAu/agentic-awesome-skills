@@ -119,7 +119,7 @@ const initPush = async () => {
 - Enable HTTP caching in Android WebView settings
 - Lazy-load routes with React.lazy / dynamic imports
 - Avoid `setTimeout`/`setInterval` for animations; use CSS transitions
-- Use `@ionic/react` components; they handle mobile-specific touch handling
+- Use `@ionic/react` components — they handle mobile-specific touch handling
 - Ionic virtual scroll for long lists
 
 ## Build & Deploy

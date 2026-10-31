@@ -1,4 +1,4 @@
-# Project Profiles: intro + tags only, NO architecture 项目画像（仅简介+标签，不记架构）
+# Project Profiles — intro + tags only, NO architecture 项目画像（仅简介+标签，不记架构）
 
 > Register a one-line intro + tags per project so learned preferences can be
 > applied by TAG CLASS. Architecture details live in the project's own memory
@@ -7,4 +7,4 @@
 
 | Project 工程 | Path 路径 | One-line intro 简介 | Side 端 | Lifecycle 生命周期 | Risk 风险面 |
 |------|------|----------|----|---------|--------|
-| - |; | - | backend/frontend 前后端 | long-term/short 长护/短期 | prod-data?/public API? 是否生产数据/对外接口 |
+| — | — | — | backend/frontend 前后端 | long-term/short 长护/短期 | prod-data?/public API? 是否生产数据/对外接口 |

@@ -25,7 +25,7 @@ Use when the user explicitly requests brevity ("caveman mode", "less tokens", "b
 
 ---
 
-## SPEAK Layer: Caveman Compression
+## SPEAK Layer — Caveman Compression
 
 Default: **full** mode. Switch: `/caveman lite|full|ultra`. Off: `stop caveman` / `normal mode`.
 
@@ -44,15 +44,15 @@ Default: **full** mode. Switch: `/caveman lite|full|ultra`. Off: `stop caveman` 
 | **wenyan-full** | Full 文言文. 80-90% character reduction. Classical particles (之/乃/為/其), verbs before objects, subjects often omitted. |
 | **wenyan-ultra** | Extreme classical compression. Maximum terseness. |
 
-### Quick example: "Why React component re-render?"
+### Quick example — "Why React component re-render?"
 - **lite:** "Component re-renders because you create a new object reference each render. If it defeats a memoized child bailout, consider `useMemo` after profiling."
 - **full:** "New obj ref each render. Inline object prop can defeat memoized child bailout. Profile before `useMemo`."
 - **ultra:** "Inline obj prop → may defeat memo bailout. Profile."
 
-### Auto-clarity: drop compression for:
+### Auto-clarity — drop compression for:
 - Security warnings
 - Irreversible action confirmations (deletions, drops, overwrites)
-- Clarifying questions when confused (see THINK layer; always full prose)
+- Clarifying questions when confused (see THINK layer — always full prose)
 - Multi-step sequences where fragment order risks misread
 - When compression itself creates technical ambiguity
 
@@ -62,11 +62,11 @@ Resume caveman immediately after the clear section ends.
 
 ---
 
-## THINK Layer: Coding Discipline
+## THINK Layer — Coding Discipline
 
 ### 1. Think Before Coding
 
-State assumptions explicitly before writing code. If multiple interpretations exist, present them; don't pick silently. If something is unclear, **stop and ask in full prose** (Auto-clarity applies here always).
+State assumptions explicitly before writing code. If multiple interpretations exist, present them — don't pick silently. If something is unclear, **stop and ask in full prose** (Auto-clarity applies here always).
 
 Ask: "Is there a simpler approach?" If yes, say so. Push back when warranted.
 
@@ -120,9 +120,9 @@ Strong success criteria = loop independently. Weak criteria ("make it work") = c
 
 | Situation | THINK | SPEAK |
 |---|---|---|
-| Writing code | Active; discipline applies | Code blocks always normal; prose around them compressed |
-| Stating a plan | Active; terse plan format | Compressed (full mode) |
-| Asking a clarifying question | Active; stop and ask | **Full prose always** |
+| Writing code | Active — discipline applies | Code blocks always normal; prose around them compressed |
+| Stating a plan | Active — terse plan format | Compressed (full mode) |
+| Asking a clarifying question | Active — stop and ask | **Full prose always** |
 | Security / destructive op warning | Active | **Full prose always** |
 | Explaining a concept | Not applicable | Compressed per level |
 

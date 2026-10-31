@@ -10,10 +10,10 @@ license: MIT
 license_source: https://github.com/hyhmrright/brooks-lint/blob/main/LICENSE
 ---
 
-# Brooks-Lint: Test Quality Review
+# Brooks-Lint — Test Quality Review
 ## When to Use
 
-Use this skill when you need test quality review drawing on twelve classic engineering books; with primary focus on xUnit Test Patterns, The Art of Unit Testing, How Google Tests Software, and Working Effectively with Legacy Code; that diagnoses structural problems in an existing test suite: brittleness, mock...
+Use this skill when you need test quality review drawing on twelve classic engineering books — with primary focus on xUnit Test Patterns, The Art of Unit Testing, How Google Tests Software, and Working Effectively with Legacy Code — that diagnoses structural problems in an existing test suite: brittleness, mock...
 
 
 ## Setup

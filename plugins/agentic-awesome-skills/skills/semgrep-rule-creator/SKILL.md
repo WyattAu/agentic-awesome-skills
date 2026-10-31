@@ -102,9 +102,9 @@ This skill guides creation of Semgrep rules that detect security vulnerabilities
 - **Taint mode** (prioritize): Data flow issues where untrusted input reaches dangerous sinks
 - **Pattern matching**: Simple syntactic patterns without data flow requirements
 
-**Why prioritize taint mode?** Pattern matching finds syntax but misses context. A pattern `eval($X)` matches both `eval(user_input)` (vulnerable) and `eval("safe_literal")` (safe). Taint mode tracks data flow, so it only alerts when untrusted data actually reaches the sink-dramatically reducing false positives for injection vulnerabilities. <!-- security-allowlist: Semgrep taint-mode explanation -->
+**Why prioritize taint mode?** Pattern matching finds syntax but misses context. A pattern `eval($X)` matches both `eval(user_input)` (vulnerable) and `eval("safe_literal")` (safe). Taint mode tracks data flow, so it only alerts when untrusted data actually reaches the sink—dramatically reducing false positives for injection vulnerabilities. <!-- security-allowlist: Semgrep taint-mode explanation -->
 
-**Iterating between approaches:** It's okay to experiment. If you start with taint mode and it's not working well (e.g., taint doesn't propagate as expected, too many false positives/negatives), switch to pattern matching. Conversely, if pattern matching produces too many false positives on safe cases, try taint mode instead. The goal is a working rule-not rigid adherence to one approach.
+**Iterating between approaches:** It's okay to experiment. If you start with taint mode and it's not working well (e.g., taint doesn't propagate as expected, too many false positives/negatives), switch to pattern matching. Conversely, if pattern matching produces too many false positives on safe cases, try taint mode instead. The goal is a working rule—not rigid adherence to one approach.
 
 **Output structure** - exactly 2 files in a directory named after the rule-id:
 ```

@@ -11,16 +11,16 @@ How `.lore/*` content gets mirrored to platform-specific config files. The main 
 |---|---|---|
 | Claude Code | `CLAUDE.md` (root) | `.claude/CLAUDE.md` |
 | Cursor | `.cursorrules` (root) | `.cursor/rules/*.mdc` |
-| Cline | `.clinerules` (root) | - |
+| Cline | `.clinerules` (root) | — |
 | Aider | `AGENTS.md` (root) | `CONVENTIONS.md` |
-| OpenAI Codex | `AGENTS.md` (root) | - |
-| OpenCode | `AGENTS.md` (root) | - |
-| Windsurf | `.windsurfrules` (root) | - |
-| GitHub Copilot | `.github/copilot-instructions.md` | - |
-| Continue.dev | `.continue/rules/lore.md` | - |
-| LangGraph / DeepAgents | (no file; inject at runtime) | - |
+| OpenAI Codex | `AGENTS.md` (root) | — |
+| OpenCode | `AGENTS.md` (root) | — |
+| Windsurf | `.windsurfrules` (root) | — |
+| GitHub Copilot | `.github/copilot-instructions.md` | — |
+| Continue.dev | `.continue/rules/lore.md` | — |
+| LangGraph / DeepAgents | (no file — inject at runtime) | — |
 
-For LangGraph and DeepAgents, the skill does not produce a mirror file. Read `.lore/*.md` directly or ingest into the system prompt at runtime; that ingestion is the user's responsibility.
+For LangGraph and DeepAgents, the skill does not produce a mirror file. Read `.lore/*.md` directly or ingest into the system prompt at runtime — that ingestion is the user's responsibility.
 
 ## Resolution: how `mirror_targets` is computed
 
@@ -44,7 +44,7 @@ resolve_mirror_targets(config, repo_root):
     return validate_mirror_targets(selected, repo_root)
 ```
 
-This is the core resolution used by all three commands. `init` extends it with classification and per-file takeover steps; see "Init-time behavior (full procedure)" below.
+This is the core resolution used by all three commands. `init` extends it with classification and per-file takeover steps — see "Init-time behavior (full procedure)" below.
 
 ### Mandatory target validation
 
@@ -91,7 +91,7 @@ CONVENTIONS.md
 .cursor/rules/*.mdc        # glob: any .mdc file under .cursor/rules/
 ```
 
-These match the platform table above (default + "Also accepted" filenames). The `.cursor/rules/*.mdc` entry is a glob; it's a hit if `.cursor/rules/` exists and contains at least one `.mdc` file.
+These match the platform table above (default + "Also accepted" filenames). The `.cursor/rules/*.mdc` entry is a glob — it's a hit if `.cursor/rules/` exists and contains at least one `.mdc` file.
 
 ### Multi-select agent choices
 
@@ -109,13 +109,13 @@ When Step 3 fires, present this question to the user:
 | GitHub Copilot | `.github/copilot-instructions.md` |
 | Continue.dev | `.continue/rules/lore.md` |
 
-Aider, Codex, and OpenCode all map to `AGENTS.md`. Selecting any combination produces one entry. Selecting nothing is valid; writes `mirror_targets: []` (no mirrors generated).
+Aider, Codex, and OpenCode all map to `AGENTS.md`. Selecting any combination produces one entry. Selecting nothing is valid — writes `mirror_targets: []` (no mirrors generated).
 
 ### When this runs
 
-- `lore init`; always interactive.
-- `lore mirror` when `mirror_targets` is absent; also interactive (skill is invoked through chat).
-- `lore compress` (when `auto_mirror: true`); also goes through this resolution if `mirror_targets` is absent.
+- `lore init` — always interactive.
+- `lore mirror` when `mirror_targets` is absent — also interactive (skill is invoked through chat).
+- `lore compress` (when `auto_mirror: true`) — also goes through this resolution if `mirror_targets` is absent.
 
 Both paths use the same function. Once `init` has run, `mirror_targets` is set, so subsequent `mirror` calls hit Step 1 and are silent.
 
@@ -133,7 +133,7 @@ Every mirror file is split into two sections by a `---` separator. The top secti
 > Total entries: 247 across 3 scopes
 
 ## Global
-- Monorepo with pnpm workspaces + Turborepo; [_global/ARCHITECTURE.md#ARCH-2026-01-15-d7a3]
+- Monorepo with pnpm workspaces + Turborepo — [_global/ARCHITECTURE.md#ARCH-2026-01-15-d7a3]
 ...
 <!-- LORE:END -->
 
@@ -183,7 +183,7 @@ When syncing a mirror file:
 
 ## Sync-time behavior
 
-**`sync` does not regenerate platform mirrors.** This is intentional; see the "Mirror update triggers" section in `SKILL.md`. The skill only writes `.lore/*.md` during `sync`. To update mirrors after `sync`, the user runs `lore mirror` (or `compress`, which calls mirror generation as a side effect).
+**`sync` does not regenerate platform mirrors.** This is intentional — see the "Mirror update triggers" section in `SKILL.md`. The skill only writes `.lore/*.md` during `sync`. To update mirrors after `sync`, the user runs `lore mirror` (or `compress`, which calls mirror generation as a side effect).
 
 If a project needs the old behavior (mirror updates on every `sync`), set `sync_updates_mirror: true` in `.lore/.config.json`.
 
@@ -201,7 +201,7 @@ This is the actual write step for platform mirrors.
 6. If different, replace the Lore section (full rewrite, no merge with previous content). Preserve the My notes section verbatim.
 7. Recheck canonical containment, then write the file back. Report "Mirror updated: `<file>`".
 
-The content-based dedup step (4) is the key reason `mirror` can be run frequently without polluting `git log`; most invocations will be no-ops once the mirror is in sync.
+The content-based dedup step (4) is the key reason `mirror` can be run frequently without polluting `git log` — most invocations will be no-ops once the mirror is in sync.
 
 ## Init-time behavior (full procedure)
 
@@ -214,9 +214,9 @@ The `init` command extends the resolution algorithm above with classification an
 2. **Scan existing platform files** in repo root using the same candidate list as the resolution algorithm. Result: list of paths that exist.
 
 3. **Classify each detected file** into one of three classes:
-   - **Class (a)**; already a lore mirror: contains `## Lore` section.
-   - **Class (b)**; user-written: contains `## My notes` but no `## Lore`.
-   - **Class (c)**; unmarked: neither header present.
+   - **Class (a)** — already a lore mirror: contains `## Lore` section.
+   - **Class (b)** — user-written: contains `## My notes` but no `## Lore`.
+   - **Class (c)** — unmarked: neither header present.
 
    For class (b) and (c) files, present a per-file choice:
    - **Take over**: file becomes a two-section mirror; existing content is preserved as My notes.
@@ -225,7 +225,7 @@ The `init` command extends the resolution algorithm above with classification an
 
    Class (a) files are auto-included in `mirror_targets`.
 
-4. **Multi-select question.** "Which agents do you use in this project?" Default pre-selection: every agent corresponding to a class (a) file. Empty selection is allowed; but class (a) files still get included via Step 5. Unlike `mirror` / `compress` (which follow the resolution algorithm's silent return-on-detect), `init` always asks; this is how the user adds agents whose files don't exist yet.
+4. **Multi-select question.** "Which agents do you use in this project?" Default pre-selection: every agent corresponding to a class (a) file. Empty selection is allowed — but class (a) files still get included via Step 5. Unlike `mirror` / `compress` (which follow the resolution algorithm's silent return-on-detect), `init` always asks — this is how the user adds agents whose files don't exist yet.
 
 5. **Compute final `mirror_targets`** by combining three sources and deduplicating:
    - All class (a) files from Step 3 (always included, regardless of Step 4 selection).
@@ -260,7 +260,7 @@ For each generated mirror file, the section template is:
 
 ## What gets mirrored
 
-The mirror's Lore section is an **index** into `.lore/`; not a copy of its content. This keeps per-session token cost flat (size proportional to the number and length of scope descriptions, rather than copying all entry text) and aligns with how platform instruction files (`CLAUDE.md`, `.cursorrules`, etc.) are designed to be used: as small pointers that tell the agent where to find detail on demand.
+The mirror's Lore section is an **index** into `.lore/` — not a copy of its content. This keeps per-session token cost flat (size proportional to the number and length of scope descriptions, rather than copying all entry text) and aligns with how platform instruction files (`CLAUDE.md`, `.cursorrules`, etc.) are designed to be used: as small pointers that tell the agent where to find detail on demand.
 
 The agent generating the mirror walks `.lore/` and emits the structure below. Sections appear only when their content exists (adaptive rendering).
 
@@ -288,12 +288,12 @@ Project memory at `.lore/`. Before project-specific questions, read `.lore/SUMMA
 ## My notes (free edit)
 ```
 
-The `<!-- LORE:START -->` / `<!-- LORE:END -->` markers, `## Lore (auto-managed)` opener, `---` separator, and `## My notes (free edit)` closer are **always present** in new mirrors; only the `**Structure**:` body varies with adaptive rendering. Agent preserves the My notes section verbatim across regenerations.
+The `<!-- LORE:START -->` / `<!-- LORE:END -->` markers, `## Lore (auto-managed)` opener, `---` separator, and `## My notes (free edit)` closer are **always present** in new mirrors — only the `**Structure**:` body varies with adaptive rendering. Agent preserves the My notes section verbatim across regenerations.
 
 ### Field sources
 
-- `<scope_name>`; directory name under `.lore/scopes/`. Each scope's full path is `.lore/scopes/<scope_name>/`.
-- `<description>`; extracted from `.lore/scopes/<scope_name>/ARCHITECTURE.md` via the HTML comment `<!-- description: ... -->`. See "Scope description extraction" below. If absent, the description is omitted (scope row still appears, just without parenthetical).
+- `<scope_name>` — directory name under `.lore/scopes/`. Each scope's full path is `.lore/scopes/<scope_name>/`.
+- `<description>` — extracted from `.lore/scopes/<scope_name>/ARCHITECTURE.md` via the HTML comment `<!-- description: ... -->`. See "Scope description extraction" below. If absent, the description is omitted (scope row still appears, just without parenthetical).
 
 The index does **not** track the project's source-directory mapping for each scope (e.g. `packages/frontend/` for the `frontend` scope). Source paths are detected by `references/monorepo-detection.md` at init time but not persisted in `.lore/`. If a user needs source paths surfaced in the mirror, that mapping belongs in the project's own docs.
 

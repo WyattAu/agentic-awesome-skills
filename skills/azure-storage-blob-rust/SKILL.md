@@ -8,7 +8,7 @@ date_added: '2026-02-27'
 
 # Azure Blob Storage SDK for Rust
 
-Client library for Azure Blob Storage; Microsoft's object storage solution for the cloud.
+Client library for Azure Blob Storage — Microsoft's object storage solution for the cloud.
 
 The examples below require a reviewed compatible crate set and replacement of every resource placeholder. Do not use production data for demonstration writes.
 
@@ -113,18 +113,18 @@ while let Some(page) = pager.try_next().await? {
 
 ## Best Practices
 
-1. **Use Entra ID auth**; `DeveloperToolsCredential` for dev, `ManagedIdentityCredential` for production
-2. **Review overwrite behavior**; the reviewed upload API uses options; if_not_exists prevents unintended replacement
-3. **Use `RequestContent::from()`**; to wrap upload data
-4. **Handle async operations**; use `tokio` runtime
-5. **Check RBAC permissions**; ensure "Storage Blob Data Contributor" role
+1. **Use Entra ID auth** — `DeveloperToolsCredential` for dev, `ManagedIdentityCredential` for production
+2. **Review overwrite behavior** — the reviewed upload API uses options; if_not_exists prevents unintended replacement
+3. **Use `RequestContent::from()`** — to wrap upload data
+4. **Handle async operations** — use `tokio` runtime
+5. **Check RBAC permissions** — ensure "Storage Blob Data Contributor" role
 
 ## RBAC Permissions
 
 For Entra ID auth, assign one of these roles:
-- `Storage Blob Data Reader`; read-only
-- `Storage Blob Data Contributor`; read/write
-- `Storage Blob Data Owner`; blob-data access and supported ownership/ACL management; it does not grant general Azure RBAC role-assignment authority
+- `Storage Blob Data Reader` — read-only
+- `Storage Blob Data Contributor` — read/write
+- `Storage Blob Data Owner` — blob-data access and supported ownership/ACL management; it does not grant general Azure RBAC role-assignment authority
 
 The example API follows [BlobClient 1.1.0](https://docs.rs/azure_storage_blob/1.1.0/azure_storage_blob/clients/struct.BlobClient.html); earlier releases used different constructor/upload signatures. Use the project’s compatible Azure crate versions rather than mixing them.
 

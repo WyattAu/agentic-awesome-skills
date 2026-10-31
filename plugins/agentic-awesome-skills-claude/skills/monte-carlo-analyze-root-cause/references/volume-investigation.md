@@ -14,7 +14,7 @@ Call `get_table_size_history` with the table's `full_table_id` and `resource_id`
 
 ### 2. Check for query changes
 
-Call `get_query_changes`; did the ETL query change around the time of the volume shift?
+Call `get_query_changes` — did the ETL query change around the time of the volume shift?
 - New or removed WHERE clauses can dramatically change row counts
 - Changed JOINs (INNER → LEFT, or vice versa) affect output volume
 - Modified deduplication logic
@@ -25,7 +25,7 @@ Call `get_change_timeline` for a unified view of all changes correlated with the
 
 Call `get_asset_lineage(mcons=[table_mcon], direction="UPSTREAM")` to find source tables.
 For each upstream table:
-- Call `get_table_size_history`; did the source data volume also change?
+- Call `get_table_size_history` — did the source data volume also change?
 - Proportional upstream volume change suggests an upstream contribution; verify coverage, timing and transformation behavior before concluding
 
 ### 4. Check for failed/futile queries
@@ -45,11 +45,11 @@ If a database MCP server is connected:
 
 ## Common root causes
 
-- **Source data volume change**; upstream system sent more/fewer records than usual
-- **Filter change**; ETL WHERE clause was modified, including/excluding different rows
-- **Dedup logic change**; deduplication rules changed, producing more or fewer unique rows
-- **Late-arriving data**; backfill or reprocessing loaded historical data
-- **Partition swap**; a full partition was replaced with different data
-- **Schema migration**; table was truncated and reloaded as part of a migration
+- **Source data volume change** — upstream system sent more/fewer records than usual
+- **Filter change** — ETL WHERE clause was modified, including/excluding different rows
+- **Dedup logic change** — deduplication rules changed, producing more or fewer unique rows
+- **Late-arriving data** — backfill or reprocessing loaded historical data
+- **Partition swap** — a full partition was replaced with different data
+- **Schema migration** — table was truncated and reloaded as part of a migration
 
 <!-- Modified locally: evidence, SQL safety or paid-run corrections. -->

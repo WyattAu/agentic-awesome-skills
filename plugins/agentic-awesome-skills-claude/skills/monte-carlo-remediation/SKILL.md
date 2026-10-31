@@ -52,13 +52,13 @@ Do not activate when the user is:
 
 ### Monte Carlo MCP server (investigation + post-remediation)
 
-The Monte Carlo MCP server (`monte-carlo-mcp`) provides the investigation tools used in the workflows below. The workflows reference key tools by name (e.g., `get_alerts`, `run_troubleshooting_agent`, `get_asset_lineage`), but **use any Monte Carlo tool that helps**; the server has additional tools beyond what the workflows explicitly call out. Explore what's available.
+The Monte Carlo MCP server (`monte-carlo-mcp`) provides the investigation tools used in the workflows below. The workflows reference key tools by name (e.g., `get_alerts`, `run_troubleshooting_agent`, `get_asset_lineage`), but **use any Monte Carlo tool that helps** — the server has additional tools beyond what the workflows explicitly call out. Explore what's available.
 
-> **Note on tool call examples:** The code blocks below show key parameters to guide you. Always check the tool's own description for the complete parameter list and exact parameter names; they are authoritative.
+> **Note on tool call examples:** The code blocks below show key parameters to guide you. Always check the tool's own description for the complete parameter list and exact parameter names — they are authoritative.
 
 ### External tools (remediation execution)
 
-Remediation actions are executed via whatever tools are available; MCP servers, CLI tools, or APIs. See Workflow 2 (Capability Discovery) and `references/tool-discovery.md` for how to detect and use them. Use whatever works; don't limit yourself to a prescribed list.
+Remediation actions are executed via whatever tools are available — MCP servers, CLI tools, or APIs. See Workflow 2 (Capability Discovery) and `references/tool-discovery.md` for how to detect and use them. Use whatever works; don't limit yourself to a prescribed list.
 
 ---
 
@@ -70,7 +70,7 @@ Follow these workflows in order. Each workflow builds on the context gathered by
 
 **Goal:** Understand what happened, why it happened, and what's affected.
 
-Before proposing ANY remediation action, you MUST complete this investigation. Do not skip steps; incomplete context leads to wrong fixes.
+Before proposing ANY remediation action, you MUST complete this investigation. Do not skip steps — incomplete context leads to wrong fixes.
 
 #### Step 1: Get alert context
 
@@ -119,7 +119,7 @@ run_troubleshooting_agent(
 )
 ```
 
-**While TSA runs, proceed with Steps 4–6 in parallel**; gather lineage, table context, and query data while waiting. Then poll for TSA results:
+**While TSA runs, proceed with Steps 4–6 in parallel** — gather lineage, table context, and query data while waiting. Then poll for TSA results:
 
 ```
 get_troubleshooting_agent_results(
@@ -133,7 +133,7 @@ Status values:
 - `success` → results available
 - `failed` → check `full_response` for error; proceed with manual investigation
 
-**When TSA succeeds, read both the `tldr` and the verifications section.** The `tldr` summarizes the root cause; this is your primary input for choosing a remediation action. The `full_response` includes a "verifications to confirm the root cause" section with specific checks (queries to run, things to compare, upstream systems to inspect). These verifications are often actionable remediation steps themselves; use them to guide what to do next or present them to the user as concrete next steps.
+**When TSA succeeds, read both the `tldr` and the verifications section.** The `tldr` summarizes the root cause — this is your primary input for choosing a remediation action. The `full_response` includes a "verifications to confirm the root cause" section with specific checks (queries to run, things to compare, upstream systems to inspect). These verifications are often actionable remediation steps themselves — use them to guide what to do next or present them to the user as concrete next steps.
 
 #### Step 4: Assess blast radius
 
@@ -159,7 +159,7 @@ get_asset_lineage(
 )
 ```
 
-Note: `has_relationships=false` means no relationships were returned/tracked; it does not prove that real dependencies are absent.
+Note: `has_relationships=false` means no relationships were returned/tracked — it does not prove that real dependencies are absent.
 
 #### Step 5: Gather table context
 
@@ -191,7 +191,7 @@ get_monitors(
   include_fields=["config"]
 )
 ```
-The config contains the SQL query or validation conditions; this tells you exactly what the monitor checks, which is essential for understanding what went wrong and what the fix should be.
+The config contains the SQL query or validation conditions — this tells you exactly what the monitor checks, which is essential for understanding what went wrong and what the fix should be.
 
 ```
 get_queries_for_table(
@@ -226,11 +226,11 @@ Present this summary to the user before proceeding to remediation.
 
 Before attempting any remediation action, you must know what tools you can use. You have three categories to check:
 
-1. **MCP servers**; scan your tool list for `mcp__*__*` patterns (e.g., `mcp__airflow__trigger_dag_run`)
-2. **CLI tools**; you have shell access; check for tools like `gh`, `dbt`, `airflow`, `curl` via `which <tool>`
-3. **APIs**; any service with a REST API is reachable via `curl` if you have the right credentials
+1. **MCP servers** — scan your tool list for `mcp__*__*` patterns (e.g., `mcp__airflow__trigger_dag_run`)
+2. **CLI tools** — you have shell access; check for tools like `gh`, `dbt`, `airflow`, `curl` via `which <tool>`
+3. **APIs** — any service with a REST API is reachable via `curl` if you have the right credentials
 
-Don't assume any particular tool is available. But also don't assume MCP is the only option; a `gh pr create` via the CLI works just as well as a GitHub MCP tool.
+Don't assume any particular tool is available. But also don't assume MCP is the only option — a `gh pr create` via the CLI works just as well as a GitHub MCP tool.
 
 For detailed guidance on discovery across all three categories, read `references/tool-discovery.md`.
 
@@ -249,10 +249,10 @@ After checking, summarize what's available:
 
 When no tool (MCP, CLI, or API) is available for a needed action:
 
-1. **Always produce the remediation plan**; describe exactly what needs to happen, step by step
-2. **Provide runnable commands**; give the user the exact commands they can run manually (e.g., `airflow dags trigger <dag_id>`, `dbt run --select <model>`)
-3. **Present findings and ask for next steps**; tell the user what you found, what you recommend, and ask how they'd like to proceed
-4. **Document on the alert**; use `create_or_update_alert_comment` to record the diagnosis and recommended fix
+1. **Always produce the remediation plan** — describe exactly what needs to happen, step by step
+2. **Provide runnable commands** — give the user the exact commands they can run manually (e.g., `airflow dags trigger <dag_id>`, `dbt run --select <model>`)
+3. **Present findings and ask for next steps** — tell the user what you found, what you recommend, and ask how they'd like to proceed
+4. **Document on the alert** — use `create_or_update_alert_comment` to record the diagnosis and recommended fix
 
 ---
 
@@ -297,11 +297,11 @@ Based on the TSA root cause and available tools, determine the action:
 
 Before executing, read `references/safety.md` for the full safety protocol. The essentials:
 
-- **Explain before executing**; never take action without telling the user what and why
-- **Confirm destructive operations**; wait for explicit user approval
-- **Ask the user when uncertain**; don't guess at a fix
-- **One action at a time**; execute one action, then decide next step
-- **Log necessary redacted evidence**; document authorized actions on the alert via `create_or_update_alert_comment`
+- **Explain before executing** — never take action without telling the user what and why
+- **Confirm destructive operations** — wait for explicit user approval
+- **Ask the user when uncertain** — don't guess at a fix
+- **One action at a time** — execute one action, then decide next step
+- **Log necessary redacted evidence** — document authorized actions on the alert via `create_or_update_alert_comment`
 
 ---
 
@@ -309,15 +309,15 @@ Before executing, read `references/safety.md` for the full safety protocol. The 
 
 Alert comments, ownership and status are external writes. Use only authorization already given for that exact incident/action; draft the update if absent. Never send Slack/email/page notifications without explicit user instruction.
 
-**Goal:** Close out the incident properly; update status, document, and prevent recurrence.
+**Goal:** Close out the incident properly — update status, document, and prevent recurrence.
 
 #### Step 1: Update the alert
 
 Ask the user what status to set:
 
-- `FIXED`; the root cause was identified and remediated
-- `EXPECTED`; the alert fired on expected behavior (e.g., planned maintenance)
-- `NO_ACTION_NEEDED`; the issue resolved itself or is not actionable
+- `FIXED` — the root cause was identified and remediated
+- `EXPECTED` — the alert fired on expected behavior (e.g., planned maintenance)
+- `NO_ACTION_NEEDED` — the issue resolved itself or is not actionable
 
 Then call `update_alert(alert_id="<alert_uuid>", status="<chosen_status>")`.
 
@@ -337,15 +337,15 @@ After remediating, briefly assess whether this issue is likely to recur:
 - **If the root cause is systemic** (e.g., a flaky pipeline, a missing monitor): suggest adding a monitor or creating a ticket to address the underlying issue
 - **If it was a one-off** (e.g., infrastructure blip, manual error): document and move on
 
-Do not automatically create monitors or tickets; suggest them and let the user decide.
+Do not automatically create monitors or tickets — suggest them and let the user decide.
 
 ---
 
 ## Common mistakes to avoid
 
 - **NEVER execute a remediation action without presenting the plan first.** The user must understand what you're about to do.
-- **NEVER skip the investigation phase.** A wrong diagnosis leads to a wrong fix; or worse, a fix that causes new problems.
-- **NEVER assume external MCP tools are available.** Always check first. A missing tool is not an error; present findings to the user and ask for next steps.
+- **NEVER skip the investigation phase.** A wrong diagnosis leads to a wrong fix — or worse, a fix that causes new problems.
+- **NEVER assume external MCP tools are available.** Always check first. A missing tool is not an error — present findings to the user and ask for next steps.
 - **NEVER chain multiple remediation actions without verifying each one.** One action at a time.
 - **NEVER modify data directly** (DELETE, UPDATE, DROP) without explicit user confirmation AND a clearly stated rollback plan.
 - **NEVER mark an alert as FIXED before verifying the fix.** Check that the underlying condition has actually improved.

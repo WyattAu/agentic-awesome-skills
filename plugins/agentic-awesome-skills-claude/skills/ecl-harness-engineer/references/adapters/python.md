@@ -218,9 +218,9 @@ The adapter checks for virtual environments in this order:
 ## Type Checking
 
 Python projects may use type checkers:
-- `mypy`; most common, configured in `pyproject.toml` or `mypy.ini`
-- `pyright`; Microsoft's type checker, often via Pylance
-- `pytype`; Google's type checker
+- `mypy` — most common, configured in `pyproject.toml` or `mypy.ini`
+- `pyright` — Microsoft's type checker, often via Pylance
+- `pytype` — Google's type checker
 
 Detection: check `pyproject.toml` `[tool.mypy]` or `mypy.ini` existence.
 

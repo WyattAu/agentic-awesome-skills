@@ -6,7 +6,7 @@
 - Parallel tabs mean `render(t)` must be deterministic: `Math.random()` in a noise texture made every worker different → flicker. Use a seeded generator.
 - Puppeteer's bundled Chrome download can hang; install with `PUPPETEER_SKIP_DOWNLOAD=1` and point at the system Chrome. Killing an in-progress `npm i` rolls back node_modules.
 - `ffmpeg-static` binary may land without the exec bit: `chmod +x`.
-- Canvas `getImageData` on images needs http, not file://; the renderers serve the folder over a local http server.
+- Canvas `getImageData` on images needs http, not file:// — the renderers serve the folder over a local http server.
 
 ## Geometry & drawing
 - Vision face boxes are normalized (0–1, top-left origin after flipping). Passing them into a pixel-space helper put the orbit ring and CCTV box off-screen. Convert explicitly.

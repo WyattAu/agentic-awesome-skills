@@ -14,7 +14,7 @@ license: "MIT"
 license_source: "https://github.com/LambdaTest/agent-skills/blob/main/LICENSE"
 ---
 
-# LambdaTest Agent Skills: Test Automation Registry (46 Skills)
+# LambdaTest Agent Skills — Test Automation Registry (46 Skills)
 
 ## Overview
 
@@ -48,11 +48,11 @@ Load the relevant framework skill from the registry below. Each skill includes: 
 
 ### Step 3: Generate Production-Ready Test Code
 
-Use the loaded skill context to generate test code that follows real-world conventions; not generic boilerplate. Apply correct import paths, configuration formats, assertion libraries, and runner commands specific to the framework and language.
+Use the loaded skill context to generate test code that follows real-world conventions — not generic boilerplate. Apply correct import paths, configuration formats, assertion libraries, and runner commands specific to the framework and language.
 
 ### Step 4: Configure for Local or Cloud Execution
 
-If the user wants to run tests locally, apply local runner configuration. If running on LambdaTest / TestMu AI cloud, configure RemoteWebDriver capabilities or the appropriate cloud SDK, and set `LT_USERNAME` and `LT_ACCESS_KEY` from environment variables; never hardcode credentials.
+If the user wants to run tests locally, apply local runner configuration. If running on LambdaTest / TestMu AI cloud, configure RemoteWebDriver capabilities or the appropriate cloud SDK, and set `LT_USERNAME` and `LT_ACCESS_KEY` from environment variables — never hardcode credentials.
 
 ### Step 5: Add CI/CD Integration
 
@@ -182,16 +182,16 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
 
 ## Best Practices
 
-- ✅ Always use environment variables for cloud credentials (`LT_USERNAME`, `LT_ACCESS_KEY`); never hardcode them
+- ✅ Always use environment variables for cloud credentials (`LT_USERNAME`, `LT_ACCESS_KEY`) — never hardcode them
 - ✅ Use Page Object Model (POM) to keep test logic separate from UI selectors
 - ✅ Prefer explicit waits over fixed `sleep()` calls in all frameworks
 - ✅ Run tests in parallel where the framework supports it to reduce execution time
 - ✅ Always capture screenshots and logs on test failure for easier debugging
-- ✅ Match dependency versions to what each framework officially recommends; avoid mixing major versions
+- ✅ Match dependency versions to what each framework officially recommends — avoid mixing major versions
 - ❌ Don't write tests that depend on test execution order
 - ❌ Don't hardcode URLs, credentials, or environment-specific values inside test files
-- ❌ Don't skip writing assertions; a test without assertions is not a test
-- ❌ Don't ignore flaky tests; investigate and fix root cause rather than adding retries as a permanent fix
+- ❌ Don't skip writing assertions — a test without assertions is not a test
+- ❌ Don't ignore flaky tests — investigate and fix root cause rather than adding retries as a permanent fix
 
 ## Limitations
 
@@ -203,7 +203,7 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
 ## Security & Safety Notes
 
 - Never include `LT_USERNAME`, `LT_ACCESS_KEY`, API tokens, or any credentials in generated code. Always reference them via environment variables.
-- When generating CI/CD pipelines, store secrets in GitHub Actions Secrets or equivalent; never in plaintext YAML.
+- When generating CI/CD pipelines, store secrets in GitHub Actions Secrets or equivalent — never in plaintext YAML.
 - Installation commands (`npm install`, `pip install`, `mvn install`) should only be run in local development or authorized CI environments.
 
 ## Common Pitfalls
@@ -212,7 +212,7 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
   **Solution:** Ensure headless mode is enabled in CI, and that browser versions match between local and CI environments. Use the framework's built-in CI detection where available.
 
 - **Problem:** Flaky tests due to timing issues
-  **Solution:** Replace `sleep()` with explicit waits; `waitForSelector` in Playwright, `WebDriverWait` in Selenium, `cy.get().should()` in Cypress.
+  **Solution:** Replace `sleep()` with explicit waits — `waitForSelector` in Playwright, `WebDriverWait` in Selenium, `cy.get().should()` in Cypress.
 
 - **Problem:** Cloud tests fail with authentication errors
   **Solution:** Verify `LT_USERNAME` and `LT_ACCESS_KEY` are correctly set as environment variables and match the credentials on the LambdaTest dashboard.
@@ -225,7 +225,7 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
 
 ## Related Skills
 
-- `@test-driven-development`; Use when you want to design tests before writing implementation code
-- `@testing-patterns`; Use for general testing design patterns and strategies
-- `@cicd-pipeline-skill`; Use when setting up end-to-end CI/CD pipelines with test automation
-- `@debugging-strategies`; Use when diagnosing systematic test failures
+- `@test-driven-development` — Use when you want to design tests before writing implementation code
+- `@testing-patterns` — Use for general testing design patterns and strategies
+- `@cicd-pipeline-skill` — Use when setting up end-to-end CI/CD pipelines with test automation
+- `@debugging-strategies` — Use when diagnosing systematic test failures

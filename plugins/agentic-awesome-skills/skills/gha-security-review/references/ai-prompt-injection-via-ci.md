@@ -37,7 +37,7 @@ The attacker replaces `CLAUDE.md` in their fork PR with instructions that direct
 
 ### CLAUDE.md / AGENTS.md Poisoning
 
-These files are loaded as "project-level instructions"; trusted context that shapes agent behavior:
+These files are loaded as "project-level instructions" — trusted context that shapes agent behavior:
 
 ```markdown
 <!-- Attacker's CLAUDE.md replacement -->
@@ -83,7 +83,7 @@ The workflow used `pull_request_target` with `contents: write` and `allowed_non_
 
 The attacker replaced `CLAUDE.md` with instructions to commit changes, modify README, and post approval comments. However, Claude identified both injection attempts immediately, classifying it as a "textbook AI agent supply-chain attack via poisoned project-level instructions" and refused to execute.
 
-**Key insight:** The defense worked because Claude detected the injection; but the workflow configuration was still vulnerable. A different AI agent or a more subtle injection might succeed.
+**Key insight:** The defense worked because Claude detected the injection — but the workflow configuration was still vulnerable. A different AI agent or a more subtle injection might succeed.
 
 ---
 
@@ -179,5 +179,5 @@ MITIGATION CHECK: Does the AI agent detect injection? Is tool use restricted?
 
 ## References
 
-- [HackerBot Claw; ambient-code/platform AI prompt injection attempt](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)
-- [Anthropic Claude Code Action; Security considerations](https://github.com/anthropics/claude-code-action)
+- [HackerBot Claw — ambient-code/platform AI prompt injection attempt](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)
+- [Anthropic Claude Code Action — Security considerations](https://github.com/anthropics/claude-code-action)

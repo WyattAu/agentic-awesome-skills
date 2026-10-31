@@ -1,4 +1,4 @@
-# Native Android: Java Reference
+# Native Android — Java Reference
 
 ## When to Use Java
 
@@ -8,7 +8,7 @@ Java remains fully supported by Android and Google. Use it when:
 - Integrating Java-only SDKs or legacy modules
 - Gradual migration: new Kotlin modules alongside old Java modules
 
-> **Java + Kotlin interop is seamless**; you can have both in the same project. New files can be Kotlin while legacy files stay Java.
+> **Java + Kotlin interop is seamless** — you can have both in the same project. New files can be Kotlin while legacy files stay Java.
 
 ---
 
@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // CRITICAL; avoid memory leak
+        binding = null; // CRITICAL — avoid memory leak
     }
 }
 ```
@@ -195,7 +195,7 @@ public interface ItemDao {
     LiveData<List<ItemEntity>> observeAll();
 
     @Query("SELECT * FROM items ORDER BY updatedAt DESC")
-    List<ItemEntity> getAll(); // blocking; call off main thread
+    List<ItemEntity> getAll(); // blocking — call off main thread
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ItemEntity> items);
@@ -316,7 +316,7 @@ public class ItemRepository {
         }
     }
 
-    // Observe cached data (returns LiveData; auto updates UI)
+    // Observe cached data (returns LiveData — auto updates UI)
     public LiveData<List<Item>> observeItems() {
         return Transformations.map(itemDao.observeAll(), entities ->
             entities.stream().map(ItemMapper::toDomain).collect(Collectors.toList())
@@ -416,7 +416,7 @@ public class ItemAdapter extends ListAdapter<Item, ItemAdapter.ItemViewHolder> {
 ## XML Layout Best Practices (Java projects)
 
 ```xml
-<!-- Use ConstraintLayout; flat hierarchy = better performance -->
+<!-- Use ConstraintLayout — flat hierarchy = better performance -->
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -480,7 +480,7 @@ public class AuthException extends AppException { ... }
 @HiltAndroidApp
 public class MyApp extends Application {}
 
-// Activity / Fragment; annotate for injection
+// Activity / Fragment — annotate for injection
 @AndroidEntryPoint
 public class HomeFragment extends Fragment {
     @Inject
@@ -572,12 +572,12 @@ class HomeViewModelTest {
 
 When migrating a Java project to Kotlin incrementally:
 
-1. **New files in Kotlin**; Java and Kotlin coexist seamlessly
-2. **Convert utilities first**; `@JvmStatic`, `@JvmField` for interop
-3. **Convert data models**; Java POJOs → Kotlin `data class`
-4. **Convert DAOs and Repositories**; add `suspend` + `Flow`
-5. **Convert ViewModels last**; swap `LiveData` + `MutableLiveData` for `StateFlow`
-6. **Convert Activities/Fragments**; migrate to Compose screen by screen
+1. **New files in Kotlin** — Java and Kotlin coexist seamlessly
+2. **Convert utilities first** — `@JvmStatic`, `@JvmField` for interop
+3. **Convert data models** — Java POJOs → Kotlin `data class`
+4. **Convert DAOs and Repositories** — add `suspend` + `Flow`
+5. **Convert ViewModels last** — swap `LiveData` + `MutableLiveData` for `StateFlow`
+6. **Convert Activities/Fragments** — migrate to Compose screen by screen
 7. Annotate Kotlin with `@JvmOverloads`, `@JvmName` where Java callers exist
 
 ```kotlin

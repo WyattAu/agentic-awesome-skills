@@ -2,7 +2,7 @@
 
 Scope: read-only research template; verify current CLI flags/entitlements, cite actual sources and timestamps, and distinguish estimates from observations. Never expose account credentials or raw sensitive error output. Examples and thresholds are illustrative, not current quotes or validated trading signals. Account-specific data is optional and requires user-authorized minimum read access.
 
-Personal financial planning framework; retirement targets, education fund, balance sheet, and portfolio gap analysis.
+Personal financial planning framework — retirement targets, education fund, balance sheet, and portfolio gap analysis.
 
 ## Workflow
 
@@ -75,6 +75,6 @@ ACTION ITEMS
 | Situation                       | 简体回复                                           | 繁體回復                                           | English reply                                        |
 | ------------------------------- | -------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------- |
 | Not logged in                   | 请运行 `longbridge auth login` 并授予 Trade 权限。 | 請執行 `longbridge auth login` 並授予 Trade 權限。 | Use user-authorized read access only; never request trading scope for planning.        |
-| Empty portfolio                 | 账户暂无持仓，请先建立投资组合。                   | 賬戶暫無持倉，請先建立投資組合。                   | No positions found; continue with user-supplied cash, assets and liabilities.        |
-| FX rate unavailable             | 部分货币汇率不可用，已使用近似值。                 | 部分貨幣匯率不可用，已使用近似值。                 | Some FX rates unavailable; leave conversions unknown or label a user-approved dated assumption. |
+| Empty portfolio                 | 账户暂无持仓，请先建立投资组合。                   | 賬戶暫無持倉，請先建立投資組合。                   | No positions found — continue with user-supplied cash, assets and liabilities.        |
+| FX rate unavailable             | 部分货币汇率不可用，已使用近似值。                 | 部分貨幣匯率不可用，已使用近似值。                 | Some FX rates unavailable — leave conversions unknown or label a user-approved dated assumption. |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。       | 請安裝 longbridge-terminal 或透過 MCP 連線。       | Install longbridge-terminal or connect via MCP.      |

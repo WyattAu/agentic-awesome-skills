@@ -41,7 +41,7 @@ Trigger when:
 DO NOT use for:
 - On-prem-only Active Directory (use a separate AD-attack skill)
 - Service-to-service token attacks (different threat model)
-- Phishing-required attack chains (covered by phishing skills); but you can prep for the credential-validation step here
+- Phishing-required attack chains (covered by phishing skills) — but you can prep for the credential-validation step here
 
 ---
 
@@ -55,7 +55,7 @@ msftrecon -d sister-brand-school.example
 ```
 
 Key fields in output:
-- **Tenant ID** (different domains may share OR have separate tenants; always test all owned domains)
+- **Tenant ID** (different domains may share OR have separate tenants — always test all owned domains)
 - **Federation Information.Namespace Type** = `Managed` (cloud-only, ROPC works) | `Federated` (ADFS, different attack)
 - **SharePoint Detected** (Yes = OneDrive enum vector available)
 - **Communication Services Teams/Skype** (post-auth lateral targets)
@@ -88,7 +88,7 @@ store shared by all operators and flows. Atomic file replacement alone does not
 serialize concurrent read-modify-write. Stop on unexpected blocks and consult
 the SOC; do not rotate IPs to evade a protection or retry ambiguous requests.
 
-## User enumeration: vectors + hardening status (May 2026)
+## User enumeration — vectors + hardening status (May 2026)
 
 ### Tenant-specific hypotheses, not current guarantees
 
@@ -110,8 +110,8 @@ assessment objective permits it.
 | EWS / IMAP / POP3 / SMTP Basic Auth | Mostly disabled | MS deprecated Basic Auth Oct 2022; per-account exceptions exist |
 | FOCI (Family of Client IDs) | Token-refresh path | Use a refresh token from one FOCI client to mint tokens for another |
 | Device-code phishing | Works | Requires user-side interaction (OOS for many engagements) |
-| Compliant-device emulation | Hard | Requires Intune device registration; high effort, often impossible without insider |
-| AiTM session-cookie steal | Works (with phishing) | Modern primary technique; out of scope for non-phishing engagements |
+| Compliant-device emulation | Hard | Requires Intune device registration — high effort, often impossible without insider |
+| AiTM session-cookie steal | Works (with phishing) | Modern primary technique — out of scope for non-phishing engagements |
 | FOCI + Family Refresh Token Theft | Post-auth | Requires already having a token |
 | SAML SSO via different SP | Sometimes | Each enterprise app has its own CA policy; an app with weaker CA = pivot |
 | Geo-bypass via VPN | Sometimes | If "trusted location" CA policy includes corp HQ IPs, use a VPN exit there |
@@ -135,7 +135,7 @@ no automatic retries. Retain only sanitized result/correlation metadata; never
 return or log a token/password in report evidence. ROPC cannot satisfy MFA and
 is unsuitable for many federation and passwordless configurations.
 
-### ⚠ CRITICAL TRAP: AADSTS50076 body contains literal `"access_token"` substring
+### ⚠ CRITICAL TRAP — AADSTS50076 body contains literal `"access_token"` substring
 
 When CA policy requires MFA and ROPC cannot satisfy it, Entra returns an error body that INCLUDES a `claims` field listing CA policy IDs as a step-up challenge:
 
@@ -151,9 +151,9 @@ When CA policy requires MFA and ROPC cannot satisfy it, Entra returns an error b
 
 **The `"access_token"` substring appears inside the CA claims challenge JSON.** A loose substring check `if "access_token" in raw_body:` will false-positive every MFA-blocked attempt as a successful token issuance.
 
-**Always parse JSON, then check `if "access_token" in parsed_dict:`**; never substring-match on OAuth error bodies. This is a parsing hazard, not independently reproduced engagement evidence.
+**Always parse JSON, then check `if "access_token" in parsed_dict:`** — never substring-match on OAuth error bodies. This is a parsing hazard, not independently reproduced engagement evidence.
 
-The `claims.access_token.capolids` values are tenant-internal Conditional Access policy IDs; useful recon enrichment, but NOT a token. Document them in engagement notes as "CA policy IDs that fired"; they're a defender-side breadcrumb, not an attacker-side win.
+The `claims.access_token.capolids` values are tenant-internal Conditional Access policy IDs — useful recon enrichment, but NOT a token. Document them in engagement notes as "CA policy IDs that fired" — they're a defender-side breadcrumb, not an attacker-side win.
 
 Use only the owner-approved serial pace and cumulative budget. A low rate is
 not a guarantee against lockout or detection. Stop and investigate unexpected
@@ -247,11 +247,11 @@ MFA-bypass, compromise or active-attacker finding.
 
 ## Related Skills & Chains
 
-- **`hunt-mfa-bypass`**; Authentication errors require tenant-log corroboration and are not a reliable factor-presence oracle. Chain primitive: M365 AADSTS50053 lockout differential observed → inspect actual sign-in and policy evidence → `hunt-mfa-bypass` factor-probe (SMS fallback, voice fallback, OAuth device-code flow, ROPC against legacy endpoint) → Conditional Access bypass via legacy-protocol path.
-- **`hunt-ntlm-info`**; On-prem NTLM topology leak feeds the Entra spray. Chain primitive: SharePoint/Exchange/IIS anon NTLM Type-2 → AV_PAIR decode yields `corp.example.com` → `m365-entra-attack` resolves Entra tenant via openid-configuration → ROPC spray with realistic UPN format.
-- **`okta-attack`**; Hybrid orgs run Okta-as-IdP federated into Entra. Chain primitive: M365 `getuserrealm` returns `NameSpaceType: Federated` with AuthURL pointing to `*.okta.com` → pivot to `okta-attack` for tenant enumeration → Okta ATO → SAML assertion to Entra → full M365 access.
-- **`hunt-saml`**; Federated tenants accept signed SAML assertions; XSW or signature-stripping on the federated IdP bypasses Entra's controls entirely. Chain primitive: `getuserrealm` reveals federation → IdP fingerprinted (ADFS / Okta / PingFederate) → `hunt-saml` XSW1-XSW8 against IdP's `/adfs/ls/` or equivalent → forged assertion → Entra grants access.
-- **`redteam-report-template`**; M365 findings need clear tenant/user/CA-policy framing because the blast radius is "every Microsoft service the org uses." Chain primitive: validated finding from this skill → run through `triage-validation` 7-Question Gate → package via `redteam-report-template` with explicit blast-radius (which apps, which users, which data) for client deliverable.
+- **`hunt-mfa-bypass`** — Authentication errors require tenant-log corroboration and are not a reliable factor-presence oracle. Chain primitive: M365 AADSTS50053 lockout differential observed → inspect actual sign-in and policy evidence → `hunt-mfa-bypass` factor-probe (SMS fallback, voice fallback, OAuth device-code flow, ROPC against legacy endpoint) → Conditional Access bypass via legacy-protocol path.
+- **`hunt-ntlm-info`** — On-prem NTLM topology leak feeds the Entra spray. Chain primitive: SharePoint/Exchange/IIS anon NTLM Type-2 → AV_PAIR decode yields `corp.example.com` → `m365-entra-attack` resolves Entra tenant via openid-configuration → ROPC spray with realistic UPN format.
+- **`okta-attack`** — Hybrid orgs run Okta-as-IdP federated into Entra. Chain primitive: M365 `getuserrealm` returns `NameSpaceType: Federated` with AuthURL pointing to `*.okta.com` → pivot to `okta-attack` for tenant enumeration → Okta ATO → SAML assertion to Entra → full M365 access.
+- **`hunt-saml`** — Federated tenants accept signed SAML assertions; XSW or signature-stripping on the federated IdP bypasses Entra's controls entirely. Chain primitive: `getuserrealm` reveals federation → IdP fingerprinted (ADFS / Okta / PingFederate) → `hunt-saml` XSW1-XSW8 against IdP's `/adfs/ls/` or equivalent → forged assertion → Entra grants access.
+- **`redteam-report-template`** — M365 findings need clear tenant/user/CA-policy framing because the blast radius is "every Microsoft service the org uses." Chain primitive: validated finding from this skill → run through `triage-validation` 7-Question Gate → package via `redteam-report-template` with explicit blast-radius (which apps, which users, which data) for client deliverable.
 
 ## Limitations
 

@@ -10,7 +10,7 @@ date_added: "2026-06-19"
 
 ## Overview
 
-**Email Sandbox** captures mail in **sandboxes (test inboxes)**-a test environment where messages are **not** delivered to real recipients. You can send to sandboxes using our **SDKs**, **HTTP API**, or **SMTP**, depending on your needs.
+**Email Sandbox** captures mail in **sandboxes (test inboxes)**—a test environment where messages are **not** delivered to real recipients. You can send to sandboxes using our **SDKs**, **HTTP API**, or **SMTP**, depending on your needs.
 
 **Before generating SDK code:** read the README of the relevant SDK repository (see `mailtrap-sending-emails`) for current sandbox mode options, **inbox id**, and constructor flags. Do not rely on memory.
 
@@ -21,12 +21,12 @@ date_added: "2026-06-19"
 - You want **no real delivery**: dev, staging, CI, or demos where mail must stay in a **test inbox**.
 - You need to **inspect** what was sent: bodies, headers, attachments, or basic checks (e.g. spam report) via **Sandbox / Testing API** or the **UI**.
 - You are **automating** tests against captured mail.
-- You will **only change SMTP settings** so an existing app sends into a sandbox-no need for a framework-by-framework tutorial from this skill.
+- You will **only change SMTP settings** so an existing app sends into a sandbox—no need for a framework-by-framework tutorial from this skill.
 
 ## When not to use
 
 - **Live** sends to real recipients (`mailtrap-sending-emails`).
-- For full framework setup guides or detailed API references, link users to Mailtrap's Integration tab for SMTP/API details and the [API docs](https://docs.mailtrap.io/developers/) for specifics-don't cover every framework or API field here.
+- For full framework setup guides or detailed API references, link users to Mailtrap's Integration tab for SMTP/API details and the [API docs](https://docs.mailtrap.io/developers/) for specifics—don't cover every framework or API field here.
 
 ## Quick reference
 
@@ -38,7 +38,7 @@ date_added: "2026-06-19"
 
 ### Tokens and account_id
 
-Sandbox uses a **separate** token (`$MAILTRAP_SANDBOX_API_TOKEN`, Testing/Sandbox scope); never reuse the live `$MAILTRAP_API_TOKEN`. The `account_id` in the example endpoints below is resolved at runtime via `GET https://mailtrap.io/api/accounts`. Store tokens in environment variables or a secrets manager.
+Sandbox uses a **separate** token (`$MAILTRAP_SANDBOX_API_TOKEN`, Testing/Sandbox scope) — never reuse the live `$MAILTRAP_API_TOKEN`. The `account_id` in the example endpoints below is resolved at runtime via `GET https://mailtrap.io/api/accounts`. Store tokens in environment variables or a secrets manager.
 
 ### When to use API vs SMTP
 
@@ -82,7 +82,7 @@ For **template testing**, see the Integration tab of your template and [Handleba
 
 ### SDKs
 
-Official Mailtrap SDKs support sandbox/inbox operations and provide flags or methods to set **test mode** and **inbox id**. This allows you to use the same integration for both live sending and sandbox testing-simply change the mode or credentials depending on your environment (development, staging, or production). For install commands and language coverage, see [Mailtrap developer documentation](https://docs.mailtrap.io/developers/). Repository READMEs have the latest sandbox options:
+Official Mailtrap SDKs support sandbox/inbox operations and provide flags or methods to set **test mode** and **inbox id**. This allows you to use the same integration for both live sending and sandbox testing—simply change the mode or credentials depending on your environment (development, staging, or production). For install commands and language coverage, see [Mailtrap developer documentation](https://docs.mailtrap.io/developers/). Repository READMEs have the latest sandbox options:
 
 - [Node.js](https://github.com/mailtrap/mailtrap-nodejs)
 - [Python](https://github.com/mailtrap/mailtrap-python)

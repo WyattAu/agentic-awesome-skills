@@ -16,7 +16,7 @@ license_source: https://github.com/jonathimer/devmarketing-skills/blob/main/LICE
 Use this skill when the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded. Trigger phrases include "developer persona," "target developers," "who are our developers," "developer audience."
 
 
-This skill helps you create and maintain `.agents/developer-audience-context.md`; a foundational document that captures everything about your target developers. Related developer marketing skills can consult this document when explicitly instructed, so you only define your audience once.
+This skill helps you create and maintain `.agents/developer-audience-context.md` — a foundational document that captures everything about your target developers. Related developer marketing skills can consult this document when explicitly instructed, so you only define your audience once.
 
 ---
 
@@ -35,12 +35,12 @@ Check if `.agents/developer-audience-context.md` exists:
 
 Analyze existing materials to draft an initial version:
 
-1. **README.md**; Product description, features, getting started
-2. **Documentation**; `/docs`, API reference, tutorials
-3. **Landing pages**; `index.html`, marketing copy
-4. **package.json / pyproject.toml**; Dependencies reveal ecosystem
-5. **GitHub Issues**; Common questions, frustrations, use cases
-6. **Existing blog posts**; Technical content, tutorials
+1. **README.md** — Product description, features, getting started
+2. **Documentation** — `/docs`, API reference, tutorials
+3. **Landing pages** — `index.html`, marketing copy
+4. **package.json / pyproject.toml** — Dependencies reveal ecosystem
+5. **GitHub Issues** — Common questions, frustrations, use cases
+6. **Existing blog posts** — Technical content, tutorials
 
 After drafting, walk through each section to validate and fill gaps.
 
@@ -64,7 +64,7 @@ Ask questions section-by-section. Don't advance until the current section is com
 
 ### 2. Developer Persona
 
-Not "developers" generically; get specific:
+Not "developers" generically — get specific:
 
 | Field | What to capture |
 |-------|-----------------|
@@ -123,7 +123,7 @@ For each alternative, capture:
 
 ### 6. Key Differentiators
 
-What makes you different; in developer terms:
+What makes you different — in developer terms:
 
 | Differentiator type | Example |
 |--------------------|---------|
@@ -136,7 +136,7 @@ What makes you different; in developer terms:
 
 ### 7. Verbatim Developer Language
 
-Capture exact phrases developers use; not polished marketing copy:
+Capture exact phrases developers use — not polished marketing copy:
 
 | Category | Examples |
 |----------|----------|
@@ -258,11 +258,11 @@ Update this document when:
 
 After establishing context, these skills will reference it:
 
-- `devrel-content`; Writing content that resonates
-- `hacker-news-strategy`; Engaging on HN authentically
-- `developer-onboarding`; Optimizing time-to-value
-- `developer-seo`; Targeting the right technical queries
-- `competitor-tracking`; Understanding your competitive landscape
+- `devrel-content` — Writing content that resonates
+- `hacker-news-strategy` — Engaging on HN authentically
+- `developer-onboarding` — Optimizing time-to-value
+- `developer-seo` — Targeting the right technical queries
+- `competitor-tracking` — Understanding your competitive landscape
 
 ## Limitations
 

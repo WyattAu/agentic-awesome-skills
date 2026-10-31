@@ -18,7 +18,7 @@ license_source: "https://github.com/gooseworks-ai/goose-skills/blob/main/LICENSE
 
 ## Overview
 
-Research competitor ads from Meta and Google, analyze creative patterns, map observable landing-page funnels, and produce a strategic teardown; hooks, formats, positioning bets, vulnerabilities, and counter-plays.
+Research competitor ads from Meta and Google, analyze creative patterns, map observable landing-page funnels, and produce a strategic teardown — hooks, formats, positioning bets, vulnerabilities, and counter-plays.
 
 **Core principle:** A competitor's public ad portfolio is partial evidence about its growth strategy. Long-running ads can indicate continued investment, but public libraries do not expose conversion performance or spend. Separate observations from hypotheses, cite every observed ad or page, and label all performance and budget inferences explicitly.
 
@@ -31,20 +31,20 @@ Research competitor ads from Meta and Google, analyze creative patterns, map obs
 - "What hooks are working in [our space]?"
 - "Audit the ad landscape before we launch"
 - "Find weaknesses in [competitor]'s ad strategy"
-- "What format; video, image, carousel; is dominant in our category?"
+- "What format — video, image, carousel — is dominant in our category?"
 
 ## Phase 0: Intake
 
 Gather from the user:
 
 1. **Competitor names + domains** (e.g., `apollo.io`, `clay.run`)
-2. **Your product/domain**; for comparison framing
+2. **Your product/domain** — for comparison framing
 3. **Channels:** Meta only, Google only, or both? (default: both)
 4. **Depth level:**
    - **Standard:** Ad scrape + creative analysis + landing page analysis
    - **Deep:** Standard + historical comparison + funnel reconstruction + counter-plays
-5. **Product category**; helps frame analysis
-6. **Known competitor landing pages?**; any URLs already spotted in their ads
+5. **Product category** — helps frame analysis
+6. **Known competitor landing pages?** — any URLs already spotted in their ads
 
 ## Phase 1: Research Meta Ads
 
@@ -110,7 +110,7 @@ Group all ad headlines/openers by hook type:
 | **Social proof** | Names customers or numbers | "Join 500+ B2B teams using [product]" |
 | **Contrarian** | Challenges conventional wisdom | "Cold email isn't dead. Your copy is." |
 | **Empathy** | Validates their pain | "We know SDR ramp time is brutal" |
-| **Product-led** | Feature as hook | "[Feature] is live; see what's new" |
+| **Product-led** | Feature as hook | "[Feature] is live — see what's new" |
 
 Count how many ads per competitor use each hook type. This reveals their primary messaging strategy.
 
@@ -144,21 +144,21 @@ fetch_webpage: [landing_page_url]
 Or use `curl` if `fetch_webpage` is unavailable.
 
 **Extract per landing page:**
-- **Hero headline**; Does it match the ad promise?
-- **Subheadline**; Value prop expansion
-- **Primary CTA**; What action are they driving? (Demo / Free trial / Sign up / Download)
-- **Social proof**; Logos, testimonials, case study metrics
-- **Pricing visibility**; Is pricing shown or hidden?
-- **Form fields**; How much info do they ask for?
-- **Page type**; General homepage / dedicated LP / feature page / use-case page
-- **Message match score**; How well does the LP deliver on the ad's promise? (1-10)
+- **Hero headline** — Does it match the ad promise?
+- **Subheadline** — Value prop expansion
+- **Primary CTA** — What action are they driving? (Demo / Free trial / Sign up / Download)
+- **Social proof** — Logos, testimonials, case study metrics
+- **Pricing visibility** — Is pricing shown or hidden?
+- **Form fields** — How much info do they ask for?
+- **Page type** — General homepage / dedicated LP / feature page / use-case page
+- **Message match score** — How well does the LP deliver on the ad's promise? (1-10)
 
 ### Campaign Clustering
 
 Group all ads into logical campaigns by:
-- **Landing page destination**; Ads sharing a URL form an inferred cluster; this does not establish the advertiser’s campaign IDs
-- **Messaging theme**; Similar copy angles = same strategic bet
-- **Audience signal**; Different copy for different personas
+- **Landing page destination** — Ads sharing a URL form an inferred cluster; this does not establish the advertiser’s campaign IDs
+- **Messaging theme** — Similar copy angles = same strategic bet
+- **Audience signal** — Different copy for different personas
 
 ### Per-Campaign Funnel Analysis
 
@@ -192,11 +192,11 @@ Use ad volume and platform distribution only as directional signals. Do not tran
 
 Identify across all competitors:
 
-1. **Angles absent from the observed sample**; Candidate white space, with region, date and library coverage stated
-2. **Overcrowded angles**; If everyone leads with "save time", avoid it or be more specific
-3. **Format opportunities**; If no one is running video in your space, it may stand out
-4. **Underutilized proof**; Are competitors avoiding specific proof points you could own?
-5. **CTA patterns to test**; What CTAs appear in the longest-observed ads? Treat them as test ideas, not proven winners.
+1. **Angles absent from the observed sample** — Candidate white space, with region, date and library coverage stated
+2. **Overcrowded angles** — If everyone leads with "save time", avoid it or be more specific
+3. **Format opportunities** — If no one is running video in your space, it may stand out
+4. **Underutilized proof** — Are competitors avoiding specific proof points you could own?
+5. **CTA patterns to test** — What CTAs appear in the longest-observed ads? Treat them as test ideas, not proven winners.
 
 ### Vulnerability Analysis
 
@@ -205,12 +205,12 @@ Identify weaknesses in each competitor's ad strategy:
 | Vulnerability Type | Description |
 |-------------------|-------------|
 | **Message-LP mismatch** | Ad promises one thing, LP delivers another |
-| **Single-persona dependency** | All ads target the same persona; missing segments |
+| **Single-persona dependency** | All ads target the same persona — missing segments |
 | **Platform concentration** | Heavy on one platform, absent from others |
 | **No social proof** | Ads or LPs lack credibility markers |
 | **Weak CTA** | Asking for too much too soon (demo before value) |
-| **Generic positioning** | Claims anyone could make; not differentiated |
-| **Stale creative** | Same ads running unchanged for months; fatigue risk |
+| **Generic positioning** | Claims anyone could make — not differentiated |
+| **Stale creative** | Same ads running unchanged for months — fatigue risk |
 
 ### Historical Comparison (Deep Mode)
 
@@ -222,7 +222,7 @@ If authorized Web Archive data exists for their landing pages:
 ## Phase 6: Output
 
 ````markdown
-# Competitor Ad Intelligence Report: [DATE]
+# Competitor Ad Intelligence Report — [DATE]
 
 ## Coverage
 - Competitors analyzed: [list]
@@ -249,7 +249,7 @@ If authorized Web Archive data exists for their landing pages:
 ...
 
 ### Longest-Running Ads (Performance Unknown)
-**[Competitor]; [Ad Title/Hook]**
+**[Competitor] — [Ad Title/Hook]**
 > [Ad copy excerpt]
 - Format: [type]
 - CTA: [text]
@@ -317,11 +317,11 @@ If authorized Web Archive data exists for their landing pages:
 ## Creative Gap Analysis
 
 ### Angles Absent from the Observed Sample
-1. [Angle]; Why it could work for you: [reasoning]
-2. [Angle]; ...
+1. [Angle] — Why it could work for you: [reasoning]
+2. [Angle] — ...
 
 ### Overcrowded Angles (Avoid or Differentiate)
-- [Angle]; [N] of [N] competitors use this
+- [Angle] — [N] of [N] competitors use this
 
 ### Format White Space
 - [Format] was not observed in the sampled competitors’ ads on [platform] during [coverage window]
@@ -379,8 +379,8 @@ If authorized Web Archive data exists for their landing pages:
 
 ## Tools Used
 
-- **`web_search`**; query Meta Ad Library and Google Ads Transparency Center
-- **`fetch_webpage`** or **`curl`**; fetch and analyze landing pages
+- **`web_search`** — query Meta Ad Library and Google Ads Transparency Center
+- **`fetch_webpage`** or **`curl`** — fetch and analyze landing pages
 
 ## Examples
 

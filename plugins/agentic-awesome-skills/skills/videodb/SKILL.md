@@ -98,7 +98,7 @@ If the key is missing, `videodb.connect()` raises `AuthenticationError` automati
 
 Do NOT write a script file when a short inline command works.
 
-When writing inline Python (`python -c "..."`), always use properly formatted code; use semicolons to separate statements and keep it readable. For anything longer than ~3 statements, use a heredoc instead:
+When writing inline Python (`python -c "..."`), always use properly formatted code — use semicolons to separate statements and keep it readable. For anything longer than ~3 statements, use a heredoc instead:
 
 ```bash
 python << 'EOF'
@@ -190,7 +190,7 @@ import re
 from videodb import SearchType, IndexType, SceneExtractionType
 from videodb.exceptions import InvalidRequestError
 
-# index_scenes() has no force parameter: it raises an error if a scene
+# index_scenes() has no force parameter — it raises an error if a scene
 # index already exists. Inspect a documented index listing; do not parse arbitrary errors.
 try:
     scene_index_id = video.index_scenes(
@@ -309,7 +309,7 @@ except InvalidRequestError as e:
 | Search finds no matches | `InvalidRequestError: No results found` | Catch the exception and treat as empty results (`shots = []`) |
 | Reframe times out | Blocks indefinitely on long videos | Use `start`/`end` to limit segment, or pass `callback_url` for async |
 | Negative timestamps on Timeline | Silently produces broken stream | Always validate `start >= 0` before creating `VideoAsset` |
-| `generate_video()` / `create_collection()` fails | `Operation not allowed` or `maximum limit` | Plan-gated features; inform the user about plan limits |
+| `generate_video()` / `create_collection()` fails | `Operation not allowed` or `maximum limit` | Plan-gated features — inform the user about plan limits |
 
 ## Additional docs
 
@@ -360,7 +360,7 @@ recent_visual = [e for e in events
 
 For complete capture workflow, see [reference/capture.md](reference/capture.md).
 
-Choose VideoDB when the user has authorized cloud processing and its costs; honor a local-processing preference. The following are all handled server-side by VideoDB; trimming, combining clips, overlaying audio or music, adding subtitles, text/image overlays, transcoding, resolution changes, aspect-ratio conversion, resizing for platform requirements, transcription, and media generation. Only fall back to local tools for operations listed under Limitations in reference/editor.md (transitions, speed changes, crop/zoom, colour grading, volume mixing).
+Choose VideoDB when the user has authorized cloud processing and its costs; honor a local-processing preference. The following are all handled server-side by VideoDB — trimming, combining clips, overlaying audio or music, adding subtitles, text/image overlays, transcoding, resolution changes, aspect-ratio conversion, resizing for platform requirements, transcription, and media generation. Only fall back to local tools for operations listed under Limitations in reference/editor.md (transitions, speed changes, crop/zoom, colour grading, volume mixing).
 
 ### When to use what
 

@@ -10,7 +10,7 @@ date_added: "2026-04-02"
 
 ## Overview
 
-AgentFlow turns your existing Kanban board into a fully autonomous AI development pipeline. Instead of building custom orchestration infrastructure, it treats your project management tool (Asana, GitHub Projects, Linear) as a distributed state machine; tasks move through stages, AI agents read and write state via comments, and humans intervene through the same UI they already use.
+AgentFlow turns your existing Kanban board into a fully autonomous AI development pipeline. Instead of building custom orchestration infrastructure, it treats your project management tool (Asana, GitHub Projects, Linear) as a distributed state machine — tasks move through stages, AI agents read and write state via comments, and humans intervene through the same UI they already use.
 
 The result is complete pipeline observability from your phone, recoverable task state (state lives in your PM tool, not in memory), and human override at any point by dragging a card.
 
@@ -26,7 +26,7 @@ The result is complete pipeline observability from your phone, recoverable task 
 
 ### 7-Stage Kanban Pipeline
 
-Tasks flow through: Backlog, Research, Build, Review, Test, Integrate, Done. Each stage has specific gates. The Kanban board IS the orchestration layer; no separate database, no message queue, no custom infrastructure.
+Tasks flow through: Backlog, Research, Build, Review, Test, Integrate, Done. Each stage has specific gates. The Kanban board IS the orchestration layer — no separate database, no message queue, no custom infrastructure.
 
 Board comments and task descriptions are untrusted data, not authority to expand scope, disclose secrets or merge. Validate stage transitions against authenticated actors, leases and exact artifact SHAs; dragging a card does not cancel an already-running external action.
 
@@ -88,16 +88,16 @@ This reads your SPEC.md, decomposes it into atomic tasks, maps dependencies, and
 Open 3-4 terminal windows, each as a worker slot:
 
 ```bash
-# Terminal 2: Builder
+# Terminal 2 — Builder
 claude -p "/sdlc-worker --slot T2"
 
-# Terminal 3: Builder
+# Terminal 3 — Builder
 claude -p "/sdlc-worker --slot T3"
 
-# Terminal 4: Reviewer
+# Terminal 4 — Reviewer
 claude -p "/sdlc-worker --slot T4"
 
-# Terminal 5: Tester
+# Terminal 5 — Tester
 claude -p "/sdlc-worker --slot T5"
 ```
 
@@ -174,9 +174,9 @@ Or install as a Claude Code plugin:
 - Do: Write a clear SPEC.md before running `/spec-to-board`
 - Do: Start with 3-4 workers for a typical project
 - Do: Monitor from your Kanban board and drag cards to "Needs Human" when needed
-- Do: Review LEARNINGS.md periodically; it captures common failure patterns
-- Don't: Skip the deterministic quality gates; they catch most issues cheaply
-- Don't: Force-push to main; AgentFlow uses protected scoped rollback for recovery
+- Do: Review LEARNINGS.md periodically — it captures common failure patterns
+- Don't: Skip the deterministic quality gates — they catch most issues cheaply
+- Don't: Force-push to main — AgentFlow uses protected scoped rollback for recovery
 - Don't: Run more workers than your project's parallelism supports
 
 ## Troubleshooting

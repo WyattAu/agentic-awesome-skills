@@ -115,14 +115,14 @@ Optional example for an explicitly requested advisory CI integration; verify the
 
 - ✅ Score tools before adding them to long-running agent workflows
 - ✅ Use Clarvia's leaderboard to discover alternatives you haven't considered
-- ✅ Re-check scores periodically; tools improve over time
+- ✅ Re-check scores periodically — tools improve over time
 - ✅ Compare scores with actual protocol compatibility, required functionality and source/security review; scoring is optional
 - ❌ Don't use tools scoring below 50 in production agent pipelines without understanding the limitations
 
 ## Common Pitfalls
 
 - **Problem:** Clarvia returns "not found" for a tool
-  **Solution:** Try scanning by URL directly with `aeo_score`; Clarvia will score it on-demand
+  **Solution:** Try scanning by URL directly with `aeo_score` — Clarvia will score it on-demand
 
 - **Problem:** Score seems low for a tool I trust
   **Solution:** Use `get_score_breakdown` to see which dimensions are weak and decide if they matter for your use case

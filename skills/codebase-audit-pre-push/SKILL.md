@@ -21,7 +21,7 @@ As a senior engineer, you're doing the final review before pushing this code to 
 
 ## Your Job  
 
-Review the entire codebase file by file. Read the code carefully. Fix issues right away. Don't just note problems-make the necessary changes.  
+Review the entire codebase file by file. Read the code carefully. Fix issues right away. Don't just note problems—make the necessary changes.  
 
 ## Audit Process  
 
@@ -61,7 +61,7 @@ Look through each code file and check:
 - Unused variables (declared but never used)  
 - Unused functions (defined but never called)  
 - Unreachable code (after `return`, inside `if (false)`)  
-- Duplicate logic (same code in multiple places-combine)  
+- Duplicate logic (same code in multiple places—combine)  
 
 **Code Quality (fix issues as you go):**  
 - Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive  
@@ -86,7 +86,7 @@ Look through each code file and check:
 **Secrets:** Search for hardcoded passwords, API keys, and tokens. They must be in environment variables.  
 
 **Injection vulnerabilities:**  
-- SQL: No string concatenation in queries-use parameterized queries only  
+- SQL: No string concatenation in queries—use parameterized queries only  
 - Command injection: No `exec()` with user-provided input  
 - Path traversal: No file paths from user input without validation  
 - XSS: No `innerHTML` or `dangerouslySetInnerHTML` with user data  
@@ -230,8 +230,8 @@ Overall: state remaining blockers
 - Fix issues immediately, don’t just document them  
 - If uncertain about removing something, ask the user  
 - Test after making changes  
-- Be thorough but practical-focus on real problems  
-- Security issues are blockers-nothing should ship with critical vulnerabilities  
+- Be thorough but practical—focus on real problems  
+- Security issues are blockers—nothing should ship with critical vulnerabilities  
 
 ## Related Skills  
 

@@ -1,4 +1,4 @@
-# `container`: Complete CLI Command Reference
+# `container` — Complete CLI Command Reference
 
 > Reference scope: this imported guide mixes release-era and later branch documentation; its `1.0.0+` annotations are not verified introduction versions. Match the installed `container --version` and subcommand `--help` to the same upstream release tag before using flags or defaults. Current branch documentation can describe unreleased behavior. No container runtime was executed for this static review.
 
@@ -7,17 +7,17 @@ Full command/flag reference for Apple's `container` CLI (repo `apple/container`)
 the swift-argument-parser declarations in `Sources/ContainerCommands/` (source of truth) and
 `docs/command-reference.md`. On conflicts, compare the installed help and source at its exact release tag; do not substitute main-branch syntax for an installed release.
 
-Not Docker. The CLI is deliberately Docker-like, but flags, defaults, and daemon model differ -
+Not Docker. The CLI is deliberately Docker-like, but flags, defaults, and daemon model differ —
 do not assume Docker behavior carries over. Every container runs in its own lightweight VM;
 a shared per-user API server and helpers run under `launchd`, with a runtime helper per container. Registry is the top-level `container registry` group; help headings are not command namespaces.
 
-**Conventions used below:** a value of `-` in the Default column means "no default (unset /
+**Conventions used below:** a value of `—` in the Default column means "no default (unset /
 optional)". "flag" in the Value column means a boolean switch (no argument). `[env: NAME]`
-marks an environment-variable fallback. Command availability varies by macOS version; caveats
+marks an environment-variable fallback. Command availability varies by macOS version — caveats
 are called out inline.
 
 **Version:** this reference tracks the **1.0.0** release. Items marked *(1.0.0+)* were added after
-0.7.1; namely `container cp`, `container export`, `container prune`, `container image prune`,
+0.7.1 — namely `container cp`, `container export`, `container prune`, `container image prune`,
 `container registry list`, `container system version`, and the whole `container machine` group (on
 0.7.1 the `registry` group had only `login`/`logout`). Run `container <group> --help` to confirm
 what your installed build supports.
@@ -48,7 +48,7 @@ what your installed build supports.
 
 ## Global
 
-Root command: `container`; "A container platform for macOS".
+Root command: `container` — "A container platform for macOS".
 
 ```bash
 container [--debug] [--version] [-h|--help] <command> [<args> ...]
@@ -56,9 +56,9 @@ container [--debug] [--version] [-h|--help] <command> [<args> ...]
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `--debug` | flag | `false` | Enable debug output. Applies to every command (composed via `Flags.Logging`). `[env: CONTAINER_DEBUG]`; setting the env var (any value) also enables debug. |
-| `--version` | flag | - | Print CLI version (`container CLI version …`) and exit. |
-| `-h, --help` | flag | - | Show help. On the bare root command, help is augmented with a `PLUGINS:` section. |
+| `--debug` | flag | `false` | Enable debug output. Applies to every command (composed via `Flags.Logging`). `[env: CONTAINER_DEBUG]` — setting the env var (any value) also enables debug. |
+| `--version` | flag | — | Print CLI version (`container CLI version …`) and exit. |
+| `-h, --help` | flag | — | Show help. On the bare root command, help is augmented with a `PLUGINS:` section. |
 
 Notes:
 - **There is no global `-d` short flag.** `--debug` is long-only. `-d` is `--detach` on `run`/`create`/`exec`/`machine run`.
@@ -109,63 +109,63 @@ container myplugin --flag arg     # execs container-myplugin --flag arg
 ## Container lifecycle
 
 The following flag groups are shared (composed via `@OptionGroup`) across `run`, `create`,
-and; for the process subset; `exec`. They are defined once here and referenced by name.
+and — for the process subset — `exec`. They are defined once here and referenced by name.
 
 **Process options** (`run`, `create`, `exec`):
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `-e, --env` | `<key=value>` | - | Set env var. `key=value`, or bare `key` to inherit from host. Repeatable. |
-| `--env-file` | `<path>` | - | Read env vars from a file (`key=value`; ignores `#` comments and blank lines). Repeatable. |
-| `--gid` | `<gid>` | - | Group ID for the process. |
+| `-e, --env` | `<key=value>` | — | Set env var. `key=value`, or bare `key` to inherit from host. Repeatable. |
+| `--env-file` | `<path>` | — | Read env vars from a file (`key=value`; ignores `#` comments and blank lines). Repeatable. |
+| `--gid` | `<gid>` | — | Group ID for the process. |
 | `-i, --interactive` | flag | `false` | Keep stdin open even if not attached. |
 | `-t, --tty` | flag | `false` | Open a TTY for the process. |
-| `-u, --user` | `<user>` | - | User for the process (format `name` \| `uid[:gid]`). |
-| `--uid` | `<uid>` | - | User ID for the process. |
-| `-w, --workdir, --cwd` | `<dir>` | - | Initial working directory inside the container. (`-w`, `--workdir`, and `--cwd` are all accepted.) |
-| `--ulimit` | `<type>=<soft>[:<hard>]` | - | Resource limit (`RLIMIT_*`, e.g. `nofile=1024:2048`). Repeatable. Part of the shared Process group, so it also parses on `exec`. |
+| `-u, --user` | `<user>` | — | User for the process (format `name` \| `uid[:gid]`). |
+| `--uid` | `<uid>` | — | User ID for the process. |
+| `-w, --workdir, --cwd` | `<dir>` | — | Initial working directory inside the container. (`-w`, `--workdir`, and `--cwd` are all accepted.) |
+| `--ulimit` | `<type>=<soft>[:<hard>]` | — | Resource limit (`RLIMIT_*`, e.g. `nofile=1024:2048`). Repeatable. Part of the shared Process group, so it also parses on `exec`. |
 
 **Resource options** (`run`, `create`):
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `-c, --cpus` | `<n>` | - | Number of CPUs to allocate. |
-| `-m, --memory` | `<size>` | - | Memory (1 MiB granularity); optional `K`/`M`/`G`/`T`/`P` suffix. |
+| `-c, --cpus` | `<n>` | — | Number of CPUs to allocate. |
+| `-m, --memory` | `<size>` | — | Memory (1 MiB granularity); optional `K`/`M`/`G`/`T`/`P` suffix. |
 
 **Management options** (`run`, `create`):
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
 | `-a, --arch` | `<arch>` | host arch (e.g. `arm64`) | Arch to use if the image is multi-arch. |
-| `--cap-add` | `<cap>` | - | Add a Linux capability (`CAP_NET_RAW`, `NET_RAW`, or `ALL`). Repeatable. |
-| `--cap-drop` | `<cap>` | - | Drop a Linux capability. Repeatable. |
+| `--cap-add` | `<cap>` | — | Add a Linux capability (`CAP_NET_RAW`, `NET_RAW`, or `ALL`). Repeatable. |
+| `--cap-drop` | `<cap>` | — | Drop a Linux capability. Repeatable. |
 | `--cidfile` | `<path>` | `""` | Write the container ID to this path. |
 | `-d, --detach` | flag | `false` | Run detached from the process. |
-| `--dns` | `<ip>` | - | DNS nameserver IP. Repeatable. |
-| `--dns-domain` | `<domain>` | - | Default DNS domain. |
-| `--dns-option` | `<option>` | - | DNS option. Repeatable. |
-| `--dns-search` | `<domain>` | - | DNS search domain. Repeatable. |
-| `--entrypoint` | `<cmd>` | - | Override the image entrypoint. |
+| `--dns` | `<ip>` | — | DNS nameserver IP. Repeatable. |
+| `--dns-domain` | `<domain>` | — | Default DNS domain. |
+| `--dns-option` | `<option>` | — | DNS option. Repeatable. |
+| `--dns-search` | `<domain>` | — | DNS search domain. Repeatable. |
+| `--entrypoint` | `<cmd>` | — | Override the image entrypoint. |
 | `--init` | flag | `false` | Run an init process that forwards signals and reaps zombies. |
-| `--init-image` | `<image>` | - | Custom init image (customize boot-time behavior: VM daemons, eBPF filters, debugging init). |
-| `-k, --kernel` | `<path>` | - | Custom kernel path (resolved to an absolute path). |
-| `-l, --label` | `<key=value>` | - | Add a label. Repeatable. |
-| `--mount` | `<spec>` | - | Add a mount (`type=<>,source=<>,target=<>,readonly`). Repeatable. |
-| `--name` | `<name>` | - | Use this name as the container ID (auto-generated otherwise). |
-| `--network` | `<spec>` | - | Attach to a network (`<name>[,mac=XX:XX:XX:XX:XX:XX][,mtu=VALUE]`). Repeatable. |
+| `--init-image` | `<image>` | — | Custom init image (customize boot-time behavior: VM daemons, eBPF filters, debugging init). |
+| `-k, --kernel` | `<path>` | — | Custom kernel path (resolved to an absolute path). |
+| `-l, --label` | `<key=value>` | — | Add a label. Repeatable. |
+| `--mount` | `<spec>` | — | Add a mount (`type=<>,source=<>,target=<>,readonly`). Repeatable. |
+| `--name` | `<name>` | — | Use this name as the container ID (auto-generated otherwise). |
+| `--network` | `<spec>` | — | Attach to a network (`<name>[,mac=XX:XX:XX:XX:XX:XX][,mtu=VALUE]`). Repeatable. |
 | `--no-dns` | flag | `false` | Do not configure DNS. Conflicts with any `--dns*` flag (validation error). |
 | `--os` | `<os>` | `linux` | OS to use if the image is multi-OS. |
-| `-p, --publish` | `<spec>` | - | Publish a port (`[host-ip:]host-port:container-port[/protocol]`). Repeatable. |
-| `--platform` | `<platform>` | - | Platform for multi-platform images (`os/arch[/variant]`). Takes precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
-| `--publish-socket` | `<spec>` | - | Publish a socket (`host_path:container_path`). Repeatable. |
+| `-p, --publish` | `<spec>` | — | Publish a port (`[host-ip:]host-port:container-port[/protocol]`). Repeatable. |
+| `--platform` | `<platform>` | — | Platform for multi-platform images (`os/arch[/variant]`). Takes precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
+| `--publish-socket` | `<spec>` | — | Publish a socket (`host_path:container_path`). Repeatable. |
 | `--read-only` | flag | `false` | Mount the root filesystem read-only. |
 | `--rm, --remove` | flag | `false` | Remove the container after it stops. |
 | `--rosetta` | flag | `false` | Enable Rosetta in the container. |
-| `--runtime` | `<handler>` | - | Runtime handler (default: `container-runtime-linux`). |
+| `--runtime` | `<handler>` | — | Runtime handler (default: `container-runtime-linux`). |
 | `--ssh` | flag | `false` | Forward the SSH agent socket into the container. |
-| `--shm-size` | `<size>` | - | Size of `/dev/shm` (e.g. `64M`, `1G`). |
-| `--tmpfs` | `<path>` | - | Add a tmpfs mount at the given path. Repeatable. |
-| `-v, --volume` | `<spec>` | - | Bind-mount a volume. Repeatable. |
+| `--shm-size` | `<size>` | — | Size of `/dev/shm` (e.g. `64M`, `1G`). |
+| `--tmpfs` | `<path>` | — | Add a tmpfs mount at the given path. Repeatable. |
+| `-v, --volume` | `<spec>` | — | Bind-mount a volume. Repeatable. |
 | `--virtualization` | flag | `false` | Expose virtualization capabilities (requires host and guest support). |
 
 **Registry options** (`run`, `create`):
@@ -189,7 +189,7 @@ the image's default command runs. Foreground by default; stdin stays closed unle
 container run [<options>] <image> [<arguments> ...]
 ```
 
-**Arguments:** `<image>` (image name, required) · `<arguments>` (init-process args, captured for passthrough; everything after the image is forwarded verbatim).
+**Arguments:** `<image>` (image name, required) · `<arguments>` (init-process args, captured for passthrough — everything after the image is forwarded verbatim).
 
 **Options:** all Process + Resource + Management + Registry + Progress + Image-fetch groups above.
 
@@ -239,14 +239,14 @@ Run a command inside a **running** container. Uses the Process options group.
 container exec [-d] [<process options>] <container-id> <arguments> ...
 ```
 
-**Arguments:** `<container-id>` (required) · `<arguments>` (new process args, passthrough; first arg is the executable).
+**Arguments:** `<container-id>` (required) · `<arguments>` (new process args, passthrough — first arg is the executable).
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
 | `-d, --detach` | flag | `false` | Run the process and detach from it. |
 
 Plus the **full** Process options group (`-e/--env`, `--env-file`, `--gid`, `-i/--interactive`,
-`-t/--tty`, `-u/--user`, `--uid`, `-w/--workdir/--cwd`, `--ulimit`); `exec` composes the same
+`-t/--tty`, `-u/--user`, `--uid`, `-w/--workdir/--cwd`, `--ulimit`) — `exec` composes the same
 `Flags.Process` group as `run`/`create`, so all of these are accepted on `exec` too.
 
 ```bash
@@ -293,7 +293,7 @@ container stop [-a] [-s <signal>] [-t <time>] [<container-ids> ...]
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
 | `-a, --all` | flag | `false` | Stop all running containers. |
-| `-s, --signal` | `<signal>` | `SIGTERM` (effective) | Signal to send. The CLI flag itself has no hard default; when omitted the server applies the graceful default (`SIGTERM`). |
+| `-s, --signal` | `<signal>` | `SIGTERM` (effective) | Signal to send. The CLI flag itself has no hard default — when omitted the server applies the graceful default (`SIGTERM`). |
 | `-t, --time` | `<seconds>` | `5` | Seconds to wait before `SIGKILL`. |
 
 Aliases: none.
@@ -308,7 +308,7 @@ container stop -s SIGINT -t 10 web db
 
 ### `container kill`
 
-Immediately signal (default `KILL`) running containers. No graceful shutdown; use with care.
+Immediately signal (default `KILL`) running containers. No graceful shutdown — use with care.
 
 ```bash
 container kill [-a] [-s <signal>] [<container-ids> ...]
@@ -391,7 +391,7 @@ container logs [--boot] [-f] [-n <n>] <container-id>
 |------|-------|---------|-------------|
 | `--boot` | flag | `false` | Show the boot log instead of stdio. |
 | `-f, --follow` | flag | `false` | Follow log output. |
-| `-n` | `<n>` |; (all) | Show the last `n` lines. `-n` is short-only (no `--lines`). Omit to print everything. |
+| `-n` | `<n>` | — (all) | Show the last `n` lines. `-n` is short-only (no `--lines`). Omit to print everything. |
 
 ```bash
 container logs -f web
@@ -495,7 +495,7 @@ container export mybox > mybox.tar
 
 ### `container prune`
 
-> **⚠️ Requires 1.0.0+** (added after 0.7.1). Removes all *stopped* containers; distinct from
+> **⚠️ Requires 1.0.0+** (added after 0.7.1). Removes all *stopped* containers — distinct from
 > `container image prune` / `container volume prune`.
 
 Remove **stopped** containers to reclaim disk space; prints the space freed.
@@ -524,26 +524,26 @@ container build [<options>] [<context-dir>]
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
 | `-a, --arch` | `<value>` | host arch (e.g. `arm64`) | Add an architecture to the build (comma-separated and/or repeatable). |
-| `--build-arg` | `<key=val>` | - | Build-time variable. Repeatable. |
-| `--cache-in` | `<value>` | - | (Hidden/advanced) BuildKit cache import. Repeatable. |
-| `--cache-out` | `<value>` | - | (Hidden/advanced) BuildKit cache export. Repeatable. |
+| `--build-arg` | `<key=val>` | — | Build-time variable. Repeatable. |
+| `--cache-in` | `<value>` | — | (Hidden/advanced) BuildKit cache import. Repeatable. |
+| `--cache-out` | `<value>` | — | (Hidden/advanced) BuildKit cache export. Repeatable. |
 | `-c, --cpus` | `<n>` | `2` | CPUs for the builder container. |
-| `--dns` | `<ip>` | - | DNS nameserver IP for the build. Repeatable. |
-| `--dns-domain` | `<domain>` | - | Default DNS domain. |
-| `--dns-option` | `<option>` | - | DNS option. Repeatable. |
-| `--dns-search` | `<domain>` | - | DNS search domain. Repeatable. |
+| `--dns` | `<ip>` | — | DNS nameserver IP for the build. Repeatable. |
+| `--dns-domain` | `<domain>` | — | Default DNS domain. |
+| `--dns-option` | `<option>` | — | DNS option. Repeatable. |
+| `--dns-search` | `<domain>` | — | DNS search domain. Repeatable. |
 | `-f, --file` | `<path>` | `Dockerfile`→`Containerfile` | Path to the Dockerfile/Containerfile. |
-| `-l, --label` | `<key=val>` | - | Set a label. Repeatable. |
+| `-l, --label` | `<key=val>` | — | Set a label. Repeatable. |
 | `-m, --memory` | `<size>` | `2048MB` | Builder container memory; optional `K`/`M`/`G`/`T`/`P` suffix. |
 | `--no-cache` | flag | `false` | Do not use the build cache. |
 | `-o, --output` | `<value>` | `type=oci` | Output config (`type=<oci\|tar\|local>[,dest=]`). |
 | `--os` | `<value>` | `linux` | Add an OS to the build (comma-separated and/or repeatable). |
-| `--platform` | `<platform>` | - | Add a platform (`os/arch[/variant]`); precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
+| `--platform` | `<platform>` | — | Add a platform (`os/arch[/variant]`); precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
 | `--progress` | `auto\|plain\|tty` | `auto` | Build progress type. (Note the values differ from the pull/push progress set.) |
 | `--pull` | flag | `false` | Pull the latest base image. |
 | `-q, --quiet` | flag | `false` | Suppress build output. |
-| `--secret` | `id=<key>,...` | - | Build secret (`id=<key>[,env=<ENV_VAR>\|,src=<local/path>]`). Repeatable. |
-| `-t, --tag` | `<name>` | - | Name/tag for the built image. Repeatable. |
+| `--secret` | `id=<key>,...` | — | Build secret (`id=<key>[,env=<ENV_VAR>\|,src=<local/path>]`). Repeatable. |
+| `-t, --tag` | `<name>` | — | Name/tag for the built image. Repeatable. |
 | `--target` | `<stage>` | `""` | Target build stage. |
 | `--vsock-port` | `<port>` | `8088` | Builder shim vsock port. |
 
@@ -560,7 +560,7 @@ container build -t my-app:latest -t my-app:v1.0.0 .
 ### `container image` group
 
 Manage images. **Alias:** `i`. (The plural `images` is only the help section header, not a
-command; `container images` errors with "plugin not found".)
+command — `container images` errors with "plugin not found".)
 
 ```bash
 container image <subcommand>
@@ -583,9 +583,9 @@ container image pull [--scheme <scheme>] [--progress <type>] [--max-concurrent-d
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `-a, --arch` | `<arch>` | - | Limit to the specified architecture. |
-| `--os` | `<os>` | - | Limit to the specified OS. |
-| `--platform` | `<platform>` | - | Limit to platform (`os/arch[/variant]`); precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
+| `-a, --arch` | `<arch>` | — | Limit to the specified architecture. |
+| `--os` | `<os>` | — | Limit to the specified OS. |
+| `--platform` | `<platform>` | — | Limit to platform (`os/arch[/variant]`); precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
 | `--scheme` | `http\|https\|auto` | `auto` | Registry connection scheme. |
 | `--progress` | `auto\|none\|ansi\|plain\|color` | `auto` | Progress type. |
 | `--max-concurrent-downloads` | `<n>` | `3` | Max concurrent blob downloads. |
@@ -610,9 +610,9 @@ container image push [--scheme <scheme>] [--progress <type>] [-a <arch>] [--os <
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `-a, --arch` | `<arch>` | - | Limit to architecture. |
-| `--os` | `<os>` | - | Limit to OS. |
-| `--platform` | `<platform>` | - | Limit to platform; precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
+| `-a, --arch` | `<arch>` | — | Limit to architecture. |
+| `--os` | `<os>` | — | Limit to OS. |
+| `--platform` | `<platform>` | — | Limit to platform; precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
 | `--scheme` | `http\|https\|auto` | `auto` | Registry connection scheme. |
 | `--progress` | `auto\|none\|ansi\|plain\|color` | `auto` | Progress type. |
 
@@ -654,10 +654,10 @@ container image save [-a <arch>] [--os <os>] [-o <output>] [--platform <platform
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `-a, --arch` | `<arch>` | - | Architecture for the saved image. |
-| `--os` | `<os>` | - | OS for the saved image. |
+| `-a, --arch` | `<arch>` | — | Architecture for the saved image. |
+| `--os` | `<os>` | — | OS for the saved image. |
 | `-o, --output` | `<path>` | stdout | Pathname for the saved tar (resolved to absolute). |
-| `--platform` | `<platform>` | - | Platform (`os/arch[/variant]`); precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
+| `--platform` | `<platform>` | — | Platform (`os/arch[/variant]`); precedence over `--os`/`--arch`. `[env: CONTAINER_DEFAULT_PLATFORM]` |
 
 Every reference must resolve; if a platform is resolved, each image must contain content for it
 (else it errors listing available platforms). Without `-o`, the tar goes to stdout and the saved
@@ -800,7 +800,7 @@ stored in the macOS keychain.
 
 > Note: source declares only `login`, `logout`, and `list`. There is **no** `registry default`
 > get/set command in the current source (despite occasional mentions of "default registry"
-> elsewhere; that concept lives in system configuration, not this group).
+> elsewhere — that concept lives in system configuration, not this group).
 
 ```bash
 container registry <subcommand>
@@ -907,10 +907,10 @@ container builder start [-c <cpus>] [-m <memory>] [--dns <ip> ...] [--dns-domain
 |------|-------|---------|-------------|
 | `-c, --cpus` | `<n>` | `2` | CPUs for the builder container. |
 | `-m, --memory` | `<size>` | `2048MB` | Builder memory; optional `K`/`M`/`G`/`T`/`P` suffix. |
-| `--dns` | `<ip>` | - | DNS nameserver IP. Repeatable. |
-| `--dns-domain` | `<domain>` | - | Default DNS domain. |
-| `--dns-option` | `<option>` | - | DNS option. Repeatable. |
-| `--dns-search` | `<domain>` | - | DNS search domain. Repeatable. |
+| `--dns` | `<ip>` | — | DNS nameserver IP. Repeatable. |
+| `--dns-domain` | `<domain>` | — | Default DNS domain. |
+| `--dns-option` | `<option>` | — | DNS option. Repeatable. |
+| `--dns-search` | `<domain>` | — | DNS search domain. Repeatable. |
 
 ```bash
 container builder start
@@ -1110,7 +1110,7 @@ sudo container system dns create [--localhost <ip>] <domain-name>
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `--localhost` | `<ip>` | - | IPv4 address to redirect to localhost. |
+| `--localhost` | `<ip>` | — | IPv4 address to redirect to localhost. |
 
 #### `container system dns delete (rm)`
 
@@ -1148,10 +1148,10 @@ container system kernel set [--arch <arch>] [--binary <path>] [--force] [--recom
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
 | `--arch` | `amd64\|arm64` | `arm64` | Architecture of the kernel binary. |
-| `--binary` | `<path>` | - | Path to the kernel file (or archive member if used with `--tar`). |
+| `--binary` | `<path>` | — | Path to the kernel file (or archive member if used with `--tar`). |
 | `--force` | flag | `false` | Overwrite an existing kernel of the same name. |
 | `--recommended` | flag | `false` | Download and install the recommended default kernel (takes precedence over all other flags). |
-| `--tar` | `<tar>` | - | Filesystem path or remote URL to a tar archive containing a kernel file. |
+| `--tar` | `<tar>` | — | Filesystem path or remote URL to a tar archive containing a kernel file. |
 
 ```bash
 container system kernel set --recommended
@@ -1210,11 +1210,11 @@ container network create [--internal] [--label <label> ...] [--option <option> .
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
 | `--internal` | flag | `false` | Restrict to a host-only network (NAT otherwise). |
-| `--label` | `<key=value>` | - | Network metadata. Repeatable. |
-| `--option` | `<key=value>` | - | Plugin-specific option. Repeatable. |
+| `--label` | `<key=value>` | — | Network metadata. Repeatable. |
+| `--option` | `<key=value>` | — | Plugin-specific option. Repeatable. |
 | `--plugin` | `<plugin>` | `container-network-vmnet` | Network plugin to use. |
-| `--subnet` | `<cidr>` | - | IPv4 subnet (e.g. `192.168.100.0/24`). |
-| `--subnet-v6` | `<cidr>` | - | IPv6 prefix (e.g. `fd00:1234::/64`). |
+| `--subnet` | `<cidr>` | — | IPv4 subnet (e.g. `192.168.100.0/24`). |
+| `--subnet-v6` | `<cidr>` | — | IPv6 prefix (e.g. `fd00:1234::/64`). |
 
 ```bash
 container network create mynet
@@ -1313,14 +1313,14 @@ container volume create [--label <label> ...] [--opt <opt> ...] [-s <size>] <nam
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `--label` | `<key=value>` | - | Volume metadata. Repeatable. |
-| `--opt` | `<key=value>` | - | Driver-specific option. Repeatable. |
-| `-s` | `<size>` | - | Volume size in bytes; optional `K`/`M`/`G`/`T`/`P` suffix. Takes precedence over `--opt size=`. |
+| `--label` | `<key=value>` | — | Volume metadata. Repeatable. |
+| `--opt` | `<key=value>` | — | Driver-specific option. Repeatable. |
+| `-s` | `<size>` | — | Volume size in bytes; optional `K`/`M`/`G`/`T`/`P` suffix. Takes precedence over `--opt size=`. |
 
 **Driver options** (`--opt key=value`, default `local` driver):
 
-- `size=<value>`; volume size (unit suffixes as above; min 1 MiB). Equivalent to `-s`; `-s` wins if both set.
-- `journal=<mode>[:<size>]`; ext4 journaling. `<mode>` ∈ `ordered` (metadata only, data-before-metadata; kernel default), `writeback` (metadata only, no data ordering; fastest, least safe), `journal` (metadata + data; safest). Optional `:<size>` sets the journal size.
+- `size=<value>` — volume size (unit suffixes as above; min 1 MiB). Equivalent to `-s`; `-s` wins if both set.
+- `journal=<mode>[:<size>]` — ext4 journaling. `<mode>` ∈ `ordered` (metadata only, data-before-metadata; kernel default), `writeback` (metadata only, no data ordering; fastest, least safe), `journal` (metadata + data; safest). Optional `:<size>` sets the journal size.
 
 ```bash
 container volume create --opt journal=ordered myvol
@@ -1330,7 +1330,7 @@ container volume create -s 5G data
 ```
 
 **Anonymous volumes:** auto-created with `-v /path` or `--mount type=volume,dst=/path` (UUID
-name `anon-…`). Unlike Docker, they do **not** auto-clean with `--rm`; delete manually.
+name `anon-…`). Unlike Docker, they do **not** auto-clean with `--rm` — delete manually.
 
 ```bash
 container run -v /data alpine
@@ -1407,7 +1407,7 @@ No arguments, no options beyond global.
 
 ## Machine
 
-> **⚠️ Requires 1.0.0+**; the entire `container machine` group was added after 0.7.1. Verify with
+> **⚠️ Requires 1.0.0+** — the entire `container machine` group was added after 0.7.1. Verify with
 > `container machine --help` on your install.
 
 Manage container machines (persistent Linux environments, distinct from ordinary per-container VMs). **Group alias:** `m`.
@@ -1435,17 +1435,17 @@ container machine create [<options>] <image>
 
 | Flag | Value | Default | Description |
 |------|-------|---------|-------------|
-| `-n, --name` | `<name>` | - | Name for the machine. |
+| `-n, --name` | `<name>` | — | Name for the machine. |
 | `--set-default` | flag | `false` | Set this machine as the default. |
 | `--no-boot` | flag | `false` | Create without booting. |
-| `--cpus` | `<n>` | - | Number of virtual CPUs. |
+| `--cpus` | `<n>` | — | Number of virtual CPUs. |
 | `--memory` | `<size>` | half of system memory | Memory allocation (e.g. `2G`, `8G`). |
 | `--home-mount` | `ro\|rw\|none` | `rw` | How to mount the user's home directory. |
 | `--virtualization` | flag | `false` | Enable nested virtualization. Requires Apple silicon M3+, macOS 15+, and a kernel with `CONFIG_KVM=y`. |
-| `--kernel` | `<path>` | - | Path to a custom kernel binary (e.g. `vmlinux`). |
+| `--kernel` | `<path>` | — | Path to a custom kernel binary (e.g. `vmlinux`). |
 | `-a, --arch` | `<arch>` | host arch | Arch for a multi-arch image. |
 | `--os` | `<os>` | `linux` | OS for a multi-OS image. |
-| `--platform` | `<platform>` | - | Platform for a multi-platform image; precedence over `--os`/`--arch`. |
+| `--platform` | `<platform>` | — | Platform for a multi-platform image; precedence over `--os`/`--arch`. |
 | `--scheme` | `http\|https\|auto` | `auto` | Registry connection scheme. |
 | `--progress` | `auto\|none\|ansi\|plain\|color` | `auto` | Progress type. |
 | `--max-concurrent-downloads` | `<n>` | `3` | Max concurrent blob downloads. |
@@ -1568,7 +1568,7 @@ container machine logs [--boot] [-f] [-n <n>] [<id>]
 |------|-------|---------|-------------|
 | `--boot` | flag | `false` | Show the boot log instead of stdio. |
 | `-f, --follow` | flag | `false` | Follow log output. |
-| `-n` | `<n>` |; (all) | Show the last `n` lines. `-n` is short-only. |
+| `-n` | `<n>` | — (all) | Show the last `n` lines. `-n` is short-only. |
 
 ---
 

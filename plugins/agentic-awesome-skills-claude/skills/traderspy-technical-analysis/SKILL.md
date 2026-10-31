@@ -18,8 +18,8 @@ license_source: "https://github.com/target1m/traderspy-mcp/blob/069aae5a84640d67
 
 One good read of a chart is three things in order: where price is in its structure (trend and
 levels), what momentum and volatility are doing, and how the derivatives market is positioned
-around it. TraderSpy gives all three in at most two calls. Spend the calls well; the user's quota
-is finite; and quote the numbers, not adjectives.
+around it. TraderSpy gives all three in at most two calls. Spend the calls well — the user's quota
+is finite — and quote the numbers, not adjectives.
 
 ## When to Use
 
@@ -47,7 +47,7 @@ extrapolation at a verified interval, not a promised investment return.
 | `get_derivatives` | Funding, open interest, positioning | `symbols` (≤ 5 Binance USDⓈ-M perps; bare `BTC` is fine) |
 | `get_price` | Live price, 24h high/low/volume/change | `symbols` (≤ 20) |
 | `get_candles` | Raw OHLCV | `symbol`, `interval` 1m/5m/15m/1h/4h/1d, `limit` ≤ 500 |
-| `get_tracked_symbols` | Coverage check | none; only when a symbol returns no data |
+| `get_tracked_symbols` | Coverage check | none — only when a symbol returns no data |
 
 Symbols are Binance Futures names: `BTCUSDT`, `SOLUSDT`, `1000PEPEUSDT` (1000x-prefixed small
 caps), in the imported provider snapshot. Resolve venue, instrument and multiplier from current coverage; do not assume a bare ticker or suffixed name identifies the same asset on every venue.
@@ -56,7 +56,7 @@ caps), in the imported provider snapshot. Resolve venue, instrument and multipli
 
 - **Multi-timeframe is one quota unit.** For any "how does X look" question pass
   `intervals: ["1h","4h","1d"]` (or `["15m","1h","4h"]` for an intraday user) and get a
-  `confluence` verdict; never three separate calls.
+  `confluence` verdict — never three separate calls.
 - **Pick indicators for the question.** Default `rsi, macd, ema, bollinger` covers momentum and
   trend. Add `levels` + `pivots` whenever the user cares about entries, targets or "where is
   support"; `atr` for stop distance and volatility; `adx` for trend strength; `supertrend` for a
@@ -65,7 +65,7 @@ caps), in the imported provider snapshot. Resolve venue, instrument and multipli
 - **`periods`** lets you honour the user's settings (`{"ema":[9,21,55,200],"rsi":7}`); an unknown
   key is rejected, so use the documented names only.
 - **Add `get_derivatives`** when the question involves "why is it moving", crowding, funding,
-  open interest, leverage, liquidations, or when the user is about to lean on a directional call -
+  open interest, leverage, liquidations, or when the user is about to lean on a directional call —
   candles cannot see positioning.
 - `get_candles` is for when the user wants the data itself (to chart, export or compute something
   custom). Do not fetch candles to eyeball indicators the technicals tool already computes.
@@ -78,10 +78,10 @@ byInterval }`; the top-level `interval`/`price` then name the first timeframe on
 echoes what was computed; `warnings[]` lists anything that was thinned or missing.
 
 **Every indicator** carries `value`, `previous`, `direction` (rising / falling / flat) and a short
-`series` (oldest → newest), plus its own fields; `zone` on RSI/Stochastic/CCI/MFI/Williams,
+`series` (oldest → newest), plus its own fields — `zone` on RSI/Stochastic/CCI/MFI/Williams,
 `crossover` on MACD/Stochastic, `stack`/`pricePosition` on EMA, `±DI` and `strength` on ADX,
 `trend`/`flipped`/`barsSinceFlip` on SuperTrend, `divergence` on RSI/MACD/OBV. `{ value: null,
-reason: "insufficient_data" }` means the tape is too short for that period; say so, do not
+reason: "insufficient_data" }` means the tape is too short for that period — say so, do not
 substitute.
 
 **`summary` is the spine of the read.** `bias` (bullish / bearish / neutral) is computed from a
@@ -89,7 +89,7 @@ FIXED set (RSI 14, MACD, EMA 20/50/200, ADX 14, ATR 14, BB 20/2, volume 20) rega
 you requested, so it is comparable between calls; `score` is its internal vote (|score| ≥ 30 sets
 a bias). `trend` (direction, strength, emaStack, priceVsEma200), `momentum` (rsiZone, macdState),
 `volatility` (atrPct, atrPercentile 0–100, squeeze, state), `volume.ratioVsAverage`, `patterns[]`
-(candlestick finders on the last two bars) and `notes[]`; plain-language sentences written to be
+(candlestick finders on the last two bars) and `notes[]` — plain-language sentences written to be
 quoted. Build the answer from the notes, then add the numbers.
 
 **`levels`** (nearest three per side from swing highs/lows over 300 bars): `price`, `touches`,
@@ -103,12 +103,12 @@ in % is what a user can act on.
 "Aligned bearish on 1h/4h/1d" is a strong statement; "4h bullish, 1d neutral" is a pullback
 question. Say which.
 
-**Derivatives** (`get_derivatives`): `funding.label`; `extreme_longs_paying` / `longs_paying` /
+**Derivatives** (`get_derivatives`): `funding.label` — `extreme_longs_paying` / `longs_paying` /
 `neutral` / `shorts_paying` / `extreme_shorts_paying` (longs pay at ≥ +0.03% per 8h, extreme at
 ≥ +0.10%; shorts pay at ≤ −0.01%, extreme at ≤ −0.05%; do not assume a universal Binance baseline or interval; quote
-`annualizedPct`); `openInterest.regime`; `new_longs` / `short_covering` / `new_shorts` /
+`annualizedPct`); `openInterest.regime` — `new_longs` / `short_covering` / `new_shorts` /
 `long_liquidation` / `flat` (needs ≥ 1% OI and ≥ 0.5% price change over 24h);
-`positioning.label`; `long_heavy` (long/short ratio ≥ 1.5, i.e. ≥ 60% long) / `balanced` /
+`positioning.label` — `long_heavy` (long/short ratio ≥ 1.5, i.e. ≥ 60% long) / `balanced` /
 `short_heavy` (≤ 0.67, i.e. ≤ 40% long), read from the top-trader POSITION ratio first;
 `takerBuySellRatio` is the last hour's aggressor flow. The upstream snapshot describes a 60-second cache; actual age must be checked from returned timestamps. `notes[]` are
 quotable. Details in `references/derivatives-guide.md`.
@@ -117,18 +117,18 @@ quotable. Details in `references/derivatives-guide.md`.
 
 For a single-coin read ALWAYS use this order, and keep it to what the user asked:
 
-1. **Price line**; symbol, price, time of the read, 24h change if you fetched it.
-2. **Per timeframe, one line each**; bias, trend (EMA stack and ADX), momentum (RSI zone, MACD
+1. **Price line** — symbol, price, time of the read, 24h change if you fetched it.
+2. **Per timeframe, one line each** — bias, trend (EMA stack and ADX), momentum (RSI zone, MACD
    state), volatility (ATR %, squeeze), with the key number after each label.
-3. **Confluence**; aligned or not, and what the disagreement means.
-4. **Levels table**; nearest support and resistance with distance %, the pivot, the nearest
+3. **Confluence** — aligned or not, and what the disagreement means.
+4. **Levels table** — nearest support and resistance with distance %, the pivot, the nearest
    Fibonacci level, the value-area edge if price is near it.
-5. **Derivatives line** (if fetched); funding label + annualized, OI regime, top-trader long %.
-6. **What would change the read**; the one or two levels or readings that flip the picture
+5. **Derivatives line** (if fetched) — funding label + annualized, OI regime, top-trader long %.
+6. **What would change the read** — the one or two levels or readings that flip the picture
    (e.g. "a 4h close above 79,325 resistance with OI rising would turn the 4h bias bullish").
 7. One plain sentence: crypto derivatives are high-risk; this is market information, not advice.
 
-Use `RSI(14) 41.3; neutral, falling` style labelling so the period and the direction are always
+Use `RSI(14) 41.3 — neutral, falling` style labelling so the period and the direction are always
 visible. Percentages to one decimal; prices to the precision the tool returned.
 
 ## Conduct
@@ -138,12 +138,12 @@ visible. Percentages to one decimal; prices to the precision the tool returned.
   decision back. Never tell the user to buy, sell, size or leverage.
 - Indicators describe the past bars they were computed on; do not present a bias as a forecast or
   imply any outcome is assured.
-- Nothing in this connector trades; no order, close, transfer or withdrawal tool exists, by
+- Nothing in this connector trades — no order, close, transfer or withdrawal tool exists, by
   design. If asked to execute, say so plainly; the decision and the trade stay with the user.
 - Quote only what the tools returned. If an indicator is `insufficient_data` or a symbol is not
   tracked, say so instead of estimating.
 - When the answer is about a specific trade idea, end with one plain sentence that crypto
-  derivatives are high-risk and this is market information, not financial advice; once per
+  derivatives are high-risk and this is market information, not financial advice — once per
   answer.
 
 Per-indicator fields and conventional readings: `references/indicator-guide.md`.

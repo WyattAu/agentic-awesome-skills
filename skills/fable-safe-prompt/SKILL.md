@@ -22,7 +22,7 @@ disable-model-invocation: true
 - Use when an allowed prompt appears likely to hit false-positive classifier language.
 - Use when the user asks for prompt wording that keeps benign intent clear and policy-compliant.
 
-Return the user's prompt back **in full, verbatim**, changing ONLY the specific sentences/phrases most likely to trip Fable 5's cyber/bio classifiers. Do not rewrite the whole thing, do not summarize, do not restructure; minimal surgical edits. Keep the actual goal and all benign text exactly as written. This lowers false positives for benign work. It must not be used to bypass safety policy or enable harmful requests.
+Return the user's prompt back **in full, verbatim**, changing ONLY the specific sentences/phrases most likely to trip Fable 5's cyber/bio classifiers. Do not rewrite the whole thing, do not summarize, do not restructure — minimal surgical edits. Keep the actual goal and all benign text exactly as written. This lowers false positives for benign work. It must not be used to bypass safety policy or enable harmful requests.
 
 ## Method
 

@@ -234,9 +234,9 @@ GoReSym -p binary | grep "Version"
 |------|--------|
 | IDA 深度分析 Go 二进制 | `ida-reverse/` + go_parser 插件 |
 | Ghidra 分析（免费） | Ghidra + GoReSym 符号导入 |
-| 快速侦察 | `radare2/`; `rabin2 -z` 看字符串 |
+| 快速侦察 | `radare2/` — `rabin2 -z` 看字符串 |
 | 动态 Hook | Frida（Hook runtime 函数）或 dlv（Go 原生调试器） |
-| 跨版本对比 | `binary-diff/`; 旧版有符号迁移到新版 |
+| 跨版本对比 | `binary-diff/` — 旧版有符号迁移到新版 |
 | Garble 去混淆 | GoResolver + GoStringUngarbler |
 
 ## Verified references and limits

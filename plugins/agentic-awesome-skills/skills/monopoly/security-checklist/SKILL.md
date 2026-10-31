@@ -7,7 +7,7 @@ risk: safe
 reports-to: monopoly
 ---
 
-# MONOPOLY: Security Hardening Checklist
+# MONOPOLY — Security Hardening Checklist
 
 ## When to Use
 - Use this skill when the task matches this description: Review a scoped architecture against evidence-based network, identity, data, secrets, dependency and incident-response controls.
@@ -66,7 +66,7 @@ reports-to: monopoly
 ## Compliance (as applicable)
 - [ ] GDPR: lawful basis, transparency, rights, retention and lawful transfer safeguards where applicable
 - [ ] PCI-DSS: establish card-data scope and current storage, masking, encryption and sensitive-authentication-data restrictions
-- [ ] HIPAA: if health data; encryption, audit logs, BAA with vendors
+- [ ] HIPAA: if health data — encryption, audit logs, BAA with vendors
 - [ ] SOC 2 Type II: access control, availability, confidentiality evidence
 
 ## Example

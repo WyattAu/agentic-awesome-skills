@@ -115,7 +115,7 @@ struct SkeuoButton: View {
 ```
 - Stack multiple shapes (`Circle`, `RoundedRectangle`) with different gradients to build up realistic depth.
 - Use `.overlay()` with stroked shapes for highlight bezels along the edges.
-- The pressed state should reduce shadow AND scale; simulating a physical push.
+- The pressed state should reduce shadow AND scale — simulating a physical push.
 
 ### Flutter
 ```dart

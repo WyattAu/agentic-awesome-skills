@@ -161,7 +161,7 @@ public final class TestDataFactory {
 
 ## Pre-Authenticated Context (Reuse Auth State)
 
-Save login state once, reuse across tests; massive speed improvement:
+Save login state once, reuse across tests — massive speed improvement:
 
 ```java
 // Run once before test suite (e.g., in @BeforeAll or a setup class)

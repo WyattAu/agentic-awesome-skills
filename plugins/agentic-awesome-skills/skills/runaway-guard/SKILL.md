@@ -13,17 +13,17 @@ license: "Apache-2.0"
 license_source: "https://github.com/morsechimwai/lemmaly/blob/main/LICENSE"
 ---
 
-# runaway-guard: $-Cost is the Third Complexity Dimension
+# runaway-guard — $-Cost is the Third Complexity Dimension
 
 > Catalog review modification (2026-10-23): corrected cost arithmetic, retry/idempotency claims and unsupported provider-cap guarantees. Upstream authorship and Apache-2.0 attribution are retained.
 
-Every loop has time complexity and space complexity. A loop that calls a paid API has a third: **dollars per execution**. The model tracks the first two automatically. It does not track the third, so it ships code where a single bug; a retry without bound, a stream reconnect storm, an agent that re-queues itself, a webhook that fires the same job twice; silently spends real money.
+Every loop has time complexity and space complexity. A loop that calls a paid API has a third: **dollars per execution**. The model tracks the first two automatically. It does not track the third, so it ships code where a single bug — a retry without bound, a stream reconnect storm, an agent that re-queues itself, a webhook that fires the same job twice — silently spends real money.
 
 Illustrative, unverified incident narrative: developer writes a Fal.ai image-generation loop. Loop "obviously terminates" because it iterates over a fixed list. The list comes from a callback that fires on every Inngest retry. Each retry doubles the list. By morning, the bill is **$200**. Tests pass. Code review passed. The bug is not in the loop body. The bug is that **no one stated the wallet invariant**.
 
 runaway-guard helps identify this design risk. State the max calls. State the max dollars per run. State the max dollars per day. Set the same caps in the provider dashboard so a code bug cannot bypass them. Then write the code.
 
-**Violating the letter of these rules is violating the spirit of the skill.** "I'm only testing locally" is the exact rationalization that ships the $200 bill; local code hits the same paid API as production.
+**Violating the letter of these rules is violating the spirit of the skill.** "I'm only testing locally" is the exact rationalization that ships the $200 bill — local code hits the same paid API as production.
 
 ## When to Use This Skill
 
@@ -41,13 +41,13 @@ Use **runaway-guard** when:
 NO CALL TO A PAID API WITHOUT A WRITTEN $-CAP AT BOTH THE CODE AND PROVIDER LEVEL
 ```
 
-A cap only in code can be bypassed by a bug in that code. A cap only at the provider can be hit during normal usage and degrade the product. You need both. If you cannot state both in one sentence each, you have not designed the call site; you have written a wish.
+A cap only in code can be bypassed by a bug in that code. A cap only at the provider can be hit during normal usage and degrade the product. You need both. If you cannot state both in one sentence each, you have not designed the call site — you have written a wish.
 
 ## Non-negotiable rules
 
 1. **Every call site gets a one-line cost contract.** Before writing any paid-API call, state in one sentence:
    - **Max calls per run:** the strict upper bound on invocations in a single execution of this code path.
-   - **Max $ per run:** `max_calls × unit_cost`; compute it, don't estimate.
+   - **Max $ per run:** `max_calls × unit_cost` — compute it, don't estimate.
    - **Max $ per day:** the provider-side hard cap that backstops the code-side bound.
 
    Examples:
@@ -64,7 +64,7 @@ A cap only in code can be bypassed by a bug in that code. A cap only at the prov
      await fal.run(...);
    }
 
-   // ✅ Concrete bound; wallet invariant explicit.
+   // ✅ Concrete bound — wallet invariant explicit.
    const MAX_CALLS = 20;
    for (let i = 0; i < MAX_CALLS && job.status !== 'done'; i++) {
      await fal.run(...);
@@ -74,13 +74,13 @@ A cap only in code can be bypassed by a bug in that code. A cap only at the prov
 
 3. **Every retry path is bounded by attempts AND total elapsed cost, not by time alone.** Exponential backoff with no attempt cap is a wallet attack on yourself.
    - Max attempts: an explicit small integer chosen for the provider and error class.
-   - Cap counts across the whole pipeline, not just one library; Inngest retries × SDK retries × your own retry wrapper multiply.
+   - Cap counts across the whole pipeline, not just one library — Inngest retries × SDK retries × your own retry wrapper multiply.
    - Do not retry permanent invalid requests. Some 4xx errors, including 429 and provider-defined transient statuses, can be retryable under a bounded policy; respect Retry-After and the shared spend reservation.
 
 4. **Every fan-out path declares a concurrency limit.** Parallel calls multiply cost per wall-clock second. State the limit in code, at the queue (Inngest `concurrency`), and at the provider where supported:
    - Inngest: `concurrency: { limit: N }` on the function.
    - BullMQ / Sidekiq / Cloud Tasks: queue-level concurrency.
-   - In-process: `p-limit`, semaphore, or batched `Promise.all` chunks; never an unbounded `Promise.all(items.map(...))` on a paid API.
+   - In-process: `p-limit`, semaphore, or batched `Promise.all` chunks — never an unbounded `Promise.all(items.map(...))` on a paid API.
 
 5. **Every paid API has a matching provider-side hard cap, configured out of band.** Defense in depth: if the code is wrong, the provider stops the bleeding. Document the cap in the same file as the call site so future readers know it exists.
 
@@ -98,7 +98,7 @@ A cap only in code can be bypassed by a bug in that code. A cap only at the prov
 
 ## The pre-write protocol
 
-Before producing code that calls a paid API, your message must contain; in this order:
+Before producing code that calls a paid API, your message must contain — in this order:
 
 1. **Provider + unit cost.** "Fal flux-pro: $0.05/image, billed per success."
 2. **Max calls per run.** A literal integer that will appear as a constant in the code.
@@ -107,12 +107,12 @@ Before producing code that calls a paid API, your message must contain; in this 
 5. **Concurrency limit.** In code, at the queue, at the provider.
 6. **Retry policy.** Max attempts, which error codes retry, idempotency key strategy.
 7. **Amplifier audit.** Walk the list in rule 7; declare "none apply" or address each that does.
-8. **The code**; with the cost contract in a comment above the call site.
+8. **The code** — with the cost contract in a comment above the call site.
 9. **Self-check.** One line: "in the worst case, this code bills $X and the provider cap stops it at $Y."
 
 If any of 1–7 is missing, do not emit code.
 
-## Worked trap: the Inngest + Fal $200 night
+## Worked trap — the Inngest + Fal $200 night
 
 This is the canonical case. Observe how each rule would have caught it.
 
@@ -142,7 +142,7 @@ export const generateCampaign = inngest.createFunction(
 | 3. Retry policy | Inngest default retries × no idempotency key = double-billed work. Rule forces an idempotency key per `(campaignId, promptHash)`. |
 | 4. Concurrency limit | `Promise.all` is unbounded concurrency. Rule forces `p-limit(3)` and Inngest `concurrency: { limit: 3 }`. |
 | 5. Provider hard cap | Fal Spend Limit $50/day would have stopped the bleeding at $50 instead of $200. |
-| 7. Amplifier audit | "Self-rescheduling jobs"; Inngest's retry IS self-rescheduling. The audit forces you to consider it. |
+| 7. Amplifier audit | "Self-rescheduling jobs" — Inngest's retry IS self-rescheduling. The audit forces you to consider it. |
 
 **Partial mitigation sketch (not a proven spend cap):**
 
@@ -179,7 +179,7 @@ export const generateCampaign = inngest.createFunction(
 );
 ```
 
-Note: the bug in `fetchPrompts` is still there. The protocol does not fix that bug; it bounds a single batch to 50 items, but retries, duplicate events and ambiguous failures can still recharge work. No $2.50 run cap is established without a shared spend reservation and verified provider deduplication. That is the entire point of defense in depth.
+Note: the bug in `fetchPrompts` is still there. The protocol does not fix that bug — it bounds a single batch to 50 items, but retries, duplicate events and ambiguous failures can still recharge work. No $2.50 run cap is established without a shared spend reservation and verified provider deduplication. That is the entire point of defense in depth.
 
 ## Common runaway patterns and their wallet invariants
 
@@ -203,7 +203,7 @@ Before enabling billing, verify provider-specific caps from current official doc
 
 | Scenario | Expected behavior |
 |---|---|
-| Empty input list | 0 calls, 0 cost, return early; do not even auth |
+| Empty input list | 0 calls, 0 cost, return early — do not even auth |
 | Input list longer than MAX | reject with NonRetriableError, do not partial-process |
 | All calls fail with 4xx | 1 attempt each, no retry, surface error |
 | All calls fail with 5xx | bounded retries, total cost ≤ attempts × unit, alert on full exhaustion |
@@ -219,8 +219,8 @@ Before enabling billing, verify provider-specific caps from current official doc
 Code you emit must:
 
 - Have a `// cost contract:` block above each call site with the four numbers (unit cost, max calls, max $/run, provider hard cap setting).
-- Use a named constant (`MAX_IMAGES_PER_RUN`, `MAX_AGENT_STEPS`) for the bound; never a magic number inline.
-- Wrap fan-out in `p-limit` or equivalent; never raw `Promise.all` over a paid API.
+- Use a named constant (`MAX_IMAGES_PER_RUN`, `MAX_AGENT_STEPS`) for the bound — never a magic number inline.
+- Wrap fan-out in `p-limit` or equivalent — never raw `Promise.all` over a paid API.
 - Pass an idempotency key for every mutating / charging call.
 - Set queue-level concurrency and retries in the same file or document it.
 - Reject permanent failures via `NonRetriableError` or equivalent; classify transient 4xx separately.
@@ -228,10 +228,10 @@ Code you emit must:
 
 ## Related Skills
 
-- **invariant-guard**; when the loop or recursion calling the paid API has no written termination measure. Termination is a precondition for a wallet cap; invariant-guard establishes it, runaway-guard bounds the cost.
-- **complexity-cuts**; when the runaway has already shipped and you are diagnosing an unexpected bill. Treat the unintended fan-out as a complexity bug, write a characterization test, then transform one step at a time.
-- **lemmaly**; when designing a new agent loop or batch pipeline that fans out paid calls. Pick the algorithm and data structure first; come back here for the wallet invariant per step.
-- **mathguard**; when the cost driver is compute on a sublinear-algorithm problem (vector search, sketching, FFT) rather than per-call billing; mathguard sets the algorithmic floor that determines per-call work.
+- **invariant-guard** — when the loop or recursion calling the paid API has no written termination measure. Termination is a precondition for a wallet cap; invariant-guard establishes it, runaway-guard bounds the cost.
+- **complexity-cuts** — when the runaway has already shipped and you are diagnosing an unexpected bill. Treat the unintended fan-out as a complexity bug, write a characterization test, then transform one step at a time.
+- **lemmaly** — when designing a new agent loop or batch pipeline that fans out paid calls. Pick the algorithm and data structure first; come back here for the wallet invariant per step.
+- **mathguard** — when the cost driver is compute on a sublinear-algorithm problem (vector search, sketching, FFT) rather than per-call billing; mathguard sets the algorithmic floor that determines per-call work.
 
 ## Rationalizations to watch for
 
@@ -240,7 +240,7 @@ Code you emit must:
 | "I'm only testing locally." | Local hits the same paid endpoint. A retry bug in test code bills the same dollars. |
 | "The list is small, fan-out is fine." | The list is small *today*. Next week it is fetched from a table that grew 50×. The cap exists for next week. |
 | "Inngest already retries, so I don't need a retry policy." | Inngest retries × your retry wrapper × SDK retries = 27 attempts. Each one bills. |
-| "The API call is cheap, $0.001." | At 10,000 unintended invocations that is $10; and the count is exactly what you failed to bound. |
+| "The API call is cheap, $0.001." | At 10,000 unintended invocations that is $10 — and the count is exactly what you failed to bound. |
 | "I'll set the provider cap later." | The bug ships before "later". Set the cap in the 60 seconds it takes; the code can wait. |
 | "Idempotency is overkill for this." | Webhooks retry. Load balancers retry. Browsers retry. Without an idempotency key, *something* will duplicate. |
 | "We have monitoring, we'll catch it." | Monitoring catches it after $200 is spent. Caps prevent the $200 from being spent. |
@@ -248,7 +248,7 @@ Code you emit must:
 
 If any of these sound familiar mid-thought: stop, write the cost contract, set the provider cap, then write the code.
 
-## Red flags: STOP and write the cost contract first
+## Red flags — STOP and write the cost contract first
 
 - About to write `await Promise.all(items.map(x => paidApi(x)))` with no `p-limit`.
 - About to write `while (!done) await paidApi(...)` with no integer bound.
@@ -257,7 +257,7 @@ If any of these sound familiar mid-thought: stop, write the cost contract, set t
 - About to deploy a paid API key without first setting the provider dashboard cap.
 - About to commit a paid API key to a `.env` shared across environments.
 - About to handle a webhook that calls the API that produced the webhook.
-- "Just for tonight"; overnight is exactly when runaway loops bill the most.
+- "Just for tonight" — overnight is exactly when runaway loops bill the most.
 
 All of these mean: stop, write the cost contract, set the provider cap, then write the code.
 
@@ -279,12 +279,12 @@ Cannot check every box? The code is example-correct, not bill-correct. Either fi
 
 ## Limitations
 
-- **Not a billing system.** runaway-guard enforces *intent* (caps, contracts, audits) at code-write time. It does not meter spend in production; pair it with the provider's hard cap and observability (LLM-cost dashboards, log alerts) for runtime enforcement.
+- **Not a billing system.** runaway-guard enforces *intent* (caps, contracts, audits) at code-write time. It does not meter spend in production — pair it with the provider's hard cap and observability (LLM-cost dashboards, log alerts) for runtime enforcement.
 - **Provider enforcement varies.** Verify timing and scope; do not assume overshoot is modest. Reserve worst-case concurrent exposure and retain budget for uncertain outcomes.
 - **No automated cost estimation for novel models.** The cost-contract numbers (unit cost, $/run) are inputs the author must look up; the skill does not maintain a per-model price table.
-- **Streaming and per-token pricing.** For per-token APIs (Anthropic, OpenAI), `max calls` is a proxy; the real cap is `(max input tokens × input-token rate) + (max output tokens × output-token rate), summed across all attempts and including billable tools, cache tiers and other charges`. Adapt the protocol: replace `max calls per run` with `max tokens per run`.
+- **Streaming and per-token pricing.** For per-token APIs (Anthropic, OpenAI), `max calls` is a proxy — the real cap is `(max input tokens × input-token rate) + (max output tokens × output-token rate), summed across all attempts and including billable tools, cache tiers and other charges`. Adapt the protocol: replace `max calls per run` with `max tokens per run`.
 - **Compute-billed providers.** For long-running GPU jobs (training, video encoding) billed in seconds, replace "calls" with "GPU-seconds" in the contract; the discipline transfers but the units differ.
-- **Does not replace incident response.** When a bill has already arrived, escalate to `complexity-cuts` for the corrective rewrite; runaway-guard prevents the next one, not the current one.
+- **Does not replace incident response.** When a bill has already arrived, escalate to `complexity-cuts` for the corrective rewrite — runaway-guard prevents the next one, not the current one.
 
 ## The thesis, in one line
 

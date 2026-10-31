@@ -1,7 +1,7 @@
 # Example: Backend API Agent + Frontend UI Agent in Parallel
 
 ## Scenario
-User prompt: "Build a proposal generator; form on frontend, AI call on backend, result displayed on screen."
+User prompt: "Build a proposal generator — form on frontend, AI call on backend, result displayed on screen."
 
 ## This is the ProposalKit core feature pattern.
 
@@ -14,12 +14,12 @@ MISSION BRIEF
 ─────────────────────────────────────────
 Goal: Working proposal generator with form input, API processing, and result display.
 Total Agents: 2 + 1 integration
-Quota Strategy: MIXED; Flash for backend, Sonnet for frontend UI
+Quota Strategy: MIXED — Flash for backend, Sonnet for frontend UI
 Expected Token Cost: MEDIUM
 
 AGENTS:
 [1] ID: agent-001
-    Role: Builder; Backend API
+    Role: Builder — Backend API
     Scope: /app/api/generate/route.ts
     Model: Gemini Flash
     Input: NVIDIA API key env name, prompt template from resources/prompt-template.md
@@ -27,16 +27,16 @@ AGENTS:
     Depends on: none
 
 [2] ID: agent-002
-    Role: Builder; Frontend Form + Display
+    Role: Builder — Frontend Form + Display
     Scope: /components/ProposalForm.tsx, /components/ProposalResult.tsx, /app/page.tsx
     Model: Claude Sonnet (UI needs quality)
-    Input: API contract from agent-001 spec (input/output shape only; not the code)
+    Input: API contract from agent-001 spec (input/output shape only — not the code)
     Output: Form component, result display, wired to /api/generate
     Depends on: none (uses spec, not agent-001 output directly)
 
 [3] ID: agent-003
     Role: Integrator
-    Scope: review only; no new files
+    Scope: review only — no new files
     Model: Gemini Flash
     Input: Outputs from agent-001 and agent-002
     Output: List of any mismatches between API contract and frontend calls

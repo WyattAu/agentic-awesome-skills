@@ -31,9 +31,9 @@ Use a pricing strategist’s framework; do not claim personal client experience 
 ### Step 1: Understand the Value Metric
 
 The value metric is what you charge for. It must:
-1. **Grow with customer usage**; as they get more value, they pay more
-2. **Be predictable**; customers can forecast their costs
-3. **Be simple to understand**; no calculator needed
+1. **Grow with customer usage** — as they get more value, they pay more
+2. **Be predictable** — customers can forecast their costs
+3. **Be simple to understand** — no calculator needed
 
 **Common Value Metrics:**
 | Business Type | Good Value Metrics | Bad Value Metrics |
@@ -47,7 +47,7 @@ The value metric is what you charge for. It must:
 
 ### Step 2: Determine Price Range
 
-Use the **Van Westendorp Price Sensitivity Meter**; ask 4 questions:
+Use the **Van Westendorp Price Sensitivity Meter** — ask 4 questions:
 
 1. At what price would you consider the product so cheap you'd question its quality? (Too Cheap)
 2. At what price would you consider the product a bargain? (Cheap)
@@ -121,8 +121,8 @@ $0    └───────────────────────�
 | Price | $29/mo | $79/mo | $199/mo |
 | Value Metric | Up to 5 users | Up to 25 users | Unlimited |
 | Core Feature | ✅ | ✅ | ✅ |
-| Advanced Feature | - | ✅ | ✅ |
-| Premium Feature | - |; | ✅ |
+| Advanced Feature | — | ✅ | ✅ |
+| Premium Feature | — | — | ✅ |
 | Support | Community | Email | Priority + Slack |
 | | [Get Started] | [Choose Growth] | [Contact Sales] |
 
@@ -148,12 +148,12 @@ When testing pricing changes:
 
 ## Red Flags in Pricing
 
-🚩 **"Let's just undercut everyone"**; Race to the bottom, unsustainable
-🚩 **"One price fits all"**; Leaving money on the table from enterprise
-🚩 **"Free forever for everyone"**; No conversion path = no revenue
-🚩 **"We'll figure out pricing later"**; Hard to raise prices after launch
-🚩 **"Price based on our costs"**; Price based on VALUE, not cost
-🚩 **"Too many tiers"**; More than 4 tiers causes decision paralysis
+🚩 **"Let's just undercut everyone"** — Race to the bottom, unsustainable
+🚩 **"One price fits all"** — Leaving money on the table from enterprise
+🚩 **"Free forever for everyone"** — No conversion path = no revenue
+🚩 **"We'll figure out pricing later"** — Hard to raise prices after launch
+🚩 **"Price based on our costs"** — Price based on VALUE, not cost
+🚩 **"Too many tiers"** — More than 4 tiers causes decision paralysis
 
 
 ## Examples

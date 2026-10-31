@@ -20,7 +20,7 @@ Transform documentation into a powerful marketing channel that attracts, convert
 
 ## Key Principle
 
-Great documentation is invisible marketing. It reduces friction, builds trust, and turns visitors into advocates-all while helping developers succeed.
+Great documentation is invisible marketing. It reduces friction, builds trust, and turns visitors into advocates—all while helping developers succeed.
 
 ## Quick Wins
 

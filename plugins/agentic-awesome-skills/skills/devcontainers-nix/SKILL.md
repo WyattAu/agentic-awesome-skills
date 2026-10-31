@@ -353,7 +353,7 @@ jobs:
 ### GitHub Codespaces
 
 ```json
-// .devcontainer/devcontainer.json; works in Codespaces
+// .devcontainer/devcontainer.json — works in Codespaces
 {
   "name": "Codespaces Dev",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
@@ -382,7 +382,7 @@ jobs:
 
 ## Best Practices
 
-- Pin all tool versions explicitly; never use `latest`
+- Pin all tool versions explicitly — never use `latest`
 - Commit lock files (`flake.lock`, `devbox.lock`, etc.)
 - Use direnv for automatic environment activation
 - Cache Nix store in CI (Cachix or GitHub cache)
@@ -401,9 +401,9 @@ jobs:
 
 ## Related Skills
 
-- docker-management (`docker-management`); Container image optimization
-- github-actions (`github-actions`); CI/CD pipeline setup
-- linux-administration (`linux-administration`); System-level tooling
+- docker-management (`docker-management`) — Container image optimization
+- github-actions (`github-actions`) — CI/CD pipeline setup
+- linux-administration (`linux-administration`) — System-level tooling
 
 ## Limitations
 

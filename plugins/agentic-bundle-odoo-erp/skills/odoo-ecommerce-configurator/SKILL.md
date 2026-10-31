@@ -122,11 +122,11 @@ Note: Some Odoo hosting plans may require "Email Marketing" app enabled.
 
 ## Best Practices
 
-- ✅ **Do:** Use **Product Variants** (color, size) instead of duplicate products; cleaner catalog and shared inventory tracking.
+- ✅ **Do:** Use **Product Variants** (color, size) instead of duplicate products — cleaner catalog and shared inventory tracking.
 - ✅ **Do:** Configure HTTPS and reviewed HSTS at the actual hosting/reverse-proxy layer; do not assume a universal Odoo menu exists.
 - ✅ **Do:** Set up **Abandoned Cart Recovery** using Marketing Automation or a scheduled email sequence.
-- ✅ **Do:** Add a **Stripe webhook** so Odoo is notified of payment events in real time; without it, failed payments may not update correctly.
-- ❌ **Don't:** Leave the payment provider in **Test mode** in production; no real charges will be processed.
+- ✅ **Do:** Add a **Stripe webhook** so Odoo is notified of payment events in real time — without it, failed payments may not update correctly.
+- ❌ **Don't:** Leave the payment provider in **Test mode** in production — no real charges will be processed.
 - ✅ **Do:** Use unique SKUs where integrations/business processes require them; an absent Internal Reference does not universally break Odoo inventory.
 - ❌ **Don't:** Mix sandbox and live credentials. Switch to the authorized live account only after review; changing mode is distinct from rotating a key.
 
@@ -135,4 +135,4 @@ Note: Some Odoo hosting plans may require "Email Marketing" app enabled.
 - **Carrier integration** (live UPS/FedEx rate calculation) requires the specific carrier connector module (e.g., `delivery_ups`) and a carrier account API key.
 - Multi-website, subscription and automation availability depends on the actual Odoo version, edition and installed modules; verify it rather than inferring entitlement from this guide.
 - **B2B eCommerce** (customer login required, custom catalog and prices per customer) has additional configuration steps not fully covered here.
-- Odoo eCommerce does not support **subscription billing** natively; that requires the Enterprise **Subscriptions** module.
+- Odoo eCommerce does not support **subscription billing** natively — that requires the Enterprise **Subscriptions** module.

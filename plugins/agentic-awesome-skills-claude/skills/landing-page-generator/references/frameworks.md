@@ -10,15 +10,15 @@ All worked products, numbers, customer names and claimed studies below are ficti
 
 The classic direct response formula, ideal for product landing pages.
 
-**Example; Project management SaaS:**
+**Example — Project management SaaS:**
 
 > **Attention:** "Your Team Loses 12 Hours Every Sprint to Status Meetings"
 >
-> **Interest:** "Engineering teams at Series A-C startups spend 23% of their week in sync meetings; not writing code. We tracked 847 teams over 6 months. The pattern was clear: the more people in a standup, the less code shipped that day."
+> **Interest:** "Engineering teams at Series A-C startups spend 23% of their week in sync meetings — not writing code. We tracked 847 teams over 6 months. The pattern was clear: the more people in a standup, the less code shipped that day."
 >
 > **Desire:** "Teams using AsyncStand ship 31% more story points per sprint. No more 15-person standups where 13 people zone out. Replace your daily sync with a 2-minute async check-in that your engineers actually complete (94% response rate vs 67% attendance for live standups)."
 >
-> **Action:** "Start Your Free 14-Day Trial; No Credit Card Required"
+> **Action:** "Start Your Free 14-Day Trial — No Credit Card Required"
 
 ### Attention
 - Lead with a specific, quantified pain point (not vague claims)
@@ -27,7 +27,7 @@ The classic direct response formula, ideal for product landing pages.
 
 ### Interest
 - Back up the headline with specific data or a relatable scenario
-- Weak: "Meetings waste time" → Strong: "We tracked 847 teams; the more people in standup, the less code shipped that day"
+- Weak: "Meetings waste time" → Strong: "We tracked 847 teams — the more people in standup, the less code shipped that day"
 - Use their language: mirror words from customer reviews, support tickets, and G2 feedback
 
 ### Desire
@@ -44,11 +44,11 @@ The classic direct response formula, ideal for product landing pages.
 
 Best for pain-point-driven products where the problem is well understood.
 
-**Example; Expense management tool:**
+**Example — Expense management tool:**
 
 > **Problem:** "Your finance team is still chasing receipts in Slack DMs."
 >
-> **Agitate:** "Last quarter, your team spent 46 hours manually reconciling expenses across email threads, shared drives, and 'I'll submit it later' promises. That's $4,200 in payroll; spent on data entry. And when audit season hits? Good luck finding that client dinner receipt from February."
+> **Agitate:** "Last quarter, your team spent 46 hours manually reconciling expenses across email threads, shared drives, and 'I'll submit it later' promises. That's $4,200 in payroll — spent on data entry. And when audit season hits? Good luck finding that client dinner receipt from February."
 >
 > **Solution:** "Snap a photo of the receipt. ExpenseFlow auto-extracts vendor, amount, and category in 3 seconds. Your monthly close drops from 5 days to 1. 2,400 finance teams already made the switch."
 
@@ -59,7 +59,7 @@ Best for pain-point-driven products where the problem is well understood.
 
 ### Agitate
 - Quantify the cost in dollars, hours, or missed opportunities
-- Weak: "This costs you money" → Strong: "46 hours last quarter, $4,200 in payroll; on data entry"
+- Weak: "This costs you money" → Strong: "46 hours last quarter, $4,200 in payroll — on data entry"
 - Acknowledge the workarounds they've tried and why those fail too
 
 ### Solution
@@ -71,21 +71,21 @@ Best for pain-point-driven products where the problem is well understood.
 
 Ideal for aspirational products and lifestyle-oriented landing pages.
 
-**Example; Sales enablement platform:**
+**Example — Sales enablement platform:**
 
 > **Before:** "It's 9 PM. You're rebuilding a deck for tomorrow's demo because the prospect is in healthcare, not fintech. You copy-paste from three old decks, pray the logos are right, and rehearse the new talk track in the shower."
 >
-> **After:** "It's 9 AM. You type 'healthcare, 200-bed hospital, HIPAA-concerned CTO.' DeckGen builds your slides in 40 seconds; case studies, compliance badges, ROI calculator pre-loaded. You walk into the call with the best deck your prospect has ever seen."
+> **After:** "It's 9 AM. You type 'healthcare, 200-bed hospital, HIPAA-concerned CTO.' DeckGen builds your slides in 40 seconds — case studies, compliance badges, ROI calculator pre-loaded. You walk into the call with the best deck your prospect has ever seen."
 >
-> **Bridge:** "DeckGen connects to your CRM, learns your win patterns, and generates prospect-specific decks in under a minute. 340 AEs at companies like Stripe and Notion already use it. Start free; your first 5 decks are on us."
+> **Bridge:** "DeckGen connects to your CRM, learns your win patterns, and generates prospect-specific decks in under a minute. 340 AEs at companies like Stripe and Notion already use it. Start free — your first 5 decks are on us."
 
 ### Before
-- Describe a specific, lived moment; not an abstract pain category
+- Describe a specific, lived moment — not an abstract pain category
 - Weak: "Sales decks take too long" → Strong: "It's 9 PM. You're rebuilding a deck for tomorrow's demo..."
 - Use second person and present tense to make it feel immediate
 
 ### After
-- Same level of specificity; show the transformed version of that exact moment
+- Same level of specificity — show the transformed version of that exact moment
 - Include a measurable outcome: "40 seconds," "best deck your prospect has ever seen"
 - The after state should feel effortless compared to the before
 

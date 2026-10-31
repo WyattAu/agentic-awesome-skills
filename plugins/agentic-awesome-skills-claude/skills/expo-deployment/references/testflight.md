@@ -34,13 +34,13 @@ The CLI prints your Team ID when you run `eas build -p ios --profile production 
 
 **Internal (100 max)**: Your team. Immediate access. Use for every build.
 
-**External (10,000 max)**: Beta users. External builds may require Beta App Review; timing and later review are not guaranteed. Always have an external group-even if it's just friends. Real feedback beats assumptions.
+**External (10,000 max)**: Beta users. External builds may require Beta App Review; timing and later review are not guaranteed. Always have an external group—even if it's just friends. Real feedback beats assumptions.
 
 ## Tips
 
 - Submit to external TestFlight the moment internal looks stable
 - Beta App Review has distinct requirements; do not assume approval or a deadline
-- Add release notes-testers actually read them
+- Add release notes—testers actually read them
 - Use TestFlight's built-in feedback and screenshots
 - Choose the release path based on the app’s reviewed validation plan.
 

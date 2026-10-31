@@ -1,6 +1,6 @@
 # longbridge-fx-carry
 
-FX carry-trade analysis; evaluate interest-rate differential, historical carry returns, and key risks for currency pairs.
+FX carry-trade analysis — evaluate interest-rate differential, historical carry returns, and key risks for currency pairs.
 
 ## Pair selection
 
@@ -47,8 +47,8 @@ Follow with a narrative covering: current macro environment, carry unwind risks,
 
 | Situation                       | 简体回复                                     | 繁體回復                                     | English reply                                                         |
 | ------------------------------- | -------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------- |
-| FX pair not supported           | 该货币对暂不支持，请尝试其他主要货币对。     | 該貨幣對暫不支援，請嘗試其他主要貨幣對。     | This FX pair is not supported; try a major currency pair.            |
-| Historical FX data unavailable  | 历史汇率数据不可用，仅提供当前利差分析。     | 歷史匯率數據不可用，僅提供當前利差分析。     | Historical FX data unavailable; providing current differential only. |
+| FX pair not supported           | 该货币对暂不支持，请尝试其他主要货币对。     | 該貨幣對暫不支援，請嘗試其他主要貨幣對。     | This FX pair is not supported — try a major currency pair.            |
+| Historical FX data unavailable  | 历史汇率数据不可用，仅提供当前利差分析。     | 歷史匯率數據不可用，僅提供當前利差分析。     | Historical FX data unavailable — providing current differential only. |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。 | 請安裝 longbridge-terminal 或透過 MCP 連線。 | Install longbridge-terminal or connect via MCP.                       |
 | `not logged in`                 | 请运行 `longbridge auth login`。             | 請執行 `longbridge auth login`。             | Run `longbridge auth login`.                                          |
 

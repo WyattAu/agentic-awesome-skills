@@ -88,13 +88,13 @@ User → Star → Issue → PR → Regular Contributor → Maintainer
 
 ## Tools
 
-- **[Octolens](https://octolens.com)**; Monitor project mentions across platforms
-- **Star History**; Track star growth
-- **npm-stat**; Download statistics
-- **All Contributors**; Recognize contributors
+- **[Octolens](https://octolens.com)** — Monitor project mentions across platforms
+- **Star History** — Track star growth
+- **npm-stat** — Download statistics
+- **All Contributors** — Recognize contributors
 
 ## Related Skills
 
-- `developer-audience-context`; Know your users
-- `community-building`; Discord/Slack community
-- `developer-advocacy`; Talks, podcasts
+- `developer-audience-context` — Know your users
+- `community-building` — Discord/Slack community
+- `developer-advocacy` — Talks, podcasts

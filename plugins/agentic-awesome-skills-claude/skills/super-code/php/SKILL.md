@@ -48,7 +48,7 @@ foreach ($items as $item) {
     $grouped[$item->getCategory()][] = $item;
 }
 
-// ✅ (PHP 8.1+); or use the loop above; PHP lacks a built-in groupBy
+// ✅ (PHP 8.1+) — or use the loop above; PHP lacks a built-in groupBy
 // The foreach is actually idiomatic PHP for grouping. No need to force array_* here.
 ```
 
@@ -153,7 +153,7 @@ function divide(int $a, int $b): int|false {
     return intdiv($a, $b);
 }
 
-// ✅; throw exception for exceptional cases
+// ✅ — throw exception for exceptional cases
 function divide(int $a, int $b): int {
     if ($b === 0) throw new \DivisionByZeroError();
     return intdiv($a, $b);
@@ -251,7 +251,7 @@ class Money {
     }
 }
 
-// ✅ (PHP 8.1+); readonly constructor promotion + named arguments
+// ✅ (PHP 8.1+) — readonly constructor promotion + named arguments
 class Money {
     public function __construct(
         public readonly int $cents,
@@ -280,7 +280,7 @@ function getUser(int $id) {
     return $db->find($id);
 }
 
-// ✅; dependency injection
+// ✅ — dependency injection
 function getUser(int $id, UserRepository $db): ?User {
     return $db->find($id);
 }
@@ -290,7 +290,7 @@ function getUser(int $id, UserRepository $db): ?User {
 // ❌ Named arguments abused for every call
 str_pad(string: $s, length: 10, pad_string: ' ', pad_type: STR_PAD_LEFT);
 
-// ✅; named args are useful for readability on ambiguous params; don't force
+// ✅ — named args are useful for readability on ambiguous params; don't force
 str_pad($s, 10, ' ', STR_PAD_LEFT);
 // but named args shine for: new User(name: 'Alice', age: 30)
 ```

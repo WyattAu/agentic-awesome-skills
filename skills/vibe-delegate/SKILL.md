@@ -24,8 +24,8 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 - You want to delegate a bounded coding task to a separate `vibe` implementer (`Mistral Vibe`) and then review its diff yourself.
 - The user explicitly asked for delegation to this implementer.
 
-You are the **orchestrator**. Hand a bounded coding task to a separate **implementer**; the Mistral
-Vibe CLI (`vibe`); then review what it produced and land it yourself. You write the brief and own
+You are the **orchestrator**. Hand a bounded coding task to a separate **implementer** — the Mistral
+Vibe CLI (`vibe`) — then review what it produced and land it yourself. You write the brief and own
 the judgment; Vibe does the typing in its own session; you verify and commit.
 
 The loop needs only a shell command and file access, so any comparable orchestrator can drive it.
@@ -49,7 +49,7 @@ Run these five steps per task. Steps 1, 4, and 5 require judgment; 2 and 3 are m
 
 ### 1. Write the brief
 
-Vibe sees only the text you send plus what it can inspect in the workspace; no chat history or shared
+Vibe sees only the text you send plus what it can inspect in the workspace — no chat history or shared
 context. Include the goal, current state, what to change, what to leave untouched, the project's
 **actual** gates, and a report contract. Tell Vibe not to commit. Keep one task per brief. See
 [references/writing-the-brief.md](references/writing-the-brief.md).
@@ -87,7 +87,7 @@ after stopping Vibe's process tree.
 Trust process state and the working tree over a progress display. Completion means the process exited
 and `result.json` exists.
 
-### 4. Review: do not trust the self-report
+### 4. Review — do not trust the self-report
 
 Treat Vibe's final message and gate claims as claims:
 
@@ -114,7 +114,7 @@ In `--prompt` mode the relay always sets the agent profile explicitly:
 
 | Relay flag | What Vibe gets | Use when |
 | --- | --- | --- |
-| *(default)* | `--agent accept-edits` | Normal implementation; built-in file edits are approved |
+| *(default)* | `--agent accept-edits` | Normal implementation — built-in file edits are approved |
 | `--plan-only` | `--agent plan` | Read-only review, exploration, or planning |
 | `--full-access` | `--agent auto-approve` | Explicitly authorized runs that need arbitrary shell/tools |
 
@@ -137,19 +137,19 @@ mandate). See [references/review-and-land.md](references/review-and-land.md).
 
 ## References
 
-- [references/writing-the-brief.md](references/writing-the-brief.md); structure, report contract,
+- [references/writing-the-brief.md](references/writing-the-brief.md) — structure, report contract,
   real gates, argv delivery, and delta briefs.
-- [references/dispatch-and-poll.md](references/dispatch-and-poll.md); flags, artifacts,
+- [references/dispatch-and-poll.md](references/dispatch-and-poll.md) — flags, artifacts,
   `result.json`, polling, and failure recovery.
-- [references/review-and-land.md](references/review-and-land.md); review checklist, commit boundary,
+- [references/review-and-land.md](references/review-and-land.md) — review checklist, commit boundary,
   and rework through Vibe sessions.
-- [references/multi-task-queues.md](references/multi-task-queues.md); sequential queues, constraint
+- [references/multi-task-queues.md](references/multi-task-queues.md) — sequential queues, constraint
   carry-forward, progress tracking, and the final coherence pass.
 
 
 ## Limitations
 
 - Runtime helper `scripts/relay.mjs` is bundled from the revision recorded in `UPSTREAM-NOTICE.md`. Requires the corresponding installed and authenticated CLI, Node 18+, and git.
-- Relay never commits; it only returns structured result JSON; you review and land the commit.
+- Relay never commits — it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); runtime and references pinned in UPSTREAM-NOTICE.md.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — runtime and references pinned in UPSTREAM-NOTICE.md.

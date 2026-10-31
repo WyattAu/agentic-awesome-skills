@@ -29,7 +29,7 @@ For example, Mail uses a web view to show HTML content in messages.
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/web-views#Developer-documentation)
 
-[`WKWebView`](https://developer.apple.com/documentation/WebKit/WKWebView); WebKit
+[`WKWebView`](https://developer.apple.com/documentation/WebKit/WKWebView) — WebKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/web-views#Videos)
 

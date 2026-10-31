@@ -74,7 +74,7 @@ litellm.success_callback = [log_cost]
 ## Model Right-Sizing
 
 ```python
-# Route by task complexity: don't use GPT-4o for everything
+# Route by task complexity — don't use GPT-4o for everything
 def get_model_for_task(task_type: str) -> str:
     routing = {
         "classification":     "gpt-4o-mini",      # ~30× cheaper than gpt-4o
@@ -97,7 +97,7 @@ def get_model_for_task(task_type: str) -> str:
 ## Prompt Caching (Provider-Side)
 
 ```python
-# Anthropic: cache long system prompts (saves 90% on cached tokens)
+# Anthropic — cache long system prompts (saves 90% on cached tokens)
 import anthropic
 
 client = anthropic.Anthropic()
@@ -121,7 +121,7 @@ response = client.messages.create(
 # Cache creation/read pricing and eligibility vary by model/provider/TTL; measure actual usage.
 print(f"Cache read tokens: {response.usage.cache_read_input_tokens}")
 
-# OpenAI: prompt caching is automatic for repeated prefixes >1024 tokens
+# OpenAI — prompt caching is automatic for repeated prefixes >1024 tokens
 # No code change needed; check usage.prompt_tokens_details.cached_tokens
 ```
 
@@ -195,7 +195,7 @@ def cached_llm_call(prompt: str, llm_fn) -> str:
         if similarity >= SIMILARITY_THRESHOLD:
             return data["response"]
 
-    # 3. Cache miss: call LLM
+    # 3. Cache miss — call LLM
     response = llm_fn(prompt)
 
     # Store exact match
@@ -214,7 +214,7 @@ def cached_llm_call(prompt: str, llm_fn) -> str:
 ## Prompt Compression
 
 ```python
-# LLMLingua: compress long prompts by 3–20× with minimal quality loss
+# LLMLingua — compress long prompts by 3–20× with minimal quality loss
 from llmlingua import PromptCompressor
 
 compressor = PromptCompressor(
@@ -245,9 +245,9 @@ def break_even_analysis(
     monthly_gpu_cost = gpu_cost_per_hour_usd * billable_hours
     break_even = monthly_gpu_cost / monthly_api_spend_usd
     recommendation = (
-        "Self-host now; strong ROI" if break_even < 0.5 else
+        "Self-host now — strong ROI" if break_even < 0.5 else
         "Self-host if traffic grows 2×" if break_even < 0.8 else
-        "Stick with API; not enough scale yet"
+        "Stick with API — not enough scale yet"
     )
     return {
         "monthly_gpu_cost": f"${monthly_gpu_cost:.0f}",
@@ -289,9 +289,9 @@ def track_call(model, team, task_type, response):
 
 ## Best Practices
 
-- Use `gpt-4o-mini` or `claude-haiku` for 80% of tasks; they're 10–30× cheaper.
+- Use `gpt-4o-mini` or `claude-haiku` for 80% of tasks — they're 10–30× cheaper.
 - Enable prompt caching for system prompts >1,024 tokens (Anthropic) or >1,024 tokens (OpenAI).
-- Audit your top 5 prompts by token count; compress or cache them.
+- Audit your top 5 prompts by token count — compress or cache them.
 - Set hard budget limits with LiteLLM or Bifrost virtual keys before costs spiral.
 - Compare measured quality, throughput, billable uptime and full operating cost before choosing self-hosting; no monthly-spend threshold alone establishes break-even.
 

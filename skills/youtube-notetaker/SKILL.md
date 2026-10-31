@@ -74,12 +74,12 @@ The VTT helper confines inputs and outputs to the current working directory: run
   pip install yt-dlp pillow pyyaml      # ffmpeg via your package manager
   ```
 
-## Adding a video: the pipeline
+## Adding a video — the pipeline
 
 All helper scripts are in `scripts/`. `setup.sh` creates a private, unpredictable scratch
 directory; copy the printed `SCRATCH` path into a shell variable, then copy final assets into the
 library. Set `VIDEO_LIBRARY_DIR` once per shell if you don't want the
-default. **Do not use em dashes (-) or arrows (→) in notes/titles.**
+default. **Do not use em dashes (—) or arrows (→) in notes/titles.**
 
 ### 1. Resolve the id and check embeddability
 ```

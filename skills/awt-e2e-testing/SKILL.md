@@ -1,12 +1,12 @@
 ---
 name: awt-e2e-testing
-description: "AI-powered E2E web testing; eyes and hands for AI coding tools. Declarative YAML scenarios, Playwright execution, visual matching (OpenCV + OCR), platform auto-detection (Flutter/React/Vue), learning DB. Install: npx skills add ksgisang/awt-skill --skill awt -g"
+description: "AI-powered E2E web testing — eyes and hands for AI coding tools. Declarative YAML scenarios, Playwright execution, visual matching (OpenCV + OCR), platform auto-detection (Flutter/React/Vue), learning DB. Install: npx skills add ksgisang/awt-skill --skill awt -g"
 risk: critical
 source: "https://github.com/ksgisang/awt-skill"
 date_added: "2026-03-16"
 ---
 
-# AWT: AI-Powered E2E Testing (Beta)
+# AWT — AI-Powered E2E Testing (Beta)
 
 > `npx skills add ksgisang/awt-skill --skill awt -g`
 
@@ -37,7 +37,7 @@ Confirm the target environment, test accounts, permitted browser actions and dat
 - Skill repo: https://github.com/ksgisang/awt-skill
 - Cloud demo: https://ai-watch-tester.vercel.app
 
-Built with the help of AI coding tools; and designed to help AI coding tools test better.
+Built with the help of AI coding tools — and designed to help AI coding tools test better.
 
 Actively developed by a solo developer at AILoopLab. Feedback welcome!
 

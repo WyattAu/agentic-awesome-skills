@@ -116,9 +116,9 @@ This is a **diagnostic score**, not a promise of rich results.
 For each of the six scoring categories, allot points within the category's weight band using these anchors:
 
 - **0–15% of band:** Schema describes none of the visible content (e.g. you would mark `description` for a `Recipe` page that has no recipe markup yet).
-- **16–40% of band:** Partial alignment; the schema describes some but not all of the visible content, OR maps to a less-common schema.org type.
-- **41–80% of band:** Strong alignment; the schema describes the bulk of the visible content with a common schema.org type.
-- **81–100% of band:** Exemplary; the schema covers all visible content, uses a Google-supported rich-result type, and includes all required properties.
+- **16–40% of band:** Partial alignment — the schema describes some but not all of the visible content, OR maps to a less-common schema.org type.
+- **41–80% of band:** Strong alignment — the schema describes the bulk of the visible content with a common schema.org type.
+- **81–100% of band:** Exemplary — the schema covers all visible content, uses a Google-supported rich-result type, and includes all required properties.
 
 Sum the per-category scores to compute the Eligibility Index used in §"Eligibility Bands" below.
 

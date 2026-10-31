@@ -32,7 +32,7 @@ The Photos app with the status bar hidden
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/status-bars#Developer-documentation)
 
-[`UIStatusBarStyle`](https://developer.apple.com/documentation/UIKit/UIStatusBarStyle); UIKit
+[`UIStatusBarStyle`](https://developer.apple.com/documentation/UIKit/UIStatusBarStyle) — UIKit
 
-[`preferredStatusBarStyle`](https://developer.apple.com/documentation/UIKit/UIViewController/preferredStatusBarStyle); UIKit
+[`preferredStatusBarStyle`](https://developer.apple.com/documentation/UIKit/UIViewController/preferredStatusBarStyle) — UIKit
 

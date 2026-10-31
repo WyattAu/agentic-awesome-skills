@@ -7,14 +7,14 @@ scenario's `must_cover` points within ~2 hops.
 
 **Methodology / honesty caveats** (so a reader can weight this correctly):
 - Runs to date were gathered **during development**, on the development model (Claude Opus class),
-  as subagent dispatches; not an independent third party, and **not yet** the
+  as subagent dispatches — not an independent third party, and **not yet** the
   Haiku/Sonnet/Opus sweep Anthropic's best-practices recommend. Treat as *author-run smoke evals*,
   not a neutral benchmark.
 - These prove **routing + retrieval** inside the skill, not the truth of platform facts on a live
-  box (only AutoDL is battle-tested; see the repo README's "Verification status").
+  box (only AutoDL is battle-tested — see the repo README's "Verification status").
 - Single run per scenario; no adversarial/perturbed phrasings yet.
 
-## Results: 2026-06
+## Results — 2026-06
 
 | Scenario | Verdict | Hops | Navigation path observed |
 |---|---|---|---|
@@ -39,6 +39,6 @@ cases and is the regression guard kept green in CI.
 
 ## Known gaps (what these results do NOT yet cover)
 
-- No multi-model sweep (Haiku/Sonnet/Opus); required to claim the best-practices testing bar.
+- No multi-model sweep (Haiku/Sonnet/Opus) — required to claim the best-practices testing bar.
 - No adversarial/paraphrased prompts (e.g. the user describes the symptom in non-canonical words).
 - No live-platform validation of the facts the agent retrieves (the verification-status caveat).

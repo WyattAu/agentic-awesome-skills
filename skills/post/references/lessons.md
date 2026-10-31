@@ -1,4 +1,4 @@
-# Lessons: what got rejected, what got accepted (one real build, 7 rounds)
+# Lessons — what got rejected, what got accepted (one real build, 7 rounds)
 
 Read at step 4 (before building) and step 7 (review). Each line is a past failure or win.
 
@@ -19,6 +19,6 @@ Read at step 4 (before building) and step 7 (review). Each line is a past failur
 ## Craft that separated a "very good" deck from ours (same chart skill, better hands)
 - Extreme scale contrast: hero number 200px+, labels small and grey. Kill middle sizes.
 - Confident color: a whole page in the accent, not pale tints everywhere.
-- Real artifacts as objects: big cards, deep soft shadows, slight tilt; never flat crops.
+- Real artifacts as objects: big cards, deep soft shadows, slight tilt — never flat crops.
 - Story + evidence + number in one frame.
 - Heavy system font (PingFang / -apple-system 800–900) for CJK headlines.

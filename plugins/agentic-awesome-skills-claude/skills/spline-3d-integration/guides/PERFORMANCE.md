@@ -1,17 +1,17 @@
 # Performance & Mobile Optimization
 
-Spline scenes are WebGL; they run on the GPU. A poorly optimized scene will tank your PageSpeed score, lag on mid-range devices, and drain mobile batteries. Treat them like video files, not images.
+Spline scenes are WebGL — they run on the GPU. A poorly optimized scene will tank your PageSpeed score, lag on mid-range devices, and drain mobile batteries. Treat them like video files, not images.
 
 ---
 
-## Before You Even Integrate: Check Scene Size
+## Before You Even Integrate — Check Scene Size
 
 **Tell the user to check their scene file size before giving you the URL.**
 
 - Under ~3MB = generally fine
 - 3–10MB = usable but optimize where possible
 - Over 10MB = serious problem, needs optimization or a different approach
-- Over 20MB = do not embed as live 3D; export as video instead
+- Over 20MB = do not embed as live 3D — export as video instead
 
 To check: in Spline editor → Export → Code Export → the file size is shown before generating the URL.
 
@@ -20,7 +20,7 @@ To check: in Spline editor → Export → Code Export → the file size is shown
 2. Reduce subdivision levels (1 is usually enough, max 2)
 3. Delete objects that are hidden or never visible
 4. Remove unused textures and images
-5. Use fewer than 3 lights; prefer Matcap materials for reflective effects (fakes reflections without GPU cost)
+5. Use fewer than 3 lights — prefer Matcap materials for reflective effects (fakes reflections without GPU cost)
 6. Merge objects that share the same material
 
 ---
@@ -52,7 +52,7 @@ Never leave users staring at a blank space. Always render a background color or 
 
 ```css
 .spline-wrapper {
-  background: #0a0a0a; /* your site's bg color; shows instantly */
+  background: #0a0a0a; /* your site's bg color — shows instantly */
   width: 100%;
   height: 100vh;
 }
@@ -87,15 +87,15 @@ Spline scenes are GPU-intensive. On mobile they:
 
 **Always implement one of these strategies:**
 
-### Option A: Skip entirely on mobile (recommended for hero backgrounds)
+### Option A — Skip entirely on mobile (recommended for hero backgrounds)
 ```js
 if (window.innerWidth < 768) {
-  // Don't load Spline; show static background instead
+  // Don't load Spline — show static background instead
   document.querySelector('.spline-wrapper').style.background = 'url(fallback.jpg) center/cover';
 }
 ```
 
-### Option B: Hardware concurrency check
+### Option B — Hardware concurrency check
 ```js
 // navigator.hardwareConcurrency = number of CPU cores
 // Low core count = likely a low-end device
@@ -104,7 +104,7 @@ if (navigator.hardwareConcurrency <= 2 || window.innerWidth < 768) {
 }
 ```
 
-### Option C: Export as video for mobile
+### Option C — Export as video for mobile
 For decorative/non-interactive scenes: record the animation in Spline as MP4, serve that on mobile instead. Video still has decode/render/network costs; provide controls or respect reduced motion.
 
 ```js

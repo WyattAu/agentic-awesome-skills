@@ -20,7 +20,7 @@ license_source: "https://github.com/unslothai/unsloth/blob/main/LICENSE"
 
 Unsloth trains LLMs with custom kernels that cut VRAM use and step time without changing the
 math, which makes single-GPU fine-tuning practical on hardware that would otherwise OOM.
-This skill covers **Unsloth Core**; the Python API; because that is what an agent can drive
+This skill covers **Unsloth Core** — the Python API — because that is what an agent can drive
 programmatically; the Desktop app and Studio web UI are interactive and out of scope.
 
 The hard parts of an Unsloth run are not the training call. They are sizing the job against
@@ -33,7 +33,7 @@ format the target runtime can actually load. This skill covers those three.
 - Use when a training run OOMs and needs to be resized rather than rewritten.
 - Use when doing preference or RL post-training (GRPO, DPO) on consumer hardware.
 - Use when a fine-tuned model must be exported to GGUF, vLLM, or merged 16-bit weights.
-- Use when a fine-tune "ran fine" but the model's output format is wrong; usually a chat
+- Use when a fine-tune "ran fine" but the model's output format is wrong — usually a chat
   template or loss-masking bug, not a hyperparameter one.
 
 ### Do not use this skill when
@@ -58,7 +58,7 @@ for activations and optimizer state:
 | `full_finetuning=True` | ~14 GB per 1B parameters before activations (illustrative mixed-precision training budget) | ~112 GB | Rarely justified. Prefer LoRA. |
 
 Add roughly 2-6 GB for activations, scaling with `max_seq_length` and batch size. Treat these
-as planning figures and confirm against `nvidia-smi` on the first run; they vary by
+as planning figures and confirm against `nvidia-smi` on the first run — they vary by
 architecture, attention implementation and vocabulary size.
 
 If the estimate does not fit, reduce in this order: `max_seq_length`, then batch size (raising
@@ -149,7 +149,7 @@ model = FastLanguageModel.get_peft_model(
 ```
 
 Rank guidance: `r=8-16` for style and format adaptation, `r=32-64` when teaching genuinely new
-capability. Setting `lora_alpha` to 1-2x `r` is a safe default. Keep `lora_dropout = 0.0` -
+capability. Setting `lora_alpha` to 1-2x `r` is a safe default. Keep `lora_dropout = 0.0` —
 Unsloth's fast path is only taken when dropout is zero.
 
 Train all seven projection modules unless VRAM forces otherwise; attention-only LoRA
@@ -180,7 +180,7 @@ trainer = SFTTrainer(
 trainer.train()
 ```
 
-`2e-4` suits LoRA; full fine-tuning needs roughly 10x lower. One to three epochs is typical -
+`2e-4` suits LoRA; full fine-tuning needs roughly 10x lower. One to three epochs is typical —
 LoRA overfits small datasets quickly, so watch eval loss rather than trusting an epoch count.
 
 ### Step 6: Export to the target runtime
@@ -198,7 +198,7 @@ The right format depends entirely on where the model will run:
 pass: `["q4_k_m", "q5_k_m", "q8_0"]`. `q4_k_m` is the usual quality/size compromise. The `iq*`
 importance-matrix quants additionally require `imatrix_file=`.
 
-Avoid `save_method="merged_4bit"` for anything redistributed; it bakes in the quantization and
+Avoid `save_method="merged_4bit"` for anything redistributed — it bakes in the quantization and
 cannot be cleanly re-quantized afterwards.
 
 ## Examples
@@ -346,7 +346,7 @@ Examples use current TRL `processing_class`/SFTConfig conventions; pin a mutuall
 
 - ✅ Set `random_state` so a promising run can be reproduced.
 - ✅ Log peak VRAM on the first run and reuse it to size later jobs on the same hardware.
-- ✅ Evaluate the exported artifact, not just the adapter; quantization shifts behaviour.
+- ✅ Evaluate the exported artifact, not just the adapter — quantization shifts behaviour.
 - ❌ Don't change `max_seq_length` between training and export; the GGUF inherits it.
 - ❌ Don't tune hyperparameters before the loss mask has been verified once.
 
@@ -357,7 +357,7 @@ Examples use current TRL `processing_class`/SFTConfig conventions; pin a mutuall
 - Unsloth's speed and memory claims are the project's own published figures, measured on their
   own benchmarks; they are not independently verified here.
 - This skill does not replace environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if the GPU, model, dataset format or export target is unknown -
+- Stop and ask for clarification if the GPU, model, dataset format or export target is unknown —
   every step above depends on those four.
 
 ## Security & Safety Notes
@@ -387,7 +387,7 @@ Examples use current TRL `processing_class`/SFTConfig conventions; pin a mutuall
 
 - **Problem:** CUDA OOM partway through the first epoch rather than at step 0.
   **Solution:** A long sample exceeded the activation budget. Lower `max_seq_length` or filter
-  outliers; peak memory tracks the longest sequence, not the mean.
+  outliers — peak memory tracks the longest sequence, not the mean.
 
 - **Problem:** Training runs, but at ordinary unaccelerated speed.
   **Solution:** `transformers` or `trl` was imported before `unsloth`, so the patches never

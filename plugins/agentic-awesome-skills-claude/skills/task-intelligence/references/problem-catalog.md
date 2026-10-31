@@ -7,7 +7,7 @@ As frequências são exemplos qualitativos sem dataset medido. Scripts/instalado
 | Problema | Frequência | Solução Preventiva |
 |----------|-----------|-------------------|
 | YAML inválido no SKILL.md | Alta | Validador do projeto que extrai frontmatter YAML e valida esquema |
-| `name` ou `description` duplicados no YAML | Média | Grep por `^name:` no arquivo; deve ter 1 ocorrência |
+| `name` ou `description` duplicados no YAML | Média | Grep por `^name:` no arquivo — deve ter 1 ocorrência |
 | skill-installer falha silenciosamente | Média | Inspecionar erro e preservar estado; não usar --force sem entender sobrescritas |
 | scan_registry.py bug com sets/dicts | Baixa | Atualizar registry manualmente via JSON |
 | Skill no .claude mas não em skills/ | Média | Sempre instalar via skill-installer, não copiar manual |

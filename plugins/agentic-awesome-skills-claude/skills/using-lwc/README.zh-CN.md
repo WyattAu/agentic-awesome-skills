@@ -1,5 +1,5 @@
 <!-- Modified for AAS individual review: scope, consent, recovery and factual guidance corrected; upstream attribution retained. -->
-<h1 align="center">LWC; 面向 AI Agent 的主动记忆</h1>
+<h1 align="center">LWC — 面向 AI Agent 的主动记忆</h1>
 
 <p align="center">
   <strong>Agent 驱动 · 持久化 · 来源可追溯</strong>

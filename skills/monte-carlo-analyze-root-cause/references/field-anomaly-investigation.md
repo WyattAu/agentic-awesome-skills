@@ -28,7 +28,7 @@ Call `get_alerts` with a time range around the incident:
 
 ### 4. Check for query changes
 
-Call `get_query_changes`; did the ETL query modify how this field is computed?
+Call `get_query_changes` — did the ETL query modify how this field is computed?
 - Changed CASE WHEN logic → different values
 - Changed COALESCE or NULL handling → null rate changes
 - Changed aggregation → mean/sum shifts
@@ -69,8 +69,8 @@ See `references/data-exploration.md` for more patterns.
 ### 6. Check upstream data quality
 
 For the upstream table/field identified in Step 2:
-- Call `get_table_freshness`; is the upstream data fresh?
-- Call `get_table_size_history`; did upstream volume change?
+- Call `get_table_freshness` — is the upstream data fresh?
+- Call `get_table_size_history` — did upstream volume change?
 - If DB connector available, profile the upstream field directly
 
 ### 7. Check column correlations (if DB connector available)
@@ -93,17 +93,17 @@ ORDER BY bad_rate DESC
 LIMIT 20
 ```
 
-If one dimension value has a much higher "bad rate" than others, it is a useful localization hypothesis, not proof of causation; e.g., "all rows from source_system='legacy_api' have NULL revenue, but rows from other sources are fine."
+If one dimension value has a much higher "bad rate" than others, it is a useful localization hypothesis, not proof of causation — e.g., "all rows from source_system='legacy_api' have NULL revenue, but rows from other sources are fine."
 
 Try this across multiple columns (category fields, source identifiers, date partitions) to narrow down the pattern.
 
 ## Common root causes
 
-- **Upstream data quality issue**; bad data in source propagated downstream
-- **ETL logic change**; CASE/COALESCE/type handling modified
-- **New data source**; a new upstream source introduced unexpected values
-- **Schema change**; column type changed, causing implicit conversions
-- **Backfill**; historical data reprocessed with different logic
-- **Null propagation**; upstream NULL values cascading through JOINs
+- **Upstream data quality issue** — bad data in source propagated downstream
+- **ETL logic change** — CASE/COALESCE/type handling modified
+- **New data source** — a new upstream source introduced unexpected values
+- **Schema change** — column type changed, causing implicit conversions
+- **Backfill** — historical data reprocessed with different logic
+- **Null propagation** — upstream NULL values cascading through JOINs
 
 <!-- Modified locally: evidence, SQL safety or paid-run corrections. -->

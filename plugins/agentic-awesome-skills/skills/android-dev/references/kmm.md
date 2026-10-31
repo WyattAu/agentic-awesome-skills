@@ -71,7 +71,7 @@ VALUES (?, ?, ?);
 ```
 
 ```kotlin
-// commonMain; Database driver expect/actual
+// commonMain — Database driver expect/actual
 interface DatabaseDriverFactory {
     fun createDriver(): SqlDriver
 }
@@ -127,7 +127,7 @@ class HomeViewModel(
 ## Koin DI (Shared + Android)
 
 ```kotlin
-// commonMain; shared Koin modules
+// commonMain — shared Koin modules
 val sharedModule = module {
     single { AppDatabase(get<DatabaseDriverFactory>().createDriver()) }
     single<ItemRepository> { ItemRepositoryImpl(get(), get()) }
@@ -135,7 +135,7 @@ val sharedModule = module {
     factory { RefreshItemsUseCase(get()) }
 }
 
-// androidApp; Android-specific module
+// androidApp — Android-specific module
 val androidModule = module {
     single<Context> { androidApplication() }
     single<DatabaseDriverFactory> { AndroidDatabaseDriverFactory(get()) }
@@ -185,7 +185,7 @@ kotlin {
 Use when you want to share UI across Android + Desktop + Web:
 
 ```kotlin
-// commonMain; shared composable
+// commonMain — shared composable
 @Composable
 fun HomeScreenContent(
     state: HomeUiState,
@@ -198,7 +198,7 @@ fun HomeScreenContent(
     }
 }
 
-// androidApp; wraps with Android ViewModel
+// androidApp — wraps with Android ViewModel
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()

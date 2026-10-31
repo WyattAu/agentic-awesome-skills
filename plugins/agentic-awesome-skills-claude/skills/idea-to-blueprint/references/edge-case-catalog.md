@@ -4,7 +4,7 @@ How to use: for every story, walk each category below and ask the question. If i
 
 Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FILE · MSG · PERM · SEARCH · BIZ · INT · OPS · L10N · SEC · A11Y · IR (Iran-specific) · BOT (messenger bots) · ADMIN
 
-## INPUT: input and validation
+## INPUT — input and validation
 - EC-INPUT-01 Empty / whitespace-only / only ZWNJ or invisible characters → treated as empty; field-level error; no request.
 - EC-INPUT-02 Maximum length reached / exceeded on paste → hard limit enforced client and server; counter shown; truncation policy explicit.
 - EC-INPUT-03 Invisible or control characters pasted → validate per field; reject unsafe controls without stripping legitimate ZWNJ/combining marks from names or natural-language text.
@@ -18,7 +18,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-INPUT-11 Autofill/autocorrect altering input (browser filling email into phone) → validation catches, error names the field.
 - EC-INPUT-12 Decimal and thousands separators in money/quantity fields (Persian ٫ ٬ vs , .) → accepted and normalised.
 
-## AUTH: identity, sessions, OTP
+## AUTH — identity, sessions, OTP
 - EC-AUTH-01 OTP wrong code n times → attempt limit, lockout duration, copy with remaining attempts.
 - EC-AUTH-02 Double tap / double submit → single request (button disabled while pending, server idempotency).
 - EC-AUTH-03 Resend before cooldown → blocked client-side; server-enforced; copy shows seconds.
@@ -32,7 +32,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-AUTH-11 Brute force on OTP or password → rate limits per number and per IP; monitoring alert.
 - EC-AUTH-12 Sign-in via a channel the user no longer controls (old email) → recovery requires the current primary channel.
 
-## DATA: data and state
+## DATA — data and state
 - EC-DATA-01 First use, no data → designed empty state with one action.
 - EC-DATA-02 Exactly one item (no plural, no "others") → copy and layout handle singular.
 - EC-DATA-03 Thousands of items → pagination or virtualisation; response size limit; sort stable.
@@ -42,11 +42,11 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-DATA-07 Orphaned records after deletion → cascade or restrict policy per relation; tested.
 - EC-DATA-08 Long text in short layouts → truncation with full text on tap; no overflow breaking RTL layout.
 - EC-DATA-09 Migration on live data → backfill plan, reversible, tested against a dump.
-- EC-DATA-10 Very long lists in exports (CSV/Excel) → streaming; Persian text encoding correct (UTF-8 with BOM if Excel is a target; verify).
+- EC-DATA-10 Very long lists in exports (CSV/Excel) → streaming; Persian text encoding correct (UTF-8 with BOM if Excel is a target — verify).
 - EC-DATA-11 Duplicate detection rules (same phone twice, same product name) → stated per entity.
 - EC-DATA-12 Stale data on screen after another actor changes it → refresh policy; conflict copy.
 
-## TIME: dates, calendars, time zones
+## TIME — dates, calendars, time zones
 - EC-TIME-01 Jalali month lengths and Esfand leap year → library verified; tests for the current and next two years.
 - EC-TIME-02 Month/year boundaries in reports ("this month" at 23:59 on the last day) → boundaries computed in Asia/Tehran, stored UTC.
 - EC-TIME-03 Week starts Saturday; "this week", weekly reports and pickers follow it.
@@ -57,7 +57,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-TIME-08 Cross-year ranges and reports spanning Nowruz → correct year labels.
 - EC-TIME-09 Expiry exactly at boundary (expires_at == now) → inclusive/exclusive stated.
 
-## NET: network and connectivity
+## NET — network and connectivity
 - EC-NET-01 Offline at load → cached read view or explicit offline screen; nothing spinning forever.
 - EC-NET-02 Offline at submit → draft kept locally; clear copy; retry when back or manual retry.
 - EC-NET-03 Request timed out but server completed it → idempotency keys so retry does not duplicate; client reconciles.
@@ -68,7 +68,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-NET-08 Captive portal / blocked host (CDN or fonts blocked in the market) → self-hosted assets; no functional dependency on foreign CDNs.
 - EC-NET-09 Retry storms → exponential backoff with jitter; max attempts.
 
-## DEV: devices, browsers, platform
+## DEV — devices, browsers, platform
 - EC-DEV-01 Small screens (≤ 360 px) and large text settings (200 %) → no clipped primary actions.
 - EC-DEV-02 Low-memory Android → no huge lists in memory; images downscaled.
 - EC-DEV-03 Browser back/forward and refresh mid-flow → state restored or explicit restart with no data loss.
@@ -80,7 +80,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-DEV-09 Clipboard and share APIs unavailable → fallback UI.
 - EC-DEV-10 PWA install prompt behaviour differs per browser → tested on the segment's browsers; manual install instructions copy.
 
-## CONC: concurrency and idempotency
+## CONC — concurrency and idempotency
 - EC-CONC-01 Two actors edit the same record → optimistic locking (version field) and conflict copy.
 - EC-CONC-02 Double-click on create/pay → idempotency key; one record; UI disables while pending.
 - EC-CONC-03 Race on limited inventory/slots → transactional check-and-decrement; clear "just sold out" copy.
@@ -88,7 +88,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-CONC-05 Background job runs twice (scheduler overlap) → idempotent jobs; lock or unique key.
 - EC-CONC-06 Ordering of events out of sequence (status updates) → monotonic status machine; ignore stale transitions.
 
-## PAY: payments and money
+## PAY — payments and money
 - EC-PAY-01 Gateway redirect never returns (user closes browser after paying) → server-side verification via callback/inquiry; order reconciled; receipt on next visit.
 - EC-PAY-02 Callback missing, delayed or duplicated → idempotent handler; inquiry job for pending payments; duplicate callbacks ignored.
 - EC-PAY-03 Amount mismatch between request and callback → fulfilment held, discrepancy flagged and reconciled with the provider; tell the user the payment status is under verification. Never claim nothing was charged without provider evidence.
@@ -102,7 +102,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-PAY-11 Test/sandbox vs production credentials mixed up → startup validation refuses sandbox keys in production.
 - EC-PAY-12 Sanctions or blocked service for the market (foreign gateways/processors) → excluded by decision record; verified at build.
 
-## FILE: files and media
+## FILE — files and media
 - EC-FILE-01 Oversized file → client-side pre-check and server limit; copy with the limit.
 - EC-FILE-02 Unsupported or mislabeled type (extension vs magic bytes) → server validates content; rejected with copy.
 - EC-FILE-03 Image orientation (EXIF), HEIC/HEIF from iPhones, very large dimensions → normalised, converted, resized.
@@ -112,7 +112,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-FILE-07 Deleting a file referenced elsewhere → reference check or tombstone.
 - EC-FILE-08 Slow upload progress and cancel → progress shown; cancel leaves no partial record.
 
-## MSG: SMS, email, push, in-app messaging
+## MSG — SMS, email, push, in-app messaging
 - EC-MSG-01 Provider accepts but never delivers → resend policy; alternative channel; delivery status if the provider offers it.
 - EC-MSG-02 Wrong or unreachable number → bounce handling; copy asking to check the number.
 - EC-MSG-03 Persian SMS length (Unicode segments) → templates tested against the provider's segment limit; no cut-off codes.
@@ -124,7 +124,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-MSG-09 Template placeholders unfilled ("{name}") → render-time validation; test for every template.
 - EC-MSG-10 Rate limits at provider → queue with backoff; alert when backlog grows.
 
-## PERM: permissions, privacy, roles
+## PERM — permissions, privacy, roles
 - EC-PERM-01 Role × action matrix enforced server-side, not just hidden in UI → tests per role per endpoint.
 - EC-PERM-02 Direct object access by ID (another tenant's record) → 404/403 policy; tests.
 - EC-PERM-03 Admin acting on behalf of a user → audit log entry with actor, target, reason.
@@ -134,7 +134,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-PERM-07 Retention limits (OTP codes, sessions, logs, backups) → stated and enforced by jobs.
 - EC-PERM-08 Screenshots/previews containing sensitive data (link previews, notification previews) → masked where the platform allows.
 
-## SEARCH: search and lists
+## SEARCH — search and lists
 - EC-SEARCH-01 Persian normalisation (ی/ک, ZWNJ vs space, diacritics, Arabic vs Persian forms) → indexed and queried normalised.
 - EC-SEARCH-02 Zero results → copy with suggestion; filters visible; clear-all.
 - EC-SEARCH-03 Typos and partial words → tolerance policy stated (prefix, fuzzy) with limits.
@@ -142,7 +142,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-SEARCH-05 Very common query (single letter) → minimum length or debounce; performance bound.
 - EC-SEARCH-06 Results changing while browsing → stable pagination cursors.
 
-## BIZ: business rules and lifecycle
+## BIZ — business rules and lifecycle
 - EC-BIZ-01 Plan/quota limit reached mid-action → copy before the action when predictable; graceful block otherwise.
 - EC-BIZ-02 Subscription expires mid-session → grace behaviour; read-only vs blocked; copy.
 - EC-BIZ-03 Downgrade with data over the new limit → policy (read-only, archive, delete after notice).
@@ -152,7 +152,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-BIZ-07 Minimums and maximums (order minimum, max quantity) → shown before, enforced server-side.
 - EC-BIZ-08 Multi-tenant boundaries (a restaurant sees only its data) → tenant scoping in every query; tests.
 
-## INT: integrations and third parties
+## INT — integrations and third parties
 - EC-INT-01 Service down → fallback per integration card; user copy; degraded mode.
 - EC-INT-02 API changed / deprecated endpoint → version pinned; contract tests against sandbox; alert on schema drift.
 - EC-INT-03 Rate limits → client-side limiter; backoff; queue.
@@ -162,7 +162,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-INT-07 Webhook signature invalid or replayed → verify signature and timestamp; reject replays.
 - EC-INT-08 Partial success in batch calls → per-item status handled.
 
-## OPS: operations and deployment
+## OPS — operations and deployment
 - EC-OPS-01 Missing or invalid environment variable → app refuses to start with a clear message (fail fast).
 - EC-OPS-02 Migration fails mid-deploy → transactional migrations or documented rollback; deploy aborted; health check fails loudly.
 - EC-OPS-03 Rollback to previous release with a newer schema → backward-compatible migrations for one release.
@@ -173,7 +173,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-OPS-08 Time drift between servers → NTP; tokens tolerate small skew.
 - EC-OPS-09 Health endpoint reports dependencies (DB, cache, provider) → used by the platform.
 
-## L10N: localisation and RTL
+## L10N — localisation and RTL
 - EC-L10N-01 RTL layout: mirrored icons, logical properties, scroll direction → visual tests on key screens.
 - EC-L10N-02 Mixed-direction strings (Persian + Latin + digits) → bidi isolation; punctuation stays in place.
 - EC-L10N-03 Longer Persian strings → no truncation of primary actions; wrapping rules.
@@ -183,7 +183,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-L10N-07 Date/number/currency formatting through one utility → no ad-hoc formatting in components.
 - EC-L10N-08 Untranslated strings leak (English fallback) → test that every key has product-language copy from the copy table.
 
-## SEC: security baseline
+## SEC — security baseline
 - EC-SEC-01 Injection (SQL, command, template) → parameterised/ORM, no string concatenation; tests.
 - EC-SEC-02 XSS and unsafe HTML → output encoding; CSP; sanitiser for rich text if any.
 - EC-SEC-03 CSRF for cookie-based sessions → tokens or same-site cookies; tests.
@@ -195,7 +195,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-SEC-09 File upload as attack vector → EC-FILE-02/05.
 - EC-SEC-10 Session fixation/hijack → rotate on login; secure cookie flags; short-lived tokens with refresh.
 
-## A11Y: accessibility
+## A11Y — accessibility
 - EC-A11Y-01 Screen reader: labels, roles, announcements for async changes → per screen.
 - EC-A11Y-02 Keyboard-only (web): focus order, trap in dialogs, escape closes → tests.
 - EC-A11Y-03 Colour-only meaning (status by colour) → icon or text as well.
@@ -204,7 +204,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-A11Y-06 Timeouts (OTP expiry, session) → warning and extension where feasible.
 - EC-A11Y-07 Error identification → associated with the field, announced.
 
-## IR: Iran-specific (load when users are Iranian; verify each at research and at build)
+## IR — Iran-specific (load when users are Iranian; verify each at research and at build)
 - EC-IR-01 Users on VPN → IP geolocation unreliable; never gate features by IP country; language from settings, not IP.
 - EC-IR-02 Mobile prefixes and operators → validation by format (11 digits, 09…) not by a hard-coded operator list; MVNOs exist.
 - EC-IR-03 National ID check digit → validated when collected; copy explains why it is needed; not required unless a business rule demands it.
@@ -220,7 +220,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-IR-13 Foreign services with sanctions clauses in ToS → excluded or explicitly risk-accepted in a DR.
 - EC-IR-14 Jalali everywhere in UI, UTC in storage → single conversion utility; leap-year tests.
 
-## BOT: messenger bots (when the product is or includes a bot)
+## BOT — messenger bots (when the product is or includes a bot)
 - EC-BOT-01 Unknown command / free text → helpful fallback with the main options; never silent.
 - EC-BOT-02 Message edits/deletes, stickers, voice, forwarded messages → handled or politely declined.
 - EC-BOT-03 Group vs private chat behaviour → explicit policy.
@@ -231,7 +231,7 @@ Category codes: INPUT · AUTH · DATA · TIME · NET · DEV · CONC · PAY · FI
 - EC-BOT-08 Blocked bot / user left → cleanup; no repeated failed sends.
 - EC-BOT-09 Multiple languages in one chat → language preference per user.
 
-## ADMIN: back-office
+## ADMIN — back-office
 - EC-ADMIN-01 Bulk actions partially failing → per-row result; nothing silently skipped.
 - EC-ADMIN-02 Destructive admin actions → consequence dialog; audit; undo window where feasible.
 - EC-ADMIN-03 Impersonation / support view → read-only by default; audited.

@@ -1,6 +1,6 @@
 ---
 name: sdk-dx
-description: "Design SDKs that developers love to use-APIs that feel native, error messages that guide, and experiences that reduce friction. This skill covers creating SDKs that drive adoption through exceptional developer experience rather than aggressive marketing."
+description: "Design SDKs that developers love to use—APIs that feel native, error messages that guide, and experiences that reduce friction. This skill covers creating SDKs that drive adoption through exceptional developer experience rather than aggressive marketing."
 risk: critical
 source: https://github.com/jonathimer/devmarketing-skills/tree/main/skills/sdk-dx
 source_repo: jonathimer/devmarketing-skills
@@ -18,7 +18,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 ## When to Use
 
-Use this skill when you need design SDKs that developers love to use-APIs that feel native, error messages that guide, and experiences that reduce friction. This skill covers creating SDKs that drive adoption through exceptional developer experience rather than aggressive marketing. Trigger phrases: "SDK design",...
+Use this skill when you need design SDKs that developers love to use—APIs that feel native, error messages that guide, and experiences that reduce friction. This skill covers creating SDKs that drive adoption through exceptional developer experience rather than aggressive marketing. Trigger phrases: "SDK design",...
 
 
 The best SDK marketing is an SDK that developers can't stop talking about. When your SDK makes developers feel productive and competent, they become your advocates. When it frustrates them, no amount of marketing will save you.

@@ -13,11 +13,11 @@ The caller's Execute Workflow node has a `mode` that controls how items reach th
 | `all` (default) | once | all N items, flowing through nodes per-item as usual |
 | `each` | N times | exactly one item per run |
 
-For a body that just processes items the ordinary way; map, filter, transform; the two are equivalent, because n8n nodes iterate per-item regardless of how many items arrived.
+For a body that just processes items the ordinary way — map, filter, transform — the two are equivalent, because n8n nodes iterate per-item regardless of how many items arrived.
 
 The split matters in exactly one situation: **the body assumes it sees exactly one item.** Three telltales:
 
-- **Per-run aggregation.** A node like "sum these line items" or "build one report from these rows" produces a single output from whatever items it sees. Under `mode: all` it sees all N inputs and produces *one* aggregate across everyone. Under `mode: each` it runs N times and produces one aggregate *per input*; which is almost always what a per-customer / per-order body means.
+- **Per-run aggregation.** A node like "sum these line items" or "build one report from these rows" produces a single output from whatever items it sees. Under `mode: all` it sees all N inputs and produces *one* aggregate across everyone. Under `mode: each` it runs N times and produces one aggregate *per input* — which is almost always what a per-customer / per-order body means.
 - **"This is THE thing to act on" logic.** A body written around a single entity (`$json.customer_id`, "send this one email") silently operates on only the first item, or mis-aggregates, when handed N at once.
 - **A final write that should fire once per input.** Check the node’s item behavior: a node may already write once per item under `all`; aggregation or execute-once settings change that.
 
@@ -32,7 +32,7 @@ A sub-workflow `Customer: build monthly summary` whose body groups orders and em
 
 When you need per-item iteration, let the caller's `mode: each` do it rather than dropping a **Loop Over Items** node inside the sub-workflow. Reasons:
 
-- The body stays single-item and simple; no batch-cursor logic, no cross-iteration state to manage.
+- The body stays single-item and simple — no batch-cursor logic, no cross-iteration state to manage.
 - The contract reads as "give me one item, I act on it", which is also exactly the agent-tool contract.
 - You avoid the classic SplitInBatches gotchas (see **n8n-code-javascript**) inside a workflow that's supposed to be a clean function.
 
@@ -48,7 +48,7 @@ The forcing function is structural in n8n: on a single Execute Workflow Trigger,
 
 Common cases where contracts genuinely differ:
 
-- **Binary vs non-binary input** (the canonical one; typed fields are JSON-only).
+- **Binary vs non-binary input** (the canonical one — typed fields are JSON-only).
 - **Sync vs async paths** with different return contracts.
 - **Different auth schemes per path.**
 
@@ -58,19 +58,19 @@ If the body opens with a top-level IF/Switch on *which input shape arrived*, tha
 
 Faced with two divergent input shapes, the reflex is:
 
-1. Pick passthrough (most permissive; it supports binary).
+1. Pick passthrough (most permissive — it supports binary).
 2. Branch internally on a flag.
 3. Accept the loss of typed inputs.
 
 Why it's wrong:
 
-- The workflow can't be exposed as a clean agent tool; passthrough has no `$fromAI` schema.
+- The workflow can't be exposed as a clean agent tool — passthrough has no `$fromAI` schema.
 - Body-shape branches accumulate ("in case A this field is set, in case B it's empty…").
 - A future third input shape means *more* branching, not a clean third sub-workflow.
 
 ### The fix: N+1 sub-workflows
 
-For N divergent input contracts, build **N+1** sub-workflows: one *outer* per contract, plus one *shared downstream* for the common work. Each outer does its input-specific prep; validation, fetching, normalization, hashing, extraction; and calls the shared core with a normalized shape. The shared core has a single typed input contract and knows nothing about which outer called it.
+For N divergent input contracts, build **N+1** sub-workflows: one *outer* per contract, plus one *shared downstream* for the common work. Each outer does its input-specific prep — validation, fetching, normalization, hashing, extraction — and calls the shared core with a normalized shape. The shared core has a single typed input contract and knows nothing about which outer called it.
 
 ### Worked example
 
@@ -84,7 +84,7 @@ Subworkflow: Process Paper from External ID
         with { arxivId, title, authors, body, source, ... }
 
 Subworkflow: Process Paper from Uploaded PDF
-  Trigger: Passthrough   (required; binary flows through)
+  Trigger: Passthrough   (required — binary flows through)
     → [hash binary for a synthetic ID, dedup, extract text]
     → [Execute Workflow → "Subworkflow: Summarize and Store Paper"]
         with { arxivId: "<synthetic>", title, body, source: "upload", ... }
@@ -94,7 +94,7 @@ Subworkflow: Summarize and Store Paper           ← the shared core
     → [LLM with structured output → Data Table insert → Return result]
 ```
 
-The "pull" path (look up by ID) and the "push" path (data already in hand, here as binary) each get their own typed-or-passthrough trigger, and converge on one typed core. Add a third input shape later and you add a third outer; not a third branch.
+The "pull" path (look up by ID) and the "push" path (data already in hand, here as binary) each get their own typed-or-passthrough trigger, and converge on one typed core. Add a third input shape later and you add a third outer — not a third branch.
 
 The pattern generalizes: any time a capability has both a pull path (look up by ID) and a push path (caller already holds the data, including binary or a template), the split applies. For the binary-handling specifics, see **n8n-binary-and-data**; for wiring the typed outer as an agent tool, **n8n-agents**.
 
@@ -104,13 +104,13 @@ The pattern generalizes: any time a capability has both a pull path (look up by 
 
 `mode: each` + `options.waitForSubWorkflow: false` dispatches independent runs without waiting. Scheduling, worker configuration and concurrency limits determine actual overlap; this is not a guarantee of parallel execution.
 
-The catch: the caller doesn't know when; or whether; any of them finished. So this only works with a **separate completion-tracking mechanism**, typically a Data Table the sub-workflow writes to as it progresses (manage it with `n8n_manage_datatable`; see **n8n-mcp-tools-expert**).
+The catch: the caller doesn't know when — or whether — any of them finished. So this only works with a **separate completion-tracking mechanism**, typically a Data Table the sub-workflow writes to as it progresses (manage it with `n8n_manage_datatable` — see **n8n-mcp-tools-expert**).
 
 ### The pattern
 
 1. **Stage.** Insert one "in progress" row per parallel job, keyed by a run ID + a per-job sub-key.
 2. **Dispatch.** Call Execute Workflow with `mode: each` and `options.waitForSubWorkflow: false`. The caller continues immediately.
-3. **Each sub-workflow.** Does its work, then updates *its* row; `status: completed` / `error`, plus output.
+3. **Each sub-workflow.** Does its work, then updates *its* row — `status: completed` / `error`, plus output.
 4. **Poll.** The caller enters a loop:
    - Get all rows for this run ID.
    - If all rows are in a terminal status → exit and aggregate.
@@ -131,13 +131,13 @@ The catch: the caller doesn't know when; or whether; any of them finished. So th
 
 Use conditional state transitions and idempotency keys per run/job. A polling timeout does not stop a dispatched job: fence or reconcile late completions before retrying side effects. Verify the full expected job count (including zero-job handling), not merely that all returned rows are terminal.
 
-If a sub-workflow crashes without updating its row, the poll sees `inProgress` past the runtime cap and times it out; so a dead job can't hang the loop forever.
+If a sub-workflow crashes without updating its row, the poll sees `inProgress` past the runtime cap and times it out — so a dead job can't hang the loop forever.
 
 ### When it earns its place
 
 - **Long per-item work** (LLM calls, large media, slow APIs) where serial would take hours.
 - **Independent jobs** that can each complete or fail without affecting the others.
-- **You can afford eventual consistency**; the poll loop adds latency by design.
+- **You can afford eventual consistency** — the poll loop adds latency by design.
 
 ### When it's the wrong tool
 

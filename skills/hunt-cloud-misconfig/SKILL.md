@@ -89,9 +89,9 @@ Checksum compatibility is version-specific, not a universal failure rule. The re
 
 ## CloudWatch RUM Weaponization (2024-2026 surface)
 
-AWS CloudWatch RUM (Real-User Monitoring) is a client-side telemetry service launched late 2021. Customers embed a JS snippet on their pages that sends performance/error events to `dataplane.rum.<region>.amazonaws.com`. The snippet's `AppMonitor` config contains an `identityPoolId` (Cognito) and `guestRoleArn` (IAM role); both **public by design**. The IAM role policy is the security boundary, and when developers leave it broader than the documented minimum (`rum:PutRumEvents` on the AppMonitor ARN), the entire pool becomes the unauthenticated AWS-credential vending machine described in `cloud-iam-deep` → Cognito Identity Pool chain.
+AWS CloudWatch RUM (Real-User Monitoring) is a client-side telemetry service launched late 2021. Customers embed a JS snippet on their pages that sends performance/error events to `dataplane.rum.<region>.amazonaws.com`. The snippet's `AppMonitor` config contains an `identityPoolId` (Cognito) and `guestRoleArn` (IAM role) — both **public by design**. The IAM role policy is the security boundary, and when developers leave it broader than the documented minimum (`rum:PutRumEvents` on the AppMonitor ARN), the entire pool becomes the unauthenticated AWS-credential vending machine described in `cloud-iam-deep` → Cognito Identity Pool chain.
 
-### Detection: JS bundle fingerprints
+### Detection — JS bundle fingerprints
 
 **Snippet-style (most common, embedded in `<head>`):**
 ```javascript
@@ -139,7 +139,7 @@ grep -ErohE "dataplane\.rum\.[a-z0-9-]+\.amazonaws\.com" .
 
 ### Attack chains
 
-**Chain A; Credential extraction (Critical when guestRole is over-permissioned).** Once `identityPoolId` is extracted from the page, an assessor may test only after explicit scope for temporary credentials and the exact minimal follow-up action:
+**Chain A — Credential extraction (Critical when guestRole is over-permissioned).** Once `identityPoolId` is extracted from the page, an assessor may test only after explicit scope for temporary credentials and the exact minimal follow-up action:
 
 ```bash
 aws cognito-identity get-id \
@@ -156,11 +156,11 @@ aws sts get-caller-identity        # confirm role
 
 Full chain documented in `cloud-iam-deep` → Cognito Identity Pool unauthenticated chain. RUM is one common embedding context.
 
-**Chain B; Telemetry data-handling review.** AWS-owned endpoints are not automatically trusted by every enterprise allowlist. Review whether telemetry can contain sensitive fields and whether egress/DLP policies inspect the payload. Use only a synthetic marker in an owned test monitor if a write test is explicitly authorized; never transmit stolen or production data to demonstrate a finding. Record monitor authorization, custom-event settings, retention and receiver access. Endpoint branding does not prove a blind spot.
+**Chain B — Telemetry data-handling review.** AWS-owned endpoints are not automatically trusted by every enterprise allowlist. Review whether telemetry can contain sensitive fields and whether egress/DLP policies inspect the payload. Use only a synthetic marker in an owned test monitor if a write test is explicitly authorized; never transmit stolen or production data to demonstrate a finding. Record monitor authorization, custom-event settings, retention and receiver access. Endpoint branding does not prove a blind spot.
 
-**Chain C; DOM injection via snippet source poisoning.** Many customers either self-host `cwr.js` on their own CDN (`assets.target.com/cwr.js`) or bundle `aws-rum-web` and serve from `static.target.com/main.<hash>.js`. Subdomain takeover on the JS host or supply-chain compromise (npm typosquat against `aws-rum-webb`) gives persistent JS execution on every page-load with the trust of the `aws-rum-web` SDK; including its already-granted Cognito permissions.
+**Chain C — DOM injection via snippet source poisoning.** Many customers either self-host `cwr.js` on their own CDN (`assets.target.com/cwr.js`) or bundle `aws-rum-web` and serve from `static.target.com/main.<hash>.js`. Subdomain takeover on the JS host or supply-chain compromise (npm typosquat against `aws-rum-webb`) gives persistent JS execution on every page-load with the trust of the `aws-rum-web` SDK — including its already-granted Cognito permissions.
 
-**Chain D; Telemetry injection / dashboard poisoning.** With the public `identityPoolId` + `applicationId`, an external attacker can flood `PutRumEvents` with fake error spikes (drown real alerts), potentially affect downstream consumers if those consumers render event data unsafely (console XSS is not established by this bundle), and inflate billable RUM event counts (financial DoS).
+**Chain D — Telemetry injection / dashboard poisoning.** With the public `identityPoolId` + `applicationId`, an external attacker can flood `PutRumEvents` with fake error spikes (drown real alerts), potentially affect downstream consumers if those consumers render event data unsafely (console XSS is not established by this bundle), and inflate billable RUM event counts (financial DoS).
 
 ### Severity rubric
 
@@ -189,23 +189,23 @@ AWS documents Cognito unauthenticated identities scoped to rum:PutRumEvents as a
 4. Run `aws sts get-caller-identity` and **screenshot the role ARN**.
 5. Review effective policies with the owner or test one explicitly approved canary action. Document unresolved policy/permission boundaries instead of broad enumeration.
 6. Use a synthetic owned test resource if authorized. Lambda invocation is not read-only and must never be grouped with harmless listing.
-7. **Do not** modify/delete data even if permitted; read-only PoC only.
+7. **Do not** modify/delete data even if permitted — read-only PoC only.
 
 ---
 
 ## Related Skills & Chains
 
-- **`hunt-subdomain`**; Stale CNAMEs pointing to deleted buckets are a takeover gold mine. Chain primitive: Cloud misconfig (S3 public/deleted) + `hunt-subdomain` → unclaimed CNAME points to bucket → `assets.target.com` takeover.
-- **`cloud-iam-deep`**; A leaked SA JSON / AWS key in a public bucket is only half the bug. Chain primitive: Public S3 + leaked AWS key in `.env` → `cloud-iam-deep` enumeration → cross-service `iam:PassRole` escalation.
-- **`hunt-ssrf`**; Instance metadata is normally reachable from its instance-local network context, subject to IMDS configuration and hop limits; SSRF is the bridge. Chain primitive: SSRF + cloud misconfig (IMDSv1 still enabled) → instance role keys → S3/RDS data read.
-- **`supply-chain-attack-recon`**; Exposed CI/CD endpoints and SBOMs reveal internal package names. Chain primitive: Exposed Jenkins/GitLab + internal package name leak → npm/PyPI dependency-confusion publish → CI build pwn.
-- **`security-arsenal`**; Load the Cloud Bucket Wordlist (target-prod / target-backup / target-staging permutations) and the Admin-Panel Path List for fast enumeration.
-- **`triage-validation`**; Apply the Unique-Marker gate: a write test is permitted only when explicitly authorized; use a unique synthetic marker, verify exact scope/read-back and authorized cleanup. Otherwise report the limitation without writing.
+- **`hunt-subdomain`** — Stale CNAMEs pointing to deleted buckets are a takeover gold mine. Chain primitive: Cloud misconfig (S3 public/deleted) + `hunt-subdomain` → unclaimed CNAME points to bucket → `assets.target.com` takeover.
+- **`cloud-iam-deep`** — A leaked SA JSON / AWS key in a public bucket is only half the bug. Chain primitive: Public S3 + leaked AWS key in `.env` → `cloud-iam-deep` enumeration → cross-service `iam:PassRole` escalation.
+- **`hunt-ssrf`** — Instance metadata is normally reachable from its instance-local network context, subject to IMDS configuration and hop limits; SSRF is the bridge. Chain primitive: SSRF + cloud misconfig (IMDSv1 still enabled) → instance role keys → S3/RDS data read.
+- **`supply-chain-attack-recon`** — Exposed CI/CD endpoints and SBOMs reveal internal package names. Chain primitive: Exposed Jenkins/GitLab + internal package name leak → npm/PyPI dependency-confusion publish → CI build pwn.
+- **`security-arsenal`** — Load the Cloud Bucket Wordlist (target-prod / target-backup / target-staging permutations) and the Admin-Panel Path List for fast enumeration.
+- **`triage-validation`** — Apply the Unique-Marker gate: a write test is permitted only when explicitly authorized; use a unique synthetic marker, verify exact scope/read-back and authorized cleanup. Otherwise report the limitation without writing.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

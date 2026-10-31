@@ -38,11 +38,11 @@ Master guide for embedding interactive 3D scenes from [Spline.design](https://sp
 
 ## What Is Spline?
 
-Spline is a browser-based 3D design tool; think Figma, but for 3D. Designers create interactive 3D scenes (objects, materials, animations, physics, events) in the Spline editor, then export them for the web via a hosted `.splinecode` file URL.
+Spline is a browser-based 3D design tool — think Figma, but for 3D. Designers create interactive 3D scenes (objects, materials, animations, physics, events) in the Spline editor, then export them for the web via a hosted `.splinecode` file URL.
 
 ---
 
-## STEP 1: Identify the Stack
+## STEP 1 — Identify the Stack
 
 Before writing any code, check the existing project files to determine the framework.
 
@@ -56,7 +56,7 @@ Before writing any code, check the existing project files to determine the frame
 
 ---
 
-## STEP 2: Get the Scene URL
+## STEP 2 — Get the Scene URL
 
 The user must go to their Spline editor → **Export** → **Code Export** → copy the `prod.spline.design` URL:
 
@@ -70,13 +70,13 @@ https://prod.spline.design/XXXXXXXXXXXXXXXX/scene.splinecode
 - ✅ Toggle **Hide Spline Logo** ON if they have a paid plan
 - ✅ Set **Geometry Quality** to Performance for faster load
 - ✅ Disable **Page Scroll**, **Zoom**, **Pan** if those aren't needed (reduces hijacking risk)
-- ✅ Click **Generate Draft** or **Promote to Production** after any settings change; the URL does NOT auto-update
+- ✅ Click **Generate Draft** or **Promote to Production** after any settings change — the URL does NOT auto-update
 
 ---
 
-## STEP 3: Read the Relevant Guide
+## STEP 3 — Read the Relevant Guide
 
-Once you have the stack and the scene URL, read the appropriate guide file above and follow its instructions. Always read COMMON_PROBLEMS.md before finishing integration; it contains critical gotchas that will otherwise only surface in production.
+Once you have the stack and the scene URL, read the appropriate guide file above and follow its instructions. Always read COMMON_PROBLEMS.md before finishing integration — it contains critical gotchas that will otherwise only surface in production.
 
 ---
 

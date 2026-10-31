@@ -41,7 +41,7 @@ People can always rate your app within the App Store.
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews#Developer-documentation)
 
-[`RequestReviewAction`](https://developer.apple.com/documentation/StoreKit/RequestReviewAction); StoreKit
+[`RequestReviewAction`](https://developer.apple.com/documentation/StoreKit/RequestReviewAction) — StoreKit
 
 ## [Change log](https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews#Change-log)
 

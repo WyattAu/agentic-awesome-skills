@@ -1,6 +1,6 @@
 ---
 name: ui-lint
-description: Quick automated lint; detects common design system violations in seconds
+description: Quick automated lint — detects common design system violations in seconds
 risk: safe
 source: https://github.com/bitjaru/styleseed/tree/main/engine/.claude/skills/ss-lint
 source_repo: bitjaru/styleseed
@@ -13,7 +13,7 @@ license_source: https://github.com/bitjaru/styleseed/blob/main/LICENSE
 # Design Lint (Quick Check)
 ## When to Use
 
-Use this skill when you need quick automated lint; detects common design system violations in seconds.
+Use this skill when you need quick automated lint — detects common design system violations in seconds.
 
 
 ## When NOT to use
@@ -21,7 +21,7 @@ Use this skill when you need quick automated lint; detects common design system 
 - For deeper review of design judgment (composition, hierarchy, rhythm) → use `/ss-review`
 - For accessibility specifically → use `/ss-a11y`
 - For Nielsen UX heuristics → use `/ss-audit`
-- For applying refactors; this only flags violations; use `/ss-review` to fix
+- For applying refactors — this only flags violations; use `/ss-review` to fix
 
 Target: **$ARGUMENTS**
 

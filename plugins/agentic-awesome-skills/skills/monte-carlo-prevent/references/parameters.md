@@ -5,7 +5,7 @@ calls to avoid common mistakes.
 
 ---
 
-## `getAlerts`: use snake_case parameters
+## `getAlerts` — use snake_case parameters
 
 The MCP tool uses Python snake_case, **not** the camelCase params from the MC web UI:
 
@@ -21,7 +21,7 @@ Use `getCurrentTime()` to get the current ISO timestamp when needed.
 
 ---
 
-## `search`: finding the right table identifier
+## `search` — finding the right table identifier
 
 MC uses MCONs (Monte Carlo Object Names) as table identifiers. Always use
 `search` first to resolve a table name to its MCON before calling `getTable`,

@@ -47,7 +47,7 @@ BEFORE YOU START:
         Export to CSV and review for custom/OCA modules
   ☑ 2. Check OCA compatibility matrix for each community module
         https://github.com/OCA/maintainer-tools/wiki/Migration-Status
-  ☑ 3. Take a full backup (database + filestore); your restore point
+  ☑ 3. Take a full backup (database + filestore) — your restore point
   ☑ 4. Clone production to a staging environment
   ☑ 5. Run the Odoo Upgrade pre-analysis:
         https://upgrade.odoo.com/ → Upload DB → Review breaking changes report
@@ -114,13 +114,13 @@ Users & Security:
 
 ## Best Practices
 
-- ✅ **Do:** Always upgrade on a **copy of production** (staging) first; never the live instance.
+- ✅ **Do:** Always upgrade on a **copy of production** (staging) first — never the live instance.
 - ✅ **Do:** Keep the old version running until the new version is **fully validated and signed off**.
 - ✅ **Do:** Check OCA's migration status page: [OCA Migration Status](https://github.com/OCA/maintainer-tools/wiki/Migration-Status)
 - ✅ **Do:** Use the [Odoo Upgrade Service](https://upgrade.odoo.com/) pre-analysis report to get a list of breaking changes **before writing any code**.
 - ❌ **Don't:** Skip intermediate versions with OpenUpgrade. The official Odoo upgrade service has its own supported-source/target policy; do not impose OpenUpgrade's sequence on it.
-- ❌ **Don't:** Upgrade custom modules and Odoo core simultaneously; adapt Odoo core first, then fix custom modules.
-- ❌ **Don't:** Run OpenUpgrade against production directly; always test on a staging copy first.
+- ❌ **Don't:** Upgrade custom modules and Odoo core simultaneously — adapt Odoo core first, then fix custom modules.
+- ❌ **Don't:** Run OpenUpgrade against production directly — always test on a staging copy first.
 
 ## Limitations
 

@@ -1,4 +1,4 @@
-# Docs Guard: Review Checklist
+# Docs Guard — Review Checklist
 
 Structured walk for review mode. Findings first, file:line evidence always. Priorities: false claims → drift → substance → navigation.
 
@@ -28,7 +28,7 @@ For every fenced block, run the [code-samples.md](code-samples.md) checklist: im
 
 - Take the public API surface (or the diff, when reviewing a change) and grep the docs for renamed/removed symbols, old defaults, and dead flags.
 - Check the changelog mentions what the docs claim is new, and versions agree (Rule 5).
-- Cross-surface consistency: README vs reference vs docstrings vs config samples; one claim per fact, surfaces agreeing (Rule 6).
+- Cross-surface consistency: README vs reference vs docstrings vs config samples — one claim per fact, surfaces agreeing (Rule 6).
 
 ## Pass 4: Substance (should fix)
 
@@ -42,4 +42,4 @@ For every fenced block, run the [code-samples.md](code-samples.md) checklist: im
 
 ## Reporting
 
-Use the SKILL.md reporting format (Claim / Reality / Fix). Lead with the count: "N claims checked, M false, K unverifiable." End with a verdict; publish / fix first / do not publish; and at most three things the docs do well. A review that verifies 40 claims and finds 2 false is a *good* result; say so.
+Use the SKILL.md reporting format (Claim / Reality / Fix). Lead with the count: "N claims checked, M false, K unverifiable." End with a verdict — publish / fix first / do not publish — and at most three things the docs do well. A review that verifies 40 claims and finds 2 false is a *good* result; say so.

@@ -92,19 +92,19 @@ Action:
 
 ## Best Practices
 
-- ✅ **Do:** Install your country's **localization module** first (`l10n_us`, `l10n_mx`, etc.) before manually creating accounts; it sets up the correct chart of accounts.
-- ✅ **Do:** Use **Fiscal Positions** to automate B2B vs B2C tax switching; never change taxes manually on individual invoices.
+- ✅ **Do:** Install your country's **localization module** first (`l10n_us`, `l10n_mx`, etc.) before manually creating accounts — it sets up the correct chart of accounts.
+- ✅ **Do:** Use **Fiscal Positions** to automate B2B vs B2C tax switching — never change taxes manually on individual invoices.
 - ✅ **Do:** Lock accounting periods (Accounting → Actions → Lock Dates) after month-end closing to prevent retroactive edits.
 - ✅ **Do:** Use the **Early Payment Discount** feature (v16+) instead of splitting payment term lines for discount modelling.
-- ❌ **Don't:** Delete journal entries; always reverse them with a credit note or the built-in reversal function.
+- ❌ **Don't:** Delete journal entries — always reverse them with a credit note or the built-in reversal function.
 - ❌ **Don't:** Mix personal and business transactions in the same journal.
-- ❌ **Don't:** Create manual journal entries to fix bank reconciliation mismatches; use the reconciliation model workflow instead.
+- ❌ **Don't:** Create manual journal entries to fix bank reconciliation mismatches — use the reconciliation model workflow instead.
 
 ## Limitations
 
 - Does not cover **multi-currency revaluation** or foreign exchange gain/loss accounting in depth.
-- **Country-specific e-invoicing** (CFDI, FatturaPA, SAF-T) requires additional localization modules; use `@odoo-l10n-compliance` for those.
-- Payroll accounting integration (salary journals, deduction accounts) is not covered here; use `@odoo-hr-payroll-setup`.
+- **Country-specific e-invoicing** (CFDI, FatturaPA, SAF-T) requires additional localization modules — use `@odoo-l10n-compliance` for those.
+- Payroll accounting integration (salary journals, deduction accounts) is not covered here — use `@odoo-hr-payroll-setup`.
 - Menu labels, lock-date controls and fields vary by version, edition and installed modules. Establish those inputs before providing exact navigation.
 - These are configuration examples, not tax advice. A qualified accountant must approve accounts, tax eligibility and reporting treatment before live posting; zero VAT alone does not implement reverse-charge reporting.
 - See [Odoo 17 cash discount configuration](https://www.odoo.com/documentation/17.0/applications/finance/accounting/customer_invoices/cash_discounts.html).

@@ -113,7 +113,7 @@ Analyze the monitor report and config together. Focus on:
 
 ### 2a. Alert volume & frequency
 - How many incidents in the last 30 days? Last 7 days?
-- What is the firing cadence; multiple times per day? Daily? Sporadic?
+- What is the firing cadence — multiple times per day? Daily? Sporadic?
 - Are incidents clustered in time (bursts) or spread evenly?
 
 ### 2b. Anomaly patterns
@@ -150,9 +150,9 @@ Based on the analysis, produce a prioritized list of recommendations. For each r
 ### General recommendations (all monitor types)
 
 #### Sensitivity tuning (ML thresholds only)
-This applies to any monitor that uses ML thresholds; both metric monitors and custom SQL monitors.
+This applies to any monitor that uses ML thresholds — both metric monitors and custom SQL monitors.
 Skip this section for validation monitors (they don't use ML thresholds), for table monitors
-(they have their own per-metric sensitivity; see the table monitor reference), and for monitors
+(they have their own per-metric sensitivity — see the table monitor reference), and for monitors
 with explicit thresholds (for custom SQL monitors, see threshold adjustment in the per-type
 reference instead).
 
@@ -183,13 +183,13 @@ sensitivity tuning), follow the guidance in the per-type reference loaded in Pha
 
 ## Phase 4: Present the Report
 
-Output a structured analysis. **This is the primary output; include it in full.**
+Output a structured analysis. **This is the primary output — include it in full.**
 
 ```markdown
 ## Monitor Tune Report: {monitor_uuid}
 
 **Monitor:** {display_name or mac_name}
-**Type:** {monitor type; metric, custom SQL, validation, or table}
+**Type:** {monitor type — metric, custom SQL, validation, or table}
 **Table:** {table}
 **What it monitors:** {metric and segments, SQL query summary, validation conditions, or table/metric coverage}
 **Current sensitivity:** {sensitivity or "AUTO (default)" or "N/A (explicit thresholds)"}
@@ -202,7 +202,7 @@ Output a structured analysis. **This is the primary output; include it in full.*
 - Most noisy (table, metric) pairs: {for table monitors: top pairs by anomaly count}
 
 ### Root Cause Pattern
-{1-3 sentence summary of what the alerts represent; operational events, bursty data, model
+{1-3 sentence summary of what the alerts represent — operational events, bursty data, model
 miscalibration, genuine issues, etc.}
 
 ### Recommendations
@@ -222,7 +222,7 @@ miscalibration, genuine issues, etc.}
 ...
 
 ### What NOT to change
-{Any configurations that look correct and should be left alone; avoid over-tuning.}
+{Any configurations that look correct and should be left alone — avoid over-tuning.}
 
 ### If these changes are made
 {Report the expected direction and detection-delay/blind-spot risk. Quantify reduction only from an explicit historical replay or measured trial, including its coverage and limitations.}
@@ -240,10 +240,10 @@ Phase 1.5. Each reference specifies the correct tool and constraints for that mo
 
 General rules for all types:
 0. **Re-fetch before applying.** Compare the current full config/version with the analyzed snapshot; if it changed, recompute the preview. Preserve original config for rollback, and after applying re-read the full config to verify intended changes and unchanged fields. A success link alone is not verification. Define a trial window and rollback trigger based on genuine-incident detection as well as noise.
-1. **Always preview first**; show the user what will change before applying.
+1. **Always preview first** — show the user what will change before applying.
 2. **Get explicit confirmation** before applying any change.
-3. **Validate the preview YAML against the schema**; before presenting the preview YAML to the user, fetch the published MaC JSON Schema from `https://clidocs.getmontecarlo.com/mac/schema.json` (WebFetch) and check the preview YAML against it. If any field in the YAML does not appear in the schema for the given monitor type, flag it and correct it. Note: the schema validates field names, types, and enum values only; schema constraints vary by version; do not assume validation proves backend compatibility or safe detection. Inspect the installed tool schema too, use a safe YAML loader and retain schema version/hash. If the schema is unavailable, do not claim validation passed or deploy an unverified field.
-4. **MaC-managed monitors**; if `get_monitors` returns a `mac_name` or the user mentions the monitor is managed via a MaC YAML file, note this before applying: changes made via the API will be overwritten the next time `montecarlo monitors apply` runs. Offer to hand off to `/manage-mac` (edit workflow) instead so the YAML file stays the source of truth.
+3. **Validate the preview YAML against the schema** — before presenting the preview YAML to the user, fetch the published MaC JSON Schema from `https://clidocs.getmontecarlo.com/mac/schema.json` (WebFetch) and check the preview YAML against it. If any field in the YAML does not appear in the schema for the given monitor type, flag it and correct it. Note: the schema validates field names, types, and enum values only — schema constraints vary by version; do not assume validation proves backend compatibility or safe detection. Inspect the installed tool schema too, use a safe YAML loader and retain schema version/hash. If the schema is unavailable, do not claim validation passed or deploy an unverified field.
+4. **MaC-managed monitors** — if `get_monitors` returns a `mac_name` or the user mentions the monitor is managed via a MaC YAML file, note this before applying: changes made via the API will be overwritten the next time `montecarlo monitors apply` runs. Offer to hand off to `/manage-mac` (edit workflow) instead so the YAML file stays the source of truth.
 
 ---
 

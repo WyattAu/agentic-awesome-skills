@@ -18,7 +18,7 @@ license_source: "https://github.com/target1m/traderspy-mcp/blob/069aae5a84640d67
 
 TraderSpy's AI signals are automated reads of the market: a named preset fires when several
 technical conditions line up on one crypto futures pair, a validator scores the alignment, and
-the published signal carries an entry, a take-profit ladder, a stop and; later; what actually
+the published signal carries an entry, a take-profit ladder, a stop and — later — what actually
 happened. The signals feed at https://traderspy.app/signals publishes every one with its resolved
 outcome. Your job is to fetch,
 translate and contextualise them; the decision stays with the user.
@@ -47,7 +47,7 @@ Three argument behaviours that are easy to get wrong:
 - **`coin` is a prefix match** on the pair name. `BTC` matches `BTCUSDT` and also `BTCDOMUSDT`;
   check the `coin` field of each row before presenting "BTC signals".
 - **`limit` is what gets rendered.** In hosts that draw signal cards, every fetched row becomes a
-  card. If the user asks for "the last 5", pass `limit: 5`; do not fetch 20 and show 5.
+  card. If the user asks for "the last 5", pass `limit: 5` — do not fetch 20 and show 5.
 
 ## What a signal row contains
 
@@ -56,7 +56,7 @@ Three argument behaviours that are easy to get wrong:
 `price` · `triggeredConditions[]` in plain language · `importance` · `signalStrength` weak /
 moderate / strong / very_strong · `resolutionStatus` · `createdAt`.
 
-Convert target percentages to prices before showing them; users think in prices:
+Convert target percentages to prices before showing them — users think in prices:
 
 - buy: TP = price × (1 + pct/100), SL = price × (1 − pct/100)
 - sell: TP = price × (1 − pct/100), SL = price × (1 + pct/100)
@@ -82,7 +82,7 @@ signal that is still `pending` two days later is stale rather than alive.
 
 **"Latest signals" / "any setups?"** → `get_signals` with the limit the user implies (default 10 if
 they gave no number). Lead with the newest, group by side if several, and make the resolved ones
-visible; a list that mixes three winners, two stops and five pending rows should say so.
+visible — a list that mixes three winners, two stops and five pending rows should say so.
 
 **"Signals for SOL"** → `get_signals` with `coin`. If the result is empty, say there is no recent
 signal on that pair rather than offering a different pair as if it were the same thing.
@@ -92,7 +92,7 @@ compare `livePrice` with the entry, TP1 and SL in the same units:
 
 - distance from entry in % (signed the way the trade wants it: for a buy, positive = in profit)
 - whether a level has already been crossed (a `pending` buy with `livePrice` below the SL price
-  is finished in everything but paperwork; say so)
+  is finished in everything but paperwork — say so)
 - `history.highestPrice` / `lowestPrice` show the best and worst it has seen since entry
 - `indicatorValues` are the readings at trigger time, not now; if the user wants the current
   picture, hand off to technical-analysis rather than re-reading stale values as if they were live
@@ -113,7 +113,7 @@ as prices with the % in brackets → what triggered it (the `triggeredConditions
 rephrased) → where price is now versus entry / TP1 / SL → the outcome so far → the one-line risk
 note. Quote `livePrice` with its timestamp when the answer depends on it.
 
-Do not invent an "AI review" if `aiReview` is null; most signals do not carry one. When it exists,
+Do not invent an "AI review" if `aiReview` is null — most signals do not carry one. When it exists,
 report `score` and `decision` as the reviewer's opinion, not as a verdict.
 
 ## Conduct

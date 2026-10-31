@@ -16,7 +16,7 @@ license_source: https://github.com/jonathimer/devmarketing-skills/blob/main/LICE
 Use this skill when you need transform documentation into a powerful marketing channel that attracts, converts, and retains developers. This skill covers creating documentation that ranks in search, converts visitors into users, and accelerates adoption through exceptional information architecture and...
 
 
-Documentation is often a developer's first meaningful interaction with your product. Great docs don't just explain-they market. They reduce friction, build trust, and turn curious visitors into active users who recommend your product to others.
+Documentation is often a developer's first meaningful interaction with your product. Great docs don't just explain—they market. They reduce friction, build trust, and turn curious visitors into active users who recommend your product to others.
 
 ## Overview
 
@@ -26,7 +26,7 @@ Developer documentation serves multiple marketing functions:
 - **Retention**: Comprehensive references keep developers building
 - **Referral**: Developers share docs they love, not marketing pages
 
-This skill covers the intersection of technical writing and developer marketing-creating documentation that serves both education and conversion goals.
+This skill covers the intersection of technical writing and developer marketing—creating documentation that serves both education and conversion goals.
 
 ## Before You Start
 
@@ -127,7 +127,7 @@ Get your first [meaningful result] in under 5 minutes.
 [Minimal configuration, explain what each part does]
 
 ## Step 3: Run
-[The payoff-show them it works]
+[The payoff—show them it works]
 
 ## What You Built
 [Explain what just happened and why it matters]

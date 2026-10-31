@@ -1,11 +1,11 @@
-# Especificação de Formatos: Context Agent
+# Especificação de Formatos — Context Agent
 
 ## session-NNN.md
 
 Cada arquivo de sessão segue este formato:
 
 ```markdown
-# Sessão NNN: YYYY-MM-DD
+# Sessão NNN — YYYY-MM-DD
 **Slug:** session-slug | **Duração:** ~Xmin | **Modelo:** claude-opus-4-6
 
 ## Tópicos
@@ -22,7 +22,7 @@ Cada arquivo de sessão segue este formato:
 - [ ] Tarefa que ficou pendente (prioridade: alta|média|baixa)
 
 ## Arquivos Modificados
-- `path/to/file.py`; edit|write
+- `path/to/file.py` — edit|write
 
 ## Descobertas
 - Insight técnico importante
@@ -52,7 +52,7 @@ Cada arquivo de sessão segue este formato:
 Máximo de 150 linhas. Formato:
 
 ```markdown
-# Contexto Ativo: Atualizado em YYYY-MM-DD HH:MM
+# Contexto Ativo — Atualizado em YYYY-MM-DD HH:MM
 
 ## Projetos Ativos
 | Projeto | Status | Última Sessão | Próxima Ação |
@@ -83,7 +83,7 @@ Máximo de 150 linhas. Formato:
 ## PROJECT_REGISTRY.md
 
 ```markdown
-# Registro de Projetos: Atualizado em YYYY-MM-DD HH:MM
+# Registro de Projetos — Atualizado em YYYY-MM-DD HH:MM
 
 | Projeto | Status | Última Interação | Próximas Ações |
 |---------|--------|------------------|----------------|

@@ -33,11 +33,11 @@ Use a profile the user explicitly named, otherwise use the profile identified by
 
 ### 2. Region
 
-Resolution order; stop at the first one that produces a value:
+Resolution order — stop at the first one that produces a value:
 1. Region the user explicitly named in this conversation
 2. Region reported by `aws configure list --profile "$profile"`
 3. Region reported by `aws configure get region --profile "$profile"`
-4. Ask the user; but only after the preceding sources have failed
+4. Ask the user — but only after the preceding sources have failed
 
 Do not fall back to `us-east-1` or any other hardcoded default.
 
@@ -85,7 +85,7 @@ One or two lines, not a wall of text:
 
 > Working with profile `my-profile` in `eu-west-1`, account `123456789012`. You're authenticated via SSO; IAM permissions still depend on your assigned permission set and policies.
 
-Don't ask the user to confirm the region you just read from their config; they configured it; that is the confirmation.
+Don't ask the user to confirm the region you just read from their config — they configured it; that is the confirmation.
 
 If something is wrong (credentials expired, profile doesn't exist, no region anywhere), stop and surface the specific error before continuing.
 

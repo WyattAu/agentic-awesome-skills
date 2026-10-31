@@ -137,12 +137,12 @@ wait()
 
 The `go-rod/stealth` package injects JavaScript evasions into every new page that:
 
-- **Remove `navigator.webdriver`**; the primary headless detection signal.
-- **Spoof WebGL vendor/renderer**; presents real GPU info (e.g., "Intel Inc." / "Intel Iris OpenGL Engine") instead of headless markers like "Google SwiftShader".
-- **Fix Chrome plugin array**; reports proper `PluginArray` type with realistic plugin count.
-- **Patch permissions API**; returns `"prompt"` instead of bot-revealing values.
-- **Set realistic languages**; reports `en-US,en` instead of empty arrays.
-- **Fix broken image dimensions**; headless browsers report 0x0; stealth fixes this to 16x16.
+- **Remove `navigator.webdriver`** — the primary headless detection signal.
+- **Spoof WebGL vendor/renderer** — presents real GPU info (e.g., "Intel Inc." / "Intel Iris OpenGL Engine") instead of headless markers like "Google SwiftShader".
+- **Fix Chrome plugin array** — reports proper `PluginArray` type with realistic plugin count.
+- **Patch permissions API** — returns `"prompt"` instead of bot-revealing values.
+- **Set realistic languages** — reports `en-US,en` instead of empty arrays.
+- **Fix broken image dimensions** — headless browsers report 0x0; stealth fixes this to 16x16.
 
 ### Usage
 
@@ -172,7 +172,7 @@ if err != nil {
 page.MustNavigate("https://example.com")
 ```
 
-**Using stealth.JS directly (advanced; for custom page creation):**
+**Using stealth.JS directly (advanced — for custom page creation):**
 
 ```go
 // If you need to create the page yourself (e.g., with specific options),
@@ -462,23 +462,23 @@ browser := rod.New().ControlURL(u).MustConnect()
 - ✅ **ALWAYS use `stealth.MustPage(browser)`** instead of `browser.MustPage()` for real-world sites.
 - ✅ **ALWAYS `defer browser.MustClose()`** immediately after connecting.
 - ✅ Use the error-returning API (not `Must*`) in production code.
-- ✅ Set explicit timeouts with `.Timeout()`; never rely on defaults for production.
+- ✅ Set explicit timeouts with `.Timeout()` — never rely on defaults for production.
 - ✅ Use `browser.MustIncognito().MustPage()` for isolated sessions.
 - ✅ Use `PagePool` for concurrent scraping instead of spawning unlimited pages.
 - ✅ Use `MustWaitStable()` before clicking elements that might be animating.
 - ✅ Use `MustWaitRequestIdle()` after actions that trigger AJAX calls.
 - ✅ Use `launcher.New().Headless(false).Devtools(true)` for debugging.
-- ❌ **NEVER** use `time.Sleep()` for waiting; use Rod's built-in wait methods.
-- ❌ **NEVER** create a new `Browser` per task; create one Browser, use multiple `Page` instances.
-- ❌ **NEVER** use `browser.MustPage()` for production scraping; use `stealth.MustPage()`.
-- ❌ **NEVER** ignore errors in production; always handle them explicitly.
+- ❌ **NEVER** use `time.Sleep()` for waiting — use Rod's built-in wait methods.
+- ❌ **NEVER** create a new `Browser` per task — create one Browser, use multiple `Page` instances.
+- ❌ **NEVER** use `browser.MustPage()` for production scraping — use `stealth.MustPage()`.
+- ❌ **NEVER** ignore errors in production — always handle them explicitly.
 - ❌ **NEVER** forget to defer-close browsers, pages, and hijack routers.
 
 
 ## Common Pitfalls
 
 - **Problem:** Element not found even though it exists on the page.
-  **Solution:** The element may be inside an iframe or shadow DOM. Use `page.MustSearch()` instead of `page.MustElement()`; it searches across all iframes and shadow DOMs.
+  **Solution:** The element may be inside an iframe or shadow DOM. Use `page.MustSearch()` instead of `page.MustElement()` — it searches across all iframes and shadow DOMs.
 
 - **Problem:** Click doesn't work because the element is animating.
   **Solution:** Call `el.MustWaitStable()` before `el.MustClick()`.
@@ -498,11 +498,11 @@ browser := rod.New().ControlURL(u).MustConnect()
 
 ## Documentation References
 
-- [Official Documentation](https://go-rod.github.io/); Guides, tutorials, FAQ
-- [Go API Reference](https://pkg.go.dev/github.com/go-rod/rod); Complete type and method documentation
-- [go-rod/stealth](https://github.com/go-rod/stealth); Anti-bot detection plugin
-- [Examples (source)](https://github.com/go-rod/rod/blob/main/examples_test.go); Official example tests
-- [Rod vs Chromedp Comparison](https://github.com/nichochar/go-rod.github.io/blob/main/lib/examples/compare-chromedp); Migration reference
-- [Chrome DevTools Protocol Docs](https://chromedevtools.github.io/devtools-protocol/); Underlying protocol reference
-- [Chrome CLI Flags Reference](https://peter.sh/experiments/chromium-command-line-switches); Launcher flag documentation
-- `api-reference.md`; Quick-reference cheat sheet
+- [Official Documentation](https://go-rod.github.io/) — Guides, tutorials, FAQ
+- [Go API Reference](https://pkg.go.dev/github.com/go-rod/rod) — Complete type and method documentation
+- [go-rod/stealth](https://github.com/go-rod/stealth) — Anti-bot detection plugin
+- [Examples (source)](https://github.com/go-rod/rod/blob/main/examples_test.go) — Official example tests
+- [Rod vs Chromedp Comparison](https://github.com/nichochar/go-rod.github.io/blob/main/lib/examples/compare-chromedp) — Migration reference
+- [Chrome DevTools Protocol Docs](https://chromedevtools.github.io/devtools-protocol/) — Underlying protocol reference
+- [Chrome CLI Flags Reference](https://peter.sh/experiments/chromium-command-line-switches) — Launcher flag documentation
+- `api-reference.md` — Quick-reference cheat sheet

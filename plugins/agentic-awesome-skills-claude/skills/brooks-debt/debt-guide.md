@@ -1,4 +1,4 @@
-# Tech Debt Assessment Guide: Mode 3
+# Tech Debt Assessment Guide — Mode 3
 
 **Purpose:** Identify, classify, and prioritize technical debt across the entire codebase.
 Every finding must follow the Iron Law: Symptom → Source → Consequence → Remedy.
@@ -7,7 +7,7 @@ Every finding must follow the Iron Law: Symptom → Source → Consequence → R
 
 ## Evidence Gathering
 
-If you have insufficient evidence to assess the codebase, ask the user ONE question -
+If you have insufficient evidence to assess the codebase, ask the user ONE question —
 choose the single question most relevant to what you already know:
 
 1. "Which part of the codebase takes the longest to modify for a typical feature?"
@@ -82,17 +82,17 @@ After listing all findings, score each one:
 
 After scoring, classify each finding as intentional or accidental:
 
-**Intentional debt**; a conscious shortcut taken to meet a deadline, with the expectation
+**Intentional debt** — a conscious shortcut taken to meet a deadline, with the expectation
 of paying it back. The team knows about it. It may be legitimate (a strategic prototype,
 a known temporary workaround during a migration).
 
-**Accidental debt**; degradation that accumulated without a deliberate decision: the team
+**Accidental debt** — degradation that accumulated without a deliberate decision: the team
 did not choose it and may not even know it exists. This is the kind Ward Cunningham's
-original definition warned against; not a tactical trade-off, but structural erosion.
+original definition warned against — not a tactical trade-off, but structural erosion.
 
 Mark each finding with `[intentional]`, `[accidental]` or `[unknown intent]` in the Debt Summary Table.
-Intentional debt with no visible payback plan; no linked ticket, no code comment, no
-documented decision; has an unverified payback plan; do not infer the team's intent from missing records alone.
+Intentional debt with no visible payback plan — no linked ticket, no code comment, no
+documented decision — has an unverified payback plan; do not infer the team's intent from missing records alone.
 Focus remediation energy on accidental debt first; intentional debt at least has an owner.
 
 ### Step 4: Group by Decay Risk

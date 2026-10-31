@@ -29,13 +29,13 @@ sources: hackerone_public
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-EXCEPTIONAL-CONDITIONS: Verbose Errors / Fail-Open (A10:2025)
+# HUNT-EXCEPTIONAL-CONDITIONS — Verbose Errors / Fail-Open (A10:2025)
 
 ## What actually pays
 
 Well-built apps catch errors and return a clean, generic message. A broken app,
 when handed input it didn't expect, throws an unhandled exception and renders a
-**developer error page** straight to the client; leaking the stack trace, the
+**developer error page** straight to the client — leaking the stack trace, the
 ORM/query internals, server-side file paths, and framework/library versions.
 That disclosure is the finding (and it arms SQLi/RCE/path attacks next).
 
@@ -50,12 +50,12 @@ Search / filter / sort params
 File or content-type sensitive uploads
 ```
 
-## Attack: send what the code didn't anticipate
+## Attack — send what the code didn't anticipate
 
 Take a known-good request and break ONE assumption at a time:
 
 - **Wrong type:** a field the app expects to be a number/string is sent as an
-  array or object; `{"rating":"x","comment":[1,2,3]}`, `{"quantity":{}}`.
+  array or object — `{"rating":"x","comment":[1,2,3]}`, `{"quantity":{}}`.
 - **Malformed body:** truncated/!invalid JSON, an unterminated string, a stray
   brace, a wrong/missing Content-Type.
 - **Boundary/oversized:** test only pre-agreed small bounds and request rates; do not send unbounded payloads or attempt denial of service. Negative/overflow numbers must remain within the permitted test scope.
@@ -81,11 +81,11 @@ The following signatures are candidates for error disclosure. Confirm that the r
 - **.NET:** `Server Error in '/' Application`, a `[System.XxxException: ...]` YSOD.
 
 A clean JSON error (`{"error":"Invalid input"}`) with no internals is NOT a
-finding; that's correct handling. Disclosure of internal structure is.
+finding — that's correct handling. Disclosure of internal structure is.
 
 ## Validation discipline
 
-- Capture the exact leaked artifact (path, ORM class, version, stack frame) -
+- Capture the exact leaked artifact (path, ORM class, version, stack frame) —
   that's the evidence. "It returned 500" alone is not disclosure.
 - Note what the leak enables next (e.g. a disclosed SQL error → hunt-sqli; a
   disclosed absolute path → hunt-lfi).
@@ -93,7 +93,7 @@ finding; that's correct handling. Disclosure of internal structure is.
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

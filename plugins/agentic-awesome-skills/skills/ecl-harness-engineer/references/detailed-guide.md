@@ -18,12 +18,12 @@ business features, replace the coding agent's plan mode, or create a separate re
 Plan mode is useful for live discussion; ECL artifacts are the repository record that later agents,
 linters, CI, and archive history can inspect.
 
-1. **Quick Detection + Intent Confirmation**; what exists, what already passes, and what the user wants.
-2. **Analysis**; architecture, harness state, environment, and project identity.
-3. **Intake Review + Delta Synthesis**; classify small vs structured work, support requirement-first
+1. **Quick Detection + Intent Confirmation** — what exists, what already passes, and what the user wants.
+2. **Analysis** — architecture, harness state, environment, and project identity.
+3. **Intake Review + Delta Synthesis** — classify small vs structured work, support requirement-first
    and plan-first inputs, and compute exactly what to create or update.
-4. **Creation/Update**; docs, status handoff, linters, ECL/change scripts, environment config, and CI.
-5. **Verification + Handoff**; run checks, attribute failures, update STATUS.md, trigger auto-evolve checks, and summarize results.
+4. **Creation/Update** — docs, status handoff, linters, ECL/change scripts, environment config, and CI.
+5. **Verification + Handoff** — run checks, attribute failures, update STATUS.md, trigger auto-evolve checks, and summarize results.
 
 ---
 
@@ -340,20 +340,20 @@ Create a delta list:
 - [ ] harness/evolution/{state.json,results.tsv,proposals/} (`pending.md` is generated later only when the archive threshold is reached)
 
 ### Optional Advanced (only if explicitly requested)
-- [ ] harness/eval/; agent evaluation datasets and runner inputs
-- [ ] harness/trace/; execution traces for agent runs
-- [ ] harness/state/; executor runtime state
-- [ ] harness/checkpoints/; resumable execution checkpoints
-- [ ] harness/memory/; long-term agent memory experiments
-- [ ] harness/metrics/; execution and quality metrics
+- [ ] harness/eval/ — agent evaluation datasets and runner inputs
+- [ ] harness/trace/ — execution traces for agent runs
+- [ ] harness/state/ — executor runtime state
+- [ ] harness/checkpoints/ — resumable execution checkpoints
+- [ ] harness/memory/ — long-term agent memory experiments
+- [ ] harness/metrics/ — execution and quality metrics
 
 ### To Update (exists but has gaps)
-- [ ] docs/DEVELOPMENT.md; missing build commands
-- [ ] scripts/lint-quality.py; missing 3 packages in layer map
+- [ ] docs/DEVELOPMENT.md — missing build commands
+- [ ] scripts/lint-quality.py — missing 3 packages in layer map
 
 ### Already Good (no changes needed)
-- [x] Makefile; has all required targets
-- [x] .github/workflows/ci.yml; properly configured
+- [x] Makefile — has all required targets
+- [x] .github/workflows/ci.yml — properly configured
 ```
 
 ### 3.3 Confirm with User (if confirmation tool is available)
@@ -432,7 +432,7 @@ Contents:
 - Basic types and core logic
 - Test files
 
-This is for harness-executor to implement; not ecl-harness-engineer's responsibility.
+This is for harness-executor to implement — not ecl-harness-engineer's responsibility.
 """)
 ```
 

@@ -1,10 +1,10 @@
-# Inference Providers: when not to host the model
+# Inference Providers — when not to host the model
 
 Some Spaces don't need a GPU at all. If the model is available through HF Inference Providers (Cerebras, Fireworks, Together, Replicate, OpenRouter, etc.), the Space can be a thin Gradio shell that proxies to a hosted endpoint:
 
 - Zero VRAM, no `@spaces.GPU`, no model download.
 - Works for models too large to fit on ZeroGPU (120B+).
-- Hardware can be `cpu-basic`; no GPU at all.
+- Hardware can be `cpu-basic` — no GPU at all.
 
 ## When to use this pattern
 
@@ -22,13 +22,13 @@ Some Spaces don't need a GPU at all. If the model is available through HF Infere
 - The Space needs **multimodal** beyond what the provider exposes.
 - The user explicitly wants to own the inference stack (model loading, decoding, performance tuning).
 
-For those, host the model yourself on ZeroGPU; see [`zerogpu.md`](zerogpu.md).
+For those, host the model yourself on ZeroGPU — see [`zerogpu.md`](zerogpu.md).
 
 ## Two billing modes
 
 Choose based on who pays for inference.
 
-### Mode A: Space creator pays (simple)
+### Mode A — Space creator pays (simple)
 
 Set `HF_TOKEN` as a Space secret. The Space uses `InferenceClient` directly. Every visitor's call is billed to the Space creator's account.
 
@@ -50,7 +50,7 @@ gr.ChatInterface(chat).launch()
 
 Before exposing a creator-funded token to public requests, enforce authentication where appropriate, per-user rate/concurrency limits and a spending budget. The token stays server-side; user content is sent to the selected provider under its retention/privacy terms.
 
-### Mode B: Visitor pays (recommended for public demos)
+### Mode B — Visitor pays (recommended for public demos)
 
 `gr.LoginButton` + `gr.load("models/...")` with `accept_token=button`. Each visitor signs in with their HF account; inference is billed to **their** account.
 
@@ -72,14 +72,14 @@ hf_oauth_scopes:
   - inference-api
 ```
 
-This is the **recommended pattern for public demos**; sustainable cost-wise, and visitors get to use their own provider quotas (which most have paid for or get free).
+This is the **recommended pattern for public demos** — sustainable cost-wise, and visitors get to use their own provider quotas (which most have paid for or get free).
 
 ## Hardware
 
-`cpu-basic`. No GPU. Don't put `--flavor zero-a10g`; you'd waste a paid grant.
+`cpu-basic`. No GPU. Don't put `--flavor zero-a10g` — you'd waste a paid grant.
 
 ## Anti-pattern: `@spaces.GPU` wrapping a provider call
 
-If you do use Inference Providers, do **not** wrap the call in `@spaces.GPU`. The decorator reserves a GPU slot on your Space for the full `duration=`, but the function does no GPU work; just an HTTP call out. You burn your own ZeroGPU quota for nothing.
+If you do use Inference Providers, do **not** wrap the call in `@spaces.GPU`. The decorator reserves a GPU slot on your Space for the full `duration=`, but the function does no GPU work — just an HTTP call out. You burn your own ZeroGPU quota for nothing.
 
 A provider-proxy Space wants `cpu-basic` hardware and zero `@spaces.GPU`.

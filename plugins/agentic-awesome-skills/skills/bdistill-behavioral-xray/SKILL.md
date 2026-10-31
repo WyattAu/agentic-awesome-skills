@@ -1,6 +1,6 @@
 ---
 name: bdistill-behavioral-xray
-description: "X-ray any AI model's behavioral patterns; refusal boundaries, hallucination tendencies, reasoning style, formatting defaults. No API key needed."
+description: "X-ray any AI model's behavioral patterns — refusal boundaries, hallucination tendencies, reasoning style, formatting defaults. No API key needed."
 category: ai-testing
 risk: safe
 source: community
@@ -25,8 +25,8 @@ Use it to understand your model before building with it, compare models for task
 - Use when you want to understand how your AI model actually behaves (not how it claims to)
 - Use when choosing between models for a specific task
 - Use when debugging unexpected refusals, hallucinations, or formatting issues
-- Use for compliance auditing; documenting model behavior at deployment boundaries
-- Use for red team assessments; systematic boundary mapping across safety dimensions
+- Use for compliance auditing — documenting model behavior at deployment boundaries
+- Use for red team assessments — systematic boundary mapping across safety dimensions
 
 ## How It Works
 
@@ -76,7 +76,7 @@ A styled HTML report showing:
 
 ## Best Practices
 
-- Answer probe questions honestly; the value is in authentic behavioral data
+- Answer probe questions honestly — the value is in authentic behavioral data
 - Run probes on the same model periodically to track behavioral drift
 - Compare reports across models to make informed selection decisions
 - Use adversarial knowledge extraction (`/distill --adversarial`) alongside behavioral probes for complete model profiling

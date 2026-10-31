@@ -39,6 +39,6 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 - Electron bundles Chromium and Node.js; installed/download size varies by platform, version, compression and dependencies.
 - Not suitable for apps where minimal install size is critical (consider Tauri instead)
 - Single-window apps are simpler to architect; multi-window state synchronization requires careful IPC design
-- Auto-update on Linux requires distributing via Snap, Flatpak, or custom mechanisms; `electron-updater` has limited Linux support
+- Auto-update on Linux requires distributing via Snap, Flatpak, or custom mechanisms — `electron-updater` has limited Linux support
 - Check current Apple Developer signing/notarization requirements for the intended distribution channel; fees and platform policy can change.
-- Debugging main process issues requires VS Code or Chrome DevTools via `--inspect` flag; there is no integrated debugger in Electron itself
+- Debugging main process issues requires VS Code or Chrome DevTools via `--inspect` flag — there is no integrated debugger in Electron itself

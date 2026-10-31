@@ -760,4 +760,4 @@ See [pricing.md](../references/pricing.md) for:
 
 ## Related Skills
 
-- `@youtube-full`; fetch source material (transcripts) that can be summarized into a deck with this skill.
+- `@youtube-full` — fetch source material (transcripts) that can be summarized into a deck with this skill.

@@ -71,11 +71,11 @@ When are customers most likely to refer?
 
 **Methods to test (ordering is a hypothesis, not a universal conversion ranking):**
 
-1. **In-product sharing**; Highest conversion, feels native
-2. **Personalized link**; Easy to track, works everywhere
-3. **Email invitation**; Direct, personal, higher intent
-4. **Social sharing**; Broadest reach, lowest conversion
-5. **Referral code**; Memorable, works offline
+1. **In-product sharing** — Highest conversion, feels native
+2. **Personalized link** — Easy to track, works everywhere
+3. **Email invitation** — Direct, personal, higher intent
+4. **Social sharing** — Broadest reach, lowest conversion
+5. **Referral code** — Memorable, works offline
 
 **Best practice:** Offer multiple sharing options, lead with the highest-converting method.
 
@@ -177,11 +177,11 @@ How long after click does affiliate get credit?
 
 **Outreach template:**
 ```
-Subject: Partnership opportunity; [Your Product]
+Subject: Partnership opportunity — [Your Product]
 
 Hi [Name],
 
-I've been following your content on [topic]; particularly [specific piece]; and think there could be a great fit for a partnership.
+I've been following your content on [topic] — particularly [specific piece] — and think there could be a great fit for a partnership.
 
 [Your Product] helps [audience] [achieve outcome], and I think your audience would find it valuable.
 
@@ -355,11 +355,11 @@ Before tracking cookies/device fingerprints or importing contact lists, verify a
 ### Referral Program Tools
 
 **Full-featured platforms:**
-- ReferralCandy; E-commerce focused
-- Ambassador; Enterprise referral programs
-- Friendbuy; E-commerce and subscription
-- GrowSurf; SaaS and tech companies
-- Viral Loops; Template-based campaigns
+- ReferralCandy — E-commerce focused
+- Ambassador — Enterprise referral programs
+- Friendbuy — E-commerce and subscription
+- GrowSurf — SaaS and tech companies
+- Viral Loops — Template-based campaigns
 
 **Built-in options:**
 - Stripe (basic referral tracking)
@@ -369,15 +369,15 @@ Before tracking cookies/device fingerprints or importing contact lists, verify a
 ### Affiliate Program Tools
 
 **Affiliate networks:**
-- ShareASale; Large merchant network
-- Impact; Enterprise partnerships
-- PartnerStack; SaaS focused
-- Tapfiliate; Simple SaaS affiliate tracking
-- FirstPromoter; SaaS affiliate management
+- ShareASale — Large merchant network
+- Impact — Enterprise partnerships
+- PartnerStack — SaaS focused
+- Tapfiliate — Simple SaaS affiliate tracking
+- FirstPromoter — SaaS affiliate management
 
 **Other vendor integrations (verify hosting and current capabilities):**
-- Rewardful; Stripe-integrated affiliates
-- Refersion; E-commerce affiliates
+- Rewardful — Stripe-integrated affiliates
+- Refersion — E-commerce affiliates
 
 ### Choosing a Tool
 
@@ -421,7 +421,7 @@ Here's how it works:
 - Day 7: Remind about referral program
 - Day 30: "Know anyone who'd benefit?"
 - Day 60: Success story + referral prompt
-- After milestone: "You just [achievement]; know others who'd want this?"
+- After milestone: "You just [achievement] — know others who'd want this?"
 
 ### Re-engagement for Past Referrers
 

@@ -1,7 +1,7 @@
 # Example: Building a Full Next.js Feature with 3 Parallel Agents
 
 ## Scenario
-User prompt: "Add a user authentication flow; login page, signup page, and a protected dashboard route."
+User prompt: "Add a user authentication flow — login page, signup page, and a protected dashboard route."
 
 ---
 
@@ -10,14 +10,14 @@ User prompt: "Add a user authentication flow; login page, signup page, and a pro
 ```
 MISSION BRIEF
 ─────────────────────────────────────────
-Goal: Auth flow with login, signup, and protected dashboard; all wired and working.
+Goal: Auth flow with login, signup, and protected dashboard — all wired and working.
 Total Agents: 3
 Quota Strategy: FLASH for all, Sonnet for integration review only
 Expected Token Cost: MEDIUM
 
 AGENTS:
 [1] ID: agent-001
-    Role: Builder; Auth UI
+    Role: Builder — Auth UI
     Scope: /app/login/page.tsx, /app/signup/page.tsx
     Model: Gemini Flash
     Input: Design system from GEMINI.md, form fields spec
@@ -25,7 +25,7 @@ AGENTS:
     Depends on: none
 
 [2] ID: agent-002
-    Role: Builder; API Routes
+    Role: Builder — API Routes
     Scope: /app/api/auth/login/route.ts, /app/api/auth/signup/route.ts
     Model: Gemini Flash
     Input: Auth logic spec, env variable names from .env.example
@@ -33,7 +33,7 @@ AGENTS:
     Depends on: none
 
 [3] ID: agent-003
-    Role: Builder; Protected Route
+    Role: Builder — Protected Route
     Scope: /app/dashboard/page.tsx, /middleware.ts
     Model: Gemini Flash
     Input: Output from agent-001 (session shape), output from agent-002 (token format)

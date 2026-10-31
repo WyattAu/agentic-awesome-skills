@@ -83,13 +83,13 @@ for partner in partners:
 - ✅ **Do:** Use `sudo()` sparingly and only when you understand the security implications.
 - ✅ **Do:** Prefer `search_count()` over `len(search(...))` when you only need a count.
 - ✅ **Do:** Use `with_context(...)` to pass context values cleanly rather than modifying `self.env.context` directly.
-- ❌ **Don't:** Call `search()` inside a loop; this is the #1 Odoo performance killer.
+- ❌ **Don't:** Call `search()` inside a loop — this is the #1 Odoo performance killer.
 - ❌ **Don't:** Use raw SQL unless absolutely necessary; use ORM for all standard operations.
 - ✅ **Do:** Match values to the field type: Date uses dates or server date strings; Datetime uses datetimes or server datetime strings. Python date/datetime objects are supported; do not truncate a datetime to a date or mix the two types when comparing. See the [Odoo ORM date/time guidance](https://www.odoo.com/documentation/17.0/developer/reference/backend/orm.html).
 
 ## Limitations
 
-- Does not cover **`cr.execute()` raw SQL** patterns in depth; use the Odoo performance tuner skill for SQL-level optimization.
+- Does not cover **`cr.execute()` raw SQL** patterns in depth — use the Odoo performance tuner skill for SQL-level optimization.
 - **Stored computed fields** can cause significant write overhead at scale; this skill does not cover partitioning strategies.
 - Does not cover **transient models** (`models.TransientModel`) or wizard patterns.
 - ORM behavior can differ slightly between Odoo SaaS and On-Premise due to config overrides.

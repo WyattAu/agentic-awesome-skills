@@ -1,4 +1,4 @@
-# MAS Technology Risk Management (TRM) Guidelines: Engineering Control Reference
+# MAS Technology Risk Management (TRM) Guidelines — Engineering Control Reference
 
 Engineering-relevant expectations from the Monetary Authority of Singapore's TRM Guidelines (January 2021), organized for change triage. The topic summaries below are engineering prompts, not a verified paragraph-level control map. Verify every cited paragraph against the official January 2021 PDF before including it in an audit finding. The TRM Guidelines apply to all MAS-regulated financial institutions; they are principles-based guidelines (not prescriptive rules), so findings should be framed as "expectation gaps", and the institution's own TRM-aligned policies take precedence where stricter.
 
@@ -26,7 +26,7 @@ Related instruments to flag when relevant (not summarized here): MAS Notices on 
 | Verify official paragraph | Separate environments for development, testing, production; production data not used in non-production without protection | Environment isolation; data masking for test data |
 | Verify official paragraph | Change management: assessed, tested, approved before production; emergency change procedures with retrospective approval | CI/CD approval gates, change records, rollback plans |
 | Verify official paragraph | End-of-life/unsupported software identified and risk-managed | Dependency and runtime version currency |
-| - | DevOps note: §6 expectations apply to pipeline automation itself; the pipeline is a production system (access control, audit, segregation of duties in deployment approval) | Who can approve+deploy; pipeline credentials |
+| — | DevOps note: §6 expectations apply to pipeline automation itself — the pipeline is a production system (access control, audit, segregation of duties in deployment approval) | Who can approve+deploy; pipeline credentials |
 
 ## 2. IT Resilience & Availability (§8)
 
@@ -71,7 +71,7 @@ Related instruments to flag when relevant (not summarized here): MAS Notices on 
 |-----|----------------------|-------------------|
 | Verify official paragraph | Security event logging across systems; logs protected and retained per policy | New components emit security events to central SIEM |
 | Verify official paragraph | Continuous monitoring and correlation; anomaly detection for critical systems | Alert rules accompany new security-relevant functionality |
-| Verify official paragraph | Cyber incident response plan; roles defined; MAS notification obligations for relevant incidents (as required by notices; verify the applicable sector Notice, reportable event definition and clock start; do not infer a universal deadline) | New failure modes mapped to incident severity matrix |
+| Verify official paragraph | Cyber incident response plan; roles defined; MAS notification obligations for relevant incidents (as required by notices — verify the applicable sector Notice, reportable event definition and clock start; do not infer a universal deadline) | New failure modes mapped to incident severity matrix |
 | Verify official paragraph | Post-incident review and remediation tracking | Incident learnings feed backlog |
 
 ## 7. Online Financial Services (§14)
@@ -82,7 +82,7 @@ Related instruments to flag when relevant (not summarized here): MAS Notices on 
 | Verify official paragraph | Transaction signing/confirmation for high-risk transactions; out-of-band notification to customers | Transaction flows notify customers of significant actions |
 | Verify official paragraph | Session management: timeout, re-authentication for sensitive actions, protection against hijacking | Session config on customer-facing changes |
 | Verify official paragraph | Fraud monitoring and customer education surfaces | New transaction types covered by fraud rules |
-| - | Anti-scam expectations (post-2022 MAS/ABS measures): kill switch, cooling-off for new payees/devices, transaction limits | Payment feature changes checked against these measures |
+| — | Anti-scam expectations (post-2022 MAS/ABS measures): kill switch, cooling-off for new payees/devices, transaction limits | Payment feature changes checked against these measures |
 
 ## 8. Quick Triage Table
 

@@ -52,15 +52,15 @@ token-holder / narrative research dump. Stop after the ranked table and verdicts
 
 ## Method
 
-1. **Universe**; trending discovery (`category=trending`) unless the user named a token,
+1. **Universe** — trending discovery (`category=trending`) unless the user named a token,
    then query that mint/symbol. Pair query defaults to `--preset loose` so bin-step
    tradeoffs stay visible; pass `--preset volatile` only when the user wants that gate.
-2. **Hard filters**; reject before ranking. A high fee/TVL pool that fails a gate is a
+2. **Hard filters** — reject before ranking. A high fee/TVL pool that fails a gate is a
    skip, not a "maybe".
-3. **Rank**; lexicographically by fee/TVL, then organic score, volume and holders. The retained weighted score is diagnostic only; unbounded volume/holders cannot be assumed mere tie-breakers in a weighted sum.
-4. **Verdict**; `pass` (clears gates, top of list), `watch` (clears gates but thin
+3. **Rank** — lexicographically by fee/TVL, then organic score, volume and holders. The retained weighted score is diagnostic only; unbounded volume/holders cannot be assumed mere tie-breakers in a weighted sum.
+4. **Verdict** — `pass` (clears gates, top of list), `watch` (clears gates but thin
    activity, unverified token, or awkward bin step), `skip` (failed a gate).
-5. **Stop**; print the table. Do not fetch a wallet, do not build a tx, do not call Etemaro CLI.
+5. **Stop** — print the table. Do not fetch a wallet, do not build a tx, do not call Etemaro CLI.
 
 ## Presets
 
@@ -78,7 +78,7 @@ Always reject: dead pools (zero volume and zero fee/TVL). Any preset except `loo
 rejects critical token warnings, high single-ownership, non-DLMM pool type.
 
 Timeframe: `30m` default. `5m` is noisier (spikes look like yield). `24h` is smoother but
-lags a dead pool. State the timeframe in the report; windowed fee/TVL is not 24h APR.
+lags a dead pool. State the timeframe in the report — windowed fee/TVL is not 24h APR.
 
 ## Report shape
 
@@ -92,12 +92,12 @@ Protocol: tvl=$…  vol_24h=$…  pools=…
 ...
 
 ## Rejects (sample)
-- NAME; reason
+- NAME — reason
 ```
 
 Keep `why` to one clause (e.g. "fee/TVL 0.24, organic 67, bin 80"). Cite pool address.
 If the API returns zero rows, say so and offer explicitly labeled exploratory gate changes one at a time (usually `maxTvl` or
-`minFeeActiveTvlRatio`); do not invent pools.
+`minFeeActiveTvlRatio`) — do not invent pools.
 
 ## Read-only safety
 
@@ -120,7 +120,7 @@ This skill only **GET**s public Meteora JSON. No `.env`, no keystore, no signing
   it intentionally has no execution path.
 - Respect the public API: send a User-Agent and poll conservatively.
 
-## Go deeper: Etemaro
+## Go deeper — Etemaro
 
 Etemaro runs this screen on a cron, adds holder/bot/launchpad gates, pool memory, and
 can deploy. The skill is the analysis half; the product is the loop.

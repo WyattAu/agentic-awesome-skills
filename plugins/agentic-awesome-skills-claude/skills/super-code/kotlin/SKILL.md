@@ -135,7 +135,7 @@ val result = Builder().apply {
 }.build()
 ```
 
-**Prefer `let`, `run`, `apply`, `also`, `with` over repeated receiver references; but don't nest more than 2 levels deep.**
+**Prefer `let`, `run`, `apply`, `also`, `with` over repeated receiver references — but don't nest more than 2 levels deep.**
 
 ---
 
@@ -160,7 +160,7 @@ class Foo {
     }
 }
 
-// ✅; top-level if only used in this file
+// ✅ — top-level if only used in this file
 private const val TAG = "Foo"
 class Foo
 ```
@@ -170,7 +170,7 @@ class Foo
 enum class Status { ACTIVE, INACTIVE }
 fun label(s: Status) = when(s) { Status.ACTIVE -> "Active"; Status.INACTIVE -> "Inactive" }
 
-// ✅; put display logic on the enum itself
+// ✅ — put display logic on the enum itself
 enum class Status(val label: String) { ACTIVE("Active"), INACTIVE("Inactive") }
 ```
 
@@ -207,7 +207,7 @@ private val _state = MutableStateFlow(initial)
 val state: StateFlow<State> = _state
 // ... in many places: _state.value = newValue
 
-// ✅; use update{} for atomic mutation
+// ✅ — use update{} for atomic mutation
 _state.update { it.copy(field = newValue) }
 ```
 
@@ -221,7 +221,7 @@ _state.update { it.copy(field = newValue) }
 // ❌ Unnecessary remember for derived state that's cheap to compute
 val displayName = remember { user.firstName + " " + user.lastName }
 
-// ✅; only remember if computation is expensive or involves object creation
+// ✅ — only remember if computation is expensive or involves object creation
 val displayName = "${user.firstName} ${user.lastName}"
 ```
 
@@ -230,7 +230,7 @@ val displayName = "${user.firstName} ${user.lastName}"
 @Composable
 fun UserBadge(user: User) { Text(user.name) }
 
-// ✅; pass only what's needed (stability + minimal recomposition)
+// ✅ — pass only what's needed (stability + minimal recomposition)
 @Composable
 fun UserBadge(name: String) { Text(name) }
 ```

@@ -1,4 +1,4 @@
-# Input mapping: apify-reddit-scraper
+# Input mapping — apify-reddit-scraper
 
 User phrasing → `harshmaur/reddit-scraper` input. Field names are exact; unknown ones are ignored, and when nothing valid remains the run finishes SUCCEEDED with 0 items (`emptyReason` in `RUN-SUMMARY`, nothing charged) rather than failing.
 
@@ -46,12 +46,12 @@ User phrasing → `harshmaur/reddit-scraper` input. Field names are exact; unkno
 
 | Field | Default | Meaning |
 |---|---|---|
-| `maxPostsCount` | 50 | Posts **per search term** (and per subreddit or profile URL); 4 terms × 8 returned 32 posts. The schema title says "total across all inputs"; measured runs and the README say per term. Max 50,000; Reddit itself stops near 1,000 per listing |
+| `maxPostsCount` | 50 | Posts **per search term** (and per subreddit or profile URL) — 4 terms × 8 returned 32 posts. The schema title says "total across all inputs"; measured runs and the README say per term. Max 50,000; Reddit itself stops near 1,000 per listing |
 | `maxCommentsCount` | 400 | Comments per keyword when `searchComments` is on |
 | `maxCommentsPerPost` | 200 | Comments per post when `crawlCommentsPerPost` is on. A very large thread returns about 600–3,000 comments, even when this is higher |
 | `maxCommunitiesCount` | 2 | Communities per keyword when `searchCommunities` is on |
 
-## AI enrichment (billed per row on top of results: see gotchas; the "free plans ignore it" note in the schema did not hold in a measured run)
+## AI enrichment (billed per row on top of results — see gotchas; the "free plans ignore it" note in the schema did not hold in a measured run)
 
 | User intent | Input |
 |---|---|

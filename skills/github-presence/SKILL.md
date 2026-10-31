@@ -24,7 +24,7 @@ GitHub is where developers evaluate your project before trying it. This skill co
 
 1. Read `.agents/developer-audience-context.md` if it exists
 2. Audit your current GitHub presence (profile, pinned repos, READMEs)
-3. Understand: GitHub is often the first technical evaluation; optimize accordingly
+3. Understand: GitHub is often the first technical evaluation — optimize accordingly
 
 ---
 
@@ -72,9 +72,9 @@ GitHub is where developers evaluate your project before trying it. This skill co
 
 ## Why Project Name?
 
-- **Feature 1**; Brief explanation
-- **Feature 2**; Brief explanation
-- **Feature 3**; Brief explanation
+- **Feature 1** — Brief explanation
+- **Feature 2** — Brief explanation
+- **Feature 3** — Brief explanation
 
 ## Quick Start
 
@@ -210,7 +210,7 @@ MIT © [Your Name](https://yoursite.com)
 
 ## What I'm Working On
 
-- 🔭 Building [project]; [brief description]
+- 🔭 Building [project] — [brief description]
 - 🌱 Learning [technology]
 - 💬 Ask me about [expertise areas]
 
@@ -268,11 +268,11 @@ Topics are how people find repositories. Optimize for search.
 ### Search Optimization
 
 GitHub search considers:
-1. **Repository name**; Include main keyword
-2. **Description**; 350 chars, keyword-rich
-3. **README content**; Full text indexed
-4. **Topics**; Category matching
-5. **Language**; Auto-detected
+1. **Repository name** — Include main keyword
+2. **Description** — 350 chars, keyword-rich
+3. **README content** — Full text indexed
+4. **Topics** — Category matching
+5. **Language** — Auto-detected
 
 ### Awesome Lists
 
@@ -284,7 +284,7 @@ Getting on awesome lists drives traffic and credibility.
 | 2 | Check list requirements (quality, activity, docs) |
 | 3 | Ensure your project meets criteria |
 | 4 | Submit PR following list's guidelines |
-| 5 | Be patient; curation takes time |
+| 5 | Be patient — curation takes time |
 
 **Popular awesome lists for dev tools**:
 - `awesome-cli-apps`
@@ -411,7 +411,7 @@ custom: ["https://buymeacoffee.com/you"]
 
 ### Don'ts
 
-1. **Don't** neglect the README; it's your landing page
+1. **Don't** neglect the README — it's your landing page
 2. **Don't** use too many badges (cluttered)
 3. **Don't** let issues pile up unanswered
 4. **Don't** forget a license file
@@ -477,10 +477,10 @@ Access via: Repository → Insights → Traffic
 
 ## Related Skills
 
-- `developer-audience-context`; Know who evaluates your repo
-- `hacker-news-strategy`; HN users check GitHub before upvoting
-- `reddit-engagement`; Redditors evaluate via GitHub
-- `dev-to-hashnode`; Link from README to content
+- `developer-audience-context` — Know who evaluates your repo
+- `hacker-news-strategy` — HN users check GitHub before upvoting
+- `reddit-engagement` — Redditors evaluate via GitHub
+- `dev-to-hashnode` — Link from README to content
 
 ## Limitations
 

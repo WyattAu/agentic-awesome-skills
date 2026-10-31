@@ -46,17 +46,17 @@ Be sure to confirm User preferences where there are questions or clarifications 
 Paths below are relative to this skill directory.
 
 Reference examples:
-- `references/hf_model_papers_auth.sh`; uses `HF_TOKEN` automatically and chains trending → model metadata → model card parsing with fallbacks; it demonstrates multi-step API usage plus auth hygiene for gated/private content.
-- `references/find_models_by_paper.sh`; optional `HF_TOKEN` usage via `--token`, consistent authenticated search, and a retry path when arXiv-prefixed searches are too narrow; it shows resilient query strategy and clear user-facing help.
-- `references/hf_model_card_frontmatter.sh`; uses the `hf` CLI to download model cards, extracts YAML frontmatter, and emits NDJSON summaries (license, pipeline tag, tags, gated prompt flag) for easy filtering.
+- `references/hf_model_papers_auth.sh` — uses `HF_TOKEN` automatically and chains trending → model metadata → model card parsing with fallbacks; it demonstrates multi-step API usage plus auth hygiene for gated/private content.
+- `references/find_models_by_paper.sh` — optional `HF_TOKEN` usage via `--token`, consistent authenticated search, and a retry path when arXiv-prefixed searches are too narrow; it shows resilient query strategy and clear user-facing help.
+- `references/hf_model_card_frontmatter.sh` — uses the `hf` CLI to download model cards, extracts YAML frontmatter, and emits NDJSON summaries (license, pipeline tag, tags, gated prompt flag) for easy filtering.
 
 Baseline examples (ultra-simple, minimal logic, raw JSON output with `HF_TOKEN` header):
-- `references/baseline_hf_api.sh`; bash
-- `references/baseline_hf_api.py`; python
-- `references/baseline_hf_api.tsx`; typescript executable
+- `references/baseline_hf_api.sh` — bash
+- `references/baseline_hf_api.py` — python
+- `references/baseline_hf_api.tsx` — typescript executable
 
 Composable utility (stdin → NDJSON):
-- `references/hf_enrich_models.sh`; reads model IDs from stdin, fetches metadata per ID, emits one JSON object per line for streaming pipelines.
+- `references/hf_enrich_models.sh` — reads model IDs from stdin, fetches metadata per ID, emits one JSON object per line for streaming pipelines.
 
 Composability through piping (shell-friendly JSON output):
 - `<support-root>/references/baseline_hf_api.sh 25 | jq -r '.[].id' | references/hf_enrich_models.sh | jq -s 'sort_by(.downloads) | reverse | .[:10]'`

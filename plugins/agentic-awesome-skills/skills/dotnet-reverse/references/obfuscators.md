@@ -13,11 +13,11 @@
 | ConfuserEx 1.x/2.x | `cfze` | anti-tamper、控制流变形、字符串加密、反调试 | 需匹配已核实的专用 fork | 新版需先 patch anti-tamper |
 | ConfuserEx 3.x / 私改 | `cfze` | 同上 + 自定义 protector | ⚠️ 部分 | dump 运行时 / dnlib |
 | SmartAssembly | `sa` | 字符串编码、资源压缩、方法调用隐藏 | 取决于版本与保护配置 | 资源解压 |
-| Babel.NET | `babel` | 方法体加密、控制流、字符串 | 取决于版本与保护配置 | - |
+| Babel.NET | `babel` | 方法体加密、控制流、字符串 | 取决于版本与保护配置 | — |
 | Eazfuscator.NET | `eaz` | 字符串/资源加密、表达式混淆 | ⚠️ 部分 | 字符串解密器 |
 | .NET Reactor | `reactor` | necrobit (代码段加密) + anti-tamper | ⚠️ 新版难 | dump + 重建 metadata |
-| Themida .NET | - | 外壳 + 虚拟化 | ❌ de4dot 不行 | dump 内存，走 native 思路 |
-| Agile.NET / CliSecure | `agile` | 方法体加密 | 取决于版本与保护配置 | - |
+| Themida .NET | — | 外壳 + 虚拟化 | ❌ de4dot 不行 | dump 内存，走 native 思路 |
+| Agile.NET / CliSecure | `agile` | 方法体加密 | 取决于版本与保护配置 | — |
 
 ## de4dot 标准用法
 
@@ -68,12 +68,12 @@ dnSpyEx 打开 → 找 Module .cctor 或 Main 里的完整性校验
 ConfuserEx 的 `anti tamper` 会在运行时校验方法体哈希，被改就崩。de4dot 通常能处理旧版，新版需手动：
 
 ```text
-方法 A; dnSpyEx 直接 patch 校验函数：
+方法 A — dnSpyEx 直接 patch 校验函数：
   1. 找 anti-tamper 校验方法（通常在 <module> 的静态构造里调用）
   2. IL 编辑：把校验方法体改成 ret（直接返回）
   3. 保存 → 再喂给 de4dot
 
-方法 B; 运行时 dump：
+方法 B — 运行时 dump：
   1. 用 MegaDumper / ExtremeDumper 跑起来 dump 内存中的 assembly
   2. dump 出来的已经解密，再用 de4dot 清理残留
 ```
@@ -132,12 +132,12 @@ de4dot 对 SmartAssembly 兼容性最好，基本一键搞定。
 | 手法 | 位置 | 绕过 |
 |------|------|------|
 | `Debugger.IsAttached` 检查 | 任意方法 | IL 改 `ldc.i4.0; ret` 或 patch getter |
-| `Debugger.IsLogging` | - | 同上 |
+| `Debugger.IsLogging` | — | 同上 |
 | 时间检测 (`DateTime.Now` 差值) | 方法入口 | patch 掉差值比较 |
-| `CheckRemoteDebuggerPresent` P/Invoke | - | nop 掉调用 |
+| `CheckRemoteDebuggerPresent` P/Invoke | — | nop 掉调用 |
 | 异常驱动控制流（try/catch 路径选择）| 主逻辑 | 不能简单 nop，要分析 catch 块真实路径 |
 
-> .NET anti-debug 比 native 简单 -- 多数是托管 API 调用，dnSpyEx IL 改一行即可。
+> .NET anti-debug 比 native 简单 —— 多数是托管 API 调用，dnSpyEx IL 改一行即可。
 
 ## de4dot 失败时的退路
 

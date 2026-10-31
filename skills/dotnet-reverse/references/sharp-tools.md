@@ -21,7 +21,7 @@
 1. dnSpyEx 打开（通常没混淆，少数团队会加 ConfuserEx）
 2. 看 Program.Main 或入口命令分发（Rubeus 是 switch(command) 结构）
 3. 找目标命令的实现类/方法
-4. 看 P/Invoke 段（Interop.* 命名空间）-- native API 调用在这里
+4. 看 P/Invoke 段（Interop.* 命名空间）—— native API 调用在这里
 5. 提取内嵌资源（有些工具嵌配置/模板）
 6. 如需改特征（EDR 规避）：改命令字符串、API 调用、字符串常量
 ```
@@ -105,7 +105,7 @@ brew install --cask dotnet-sdk
 
 ## dnSpy MCP 集成
 
-社区已有多个 dnSpy MCP 项目，把 dnSpy 的反编译/IL 检查暴露成 MCP 工具，AI 可直接调用 -- 和 reverse-skill 的 MCP 哲学完全一致。
+社区已有多个 dnSpy MCP 项目，把 dnSpy 的反编译/IL 检查暴露成 MCP 工具，AI 可直接调用 —— 和 reverse-skill 的 MCP 哲学完全一致。
 
 ### 主流 dnSpy MCP 项目
 
@@ -140,25 +140,25 @@ brew install --cask dotnet-sdk
 
 ### 强烈推荐
 
-- **Washi 博客**; .NET 逆向大佬：https://blog.washi.dev/posts/misconceptions-about-dotnet/
+- **Washi 博客** — .NET 逆向大佬：https://blog.washi.dev/posts/misconceptions-about-dotnet/
   - 核心观点：**不要过度依赖 dnSpy 的 C# 反编译器，要熟悉 IL 编辑器**（与本项目 IL 优先原则一致）
-- **dnSpyEx**; dnSpy 的活跃维护分支：https://github.com/dnSpyEx/dnSpy
-- **de4dot**; .NET 脱混淆：https://github.com/de4dot/de4dot
-- **dnlib**; 元数据编程：https://github.com/dnlib/dnlib
+- **dnSpyEx** — dnSpy 的活跃维护分支：https://github.com/dnSpyEx/dnSpy
+- **de4dot** — .NET 脱混淆：https://github.com/de4dot/de4dot
+- **dnlib** — 元数据编程：https://github.com/dnlib/dnlib
 
 ### 实战教程
 
-- Medium《De-obfuscating and reversing a .NET/C# spyware》- dnSpy + de4dot 实战 info-stealer 脱混淆
-- YouTube《dnSpy Patch .NET EXEs & DLLs》- 手把手 patch + keygen
-- 看雪论坛 .NET 逆向版块; 搜 ".net 逆向" / "dnSpy" / "ConfuserEx" 有大量实战帖、Nuitka 逆向、免杀讨论
-- Guided Hacking《Top 5 .NET Reverse Engineering Tools》- dnSpy 仍排第一
-- StackExchange / Reverse Engineering; `DynamicMethod` 调试等进阶问题
+- Medium《De-obfuscating and reversing a .NET/C# spyware》— dnSpy + de4dot 实战 info-stealer 脱混淆
+- YouTube《dnSpy Patch .NET EXEs & DLLs》— 手把手 patch + keygen
+- 看雪论坛 .NET 逆向版块 — 搜 ".net 逆向" / "dnSpy" / "ConfuserEx" 有大量实战帖、Nuitka 逆向、免杀讨论
+- Guided Hacking《Top 5 .NET Reverse Engineering Tools》— dnSpy 仍排第一
+- StackExchange / Reverse Engineering — `DynamicMethod` 调试等进阶问题
 
 ### 本仓库已有 .NET 资源（联动）
 
-- `reverse-engineering/tools.md` `.NET Analysis` 段; dnSpy/ILSpy 工具速查 + Codegate 2013 两阶段 XOR+AES-CBC 模式
-- `reverse-engineering/field-notes.md` `.NET` 段; 工具速记
-- `reverse-engineering/awesome-re-resources.md`; de4dot 入选
-- `field-journal/seed-014_unity-il2cpp-reverse.md`; Unity IL2CPP（native 侧，与 .NET 托管层互补）
+- `reverse-engineering/tools.md` `.NET Analysis` 段 — dnSpy/ILSpy 工具速查 + Codegate 2013 两阶段 XOR+AES-CBC 模式
+- `reverse-engineering/field-notes.md` `.NET` 段 — 工具速记
+- `reverse-engineering/awesome-re-resources.md` — de4dot 入选
+- `field-journal/seed-014_unity-il2cpp-reverse.md` — Unity IL2CPP（native 侧，与 .NET 托管层互补）
 
 .NET 逆向深度内容统一收敛到本模块，`reverse-engineering/` 里保留速查索引即可。

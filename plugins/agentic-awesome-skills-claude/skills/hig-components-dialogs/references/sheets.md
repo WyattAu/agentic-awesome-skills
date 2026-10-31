@@ -74,11 +74,11 @@ In macOS, a sheet is a cardlike view with rounded corners that floats on top of 
 
 ![A screenshot of the Notes app, with the What's New in Notes sheet centered on top of a dimmed Notes document in the background.](https://docs-assets.developer.apple.com/published/582e02d0df9b4a07dea002053f9ec6ea/sheets-macos-notes%402x.png)
 
-**Present a sheet in a reasonable default size.** People don’t generally expect to resize sheets, so it’s important to use a size that’s appropriate for the content you display. In some cases, however, people appreciate a resizable sheet; such as when they need to expand the contents for a clearer view; so it’s a good idea to support resizing.
+**Present a sheet in a reasonable default size.** People don’t generally expect to resize sheets, so it’s important to use a size that’s appropriate for the content you display. In some cases, however, people appreciate a resizable sheet — such as when they need to expand the contents for a clearer view — so it’s a good idea to support resizing.
 
-**Let people interact with other app windows without first dismissing a sheet.** When a sheet opens, you bring its parent window to the front; if the parent window is a document window, you also bring forward its modeless document-related panels. When people want to interact with other windows in your app, make sure they can bring those windows forward even if they haven’t dismissed the sheet yet.
+**Let people interact with other app windows without first dismissing a sheet.** When a sheet opens, you bring its parent window to the front — if the parent window is a document window, you also bring forward its modeless document-related panels. When people want to interact with other windows in your app, make sure they can bring those windows forward even if they haven’t dismissed the sheet yet.
 
-**Position a sheet’s dismiss buttons as people expect.** People expect to find all buttons that dismiss a sheet; including Done, OK, and Cancel; at the bottom of the view, in the trailing corner.
+**Position a sheet’s dismiss buttons as people expect.** People expect to find all buttons that dismiss a sheet — including Done, OK, and Cancel — at the bottom of the view, in the trailing corner.
 
 **Use a panel instead of a sheet if people need to repeatedly provide input and observe results.** A find and replace panel, for example, might let people initiate replacements individually, so they can observe the result of each search for correctness. For guidance, see [Panels](https://developer.apple.com/design/human-interface-guidelines/panels).
 
@@ -140,11 +140,11 @@ The standard Done button
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/sheets#Developer-documentation)
 
-[`sheet(item:onDismiss:content:)`](https://developer.apple.com/documentation/SwiftUI/View/sheet\(item:onDismiss:content:\)); SwiftUI
+[`sheet(item:onDismiss:content:)`](https://developer.apple.com/documentation/SwiftUI/View/sheet\(item:onDismiss:content:\)) — SwiftUI
 
-[`UISheetPresentationController`](https://developer.apple.com/documentation/UIKit/UISheetPresentationController); UIKit
+[`UISheetPresentationController`](https://developer.apple.com/documentation/UIKit/UISheetPresentationController) — UIKit
 
-[`presentAsSheet(_:)`](https://developer.apple.com/documentation/AppKit/NSViewController/presentAsSheet\(_:\)); AppKit
+[`presentAsSheet(_:)`](https://developer.apple.com/documentation/AppKit/NSViewController/presentAsSheet\(_:\)) — AppKit
 
 ## [Change log](https://developer.apple.com/design/human-interface-guidelines/sheets#Change-log)
 

@@ -29,13 +29,13 @@ report_count: 0
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-LDAP: LDAP Injection & XPath Injection
+# HUNT-LDAP — LDAP Injection & XPath Injection
 
 > Grounding note: LDAP injection is rarely disclosed with verbatim payloads on
 > public platforms (most live on internal-pentest reports). This skill is
 > grounded in the **OWASP LDAP Injection Prevention / Testing Guide
 > (WSTG-INPV-06)**, **PortSwigger Web Security Academy (LDAP injection)**, and
-> the **RFC 4515** filter grammar; all publicly verifiable references rather
+> the **RFC 4515** filter grammar — all publicly verifiable references rather
 > than invented HackerOne IDs. Do not cite a report you cannot link.
 
 ## Crown Jewel Targets
@@ -44,31 +44,31 @@ LDAP injection that bypasses authentication = **Critical**. Blind attribute
 exfiltration of credentials/secrets = **High**. AD enumeration alone = Medium-High.
 
 **Highest-value chains:**
-- **LDAP auth bypass**; close the `uid` filter and append an always-true OR so the
+- **LDAP auth bypass** — close the `uid` filter and append an always-true OR so the
   bind/search returns the admin entry without a valid password.
-- **Blind attribute exfil**; char-by-char extraction of an attribute value via a
+- **Blind attribute exfil** — char-by-char extraction of an attribute value via a
   boolean oracle (login success/failure, result count, or response length).
-- **userPassword hash exfil (non-AD only)**; on OpenLDAP/389-DS the
+- **userPassword hash exfil (non-AD only)** — on OpenLDAP/389-DS the
   `userPassword` attribute can hold `{SSHA}`/`{CRYPT}` hashes that ARE readable
   by query. See the AD-vs-generic warning below.
-- **XPath injection auth bypass**; `' or '1'='1` against XML-backed auth.
+- **XPath injection auth bypass** — `' or '1'='1` against XML-backed auth.
 
 ---
 
-## CRITICAL: Active Directory vs generic LDAP
+## CRITICAL — Active Directory vs generic LDAP
 
 Do **not** conflate the two. They behave very differently:
 
 | | Generic LDAP (OpenLDAP, 389-DS, ApacheDS) | Active Directory |
 |---|---|---|
-| Password attribute | `userPassword`; may hold `{SSHA}`/`{MD5}`/`{CRYPT}` and **is readable** if ACL allows | `unicodePwd`; **write-only**, never returned by any search |
-| Hash exfil via injection | **Possible** where ACLs leak `userPassword` | **Not possible**; there is no readable hash attribute over LDAP |
+| Password attribute | `userPassword` — may hold `{SSHA}`/`{MD5}`/`{CRYPT}` and **is readable** if ACL allows | `unicodePwd` — **write-only**, never returned by any search |
+| Hash exfil via injection | **Possible** where ACLs leak `userPassword` | **Not possible** — there is no readable hash attribute over LDAP |
 | Useful enum attrs | `uid`, `cn`, `mail`, `userPassword` | `sAMAccountName`, `userPrincipalName`, `mail`, `memberOf`, `description` (often holds plaintext secrets!) |
 
-**Do not tell a reader that blind LDAP injection yields AD password hashes; it
+**Do not tell a reader that blind LDAP injection yields AD password hashes — it
 does not.** `unicodePwd` is write-only. Against AD, the win is enumeration
 (`sAMAccountName`, `memberOf`, `description`/`info` fields that admins misuse to
-store passwords) and auth bypass; not hash dumping. The hash-exfil technique
+store passwords) and auth bypass — not hash dumping. The hash-exfil technique
 applies **only** to non-AD directories exposing `userPassword`.
 
 ---
@@ -91,7 +91,7 @@ Error strings that confirm an LDAP backend:
 
 ---
 
-## LDAP filter grammar (RFC 4515): why injection works
+## LDAP filter grammar (RFC 4515) — why injection works
 
 A login filter is typically built by string-concat:
 
@@ -99,24 +99,24 @@ A login filter is typically built by string-concat:
 (&(uid=<USERNAME>)(userPassword=<PASSWORD>))
 ```
 
-`&` = AND, `|` = OR, `!` = NOT. **Filters are prefix/Polish notation**; the
+`&` = AND, `|` = OR, `!` = NOT. **Filters are prefix/Polish notation** — the
 operator comes first and every sub-filter is parenthesised. To inject you must
 (a) escape the current `(uid=...)` group, (b) inject your own logic, and
 (c) leave the overall parenthesis count **balanced** or the server throws a
 filter-syntax error instead of executing.
 
-### The special-character set: TEST EACH ONE
+### The special-character set — TEST EACH ONE
 
 These characters are syntactically meaningful and MUST be escaped by a safe app
 (RFC 4515 §3). A different response can suggest parser involvement but does not prove unescaped input or exploitability:
 
 | Char | Filter escape | Why it matters |
 |------|---------------|----------------|
-| `*`  | `\2a` | wildcard; matches any value |
+| `*`  | `\2a` | wildcard — matches any value |
 | `(`  | `\28` | opens a filter group |
 | `)`  | `\29` | closes a filter group |
 | `\`  | `\5c` | escape char itself |
-| NUL  | `\00` | string terminator; truncates filter in C-backed servers |
+| NUL  | `\00` | string terminator — truncates filter in C-backed servers |
 | `,` | DN-context escaping | RDN separator; DN encoding differs from filter encoding |
 
 **Search-filter context vs DN injection** are different bugs:
@@ -124,16 +124,16 @@ These characters are syntactically meaningful and MUST be escaped by a safe app
   `(attr=VALUE)` filter. Payloads use `* ( ) & | !`.
 - **DN injection**: your input is concatenated into a Distinguished Name
   (`uid=VALUE,ou=people,dc=corp`). Here `,` `=` `+` `"` `\` `<` `>` `;` and leading/trailing spaces
-  matter, and a `*` is NOT a wildcard. Test both; the payloads do not transfer.
+  matter, and a `*` is NOT a wildcard. Test both — the payloads do not transfer.
 
 ---
 
 ## Step-by-Step Hunting Methodology
 
-### Phase 1: Confirm an LDAP backend (baseline first)
+### Phase 1 — Confirm an LDAP backend (baseline first)
 
 ```bash
-# ALWAYS capture a control response first: you compare everything to this.
+# ALWAYS capture a control response first — you compare everything to this.
 BASE=$(curl -s -o /dev/null -w "%{http_code}|%{size_download}|%{time_total}" \
   -X POST https://$TARGET/api/login \
   -H "Content-Type: application/json" \
@@ -149,9 +149,9 @@ curl -s -X POST https://$TARGET/api/login \
 ```
 
 A lone `)` that produces a syntax error/500 while a balanced payload does not is
-the cleanest LDAP-injection tell; note it, you will need it as proof.
+the cleanest LDAP-injection tell — note it, you will need it as proof.
 
-### Phase 2: Derive a controlled test from the actual expression
+### Phase 2 — Derive a controlled test from the actual expression
 
 Do not copy a universal login payload. Record the full resulting filter, its
 parentheses and the actual bind/search flow; LDAP filters have no SQL-style
@@ -167,7 +167,7 @@ stop on lockout, elevated errors or unexpected personal data. Never expand to
 password spraying, hash cracking or real attribute extraction without separately
 scoped authorization and the exact command gate above.
 
-### Phase 3: XPath and evidence
+### Phase 3 — XPath and evidence
 
 For a known XPath 1.0 expression using a quoted string, a quote may alter syntax;
 construct the entire predicate and verify precedence, quoting and selected nodes
@@ -176,7 +176,7 @@ XPath API to concatenation. Error messages or response length alone do not prove
 successful authentication or data access. Use a controlled test session and a
 post-login resource only within scope; do not print cookies or account records.
 
-### Phase 4: Direct LDAP confirmation and remediation
+### Phase 4 — Direct LDAP confirmation and remediation
 
 If direct directory access is authorized, use certificate-verified LDAPS or
 required StartTLS and prompt-based credentials (`ldapsearch -W`) rather than a
@@ -201,20 +201,20 @@ Primary references: [RFC 4515](https://www.rfc-editor.org/rfc/rfc4515),
 | Blind exfil of `userPassword` **(non-AD only)** | `{SSHA}` (salted SHA-1) → hashcat `-m 111` (`{SSHA256}`=1411, `{SSHA512}`=1711); `{CRYPT}` → mode depends on the `$id$` prefix (`$1$`=500, `$6$`=1800) → offline crack | High |
 | LDAP referral → Collaborator | Server-side request / internal directory reach | SSRF-class, confirms blind |
 
-> AD has no readable password attribute; do not list "extract AD hashes" as a
+> AD has no readable password attribute — do not list "extract AD hashes" as a
 > chain. Against AD, the credential win comes from `description`/`info` misuse or
 > from enumerated usernames feeding a spray, never from `unicodePwd`.
 
 ---
 
-## Validation: rule out the false positive BEFORE you report
+## Validation — rule out the false positive BEFORE you report
 
 A "bypass" or "match" is only real once you have eliminated syntax-error,
 WAF-block, and length-jitter explanations.
 
 - [ ] **Auth bypass:** the always-true payload returns a **valid authenticated
       session** (session cookie + access to a post-login resource), and the same
-      request with one paren removed returns a **filter-syntax error**; proving
+      request with one paren removed returns a **filter-syntax error** — proving
       the filter parsed and executed, not that the app fell open on every input.
 - [ ] **Negative control:** an equivalently-shaped but logically-FALSE payload
       (`)(uid=NONEXISTENT_ZZZ)`) returns the **failure** response. If both
@@ -224,7 +224,7 @@ WAF-block, and length-jitter explanations.
       FALSE control still reads FALSE between rounds; recovered value verified by
       a direct lookup or by the auth-bypass payload that uses it.
 - [ ] **XPath:** quotes/brackets remained balanced (no 500), and the bypass logged
-      in to a real account context; not just a different error page.
+      in to a real account context — not just a different error page.
 - [ ] **OOB where possible:** a correlated callback requires mechanism-specific evidence and controls; it is not decisive on its own.
 - [ ] **AD claim discipline:** if you say "AD", you enumerated AD-specific attrs
       (`sAMAccountName`/`memberOf`); never claim AD hash exfil.
@@ -238,7 +238,7 @@ WAF-block, and length-jitter explanations.
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

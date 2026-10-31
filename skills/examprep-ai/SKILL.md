@@ -27,7 +27,7 @@ Use this skill when you need to:
 - Create flashcards, predicted exam papers, or check your overall exam readiness.
 - Perform last-minute revision or deep-dive into important exam topics.
 
-## 🎯 Selective Reading Rule: Read ONLY the section matching the request
+## 🎯 Selective Reading Rule — Read ONLY the section matching the request
 
 | What the student asks for | Jump to |
 |--------------------------|---------|
@@ -54,16 +54,16 @@ Skip everything else. Do not load all sections for a focused request.
 
 | Level | Signal Words | Student Goal |
 |-------|-------------|--------------|
-| 🟩 Easy | define, state, list, name, identify, what is | Foundational recall; often useful first |
+| 🟩 Easy | define, state, list, name, identify, what is | Foundational recall — often useful first |
 | 🟨 Medium | explain, describe, compare, calculate, implement, trace | Mid-paper marks |
-| 🟥 Hard | derive, prove, optimize, analyze, evaluate, design, why | Score separators; study last |
+| 🟥 Hard | derive, prove, optimize, analyze, evaluate, design, why | Score separators — study last |
 
 **Order rule:** Always present Easy → Medium → Hard. Never reverse.
 
 ### Intake (ask once, then proceed)
 
 1. Collect at least one of: syllabus, past question papers, notes, or subject name + university.
-2. Confirm course code when OCR is uncertain; do not invent a calibrated confidence percentage: *"I detected [X]; is this correct?"*
+2. Confirm course code when OCR is uncertain; do not invent a calibrated confidence percentage: *"I detected [X] — is this correct?"*
 3. Ask time available. If no answer → default **Standard Mode (6–12 hrs)** and state the assumption.
 
 ### Study Modes
@@ -111,10 +111,10 @@ Score = (Frequency × 0.40) + (Recency × 0.30) + (Unit Weight × 0.20) + (Marks
 
 > Use when: student uploads syllabus + past papers, or asks "what should I study?"
 
-**Step 1; Extract.** Pull all questions; note year/source for each.
+**Step 1 — Extract.** Pull all questions; note year/source for each.
 Confirm: *"Extracted [N] questions from [M] papers for [Course]. Found: 📝[A] 🔢[B] 🔘[C] 💻[D] 🧪[E]. Proceed?"*
 
-**Step 2; Classify + tag difficulty.** Use the five-type table:
+**Step 2 — Classify + tag difficulty.** Use the five-type table:
 
 | Type | Identify By |
 |------|------------|
@@ -124,7 +124,7 @@ Confirm: *"Extracted [N] questions from [M] papers for [Course]. Found: 📝[A] 
 | 💻 Coding | write a program, implement, trace output, algorithm, flowchart |
 | 🧪 Lab | experiment, procedure, observation, aim, apparatus, viva |
 
-**Step 3; Build ranked tables (one per type):**
+**Step 3 — Build ranked tables (one per type):**
 
 ```
 | # | Question | Times | Marks | Difficulty | Unit | Priority |
@@ -132,17 +132,17 @@ Confirm: *"Extracted [N] questions from [M] papers for [Course]. Found: 📝[A] 
 | 1 | [question text] | [N]× | [X] | 🟩/🟨/🟥 | Unit [X] | 🔥 Must / ✅ Do |
 ```
 
-**Step 4; Generate notes** using the matching type section below.
+**Step 4 — Generate notes** using the matching type section below.
 Order: Easy across all types first → then Medium → then Hard.
 
-**Step 5; Coverage tracker:**
+**Step 5 — Coverage tracker:**
 ```
-Unit 1: [Name]  →  📝✅  🔢✅  🔘⚠️ PREDICTED  💻-  🧪-
-Legend: ✅ past paper  ⚠️ predicted ; not applicable
+Unit 1: [Name]  →  📝✅  🔢✅  🔘⚠️ PREDICTED  💻—  🧪—
+Legend: ✅ past paper  ⚠️ predicted  — not applicable
 ```
-For any gap: generate one predicted question + note, label `[PREDICTED; not from past papers]`.
+For any gap: generate one predicted question + note, label `[PREDICTED — not from past papers]`.
 
-**Step 6; Offer:** *"Would you like (a) Flashcards, (b) Predicted Exam Paper, or (c) Readiness Dashboard?"*
+**Step 6 — Offer:** *"Would you like (a) Flashcards, (b) Predicted Exam Paper, or (c) Readiness Dashboard?"*
 
 ---
 
@@ -150,7 +150,7 @@ For any gap: generate one predicted question + note, label `[PREDICTED; not from
 
 > Use when: student asks about definitions, explanations, long-answer questions.
 
-**🟩 Easy; Definition / List (30 sec)**
+**🟩 Easy — Definition / List (30 sec)**
 ```
 📝🟩 [Question] | [N]× | [X] marks
 ─────────────────────────────────
@@ -159,24 +159,24 @@ KEY TERM: [single most important word]
 MEMORY HOOK: [one-liner trick]
 ```
 
-**🟨 Medium; Explanation / Comparison (2 min)**
+**🟨 Medium — Explanation / Comparison (2 min)**
 ```
 📝🟨 [Question] | [N]× | [X] marks
 ─────────────────────────────────
 DEFINITION: [1 sentence]
 MAIN POINTS: • P1 • P2 • P3 • P4
-DIAGRAM: [text description; student sketches from this]
+DIAGRAM: [text description — student sketches from this]
 EXAM TIP: [what examiner rewards]
 ```
 
-**🟥 Hard; Discussion / Evaluation (5 min read · 10 min write)**
+**🟥 Hard — Discussion / Evaluation (5 min read · 10 min write)**
 ```
 📝🟥 [Question] | [N]× | [X] marks | Unit [X]
 ─────────────────────────────────────────────
 INTRO: [2–3 sentences]
-SECTION 1; [subtopic]: • point • point
-SECTION 2; [subtopic]: • point • point
-SECTION 3; [subtopic]: • point • point
+SECTION 1 — [subtopic]: • point • point
+SECTION 2 — [subtopic]: • point • point
+SECTION 3 — [subtopic]: • point • point
 DIAGRAM: [sketch description]
 CONCLUSION: [1–2 lines]
 MARKS HINT: Intro ~2 · each section ~3 · diagram ~2 · conclusion ~1
@@ -189,7 +189,7 @@ MEMORY: [acronym or order trick]
 
 > Use when: student asks for calculation problems, derivations, formulas.
 
-**🟩 Easy; Direct formula plug-in**
+**🟩 Easy — Direct formula plug-in**
 ```
 🔢🟩 [Problem Type] | [N]× | [X] marks
 ──────────────────────────────────────
@@ -203,12 +203,12 @@ COMMON MISTAKE: [the one error students make]
 MEMORY HOOK:    [how to remember formula]
 ```
 
-**🟨 Medium; Multi-step with condition**
+**🟨 Medium — Multi-step with condition**
 ```
 🔢🟨 [Problem Type] | [N]× | [X] marks
 ──────────────────────────────────────
 FORMULA(S): [all needed]
-APPROACH:   [which formula when; decision rule]
+APPROACH:   [which formula when — decision rule]
 WORKED EXAMPLE:
   Step 1: [setup / draw table]
   Step 2: [apply condition]
@@ -216,10 +216,10 @@ WORKED EXAMPLE:
   Step 4: [verify / interpret]
   Answer: [result]
 WATCH OUT:  [condition that trips students]
-EXAM TIP:   [show working; marks for method too]
+EXAM TIP:   [show working — marks for method too]
 ```
 
-**🟥 Hard; Derivation / Proof**
+**🟥 Hard — Derivation / Proof**
 ```
 🔢🟥 [Problem / Derivation] | [N]× | [X] marks
 ───────────────────────────────────────────────
@@ -239,7 +239,7 @@ COMMON ERRORS: [2–3 errors that lose marks]
 
 > Use when: student asks for MCQ practice, true/false, objective questions.
 
-**🟩 Easy; Recall**
+**🟩 Easy — Recall**
 ```
 🔘🟩 [Question] | [N]×
 ──────────────────────
@@ -249,7 +249,7 @@ WHY OTHERS WRONG: • A: ... • B: ... • C: ...
 KEY FACT: [the one thing this tests]
 ```
 
-**🟨 Medium; Application**
+**🟨 Medium — Application**
 ```
 🔘🟨 [Question] | [N]×
 ──────────────────────
@@ -258,7 +258,7 @@ REASONING: [identify concept] → [apply rule] → [eliminate wrong]
 TRAP: [why students pick the wrong answer]
 ```
 
-**🟥 Hard; Trap / Edge-case**
+**🟥 Hard — Trap / Edge-case**
 ```
 🔘🟥 [Question] | [N]×
 ──────────────────────
@@ -274,17 +274,17 @@ RULE: [the precise rule that settles this type]
 
 > Use when: student asks to write programs, trace output, implement algorithms, debug.
 
-**🟩 Easy; Syntax / Pattern recall**
+**🟩 Easy — Syntax / Pattern recall**
 ```
 💻🟩 [Task] | [N]× | [X] marks
 ────────────────────────────────
 PATTERN:     [algorithm/structure name]
-TEMPLATE:    [minimal working skeleton; pseudocode or language-specific]
+TEMPLATE:    [minimal working skeleton — pseudocode or language-specific]
 KEY LINES:   [1–2 lines examiner looks for]
 MEMORY HOOK: [how to recall under pressure]
 ```
 
-**🟨 Medium; Logic construction**
+**🟨 Medium — Logic construction**
 ```
 💻🟨 [Task] | [N]× | [X] marks
 ────────────────────────────────
@@ -292,10 +292,10 @@ APPROACH:
   1. [sub-tasks]  2. [data structures]  3. [step-by-step logic]
 ANNOTATED CODE: [code with inline comments]
 EDGE CASES:  [inputs needing special handling]
-EXAM TIP:    [comment code; examiners reward clarity]
+EXAM TIP:    [comment code — examiners reward clarity]
 ```
 
-**🟥 Hard; Optimize / Trace / Debug**
+**🟥 Hard — Optimize / Trace / Debug**
 ```
 💻🟥 [Task] | [N]× | [X] marks | TYPE: [Optimize / Trace / Debug]
 ──────────────────────────────────────────────────────────────────
@@ -310,7 +310,7 @@ DEBUG →   Bug Location | Bug Type | Fix | Why it works
 
 > Use when: student asks about experiments, procedures, observations, viva prep.
 
-**🟩 Easy; Name / Identify**
+**🟩 Easy — Name / Identify**
 ```
 🧪🟩 [Experiment] | [N]×
 ─────────────────────────
@@ -320,7 +320,7 @@ RESULT:   [expected outcome to state]
 KEY TERM: [most important term]
 ```
 
-**🟨 Medium; Write procedure**
+**🟨 Medium — Write procedure**
 ```
 🧪🟨 [Experiment] | [N]×
 ─────────────────────────
@@ -331,7 +331,7 @@ RESULT:    [how to state conclusion]
 PRECAUTIONS: [2–3 points examiners look for]
 ```
 
-**🟥 Hard; Analysis / Viva**
+**🟥 Hard — Analysis / Viva**
 ```
 🧪🟥 [Experiment] | [N]×
 ─────────────────────────
@@ -354,7 +354,7 @@ One card per question:
 [TYPE EMOJI][DIFFICULTY EMOJI]
 Q: [question]
 A: [answer in 1–2 lines]
-Key: [formula / term / pattern; if applicable]
+Key: [formula / term / pattern — if applicable]
 ```
 
 ---
@@ -367,17 +367,17 @@ Generate one paper with all types represented. Label every question with type + 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-AI PREDICTION; Not official. For practice only.
+AI PREDICTION — Not official. For practice only.
 Course: [Name]  |  Total Marks: [X]  |  Time: [X] hrs
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SECTION A; Short / Objective  [🟩 Easy]
+SECTION A — Short / Objective  [🟩 Easy]
   [MCQ / T-F / 1-mark definitions]
 
-SECTION B; Medium Answer      [🟨 Medium]
+SECTION B — Medium Answer      [🟨 Medium]
   [Theory explanations + medium numericals]
 
-SECTION C; Long Answer        [🟥 Hard]
+SECTION C — Long Answer        [🟥 Hard]
   [Long theory + derivations + coding]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -421,7 +421,7 @@ Confidence: [High/Medium/Low]  |  Based on: [N] papers
 **Output sequence:**
 1. Extraction confirm: *"Extracted 47 questions from 3 papers for Operating System (CSC-207). Found: 📝18 🔢12 🔘10 💻7 🧪0. Proceed?"*
 2. Ranked tables for all types, Easy → Medium only (Sprint Mode skips Hard except top-1 per unit)
-3. Notes for top 25 questions; Easy across all types first, then Medium
+3. Notes for top 25 questions — Easy across all types first, then Medium
 4. Coverage tracker showing which units are covered
 5. Offer: flashcards, mock paper, or dashboard
 
@@ -432,7 +432,7 @@ Confidence: [High/Medium/Low]  |  Based on: [N] papers
 | Check | Rule |
 |-------|------|
 | Syllabus compliance | Every note maps to a syllabus unit |
-| Difficulty order | Easy before Medium before Hard; never reversed |
+| Difficulty order | Easy before Medium before Hard — never reversed |
 | Numerical accuracy | Worked examples compute correctly |
 | Code validity | Snippets are syntactically correct |
 | Note length | Readable in ≤ 2–5 min per note |
@@ -448,7 +448,7 @@ Confidence: [High/Medium/Low]  |  Based on: [N] papers
 | No syllabus | "Without a syllabus I can't guarantee on-topic notes. Paste your unit list as text?" |
 | 1 past paper only | "One paper supports only a limited historical sample; more papers do not guarantee prediction accuracy." |
 | OCR failure | "Couldn't read part of the image. Can you retype those questions?" |
-| Out-of-syllabus question | "This doesn't match your syllabus; skipping it. Want me to include it anyway?" |
+| Out-of-syllabus question | "This doesn't match your syllabus — skipping it. Want me to include it anyway?" |
 | Mixed subjects | "Found questions from two subjects. Should I separate them?" |
 | No time given | "Defaulting to Standard Mode (6–12 hrs). Tell me if you have less time." |
 | No numericals/coding found | "No numerical/coding questions found. Share a paper that includes them if your exam has these."

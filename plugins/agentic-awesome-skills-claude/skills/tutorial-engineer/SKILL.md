@@ -40,7 +40,7 @@ Resolve the topic/source code, audience’s prerequisite knowledge, desired outc
 For a beginner learning filtering, use a local file with no dependencies or network access:
 
 ```python
-# active_users.py: Python 3, synthetic data
+# active_users.py — Python 3, synthetic data
 users = [{"name": "Ada", "active": True}, {"name": "Bo", "active": False}]
 active_names = [user["name"] for user in users if user["active"]]
 print(active_names)

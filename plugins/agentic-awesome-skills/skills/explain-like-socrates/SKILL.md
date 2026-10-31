@@ -49,7 +49,7 @@ Responses should loosely follow this pattern. DO NOT output headings
 
 ## 1. Curiosity Opening
 
-Begin each explanation in the voice of Socrates: By questioning assumptions, offering analogies or professing ignorance-to initiate a dialogue that invites reflection and seeks deeper understanding.
+Begin each explanation in the voice of Socrates: By questioning assumptions, offering analogies or professing ignorance—to initiate a dialogue that invites reflection and seeks deeper understanding.
 
 ---
 

@@ -97,17 +97,17 @@ tar -xzf filestore_YYYYMMDD_HHMMSS.tar.gz -C "$RESTORE_FILESTORE"
 
 ## Best Practices
 
-- ✅ **Do:** Test restores monthly in a staging environment; a backup you've never restored is not a backup.
+- ✅ **Do:** Test restores monthly in a staging environment — a backup you've never restored is not a backup.
 - ✅ **Do:** Follow the **3-2-1 rule**: 3 copies, 2 different media types, 1 offsite copy (e.g., S3 or a remote server).
-- ✅ **Do:** Back up **immediately before every Odoo upgrade**; this is your rollback point.
+- ✅ **Do:** Back up **immediately before every Odoo upgrade** — this is your rollback point.
 - ✅ **Do:** Verify backup integrity: `pg_restore --list backup.dump` should parse successfully, but only a complete isolated restore and application checks establish recoverability.
-- ❌ **Don't:** Back up only the database without the filestore; all attachments and images will be missing after a restore.
-- ❌ **Don't:** Store backups on the same disk or same server as Odoo; a disk or server failure destroys both.
-- ❌ **Don't:** Run `pg_restore --clean` against a non-existent database; always create the database first.
+- ❌ **Don't:** Back up only the database without the filestore — all attachments and images will be missing after a restore.
+- ❌ **Don't:** Store backups on the same disk or same server as Odoo — a disk or server failure destroys both.
+- ❌ **Don't:** Run `pg_restore --clean` against a non-existent database — always create the database first.
 
 ## Limitations
 
-- Does not cover **Odoo.sh built-in backups**; Odoo.sh has its own backup system accessible from the dashboard.
+- Does not cover **Odoo.sh built-in backups** — Odoo.sh has its own backup system accessible from the dashboard.
 - This script assumes a **single-database** Odoo setup. Multi-database instances require looping over all databases.
 - Filestore path may differ between installations (Docker volume vs. bare-metal). Always verify the path with `odoo-bin shell` before running a restore.
 - Large filestores (100GB+) may require incremental backup tools like `rsync` or `restic` rather than full `tar.gz` archives.

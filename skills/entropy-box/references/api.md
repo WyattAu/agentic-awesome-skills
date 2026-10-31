@@ -41,12 +41,12 @@ groups before selecting candidates.
 
 Historical response anatomy (original review claim, not re-tested in this content review; the approved current schema wins):
 
-- `results` is grouped into three scopes; `assets` (implementation assets), `caps`
-  (capabilities), `topics` (topics); each hit carries `record`, `matched`
+- `results` is grouped into three scopes — `assets` (implementation assets), `caps`
+  (capabilities), `topics` (topics) — each hit carries `record`, `matched`
   (vec/lex/graph), and `score`;
 - `chains`: capability subgraphs (anchor + hierarchy/dependency edges) from retrieval,
   useful for understanding structural relations between capabilities;
-- `dup_folded` / `dup_of` / `dup_group`: dedup-related; the same capability may appear
+- `dup_folded` / `dup_of` / `dup_group`: dedup-related — the same capability may appear
   as multiple records; dedup by entity when presenting, do not count it twice;
 - when `low_confidence` is true, or `record.provenance` is `generated`, or the source
   carries `[verify]`, treat the record as low-confidence: verify against an upstream
@@ -117,7 +117,7 @@ deployments. Use `type` to narrow name or keyword lookups.
 
 Note: Lookup's exact matching is not guaranteed for Chinese natural phrases (e.g.,
 "柔性控制", "柔顺控制") and may return `found: false` or an empty candidate list. This
-does not mean the concept is absent from the graph; confirm with `/api/search`. Prefer
+does not mean the concept is absent from the graph — confirm with `/api/search`. Prefer
 exact IDs or English/technical aliases for Lookup.
 
 ## Generate a candidate workflow
@@ -125,7 +125,7 @@ exact IDs or English/technical aliases for Lookup.
 `POST /api/consult`
 
 By default, Consult runs hybrid retrieval (vector + BM25 + one-hop graph expansion +
-rerank) and returns the **structured knowledge graph** for the question; `results`
+rerank) and returns the **structured knowledge graph** for the question — `results`
 (topics/caps/assets with full records and `graph_via` attribution edges), `task_steps`
 (LLM intent decomposition), and `chains` (capability subgraphs discovered during
 retrieval). The graph records are retrieved candidates; task_steps can be LLM-decomposed even with integrate=false, so neither factual accuracy nor complete grounding is guaranteed. No final LLM chain assembly is requested in that mode.

@@ -113,7 +113,7 @@ dnSpyEx 调试器对 .NET 程序比 native 友好得多：
 - **断点在方法入口**：右键方法 → Add Breakpoint
 - **看对象值**：断住后 Locals / Watch 窗口直接看对象字段、字符串内容
 - **内存写入**：可以直接改运行时变量值（Edit Value）
-- **异常断点**：Debug → Exceptions，勾选要断的异常类型 -- 混淆器常用异常驱动控制流，断异常能看到真实路径
+- **异常断点**：Debug → Exceptions，勾选要断的异常类型 —— 混淆器常用异常驱动控制流，断异常能看到真实路径
 
 ### 异常驱动控制流
 
@@ -136,7 +136,7 @@ catch (CustomException e) {
 `.NET` 模块的静态构造函数（`<module>` 的 `.cctor`）在 assembly 加载时最先执行，混淆器常把 anti-tamper / 解密初始化放这里。分析顺序：
 
 ```text
-1. 先看 <module>.cctor（Module .cctor）-- 解密/反调试初始化
+1. 先看 <module>.cctor（Module .cctor）—— 解密/反调试初始化
 2. 再看 Program.Main / Startup
 3. anti-tamper 在 .cctor 里 → 先 patch .cctor 再脱壳
 ```

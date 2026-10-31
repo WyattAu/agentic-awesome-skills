@@ -74,7 +74,7 @@ struct SemiFlatCard: View {
         .padding(24)
         .background(Color(.systemBackground))
         .cornerRadius(8)
-        // The key: very soft, tinted shadow; NOT harsh black
+        // The key: very soft, tinted shadow — NOT harsh black
         .shadow(color: Color.black.opacity(0.06), radius: 12, x: 0, y: 4)
         .scaleEffect(isPressed ? 0.98 : 1.0)
         .animation(.easeOut(duration: 0.2), value: isPressed)
@@ -102,7 +102,7 @@ struct SemiFlatButton: View {
 }
 ```
 - Shadow color should be tinted (e.g., `Color.accentColor.opacity(0.15)`), never pure black.
-- Use `radius: 10...16` with `opacity: 0.05...0.08`; if you can immediately see the shadow, it's too heavy.
+- Use `radius: 10...16` with `opacity: 0.05...0.08` — if you can immediately see the shadow, it's too heavy.
 - Add subtle `scaleEffect` on press to hint at physical feedback.
 
 ### Flutter
@@ -137,7 +137,7 @@ class SemiFlatCard extends StatelessWidget {
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              elevation: 2,  // Very low; just enough to feel clickable
+              elevation: 2,  // Very low — just enough to feel clickable
               shadowColor: Theme.of(context).primaryColor.withOpacity(0.3),
               backgroundColor: Theme.of(context).primaryColor,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -227,7 +227,7 @@ fun SemiFlatCard() {
     }
 }
 ```
-- Use `CardDefaults.cardElevation(defaultElevation = 2.dp)`; keep it under 4dp.
+- Use `CardDefaults.cardElevation(defaultElevation = 2.dp)` — keep it under 4dp.
 - On hover/press: `hoveredElevation = 4.dp, pressedElevation = 1.dp` for subtle physics.
 - Tint shadows by using `Modifier.shadow(elevation, shape, ambientColor, spotColor)` with custom tinted colors.
 

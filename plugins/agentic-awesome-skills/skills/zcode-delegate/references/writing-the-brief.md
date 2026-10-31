@@ -13,7 +13,7 @@ That matters in two ways:
 
 - **The command line stops bounding the brief.** ZCode has no stdin delivery, so a brief passed as
   prompt text would be limited by the command line (about 32 767 characters on Windows). Attaching
-  sidesteps that entirely; write the brief the task deserves. The configured model's context window
+  sidesteps that entirely — write the brief the task deserves. The configured model's context window
   still applies, so this buys room, not an unlimited budget.
 - **The brief is a document, not a chat message.** Structure it with headings. ZCode reads it as a
   file.
@@ -33,7 +33,7 @@ Exactly what to do. Be specific about behaviour, not implementation, unless the 
 is the point.
 
 # Out of scope
-What to leave alone. This is the field that prevents scope creep; spend real effort on it.
+What to leave alone. This is the field that prevents scope creep — spend real effort on it.
 
 # Gates
 The project's ACTUAL commands, copied from its CLAUDE.md / AGENTS.md / Makefile / package.json.
@@ -68,7 +68,7 @@ them. If you did not verify the command yourself, do not put it in the brief.
 brief that says only what to change invites reformatting, drive-by refactors, and dependency
 additions. Name the things you do not want touched.
 
-**One task per brief.** If the brief has an "and then also", split it. Queues are for sequences -
+**One task per brief.** If the brief has an "and then also", split it. Queues are for sequences —
 see [multi-task-queues.md](multi-task-queues.md).
 
 **Ask for a report contract.** You are going to re-verify everything anyway, but a structured report
@@ -80,11 +80,11 @@ Bash tool. Being explicit costs one line.
 
 ## Tool restrictions belong on the command line, not in the brief
 
-If the task genuinely must not touch certain tools, do not ask politely in the brief; pass
+If the task genuinely must not touch certain tools, do not ask politely in the brief — pass
 `--disallowed-tools "Write,Edit,Bash"`. That denylist is enforced by ZCode: the named tools are
 absent from the session entirely. Prose in a brief is not.
 
-There is no allowlist counterpart; ZCode has no `--allowed-tools`. You can subtract capability, not
+There is no allowlist counterpart — ZCode has no `--allowed-tools`. You can subtract capability, not
 enumerate it.
 
 ## For a read-only run
@@ -100,7 +100,7 @@ Give a second opinion on the approach below. Do not change any files.
 ...points both sides accept...
 
 # Contested
-1. <point>; Position A: ... Position B: ...
+1. <point> — Position A: ... Position B: ...
 2. ...
 
 # Report contract
@@ -109,12 +109,12 @@ For each contested point, defend or concede, and say which evidence moved you.
 
 Then verify the result: `readOnlyViolation` is `false` and `touchedFiles` matches the pre-run baseline (empty only for an initially clean tree). Plan mode's
 refusal is measured by the relay's Git tripwire, not guaranteed by a sandbox, and
-`readOnlyViolation` is tri-state; `true` means Git-visible changes were detected, `false` means
+`readOnlyViolation` is tri-state — `true` means Git-visible changes were detected, `false` means
 none were, and `null` means the tripwire could not tell, which calls for inspecting the tree
 yourself rather than assuming either.
 
 ## Delta briefs for rework
 
 When you send work back with `--session <sessionId>`, ZCode still has the earlier turn. Send only
-what changed; the correction, not the whole original brief. Repeating the full brief wastes context
+what changed — the correction, not the whole original brief. Repeating the full brief wastes context
 and invites it to redo work you already accepted. See [review-and-land.md](review-and-land.md).

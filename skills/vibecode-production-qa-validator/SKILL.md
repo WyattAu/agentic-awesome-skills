@@ -101,7 +101,7 @@ Do not follow redirects carrying credentials to other origins. A status check pr
 
 ---
 
-### Phase 5: SEO: Tags, Images, Favicon, Slugs
+### Phase 5: SEO — Tags, Images, Favicon, Slugs
 
 - [ ] `<title>` 30–60 chars, unique per page
 - [ ] `<meta name="description">` in raw HTML
@@ -166,9 +166,9 @@ Do not follow redirects carrying credentials to other origins. A status check pr
 
 ### Phase 10: Cleanup & Vulnerability Scan
 
-- [ ] `npm prune`, `depcheck`; no unused deps
+- [ ] `npm prune`, `depcheck` — no unused deps
 - [ ] No console.log/debugger in staged code
-- [ ] `npm audit`; zero critical/high vulnerabilities
+- [ ] `npm audit` — zero critical/high vulnerabilities
 - [ ] No eval/new Function/document.write
 - [ ] TODOs resolved
 
@@ -176,7 +176,7 @@ Do not follow redirects carrying credentials to other origins. A status check pr
 
 ---
 
-### Phase 11: UI/UX: Cards, Animation, Error Boundaries
+### Phase 11: UI/UX — Cards, Animation, Error Boundaries
 
 - [ ] Cards: equal height grid, no overlap, text ellipsis, responsive (1→2→3 col)
 - [ ] No horizontal scroll at any viewport (320–1440px)
@@ -273,7 +273,7 @@ jobs:
 | Problem | Solution |
 |---------|----------|
 | OG tags missing in raw HTML | Use `export const metadata` in Next.js |
-| `Disallow: /` in robots.txt | Blocks all crawlers; use specific paths |
+| `Disallow: /` in robots.txt | Blocks all crawlers — use specific paths |
 | Cards different heights in grid | Use `display: grid` with equal-height rows, not flex |
 | Text overflows card | Add `text-overflow: ellipsis` + `overflow: hidden` |
 | Animation jank | Animate `transform` not `width`/`height` |
@@ -292,7 +292,7 @@ jobs:
 - Project commands can mutate state or execute arbitrary lifecycle/tool code; inspect them and use an isolated approved environment.
 - `PROD_URL` and `QA_AUTH_HEADER` only for environments you own
 - Use a reviewed secret scanner with redacted output; missing matches do not prove absence. Validate dependencies from structured audit results and propagate command failures.
-- Auth tests with real credentials against prod is destructive; use staging
+- Auth tests with real credentials against prod is destructive — use staging
 
 ---
 
@@ -301,7 +301,7 @@ jobs:
 - Passing all phases reduces risk but doesn't eliminate production bugs
 - Some checks depend on project-specific tooling (Prisma, NextAuth, etc.)
 - Manual UX testing still required for critical user journeys
-- SEO checks verify raw HTML only; not social preview rendering
+- SEO checks verify raw HTML only — not social preview rendering
 - Route checks verify status codes, not content correctness
 
 ---

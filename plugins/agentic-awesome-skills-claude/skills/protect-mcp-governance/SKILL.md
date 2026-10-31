@@ -1,6 +1,6 @@
 ---
 name: protect-mcp-governance
-description: "Agent governance skill for MCP tool calls; Cedar policy authoring, shadow-to-enforce rollout, and Ed25519 receipt verification."
+description: "Agent governance skill for MCP tool calls — Cedar policy authoring, shadow-to-enforce rollout, and Ed25519 receipt verification."
 risk: critical
 source: community
 source_repo: scopeblind/scopeblind-gateway
@@ -40,9 +40,9 @@ Agent → protect-mcp → Cedar policy evaluation → MCP Server
 
 Three modes of operation:
 
-1. **Shadow mode** (default); logs decisions without blocking. Use this to observe what your policies would do before enforcing them.
-2. **Enforce mode**; blocks tool calls that violate policy. Use after shadow-mode validation.
-3. **Hooks mode**; integrates with Claude Code hooks for pre/post tool-call governance.
+1. **Shadow mode** (default) — logs decisions without blocking. Use this to observe what your policies would do before enforcing them.
+2. **Enforce mode** — blocks tool calls that violate policy. Use after shadow-mode validation.
+3. **Hooks mode** — integrates with Claude Code hooks for pre/post tool-call governance.
 
 ## Core Concepts
 
@@ -50,7 +50,7 @@ Use an approved pinned package version and confirm its actual CLI/config schema 
 
 ### Cedar Policies
 
-Cedar is a policy language designed for authorization. Policies are evaluated locally via WASM; no network calls required.
+Cedar is a policy language designed for authorization. Policies are evaluated locally via WASM — no network calls required.
 
 ```cedar
 // Allow read-only file operations
@@ -117,7 +117,7 @@ This creates a `protect-mcp.config.json` and a starter Cedar policy in your proj
 Create `policy.cedar` in your project:
 
 ```cedar
-// Start permissive; allow everything in shadow mode
+// Start permissive — allow everything in shadow mode
 permit(
   principal,
   action == Action::"call_tool",
@@ -128,7 +128,7 @@ permit(
 ### 3. Run in Shadow Mode (Observe First)
 
 ```bash
-# Shadow mode is the default: logs decisions without blocking
+# Shadow mode is the default — logs decisions without blocking
 npx protect-mcp --policy policy.cedar -- node your-mcp-server.js
 ```
 
@@ -254,7 +254,7 @@ npx @veritasacta/verify audit.json --bundle
 - ✅ **Do:** Pin the verifier version when integrating into CI (`@veritasacta/verify@0.2.5`)
 - ❌ **Don't:** Skip shadow mode and go straight to enforce in production
 - ❌ **Don't:** Trust `claimed_issuer_tier` without independent verification
-- ❌ **Don't:** Treat a valid signature as proof the signer is trustworthy; it only proves the receipt has not been tampered with since signing
+- ❌ **Don't:** Treat a valid signature as proof the signer is trustworthy — it only proves the receipt has not been tampered with since signing
 
 ## Troubleshooting
 
@@ -272,16 +272,16 @@ npx @veritasacta/verify audit.json --bundle
 
 ## Related Skills
 
-- `@security-auditor`; General security auditing and compliance
-- `@security-audit`; Code vulnerability scanning
-- `@mcp-development`; MCP server development patterns
+- `@security-auditor` — General security auditing and compliance
+- `@security-audit` — Code vulnerability scanning
+- `@mcp-development` — MCP server development patterns
 
 ## Additional Resources
 
-- [protect-mcp on npm](https://www.npmjs.com/package/protect-mcp); MIT licensed
-- [Cedar Policy Language](https://www.cedarpolicy.com/); AWS open-source policy engine
-- [IETF Draft: Signed Receipts](https://datatracker.ietf.org/doc/draft-farley-acta-signed-receipts/); Receipt format specification
-- [@veritasacta/verify](https://www.npmjs.com/package/@veritasacta/verify); Apache-2.0 verifier, works offline
+- [protect-mcp on npm](https://www.npmjs.com/package/protect-mcp) — MIT licensed
+- [Cedar Policy Language](https://www.cedarpolicy.com/) — AWS open-source policy engine
+- [IETF Draft: Signed Receipts](https://datatracker.ietf.org/doc/draft-farley-acta-signed-receipts/) — Receipt format specification
+- [@veritasacta/verify](https://www.npmjs.com/package/@veritasacta/verify) — Apache-2.0 verifier, works offline
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

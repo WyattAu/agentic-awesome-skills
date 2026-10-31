@@ -2,9 +2,9 @@
 
 Scope: read-only research template; verify current CLI flags/entitlements, cite actual sources and timestamps, and distinguish estimates from observations. Never expose account credentials or raw sensitive error output. Examples and thresholds are illustrative, not current quotes or validated trading signals. Account-specific data is optional and requires user-authorized minimum read access.
 
-DeFi yield analysis framework; covers lending rates (AAVE / Compound), liquidity provision (LP) returns, staking yields, yield farming strategies, and risk-adjusted return comparison across DeFi protocols.
+DeFi yield analysis framework — covers lending rates (AAVE / Compound), liquidity provision (LP) returns, staking yields, yield farming strategies, and risk-adjusted return comparison across DeFi protocols.
 
-> **Data scope notice**: Longbridge provides real-time spot prices for major cryptocurrencies (`.HAS` suffix, e.g. `BTCUSD.HAS`, `ETHUSD.HAS`). DeFi protocol metrics (APY, TVL, utilisation rates) are **not available** via the Longbridge CLI; they must be sourced via WebSearch (DefiLlama, CoinGecko, protocol dashboards).
+> **Data scope notice**: Longbridge provides real-time spot prices for major cryptocurrencies (`.HAS` suffix, e.g. `BTCUSD.HAS`, `ETHUSD.HAS`). DeFi protocol metrics (APY, TVL, utilisation rates) are **not available** via the Longbridge CLI — they must be sourced via WebSearch (DefiLlama, CoinGecko, protocol dashboards).
 
 ## Workflow
 

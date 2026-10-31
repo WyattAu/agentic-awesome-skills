@@ -32,7 +32,7 @@ report_count: 0
 
 
 
-# HUNT-CICD: CI/CD Pipeline Security
+# HUNT-CICD — CI/CD Pipeline Security
 
 ## When to Use
 

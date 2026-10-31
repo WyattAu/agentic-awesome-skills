@@ -30,10 +30,10 @@ report_count: 0
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-## OWASP API9: Improper Inventory Management (Shadow / Zombie APIs)
+## OWASP API9 — Improper Inventory Management (Shadow / Zombie APIs)
 
 As an API evolves, old versions and internal/staging routes routinely stay reachable without
-receiving the same security fixes as the current version; because nobody tracks that they
+receiving the same security fixes as the current version — because nobody tracks that they
 still exist. The bug is rarely in one endpoint; it's in the **delta** between what an old
 version enforces and what the current version enforces on the same operation.
 
@@ -48,12 +48,12 @@ Trigger when:
 - Multiple OpenAPI/Swagger specs are discoverable, or `info.version` in one spec implies others
   exist.
 
-DO NOT use for single-version APIs with no version history; there's nothing to diff; go
+DO NOT use for single-version APIs with no version history — there's nothing to diff; go
 straight to `hunt-api-misconfig` for direct exploitation of the one surface that exists.
 
 ---
 
-## Stage 1: Enumerate the Full Version Surface
+## Stage 1 — Enumerate the Full Version Surface
 
 ```bash
 # Path-based versioning
@@ -75,7 +75,7 @@ A `200`/`401`/`403` is a discovery lead, not proof an API version exists: compar
 
 ---
 
-## Stage 2: Pull Every Reachable Spec, Not Just the Linked One
+## Stage 2 — Pull Every Reachable Spec, Not Just the Linked One
 
 ```bash
 for path in openapi.json swagger.json v1/swagger.json v2/swagger.json v3/api-docs \
@@ -83,7 +83,7 @@ for path in openapi.json swagger.json v1/swagger.json v2/swagger.json v3/api-doc
   curl -s -o /dev/null -w "%{http_code} /$path\n" "https://$TARGET/$path"
 done
 
-# Wayback Machine: a DEPRECATED version's spec often stays indexed after the live link is removed
+# Wayback Machine — a DEPRECATED version's spec often stays indexed after the live link is removed
 curl -s "http://web.archive.org/cdx/search/cdx?url=$TARGET/*swagger*&output=json&collapse=urlkey"
 curl -s "http://web.archive.org/cdx/search/cdx?url=$TARGET/*openapi*&output=json&collapse=urlkey"
 ```
@@ -93,15 +93,15 @@ inventories directly:
 ```bash
 jq -r '.paths | keys[]' v1-swagger.json | sort > /tmp/v1_paths.txt
 jq -r '.paths | keys[]' v2-swagger.json | sort > /tmp/v2_paths.txt
-comm -23 /tmp/v1_paths.txt /tmp/v2_paths.txt   # in v1 only; candidates for "still live but forgotten"
+comm -23 /tmp/v1_paths.txt /tmp/v2_paths.txt   # in v1 only — candidates for "still live but forgotten"
 ```
 For every path in that diff, confirm it's still reachable against the v1 base URL. A route
 documented only in the old spec that still returns something other than `404` is a zombie-
-endpoint candidate; carry it into Stage 3.
+endpoint candidate — carry it into Stage 3.
 
 ---
 
-## Stage 3: Behavioral Diff Between Old and Current Version
+## Stage 3 — Behavioral Diff Between Old and Current Version
 
 For each operation that exists in **both** versions, compare security-relevant behavior, not
 response shape. Response shape differences are Informational; behavioral security regressions
@@ -115,19 +115,19 @@ are the finding.
   ```
 - **Rate limiting.** Compare only within the explicitly authorized rate/request budget and test-account scope. Absence of `429` alone does not establish a missing control; rate limits may depend on identity, window, gateway or other signals. Record actual impact without brute-force escalation unless separately authorized.
 - **Input validation.** Send the identical injection/oversized/malformed payload to both; the
-  old version accepting what the new one rejects means hardening happened forward-only -
+  old version accepting what the new one rejects means hardening happened forward-only —
   chain into whichever injection class the payload targets (`hunt-sqli`, `hunt-idor`, etc.).
-- **Field exposure.** Does the old version's response body include fields; internal IDs, other
-  users' data, internal notes, PII; that the current version has since redacted?
+- **Field exposure.** Does the old version's response body include fields — internal IDs, other
+  users' data, internal notes, PII — that the current version has since redacted?
 
 ---
 
-## Stage 4: Deprecated / Internal Routes Never Referenced by the Current UI
+## Stage 4 — Deprecated / Internal Routes Never Referenced by the Current UI
 
 - Grep JS bundles for API calls no visible UI flow triggers (`/internal/`, `/admin/`, `/debug/`,
-  `/_internal/`, `/test/`, `/staging/`); reuse `hunt-source-leak`'s JS-bundle grep patterns for
+  `/_internal/`, `/test/`, `/staging/`) — reuse `hunt-source-leak`'s JS-bundle grep patterns for
   this specifically.
-- Check `robots.txt` / `sitemap.xml` for disallowed API paths; a self-inflicted disclosure.
+- Check `robots.txt` / `sitemap.xml` for disallowed API paths — a self-inflicted disclosure.
 - Mobile-app endpoint inventories (via `apk-redteam-pipeline` / `ios-redteam-pipeline`) very
   often reference an older backend version than the current web app calls. Treat every
   APK/IPA-sourced endpoint as a version-diff candidate against the live web API.
@@ -137,13 +137,13 @@ are the finding.
 ## False-Positive Gate
 
 - A version difference alone (different response shape, cosmetic field renaming) is
-  Informational. The finding is a **security-relevant regression**; auth, rate-limit, or
+  Informational. The finding is a **security-relevant regression** — auth, rate-limit, or
   validation that got weaker going backward in version history.
 - Confirm the old endpoint is not simply an alias/proxy to the current implementation before
-  claiming a behavioral difference; send a payload that would actually behave differently
+  claiming a behavioral difference — send a payload that would actually behave differently
   under old vs. new logic, not just compare a version string in the response body.
 - A `200` on a path that just serves a static "this API version is deprecated, use v2" message
-  is not a finding; confirm the underlying operation still executes.
+  is not a finding — confirm the underlying operation still executes.
 
 ---
 
@@ -161,23 +161,23 @@ are the finding.
 
 ## Related Skills & Chains
 
-- **`hunt-api-misconfig`**; owns exploitation once a spec or endpoint is in hand (mass
+- **`hunt-api-misconfig`** — owns exploitation once a spec or endpoint is in hand (mass
   assignment, JWT attacks, OData, Swagger-chain attacks). This skill hands it a sharper target:
   "here's a zombie endpoint with weaker validation than the current one."
-- **`hunt-subdomain`**; owns host/subdomain-level discovery (`api-v1.target.com` as its own
+- **`hunt-subdomain`** — owns host/subdomain-level discovery (`api-v1.target.com` as its own
   host, potential takeover). This skill owns what happens once you're inside a given host's
   version surface.
-- **`hunt-source-leak`**; JS-bundle grep for internal/undocumented calls; reused here
+- **`hunt-source-leak`** — JS-bundle grep for internal/undocumented calls; reused here
   specifically for version-diffing rather than secret extraction.
-- **`apk-redteam-pipeline`** / **`ios-redteam-pipeline`**; mobile builds routinely hardcode an
+- **`apk-redteam-pipeline`** / **`ios-redteam-pipeline`** — mobile builds routinely hardcode an
   older API version; every mobile-sourced endpoint is a version-diff candidate.
-- **`hunt-brute-force`**; a rate-limit regression found here is only a complete finding once
+- **`hunt-brute-force`** — a rate-limit regression found here is only a complete finding once
   chained to actual brute-forceable impact (login, OTP, enumeration).
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

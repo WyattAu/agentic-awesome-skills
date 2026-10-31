@@ -20,19 +20,19 @@ Use this skill to help the user store and serve files that branch alongside thei
 
 Reach for Neon Object Storage when the user needs to store files (images, uploads, generated assets, documents, backups) and any of the following are true:
 
-- **They already use Neon Postgres and don't want a second provider.** One backend, one bill, one CLI, one set of branches; instead of standing up and wiring a separate AWS S3 / R2 / Supabase Storage account. The same Neon credential that backs the database backs storage.
-- **Files must stay in sync with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time; copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
+- **They already use Neon Postgres and don't want a second provider.** One backend, one bill, one CLI, one set of branches — instead of standing up and wiring a separate AWS S3 / R2 / Supabase Storage account. The same Neon credential that backs the database backs storage.
+- **Files must stay in sync with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time — copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
 - **They want safe, throwaway environments.** Upload, overwrite, and delete files in a preview/CI branch within the verified branch and credential boundaries, then drop the branch.
-- **They want standard S3 tooling.** It's built on S3 semantics and speaks the S3 API, so the AWS SDKs, `boto3`, the AWS CLI, and presigned URLs all work; reliable and familiar, with no proprietary client.
+- **They want standard S3 tooling.** It's built on S3 semantics and speaks the S3 API, so the AWS SDKs, `boto3`, the AWS CLI, and presigned URLs all work — reliable and familiar, with no proprietary client.
 
-If the user has no Neon project, isn't on Postgres, and just needs a standalone CDN-backed asset store, a dedicated object store may fit better; but the moment branch-consistent files + rows matter, this is the reason to use it.
+If the user has no Neon project, isn't on Postgres, and just needs a standalone CDN-backed asset store, a dedicated object store may fit better — but the moment branch-consistent files + rows matter, this is the reason to use it.
 
 ## What It Does
 
-- **S3-compatible**; Works with existing S3 SDKs, `boto3`, the AWS CLI, and presigned URLs. Path-style addressing and SigV4 only.
-- **Branches with your database**; Every Neon branch gets its own isolated, copy-on-write storage state. Forking copies no data.
-- **Two access modes**; `private` buckets require a credential for every operation; `public_read` buckets allow anonymous reads with authenticated writes.
-- **One credential system**; The same Neon credential system used by Functions and the AI Gateway.
+- **S3-compatible** — Works with existing S3 SDKs, `boto3`, the AWS CLI, and presigned URLs. Path-style addressing and SigV4 only.
+- **Branches with your database** — Every Neon branch gets its own isolated, copy-on-write storage state. Forking copies no data.
+- **Two access modes** — `private` buckets require a credential for every operation; `public_read` buckets allow anonymous reads with authenticated writes.
+- **One credential system** — The same Neon credential system used by Functions and the AI Gateway.
 
 Verify current preview availability, CLI/SDK versions and project eligibility in the official docs before provisioning. Confirm the linked branch and inspect the plan before applying. Treat inherited production objects as sensitive in preview branches; descendant-capable credentials are broader than a single child branch. Protect and gitignore pulled environment files, keep credentials server-side, and use short-lived presigned URLs only for intended recipients. `public_read` is anonymous publication, requiring explicit scope.
 
@@ -62,7 +62,7 @@ neon deploy   # alias for `neon config apply`
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
-The `preview.buckets` block above is part of `neon.ts`, Neon's infrastructure-as-code file; one TypeScript file declares your buckets alongside every other service the branch should have (see the `neon` skill for the full reference). Reconcile the declaration against a branch the Terraform way:
+The `preview.buckets` block above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares your buckets alongside every other service the branch should have (see the `neon` skill for the full reference). Reconcile the declaration against a branch the Terraform way:
 
 ```bash
 neon config status   # print the branch's live config (which buckets exist)
@@ -70,9 +70,9 @@ neon config plan     # dry-run diff of what apply would change
 neon config apply    # create the declared buckets  (neon deploy is an alias)
 ```
 
-Buckets are **branch-scoped**: when a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with its buckets already provisioned (and copy-on-write objects inherited from the parent). Checking out an _existing_ branch doesn't reconcile it; run `neon deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's S3 credentials into your local `.env.local`, so the same `env pull` step shown below happens for you on those commands.
+Buckets are **branch-scoped**: when a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with its buckets already provisioned (and copy-on-write objects inherited from the parent). Checking out an _existing_ branch doesn't reconcile it — run `neon deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's S3 credentials into your local `.env.local`, so the same `env pull` step shown below happens for you on those commands.
 
-For typed, validated access to the injected S3 credentials, pass the same config object to `parseEnv` from `@neon/env`; it returns an `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts`.
+For typed, validated access to the injected S3 credentials, pass the same config object to `parseEnv` from `@neon/env` — it returns an `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts`.
 
 ## Environment variables
 
@@ -95,7 +95,7 @@ Because the names are AWS-standard, the AWS SDK picks up the credentials, endpoi
 
 ## Working with objects: the Files SDK (recommended)
 
-The simplest, most portable way to read and write objects is the [Files SDK](https://files-sdk.dev) with its `neon` adapter; a small, unified storage API (`upload`, `download`, `url`, `list`, `exists`, `copy`, `delete`, `signedUploadUrl`) over web-standard I/O. It uses the AWS S3 client under the hood, configured appropriately for Neon, and relabels errors as `Neon error`; so there's nothing to misconfigure. Reach for this first.
+The simplest, most portable way to read and write objects is the [Files SDK](https://files-sdk.dev) with its `neon` adapter — a small, unified storage API (`upload`, `download`, `url`, `list`, `exists`, `copy`, `delete`, `signedUploadUrl`) over web-standard I/O. It uses the AWS S3 client under the hood, configured appropriately for Neon, and relabels errors as `Neon error` — so there's nothing to misconfigure. Reach for this first.
 
 Install it alongside the AWS S3 peer dependencies the adapter uses internally:
 
@@ -103,7 +103,7 @@ Install it alongside the AWS S3 peer dependencies the adapter uses internally:
 npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-presigned-post @aws-sdk/s3-request-presigner
 ```
 
-The adapter resolves its endpoint, region, and credentials from the same injected `AWS_*` env vars; pass only the bucket name:
+The adapter resolves its endpoint, region, and credentials from the same injected `AWS_*` env vars — pass only the bucket name:
 
 ```typescript
 import { Files } from "files-sdk";
@@ -111,14 +111,14 @@ import { neon } from "files-sdk/neon";
 
 const files = new Files({ adapter: neon({ bucket: "images" }) });
 
-// Upload; body may be a Buffer, Uint8Array, Blob, File, ReadableStream, or string
+// Upload — body may be a Buffer, Uint8Array, Blob, File, ReadableStream, or string
 await files.upload("generated/cat.jpg", fileBuffer, { contentType: "image/jpeg" });
 
 // Download
 const file = await files.download("generated/cat.jpg");
 const bytes = new Uint8Array(await file.arrayBuffer());
 
-// Presigned GET; share without exposing credentials (defaults to a 1h expiry)
+// Presigned GET — share without exposing credentials (defaults to a 1h expiry)
 const url = await files.url("generated/cat.jpg", { expiresIn: 3600 });
 
 // Plus: files.exists(), files.list({ prefix }), files.copy(), files.delete(), files.signedUploadUrl()
@@ -128,7 +128,7 @@ Swap the adapter import (`files-sdk/s3`, `files-sdk/r2`, `files-sdk/gcs`, …) a
 
 ## Working with objects: the AWS S3 client (alternative)
 
-Neon speaks the S3 API directly, so you can drop down to the AWS SDK whenever you prefer the native client or already depend on it. The credentials, endpoint, and region are read from the standard AWS env chain, so the only setting you pass is `forcePathStyle: true`; Neon requires path-style addressing, so the S3 client **must** set it:
+Neon speaks the S3 API directly, so you can drop down to the AWS SDK whenever you prefer the native client or already depend on it. The credentials, endpoint, and region are read from the standard AWS env chain, so the only setting you pass is `forcePathStyle: true` — Neon requires path-style addressing, so the S3 client **must** set it:
 
 ```typescript
 import { S3Client } from "@aws-sdk/client-s3";
@@ -138,7 +138,7 @@ const s3 = new S3Client({
 });
 ```
 
-If you prefer typed access instead of reading `process.env` directly, `parseEnv` (from `@neon/env`) returns a validated `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts`; see the `neon` skill.
+If you prefer typed access instead of reading `process.env` directly, `parseEnv` (from `@neon/env`) returns a validated `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts` — see the `neon` skill.
 
 Then upload, download, and presign with the raw command objects:
 
@@ -164,7 +164,7 @@ const res = await s3.send(
 );
 const bytes = await res.Body?.transformToByteArray();
 
-// Presigned GET; share without exposing credentials
+// Presigned GET — share without exposing credentials
 const url = await getSignedUrl(
   s3,
   new GetObjectCommand({ Bucket: BUCKET, Key: "generated/cat.jpg" }),
@@ -193,7 +193,7 @@ The Neon documentation is the source of truth and Object Storage is evolving rap
 - https://neon.com/docs/storage/authentication.md
 - https://neon.com/docs/storage/s3-compatibility.md
 - https://neon.com/docs/storage/troubleshooting.md
-- https://files-sdk.dev; Files SDK docs (the `neon` adapter)
+- https://files-sdk.dev — Files SDK docs (the `neon` adapter)
 
 ## Limitations
 

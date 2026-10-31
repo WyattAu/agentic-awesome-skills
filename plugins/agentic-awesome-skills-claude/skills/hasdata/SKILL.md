@@ -36,11 +36,11 @@ Use this skill when:
 
 | Mode | Latency | When | Endpoint |
 |---|---|---|---|
-| **Web Scraping API** | seconds | Arbitrary URL; JS rendering, CSS/AI extraction, screenshots | `POST /scrape/web` |
+| **Web Scraping API** | seconds | Arbitrary URL — JS rendering, CSS/AI extraction, screenshots | `POST /scrape/web` |
 | **Scraper APIs** (sync) | seconds | Pre-parsed JSON for known platforms (Google, Amazon, Zillow, …) | `GET /scrape/<vertical>/<resource>` |
 | **Scraper Jobs** (async) | minutes–hours | Bulk extraction, recursive crawling, webhook fan-out | `POST /scrapers/<slug>/jobs` |
 
-**Decision rule.** Default to a **Scraper API** when one exists for the platform (pre-parsed JSON, no selector maintenance). Use **Web Scraping** for arbitrary URLs not covered by an API. Reach for a **Scraper Job** only when no API equivalent exists; `crawler`, `contacts`, `sec-edgar`, `amazon-bestsellers`, `amazon-product-reviews`; *or* when async fan-out + webhooks save engineering time over a paginated client loop.
+**Decision rule.** Default to a **Scraper API** when one exists for the platform (pre-parsed JSON, no selector maintenance). Use **Web Scraping** for arbitrary URLs not covered by an API. Reach for a **Scraper Job** only when no API equivalent exists — `crawler`, `contacts`, `sec-edgar`, `amazon-bestsellers`, `amazon-product-reviews` — *or* when async fan-out + webhooks save engineering time over a paginated client loop.
 
 ## JSON-wrapped synchronous response shape
 
@@ -66,17 +66,17 @@ Cookies, login credentials and private URLs sent in scrape bodies are disclosed 
 
 - **Auth:** `x-api-key` header on every request. Read from `HASDATA_API_KEY` env. Never hardcode, never log.
 - **Timeouts:** **set client timeout ≥ 300 s.** HasData's own deadline is 300 s; shorter clients produce phantom failures while still being billed on completion.
-- **Retries:** `429` and `5xx` only; exponential backoff, jitter. Never retry other `4xx` (auth, validation).
+- **Retries:** `429` and `5xx` only — exponential backoff, jitter. Never retry other `4xx` (auth, validation).
 - **Concurrency:** cap at your plan limit. The free tier is 1; anything higher just generates `429`s.
-- **Async jobs:** the submit response handle is `body.id` (integer), **not `jobId`**. Persist it immediately. Poll `GET /scrapers/jobs/<id>` every 10–30 s with backoff; treat webhooks as best-effort and always pair with polling. On `finished` the status carries `data: {csv, json, xlsx}` short-lived URLs; download immediately.
+- **Async jobs:** the submit response handle is `body.id` (integer), **not `jobId`**. Persist it immediately. Poll `GET /scrapers/jobs/<id>` every 10–30 s with backoff; treat webhooks as best-effort and always pair with polling. On `finished` the status carries `data: {csv, json, xlsx}` short-lived URLs — download immediately.
 
 See `references/code-recipes.md` for ready-to-paste Python and TypeScript clients with retry, backoff, bounded concurrency, and the full job lifecycle.
 
 ## Common gotchas
 
 - **300 s server deadline.** Match client timeout.
-- **Disable `jsRendering` first**, enable only if the page needs it; most static pages parse fine without a headless browser.
-- **No `cookies` parameter**; cookies go through `headers["Cookie"]`.
+- **Disable `jsRendering` first**, enable only if the page needs it — most static pages parse fine without a headless browser.
+- **No `cookies` parameter** — cookies go through `headers["Cookie"]`.
 - **`includePaths` regex is case-sensitive.** `/blog/.+` won't match `/Blog/...`.
 - **Scraper Job `data` is double-wrapped.** Each row is `body.data[i].data`; outer wraps with `id`, `jobId`, `dataId`, `createdAt`, `updatedAt`.
 - **Check the endpoint-specific success contract.** JSON-wrapped synchronous APIs use `requestMetadata.status === "ok"`; raw outputs and async jobs differ. HTTP 200 alone is not sufficient for JSON-wrapped APIs.
@@ -84,16 +84,16 @@ See `references/code-recipes.md` for ready-to-paste Python and TypeScript client
 
 ## References
 
-- [`references/web-scraping.md`](references/web-scraping.md); `POST /scrape/web` parameters, JS scenarios, AI extraction, cookie auth.
-- [`references/search.md`](references/search.md); Google SERP / Light / AI Mode / News / Shopping / Bing / Trends + pagination.
-- [`references/ecommerce.md`](references/ecommerce.md); Amazon (product, search, seller, seller-products) and Shopify.
-- [`references/real-estate.md`](references/real-estate.md); Zillow, Redfin (bracketed filters).
-- [`references/travel.md`](references/travel.md); Airbnb, Booking, Google Flights (occupancy rules, token pagination, IATA codes).
-- [`references/local-business.md`](references/local-business.md); Maps (search/place/reviews/photos/posts), Yelp, YellowPages.
-- [`references/jobs.md`](references/jobs.md); Indeed and Glassdoor.
-- [`references/youtube.md`](references/youtube.md); YouTube search / video / channel / transcript.
-- [`references/scraper-jobs.md`](references/scraper-jobs.md); async submit/poll/results, Crawler, Contacts, SEC EDGAR, webhook receiver.
-- [`references/code-recipes.md`](references/code-recipes.md); Python / TypeScript clients with retry, backoff, concurrency, polling.
+- [`references/web-scraping.md`](references/web-scraping.md) — `POST /scrape/web` parameters, JS scenarios, AI extraction, cookie auth.
+- [`references/search.md`](references/search.md) — Google SERP / Light / AI Mode / News / Shopping / Bing / Trends + pagination.
+- [`references/ecommerce.md`](references/ecommerce.md) — Amazon (product, search, seller, seller-products) and Shopify.
+- [`references/real-estate.md`](references/real-estate.md) — Zillow, Redfin (bracketed filters).
+- [`references/travel.md`](references/travel.md) — Airbnb, Booking, Google Flights (occupancy rules, token pagination, IATA codes).
+- [`references/local-business.md`](references/local-business.md) — Maps (search/place/reviews/photos/posts), Yelp, YellowPages.
+- [`references/jobs.md`](references/jobs.md) — Indeed and Glassdoor.
+- [`references/youtube.md`](references/youtube.md) — YouTube search / video / channel / transcript.
+- [`references/scraper-jobs.md`](references/scraper-jobs.md) — async submit/poll/results, Crawler, Contacts, SEC EDGAR, webhook receiver.
+- [`references/code-recipes.md`](references/code-recipes.md) — Python / TypeScript clients with retry, backoff, concurrency, polling.
 
 ## Resources
 

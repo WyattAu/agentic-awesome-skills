@@ -1,4 +1,4 @@
-# Agent SDK: Python
+# Agent SDK — Python
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -50,7 +50,7 @@ anyio.run(main)
 
 ## Primary Interfaces
 
-### `query()`: Simple One-Shot Usage
+### `query()` — Simple One-Shot Usage
 
 The `query()` function is the simplest way to run an agent. It returns an async iterator of messages.
 
@@ -65,7 +65,7 @@ async for message in query(
         print(message.result)
 ```
 
-### `ClaudeSDKClient`: Full Control
+### `ClaudeSDKClient` — Full Control
 
 `ClaudeSDKClient` provides full control over the agent lifecycle. Use it when you need custom tools, hooks, streaming, or the ability to interrupt execution.
 
@@ -265,10 +265,10 @@ except CLIConnectionError as e:
 
 ## Best Practices
 
-1. **Restrict available tools**; Use `tools`/deny rules; `allowed_tools` grants automatic approval, not exclusivity
-2. **Set working directory**; Always specify `cwd` for file operations
-3. **Use appropriate permission modes**; Start with `"default"` and only escalate when needed
-4. **Handle all message types**; Check for `ResultMessage` to get agent output
-5. **Limit max_turns**; Prevent runaway agents with reasonable limits
+1. **Restrict available tools** — Use `tools`/deny rules; `allowed_tools` grants automatic approval, not exclusivity
+2. **Set working directory** — Always specify `cwd` for file operations
+3. **Use appropriate permission modes** — Start with `"default"` and only escalate when needed
+4. **Handle all message types** — Check for `ResultMessage` to get agent output
+5. **Limit max_turns** — Prevent runaway agents with reasonable limits
 
 For every actual run set an approved cwd, explicit tools/deny rules, max turns, cost and time budget, and an approval handler where required. Resume only an existing authorized session with the same scope and restrictions; a missing ID must fail rather than start a new broader session. Do not log untrusted paths or full message objects without sanitization.

@@ -1,4 +1,4 @@
-# Docs Guard: Verification Procedure
+# Docs Guard — Verification Procedure
 
 The mechanical heart of this skill: turn a document into a list of claims, then check each claim against the source of truth.
 
@@ -26,7 +26,7 @@ Inline code spans and code blocks are claim-dense; prose hides claims in verbs (
 
 | Claim type | Source of truth | How |
 |---|---|---|
-| Symbol exists | The codebase | Grep definition (`function name`, `class Name`, `def name`, export); not usages, the definition |
+| Symbol exists | The codebase | Grep definition (`function name`, `class Name`, `def name`, export) — not usages, the definition |
 | Signature | The definition site | Read parameters, defaults, return; compare name-by-name with the doc |
 | CLI flag | The argument parser source, or `--help` output if runnable | Read the parser registration; flags in README but not in the parser are hallucinations |
 | Endpoint | Route registration (router file, `register_rest_route`, annotations) | Match path, method, and handler |
@@ -38,9 +38,9 @@ Inline code spans and code blocks are claim-dense; prose hides claims in verbs (
 
 ## Step 3: Record what you verified
 
-In write-time mode, keep a short verification trail in your working notes (not in the doc): claim → file:line where confirmed. In review mode, this trail becomes your evidence; every finding cites the definition site that contradicts the doc.
+In write-time mode, keep a short verification trail in your working notes (not in the doc): claim → file:line where confirmed. In review mode, this trail becomes your evidence — every finding cites the definition site that contradicts the doc.
 
-After reviewing inputs and establishing isolation, authorization and budgets, use appropriate executable checks; --help, samples and link checkers may execute untrusted code or make network requests. Do not run them automatically against production or with ambient secrets. When it does not, source-reading is the standard; never skip to "it looks right."
+After reviewing inputs and establishing isolation, authorization and budgets, use appropriate executable checks; --help, samples and link checkers may execute untrusted code or make network requests. Do not run them automatically against production or with ambient secrets. When it does not, source-reading is the standard — never skip to "it looks right."
 
 ## When you cannot verify
 

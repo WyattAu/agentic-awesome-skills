@@ -46,28 +46,28 @@ The child cwd pins the workspace. The relay does not pass copilot's `--add-dir`.
 Artifacts live outside the repo by default, so they do not appear in `touchedFiles`; an
 `--out-dir` inside the worktree can make the artifacts appear there:
 
-- `brief.txt`; the exact brief.
-- `events.jsonl`; raw copilot stdout events (every JSONL event copilot emitted).
-- `final.txt`; the last non-ephemeral `assistant.message` content; absent if none was emitted.
-- `stderr.txt`; complete stderr.
-- `result.json`; the stable `delegate-relay.result.v1` contract.
+- `brief.txt` — the exact brief.
+- `events.jsonl` — raw copilot stdout events (every JSONL event copilot emitted).
+- `final.txt` — the last non-ephemeral `assistant.message` content; absent if none was emitted.
+- `stderr.txt` — complete stderr.
+- `result.json` — the stable `delegate-relay.result.v1` contract.
 
 `result.json` fields:
 
 - `schema`, `tool` (`"copilot"`), `status` (`completed` | `failed` | `timeout` | `aborted` | `copilot_unavailable`), `exitCode`, and `signal` (`null` unless the child died on a signal).
 - `workdir`, `model`, `effort`, `readOnly`, `allowAllTools`, `resumed`, `copilotVersion`,
   `startedAt`, and `finishedAt`.
-- `sessionId`; parsed from the `result` event's `sessionId` field; available for resume.
-- `finalMessage`; text of the last non-ephemeral `assistant.message` event.
-- `touchedFiles`; `git status --porcelain` lines for the **final working tree under `--cd` only**,
+- `sessionId` — parsed from the `result` event's `sessionId` field; available for resume.
+- `finalMessage` — text of the last non-ephemeral `assistant.message` event.
+- `touchedFiles` — `git status --porcelain` lines for the **final working tree under `--cd` only**,
   not an attribution of copilot's edits: anything already dirty before dispatch shows up too.
   Dispatch from a clean tree when you want the list to read as "what copilot changed". `null` means
   git could not report; `[]` means git ran and the tree is clean.
 - `briefPath`, nullable `finalPath`, `eventsPath`, and `stderrPath`. `finalPath` is `null` when
   copilot emitted no non-ephemeral assistant message and `final.txt` was not created.
-- `stderrTail`; the last 20 non-empty stderr lines on any run that did not complete (`failed`,
+- `stderrTail` — the last 20 non-empty stderr lines on any run that did not complete (`failed`,
   `timeout`, `aborted`).
-- `error`; present on denial failures (with the CLI's own denial message plus a hint to pass
+- `error` — present on denial failures (with the CLI's own denial message plus a hint to pass
   `--allow-all-tools`), preflight failures, when the relay watchdog fires (`timeout`), and on an
   `aborted` run.
 
@@ -104,7 +104,7 @@ A pre-run usage error exits 2 and writes no result. A missing `copilot` exits 12
 ## Recovering lost work
 
 `events.jsonl` in the run directory records every JSONL event the implementer streamed. If finished
-work is lost; the run killed late, or the working tree damaged afterward; read the event log
+work is lost — the run killed late, or the working tree damaged afterward — read the event log
 before re-dispatching: it identifies which files and tool commands were involved, which scopes
 what needs redoing.
 
@@ -123,9 +123,9 @@ copilot --output-format json --no-color --stream off \
 The child process cwd pins the workspace. Only token-validated model/effort/session values and
 fixed text reach the `shell:true` launch on native Windows; the brief is delivered via `-p @<file>`
 (the CLI's @-prefixed file prompt channel), with the brief path quoted for the shell on Windows.
-On resume (`--continue` / `--resume=<id>`) the relay wraps the reference in a fixed directive -
+On resume (`--continue` / `--resume=<id>`) the relay wraps the reference in a fixed directive —
 `Execute the instructions in the referenced file, then report what you did. Do not just summarize
-the file: @<file>`; because a bare `@<file>` reference in a resumed session is echoed back instead
+the file: @<file>` — because a bare `@<file>` reference in a resumed session is echoed back instead
 of executed (verified on copilot 1.0.78). The directive is relay-authored fixed text, so no user
 content ever reaches the shell-quoted value on Windows. Fresh runs deliver the bare `@<file>`,
 which copilot executes correctly.

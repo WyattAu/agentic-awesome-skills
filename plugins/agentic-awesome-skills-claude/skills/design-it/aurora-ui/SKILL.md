@@ -217,7 +217,7 @@ const AuroraView = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#000' }}>
-      {/* Orb; note: React Native struggles with massive live blurs, 
+      {/* Orb — note: React Native struggles with massive live blurs, 
           so pre-rendered blurred PNGs are highly recommended for production */}
       <Animated.Image 
         source={require('./blurred_orb_cyan.png')} 
@@ -242,7 +242,7 @@ const AuroraView = () => {
   );
 };
 ```
-- **Performance Warning**: Do NOT use `BlurView` with huge amounts for moving background orbs on React Native; it will lag terribly, especially on Android.
+- **Performance Warning**: Do NOT use `BlurView` with huge amounts for moving background orbs on React Native — it will lag terribly, especially on Android.
 - **Best Practice**: Create large, already-blurred PNG images in Figma/Photoshop and animate those using `Animated.Image`.
 
 ### Jetpack Compose

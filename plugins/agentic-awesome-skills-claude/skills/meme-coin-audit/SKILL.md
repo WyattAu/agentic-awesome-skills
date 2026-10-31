@@ -253,7 +253,7 @@ contract TokenExploitTest is Test {
         vm.prank(owner);
         token.setFees(3, 99); // Buy 3%, Sell 99%
 
-        // Step 3: Victim sells; loses 99% to fees
+        // Step 3: Victim sells — loses 99% to fees
         vm.startPrank(victim);
         uint256 balanceBefore = address(victim).balance;
         // ... sell tokens
@@ -300,11 +300,11 @@ When you don't have source code, check on-chain:
 
 ## Related Skills & Chains
 
-- **`web3-audit`**; When the target is a DeFi protocol (not just a token). Workflow primitive: this skill's 8 token-specific bug classes are a subset of `web3-audit`'s scope; if the target has lending / vault / oracle logic beyond the token contract itself, also load `web3-audit` for the broader 10 DeFi bug classes.
-- **`triage-validation`**; When deciding if a rug-pull finding qualifies as a bug bounty submission. Workflow primitive: many "rug vector" observations are pre-rug warnings, not exploitable bugs in a deployed protocol; run 7Q gate to distinguish "the deployer COULD rug" (informational) from "the contract IS exploitable now" (reportable).
-- **`report-writing`**; When writing up a confirmed token security finding for Immunefi / private bounty. Workflow primitive: Foundry PoC template here feeds into `report-writing`'s Immunefi body template.
-- **`offensive-osint`**; When the token has off-chain infrastructure (project website, Telegram, deployer doxxing). Workflow primitive: on-chain audit is this skill's domain; deployer wallet history, social presence, and project legitimacy checks route to `offensive-osint`.
-- **`bb-methodology`**; When confirming engagement mode. Workflow primitive: PART 0 separates "pre-investment due diligence" (this skill's primary use) from "Immunefi bug bounty submission" (different reporting + severity standards); the answer routes which post-audit handoff is correct.
+- **`web3-audit`** — When the target is a DeFi protocol (not just a token). Workflow primitive: this skill's 8 token-specific bug classes are a subset of `web3-audit`'s scope; if the target has lending / vault / oracle logic beyond the token contract itself, also load `web3-audit` for the broader 10 DeFi bug classes.
+- **`triage-validation`** — When deciding if a rug-pull finding qualifies as a bug bounty submission. Workflow primitive: many "rug vector" observations are pre-rug warnings, not exploitable bugs in a deployed protocol; run 7Q gate to distinguish "the deployer COULD rug" (informational) from "the contract IS exploitable now" (reportable).
+- **`report-writing`** — When writing up a confirmed token security finding for Immunefi / private bounty. Workflow primitive: Foundry PoC template here feeds into `report-writing`'s Immunefi body template.
+- **`offensive-osint`** — When the token has off-chain infrastructure (project website, Telegram, deployer doxxing). Workflow primitive: on-chain audit is this skill's domain; deployer wallet history, social presence, and project legitimacy checks route to `offensive-osint`.
+- **`bb-methodology`** — When confirming engagement mode. Workflow primitive: PART 0 separates "pre-investment due diligence" (this skill's primary use) from "Immunefi bug bounty submission" (different reporting + severity standards); the answer routes which post-audit handoff is correct.
 
 ---
 
@@ -314,7 +314,7 @@ When you don't have source code, check on-chain:
 > Upstream engagement/test claims are not independently verified by this catalog review. The upstream content covers the WHAT;
 > this layer covers the WHEN-IT-WORKS-vs-WHEN-IT-DOESN'T.
 
-### Solana-specific signals: 2025-2026 reality
+### Solana-specific signals — 2025-2026 reality
 
 Token-2022 transfer hooks are the new rug-pull vector. Hook authority can be set to a single key; that key can pause / blacklist / fee-on-transfer arbitrary addresses post-launch. Always check hook authority + permanent-delegate authority for Token-2022 mints:
 
@@ -328,7 +328,7 @@ A non-null TransferHook authority can change hook configuration; inspect the ref
 
 For any bonding-curve launch, identify the exact program/version, graduation state and current authorities from on-chain evidence. Do not generalize a mutable parameter or authority layout across protocols.
 
-### Honeypot detection: beyond the obvious
+### Honeypot detection — beyond the obvious
 
 `transfer()` succeeds in dry-run but fails on certain addresses (sender allowlist / blocklist). Test with: simulated buy → simulated transfer to a different address → simulated sell. If buy and transfer succeed but sell fails, investigate the revert, liquidity, account setup and route; a failed simulation alone is not proof of intentional trapping.
 
@@ -336,23 +336,23 @@ Quick triage matrix:
 
 | Test | Honeypot Signal |
 |------|----------------|
-| Buy from random wallet | Succeeds (must; or no one would touch it) |
+| Buy from random wallet | Succeeds (must — or no one would touch it) |
 | Transfer to second random wallet | Often fails on honeypot |
 | Sell from original wallet | Fails or applies > 50% tax |
 | Sell from team-controlled wallet | Succeeds (the giveaway) |
 
-Cross-source verification: solana-rugcheck, rugcheck.xyz, dexscreener risk signals, honeypot.is (EVM). Never trust a single source; rug-checkers can be fooled by deferred-malice patterns (clean for first 7 days, hook activates later).
+Cross-source verification: solana-rugcheck, rugcheck.xyz, dexscreener risk signals, honeypot.is (EVM). Never trust a single source — rug-checkers can be fooled by deferred-malice patterns (clean for first 7 days, hook activates later).
 
-### LP lock claims: verify, don't trust
+### LP lock claims — verify, don't trust
 
 LP-lock badges on DexScreener mean nothing without on-chain verification. Check the actual lock contract (Unicrypt, TeamFinance, Bonkbot, PinkLock) for:
 
-- **Unlock date**; the on-chain timestamp, not the badge text
-- **Lock owner**; is it the deployer's wallet? Are there multiple lockers fragmenting the LP?
-- **Extension / shortening permission**; some lock contracts allow the owner to SHORTEN the lock; that's an exit hatch dressed as a lock
-- **Lock contract bytecode**; verify it's the canonical locker, not a fork with backdoors
+- **Unlock date** — the on-chain timestamp, not the badge text
+- **Lock owner** — is it the deployer's wallet? Are there multiple lockers fragmenting the LP?
+- **Extension / shortening permission** — some lock contracts allow the owner to SHORTEN the lock; that's an exit hatch dressed as a lock
+- **Lock contract bytecode** — verify it's the canonical locker, not a fork with backdoors
 
-Some "locked" LPs are 1-day locks renewed weekly; visually the same as a year lock to the buyer, but the deployer can let it lapse on any Tuesday. Always read the lock contract source on the chain explorer.
+Some "locked" LPs are 1-day locks renewed weekly — visually the same as a year lock to the buyer, but the deployer can let it lapse on any Tuesday. Always read the lock contract source on the chain explorer.
 
 ### Pre-investment due diligence in under 5 minutes
 
@@ -374,7 +374,7 @@ from MEV or price impact; no percentage loss estimate is established here.
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

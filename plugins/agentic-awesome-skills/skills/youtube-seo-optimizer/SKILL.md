@@ -1,7 +1,7 @@
 ---
 name: youtube-seo-optimizer
 description: >
-  Generate complete YouTube & podcast SEO packages with live-researched keywords -
+  Generate complete YouTube & podcast SEO packages with live-researched keywords —
   titles, descriptions, tags, hashtags, chapters, and audit fixes. Use for new or
   underperforming content.
 risk: safe
@@ -23,13 +23,13 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 - User needs an audit of a live video or podcast episode that isn't getting views
 - User asks for show notes, timestamps, or podcast episode metadata
 - User says "SEO my video", "audit my YouTube video", "write a podcast description", "why isn't my video ranking", "generate tags", "fix my podcast SEO"
-- Use this for any video or podcast SEO request; new, already published, or short-form
+- Use this for any video or podcast SEO request — new, already published, or short-form
 
 ## Examples
 
-**Video, new upload:** User says "uploading a video about how farmers in Nepal can use mobile apps to sell vegetables directly." → Confirm target keyword ("sell vegetables online Nepal"), run Step 1, produce Mode A package; title, A/B variant, a concise description within the platform limit, relevant tags/hashtags, and chapters only from verified timestamps, thumbnail text, cards, playlist note, pinned comment, end-screen script.
+**Video, new upload:** User says "uploading a video about how farmers in Nepal can use mobile apps to sell vegetables directly." → Confirm target keyword ("sell vegetables online Nepal"), run Step 1, produce Mode A package — title, A/B variant, a concise description within the platform limit, relevant tags/hashtags, and chapters only from verified timestamps, thumbnail text, cards, playlist note, pinned comment, end-screen script.
 
-**Podcast, existing episode, underperforming:** User says "My episode with [guest] has barely any views, here's the URL." → Fetch URL, confirm target keyword, produce Mode D audit; scorecard, detailed findings, rewritten metadata, action plan.
+**Podcast, existing episode, underperforming:** User says "My episode with [guest] has barely any views, here's the URL." → Fetch URL, confirm target keyword, produce Mode D audit — scorecard, detailed findings, rewritten metadata, action plan.
 
 **Short-form, new clip from a podcast:** User says "Cut a Short from the Agentic Awesome Skills part of that episode." → Mode E: reuse episode's keyword and tags, concise accurate title and description within destination limits, 3-5 hashtags including `#Shorts`, cross-post caption.
 

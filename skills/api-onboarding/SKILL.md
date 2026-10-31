@@ -20,7 +20,7 @@ The time between a developer discovering your API and successfully making their 
 
 ## Overview
 
-Time-to-First-API-Call (TTFAC) is a useful onboarding metric to compare with activation and retention. Developers who succeed quickly become active users. Developers who struggle leave-often silently.
+Time-to-First-API-Call (TTFAC) is a useful onboarding metric to compare with activation and retention. Developers who succeed quickly become active users. Developers who struggle leave—often silently.
 
 This skill covers:
 - Measuring and optimizing TTFAC
@@ -134,7 +134,7 @@ Minimize friction for first API call.
 **Provide Test Keys Immediately**
 ```
 ✅ "Here's your test API key: sk_test_abc123...
-    Use this in sandbox mode-no charges, no setup."
+    Use this in sandbox mode—no charges, no setup."
 ```
 
 **Support Multiple Auth Methods**

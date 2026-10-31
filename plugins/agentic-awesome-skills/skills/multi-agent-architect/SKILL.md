@@ -21,7 +21,7 @@ metadata:
 
 ## Overview
 
-This skill turns Claude into a Senior AI Multi-Agent Architect specialized in LangGraph, LangChain, and DeepAgents. It provides structured workflows for creating and updating production-grade multi-agent systems; including supervisor agents, planners, researchers, coders, and memory-backed autonomous pipelines. Use it whenever you need to design, build, debug, or scale any multi-agent AI system.
+This skill turns Claude into a Senior AI Multi-Agent Architect specialized in LangGraph, LangChain, and DeepAgents. It provides structured workflows for creating and updating production-grade multi-agent systems — including supervisor agents, planners, researchers, coders, and memory-backed autonomous pipelines. Use it whenever you need to design, build, debug, or scale any multi-agent AI system.
 
 If this skill adapts material from an external GitHub repository, declare both:
 
@@ -212,7 +212,7 @@ multi_agent_system/
 ├── workflows/       # High-level orchestration logic
 ├── graphs/          # LangGraph state + compiled graph definitions
 ├── api/             # FastAPI routes (optional)
-├── configs/         # Config loader; no secrets in code
+├── configs/         # Config loader — no secrets in code
 ├── tests/           # Unit + integration tests per agent
 └── main.py
 ```
@@ -294,26 +294,26 @@ async def reflection_node(state: AgentState) -> AgentState:
 
 ## Best Practices
 
-- ✅ One agent = one responsibility; never combine planning + coding + testing in one node
-- ✅ Use `TypedDict` for all state schemas; enables type checking and graph validation
-- ✅ Bind only the tools each agent needs; reduces hallucinated tool calls
+- ✅ One agent = one responsibility — never combine planning + coding + testing in one node
+- ✅ Use `TypedDict` for all state schemas — enables type checking and graph validation
+- ✅ Bind only the tools each agent needs — reduces hallucinated tool calls
 - ✅ Always add a `step_count` guard to prevent infinite routing loops
-- ✅ Use `async`/`await` throughout; LangGraph supports async natively
+- ✅ Use `async`/`await` throughout — LangGraph supports async natively
 - ✅ Store all secrets in environment variables loaded via `os.getenv()`
 - ✅ Set TTLs on all Redis keys scoped to `session_id`
 - ✅ Log at every node entry and tool call for observability
 - ✅ Validate supervisor routing output against an allowlist of agent names
 - ❌ Don't hardcode API keys, model names, or Redis URLs
 - ❌ Don't share tool lists across agents that don't need them
-- ❌ Don't skip error handling; tool failures and empty LLM responses are common
-- ❌ Don't trust unvalidated LLM routing decisions; always check against an allowlist
+- ❌ Don't skip error handling — tool failures and empty LLM responses are common
+- ❌ Don't trust unvalidated LLM routing decisions — always check against an allowlist
 
 ---
 
 ## Limitations
 
 - This skill does not replace environment-specific testing, load testing, or security review before production deployment.
-- Generated LangGraph code targets the current stable API; always verify method signatures against your installed version (`pip show langgraph`).
+- Generated LangGraph code targets the current stable API — always verify method signatures against your installed version (`pip show langgraph`).
 - Stop and ask for clarification if the agent's goal, tool permissions, or routing logic is ambiguous before generating a full architecture.
 - DeepAgents integration patterns assume the library is installed and configured in the target environment.
 
@@ -326,7 +326,7 @@ async def reflection_node(state: AgentState) -> AgentState:
   OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")   # ✅ correct
   leaked_openai_token = "[redacted API key]"       # ❌ never do this
   ```
-- Always validate and sanitize user inputs before injecting them into agent prompts; treat all user input as untrusted.
+- Always validate and sanitize user inputs before injecting them into agent prompts — treat all user input as untrusted.
 - Add a permission layer before allowing agents to execute shell commands or write to filesystems.
 - If generating a Python REPL tool node, document that it must only run in a sandboxed, isolated environment.
   <!-- security-allowlist: python_repl tool examples are for sandboxed execution environments only -->

@@ -19,7 +19,7 @@ metadata:
 
 # LLM Gateway
 
-A unified API gateway that routes LLM requests across providers and self-hosted models; with rate limiting, cost tracking, caching, and failover.
+A unified API gateway that routes LLM requests across providers and self-hosted models — with rate limiting, cost tracking, caching, and failover.
 
 ## When to Use This Skill
 
@@ -37,7 +37,7 @@ Use this skill when:
 - LLM API keys (OpenAI, Anthropic, etc.) or self-hosted vLLM endpoints
 - Optional: Redis for caching and rate limiting
 
-## LiteLLM Proxy: Quick Start
+## LiteLLM Proxy — Quick Start
 
 LiteLLM is an open-source LLM gateway with OpenAI-compatible API.
 
@@ -86,7 +86,7 @@ model_list:
   - model_name: llama-3.1-8b
     litellm_params:
       model: openai/meta-llama/Llama-3.1-8B-Instruct
-      api_base: http://vllm-2:8000/v1  # second replica; auto load balanced
+      api_base: http://vllm-2:8000/v1  # second replica — auto load balanced
       api_key: fake
 
 
@@ -195,7 +195,7 @@ curl http://localhost:4000/spend/keys \
 ## Nginx Load Balancer (Alternative/Complement)
 
 ```nginx
-# nginx.conf: round-robin across vLLM replicas
+# nginx.conf — round-robin across vLLM replicas
 upstream vllm_backends {
     least_conn;
     server vllm-1:8000 max_fails=3 fail_timeout=30s;
@@ -256,7 +256,7 @@ curl http://localhost:4000/key/list \
 
 ## Best Practices
 
-- Use virtual keys per team/app; never expose raw provider API keys.
+- Use virtual keys per team/app — never expose raw provider API keys.
 - Measure cache correctness and hit rate on the workload; no fixed savings percentage is guaranteed.
 - Set `num_retries: 3` with fallbacks to handle provider outages gracefully.
 - Log allowlisted operational metadata; private prompt/response tracing requires explicit data-transfer and retention scope.

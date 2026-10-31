@@ -30,7 +30,7 @@ Static analysis scanner that detects deterministic patterns. Outputs structured 
 python3 "<installed-skill-dir>/scripts/scan_skill.py" "<authorized-inert-skill-directory>"
 ```
 
-Returns JSON with findings, URL host/line locators, structure info, and severity counts. The script catches patterns mechanically; your job is to evaluate intent and filter false positives.
+Returns JSON with findings, URL host/line locators, structure info, and severity counts. The script catches patterns mechanically — your job is to evaluate intent and filter false positives.
 
 ## Scanner Coverage and Report Privacy
 
@@ -74,7 +74,7 @@ Read the SKILL.md and check:
 
 - **Required fields**: `name` and `description` must be present
 - **Name consistency**: `name` field should match the directory name
-- **Tool assessment**: Review `allowed-tools`; is Bash justified? Are tools unrestricted (`*`)?
+- **Tool assessment**: Review `allowed-tools` — is Bash justified? Are tools unrestricted (`*`)?
 - **Model override**: Is a specific model forced? Why?
 - **Description quality**: Does the description accurately represent what the skill does?
 
@@ -86,13 +86,13 @@ Review scanner findings in the "Prompt Injection" category. For each finding:
 
 1. Read the surrounding context in the file
 2. Determine if the pattern is **performing** injection (malicious) or **discussing/detecting** injection (legitimate)
-3. Skills about security, testing, or education commonly reference injection patterns; this is expected
+3. Skills about security, testing, or education commonly reference injection patterns — this is expected
 
 **Critical distinction**: A security review skill that lists injection patterns in its references is documenting threats, not attacking. Only flag patterns that would execute against the agent running the skill.
 
 ### Phase 5: Behavioral Analysis
 
-This phase is agent-only; no pattern matching. Read the full SKILL.md instructions and evaluate:
+This phase is agent-only — no pattern matching. Read the full SKILL.md instructions and evaluate:
 
 **Description vs. instructions alignment**:
 - Does the description match what the instructions actually tell the agent to do?
@@ -126,7 +126,7 @@ If the skill has a `scripts/` directory:
    - **Credential theft**: Reading SSH keys, .env files, tokens from environment
    - **Dangerous execution**: eval/exec with dynamic input, shell=True with interpolation
    - **Config modification**: Writing to agent settings, shell configs, git hooks
-5. Check PEP 723 `dependencies`; are they legitimate, well-known packages?
+5. Check PEP 723 `dependencies` — are they legitimate, well-known packages?
 6. Verify the script's behavior matches the SKILL.md description of what it does
 
 **Legitimate patterns**: `gh` CLI calls, `git` commands, reading project files, JSON output to stdout are normal for skill scripts.
@@ -136,7 +136,7 @@ If the skill has a `scripts/` directory:
 Review URL domains and file/line locators from the scanner output; inspect complete URLs locally in the source:
 
 - **Familiar domains**: GitHub, PyPI and documentation sites are discovery context, not proof that a particular repository/package is trustworthy
-- **Untrusted domains**: Unknown domains, personal sites, URL shorteners; flag for review
+- **Untrusted domains**: Unknown domains, personal sites, URL shorteners — flag for review
 - **Remote instruction loading**: Any URL that fetches content to be executed or interpreted as instructions is high risk
 - **Dependency downloads**: Scripts that download and execute binaries or code at runtime
 - **Unverifiable sources**: References to packages or tools not on standard registries
@@ -152,9 +152,9 @@ Evaluate:
 - **Risk level**: Rate the overall permission profile using the tier system from the reference
 
 Example assessments:
-- `Read Grep Glob`; Low risk, read-only analysis skill
-- `Read Grep Glob Bash`; Medium risk, needs Bash justification (e.g., running bundled scripts)
-- `Read Grep Glob Bash Write Edit WebFetch Task`; High risk, near-full access
+- `Read Grep Glob` — Low risk, read-only analysis skill
+- `Read Grep Glob Bash` — Medium risk, needs Bash justification (e.g., running bundled scripts)
+- `Read Grep Glob Bash Write Edit WebFetch Task` — High risk, near-full access
 
 ## Confidence Levels
 

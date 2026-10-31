@@ -37,7 +37,7 @@ license_source: "https://github.com/davidondrej/skills/blob/main/LICENSE"
 ## Polling
 
 Use supported completion/event waits with bounded intervals; check meaningful progress and deliver concise updates. Do not busy-poll every 3–5 seconds or report unchanged state after each check. Back off while an agent remains active and continue independent authorized work.
-Claude Code note: after it finishes, it may prefill a predicted next user message; that draft is Claude, not the user.
+Claude Code note: after it finishes, it may prefill a predicted next user message — that draft is Claude, not the user.
 
 ## Remote VPS
 
@@ -50,7 +50,7 @@ All four use the portable SKILL.md standard; project skills win over global.
 - **Pi** (pi.dev, open-source TS): minimal read/write/edit/bash core, self-extends via TS extensions; true BYOK; best-in-class session branch/fork/resume. Skills: `~/.pi/agent/skills/`.
 - **Codex CLI** (OpenAI, Rust): fastest startup; kernel-level sandboxing; `codex exec` for CI; reads AGENTS.md. Skills: `~/.codex/skills/`.
 - **Claude Code** (Anthropic, TS): deepest Claude integration, `.claude/` conventions, live skill hot-reload. Skills: `~/.claude/skills/`.
-- **Hermes** (Nous Research, Python): persistent autonomous agent; cross-session memory, built-in scheduler, 40+ tools; can orchestrate the other CLIs as workers. Skills: `~/.hermes/skills/`.
+- **Hermes** (Nous Research, Python): persistent autonomous agent — cross-session memory, built-in scheduler, 40+ tools; can orchestrate the other CLIs as workers. Skills: `~/.hermes/skills/`.
 
 ## Driving interactive CLIs
 

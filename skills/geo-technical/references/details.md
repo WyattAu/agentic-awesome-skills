@@ -50,7 +50,7 @@ Google-Extended is a robots control token, not a separate HTTP crawler user agen
 - Fetch sitemap (check robots.txt for location, or try `/sitemap.xml`, `/sitemap_index.xml`)
 - Validate XML syntax
 - Check for `<lastmod>` dates (should be present and accurate)
-- Count URLs; compare to expected number of indexable pages
+- Count URLs — compare to expected number of indexable pages
 - Check for sitemap index if large site (50,000+ URLs per sitemap max)
 - Verify all sitemap URLs return 200 status codes (sample check)
 
@@ -82,7 +82,7 @@ Google-Extended is a robots control token, not a separate HTTP crawler user agen
 - Check canonical signals where duplicates need consolidation; a canonical tag is a hint, not a universal indexability requirement.
 - Canonical must point to itself (self-referencing) for the authoritative version
 - Check for conflicting canonicals (canonical in HTML vs. HTTP header)
-- Check for canonical chains (A canonicals to B, B canonicals to C; should be A to C)
+- Check for canonical chains (A canonicals to B, B canonicals to C — should be A to C)
 
 ### 2.2 Duplicate Content
 - Check for www vs. non-www (both should resolve, one should redirect)
@@ -162,7 +162,7 @@ Check HTTP response headers for:
 
 ### 4.2 Logical Hierarchy
 - URL path should reflect site architecture: `/category/subcategory/page`
-- Flat where appropriate; avoid unnecessarily deep nesting
+- Flat where appropriate — avoid unnecessarily deep nesting
 - Consistent pattern across the site
 
 ### 4.3 Redirect Chains
@@ -230,9 +230,9 @@ Core Web Vitals use the **75th percentile** of real user data (field data) as th
 
 | Metric | Good | Needs Improvement | Poor | Notes |
 |---|---|---|---|---|
-| **LCP** (Largest Contentful Paint) | < 2.5s | 2.5s - 4.0s | > 4.0s | Measures loading; time until largest visible element renders |
+| **LCP** (Largest Contentful Paint) | < 2.5s | 2.5s - 4.0s | > 4.0s | Measures loading — time until largest visible element renders |
 | **INP** (Interaction to Next Paint) | < 200ms | 200ms - 500ms | > 500ms | Replaced FID in March 2024. Measures ALL interactions, not just first |
-| **CLS** (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 | Measures visual stability; unexpected layout movements |
+| **CLS** (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 | Measures visual stability — unexpected layout movements |
 
 ### How to Assess Without CrUX Data
 When real user data is unavailable, estimate from page characteristics:
@@ -268,7 +268,7 @@ When real user data is unavailable, estimate from page characteristics:
 ---
 
 
-## Category 7: Server-Side Rendering (15 points): CRITICAL FOR GEO
+## Category 7: Server-Side Rendering (15 points) — CRITICAL FOR GEO
 
 ### Why raw HTML content improves compatibility
 Do not assume every retrieval client executes JavaScript. Compare raw HTML and rendered content for the actual target service. Static generation and prerendering can provide the same accessible content as SSR; a framework name alone does not establish an empty page.
@@ -365,11 +365,11 @@ Google can render JavaScript, subject to rendering/resource constraints. Do not 
 
 ## Category 9: Agent-Readiness Signals (non-scoring)
 
-These checks surface emerging AI agent compatibility signals. None contribute to the numeric score; they produce a pass or a recommendation. The underlying standards are either IETF drafts or early-adoption features; penalizing absence would be unfair.
+These checks surface emerging AI agent compatibility signals. None contribute to the numeric score — they produce a pass or a recommendation. The underlying standards are either IETF drafts or early-adoption features; penalizing absence would be unfair.
 
 ### 9.1 RFC 8288 Link Headers (Service Discovery)
 
-RFC 8288 (Web Linking) defines the HTTP `Link:` response header. Servers can use it to advertise related resources; API catalog, service docs, MCP server card; in a machine-readable way, without HTML parsing.
+RFC 8288 (Web Linking) defines the HTTP `Link:` response header. Servers can use it to advertise related resources — API catalog, service docs, MCP server card — in a machine-readable way, without HTML parsing.
 
 **How to check:** Capture all `Link:` response headers from the standard homepage fetch (no extra request).
 
@@ -377,29 +377,29 @@ RFC 8288 (Web Linking) defines the HTTP `Link:` response header. Servers can use
 - Parse `<url>; rel="relation-type"` pairs.
 - High-value rel types: `api-catalog` (RFC 9609), `describedby`, `service-doc`, `mcp-server-card`.
 
-**When to surface a recommendation:** Only for API-first sites (API docs linked in nav, `/api/` or `/developers/` paths, swagger/OpenAPI in sitemap). Omit this section entirely for standard business sites; absence is expected and not noteworthy.
+**When to surface a recommendation:** Only for API-first sites (API docs linked in nav, `/api/` or `/developers/` paths, swagger/OpenAPI in sitemap). Omit this section entirely for standard business sites — absence is expected and not noteworthy.
 
 | State | Treatment |
 |---|---|
-| `Link:` headers present, known rel types | Informational; document what was found |
-| `Link:` headers present, unknown rel types | Informational; note and explain |
-| Absent, API-first site | Recommendation; explain and suggest implementation |
-| Absent, standard business site | Omit; do not surface |
+| `Link:` headers present, known rel types | Informational — document what was found |
+| `Link:` headers present, unknown rel types | Informational — note and explain |
+| Absent, API-first site | Recommendation — explain and suggest implementation |
+| Absent, standard business site | Omit — do not surface |
 
 ### 9.2 Markdown Content Negotiation
 
-Checks if the server responds to `Accept: text/markdown` with `Content-Type: text/markdown`. Cloudflare's "Markdown for Agents" feature enables this; AI agents receive clean Markdown instead of HTML, eliminating boilerplate stripping and improving content extraction accuracy.
+Checks if the server responds to `Accept: text/markdown` with `Content-Type: text/markdown`. Cloudflare's "Markdown for Agents" feature enables this — AI agents receive clean Markdown instead of HTML, eliminating boilerplate stripping and improving content extraction accuracy.
 
 **How to check:** Send a GET to the homepage with `Accept: text/markdown`. This is one additional HTTP request per audit.
 
 **Evaluation:**
-- If response `Content-Type` is `text/markdown` (or `text/markdown; charset=utf-8`): pass; note as a leading-edge capability.
+- If response `Content-Type` is `text/markdown` (or `text/markdown; charset=utf-8`): pass — note as a leading-edge capability.
 - Otherwise: forward-looking recommendation, not a failure.
 - If the request errors or returns non-200: skip and note the error. Do not penalize.
 
 | State | Treatment |
 |---|---|
-| `text/markdown` returned | Bonus; note as a leading-edge capability |
+| `text/markdown` returned | Bonus — note as a leading-edge capability |
 | Standard HTML returned | Forward-looking recommendation |
 | Request errors / non-200 | Skip, note the error, do not penalize |
 
@@ -439,11 +439,11 @@ Search-provider integrations vary. IndexNow notifies participating engines; acce
 Non-scoring checks (Category 9) appear in the output under "Agent-Readiness Signals" and do not affect this total.
 
 ### Score Interpretation
-- **90-100**: Excellent; technically sound for both traditional SEO and GEO
-- **70-89**: Good; minor issues to address but fundamentally solid
-- **50-69**: Needs Work; significant technical debt impacting visibility
-- **30-49**: Poor; major issues blocking crawling, indexing, or AI visibility
-- **0-29**: Critical; fundamental technical failures requiring immediate attention
+- **90-100**: Excellent — technically sound for both traditional SEO and GEO
+- **70-89**: Good — minor issues to address but fundamentally solid
+- **50-69**: Needs Work — significant technical debt impacting visibility
+- **30-49**: Poor — major issues blocking crawling, indexing, or AI visibility
+- **0-29**: Critical — fundamental technical failures requiring immediate attention
 
 ---
 
@@ -453,7 +453,7 @@ Non-scoring checks (Category 9) appear in the output under "Agent-Readiness Sign
 Generate **GEO-TECHNICAL-AUDIT.md** with:
 
 ```markdown
-# GEO Technical SEO Audit: [Domain]
+# GEO Technical SEO Audit — [Domain]
 Date: [Date]
 
 

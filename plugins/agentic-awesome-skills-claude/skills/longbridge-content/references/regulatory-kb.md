@@ -1,6 +1,6 @@
 # longbridge-regulatory-kb
 
-A structured regulatory knowledge base covering the rules, restrictions, and mechanisms investors face across A-shares, Hong Kong, US equity markets, and cryptocurrency; provides a historical checklist. Verify every applicable rule with the governing exchange/regulator and effective date before answering; this is not a current legal or tax reference.
+A structured regulatory knowledge base covering the rules, restrictions, and mechanisms investors face across A-shares, Hong Kong, US equity markets, and cryptocurrency — provides a historical checklist. Verify every applicable rule with the governing exchange/regulator and effective date before answering; this is not a current legal or tax reference.
 
 ## A-Share Rules (A股规则)
 
@@ -25,7 +25,7 @@ Main-board/STAR/ChiNext IPO exceptions must be checked by board and effective ru
 
 - Available only via margin accounts through approved brokers.
 - Securities in the approved short-list only (maintained by exchanges).
-- No naked short selling; must borrow first.
+- No naked short selling — must borrow first.
 - Transfer fee: typically 0.05–0.10% daily.
 
 ### Circuit breakers (熔断)
@@ -51,12 +51,12 @@ The original numeric summary mixed board-specific and historical thresholds. Do 
 ### Settlement (交收)
 
 - **T+2**: Standard settlement. Sell on day T; proceeds settled T+2.
-- **T+0 selling**: Allowed; you can sell shares purchased today if settled (e.g. shares transferred to your account already, which typically requires prior holding).
+- **T+0 selling**: Allowed — you can sell shares purchased today if settled (e.g. shares transferred to your account already, which typically requires prior holding).
 
 ### Short selling (卖空)
 
-- **Designated short-selling stocks only**; SEHK publishes the list.
-- No naked short selling; must borrow.
+- **Designated short-selling stocks only** — SEHK publishes the list.
+- No naked short selling — must borrow.
 - Short positions must be marked as "short" at order entry.
 
 ### Odd-lot trading (碎股)

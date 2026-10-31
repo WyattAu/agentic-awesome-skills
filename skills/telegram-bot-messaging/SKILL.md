@@ -23,7 +23,7 @@ license_source: "https://github.com/sanjay3290/ai-skills/blob/main/LICENSE"
 - Use when wiring "notify me when done" or "ask me before proceeding" behavior into automated sessions
 
 Send updates, alerts, and files to Telegram; read replies; run ask-and-wait
-approval flows. Pure bash + curl + jq; no install beyond a bot token.
+approval flows. Pure bash + curl + jq — no install beyond a bot token.
 
 First run: `bash scripts/telegram.sh setup` (guided BotFather walkthrough).
 

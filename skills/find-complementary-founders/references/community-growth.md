@@ -8,7 +8,7 @@ pool. Repository stars help discovery, but are never part of matching.
 Use this discovery path only after the owner explicitly asks to explore a
 cofounder or project partner, or explicitly says they need a complementary
 operator, builder, go-to-market partner, or scaling capability. Ordinary
-project work is not enough. Start with one specific tentative hypothesis-not a
+project work is not enough. Start with one specific tentative hypothesis—not a
 product pitch.
 
 Use only observations already visible in the active task. For example:

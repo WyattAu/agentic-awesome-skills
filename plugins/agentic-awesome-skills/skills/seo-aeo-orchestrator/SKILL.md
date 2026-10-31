@@ -29,18 +29,18 @@ The workflow is designed for coding agents working directly in a repository. It 
 ```json
 {
   "workflow_input": {
-    "project_path": "string; current project or repository",
-    "site_url": "string; optional live URL",
-    "business_type": "string; optional description of the business",
-    "target_audience": "string; optional audience",
-    "conversion_goal": "string; signup, demo, purchase, download, contact, or other",
-    "user_keywords": ["string; optional owner-approved targets"],
-    "location": "string; optional market or country",
-    "foundation_page_count": "integer; 5–10, default 10",
-    "research_mode": "browser | api | both | unavailable; default both",
-    "existing_content": ["string; optional URLs, routes, or titles"],
+    "project_path": "string — current project or repository",
+    "site_url": "string — optional live URL",
+    "business_type": "string — optional description of the business",
+    "target_audience": "string — optional audience",
+    "conversion_goal": "string — signup, demo, purchase, download, contact, or other",
+    "user_keywords": ["string — optional owner-approved targets"],
+    "location": "string — optional market or country",
+    "foundation_page_count": "integer — 5–10, default 10",
+    "research_mode": "browser | api | both | unavailable — default both",
+    "existing_content": ["string — optional URLs, routes, or titles"],
     "tone": "professional | conversational | bold | empathetic | authoritative",
-    "monitoring_preference": "ask | one-time | recurring | none; default ask"
+    "monitoring_preference": "ask | one-time | recurring | none — default ask"
   }
 }
 ```
@@ -60,27 +60,27 @@ Never claim an account is connected, a sitemap is submitted, a URL is indexed, o
 ## Execution architecture
 
 ```
-PHASE 0; DISCOVERY
+PHASE 0 — DISCOVERY
   inspect codebase, framework, routes, live URL, deployment, and content model
         │
         ▼
-PHASE 1; AUDIT
+PHASE 1 — AUDIT
   SEO/AEO/technical/conversion audit with evidence and prioritized fixes
         │
         ▼
-PHASE 2; IMPLEMENTATION
+PHASE 2 — IMPLEMENTATION
   apply approved audit fixes, then re-audit and verify build/routes
         │
         ▼
-PHASE 3; STRATEGY CONFIRMATION
+PHASE 3 — STRATEGY CONFIRMATION
   ask for business context, target keywords, audience, location, and conversion goal
         │
         ▼
-PHASE 4; SEARCH-INTENT RESEARCH
+PHASE 4 — SEARCH-INTENT RESEARCH
   browser + API research when available; semantic fallback when unavailable
         │
         ▼
-PHASE 5; CONTENT FOUNDATION
+PHASE 5 — CONTENT FOUNDATION
   landing/product improvements + 5–10 foundational pages, default 10 when justified
         │
         ├───────────────┐
@@ -89,15 +89,15 @@ PHASE 5; CONTENT FOUNDATION
         │               │
         └───────┬───────┘
                 ▼
-PHASE 6; MEASUREMENT AND PUBLISHING
+PHASE 6 — MEASUREMENT AND PUBLISHING
   Search Console/Bing setup (gated), sitemap/URL submission, deploy, verify
                 │
                 ▼
-PHASE 7; MONITORING
+PHASE 7 — MONITORING
   weekly analysis, refresh recommendations, optional recurring automation
 ```
 
-## Phase 0: Discover the project
+## Phase 0 — Discover the project
 
 1. Inspect the repository without overwriting user work.
 2. Identify framework, package manager, routes, page components, content files/CMS, metadata helpers, sitemap and robots generation, schema implementation, internal-link patterns, environment configuration, and deployment commands.
@@ -107,7 +107,7 @@ PHASE 7; MONITORING
 
 **Output:** `project-discovery.md` with framework, routes, content model, deployment path, measurement status, and access limitations.
 
-## Phase 1: Run the SEO/AEO audit
+## Phase 1 — Run the SEO/AEO audit
 
 Use `seo-aeo-content-quality-auditor` with `input_type: codebase`, `website`, or both. Inspect:
 
@@ -122,7 +122,7 @@ Every finding must include severity, evidence, impact, exact fix, verification m
 
 **Output:** `audit-report.md` and `audit-fix-plan.md`.
 
-## Phase 2: Implement and verify audit fixes
+## Phase 2 — Implement and verify audit fixes
 
 1. Apply blocker and high-priority fixes first.
 2. Fix technical foundations before producing new content: metadata, canonical behavior, sitemap, robots, routes, broken links, schema, and internal navigation.
@@ -134,7 +134,7 @@ Do not start the foundation content phase while critical indexability or deploym
 
 **Output:** updated code/content plus `audit-verification.md`.
 
-## Phase 3: Confirm strategy with the owner
+## Phase 3 — Confirm strategy with the owner
 
 Ask concise questions if the answers are not already known:
 
@@ -144,7 +144,7 @@ Ask concise questions if the answers are not already known:
 
 If the owner does not know target keywords, continue with provisional candidates derived from the audit and site, but label them clearly and request confirmation before treating them as final.
 
-## Phase 4: Research search intent
+## Phase 4 — Research search intent
 
 Use `seo-aeo-keyword-research` with `research_mode: both` by default:
 
@@ -158,7 +158,7 @@ Prioritize problem-related queries that the product can genuinely solve. Search 
 
 **Output:** `seo-aeo-keyword-research-report.md` containing owner keywords, provisional candidates, search-intent evidence, cannibalization risks, keywords to avoid, and a content map.
 
-## Phase 5: Create the content foundation
+## Phase 5 — Create the content foundation
 
 Use `seo-aeo-content-cluster` to create between 5 and 10 foundational pages, defaulting to 10 only when there are 10 distinct defensible intents. If fewer than 5 distinct intents exist, explain the limitation instead of inventing topics.
 
@@ -179,7 +179,7 @@ Create a separate 20-day editorial calendar after the foundation is mapped. It s
 
 **Outputs:** `foundational-content-plan.md`, foundational page files in the project’s native content location, `20-day-editorial-calendar.md`, and `external-distribution-plan.md`.
 
-## Phase 6: Measurement, publishing, and deployment
+## Phase 6 — Measurement, publishing, and deployment
 
 1. Detect and validate sitemap and robots output locally.
 2. Ask whether the user wants Google Search Console and Bing Webmaster setup now.
@@ -191,7 +191,7 @@ Create a separate 20-day editorial calendar after the foundation is mapped. It s
 
 Internal pages should be published on the website. External articles should be adapted for the selected platform, use canonical links where supported, and link naturally to the relevant internal article and product page. Do not mass-publish duplicated content or promise backlink outcomes.
 
-## Phase 7: Monitor and refresh
+## Phase 7 — Monitor and refresh
 
 After publishing, offer the user these choices:
 

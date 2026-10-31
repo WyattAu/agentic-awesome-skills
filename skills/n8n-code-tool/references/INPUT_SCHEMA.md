@@ -15,7 +15,7 @@ With a schema, the Code Tool becomes a `DynamicStructuredTool`:
 - LLM sees: a typed object with named fields and descriptions
 - Runtime rejects invalid calls before your code runs
 - Numeric fields stay numeric (no more `Number(params.price)` for every field)
-- Tool calls are more reliable; most modern LLMs handle structured tools better than "here's a JSON string please"
+- Tool calls are more reliable — most modern LLMs handle structured tools better than "here's a JSON string please"
 
 **Cost**: a little config to define the schema, and the node must be on a version that supports it.
 
@@ -25,7 +25,7 @@ With a schema, the Code Tool becomes a `DynamicStructuredTool`:
 
 Set `specifyInputSchema: true` on the `toolCode` parameters. Two schema-definition styles:
 
-### Style A: `fromJson`: paste a representative example (v≥1.3, recommended)
+### Style A: `fromJson` — paste a representative example (v≥1.3, recommended)
 
 The easiest. Give n8n an example JSON, and it infers the schema for you.
 
@@ -48,7 +48,7 @@ The easiest. Give n8n an example JSON, and it infers the schema for you.
 
 **How it works**: n8n looks at the example, infers `{price: number, down_payment: number, ...}`, and generates a JSON Schema. The LLM sees that schema and passes a validated object.
 
-### Style B: `manual`: write the JSON Schema yourself
+### Style B: `manual` — write the JSON Schema yourself
 
 Use when you need descriptions per field, enums, min/max constraints, or optional fields.
 
@@ -92,7 +92,7 @@ The sandbox always receives `{ query }`. The difference is what `query` holds:
 | No schema | `string` | `JSON.parse(query)` if you want structure |
 | With schema | `object` (validated) | Destructure: `const { price, months } = query;` |
 
-In Python, the same applies; `_query` is a string without schema, a dict with schema.
+In Python, the same applies — `_query` is a string without schema, a dict with schema.
 
 ---
 
@@ -110,7 +110,7 @@ Set `typeVersion: 1.3` on the node if you want `fromJson`. Older installs should
 ```
 Does your tool need more than one input field?
 ├─ No (just a URL, question, text blob)
-│  └─ Unstructured; skip the schema
+│  └─ Unstructured — skip the schema
 ├─ Yes, and fields are all typed (numbers, bools, enums)
 │  └─ Structured with fromJson (easiest)
 ├─ Yes, and you need constraints or rich descriptions

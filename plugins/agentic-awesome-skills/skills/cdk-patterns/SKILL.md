@@ -77,7 +77,7 @@ for the named environment. An L2 construct alone does not establish safe default
 - ✅ **Do:** Separate stateful and stateless resources into different stacks
 - ✅ **Do:** Use `cdk diff` before every deploy
 - ❌ **Don't:** Use L1 (`Cfn*`) constructs when L2 alternatives exist
-- ❌ **Don't:** Hardcode account IDs or regions; use `cdk.Aws.ACCOUNT_ID`
+- ❌ **Don't:** Hardcode account IDs or regions — use `cdk.Aws.ACCOUNT_ID`
 
 ## Troubleshooting
 

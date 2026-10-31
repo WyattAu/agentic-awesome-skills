@@ -95,7 +95,7 @@ vercel cache purge --type cdn
 Re-run the header check after the purge. Do not purge a project inferred only
 from the current directory or a preview URL.
 
-**Gotcha; the staging URL:** a `*.vercel.app` preview may be SSO-protected
+**Gotcha — the staging URL:** a `*.vercel.app` preview may be SSO-protected
 (`_vercel_sso_nonce` 302) and wrap deploys in a provider frame that injects
 platform branding. Always verify icons on the real custom domain.
 

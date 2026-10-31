@@ -1,6 +1,6 @@
-# Communication Templates: Inventory Demand Planning
+# Communication Templates — Inventory Demand Planning
 
-> **Reference Type:** Tier 3; Load on demand when composing or reviewing demand planning communications.
+> **Reference Type:** Tier 3 — Load on demand when composing or reviewing demand planning communications.
 >
 > **Usage:** Each template includes variable placeholders in `{{double_braces}}` for direct substitution. Templates are organized by audience and purpose. Select the template matching your scenario, substitute variables, review tone guidance, and return a draft pending explicit recipient/message approval.
 
@@ -69,12 +69,12 @@ Common variables used across templates:
 Transactional and efficient. The vendor receives dozens of these daily. Be clear, reference the PO, specify quantities, delivery date, and delivery location. No need for pleasantries beyond professional courtesy.
 
 ### What NOT to Say
-- Do not include forecast data or inventory levels in routine POs; this is proprietary information.
+- Do not include forecast data or inventory levels in routine POs — this is proprietary information.
 - Do not request lead time changes or raise performance issues in a PO communication.
 
 ### Template
 
-**Subject:** `PO {{po_number}}; {{vendor_name}}; Delivery {{delivery_date}}`
+**Subject:** `PO {{po_number}} — {{vendor_name}} — Delivery {{delivery_date}}`
 
 ---
 
@@ -111,16 +111,16 @@ Regards,
 - You need a formal escalation before involving procurement or vendor management.
 
 ### Tone Guidance
-Firm and data-driven. You are not complaining; you are presenting evidence and requesting a corrective action plan. Lead with the impact to your business, not the vendor's failure. Offer collaboration: you want to solve this together, but you need a commitment.
+Firm and data-driven. You are not complaining — you are presenting evidence and requesting a corrective action plan. Lead with the impact to your business, not the vendor's failure. Offer collaboration: you want to solve this together, but you need a commitment.
 
 ### What NOT to Say
 - Do not threaten to switch vendors in this communication (that's a procurement conversation).
-- Do not speculate on the cause of the lead time issue; let the vendor explain.
-- Do not use vague language like "often late"; provide specific PO numbers, dates, and deviations.
+- Do not speculate on the cause of the lead time issue — let the vendor explain.
+- Do not use vague language like "often late" — provide specific PO numbers, dates, and deviations.
 
 ### Template
 
-**Subject:** `Lead Time Performance Review; {{vendor_name}}; Action Required by {{deadline_date}}`
+**Subject:** `Lead Time Performance Review — {{vendor_name}} — Action Required by {{deadline_date}}`
 
 ---
 
@@ -172,21 +172,21 @@ Regards,
 - Any stockout where revenue at risk exceeds $10,000/week.
 
 ### Tone Guidance
-Urgent, concise, action-oriented. The audience is internal (planning manager, category merchant, supply chain director). Lead with the impact, follow with the facts, close with the recommended action. This is not a post-mortem; it's a call to action.
+Urgent, concise, action-oriented. The audience is internal (planning manager, category merchant, supply chain director). Lead with the impact, follow with the facts, close with the recommended action. This is not a post-mortem — it's a call to action.
 
 ### What NOT to Say
 - Do not assign blame in the alert (e.g., "because the buyer didn't order enough"). That's for the post-mortem.
-- Do not present multiple options without a recommendation; decision-makers need a clear ask.
+- Do not present multiple options without a recommendation — decision-makers need a clear ask.
 
 ### Template
 
-**Subject:** `🔴 STOCKOUT ALERT; {{sku_description}}; {{store_count}} locations at risk`
+**Subject:** `🔴 STOCKOUT ALERT — {{sku_description}} — {{store_count}} locations at risk`
 
 ---
 
 **Attention:** {{recipient_names}}
 
-**Item:** {{sku}}; {{sku_description}}
+**Item:** {{sku}} — {{sku_description}}
 **ABC Class:** {{abc_class}}
 **Current Status:** {{current_status}} (e.g., "Out of stock at 8 locations; projected stockout at 22 additional locations by {{stockout_date}}")
 
@@ -203,9 +203,9 @@ Urgent, concise, action-oriented. The audience is internal (planning manager, ca
 
 **Recommended Actions:**
 
-1. **Immediate:** {{action_1}} (e.g., "Reallocate 400 units from low-velocity stores to stockout locations; list attached")
-2. **Short-term:** {{action_2}} (e.g., "Expedite PO {{po_number}}; vendor confirmed can ship 800 units by {{expedite_date}} at ${{expedite_cost}} additional freight")
-3. **If above fails:** {{action_3}} (e.g., "Substitute with {{alt_sku}}; similar product, available in DC, can ship to affected stores within 48 hours")
+1. **Immediate:** {{action_1}} (e.g., "Reallocate 400 units from low-velocity stores to stockout locations — list attached")
+2. **Short-term:** {{action_2}} (e.g., "Expedite PO {{po_number}} — vendor confirmed can ship 800 units by {{expedite_date}} at ${{expedite_cost}} additional freight")
+3. **If above fails:** {{action_3}} (e.g., "Substitute with {{alt_sku}} — similar product, available in DC, can ship to affected stores within 48 hours")
 
 **Decision needed by:** {{decision_deadline}}
 
@@ -224,15 +224,15 @@ Please reply or call me directly to confirm action.
 - Slow-mover kill decision has been triggered.
 
 ### Tone Guidance
-Data-driven and collaborative. You are presenting a financial analysis, not demanding a price change. Merchandising owns pricing decisions; your job is to provide the inventory data and margin impact analysis to inform their decision. Frame recommendations as margin recovery, not "we bought too much."
+Data-driven and collaborative. You are presenting a financial analysis, not demanding a price change. Merchandising owns pricing decisions — your job is to provide the inventory data and margin impact analysis to inform their decision. Frame recommendations as margin recovery, not "we bought too much."
 
 ### What NOT to Say
 - State forecast error or overbuying honestly when supported by evidence; focus on corrective action without hiding the cause.
-- Do not propose a specific retail price; propose a markdown depth (% off) and let merchandising set the price.
+- Do not propose a specific retail price — propose a markdown depth (% off) and let merchandising set the price.
 
 ### Template
 
-**Subject:** `Markdown Recommendation; {{sku_description}}; {{excess_units}} units excess`
+**Subject:** `Markdown Recommendation — {{sku_description}} — {{excess_units}} units excess`
 
 ---
 
@@ -286,12 +286,12 @@ Happy to discuss the analysis in detail.
 Structured and transparent. This document is the "source of truth" for promotional inventory planning. Include all assumptions, the baseline, the lift estimate, and the post-promo dip so that all stakeholders can challenge or validate the numbers before POs are placed.
 
 ### What NOT to Say
-- Do not present a single point estimate without a confidence range; this gives false precision.
-- Do not omit the post-promo dip; it's as important as the lift.
+- Do not present a single point estimate without a confidence range — this gives false precision.
+- Do not omit the post-promo dip — it's as important as the lift.
 
 ### Template
 
-**Subject:** `Promotional Forecast; {{sku_description}}; {{promo_start}} to {{promo_end}}`
+**Subject:** `Promotional Forecast — {{sku_description}} — {{promo_start}} to {{promo_end}}`
 
 ---
 
@@ -306,8 +306,8 @@ Structured and transparent. This document is the "source of truth" for promotion
 
 | Field | Value |
 |---|---|
-| SKU | {{sku}}; {{sku_description}} |
-| Promotion Period | {{promo_start}}; {{promo_end}} ({{promo_weeks}} weeks) |
+| SKU | {{sku}} — {{sku_description}} |
+| Promotion Period | {{promo_start}} — {{promo_end}} ({{promo_weeks}} weeks) |
 | Promotion Type | {{promo_type}} |
 | Promotional Retail Price | ${{promo_price}} (regular: ${{reg_price}}, {{discount_pct}}% off) |
 | Media Support | {{media_support}} (e.g., "Circular page 3 + endcap display") |
@@ -317,12 +317,12 @@ Structured and transparent. This document is the "source of truth" for promotion
 
 | Period | Baseline Forecast | Lift Estimate | Total Forecast | Confidence Range (±) |
 |---|---|---|---|---|
-| Pre-promo (week before) | {{baseline}} units | - | {{baseline}} units | - |
+| Pre-promo (week before) | {{baseline}} units | — | {{baseline}} units | — |
 | Promo Week 1 | {{baseline}} | +{{lift_wk1}}% ({{lift_units_1}} units) | {{total_wk1}} units | ±{{conf_1}}% |
 | Promo Week 2 | {{baseline}} | +{{lift_wk2}}% ({{lift_units_2}} units) | {{total_wk2}} units | ±{{conf_2}}% |
 | Post-Promo Week 1 | {{baseline}} | −{{dip_wk1}}% ({{dip_units_1}} units) | {{post_1}} units | ±{{conf_post_1}}% |
 | Post-Promo Week 2 | {{baseline}} | −{{dip_wk2}}% ({{dip_units_2}} units) | {{post_2}} units | ±{{conf_post_2}}% |
-| Recovery (Week 3+) | {{baseline}} | - | {{baseline}} units | - |
+| Recovery (Week 3+) | {{baseline}} | — | {{baseline}} units | — |
 
 **Total Promotional Period Demand:** {{total_promo_demand}} units
 **Total Incremental Demand (above baseline):** {{incremental_demand}} units
@@ -367,7 +367,7 @@ Analytical and justified. Every safety stock change is an inventory investment c
 
 ### Template
 
-**Subject:** `Safety Stock Adjustment; {{sku_description}}; {{adjustment_direction}} by {{adjustment_pct}}%`
+**Subject:** `Safety Stock Adjustment — {{sku_description}} — {{adjustment_direction}} by {{adjustment_pct}}%`
 
 ---
 
@@ -375,7 +375,7 @@ Analytical and justified. Every safety stock change is an inventory investment c
 **From:** {{our_contact_name}}, {{our_contact_title}}
 **Date:** {{date}}
 
-**Item:** {{sku}}; {{sku_description}} ({{abc_class}})
+**Item:** {{sku}} — {{sku_description}} ({{abc_class}})
 
 ### Reason for Adjustment
 
@@ -404,7 +404,7 @@ Analytical and justified. Every safety stock change is an inventory investment c
 
 ### Approval Requested By
 
-{{deadline}}; needed before the next replenishment cycle to take effect.
+{{deadline}} — needed before the next replenishment cycle to take effect.
 
 {{our_contact_name}}
 {{our_contact_title}} | {{our_contact_email}}
@@ -418,11 +418,11 @@ Analytical and justified. Every safety stock change is an inventory investment c
 - Required at the pre-launch planning meeting and updated at the 4-week and 8-week checkpoints.
 
 ### Tone Guidance
-Transparent and falsifiable. The purpose of this document is to make every assumption explicit so that the post-mortem can identify where the forecast diverged from reality. Do not hedge with vague language; state the assumptions clearly so they can be validated or disproved.
+Transparent and falsifiable. The purpose of this document is to make every assumption explicit so that the post-mortem can identify where the forecast diverged from reality. Do not hedge with vague language — state the assumptions clearly so they can be validated or disproved.
 
 ### Template
 
-**Subject:** `New Product Forecast Assumptions; {{sku_description}}; Launch {{launch_date}}`
+**Subject:** `New Product Forecast Assumptions — {{sku_description}} — Launch {{launch_date}}`
 
 ---
 
@@ -434,7 +434,7 @@ Transparent and falsifiable. The purpose of this document is to make every assum
 
 | Field | Value |
 |---|---|
-| SKU | {{sku}}; {{sku_description}} |
+| SKU | {{sku}} — {{sku_description}} |
 | Category | {{category}} / {{subcategory}} |
 | Retail Price | ${{retail_price}} |
 | Unit Cost | ${{unit_cost}} |
@@ -500,11 +500,11 @@ Transparent and falsifiable. The purpose of this document is to make every assum
 - Discontinued product with remaining inventory after final markdown.
 
 ### Tone Guidance
-Pragmatic and action-oriented. The liquidation plan is an acknowledgment that margin recovery is limited and the priority has shifted to cash recovery and warehouse space liberation. Present the options dispassionately; the goal is to make the best of a bad situation, not to relitigate the buying decision.
+Pragmatic and action-oriented. The liquidation plan is an acknowledgment that margin recovery is limited and the priority has shifted to cash recovery and warehouse space liberation. Present the options dispassionately — the goal is to make the best of a bad situation, not to relitigate the buying decision.
 
 ### Template
 
-**Subject:** `Excess Inventory Liquidation Plan; {{sku_description}}; {{excess_units}} units`
+**Subject:** `Excess Inventory Liquidation Plan — {{sku_description}} — {{excess_units}} units`
 
 ---
 
@@ -516,7 +516,7 @@ Pragmatic and action-oriented. The liquidation plan is an acknowledgment that ma
 
 | Metric | Value |
 |---|---|
-| SKU | {{sku}}; {{sku_description}} |
+| SKU | {{sku}} — {{sku_description}} |
 | Current On-Hand | {{excess_units}} units |
 | Original Cost | ${{unit_cost}} per unit (${{total_cost}} total) |
 | Current Retail | ${{current_retail}} (after markdowns) |
@@ -537,7 +537,7 @@ Pragmatic and action-oriented. The liquidation plan is an acknowledgment that ma
 
 Option {{recommended_option}} is recommended based on the following rationale:
 
-{{recommendation_rationale}} (e.g., "Option B (liquidation) recovers $3,200 compared to Option A's $4,100; but Option A requires 8 more weeks of shelf space that has a higher-value alternative use. The opportunity cost of holding the shelf space exceeds the $900 margin difference.")
+{{recommendation_rationale}} (e.g., "Option B (liquidation) recovers $3,200 compared to Option A's $4,100 — but Option A requires 8 more weeks of shelf space that has a higher-value alternative use. The opportunity cost of holding the shelf space exceeds the $900 margin difference.")
 
 ### Execution Plan
 

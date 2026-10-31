@@ -13,7 +13,7 @@ Most first-principles tools skip classification and jump straight to "question e
 - Questioning a **belief** requires finding whose experience shaped it
 - Questioning an **interest-driven** assumption requires following the money
 
-**The biggest "aha" moment** often comes when someone discovers that what they treated as an unchangeable fact is actually just a convention; or even an interest-driven narrative.
+**The biggest "aha" moment** often comes when someone discovers that what they treated as an unchangeable fact is actually just a convention — or even an interest-driven narrative.
 
 > 很多人第一次做分类时会震惊地发现：他们一直当成"事实"的东西，其实只是"惯例"，甚至是"利益驱动"。
 
@@ -46,7 +46,7 @@ Laws of nature, mathematical truths, verified scientific constants, and logical 
 | ✅ Genuine Physical Facts | ❌ Often Misclassified As Facts |
 |---------------------------|-------------------------------|
 | Local gravitational acceleration depends on location; state the approximation | "Housing always appreciates" (convention) |
-| Entropy of an isolated system does not decrease in the thermodynamic formulation | "You need 8 hours of sleep" (convention; varies by person) |
+| Entropy of an isolated system does not decrease in the thermodynamic formulation | "You need 8 hours of sleep" (convention — varies by person) |
 | Speed of light in vacuum is constant in the stated physical model | "People are rational economic actors" (belief) |
 | Compound interest formula under declared rate/compounding assumptions | "Innovation requires disruption" (interest-driven) |
 
@@ -72,9 +72,9 @@ Practices, rules, or beliefs that were once valid and widely adopted but origina
 - What percentage of people who follow this convention actually get the promised result? / 遵循这个惯例的人中，多少比例真正得到了承诺的结果？
 
 **Challenge Strategy / 质疑策略:**
-**Check the timestamp.** Ask: "Was this true 20 years ago? Is it still true now? Will it be true in 10 years?" The key insight is that conventions carry enormous inertia; people follow them long after the original reason has disappeared.
+**Check the timestamp.** Ask: "Was this true 20 years ago? Is it still true now? Will it be true in 10 years?" The key insight is that conventions carry enormous inertia — people follow them long after the original reason has disappeared.
 
-检查时间戳。问："这在20年前成立吗？现在还成立吗？10年后呢？"关键洞见：惯例有巨大的惯性; 人们在原始理由消失后很久仍然遵循它们。
+检查时间戳。问："这在20年前成立吗？现在还成立吗？10年后呢？"关键洞见：惯例有巨大的惯性 — 人们在原始理由消失后很久仍然遵循它们。
 
 **Examples / 示例:**
 
@@ -89,10 +89,10 @@ Practices, rules, or beliefs that were once valid and widely adopted but origina
 
 **Cross-Cultural Note / 跨文化注意:**
 Some conventions are deeply culture-specific:
-- 🇨🇳 "35岁是职业分水岭"; This is a Chinese labor market convention, virtually unknown in the West
-- 🇺🇸 "You should change jobs every 2-3 years"; This is an American tech industry convention, unusual in Japan or Germany
-- 🇨🇳 "有房才能结婚"; Chinese marriage convention, not a global reality
-- 🇺🇸 "Follow your passion"; American cultural narrative, less common in collectivist cultures
+- 🇨🇳 "35岁是职业分水岭" — This is a Chinese labor market convention, virtually unknown in the West
+- 🇺🇸 "You should change jobs every 2-3 years" — This is an American tech industry convention, unusual in Japan or Germany
+- 🇨🇳 "有房才能结婚" — Chinese marriage convention, not a global reality
+- 🇺🇸 "Follow your passion" — American cultural narrative, less common in collectivist cultures
 
 > 有些惯例是文化特有的。"35岁危机"几乎只存在于中国劳动力市场。"Follow your passion"主要是美国文化叙事。
 
@@ -128,7 +128,7 @@ Conclusions drawn from personal experience, projected as general truths. The per
 | "我的性格不适合社交" | Introversion ≠ inability to build relationships |
 | "Good developers don't need to be good at communication" | Belief that protects from discomfort |
 
-**Red Flag; Belief Disguised As Fact:**
+**Red Flag — Belief Disguised As Fact:**
 If someone says "That's just how it is" or "Everyone knows that" about something that isn't a physical law, investigate whether it is an empirical, definitional or normative claim rather than assuming it is a belief or convention that has been promoted to "fact" status in their mind.
 
 > 🚩 如果有人说"就是这样的"或"大家都知道"，但说的不是物理定律，应核实它是经验命题、定义还是价值判断，而不是直接断定其类别。
@@ -138,16 +138,16 @@ If someone says "That's just how it is" or "Everyone knows that" about something
 ### ⚫ Type 4: Interest-Driven / 利益驱动
 
 **Definition / 定义:**
-Assumptions that someone (an industry, company, influencer, or social group) actively propagates because they benefit from you believing them. This doesn't mean the claim is always false; but its truth is incidental to why it's being promoted.
+Assumptions that someone (an industry, company, influencer, or social group) actively propagates because they benefit from you believing them. This doesn't mean the claim is always false — but its truth is incidental to why it's being promoted.
 
-某些人（行业、公司、意见领袖或社会群体）积极传播的假设，因为他们从你的相信中获益。这并不意味着这些说法总是假的; 但它们被传播的原因不是因为真，而是因为有利可图。
+某些人（行业、公司、意见领袖或社会群体）积极传播的假设，因为他们从你的相信中获益。这并不意味着这些说法总是假的 — 但它们被传播的原因不是因为真，而是因为有利可图。
 
 **Identification Questions / 识别问题:**
 - Who is promoting this idea? What do they sell? / 谁在推广这个观点？他们卖什么？
 - Does the source of this information have a financial incentive for you to believe it? / 这个信息来源是否有经济动机让你相信？
 - Would this idea still be popular if no one profited from it? / 如果没有人从中获利，这个观点还会流行吗？
 - Is this framed as urgent? Urgency often serves the seller. / 这是否被包装成紧迫的？紧迫感通常服务于卖方。
-- What is the status-quo option; what happens if you do nothing? A statistical null hypothesis is a separately specified test proposition. / 维持现状的选项是什么; 如果你什么都不做会怎样？这不等于统计检验中的零假设。
+- What is the status-quo option — what happens if you do nothing? A statistical null hypothesis is a separately specified test proposition. / 维持现状的选项是什么 — 如果你什么都不做会怎样？这不等于统计检验中的零假设。
 
 **Challenge Strategy / 质疑策略:**
 **Follow the money.** Trace the incentive chain from the idea back to whoever benefits. This doesn't automatically disprove the claim, but it changes how much weight you should give it.
@@ -179,8 +179,8 @@ Assumptions that someone (an industry, company, influencer, or social group) act
 
 Many real-world assumptions are **hybrids**. When you encounter one:
 
-1. **Identify the primary type**; which type best describes the core mechanism?
-2. **Note the secondary type**; what additional dynamics are at play?
+1. **Identify the primary type** — which type best describes the core mechanism?
+2. **Note the secondary type** — what additional dynamics are at play?
 3. **Apply the primary challenge strategy first**, then supplement with secondary
 
 **Examples of Mixed Types / 混合类型示例:**
@@ -197,16 +197,16 @@ Many real-world assumptions are **hybrids**. When you encounter one:
 ## Edge Cases / 边界案例指南
 
 ### Statistical Trends vs Facts
-"Men are taller than women on average"; This is a **statistical fact** (measurable, repeatable), but applying it to any individual is a **subjective belief**. Classify the assumption based on how the user is using it.
+"Men are taller than women on average" — This is a **statistical fact** (measurable, repeatable), but applying it to any individual is a **subjective belief**. Classify the assumption based on how the user is using it.
 
 ### Outdated Facts
 "Pluto is a planet" mixes observation with a classification definition. A revised classification does not change the physical object; specify the definition and authority in use. Do not relabel every updated empirical finding a convention.
 
 ### Self-Fulfilling Prophecies
-"The stock market will crash"; If enough people believe this, they sell, and it crashes. Classify as **interest-driven** if the source benefits from the prediction, or **subjective belief** if it's the user's personal anxiety.
+"The stock market will crash" — If enough people believe this, they sell, and it crashes. Classify as **interest-driven** if the source benefits from the prediction, or **subjective belief** if it's the user's personal anxiety.
 
 ### Cultural Norms
-"你应该30岁之前结婚"; This is a **convention** (culturally specific, has a historical basis), with potential **interest-driven** elements (family pressure, wedding industry).
+"你应该30岁之前结婚" — This is a **convention** (culturally specific, has a historical basis), with potential **interest-driven** elements (family pressure, wedding industry).
 
 ---
 

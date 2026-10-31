@@ -132,9 +132,9 @@ Using the already-fetched robots.txt from Step 1, scan for `Content-Signal:` dir
    - Parse all key=value pairs (split on `,` then on `=`).
    - Validate keys against the known set: `ai-train`, `search`, `ai-input` in the Cloudflare Content Signals implementation.
    - Validate values: only `yes` and `no` are valid.
-   - Flag any unknown keys or invalid values as a warning; record the exact implementation/version; do not conflate it with a final IETF standard.
+   - Flag any unknown keys or invalid values as a warning — record the exact implementation/version; do not conflate it with a final IETF standard.
    - Record syntax as **Parsed**, not proof of compliance or crawler behavior and surface parsed values with plain-English meaning.
-3. If absent: record as **Absent**; ask whether the publisher wants an optional declaration.
+3. If absent: record as **Absent** — ask whether the publisher wants an optional declaration.
 
 No additional HTTP request is needed. robots.txt is already fetched in Step 1.
 

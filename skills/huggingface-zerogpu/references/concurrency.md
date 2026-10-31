@@ -8,7 +8,7 @@ Gradio handlers run **in parallel by default on ZeroGPU**. Code that works fine 
 Per-request or per-user data must not live in module-level mutable variables. Concurrent requests will overwrite each other.
 
 ```python
-# BAD: concurrent requests overwrite each other
+# BAD — concurrent requests overwrite each other
 results = {}
 
 def process(text):
@@ -17,7 +17,7 @@ def process(text):
 ```
 
 ```python
-# GOOD: pure function, no shared mutable state
+# GOOD — pure function, no shared mutable state
 def process(text):
     return expensive_compute(text)
 ```
@@ -35,14 +35,14 @@ with gr.Blocks() as demo:
     btn.click(fn=add_message, inputs=[msg, history], outputs=[chatbot, history])
 ```
 
-Note that on ZeroGPU, `gr.State` is pickled across the worker boundary on every yield; see "Process Isolation and Pickle" in SKILL.md for the implications.
+Note that on ZeroGPU, `gr.State` is pickled across the worker boundary on every yield — see "Process Isolation and Pickle" in SKILL.md for the implications.
 
 ## No fixed file paths for outputs
 
 Hardcoded output filenames cause concurrent requests to overwrite each other's files. This corrupts outputs and, worse, can leak one user's data to another.
 
 ```python
-# BAD: concurrent calls clobber the same file
+# BAD — concurrent calls clobber the same file
 def generate_image(prompt):
     image = pipe(prompt).images[0]
     image.save("output.png")
@@ -50,7 +50,7 @@ def generate_image(prompt):
 ```
 
 ```python
-# GOOD: unique path per invocation
+# GOOD — unique path per invocation
 import tempfile
 
 def generate_image(prompt):
@@ -67,7 +67,7 @@ Retain outputs until Gradio has served them, then use a bounded cleanup/retentio
 Loading model objects/tokenizers/configs at startup is encouraged, but calls may mutate internal caches, RNG state or adapters even without an explicit assignment. Verify thread/process safety for each pipeline; serialize conflicting operations or use isolated per-request state. This is the standard ZeroGPU pattern: load at module scope, read inside `@spaces.GPU` handlers.
 
 ```python
-# SAFE: loaded once at module scope, read-only during requests
+# SAFE — loaded once at module scope, read-only during requests
 model = load_model().to("cuda")
 tokenizer = load_tokenizer()
 

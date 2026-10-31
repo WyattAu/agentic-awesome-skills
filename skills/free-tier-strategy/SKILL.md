@@ -16,17 +16,17 @@ license_source: https://github.com/jonathimer/devmarketing-skills/blob/main/LICE
 Use this skill when you need design free tiers that convert to paid without creating resentment or abuse. Trigger phrases: free tier design, freemium model, free trial strategy, free tier limits, developer free plan, open source commercial, feature gating, upgrade triggers, free tier conversion.
 
 
-Design free tiers that let developers build real things, demonstrate value, and convert naturally-without feeling like a trap or creating resentment.
+Design free tiers that let developers build real things, demonstrate value, and convert naturally—without feeling like a trap or creating resentment.
 
 ## Overview
 
-Developer tools need free tiers. Developers expect to try before they buy, and they expect the trial to be meaningful-not a 14-day timer or a feature-locked demo. But free tiers also need to sustain your business. Get this wrong in either direction: too restrictive kills adoption, too generous kills revenue.
+Developer tools need free tiers. Developers expect to try before they buy, and they expect the trial to be meaningful—not a 14-day timer or a feature-locked demo. But free tiers also need to sustain your business. Get this wrong in either direction: too restrictive kills adoption, too generous kills revenue.
 
 The best free tiers feel generous to individual developers while naturally scaling into paid tiers as projects grow.
 
 ## Before You Start
 
-Review the `/devmarketing-skills/skills/developer-audience-context` skill. Free tier design varies significantly based on whether you're targeting hobbyists, startups, or enterprises. Also understand your unit economics-what does each free user actually cost you?
+Review the `/devmarketing-skills/skills/developer-audience-context` skill. Free tier design varies significantly based on whether you're targeting hobbyists, startups, or enterprises. Also understand your unit economics—what does each free user actually cost you?
 
 ## Free Tier vs Free Trial vs Freemium
 
@@ -58,7 +58,7 @@ Review the `/devmarketing-skills/skills/developer-audience-context` skill. Free 
 | Community building | Low | Medium | Medium | High |
 | Support costs | High | Low | Medium | Variable |
 
-**Treat a permanent free tier as a hypothesis, not a universal requirement.** Developers build side projects, evaluate tools for future use, and recommend tools to others-all of which require long-term free access.
+**Treat a permanent free tier as a hypothesis, not a universal requirement.** Developers build side projects, evaluate tools for future use, and recommend tools to others—all of which require long-term free access.
 
 ## Usage Limits That Make Sense
 

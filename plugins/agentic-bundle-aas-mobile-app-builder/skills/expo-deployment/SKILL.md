@@ -14,7 +14,7 @@ metadata:
 # Deployment
 ## When to Use
 
-Use this skill when you need deploy Expo apps to production with EAS; build and submit to the iOS App Store, Google Play Store, and TestFlight, configure eas.json build and submit profiles, manage app versions and build numbers, publish App Store metadata and ASO, and deploy web bundles and API routes via EAS...
+Use this skill when you need deploy Expo apps to production with EAS — build and submit to the iOS App Store, Google Play Store, and TestFlight, configure eas.json build and submit profiles, manage app versions and build numbers, publish App Store metadata and ASO, and deploy web bundles and API routes via EAS...
 
 
 This skill covers deploying Expo applications across all platforms using EAS (Expo Application Services).
@@ -89,7 +89,7 @@ npx eas-cli@latest deploy --prod
 npx eas-cli@latest deploy
 ```
 
-Expo Router API routes deploy together with the web bundle on EAS Hosting; `eas deploy` ships both. To author or configure the API routes themselves, use the `expo-api-routes` skill.
+Expo Router API routes deploy together with the web bundle on EAS Hosting — `eas deploy` ships both. To author or configure the API routes themselves, use the `expo-api-routes` skill.
 
 ## EAS Configuration
 
@@ -151,7 +151,7 @@ Standard `eas.json` for production deployments:
 
 ## Automated Deployments
 
-EAS Workflows automate the build → submit → update → deploy pipeline for CI/CD. See ./references/workflows.md for deployment-oriented examples. To author or validate workflow YAML, use the `expo-cicd-workflows` skill; it works from the live workflow schema.
+EAS Workflows automate the build → submit → update → deploy pipeline for CI/CD. See ./references/workflows.md for deployment-oriented examples. To author or validate workflow YAML, use the `expo-cicd-workflows` skill — it works from the live workflow schema.
 
 ## Version Management
 

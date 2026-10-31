@@ -69,7 +69,7 @@ Goal: **deep, accurate understanding**, not conclusions.
 
 ---
 
-## 3. Phase 1: Initial Orientation (Bottom-Up Scan)
+## 3. Phase 1 — Initial Orientation (Bottom-Up Scan)
 
 Before deep analysis, Claude performs a minimal mapping:
 
@@ -83,7 +83,7 @@ This establishes anchors for detailed analysis.
 
 ---
 
-## 4. Phase 2: Ultra-Granular Function Analysis (Default Mode)
+## 4. Phase 2 — Ultra-Granular Function Analysis (Default Mode)
 
 Every non-trivial function receives full micro analysis.
 
@@ -131,16 +131,16 @@ When encountering calls, **continue the same micro-first analysis across boundar
   caller → callee → return → caller.
 - Note if callee logic behaves differently in this specific call context.
 
-#### External Calls: Two Cases
+#### External Calls — Two Cases
 
-**Case A; External Call to a Contract Whose Code Exists in the Codebase**
+**Case A — External Call to a Contract Whose Code Exists in the Codebase**
 Treat as an internal call:
 - Jump into the target contract/function.
 - Continue block-by-block micro-analysis.
 - Propagate invariants and assumptions seamlessly.
 - Consider edge cases based on the *actual* code, not a black-box guess.
 
-**Case B; External Call Without Available Code (True External / Black Box)**
+**Case B — External Call Without Available Code (True External / Black Box)**
 Analyze as adversarial:
 - Describe payload/value/gas or parameters sent.
 - Identify assumptions about the target.
@@ -204,7 +204,7 @@ Report the inspected scope, supported invariants and all unresolved questions. D
 
 ---
 
-## 5. Phase 3: Global System Understanding
+## 5. Phase 3 — Global System Understanding
 
 After sufficient micro-analysis:
 

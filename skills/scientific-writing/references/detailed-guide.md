@@ -4,7 +4,7 @@
 
 ## Overview
 
-**This is the core skill for the deep research and writing tool**-combining AI-driven deep research with well-formatted written outputs. A comprehensive literature search and verified citations require actual source access and a documented search; this skill alone does not provide them.
+**This is the core skill for the deep research and writing tool**—combining AI-driven deep research with well-formatted written outputs. A comprehensive literature search and verified citations require actual source access and a documented search; this skill alone does not provide them.
 
 Scientific writing is a process for communicating research with precision and clarity. Write manuscripts using IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, and reporting guidelines (CONSORT/STROBE/PRISMA). Apply this skill for research papers and journal submissions.
 
@@ -180,7 +180,7 @@ When starting a new section:
    - Key studies to cite
    - Data points and statistics to include
    - Logical flow and organization
-3. These bullet points serve as scaffolding-they are NOT the final manuscript
+3. These bullet points serve as scaffolding—they are NOT the final manuscript
 
 **Fictional example outline (Introduction section):**
 
@@ -513,7 +513,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 7. Craft Abstract (synthesizing the complete story)
 8. Create Title (concise and descriptive)
 
-**Remember**: Bullet points are for planning only-the final manuscript must be in complete paragraphs.
+**Remember**: Bullet points are for planning only—the final manuscript must be in complete paragraphs.
 
 **Stage 3: Revision**
 1. Check logical flow and "red thread" throughout

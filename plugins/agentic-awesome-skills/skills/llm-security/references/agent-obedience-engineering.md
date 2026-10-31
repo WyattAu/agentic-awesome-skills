@@ -1,4 +1,4 @@
-# AI Agent 服从性工程: 让 AI 读完工作流后真正干活
+# AI Agent 服从性工程 — 让 AI 读完工作流后真正干活
 
 > 来源：2026 年多来源综合（Anthropic Skill Engineering、Microsoft Code Words、Strands Steering Hooks、Gradient Flow Harness Engineering）
 > 适用场景：AI 编码 Agent（Claude Code / Codex / Cursor / Cline / Windsurf / Kiro 等）读完 README/RULES.md 后只确认不执行、跳过步骤、自作主张省略关键操作
@@ -61,10 +61,10 @@ CORRECT (Agent 执行):
 
 **关键模式**：
 ```
-MUST; 违反 = 任务失败
-MUST NOT; 违反 = 安全违规
-SHOULD; 不做需要说明原因
-MAY; 真正可选的
+MUST — 违反 = 任务失败
+MUST NOT — 违反 = 安全违规
+SHOULD — 不做需要说明原因
+MAY — 真正可选的
 ```
 
 ---
@@ -131,7 +131,7 @@ MAY; 真正可选的
 
 ---
 
-## 技术 6：不透明标识符（Code Words）- 适用于 API/工具参数
+## 技术 6：不透明标识符（Code Words）— 适用于 API/工具参数
 
 Microsoft 2026 研究发现：语义化参数名会触发模型"帮忙优化"的倾向。
 

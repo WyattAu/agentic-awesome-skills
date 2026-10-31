@@ -21,18 +21,18 @@ tags for any page. Trigger phrases include: "write meta tags",
 ## Input Format
 ````json
 {
-  "page_title": "string; working title of the page",
+  "page_title": "string — working title of the page",
   "page_type": "landing-page | blog-post | pillar-page | 
                 product-page | homepage | category-page",
-  "primary_keyword": "string; the main keyword this page targets",
+  "primary_keyword": "string — the main keyword this page targets",
   "secondary_keywords": ["string"],
-  "content_summary": "string; 2–4 sentences describing 
+  "content_summary": "string — 2–4 sentences describing 
                        what the page covers and who it is for",
-  "target_audience": "string; who is searching for this page",
+  "target_audience": "string — who is searching for this page",
   "cta_intent": "learn | buy | try | compare | download | sign-up",
-  "usp": "string; the single strongest differentiator 
+  "usp": "string — the single strongest differentiator 
           or benefit to lead with",
-  "brand_name": "string; optional, include if brand 
+  "brand_name": "string — optional, include if brand 
                  should appear in title tag"
 }
 ````
@@ -48,13 +48,13 @@ must be built on these CTR mechanics:
 
 | Signal               | How to Use It                                        |
 |----------------------|------------------------------------------------------|
-| Keyword match        | Primary keyword first in title; matches search term |
+| Keyword match        | Primary keyword first in title — matches search term |
 | Benefit lead         | Lead description with outcome, not feature           |
 | Power words          | Words that trigger action or curiosity (see list)    |
 | Specificity          | Numbers and specifics outperform vague claims        |
 | CTA verb             | End description with an action word                  |
 | Emotional trigger    | Speak to the feeling behind the search               |
-| Urgency / scarcity   | Use only when genuine; never fabricate              |
+| Urgency / scarcity   | Use only when genuine — never fabricate              |
 
 ### Power Word Bank
 
@@ -75,14 +75,14 @@ Use these only where accurate and supported by the supplied page evidence; omit 
 
 ### What to Never Use
 
-- "Click here" or "Click to learn more"; usually less informative than a specific benefit
-- Unnecessary all caps; can reduce readability
-- Keyword stuffing; using primary keyword more than once 
+- "Click here" or "Click to learn more" — usually less informative than a specific benefit
+- Unnecessary all caps — can reduce readability
+- Keyword stuffing — using primary keyword more than once 
   in the meta description
-- Duplicate meta descriptions; every page needs unique copy
-- Vague openers; "This page is about..." or 
+- Duplicate meta descriptions — every page needs unique copy
+- Vague openers — "This page is about..." or 
   "We offer..." wastes character space
-- Empty brand-centric claims; prefer information useful to the searcher
+- Empty brand-centric claims — prefer information useful to the searcher
 
 ---
 
@@ -137,24 +137,24 @@ The skill must always produce output in this exact format:
 This is approximately how the page will appear in search results:
 
 ┌─────────────────────────────────────────────────────────────┐
-│ [Title Tag; displayed in blue]                             │
+│ [Title Tag — displayed in blue]                             │
 │ https://yourdomain.com/page-url                             │
-│ [Meta Description; displayed in grey below the URL]        │
+│ [Meta Description — displayed in grey below the URL]        │
 └─────────────────────────────────────────────────────────────┘
 
 ---
 
 ## Title Tag Variants
 
-Write 3 variants; compare with a controlled test where feasible; search changes and query mix can confound results:
+Write 3 variants — compare with a controlled test where feasible; search changes and query mix can confound results:
 
 | #   | Title Tag                          | Chars | Keyword Position | CTR Angle         |
 |-----|------------------------------------|-------|------------------|-------------------|
-| V1  | [variant 1; keyword first]        | [n]   | First word       | Benefit-led       |
-| V2  | [variant 2; keyword + power word] | [n]   | First phrase     | Curiosity/urgency |
-| V3  | [variant 3; keyword + brand]      | [n]   | First phrase     | Authority/brand   |
+| V1  | [variant 1 — keyword first]        | [n]   | First word       | Benefit-led       |
+| V2  | [variant 2 — keyword + power word] | [n]   | First phrase     | Curiosity/urgency |
+| V3  | [variant 3 — keyword + brand]      | [n]   | First phrase     | Authority/brand   |
 
-**Recommended:** V[n]; [one sentence reason why 
+**Recommended:** V[n] — [one sentence reason why 
 this variant is the preferred hypothesis for this page type
 and audience]
 
@@ -162,9 +162,9 @@ and audience]
 
 ## Meta Description Variants
 
-Write 3 variants; compare with a controlled test where feasible; search changes and query mix can confound results:
+Write 3 variants — compare with a controlled test where feasible; search changes and query mix can confound results:
 
-**V1; Benefit Lead**
+**V1 — Benefit Lead**
 [Description starting with the outcome or benefit. 
 Primary keyword in first half. 
 Ends with a CTA verb. 140–155 chars.]
@@ -175,7 +175,7 @@ CTA intent: [learn/buy/try/compare/download/sign-up]
 
 ---
 
-**V2; Question Hook**
+**V2 — Question Hook**
 [Description opening with a direct question the 
 searcher is asking. Answers it partially, 
 then drives the click for the full answer. 
@@ -187,7 +187,7 @@ CTA intent: [intent]
 
 ---
 
-**V3; Social Proof / Specificity**
+**V3 — Social Proof / Specificity**
 [Description leading with a number, stat, or 
 specific claim that signals authority. 
 Primary keyword present. Ends with CTA. 140–155 chars.]
@@ -196,7 +196,7 @@ Character count: [n]
 Power words used: [list]
 CTA intent: [intent]
 
-**Recommended:** V[n]; [one sentence reason]
+**Recommended:** V[n] — [one sentence reason]
 
 ---
 
@@ -206,10 +206,10 @@ Used when the page is shared on LinkedIn, Facebook,
 WhatsApp, and Slack:
 ```html
 <meta property="og:title" 
-  content="[OG title; can be more creative than title tag, 
+  content="[OG title — can be more creative than title tag, 
   40–60 chars]" />
 <meta property="og:description" 
-  content="[OG description; can be more conversational 
+  content="[OG description — can be more conversational 
   than meta description, 100–200 chars, no char limit 
   pressure]" />
 <meta property="og:type" 
@@ -217,7 +217,7 @@ WhatsApp, and Slack:
 <meta property="og:url" 
   content="[canonical URL placeholder]" />
 <meta property="og:image" 
-  content="[image URL placeholder; recommended 
+  content="[image URL placeholder — recommended 
   1200x630px]" />
 ```
 
@@ -230,13 +230,13 @@ Used when the page is shared on X (Twitter):
 <meta name="twitter:card" 
   content="summary_large_image" />
 <meta name="twitter:title" 
-  content="[Twitter title; punchy, 40–60 chars, 
+  content="[Twitter title — punchy, 40–60 chars, 
   can differ from title tag]" />
 <meta name="twitter:description" 
-  content="[Twitter description; conversational tone, 
+  content="[Twitter description — conversational tone, 
   100–200 chars]" />
 <meta name="twitter:image" 
-  content="[image URL placeholder; recommended 
+  content="[image URL placeholder — recommended 
   1200x628px]" />
 ```
 
@@ -253,7 +253,7 @@ Before accepting any variant, verify:
 - [ ] Does not start with the brand name 
       (unless homepage)
 - [ ] Does not use all caps
-- [ ] Reads naturally; not a keyword string
+- [ ] Reads naturally — not a keyword string
 
 ### Meta Description
 - [ ] Primary keyword appears in first half 
@@ -263,9 +263,9 @@ Before accepting any variant, verify:
 - [ ] Ends with a CTA verb or action phrase
 - [ ] Does not duplicate the title tag phrasing
 - [ ] Does not use "click here" or passive openers
-- [ ] Sentence is complete; does not truncate 
+- [ ] Sentence is complete — does not truncate 
       mid-word near the limit
-- [ ] Unique; does not match any other 
+- [ ] Unique — does not match any other 
       page's meta description
 
 ### Social Tags
@@ -284,12 +284,12 @@ Before accepting any variant, verify:
 
 | Variant             | Chars | Keyword in First Half | Power Words | CTA Verb | Recommended |
 |---------------------|-------|-----------------------|-------------|----------|-------------|
-| Title V1            | [n]   | ✅ / ❌               | [words]     | - | ✅ /;      |
-| Title V2            | [n]   | ✅ / ❌               | [words]     | - |; /;       |
-| Title V3            | [n]   | ✅ / ❌               | [words]     | - |; /;       |
-| Description V1      | [n]   | ✅ / ❌               | [words]     | [verb]   | ✅ /;      |
-| Description V2      | [n]   | ✅ / ❌               | [words]     | [verb]   |; /;       |
-| Description V3      | [n]   | ✅ / ❌               | [words]     | [verb]   |; /;       |
+| Title V1            | [n]   | ✅ / ❌               | [words]     | —        | ✅ / —      |
+| Title V2            | [n]   | ✅ / ❌               | [words]     | —        | — / —       |
+| Title V3            | [n]   | ✅ / ❌               | [words]     | —        | — / —       |
+| Description V1      | [n]   | ✅ / ❌               | [words]     | [verb]   | ✅ / —      |
+| Description V2      | [n]   | ✅ / ❌               | [words]     | [verb]   | — / —       |
+| Description V3      | [n]   | ✅ / ❌               | [words]     | [verb]   | — / —       |
 ````
 
 ---
@@ -301,29 +301,29 @@ Escape attribute values in generated HTML (including quotes and ampersands), use
 1. Read `page_type` and apply the corresponding 
    copy rules from the Page Type Copy Rules table
 2. Extract the single most compelling benefit or 
-   outcome from `content_summary` and `usp`; 
+   outcome from `content_summary` and `usp` — 
    this becomes the lead for Description V1
 3. Identify the core question the searcher is asking 
-   when they type `primary_keyword`; 
+   when they type `primary_keyword` — 
    this becomes the hook for Description V2
 4. Find the strongest specific claim, number, or 
-   social proof signal from `content_summary`; 
+   social proof signal from `content_summary` — 
    this becomes the lead for Description V3
-5. Write Title V1; keyword first, benefit second, 
+5. Write Title V1 — keyword first, benefit second, 
    brand third if `brand_name` provided
-6. Write Title V2; keyword + power word combination, 
+6. Write Title V2 — keyword + power word combination, 
    curiosity or urgency angle
-7. Write Title V3; keyword + authority signal or 
+7. Write Title V3 — keyword + authority signal or 
    brand, suited to navigational intent
 8. Write all three meta description variants using 
-   the CTR framework; check character count 
+   the CTR framework — check character count 
    after every draft
 9. Verify no variant ends mid-sentence near 
-   the character limit; trim if needed
-10. Write OG title and description; 
+   the character limit — trim if needed
+10. Write OG title and description — 
     these can be more conversational and creative 
     than the SERP versions
-11. Write Twitter title and description; 
+11. Write Twitter title and description — 
     punchy, platform-appropriate tone
 12. Build the SERP preview block using 
     the recommended title and description

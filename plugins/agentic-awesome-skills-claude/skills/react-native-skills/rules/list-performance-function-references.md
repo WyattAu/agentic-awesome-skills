@@ -100,7 +100,7 @@ function DomainSearch() {
 }
 
 function DomainItem({ tld }: { tld: Tld }) {
-  // Select only what you need-component only re-renders when keyword changes
+  // Select only what you need—component only re-renders when keyword changes
   const keyword = useSearchStore((s) => s.keyword)
   const domain = `${keyword}.${tld.name}`
   return <Text>{domain}</Text>

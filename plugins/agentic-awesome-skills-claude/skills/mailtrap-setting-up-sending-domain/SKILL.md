@@ -12,7 +12,7 @@ date_added: "2026-06-19"
 
 You must add and verify a domain you control before live sending. Mailtrap shows **every DNS record** required for that domain in the **UI**: **add the complete set** as given (do not cherry-pick). After DNS verifies, complete the **compliance** step if requested.
 
-**Subdomain vs root:** add the **exact** hostname you will use in the From address. If you send from `notifications.mycompany.com`, add that **subdomain** as the sending domain-not only `mycompany.com`, unless you truly send from the root domain.
+**Subdomain vs root:** add the **exact** hostname you will use in the From address. If you send from `notifications.mycompany.com`, add that **subdomain** as the sending domain—not only `mycompany.com`, unless you truly send from the root domain.
 
 For step-by-step clicks at common hosts, open the matching guide on [Sending domain setup](https://docs.mailtrap.io/email-api-smtp/setup/sending-domain.md) (Cloudflare, Route 53, etc.) and follow it alongside the live **UI** values.
 
@@ -35,12 +35,12 @@ The Sending Domains API calls below need `Authorization: Bearer $MAILTRAP_API_TO
 
 Prefer this path when building scripts or AI-assisted automation:
 
-1. **DNS records and status via API**; Use the Sending Domains API:
-  - `GET https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/sending_domains`; lists domains
-  - `GET https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/sending_domains/{sending_domain_id}`; returns `dns_records` (each with `type`, `name`, `value`, and verification `status`) and `dns_verified`. Poll after you publish DNS.
-2. **Create domain via API** -
+1. **DNS records and status via API** — Use the Sending Domains API:
+  - `GET https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/sending_domains` — lists domains
+  - `GET https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/sending_domains/{sending_domain_id}` — returns `dns_records` (each with `type`, `name`, `value`, and verification `status`) and `dns_verified`. Poll after you publish DNS.
+2. **Create domain via API** —
   - `POST https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/sending_domains` with `domain_name` when your flow provisions domains programmatically.
-3. **Publish DNS programmatically** -
+3. **Publish DNS programmatically** —
   - Create the returned records at your DNS host using their API (e.g., [Cloudflare API](https://developers.cloudflare.com/api/), AWS Route 53, Google Cloud DNS) or IaC. Align record names and values exactly with the API response.
 
 **Human fallback:** **Sending Domains** > **Add domain** > copy values into the registrar **UI** > **Verify** when API automation is not available.
@@ -72,7 +72,7 @@ Before editing DNS, inspect existing records and zone ownership. Do not create a
 
 ## Important DNS caveat (proxied DNS)
 
-If your DNS provider **proxies** records (orange-cloud on Cloudflare, similar CDN/proxy modes elsewhere), verification-related records must be **DNS-only** (grey cloud / non-proxied) unless Mailtrap documentation explicitly allows proxying-proxied CNAMEs and similar often break SPF/DKIM verification. The same constraint applies to any host that fronts DNS with a proxy.
+If your DNS provider **proxies** records (orange-cloud on Cloudflare, similar CDN/proxy modes elsewhere), verification-related records must be **DNS-only** (grey cloud / non-proxied) unless Mailtrap documentation explicitly allows proxying—proxied CNAMEs and similar often break SPF/DKIM verification. The same constraint applies to any host that fronts DNS with a proxy.
 
 ## Example
 

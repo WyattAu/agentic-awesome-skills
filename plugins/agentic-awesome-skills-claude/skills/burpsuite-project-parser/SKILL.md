@@ -292,11 +292,11 @@ Common shortcuts that lead to missed vulnerabilities or false reports:
 
 | Shortcut | Why It's Wrong |
 |----------|----------------|
-| "This regex looks good" | Verify on sample data first-encoding and escaping cause silent failures |
+| "This regex looks good" | Verify on sample data first—encoding and escaping cause silent failures |
 | "High severity = must fix" | Check confidence score too; Burp has false positives |
 | "All audit items are relevant" | Filter by actual threat model; not every finding matters for every app |
 | "Proxy history is complete" | May be filtered by Burp scope/intercept settings; you see only what Burp captured |
-| "Burp found it, so it's a vuln" | Burp findings require manual verification-they indicate potential issues, not proof |
+| "Burp found it, so it's a vuln" | Burp findings require manual verification—they indicate potential issues, not proof |
 
 ## Output Format
 

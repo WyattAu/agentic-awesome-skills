@@ -37,7 +37,7 @@ Not all engaged users want the same relationship:
 | **Champion** | Creates content, answers questions | Platform and recognition | Formal program |
 | **Contributor** | Contributes code, docs, extensions | Impact and ownership | Contributor program |
 
-**Key insight**: Don't try to push everyone up the spectrum. Meet developers where they are. Some just want a great product; that's fine.
+**Key insight**: Don't try to push everyone up the spectrum. Meet developers where they are. Some just want a great product — that's fine.
 
 ---
 
@@ -178,7 +178,7 @@ Normalize each rule, define missing data, deduplicate signals and calibrate agai
 ## Expectations
 - Be active in community at least 1x/week
 - Give honest feedback (including criticism)
-- No content quotas; create when you want to
+- No content quotas — create when you want to
 - Maintain constructive, helpful tone
 
 ## How to Join
@@ -586,8 +586,8 @@ This is not measured incremental profit: LTV must use contribution margin, avoid
 
 ## Related Skills
 
-- `developer-audience-context`; Understand what motivates your developers
-- `developer-churn`; Keep power users from leaving
-- `developer-listening`; Find advocate candidates through monitoring
-- `developer-email-sequences`; Nurture sequences for power users
-- `hackathon-sponsorship`; Events where advocates can shine
+- `developer-audience-context` — Understand what motivates your developers
+- `developer-churn` — Keep power users from leaving
+- `developer-listening` — Find advocate candidates through monitoring
+- `developer-email-sequences` — Nurture sequences for power users
+- `hackathon-sponsorship` — Events where advocates can shine

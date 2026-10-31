@@ -31,20 +31,20 @@ powershell -File "scripts/open.ps1" -Path "C:\huge.sys" -NoAutoAnalysis
 
 | 工具 | 用途 | 示例 |
 |------|------|------|
-| `idapro_idb_list()` / HTTP `idb_list` | 列出所有 session | - |
+| `idapro_idb_list()` / HTTP `idb_list` | 列出所有 session | — |
 | `idapro_idb_open()` / HTTP `idb_open` | 打开数据库（优先用 `open.ps1`） | 大文件走脚本 |
 | `idapro_idb_save(path)` / HTTP `idb_save` | 保存数据库 | 保存分析进度 |
-| `idapro_idb_current()` | 当前绑定的 session（若版本提供） | - |
+| `idapro_idb_current()` | 当前绑定的 session（若版本提供） | — |
 | `idapro_idb_switch(session_id)` | 切换 session | 多文件对比时 |
 | `idapro_idb_close(session_id)` | 关闭 session | 释放资源 |
-| `idapro_server_health()` | 服务器健康检查 | - |
+| `idapro_server_health()` | 服务器健康检查 | — |
 | `idapro_server_warmup()` | 预热子系统 | 首次使用前 |
 
 ---
 
 ## 第一步：全局概览
 
-### survey_binary: 快速概况
+### survey_binary — 快速概况
 
 ```
 idapro_survey_binary(detail_level="minimal")
@@ -60,9 +60,9 @@ idapro_survey_binary(detail_level="minimal")
 - 高 xref 热门函数
 
 **detail_level 选项**：
-- `"minimal"`; 快速概况（推荐首选）
-- `"standard"`; 包含更多细节
-- `"full"`; 完整信息
+- `"minimal"` — 快速概况（推荐首选）
+- `"standard"` — 包含更多细节
+- `"full"` — 完整信息
 
 ### 函数列表
 

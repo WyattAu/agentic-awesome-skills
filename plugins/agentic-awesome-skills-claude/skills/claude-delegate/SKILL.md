@@ -25,8 +25,8 @@ metadata:
 - You want to delegate a bounded coding task to a separate `claude` implementer (`Claude Code`) and then review its diff yourself.
 - The user explicitly asked for delegation to this implementer.
 
-You are the **orchestrator**. Delegate one bounded coding task to a separate **implementer**; a Claude
-Code CLI session; then review what it produced and land it yourself. You write the brief and own the
+You are the **orchestrator**. Delegate one bounded coding task to a separate **implementer** — a Claude
+Code CLI session — then review what it produced and land it yourself. You write the brief and own the
 judgment; the separate Claude session edits the working tree; you verify and commit.
 
 This skill is not a signal for the current Claude to implement directly. Use it only after the human
@@ -161,23 +161,24 @@ acceptance.
 
 Claude subagents, agent teams, and background sessions are useful when the current Claude environment
 is already the orchestrator and native coordination is the goal. This skill is complementary: it
-provides a cross-orchestrator contract; self-contained brief → dispatch → artifacts → review → land: and keeps the commit with the orchestrator.
+provides a cross-orchestrator contract — self-contained brief → dispatch → artifacts → review → land
+— and keeps the commit with the orchestrator.
 
 ## References
 
-- [references/writing-the-brief.md](references/writing-the-brief.md); context, `CLAUDE.md` versus
+- [references/writing-the-brief.md](references/writing-the-brief.md) — context, `CLAUDE.md` versus
   `AGENTS.md`, real gates, report contract, and delta briefs.
-- [references/dispatch-and-poll.md](references/dispatch-and-poll.md); flags, profiles, artifacts,
+- [references/dispatch-and-poll.md](references/dispatch-and-poll.md) — flags, profiles, artifacts,
   `result.json`, polling, and failure recovery.
-- [references/review-and-land.md](references/review-and-land.md); generated-code review, the commit
+- [references/review-and-land.md](references/review-and-land.md) — generated-code review, the commit
   boundary, and session rework.
-- [references/multi-task-queues.md](references/multi-task-queues.md); sequential queues, progress
+- [references/multi-task-queues.md](references/multi-task-queues.md) — sequential queues, progress
   tracking, constraint carry-forward, and final coherence.
 
 
 ## Limitations
 
-- Docs-only import; executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `claude` CLI, Node 18+, git.
-- Relay never commits; it only returns structured result JSON; you review and land the commit.
+- Docs-only import — executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `claude` CLI, Node 18+, git.
+- Relay never commits — it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); docs-only, runtime not bundled.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — docs-only, runtime not bundled.

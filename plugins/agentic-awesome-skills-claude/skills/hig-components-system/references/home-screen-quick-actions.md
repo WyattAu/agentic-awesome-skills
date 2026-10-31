@@ -41,7 +41,7 @@ If you design your own interface icon, use the Quick Action Icon Template thatâ€
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/home-screen-quick-actions#Developer-documentation)
 
-[Add Home Screen quick actions](https://developer.apple.com/documentation/UIKit/add-home-screen-quick-actions); UIKit
+[Add Home Screen quick actions](https://developer.apple.com/documentation/UIKit/add-home-screen-quick-actions) â€” UIKit
 
 
 ## Handler checks

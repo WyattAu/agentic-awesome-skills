@@ -6,7 +6,7 @@
 
 ## Overview
 
-Run any workload on fully managed Hugging Face infrastructure. No local setup required-jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub.
+Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub.
 
 **Common use cases:**
 - **Data Processing** - Transform, filter, or analyze large datasets
@@ -235,7 +235,7 @@ Consult `references/hardware_guide.md`, [current Jobs pricing](https://huggingfa
 
 ## Critical: Saving Results
 
-**⚠️ EPHEMERAL ENVIRONMENT-MUST PERSIST RESULTS**
+**⚠️ EPHEMERAL ENVIRONMENT—MUST PERSIST RESULTS**
 
 The Jobs environment is temporary. The scratch filesystem is ephemeral; configured durable storage and retained logs have their own lifecycle. If results aren't persisted, **unpersisted scratch artifacts may be unavailable**.
 
@@ -543,7 +543,7 @@ A Hub webhook is not automatically a Jobs trigger, and `create_webhook(job_id=..
 
 This repository ships ready-to-run UV scripts in `scripts/`. Prefer using them instead of inventing new templates.
 
-### Pattern 1: Dataset → Model Responses (vLLM): `scripts/generate-responses.py`
+### Pattern 1: Dataset → Model Responses (vLLM) — `scripts/generate-responses.py`
 
 **What it does:** loads a Hub dataset (chat `messages` or a `prompt` column), applies a model chat template, generates responses with vLLM, and **pushes** the output dataset + dataset card back to the Hub.
 
@@ -571,7 +571,7 @@ hf_jobs("uv", {
 })
 ```
 
-### Pattern 2: CoT Self-Instruct Synthetic Data: `scripts/cot-self-instruct.py`
+### Pattern 2: CoT Self-Instruct Synthetic Data — `scripts/cot-self-instruct.py`
 
 **What it does:** generates synthetic prompts/answers via CoT Self-Instruct, optionally applies answer-consistency (agreement only; RIP is not implemented), then **pushes** the generated dataset + dataset card to the Hub.
 
@@ -597,7 +597,7 @@ hf_jobs("uv", {
 })
 ```
 
-### Pattern 3: Streaming Dataset Stats (Polars + HF Hub): `scripts/finepdfs-stats.py`
+### Pattern 3: Streaming Dataset Stats (Polars + HF Hub) — `scripts/finepdfs-stats.py`
 
 **What it does:** scans parquet directly from Hub (projected remote transfer, not zero download), computes temporal stats, and (optionally) uploads results to a Hub dataset repo.
 
@@ -662,7 +662,7 @@ Add to PEP 723 header:
 
 **Fix:**
 1. Check `hf_whoami()` works locally
-2. Verify token in secrets; MCP: `"$HF_TOKEN"`, Python API: `get_token()` (NOT `"$HF_TOKEN"`)
+2. Verify token in secrets — MCP: `"$HF_TOKEN"`, Python API: `get_token()` (NOT `"$HF_TOKEN"`)
 3. Re-login: `hf auth login`
 4. Check token has required permissions
 
@@ -713,7 +713,7 @@ Add to PEP 723 header:
 2. **Jobs are asynchronous** - Match monitoring to the requested outcome with bounded checks
 3. **Always set timeout** - Default 30 min may be insufficient; set appropriate timeout
 4. **Always persist results** - Environment is ephemeral; without persistence, all work is lost
-5. **Use tokens securely** - MCP: `secrets={"HF_TOKEN": "$HF_TOKEN"}`, Python API: `secrets={"HF_TOKEN": get_token()}`; `"$HF_TOKEN"` only works with MCP tool
+5. **Use tokens securely** - MCP: `secrets={"HF_TOKEN": "$HF_TOKEN"}`, Python API: `secrets={"HF_TOKEN": get_token()}` — `"$HF_TOKEN"` only works with MCP tool
 6. **Choose appropriate hardware** - Start small, scale up based on needs (see hardware guide)
 7. **Use UV scripts** - Default to `hf_jobs("uv", {...})` with inline scripts for Python workloads
 8. **Handle authentication** - Verify tokens are available before Hub operations

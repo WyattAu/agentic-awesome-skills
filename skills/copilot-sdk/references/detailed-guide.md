@@ -286,10 +286,10 @@ const session = await client.createSession({
 
 ### Methods (Priority Order)
 
-1. **Explicit token**; `githubToken` in constructor
-2. **Environment variables**; `COPILOT_GITHUB_TOKEN` → `GH_TOKEN` → `GITHUB_TOKEN`
-3. **Stored OAuth**; From `copilot auth login`
-4. **GitHub CLI**; `gh auth` credentials
+1. **Explicit token** — `githubToken` in constructor
+2. **Environment variables** — `COPILOT_GITHUB_TOKEN` → `GH_TOKEN` → `GITHUB_TOKEN`
+3. **Stored OAuth** — From `copilot auth login`
+4. **GitHub CLI** — `gh auth` credentials
 
 ### Programmatic Token
 
@@ -299,7 +299,7 @@ const client = new CopilotClient({ githubToken: process.env.GITHUB_TOKEN });
 
 ### BYOK (Bring Your Own Key)
 
-Use your own API keys; no Copilot subscription required.
+Use your own API keys — no Copilot subscription required.
 
 ```typescript
 const session = await client.createSession({

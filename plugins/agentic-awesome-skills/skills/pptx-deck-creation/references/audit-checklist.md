@@ -26,7 +26,7 @@ Rough capacity (Latin):
   _(bbox in inches, font_size in pt)_
 
 Adjustments:
-- **CJK / full-width text:** halve the characters-per-line value (full-width glyphs ≈ 2× Latin advance). The extractor reports `non_ascii_text`; use it to flag CJK-heavy slides.
+- **CJK / full-width text:** halve the characters-per-line value (full-width glyphs ≈ 2× Latin advance). The extractor reports `non_ascii_text` — use it to flag CJK-heavy slides.
 - **Text on a shape/card:** subtract ≈0.1 in of inner padding from each side of the shape before computing capacity; the text occupies the inset inner area, not the full shape.
 
 - **Pass:** estimated text volume ≤ available capacity.
@@ -48,7 +48,7 @@ Scan every object with `classification: "content"`. Check `style.font_size`.
 Inspect `summary.design_context` in the spec root.
 
 - **Pass:** field present and contains `profile_id`, source URL, and license ID.
-- **Fail; any of the following:**
+- **Fail — any of the following:**
   - `summary.design_context` absent -> load a design profile from [design-profiles.md](design-profiles.md) and rebuild.
   - Plain white backgrounds throughout with no accent elements.
   - Calibri-only text with default theme colors across all slides.
@@ -58,14 +58,14 @@ Inspect `summary.design_context` in the spec root.
 
 For each normal content slide (exclude section headers and hidden appendix slides):
 
-- **Pass:** at least one style-derived visual element present; accent band, card shell, grid cell, rule/divider, shape motif, image treatment, or background pattern.
+- **Pass:** at least one style-derived visual element present — accent band, card shell, grid cell, rule/divider, shape motif, image treatment, or background pattern.
 - **Fail:** slide is plain white with only text objects → add a design element derived from the selected profile's `source_signals`.
 
 ## 6. Narrative and Count
 
 - Slide count matches the user's requested count; deviations require an explicitly accepted range.
 - Topic sequence matches the requested business framework (McKinsey, SCQA, pyramid, etc.) or the user's stated structure.
-- For action-title frameworks (e.g., `action-title`, McKinsey): every content slide has an **action title** (not a descriptive label). Run the ghost-deck test: read only slide titles; they must tell the full story on their own.
+- For action-title frameworks (e.g., `action-title`, McKinsey): every content slide has an **action title** (not a descriptive label). Run the ghost-deck test: read only slide titles — they must tell the full story on their own.
 
 ## 7. Hidden Slides
 

@@ -1,4 +1,4 @@
-# Juntas Comerciais do Brasil: URLs e Status de Scraping
+# Juntas Comerciais do Brasil — URLs e Status de Scraping
 
 Tabela histórica de rotas upstream; disponibilidade e cobertura atuais não foram verificadas nesta revisão.
 **Data declarada pelo upstream:** 2026-02-25 (não é evidência de teste atual).

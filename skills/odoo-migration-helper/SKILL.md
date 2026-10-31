@@ -40,11 +40,11 @@ Do not apply a blanket field rename or assume a report-method signature. Compare
 ### Example 1: Migrate `attrs` visibility to Odoo 17
 
 ```xml
-<!-- v16; domain-based attrs -->
+<!-- v16 — domain-based attrs -->
 <field name="discount" attrs="{'invisible': [('product_type', '!=', 'service')]}"/>
 <field name="discount" attrs="{'required': [('state', '=', 'sale')]}"/>
 
-<!-- v17; inline Python expressions -->
+<!-- v17 — inline Python expressions -->
 <field name="discount" invisible="product_type != 'service'"/>
 <field name="discount" required="state == 'sale'"/>
 ```
@@ -61,7 +61,7 @@ Do not apply a blanket field rename or assume a report-method signature. Compare
 
 ## Limitations
 
-- Covers **v14 through v17** only; does not address v13 or older.
+- Covers **v14 through v17** only — does not address v13 or older.
 - The **Odoo.sh automated upgrade** path has additional steps not covered here; refer to Odoo.sh documentation.
 - **Enterprise-specific modules** (e.g., `account_accountant`, `sign`) may have undocumented breaking changes; test on a staging environment with Enterprise license.
 - JavaScript OWL component migration (v15 Legacy → v16 OWL) is a complex topic not fully covered by this skill.

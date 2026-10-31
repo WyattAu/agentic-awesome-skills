@@ -20,8 +20,8 @@ Use this skill when you need design user flows and navigation structure followin
 
 - For implementing a single page → use `/ss-page` after the flow is settled
 - For copy on each step → use `/ss-copy` after the structure is settled
-- For information architecture of an entire product; narrow scope to one flow first
-- For high-fidelity mockups; this produces a flow map, not pixel-perfect designs
+- For information architecture of an entire product — narrow scope to one flow first
+- For high-fidelity mockups — this produces a flow map, not pixel-perfect designs
 
 Design a user flow: **$0**
 Description: $ARGUMENTS

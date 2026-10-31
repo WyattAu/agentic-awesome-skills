@@ -7,7 +7,7 @@ This file is static guidance for inspecting existing `.pptx` files and defining 
 - Keep only static guidance for reference-deck prompt context, extraction, folder analysis, and style-master inspection.
 - Do not place runtime scripts, model assets, importable Python modules, or generated artifacts here.
 - This skill ships no importable code; implement the extraction/style-analysis and read-only OOXML inspection contracts on demand with `python-pptx`, `zipfile`, and a secure XML parser.
-- `reference-deck-analysis-patterns.md` holds documentation-only `python-pptx` guidance; approach notes plus short illustrative snippets. Do not import from it or recreate packaged `.py` resources from it.
+- `reference-deck-analysis-patterns.md` holds documentation-only `python-pptx` guidance — approach notes plus short illustrative snippets. Do not import from it or recreate packaged `.py` resources from it.
 - `ooxml-parsing.md` holds documentation-only package-part, relationship, namespace, and security guidance. It is not a runtime dependency or script template.
 
 ## Analysis Recipes

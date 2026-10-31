@@ -1,6 +1,6 @@
 ---
 name: earllm-build
-description: "Build, maintain, and extend the EarLLM One Android project; a Kotlin/Compose app that connects Bluetooth earbuds to an LLM via voice pipeline."
+description: "Build, maintain, and extend the EarLLM One Android project — a Kotlin/Compose app that connects Bluetooth earbuds to an LLM via voice pipeline."
 risk: safe
 source: community
 date_added: '2026-03-06'
@@ -19,11 +19,11 @@ tools:
 - codex-cli
 ---
 
-# EarLLM One: Build & Maintain
+# EarLLM One — Build & Maintain
 
 ## Overview
 
-Build, maintain, and extend the EarLLM One Android project; a Kotlin/Compose app that connects Bluetooth earbuds to an LLM via voice pipeline.
+Build, maintain, and extend the EarLLM One Android project — a Kotlin/Compose app that connects Bluetooth earbuds to an LLM via voice pipeline.
 
 ## When to Use This Skill
 
@@ -119,7 +119,7 @@ Headset button tap
 
 1. Identify which module(s) are affected
 2. Read existing code in those modules first
-3. Follow the StateFlow pattern; expose state via `MutableStateFlow` / `StateFlow`
+3. Follow the StateFlow pattern — expose state via `MutableStateFlow` / `StateFlow`
 4. Update `MainViewModel.kt` if the feature needs UI integration
 5. Add unit tests in the module's `src/test/` directory
 6. Update docs if the feature changes behavior
@@ -139,7 +139,7 @@ Headset button tap
 
 ## Modifying The Llm Integration
 
-- `LlmClient.kt` defines the interface; keep it generic
+- `LlmClient.kt` defines the interface — keep it generic
 - `StubLlmClient.kt` for offline testing (500ms simulated delay)
 - `RealLlmClient.kt` uses OkHttp to call OpenAI-compatible APIs
 - API keys stored in `SecureTokenStore.kt` (EncryptedSharedPreferences)

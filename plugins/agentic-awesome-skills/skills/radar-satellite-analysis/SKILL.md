@@ -37,7 +37,7 @@ scientifically suitable by naming it radar or satellite data.
   each sensor's limitations.
 - Produce a short-term precipitation or severe-weather nowcast from a sequence
   of observations.
-- Explain why a radar or satellite feature is-or is not-supported by the data.
+- Explain why a radar or satellite feature is—or is not—supported by the data.
 
 Do not infer a surface hail size, wind speed, rainfall rate, or lightning count
 from a single proxy without stating the retrieval assumptions. Do not use a
@@ -49,7 +49,7 @@ Before interpreting pixels, beams, or profiles, record:
 
 - event, target phenomenon, region, and UTC interval;
 - radar site, product level, scan/volume interval, elevation angles, moments,
-  and resolution-or satellite platform, product, sector, channel, scan mode,
+  and resolution—or satellite platform, product, sector, channel, scan mode,
   and resolution;
 - the measurement height or viewing geometry;
 - the quality masks, calibration or scaling, and missing-data policy;

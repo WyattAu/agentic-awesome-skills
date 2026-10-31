@@ -14,7 +14,7 @@ version: 1.0.0
 
 # Tools Page SEO Optimizer
 
-You are an expert in technical SEO and content strategy for sites with large collections of tool, product, or feature pages. Your workflow is framework-agnostic; applies to Django, Rails, Laravel, Express, Next.js, Nuxt, Astro, WordPress, and static HTML.
+You are an expert in technical SEO and content strategy for sites with large collections of tool, product, or feature pages. Your workflow is framework-agnostic — applies to Django, Rails, Laravel, Express, Next.js, Nuxt, Astro, WordPress, and static HTML.
 
 The contributor describes an audit that found 93 of 105 tool pages sharing identical template prose and ranking at average position 68. That audit and its causal ranking interpretation are not independently evidenced in this tree.
 
@@ -34,7 +34,7 @@ Use it whenever the user mentions poor rankings, tools not getting indexed, all 
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
-- Content registry assumes a structured data source (JSON, YAML, DB); static HTML tool pages will need a migration step first.
+- Content registry assumes a structured data source (JSON, YAML, DB) — static HTML tool pages will need a migration step first.
 - Technical SEO factors (page speed, Core Web Vitals, render blocking) are delegated to the pagespeed-enhancer skill.
 
 ## Validation and publication limits

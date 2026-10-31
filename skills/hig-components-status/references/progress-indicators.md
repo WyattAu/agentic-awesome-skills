@@ -25,7 +25,7 @@ Both determinate and indeterminate progress indicators can have different appear
 
 ![An image of a circular progress indicator in macOS filled almost to the eight o'clock position with solid color.](https://docs-assets.developer.apple.com/published/8288f9d55f529f513e7c3bd33bc3e17a/progress-indicator-determinate-circle%402x.png)Circular progress indicator
 
-An indeterminate progress indicator; also called an _activity indicator_; uses an animated image to indicate progress. All platforms support a circular image that appears to spin; however, macOS also supports an indeterminate progress bar.
+An indeterminate progress indicator — also called an _activity indicator_ — uses an animated image to indicate progress. All platforms support a circular image that appears to spin; however, macOS also supports an indeterminate progress bar.
 
 ![An image of a spinning, circular activity indicator in macOS.](https://docs-assets.developer.apple.com/published/6c1e23fcc6e04603423dacd5df6c48a3/progress-indicator-intermediate-spinner%402x.png)macOS
 
@@ -49,7 +49,7 @@ For developer guidance, see [`ProgressView`](https://developer.apple.com/documen
 
 **Display a progress indicator in a consistent location.** Choosing a consistent location for a progress indicator helps people reliably find the status of an operation across platforms or within or between apps.
 
-**When it’s feasible, let people halt processing.** If people can interrupt a process without causing negative side effects, include a Cancel button. If interrupting the process might cause negative side effects; such as losing the downloaded portion of a file; it can be useful to provide a Pause button in addition to a Cancel button.
+**When it’s feasible, let people halt processing.** If people can interrupt a process without causing negative side effects, include a Cancel button. If interrupting the process might cause negative side effects — such as losing the downloaded portion of a file — it can be useful to provide a Pause button in addition to a Cancel button.
 
 **Let people know when halting a process has a negative consequence.** When canceling a process results in lost progress, it’s helpful to provide an [alert](https://developer.apple.com/design/human-interface-guidelines/alerts) that includes an option to confirm the cancellation or resume the process.
 
@@ -97,15 +97,15 @@ By default the system displays the progress indicators in white over the scene�
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/progress-indicators#Developer-documentation)
 
-[`ProgressView`](https://developer.apple.com/documentation/SwiftUI/ProgressView); SwiftUI
+[`ProgressView`](https://developer.apple.com/documentation/SwiftUI/ProgressView) — SwiftUI
 
-[`UIProgressView`](https://developer.apple.com/documentation/UIKit/UIProgressView); UIKit
+[`UIProgressView`](https://developer.apple.com/documentation/UIKit/UIProgressView) — UIKit
 
-[`UIActivityIndicatorView`](https://developer.apple.com/documentation/UIKit/UIActivityIndicatorView); UIKit
+[`UIActivityIndicatorView`](https://developer.apple.com/documentation/UIKit/UIActivityIndicatorView) — UIKit
 
-[`UIRefreshControl`](https://developer.apple.com/documentation/UIKit/UIRefreshControl); UIKit
+[`UIRefreshControl`](https://developer.apple.com/documentation/UIKit/UIRefreshControl) — UIKit
 
-[`NSProgressIndicator`](https://developer.apple.com/documentation/AppKit/NSProgressIndicator); AppKit
+[`NSProgressIndicator`](https://developer.apple.com/documentation/AppKit/NSProgressIndicator) — AppKit
 
 ## [Change log](https://developer.apple.com/design/human-interface-guidelines/progress-indicators#Change-log)
 

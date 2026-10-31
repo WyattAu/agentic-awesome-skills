@@ -43,7 +43,7 @@ Generally speaking, collections are ideal for showing image-based content.
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/collections#Developer-documentation)
 
-[`UICollectionView`](https://developer.apple.com/documentation/UIKit/UICollectionView); UIKit
+[`UICollectionView`](https://developer.apple.com/documentation/UIKit/UICollectionView) — UIKit
 
-[`NSCollectionView`](https://developer.apple.com/documentation/AppKit/NSCollectionView); AppKit
+[`NSCollectionView`](https://developer.apple.com/documentation/AppKit/NSCollectionView) — AppKit
 

@@ -1,6 +1,6 @@
 ---
 name: product-design
-description: "Design de produto nivel Apple; sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espacamento, motion design e principios de design cognitivo."
+description: "Design de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espacamento, motion design e principios de design cognitivo."
 risk: none
 source: community
 date_added: '2026-03-06'
@@ -19,11 +19,11 @@ tools:
 - codex-cli
 ---
 
-# PRODUCT DESIGN: Nivel Apple
+# PRODUCT DESIGN — Nivel Apple
 
 ## Overview
 
-Design de produto nivel Apple; sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espacamento, motion design e principios de design cognitivo. Ativar para: criar design system, definir visual language, revisar UX, acessibilidade, tokens de design, branding de produto, UI critique.
+Design de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espacamento, motion design e principios de design cognitivo. Ativar para: criar design system, definir visual language, revisar UX, acessibilidade, tokens de design, branding de produto, UI critique.
 
 ## When to Use This Skill
 
@@ -38,7 +38,7 @@ Design de produto nivel Apple; sistemas visuais, UX flows, acessibilidade, lingu
 ## How It Works
 
 > "Design is not just what it looks like and feels like. Design is how it works."
->; Steve Jobs
+> — Steve Jobs
 
 ---
 
@@ -46,23 +46,23 @@ Design de produto nivel Apple; sistemas visuais, UX flows, acessibilidade, lingu
 
 Esta lista e uma sintese editorial, nao uma lista oficial atribuida a Jony Ive ou Apple. Tokens Auri abaixo sao exemplos de marca; adaptar a identidade existente, testar contraste real e respeitar reduced motion, teclado e leitores de tela.
 
-1. **Simplicidade radical**; remova tudo que nao e essencial
-2. **Honestidade material**; cada elemento existe por uma razao
-3. **Menos e mais**; restraint e uma decisao de design
-4. **Coerencia sistemica**; tudo faz parte de um sistema unico
-5. **Detalhes importam**; o usuario sente, mesmo sem notar
-6. **Funcao define forma**; a estetica serve ao proposito
-7. **Durabilidade**; design que envelhece bem
-8. **Acessibilidade como padrao**; nao como adicional
-9. **Continuidade entre telas**; experiencia unificada
-10. **Surpresa deleitosa**; o inesperado que encanta
+1. **Simplicidade radical** — remova tudo que nao e essencial
+2. **Honestidade material** — cada elemento existe por uma razao
+3. **Menos e mais** — restraint e uma decisao de design
+4. **Coerencia sistemica** — tudo faz parte de um sistema unico
+5. **Detalhes importam** — o usuario sente, mesmo sem notar
+6. **Funcao define forma** — a estetica serve ao proposito
+7. **Durabilidade** — design que envelhece bem
+8. **Acessibilidade como padrao** — nao como adicional
+9. **Continuidade entre telas** — experiencia unificada
+10. **Surpresa deleitosa** — o inesperado que encanta
 
 ## Design Cognitivo
 
-- **Carga cognitiva zero**; o usuario nunca deve pensar
-- **Affordances claras**; o que e clicavel parece clicavel
-- **Feedback imediato**; toda acao tem resposta visual
-- **Erros previnem-se**; design que impossibilita erros
+- **Carga cognitiva zero** — o usuario nunca deve pensar
+- **Affordances claras** — o que e clicavel parece clicavel
+- **Feedback imediato** — toda acao tem resposta visual
+- **Erros previnem-se** — design que impossibilita erros
 
 ---
 
@@ -92,7 +92,7 @@ design-system/
     └── accessibility.md  # WCAG 2.1 AA
 ```
 
-## Design Tokens: Exemplo Auri
+## Design Tokens — Exemplo Auri
 
 ```json
 {
@@ -163,22 +163,22 @@ design-system/
 ## Onboarding De Elite (Primeiros 5 Minutos)
 
 ```
-Tela 1: Promessa; "O que voce vai conseguir"
+Tela 1: Promessa — "O que voce vai conseguir"
   - Uma frase impactante
   - Uma imagem que mostra o resultado
   - CTA: "Comecar" (nao "Criar conta")
 
-Tela 2: Acao imediata; primeiro valor antes de cadastro
+Tela 2: Acao imediata — primeiro valor antes de cadastro
   - Deixe o usuario experimentar algo real
   - Formulario minimo (email apenas)
   - Progresso visivel (1 de 3)
 
-Tela 3: Personalizacao; "Me conte sobre voce"
+Tela 3: Personalizacao — "Me conte sobre voce"
   - Max 3 perguntas
   - Visual, nao texto
   - Pula disponivel sempre
 
-Tela 4: Momento Aha; primeiro sucesso real
+Tela 4: Momento Aha — primeiro sucesso real
   - O usuario faz algo que funciona
   - Celebracao genuina (nao excessiva)
   - "Voce acabou de [acao de valor]"
@@ -199,11 +199,11 @@ Mostre:
 
 ## Principios Unicos Para Voice Ui
 
-1. **Zero carga visual**; o usuario nao ve nada (apenas ouve)
-2. **Reversibilidade facil**; "desfazer" e sempre possivel
-3. **Confirmacao opcional**; so para acoes irreversiveis
-4. **Variedade de resposta**; nunca a mesma frase duas vezes
-5. **Silencio e ok**; pausa de 2s antes de perguntar se precisa de ajuda
+1. **Zero carga visual** — o usuario nao ve nada (apenas ouve)
+2. **Reversibilidade facil** — "desfazer" e sempre possivel
+3. **Confirmacao opcional** — so para acoes irreversiveis
+4. **Variedade de resposta** — nunca a mesma frase duas vezes
+5. **Silencio e ok** — pausa de 2s antes de perguntar se precisa de ajuda
 
 ## Estrutura De Resposta De Voz
 
@@ -221,7 +221,7 @@ Bom:  "A resposta e: [resposta direta]"
 
 ```
 Primeiro uso:
-"Oi! Sou a Auri. Pode me perguntar qualquer coisa; de decisoes de negocio
+"Oi! Sou a Auri. Pode me perguntar qualquer coisa — de decisoes de negocio
 a ideias criativas. Como posso ajudar hoje?"
 
 Retorno (usuario ja conhecido):
@@ -272,24 +272,24 @@ Encerramento:
 
 ## Conceito Visual
 
-A Auri e **inteligencia com calor humano**. Nao e um robo; e uma presenca.
+A Auri e **inteligencia com calor humano**. Nao e um robo — e uma presenca.
 A identidade visual deve comunicar: sofisticacao acessivel.
 
 ## Paleta Principal
 
 ```
-Roxo Auri:     #6C63FF ; identidade, inteligencia, inovacao
-Rosa Auri:     #FF6B9D ; calor, empatia, humanidade
-Branco Puro:   #FFFFFF ; clareza, espaco, respiro
-Grafite Suave: #1A1A2E ; autoridade, profundidade, noite
+Roxo Auri:     #6C63FF  — identidade, inteligencia, inovacao
+Rosa Auri:     #FF6B9D  — calor, empatia, humanidade
+Branco Puro:   #FFFFFF  — clareza, espaco, respiro
+Grafite Suave: #1A1A2E  — autoridade, profundidade, noite
 ```
 
 ## Tipografia
 
 ```
-Display/Titulos: Inter (ou SF Pro para Apple); Bold 700
-Corpo de texto:  Inter Regular 400; linha 1.6
-Mono/Codigo:     JetBrains Mono; para elementos tecnicos
+Display/Titulos: Inter (ou SF Pro para Apple) — Bold 700
+Corpo de texto:  Inter Regular 400 — linha 1.6
+Mono/Codigo:     JetBrains Mono — para elementos tecnicos
 ```
 
 ## Logo Conceito
@@ -318,11 +318,11 @@ Tamanho minimo: 24px (icone), 120px (lockup completo)
 ## Processo De Design Sprint (5 Dias)
 
 ```
-Segunda: Entender; pesquisa, user interviews, definir o problema
-Terca:   Divergir; crazy 8s, sketches individuais, lightning demos
-Quarta:  Decidir; vote, storyboard, decisao final
-Quinta:  Prototipar; prototipo de alta fidelidade no Figma
-Sexta:   Testar; 5 usuarios, insights, iterar
+Segunda: Entender — pesquisa, user interviews, definir o problema
+Terca:   Divergir — crazy 8s, sketches individuais, lightning demos
+Quarta:  Decidir — vote, storyboard, decisao final
+Quinta:  Prototipar — prototipo de alta fidelidade no Figma
+Sexta:   Testar — 5 usuarios, insights, iterar
 ```
 
 ---

@@ -12,13 +12,13 @@ uv run scripts/hybrid_search.py --query "USER_QUERY" --collection "CollectionNam
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--query` | `-q` | Yes | - | Search query text |
-| `--collection` | `-c` | Yes | - | Collection name |
+| `--query` | `-q` | Yes | — | Search query text |
+| `--collection` | `-c` | Yes | — | Collection name |
 | `--alpha` | `-a` | No | `0.7` | Balance between vector (1.0) and keyword (0.0) |
 | `--limit` | `-l` | No | `10` | Maximum number of results |
 | `--properties` | `-p` | No | all | Comma-separated properties to search |
-| `--target-vector` | `-t` | No | - | Target vector name for named vector collections |
-| `--json` | - | No | `false` | Output in JSON format |
+| `--target-vector` | `-t` | No | — | Target vector name for named vector collections |
+| `--json` | — | No | `false` | Output in JSON format |
 
 ## Output
 

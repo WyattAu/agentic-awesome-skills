@@ -315,8 +315,8 @@ for conn in connections:
 
 1. **Use DefaultAzureCredential** for authentication
 2. **Start with F0 SKU** for development, upgrade to S1 for production
-3. **Store MSA App ID/Secret securely**; use Key Vault
-4. **Enable only needed channels**; reduces attack surface
+3. **Store MSA App ID/Secret securely** — use Key Vault
+4. **Enable only needed channels** — reduces attack surface
 5. **Rotate Direct Line keys** periodically
 6. **Use managed identity** when possible for bot connections
 7. **Configure proper CORS** for Web Chat channel

@@ -1,4 +1,4 @@
-# Woo Guard: Sources
+# Woo Guard — Sources
 
 Central bibliography. Operational guidance lives in the other references; read this file only when a source URL is needed.
 
@@ -12,6 +12,6 @@ Central bibliography. Operational guidance lives in the other references; read t
 - HPOS recipe book (compatibility patterns): https://developer.woocommerce.com/docs/features/high-performance-order-storage/recipe-book/
 - CRUD objects: https://developer.woocommerce.com/docs/category/data-management/crud-objects/
 - Store API: https://developer.woocommerce.com/docs/apis/store-api/
-- Cart and Checkout Blocks; extensibility: https://developer.woocommerce.com/docs/category/cart-and-checkout-blocks/
+- Cart and Checkout Blocks — extensibility: https://developer.woocommerce.com/docs/category/cart-and-checkout-blocks/
 - Action Scheduler: https://actionscheduler.org/
 - Payment gateway API: https://developer.woocommerce.com/docs/woocommerce-payment-gateway-api/

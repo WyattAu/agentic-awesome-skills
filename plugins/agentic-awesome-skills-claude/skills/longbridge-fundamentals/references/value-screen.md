@@ -40,12 +40,12 @@ Apply the following filters (user can adjust thresholds):
 
 **Illustrative composite score**: require positive meaningful denominators; rank valid PE/PB ascending and ROE/yield descending with best rank 1, average ties. Per metric score = 10 * (N - rank) / (N - 1), N > 1; average available comparable metrics with disclosed weights/coverage. A single candidate or missing required metric has no comparative score. Higher = stronger on this chosen screen, not a return prediction.
 
-**Cyclical-industry caveat**: for energy, steel, banks, shipping; low PE near a cycle peak may not signal undervaluation. Flag these and suggest using PB or dividend yield as primary metric.
+**Cyclical-industry caveat**: for energy, steel, banks, shipping — low PE near a cycle peak may not signal undervaluation. Flag these and suggest using PB or dividend yield as primary metric.
 
 ## Output template
 
 ```
-Value Screen; <INDEX> (<N> stocks screened)  Source: Longbridge Securities
+Value Screen — <INDEX> (<N> stocks screened)  Source: Longbridge Securities
 Date: <today>  Filters: PE<20, PB<2, ROE>10%
 
 Rank  Symbol      Name         PE    PB    ROE    Div.Yield  Score   Note
@@ -55,7 +55,7 @@ Rank  Symbol      Name         PE    PB    ROE    Div.Yield  Score   Note
 (top 10 candidates)
 
 [Interpretation]
-- Top pick: <symbol>; <brief rationale>
+- Top pick: <symbol> — <brief rationale>
 - Key risk: <e.g. sector concentration, cyclical exposure>
 
 ⚠️ 筛选结果仅供参考，不构成投资建议。/ 篩選結果僅供參考，不構成投資建議。/ Screening results are for reference only. Not investment advice.

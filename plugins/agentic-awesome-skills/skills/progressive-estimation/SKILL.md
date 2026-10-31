@@ -22,7 +22,7 @@ Estimate AI-assisted and hybrid human+agent development work using three-point e
 
 ## Overview
 
-Progressive Estimation adapts to your team's working mode; human-only, hybrid, or agent-first; choosing explicit assumptions for each. Estimates remain uncertain and require local calibration.
+Progressive Estimation adapts to your team's working mode — human-only, hybrid, or agent-first — choosing explicit assumptions for each. Estimates remain uncertain and require local calibration.
 
 ## When to Use This Skill
 
@@ -34,13 +34,13 @@ Progressive Estimation adapts to your team's working mode; human-only, hybrid, o
 
 ## How It Works
 
-1. **Mode Detection**; Determines if the team works human-only, hybrid, or agent-first
-2. **Task Classification**; Categorizes by size (XS–XL), complexity, and risk
-3. **Formula Application**; Applies locally measured multipliers when available, or clearly labeled scenarios
-4. **PERT Calculation**; Produces expected values using three-point estimation
-5. **Confidence Bands**; Generates percentiles only with a specified, calibrated forecast model
-6. **Output Formatting**; Formats for Linear, JIRA, ClickUp, GitHub Issues, Monday, or GitLab
-7. **Calibration**; Feeds back actuals to improve future estimates
+1. **Mode Detection** — Determines if the team works human-only, hybrid, or agent-first
+2. **Task Classification** — Categorizes by size (XS–XL), complexity, and risk
+3. **Formula Application** — Applies locally measured multipliers when available, or clearly labeled scenarios
+4. **PERT Calculation** — Produces expected values using three-point estimation
+5. **Confidence Bands** — Generates percentiles only with a specified, calibrated forecast model
+6. **Output Formatting** — Formats for Linear, JIRA, ClickUp, GitHub Issues, Monday, or GitLab
+7. **Calibration** — Feeds back actuals to improve future estimates
 
 ## Examples
 
@@ -72,7 +72,7 @@ Do not derive P50/P75/P90 directly from the mean or label a range a confidence i
   **Solution:** Use P75 or P90 for commitments, not P50
 
 - **Problem:** Missing context
-  **Solution:** The skill asks clarifying questions; provide team size and agent usage
+  **Solution:** The skill asks clarifying questions — provide team size and agent usage
 
 - **Problem:** Stale calibration
   **Solution:** Re-calibrate when team composition or tooling changes significantly

@@ -1,4 +1,4 @@
-# Decision Frameworks: Inventory Demand Planning
+# Decision Frameworks — Inventory Demand Planning
 
 This reference provides the detailed decision logic, optimization models, method selection
 trees, and segmentation methodologies for inventory demand planning at multi-location
@@ -20,7 +20,7 @@ holdout data. In practice, most organizations cannot afford per-SKU model optimi
 across hundreds of items. Instead, classify items into demand pattern archetypes and assign
 methods by archetype.
 
-#### Step 1: Classify the Demand Pattern
+#### Step 1 — Classify the Demand Pattern
 
 Compute the following statistics on sufficient recent history (more than one annual cycle when testing lag-52 seasonality) of de-promoted demand data
 (remove promotional lift periods before computing):
@@ -33,7 +33,7 @@ Compute the following statistics on sufficient recent history (more than one ann
 | **Seasonal Strength** | Autocorrelation at lag 52 (weekly) or lag 12 (monthly) | Measures repeating seasonal pattern |
 | **Zero-Demand Ratio** | Count of zero-demand periods / Total periods | Measures how often demand is absent |
 
-#### Step 2: Map to Demand Archetype
+#### Step 2 — Map to Demand Archetype
 
 | Archetype | CV | ADI | Trend R² | Seasonal AC | Zero Ratio | Example |
 |---|---|---|---|---|---|---|
@@ -45,7 +45,7 @@ Compute the following statistics on sufficient recent history (more than one ann
 | **Intermittent** | any | ≥ 1.5 | any | any | ≥ 30% | Spare parts, specialty ingredients |
 | **Lumpy** | ≥ 1.0 | ≥ 1.5 | any | any | ≥ 30% | Bulk wholesale items with sporadic orders |
 
-#### Step 3: Assign Forecasting Method
+#### Step 3 — Assign Forecasting Method
 
 | Archetype | Primary Method | Parameters | Fallback |
 |---|---|---|---|
@@ -79,9 +79,9 @@ cross-validation (rolling origin, forecasts at the actual protection/replenishme
 
 | Parameter | Range | Step Size | Constraint |
 |---|---|---|---|
-| α (level) | 0.05–0.50 | 0.05 | - |
+| α (level) | 0.05–0.50 | 0.05 | — |
 | β (trend) | 0.01–0.20 | 0.01 | β ≤ α |
-| γ (seasonal) | 0.05–0.40 | 0.05 | - |
+| γ (seasonal) | 0.05–0.40 | 0.05 | — |
 | φ (damping) | 0.80–0.98 | 0.02 | Only for damped methods |
 
 **Optimization metric:** Minimize WMAPE on the holdout origins. If two parameter sets
@@ -111,14 +111,14 @@ Where:
 
 | Service Level | Z-Score | Typical Application |
 |---|---|---|
-| 85.0% | 1.04 | CZ items; minimal investment |
+| 85.0% | 1.04 | CZ items — minimal investment |
 | 90.0% | 1.28 | C-items, non-critical B-items |
 | 92.0% | 1.41 | Mid-range safety net |
 | 95.0% | 1.65 | Standard target for A/B items |
-| 97.5% | 1.96 | AX items; high value, predictable |
-| 99.0% | 2.33 | Critical items; stockout cost vastly exceeds holding |
+| 97.5% | 1.96 | AX items — high value, predictable |
+| 99.0% | 2.33 | Critical items — stockout cost vastly exceeds holding |
 | 99.5% | 2.58 | Life-safety or contractual obligation items |
-| 99.9% | 3.09 | Rarely justified; extreme holding cost |
+| 99.9% | 3.09 | Rarely justified — extreme holding cost |
 
 ### 2.2 Safety Stock with Lead Time Variability
 
@@ -136,7 +136,7 @@ Where:
 **Practical note:** Many planners underestimate lead time variability because they
 measure "vendor ship date to DC receipt" without accounting for receiving delays,
 quality holds, or weekend/holiday dead time. Measure lead time from PO release to
-"available to sell"; this is the operationally relevant metric.
+"available to sell" — this is the operationally relevant metric.
 
 ### 2.3 Safety Stock with Review Period
 
@@ -146,9 +146,9 @@ For periodic review systems (review every R periods):
 SS = Z × σ_d × √(LT + R)
 ```
 
-The review period adds exposure time; between reviews, you cannot react to demand
+The review period adds exposure time — between reviews, you cannot react to demand
 changes. Weekly review (R=1) on a 2-week lead time item needs safety stock for √3 weeks.
-Monthly review (R=4) on the same item needs safety stock for √6 weeks; 41% more.
+Monthly review (R=4) on the same item needs safety stock for √6 weeks — 41% more.
 
 ### 2.4 Safety Stock for Intermittent Demand
 
@@ -162,7 +162,7 @@ Normal-distribution formulas fail when demand has many zero periods. Use empiric
 4. The safety stock is the (service level)th percentile of the simulated demand totals
    minus the mean simulated demand total.
 
-**Example:** For 95% service level, safety stock = P95 of bootstrap demand; mean of
+**Example:** For 95% service level, safety stock = P95 of bootstrap demand — mean of
 bootstrap demand. This captures the skewed, zero-inflated distribution that parametric
 formulas miss.
 
@@ -192,7 +192,7 @@ Promotional lift is always computed relative to the baseline forecast (the forec
 would have been generated without the promotion). Contaminating the baseline with
 promotional history is the #1 source of systematic forecast error in retail.
 
-#### Step 1: Establish Clean Baseline
+#### Step 1 — Establish Clean Baseline
 
 Strip promotional periods from the demand history before fitting the baseline model.
 Flag weeks as "promotional" if any of the following were active:
@@ -204,7 +204,7 @@ Flag weeks as "promotional" if any of the following were active:
 After stripping, interpolate the gaps using the forecast model fitted to non-promotional
 periods. This creates a "what would have sold at regular price" baseline.
 
-#### Step 2: Compute Historical Lifts
+#### Step 2 — Compute Historical Lifts
 
 For each historical promotional event on this SKU:
 
@@ -222,11 +222,11 @@ Organize lift ratios by promotional mechanism:
 | TPR (15–30% off) | 1.40–2.00 | Deeper discount creates sharper response |
 | TPR + display | 1.80–2.50 | Display location (endcap > wing > inline) |
 | TPR + circular feature | 2.00–3.00 | Circular reach and placement (front page > interior) |
-| TPR + display + circular | 2.50–4.00 | Full support; this is the "A-level" promo |
+| TPR + display + circular | 2.50–4.00 | Full support — this is the "A-level" promo |
 | BOGO | 2.50–5.00 | Perceived value drives high response but heavy forward-buy |
 | Doorbuster / loss leader | 3.00–6.00+ | Traffic driver; lift varies wildly by event |
 
-#### Step 3: Apply Lift to Current Forecast
+#### Step 3 — Apply Lift to Current Forecast
 
 ```
 Promo Forecast = Baseline Forecast × Lift Ratio
@@ -237,7 +237,7 @@ Use the combined-mechanism lift from historical data or the table above. The int
 effects are sub-additive (display alone = 1.5× and circular alone = 1.8× does not mean
 display + circular = 2.7×; it's typically 2.0–2.5×).
 
-#### Step 4: Model the Post-Promotion Dip
+#### Step 4 — Model the Post-Promotion Dip
 
 ```
 Post-Promo Demand_t = max(0, Baseline_t − IncrementalPromoUnits × ForwardBuyFraction × AllocationWeight_t)
@@ -305,7 +305,7 @@ Forward-Buy Volume = Incremental Lift × Forward-Buy Factor
 
 The forward-buy factor tells you what fraction of the incremental lift came from
 pantry loading rather than true consumption increase. This directly feeds the
-post-promo dip calculation; the dip is approximately equal to the forward-buy volume
+post-promo dip calculation — the dip is approximately equal to the forward-buy volume
 spread over its consumption period.
 
 ### 3.4 Promotional Calendar Planning
@@ -322,7 +322,7 @@ When planning the annual promotional calendar, apply these rules:
 4. **Cross-category coordination:** Avoid promoting close substitutes simultaneously.
    Stagger promotions across substitutes by at least 2 weeks to avoid self-cannibalization.
 5. **Vendor funding alignment:** Match promotional timing to vendor trade fund availability.
-   Many CPG manufacturers operate on calendar quarters; funds not committed by quarter-end
+   Many CPG manufacturers operate on calendar quarters — funds not committed by quarter-end
    expire. Plan key promos in weeks 8–12 of each quarter when vendors are motivated to
    spend remaining funds.
 
@@ -339,7 +339,7 @@ and management attention.
 #### Classification Procedure
 
 1. **Select the value metric.** Options in order of preference:
-   - Gross margin contribution (best; focuses investment on profit, not revenue)
+   - Gross margin contribution (best — focuses investment on profit, not revenue)
    - Revenue (acceptable when margin data is unavailable)
    - Unit volume (use only for warehouse space planning, not financial investment)
 
@@ -390,9 +390,9 @@ forecasting method selection and safety stock strategies.
 
 | Class | CV Range | Description | Forecast Difficulty |
 |---|---|---|---|
-| X | < 0.5 | Highly predictable; demand varies little around its mean | Low; simple methods work well |
-| Y | 0.5–1.0 | Moderately predictable; noticeable variability | Medium; requires good models and monitoring |
-| Z | > 1.0 | Erratic/lumpy; demand is highly variable or intermittent | High; no model will be highly accurate |
+| X | < 0.5 | Highly predictable — demand varies little around its mean | Low — simple methods work well |
+| Y | 0.5–1.0 | Moderately predictable — noticeable variability | Medium — requires good models and monitoring |
+| Z | > 1.0 | Erratic/lumpy — demand is highly variable or intermittent | High — no model will be highly accurate |
 
 4. **Supplement with ADI (Average Demand Interval):** Items with ADI > 2.0 (meaning
    demand occurs less than every other period) should be classified Z regardless of CV,
@@ -410,7 +410,7 @@ forecasting method selection and safety stock strategies.
 | **BZ** | Croston's or damped trend | Z = 1.28 (90%) | Bi-weekly | Semi-automated with planner approval | Monthly review |
 | **CX** | Simple moving average | Z = 1.28 (90%) | Monthly | Automated | Quarterly review |
 | **CY** | Simple moving average | Z = 1.28 (90%) | Monthly | Automated | Quarterly review |
-| **CZ** | Croston's or none | Z = 1.04 (85%) | Monthly | Manual or min/max | Quarterly; discontinuation candidate |
+| **CZ** | Croston's or none | Z = 1.04 (85%) | Monthly | Manual or min/max | Quarterly — discontinuation candidate |
 
 ### 4.4 Migration Tracking
 
@@ -471,12 +471,12 @@ aggregate safety stock by 5–8%.
 
 | Component | Typical Range | Planner Influence |
 |---|---|---|
-| Order processing at vendor | 1–3 days | Low; vendor's internal process |
-| Production/picking | 2–10 days | Medium; negotiate priority tiers |
+| Order processing at vendor | 1–3 days | Low — vendor's internal process |
+| Production/picking | 2–10 days | Medium — negotiate priority tiers |
 | Vendor ship preparation | 1–2 days | Low |
-| Transit time | 1–14 days | Medium; carrier selection, mode choice |
-| Receiving and put-away | 1–3 days | High; internal process improvement |
-| Quality hold (if applicable) | 0–5 days | High; streamline QC process |
+| Transit time | 1–14 days | Medium — carrier selection, mode choice |
+| Receiving and put-away | 1–3 days | High — internal process improvement |
+| Quality hold (if applicable) | 0–5 days | High — streamline QC process |
 
 **Actions to reduce lead time:**
 
@@ -600,7 +600,7 @@ After applying a markdown, monitor the velocity response:
 | 20% off | 1.5–2.0× | Deepen to 30% |
 | 30% off | 2.0–3.0× | Deepen to 40% |
 | 40% off | 3.0–4.0× | Deepen to 50% or explore liquidation |
-| 50% off | 4.0–6.0× | If still not moving, this is dead stock; liquidate |
+| 50% off | 4.0–6.0× | If still not moving, this is dead stock — liquidate |
 
 ### 6.3 Season-End Liquidation Decision
 
@@ -649,7 +649,7 @@ analogous items selected. Bad analogs produce bad forecasts regardless of the me
 
 Score each candidate analog on the criteria above (1–5 scale per criterion, weighted).
 Select the top 3–5 analogs with composite scores > 3.5. If no analogs score > 3.0, the
-new product is truly novel; use category average with a 40% confidence band.
+new product is truly novel — use category average with a 40% confidence band.
 
 ### 7.2 New Product Lifecycle Curve
 
@@ -799,7 +799,7 @@ and working capital.
 
 | Tier | Definition | Action | Timeline |
 |---|---|---|---|
-| Aging | Zero sales for 8–12 weeks | Review; is this seasonal? New? Misplaced? | Investigate within 1 week |
+| Aging | Zero sales for 8–12 weeks | Review — is this seasonal? New? Misplaced? | Investigate within 1 week |
 | Dead | Zero sales for 13–26 weeks | Markdown 40–50% or move to clearance | Initiate within 2 weeks |
 | Obsolete | Zero sales for > 26 weeks | Liquidate at any positive recovery or donate | Execute within 4 weeks |
 | Write-off | Liquidation/donation uneconomical | Destroy and write off; recover warehouse space | Execute within 2 weeks |

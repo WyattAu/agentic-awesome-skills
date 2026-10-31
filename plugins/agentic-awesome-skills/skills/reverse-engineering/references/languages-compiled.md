@@ -116,7 +116,7 @@ struct GoInterface {
 # Channel: pointer to runtime.hchan struct
 ```
 
-**In Ghidra/IDA:** When you see a function taking `(ptr, int64)`; it's likely a Go string. Three-field `(ptr, int64, int64)` is a slice.
+**In Ghidra/IDA:** When you see a function taking `(ptr, int64)` — it's likely a Go string. Three-field `(ptr, int64, int64)` is a slice.
 
 ### Goroutine and Concurrency Analysis
 
@@ -143,7 +143,7 @@ gdb ./binary
 **Defer mechanism:**
 - `runtime.deferproc` → registers deferred function
 - `runtime.deferreturn` → executes deferred functions at function exit
-- Deferred calls execute in LIFO order; relevant for cleanup/crypto key wiping
+- Deferred calls execute in LIFO order — relevant for cleanup/crypto key wiping
 
 **Error handling (the `if err != nil` pattern):**
 ```text
@@ -191,7 +191,7 @@ strings binary | grep "embed"
 # Search for known file signatures (PK for zip, PNG header, etc.)
 ```
 
-**Key insight:** Go's runtime embeds extensive metadata even in stripped binaries. Use GoReSym before any manual analysis; it often recovers 90%+ of function names, making decompilation dramatically easier. Go strings are `{ptr, len}` tuples, not null-terminated; Ghidra's default string analysis will miss them without the golang-loader plugin.
+**Key insight:** Go's runtime embeds extensive metadata even in stripped binaries. Use GoReSym before any manual analysis — it often recovers 90%+ of function names, making decompilation dramatically easier. Go strings are `{ptr, len}` tuples, not null-terminated — Ghidra's default string analysis will miss them without the golang-loader plugin.
 
 **Detection:** Large static binary (2MB+ for simple programs), `go.buildid`, `runtime.gopanic`, source paths like `/home/user/go/src/`.
 
@@ -217,7 +217,7 @@ strings binary | grep "core::panicking"   # Panic infrastructure
 
 **Key indicators:**
 - `core::panicking::panic` in strings
-- Mangled symbols starting with `_ZN` (Itanium ABI); e.g., `_ZN4main4main17h...`
+- Mangled symbols starting with `_ZN` (Itanium ABI) — e.g., `_ZN4main4main17h...`
 - `.rustc` section in ELF
 - References to `/rustc/<commit_hash>/library/`
 - Large binary size (Rust statically links by default)
@@ -260,8 +260,8 @@ struct RustVec {
 
 **String / &str:**
 ```text
-# String (owned): {ptr, capacity, length}: 24 bytes, heap-allocated
-# &str (borrowed): {ptr, length}: 16 bytes, can point anywhere
+# String (owned): {ptr, capacity, length} — 24 bytes, heap-allocated
+# &str (borrowed): {ptr, length} — 16 bytes, can point anywhere
 
 # In decompilation, look for:
 # alloc::string::String::from    → String creation
@@ -294,7 +294,7 @@ cargo bloat --release -n 50
 # https://github.com/AmateursCTF/ghidra-rust (community scripts for Rust RE)
 ```
 
-**Key insight:** Rust panic messages are goldmines; they contain source file paths, line numbers, and descriptive error strings even in release builds. Always `strings binary | grep "panicked"` first. Rust's monomorphization means generic functions get duplicated per type; expect many similar-looking functions.
+**Key insight:** Rust panic messages are goldmines — they contain source file paths, line numbers, and descriptive error strings even in release builds. Always `strings binary | grep "panicked"` first. Rust's monomorphization means generic functions get duplicated per type — expect many similar-looking functions.
 
 **Detection:** `core::panicking`, `.rustc` section, `/rustc/` paths, `_ZN` mangled symbols with Rust-style module paths.
 
@@ -367,7 +367,7 @@ fernflower classes.jar output/       # IntelliJ's decompiler
 # Recognize by: konan, kotlin.native strings
 strings binary | grep "konan"
 
-# Much harder to reverse: no reflection metadata
+# Much harder to reverse — no reflection metadata
 # Uses LLVM backend, looks similar to C/C++ in disassembly
 # Key functions: InitRuntime, DeinitRuntime, CreateStablePointer
 # Memory management depends on Kotlin/Native version; modern runtimes use tracing garbage collection
@@ -412,7 +412,7 @@ def reverse_d_cipher(encrypted, num_functions=500):
     return bytes(result)
 ```
 
-**Key insight:** D binaries are rare in CTFs but identifiable by `_D` symbol prefixes and Phobos library references. The compile-time template system means D functions may be duplicated hundreds of times with different parameters; look for patterns like `enc!("N")` where N varies.
+**Key insight:** D binaries are rare in CTFs but identifiable by `_D` symbol prefixes and Phobos library references. The compile-time template system means D functions may be duplicated hundreds of times with different parameters — look for patterns like `enc!("N")` where N varies.
 
 ---
 

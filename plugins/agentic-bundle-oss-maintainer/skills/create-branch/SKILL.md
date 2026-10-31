@@ -49,7 +49,7 @@ Pick the type from this table based on the description:
 | `feat`    | New user-facing functionality                                         |
 | `fix`     | Broken behavior now works                                             |
 | `ref`     | Same behavior, different structure                                    |
-| `chore`   | Deps, config, version bumps, updating existing tooling; no new logic |
+| `chore`   | Deps, config, version bumps, updating existing tooling — no new logic |
 | `perf`    | Same behavior, faster                                                 |
 | `style`   | CSS, formatting, visual-only                                          |
 | `docs`    | Documentation only                                                    |
@@ -70,7 +70,7 @@ Rules for `<short-description>`:
 - Kebab-case, lowercase
 - 3 to 6 words, concise but clear
 - Describe the change, not file names
-- Only use ASCII letters, digits, and hyphens; no spaces, dots, colons, tildes, or other git-forbidden characters
+- Only use ASCII letters, digits, and hyphens — no spaces, dots, colons, tildes, or other git-forbidden characters
 
 Present it to the user and ask if they want to use it, modify it, or change the type.
 

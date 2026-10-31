@@ -1,4 +1,4 @@
-# Jobs APIs: Indeed & Glassdoor
+# Jobs APIs — Indeed & Glassdoor
 
 | Endpoint | Returns |
 |---|---|
@@ -33,10 +33,10 @@ resp = requests.get(
 | `keyword` | **Required.** |
 | `location` | **Required.** |
 | `sort` | `date`, `relevance` (default). |
-| `domain` | Country site; `www.indeed.com`, `uk.indeed.com`, `de.indeed.com`. |
+| `domain` | Country site — `www.indeed.com`, `uk.indeed.com`, `de.indeed.com`. |
 | `start` | Offset, **steps of 10**. |
 
-Response: `jobs` array with `title`, `company`, `location`, `salary`, `description`, `postedAt`, `link`, `jobKey`. Salary is free-form string; parse with regex.
+Response: `jobs` array with `title`, `company`, `location`, `salary`, `description`, `postedAt`, `link`, `jobKey`. Salary is free-form string — parse with regex.
 
 ## Indeed Job
 

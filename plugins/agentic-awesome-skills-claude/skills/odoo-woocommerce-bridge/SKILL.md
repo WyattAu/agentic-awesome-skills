@@ -137,8 +137,8 @@ def sync_inventory_to_woocommerce():
 - ✅ **Do:** Use **SKU** as the unique identifier linking WooCommerce products to Odoo products.
 - ✅ **Do:** Run inventory sync on a **schedule** (every 15-30 min) rather than real-time to avoid rate limits.
 - ✅ **Do:** Log redacted operation IDs/status/errors; exclude customer addresses, credentials and full request/response bodies.
-- ❌ **Don't:** Process the same WooCommerce order twice; flag it as processed immediately after import.
-- ❌ **Don't:** Sync draft or cancelled WooCommerce orders to Odoo; filter by `status = processing` or `completed`.
+- ❌ **Don't:** Process the same WooCommerce order twice — flag it as processed immediately after import.
+- ❌ **Don't:** Sync draft or cancelled WooCommerce orders to Odoo — filter by `status = processing` or `completed`.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

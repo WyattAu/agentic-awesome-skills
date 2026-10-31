@@ -1,6 +1,6 @@
 # SwiftUI Text Patterns Reference
 
-> For broader localization guidance; String Catalogs, `#bundle` for packages, `LocalizedStringResource`, locale-aware formatting, RTL layout, and translator comments; see `references/localization.md`. This file covers only the verbatim-vs-localized decision for a single `Text`.
+> For broader localization guidance — String Catalogs, `#bundle` for packages, `LocalizedStringResource`, locale-aware formatting, RTL layout, and translator comments — see `references/localization.md`. This file covers only the verbatim-vs-localized decision for a single `Text`.
 
 ## Table of Contents
 

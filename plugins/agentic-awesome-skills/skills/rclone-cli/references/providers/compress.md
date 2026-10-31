@@ -60,23 +60,23 @@ Choose a number from below, or type in your own value of type string.
 Press Enter for the default (gzip).
  1 / Standard gzip compression with fastest parameters.
    \ (gzip)
- 2 / Zstandard compression; fast modern algorithm offering adjustable speed-to-compression tradeoffs.
+ 2 / Zstandard compression — fast modern algorithm offering adjustable speed-to-compression tradeoffs.
    \ (zstd)
 mode> gzip
 
 Option level.
 GZIP (levels -2 to 9):
-- -2; Huffman encoding only. Only use if you know what you're doing.
-- -1 (default); recommended; equivalent to level 5.
-- 0; turns off compression.
-- 1–9; increase compression at the cost of speed. Going past 6 generally offers very little return.
+- -2 — Huffman encoding only. Only use if you know what you're doing.
+- -1 (default) — recommended; equivalent to level 5.
+- 0 — turns off compression.
+- 1–9 — increase compression at the cost of speed. Going past 6 generally offers very little return.
 
 ZSTD (levels 0 to 4):
-- 0; turns off compression entirely.
-- 1; fastest compression with the lowest ratio.
-- 2 (default); good balance of speed and compression.
-- 3; better compression, but uses about 2–3x more CPU than the default.
-- 4; best possible compression ratio (highest CPU cost).
+- 0 — turns off compression entirely.
+- 1 — fastest compression with the lowest ratio.
+- 2 (default) — good balance of speed and compression.
+- 3 — better compression, but uses about 2–3x more CPU than the default.
+- 4 — best possible compression ratio (highest CPU cost).
 
 Notes:
 - Choose GZIP for wide compatibility; ZSTD for better speed/ratio tradeoffs.
@@ -154,22 +154,22 @@ Properties:
   - "gzip"
     - Standard gzip compression with fastest parameters.
   - "zstd"
-    - Zstandard compression; fast modern algorithm offering adjustable speed-to-compression tradeoffs.
+    - Zstandard compression — fast modern algorithm offering adjustable speed-to-compression tradeoffs.
 
 #### --compress-level
 
 GZIP (levels -2 to 9):
-- -2; Huffman encoding only. Only use if you know what you're doing.
-- -1 (default); recommended; equivalent to level 5.
-- 0; turns off compression.
-- 1–9; increase compression at the cost of speed. Going past 6 generally offers very little return.
+- -2 — Huffman encoding only. Only use if you know what you're doing.
+- -1 (default) — recommended; equivalent to level 5.
+- 0 — turns off compression.
+- 1–9 — increase compression at the cost of speed. Going past 6 generally offers very little return.
 
 ZSTD (levels 0 to 4):
-- 0; turns off compression entirely.
-- 1; fastest compression with the lowest ratio.
-- 2 (default); good balance of speed and compression.
-- 3; better compression, but uses about 2–3x more CPU than the default.
-- 4; best possible compression ratio (highest CPU cost).
+- 0 — turns off compression entirely.
+- 1 — fastest compression with the lowest ratio.
+- 2 (default) — good balance of speed and compression.
+- 3 — better compression, but uses about 2–3x more CPU than the default.
+- 4 — best possible compression ratio (highest CPU cost).
 
 Notes:
 - Choose GZIP for wide compatibility; ZSTD for better speed/ratio tradeoffs.

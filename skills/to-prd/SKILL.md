@@ -1,6 +1,6 @@
 ---
 name: to-prd
-description: Turn the current conversation into a PRD and publish it to the project issue tracker; no interview, just synthesis of what you've already discussed.
+description: Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
 disable-model-invocation: true
 category: "project-management"
 risk: "safe"
@@ -23,12 +23,12 @@ tools:
 
 ## When to Use
 
-Use when this workflow matches the user request: Turn the current conversation into a PRD and publish it to the project issue tracker; no interview, just synthesis of what you've already discussed.
+Use when this workflow matches the user request: Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
 
 
-_Source: [mattpocock/skills](https://github.com/mattpocock/skills) (MIT)._This skill takes the current conversation context and codebase understanding and produces a PRD. Do NOT interview the user; just synthesize what you already know.
+_Source: [mattpocock/skills](https://github.com/mattpocock/skills) (MIT)._This skill takes the current conversation context and codebase understanding and produces a PRD. Do NOT interview the user — just synthesize what you already know.
 
-The issue tracker and triage label vocabulary should have been provided to you; run `/setup-matt-pocock-skills` if not.
+The issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.
 
 ## Process
 
@@ -76,7 +76,7 @@ A list of implementation decisions that were made. This can include:
 
 Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
 
-Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts; not a working demo, just the important bits.
+Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
 
 ## Testing Decisions
 
@@ -100,7 +100,7 @@ Any further notes about the feature.
 
 **User request:**
 
-> Turn the current conversation into a PRD and publish it to the project issue tracker; no interview, just synthesis of what you've already discussed.
+> Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
 
 ## Limitations
 

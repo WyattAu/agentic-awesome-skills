@@ -14,7 +14,7 @@ Iteratively improve a Claude Code skill using the skill-reviewer agent until it 
 
 Requires the `plugin-dev` plugin which provides the `skill-reviewer` agent.
 
-Verify it's enabled: run `/plugins`; `plugin-dev` should appear in the list. If missing, report the prerequisite and verify the provider and installation instructions before an authorized install; the plugin name alone does not establish its source.
+Verify it's enabled: run `/plugins` — `plugin-dev` should appear in the list. If missing, report the prerequisite and verify the provider and installation instructions before an authorized install; the plugin name alone does not establish its source.
 
 ## Core Loop
 
@@ -43,29 +43,29 @@ Verify it's enabled: run `/plugins`; `plugin-dev` should appear in the list. If 
 
 These block skill loading or cause runtime failures:
 
-- Missing required frontmatter fields (name, description); Claude cannot index or trigger the skill
-- Invalid YAML frontmatter syntax; Parsing fails, skill won't load
-- Referenced files that don't exist; Runtime errors when Claude follows links
-- Broken file paths; Same as above, leads to tool failures
+- Missing required frontmatter fields (name, description) — Claude cannot index or trigger the skill
+- Invalid YAML frontmatter syntax — Parsing fails, skill won't load
+- Referenced files that don't exist — Runtime errors when Claude follows links
+- Broken file paths — Same as above, leads to tool failures
 
 ### Major Issues (MUST fix)
 
 These significantly degrade skill effectiveness:
 
-- Weak or vague trigger descriptions; Claude may not recognize when to use the skill
-- Writing voice that materially obscures execution; assess against the target project style, not a universal second-person prohibition
-- Excessive context use; inspect actual loading behavior and consider references; 500 lines is a guideline unless the host/project enforces it
+- Weak or vague trigger descriptions — Claude may not recognize when to use the skill
+- Writing voice that materially obscures execution — assess against the target project style, not a universal second-person prohibition
+- Excessive context use — inspect actual loading behavior and consider references; 500 lines is a guideline unless the host/project enforces it
 - Missing trigger/scope boundaries required by the actual target project
-- Description doesn't specify when to trigger; Skill may never be selected
+- Description doesn't specify when to trigger — Skill may never be selected
 
 ### Minor Issues (Evaluate before fixing)
 
 These are polish items that may or may not improve the skill:
 
-- Subjective style preferences; Reviewer may have different taste than author
-- Optional enhancements; May add complexity without proportional value
-- "Nice to have" improvements; Consider cost-benefit before implementing
-- Formatting suggestions; Often valid but low impact
+- Subjective style preferences — Reviewer may have different taste than author
+- Optional enhancements — May add complexity without proportional value
+- "Nice to have" improvements — Consider cost-benefit before implementing
+- Formatting suggestions — Often valid but low impact
 
 ## Minor Issue Evaluation
 
@@ -87,7 +87,7 @@ Replace `[SKILL_PATH]` with the absolute path to the skill directory (e.g., `/pa
 
 ## Example Fix Cycle
 
-**Iteration 1; skill-reviewer output:**
+**Iteration 1 — skill-reviewer output:**
 ```text
 Critical: SKILL.md:1 - Missing required 'name' field in frontmatter
 Major: SKILL.md:3 - Description uses second person ("you should use")
@@ -100,7 +100,7 @@ Minor: Line 45 is verbose
 - Rewrote description in third person
 - Added "When NOT to Use" section
 
-**Iteration 2; run skill-reviewer again to verify fixes:**
+**Iteration 2 — run skill-reviewer again to verify fixes:**
 ```text
 Minor: Line 45 is verbose
 ```

@@ -52,14 +52,14 @@ gh pr view <PR#> --repo <owner>/<repo> --json files --jq '.files[].path'
 gh pr diff <PR#> --repo <owner>/<repo>
 ```
 
-5. Filter the changed files list to only `.sql` files under `models/` or `snapshots/` directories (at any depth; e.g., `models/`, `analytics/models/`, `dbt/models/`). These are the dbt models to analyze. If no model SQL files were changed, report that and stop.
+5. Filter the changed files list to only `.sql` files under `models/` or `snapshots/` directories (at any depth — e.g., `models/`, `analytics/models/`, `dbt/models/`). These are the dbt models to analyze. If no model SQL files were changed, report that and stop.
 
 6. For each changed model file, fetch the full file content at the head SHA:
 ```bash
 gh api repos/<owner>/<repo>/contents/<file_path>?ref=<head_sha> --jq '.content' | python3 -c "import sys,base64; sys.stdout.write(base64.b64decode(sys.stdin.read()).decode())"
 ```
 
-7. **Fetch dbt_project.yml** for schema resolution. Detect the dbt project root by looking at the changed file paths; find the common parent directory that contains `dbt_project.yml`. Try these paths in order until one succeeds:
+7. **Fetch dbt_project.yml** for schema resolution. Detect the dbt project root by looking at the changed file paths — find the common parent directory that contains `dbt_project.yml`. Try these paths in order until one succeeds:
 ```bash
 gh api repos/<owner>/<repo>/contents/<dbt_root>/dbt_project.yml?ref=<head_sha> --jq '.content' | python3 -c "import sys,base64; sys.stdout.write(base64.b64decode(sys.stdin.read()).decode())"
 ```
@@ -83,7 +83,7 @@ git rev-parse --abbrev-ref HEAD
 git diff --name-only <base_branch>...HEAD -- '*.sql'
 ```
 
-5. Filter to only `.sql` files under `models/` or `snapshots/` directories (at any depth; e.g., `models/`, `analytics/models/`, `dbt/models/`). If no model SQL files were changed, report that and stop.
+5. Filter to only `.sql` files under `models/` or `snapshots/` directories (at any depth — e.g., `models/`, `analytics/models/`, `dbt/models/`). If no model SQL files were changed, report that and stop.
 
 6. Get the diff for each changed file:
 ```bash
@@ -111,7 +111,7 @@ After filtering to `.sql` files under `models/` or `snapshots/`:
 
 2. **Model cap:** If more than 10 models remain after filtering, select the first 10 (by file path order) and warn the user:
    ```
-   ⚠️ <total_count> models changed; generating validation queries for the first 10 only.
+   ⚠️ <total_count> models changed — generating validation queries for the first 10 only.
    To generate for specific models, re-run with: --models <model1,model2,...>
    Skipped models: <list of skipped model filenames>
    ```
@@ -322,7 +322,7 @@ LIMIT 100
 ```
 
 #### Pattern 1: Changed Field Distribution
-**Trigger:** Changed fields found in Phase 2b. **Exclude added columns** (from "New columns" in Phase 2b); only include fields that exist in prod.
+**Trigger:** Changed fields found in Phase 2b. **Exclude added columns** (from "New columns" in Phase 2b) — only include fields that exist in prod.
 
 ```sql
 SELECT
@@ -508,7 +508,7 @@ metadata:
   content: |
     /*
     ========================================
-    <Pattern Name (human-readable, e.g. "Total Row Count"; do NOT include pattern numbers like "Pattern 7:")>
+    <Pattern Name (human-readable, e.g. "Total Row Count" — do NOT include pattern numbers like "Pattern 7:")>
     ========================================
     Model: <SCHEMA>.<TABLE_NAME>
     Triggered by: <why this pattern was generated>
@@ -525,7 +525,7 @@ Cells are ordered consistently for both model types, following this sequence:
 
 **New models:**
 1. Summary markdown cell (note that model is new)
-2. Parameter cells (dev_db only; no prod_db if all models are new)
+2. Parameter cells (dev_db only — no prod_db if all models are new)
 3. Total row count (Pattern 7-new)
 4. Sample data preview (Pattern 9)
 5. Core segmentation counts (Pattern 2-new)
@@ -611,4 +611,4 @@ If the user asks how to install or set up MC Bridge, fetch the README from the m
 gh api repos/monte-carlo-data/mc-bridge/readme --jq '.content' | base64 --decode
 ```
 
-Focus on: how to install, configure connections, and run MC Bridge. Don't dump the entire README; extract just the setup-relevant sections.
+Focus on: how to install, configure connections, and run MC Bridge. Don't dump the entire README — extract just the setup-relevant sections.

@@ -1,10 +1,10 @@
 # Installing Debug Adapters
 
-`dap` relies on language-specific debug adapters (backends). Many IDEs already ship them; **check before installing**.
+`dap` relies on language-specific debug adapters (backends). Many IDEs already ship them — **check before installing**.
 
 ---
 
-## Python: debugpy
+## Python — debugpy
 
 **Check:** `python3 -m debugpy --version`
 
@@ -13,12 +13,12 @@
 **Virtualenv:** `dap` picks up the active venv automatically via `$VIRTUAL_ENV`.
 Activate the venv (`source .venv/bin/activate`) before running `dap debug`, or pass
 `--python /path/to/venv/bin/python` to override. Without either, `dap` falls back
-to `python3` on PATH; which may not have `debugpy` installed or may be the wrong
+to `python3` on PATH — which may not have `debugpy` installed or may be the wrong
 interpreter version.
 
 ---
 
-## Go: Delve
+## Go — Delve
 
 **Check:** `dlv version`
 
@@ -30,14 +30,14 @@ macOS note: you may need `sudo DevToolsSecurity -enable` for debugging permissio
 
 ---
 
-## Node.js/TypeScript: js-debug
+## Node.js/TypeScript — js-debug
 
 `dap` auto-discovers js-debug from common locations:
 - VS Code extensions (`~/.vscode/extensions/`)
 - Cursor extensions (`~/.cursor/extensions/`)
 - Standalone install (`~/.dap-cli/js-debug/`)
 
-**Check:** Look for js-debug in the paths above, or run `dap debug --backend js-debug script.js`; if it fails, install below.
+**Check:** Look for js-debug in the paths above, or run `dap debug --backend js-debug script.js` — if it fails, install below.
 
 **Standalone install** (only if not found above):
 ```bash
@@ -53,7 +53,7 @@ Also supports **Chrome DevTools debugging** for browser-side JavaScript.
 
 ---
 
-## Rust/C/C++: lldb-dap
+## Rust/C/C++ — lldb-dap
 
 **Check:** `lldb-dap --version`
 

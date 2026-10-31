@@ -20,7 +20,7 @@ GitHub offers two default permission modes (configured in repo Settings > Action
 ### Explicit Permission Scoping
 
 ```yaml
-# VULNERABLE: No explicit permissions: inherits repo default
+# VULNERABLE: No explicit permissions — inherits repo default
 on: pull_request
 jobs:
   build:
@@ -48,7 +48,7 @@ jobs:
 | `issues` | View issues | Create, comment, close | Issue management |
 | `packages` | Pull packages | Push packages | Package publishing |
 | `deployments` | View deployments | Create deployments | CD workflows |
-| `id-token` | - | Request OIDC token | Cloud authentication |
+| `id-token` | — | Request OIDC token | Cloud authentication |
 | `actions` | View workflow runs | Cancel/rerun workflows | Workflow management |
 | `security-events` | View alerts | Upload SARIF, dismiss alerts | Security scanning |
 | `statuses` | View statuses | Create commit statuses | CI status reporting |
@@ -168,7 +168,7 @@ grep -rn "environment:" .github/workflows/
 GitHub OIDC tokens include a `sub` (subject) claim that cloud providers use to authorize access. Misconfigured subject claims can allow unauthorized workflows to assume cloud roles.
 
 ```yaml
-# VULNERABLE: Subject claim too broad: any branch can assume role
+# VULNERABLE: Subject claim too broad — any branch can assume role
 # AWS IAM trust policy
 {
   "Condition": {
@@ -192,7 +192,7 @@ GitHub OIDC tokens include a `sub` (subject) claim that cloud providers use to a
 
 | Claim Filter | Risk Level | When to Use |
 |-------------|------------|-------------|
-| `repo:org/repo:*` | **High** | Never; any branch/PR can assume role |
+| `repo:org/repo:*` | **High** | Never — any branch/PR can assume role |
 | `repo:org/repo:ref:refs/heads/main` | **Medium** | Only main branch, but any workflow |
 | `repo:org/repo:environment:production` | **Low** | Requires environment protection rules |
 
@@ -264,4 +264,4 @@ Environment protection rules add:
 
 - [GitHub Docs: Permissions for GITHUB_TOKEN](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)
 - [GitHub Docs: Using OIDC for cloud deployments](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
-- [GitHub Blog: Security hardening; Permissions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)
+- [GitHub Blog: Security hardening — Permissions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)

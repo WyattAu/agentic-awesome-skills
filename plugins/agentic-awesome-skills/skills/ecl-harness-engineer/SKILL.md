@@ -17,7 +17,7 @@ license_source: "https://github.com/qinghui316/ecl-harness-engineer/blob/main/LI
 # ECL Harness Engineer
 Design and create Harness Engineering infrastructure so AI agents can work reliably in a codebase.
 
-> **Core Philosophy**: "Intelligence without infrastructure is just a demo." The Agent Harness is the Operating System; the LLM is just the CPU. Repository evidence grounds project claims; other authorized sources may also supply context. Missing context is uncertainty, not proof that something does not exist.
+> **Core Philosophy**: "Intelligence without infrastructure is just a demo." The Agent Harness is the Operating System — the LLM is just the CPU. Repository evidence grounds project claims; other authorized sources may also supply context. Missing context is uncertainty, not proof that something does not exist.
 
 ## Execution and instruction boundaries
 

@@ -20,23 +20,23 @@ longbridge quote <SYMBOL> --format json
 
 ## Workflow
 
-1. **Identify legs**; extract each leg: side (buy/sell), type (call/put), strike, expiry, quantity, premium paid/received.
-2. **Fetch live data**; call `longbridge option quote` for each OCC symbol; if not known, use `option chain` to find it. Fetch underlying spot with `longbridge quote`.
+1. **Identify legs** — extract each leg: side (buy/sell), type (call/put), strike, expiry, quantity, premium paid/received.
+2. **Fetch live data** — call `longbridge option quote` for each OCC symbol; if not known, use `option chain` to find it. Fetch underlying spot with `longbridge quote`.
 3. **Compute at-expiry payoff** for each leg:
    - Long call: `max(S − K, 0) − premium`
    - Short call: `premium − max(S − K, 0)`
    - Long put: `max(K − S, 0) − premium`
    - Short put: `premium − max(K − S, 0)`
    - Net position P&L = sum of per-unit leg P&L × contract multiplier × contract count, less applicable fees and other cash flows.
-4. **Find breakeven(s)**; stock price(s) where net payoff = 0.
-5. **Find max profit and max loss**; evaluate same-expiry piecewise-linear segments at strikes and S=0, then inspect the high-price tail slope for unbounded outcomes. A finite scan cannot prove a finite maximum loss.
+4. **Find breakeven(s)** — stock price(s) where net payoff = 0.
+5. **Find max profit and max loss** — evaluate same-expiry piecewise-linear segments at strikes and S=0, then inspect the high-price tail slope for unbounded outcomes. A finite scan cannot prove a finite maximum loss.
 6. **Summarise Greeks** from `option quote` output; compute net Greeks for multi-leg.
 7. **Output** payoff table + summary (template below).
 
 ## Output template
 
 ```
-{Strategy name} P&L snapshot; Source: Longbridge Securities
+{Strategy name} P&L snapshot — Source: Longbridge Securities
 
 [Position]
 Leg 1: {Buy/Sell} {N} {SYMBOL} {YYMMDD} {C/P} K={strike}  Premium={prem}

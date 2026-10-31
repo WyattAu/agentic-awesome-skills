@@ -96,14 +96,14 @@ nvidia-smi --query-gpu=index,name,temperature.gpu,utilization.gpu,\
 utilization.memory,memory.used,memory.free,power.draw,clocks.current.graphics \
 --format=csv --loop=1
 
-# DCGM: production monitoring daemon (for clusters)
+# DCGM — production monitoring daemon (for clusters)
 sudo apt install -y datacenter-gpu-manager
 sudo systemctl start dcgm
 dcgmi discovery -l                # list GPUs
 dcgmi diag -r 1                  # quick health check
 dcgmi diag -r 3                  # full diagnostic (takes ~20 min)
 
-# Check GPU errors (XID errors: important for stability)
+# Check GPU errors (XID errors — important for stability)
 sudo dmesg | grep -i "NVRM\|nvidia\|XID"
 nvidia-smi --query-gpu=ecc.errors.corrected.volatile.total \
   --format=csv,noheader
@@ -142,10 +142,10 @@ sudo systemctl restart nvidia-persistenced
 
 # List available MIG profiles (A100 80GB example)
 nvidia-smi mig -lgip
-# 1g.10gb  : 1 slice,  10GB (max 7 instances)
-# 2g.20gb  : 2 slices, 20GB (max 3 instances)
-# 3g.40gb  : 3 slices, 40GB (max 2 instances)
-# 7g.80gb  : full GPU, 80GB (max 1 instance)
+# 1g.10gb   — 1 slice,  10GB (max 7 instances)
+# 2g.20gb   — 2 slices, 20GB (max 3 instances)
+# 3g.40gb   — 3 slices, 40GB (max 2 instances)
+# 7g.80gb   — full GPU, 80GB (max 1 instance)
 
 # Example only if this exact GPU reports the profile and placement as valid:
 sudo nvidia-smi mig -cgi 2g.20gb,2g.20gb,2g.20gb -C
@@ -210,7 +210,7 @@ nvidia-smi topo -m
 
 ## Best Practices
 
-- Always enable persistence mode (`nvidia-smi -pm 1`); reduces first-request latency.
+- Always enable persistence mode (`nvidia-smi -pm 1`) — reduces first-request latency.
 - Monitor XID errors; persistent XID 79/94 indicates hardware failure.
 - For training: use NVLink-connected GPUs; for inference: PCIe is usually fine.
 - Set up DCGM alerts on temperature >80°C and power draw near TDP.

@@ -11,7 +11,7 @@ Historical upstream provider list, not measured current recall or availability:
 
 | Source | Tier | Notes |
 |---|---|---|
-| crt.sh | Free | Best single source for cert-derived subdomains; **frequently 502s during peak hours; see fallback chain below**. |
+| crt.sh | Free | Best single source for cert-derived subdomains; **frequently 502s during peak hours — see fallback chain below**. |
 | VirusTotal | Freemium | Domain → passive DNS history. |
 | AlienVault OTX | Free | Passive DNS + URL data. |
 | Shodan | Paid (low tier) | Subdomain enum via `domain:` filter. |
@@ -35,32 +35,32 @@ An accepted transfer exposes the zone’s published records; severity depends on
 
 ### 27.0.1 crt.sh down? Fallback chain (try in order)
 
-crt.sh runs on a single nginx in front of a busy Postgres; 502 / 503 / timeout in peak hours is routine. Don't retry-loop; pivot:
+crt.sh runs on a single nginx in front of a busy Postgres; 502 / 503 / timeout in peak hours is routine. Don't retry-loop — pivot:
 
 ```bash
 D="target.example"
 
-# 1. Censys cert search (free 250 queries/month with key): same data, different infra
+# 1. Censys cert search (free 250 queries/month with key) — same data, different infra
 censys search "names: ${D}" --index-type certificates --fields names | jq -r '.names[]' | sort -u
 
-# 2. Cert Spotter API (sslmate): free w/ rate limits
+# 2. Cert Spotter API (sslmate) — free w/ rate limits
 curl -sS -m 15 "https://api.certspotter.com/v1/issuances?domain=${D}&include_subdomains=true&expand=dns_names" | \
   jq -r '.[].dns_names[]' | sort -u
 
-# 3. CertStream archive (Calidog): historical CT log mirror
+# 3. CertStream archive (Calidog) — historical CT log mirror
 curl -sS -m 15 "https://crt.calidog.io/?q=${D}" | jq -r '.[].name_value' | sort -u
 
-# 4. Subfinder bundled aggregator (uses 30+ sources internally: Chaos, Anubis, BinaryEdge, BufferOver, Censys, CertSpotter, Crobat, Crtsh, DNSDumpster, FOFA, Fullhunt, GitHub, HackerTarget, IntelX, PassiveTotal, Quake, Rapiddns, Shodan, Spyse, ThreatBook, ThreatMiner, URLScan, VirusTotal, WhoisXML, ZoomEye, etc.)
+# 4. Subfinder bundled aggregator (uses 30+ sources internally — Chaos, Anubis, BinaryEdge, BufferOver, Censys, CertSpotter, Crobat, Crtsh, DNSDumpster, FOFA, Fullhunt, GitHub, HackerTarget, IntelX, PassiveTotal, Quake, Rapiddns, Shodan, Spyse, ThreatBook, ThreatMiner, URLScan, VirusTotal, WhoisXML, ZoomEye, etc.)
 subfinder -d ${D} -all -recursive -silent
 
-# 5. AlienVault OTX: free, no key
+# 5. AlienVault OTX — free, no key
 curl -sS -m 15 "https://otx.alienvault.com/api/v1/indicators/domain/${D}/passive_dns" | \
   jq -r '.passive_dns[].hostname' | sort -u
 
-# 6. ThreatMiner: free
+# 6. ThreatMiner — free
 curl -sS -m 15 "https://api.threatminer.org/v2/domain.php?q=${D}&rt=5" | jq -r '.results[]'
 
-# 7. URLScan: passive DNS via past scans
+# 7. URLScan — passive DNS via past scans
 curl -sS -m 15 "https://urlscan.io/api/v1/search/?q=domain:${D}" | \
   jq -r '.results[].page.domain' | sort -u
 
@@ -82,7 +82,7 @@ function Get-Subs {
       Start-Sleep -Seconds 5
     }
   }
-  "crt.sh down; pivot to Subfinder: subfinder -d $D -all -silent" | Out-Host
+  "crt.sh down — pivot to Subfinder: subfinder -d $D -all -silent" | Out-Host
   return @()
 }
 ```
@@ -124,19 +124,19 @@ ffuf -u "https://target.example/FUZZ" -w raft-large-words.txt -mc 200,301,403 -t
 
 ## 28. Infrastructure & Attack-Surface OSINT
 
-- [Shodan](https://www.shodan.io/), [Censys](https://search.censys.io/); internet device + cert search.
-- [GreyNoise](https://viz.greynoise.io/); distinguish background noise from targeted scans.
-- [SecurityTrails](https://securitytrails.com/); passive DNS + asset discovery.
-- [SpiderFoot](https://www.spiderfoot.net/); automated recon + correlation.
-- [theHarvester](https://github.com/laramies/theHarvester); subdomain, email, metadata.
-- [Recon-ng](https://github.com/lanmaster53/recon-ng); web recon framework.
-- [Amass](https://github.com/owasp-amass/amass) / [Subfinder](https://github.com/projectdiscovery/subfinder); passive subdomain.
-- [BuiltWith](https://builtwith.com/); tech stack enumeration.
-- [Netlas](https://netlas.io/); large-scale HTTP/DNS/cert pivots.
-- [BinaryEdge](https://www.binaryedge.io/) / [FOFA](https://fofa.so/) / [ZoomEye](https://www.zoomeye.org/); Shodan/Censys complements.
-- [RiskIQ PassiveTotal](https://community.riskiq.com/); passive DNS/cert/host pivots.
-- [Spur](https://spur.us/); IP lookups.
-- [Robtex](https://www.robtex.com/); passive DNS + infrastructure.
+- [Shodan](https://www.shodan.io/), [Censys](https://search.censys.io/) — internet device + cert search.
+- [GreyNoise](https://viz.greynoise.io/) — distinguish background noise from targeted scans.
+- [SecurityTrails](https://securitytrails.com/) — passive DNS + asset discovery.
+- [SpiderFoot](https://www.spiderfoot.net/) — automated recon + correlation.
+- [theHarvester](https://github.com/laramies/theHarvester) — subdomain, email, metadata.
+- [Recon-ng](https://github.com/lanmaster53/recon-ng) — web recon framework.
+- [Amass](https://github.com/owasp-amass/amass) / [Subfinder](https://github.com/projectdiscovery/subfinder) — passive subdomain.
+- [BuiltWith](https://builtwith.com/) — tech stack enumeration.
+- [Netlas](https://netlas.io/) — large-scale HTTP/DNS/cert pivots.
+- [BinaryEdge](https://www.binaryedge.io/) / [FOFA](https://fofa.so/) / [ZoomEye](https://www.zoomeye.org/) — Shodan/Censys complements.
+- [RiskIQ PassiveTotal](https://community.riskiq.com/) — passive DNS/cert/host pivots.
+- [Spur](https://spur.us/) — IP lookups.
+- [Robtex](https://www.robtex.com/) — passive DNS + infrastructure.
 
 ### 28.1 ASN/BGP & Internet Measurement
 
@@ -162,7 +162,7 @@ curl -sS -m 15 "https://ipinfo.io/8.8.8.8?token=<key>" | jq .
 
 **Watch out:**
 - `bgpview.io` API has aggressive undocumented rate limits (~1 req/min/IP); not suitable for bulk.
-- `bgp.he.net` has no public API; HTML scraping only; fragile.
+- `bgp.he.net` has no public API; HTML scraping only — fragile.
 - `PeeringDB` is for facility/IX info, not per-IP ASN lookup.
 - For bulk (>50 IPs): use the **Cymru bulk format** above; it accepts hundreds of IPs in one TCP session.
 
@@ -173,8 +173,8 @@ curl -sS -m 15 "https://ipinfo.io/8.8.8.8?token=<key>" | jq .
 
 ### 28.3 Web tech / TLS / fingerprinting
 
-- **httpx (ProjectDiscovery)**; Wappalyzer-compatible ~600 signatures, JARM, favicon mmh3, TLS cert SHA256, security headers, screenshots. Use only the explicit approved host list and request budget; do not default to thousands of hosts.
-- **JARM**; TLS handshake hash; stable per server config; useful for clustering.
+- **httpx (ProjectDiscovery)** — Wappalyzer-compatible ~600 signatures, JARM, favicon mmh3, TLS cert SHA256, security headers, screenshots. Use only the explicit approved host list and request budget; do not default to thousands of hosts.
+- **JARM** — TLS handshake hash; stable per server config; useful for clustering.
 - **Wappalyzer** browser extension or CLI for tech enumeration.
 
 ### 28.4 TLS Deep Audit
@@ -222,8 +222,8 @@ nmap --script ssl-enum-ciphers,ssl-cert -p 443 target.example
 
 **JA3 / JA4 reference databases:**
 
-- [ja3er.com](https://ja3er.com); community-curated JA3 → client-software mapping.
-- [TLS Fingerprint DB](https://tlsfingerprint.io/); research aggregator.
+- [ja3er.com](https://ja3er.com) — community-curated JA3 → client-software mapping.
+- [TLS Fingerprint DB](https://tlsfingerprint.io/) — research aggregator.
 - For server JARM: search Shodan `ssl.jarm:<hash>` to find shared infrastructure / origin candidates (see §16.15).
 
 ### 28.5 Reverse DNS Sweep & IPv6 Enumeration
@@ -273,8 +273,8 @@ whois -h whois.cymru.com " -v <approved-IP>"   # IP-to-ASN example; not hostname
 
 **BGP route observation:**
 
-- **RouteViews**; `http://archive.routeviews.org/` (free; historical BGP routing table snapshots).
-- **RIPE RIS**; `https://ris.ripe.net/` (free; route collectors).
+- **RouteViews** — `http://archive.routeviews.org/` (free; historical BGP routing table snapshots).
+- **RIPE RIS** — `https://ris.ripe.net/` (free; route collectors).
 - Use these to detect route hijacks against the target's prefixes (defensive intel; sometimes IOC).
 
 **Reverse DNS pivots from third-party IPs:**

@@ -54,7 +54,7 @@ my-electron-app/
 
 **Key architectural principles:**
 - **Separate entry points**: Main, preload, and renderer each have their own build configuration.
-- **Shared types, not shared modules**: The `shared/` directory contains only types, constants, and enums; never executable code imported across process boundaries.
+- **Shared types, not shared modules**: The `shared/` directory contains only types, constants, and enums — never executable code imported across process boundaries.
 - **Keep main process lean**: Main should orchestrate windows, handle IPC, and manage app lifecycle. Business logic belongs in the renderer or dedicated worker processes.
 
 ---
@@ -202,7 +202,7 @@ export function registerIpcHandlers(mainWindow: BrowserWindow): void {
 
   ipcMain.handle('file:save', async (event, _ignoredPath: unknown, content: string) => {
     requireTrusted(event);
-    // VALIDATE INPUTS; never trust renderer data blindly
+    // VALIDATE INPUTS — never trust renderer data blindly
     if (typeof content !== 'string' || Buffer.byteLength(content, 'utf8') > 1_000_000) {
       throw new Error('Invalid arguments');
     }
@@ -221,7 +221,7 @@ export function registerIpcHandlers(mainWindow: BrowserWindow): void {
 
 **Renderer usage (type-safe):**
 ```typescript
-// src/renderer/App.tsx; or any renderer code
+// src/renderer/App.tsx — or any renderer code
 // The electronAPI is globally available via contextBridge
 
 declare global {
@@ -259,7 +259,7 @@ const unsubscribe = window.electronAPI.on('update:available', (version) => {
 | **Request/Response** | `ipcRenderer.invoke()` → `ipcMain.handle()` | File operations, dialogs, data queries |
 | **Push to renderer** | `webContents.send()` → `ipcRenderer.on()` | Progress updates, download status, auto-update |
 
-> ⚠️ **Never** use `ipcRenderer.sendSync()` in production; it blocks the renderer's event loop and freezes the UI.
+> ⚠️ **Never** use `ipcRenderer.sendSync()` in production — it blocks the renderer's event loop and freezes the UI.
 
 ---
 
@@ -288,7 +288,7 @@ const unsubscribe = window.electronAPI.on('update:available', (version) => {
 [ ] protocol.registerSchemesAsPrivileged() uses minimal permissions
 
 ── NAVIGATION ──
-[ ] webContents 'will-navigate' event intercepted; block unexpected URLs
+[ ] webContents 'will-navigate' event intercepted — block unexpected URLs
 [ ] setWindowOpenHandler() denies unexpected windows
 [ ] No shell.openExternal() with unsanitized URLs
 
@@ -594,9 +594,9 @@ ipcMain.handle('update:install', () => autoUpdater.quitAndInstall());
 - ✅ Set `compression: maximum` in electron-builder config
 - ✅ Exclude dev dependencies: `"files"` pattern should only include compiled output
 - ✅ Use a bundler (Vite, webpack, esbuild) to tree-shake the renderer
-- ✅ Audit `node_modules` shipped with the app; use `electron-builder`'s `files` exclude patterns
+- ✅ Audit `node_modules` shipped with the app — use `electron-builder`'s `files` exclude patterns
 - ✅ Consider `@electron/rebuild` for native modules instead of shipping prebuilt for all platforms
-- ❌ Do NOT bundle the entire `node_modules`; only production dependencies
+- ❌ Do NOT bundle the entire `node_modules` — only production dependencies
 
 ---
 
@@ -618,9 +618,9 @@ ipcMain.handle('update:install', () => autoUpdater.quitAndInstall());
 ```
 
 **Recommended toolchain:**
-- **electron-vite** or **electron-forge with Vite plugin**; modern, fast HMR for renderer
-- **tsx** or **ts-node**; for running TypeScript in main process during development
-- **concurrently**; run renderer dev server + Electron simultaneously
+- **electron-vite** or **electron-forge with Vite plugin** — modern, fast HMR for renderer
+- **tsx** or **ts-node** — for running TypeScript in main process during development
+- **concurrently** — run renderer dev server + Electron simultaneously
 
 #### Debugging the Main Process
 
@@ -819,26 +819,26 @@ app.on('web-contents-created', (_event, contents) => {
 
 - ✅ **Always** set `contextIsolation: true` and `nodeIntegration: false`
 - ✅ **Always** use `contextBridge` in preload with an explicit channel whitelist
-- ✅ **Always** validate IPC inputs in the main process; treat renderer as untrusted
+- ✅ **Always** validate IPC inputs in the main process — treat renderer as untrusted
 - ✅ **Always** use `ipcMain.handle()` / `ipcRenderer.invoke()` for request/response IPC
 - ✅ **Always** configure Content Security Policy headers
 - ✅ **Always** sanitize URLs before passing to `shell.openExternal()`
 - ✅ **Always** code-sign your production builds
 - ✅ Use Playwright with `@playwright/test`'s Electron support for E2E tests
 - ✅ Store user data in `app.getPath('userData')`, never in the app directory
-- ❌ **Never** set `nodeIntegration: true`; this is the #1 Electron security vulnerability
+- ❌ **Never** set `nodeIntegration: true` — this is the #1 Electron security vulnerability
 - ❌ **Never** expose raw `ipcRenderer` or `require()` to the renderer context
 - ❌ **Never** use `remote` module (deprecated and insecure)
-- ❌ **Never** use `ipcRenderer.sendSync()`; it blocks the renderer event loop
+- ❌ **Never** use `ipcRenderer.sendSync()` — it blocks the renderer event loop
 - ❌ **Never** disable `webSecurity` in production
 - ❌ **Never** load remote/untrusted content without a strict CSP and sandboxing
 
 
 ## Related Skills
 
-- `chrome-extension-developer`; When building browser extensions instead of desktop apps (shares multi-process model concepts)
-- `docker-expert`; When containerizing Electron's build pipeline or CI/CD
-- `react-patterns` / `react-best-practices`; When using React for the renderer UI
-- `typescript-pro`; When setting up advanced TypeScript configurations for multi-target builds
-- `nodejs-backend-patterns`; When the main process needs complex backend logic
-- `github-actions-templates`; When setting up CI/CD for cross-platform Electron builds
+- `chrome-extension-developer` — When building browser extensions instead of desktop apps (shares multi-process model concepts)
+- `docker-expert` — When containerizing Electron's build pipeline or CI/CD
+- `react-patterns` / `react-best-practices` — When using React for the renderer UI
+- `typescript-pro` — When setting up advanced TypeScript configurations for multi-target builds
+- `nodejs-backend-patterns` — When the main process needs complex backend logic
+- `github-actions-templates` — When setting up CI/CD for cross-platform Electron builds

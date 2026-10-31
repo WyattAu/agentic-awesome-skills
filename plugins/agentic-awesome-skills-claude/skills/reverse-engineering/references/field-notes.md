@@ -129,7 +129,7 @@ Tauri embeds Brotli-compressed frontend assets in the executable. Find `index.ht
 Common checks:
 - `IsDebuggerPresent()` / PEB.BeingDebugged / NtQueryInformationProcess (Windows)
 - `ptrace(PTRACE_TRACEME)` / `/proc/self/status` TracerPid (Linux)
-- TLS callbacks (run before main; check PE TLS Directory)
+- TLS callbacks (run before main — check PE TLS Directory)
 - Timing checks (`rdtsc`, `clock_gettime`, `GetTickCount`)
 - Hardware breakpoint detection (DR0-DR3 via GetThreadContext)
 - INT3 scanning / code self-hashing (CRC over .text section)
@@ -168,7 +168,7 @@ Binary uses UNIX signals as binary tree navigation; hook `sigaction` via `LD_PRE
 Flip `JNZ`/`JZ` (0x75/0x74), change sleep values, patch environment checks in Ghidra (`Ctrl+Shift+G`). See [patterns.md](patterns.md#malware-anti-analysis-bypass-via-patching).
 
 ### Expected Values Tables
-Locate with `objdump -s -j .rodata binary | less`; look near comparison instructions, size matches flag length.
+Locate with `objdump -s -j .rodata binary | less` — look near comparison instructions, size matches flag length.
 
 ### x86-64 Gotchas
 Sign extension and 32-bit truncation pitfalls. See [patterns.md](patterns.md#x86-64-gotchas) for details and code examples.
@@ -212,7 +212,7 @@ Binary mmaps `.rodata` blob, XOR-deobfuscates, uses it to validate input. Reimpl
 Binary hashes every prefix independently. Recover one character at a time by matching prefix hashes. See [patterns-ctf-2.md](patterns-ctf-2.md#prefix-hash-brute-force-nullcon-2026).
 
 ### Mathematical Convergence Bitmap
-**Pattern:** Binary classifies coordinate pairs by Newton's method convergence (e.g., z^3-1=0). Grid of pass/fail results renders ASCII art flag. Key: the binary is a classifier, not a checker; reverse the math and visualize. See [patterns-ctf.md](patterns-ctf.md#mathematical-convergence-bitmap-ehax-2026).
+**Pattern:** Binary classifies coordinate pairs by Newton's method convergence (e.g., z^3-1=0). Grid of pass/fail results renders ASCII art flag. Key: the binary is a classifier, not a checker — reverse the math and visualize. See [patterns-ctf.md](patterns-ctf.md#mathematical-convergence-bitmap-ehax-2026).
 
 ### RISC-V Binary Analysis
 Statically linked, stripped RISC-V ELF. Use Capstone with `CS_MODE_RISCVC | CS_MODE_RISCV64` for mixed compressed instructions. Emulate with `qemu-riscv64`. Watch for fake flags and XOR decryption with incremental keys. See [tools.md](tools.md#risc-v-binary-analysis-ehax-2026).
@@ -236,7 +236,7 @@ Binary validates flag via matrix multiplication with 64-bit coefficients; soluti
 N-layer binary where each layer decrypts the next using user-provided key bytes + SHA-NI. Use oracle (correct key → valid code with expected pattern). JIT/fork is execution, not host containment; use a dedicated offline disposable VM. See [patterns-ctf-2.md](patterns-ctf-2.md#multi-layer-self-decrypting-binary-dicectf-2026).
 
 ### GLSL Shader VM with Self-Modifying Code
-**Pattern:** WebGL2 fragment shader implements Turing-complete VM on a 256x256 RGBA texture (program memory + VRAM). Self-modifying code (STORE opcode) patches drawing instructions. GPU parallelism causes write conflicts; emulate sequentially in Python to recover full output. See [patterns-ctf-3.md](patterns-ctf-3.md#glsl-shader-vm-with-self-modifying-code-apoorvctf-2026).
+**Pattern:** WebGL2 fragment shader implements Turing-complete VM on a 256x256 RGBA texture (program memory + VRAM). Self-modifying code (STORE opcode) patches drawing instructions. GPU parallelism causes write conflicts — emulate sequentially in Python to recover full output. See [patterns-ctf-3.md](patterns-ctf-3.md#glsl-shader-vm-with-self-modifying-code-apoorvctf-2026).
 
 ### GF(2^8) Gaussian Elimination for Flag Recovery
 **Pattern:** Binary performs Gaussian elimination over GF(2^8) with the AES polynomial (0x11b). Matrix + augmentation vector in `.rodata`; solution vector is the flag. Look for constant `0x1b` in disassembly. Addition is XOR, multiplication uses polynomial reduction. See [patterns-ctf-2.md](patterns-ctf-2.md#gf28-gaussian-elimination-for-flag-recovery-apoorvctf-2026).
@@ -257,7 +257,7 @@ N-layer binary where each layer decrypts the next using user-provided key bytes 
 **Pattern:** Kernel module registers binfmt handler for encrypted flat binaries. Reverse the `.ko` to find RC4 key (in `movabs` immediates), decrypt the flat binary, import at the fixed virtual address from the module's `vm_mmap` call. See [patterns-ctf.md](patterns-ctf.md#custom-binfmt-kernel-module-with-rc4-flat-binaries-bsidessf-2026).
 
 ### Hash-Resolved Imports / No-Import Ransomware
-**Pattern:** Binary with zero visible imports resolves APIs via symbol name hashing at runtime. Skip the hash reversing; analyze symbol resolution statically or use approved captured artifacts; do not execute ransomware with host bind mounts. See [patterns-ctf.md](patterns-ctf.md#hash-resolved-imports-no-import-ransomware-bsidessf-2026).
+**Pattern:** Binary with zero visible imports resolves APIs via symbol name hashing at runtime. Skip the hash reversing — analyze symbol resolution statically or use approved captured artifacts; do not execute ransomware with host bind mounts. See [patterns-ctf.md](patterns-ctf.md#hash-resolved-imports-no-import-ransomware-bsidessf-2026).
 
 ### ELF Section Header Corruption for Anti-Analysis
 **Pattern:** Corrupted section headers crash analysis tools but program headers are intact so binary runs normally. Patch `e_shoff` to zero or use `readelf -l` (program headers only). Flag hidden after corrupted sections with magic marker + XOR. See [patterns-ctf.md](patterns-ctf.md#elf-section-header-corruption-for-anti-analysis-bsidessf-2026).
@@ -266,7 +266,7 @@ N-layer binary where each layer decrypts the next using user-provided key bytes 
 **Pattern:** BF programs validating input have `,` (read char) followed by `+` operations whose count = expected ASCII value. Extract increment counts per input position to recover expected input without execution. See [languages.md](languages.md#brainfuck-character-by-character-static-analysis-bsidessf-2026).
 
 ### Brainfuck Side-Channel via Read Count Oracle
-**Pattern:** BF input validators read more bytes when a character is correct. Count `,` operations per candidate; highest read count = correct byte. Character-by-character recovery. See [languages.md](languages.md#brainfuck-side-channel-via-read-count-oracle-bsidessf-2026).
+**Pattern:** BF input validators read more bytes when a character is correct. Count `,` operations per candidate — highest read count = correct byte. Character-by-character recovery. See [languages.md](languages.md#brainfuck-side-channel-via-read-count-oracle-bsidessf-2026).
 
 ### Brainfuck Comparison Idiom Detection
 **Pattern:** Compiled BF uses fixed idioms for equality checks (`<[-<->] +<[>-<[-]]>[-<+>]`). Instrument interpreter to detect patterns and extract comparison operands (expected flag bytes). See [languages.md](languages.md#brainfuck-comparison-idiom-detection-bsidessf-2026).
@@ -275,7 +275,7 @@ N-layer binary where each layer decrypts the next using user-provided key bytes 
 Binary works in GDB but fails when run normally (suid)? Inspect DT_NEEDED/RPATH/RUNPATH statically for suspicious dependency paths, then `strings | diff` the suspicious vs. system library to find injected code/passwords. See [patterns-ctf.md](patterns-ctf.md#backdoored-shared-library-detection-via-string-diffing-hacklu-ctf-2012).
 
 ### Go Binary Reversing
-Large static binary with `go.buildid`? Use GoReSym to recover function names (works even on stripped binaries). Go strings are `{ptr, len}` pairs; not null-terminated. Look for `main.main`, `runtime.gopanic`, channel ops (`runtime.chansend1`/`chanrecv1`). Use Ghidra golang-loader plugin for best results. See [languages-compiled.md](languages-compiled.md#go-binary-reversing).
+Large static binary with `go.buildid`? Use GoReSym to recover function names (works even on stripped binaries). Go strings are `{ptr, len}` pairs — not null-terminated. Look for `main.main`, `runtime.gopanic`, channel ops (`runtime.chansend1`/`chanrecv1`). Use Ghidra golang-loader plugin for best results. See [languages-compiled.md](languages-compiled.md#go-binary-reversing).
 
 ### Go Binary UUID Patching for C2 Enumeration
 **Pattern:** Go C2 client with UUID from `-ldflags -X`. Binary-patch UUID bytes (same length), register with C2, enumerate clients/files via API. See [languages-compiled.md](languages-compiled.md#go-binary-uuid-patching-for-c2-client-enumeration-bsidessf-2026).
@@ -284,7 +284,7 @@ Large static binary with `go.buildid`? Use GoReSym to recover function names (wo
 D language binaries have unique symbol mangling (not C++ style). Template-heavy, many function variants. Look for `_D` prefix in symbols. See [languages-compiled.md](languages-compiled.md#d-language-binary-reversing-csaw-ctf-2016).
 
 ### Rust Binary Reversing
-Binary with `core::panicking` strings and `_ZN` mangled symbols? Use `rustfilt` for demangling. Panic messages contain source paths and line numbers; `strings binary | grep "panicked"` is the fastest approach. Option/Result layout depends on type/compiler and may use niches; no universal discriminant byte is guaranteed. See [languages-compiled.md](languages-compiled.md#rust-binary-reversing).
+Binary with `core::panicking` strings and `_ZN` mangled symbols? Use `rustfilt` for demangling. Panic messages contain source paths and line numbers — `strings binary | grep "panicked"` is the fastest approach. Option/Result layout depends on type/compiler and may use niches; no universal discriminant byte is guaranteed. See [languages-compiled.md](languages-compiled.md#rust-binary-reversing).
 
 ### Frida Dynamic Instrumentation
 Hook runtime functions without modifying binary. `frida -f ./binary -l hook.js` to spawn with instrumentation. Hook `strcmp`/`memcmp` to capture expected values, bypass anti-debug by replacing `ptrace` return value, scan memory for flag patterns, replace validation functions. See [tools-dynamic.md](tools-dynamic.md#frida-dynamic-instrumentation).
@@ -305,7 +305,7 @@ VMProtect virtualizes code into custom bytecode. Identify VM entry (pushad-like)
 BinDiff and Diaphora compare two binaries to highlight changes. Essential when challenge provides patched/original versions. Export from IDA/Ghidra, diff to find vulnerability or hidden functionality. See [tools-advanced.md](tools-advanced.md#binary-diffing).
 
 ### Advanced GDB (pwndbg, rr)
-pwndbg: `context`, `vmmap`, `search -s "flag{"`, `telescope $rsp`. GEF alternative. Reverse debugging with `rr record`/`rr replay`; step backward through execution. Python scripting for brute-force and automated tracing. See [tools-advanced.md](tools-advanced.md#advanced-gdb-techniques).
+pwndbg: `context`, `vmmap`, `search -s "flag{"`, `telescope $rsp`. GEF alternative. Reverse debugging with `rr record`/`rr replay` — step backward through execution. Python scripting for brute-force and automated tracing. See [tools-advanced.md](tools-advanced.md#advanced-gdb-techniques).
 
 ### macOS / iOS Reversing
 Mach-O binaries: `otool -l` for load commands, `class-dump` for Objective-C headers. Swift: `swift demangle` for symbols. iOS apps: decrypt FairPlay DRM with frida-ios-dump, bypass jailbreak detection with Frida hooks. Re-sign patched binaries with `codesign -f -s -`. See [platforms.md](platforms.md#macos-ios-reversing).
@@ -344,7 +344,7 @@ Execution traces with only opcodes (no data) still leak info through branch deci
 Combat-simulation binary with thread-unsafe skill lock. Race between skill selection and damage calculation; `cdqe` sign-extends 0xFFFFFFFF to -1 (signed), causing HP overflow on subtraction. See [patterns-ctf-3.md](patterns-ctf-3.md#thread-race-condition-with-signed-integer-overflow-codegate-2017).
 
 ### ESP32/Xtensa Firmware Reversing
-No IDA support; use radare2 + ESP-IDF ROM linker script (`esp32.rom.ld`) for symbol resolution. Cross-reference with public ESP-IDF HTTP server examples to identify app logic. See [patterns-ctf-3.md](patterns-ctf-3.md#esp32xtensa-firmware-reversing-with-rom-symbol-map-insomnihack-2017).
+No IDA support — use radare2 + ESP-IDF ROM linker script (`esp32.rom.ld`) for symbol resolution. Cross-reference with public ESP-IDF HTTP server examples to identify app logic. See [patterns-ctf-3.md](patterns-ctf-3.md#esp32xtensa-firmware-reversing-with-rom-symbol-map-insomnihack-2017).
 
 ### Custom VM Bytecode Lifting to LLVM IR
 Transpile custom VM bytecode to LLVM IR, then use `opt -O3` to simplify (inlining, constant folding, dead code elimination). Reduces 1300 lines to ~150 lines, revealing the underlying algorithm. See [tools-advanced.md](tools-advanced.md#custom-vm-bytecode-lifting-to-llvm-ir-google-ctf-2017).
@@ -377,8 +377,8 @@ Compare a captured synthetic signature offline, then verify the local server rej
 Two-server phishing infrastructure impersonating a government agency. Full victim control system with server-driven status code redirection.
 
 **Architecture:**
-- `{target_domain_a}`; Presentation layer (phishing pages, JS polling client)
-- `{target_domain_b}`; Data layer (PHP+MySQL backend, admin panel)
+- `{target_domain_a}` — Presentation layer (phishing pages, JS polling client)
+- `{target_domain_b}` — Data layer (PHP+MySQL backend, admin panel)
 - Both behind NAT ({internal_ip} internal), nginx, SSL-only
 - Web root: `/www/wwwroot/{target_domain_b}/`
 
@@ -387,7 +387,7 @@ Two-server phishing infrastructure impersonating a government agency. Full victi
 **Key Findings:**
 - Admin panel at `register.php` → `qichuang.php` (login form), `list.php` (dashboard template)
 - Auth via PHP session (`PHPSESSID`); `login.php` and `check_login_ajax.php` removed (404)
-- **Data leak**: `db.php` returns victim name list without auth (49+ records, **no bank details**; only id/username/note/description fields)
+- **Data leak**: `db.php` returns victim name list without auth (49+ records, **no bank details** — only id/username/note/description fields)
 - **No-auth write**: `save_note.php` accepts data without authentication
 - `backend.php` gives SQL error suggesting admin registration endpoint (broken)
 - Rate limiting on `submit.php` (multi-factor), no SQLi or session bypass found

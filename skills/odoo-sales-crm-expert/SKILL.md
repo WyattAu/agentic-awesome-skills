@@ -41,7 +41,7 @@ Typical B2B Pipeline:
   Stage 2: Qualified         (probability: 25%)
   Stage 3: Proposal Sent     (probability: 50%)
   Stage 4: Negotiation       (probability: 75%)
-  Stage 5: Won               (is_won: YES; marks opportunity as closed-won)
+  Stage 5: Won               (is_won: YES — marks opportunity as closed-won)
   Stage 6: Lost              (mark as lost via the "Mark as Lost" button)
 
 Tips:
@@ -57,7 +57,7 @@ Tips:
 
 ```text
 Menu: Sales → Configuration → Quotation Templates → New
-(Requires the "Sales Management" module; enabled in Sales Settings)
+(Requires the "Sales Management" module — enabled in Sales Settings)
 
 Template Name: SaaS Annual Subscription
 Valid for: 30 days
@@ -70,7 +70,7 @@ Lines:
 
 Signature & Payment:
   ☑ Online Signature required before order confirmation
-  ☑ Online Payment (deposit); 50% upfront
+  ☑ Online Payment (deposit) — 50% upfront
 
 Notes section:
   "Prices valid until expiration date. Subject to Schedule A terms."
@@ -84,7 +84,7 @@ Menu: Sales → Configuration → Settings
 
 Menu: Sales → Configuration → Pricelists → New
 
-Name: VIP Customer; 15% Off
+Name: VIP Customer — 15% Off
 Currency: USD
 Discount Policy: Show public price & discount on quotation
 
@@ -100,12 +100,12 @@ Assign to a customer:
 
 ## Best Practices
 
-- ✅ **Do:** Use **Lost Reasons** (CRM → Configuration → Lost Reasons) to build a dataset of why deals are lost; invaluable for sales coaching.
+- ✅ **Do:** Use **Lost Reasons** (CRM → Configuration → Lost Reasons) to build a dataset of why deals are lost — invaluable for sales coaching.
 - ✅ **Do:** Enable **Sales Teams** with revenue targets so pipeline forecasting is meaningful per team.
-- ✅ **Do:** Set **Expected Revenue** and **Closing Date** on every opportunity; these feed the revenue forecast dashboard.
+- ✅ **Do:** Set **Expected Revenue** and **Closing Date** on every opportunity — these feed the revenue forecast dashboard.
 - ✅ **Do:** Use **Quotation Templates** to standardize offers and reduce quoting time across the team.
-- ❌ **Don't:** Skip the CRM opportunity when selling; going directly from lead to invoice breaks pipeline analytics.
-- ❌ **Don't:** Manually edit prices on quotation lines as a workaround; set up proper pricelists instead.
+- ❌ **Don't:** Skip the CRM opportunity when selling — going directly from lead to invoice breaks pipeline analytics.
+- ❌ **Don't:** Manually edit prices on quotation lines as a workaround — set up proper pricelists instead.
 - Review predictive scoring variables and historical data quality; compare forecasts with actual outcomes rather than assuming accuracy.
 
 ## Limitations
@@ -113,6 +113,6 @@ Assign to a customer:
 - Odoo 19 documents a **Commissions** feature in Sales; check the installed edition/modules before assuming custom development is required.
 - The **Quotation Template** optional product feature requires the **Sale Management** module; it is not available in the base `sale` module.
 - Rule-based assignment can use team/member domains; confirm available geographic fields and test overlapping rules before enabling repeated assignment.
-- Odoo CRM does not have native **email sequence / cadence** automation; use the **Email Marketing** or **Marketing Automation** modules for drip campaigns.
+- Odoo CRM does not have native **email sequence / cadence** automation — use the **Email Marketing** or **Marketing Automation** modules for drip campaigns.
 
 References: [Odoo 19 predictive scoring and assignment](https://www.odoo.com/documentation/19.0/applications/sales/crm/track_leads/lead_scoring.html), [Odoo 19 Sales commissions](https://www.odoo.com/documentation/19.0/applications/sales/sales/commissions.html).

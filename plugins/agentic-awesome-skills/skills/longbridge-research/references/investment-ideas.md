@@ -2,7 +2,7 @@
 
 Scope: read-only research template; verify current CLI flags/entitlements, cite actual sources and timestamps, and distinguish estimates from observations. Never expose account credentials or raw sensitive error output. Examples and thresholds are illustrative, not current quotes or validated trading signals. Account-specific data is optional and requires user-authorized minimum read access.
 
-Surfaces actionable investment ideas through a multi-lens screening process: value, momentum, fundamental improvement, and thematic catalysts; outputting a prioritised candidate list with brief rationale for each idea.
+Surfaces actionable investment ideas through a multi-lens screening process: value, momentum, fundamental improvement, and thematic catalysts — outputting a prioritised candidate list with brief rationale for each idea.
 
 ## Workflow
 

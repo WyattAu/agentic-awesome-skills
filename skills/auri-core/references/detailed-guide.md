@@ -150,7 +150,7 @@ Env vars: ANTHROPIC_API_KEY_SECRET, DYNAMODB_TABLE=auri-user-memory, POLLY_VOICE
 
 ---
 
-### 3.7 Esboços: implementação não fornecida
+### 3.7 Esboços — implementação não fornecida
 
 Handler de Conversa (handlers/conversation.py):
 

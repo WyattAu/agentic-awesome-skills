@@ -52,7 +52,7 @@ Confirm source/restore targets, RPO/RTO, retention and rollback. These scripts a
 
 ```bash
 #!/bin/bash
-# pg_backup.sh: PostgreSQL logical backup
+# pg_backup.sh — PostgreSQL logical backup
 set -euo pipefail
 umask 077
 
@@ -75,7 +75,7 @@ echo "[$(date)] PostgreSQL backup complete: $FILENAME ($(du -h "$FILENAME" | cut
 
 ```bash
 #!/bin/bash
-# pg_basebackup.sh: PostgreSQL physical backup for PITR
+# pg_basebackup.sh — PostgreSQL physical backup for PITR
 set -euo pipefail
 umask 077
 
@@ -113,7 +113,7 @@ psql -h localhost -U myapp -d mydb < /backups/postgres/mydb_20250115.sql
 
 ```bash
 #!/bin/bash
-# mysql_backup.sh: MySQL logical backup
+# mysql_backup.sh — MySQL logical backup
 set -euo pipefail
 umask 077
 
@@ -140,7 +140,7 @@ echo "[$(date)] MySQL backup complete: $FILENAME ($(du -h "$FILENAME" | cut -f1)
 
 ```bash
 #!/bin/bash
-# xtrabackup.sh: MySQL physical backup
+# xtrabackup.sh — MySQL physical backup
 set -euo pipefail
 umask 077
 
@@ -178,7 +178,7 @@ sudo systemctl start mysql
 
 ```bash
 #!/bin/bash
-# mongo_backup.sh: MongoDB backup
+# mongo_backup.sh — MongoDB backup
 set -euo pipefail
 umask 077
 
@@ -216,7 +216,7 @@ mongorestore --config=/etc/backup/mongo-restore.yml \
 
 ```bash
 #!/bin/bash
-# s3_upload.sh: Upload backups to S3
+# s3_upload.sh — Upload backups to S3
 set -euo pipefail
 umask 077
 
@@ -283,7 +283,7 @@ restic backup /backups/postgres /backups/mysql /backups/mongodb
 # List snapshots
 restic snapshots
 
-# Prune old snapshots: keep 7 daily, 4 weekly, 6 monthly
+# Prune old snapshots — keep 7 daily, 4 weekly, 6 monthly
 restic forget --keep-daily 7 --keep-weekly 4 --keep-monthly 6 --prune
 
 # Restore a snapshot
@@ -318,7 +318,7 @@ restic restore latest --target /restore/
 
 ```bash
 #!/bin/bash
-# verify_backup.sh: weekly restore test
+# verify_backup.sh — weekly restore test
 set -euo pipefail
 umask 077
 
@@ -357,7 +357,7 @@ docker rm -f pg-restore-test
 
 # Alert on failure
 if [ "$USERS_COUNT" -lt 1 ]; then
-  echo "ALERT: Backup verification failed; users table is empty" >&2
+  echo "ALERT: Backup verification failed — users table is empty" >&2
   exit 1
 fi
 
@@ -368,7 +368,7 @@ echo "[$(date)] Backup verification PASSED"
 
 ```bash
 #!/bin/bash
-# backup_all.sh: unified backup orchestrator
+# backup_all.sh — unified backup orchestrator
 set -euo pipefail
 umask 077
 

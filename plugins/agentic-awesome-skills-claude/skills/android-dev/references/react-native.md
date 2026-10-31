@@ -62,7 +62,7 @@ export const RootNavigator = () => {
 ## State Management (Zustand + React Query)
 
 ```typescript
-// Client state; Zustand
+// Client state — Zustand
 // Do not persist bearer or refresh tokens in AsyncStorage/plain MMKV.
 // Store secrets with a platform-backed module such as react-native-keychain
 // or expo-secure-store, and persist only non-sensitive UI state here.
@@ -88,7 +88,7 @@ const getSecureToken = () => Keychain.getGenericPassword().then((r) => (r ? r.pa
 const saveSecureToken = (token: string) => Keychain.setGenericPassword('auth', token);
 const clearSecureToken = () => Keychain.resetGenericPassword();
 
-// Server state; React Query
+// Server state — React Query
 export const useItems = () =>
   useQuery({
     queryKey: ['items'],

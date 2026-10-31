@@ -19,7 +19,7 @@ license_source: "https://github.com/target1m/traderspy-mcp/blob/069aae5a84640d67
 A briefing is a fixed set of questions answered with fresh numbers, in an order a trader can scan
 in thirty seconds: where are the majors, how is the market positioned, what is the signal engine
 seeing, what stands out on the screener. The value is in the selection and the brevity, not in the
-volume of data; every tool call costs the user quota, so the playbook below is deliberately
+volume of data — every tool call costs the user quota, so the playbook below is deliberately
 tight.
 
 ## When to Use
@@ -30,18 +30,18 @@ tight.
 
 ## The playbook (6 calls, all read-only)
 
-1. **Majors**; `get_price` with `["BTCUSDT","ETHUSDT","SOLUSDT"]` plus any coins the user has
+1. **Majors** — `get_price` with `["BTCUSDT","ETHUSDT","SOLUSDT"]` plus any coins the user has
    mentioned in the conversation (≤ 20 per call). Price, 24h change, 24h range.
-2. **Positioning**; `get_derivatives` with `["BTC","ETH","SOL"]` (add up to two of the user's
+2. **Positioning** — `get_derivatives` with `["BTC","ETH","SOL"]` (add up to two of the user's
    coins). Funding label and annualized rate, open-interest change and regime, top-trader long
    share, taker flow. The `notes[]` are written to be quoted.
-3. **Movers**; `screen_symbols` with no conditions, `sortBy: "change24h"`, `limit: 50`, `universe:
+3. **Movers** — `screen_symbols` with no conditions, `sortBy: "change24h"`, `limit: 50`, `universe:
    50`, `interval: "4h"`. One call returns all 50 most-traded pairs sorted by 24h change: the top
    five are the gainers, the last five the losers.
-4. **What is stretched**; `screen_symbols` with `[{"metric":"rsi","op":"lt","value":30}]` on 4h,
-   `limit: 5`. If it returns nothing, flip to `rsi gt 70`; one of the two usually has names.
-5. **Signal engine**; `get_signal_stats` with `period: "24h"` (or `7d` for a weekly recap).
-6. **Freshest ideas**; `get_signals` with `limit: 5`.
+4. **What is stretched** — `screen_symbols` with `[{"metric":"rsi","op":"lt","value":30}]` on 4h,
+   `limit: 5`. If it returns nothing, flip to `rsi gt 70` — one of the two usually has names.
+5. **Signal engine** — `get_signal_stats` with `period: "24h"` (or `7d` for a weekly recap).
+6. **Freshest ideas** — `get_signals` with `limit: 5`.
 
 Smart-money lean is already in step 2 (`positioning.topTraderLongPct`); add `get_positions`
 (`status: open`, `limit: 20`) only when the user asks who specifically is positioned how.
@@ -51,13 +51,13 @@ Smart-money lean is already in step 2 (`positioning.topTraderLongPct`); add `get
 `interval: "1d"` in steps 3–4.
 
 If any call fails or returns empty, keep the section with a one-line "unavailable right now" note
-rather than dropping it silently; a briefing with a hole is more honest than one that quietly
+rather than dropping it silently — a briefing with a hole is more honest than one that quietly
 narrowed.
 
 ## Reading the pieces
 
 - **Funding**: near the 0.01%/8h baseline is neutral; clearly positive means longs pay shorts (a
-  crowded long is a risk, not a signal); negative means shorts pay. Quote the annualized figure -
+  crowded long is a risk, not a signal); negative means shorts pay. Quote the annualized figure —
   it is the number people feel.
 - **Open interest regime** (`openInterest.regime`): `new_longs` (OI up, price up), `short_covering`
   (OI down, price up), `new_shorts` (OI up, price down), `long_liquidation` (OI down, price down),
@@ -68,24 +68,24 @@ narrowed.
 - **Signal stats**: `winRate` is hits ÷ (hits + stops) on signals created in the window; say
   `total` and `pending` next to it, and treat a 24h window with fewer than ~10 resolved signals as
   a small sample.
-- **Movers** are the most-traded pairs by 24h volume sorted by change; a liquid-names list, not
+- **Movers** are the most-traded pairs by 24h volume sorted by change — a liquid-names list, not
   an all-market list. Say so if a small cap the user follows is missing.
 
 ## The briefing format
 
-ALWAYS use this structure, in this order, with real numbers from the calls; no placeholders:
+ALWAYS use this structure, in this order, with real numbers from the calls — no placeholders:
 
-**Crypto brief; <date, UTC time of the calls>**
+**Crypto brief — <date, UTC time of the calls>**
 
-1. **Headline**; one sentence: the majors' direction and the single most notable positioning fact.
-2. **Majors**; a table: Symbol · Price · 24h % · 24h range.
-3. **Positioning**; per major, one line: funding (label, annualized), OI regime, top-trader long %,
+1. **Headline** — one sentence: the majors' direction and the single most notable positioning fact.
+2. **Majors** — a table: Symbol · Price · 24h % · 24h range.
+3. **Positioning** — per major, one line: funding (label, annualized), OI regime, top-trader long %,
    and one quoted `note`.
-4. **Movers**; top 5 gainers and top 5 losers among the most-traded pairs (symbol, price, 24h %).
-5. **Stretched**; the oversold or overbought names with their RSI, or "none on the 4h" if empty.
-6. **Signal engine**; `total` signals in the window, hit rate with the resolved count, then the
+4. **Movers** — top 5 gainers and top 5 losers among the most-traded pairs (symbol, price, 24h %).
+5. **Stretched** — the oversold or overbought names with their RSI, or "none on the 4h" if empty.
+6. **Signal engine** — `total` signals in the window, hit rate with the resolved count, then the
    five freshest signals as one line each: coin, side, timeframe, preset, status.
-7. **What to watch**; two or three bullets derived from the data above (a funding extreme, an OI
+7. **What to watch** — two or three bullets derived from the data above (a funding extreme, an OI
    regime worth confirming, a stretched name that is also in a signal). Facts and their
    implications, not instructions.
 8. One plain sentence: crypto derivatives are high-risk; this is market information for the user's
@@ -97,9 +97,9 @@ with price flat" is a briefing; "BTC looks weak" is not.
 ## Conduct
 
 - A briefing reports the market; it does not tell the user what to do in it. "What to watch" names
-  facts and what would confirm or invalidate them; never "buy the dip" or "short this".
+  facts and what would confirm or invalidate them — never "buy the dip" or "short this".
 - Hit rates and past moves describe their sample; do not extend them into predictions.
-- Nothing in this connector trades; no order, close, transfer or withdrawal tool exists, by
+- Nothing in this connector trades — no order, close, transfer or withdrawal tool exists, by
   design. If asked to act on the briefing, say so plainly; the decision and the trade stay with the
   user.
 - Every number comes from a tool result made in this conversation; state the time of the calls so

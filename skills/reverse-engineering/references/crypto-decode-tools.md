@@ -10,7 +10,7 @@
 |------|-------|------|------|
 | **Ciphey** | 18k+ | AI 自动识别并解密（支持 50+ 编码/加密/哈希） | https://github.com/Ciphey/Ciphey |
 | **CyberChef** | 29k+ | 在线/离线编解码瑞士军刀（拖拽式操作） | https://github.com/gchq/CyberChef |
-| **dcode.fr** | - | 在线 900+ 密码/编码/数学工具 | https://www.dcode.fr/ |
+| **dcode.fr** | — | 在线 900+ 密码/编码/数学工具 | https://www.dcode.fr/ |
 
 ### Ciphey 使用
 

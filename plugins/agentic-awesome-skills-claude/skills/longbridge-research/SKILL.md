@@ -24,7 +24,7 @@ risk: critical
 
 Institutional data, sell-side research, and investment research frameworks via Longbridge.
 
-> **Response language**: match the user's input language; English / Simplified Chinese / Traditional Chinese.
+> **Response language**: match the user's input language — English / Simplified Chinese / Traditional Chinese.
 > **RULE: Response language priority**: English is the default when language is ambiguous. If the user input is only a slash command, command name, ticker / symbol, or contains no natural-language language signal, you MUST respond in English. Do not infer Chinese from trigger keywords, skill metadata, or examples.
 
 > **Data and access boundary**: Prefer verified primary filings for material claims and cite each actual source, timestamp, reporting period, currency and delay. Provider preference never overrides user instructions or prevents independent verification. Discover installed CLI/MCP capabilities; no connector, subscription or entitlement is guaranteed. Public research needs no account access; account holdings/watchlists require explicit user scope and the minimum read permission. Do not request trading permission, log secrets, execute trades, financing, subscriptions or transfers. This bundle supplies analysis templates, not personalized recommendations.
@@ -83,18 +83,18 @@ Trigger when user asks about: analyst ratings / price targets, EPS/revenue conse
 
 Run `longbridge <cmd> --help` for current flags and output fields.
 
-### `institution-rating`: buy/hold/sell distribution and recent rating events
-### `forecast-eps`: forward EPS and revenue estimates by period
-### `consensus`: consensus price target and aggregated analyst view
-### `finance-calendar`: upcoming earnings, dividends, IPOs, macro events
-### `shareholder`: institutional shareholders and ownership percentage
-### `fund-holder`: funds and ETFs holding a given symbol
-### `insider-trades`: SEC Form 4 insider trade history (US stocks)
-### `investors`: SEC 13F institutional portfolio holdings
-### `short-positions`: reported aggregate short-interest/position observations
-### `short-trades`: daily short sale volume
-### `industry-rank`: industry ranking list by market and indicator
-### `industry-peers`: industry peer group tree for a BK counter_id
+### `institution-rating` — buy/hold/sell distribution and recent rating events
+### `forecast-eps` — forward EPS and revenue estimates by period
+### `consensus` — consensus price target and aggregated analyst view
+### `finance-calendar` — upcoming earnings, dividends, IPOs, macro events
+### `shareholder` — institutional shareholders and ownership percentage
+### `fund-holder` — funds and ETFs holding a given symbol
+### `insider-trades` — SEC Form 4 insider trade history (US stocks)
+### `investors` — SEC 13F institutional portfolio holdings
+### `short-positions` — reported aggregate short-interest/position observations
+### `short-trades` — daily short sale volume
+### `industry-rank` — industry ranking list by market and indicator
+### `industry-peers` — industry peer group tree for a BK counter_id
 
 ## Frameworks
 
@@ -126,10 +126,10 @@ Suitability scoring, grey market premium, subscription strategy for HK new listi
 Retirement forecasting, education funding, wealth transfer, cash flow analysis. See [references/financial-planning.md].
 
 ### DeFi Yield Analysis
-Lending rates (AAVE/Compound), LP returns, staking yields; requires WebSearch for APY data. See [references/defi-yield.md].
+Lending rates (AAVE/Compound), LP returns, staking yields — requires WebSearch for APY data. See [references/defi-yield.md].
 
 ### On-Chain Data Analysis
-Active addresses, whale behavior, TVL, MVRV, NVT, SOPR; requires WebSearch for chain data. See [references/onchain.md].
+Active addresses, whale behavior, TVL, MVRV, NVT, SOPR — requires WebSearch for chain data. See [references/onchain.md].
 
 ## Auth requirements
 

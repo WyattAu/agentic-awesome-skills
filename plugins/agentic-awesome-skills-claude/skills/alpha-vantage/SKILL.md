@@ -8,7 +8,7 @@ metadata:
     skill-author: K-Dense Inc.
 ---
 
-# Alpha Vantage: Financial Market Data
+# Alpha Vantage — Financial Market Data
 
 Access 20+ years of global financial data: equities, options, forex, crypto, commodities, economic indicators, and 50+ technical indicators.
 

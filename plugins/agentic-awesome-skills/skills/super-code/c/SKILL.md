@@ -61,7 +61,7 @@ char *a = malloc(100);
 char *b = malloc(200);
 if (!b) return -1; // leaks a
 
-// ✅; single cleanup label
+// ✅ — single cleanup label
 char *a = NULL, *b = NULL;
 a = malloc(100);
 if (!a) goto cleanup;
@@ -73,7 +73,7 @@ cleanup:
     free(a);
 ```
 
-**Use `sizeof *ptr` instead of `sizeof(Type)`; it stays correct when the type changes.**
+**Use `sizeof *ptr` instead of `sizeof(Type)` — it stays correct when the type changes.**
 
 ---
 
@@ -84,7 +84,7 @@ cleanup:
 void process(int *arr, int len) { ... }
 process(data, 10);
 
-// ✅; pass size alongside pointer, or use a struct
+// ✅ — pass size alongside pointer, or use a struct
 typedef struct { int *data; size_t len; } IntSlice;
 ```
 
@@ -116,7 +116,7 @@ free(arr);
 // ❌ Using magic numbers for error returns
 if (do_thing() == -1) { ... }
 
-// ✅; define or use named error codes
+// ✅ — define or use named error codes
 #include <errno.h>
 if (do_thing() < 0) {
     int saved_errno = errno; // only when do_thing documents setting errno
@@ -136,7 +136,7 @@ if (r1 == 0) {
     }
 }
 
-// ✅; early return / goto cleanup
+// ✅ — early return / goto cleanup
 if (step1() < 0) goto fail;
 if (step2() < 0) goto fail;
 if (step3() < 0) goto fail;
@@ -146,7 +146,7 @@ fail:
     return -1;
 ```
 
-**`goto cleanup` is idiomatic C for resource teardown; don't avoid it out of principle.**
+**`goto cleanup` is idiomatic C for resource teardown — don't avoid it out of principle.**
 
 ---
 
@@ -178,7 +178,7 @@ for (int i = 0; i < n; i++) {
     strcat(result, items[i]);
 }
 
-// ✅; track write position
+// ✅ — track write position
 char result[1024];
 size_t pos = 0;
 result[0] = '\0';
@@ -189,7 +189,7 @@ for (int i = 0; i < n; i++) {
 }
 ```
 
-**Prefer `snprintf` over `sprintf`; always.**
+**Prefer `snprintf` over `sprintf` — always.**
 
 ---
 

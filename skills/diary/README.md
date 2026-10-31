@@ -33,7 +33,7 @@ When a developer types `:{Write a diary entry using the diary skill}` in *any* p
 
 ### Step 3: AI Smart Fusion & Global Archiving (AI Execution)
 * **Seamless Fusion**: The AI mentally sews the two sources from Step 2 together, writing the combined result into the global diary vault: `.../global_skills/auto-skill/diary/YYYY/MM/YYYY-MM-DD.md`.
-* **Strict Zoning**: It uses `### 📁 <Project Name>` tagging to ensure existing project progress is preserved, while new project progress is safely appended-absolutely no overwriting.
+* **Strict Zoning**: It uses `### 📁 <Project Name>` tagging to ensure existing project progress is preserved, while new project progress is safely appended—absolutely no overwriting.
 
 ### Step 4: Cloud Sync & Experience Extraction (Script + Human)
 1. **One-Click Push**: The AI calls `master_diary_sync.py --sync-only` to push the data to Notion/Obsidian.

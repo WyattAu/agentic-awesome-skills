@@ -7,7 +7,7 @@ implementer produces a diff, and a reviewer who did not write it decides whether
 
 Every delegate skill asks you to verify the implementer's claims. Warp raises the stakes: `oz agent
 run` has no sandbox, no permission mode, and no read-only run, so nothing constrained what the run
-could touch while it worked. The diff is not a courtesy record; it is the only record.
+could touch while it worked. The diff is not a courtesy record — it is the only record.
 
 ## The checklist
 
@@ -25,35 +25,35 @@ discard.
    git-visible worktree state, not a log of what the agent did. It cannot show an ignored file, an
    edit the run made and then reverted, or a write outside the repository, and it includes anything
    already dirty before dispatch. Start there, but do not read it as the complete set. `null` means
-   git could not report; inspect the tree by hand. `[]` on a run that claimed edits is a
+   git could not report — inspect the tree by hand. `[]` on a run that claimed edits is a
    contradiction worth chasing.
 3. **Re-run the gates yourself.** Do not accept "tests pass" from `finalMessage`. Run the project's
    actual lint, typecheck, build, and test commands and read the output. Take "actual" from
    `CONTRIBUTING.md`, the CI config, or `package.json`: a project's gate set often includes a
    packaging, manifest, or schema validation step that lint and test do not cover, and that is
    exactly the gate a run can break without any test going red.
-4. **Read the whole diff against the brief.** `git diff` and `git diff --staged`; then open every
+4. **Read the whole diff against the brief.** `git diff` and `git diff --staged` — then open every
    `??` path in `touchedFiles` directly, including everything inside an untracked directory. Neither
    diff command shows the contents of an untracked file, so a file Warp created is invisible to both
    and would otherwise reach your commit unread. Ask of each hunk and each new file: did the brief
    ask for this? Changes outside the brief's stated scope are the thing to catch.
 5. **Check what should NOT have changed.** Lockfiles, CI config, formatter config, unrelated
    modules, and anything the brief listed under "leave untouched".
-6. **Grep for dangling references** after any removal or rename; imports, string keys, docs.
+6. **Grep for dangling references** after any removal or rename — imports, string keys, docs.
 7. **Round-trip migrations.** Apply and roll back before trusting a schema change.
 8. **Run guard skills** if the repository has them installed.
 9. **Confirm nothing was committed.** `git log -1` should still be your last commit. The relay never
-   commits; if a commit exists, the agent made it despite the brief; treat that as a finding.
+   commits; if a commit exists, the agent made it despite the brief — treat that as a finding.
 
 ## Reading `finalMessage` correctly
 
-`finalMessage` is Warp's self-report: a claim, not evidence. Read it for two things only -
+`finalMessage` is Warp's self-report: a claim, not evidence. Read it for two things only —
 
 - **Decisions it made that the brief did not specify.** These are the parts you most need to surface
   to the user.
 - **What it says it could not do.** Usually accurate, and it tells you where to look first.
 
-Everything else in it; "all tests pass", "no other files changed"; is a hypothesis your gates and
+Everything else in it — "all tests pass", "no other files changed" — is a hypothesis your gates and
 your diff read either confirm or refute. If `finalMessage` is empty on a run that exited 0, read
 `events.jsonl` rather than assuming the run did nothing.
 
@@ -66,7 +66,7 @@ node "<skill-dir>/scripts/relay.mjs" --brief delta-brief.txt --cd /path/to/repo 
   --conversation "$(jq -r .conversationId /tmp/warp-run-1/result.json)"
 ```
 
-Warp still holds the earlier exchange, so send only the delta; what was wrong, what to change, what
+Warp still holds the earlier exchange, so send only the delta — what was wrong, what to change, what
 to leave alone. See [writing-the-brief.md](writing-the-brief.md#delta-briefs).
 
 If `conversationId` is `null`, the stream did not carry one; dispatch a fresh run with a brief that
@@ -77,7 +77,7 @@ would take longer to correct than to redo.
 
 Discard against a known baseline, never with a blanket revert. `git checkout -- .` is the wrong
 reach: it leaves staged and untracked files behind, so the tree stays dirty for the next dispatch,
-and it destroys any uncommitted work of your own that predates the run. Dispatch from a clean tree -
+and it destroys any uncommitted work of your own that predates the run. Dispatch from a clean tree —
 commit your own changes, or `git stash push --include-untracked` them. A bare `git stash` leaves
 untracked files in place, and those resurface as `??` entries in `touchedFiles`, where the cleanup
 below would delete work the run never made. Confirm `git status --porcelain` prints nothing before
@@ -91,7 +91,7 @@ git clean -f -- <untracked paths>                    # the '??' entries
 
 A `??` entry can name a whole directory rather than each file under it; passing that path removes
 the directory and its contents, since `-d` only governs the no-pathspec case. The exception is a
-nested git repository; if the run scaffolded one, `git clean -f` skips it and `-ff` is required.
+nested git repository — if the run scaffolded one, `git clean -f` skips it and `-ff` is required.
 
 If dispatching from a clean tree is not an option, give Warp its own `git worktree` instead: then
 discarding is `git worktree remove --force`, and your work was never in reach. Either way, rewrite
@@ -111,14 +111,14 @@ agreed contract. Two limits stay with you:
 - **Surface, don't absorb.** Report Warp's design decisions, its defensible-but-unasked turns, and
   the non-blocking nitpicks you chose not to fix. Silently smoothing them over hides the
   implementer's judgment from the person who owns the code.
-- **Stop for scope changes.** If finishing correctly requires going beyond the brief; a dependency
-  bump, a schema change, an interface the brief did not mention; ask rather than expanding the
+- **Stop for scope changes.** If finishing correctly requires going beyond the brief — a dependency
+  bump, a schema change, an interface the brief did not mention — ask rather than expanding the
   mandate yourself.
 
 Snapshot egress is a decision you make **before** dispatch, not something you report after it. `oz
 agent run` uploads an end-of-run workspace snapshot by default, so reading `snapshotDisabled: false`
 off a finished run tells you only that the upload already happened. If the repository is sensitive,
 pass `--no-snapshot` on the dispatch and confirm `snapshotDisabled: true` in `result.json` before
-going further. Keep reporting the field either way; it is the evidence of which way the run went.
+going further. Keep reporting the field either way — it is the evidence of which way the run went.
 
 Also surface the `runUrl` when someone will want to inspect the run in Warp.

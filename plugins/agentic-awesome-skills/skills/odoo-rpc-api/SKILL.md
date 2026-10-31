@@ -93,13 +93,13 @@ curl -X POST https://myodoo.example.com/web/dataset/call_kw \
 
 ## Best Practices
 
-- ✅ **Do:** Use **API Keys** (Settings → Technical → API Keys) instead of passwords; available from Odoo 14+.
+- ✅ **Do:** Use **API Keys** (Settings → Technical → API Keys) instead of passwords — available from Odoo 14+.
 - ✅ **Do:** Use `search_read` instead of `search` + `read` to reduce network round trips.
 - ✅ **Do:** Handle connection errors with bounded backoff for safe reads. After an ambiguous create/write timeout, reconcile using a stable external identifier before retrying to avoid duplicate business records.
 - ✅ **Do:** Store credentials in environment variables or a secrets manager (e.g., AWS Secrets Manager, `.env` file).
-- ❌ **Don't:** Hardcode passwords or API keys directly in scripts; rotate them and use env vars.
-- ❌ **Don't:** Call the API in a tight loop without batching; bulk operations reduce server load significantly.
-- ❌ **Don't:** Use the master admin password for API integrations; create a dedicated integration user with minimum required permissions.
+- ❌ **Don't:** Hardcode passwords or API keys directly in scripts — rotate them and use env vars.
+- ❌ **Don't:** Call the API in a tight loop without batching — bulk operations reduce server load significantly.
+- ❌ **Don't:** Use the master admin password for API integrations — create a dedicated integration user with minimum required permissions.
 
 ## Limitations
 

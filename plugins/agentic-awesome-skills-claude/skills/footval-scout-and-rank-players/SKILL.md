@@ -61,7 +61,7 @@ Full argument list:
 ## National teams
 
 `get_national_team` builds the strongest 26-player squad FootVal can assemble from the players who
-represent that nation (3 GK, 8 DF, 8 MF, 7 FW by value). It is **not** the official call-up -
+represent that nation (3 GK, 8 DF, 8 MF, 7 FW by value). It is **not** the official call-up —
 call it "FootVal's strongest squad by value".
 
 ## Examples

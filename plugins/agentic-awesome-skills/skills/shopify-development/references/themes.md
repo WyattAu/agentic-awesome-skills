@@ -377,7 +377,7 @@ check response.ok before claiming success. Never log customer/cart payloads.
   <select id="variant-{{ section.id }}" name="id">
     {% for variant in product.variants %}
       <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
-        {{ variant.title | escape }}; {{ variant.price | money }}
+        {{ variant.title | escape }} — {{ variant.price | money }}
       </option>
     {% endfor %}
   </select>

@@ -1,4 +1,4 @@
-# AGENTS.md: Minimal Template
+# AGENTS.md — Minimal Template
 
 Generate when the user asks for a simple, single-file AGENTS.md following the agents.md standard format (https://agents.md). No YAML frontmatter, no rule files, no ASCII art. Keep it under 30 lines.
 
@@ -28,7 +28,7 @@ Fill `{{PLACEHOLDER}}` markers from project detection. Only include sections who
 
 - One bullet per command: install deps, start dev, run build, run lint, format
 - Use the detected package manager (`pnpm install`, `bun install`, etc.)
-- Keep it short; 3-5 bullets max
+- Keep it short — 3-5 bullets max
 
 ### `{{CODE_STYLE}}`
 

@@ -29,10 +29,10 @@ report_count: 0
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-BRUTE-FORCE: Rate Limiting / Brute Force / Enumeration
+# HUNT-BRUTE-FORCE — Rate Limiting / Brute Force / Enumeration
 
 > Grounding note: this skill is built from published technique classes, not from a
-> curated set of named HackerOne reports. `report_count` is intentionally `0`; do
+> curated set of named HackerOne reports. `report_count` is intentionally `0` — do
 > not cite an exact payout or report ID you cannot verify. Where a public case is
 > well-documented (e.g. Laxman Muthiyah's Instagram password-reset OTP race/rotation
 > research, 2019–2021), it is named below as a *technique reference*, not a payout claim.
@@ -42,11 +42,11 @@ report_count: 0
 A uniform six-digit code has 1,000,000 possibilities; account-takeover feasibility depends on effective attempt budgets, binding, lifetime and other controls.
 
 **Highest-value chains:**
-- **OTP / 2FA brute → MFA bypass → ATO**; no effective rate limit on `/verify-otp`, full 000000–999999 keyspace reachable
-- **Password-reset token brute**; short/predictable/non-expiring tokens + no rate limit → ATO (the Instagram 2019 case combined a 6-digit reset code, no rate limit per request-source, and IP rotation to make 10^6 tractable)
-- **Username/email enumeration → targeted credential stuffing**; valid/invalid distinguishable by response string, status code, or timing, use only controlled synthetic identities; never acquire/spray breach corpora
-- **Coupon / gift-card / referral code brute**; no rate limit on code validation → financial impact
-- **ReDoS**; attacker-controlled input hits a catastrophic-backtracking regex → CPU exhaustion → DoS
+- **OTP / 2FA brute → MFA bypass → ATO** — no effective rate limit on `/verify-otp`, full 000000–999999 keyspace reachable
+- **Password-reset token brute** — short/predictable/non-expiring tokens + no rate limit → ATO (the Instagram 2019 case combined a 6-digit reset code, no rate limit per request-source, and IP rotation to make 10^6 tractable)
+- **Username/email enumeration → targeted credential stuffing** — valid/invalid distinguishable by response string, status code, or timing, use only controlled synthetic identities; never acquire/spray breach corpora
+- **Coupon / gift-card / referral code brute** — no rate limit on code validation → financial impact
+- **ReDoS** — attacker-controlled input hits a catastrophic-backtracking regex → CPU exhaustion → DoS
 
 ---
 
@@ -126,7 +126,7 @@ local CPU/time evidence without causing a real outage.
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

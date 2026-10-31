@@ -172,7 +172,7 @@ trackio.init(project="hyperparam-sweep", name="lr-0.01", group="lr_0.01")
 
 ## Configuration Best Practices
 
-Keep config minimal; only log what's useful for comparing runs:
+Keep config minimal — only log what's useful for comparing runs:
 
 ```python
 trackio.init(

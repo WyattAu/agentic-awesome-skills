@@ -19,9 +19,9 @@ Use this skill when you need scaffold a new mobile page/screen using the StyleSe
 ## When NOT to use
 
 - For a single composed pattern within an existing page → use `/ss-pattern`
-- For desktop-only screens; this skill is mobile-first
+- For desktop-only screens — this skill is mobile-first
 - For multi-page navigation structure → use `/ss-flow` first
-- For tweaking an existing page; edit the file directly
+- For tweaking an existing page — edit the file directly
 
 Create a new page: **$0**
 Description: $ARGUMENTS
@@ -65,7 +65,7 @@ export default function PageName() {
    - Bottom padding for nav: `pb-24`
    - Cards: `bg-card rounded-2xl p-6 shadow-[var(--shadow-card)]`
 
-4. Use semantic tokens for all colors; never hardcode hex values.
+4. Use semantic tokens for all colors — never hardcode hex values.
 
 5. Compose the page from existing components (ui/ and patterns/) wherever possible.
 

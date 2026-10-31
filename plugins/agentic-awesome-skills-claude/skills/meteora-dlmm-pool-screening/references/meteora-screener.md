@@ -238,7 +238,7 @@ def from_dlmm(raw: dict[str, Any], timeframe: str) -> dict[str, Any]:
 
 def fmt(n: float | None, digits: int = 2) -> str:
     if n is None:
-        return "-"
+        return "—"
     if abs(n) >= 1_000_000:
         return f"{n / 1_000_000:.{digits}f}M"
     if abs(n) >= 1_000:
@@ -248,7 +248,7 @@ def fmt(n: float | None, digits: int = 2) -> str:
 
 def fmt_bin(n: float | None) -> str:
     if n is None:
-        return "-"
+        return "—"
     return str(int(n)) if float(n).is_integer() else fmt(n, 1)
 
 
@@ -282,12 +282,12 @@ def print_table(rows: list[dict[str, Any]], rejects: list[tuple[str, str]], meta
             f"{row.get('verdict')} | {why} |"
         )
     if not rows:
-        print("_no pools passed gates; loosen max TVL or min fee/TVL, or try --preset loose_")
+        print("_no pools passed gates — loosen max TVL or min fee/TVL, or try --preset loose_")
     if rejects:
         print()
         print("## Rejects (sample)")
         for name, reason in rejects[:12]:
-            print(f"- {name}; {reason}")
+            print(f"- {name} — {reason}")
 
 
 def main() -> None:

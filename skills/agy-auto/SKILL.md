@@ -14,7 +14,7 @@ license_source: "https://github.com/onkarbadve/agy-auto/blob/main/LICENSE"
 tools: [antigravity]
 ---
 
-# agy-auto: Antigravity Auto-Permission & Security Gate
+# agy-auto — Antigravity Auto-Permission & Security Gate
 
 ## External tool prerequisite
 

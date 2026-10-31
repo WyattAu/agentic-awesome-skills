@@ -1,4 +1,4 @@
-# astropy.cosmology: Reference
+# astropy.cosmology — Reference
 
 This file is a placeholder for the extended `astropy.cosmology` reference promised in the skill workflow.
 

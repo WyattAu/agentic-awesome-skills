@@ -20,7 +20,7 @@ metadata:
 
 # LLM Fine-Tuning Infrastructure
 
-Train and fine-tune open-source LLMs efficiently; from LoRA on a single GPU to distributed full fine-tuning across multi-node clusters.
+Train and fine-tune open-source LLMs efficiently — from LoRA on a single GPU to distributed full fine-tuning across multi-node clusters.
 
 ## When to Use This Skill
 
@@ -106,7 +106,7 @@ EOF
 ## Axolotl (Production Fine-Tuning Framework)
 
 ```yaml
-# config.yaml: Axolotl QLoRA config for Llama 3.1
+# config.yaml — Axolotl QLoRA config for Llama 3.1
 base_model: meta-llama/Llama-3.1-8B-Instruct
 model_type: LlamaForCausalLM
 tokenizer_type: PreTrainedTokenizerFast
@@ -312,7 +312,7 @@ spec:
 - Benchmark compatible attention implementations; gains depend on hardware, shapes and software versions.
 - Monitor training loss/eval loss via W&B or MLflow; investigate overfitting with held-out data, regularization or fewer training steps; reducing data can worsen it.
 - Validate with a held-out eval set (5–10%); MMLU or custom evals for quality gates.
-- Start with LoRA r=16 before increasing; higher rank = more parameters, diminishing returns.
+- Start with LoRA r=16 before increasing — higher rank = more parameters, diminishing returns.
 - Use `sample_packing` in Axolotl to maximize GPU utilization on short sequences.
 
 ## Related Skills

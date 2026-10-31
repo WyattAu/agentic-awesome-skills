@@ -1,6 +1,6 @@
 # Workflow-Level Error Workflows
 
-Per-node error outputs handle the failures you anticipated on the nodes you remembered to wire. A **workflow-level error workflow** is the catch-all for everything else; and for an unattended workflow (scheduled, cron, queue worker), it's the difference between "the job silently stopped three days ago" and "an alert arrived the moment it broke".
+Per-node error outputs handle the failures you anticipated on the nodes you remembered to wire. A **workflow-level error workflow** is the catch-all for everything else — and for an unattended workflow (scheduled, cron, queue worker), it's the difference between "the job silently stopped three days ago" and "an alert arrived the moment it broke".
 
 What per-node outputs **don't** catch:
 
@@ -68,7 +68,7 @@ A good notification lets on-call act without opening n8n first. Pull these from 
 | Error description | `{{ $json.execution.error.description }}` (often empty, useful when set) |
 | Timestamp | `{{ DateTime.fromMillis($json.execution.error.timestamp).toISO() }}` |
 
-The `timestamp` is a Unix-ms number; format it with Luxon's `DateTime.fromMillis(...)`. The execution `url` is `{base}/workflow/{id}/executions/{execId}`, so stripping the `/executions/...` tail gives the editor URL.
+The `timestamp` is a Unix-ms number — format it with Luxon's `DateTime.fromMillis(...)`. The execution `url` is `{base}/workflow/{id}/executions/{execId}`, so stripping the `/executions/...` tail gives the editor URL.
 
 A useful Slack body:
 
@@ -81,7 +81,7 @@ Execution: {{ $json.execution.url }}
 Time: {{ DateTime.fromMillis($json.execution.error.timestamp).toISO() }}
 ```
 
-Two links matter: the **editor link** so on-call can start fixing, and the **execution link** so they can see the exact failed run. Skipping either costs a step. "Workflow failed." is not an alert; it's a notification that you'll have to investigate from scratch.
+Two links matter: the **editor link** so on-call can start fixing, and the **execution link** so they can see the exact failed run. Skipping either costs a step. "Workflow failed." is not an alert — it's a notification that you'll have to investigate from scratch.
 
 ---
 
@@ -106,7 +106,7 @@ Error Trigger
 
 Caveats, all of which can turn the error workflow itself into a *new* silent failure:
 
-- **Requires an n8n API credential** on this workflow (Settings → API → personal access token, then attach it to the n8n node). Without it the node throws a 401; an unhandled error *inside the error workflow*.
+- **Requires an n8n API credential** on this workflow (Settings → API → personal access token, then attach it to the n8n node). Without it the node throws a 401 — an unhandled error *inside the error workflow*.
 - **Requires the failing workflow to persist execution data** (Save Execution Data, instance default or per-workflow). If it doesn't, the API returns metadata only.
 - **The n8n node call can itself fail** (API down, rate-limited). Wire its error output (`sourceIndex: 1`) to a fallback that still notifies, or the original error vanishes behind a fetch failure.
 
@@ -114,11 +114,11 @@ Minimal is enough most of the time. The featureful version earns its keep on pro
 
 ---
 
-## Assigning it (Connector/version dependent; UI fallback: the MCP can't)
+## Assigning it (Connector/version dependent; UI fallback — the MCP can't)
 
-> The error workflow is assigned in the n8n **UI**: per workflow under **Workflow Settings → Error Workflow**, or as an instance-wide default. Connector capabilities vary; inspect the current tool schema. `n8n_update_partial_workflow` exposes an `updateSettings` op, but the error-workflow setting is not reliably writable through it; confirm in the UI.
+> The error workflow is assigned in the n8n **UI**: per workflow under **Workflow Settings → Error Workflow**, or as an instance-wide default. Connector capabilities vary; inspect the current tool schema. `n8n_update_partial_workflow` exposes an `updateSettings` op, but the error-workflow setting is not reliably writable through it — confirm in the UI.
 
-So the agent's job is: **build the error workflow with the MCP, then hand the user the exact UI step**; "Open the failing workflow → Settings → Error Workflow → select '<name>'"; and remind them to do it for *every* unattended workflow (or set the instance default once). Building the workflow without assigning it does nothing; the trigger only fires for workflows that point at it.
+So the agent's job is: **build the error workflow with the MCP, then hand the user the exact UI step** — "Open the failing workflow → Settings → Error Workflow → select '<name>'" — and remind them to do it for *every* unattended workflow (or set the instance default once). Building the workflow without assigning it does nothing; the trigger only fires for workflows that point at it.
 
 ---
 
@@ -132,7 +132,7 @@ So the agent's job is: **build the error workflow with the MCP, then hand the us
 
 **Does NOT fire** when:
 
-- A node's error output is wired; even if the handler does nothing. n8n considers the error *handled*.
+- A node's error output is wired — even if the handler does nothing. n8n considers the error *handled*.
 - You manually stop an execution.
 - The workflow is paused / inactive.
 
@@ -142,7 +142,7 @@ That second case is the subtle one: **a per-node error output wired to a no-op t
 
 ## What the error workflow should NOT do
 
-- **Make external calls that can themselves fail without a fallback.** If the error workflow fails, the original error disappears; you've added a second silent failure on top of the first.
+- **Make external calls that can themselves fail without a fallback.** If the error workflow fails, the original error disappears — you've added a second silent failure on top of the first.
 - **Take significant time.** Keep it bounded; dispatch behavior is version dependent and it cannot repair the original HTTP response.
 
 Keep it fast: parse, notify, return.
@@ -151,12 +151,12 @@ Keep it fast: parse, notify, return.
 
 ## The recursion trap
 
-If your monitored workflows alert Slack, and the *error* workflow also alerts Slack, then a Slack outage takes out both; the error workflow fails and the failure goes nowhere. n8n won't re-trigger on its own failure (no infinite loop), but you've lost the alert.
+If your monitored workflows alert Slack, and the *error* workflow also alerts Slack, then a Slack outage takes out both — the error workflow fails and the failure goes nowhere. n8n won't re-trigger on its own failure (no infinite loop), but you've lost the alert.
 
 Mitigations:
 
 - **Use a different channel than the monitored workflows.** If everything notifies Slack, the error workflow should use email (or vice versa).
-- **Add a fallback**; write to a Data Table (`n8n_manage_datatable`) if the primary notification fails, as an additional trace when n8n remains available.
+- **Add a fallback** — write to a Data Table (`n8n_manage_datatable`) if the primary notification fails, as an additional trace when n8n remains available.
 - **Lean on instance-level logging** (server logs, Sentry) so even an error-workflow failure surfaces somewhere outside n8n.
 
 ---
@@ -165,7 +165,7 @@ Mitigations:
 
 After building and assigning:
 
-1. Make a throwaway workflow that always fails; e.g. an HTTP Request to an invalid URL, with **no** error output wired so the failure is unhandled.
+1. Make a throwaway workflow that always fails — e.g. an HTTP Request to an invalid URL, with **no** error output wired so the failure is unhandled.
 2. Trigger a controlled automatic execution (not a manual editor run); use an isolated test workflow and authorized alert destination.
 3. Confirm the error workflow fires and the notification arrives.
 
@@ -175,4 +175,4 @@ This catches the setup mistakes that otherwise stay invisible until a real incid
 
 ## Drift watch
 
-The Error Trigger payload shape can shift between n8n versions. If a field isn't where this file says, check current n8n docs and update your expressions; a renamed field fails silently as an empty alert, not a thrown error.
+The Error Trigger payload shape can shift between n8n versions. If a field isn't where this file says, check current n8n docs and update your expressions — a renamed field fails silently as an empty alert, not a thrown error.

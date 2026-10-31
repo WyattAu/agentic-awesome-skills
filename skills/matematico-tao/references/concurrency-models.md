@@ -40,9 +40,9 @@ launch { channelB.send(2); channelA.receive() }  // Q
 
 ### Definição
 Cada ator tem:
-- Caixa postal (mailbox); fila de mensagens
-- Comportamento; função: Mensagem → (Estado', [Atores novos], [Mensagens])
-- Estado local encapsulado; não compartilhado
+- Caixa postal (mailbox) — fila de mensagens
+- Comportamento — função: Mensagem → (Estado', [Atores novos], [Mensagens])
+- Estado local encapsulado — não compartilhado
 
 ### Em Kotlin com Coroutines
 ```kotlin
@@ -121,7 +121,7 @@ fun onClickButton() {
 
 #### Pattern 2: Mutex lock reentrante (não existe em Kotlin)
 ```kotlin
-// Kotlin Mutex é NÃO reentrante; diferente de synchronized(this)
+// Kotlin Mutex é NÃO reentrante — diferente de synchronized(this)
 val mutex = Mutex()
 
 suspend fun outer() {
@@ -220,7 +220,7 @@ RecurringIdle == []<>(state = "IDLE")
 
 ---
 
-## 7. Race Conditions: Checklist para Kotlin/Android
+## 7. Race Conditions — Checklist para Kotlin/Android
 
 ### Variáveis que precisam de proteção
 ```kotlin

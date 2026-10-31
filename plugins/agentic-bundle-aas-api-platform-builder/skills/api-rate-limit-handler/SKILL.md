@@ -36,7 +36,7 @@ Determine whether a failed request is retryable or terminal.
 | Status | Classification | Action |
 |--------|---------------|--------|
 | 200-299 | Success | Return response |
-| 400, 401, 403, 404 | Terminal client error | Do not retry; fix the request |
+| 400, 401, 403, 404 | Terminal client error | Do not retry — fix the request |
 | 408, 429 | Retryable (rate limit / timeout) | Retry with backoff |
 | 500, 502, 503, 504 | Retryable (server error) | Retry with backoff |
 
@@ -103,7 +103,7 @@ async function fetchWithRetry(
 
     if (response.ok) return response;
 
-    // Terminal errors; do not retry
+    // Terminal errors — do not retry
     if (![408, 429, 500, 502, 503, 504].includes(response.status)) {
       throw new Error(`Terminal error ${response.status}: ${response.statusText}`);
     }
@@ -114,7 +114,7 @@ async function fetchWithRetry(
       );
     }
 
-    // Retryable; but exhausted attempts
+    // Retryable — but exhausted attempts
     if (attempt === maxRetries) {
       throw new Error(`Failed after ${maxRetries} retries: ${response.status}`);
     }
@@ -252,21 +252,21 @@ def fetch_with_retry(url: str, max_retries: int = 3, max_elapsed_s: float = 120,
 
 ## Best Practices
 
-- ✅ Always respect `Retry-After` headers; they come from the provider who knows their limits
+- ✅ Always respect `Retry-After` headers — they come from the provider who knows their limits
 - ✅ Add jitter to backoff to prevent thundering herd when multiple clients retry simultaneously
 - ✅ Log every retry with status code, delay, and attempt number for debugging
 - ✅ Set a maximum total timeout to avoid hanging indefinitely
 - ✅ Use a client-side rate limiter proactively rather than only reacting to 429s
 - ✅ Retry state-changing requests only with a provider-documented idempotency mechanism and a stable key
-- ❌ Don't retry 4xx client errors (except 408 and 429); fix the request instead
-- ❌ Don't use fixed delays; exponential backoff distributes load more evenly
-- ❌ Don't retry without a cap; unbounded retries can amplify outages
-- ❌ Don't ignore per-endpoint limits; some APIs have different quotas per route
+- ❌ Don't retry 4xx client errors (except 408 and 429) — fix the request instead
+- ❌ Don't use fixed delays — exponential backoff distributes load more evenly
+- ❌ Don't retry without a cap — unbounded retries can amplify outages
+- ❌ Don't ignore per-endpoint limits — some APIs have different quotas per route
 
 ## Limitations
 
 - This skill does not replace environment-specific validation, testing, or expert review.
-- Token bucket is approximate for distributed systems; use Redis-backed rate limiting for multi-instance deployments (for example the `upstash-ratelimit` skill, or any shared-store limiter).
+- Token bucket is approximate for distributed systems — use Redis-backed rate limiting for multi-instance deployments (for example the `upstash-ratelimit` skill, or any shared-store limiter).
 - Some APIs use non-standard rate limit headers; check provider documentation.
 - The elapsed-time cap shown here bounds retry waits, not a single hung network call; combine it with an `AbortSignal` or client timeout.
 
@@ -279,7 +279,7 @@ def fetch_with_retry(url: str, max_retries: int = 3, max_elapsed_s: float = 120,
   **Solution:** Add randomized jitter (`Math.random() * 0.3 * delay`) to decorrelate retries.
 
 - **Problem:** Retry-After header contains an HTTP-date instead of seconds.
-  **Solution:** Parse both formats; check if the value is numeric first, then try Date parsing.
+  **Solution:** Parse both formats — check if the value is numeric first, then try Date parsing.
 
 - **Problem:** Client-side limiter doesn't account for concurrent requests already in-flight.
   **Solution:** Serialize acquisition within one process, decrement before send, and use a shared distributed limiter across instances.

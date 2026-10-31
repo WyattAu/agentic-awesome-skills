@@ -214,7 +214,7 @@ When using `maxSteps`, the `useChat` hook will display intermediate tool calls i
 - ✅ **Do:** Use `tool()` with comprehensive `description` tags on Zod parameters, as the LLM relies entirely on those strings to understand when and how to call the tool.
 - ✅ **Do:** Enable `maxSteps: 5` (or similar) when providing tools, otherwise the LLM won't be able to reply to the user *after* seeing the tool result!
 - ❌ **Don't:** Forget to return `result.toDataStreamResponse()` in Next.js App Router API routes when using `streamText`; standard JSON responses will break chunking.
-- ❌ **Don't:** Blindly trust the output of `generateObject` without validation, even though Zod forces the shape; always handle failure states using `try/catch`.
+- ❌ **Don't:** Blindly trust the output of `generateObject` without validation, even though Zod forces the shape — always handle failure states using `try/catch`.
 
 ## Troubleshooting
 

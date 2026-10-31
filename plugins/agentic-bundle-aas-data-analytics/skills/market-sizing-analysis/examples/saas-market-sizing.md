@@ -9,7 +9,7 @@ All customer counts, prices, filters and capture rates below are hypothetical in
 | Small | 85,000 | $3,600 | $306,000,000 |
 | Mid-market | 18,000 | $9,600 | $172,800,000 |
 | Enterprise | 2,500 | $24,000 | $60,000,000 |
-| Total | 105,500 | - | $538,800,000 |
+| Total | 105,500 | — | $538,800,000 |
 
 The hypothetical North American TAM is $538.8 million. Applying a 45% product-fit filter and then a conditional 70% switching-addressability filter gives:
 

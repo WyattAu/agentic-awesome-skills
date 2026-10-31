@@ -16,7 +16,7 @@ license_source: https://github.com/microsoft/skills/blob/main/LICENSE
 Use this skill when you need azure Queue Storage library for Rust. Send, receive, and manage queue messages. Triggers: "queue storage rust", "QueueClient rust", "send message rust", "receive messages rust", "QueueServiceClient rust", "queue rust".
 
 
-Client library for Azure Queue Storage; send, receive, and manage queue messages.
+Client library for Azure Queue Storage — send, receive, and manage queue messages.
 
 Use this skill when:
 
@@ -156,12 +156,12 @@ For Entra ID auth, assign one of these roles to the identity:
 
 1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.
 2. **Add `azure_core` only when importing `azure_core` types directly.** If your code imports `azure_core::http::Url`, `azure_core::http::RequestContent`, or `azure_core::error::ErrorKind`, include `azure_core`; otherwise a direct dependency is optional.
-3. **Use `DeveloperToolsCredential`** for local dev, **`ManagedIdentityCredential`** for production; Rust does not provide a single `DefaultAzureCredential` type
-4. **Never hardcode credentials**; use environment variables or managed identity
-5. **Assign RBAC roles**; ensure appropriate queue data roles for the identity
+3. **Use `DeveloperToolsCredential`** for local dev, **`ManagedIdentityCredential`** for production — Rust does not provide a single `DefaultAzureCredential` type
+4. **Never hardcode credentials** — use environment variables or managed identity
+5. **Assign RBAC roles** — ensure appropriate queue data roles for the identity
 6. **Use `QueueServiceClient` as the entry point** and derive `QueueClient` from it via `queue_client()`
-7. **Delete messages after processing**; use the message ID and pop receipt from `receive_messages`
-8. **Reuse clients**; clients are thread-safe; create once, share across tasks
+7. **Delete messages after processing** — use the message ID and pop receipt from `receive_messages`
+8. **Reuse clients** — clients are thread-safe; create once, share across tasks
 
 ## Reference Links
 

@@ -1,4 +1,4 @@
-# astropy.io.fits: Reference
+# astropy.io.fits — Reference
 
 This file is a placeholder for the extended `astropy.io.fits` reference promised in the skill workflow.
 

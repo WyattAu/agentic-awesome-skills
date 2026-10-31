@@ -16,7 +16,7 @@ version: 1.1.0
 
 ## Overview
 
-This skill enables Senior Content Strategists and Expert Copywriters to produce long-form, publication-ready blog posts for WordPress. It enforces professional structure, factual rigor, and comprehensive SEO optimization; including Yoast metadata and JSON-LD schema markup.
+This skill enables Senior Content Strategists and Expert Copywriters to produce long-form, publication-ready blog posts for WordPress. It enforces professional structure, factual rigor, and comprehensive SEO optimization — including Yoast metadata and JSON-LD schema markup.
 
 ---
 
@@ -47,13 +47,13 @@ This skill enables Senior Content Strategists and Expert Copywriters to produce 
 
 ## How It Works
 
-### Step 1: Gather Inputs
+### Step 1 — Gather Inputs
 Collect all required fields. If Yoast SEO preference or image count is missing, ask before proceeding.
 
-### Step 2: Generate Content
+### Step 2 — Generate Content
 Produce a structured, long-form blog post following the content rules and format below.
 
-### Step 3: Generate SEO & Schema (If Requested)
+### Step 3 — Generate SEO & Schema (If Requested)
 Append Yoast metadata and JSON-LD schema after the blog post, in the order specified.
 
 ---
@@ -128,9 +128,9 @@ Generate a clickable table of contents using this structure:
   Contents
 
   Introduction
-  [Core Topic Section 1; e.g., Overview or Key Concepts]
-  [Core Topic Section 2; e.g., Deep Dive or Analysis]
-  [Core Topic Section 3; e.g., Practical Application or Steps]
+  [Core Topic Section 1 — e.g., Overview or Key Concepts]
+  [Core Topic Section 2 — e.g., Deep Dive or Analysis]
+  [Core Topic Section 3 — e.g., Practical Application or Steps]
   [Comparison or Alternatives Section]
   [Industry or Market Context]
   Common Misconceptions
@@ -150,10 +150,10 @@ MAIN BLOG STRUCTURE
   Truth Box
 
   [Core Topic Section 1]
-  [Relevant Table 1; e.g., Key Features, Pros/Cons, Pricing, or Summary]
+  [Relevant Table 1 — e.g., Key Features, Pros/Cons, Pricing, or Summary]
 
   [Core Topic Section 2]
-  [Relevant Table 2; e.g., Data, Comparison, or Checklist]
+  [Relevant Table 2 — e.g., Data, Comparison, or Checklist]
 
   [Core Topic Section 3]
 
@@ -241,10 +241,10 @@ When a batch mode is selected, return only the requested component(s).
 
 Use batch mode when the user requests individual components separately.
 
-### Batch 1: Blog Post Only
+### Batch 1 — Blog Post Only
 Full blog post from title to conclusion. No SEO metadata, schema, or image SEO.
 
-### Batch 2: SEO Metadata
+### Batch 2 — SEO Metadata
 Yoast SEO elements only:
 - Focus keyphrase
 - SEO title
@@ -255,13 +255,13 @@ Yoast SEO elements only:
 - Suggested internal links
 - Suggested external link types
 
-### Batch 3: Image SEO
+### Batch 3 — Image SEO
 Image SEO assets only:
 - Featured image concept
 - Supporting image concepts
 - Alt text, title, caption, description, and placement for each
 
-### Batch 4: Schema Markup
+### Batch 4 — Schema Markup
 JSON-LD schema only:
 - `BlogPosting` schema
 - `FAQPage` schema
@@ -304,7 +304,7 @@ Use placeholder URLs where actual URLs are unavailable.
 - Write short, direct sentences.
 - Use `|` markdown syntax for clean, readable tables.
 - Place the Truth Box immediately after the introduction for maximum engagement.
-- Use `#`, `##`, and `###` for headings; never number them.
+- Use `#`, `##`, and `###` for headings — never number them.
 - Avoid hyphen bullets in the contents section.
 
 ---
@@ -336,8 +336,8 @@ Revisit the Writing Rules. Shorten sentences, vary structure, and remove filler 
 
 ## Related Skills
 
-- `@seo-plan`; High-level SEO strategy before writing
-- `@seo-content`; Broader SEO content optimization across platforms
-- `@copywriting`; General professional writing and marketing copy
+- `@seo-plan` — High-level SEO strategy before writing
+- `@seo-content` — Broader SEO content optimization across platforms
+- `@copywriting` — General professional writing and marketing copy
 
 A source quota does not establish accuracy: cite sources supporting each material claim and disclose unresolved conflicts. Placeholder URLs must be replaced before publication. FAQPage markup can describe visible FAQs but Google FAQ rich results are restricted to eligible authoritative government/health sites; schema validity does not promise search display. Content generation does not authorize WordPress publication.

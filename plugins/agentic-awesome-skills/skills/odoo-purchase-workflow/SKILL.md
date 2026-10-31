@@ -10,7 +10,7 @@ date_added: "2026-03-04"
 
 ## Overview
 
-This skill guides you through the complete Odoo Purchase workflow; from sending a Request for Quotation (RFQ) to receiving goods and matching the vendor bill. It also covers purchase agreements, vendor price lists on products, automated reordering, and 3-way matching controls.
+This skill guides you through the complete Odoo Purchase workflow — from sending a Request for Quotation (RFQ) to receiving goods and matching the vendor bill. It also covers purchase agreements, vendor price lists on products, automated reordering, and 3-way matching controls.
 
 ## When to Use This Skill
 
@@ -94,15 +94,15 @@ based on the ordered quantity for this vendor.
 - ✅ **Do:** Use **Purchase Agreements (Blanket Orders)** for recurring vendors with pre-negotiated annual contracts.
 - ✅ **Do:** Set a **vendor lead time** on products (Purchase tab) so Odoo can schedule arrival dates accurately.
 - ✅ **Do:** Set the **Bill Control** policy to "Based on received quantities" (not ordered qty) for accurate 3-way matching.
-- ❌ **Don't:** Confirm a PO before prices are agreed; use Draft/RFQ status to negotiate first.
+- ❌ **Don't:** Confirm a PO before prices are agreed — use Draft/RFQ status to negotiate first.
 - ✅ **Do:** Distinguish goods billed on receipts from ordered-quantity/service flows. Reconcile applicable PO/receipt/bill evidence; do not assume 3-way matching is an unbypassable payment block.
-- ❌ **Don't:** Delete a PO that has received quantities; archive it instead to preserve the stock and accounting trail.
+- ❌ **Don't:** Delete a PO that has received quantities — archive it instead to preserve the stock and accounting trail.
 
 Reference: [Odoo 17 bill control and 3-way matching](https://www.odoo.com/documentation/17.0/applications/inventory_and_mrp/purchase/manage_deals/control_bills.html). Confirm the deployed version, modules, company currency and access rights before configuring approvals. Sending RFQs, confirming orders, validating receipts and posting/paying bills require the user's operational authorization; a setup request alone does not authorize these transactions.
 
 ## Limitations
 
-- Does not cover **subcontracting purchase flows**; those require the Manufacturing module and subcontracting BoM type.
-- **EDI-based order exchange** (automated PO import/export) requires custom integration; use `@odoo-edi-connector` for that.
+- Does not cover **subcontracting purchase flows** — those require the Manufacturing module and subcontracting BoM type.
+- **EDI-based order exchange** (automated PO import/export) requires custom integration — use `@odoo-edi-connector` for that.
 - Vendor pricelist currency conversion depends on the active **currency rate** in Odoo; rates must be kept current for accuracy.
 - The **2-level approval** is a binary threshold; more complex approval matrices (department-based, multi-tier) require custom development or the Approvals app.

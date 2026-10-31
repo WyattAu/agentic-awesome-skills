@@ -17,7 +17,7 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 
 Financial data, valuation, and company information for HK / US / A-share / Singapore via Longbridge.
 
-> **Response language**: match the user's input language; English / Simplified Chinese / Traditional Chinese.
+> **Response language**: match the user's input language — English / Simplified Chinese / Traditional Chinese.
 > **RULE: Response language priority**: English is the default when language is ambiguous. If the user input is only a slash command, command name, ticker / symbol, or contains no natural-language language signal, you MUST respond in English. Do not infer Chinese from trigger keywords, skill metadata, or examples.
 
 > **Research boundary**: read-only, sourced analysis. Verify provider capabilities/entitlements and primary filings; user instructions govern source choice. Cite actual sources, retrieval time, reporting period, currency and estimate status. Do not request trading access or execute account operations. Never expose secrets or raw sensitive errors. Templates and thresholds are illustrative, not validated trading signals.
@@ -56,19 +56,19 @@ Trigger when user asks about: financial statements (income/balance sheet/cash fl
 
 Run `longbridge <cmd> --help` for current flags and output fields.
 
-### `financial-report`: income statement, balance sheet, cash flow
-### `financial-statement`: detailed financial statement with period selection
-### `business-segments`: revenue breakdown by business segment
-### `dividend`: dividend history and distribution details
-### `valuation`: PE, PB, PS, dividend yield, and peer comparison
-### `industry-valuation`: industry valuation comparison and distribution
-### `operating`: operating reviews and KPIs by report period (HK stocks only)
-### `corp-action`: corporate actions (splits, rights issues, dividends)
-### `invest-relation`: subsidiary/parent company relationships
-### `company`: founding date, employees, IPO price, address
-### `executive`: key personnel and executives
-### `valuation-rank`: valuation percentile rank within industry
-### `compare`: multi-stock comparison matrix (PE/PB/ROE/revenue growth)
+### `financial-report` — income statement, balance sheet, cash flow
+### `financial-statement` — detailed financial statement with period selection
+### `business-segments` — revenue breakdown by business segment
+### `dividend` — dividend history and distribution details
+### `valuation` — PE, PB, PS, dividend yield, and peer comparison
+### `industry-valuation` — industry valuation comparison and distribution
+### `operating` — operating reviews and KPIs by report period (HK stocks only)
+### `corp-action` — corporate actions (splits, rights issues, dividends)
+### `invest-relation` — subsidiary/parent company relationships
+### `company` — founding date, employees, IPO price, address
+### `executive` — key personnel and executives
+### `valuation-rank` — valuation percentile rank within industry
+### `compare` — multi-stock comparison matrix (PE/PB/ROE/revenue growth)
 
 ## Frameworks
 
@@ -79,7 +79,7 @@ Historical FCF, WACC, terminal value, intrinsic value vs current price. See [ref
 PE-Band, PB-ROE, EV-EBITDA, DDM, SOTP frameworks. See [references/valuation-methodology.md](references/valuation-methodology.md).
 
 ### Behavioral Finance
-Overreaction/underreaction, disposition effect, anchoring, herding; momentum/reversal signals. See [references/behavioral-finance.md](references/behavioral-finance.md).
+Overreaction/underreaction, disposition effect, anchoring, herding — momentum/reversal signals. See [references/behavioral-finance.md](references/behavioral-finance.md).
 
 ### Value Screen
 Low PE/PB + high ROE + dividend yield screening for undervalued stocks. See [references/value-screen.md](references/value-screen.md).

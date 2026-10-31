@@ -47,7 +47,7 @@ Before writing anything, validate the topic is worth writing about.
 | **Internal data** | Support tickets, Discord questions, GitHub issues about this topic |
 | **Keyword research** | Use Ahrefs/SEMrush for search volume on technical terms |
 
-**Red flags**; Don't write if:
+**Red flags** — Don't write if:
 - You're the only one who cares about this topic
 - 10 identical articles already exist
 - The topic is too broad ("Introduction to JavaScript")
@@ -254,22 +254,22 @@ What separates great devrel content from mediocre:
 
 ### Do This
 
-- **Show, don't tell**; Code over prose
-- **Address the "why"**; Not just how to do it, but when and why
-- **Acknowledge tradeoffs**; Nothing is perfect; developers respect honesty
-- **Link to sources**; Official docs, RFCs, related articles
-- **Include dates**; "Updated March 2024" or version numbers
-- **Progressive disclosure**; Start simple, add complexity
-- **Real examples**; Production scenarios, not just hello world
+- **Show, don't tell** — Code over prose
+- **Address the "why"** — Not just how to do it, but when and why
+- **Acknowledge tradeoffs** — Nothing is perfect; developers respect honesty
+- **Link to sources** — Official docs, RFCs, related articles
+- **Include dates** — "Updated March 2024" or version numbers
+- **Progressive disclosure** — Start simple, add complexity
+- **Real examples** — Production scenarios, not just hello world
 
 ### Don't Do This
 
-- **Wall of text**; Break up with code, headers, bullets
-- **Marketing speak**; "Best-in-class," "seamless," "revolutionary"
-- **Assuming knowledge**; Define acronyms, link to prerequisites
-- **Outdated content**; Nothing worse than a 2019 tutorial with deprecated APIs
-- **Buried lede**; Put the answer first, explanation second
-- **No code**; Developers came for code, not prose
+- **Wall of text** — Break up with code, headers, bullets
+- **Marketing speak** — "Best-in-class," "seamless," "revolutionary"
+- **Assuming knowledge** — Define acronyms, link to prerequisites
+- **Outdated content** — Nothing worse than a 2019 tutorial with deprecated APIs
+- **Buried lede** — Put the answer first, explanation second
+- **No code** — Developers came for code, not prose
 
 ---
 
@@ -418,11 +418,11 @@ Track the journey:
 
 ## Related Skills
 
-- `developer-audience-context`; Foundation for knowing your readers
-- `technical-tutorials`; Deep dive into step-by-step content
-- `developer-newsletter`; Distributing content via email
-- `developer-seo`; Technical SEO optimization
-- `hacker-news-strategy`; Sharing content on HN effectively
+- `developer-audience-context` — Foundation for knowing your readers
+- `technical-tutorials` — Deep dive into step-by-step content
+- `developer-newsletter` — Distributing content via email
+- `developer-seo` — Technical SEO optimization
+- `hacker-news-strategy` — Sharing content on HN effectively
 
 ## Limitations
 

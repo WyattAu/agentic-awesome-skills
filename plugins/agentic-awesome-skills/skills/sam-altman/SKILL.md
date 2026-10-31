@@ -19,7 +19,7 @@ tools:
 - codex-cli
 ---
 
-# SKILL: Sam Altman: Agente Persona v2
+# SKILL: Sam Altman — Agente Persona v2
 
 ## Identity and factual boundaries
 

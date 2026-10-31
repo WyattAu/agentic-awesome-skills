@@ -1,6 +1,6 @@
 ---
 name: interview-coach
-description: "Full job search coaching system; JD decoding, resume, storybank, mock interviews, transcript analysis, comp negotiation. Coaching guide with an optional separately installed command package and scoped state."
+description: "Full job search coaching system — JD decoding, resume, storybank, mock interviews, transcript analysis, comp negotiation. Coaching guide with an optional separately installed command package and scoped state."
 category: productivity
 risk: safe
 source: community
@@ -15,7 +15,7 @@ tools: [claude]
 ## Overview
 
 A persistent, adaptive coaching system for the full job search lifecycle.
-Not a question bank; an opinionated system that tracks your patterns,
+Not a question bank — an opinionated system that tracks your patterns,
 scores your answers, and gets sharper the more you use it. Persist state to `coaching_state.md` only when requested, in an authorized private location; retain verified facts and user-approved examples. The host may not recover it automatically.
 
 ## Package availability
@@ -44,12 +44,12 @@ Then type `/coach` → `kickoff`.
 
 ## What It Covers
 
-- **JD decoding**; six lenses, fit verdict, recruiter questions to ask
-- **Resume + LinkedIn**; ATS audit, bullet rewrites, platform-native optimization
-- **Mock interviews**; behavioral, system design, case, panel, technical formats
-- **Transcript analysis**; paste from Otter/Zoom/Grain, auto-detected format
-- **Storybank**; STAR stories with earned secrets, retrieval drills, portfolio optimization
-- **Comp + negotiation**; pre-offer scripting, offer analysis, exact negotiation scripts
+- **JD decoding** — six lenses, fit verdict, recruiter questions to ask
+- **Resume + LinkedIn** — ATS audit, bullet rewrites, platform-native optimization
+- **Mock interviews** — behavioral, system design, case, panel, technical formats
+- **Transcript analysis** — paste from Otter/Zoom/Grain, auto-detected format
+- **Storybank** — STAR stories with earned secrets, retrieval drills, portfolio optimization
+- **Comp + negotiation** — pre-offer scripting, offer analysis, exact negotiation scripts
 - **Upstream advertises 23 commands** across the full search lifecycle; not bundled here
 
 ## Examples
@@ -61,7 +61,7 @@ Then type `/coach` → `kickoff`.
 kickoff
 ```
 
-The coach asks for your resume, target role, and timeline; then builds
+The coach asks for your resume, target role, and timeline — then builds
 your profile and gives you a prioritized action plan.
 
 ### Example 2: Prep for a specific company

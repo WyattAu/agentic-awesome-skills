@@ -39,11 +39,11 @@ When `sync` proposes a change, it never silently mutates files. Instead it emits
 
 The user can reply with:
 
-- `"accept all"`; apply every `[NEW]`, `[STALE]`, and `[REFINED]` in the proposal
-- `"accept only NEW"`; add new entries, leave existing untouched
-- `"accept NEW + REFINE"`; add new and refine, do not mark anything stale
-- `"drop STALE #d7a3"`; skip one specific stale entry
-- `"reject all"`; discard the entire proposal
+- `"accept all"` — apply every `[NEW]`, `[STALE]`, and `[REFINED]` in the proposal
+- `"accept only NEW"` — add new entries, leave existing untouched
+- `"accept NEW + REFINE"` — add new and refine, do not mark anything stale
+- `"drop STALE #d7a3"` — skip one specific stale entry
+- `"reject all"` — discard the entire proposal
 
 For partial acceptance, the user should explicitly list which items to apply.
 
@@ -52,13 +52,13 @@ For partial acceptance, the user should explicitly list which items to apply.
 | Marker | File action |
 |---|---|
 | `[NEW]` | Append a new bullet to the named file, with `#added:<today>` |
-| `[STALE]` | Append `#stale:<today>` and (if a replacement exists) `#superseded-by:<replacement-id>` to the existing entry; entry stays in the file. Two cases: (a) the entry was superseded by a `[NEW]` entry in the same proposal; set both tags and carry the new ID forward; (b) the entry is deprecated with no successor; set `#stale:<today>` only; the user can backfill the chain later if a replacement appears. |
+| `[STALE]` | Append `#stale:<today>` and (if a replacement exists) `#superseded-by:<replacement-id>` to the existing entry; entry stays in the file. Two cases: (a) the entry was superseded by a `[NEW]` entry in the same proposal — set both tags and carry the new ID forward; (b) the entry is deprecated with no successor — set `#stale:<today>` only; the user can backfill the chain later if a replacement appears. |
 | `[REFINED]` | Body unchanged → update tags only (e.g. bump `#verified:<today>`), keep the ID. Body changed → write a new entry with a freshly hashed ID and mark the old entry `#stale:<today>` + `#superseded-by:<new-id>` (the ID is the content hash, so a rewritten body can never keep its old ID) |
 | `[ALERT]` | No direct file change; only marks the conflict for user resolution |
 | `[COMPRESS NOTICE]` | No file change; advisory only |
 
-Note: `[STALE]` does not delete or move anything. The entry remains in its file with `#stale` (and optionally `#superseded-by`) tags. There is no `archive/` step; git history is the archive, and `#superseded-by` (when present) tells `compress`/`audit`/`history` how to walk the replacement chain.
+Note: `[STALE]` does not delete or move anything. The entry remains in its file with `#stale` (and optionally `#superseded-by`) tags. There is no `archive/` step — git history is the archive, and `#superseded-by` (when present) tells `compress`/`audit`/`history` how to walk the replacement chain.
 
 ## When audit uses these markers
 
-`audit` does **not** use these markers. It writes its own severity tags (`[CONFLICT]`, `[STALE]`, `[UNVERIFIED]`) into the audit report file under `.lore/audit/`. The naming overlap (`[STALE]` in sync vs `[STALE]` severity in audit) is intentional; both refer to the same concept (entry no longer accurate) but operate in different files with different downstream actions.
+`audit` does **not** use these markers. It writes its own severity tags (`[CONFLICT]`, `[STALE]`, `[UNVERIFIED]`) into the audit report file under `.lore/audit/`. The naming overlap (`[STALE]` in sync vs `[STALE]` severity in audit) is intentional — both refer to the same concept (entry no longer accurate) but operate in different files with different downstream actions.

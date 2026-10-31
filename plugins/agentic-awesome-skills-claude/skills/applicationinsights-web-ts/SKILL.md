@@ -13,7 +13,7 @@ license_source: https://github.com/microsoft/skills/blob/main/LICENSE
 # Application Insights JavaScript SDK (Web) for TypeScript
 ## When to Use
 
-Use this skill when you need instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). Use for Real User Monitoring (RUM); page views, clicks, AJAX/fetch dependencies, exceptions, custom events, and browser-side GenAI agent traces with explicitly verified backend correlation.
+Use this skill when you need instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). Use for Real User Monitoring (RUM) — page views, clicks, AJAX/fetch dependencies, exceptions, custom events, and browser-side GenAI agent traces with explicitly verified backend correlation.
 
 
 Real User Monitoring (RUM) for browser apps with `@microsoft/applicationinsights-web`. Auto-collects page views, AJAX/fetch dependencies, unhandled exceptions, and (with the Click Analytics plugin) clicks. Supports custom events, metrics, and **GenAI agent traces** that follow OpenTelemetry GenAI semantic conventions and correlate to backend spans via W3C Trace Context.
@@ -50,14 +50,14 @@ npm i --save @microsoft/applicationinsights-clickanalytics-js
 npm i --save @microsoft/applicationinsights-react-js @microsoft/applicationinsights-react-native @microsoft/applicationinsights-angularplugin-js
 ```
 
-Typings ship with the package; no separate `@types/...` install needed.
+Typings ship with the package — no separate `@types/...` install needed.
 
 ## Connection String
 
-The browser SDK requires a connection string at init time. **It ships in plaintext to clients**; Microsoft Entra ID auth is not supported for browser telemetry. Use a separate App Insights resource with local auth enabled for browser RUM if you need to isolate it from backend telemetry.
+The browser SDK requires a connection string at init time. **It ships in plaintext to clients** — Microsoft Entra ID auth is not supported for browser telemetry. Use a separate App Insights resource with local auth enabled for browser RUM if you need to isolate it from backend telemetry.
 
 ```bash
-# Vite / CRA / Next.js: expose to client via the public env prefix
+# Vite / CRA / Next.js — expose to client via the public env prefix
 VITE_APPINSIGHTS_CONNECTION_STRING="InstrumentationKey=...;IngestionEndpoint=https://...;LiveEndpoint=https://..."
 NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING="InstrumentationKey=..."
 ```
@@ -85,7 +85,7 @@ appInsights.loadAppInsights();
 appInsights.trackPageView();
 ```
 
-Call `loadAppInsights()` exactly once, as early as possible (before user interactions you want tracked). Then `trackPageView()` for the initial load; when `enableAutoRouteTracking` is on, subsequent route changes are automatic.
+Call `loadAppInsights()` exactly once, as early as possible (before user interactions you want tracked). Then `trackPageView()` for the initial load — when `enableAutoRouteTracking` is on, subsequent route changes are automatic.
 
 ## Quick Start (SDK Loader Script)
 
@@ -120,7 +120,7 @@ appInsights.trackTrace({ message: "Cart hydrated from local storage", severityLe
 // Custom metrics (numeric)
 appInsights.trackMetric({ name: "checkout.duration_ms", average: 1234 });
 
-// Dependencies (manually-tracked outbound calls; fetch/XHR are auto-tracked)
+// Dependencies (manually-tracked outbound calls — fetch/XHR are auto-tracked)
 appInsights.trackDependencyData({
   id: crypto.randomUUID(),
   name: "GET /api/orders",
@@ -128,7 +128,7 @@ appInsights.trackDependencyData({
   data: "https://api.example.com/api/orders", target: "api.example.com", type: "Fetch"
 });
 
-// User identity (set ONCE per authenticated session; values are PII; do not pass emails)
+// User identity (set ONCE per authenticated session — values are PII; do not pass emails)
 appInsights.setAuthenticatedUserContext("user-id-123", "tenant-456", /*storeInCookie*/ false);
 appInsights.clearAuthenticatedUserContext(); // on logout
 
@@ -359,7 +359,7 @@ const appInsights = new ApplicationInsights({
 appInsights.loadAppInsights();
 ```
 
-## Performance: Web Vitals
+## Performance — Web Vitals
 
 Auto-collected: page-load timings via `PerformanceTiming` / `PerformanceNavigationTiming`. To add Core Web Vitals:
 
@@ -410,12 +410,12 @@ The SDK uses `sendBeacon` (default `onunloadDisableBeacon: false`) to flush on `
 
 1. **Do not initialize twice.** Re-importing the module under different bundles produces duplicate page views. Use a single shared module export.
 2. **Initialize before first user input** to avoid losing early clicks/exceptions.
-3. **Connection string is public**; never reuse the same App Insights resource for backend secrets.
+3. **Connection string is public** — never reuse the same App Insights resource for backend secrets.
 4. **`enableAutoRouteTracking` + manual `trackPageView`** = duplicates. Pick one.
 5. **CORS distributed tracing** requires the API to allow `Request-Id`, `Request-Context`, `traceparent`, `tracestate` request headers and expose `Request-Context` response header.
-6. **GenAI sensitive content** (`gen_ai.input.messages` etc.) is Opt-In; never log without an explicit runtime flag and approved data handling.
-7. **Agent token usage is on `chat` spans, not `invoke_agent`**; copy aggregated usage to the parent agent span only if you know it.
-8. **React StrictMode** double-invokes effects in dev; guard `loadAppInsights()` with a module-level singleton.
+6. **GenAI sensitive content** (`gen_ai.input.messages` etc.) is Opt-In — never log without an explicit runtime flag and approved data handling.
+7. **Agent token usage is on `chat` spans, not `invoke_agent`** — copy aggregated usage to the parent agent span only if you know it.
+8. **React StrictMode** double-invokes effects in dev — guard `loadAppInsights()` with a module-level singleton.
 
 ## Bundle Size
 
@@ -448,15 +448,15 @@ import {
 2. **Initialize early** in the app entrypoint, before router setup.
 3. **Use telemetry initializers** to attach `app.version`, `tenantId`, and to scrub PII / query-string secrets.
 4. **Set `distributedTracingMode: DistributedTracingModes.W3C`** and ensure your APIs accept/expose W3C trace context headers.
-5. **For GenAI**, follow OTel `gen_ai.*` attribute names verbatim; they are queryable across browser and backend telemetry uniformly.
+5. **For GenAI**, follow OTel `gen_ai.*` attribute names verbatim — they are queryable across browser and backend telemetry uniformly.
 6. **Gate sensitive content capture** (`gen_ai.input.messages` / `gen_ai.output.messages`) behind a build-time or runtime opt-in.
 7. **Flush on logout / sensitive navigation** so in-flight telemetry isn't dropped.
 
 ## References
 
-- [references/agent-traces.md](https://github.com/microsoft/skills/tree/main/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/references/agent-traces.md); Full OTel GenAI semconv distilled (agent / model / tool spans, attributes, content capture).
-- [references/framework-extensions.md](https://github.com/microsoft/skills/tree/main/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/references/framework-extensions.md); React, React Native, Angular, Next.js, Vite recipes.
-- [references/configuration.md](https://github.com/microsoft/skills/tree/main/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/references/configuration.md); Full `IConfiguration` reference and tuning guide.
+- [references/agent-traces.md](https://github.com/microsoft/skills/tree/main/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/references/agent-traces.md) — Full OTel GenAI semconv distilled (agent / model / tool spans, attributes, content capture).
+- [references/framework-extensions.md](https://github.com/microsoft/skills/tree/main/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/references/framework-extensions.md) — React, React Native, Angular, Next.js, Vite recipes.
+- [references/configuration.md](https://github.com/microsoft/skills/tree/main/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/references/configuration.md) — Full `IConfiguration` reference and tuning guide.
 - Microsoft Learn: <https://learn.microsoft.com/azure/azure-monitor/app/javascript-sdk>
 - ApplicationInsights-JS source: <https://github.com/microsoft/ApplicationInsights-JS>
 - OTel GenAI semantic conventions: <https://opentelemetry.io/docs/specs/semconv/gen-ai/>

@@ -10,7 +10,7 @@ metadata:
 
 # AI SEO
 
-You are an expert in AI search optimization; the practice of making content discoverable, extractable, and citable by AI systems including Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini, and Copilot. Your goal is to help users get their content cited as a source in AI-generated answers.
+You are an expert in AI search optimization — the practice of making content discoverable, extractable, and citable by AI systems including Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini, and Copilot. Your goal is to help users get their content cited as a source in AI-generated answers.
 
 ## When to Use
 - Use when optimizing content to be cited by LLMs and AI search systems.
@@ -67,7 +67,7 @@ For a deep dive on how each platform selects sources and what to optimize per pl
 
 Traditional SEO gets you ranked. AI SEO gets you **cited**.
 
-In traditional search, you need to rank on page 1. In AI search, a well-structured page can get cited even if it ranks on page 2 or 3; AI systems select sources based on content quality, structure, and relevance, not just rank position.
+In traditional search, you need to rank on page 1. In AI search, a well-structured page can get cited even if it ranks on page 2 or 3 — AI systems select sources based on content quality, structure, and relevance, not just rank position.
 
 Treat visibility estimates as dataset-, query-, geography- and date-specific. No universal citation uplift, click-loss rate or current platform market share is asserted here. Establish a repeatable baseline before changes, preserving query set, locale, product/mode, date and cited URLs; repeat observations because results vary.
 ---
@@ -95,11 +95,11 @@ Test 10-20 of your most important queries across platforms:
 ### Step 2: Analyze Citation Patterns
 
 When your competitors get cited and you don't, examine:
-- **Content structure**; Is their content more extractable?
-- **Authority signals**; Do they have more citations, stats, expert quotes?
-- **Freshness**; Is their content more recently updated?
-- **Schema markup**; Do they have structured data you're missing?
-- **Third-party presence**; Are they cited via Wikipedia, Reddit, review sites?
+- **Content structure** — Is their content more extractable?
+- **Authority signals** — Do they have more citations, stats, expert quotes?
+- **Freshness** — Is their content more recently updated?
+- **Schema markup** — Do they have structured data you're missing?
+- **Third-party presence** — Are they cited via Wikipedia, Reddit, review sites?
 
 ### Step 3: Content Extractability Check
 
@@ -136,7 +136,7 @@ Inspect robots.txt alongside CDN/WAF rules, indexing and preview directives. Ver
 3. Presence (be where AI looks)
 ```
 
-### Pillar 1: Structure: Make Content Extractable
+### Pillar 1: Structure — Make Content Extractable
 
 AI systems extract passages, not pages. Every key claim should work as a standalone statement.
 
@@ -158,7 +158,7 @@ For detailed templates for each block type, see [references/content-patterns.md]
 - Numbered lists beat paragraphs for process content
 - Each paragraph should convey one clear idea
 
-### Pillar 2: Authority: Make Content Citable
+### Pillar 2: Authority — Make Content Citable
 
 AI systems prefer sources they can trust. Build citation-worthiness.
 
@@ -188,9 +188,9 @@ The [GEO paper](https://arxiv.org/abs/2311.09735) reports visibility improvement
 - Transparent sourcing and methodology
 - Clear author expertise for the topic
 
-### Pillar 3: Presence: Be Where AI Looks
+### Pillar 3: Presence — Be Where AI Looks
 
-AI systems don't just cite your website; they cite where you appear.
+AI systems don't just cite your website — they cite where you appear.
 
 **Third-party sources matter more than your own site:**
 - Wikipedia mentions (7.8% of all ChatGPT citations)
@@ -324,17 +324,17 @@ Monthly manual check:
 
 ## Common Mistakes
 
-- **Ignoring relevant search modes**; Measure the modes your audience actually uses before prioritizing them
-- **Treating AI SEO as separate from SEO**; Good traditional SEO is the foundation; AI SEO adds structure and authority on top
-- **Writing for AI, not humans**; If content reads like it was written to game an algorithm, it won't get cited or convert
-- **No freshness signals**; Undated content loses to dated content because AI systems weight recency heavily. Show when content was last updated
-- **Gating all content**; AI can't access gated content. Keep your most authoritative content open
-- **Ignoring third-party presence**; You may get more AI citations from a Wikipedia mention than from your own blog
-- **No structured data**; Schema markup gives AI systems structured context about your content
-- **Keyword stuffing**; Avoid irrelevant repetition; write useful, accurate content
-- **Conflating crawler purposes**; Search and training controls differ; verify each provider's documented behavior
-- **Generic content without data**; "We're the best" won't get cited. specific customer results require evidence and permission; no phrasing guarantees citation
-- **Forgetting to monitor**; You can't improve what you don't measure. Check AI visibility monthly at minimum
+- **Ignoring relevant search modes** — Measure the modes your audience actually uses before prioritizing them
+- **Treating AI SEO as separate from SEO** — Good traditional SEO is the foundation; AI SEO adds structure and authority on top
+- **Writing for AI, not humans** — If content reads like it was written to game an algorithm, it won't get cited or convert
+- **No freshness signals** — Undated content loses to dated content because AI systems weight recency heavily. Show when content was last updated
+- **Gating all content** — AI can't access gated content. Keep your most authoritative content open
+- **Ignoring third-party presence** — You may get more AI citations from a Wikipedia mention than from your own blog
+- **No structured data** — Schema markup gives AI systems structured context about your content
+- **Keyword stuffing** — Avoid irrelevant repetition; write useful, accurate content
+- **Conflating crawler purposes** — Search and training controls differ; verify each provider's documented behavior
+- **Generic content without data** — "We're the best" won't get cited. specific customer results require evidence and permission; no phrasing guarantees citation
+- **Forgetting to monitor** — You can't improve what you don't measure. Check AI visibility monthly at minimum
 
 ---
 

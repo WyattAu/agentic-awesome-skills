@@ -52,7 +52,7 @@ Use when writing, reviewing, or refactoring SwiftUI code for iOS or macOS, inclu
 ### Record a new Instruments trace
 Trigger when the user asks to "record a trace", "profile the app", "capture a session", etc. Full reference: `references/trace-recording.md`.
 
-1. **Confirm target**; attach to a running app, launch an app, or record all processes? If the user didn't say, ask. List connected devices when useful:
+1. **Confirm target** — attach to a running app, launch an app, or record all processes? If the user didn't say, ask. List connected devices when useful:
    ```bash
    python3 "${SKILL_DIR}/scripts/record_trace.py" --list-devices
    ```
@@ -64,11 +64,11 @@ Trigger when the user asks to "record a trace", "profile the app", "capture a se
        --stop-file "$TRACE_RUN_DIR/stop" --output ~/Desktop/session.trace
    ```
    Create TRACE_RUN_DIR with mktemp -d before the background example and retain its exact private path for the stop call. For interactive sessions, just tell the user to press Ctrl+C when done.
-4. **Signal stop**; when the user says they've finished exercising the app, `touch "$TRACE_RUN_DIR/stop"`. The script cleanly SIGINTs xctrace and waits up to 60s for finalisation.
+4. **Signal stop** — when the user says they've finished exercising the app, `touch "$TRACE_RUN_DIR/stop"`. The script cleanly SIGINTs xctrace and waits up to 60s for finalisation.
 5. **Analyse** the resulting trace (flow into the "Trace-driven improvement" workflow below).
 
 ### Trace-driven improvement (Instruments `.trace` provided)
-Trigger whenever the user's request references a `.trace` file. A target SwiftUI source file is **optional**; if given, cite specific lines; if not, recommend where to look based on view names and symbols the trace already reveals.
+Trigger whenever the user's request references a `.trace` file. A target SwiftUI source file is **optional** — if given, cite specific lines; if not, recommend where to look based on view names and symbols the trace already reveals.
 
 Full reference: `references/trace-analysis.md`. Summary of the composition pattern:
 
@@ -90,9 +90,9 @@ Full reference: `references/trace-analysis.md`. Summary of the composition patte
    python3 "${SKILL_DIR}/scripts/analyze_trace.py" --trace <path> \
        --json-only --top 10 [--window START_MS:END_MS]
    ```
-4. **Interpret with `references/trace-analysis.md`**; key diagnostics:
+4. **Interpret with `references/trace-analysis.md`** — key diagnostics:
    - `main_running_coverage_pct` is a sampling heuristic assuming 1ms samples; low or high coverage alone does not prove blocking or CPU saturation.
-   - `swiftui-causes.top_sources` reveals *why* updates keep happening; high-edge-count sources like `UserDefaultObserver.send()` or wide `EnvironmentWriter` entries are investigation candidates, not proof of a bug or feedback loop. Confirm repeated writes and causality in the app before changing architecture.
+   - `swiftui-causes.top_sources` reveals *why* updates keep happening — high-edge-count sources like `UserDefaultObserver.send()` or wide `EnvironmentWriter` entries are investigation candidates, not proof of a bug or feedback loop. Confirm repeated writes and causality in the app before changing architecture.
 5. **When a specific view shows as expensive, ask who's invalidating it.** Use `--fanin-for "<view name>"` to get the ranked list of source nodes driving the updates.
 6. **Optionally ground in source.** If the user pointed at a file, read it and match view names / user-code symbols against identifiers there. If not, recommend which files to open based on the view names SwiftUI reported.
 7. **Return a prioritised plan.** Cite evidence (coverage %, hot symbol, overlapping view, log timestamp, cause-graph edges) and route each recommendation to a Topic Router reference.

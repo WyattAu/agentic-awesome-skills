@@ -1,4 +1,4 @@
-# psql Tips: Advanced Debugging, Performance & Safety
+# psql Tips — Advanced Debugging, Performance & Safety
 
 Part of the psql tips reference. See also: tips-workflows.md
 
@@ -204,7 +204,7 @@ psql variables are simple text substitution. They are NOT parameterized queries:
 \set name "Robert'); DROP TABLE students;--"
 SELECT * FROM users WHERE name = :'name';
 -- Expands to: WHERE name = 'Robert''); DROP TABLE students;--'
--- The '' is an escaped quote, so the entire value is a single string literal; NOT injected.
+-- The '' is an escaped quote, so the entire value is a single string literal — NOT injected.
 
 -- However, :'varname' is NOT safe for identifiers or unquoted contexts.
 -- For identifiers (table/column names), use :"varname" (double-quoted form).
@@ -261,14 +261,14 @@ The `*` and `?` in \d commands are converted to regex (`.*` and `.`). Advanced r
 psql -h localhost -p 5432 -U admin -d mydb
 psql "postgresql://admin@localhost:5432/mydb"
 
-# But you can't mix freely: URI overrides individual flags
+# But you can't mix freely — URI overrides individual flags
 psql -h otherhost "postgresql://admin@localhost:5432/mydb"  -- uses localhost, not otherhost
 ```
 
 ### \i vs \ir
 
-- `\i filename`; resolves relative to the **current working directory** (where psql was started)
-- `\ir filename`; resolves relative to the **currently executing script's directory**
+- `\i filename` — resolves relative to the **current working directory** (where psql was started)
+- `\ir filename` — resolves relative to the **currently executing script's directory**
 
 For script portability, prefer `\ir`:
 

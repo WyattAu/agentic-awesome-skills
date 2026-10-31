@@ -50,7 +50,7 @@ curl -s -H "Authorization: Bearer $(cat ~/.cache/huggingface/token)" \
   "https://huggingface.co/api/datasets?filter=benchmark:official&limit=500" | jq '[.[] | {id, tags, description}]'
 ```
 
-Read the returned list and select the datasets most relevant to the user's task; match on dataset id, tags, and description. Use your judgment; don't limit yourself to 2-3. Aim for comprehensive coverage: if 5 benchmarks clearly cover the task, use all 5.
+Read the returned list and select the datasets most relevant to the user's task — match on dataset id, tags, and description. Use your judgment; don't limit yourself to 2-3. Aim for comprehensive coverage: if 5 benchmarks clearly cover the task, use all 5.
 
 ---
 
@@ -92,9 +92,9 @@ Extract from each response:
 **If a device was specified:**
 1. Remove models exceeding the fp16 parameter budget for the device
 2. Flag models that fit only with Q4 quantization (multiply budget by ~4 for Q4 capacity)
-3. If a highly-ranked model is slightly over budget, keep it with a "needs Q4" note; don't silently drop it
+3. If a highly-ranked model is slightly over budget, keep it with a "needs Q4" note — don't silently drop it
 
-**If no device was mentioned:** skip all size filtering; just rank by benchmark score.
+**If no device was mentioned:** skip all size filtering — just rank by benchmark score.
 
 Then compare scores only within the same benchmark revision, metric direction and evaluation setup; do not collapse incompatible benchmarks into a universal ranking. Keep 5–8 relevant candidates and report missing data.
 
@@ -109,13 +109,13 @@ Include proprietary models (GPT-4, Claude, Gemini) if they appear on leaderboard
 ```markdown
 | # | Model | Params | [Benchmark 1] | [Benchmark 2] | License | On device |
 |---|-------|--------|--------------|--------------|---------|-----------|
-| ⭐1 | [org/name](https://huggingface.co/org/name) | 7B | 85.2% | - | Apache 2.0 | Yes (fp16) |
+| ⭐1 | [org/name](https://huggingface.co/org/name) | 7B | 85.2% | — | Apache 2.0 | Yes (fp16) |
 | 2 | [org/name](https://huggingface.co/org/name) | 13B | 83.1% | 71.5% | MIT | Q4 only |
 | 3 | [org/name](https://huggingface.co/org/name) | 70B | 90.0% | 81.0% | Llama | Too large |
 ```
 
 - Link model names to `https://huggingface.co/<model_id>`
-- Use `-` for benchmarks where the model wasn't evaluated
+- Use `—` for benchmarks where the model wasn't evaluated
 - Star the top recommended pick with ⭐
 - "On device" values: `Yes (fp16)`, `Q4 only`, `Too large`, `API only`
 
@@ -124,8 +124,8 @@ Include proprietary models (GPT-4, Claude, Gemini) if they appear on leaderboard
 After presenting the table, ask the user: "Would you like to run **[top recommended model]**?"
 
 If they say yes, ask whether they'd prefer to:
-- **Run locally**; ask about their device if not already known, then give appropriate setup instructions
-- **Run on HF Jobs**; point them to the HF Jobs guide: https://huggingface.co/docs/huggingface_hub/en/guides/jobs
+- **Run locally** — ask about their device if not already known, then give appropriate setup instructions
+- **Run on HF Jobs** — point them to the HF Jobs guide: https://huggingface.co/docs/huggingface_hub/en/guides/jobs
 
 ---
 

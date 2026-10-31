@@ -1,7 +1,7 @@
 ---
 name: interview-me
 description: Draw out what the user actually wants with one-question-at-a-time interviews
-  until intent is clear; before any plan, spec, or code exists.
+  until intent is clear — before any plan, spec, or code exists.
 category: productivity
 risk: safe
 source: https://github.com/addyosmani/agent-skills
@@ -53,12 +53,12 @@ Before asking anything, write down your current best read of what the user wants
 
 ```
 HYPOTHESIS: You want a way to answer "how are we doing?" in standup, and "dashboard" was the convention that came to mind.
-CONFIDENCE: ~30%; missing: who it's for, what "metrics" means in context, and what success looks like
+CONFIDENCE: ~30% — missing: who it's for, what "metrics" means in context, and what success looks like
 ```
 
 The number is a subjective estimate, not a calibrated probability or evidence of shared understanding. If you wrote down a high number but can't actually predict the user's reactions to the next three questions you'd ask, the number is wrong. Start at the confidence level you can defend.
 
-When confidence is below ~70%, append a brief reason on the same line; what's still unresolved or missing. This tells the user exactly what the interview needs to surface, and prevents the number from being a vague signal.
+When confidence is below ~70%, append a brief reason on the same line — what's still unresolved or missing. This tells the user exactly what the interview needs to surface, and prevents the number from being a vague signal.
 
 ### Step 2: Ask one question at a time, each with a guess attached
 
@@ -93,7 +93,7 @@ The most dangerous answers are the ones where the user says what a thoughtful an
 - Answers that pattern-match best-practice talk ("I want it to be scalable", "clean architecture") without specifics
 - Answers that defer to convention ("the way most apps do it", "the standard approach")
 - Phrases like "I should probably…", "I think I'm supposed to…", "good engineering practice says…"
-- Buzzwords as goals; when "modern", "scalable", "robust" are the answer instead of a specific outcome
+- Buzzwords as goals — when "modern", "scalable", "robust" are the answer instead of a specific outcome
 
 When you hear these, the question to ask is:
 
@@ -109,11 +109,11 @@ When your confidence is high, write back what you now think the user wants. Keep
 Here's what I now think you want:
 
 - Outcome:      <one line>
-- User:         <one line; who benefits>
-- Why now:      <one line; what changed>
-- Success:      <one line; how we know it worked>
-- Constraint:   <one line; the binding limit>
-- Out of scope: <one line; what we're explicitly not doing>
+- User:         <one line — who benefits>
+- Why now:      <one line — what changed>
+- Success:      <one line — how we know it worked>
+- Constraint:   <one line — the binding limit>
+- Out of scope: <one line — what we're explicitly not doing>
 
 Yes / no / refine?
 ```
@@ -160,15 +160,15 @@ User: build me a dashboard for our metrics
 
 Agent:
 HYPOTHESIS: You want a way to answer "how are we doing?" in standup, and "dashboard" came to mind because that's the conventional answer.
-CONFIDENCE: ~30%; missing: who it's for, what "metrics" are, and what success looks like
+CONFIDENCE: ~30% — missing: who it's for, what "metrics" are, and what success looks like
 
-Q:     When you say "how are we doing?", who's asking; you alone, the engineering team in standup, or up the chain (e.g., your manager, an exec, a board)?
+Q:     When you say "how are we doing?", who's asking — you alone, the engineering team in standup, or up the chain (e.g., your manager, an exec, a board)?
 GUESS: engineering team in standup, because "we" usually scopes that way and standups are where this question gets asked. If it's for execs the metrics and the framing change a lot.
 
 User: It's actually for me. I keep losing track of which experiments are running and what their early signal looks like.
 
 Agent:
-Updated read: not a team dashboard at all. It's a personal experiment tracker. Confidence: ~60%; still missing: what "early signal" means and what done looks like.
+Updated read: not a team dashboard at all. It's a personal experiment tracker. Confidence: ~60% — still missing: what "early signal" means and what done looks like.
 
 Q:     Is the gap that you don't know which experiments exist, or that you can't see their results in one place?
 GUESS: the second one. You have a list of experiments somewhere, but their results live in five different tools, and reconciling them by hand is what you're tired of.

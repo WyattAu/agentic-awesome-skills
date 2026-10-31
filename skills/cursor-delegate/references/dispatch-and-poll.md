@@ -45,18 +45,18 @@ node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
 A fresh run defaults to write-capable with `--force` (commands run without approval unless your
 Cursor config denies them). `--no-force` withholds automatic command approval while retaining file
 edits; `--read-only` switches to plan mode instead. The relay always passes `--trust` so a headless
-run never stalls on the workspace-trust prompt; point `--cd` only at repositories you trust.
+run never stalls on the workspace-trust prompt — point `--cd` only at repositories you trust.
 
 ## Artifacts and result fields
 
 Artifacts live outside the repo by default, so they do not appear in `touchedFiles`; an `--out-dir`
 inside the worktree can make the artifacts appear there:
 
-- `brief.txt`; the exact brief.
-- `events.jsonl`; raw cursor-agent stdout events.
-- `final.txt`; the final report; absent if none was emitted.
-- `stderr.txt`; complete stderr.
-- `result.json`; the stable `delegate-relay.result.v1` contract.
+- `brief.txt` — the exact brief.
+- `events.jsonl` — raw cursor-agent stdout events.
+- `final.txt` — the final report; absent if none was emitted.
+- `stderr.txt` — complete stderr.
+- `result.json` — the stable `delegate-relay.result.v1` contract.
 
 `result.json` fields:
 
@@ -67,19 +67,19 @@ inside the worktree can make the artifacts appear there:
   `force`, `sandbox` (the requested value or `null`, not a claim about what Cursor applied),
   `resumed`, `cursorAgentVersion`, `sessionId`, `startedAt`, and `finishedAt`.
 - `briefPath`, `finalPath`, `eventsPath`, and `stderrPath`.
-- `finalMessage`; the `result` field of Cursor's closing event; when the run died before emitting
+- `finalMessage` — the `result` field of Cursor's closing event; when the run died before emitting
   one, the assistant text chunks joined with `"\n\n"` instead. Tool calls and tool results are
   excluded.
-- `touchedFiles`; `git status --porcelain` lines for the **final working tree under `--cd` only**,
+- `touchedFiles` — `git status --porcelain` lines for the **final working tree under `--cd` only**,
   not an attribution of Cursor's edits: anything already dirty before dispatch shows up too, and
-  edits Cursor makes inside `--add-dir` roots do not show up at all; inspect those trees yourself.
+  edits Cursor makes inside `--add-dir` roots do not show up at all — inspect those trees yourself.
   Dispatch from a clean tree when you want the list to read as "what Cursor changed". `null` means
   git could not report; `[]` means git ran and the tree is clean.
-- `usage`; Cursor's token-usage object from the closing result event, or `null` if no result event
+- `usage` — Cursor's token-usage object from the closing result event, or `null` if no result event
   supplied one.
-- `stderrTail`; the last 20 non-empty stderr lines on any run that did not complete (`failed`,
+- `stderrTail` — the last 20 non-empty stderr lines on any run that did not complete (`failed`,
   `timeout`, `aborted`), except a launch failure, which reports `failed` with no `stderrTail`.
-- `error`; present for launch failures, when the relay watchdog fires (`timeout`), on an `aborted`
+- `error` — present for launch failures, when the relay watchdog fires (`timeout`), on an `aborted`
   run, and when Cursor's own result event carries `is_error: true`.
 
 ## Waiting for completion
@@ -97,7 +97,7 @@ A pre-run usage error exits 2 and writes no result. A missing `cursor-agent` exi
   `cursor-agent login`, and re-dispatch.
 - **`status: "failed"`:** read `stderrTail`, `stderrPath`, and the tail of `events.jsonl`. If the
   result event carried `is_error: true` the relay reports `failed` even on a zero exit; Cursor's own
-  message is in `finalMessage`. An unknown `--model` name fails fast; re-check against
+  message is in `finalMessage`. An unknown `--model` name fails fast — re-check against
   `cursor-agent models`.
 - **A version-preflight failure:** the relay writes `failed` with the probe's exit code, or `timeout`
   with exit 124 when the probe exceeds the smaller of the run watchdog and 10 seconds. Cursor is not
@@ -105,7 +105,7 @@ A pre-run usage error exits 2 and writes no result. A missing `cursor-agent` exi
 - **`status: "aborted"`:** the relay itself was killed (its parent's timeout, a stopped task, a
   closed terminal) and forwarded the kill to cursor-agent. The result is written before the relay
   exits; inspect the working tree before re-dispatching. On native Windows a hard kill of the relay
-  is uncatchable (Node supports no `SIGTERM` handler there), so this status may never get written -
+  is uncatchable (Node supports no `SIGTERM` handler there), so this status may never get written —
   a relay process that is gone without a `result.json` is an aborted run; inspect the working tree
   and `events.jsonl` directly.
 - **`status: "failed"` with `signal: "SIGKILL"`:** the host killed the process, commonly through the
@@ -119,21 +119,21 @@ A pre-run usage error exits 2 and writes no result. A missing `cursor-agent` exi
   `<structured_output_contract>` to the next brief to require a closing report.
 - **Every command Cursor runs is rejected with "Hook blocked with message: … eval: … syntax error
   near unexpected token `&`" (or Cursor reports "the terminal hook failed"):** a cursor-agent bug,
-  not a hook bug. When cursor-agent is launched from a Git Bash (MSYS) console on Windows; which
-  is what an orchestrator's bash tool uses; it selects `bash.exe` as its persistent shell while
+  not a hook bug. When cursor-agent is launched from a Git Bash (MSYS) console on Windows — which
+  is what an orchestrator's bash tool uses — it selects `bash.exe` as its persistent shell while
   still generating its hook wrappers in PowerShell syntax, so every configured hook (its own
   `~/.cursor/hooks.json` and any imported Claude Code `PreToolUse` hooks) errors and Cursor blocks
-  the command, fail-closed. File edits still work; command execution does not; which also means
+  the command, fail-closed. File edits still work; command execution does not — which also means
   Cursor cannot run the gates, only claim it could not. Workaround: dispatch the relay from a
   PowerShell or cmd console instead (observed fixed there); do not remove safety hooks to force execution; if the compatible shell also fails, stop and report the blocker. Verified on cursor-agent 2026.07.23.
 
 ## Recovering lost work
 
 `events.jsonl` in the run directory records every event the implementer streamed. If finished
-work is lost; the run killed late, or the working tree damaged afterward; read the event log
+work is lost — the run killed late, or the working tree damaged afterward — read the event log
 before re-dispatching: it identifies which files and tool commands were involved, which scopes
 what needs redoing. Whether it also carries the edit contents depends on what the CLI streams,
-so treat any reconstruction as unverified until it matches a working-tree diff; when the tree
+so treat any reconstruction as unverified until it matches a working-tree diff — when the tree
 still holds the work, preserve the tree rather than replaying the log.
 
 ## What the relay runs

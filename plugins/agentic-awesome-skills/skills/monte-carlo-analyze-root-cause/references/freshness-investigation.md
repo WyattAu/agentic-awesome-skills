@@ -6,7 +6,7 @@ Use this when a table hasn't updated on its expected schedule.
 
 ### 1. Confirm the freshness delay
 
-Call `get_table_freshness` with the table's `full_table_id` and `resource_id`. Also call `get_table` with the same `full_table_id`; its response includes the table's `mcon`, which the lineage and query tools below need. Check:
+Call `get_table_freshness` with the table's `full_table_id` and `resource_id`. Also call `get_table` with the same `full_table_id` — its response includes the table's `mcon`, which the lineage and query tools below need. Check:
 - When was the last successful update?
 - What's the normal update cadence? (hourly, daily, etc.)
 - How long has the delay been?
@@ -17,15 +17,15 @@ The table is populated by an ETL pipeline. Check if the pipeline failed:
 
 **Airflow:**
 - Call `get_etl_jobs` with `platform="airflow"` to find which DAGs/tasks write to this table
-- Call `get_etl_issues` with `platform="airflow"` and a time range; look for task failures, retries, or SLA misses
+- Call `get_etl_issues` with `platform="airflow"` and a time range — look for task failures, retries, or SLA misses
 
 **dbt:**
 - Call `get_etl_jobs` with `platform="dbt"` to find which dbt jobs/models produce this table
-- Call `get_etl_issues` with `platform="dbt"`; look for compilation errors, test failures, or timeouts
+- Call `get_etl_issues` with `platform="dbt"` — look for compilation errors, test failures, or timeouts
 
 **Databricks:**
 - Call `get_etl_jobs` with `platform="databricks"` to find relevant jobs
-- Call `get_etl_issues` with `platform="databricks"`; look for notebook failures, cluster issues
+- Call `get_etl_issues` with `platform="databricks"` — look for notebook failures, cluster issues
 
 ### 3. Check the write queries
 
@@ -53,15 +53,15 @@ Also call `get_etl_jobs` with the relevant `platform` and the table MCONs to fin
 
 ### 6. Check for query changes
 
-Call `get_query_changes`; did someone modify the ETL query recently?
+Call `get_query_changes` — did someone modify the ETL query recently?
 - New JOINs that produce empty results
 - Changed WHERE clauses that filter out all data
 - Modified schedule or dependency
 
 ## Common root causes
 
-- **Pipeline scheduling failure**; cron job stopped, DAG was paused, permissions revoked
-- **Upstream freshness cascade**; an upstream table is stale, blocking this table's refresh
-- **Query timeout**; the refresh query is taking too long and timing out
-- **Resource contention**; warehouse is overloaded, queries are queued
-- **Permission change**; service account lost access to source data
+- **Pipeline scheduling failure** — cron job stopped, DAG was paused, permissions revoked
+- **Upstream freshness cascade** — an upstream table is stale, blocking this table's refresh
+- **Query timeout** — the refresh query is taking too long and timing out
+- **Resource contention** — warehouse is overloaded, queries are queued
+- **Permission change** — service account lost access to source data

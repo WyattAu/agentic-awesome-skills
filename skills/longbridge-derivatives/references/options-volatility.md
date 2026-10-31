@@ -7,13 +7,13 @@ Prompt-only analysis skill. Compares implied volatility (IV) against historical 
 Run `longbridge <subcommand> --help` to verify exact flags. Primary calls (may be run concurrently):
 
 ```bash
-# 1. Option chain: get IV across strikes for a specific expiry
+# 1. Option chain — get IV across strikes for a specific expiry
 longbridge option chain <SYMBOL> --date <YYYY-MM-DD> --format json
 
-# 2. Option volume: call/put volume for sentiment context
+# 2. Option volume — call/put volume for sentiment context
 longbridge option volume <SYMBOL> --format json
 
-# 3. Daily kline: compute historical volatility (60-day window typical)
+# 3. Daily kline — compute historical volatility (60-day window typical)
 longbridge kline <SYMBOL> --period day --count 60 --format json
 
 # If unsure of exact flags:
@@ -37,7 +37,7 @@ longbridge kline --help
 ## Output template
 
 ```
-{Symbol} volatility snapshot; Source: Longbridge Securities
+{Symbol} volatility snapshot — Source: Longbridge Securities
 
 [IV vs HV]
 - ATM IV (nearest expiry): X%

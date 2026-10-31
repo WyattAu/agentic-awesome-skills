@@ -107,6 +107,6 @@ Open `src/api/deps.py` and import `is_token_blacklisted` from `src.services.auth
 
 ## Limitations
 
-- This skill produces a written handoff only; it cannot preserve live state such as running processes, uncommitted terminal output, or in-memory debugging context; record anything that matters explicitly in the note.
+- This skill produces a written handoff only; it cannot preserve live state such as running processes, uncommitted terminal output, or in-memory debugging context — record anything that matters explicitly in the note.
 - Handoff quality is bounded by what the outgoing session records: decisions, dead-ends, or file changes that are not written down cannot be recovered by the next session.
 - It does not replace version control or issue tracking; commit work first and reference commits or tickets in the note instead of duplicating them.

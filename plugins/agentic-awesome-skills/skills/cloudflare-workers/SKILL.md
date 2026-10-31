@@ -312,7 +312,7 @@ crons = [
 ```
 
 ```typescript
-// src/index.ts; scheduled handler
+// src/index.ts — scheduled handler
 export default {
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
     switch (event.cron) {
@@ -346,7 +346,7 @@ new_classes = ["Counter"]
 ```
 
 ```typescript
-// src/counter.ts; Durable Object class
+// src/counter.ts — Durable Object class
 export class Counter {
   state: DurableObjectState;
 
@@ -362,7 +362,7 @@ export class Counter {
   }
 }
 
-// src/index.ts; route to Durable Object
+// src/index.ts — route to Durable Object
 interface Env {
   COUNTER: DurableObjectNamespace;
 }

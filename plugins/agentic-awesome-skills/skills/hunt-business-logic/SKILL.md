@@ -33,10 +33,10 @@ report_count: 25
 
 Business logic vulnerabilities can cause serious harm in platforms where financial transactions, identity verification, and access controls intersect with real-world consequences. Relevant authorized application categories include:
 
-- **E-commerce & payment platforms** (Valve/Steam, Shopify); payment flow manipulation, free goods, price tampering
-- **Marketplace & gig economy apps** (Airbnb, Uber); identity/verification bypass enabling fraud or unsafe interactions
-- **SaaS with tiered access** (Mozilla Monitor); bypassing verification to unlock monitoring features without entitlement
-- **High-traffic consumer apps** (Snapchat, Yelp); rate-limit bypass enabling spam, enumeration, or abuse at scale
+- **E-commerce & payment platforms** (Valve/Steam, Shopify) — payment flow manipulation, free goods, price tampering
+- **Marketplace & gig economy apps** (Airbnb, Uber) — identity/verification bypass enabling fraud or unsafe interactions
+- **SaaS with tiered access** (Mozilla Monitor) — bypassing verification to unlock monitoring features without entitlement
+- **High-traffic consumer apps** (Snapchat, Yelp) — rate-limit bypass enabling spam, enumeration, or abuse at scale
 
 Relevant asset types: checkout flows, subscription endpoints, callback/verification systems, webhook handlers, employee/internal portals exposed to the internet, and any endpoint that trusts client-supplied data to make authorization decisions.
 
@@ -46,8 +46,8 @@ Relevant asset types: checkout flows, subscription endpoints, callback/verificat
 
 **URL patterns to watch:**
 - `/checkout`, `/order`, `/subscribe`, `/payment`, `/verify`, `/confirm`, `/callback`
-- `/internal`, `/employee`, `/summit`, `/staff`, `/admin`; internal pages accidentally public
-- `/api/v*/payment`, `/api/v*/notify`, `/webhook`; payment provider callbacks
+- `/internal`, `/employee`, `/summit`, `/staff`, `/admin` — internal pages accidentally public
+- `/api/v*/payment`, `/api/v*/notify`, `/webhook` — payment provider callbacks
 - Endpoints accepting `X-Forwarded-For`, `X-Real-IP`, `CF-Connecting-IP` headers
 
 **Response/header signals:**
@@ -78,7 +78,7 @@ Relevant asset types: checkout flows, subscription endpoints, callback/verificat
 
 3. **Test rate-limiting controls on every form.** For every POST endpoint (subscribe, login, OTP, search), use a tiny owner-approved request budget with controlled test accounts and stop on 429/lockout/errors; never infer safety from a fixed request count. In a sandbox, compare trusted proxy handling of `X-Forwarded-For` / `X-Real-IP` headers, change `User-Agent`. Check if the server uses IP from headers rather than connection IP.
 
-4. **Intercept and tamper with payment flows.** Use Burp Suite to intercept every request between your browser, the application, and the payment provider. Identify where price, currency, order ID, or status fields are set. Use a provider sandbox and synthetic products/orders with fulfillment, billing and notifications disabled; compare price/currency/order binding without real financial transactions. Look for POST-back/webhook endpoints that accept payment confirmation; test if they validate HMAC/signature.
+4. **Intercept and tamper with payment flows.** Use Burp Suite to intercept every request between your browser, the application, and the payment provider. Identify where price, currency, order ID, or status fields are set. Use a provider sandbox and synthetic products/orders with fulfillment, billing and notifications disabled; compare price/currency/order binding without real financial transactions. Look for POST-back/webhook endpoints that accept payment confirmation — test if they validate HMAC/signature.
 
 5. **Test phone/callback number verification.** Whenever a platform accepts a callback number, test: can you set it to a number you don't own? Does the platform call/text that number and grant trust based solely on submission? Use only two owner-controlled test numbers with prior consent; never cause calls or messages to a victim.
 
@@ -97,7 +97,7 @@ requests to a single changed forwarding-header input in a sandbox with known tru
 proxy configuration. Confirm the server-derived limiter key; a 200 response alone
 is not proof of bypass. Never send subscription email/SMS or evade an active block.
 
-**Payment tampering; modify in-flight price:**
+**Payment tampering — modify in-flight price:**
 ```http
 POST /payment/initiate HTTP/1.1
 Host: target.example
@@ -153,7 +153,7 @@ grep -iE "x-forwarded-for|x-real-ip|cf-connecting-ip" src/ -r
 
 1. **Server trusts client-supplied data for financial decisions.** Developers offload price calculation to the frontend or pass amount fields through forms/URLs without re-validating on the server against a canonical source (the product database).
 
-2. **Verification is enforced only in the UI, not the API.** Frontend hides features behind a verification gate, but the backend API endpoints are fully functional without a verified status; any authenticated request succeeds.
+2. **Verification is enforced only in the UI, not the API.** Frontend hides features behind a verification gate, but the backend API endpoints are fully functional without a verified status — any authenticated request succeeds.
 
 3. **IP-based rate limiting reads from spoofable headers.** Developers implement rate limits using `request.headers['X-Forwarded-For']` instead of the actual connection IP, allowing trivial bypass by header manipulation.
 
@@ -180,7 +180,7 @@ vulnerability. All payment/webhook fragments are sandbox-only, never live fulfil
 | CAPTCHA on subscription forms | Use header-based bypass first; if CAPTCHA is only on the web form, call the underlying API endpoint directly |
 | Email verification gate | Access the post-verification API endpoint directly; replay valid tokens; check if `verified=true` is a client-set cookie/param |
 | Payment amount server validation | Modify currency to a lower-value currency; test with $0.00 or negative amounts; manipulate order IDs to reference different products |
-| Webhook HMAC validation | Test with no/empty signature header (is validation enforced at all; a modified payload only "passes" if it isn't); replay an UNMODIFIED captured webhook to test missing idempotency/anti-replay |
+| Webhook HMAC validation | Test with no/empty signature header (is validation enforced at all — a modified payload only "passes" if it isn't); replay an UNMODIFIED captured webhook to test missing idempotency/anti-replay |
 | Auth on internal pages | Try unauthenticated; try with a low-privilege account; try path traversal variants (`/employee/../employee/`) |
 | Phone verification (OTP sent) | Submit only a second controlled consenting test number without OTP validation; check if the system grants trust on submission vs. OTP confirmation |
 
@@ -203,14 +203,14 @@ Before writing any report, answer all three:
 
 ## Real Impact Examples
 
-**Scenario 1; Free Physical Goods via Exposed Internal Storefront (Shopify-style)**
+**Scenario 1 — Free Physical Goods via Exposed Internal Storefront (Shopify-style)**
 An employee summit page was deployed to a public Shopify storefront as a private channel for distributing free books to staff. The URL was discoverable via JS bundle analysis or link sharing. An anonymous user who navigated to the URL could browse and complete a checkout with no authentication required, receiving physical merchandise shipped at the company's expense. Impact: direct financial loss per order, potential for bulk ordering if not caught quickly.
 
-**Scenario 2; Payment Manipulation via In-Flight Tampering (Valve/Steam-style)**
-A payment flow passed order amount and currency through client-controlled parameters before redirecting to a third-party payment provider (Smart2Pay). By intercepting the redirect with Burp Suite and modifying the amount field, an attacker could complete a real payment for $0.01 while the application's webhook; lacking HMAC validation; accepted the provider's confirmation and credited the full item/service to the account. Impact: critical financial loss; attacker receives full value goods/services for near-zero cost, infinitely repeatable.
+**Scenario 2 — Payment Manipulation via In-Flight Tampering (Valve/Steam-style)**
+A payment flow passed order amount and currency through client-controlled parameters before redirecting to a third-party payment provider (Smart2Pay). By intercepting the redirect with Burp Suite and modifying the amount field, an attacker could complete a real payment for $0.01 while the application's webhook — lacking HMAC validation — accepted the provider's confirmation and credited the full item/service to the account. Impact: critical financial loss; attacker receives full value goods/services for near-zero cost, infinitely repeatable.
 
-**Scenario 3; Email Verification Bypass for Unauthorized Monitoring (Mozilla-style)**
-A breach-monitoring service required email verification before enabling monitoring alerts for an address. The verification check was enforced in the UI flow but the underlying API accepted monitoring setup requests for any address using a valid session; skipping the verification step entirely. An attacker could set up monitoring for email addresses they don't own, receiving breach notification data (potentially including credential exposure status) for victim accounts. Impact: privacy violation; attacker gains intelligence on whether a target's email was in a breach without the target's knowledge or consent.
+**Scenario 3 — Email Verification Bypass for Unauthorized Monitoring (Mozilla-style)**
+A breach-monitoring service required email verification before enabling monitoring alerts for an address. The verification check was enforced in the UI flow but the underlying API accepted monitoring setup requests for any address using a valid session — skipping the verification step entirely. An attacker could set up monitoring for email addresses they don't own, receiving breach notification data (potentially including credential exposure status) for victim accounts. Impact: privacy violation; attacker gains intelligence on whether a target's email was in a breach without the target's knowledge or consent.
 
 ---
 
@@ -233,17 +233,17 @@ chain does not establish every prerequisite, exploitability or payout.
 
 ## Related Skills & Chains
 
-- **`hunt-race-condition`**; Every uniqueness/quota check in a logic flow is a race candidate. Chain primitive: Business logic (coupon/credit/promotion) + race condition → coupon redeemed N times in a single TCP packet via Turbo Intruder.
-- **`hunt-idor`**; Logic flows that trust a client-supplied identifier (order_id, tenant_id, beneficiary_id) overlap directly with IDOR. Chain primitive: business-logic step-skip + IDOR on beneficiary_id → transfer funds from victim account.
-- **`hunt-api-misconfig`**; Step-skip and verification-bypass often live next to mass-assignment fields. Chain primitive: business-logic email-verify skip + API mass assignment (`verified:true, role:admin`) → ATO without email control.
-- **`hunt-ato`**; Logic bugs in password reset, email change, and recovery flows are core ATO paths. Chain primitive: business logic (email change accepts without re-auth) + `hunt-ato` Path 2 → silent victim email swap → password reset to attacker mailbox.
-- **`security-arsenal`**; Load the Business-Logic Probe Checklist (negative quantity, decimal overflow, currency swap, step-skip via direct URL nav, state-machine reverse) and the Always-Rejected list to avoid filing self-inflicted bugs.
-- **`triage-validation`**; Apply the 7-Question Gate (especially Q4 "Is this exploitable by an outside attacker without unrealistic preconditions?"): logic bugs need a concrete dollar/PII/state impact, not just "the flow looks weird".
+- **`hunt-race-condition`** — Every uniqueness/quota check in a logic flow is a race candidate. Chain primitive: Business logic (coupon/credit/promotion) + race condition → coupon redeemed N times in a single TCP packet via Turbo Intruder.
+- **`hunt-idor`** — Logic flows that trust a client-supplied identifier (order_id, tenant_id, beneficiary_id) overlap directly with IDOR. Chain primitive: business-logic step-skip + IDOR on beneficiary_id → transfer funds from victim account.
+- **`hunt-api-misconfig`** — Step-skip and verification-bypass often live next to mass-assignment fields. Chain primitive: business-logic email-verify skip + API mass assignment (`verified:true, role:admin`) → ATO without email control.
+- **`hunt-ato`** — Logic bugs in password reset, email change, and recovery flows are core ATO paths. Chain primitive: business logic (email change accepts without re-auth) + `hunt-ato` Path 2 → silent victim email swap → password reset to attacker mailbox.
+- **`security-arsenal`** — Load the Business-Logic Probe Checklist (negative quantity, decimal overflow, currency swap, step-skip via direct URL nav, state-machine reverse) and the Always-Rejected list to avoid filing self-inflicted bugs.
+- **`triage-validation`** — Apply the 7-Question Gate (especially Q4 "Is this exploitable by an outside attacker without unrealistic preconditions?"): logic bugs need a concrete dollar/PII/state impact, not just "the flow looks weird".
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

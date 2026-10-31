@@ -1,6 +1,6 @@
 # longbridge-kline
 
-Historical candlesticks and today's intraday curve for Longbridge-supported securities (HK / US / A-share / Singapore). Does **not** support options, warrants, or indices; defer to `longbridge-derivatives` (derivatives) or `longbridge-quote` (indices).
+Historical candlesticks and today's intraday curve for Longbridge-supported securities (HK / US / A-share / Singapore). Does **not** support options, warrants, or indices — defer to `longbridge-derivatives` (derivatives) or `longbridge-quote` (indices).
 
 ## Subcommands
 
@@ -57,7 +57,7 @@ longbridge intraday      700.HK                                       --format j
 
 ## Error handling
 
-If `longbridge` is not installed, the shell returns a `command not found` error → fall back to MCP (see below) or tell the user to install longbridge-terminal. If `longbridge` prints `Error: ...` to stderr, surface the message to the user; common causes:
+If `longbridge` is not installed, the shell returns a `command not found` error → fall back to MCP (see below) or tell the user to install longbridge-terminal. If `longbridge` prints `Error: ...` to stderr, surface the message to the user — common causes:
 
 - `Error: not logged in` / `unauthorized` → user runs `longbridge auth login`.
 - `Error: invalid symbol` / `param_error` → re-check the `<CODE>.<MARKET>` format.

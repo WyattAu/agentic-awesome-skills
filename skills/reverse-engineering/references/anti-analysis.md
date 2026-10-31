@@ -82,7 +82,7 @@ gdb ./binary
 
 **Double-ptrace pattern:**
 ```c
-// Fork child to ptrace parent; blocks all other debuggers
+// Fork child to ptrace parent — blocks all other debuggers
 pid_t child = fork();
 if (child == 0) {
     ptrace(PTRACE_ATTACH, getppid(), 0, 0);
@@ -98,12 +98,12 @@ if (child == 0) {
 ```c
 // TracerPid check
 FILE *f = fopen("/proc/self/status", "r");
-// Looks for "TracerPid:\t0"; non-zero means debugger
+// Looks for "TracerPid:\t0" — non-zero means debugger
 
 // /proc/self/exe link check (some debuggers change this)
 readlink("/proc/self/exe", buf, sizeof(buf));
 
-// /proc/self/maps; check for debugger libraries
+// /proc/self/maps — check for debugger libraries
 grep("frida", "/proc/self/maps");
 ```
 
@@ -155,12 +155,12 @@ LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1 FAKETIME="2024-01-01" ./binary
 ### Signal-Based Anti-Debug
 
 ```c
-// SIGTRAP handler; INT3 under debugger is caught by debugger, not handler
+// SIGTRAP handler — INT3 under debugger is caught by debugger, not handler
 signal(SIGTRAP, handler);
 __asm__("int3");
 // If handler runs: no debugger. If debugger catches: debugged.
 
-// SIGALRM timeout; kill self if analysis takes too long
+// SIGALRM timeout — kill self if analysis takes too long
 signal(SIGALRM, kill_handler);
 alarm(5);
 
@@ -182,7 +182,7 @@ signal(SIGSEGV, real_logic_handler);
 ### Syscall-Level Evasion
 
 ```c
-// Direct syscall instead of libc; bypasses LD_PRELOAD hooks
+// Direct syscall instead of libc — bypasses LD_PRELOAD hooks
 long ret;
 asm volatile("syscall" : "=a"(ret) : "a"(101), "D"(0), "S"(0), "d"(0), "r"(0));
 // Syscall 101 = ptrace on x86_64
@@ -233,7 +233,7 @@ HANDLE debugObj = NULL;
 NTSTATUS status = NtQueryInformationProcess(GetCurrentProcess(), 0x1E, &debugObj, sizeof(debugObj), NULL);
 if (status == 0) exit(1); // STATUS_SUCCESS means debugger present
 
-// ProcessDebugFlags (0x1F); returns inverse: 0 = debugger present
+// ProcessDebugFlags (0x1F) — returns inverse: 0 = debugger present
 DWORD noDebug = 0;
 NtQueryInformationProcess(GetCurrentProcess(), 0x1F, &noDebug, sizeof(noDebug), NULL);
 if (noDebug == 0) exit(1);
@@ -310,13 +310,13 @@ if (checksum != EXPECTED_CHECKSUM) exit(1);
 ### Exception-Based Anti-Debug
 
 ```c
-// UnhandledExceptionFilter; under debugger, filter is NOT called
+// UnhandledExceptionFilter — under debugger, filter is NOT called
 SetUnhandledExceptionFilter(handler);
 RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
 // If handler runs: no debugger
 // If debugger catches: debugger present
 
-// INT 2D; debugger single-step anomaly
+// INT 2D — debugger single-step anomaly
 __asm { int 2dh }  // Debugger silently consumes the exception
 // If execution continues: debugger present
 ```
@@ -324,7 +324,7 @@ __asm { int 2dh }  // Debugger silently consumes the exception
 ### NtSetInformationThread (Thread Hiding)
 
 ```c
-// Hide thread from debugger; stops all debug events
+// Hide thread from debugger — stops all debug events
 typedef NTSTATUS(NTAPI *pNtSIT)(HANDLE, ULONG, PVOID, ULONG);
 pNtSIT NtSIT = (pNtSIT)GetProcAddress(GetModuleHandle("ntdll"), "NtSetInformationThread");
 NtSIT(GetCurrentThread(), 0x11 /*ThreadHideFromDebugger*/, NULL, 0);
@@ -468,7 +468,7 @@ Interceptor.attach(Module.getGlobalExportByName("strstr"), {
 // Pin: "pin-", "pinbin", "pinatrace"
 // DynamoRIO: "dynamorio", "drcov", "drrun"
 
-// Instruction count timing; DBI adds overhead
+// Instruction count timing — DBI adds overhead
 // Execute known instruction sequence, compare execution time
 ```
 
@@ -491,7 +491,7 @@ if (memcmp(hash, expected_hash, 32) != 0) exit(1);
 1. **Hardware breakpoints** (don't modify code, DR0-DR3)
 2. **Patch the comparison** to always succeed
 3. **Hook the hash function** to return expected value
-4. **Emulate** instead of debug (Unicorn/Qiling; no code modification)
+4. **Emulate** instead of debug (Unicorn/Qiling — no code modification)
 5. **Snapshot + restore:** dump memory before and after, diff to find checks
 
 **Self-checksumming in loops:**
@@ -532,7 +532,7 @@ jnz odd_branch         ; Taken for odd x; do not remove without proof
 jmp real_code
 db 0xE8           ; Looks like start of CALL to linear disassembler
 real_code:
-mov eax, 1        ; Real code; disassembler may misalign here
+mov eax, 1        ; Real code — disassembler may misalign here
 ```
 
 **Fix:** Switch to graph-mode disassembly (Ghidra/IDA handle this well). Manual: undefine and re-analyze from correct offset.
@@ -542,7 +542,7 @@ mov eax, 1        ; Real code; disassembler may misalign here
 ```asm
 ; Jumps into the middle of a multi-byte instruction
 eb 01          ; jmp +1 (skip next byte)
-e8             ; fake CALL opcode; disassembler tries to decode as call
+e8             ; fake CALL opcode — disassembler tries to decode as call
 90             ; real: NOP (landed here from jmp)
 ```
 
@@ -567,7 +567,7 @@ Beyond basic switch-case (see patterns.md): modern OLLVM variants use:
 - **obpo-plugin** (629⭐, IDA microcode+concolic 云插件, 效果最强): https://github.com/obpo-project/obpo-plugin
 - **ollvm-breaker** (441⭐, Binary Ninja, Android .so 实战): https://github.com/amimo/ollvm-breaker
 - **ollvm-unflattener** (265⭐, Miasm 符号执行, 纯脚本 x86/x64): https://github.com/cdong1012/ollvm-unflattener
-- **d810-ng** (223⭐, IDA, 集成 Z3, 覆盖 OLLVM/Tigress/Hodur/Approov): https://github.com/w00tzenheimer/d810-ng; **本地首选**
+- **d810-ng** (223⭐, IDA, 集成 Z3, 覆盖 OLLVM/Tigress/Hodur/Approov): https://github.com/w00tzenheimer/d810-ng — **本地首选**
 - **DeObfBR** (96⭐, BR 间接分支混淆专项): https://github.com/Mrack/DeObfBR
 - **D-810** (原版, 已较少维护, 建议用 d810-ng): pattern-based deobfuscation, MBA simplification
 - **Miasm**: Symbolic execution for deobfuscation
@@ -624,7 +624,7 @@ void sigill_handler(int sig, siginfo_t *info, void *ucontext) {
 
 ## SIGFPE Signal Handler Side-Channel via strace Counting (PlaidCTF 2017)
 
-Binary uses SIGFPE signal handlers for control flow, making static analysis unreliable. Brute-force by counting SIGFPE signals via strace; correct input characters produce more signals.
+Binary uses SIGFPE signal handlers for control flow, making static analysis unreliable. Brute-force by counting SIGFPE signals via strace — correct input characters produce more signals.
 
 ```bash
 # Count SIGFPE signals per input character guess
@@ -642,7 +642,7 @@ done
 
 ## Instruction Trace Inversion with Keystone and Unicorn (MeePwn CTF 2017)
 
-UPX-packed binary applies a sequence of arithmetic-only transforms (sub, add, xor, rol, ror) to the flag. No memory side-effects; purely register arithmetic. IDAPython traces non-jump instructions, the sequence is then inverted to recover the flag.
+UPX-packed binary applies a sequence of arithmetic-only transforms (sub, add, xor, rol, ror) to the flag. No memory side-effects — purely register arithmetic. IDAPython traces non-jump instructions, the sequence is then inverted to recover the flag.
 
 **Inversion rules:**
 - Reverse the instruction sequence (last instruction first)
@@ -694,7 +694,7 @@ flag_bytes = uc.reg_read(UC_X86_REG_RAX).to_bytes(8, 'little')
 
 **PEB anti-debug note:** If the binary reads `PEB.BeingDebugged` and uses it to select between two comparison target values, the traced instructions under IDAPython may use the debug-mode target. Patch `BeingDebugged` to 0 before tracing, or identify both branches and use the non-debug target value.
 
-**Key insight:** Arithmetic-only obfuscation (no memory writes) is fully reversible by tracing, inverting the instruction sequence, and swapping inverse operations. PEB anti-debug can silently change comparison targets; always verify which branch is taken.
+**Key insight:** Arithmetic-only obfuscation (no memory writes) is fully reversible by tracing, inverting the instruction sequence, and swapping inverse operations. PEB anti-debug can silently change comparison targets — always verify which branch is taken.
 
 **References:** MeePwn CTF 2017
 
@@ -737,12 +737,12 @@ def reverse_processing(byte):
 
 ### Universal Bypass Checklist
 
-1. **Identify all anti-analysis checks**; search for: `ptrace`, `IsDebuggerPresent`, `rdtsc`, `cpuid`, `NtQuery`, `GetTickCount`, `CheckRemoteDebuggerPresent`, `/proc/self`, `SIGTRAP`, `alarm`
-2. **Static patching**; NOP/patch checks with pwntools or Ghidra before running
-3. **LD_PRELOAD** (Linux); hook libc functions returning fake values
-4. **ScyllaHide** (Windows x64dbg); patches PEB, hooks NT functions automatically
-5. **Emulation** (Unicorn/Qiling); no debugger artifacts to detect
-6. **Kernel-level bypass**; modify `/proc/sys/kernel/yama/ptrace_scope`, use documented per-process settings only within an authorized test VM
+1. **Identify all anti-analysis checks** — search for: `ptrace`, `IsDebuggerPresent`, `rdtsc`, `cpuid`, `NtQuery`, `GetTickCount`, `CheckRemoteDebuggerPresent`, `/proc/self`, `SIGTRAP`, `alarm`
+2. **Static patching** — NOP/patch checks with pwntools or Ghidra before running
+3. **LD_PRELOAD** (Linux) — hook libc functions returning fake values
+4. **ScyllaHide** (Windows x64dbg) — patches PEB, hooks NT functions automatically
+5. **Emulation** (Unicorn/Qiling) — no debugger artifacts to detect
+6. **Kernel-level bypass** — modify `/proc/sys/kernel/yama/ptrace_scope`, use documented per-process settings only within an authorized test VM
 
 ### Layered Anti-Debug (Real-World Pattern)
 

@@ -1,7 +1,7 @@
 # Writing the brief
 
 A brief is the entire task as copilot will see it. It runs in a separate process with **no memory of
-your conversation and no shared context**; only the text you send and whatever it can inspect in
+your conversation and no shared context** — only the text you send and whatever it can inspect in
 the workspace. If a constraint is not in the brief or discoverable in the repo, it does not exist
 for copilot.
 
@@ -51,10 +51,10 @@ End with a report in this exact shape:
 
 Add extra blocks only when the task needs them:
 
-- **Debugging or open-ended fixes**; add `<completeness_contract>` (resolve fully, not just the
+- **Debugging or open-ended fixes** — add `<completeness_contract>` (resolve fully, not just the
   first plausible cause) and `<missing_context_gating>` (find missing repo facts or state what is
   unknown).
-- **Research or recommendations**; add `<research_mode>` (separate observed facts, inferences,
+- **Research or recommendations** — add `<research_mode>` (separate observed facts, inferences,
   and open questions), and dispatch with `--read-only`; copilot runs in `--mode plan`, which
   disables edit tools so project files can't be changed by direct edits (shell commands still
   run). If the repository must not change at all, dispatch against a clean or isolated worktree.
@@ -85,10 +85,10 @@ separate dispatches.
 ## Premises freeze at dispatch
 
 The implementer starts from the brief's facts and there is no steering channel mid-run. Audit the
-fact block before sending; ownership, target branch, constraints, anything a judgment call rests
+fact block before sending — ownership, target branch, constraints, anything a judgment call rests
 on. If a premise turns out wrong while the run is live, stop the run and re-dispatch a corrected
 brief rather than discounting the output afterward; inspect the working tree and reconcile any
-partial or premise-contaminated edits; keep or revert them; before the re-dispatch.
+partial or premise-contaminated edits — keep or revert them — before the re-dispatch.
 
 ## A worked example
 
@@ -120,13 +120,13 @@ Report: (1) the root cause and fix, (2) files touched, (3) pytest and ruff outco
 
 ## Brief delivery
 
-The relay hands the brief to copilot via `-p @<brief.txt>`; the CLI's
+The relay hands the brief to copilot via `-p @<brief.txt>` — the CLI's
 `@`-prefixed file prompt channel (verified on copilot 1.0.78), the same shape
-grok's relay uses with `--prompt-file`. The brief content never rides argv -
+grok's relay uses with `--prompt-file`. The brief content never rides argv —
 only the `@<brief.txt>` reference does, plus a fixed execution directive on
 resume. The content stays out of the host process list, isn't bounded by the
 OS arg-length cap, and a brief that starts with "-" cannot be misread as a
-flag. On a shared machine keep secrets out of the brief anyway; reference
+flag. On a shared machine keep secrets out of the brief anyway — reference
 them by a path or environment variable the workspace can read. The brief is
 also preserved in the run's `brief.txt` artifact.
 

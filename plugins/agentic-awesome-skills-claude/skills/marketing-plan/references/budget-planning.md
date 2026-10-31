@@ -1,4 +1,4 @@
-# Budget Planning: Assumption-Based Scenarios
+# Budget Planning — Assumption-Based Scenarios
 
 Planning contract: user-selected scope, length, language and one-shot/interactive cadence override template defaults. All tier amounts, channel rankings, growth bands and hiring patterns below are illustrative hypotheses, not validated benchmarks. Draft completion is distinct from user approval. Use only available verified skill/tool IDs; missing dependencies are optional. No external execution is authorized by this document.
 Use an affordable-spend scenario and a goal-based cross-check together. Neither is a scientific guarantee. Obtain approved cash/runway and capacity constraints before proposing spend. Distinguish total sales-and-marketing cost from marketing-only, media-only and incremental experiment budgets. Never double-count salaries or add a buffer beyond an approved total.
@@ -13,7 +13,7 @@ Use an affordable-spend scenario and a goal-based cross-check together. Neither 
 - `s`: expected revenue-weighted survival of new acquisitions to the horizon (0–1), reflecting their acquisition dates and cohort retention. Do not automatically use a full-year opening-cohort retention rate for customers added throughout the year.
 - `C`: fully loaded acquisition cost per gross new customer, with the same cost scope and time lag used in the budget.
 
-## Method 1: Affordable spend
+## Method 1 — Affordable spend
 
 Start with an approved annual acquisition envelope `B`. Under constant-CAC and constant-price assumptions:
 
@@ -26,7 +26,7 @@ Worked sensitivity example: `A0=$1M`, `B=$50,000`, `C=$100`, `P=$50`, `g=.85`, `
 
 Percent-of-ARR envelopes (for example5%,15–25% or40%) are optional scenario anchors, not market norms, entitlements or recommendations. At zero ARR the ratio is undefined; use cash/runway. Public-company sales-and-marketing ratios are not interchangeable with a startup marketing-only budget.
 
-## Method 2: Target ending ARR
+## Method 2 — Target ending ARR
 
 ```
 Surviving new ARR needed = max(0, At - A0 * g - E)

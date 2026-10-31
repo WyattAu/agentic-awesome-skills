@@ -30,7 +30,7 @@ Delegation may send workspace content to the configured provider and incur charg
 - The user explicitly asked for delegation to this implementer.
 
 You are the **orchestrator**. This skill lets you hand a bounded coding task to a separate
-**implementer**; the Command Code CLI (`cmd`); then review what it produced and land it yourself.
+**implementer** — the Command Code CLI (`cmd`) — then review what it produced and land it yourself.
 You write the brief and own the judgment; Command Code does the typing in your working tree; you
 verify and commit.
 
@@ -41,7 +41,7 @@ as designed-for, not yet proven.)
 
 ## When NOT to use this
 
-- The task is small enough to just do inline; delegation overhead is not worth it.
+- The task is small enough to just do inline — delegation overhead is not worth it.
 - The `cmd` CLI is not installed or not authenticated (run `cmd login`).
 - You want to write the code yourself, or you only need a review (Command Code has its own `/review`).
 - You are on native Windows and `cmdc --version` does not work. Upstream recommends WSL for stable Windows use.
@@ -76,7 +76,7 @@ Before a write-capable run, verify whether the user has authorized this unsandbo
    never point to the system command interpreter. The relay records the version it ran in
    `result.json`, so a wrong binary is visible after the fact.
 3. You are in (or will point `--cd` at) the target git repository, and its tree is clean before you
-   dispatch; a full-trust run is much easier to review against a clean baseline.
+   dispatch — a full-trust run is much easier to review against a clean baseline.
 
 ## The loop
 
@@ -84,20 +84,20 @@ Run these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are 
 
 ### 1. Write the brief
 
-Command Code sees **only** the text you send; no repo memory, no chat history, no shared context
+Command Code sees **only** the text you send — no repo memory, no chat history, no shared context
 (beyond the repo's own `AGENTS.md`, which it reads automatically). Everything the task needs goes in
 the brief: the goal, the current state, what to change, what to leave untouched, the project's
-**actual** gate commands (discover them from the repo's AGENTS.md/CLAUDE.md/Makefile; do not assume),
+**actual** gate commands (discover them from the repo's AGENTS.md/CLAUDE.md/Makefile — do not assume),
 and a report contract. Tell it that it will **not** commit (you will). Keep one task per brief. Full
 guidance and a template: [references/writing-the-brief.md](references/writing-the-brief.md).
 
 ### 2. Dispatch
 
 Send the brief to Command Code with the bundled helper. It wraps `cmd -p`, captures the run, and
-writes a structured `result.json`; so your only job is "run a command, read a file." (`<skill-dir>`
-below is this skill's installed directory; the folder containing this `SKILL.md`, i.e. the directory
+writes a structured `result.json` — so your only job is "run a command, read a file." (`<skill-dir>`
+below is this skill's installed directory — the folder containing this `SKILL.md`, i.e. the directory
 you loaded the skill from. Claude Code prints it as "Base directory for this skill" when the skill
-loads; on other orchestrators use that same directory; use the explicit installation path supplied by the user or environment rather than searching the entire home directory.)
+loads; on other orchestrators use that same directory — use the explicit installation path supplied by the user or environment rather than searching the entire home directory.)
 
 ```bash
 node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
@@ -109,7 +109,7 @@ node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
 ```
 
 The helper defaults to a write-capable (`--yolo`) run, which intentionally edits the target repository.
-Its temp directory keeps only relay artifacts out of that repository. The relay **never commits** -
+Its temp directory keeps only relay artifacts out of that repository. The relay **never commits** —
 see step 5. Mechanics, flags, and the
 `result.json` shape: [references/dispatch-and-poll.md](references/dispatch-and-poll.md).
 
@@ -120,8 +120,8 @@ resume when it returns:
 
 - **Claude Code:** run the Bash call with `run_in_background: true`; you are notified on completion.
 - **Plain shell / other agents:** run it in the foreground for short tasks, or background it and poll
-  the result file; `… &` in bash/zsh, or your shell's equivalent. The run is done when `result.json`
-  exists with a `status`. (A pre-run usage error; bad args or an empty brief; instead exits with code
+  the result file — `… &` in bash/zsh, or your shell's equivalent. The run is done when `result.json`
+  exists with a `status`. (A pre-run usage error — bad args or an empty brief — instead exits with code
   2 and a stderr message and writes no result file, so check the exit code too. A missing `cmd` binary
   exits 127 but *does* write a `result.json` with status `commandcode_unavailable`.)
 
@@ -129,17 +129,17 @@ Do not trust progress trackers over reality: a run is finished when `result.json
 process has exited. Read the working tree, not a status line. The implementer's full report is the
 `finalMessage` field in `result.json` (also printed in full on stdout between the report markers).
 
-### 4. Review: do not trust the self-report
+### 4. Review — do not trust the self-report
 
 `result.json` includes Command Code's own summary and gate claims. **Re-verify, don't accept:**
 
 - **Re-run the project's gates yourself** (the test/lint/build commands from step 1). Never take
   "gates passed" on faith.
 - **Read the diff** against the brief: did it do what was asked, nothing more (scope creep) and
-  nothing less? `touchedFiles` in the result is your starting point; and because the run was
+  nothing less? `touchedFiles` in the result is your starting point — and because the run was
   full-trust, check for edits *outside* the paths the brief named, not just inside them.
 - **Run the relevant guard skills** on the diff if you have them installed (clean-code-guard,
-  test-guard, etc. from `guard-skills`); this skill produces the work; those skills judge it.
+  test-guard, etc. from `guard-skills`) — this skill produces the work; those skills judge it.
 - For schema/migration changes, round-trip them; for removals, grep for dangling references.
 
 Full checklist: [references/review-and-land.md](references/review-and-land.md).
@@ -158,7 +158,7 @@ before landing anything. **The orchestrator commits.** Only after the gates pass
 
 The relay doubles as a clean way to get an adversarial second opinion: dispatch `--read-only` with a
 brief that lists the agreed points, then each contested point with both positions, and ask Command
-Code to defend or concede each; deliverable in its final message, touching no files. The read-only
+Code to defend or concede each — deliverable in its final message, touching no files. The read-only
 guarantee here is the CLI's own permission layer rather than an OS sandbox, so the relay also checks
 it after the fact: `readOnlyViolation: false` means the Git-visible detector saw no change (ignored
 or outside-repository paths are not covered); `true` means it saw one; `null` means git could not tell.
@@ -166,27 +166,27 @@ or outside-repository paths are not covered); `true` means it saw one; `null` me
 ## Authorization model
 
 Delegation is something the human opts into. Once they have ("run this queue", "proceed"), committing
-verified, gate-passing work is the agreed contract; that is the whole point. Two limits on that
+verified, gate-passing work is the agreed contract — that is the whole point. Two limits on that
 mandate: **surface, don't absorb** (report Command Code's design decisions, defensible-but-unasked
 turns, and non-blocking nitpicks rather than silently keeping them) and **stop for scope changes** (if
-correct completion needs going beyond the brief, ask; don't expand the mandate yourself). The full
+correct completion needs going beyond the brief, ask — don't expand the mandate yourself). The full
 treatment is in [references/review-and-land.md](references/review-and-land.md).
 
 ## References
 
-- [references/writing-the-brief.md](references/writing-the-brief.md); how to write a brief Command
+- [references/writing-the-brief.md](references/writing-the-brief.md) — how to write a brief Command
   Code can execute blind: structure, XML blocks, the report contract, embedding the real gate commands.
-- [references/dispatch-and-poll.md](references/dispatch-and-poll.md); `relay.mjs` flags, the
+- [references/dispatch-and-poll.md](references/dispatch-and-poll.md) — `relay.mjs` flags, the
   `result.json` contract, backgrounding per orchestrator, and recovery when a run misbehaves.
-- [references/review-and-land.md](references/review-and-land.md); the review checklist, the commit
+- [references/review-and-land.md](references/review-and-land.md) — the review checklist, the commit
   boundary, and the exact-session rework cycle.
-- [references/multi-task-queues.md](references/multi-task-queues.md); running a sequential queue:
+- [references/multi-task-queues.md](references/multi-task-queues.md) — running a sequential queue:
   carrying constraints forward, progress tracking, and the end-of-run coherence check.
 
 
 ## Limitations
 
-- Docs-only import; executable `scripts/relay.mjs` not included; inspect an approved upstream revision for runtime. Requires Command Code CLI, Node 22+, git.
-- Relay never commits; it only returns structured result JSON; you review and land the commit.
+- Docs-only import — executable `scripts/relay.mjs` not included; inspect an approved upstream revision for runtime. Requires Command Code CLI, Node 22+, git.
+- Relay never commits — it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); docs-only, runtime not bundled.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — docs-only, runtime not bundled.

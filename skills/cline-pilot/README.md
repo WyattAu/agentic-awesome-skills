@@ -4,7 +4,7 @@
 
 Dispatch tasks → run Cline non-interactively or interactively → monitor progress from
 session files + hard evidence (git / test reports) → relay decision points back to the
-user in a fixed 4-part format → verify against a checklist before reporting done -
+user in a fixed 4-part format → verify against a checklist before reporting done —
 while **learning the user's per-project-tag preferences and gradually making the
 decisions for them**.
 
@@ -17,8 +17,8 @@ Cursor, OpenCode, and more. (Chinese docs: [README.zh.md](https://github.com/gon
 | DOES (this skill's job) | DOES NOT |
 |---|---|
 | Dispatch user tasks to Cline CLI (context + constraints, nothing dropped) | Know/hold project architecture (that lives in the project's own memory bank + clinerules) |
-| Launch Cline inside the user's dev environment (conda env, pinned branch) | Make unilateral technical decisions; hard-constraint actions always go back to the user first |
-| Monitor long background jobs via session files + `git`/test-report evidence, not self-reports | Push, delete, write to DB, spend money, change global config; always asks first |
+| Launch Cline inside the user's dev environment (conda env, pinned branch) | Make unilateral technical decisions — hard-constraint actions always go back to the user first |
+| Monitor long background jobs via session files + `git`/test-report evidence, not self-reports | Push, delete, write to DB, spend money, change global config — always asks first |
 | Relay Cline's decision points in a fixed 4-element format, with learned preference stated or "no precedent" | |
 | Verify against a 6-item acceptance checklist before reporting "done" | |
 | Log every correction/decision **by project tag class** and distill stable preferences over time | |
@@ -74,24 +74,24 @@ cline-pilot/
 ```
 
 `SKILL.md` loads only when activated; `references/*` on demand; the script is
-deterministic code; the agent doesn't improvise monitoring each time.
+deterministic code — the agent doesn't improvise monitoring each time.
 
 ## Design principles
 
-- **Cold-start gate**; before any memory bank is activated, the default global
+- **Cold-start gate** — before any memory bank is activated, the default global
   memory-bank prompt must already be in place (`assets/global-memory-bank-prompt.md`,
   verbatim template)
-- **Two cold-start paths**; no code yet: rules are assembled by asking the user
+- **Two cold-start paths** — no code yet: rules are assembled by asking the user
   dimension by dimension; legacy code: rules are grounded in a code scan
-- **No architecture in the skill**; project technical facts belong to the project's
+- **No architecture in the skill** — project technical facts belong to the project's
   memory bank / clinerules; the skill holds intro + tags + learned preferences only
-- **Deterministic first**; anything that must be right every time is a script, not a
+- **Deterministic first** — anything that must be right every time is a script, not a
   prompt the model re-derives per run
-- **Evidence over self-report**; completion is proved by git status, test-report
+- **Evidence over self-report** — completion is proved by git status, test-report
   numbers, and non-empty artifacts, never by the agent's own claim
-- **Learning loop**; correction → `decision-log.md` (per tag class) → ≥2 consistent
+- **Learning loop** — correction → `decision-log.md` (per tag class) → ≥2 consistent
   samples → distilled into the preference section of SKILL.md
-- **Privacy by layer**; public files (SKILL.md, scripts, templates) carry zero
+- **Privacy by layer** — public files (SKILL.md, scripts, templates) carry zero
   user-specific secrets; private state stays in git-ignored `references/*.md`
 
 ## Best practice: two-tier model strategy
@@ -99,28 +99,28 @@ deterministic code; the agent doesn't improvise monitoring each time.
 Cline's cost/quality balance changes dramatically between the **cold-start** and the
 **steady-state** phases. Recommended setup (validated on a production Java backend):
 
-1. **Initialization; use a strong long-context (paid) model.**
+1. **Initialization — use a strong long-context (paid) model.**
    Give it the full weight: whole-project codebase scan, writing project rules
    (`clinerules` / memory-bank seed) grounded in what the code actually does, and
    authoring one or two **template test/code patterns** representative of the
    project (assertion style, mock granularity, naming, edge-case coverage).
-   This phase is read-heavy and long-context-heavy; exactly where frontier
+   This phase is read-heavy and long-context-heavy — exactly where frontier
    models pay for themselves. A single good cold start prevents most
    rework later: every batch after it is constrained by the rules it wrote.
 
-2. **Steady state; switch to a small local model for the task loop.**
+2. **Steady state — switch to a small local model for the task loop.**
    Once the rules + templates exist, each batch is a small, tightly-scoped
    task with an explicit spec (target class, test file path, mock list,
    assertion requirements). That shape is ideal for a local, low-parameter
    model: the skill's task-spec granularity, the anti-hallucination protocol,
    and per-batch verification carry the discipline, so model quality can be
    traded against cost/privacy/throughput. (The maintainer runs
-   `qwen3.8:27b` locally via Ollama for all batch execution; 50+ test
+   `qwen3.8:27b` locally via Ollama for all batch execution — 50+ test
    classes delivered against a 7-module Java backend on that setup.)
 
 Rule of thumb: **frontier model buys the rules once; the local model runs the
 discipline every day.** If a local batch fails the same assertion 3 times in a
-row, that is a signal the template/rules are the gap; escalate *that batch*
+row, that is a signal the template/rules are the gap — escalate *that batch*
 back to the stronger model, don't keep burning local retries.
 
 ## Validate
@@ -139,4 +139,4 @@ python3 scripts/session_report.py 5 /path/to/repo
 
 ## License
 
-MIT; see [LICENSE](https://github.com/gongdear/cline-pilot/blob/main/LICENSE)
+MIT — see [LICENSE](https://github.com/gongdear/cline-pilot/blob/main/LICENSE)

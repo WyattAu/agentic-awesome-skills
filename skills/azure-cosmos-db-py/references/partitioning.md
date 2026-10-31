@@ -27,9 +27,9 @@ The partition key determines data distribution and query efficiency:
 
 Good partition keys have:
 
-1. **High cardinality**; Many distinct values to distribute load
-2. **Even distribution**; No single value dominates storage/throughput
-3. **Query alignment**; Most queries filter by partition key
+1. **High cardinality** — Many distinct values to distribute load
+2. **Even distribution** — No single value dominates storage/throughput
+3. **Query alignment** — Most queries filter by partition key
 
 ---
 

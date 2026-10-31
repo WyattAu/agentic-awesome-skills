@@ -169,7 +169,7 @@ Define 3-4 core themes that appear consistently:
 
 #### Punctuation
 - Oxford comma: Always use
-- Em dashes: For emphasis-like this
+- Em dashes: For emphasis—like this
 - Exclamation points: Maximum one per piece
 
 #### Capitalization

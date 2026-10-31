@@ -26,7 +26,7 @@ This catalog copy contains the inline guidance below, but does not include the f
 Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
-# AI Studio Image: Especialista em Imagens Humanizadas
+# AI Studio Image — Especialista em Imagens Humanizadas
 
 ## Overview
 
@@ -54,11 +54,11 @@ a leve granulacao de um sensor de celular, a iluminacao que nao e perfeita, o en
 ligeiramente descentralizado, a profundidade de campo caracteristica de uma lente pequena.
 Esta skill injeta sistematicamente essas qualidades em cada geracao.
 
-## Ai Studio Image: Especialista Em Imagens Humanizadas
+## Ai Studio Image — Especialista Em Imagens Humanizadas
 
 Skill de geracao de imagens via Google AI Studio que transforma qualquer prompt em fotos
 com aparencia genuinamente humana. Cada imagem gerada parece ter sido tirada por uma
-pessoa real com seu celular; nao por uma IA.
+pessoa real com seu celular — nao por uma IA.
 
 ## 1. Configurar Api Key
 
@@ -133,31 +133,31 @@ python <skill-root>/scripts\prompt_engine.py --prompt "prompt do usuario" --mode
 
 O motor de humanizacao adiciona camadas de realismo:
 
-**Camada 1; Dispositivo e Tecnica:**
+**Camada 1 — Dispositivo e Tecnica:**
 - Fotografado com smartphone (iPhone/Samsung Galaxy)
 - Lente de celular com profundidade de campo natural
-- Sem flash; apenas luz ambiente
+- Sem flash — apenas luz ambiente
 - Leve ruido de sensor (ISO elevado em baixa luz)
 
-**Camada 2; Iluminacao Natural:**
+**Camada 2 — Iluminacao Natural:**
 - Luz do sol indireta / golden hour / luz de janela
 - Sombras suaves e organicas
 - Sem iluminacao de estudio
 - Reflexos naturais em superficies
 
-**Camada 3; Imperfeicoes Humanas:**
+**Camada 3 — Imperfeicoes Humanas:**
 - Enquadramento ligeiramente imperfeito (nao centralizado matematicamente)
 - Foco seletivo natural (algo levemente fora de foco no background)
 - Micro-tremor de maos (nitidez nao e absoluta)
 - Elementos aleatorios do ambiente real
 
-**Camada 4; Autenticidade:**
+**Camada 4 — Autenticidade:**
 - Expressoes faciais genuinas (nao poses de estudio)
 - Roupas e cenarios do dia-a-dia
-- Textura de pele real (poros, marcas sutis; sem pele de porcelana)
+- Textura de pele real (poros, marcas sutis — sem pele de porcelana)
 - Proporcoes corporais realistas
 
-**Camada 5; Contexto Ambiental:**
+**Camada 5 — Contexto Ambiental:**
 - Cenarios reais (nao fundos genericos de stock)
 - Objetos do cotidiano no ambiente
 - Iluminacao consistente com o cenario
@@ -247,7 +247,7 @@ Controle quanto "imperfeicao" injetar:
 
 | Nivel | Efeito |
 |-------|--------|
-| `ultra` | Maximo realismo; parece 100% foto de celular |
+| `ultra` | Maximo realismo — parece 100% foto de celular |
 | `natural` (padrao) | Equilibrio perfeito entre qualidade e realismo |
 | `polished` | Mais limpo, ainda natural mas com mais cuidado estetico |
 | `editorial` | Estilo revista, natural mas com producao |
@@ -295,15 +295,15 @@ As imagens geradas podem ser enviadas para o Canva para adicao de texto/branding
 |----------|---------|
 | `GEMINI_API_KEY not found` | Configure a variavel de ambiente ou crie `.env` |
 | `quota exceeded` | Aguarde reset do rate limit ou upgrade do plano |
-| `image blocked` | Ajuste o prompt; pode conter conteudo restrito |
+| `image blocked` | Ajuste o prompt — pode conter conteudo restrito |
 | `low quality output` | Aumente humanization para `ultra`, tente outro modelo |
 
 ## Referencias
 
 Para guias detalhados, consulte:
-- `references/setup-guide.md`; Instalacao e configuracao completa
-- `references/prompt-engineering.md`; Tecnicas avancadas de prompt para imagens humanizadas
-- `references/api-reference.md`; Documentacao da API do Google AI Studio
+- `references/setup-guide.md` — Instalacao e configuracao completa
+- `references/prompt-engineering.md` — Tecnicas avancadas de prompt para imagens humanizadas
+- `references/api-reference.md` — Documentacao da API do Google AI Studio
 
 ## Best Practices
 

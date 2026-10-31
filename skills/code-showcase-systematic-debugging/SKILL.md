@@ -43,7 +43,7 @@ Before touching any code:
 5. Find original trigger - Where did the problem actually start?
 ```
 
-**Key principle:** Never fix problems solely where errors appear-always trace to the original trigger.
+**Key principle:** Never fix problems solely where errors appear—always trace to the original trigger.
 
 ### Phase 2: Pattern Analysis
 

@@ -36,14 +36,14 @@ app/
 ## ViewModel Pattern
 
 ```kotlin
-// UiState; sealed class for exhaustive when()
+// UiState — sealed class for exhaustive when()
 sealed class HomeUiState {
     object Loading : HomeUiState()
     data class Success(val items: List<Item>) : HomeUiState()
     data class Error(val message: String) : HomeUiState()
 }
 
-// UiEvent; one-shot events (navigation, snackbars)
+// UiEvent — one-shot events (navigation, snackbars)
 sealed class HomeUiEvent {
     data class NavigateTo(val route: String) : HomeUiEvent()
     data class ShowSnackbar(val message: String) : HomeUiEvent()

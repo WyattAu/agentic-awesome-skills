@@ -1,6 +1,6 @@
 ---
 name: data-structure-protocol
-description: "Give agents persistent structural memory of a codebase; navigate dependencies, track public APIs, and understand why connections exist without re-reading the whole repo."
+description: "Give agents persistent structural memory of a codebase — navigate dependencies, track public APIs, and understand why connections exist without re-reading the whole repo."
 risk: safe
 source: "https://github.com/k-kolomeitsev/data-structure-protocol"
 date_added: "2026-02-27"
@@ -8,7 +8,7 @@ date_added: "2026-02-27"
 
 # Data Structure Protocol (DSP)
 
-LLM coding agents lose context between tasks. On large codebases they spend most of their tokens on "orientation"; figuring out where things live, what depends on what, and what is safe to change. DSP solves this by externalizing the project's structural map into a persistent, queryable graph stored in a `.dsp/` directory next to the code.
+LLM coding agents lose context between tasks. On large codebases they spend most of their tokens on "orientation" — figuring out where things live, what depends on what, and what is safe to change. DSP solves this by externalizing the project's structural map into a persistent, queryable graph stored in a `.dsp/` directory next to the code.
 
 DSP is NOT documentation for humans and NOT an AST dump. It captures three things: **meaning** (why an entity exists), **boundaries** (what it imports and exposes), and **reasons** (why each connection exists). This is enough for an agent to navigate, refactor, and generate code without loading the entire source tree into the context window.
 
@@ -77,7 +77,7 @@ Everything is plain text. Diffable. Reviewable. No database needed.
 
 ### Full import coverage
 
-Every file or artifact that is imported anywhere must be represented in `.dsp` as an Object; code, images, styles, configs, JSON, wasm, everything. External dependencies (npm packages, stdlib, etc.) are recorded as `kind: external` but their internals are never analyzed.
+Every file or artifact that is imported anywhere must be represented in `.dsp` as an Object — code, images, styles, configs, JSON, wasm, everything. External dependencies (npm packages, stdlib, etc.) are recorded as `kind: external` but their internals are never analyzed.
 
 ## How It Works
 
@@ -106,8 +106,8 @@ If `.dsp/` is empty, traverse the project from root entrypoint(s) via DFS on imp
 ## Workflow Rules
 
 - **Before changing code**: Find affected entities via `search`, `find-by-source`, or `read-toc`. Read their `description` and `imports` to understand context.
-- **When creating a file/module**: Call `create-object`. For each exported function; `create-function` (with `--owner`). Register exports via `create-shared`.
-- **When adding an import**: Call `add-import` with a brief `why`. For external deps; first `create-object --kind external` if the entity doesn't exist.
+- **When creating a file/module**: Call `create-object`. For each exported function — `create-function` (with `--owner`). Register exports via `create-shared`.
+- **When adding an import**: Call `add-import` with a brief `why`. For external deps — first `create-object --kind external` if the entity doesn't exist.
 - **When removing import/export/file**: Call `remove-import`, `remove-shared`, `remove-entity`. Cascade cleanup is automatic.
 - **When renaming/moving a file**: Call `move-entity`. UID does not change.
 - **Don't touch DSP** if only internal implementation changed without affecting purpose or dependencies.
@@ -172,26 +172,26 @@ python dsp-cli.py --root . find-by-source "lodash"
 # Output: obj-11223344
 
 python dsp-cli.py --root . get-recipients obj-11223344
-# Shows every module that imports lodash and WHY: lets you systematically replace it
+# Shows every module that imports lodash and WHY — lets you systematically replace it
 ```
 
 ## Best Practices
 
 - ✅ **Do:** Update DSP immediately when creating new files, adding imports, or changing public APIs
-- ✅ **Do:** Always add a meaningful `why` reason when recording an import; this is where most of DSP's value lives
+- ✅ **Do:** Always add a meaningful `why` reason when recording an import — this is where most of DSP's value lives
 - ✅ **Do:** Use `kind: external` for third-party libraries without analyzing their internals
 - ✅ **Do:** Keep descriptions minimal (1-3 sentences about purpose, not implementation)
-- ✅ **Do:** Treat `.dsp/` diffs like code diffs; review them, keep them accurate
+- ✅ **Do:** Treat `.dsp/` diffs like code diffs — review them, keep them accurate
 - ❌ **Don't:** Touch `.dsp/` for internal-only changes that don't affect purpose or dependencies
 - ❌ **Don't:** Change an entity's UID on rename/move (use `move-entity` instead)
-- ❌ **Don't:** Create UIDs for every local variable or helper; only file-level Objects and public/shared entities
+- ❌ **Don't:** Create UIDs for every local variable or helper — only file-level Objects and public/shared entities
 
 ## Integration
 
 This skill connects naturally to:
-- **context-compression**; DSP reduces the need for compression by providing targeted retrieval instead of loading everything
-- **context-optimization**; DSP is a structural optimization: agents pull minimal "context bundles" instead of raw source
-- **architecture**; DSP captures architectural boundaries (imports/exports) that feed system design decisions
+- **context-compression** — DSP reduces the need for compression by providing targeted retrieval instead of loading everything
+- **context-optimization** — DSP is a structural optimization: agents pull minimal "context bundles" instead of raw source
+- **architecture** — DSP captures architectural boundaries (imports/exports) that feed system design decisions
 
 ## References
 

@@ -115,5 +115,5 @@ Agent: batch the shop names, sort by non-null `lift_7d` / `delta_7d` / `breakout
 
 ## Related Skills
 
-- `@etsy-search-listings`; find shops that own page-1 slots for a keyword
-- `@apify-ecommerce`; broader multi-marketplace extraction via Apify
+- `@etsy-search-listings` — find shops that own page-1 slots for a keyword
+- `@apify-ecommerce` — broader multi-marketplace extraction via Apify

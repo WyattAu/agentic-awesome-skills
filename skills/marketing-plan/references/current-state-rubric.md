@@ -1,13 +1,13 @@
-# Current State Rubric: 17-Section Scoring Lens
+# Current State Rubric — 17-Section Scoring Lens
 
 Planning contract: user-selected scope, length, language and one-shot/interactive cadence override template defaults. All tier amounts, channel rankings, growth bands and hiring patterns below are illustrative hypotheses, not validated benchmarks. Draft completion is distinct from user approval. Use only available verified skill/tool IDs; missing dependencies are optional. No external execution is authorized by this document.
 This 17-section rubric is the source of truth for Section 3 ("Current State") of every marketing plan. Score each section 0–5 from available materials, then write a 2–4 sentence "shape interpretation" that names where strengths and gaps cluster.
 
 ## How to score
 
-**From rich materials.** When the team has shared decks, prior content audits, a brand voice doc, kickoff transcript, app store and analytics snapshots; score each section from those artifacts. Mark "scored from materials" in the section heading so the team can push back where they have better data.
+**From rich materials.** When the team has shared decks, prior content audits, a brand voice doc, kickoff transcript, app store and analytics snapshots — score each section from those artifacts. Mark "scored from materials" in the section heading so the team can push back where they have better data.
 
-**From a separately scored audit.** If the team has already run a scored current-state assessment (in any format), ingest those scores directly. Check rubric compatibility before reuse; do not silently translate incomparable scales; note the date the rubric was scored and flag any sections where material has shifted since.
+**From a separately scored audit.** If the team has already run a scored current-state assessment (in any format), ingest those scores directly. Check rubric compatibility before reuse; do not silently translate incomparable scales — note the date the rubric was scored and flag any sections where material has shifted since.
 
 Either way, the output is the same: a 17-row scored table, a total over the applicable scored denominator, and a shape paragraph.
 
@@ -22,7 +22,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 - 4 = Clear, original, mostly consistent; minor surface gaps
 - 5 = Distinctive, category-defining, every surface aligned
 
-**Maps to AARRR:** Cross-cutting; feeds every stage.
+**Maps to AARRR:** Cross-cutting — feeds every stage.
 
 ### 2. Customer research
 **What's scored:** Depth and recency of customer research, ICP clarity, voice-of-customer capture.
@@ -33,7 +33,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 - 4 = Active research practice, customer language captured
 - 5 = Continuous research, customer language flows into copy / product / messaging
 
-**Maps to AARRR:** Cross-cutting; feeds especially Acquisition (channel choice) and Activation (onboarding voice).
+**Maps to AARRR:** Cross-cutting — feeds especially Acquisition (channel choice) and Activation (onboarding voice).
 
 ### 3. Homepage
 **What's scored:** Headline clarity, voice alignment, conversion architecture, mobile experience.
@@ -72,7 +72,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 **What's scored:** Existence of "vs. {competitor}" pages, comparison content. Does the brand acknowledge alternatives, or pretend they don't exist?
 
 **Score guide:**
-- 0 = Nothing; actively avoiding competitor mentions
+- 0 = Nothing — actively avoiding competitor mentions
 - 2 = Some content exists but is weak or hidden
 - 4 = Solid comparison pages for top 2–3 competitors
 - 5 = Comprehensive comparison library; SEO-targeted; high-converting
@@ -86,7 +86,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 - 0 = No content surface
 - 2 = Blog exists but is stale or thin
 - 4 = Active content production; multiple formats
-- 5 = Content is a moat; proprietary research, named pillars, daily volume
+- 5 = Content is a moat — proprietary research, named pillars, daily volume
 
 **Maps to AARRR:** Acquisition.
 
@@ -113,7 +113,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 **Maps to AARRR:** Retention (+ Activation for onboarding emails).
 
 ### 10. Sales material
-**What's scored:** Sales decks, one-pagers, demos, case studies, pricing sheets. (For B2B / hybrid companies; for pure D2C, this can be marked N/A when not applicable.)
+**What's scored:** Sales decks, one-pagers, demos, case studies, pricing sheets. (For B2B / hybrid companies — for pure D2C, this can be marked N/A when not applicable.)
 
 **Score guide:**
 - 0 = No sales material
@@ -178,7 +178,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 
 **Maps to AARRR:** Acquisition.
 
-**Note:** For pre-seed clients with no paid budget, mark N/A when paid acquisition is intentionally outside scope; it reflects the funding stage, not a marketing failure.
+**Note:** For pre-seed clients with no paid budget, mark N/A when paid acquisition is intentionally outside scope — it reflects the funding stage, not a marketing failure.
 
 ### 16. SEO
 **What's scored:** Organic search performance. Domain rating, ranking keywords, organic traffic, content cluster strategy.
@@ -210,7 +210,7 @@ Either way, the output is the same: a 17-row scored table, a total over the appl
 
 The total matters less than the *shape*. After the scoring table, write a 2–4 sentence "shape interpretation":
 
-> *"High in {strong sections}, low in {weak sections}. That shape is the gap the rest of the plan closes; Sections X (AARRR stage) is the longest because that's where the gap is widest."*
+> *"High in {strong sections}, low in {weak sections}. That shape is the gap the rest of the plan closes — Sections X (AARRR stage) is the longest because that's where the gap is widest."*
 
 ## Common shapes
 
@@ -230,7 +230,7 @@ The total matters less than the *shape*. After the scoring table, write a 2–4 
 - Translation: Users sign up and pay but churn. Plan emphasizes Retention.
 
 ### "Strong product, weak everything-else"
-- High: only Positioning (#1) and Customer research (#2); the founder knows the customer
+- High: only Positioning (#1) and Customer research (#2) — the founder knows the customer
 - Low: everything operational
 - Translation: Pre-marketing stage. Plan is foundation-heavy. First quarter is bedrock fixes.
 
@@ -243,14 +243,14 @@ The total matters less than the *shape*. After the scoring table, write a 2–4 
 
 Some sections are easier to score from outside than others. Subjectivity tier:
 
-- **Objective (data-driven):** SEO (#16), Ads (#15), Email lifecycle (#9), Onboarding (#8); backed by analytics
-- **Semi-objective:** Pricing (#12), CRO (#13), Conversion pages (#5), Sales material (#10); visible artifacts to evaluate
-- **Subjective (judgment call):** Positioning (#1), Messaging (#11), Customer research (#2), Resources (#7); interpretive
+- **Objective (data-driven):** SEO (#16), Ads (#15), Email lifecycle (#9), Onboarding (#8) — backed by analytics
+- **Semi-objective:** Pricing (#12), CRO (#13), Conversion pages (#5), Sales material (#10) — visible artifacts to evaluate
+- **Subjective (judgment call):** Positioning (#1), Messaging (#11), Customer research (#2), Resources (#7) — interpretive
 
 For subjective sections, write the rationale into the "Note" column so the team can push back if they disagree.
 
 ## When a prior scored audit exists
 
-If the team already has scored output from any current-state assessment, ingest those scores directly; don't redo the work. Treat that prior scoring as dated evidence with its original rubric, scope and confidence for sections it covers.
+If the team already has scored output from any current-state assessment, ingest those scores directly — don't redo the work. Treat that prior scoring as dated evidence with its original rubric, scope and confidence for sections it covers.
 
 If the prior scoring was done weeks ago and material has shifted since (new shipped flows, new content live, repositioning, etc.), note "scored on YYYY-MM-DD; material has shifted since" and update any specific scores you have current evidence for.

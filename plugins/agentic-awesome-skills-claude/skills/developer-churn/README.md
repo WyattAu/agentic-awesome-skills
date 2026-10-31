@@ -1,6 +1,6 @@
 # developer-churn
 
-**Why developers leave and how to win them back**; understanding, preventing, and recovering from churn.
+**Why developers leave and how to win them back** — understanding, preventing, and recovering from churn.
 
 ## What It Does
 
@@ -40,7 +40,7 @@ We've had 15% churn last month and I need to figure out the causes.
 2. **Support tickets are warning signs, not engagement**
 3. **Don't try to win back project-death churners**
 4. **Lead with value in win-back, not discounts**
-5. **Fix involuntary churn first; measure its share in your cohort**
+5. **Fix involuntary churn first — measure its share in your cohort**
 
 ## Files
 
@@ -67,14 +67,14 @@ Illustrative unvalidated weights, requiring normalized 0–100 component scores 
 
 ## Tools
 
-- **[Octolens](https://octolens.com)**; Monitor competitor switches and developer sentiment
-- **Segment**; Usage tracking for health scores
-- **Amplitude**; Cohort retention analysis
-- **Stripe**; Dunning management
+- **[Octolens](https://octolens.com)** — Monitor competitor switches and developer sentiment
+- **Segment** — Usage tracking for health scores
+- **Amplitude** — Cohort retention analysis
+- **Stripe** — Dunning management
 
 ## Related Skills
 
-- `developer-audience-context`; Understand alternatives
-- `developer-email-sequences`; Re-engagement emails
-- `competitor-tracking`; Monitor competitive landscape
-- `developer-onboarding`; Prevent churn at the source
+- `developer-audience-context` — Understand alternatives
+- `developer-email-sequences` — Re-engagement emails
+- `competitor-tracking` — Monitor competitive landscape
+- `developer-onboarding` — Prevent churn at the source

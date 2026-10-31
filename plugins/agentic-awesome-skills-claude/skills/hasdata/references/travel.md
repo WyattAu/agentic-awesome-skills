@@ -1,4 +1,4 @@
-# Travel APIs: Airbnb, Booking, Google Flights
+# Travel APIs — Airbnb, Booking, Google Flights
 
 | Endpoint | Returns |
 |---|---|
@@ -90,8 +90,8 @@ def booking_search(keyword, check_in, check_out, *, adults=2, children=0,
 | `keyword` | **Required.** City, neighborhood, or property name. |
 | `checkInDate` / `checkOutDate` | **Required.** `YYYY-MM-DD`. |
 | `adults`, `children`, `rooms` | **Required.** Pass `children=0` explicitly when none. |
-| `childrenAgesJson` | Required iff `children > 0`; JSON array of ages (0–17), one per child. |
-| `price[min]` / `price[max]` | `>= 10` / `>= 20`. Bracketed; pass explicit bracketed keys in Python `requests`; verify Axios serialization. |
+| `childrenAgesJson` | Required iff `children > 0` — JSON array of ages (0–17), one per child. |
+| `price[min]` / `price[max]` | `>= 10` / `>= 20`. Bracketed — pass explicit bracketed keys in Python `requests`; verify Axios serialization. |
 | `rating[]`, `reviewScore[]`, `propertyType[]`, `facilities[]`, `meals[]`, `bedPreference[]`, `roomFacilities[]`, `propertyAccessibility[]`, `roomAccessibility[]`, `distanceFromCenter[]`, `travelGroup[]`, `onlinePayment[]`, `reservationPolicy[]` | Multi-value filters (OR). |
 | `bedrooms`, `bathrooms` | Minimum count. |
 | `sort` | `ourTopPicks`, `homesAndApartmentsFirst`, `priceLowestFirst`, `priceHighestFirst`, `bestReviewedAndLowestPrice`, `ratingHighToLow`, `ratingLowToHigh`, `ratingAndPrice`, `distanceFromDowntown`, `topReviewed`. |
@@ -147,7 +147,7 @@ resp = requests.get(
 |---|---|
 | `departureId` / `arrivalId` | **Required.** IATA airport codes (`JFK`, `LAX`). |
 | `outboundDate` | **Required.** `YYYY-MM-DD`. |
-| `returnDate` | Optional; omit for one-way. |
+| `returnDate` | Optional — omit for one-way. |
 | `currency` | ISO code. |
 | `gl`, `hl` | Country / language. |
 | `travelClass` | `1` economy, `2` premium economy, `3` business, `4` first. |
@@ -200,11 +200,11 @@ total = (cheapest_flight + cheapest_stay
 
 ## Gotchas
 
-- **Airbnb requires `checkIn`** and uses **token** pagination; store `nextPageToken`, not page numbers.
+- **Airbnb requires `checkIn`** and uses **token** pagination — store `nextPageToken`, not page numbers.
 - **Airbnb property endpoints take URLs**, not IDs.
 - **Booking requires `children` even when zero.** Pass `children=0`. When `children > 0`, also pass `childrenAgesJson` with exactly that many ages.
-- **Booking `price[min]` / `price[max]`** are bracketed; use explicit bracketed keys with Python `requests`.
-- **Booking `rooms[i].variants[]` is where prices live**; the parent `rooms[i]` describes the floor-plan, variants are the buyable rates with `priceBreakdown` / `cancellationPolicy` / `mealPlan`.
-- **`bookingDetails` carries the resolved stay context** the response was priced for; echo it back when persisting results so future comparisons use the same dates / occupancy.
+- **Booking `price[min]` / `price[max]`** are bracketed — use explicit bracketed keys with Python `requests`.
+- **Booking `rooms[i].variants[]` is where prices live** — the parent `rooms[i]` describes the floor-plan, variants are the buyable rates with `priceBreakdown` / `cancellationPolicy` / `mealPlan`.
+- **`bookingDetails` carries the resolved stay context** the response was priced for — echo it back when persisting results so future comparisons use the same dates / occupancy.
 - **Google Flights uses IATA codes**, not city names. `JFK` not `New York`.
-- **Round-trip vs one-way** is determined by `returnDate` presence; pass it for round-trip, omit for one-way.
+- **Round-trip vs one-way** is determined by `returnDate` presence — pass it for round-trip, omit for one-way.

@@ -1,6 +1,6 @@
 ---
 name: accesslint-diff
-description: "Diff a live page's accessibility violations against a baseline; by default compares uncommitted changes (stash-based), or pass --branch [<name>] to diff against a branch. Reports only new violations introduced, violations fixed, and pre-existing count. Use `scan` for a full audit with no diffing."
+description: "Diff a live page's accessibility violations against a baseline — by default compares uncommitted changes (stash-based), or pass --branch [<name>] to diff against a branch. Reports only new violations introduced, violations fixed, and pre-existing count. Use `scan` for a full audit with no diffing."
 risk: safe
 source: "https://github.com/AccessLint/skills"
 date_added: "2026-06-02"
@@ -24,17 +24,17 @@ This package does not bundle the CLI or browser. Verify the current installed to
 ## 2. Report
 
 ```
-Accessibility diff; http://localhost:3000/ vs main (94 rules, live DOM)
+Accessibility diff — http://localhost:3000/ vs main (94 rules, live DOM)
 2 new · 1 fixed · 4 pre-existing hidden
 
-New; Critical
-- color-contrast; 2.1:1 (needs 4.5:1), #bbb on #fff
+New — Critical
+- color-contrast — 2.1:1 (needs 4.5:1), #bbb on #fff
     where: main > p.subtitle   fix: darken to #767676
 Fixed
-- img-alt; <img src="old.jpg"> (no longer present)
+- img-alt — <img src="old.jpg"> (no longer present)
 ```
 
-Each new violation: **where** (selector verbatim + `file:line (symbol)` if `source` present; never fabricate), **evidence**, **fix** (mechanical change or `NEEDS HUMAN`).
+Each new violation: **where** (selector verbatim + `file:line (symbol)` if `source` present — never fabricate), **evidence**, **fix** (mechanical change or `NEEDS HUMAN`).
 
 Don't edit. For an explicitly authorized fix request, use the available `accesslint-audit` procedure and verify with the same controlled baseline. This report-only skill does not authorize a separate agent handoff.
 

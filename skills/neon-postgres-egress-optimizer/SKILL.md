@@ -48,7 +48,7 @@ Stats are cleared when a Neon compute scales to zero and restarts. If the stats 
 2. Let the application run under representative traffic for at least an hour.
 3. Return and run the diagnostic queries below.
 
-If the user has stats from a production database, use those. If they have no access to production stats, proceed to Step 2 and analyze the codebase directly; code-level patterns are often sufficient to identify the worst offenders.
+If the user has stats from a production database, use those. If they have no access to production stats, proceed to Step 2 and analyze the codebase directly — code-level patterns are often sufficient to identify the worst offenders.
 
 ### Diagnostic queries
 
@@ -135,7 +135,7 @@ SELECT id, name, price, image_urls FROM products;
 
 ### Missing pagination
 
-**Problem:** A list endpoint returns all rows with no LIMIT. This is an unbounded egress risk; every new row in the table increases data transfer on every request. Flag this regardless of current table size.
+**Problem:** A list endpoint returns all rows with no LIMIT. This is an unbounded egress risk — every new row in the table increases data transfer on every request. Flag this regardless of current table size.
 
 This is easy to miss because the application may work fine with small datasets. But at scale, an unpaginated endpoint returning 10,000 rows with even moderate column widths can transfer hundreds of megabytes per day.
 
@@ -157,7 +157,7 @@ When adding pagination, check whether the consuming client already supports pagi
 
 ### High-frequency queries on static data
 
-**Problem:** A query is called thousands of times per day but returns data that rarely changes. Every call transfers the same rows from the database. This pattern is only visible from `pg_stat_statements`; the code itself looks normal.
+**Problem:** A query is called thousands of times per day but returns data that rarely changes. Every call transfers the same rows from the database. This pattern is only visible from `pg_stat_statements` — the code itself looks normal.
 
 Look for queries with extremely high call counts relative to other queries. Common examples: configuration tables, category lists, feature flags, user role definitions.
 
@@ -210,12 +210,12 @@ Two queries instead of one JOIN. The product data is fetched once. The reviews a
 After applying fixes:
 
 1. **Run existing tests** to confirm nothing broke.
-2. **Check the responses**; make sure the API still returns the same data shape. Column selection and pagination changes can break clients that depend on specific fields or full result sets.
-3. **Measure the improvement**; compare counter deltas and transfer metrics over equivalent traffic windows; use a reset only in an explicitly approved isolated measurement.
+2. **Check the responses** — make sure the API still returns the same data shape. Column selection and pagination changes can break clients that depend on specific fields or full result sets.
+3. **Measure the improvement** — compare counter deltas and transfer metrics over equivalent traffic windows; use a reset only in an explicitly approved isolated measurement.
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
-The fixes above cut **egress** (data transferred out of Postgres). The other big non-prod cost lever is **compute**, and you can codify it durably in `neon.ts`; Neon's infrastructure-as-code file (see the `neon` skill for the full reference); so dev, preview, and CI branches stay cheap by default instead of relying on per-branch flags:
+The fixes above cut **egress** (data transferred out of Postgres). The other big non-prod cost lever is **compute**, and you can codify it durably in `neon.ts` — Neon's infrastructure-as-code file (see the `neon` skill for the full reference) — so dev, preview, and CI branches stay cheap by default instead of relying on per-branch flags:
 
 ```bash
 npm i @neon/config

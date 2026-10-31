@@ -29,16 +29,16 @@ If the user mentions a dashboard or report, search for it and then trace lineage
 Call `get_alerts` with a recent time range (last 7-14 days):
 - Filter by the affected table if possible
 - Look for alerts that match the user's description (freshness, volume, schema, field metric)
-- If a matching alert exists, use its details to drive the investigation; proceed as if the user provided an incident ID
+- If a matching alert exists, use its details to drive the investigation — proceed as if the user provided an incident ID
 
 ### 4. Check table health
 
 Even without an alert, check the table directly:
 
-- **Freshness:** `get_table_freshness`; when was it last updated? Is it overdue?
-- **Volume:** `get_table_size_history`; has the row count changed unexpectedly?
-- **Schema:** `get_table(mcon=..., include_fields=true)`; check current schema
-- **Query activity:** `get_queries_for_table`; are write queries still running?
+- **Freshness:** `get_table_freshness` — when was it last updated? Is it overdue?
+- **Volume:** `get_table_size_history` — has the row count changed unexpectedly?
+- **Schema:** `get_table(mcon=..., include_fields=true)` — check current schema
+- **Query activity:** `get_queries_for_table` — are write queries still running?
 
 ### 5. Classify the issue type
 
@@ -52,13 +52,13 @@ Based on the evidence gathered, determine the issue type:
 | Data values look wrong (nulls, weird averages) | Field anomaly | `references/field-anomaly-investigation.md` |
 | Pipeline failed or errored | ETL failure | `references/etl-failure-investigation.md` |
 | Query was modified | Query change | `references/query-change-investigation.md` |
-| Problem is about an AI agent (quality, latency, traces, conversations) | Agent issue | Hand off; read and follow `../../troubleshoot-agent-traces/SKILL.md` |
+| Problem is about an AI agent (quality, latency, traces, conversations) | Agent issue | Hand off — read and follow `../../troubleshoot-agent-traces/SKILL.md` |
 
 ### 6. Proceed to investigation
 
 Once you've identified the table, issue type, and approximate timeline, continue with Step 2 (Map the blast radius) from the main SKILL.md workflow.
 
-> **TSA note.** This intake path intentionally does **not** invoke the Troubleshooting Agent (TSA), because `run_troubleshooting_agent` requires a Monte Carlo incident UUID and this path starts without one. If Step 3 above identifies a matching alert, treat the user as having provided that alert's incident ID and re-enter the main `SKILL.md` flow at Step 1; Step 1.5 there checks authorization before any new paid TSA run. If no matching alert is found, run the manual investigation only.
+> **TSA note.** This intake path intentionally does **not** invoke the Troubleshooting Agent (TSA), because `run_troubleshooting_agent` requires a Monte Carlo incident UUID and this path starts without one. If Step 3 above identifies a matching alert, treat the user as having provided that alert's incident ID and re-enter the main `SKILL.md` flow at Step 1 — Step 1.5 there checks authorization before any new paid TSA run. If no matching alert is found, run the manual investigation only.
 
 ## Tips
 

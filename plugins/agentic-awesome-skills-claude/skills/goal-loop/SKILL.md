@@ -36,9 +36,9 @@ When monitoring a running `/goal`, every check should include a one-line update 
 
 ## Requirements
 
-- An agent with the `/goal` feature; right now: Codex, Claude Code, or Hermes Agent
+- An agent with the `/goal` feature — right now: Codex, Claude Code, or Hermes Agent
 - The goals feature enabled in the agent's config
-- **Subscription auth**; API-key auth does **not** work. A pro-tier plan is the realistic minimum for long runs.
+- **Subscription auth** — API-key auth does **not** work. A pro-tier plan is the realistic minimum for long runs.
 
 ## When to Use it
 
@@ -53,24 +53,24 @@ Bad fits: exploratory work, vague "improve this", anything without a "done" defi
 
 ## The 5-part contract (every goal needs this)
 
-1. **Objective**; one sentence, one concrete outcome.
-2. **Constraints**; what must NOT change (public API, files, libs, conventions).
-3. **Validation command**; the exact shell command that proves progress (`pytest -q`, `pnpm test`, etc.).
-4. **Stop condition**; verifiable: "Stop when X passes" OR "when further changes need human/product input."
-5. **Documentation**; one sentence instructing the agent to write concise, targeted docs for every change, either creating new `.md` files or updating existing ones.
+1. **Objective** — one sentence, one concrete outcome.
+2. **Constraints** — what must NOT change (public API, files, libs, conventions).
+3. **Validation command** — the exact shell command that proves progress (`pytest -q`, `pnpm test`, etc.).
+4. **Stop condition** — verifiable: "Stop when X passes" OR "when further changes need human/product input."
+5. **Documentation** — one sentence instructing the agent to write concise, targeted docs for every change, either creating new `.md` files or updating existing ones.
 
 Plus: tell the agent what to read first, ask it to work in checkpoints with a short progress log.
 
 ## Writing a goal (the core deliverable)
 
-When the user wants a quick `/goal` instruction, produce a structured markdown block with one line per contract item (proper newlines, not flowing prose). **Do not prefix the output with `/goal`**; the user adds the slash command themselves in the composer. Emit only the contract body. Template:
+When the user wants a quick `/goal` instruction, produce a structured markdown block with one line per contract item (proper newlines, not flowing prose). **Do not prefix the output with `/goal`** — the user adds the slash command themselves in the composer. Emit only the contract body. Template:
 
 ```
 **Objective:** <one-sentence objective>
 **Read first:** <files/PLAN.md/issue>
 **Constraints:** <what not to change, libs, conventions>
 **Validate:** `<exact command>` after each change
-**Document:** Write concise, targeted documentation for all changes; create new `.md` files or update existing docs as needed.
+**Document:** Write concise, targeted documentation for all changes — create new `.md` files or update existing docs as needed.
 **Checkpoints:** work in checkpoints and log progress briefly
 **Stop when:** <verifiable condition>, OR when further changes require human/product input
 ```
@@ -99,11 +99,11 @@ When the user wants a quick `/goal` instruction, produce a structured markdown b
 
 ### Writing rules
 - **One objective, one stop condition.** Not a backlog.
-- **Documentation is mandatory.** Every `/goal` prompt must include a single sentence committing the agent to concise, targeted docs; new `.md` files or focused updates to existing docs.
-- **Never instruct the agent to create new ADRs**; ADRs require the user's explicit approval, so goal prompts must not pre-approve or encourage them.
+- **Documentation is mandatory.** Every `/goal` prompt must include a single sentence committing the agent to concise, targeted docs — new `.md` files or focused updates to existing docs.
+- **Never instruct the agent to create new ADRs** — ADRs require the user's explicit approval, so goal prompts must not pre-approve or encourage them.
 - **Forbid reward-hacking explicitly:** "Do not delete, skip, weaken, or narrow tests to make the goal pass." Otherwise the agent may game the stop condition.
-- **4,000-char limit** on the objective. If longer, put detail in a file (`PLAN.md`/`GOAL_BRIEF.md`) and make the goal point to it; keep the goal itself compact.
-- Use **literal strings** for paths, commands, issue numbers; exact.
+- **4,000-char limit** on the objective. If longer, put detail in a file (`PLAN.md`/`GOAL_BRIEF.md`) and make the goal point to it — keep the goal itself compact.
+- Use **literal strings** for paths, commands, issue numbers — exact.
 - Forbid scope creep explicitly: "Do not refactor unrelated code. Do not add dependencies."
 - Tell the agent when to pause: "If <condition>, pause and ask before proceeding."
 - Short, vague goals burn tokens for no extra value vs. a normal prompt.
@@ -116,12 +116,12 @@ Claude Code cmux note: after Claude finishes, it may prefill a predicted next us
 
 ### Self-goal setting
 
-The agent can now write and set its own goal natively (the `create_goal` tool). Instead of crafting the contract yourself, give it your high-level intent and tell it to set the goal: "Inspect this repo, then write yourself a `/goal` with a verifiable stop condition and pursue it." It's the meta-prompting trick done inline; the agent turns your intent into the contract. Still give it the same raw materials (files to read, constraints, the validation command) so the goal it writes is grounded. Add: "ask clarifying questions before committing if the intent is underspecified"; catches ambiguity up front and prevents the self-set goal from drifting.
+The agent can now write and set its own goal natively (the `create_goal` tool). Instead of crafting the contract yourself, give it your high-level intent and tell it to set the goal: "Inspect this repo, then write yourself a `/goal` with a verifiable stop condition and pursue it." It's the meta-prompting trick done inline — the agent turns your intent into the contract. Still give it the same raw materials (files to read, constraints, the validation command) so the goal it writes is grounded. Add: "ask clarifying questions before committing if the intent is underspecified" — catches ambiguity up front and prevents the self-set goal from drifting.
 
 ## Launching
 
 1. `cd <repo>` (goals run scoped to the working directory).
-2. Launch the agent bare (opens the TUI). **Not** exec/headless mode; `/goal` is a TUI slash command only.
+2. Launch the agent bare (opens the TUI). **Not** exec/headless mode — `/goal` is a TUI slash command only.
 3. Sign in with subscription auth (not an API key).
 4. Type `/goal <your contract>` in the composer, Enter.
 5. Walk away.
@@ -139,12 +139,12 @@ The agent can now write and set its own goal natively (the `create_goal` tool). 
 
 Resuming across sessions: goal state is persisted server-side. `cd` back into the repo, launch the agent, `/goal` for status, `/goal resume`.
 
-Budget-limited state: the agent doesn't stop abruptly; it summarizes, notes what's left, saves state. `/goal resume` works after budget refresh or upgrade.
+Budget-limited state: the agent doesn't stop abruptly — it summarizes, notes what's left, saves state. `/goal resume` works after budget refresh or upgrade.
 
 ## When a goal drifts
 
 - **Minor drift:** just type a correction in the composer (auto-pauses, folds it in, resumes).
-- **Loose objective:** `/goal pause`, read status, then `/goal <tighter version>`; replaces the contract. Don't pile instructions on a vague goal.
+- **Loose objective:** `/goal pause`, read status, then `/goal <tighter version>` — replaces the contract. Don't pile instructions on a vague goal.
 - **Bad mess:** `/goal clear`, `git status` or `git stash`, rewrite with the meta-prompting trick, restart.
 
 Don't let a drifting goal keep running "to see where it goes." Tokens burn, diffs compound.
@@ -152,7 +152,7 @@ Don't let a drifting goal keep running "to see where it goes." Tokens burn, diff
 ## Operational tips
 
 - Inspect status periodically with bare `/goal`.
-- **Always review the diff** before merging; long autonomy means more code to validate, not less. Human oversight becomes more critical, not optional.
+- **Always review the diff** before merging — long autonomy means more code to validate, not less. Human oversight becomes more critical, not optional.
 - Keep approvals/sandboxing tight; default permissions are correct.
 - First run: pick a 30-min scoped task so you learn how `/goal` actually stops before trusting it overnight.
 - Bake recurring policy into `AGENTS.md` so every goal inherits it without restating: adversarial self-review before declaring done, an extra QA pass even when tests pass, and the standard validation command. Saves repeating it in each goal paragraph.
@@ -165,9 +165,9 @@ Don't let a drifting goal keep running "to see where it goes." Tokens burn, diff
 | Feature flag on but command missing | Quit and restart the agent fully |
 | Typed `/goals` | It's singular: `/goal` |
 | Doesn't activate | Sign out, sign back in with subscription auth (not API key) |
-| Stopped with progress summary | Budget-limited; `/goal resume` after refresh, or tighten scope |
-| `/goal resume` says no active goal | Terminal state or cleared; start fresh with `/goal <new>` |
-| Goal looks active but won't auto-continue | Stuck in Plan mode; plan-only work doesn't trigger continuation. Draft the plan, then switch to Goal execution |
+| Stopped with progress summary | Budget-limited — `/goal resume` after refresh, or tighten scope |
+| `/goal resume` says no active goal | Terminal state or cleared — start fresh with `/goal <new>` |
+| Goal looks active but won't auto-continue | Stuck in Plan mode — plan-only work doesn't trigger continuation. Draft the plan, then switch to Goal execution |
 
 ## Mental model
 

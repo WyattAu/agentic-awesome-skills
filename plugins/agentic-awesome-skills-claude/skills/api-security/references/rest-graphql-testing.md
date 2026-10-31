@@ -5,13 +5,13 @@
 ### 内省探测（三级降级）
 
 ```graphql
-# Level 1: 标准内省
+# Level 1 — 标准内省
 { __schema { queryType { name } mutationType { name } types { name fields { name type { name } } } } }
 
-# Level 2: 精简内省（绕过 WAF）
+# Level 2 — 精简内省（绕过 WAF）
 { __schema { types { name } } }
 
-# Level 3: 最小探测
+# Level 3 — 最小探测
 { __type(name: "Query") { name } }
 ```
 
@@ -51,7 +51,7 @@ GET /graphql?query=mutation+{+deleteUser(id:1)+}
 | 端点 | GET | POST | PUT | PATCH | DELETE | OPTIONS |
 |------|-----|------|-----|-------|--------|---------|
 | /users | ✓ 可访问 | 测试越权创建 | 测试批量覆盖 | 测试字段注入 | 测试级联删除 | 信息泄漏 |
-| /users/me | 基准 | - | 测试自我提权 | 测试字段追加 | 测试自我删除 | - |
+| /users/me | 基准 | — | 测试自我提权 | 测试字段追加 | 测试自我删除 | — |
 
 ### 参数注入
 

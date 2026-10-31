@@ -33,7 +33,7 @@ If your experience needs to access motion data from a device, you must provide c
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/gyro-and-accelerometer#Developer-documentation)
 
-[Getting processed device-motion data](https://developer.apple.com/documentation/CoreMotion/getting-processed-device-motion-data); Core Motion
+[Getting processed device-motion data](https://developer.apple.com/documentation/CoreMotion/getting-processed-device-motion-data) — Core Motion
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/gyro-and-accelerometer#Videos)
 

@@ -23,7 +23,7 @@ You can create a workout experience for Apple Watch, iPhone, or iPad that helps 
 
 ![A screenshot of the leftmost Workout screen for an Outdoor Walk workout. Clockwise from the top-left corner are the End, Resume, New, and Segment buttons.](https://docs-assets.developer.apple.com/published/f893039e593af4d8e40eb6d374dfc6a3/workouts-large-buttons%402x.png)
 
-Large buttons that control the in-progress session; such as End, Resume, and New; appear on the leftmost screen.
+Large buttons that control the in-progress session — such as End, Resume, and New — appear on the leftmost screen.
 
 ![A screenshot of the middle Workout screen for an Outdoor Walk workout. Five lines of data are visible. From the top, the screen shows the elapsed time, the active calories, the current heart rate, the average pace, and the elevation.](https://docs-assets.developer.apple.com/published/8de838390249b16301bfc5495947da37/workouts-metrics%402x.png)
 
@@ -67,7 +67,7 @@ If supported, media playback controls appear on the rightmost screen.
 
 [WorkoutKit](https://developer.apple.com/documentation/WorkoutKit)
 
-[Workouts and activity rings](https://developer.apple.com/documentation/HealthKit/workouts-and-activity-rings); HealthKit
+[Workouts and activity rings](https://developer.apple.com/documentation/HealthKit/workouts-and-activity-rings) — HealthKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/workouts#Videos)
 

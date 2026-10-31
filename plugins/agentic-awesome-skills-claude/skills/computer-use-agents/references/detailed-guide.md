@@ -1064,14 +1064,14 @@ Why this breaks:
 injection risks, browser use amplifies this risk in two ways. First,
 the attack surface is vast: every webpage, embedded document, advertisement,
 and dynamically loaded script represents a potential vector for malicious
-instructions. Second, browser agents can take many different actions-
-navigating to URLs, filling forms, clicking buttons, downloading files-
+instructions. Second, browser agents can take many different actions—
+navigating to URLs, filling forms, clicking buttons, downloading files—
 that attackers can exploit."
 
 Real attacks have already happened:
 - "Microsoft Copilot agents were hijacked with emails containing malicious
   instructions, which allowed attackers to extract entire CRM databases."
-- "Google's Workspace services were manipulated-hidden prompts inside
+- "Google's Workspace services were manipulated—hidden prompts inside
   calendar invites and emails tricked Gemini agents into deleting events
   and exposing sensitive messages."
 

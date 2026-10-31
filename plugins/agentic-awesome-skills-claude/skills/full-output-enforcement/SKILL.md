@@ -28,7 +28,7 @@ tools: [claude, cursor, codex, antigravity]
 
 ## Baseline
 
-Match completeness to the requested deliverable and its actual stakes. Do not optimize for brevity; optimize for completeness. If the user asks for a full file, deliver the full file. If the user asks for 5 components, deliver 5 components. Respect the limitations above and report unavailable inputs honestly.
+Match completeness to the requested deliverable and its actual stakes. Do not optimize for brevity — optimize for completeness. If the user asks for a full file, deliver the full file. If the user asks for 5 components, deliver 5 components. Respect the limitations above and report unavailable inputs honestly.
 
 ## Banned Output Patterns
 
@@ -42,9 +42,9 @@ The following patterns are hard failures. Never produce them:
 
 ## Execution Process
 
-1. **Scope**; Read the full request. Count how many distinct deliverables are expected (files, functions, sections, answers). Lock that number.
-2. **Build**; Generate every deliverable completely. No partial drafts, no "you can extend this later."
-3. **Cross-check**; Before output, re-read the original request. Compare your deliverable count against the scope count. If anything is missing, add it before responding.
+1. **Scope** — Read the full request. Count how many distinct deliverables are expected (files, functions, sections, answers). Lock that number.
+2. **Build** — Generate every deliverable completely. No partial drafts, no "you can extend this later."
+3. **Cross-check** — Before output, re-read the original request. Compare your deliverable count against the scope count. If anything is missing, add it before responding.
 
 ## Handling Long Outputs
 

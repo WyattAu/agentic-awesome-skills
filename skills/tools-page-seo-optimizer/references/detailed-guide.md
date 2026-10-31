@@ -18,9 +18,9 @@ Fixes deployed but unsure they're live? → Phase 10 (Live Verification)
 ---
 
 
-## Phase 0: Codebase Reconnaissance
+## Phase 0 — Codebase Reconnaissance
 
-**Before writing any code**, locate these in the codebase. Names vary by framework; adapt.
+**Before writing any code**, locate these in the codebase. Names vary by framework — adapt.
 
 | What to find | Common locations |
 |---|---|
@@ -30,7 +30,7 @@ Fixes deployed but unsure they're live? → Phase 10 (Live Verification)
 
 **Answer these before writing a single line:**
 
-1. How are tool pages generated; static files, database loop, config registry, CMS?
+1. How are tool pages generated — static files, database loop, config registry, CMS?
 2. Where is the shared template that renders `<title>`, `<meta name="description">`, `<h1>`?
 3. Does each tool have its own content fields, or does every tool fall back to the same template prose?
 4. Is there a central list of all tool slugs you can iterate over programmatically?
@@ -38,7 +38,7 @@ Fixes deployed but unsure they're live? → Phase 10 (Live Verification)
 ---
 
 
-## Phase 1: Meta Titles & Descriptions
+## Phase 1 — Meta Titles & Descriptions
 
 ### The core problem
 
@@ -48,24 +48,24 @@ can reduce clarity in search results. Repeated titles alone do not prove duplica
 ### Title tag formula
 
 ```
-{Tool Name} | {Specific Outcome}; {Brand}
+{Tool Name} | {Specific Outcome} — {Brand}
 ```
 
 | ✅ Good | ❌ Bad |
 |---|---|
-| `Meta Tag Generator \| Create Perfect SEO Titles Free; MySite` | `Meta Tag Generator - MySite Tools` |
-| `Broken Link Finder \| Scan Any Page for Dead URLs; MySite` | `Broken Link Finder - Free Online Tool \| MySite` |
+| `Meta Tag Generator \| Create Perfect SEO Titles Free — MySite` | `Meta Tag Generator - MySite Tools` |
+| `Broken Link Finder \| Scan Any Page for Dead URLs — MySite` | `Broken Link Finder - Free Online Tool \| MySite` |
 
 **Rules:**
 - ≤ 60 characters total
 - Primary keyword in the first 40 characters
-- Every tool has a **unique** title; no two tools share the same one
+- Every tool has a **unique** title — no two tools share the same one
 - Include "Free" only where accurate; any CTR effect must be measured
 
 ### Meta description formula
 
 ```
-{What it does; one action sentence}. {Key differentiator}. {CTA}.
+{What it does — one action sentence}. {Key differentiator}. {CTA}.
 ```
 
 Example: `Scan any webpage for broken links in seconds. Checks internal and external URLs,
@@ -74,7 +74,7 @@ exports results as CSV. Free, no account needed.`
 **Rules:**
 - 120–160 characters
 - Action verbs: Generate, Scan, Check, Analyze, Convert, Build, Find
-- Every tool gets a **custom** description; zero template filler
+- Every tool gets a **custom** description — zero template filler
 
 ### Implementation (any framework)
 
@@ -84,7 +84,7 @@ exports results as CSV. Free, no account needed.`
 <meta name="description" content="{{ tool.meta_description | default(tool.tagline) }}">
 ```
 
-### Validation script: run before every deploy
+### Validation script — run before every deploy
 
 ```python
 # validate_meta.py
@@ -111,14 +111,14 @@ print(f"✅ All {len(tools)} tools passed meta validation")
 ---
 
 
-## Phase 2: Content Registry (The Highest-Leverage Fix)
+## Phase 2 — Content Registry (The Highest-Leverage Fix)
 
 **Audit hypothesis:** repeated filler may provide little page-specific value. Measure actual content, indexing and query intent before prioritizing; the 80–95% figure is not established here.
 
 ### Diagnosis
 
 ```bash
-# Find shared prose in your templates: if these strings appear in a shared template
+# Find shared prose in your templates — if these strings appear in a shared template
 # file, you have the problem
 D1=$(grep -rn "powerful tool that helps" templates/ src/ 2>/dev/null | head -5)
 [ -n "$D1" ] && echo "  ✗ Shared template prose found" || echo "  ✓ No shared prose"
@@ -129,7 +129,7 @@ D2=$(grep -rn "easy to use" templates/ src/ 2>/dev/null | head -5)
 ### Registry entry structure (framework-agnostic)
 
 ```yaml
-# data/tools/meta-tag-generator.yaml  (or JSON, DB columns, JS object: adapt to your stack)
+# data/tools/meta-tag-generator.yaml  (or JSON, DB columns, JS object — adapt to your stack)
 slug: meta-tag-generator
 name: Meta Tag Generator
 meta_title: "Meta Tag Generator | Create Perfect SEO Titles & Descriptions Free"
@@ -137,13 +137,13 @@ meta_description: "Generate optimized title tags and meta descriptions with live
   counters. Shows editorial 60/160 character targets. Instant, free, no account needed."
 
 introduction: >
-  The meta tag generator creates the two most critical on-page SEO elements -
-  your title tag and meta description; with live character counters that enforce
+  The meta tag generator creates the two most critical on-page SEO elements —
+  your title tag and meta description — with live character counters that enforce
   the chosen editorial targets before you publish. [80+ unique words minimum]
 
 best_practices:
   - "Include your primary keyword within the first 40 characters of the title"
-  - "Write a unique description per page; duplicate descriptions waste crawl budget"
+  - "Write a unique description per page — duplicate descriptions waste crawl budget"
   - "Use action verbs in descriptions: Generate, Find, Check, Analyze"
 
 how_to_steps:
@@ -156,7 +156,7 @@ how_to_steps:
 
 faqs:
   - q: "Does Google always use my meta description?"
-    a: "No; Google may choose a query-dependent snippet from page content. Write them anyway for
+    a: "No — Google may choose a query-dependent snippet from page content. Write them anyway for
        social shares and some SERPs."
   - q: "What happens if my title is over 60 characters?"
     a: "Display depends on available width; there is no fixed 60-character cutoff."
@@ -184,7 +184,7 @@ related_tools:
 ---
 
 
-## Phase 3: H1 and Heading Hierarchy
+## Phase 3 — H1 and Heading Hierarchy
 
 ### H1 formula
 
@@ -193,15 +193,15 @@ related_tools:
 ```
 
 **Rules:**
-- One `<h1>` per page; only the tool name/title
+- One `<h1>` per page — only the tool name/title
 - Must be unique per page
 
 ### Heading hierarchy
 
 ```
-h1; Tool name (one per page)
-  h2; Major sections: "How It Works", "Best Practices", "FAQs", "Related Tools"
-    h3; Subsections: individual FAQ items, feature callouts, step headers
+h1 — Tool name (one per page)
+  h2 — Major sections: "How It Works", "Best Practices", "FAQs", "Related Tools"
+    h3 — Subsections: individual FAQ items, feature callouts, step headers
 ```
 
 Never skip levels. No h1 → h3 without an h2.
@@ -215,7 +215,7 @@ curl --connect-timeout 5 --max-time 20 -s "https://yourdomain.com/tools/meta-tag
 ---
 
 
-## Phase 4: Accessibility
+## Phase 4 — Accessibility
 
 Accessibility is a separate usability requirement; failures do not automatically lower Core Web Vitals metrics.
 
@@ -236,7 +236,7 @@ B=$(grep -rn "<button" templates/ 2>/dev/null | grep -v "aria-label" | grep -v "
 ---
 
 
-## Phase 5: Internal Linking
+## Phase 5 — Internal Linking
 
 Internal links between tools are how PageRank flows through your site. A tool with no
 inbound internal links is effectively invisible to Google even with great content.
@@ -257,10 +257,10 @@ Homepage
 
 - Every tool links **to** at least 2 related tools (use `related_tools` from registry)
 - Every tool is linked **from** at least 2 other tools or category pages
-- No orphan tools; every tool reachable within 3 clicks from homepage
+- No orphan tools — every tool reachable within 3 clicks from homepage
 
 ```bash
-# Orphan detection: tools with too few inbound references
+# Orphan detection — tools with too few inbound references
 for slug in $(cat data/slugs.txt 2>/dev/null); do
   C=$(grep -rl "$slug" templates/ 2>/dev/null | wc -l | tr -d ' ')
   [ "$C" -lt 2 ] && echo "  ORPHAN RISK: $slug ($C refs)"
@@ -275,7 +275,7 @@ done
   <h2>Related Tools</h2>
   {% for slug in tool.related_tools %}
   {% set rel = get_tool(slug) %}
-  <a href="/tools/{{ slug }}">{{ rel.name }}; {{ rel.tagline }}</a>
+  <a href="/tools/{{ slug }}">{{ rel.name }} — {{ rel.tagline }}</a>
   {% endfor %}
 </section>
 {% endif %}
@@ -284,7 +284,7 @@ done
 ---
 
 
-## Phase 6: URL Slug Hygiene
+## Phase 6 — URL Slug Hygiene
 
 | ✅ Good | ❌ Bad | Problem |
 |---|---|---|
@@ -292,10 +292,10 @@ done
 | `/tools/keyword-density-checker` | `/tools/free-online-keyword-density-checker-tool-free` | Keyword stuffed |
 | `/tools/broken-link-finder` | `/tools/brokenLinkFinder` | camelCase |
 
-**Formula:** `{primary-keyword-phrase}`; lowercase, hyphens, no stop words, no "free" / "online" / "tool" padding.
+**Formula:** `{primary-keyword-phrase}` — lowercase, hyphens, no stop words, no "free" / "online" / "tool" padding.
 
 ```bash
-# Audit: list longest slugs (likely stuffed)
+# Audit — list longest slugs (likely stuffed)
 curl --connect-timeout 5 --max-time 20 -s "https://yourdomain.com/sitemap.xml" \
   | grep -oE '<loc>[^<]+' | sed 's/<loc>//' \
   | grep "/tools/" \
@@ -307,7 +307,7 @@ If renaming a slug, always 301 redirect old → new and update all internal link
 ---
 
 
-## Phase 7: E-E-A-T Signals
+## Phase 7 — E-E-A-T Signals
 
 Tool sites rank poorly when they look authorless and dateless.
 
@@ -324,9 +324,9 @@ Tool sites rank poorly when they look authorless and dateless.
 
 ```html
 <section class="trust-pillars">
-  <div>✅ <strong>100% Free</strong>; no account, no credit card</div>
-  <div>🔒 <strong>Privacy First</strong>; your data never leaves your browser</div>
-  <div>⚡ <strong>Instant Results</strong>; processed in under 1 second</div>
+  <div>✅ <strong>100% Free</strong> — no account, no credit card</div>
+  <div>🔒 <strong>Privacy First</strong> — your data never leaves your browser</div>
+  <div>⚡ <strong>Instant Results</strong> — processed in under 1 second</div>
 </section>
 ```
 
@@ -339,7 +339,7 @@ for solo-built tool sites.
 ---
 
 
-## Phase 8: Scaling to 100+ Tools
+## Phase 8 — Scaling to 100+ Tools
 
 When the content registry pattern is working for 10–20 tools, the next challenge is
 scaling it to 100+ without losing quality or introducing duplicates.
@@ -384,11 +384,11 @@ rails assets:precompile  # Rails
 ---
 
 
-## Phase 9: Blog Content Strategy (Position 50–68 Keywords)
+## Phase 9 — Blog Content Strategy (Position 50–68 Keywords)
 
 Tool pages rank well for transactional keywords ("meta tag generator", "check broken links").
 But informational keywords ("how to write meta descriptions", "what is keyword density") sit
-at position 50–68; too deep to get clicks; because tool pages aren't the right content
+at position 50–68 — too deep to get clicks — because tool pages aren't the right content
 format for them. Blog posts are.
 
 ### Diagnosis: find your 50–68 keywords
@@ -399,7 +399,7 @@ These are candidates for investigation; position alone establishes neither autho
 ### Blog post targeting formula
 
 ```
-Post title: {Informational keyword}; {Year} Guide
+Post title: {Informational keyword} — {Year} Guide
 Target keyword: the exact query from GSC
 Content length: 1,000–1,500 words
 Internal links: link to 2–3 relevant tools from within the post body
@@ -417,25 +417,25 @@ Example mapping:
 ### Blog post structure (SEO-optimised)
 
 ```
-H1: {Target keyword}; the exact GSC query, naturally phrased
+H1: {Target keyword} — the exact GSC query, naturally phrased
 Intro (100 words): answer the question directly in the first paragraph
   H2: What is {topic}?
   H2: Why it matters for SEO
-  H2: How to {action}; step by step
+  H2: How to {action} — step by step
     H3: Step 1
     H3: Step 2
     H3: Step 3
   H2: Common mistakes
-  H2: {Tool name}; try it free   ← internal link to your tool
+  H2: {Tool name} — try it free   ← internal link to your tool
 Conclusion: summarise + CTA to the tool
 ```
 
 ### Blog post meta requirements
 
-- `meta_title`: include year where relevant ("2025"); improves CTR on informational queries
+- `meta_title`: include year where relevant ("2025") — improves CTR on informational queries
 - `meta_description`: answer the question in one sentence + "Free tool included"
 - `canonical`: must point to the exact blog URL
-- `datePublished` + `dateModified` in schema; critical for freshness signals
+- `datePublished` + `dateModified` in schema — critical for freshness signals
 
 ### Internal link rule for blog posts
 
@@ -443,21 +443,21 @@ Every blog post must contain at least **2 contextual inline links** to relevant 
 not just a "Related Tools" sidebar. Use links where readers need them; no fixed PageRank advantage over sidebar links is established here.
 
 ```html
-<!-- Good; inline contextual link -->
+<!-- Good — inline contextual link -->
 <p>Use our <a href="/tools/meta-tag-generator">meta tag generator</a> to preview
 how your title and description appear in Google results before publishing.</p>
 
-<!-- Weak; sidebar only, no body link -->
+<!-- Weak — sidebar only, no body link -->
 <aside>Related: Meta Tag Generator</aside>
 ```
 
 ---
 
 
-## Phase 10: Live Deployment Verification
+## Phase 10 — Live Deployment Verification
 
 A fix that compiles cleanly can still fail in production. After every push, verify
-the live site; not just the build.
+the live site — not just the build.
 
 ```bash
 seo:verify() {
@@ -487,12 +487,12 @@ seo:verify() {
 | `/favicon.ico` | 200 |
 | `application/ld+json` blocks | ≥ 1 per tool page |
 
-If any check fails; **do not move on**. Diagnose and fix before the next phase.
+If any check fails — **do not move on**. Diagnose and fix before the next phase.
 
 ---
 
 
-## Phase 11: Pre-Commit Validation
+## Phase 11 — Pre-Commit Validation
 
 ```bash
 seo:validate() {
@@ -522,9 +522,9 @@ if missing: raise SystemExit(1)
 ## Consolidated Runners
 
 ```bash
-# Quick check: meta validation + live site verification
+# Quick check — meta validation + live site verification
 seo:quick() { seo:verify "$PROD_URL" && seo:validate; }
-# Full check: quick + duplicate title check
+# Full check — quick + duplicate title check
 seo:full()  { seo:quick; }
 ```
 
@@ -570,11 +570,11 @@ Prioritize evidence from the actual site rather than a universal ranking diagnos
 
 ## Related Skills
 
-- [schema-markup-generator](../../schema-markup-generator/SKILL.md); JSON-LD structured data (HowTo, FAQPage, WebApplication) for tool pages
-- [social-metadata-hardening](../../social-metadata-hardening/SKILL.md); OG tags and social sharing previews for tool pages
-- [indexing-issue-auditor](../../indexing-issue-auditor/SKILL.md); full crawl audit and redirect mapping after slug changes
-- [pagespeed-enhancer](../../pagespeed-enhancer/SKILL.md); Lighthouse / Core Web Vitals audit for tool pages
-- [wordpress-centric-high-seo-optimized-blogwriting-skill](../../wordpress-centric-high-seo-optimized-blogwriting-skill/SKILL.md); blog post writing with SEO structure
-- [vibecode-production-qa-validator](../../vibecode-production-qa-validator/SKILL.md); end-to-end production QA including deployment verification
+- [schema-markup-generator](../../schema-markup-generator/SKILL.md) — JSON-LD structured data (HowTo, FAQPage, WebApplication) for tool pages
+- [social-metadata-hardening](../../social-metadata-hardening/SKILL.md) — OG tags and social sharing previews for tool pages
+- [indexing-issue-auditor](../../indexing-issue-auditor/SKILL.md) — full crawl audit and redirect mapping after slug changes
+- [pagespeed-enhancer](../../pagespeed-enhancer/SKILL.md) — Lighthouse / Core Web Vitals audit for tool pages
+- [wordpress-centric-high-seo-optimized-blogwriting-skill](../../wordpress-centric-high-seo-optimized-blogwriting-skill/SKILL.md) — blog post writing with SEO structure
+- [vibecode-production-qa-validator](../../vibecode-production-qa-validator/SKILL.md) — end-to-end production QA including deployment verification
 
 ---

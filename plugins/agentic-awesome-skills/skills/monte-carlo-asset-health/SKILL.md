@@ -27,7 +27,7 @@ monitoring coverage, importance, and upstream dependency health.
 > `mcp__plugin_mc-agent-toolkit_monte-carlo-mcp__<tool>` (e.g.
 > `mcp__plugin_mc-agent-toolkit_monte-carlo-mcp__get_alerts`). Bare tool names used in this skill
 > (`get_alerts`, `search`, `get_table`, …) refer to that bundled server. If the session also has a
-> separately-configured `monte-carlo-mcp` server, do **not** route to it; it may point at a
+> separately-configured `monte-carlo-mcp` server, do **not** route to it — it may point at a
 > different endpoint or credentials.
 
 ## REQUIRED: Read reference files before executing
@@ -37,8 +37,8 @@ tool calls.** These files are the source of truth for tool calls, parameters,
 and response interpretation. This file only defines when to activate and how to
 format the output.
 
-1. `references/workflows.md` (relative to this file); exact tool calls, phases, and execution order
-2. `references/parameters.md` (relative to this file); parameter conventions and field details
+1. `references/workflows.md` (relative to this file) — exact tool calls, phases, and execution order
+2. `references/parameters.md` (relative to this file) — parameter conventions and field details
 
 **Do NOT make any MCP tool calls until you have read both files.**
 
@@ -65,7 +65,7 @@ Do NOT call additional tools, do NOT infer or fabricate metrics. Each row below
 specifies exactly which tool provides its value.**
 
 **All sections (Active Alerts, Monitors, Upstream Issues, Recommendations) must
-always appear with their heading.** Never omit a section; if there is no data,
+always appear with their heading.** Never omit a section — if there is no data,
 show the empty-state text defined below.
 
 **Never use emoji shortcodes** (like `:warning:` or `:arrow_up:`). Use Unicode
@@ -76,7 +76,7 @@ in the terminal.
 
 **`{MC_WEBAPP_URL}` appears throughout this template.** Every occurrence must be
 replaced with the actual value returned by calling `get_mc_webapp_url()`. Never
-hardcode or guess this URL; it varies by environment.
+hardcode or guess this URL — it varies by environment.
 
 Present results in this structure:
 
@@ -124,9 +124,9 @@ If there are zero monitors, show:
 No monitors configured for this table.
 
 ### Upstream Issues
-- raw_orders; FRESHNESS alert: not updated in 8h
-- raw_payments; healthy
-- dim_customers; healthy
+- raw_orders — FRESHNESS alert: not updated in 8h
+- raw_payments — healthy
+- dim_customers — healthy
 
 > Want me to check further upstream for **raw_orders**?
 
@@ -145,7 +145,7 @@ Example (healthy):
 No observed issues in the checked alert window; monitoring is configured. Report upstream checked/total and telemetry gaps before drawing further conclusions.
 
 ### Recommendations
-- Investigate upstream raw_orders freshness; likely root cause of this table's staleness
+- Investigate upstream raw_orders freshness — likely root cause of this table's staleness
 - Acknowledge or investigate the 2 active alerts
 
 If there are no recommendations, show:
@@ -153,7 +153,7 @@ No recommendations from the checked telemetry; data correctness and unmeasured c
 
 ```
 
-### Metric definitions: exact data sources
+### Metric definitions — exact data sources
 
 Each metric row MUST use only the specified data source. Do not add, infer, or
 embellish values beyond what the tool returns.
@@ -178,7 +178,7 @@ key asset or importance > 0.8, otherwise just "X.XX".
 
 Use these as observed-telemetry labels only. Any failed/missing required query makes the overall status Unknown/Partial. The seven-day created-time filter can omit older still-open alerts: label counts as active alerts created in the checked window, never all open alerts. A monitor that never executed or is failing is configured coverage, not demonstrated healthy operation. For a low-importance unmonitored asset use Unmonitored rather than Healthy. If more than ten parents exist, report checked/total and unchecked counts; never extrapolate all-source health.
 
-- **🔴 Unhealthy:** Any active alerts on the asset (from `get_alerts` with statuses `["NOT_ACKNOWLEDGED", "ACKNOWLEDGED", "WORK_IN_PROGRESS"]`; see `parameters.md`)
+- **🔴 Unhealthy:** Any active alerts on the asset (from `get_alerts` with statuses `["NOT_ACKNOWLEDGED", "ACKNOWLEDGED", "WORK_IN_PROGRESS"]` — see `parameters.md`)
 - **🟡 Degraded:** No active alerts, but 0 active monitors on a high-importance
   asset (importance > 0.8 or key asset)
 - **🟢 Healthy:** No active alerts and has at least 1 active monitor
@@ -197,7 +197,7 @@ Display the warehouse name and type from the `search` result. Always include thi
 Only include recommendations derivable from collected data:
 - Upstream health issues that may be root causes
 - Active alerts that need acknowledgment or investigation
-- Do NOT recommend specific monitor types; that is outside this skill's scope
+- Do NOT recommend specific monitor types — that is outside this skill's scope
 
 
 ## Examples

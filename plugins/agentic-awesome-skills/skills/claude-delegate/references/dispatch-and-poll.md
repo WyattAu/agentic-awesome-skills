@@ -115,9 +115,9 @@ uses `plan` mode. Local hooks still load outside that tool surface and can write
 parsed `git status --porcelain -z -uall` and fingerprints working-tree identity and index entries for
 paths that were already dirty on every outcome, including aborts:
 
-- `readOnlyViolation: true`; either signal proves a Git-visible change.
-- `readOnlyViolation: false`; coverage was complete and neither signal detected a change.
-- `readOnlyViolation: null`; coverage was incomplete, for example because git could not report or a
+- `readOnlyViolation: true` — either signal proves a Git-visible change.
+- `readOnlyViolation: false` — coverage was complete and neither signal detected a change.
+- `readOnlyViolation: null` — coverage was incomplete, for example because git could not report or a
   dirty submodule or unreadable path could not be fingerprinted.
 
 This detects new dirt and changes to readable, already-dirty Git-visible paths, but cannot attribute a
@@ -139,33 +139,33 @@ The default artifact directory is outside the repository so relay output does no
 meaningful `--read-only` review, keep artifacts outside the worktree. The fingerprint signal excludes
 only the relay-owned artifact paths, so their later writes do not prove a violation.
 
-- `brief.txt`; exact stdin brief.
-- `events.jsonl`; raw stdout bytes from `--output-format stream-json`.
-- `final.txt`; final `result` event's `result` text; present even when empty.
-- `stderr.txt`; complete stderr.
-- `profile.json`; exact inline settings passed to Claude.
-- `result.json`; stable result contract, written atomically.
+- `brief.txt` — exact stdin brief.
+- `events.jsonl` — raw stdout bytes from `--output-format stream-json`.
+- `final.txt` — final `result` event's `result` text; present even when empty.
+- `stderr.txt` — complete stderr.
+- `profile.json` — exact inline settings passed to Claude.
+- `result.json` — stable result contract, written atomically.
 
 ## `result.json`
 
 Core fields:
 
-- `schema`; `"delegate-relay.result.v1"`.
-- `tool`; `"claude"`.
-- `status`; `completed` | `failed` | `timeout` | `aborted` | `claude_unavailable`.
-- `exitCode`; Claude's code, `127` when missing, a signal-derived code when available, or a forced
+- `schema` — `"delegate-relay.result.v1"`.
+- `tool` — `"claude"`.
+- `status` — `completed` | `failed` | `timeout` | `aborted` | `claude_unavailable`.
+- `exitCode` — Claude's code, `127` when missing, a signal-derived code when available, or a forced
   non-zero value when the watchdog or terminal error result makes a zero code non-successful.
-- `signal`; terminating child/relay signal when reported, otherwise `null`.
-- `claudeVersion`; version preflight text, `"unknown"` when the binary answered abnormally, or `null`
+- `signal` — terminating child/relay signal when reported, otherwise `null`.
+- `claudeVersion` — version preflight text, `"unknown"` when the binary answered abnormally, or `null`
   when unavailable.
-- `permissionMode`; selected profile, updated from `system/init` when present.
-- `sessionId`; parsed defensively from init/result events; use with `--session`.
-- `resultSubtype`; final result subtype, such as `success` or an error subtype.
-- `finalMessage`; final result text.
-- `numTurns`, `usage`, `totalCostUsd`; terminal result metadata when present.
-- `touchedFiles`; final `git status --porcelain` lines for `--cd`; `null` means git could not report,
+- `permissionMode` — selected profile, updated from `system/init` when present.
+- `sessionId` — parsed defensively from init/result events; use with `--session`.
+- `resultSubtype` — final result subtype, such as `success` or an error subtype.
+- `finalMessage` — final result text.
+- `numTurns`, `usage`, `totalCostUsd` — terminal result metadata when present.
+- `touchedFiles` — final `git status --porcelain` lines for `--cd`; `null` means git could not report,
   while `[]` means git reported a clean tree. This is the whole final tree, not attribution.
-- `readOnlyViolation`; present only on `--read-only`, with the three-state meaning above.
+- `readOnlyViolation` — present only on `--read-only`, with the three-state meaning above.
 
 Run metadata includes `workdir`, `model`, `effort`, `maxTurns`, `maxBudgetUsd`, `timeout`, `readOnly`,
 `resumed`, `resumeLast`, `toolSurface`, `shellSandbox`, `dangerouslySkipPermissions`, timestamps, and

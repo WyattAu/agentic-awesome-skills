@@ -21,9 +21,9 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 Use this skill when you need a portable, framework-agnostic SEO system for any React or React Native-for-web frontend. Centralizes site metadata in one constants module, derives canonical URLs from a single base, builds per-route metadata (title, description, canonical, Open Graph, Twitter/X cards), generates...
 
 
-> Portable skill; readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
-> This skill describes an **SEO system**; a set of pure builder functions plus a thin
-> framework adapter; not a component library or a visual style.
+> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
+> This skill describes an **SEO system** — a set of pure builder functions plus a thin
+> framework adapter — not a component library or a visual style.
 > It pairs with the **frontend-architecture** skill: the SEO system lives in a single
 > service module (`services/seo/`) and is consumed through one barrel.
 

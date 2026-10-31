@@ -228,7 +228,7 @@ mandate). See [references/review-and-land.md](references/review-and-land.md).
 
 ## Limitations
 
-- Docs-only import; executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `aider` CLI, Node 18+, git.
-- Relay never commits; it only returns structured result JSON; you review and land the commit.
+- Docs-only import — executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `aider` CLI, Node 18+, git.
+- Relay never commits — it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); docs-only, runtime not bundled.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — docs-only, runtime not bundled.

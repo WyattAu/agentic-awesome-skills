@@ -101,12 +101,12 @@ struct MaterialFAB: View {
 }
 ```
 - Emulate Material elevation levels by stacking multiple `.shadow()` modifiers at different blur/offset values.
-- Use `.cornerRadius(8...16)`; Material Design 3 uses more rounded shapes than M2.
-- Animate shadow changes using `.animation(.easeInOut(duration: 0.28))`; Material uses 280ms transitions.
+- Use `.cornerRadius(8...16)` — Material Design 3 uses more rounded shapes than M2.
+- Animate shadow changes using `.animation(.easeInOut(duration: 0.28))` — Material uses 280ms transitions.
 
 ### Flutter
 ```dart
-// Flutter IS Material Design; use it natively
+// Flutter IS Material Design — use it natively
 class MaterialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -193,7 +193,7 @@ const MaterialScreen = () => (
         </Card.Actions>
       </Card>
 
-      {/* Filled button; Material M3 style */}
+      {/* Filled button — Material M3 style */}
       <Button
         mode="contained"
         onPress={() => {}}
@@ -206,14 +206,14 @@ const MaterialScreen = () => (
   </PaperProvider>
 );
 ```
-- Use `react-native-paper`; it implements Material Design 3 natively for React Native.
+- Use `react-native-paper` — it implements Material Design 3 natively for React Native.
 - Configure the theme to map your universal palettes to Material semantic colors.
 - Use `Card` (with `elevation` prop), `Button` (with `mode` prop), and `TextInput` for correct Material behavior.
 - Core Pressable needs its `android_ripple` configured; for themed feedback use `react-native-paper`'s `TouchableRipple`.
 
 ### Jetpack Compose
 ```kotlin
-// Jetpack Compose IS Material Design; use it natively
+// Jetpack Compose IS Material Design — use it natively
 @Composable
 fun MaterialScreen() {
     MaterialTheme(

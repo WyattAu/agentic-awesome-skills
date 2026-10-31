@@ -93,7 +93,7 @@ This file documents HTTP error codes returned by the Claude API, their common ca
 - Too many tokens in input
 - Image data too large
 
-**Fix:** Reduce input size; truncate conversation history, compress/resize images, or split large documents into chunks.
+**Fix:** Reduce input size — truncate conversation history, compress/resize images, or split large documents into chunks.
 
 ---
 

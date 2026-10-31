@@ -198,7 +198,7 @@ VoiceLiveSessionOptions options = new VoiceLiveSessionOptions()
 
 ## Best Practices
 
-1. **Use async client**; VoiceLive requires reactive patterns
+1. **Use async client** — VoiceLive requires reactive patterns
 2. **Configure turn detection** for natural conversation flow
 3. **Enable noise reduction** for better speech recognition
 4. **Handle interruptions** gracefully with `setInterruptResponse(true)`

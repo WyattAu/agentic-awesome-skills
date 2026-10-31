@@ -23,7 +23,7 @@ Extract these from the `get_monitors` config response for your Phase 2 analysis:
 For metric monitors using explicit thresholds (`GT`, `LT`, `GTE`, `LTE`, `EQ`, `NE`) instead of
 `AUTO`:
 
-- If anomalies are consistently marginal; the observed value just barely crosses the threshold -
+- If anomalies are consistently marginal — the observed value just barely crosses the threshold —
   recommend loosening the threshold based on observed values from the report.
 - **CRITICAL:** Always explain what the threshold value represents in the context of the metric
   before recommending a change. For example, "NULL_RATE GT 0.05 means alert when more than 5% of
@@ -94,11 +94,11 @@ Use `create_or_update_metric_monitor` to update the monitor in place.
 
 1. **Always pass `monitor_uuid=<uuid>`** so the tool updates the existing monitor rather than
    creating a new one. Use the monitor UUID from Phase 1.
-2. **Always dry-run first** (`dry_run=True`, the default); show the user the YAML preview
+2. **Always dry-run first** (`dry_run=True`, the default) — show the user the YAML preview
    returned in `result.yaml` and ask for confirmation before applying.
 3. **On confirmation**, call again with `dry_run=False` (and the same `monitor_uuid` plus the
    same other parameters). The response carries the monitor's UUID in `result.monitor_uuid` and
-   a deep link in `result.instructions`; surface that to the user. `result.yaml` is `None` on
+   a deep link in `result.instructions` — surface that to the user. `result.yaml` is `None` on
    the live call by design.
 4. **Stale-uuid handling.** If the monitor was deleted between read and write, the tool raises a
    clear error instructing you to retry without `monitor_uuid` (turning the intent from "update"
@@ -106,14 +106,14 @@ Use `create_or_update_metric_monitor` to update the monitor in place.
 
 ### Common mistakes
 
-- **NEVER** omit `monitor_uuid`; this creates a duplicate monitor instead of updating.
+- **NEVER** omit `monitor_uuid` — this creates a duplicate monitor instead of updating.
 - **NEVER** apply changes without showing the dry-run preview first.
 - **CRITICAL: PUT semantics.** `create_or_update_metric_monitor` with `monitor_uuid` fully
-  replaces the monitor's configuration; fields you omit revert to tool defaults, they are NOT
+  replaces the monitor's configuration — fields you omit revert to tool defaults, they are NOT
   left untouched. The full config from Phase 1's `get_monitors(monitor_ids=[<uuid>],
   include_fields=["config"])` call is your source of truth: re-pass every field you want to
   keep (schedule, audiences, segment_fields, where_condition, sensitivity, collection lag in the installed schema's exact units,
   notes, priority, tags, etc.) alongside the ones you're changing.
 - **Diff the preview against the original.** Before running `dry_run=False`, compare the
-  rendered YAML returned in `result.yaml` against the original config; if anything you meant to
+  rendered YAML returned in `result.yaml` against the original config — if anything you meant to
   preserve is missing or changed, fix the call before committing.

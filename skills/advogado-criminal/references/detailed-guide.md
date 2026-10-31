@@ -1,4 +1,4 @@
-# Informacao juridica penal brasileira: roteiro de verificacao
+# Informacao juridica penal brasileira — roteiro de verificacao
 
 ## Papel e limites
 
@@ -50,19 +50,19 @@ resultado. Advogado/Defensoria deve revisar pedidos, defesa e prazos concretos.
 7. ANPP, representacao, retratacao, prazos e recursos exigem verificacao especifica;
    nao orientar confissao sem assistencia juridica.
 
-## Modulo 10: Workflow Completo De Analise De Caso Criminal
+## Modulo 10 — Workflow Completo De Analise De Caso Criminal
 
 Ao receber um caso criminal para analise, adapte estas etapas ao pedido e aos documentos disponiveis:
 
 
-## Etapa 1: Enquadramento Do Fato
+## Etapa 1 — Enquadramento Do Fato
 
 - Tipo penal (qual crime?)
 - Base legal (qual artigo do CP/legislacao especial?)
 - Classificacao: doloso/culposo, tentado/consumado, comum/especial/hediondo
 
 
-## Etapa 2: Sujeitos
+## Etapa 2 — Sujeitos
 
 - Sujeito ativo (quem praticou?)
 - Sujeito passivo (quem sofreu?)
@@ -70,21 +70,21 @@ Ao receber um caso criminal para analise, adapte estas etapas ao pedido e aos do
 - Vulnerabilidade da vitima
 
 
-## Etapa 3: Materialidade E Autoria
+## Etapa 3 — Materialidade E Autoria
 
 - Provas da materialidade (laudo, B.O., fotos, prontuario medico)
 - Provas da autoria (testemunhas, cameras, confissao, digitais)
 - Indicio suficientes para denuncia?
 
 
-## Etapa 4: Circunstancias
+## Etapa 4 — Circunstancias
 
 - Agravantes e atenuantes aplicaveis
 - Causas de aumento e diminuicao
 - Concurso de crimes (material, formal, continuado)
 
 
-## Etapa 5: Dosimetria Estimada
+## Etapa 5 — Dosimetria Estimada
 
 - Pena-base estimada (Fase 1)
 - Agravantes/atenuantes (Fase 2)
@@ -92,7 +92,7 @@ Ao receber um caso criminal para analise, adapte estas etapas ao pedido e aos do
 - Regime inicial provavel
 
 
-## Etapa 6: Questoes Processuais
+## Etapa 6 — Questoes Processuais
 
 - Competencia (vara criminal, juri, JECrim, violencia domestica)
 - Acao penal (publica condicionada, incondicionada, privada)
@@ -100,29 +100,29 @@ Ao receber um caso criminal para analise, adapte estas etapas ao pedido e aos do
 - Medidas cautelares aplicaveis
 
 
-## Etapa 7: Teses Disponiveis
+## Etapa 7 — Teses Disponiveis
 
 - Para defesa: quais teses viáveis?
 - Para acusacao: quais os pontos fortes?
 - Jurisprudencia relevante
 
 
-## Etapa 8: Riscos E Cenarios
+## Etapa 8 — Riscos E Cenarios
 
 - Cenario otimista (absolvicao, desclassificacao)
 - Cenario base (condenacao com atenuantes)
 - Cenario pessimista (condenacao no maximo legal)
 
 
-## Etapa 9: Estrategia Recomendada
+## Etapa 9 — Estrategia Recomendada
 
-- Acordo (ANPP se cabivel; Art. 28-A CPP)
+- Acordo (ANPP se cabivel — Art. 28-A CPP)
 - Defesa em julgamento
 - Negociacao com MP
 - Recursos possiveis
 
 
-## Etapa 10: Resumo informativo para revisao profissional
+## Etapa 10 — Resumo informativo para revisao profissional
 
 ```
 CASO: _______________

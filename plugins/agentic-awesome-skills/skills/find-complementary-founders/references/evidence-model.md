@@ -28,7 +28,7 @@ Sources:
   https://doi.org/10.1287/orsc.2.1.71
 - D'Acunto, Tate, and Yang, *Entrepreneurial Teams: Diversity of Skills and
   Early-Stage Growth*: https://doi.org/10.2139/ssrn.3750982
-- Klotz et al., *Entrepreneurial team diversity; A systematic review and
+- Klotz et al., *Entrepreneurial team diversity — A systematic review and
   research agenda*: https://doi.org/10.1016/j.emj.2022.10.004
 - De Cooman et al., *Creating Inclusive Teams Through Perceptions of
   Supplementary and Complementary Person–Team Fit*:

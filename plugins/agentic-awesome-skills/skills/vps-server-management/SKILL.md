@@ -21,23 +21,23 @@ license_source: "https://github.com/davidondrej/skills/blob/main/LICENSE"
 - Use when the user asks to operate an authorized VPS or agent running on a remote host.
 - Use when SSH, deployment, restart, status, or log inspection is needed with explicit permission.
 
-Source of truth: `library/infrastructure.md` (read it for the latest; IPs/expirations change).
+Source of truth: `library/infrastructure.md` (read it for the latest — IPs/expirations change).
 
-## Servers (Hostinger VPS): 3 total
+## Servers (Hostinger VPS) — 3 total
 
 | Hostname | IP | OS | Purpose | Expires |
 |---|---|---|---|---|
-| openclaw-server | <IP> | Ubuntu 24.04 (Dokploy) | OpenClaw; personal instance | <expiry> |
+| openclaw-server | <IP> | Ubuntu 24.04 (Dokploy) | OpenClaw — personal instance | <expiry> |
 | n8n-server | <IP> | Ubuntu 24.04 (n8n) | All n8n workflow automations (primary) | <expiry> |
-| hermes-server | <IP> | Ubuntu 24.04 | Hermes Agent; Discord gateway (Vilnius, LT) | <expiry> |
+| hermes-server | <IP> | Ubuntu 24.04 | Hermes Agent — Discord gateway (Vilnius, LT) | <expiry> |
 
 The server table is an upstream example, not the current user’s inventory; `library/infrastructure.md` and `library/hermes/` are not bundled here. Resolve the authorized host from the actual workspace inventory, verify its SSH host key, and use a named least-privileged account; elevate only for the operation that requires it.
 
 ## Access levels (never share higher than needed)
 
-1. **App login**; e.g. `app.example.hstgr.cloud`. Build/edit workflows, no server access. Safest to share.
-2. **VPS SSH**; `root@<IP>`. Docker, files, system config. Trusted technical people only.
-3. **Hostinger hPanel**; `hpanel.hostinger.com`. Billing, reboot, OS reinstall. Exposes SSH creds + browser terminal, so it grants server access too. The user only.
+1. **App login** — e.g. `app.example.hstgr.cloud`. Build/edit workflows, no server access. Safest to share.
+2. **VPS SSH** — `root@<IP>`. Docker, files, system config. Trusted technical people only.
+3. **Hostinger hPanel** — `hpanel.hostinger.com`. Billing, reboot, OS reinstall. Exposes SSH creds + browser terminal, so it grants server access too. The user only.
 
 ## Managing a VPS via an agent
 
@@ -62,7 +62,7 @@ hermes gateway status|restart
 journalctl --user -u hermes-gateway --since '5 min ago' --no-pager   # gateway logs (systemd USER service)
 ```
 
-- **Default model** lives in `~/.hermes/config.yaml` under `model.provider` + `model.default`; NOT in `.env`. Change via `hermes model` (interactive) or edit the yaml directly, then `hermes gateway restart` to propagate to gateways.
+- **Default model** lives in `~/.hermes/config.yaml` under `model.provider` + `model.default` — NOT in `.env`. Change via `hermes model` (interactive) or edit the yaml directly, then `hermes gateway restart` to propagate to gateways.
 - Treat `EBADENGINE` as evidence to check supported runtime ranges. Do not assume an unsupported runtime is safe because installation completed; plan a compatible dependency/runtime change and verify the gateway before declaring the update healthy.
 - Deeper docs (Discord/Slack/WhatsApp setup, file structure, vision config): `library/hermes/`.
 

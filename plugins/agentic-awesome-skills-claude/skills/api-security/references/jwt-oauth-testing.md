@@ -5,7 +5,7 @@
 ### 1. 算法混淆
 
 ```bash
-# alg:none: 最经典
+# alg:none — 最经典
 # 原始: {"alg":"RS256","typ":"JWT"}.payload.signature
 # 攻击: {"alg":"none","typ":"JWT"}.payload.  (空签名)
 

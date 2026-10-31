@@ -12,10 +12,10 @@ uv run scripts/query_search.py --query "USER_QUERY" --collections "Collection1,C
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--query` | `-q` | Yes | - | Natural language search query |
-| `--collections` | `-c` | Yes | - | Comma-separated collection names to search across |
+| `--query` | `-q` | Yes | — | Natural language search query |
+| `--collections` | `-c` | Yes | — | Comma-separated collection names to search across |
 | `--limit` | `-l` | No | `10` | Maximum number of results to return |
-| `--json` | - | No | `false` | Output in JSON format |
+| `--json` | — | No | `false` | Output in JSON format |
 
 ## Output
 

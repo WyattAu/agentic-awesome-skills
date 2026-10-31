@@ -45,5 +45,5 @@ Tokens can also represent search terms in some situations; for guidance, see [Se
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/token-fields#Developer-documentation)
 
-[`NSTokenField`](https://developer.apple.com/documentation/AppKit/NSTokenField); AppKit
+[`NSTokenField`](https://developer.apple.com/documentation/AppKit/NSTokenField) — AppKit
 

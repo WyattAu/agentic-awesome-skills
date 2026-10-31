@@ -38,9 +38,9 @@ Use `import trackio` in your training scripts to log metrics:
 
 ### Python API → Alerts
 
-Insert `trackio.alert()` calls in training code to flag important events; like inserting print statements for debugging, but structured and queryable:
+Insert `trackio.alert()` calls in training code to flag important events — like inserting print statements for debugging, but structured and queryable:
 
-- `trackio.alert(title="...", level=trackio.AlertLevel.WARN)`; fire an alert
+- `trackio.alert(title="...", level=trackio.AlertLevel.WARN)` — fire an alert
 - Three severity levels: `INFO`, `WARN`, `ERROR`
 - Alerts are printed to terminal, stored in the database, shown in the dashboard, and optionally sent to webhooks (Slack/Discord)
 
@@ -52,11 +52,11 @@ Insert `trackio.alert()` calls in training code to flag important events; like i
 
 Use the `trackio` command to query logged metrics and alerts:
 
-- `trackio list projects/runs/metrics`; discover what's available
-- `trackio get project/run/metric`; retrieve summaries and values
-- `trackio list alerts --project <name> --json`; retrieve alerts
-- `trackio show`; launch the dashboard
-- `trackio sync`; sync to HF Space
+- `trackio list projects/runs/metrics` — discover what's available
+- `trackio get project/run/metric` — retrieve summaries and values
+- `trackio list alerts --project <name> --json` — retrieve alerts
+- `trackio show` — launch the dashboard
+- `trackio sync` — sync to HF Space
 
 **Key concept**: Add `--json` for programmatic output suitable for automation and LLM agents.
 
@@ -84,11 +84,11 @@ trackio get metric --project my-project --run my-run --metric loss --json
 
 When running experiments autonomously as an LLM agent, the recommended workflow is:
 
-1. **Set up training with alerts**; insert `trackio.alert()` calls for diagnostic conditions
-2. **Launch training**; run the script in the background
-3. **Poll for alerts**; use `trackio list alerts --project <name> --json --since <timestamp>` to check for new alerts
-4. **Read metrics**; use `trackio get metric ...` to inspect specific values
-5. **Iterate within an authorized run/time/cost budget**; preserve checkpoints, inspect alerts, and decide whether a controlled change and new run are justified
+1. **Set up training with alerts** — insert `trackio.alert()` calls for diagnostic conditions
+2. **Launch training** — run the script in the background
+3. **Poll for alerts** — use `trackio list alerts --project <name> --json --since <timestamp>` to check for new alerts
+4. **Read metrics** — use `trackio get metric ...` to inspect specific values
+5. **Iterate within an authorized run/time/cost budget** — preserve checkpoints, inspect alerts, and decide whether a controlled change and new run are justified
 
 ```python
 import trackio
@@ -108,7 +108,7 @@ for step in range(num_steps):
     if step > 0 and abs(loss) < 1e-8:
         trackio.alert(
             title="Vanishing loss",
-            text="Loss near zero; inspect objective, data leakage and gradient metrics before diagnosing",
+            text="Loss near zero — inspect objective, data leakage and gradient metrics before diagnosing",
             level=trackio.AlertLevel.WARN,
         )
 

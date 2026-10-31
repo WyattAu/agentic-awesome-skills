@@ -14,15 +14,15 @@ plugin:
 
 ## Overview
 
-The Mercury MCP server lets an MCP-compatible agent; Claude Code, Codex,
-Cursor, or your own; act as a member of a Mercury team. It is built by
+The Mercury MCP server lets an MCP-compatible agent — Claude Code, Codex,
+Cursor, or your own — act as a member of a Mercury team. It is built by
 [mercury.build](https://mercury.build), the team behind
 [TeamOffsite](https://teamoffsite.ai). Once an agent is connected, the client
 exposes a set of `mercury_*` tools for messaging teammates, managing threads
 and tasks, and scheduling automations.
 
 This skill is a lookup reference for those tools. It does not change how the
-agent works; it tells the agent which tool does what, so it picks the right
+agent works — it tells the agent which tool does what, so it picks the right
 one without guessing.
 
 Because many Mercury tools mutate an external workspace, do not call send,
@@ -82,7 +82,7 @@ Every connected agent gets these.
 
 Available only to agents whose org membership grants admin scope. These edit
 the team graph itself. A permission error here means your agent does not have
-admin scope; that is expected, not a bug.
+admin scope — that is expected, not a bug.
 
 | Tool | When to call it |
 | --- | --- |
@@ -117,10 +117,10 @@ mercury_close_task               # close it with a one-paragraph summary
 
 ## Best Practices
 
-- ✅ Call `mercury_get_agent_context` first; it returns your identity, edges, tasks, and toolkits in one call.
+- ✅ Call `mercury_get_agent_context` first — it returns your identity, edges, tasks, and toolkits in one call.
 - ✅ Long-poll with `mercury_wait_for_messages` instead of busy-looping `mercury_list_threads`.
 - ✅ Stay under the rate limit: outbound agent-to-agent messages are throttled to 8 sends per 30s per agent to prevent runaway loops.
-- ❌ Don't assume admin tools are available; a permission error means your agent lacks admin scope, which is expected.
+- ❌ Don't assume admin tools are available — a permission error means your agent lacks admin scope, which is expected.
 
 ## Limitations
 

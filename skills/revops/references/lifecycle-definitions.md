@@ -154,7 +154,7 @@ Stage names, thresholds and timings are templates, not mandatory platform fields
 | Decision-maker role | +15 |
 | Uses complementary tool | +10 |
 
-**Engagement score (60% weight); weight product usage heavily:**
+**Engagement score (60% weight) — weight product usage heavily:**
 
 | Signal | Points |
 |--------|--------|
@@ -171,7 +171,7 @@ Stage names, thresholds and timings are templates, not mandatory platform fields
 
 ### Sales-Led (Enterprise)
 
-**Fit score (60% weight); weight fit heavily:**
+**Fit score (60% weight) — weight fit heavily:**
 
 | Attribute | Points |
 |-----------|--------|

@@ -104,7 +104,7 @@ Auth: Basic <base64(email:ATATT3xFfGF0_...)>
 ```
 - `200` → live; returns account profile + email.
 - `401` → request rejected; inspect provider error, credential type, expiry and endpoint compatibility before concluding revoked/invalid.
-- Workspace required; extract from leaked repo URL or Atlassian dork results.
+- Workspace required — extract from leaked repo URL or Atlassian dork results.
 - Detectability: low.
 
 ### 23.9 DataDog API + APP Key
@@ -143,13 +143,13 @@ Headers:
 - Tag every validation with detectability.
 - Record `checked_at` (UTC).
 - If RoE forbids validation → `validation_skipped_by_policy`, stop, document.
-- For root AWS keys, infrastructure-write GitHub PATs, or admin Slack tokens; flag for the operator and let them decide.
+- For root AWS keys, infrastructure-write GitHub PATs, or admin Slack tokens — flag for the operator and let them decide.
 
 ### 23.12 Post-Discovery Enumeration Workflows
 
 Identity acceptance does not authorize resource enumeration. Each account, resource, metadata scope and request/byte budget needs separate confirmation; stop at identity-only approval. Examples below are plans for owner-approved test credentials, not an automatic next step.
 
-**AWS access key; IAM enum:**
+**AWS access key — IAM enum:**
 ```bash
 export AWS_ACCESS_KEY_ID="AKIA..."
 export AWS_SECRET_ACCESS_KEY="..."
@@ -178,7 +178,7 @@ aws ssm describe-parameters --query 'Parameters[*].Name'
 aws lambda list-functions --query 'Functions[*].FunctionName'
 aws rds describe-db-instances --query 'DBInstances[*].DBInstanceIdentifier'
 
-# CloudTrail check: is logging on?
+# CloudTrail check — is logging on?
 aws cloudtrail describe-trails
 
 # AccountMFAEnabled concerns root-account MFA, not effective MFA enforcement on this user
@@ -187,7 +187,7 @@ aws iam get-account-summary | jq '.SummaryMap.AccountMFAEnabled'
 aws iam list-mfa-devices --user-name <username>
 ```
 
-**GitHub PAT; repo enum:**
+**GitHub PAT — repo enum:**
 ```bash
 TOKEN="ghp_..."
 H="Authorization: token $TOKEN"
@@ -201,7 +201,7 @@ curl -sS -m 10 -H "$H" "https://api.github.com/user/repos?affiliation=owner,coll
 # Org memberships
 curl -sS -m 10 -H "$H" "https://api.github.com/user/orgs"
 
-# Per-org: members, repos, secrets (secrets endpoint is metadata-only: names not values)
+# Per-org: members, repos, secrets (secrets endpoint is metadata-only — names not values)
 ORG="<orgname>"
 curl -sS -m 10 -H "$H" "https://api.github.com/orgs/$ORG/members"
 curl -sS -m 10 -H "$H" "https://api.github.com/orgs/$ORG/repos?per_page=100"
@@ -212,7 +212,7 @@ REPO="<orgname/reponame>"
 curl -sS -m 10 -H "$H" "https://api.github.com/repos/$REPO/actions/secrets"
 ```
 
-**Slack token; workspace enum:**
+**Slack token — workspace enum:**
 ```bash
 TOKEN="xoxb-..."
 H="Authorization: Bearer $TOKEN"
@@ -233,14 +233,14 @@ curl -sS -m 10 -H "$H" -X POST "https://slack.com/api/users.list?limit=100" | jq
 # DO NOT: chat.postMessage, files.upload, conversations.invite, etc.
 ```
 
-**JWT; full triage workflow:**
+**JWT — full triage workflow:**
 ```bash
 JWT="eyJhbGciOiJIUzI1NiI..."
 
 # Decode header
 printf %s "$JWT" | python3 -c 'import sys,json,base64; p=sys.stdin.read().split(".")[0]; print(json.dumps(json.loads(base64.urlsafe_b64decode(p+"="*(-len(p)%4)))))'
 # Look for: alg (none is a review lead, not a bypass unless accepted contrary to policy; HS256/HS384/HS512 = symmetric, RS256/RS512 = asymmetric, ES256 = ECDSA)
-# Look for: kid (key ID: possible JKU/X5U injection target)
+# Look for: kid (key ID — possible JKU/X5U injection target)
 # Look for: jku, x5u (header presence alone does not prove the verifier trusts attacker-supplied keys)
 
 # Decode payload
@@ -267,7 +267,7 @@ NEW_JWT="${NEW_JWT}.$(echo "$JWT" | cut -d. -f2)."
 # Test against API
 ```
 
-**Postman PMAK; workspace enum:**
+**Postman PMAK — workspace enum:**
 ```bash
 PMAK="PMAK-..."
 H="X-Api-Key: $PMAK"
@@ -293,7 +293,7 @@ ENV="<environment-id>"
 curl -sS -m 10 -H "$H" "https://api.getpostman.com/environments/$ENV" | jq '.environment.values[] | {key, value}'
 ```
 
-**Anthropic API key; usage enum:**
+**Anthropic API key — usage enum:**
 ```bash
 KEY="sk-ant-api03-..."
 H="x-api-key: $KEY"
@@ -308,7 +308,7 @@ curl -sS -m 10 -H "$H" -H "$A" https://api.anthropic.com/v1/organizations/usage_
 # DO NOT: send actual completion requests against organization budget
 ```
 
-**OpenAI API key; usage enum:**
+**OpenAI API key — usage enum:**
 ```bash
 KEY="sk-..."
 H="Authorization: Bearer $KEY"
@@ -324,7 +324,7 @@ curl -sS -m 10 -H "$H" https://api.openai.com/v1/files | jq .
 curl -sS -m 10 -H "$H" https://api.openai.com/v1/fine_tuning/jobs | jq .
 ```
 
-**Generic key; provenance enum:**
+**Generic key — provenance enum:**
 1. Find the consuming domain (where in JS bundle did the key appear? what URL is the bundle served from?).
 2. Check the API docs of the inferred service.
 3. If the key matches a known regex, lookup vendor-specific scope check.

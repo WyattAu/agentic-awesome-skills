@@ -17,7 +17,7 @@ CC = 1 + número de pontos de decisão (if, when, for, while, &&, ||, catch)
 Limites recomendados:
 CC ≤ 5: simples, fácil de testar
 CC 6-10: moderado, testável
-CC 11-20: complexo, difícil de testar; refatorar
+CC 11-20: complexo, difícil de testar — refatorar
 CC >20: advisory investigation threshold, not mandatory splitting or a security verdict
 ```
 
@@ -53,7 +53,7 @@ fun create(provider: LlmProvider, context: Context?): LlmClient {
         }
     }
 }
-// CC ≈ 1 + 10 + 3 = 14; deve ser refatorado
+// CC ≈ 1 + 10 + 3 = 14 — deve ser refatorado
 ```
 
 **Refatoração com Strategy + Registry (CC ≈ 2):**
@@ -133,7 +133,7 @@ Instabilidade I = Ce / (Ca + Ce)
 
 Para módulos Auri:
   core-logging: Ca=6, Ce=0 → I = 0 (ESTÁVEL)
-  app: Ca=0, Ce=6 → I = 1 (INSTÁVEL; esperado: é a camada mais volátil)
+  app: Ca=0, Ce=6 → I = 1 (INSTÁVEL — esperado: é a camada mais volátil)
   llm: Ca=1(app), Ce=1(core-logging) → I = 0.5 (EQUILIBRADO)
 ```
 
@@ -165,7 +165,7 @@ T = {
   RESUMED → PAUSED (onPause),
   PAUSED → STOPPED (onStop) ou PAUSED → RESUMED (onResume),
   STOPPED → DESTROYED (onDestroy) ou STOPPED → CREATED (onRestart),
-  CREATED → DESTROYED (onDestroy; sem start, raro)
+  CREATED → DESTROYED (onDestroy — sem start, raro)
 }
 
 Armadilha: código em onResume assume estado "limpo" mas pode ser chamado
@@ -232,12 +232,12 @@ Entrada: Stream<String> de tokens
 
 Algoritmos possíveis:
 1. Buffer completo: acumula tudo, processa de uma vez
-   - Latência: O(total_tokens / bandwidth); alta
-   - Memória: O(total_tokens); linear
+   - Latência: O(total_tokens / bandwidth) — alta
+   - Memória: O(total_tokens) — linear
 
 2. Streaming parcial (implementar): acumula até sentença completa
    - Detectar fim de sentença: regex \.|\!|\?
-   - Latência percebida: O(primeira_sentença / bandwidth); baixa
+   - Latência percebida: O(primeira_sentença / bandwidth) — baixa
    - Memory is O(length of pending sentence/buffer), bounded only with explicit length limits
 
 Recomendação: streaming parcial para melhor UX
@@ -270,6 +270,6 @@ Interpretar:
 - Esforço alto → difícil de entender
 
 Para arquivos Kotlin médios:
-MainViewModel.kt: estimado V ≈ 5000-10000, D ≈ 15-25; COMPLEXO
-LlmProvider.kt: estimado V ≈ 500-1000, D ≈ 5-10; SIMPLES
+MainViewModel.kt: estimado V ≈ 5000-10000, D ≈ 15-25 — COMPLEXO
+LlmProvider.kt: estimado V ≈ 500-1000, D ≈ 5-10 — SIMPLES
 ```

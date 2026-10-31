@@ -1,6 +1,6 @@
 ---
 name: marketing-mindset
-description: "Use when a user asks how to win first customers, whether doing X will produce Y, how to write an ad or judge a marketing test; a marketer's decision framework, not a tactic library."
+description: "Use when a user asks how to win first customers, whether doing X will produce Y, how to write an ad or judge a marketing test — a marketer's decision framework, not a tactic library."
 category: marketing
 risk: safe
 source: https://github.com/axelfreeman/marketing-mindset
@@ -18,7 +18,7 @@ license_source: https://github.com/axelfreeman/marketing-mindset/blob/master/LIC
 
 ## Overview
 
-Most agents answer a marketing question by reaching for a tactic: a hook template, a funnel diagram, a list of channels. That produces plausible text and no decision. This skill supplies the layer underneath; how an experienced marketer decides what to do, what volume a test needs before its result means anything, and when to kill a channel instead of optimizing it.
+Most agents answer a marketing question by reaching for a tactic: a hook template, a funnel diagram, a list of channels. That produces plausible text and no decision. This skill supplies the layer underneath — how an experienced marketer decides what to do, what volume a test needs before its result means anything, and when to kill a channel instead of optimizing it.
 
 It is a pure reasoning skill. It reads the user's own context (product, offer, audience, budget, channel data) and returns a verdict with the reasoning attached, including the verdict "this is not worth doing". The full version lives at the source repository; this entry is adapted for this catalog.
 
@@ -36,11 +36,11 @@ It is a pure reasoning skill. It reads the user's own context (product, offer, a
 
 ### Step 1: Establish the exchange
 
-Marketing is an exchange. Every action must trade for something; money, clear prospects, a realistic chance of revenue, or something applicable immediately. If the exchange is zero, say so and name the missing half. This is the filter that kills most requests before any tactic is chosen.
+Marketing is an exchange. Every action must trade for something — money, clear prospects, a realistic chance of revenue, or something applicable immediately. If the exchange is zero, say so and name the missing half. This is the filter that kills most requests before any tactic is chosen.
 
 ### Step 2: Read the state of the business
 
-Ask for the two numbers that decide everything else: how many paying clients exist today, and what channel produced them. With zero clients, consider direct customer discovery and founder use as early options; choose channels from actual audience, budget and distribution evidence rather than a universal rule. Money is a scaling instrument, not a starting instrument; spend at zero clients buys noise.
+Ask for the two numbers that decide everything else: how many paying clients exist today, and what channel produced them. With zero clients, consider direct customer discovery and founder use as early options; choose channels from actual audience, budget and distribution evidence rather than a universal rule. Money is a scaling instrument, not a starting instrument — spend at zero clients buys noise.
 
 ### Step 3: Ground the hypothesis in live competitors
 
@@ -61,25 +61,25 @@ Predeclare the detectable effect, baseline rate, confidence/power or sequential 
 
 ### Step 5: Apply a kill rule, not a feeling
 
-Decide in advance what result means keep, what means re-hook, and what means stop; and hold the decision at the pre-declared volume. Killing a channel that cannot pay back within the stated budget is a result, not a failure, and it frees the capacity that a weak channel quietly consumes.
+Decide in advance what result means keep, what means re-hook, and what means stop — and hold the decision at the pre-declared volume. Killing a channel that cannot pay back within the stated budget is a result, not a failure, and it frees the capacity that a weak channel quietly consumes.
 
 ### Step 6: Write for attention, then for proof
 
-Attention splits in two: a rational part that can be reached with numbers and a part that responds only to feeling. Both need to be addressed. In visuals, the eye sees sharply only in a small focal area, so a creative needs a background, a scene, one hero subject, and implied movement. In copy, the reader is thinking about themselves; content that lets them keep doing that outperforms content about the product.
+Attention splits in two: a rational part that can be reached with numbers and a part that responds only to feeling. Both need to be addressed. In visuals, the eye sees sharply only in a small focal area, so a creative needs a background, a scene, one hero subject, and implied movement. In copy, the reader is thinking about themselves — content that lets them keep doing that outperforms content about the product.
 
 ### Step 7: Return a verdict
 
-End with a decision: run it, change one variable and rerun at the stated volume, or stop and do something else. Attach the reasoning and the number that settles the question. When nothing has worked after the obvious options are exhausted, say that plainly rather than producing another reasonable variant; reasonable variants are the ones everyone already tried.
+End with a decision: run it, change one variable and rerun at the stated volume, or stop and do something else. Attach the reasoning and the number that settles the question. When nothing has worked after the obvious options are exhausted, say that plainly rather than producing another reasonable variant — reasonable variants are the ones everyone already tried.
 
 ## Examples
 
-### Example 1: "Our cold email gets 0.4% reply rate: how do we optimize it?"
+### Example 1: "Our cold email gets 0.4% reply rate — how do we optimize it?"
 
 The response does not start with subject lines. It asks how many emails were sent. At 300 sends, 0.4% is one reply; the correct answer is to keep sending to the pre-declared floor before changing anything. At 4,000 sends across two variants, the reply rate is a real signal, and the useful move is offer and targeting, not wording.
 
 ### Example 2: "We spent $2,000 on LinkedIn ads and got 3 signups. Should we increase the budget?"
 
-The skill checks the spend against the target CPA and the pre-declared window. If $2,000 is below 1x target CPA and the campaign has run under 72 hours, the honest answer is that the data cannot support a decision yet. If spend has exceeded 3x target CPA with no conversion path, the answer is to stop and name what the campaign proved; that this channel, at this offer, does not pay back.
+The skill checks the spend against the target CPA and the pre-declared window. If $2,000 is below 1x target CPA and the campaign has run under 72 hours, the honest answer is that the data cannot support a decision yet. If spend has exceeded 3x target CPA with no conversion path, the answer is to stop and name what the campaign proved — that this channel, at this offer, does not pay back.
 
 ### Example 3: "Write me a landing page for my new API product."
 
@@ -87,7 +87,7 @@ The skill asks for the client count and the offer. With zero clients, it redirec
 
 ## Limitations
 
-- This is a mindset and decision layer. It does not log into ad platforms, send email, or fetch analytics; it reasons over data the user provides.
+- This is a mindset and decision layer. It does not log into ad platforms, send email, or fetch analytics — it reasons over data the user provides.
 - The volume floors are directional heuristics for early-stage B2B and SaaS work, not statistical guarantees, and they do not replace a properly powered experiment when the budget allows one.
 - It does not produce fake social proof, invented case studies, or testimonials, and it will refuse requests framed that way.
 - Channel economics differ by industry and average contract value; the kill rules depend on the target CPA and margin the user supplies.

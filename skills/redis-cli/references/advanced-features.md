@@ -59,7 +59,7 @@ return results
 # Enable debugger (--ldb)
 redis-cli --ldb --eval /tmp/script.lua key1 , arg1
 
-# Synchronous mode (blocks server: for debugging only)
+# Synchronous mode (blocks server — for debugging only)
 redis-cli --ldb-sync-mode --eval /tmp/script.lua key1 , arg1
 ```
 
@@ -105,10 +105,10 @@ redis-cli PSUBSCRIBE '*'
 
 # Read published messages (blocks until Ctrl-C)
 # Output format:
-# 1) "pmessage"   : message type
-# 2) "*"          : pattern matched
-# 3) "mychannel"  : channel name
-# 4) "mymessage"  : message content
+# 1) "pmessage"    — message type
+# 2) "*"           — pattern matched
+# 3) "mychannel"   — channel name
+# 4) "mymessage"   — message content
 ```
 
 ### Publishing
@@ -162,7 +162,7 @@ $<length-of-argument>\r\n
 <argument-data>\r\n
 ```
 
-Example; `SET mykey myvalue`:
+Example — `SET mykey myvalue`:
 ```
 *3\r\n$3\r\nSET\r\n$5\r\nmykey\r\n$7\r\nmyvalue\r\n
 ```
@@ -334,6 +334,6 @@ redis-cli CLUSTER MYSHARDID                   # Current shard ID (O(1))
 
 **Behavioral notes:**
 - Redis Cluster has 16384 hash slots distributed across master nodes
-- `CLUSTER SLOTS` is deprecated since Redis 7.0; use `CLUSTER SHARDS` instead
+- `CLUSTER SLOTS` is deprecated since Redis 7.0 — use `CLUSTER SHARDS` instead
 - Use `redis-cli -c` for transparent cluster redirections in interactive mode
 - `CLUSTER FORGET` auto-propagates via gossip in Redis 7.2+

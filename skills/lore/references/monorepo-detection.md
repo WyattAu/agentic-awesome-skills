@@ -40,7 +40,7 @@ No monorepo marker → fall back to `_global/` only (single-scope project).
 
 ### Nx
 - Marker: `nx.json` or `workspace.json`
-- Nx typically delegates package discovery to npm/yarn workspaces; read both
+- Nx typically delegates package discovery to npm/yarn workspaces — read both
 - One scope per resolved package
 
 ### Rush

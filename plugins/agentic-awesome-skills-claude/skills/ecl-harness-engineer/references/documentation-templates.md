@@ -34,7 +34,7 @@ between documents and makes navigation predictable for both humans and agents.
 
 This matters because agents navigating documentation need stable anchors. If you renumber,
 links break. If you don't number at all, cross-references become vague. Numbered sections
-also let agents quickly locate specific information; "jump to section 3.2" is unambiguous.
+also let agents quickly locate specific information — "jump to section 3.2" is unambiguous.
 
 ---
 
@@ -227,16 +227,16 @@ strict dependency direction enforcement."]
 
 \`\`\`mermaid
 graph TD
-    subgraph "Layer 3; Entry Points"
+    subgraph "Layer 3 — Entry Points"
         CMD[cmd/]
     end
-    subgraph "Layer 2; Business Logic"
+    subgraph "Layer 2 — Business Logic"
         CORE[internal/core/]
     end
-    subgraph "Layer 1; Utilities"
+    subgraph "Layer 1 — Utilities"
         UTIL[internal/utils/]
     end
-    subgraph "Layer 0; Types"
+    subgraph "Layer 0 — Types"
         TYPES[internal/types/]
     end
 
@@ -260,13 +260,13 @@ graph TD
 | L0 | \`internal/types/\` | stdlib only | anything internal |
 | L1 | \`internal/utils/\` | L0 | L2, L3 |
 | L2 | \`internal/core/\` | L0, L1 | L3 |
-| L3 | \`cmd/\` | L0, L1, L2 | - |
+| L3 | \`cmd/\` | L0, L1, L2 | — |
 
 > Enforced by: [\`scripts/lint-deps/main.go\`]()
 
 ### 2.3 Forbidden Dependencies
 
-These are not style suggestions; they are mechanically enforced by the linter:
+These are not style suggestions — they are mechanically enforced by the linter:
 
 - \`internal/types/\` must not import any internal package
 - \`internal/core/\` must not import \`cmd/\`
@@ -431,15 +431,15 @@ make test
 
 \`\`\`
 .
-├── cmd/          ; CLI commands (Layer 3)
+├── cmd/           — CLI commands (Layer 3)
 ├── internal/
-│   ├── core/     ; Business logic (Layer 2)
-│   ├── types/    ; Type definitions (Layer 0)
-│   └── utils/    ; Utilities (Layer 1)
-├── docs/         ; Documentation
-├── scripts/      ; Linters and tooling
-├── harness/      ; Eval & quality
-└── tests/        ; Test fixtures
+│   ├── core/      — Business logic (Layer 2)
+│   ├── types/     — Type definitions (Layer 0)
+│   └── utils/     — Utilities (Layer 1)
+├── docs/          — Documentation
+├── scripts/       — Linters and tooling
+├── harness/       — Eval & quality
+└── tests/         — Test fixtures
 \`\`\`
 
 ## 6 Configuration
@@ -453,7 +453,7 @@ make test
 
 | Variable | Default | Required | Description |
 |----------|---------|----------|-------------|
-| \`API_KEY\` | - | Yes | API authentication |
+| \`API_KEY\` | — | Yes | API authentication |
 | \`DEBUG\` | \`false\` | No | Enable debug mode |
 | \`LOG_LEVEL\` | \`info\` | No | Logging verbosity |
 ```
@@ -472,10 +472,10 @@ Golden principles enforced by \`scripts/lint-quality/main.go\`.
 > Enforced by: [\`scripts/lint-quality/main.go:28-45\`]()
 
 \`\`\`go
-// ✓ Good; structured, parseable, queryable
+// ✓ Good — structured, parseable, queryable
 logger.Info("operation completed", zap.String("key", value))
 
-// ✗ Bad; unstructured, hard to parse
+// ✗ Bad — unstructured, hard to parse
 log.Printf("operation completed: %v", value)
 \`\`\`
 
@@ -483,19 +483,19 @@ log.Printf("operation completed: %v", value)
 
 ### 2.1 Use Typed Errors
 \`\`\`go
-// ✓ Good; typed, machine-readable
+// ✓ Good — typed, machine-readable
 return NewError(ErrCodeNotFound, "resource not found")
 
-// ✗ Bad; stringly typed
+// ✗ Bad — stringly typed
 return fmt.Errorf("not found")
 \`\`\`
 
 ### 2.2 Wrap with Context
 \`\`\`go
-// ✓ Good; preserves error chain
+// ✓ Good — preserves error chain
 return fmt.Errorf("reading config: %w", err)
 
-// ✗ Bad; loses context
+// ✗ Bad — loses context
 return err
 \`\`\`
 
@@ -630,8 +630,8 @@ if err != nil {
 
 ## See Also
 
-- [Architecture Overview](../ARCHITECTURE.md#31-component-name); Section 3.1
-- [Related Component](related.md); How it interacts with this component
+- [Architecture Overview](../ARCHITECTURE.md#31-component-name) — Section 3.1
+- [Related Component](related.md) — How it interacts with this component
 ```
 
 ---
@@ -652,7 +652,7 @@ For projects with a public API surface (HTTP, gRPC, library, CLI).
 | \`/api/v1/users\` | GET | List users |
 | \`/api/v1/users/:id\` | GET | Get user by ID |
 | \`/api/v1/users\` | POST | Create user |
-| \`NewClient(cfg)\` | - | Create API client |
+| \`NewClient(cfg)\` | — | Create API client |
 
 ## 2 Endpoints
 

@@ -107,7 +107,7 @@ For every audit, you MUST generate a table in this exact format:
 
 ## Limitations
 
-- **Live Interaction**: Cannot initiate a Google Search Console "Request Indexing" action; instructions only.
+- **Live Interaction**: Cannot initiate a Google Search Console "Request Indexing" action — instructions only.
 - **Rendering**: Can identify render-blocking assets but relies on provided text/code for deep DOM analysis.
 
 ## Related Skills

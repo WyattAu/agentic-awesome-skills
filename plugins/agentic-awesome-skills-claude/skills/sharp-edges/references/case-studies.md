@@ -3,7 +3,7 @@
 > Catalog correction (CC-BY-SA-4.0 adaptation; original attribution/license in UPSTREAM-NOTICE.md): snippets are isolated teaching fragments, not production implementations or an assertion of exploitability. Confirm the installed language/library version, trust boundary, reachable input and impact. Use inert local fixtures only; do not execute the intentionally unsafe snippets, untrusted audited code or destructive payloads. No network attack or configuration change is authorized by this guide.
 
 
-Analysis of sharp edges in widely-used libraries. These aren't implementation bugs-they're design decisions that make secure usage difficult.
+Analysis of sharp edges in widely-used libraries. These aren't implementation bugs—they're design decisions that make secure usage difficult.
 
 ## GNU Multiple Precision Arithmetic Library (GMP)
 
@@ -190,7 +190,7 @@ data = pickle.loads(untrusted_input)
 # Result: Executes shell command
 ```
 
-**The Problem**: `pickle` is not a data format-it's a code execution format. There is no safe way to unpickle untrusted data, but:
+**The Problem**: `pickle` is not a data format—it's a code execution format. There is no safe way to unpickle untrusted data, but:
 - The function looks like a data parser
 - The name suggests food preservation, not danger
 - Many developers don't realize the risk

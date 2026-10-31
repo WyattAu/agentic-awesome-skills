@@ -12,11 +12,11 @@ uv run scripts/keyword_search.py --query "USER_QUERY" --collection "CollectionNa
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--query` | `-q` | Yes | - | Keyword search query |
-| `--collection` | `-c` | Yes | - | Collection name |
+| `--query` | `-q` | Yes | — | Keyword search query |
+| `--collection` | `-c` | Yes | — | Collection name |
 | `--limit` | `-l` | No | `10` | Maximum number of results |
 | `--properties` | `-p` | No | all | Properties to search with optional boost (e.g., `title^2,content`) |
-| `--json` | - | No | `false` | Output in JSON format |
+| `--json` | — | No | `false` | Output in JSON format |
 
 ## Output
 

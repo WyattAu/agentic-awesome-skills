@@ -188,7 +188,7 @@ async def main():
 ## Best Practices
 
 1. **Use DefaultAzureCredential** for code that runs locally and in Azure
-2. **Never hardcode credentials**; use environment variables or managed identity
+2. **Never hardcode credentials** — use environment variables or managed identity
 3. **Prefer managed identity** in production Azure deployments
 4. **Use ChainedTokenCredential** when you need a custom credential order
 5. **Close async credentials** explicitly or use context managers

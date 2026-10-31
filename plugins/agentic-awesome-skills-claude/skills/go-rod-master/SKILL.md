@@ -40,10 +40,10 @@ Confirm target origins, account, permitted actions, crawl/request limits and upl
 The `examples/` files are independent `package main` programs: run/build one at a time in a module with reviewed pinned dependencies. They are not verified here against a live browser/site; selectors and APIs can change. Never `go run ./examples` as one package with several main functions.
 
 See:
-- `examples/basic_scrape.go`; Minimal scraping example
-- `examples/stealth_page.go`; Anti-detection with go-rod/stealth
-- `examples/request_hijacking.go`; Intercepting and modifying network requests
-- `examples/concurrent_pages.go`; Page pool for concurrent scraping
+- `examples/basic_scrape.go` — Minimal scraping example
+- `examples/stealth_page.go` — Anti-detection with go-rod/stealth
+- `examples/request_hijacking.go` — Intercepting and modifying network requests
+- `examples/concurrent_pages.go` — Page pool for concurrent scraping
 
 ---
 

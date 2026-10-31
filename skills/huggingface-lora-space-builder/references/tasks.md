@@ -2,7 +2,7 @@ _Modified in the local catalog review: corrected authority, credential, reproduc
 
 # Tasks: per-task baseline UI patterns
 
-This file describes the *baseline* UI shape for each task category. Use it after the LoRA's task is identified, as a starting skeleton. Then read `adapting-to-the-lora.md` to shape the actual UI to the specific LoRA; the baseline is rarely the right final answer.
+This file describes the *baseline* UI shape for each task category. Use it after the LoRA's task is identified, as a starting skeleton. Then read `adapting-to-the-lora.md` to shape the actual UI to the specific LoRA — the baseline is rarely the right final answer.
 
 The five tasks: text-to-image, image-to-image, text-to-video, image-to-video, video-to-video.
 
@@ -37,7 +37,7 @@ The five tasks: text-to-image, image-to-image, text-to-video, image-to-video, vi
 
 **Validation:** raise `gr.Error("Please upload an image first.")` when the input is empty. Consider disabling Generate until an image is loaded (initial `interactive=False`, then return `gr.Button(interactive=...)` from an `input_image.change` handler; Python attribute mutation alone does not update the rendered browser control).
 
-**Sub-task variants change a lot here.** Read `adapting-to-the-lora.md`; relighting, face swap, object move, style transfer, instruction edits, inpainting all live under "I2I" but call for different UIs.
+**Sub-task variants change a lot here.** Read `adapting-to-the-lora.md` — relighting, face swap, object move, style transfer, instruction edits, inpainting all live under "I2I" but call for different UIs.
 
 ## Text-to-video (T2V)
 
@@ -81,23 +81,23 @@ Walk this ladder in order. Stop at the first rung that fits the LoRA's input sha
 
 **1. Stock Gradio components.** First choice almost always:
 
-- `gr.ImageSlider`; built-in before/after comparison for edit LoRAs.
-- `gr.ImageEditor`; upload + paint on top of an image. The right pick for any LoRA whose "input shape" is "a region of the image" expressed by painting; object removal trained on red-highlighted regions, relight trained on colored brush strokes, scribble-conditioned edits. Constrain the brush with `gr.Brush(default_color="#ff0000", colors=["#ff0000"])` so the user can only paint in the color the LoRA was trained on; the editor returns `{"background", "layers", "composite"}` and the `composite` is what you feed the pipeline. Used in production by `linoyts/QIE-2509-Object-Remover-Bbox-v3` (qie-2509-object-remover); don't reach for `gradio_image_annotation` for these tasks just because the LoRA was trained "with bboxes"; the user-facing shape is a painted region, not a literal box.
-- `@gr.render`; UI that changes shape based on input (e.g. show extra controls only when an input is uploaded).
-- `gr.Examples`; clickable example inputs. Almost always worth including. Lift from the LoRA's model card.
-- `gr.BrowserState`; persist user preferences (preferred aspect ratio, last seed, etc.) across sessions.
-- `gr.DeepLinkButton`; share a specific generation as a URL.
+- `gr.ImageSlider` — built-in before/after comparison for edit LoRAs.
+- `gr.ImageEditor` — upload + paint on top of an image. The right pick for any LoRA whose "input shape" is "a region of the image" expressed by painting — object removal trained on red-highlighted regions, relight trained on colored brush strokes, scribble-conditioned edits. Constrain the brush with `gr.Brush(default_color="#ff0000", colors=["#ff0000"])` so the user can only paint in the color the LoRA was trained on; the editor returns `{"background", "layers", "composite"}` and the `composite` is what you feed the pipeline. Used in production by `linoyts/QIE-2509-Object-Remover-Bbox-v3` (qie-2509-object-remover) — don't reach for `gradio_image_annotation` for these tasks just because the LoRA was trained "with bboxes"; the user-facing shape is a painted region, not a literal box.
+- `@gr.render` — UI that changes shape based on input (e.g. show extra controls only when an input is uploaded).
+- `gr.Examples` — clickable example inputs. Almost always worth including. Lift from the LoRA's model card.
+- `gr.BrowserState` — persist user preferences (preferred aspect ratio, last seed, etc.) across sessions.
+- `gr.DeepLinkButton` — share a specific generation as a URL.
 
 **2. Hub custom components.** A `pip install` and an import, no JS to maintain:
 
-- `gradio_image_annotation`; bbox/point annotation on top of an image. Right when the LoRA literally needs box *coordinates* as structured input (e.g. drag-and-drop "move from box A to box B" LoRAs, region-tagged edits). Wrong when the LoRA wants a painted region; use `gr.ImageEditor` instead.
-- `gradio_imageslider`; alternative before/after slider with extra controls.
-- `gradio_modal`; modal dialogs.
-- `gradio_rangeslider`; dual-handle range slider.
+- `gradio_image_annotation` — bbox/point annotation on top of an image. Right when the LoRA literally needs box *coordinates* as structured input (e.g. drag-and-drop "move from box A to box B" LoRAs, region-tagged edits). Wrong when the LoRA wants a painted region — use `gr.ImageEditor` instead.
+- `gradio_imageslider` — alternative before/after slider with extra controls.
+- `gradio_modal` — modal dialogs.
+- `gradio_rangeslider` — dual-handle range slider.
 
 Browse the rest at https://www.gradio.app/custom-components/gallery before going further down the ladder.
 
-**3. Creative mode (custom HTML/JS).** When stock and Hub custom components both come up short; point sets, strokes, trajectories, region selections with metadata, 3D rotation gizmos, timeline scrubbers, anything where the user manipulates a thing on top of media. See `creative-mode.md` for the Gradio primitives, the JS↔Python communication contract, and the pitfalls. Don't skip rung 2 to get here; `gradio_image_annotation` already covers a lot of what looks like it needs custom HTML.
+**3. Creative mode (custom HTML/JS).** When stock and Hub custom components both come up short — point sets, strokes, trajectories, region selections with metadata, 3D rotation gizmos, timeline scrubbers, anything where the user manipulates a thing on top of media. See `creative-mode.md` for the Gradio primitives, the JS↔Python communication contract, and the pitfalls. Don't skip rung 2 to get here — `gradio_image_annotation` already covers a lot of what looks like it needs custom HTML.
 
 Themes: default to `gr.themes.Citrus()`.
 
@@ -105,7 +105,7 @@ Before defaulting to a plain component or guessing at a custom one, web-fetch th
 
 ## Gradio 6.x gotchas
 
-The current `sdk_version` (6.x at time of writing; verify with `pip index versions gradio`) changed a few things that older recipes get wrong. The failures are easy to miss because they happen at the Space's first import, not when you write the file locally.
+The current `sdk_version` (6.x at time of writing — verify with `pip index versions gradio`) changed a few things that older recipes get wrong. The failures are easy to miss because they happen at the Space's first import, not when you write the file locally.
 
 - **`theme=` and `css=` moved from `gr.Blocks(...)` to `demo.launch(...)`.** Passing them to `Blocks` now emits a deprecation warning and the styling silently doesn't apply. Always:
 
@@ -119,11 +119,11 @@ The current `sdk_version` (6.x at time of writing; verify with `pip index versio
 
   Spaces runs `app.py` as `__main__`, so the `launch()` call executes.
 
-- **Some component kwargs were removed.** `gr.Image` no longer accepts `show_download_button` (the same change affects a handful of other components). The Space fails at import with `TypeError: __init__() got an unexpected keyword argument 'show_download_button'`; not surfaced until the container actually starts. When in doubt, web-fetch the current docs for the specific component before passing non-obvious kwargs.
+- **Some component kwargs were removed.** `gr.Image` no longer accepts `show_download_button` (the same change affects a handful of other components). The Space fails at import with `TypeError: __init__() got an unexpected keyword argument 'show_download_button'` — not surfaced until the container actually starts. When in doubt, web-fetch the current docs for the specific component before passing non-obvious kwargs.
 
 - **The Gradio version the Space runs at is set by `sdk_version:` in the README YAML, *not* by `requirements.txt`.** Pinning `gradio` in `requirements.txt` is at best ignored and at worst causes a runtime mismatch; set the version once, in the README, and write `app.py` against that version.
 
-If the first build fails on a `TypeError` or signature mismatch in a Gradio component, this is the most common cause; read `/logs/container` (build) or `/logs/run` (runtime), look at the line in `app.py`, and check the current component signature.
+If the first build fails on a `TypeError` or signature mismatch in a Gradio component, this is the most common cause — read `/logs/container` (build) or `/logs/run` (runtime), look at the line in `app.py`, and check the current component signature.
 ## Input and privacy limits
 
 Validate limits on the server before GPU allocation, even when UI controls constrain values. Use per-model frame/dimension rules, not universal divisibility assumptions. A seed alone does not guarantee reproducibility across model/library/hardware revisions. Shared example caching is for approved public examples only; do not cache private uploads or persist sensitive prompts in BrowserState or deep links.

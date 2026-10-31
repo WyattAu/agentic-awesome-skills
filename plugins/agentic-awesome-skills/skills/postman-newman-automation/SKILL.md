@@ -48,7 +48,7 @@ newman run <collection> \
 
 ---
 
-## Step 1: Gather Requirements
+## Step 1 — Gather Requirements
 
 Ask or infer from context:
 
@@ -63,7 +63,7 @@ Ask or infer from context:
 
 ---
 
-## Step 2: Generate Newman Command
+## Step 2 — Generate Newman Command
 
 ### Basic run (local)
 ```bash
@@ -101,7 +101,7 @@ newman run collection.json \
 
 ---
 
-## Step 3: Shell Script
+## Step 3 — Shell Script
 
 Generate a reusable shell script:
 
@@ -140,7 +140,7 @@ fi
 
 ---
 
-## Step 4: Jenkins Pipeline
+## Step 4 — Jenkins Pipeline
 
 ### Declarative Jenkinsfile (preferred)
 
@@ -242,7 +242,7 @@ steps {
 
 ---
 
-## Step 5: Reporter Reference
+## Step 5 — Reporter Reference
 
 | Reporter | Install | Flag | Output |
 |---|---|---|---|
@@ -255,15 +255,15 @@ Multiple reporters: `--reporters cli,htmlextra,junit`
 
 ---
 
-## Step 6: Output
+## Step 6 — Output
 
 Provide based on what the user needs:
 
-1. **Newman command**; ready to paste in terminal
-2. **Shell script** (`run-tests.sh`); with exit code handling
-3. **Jenkinsfile**; declarative or scripted based on context
-4. **Setup notes**; Node.js version requirement (≥14), npm install commands
-5. **Report locations**; where output files will be written
+1. **Newman command** — ready to paste in terminal
+2. **Shell script** (`run-tests.sh`) — with exit code handling
+3. **Jenkinsfile** — declarative or scripted based on context
+4. **Setup notes** — Node.js version requirement (≥14), npm install commands
+5. **Report locations** — where output files will be written
 
 ---
 

@@ -41,7 +41,7 @@ Use packages/repository codename matching the host OS and verify signing-key fin
 ## Installation and Setup
 
 ```bash
-# Debian / Ubuntu: MongoDB 7
+# Debian / Ubuntu — MongoDB 7
 curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
   sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
 echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] \
@@ -146,7 +146,7 @@ db.orders.createIndex({ userId: 1, createdAt: -1 })
 db.articles.createIndex({ title: "text", body: "text" })
 db.articles.find({ $text: { $search: "mongodb scaling" } })
 
-// TTL index; auto-delete documents after 30 days
+// TTL index — auto-delete documents after 30 days
 db.sessions.createIndex({ createdAt: 1 }, { expireAfterSeconds: 2592000 })
 
 // List indexes
@@ -386,7 +386,7 @@ db.orders.stats()
 // Index sizes
 db.orders.stats().indexSizes
 
-// Profiler; log slow queries (> 100ms)
+// Profiler — log slow queries (> 100ms)
 db.setProfilingLevel(1, { slowms: 100 })
 db.system.profile.find().sort({ ts: -1 }).limit(5)
 
@@ -397,7 +397,7 @@ rs.printSecondaryReplicationInfo()
 ## Configuration Tuning
 
 ```yaml
-# /etc/mongod.conf: production recommendations
+# /etc/mongod.conf — production recommendations
 storage:
   dbPath: /var/lib/mongodb
   wiredTiger:

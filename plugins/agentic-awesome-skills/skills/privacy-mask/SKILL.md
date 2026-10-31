@@ -1,6 +1,6 @@
 ---
 name: privacy-mask
-description: "Mask, redact, anonymize and censor sensitive information (PII) in screenshots and images; phone numbers, emails, IDs, API keys, crypto wallets, credit cards, passwords, and more."
+description: "Mask, redact, anonymize and censor sensitive information (PII) in screenshots and images — phone numbers, emails, IDs, API keys, crypto wallets, credit cards, passwords, and more."
 risk: critical
 source: https://github.com/fullstackcrew-alpha/privacy-mask/tree/main/
 source_repo: fullstackcrew-alpha/privacy-mask
@@ -73,16 +73,16 @@ Output is JSON:
 ## Constraints
 
 - Do NOT send unmasked images to any external API or cloud service
-- Do NOT skip masking when detections are found; always mask before sharing
+- Do NOT skip masking when detections are found — always mask before sharing
 - Do NOT modify the original image unless `--in-place` is explicitly requested
 - Avoid running on very large images (>10MB) without warning the user about processing time
 
 ## Anti-patterns
 
-- **Don't assume images are safe**; always run detection even if the image "looks clean"
-- **Don't use `--in-place` by default**; preserve the original unless the user asks otherwise
-- **Don't ignore dry-run results**; if `--dry-run` finds PII, the image must be masked before use
-- **Don't hardcode config paths**; inspect the installed CLI default or let the user specify `--config`
+- **Don't assume images are safe** — always run detection even if the image "looks clean"
+- **Don't use `--in-place` by default** — preserve the original unless the user asks otherwise
+- **Don't ignore dry-run results** — if `--dry-run` finds PII, the image must be masked before use
+- **Don't hardcode config paths** — inspect the installed CLI default or let the user specify `--config`
 
 ## Important
 

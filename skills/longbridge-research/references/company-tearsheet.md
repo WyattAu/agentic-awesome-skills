@@ -2,7 +2,7 @@
 
 Scope: read-only research template; verify current CLI flags/entitlements, cite actual sources and timestamps, and distinguish estimates from observations. Never expose account credentials or raw sensitive error output. Examples and thresholds are illustrative, not current quotes or validated trading signals. Account-specific data is optional and requires user-authorized minimum read access.
 
-High-density company snapshot; business, financials, valuation, shareholders, and catalysts on one page.
+High-density company snapshot — business, financials, valuation, shareholders, and catalysts on one page.
 
 ## Workflow
 
@@ -64,7 +64,7 @@ VALUATION
 PE: xx.x×  PB: x.x×  EV/EBITDA: xx.x×
 
 TOP SHAREHOLDERS
-1. <Name>; xx.x%
+1. <Name> — xx.x%
 2. ...
 
 RECENT CATALYSTS
@@ -78,7 +78,7 @@ RECENT CATALYSTS
 
 | Situation                       | 简体回复                                     | 繁體回復                                     | English reply                                      |
 | ------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------------- |
-| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found; verify the exchange and ticker. |
-| Partial data missing            | 部分数据暂不可用，已用"-"标注。              | 部分數據暫不可用，已用"-"標注。              | Some data unavailable; marked with "-".           |
+| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found — verify the exchange and ticker. |
+| Partial data missing            | 部分数据暂不可用，已用"—"标注。              | 部分數據暫不可用，已用"—"標注。              | Some data unavailable — marked with "—".           |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。 | 請安裝 longbridge-terminal 或透過 MCP 連線。 | Install longbridge-terminal or connect via MCP.    |
 | `not logged in`                 | 请运行 `longbridge auth login`。             | 請執行 `longbridge auth login`。             | Run `longbridge auth login`.                       |

@@ -26,7 +26,7 @@ Developer note
 
 To display uneditable text, SwiftUI defines two components: [`Label`](https://developer.apple.com/documentation/SwiftUI/Label) and [`Text`](https://developer.apple.com/documentation/SwiftUI/Text).
 
-The guidance below can help you use a label to display text. In some cases, guidance for specific components; such as [action buttons](https://developer.apple.com/design/human-interface-guidelines/buttons), [menus](https://developer.apple.com/design/human-interface-guidelines/menus), and [lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables); includes additional recommendations for using text.
+The guidance below can help you use a label to display text. In some cases, guidance for specific components — such as [action buttons](https://developer.apple.com/design/human-interface-guidelines/buttons), [menus](https://developer.apple.com/design/human-interface-guidelines/menus), and [lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables) — includes additional recommendations for using text.
 
 ## [Best practices](https://developer.apple.com/design/human-interface-guidelines/labels#Best-practices)
 
@@ -43,7 +43,7 @@ Secondary label| A subheading or supplemental text| [`secondaryLabel`](https://d
 Tertiary label| Text that describes an unavailable item or behavior| [`tertiaryLabel`](https://developer.apple.com/documentation/UIKit/UIColor/tertiaryLabel)| [`tertiaryLabelColor`](https://developer.apple.com/documentation/AppKit/NSColor/tertiaryLabelColor)  
 Quaternary label| Watermark text| [`quaternaryLabel`](https://developer.apple.com/documentation/UIKit/UIColor/quaternaryLabel)| [`quaternaryLabelColor`](https://developer.apple.com/documentation/AppKit/NSColor/quaternaryLabelColor)  
   
-**Make useful label text selectable.** If a label contains useful information; like an error message, a location, or an IP address; consider letting people select and copy it for pasting elsewhere.
+**Make useful label text selectable.** If a label contains useful information — like an error message, a location, or an IP address — consider letting people select and copy it for pasting elsewhere.
 
 ## [Platform considerations](https://developer.apple.com/design/human-interface-guidelines/labels#Platform-considerations)
 
@@ -77,13 +77,13 @@ Consider using date and timer components in complications. For design guidance, 
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/labels#Developer-documentation)
 
-[`Label`](https://developer.apple.com/documentation/SwiftUI/Label); SwiftUI
+[`Label`](https://developer.apple.com/documentation/SwiftUI/Label) — SwiftUI
 
-[`Text`](https://developer.apple.com/documentation/SwiftUI/Text); SwiftUI
+[`Text`](https://developer.apple.com/documentation/SwiftUI/Text) — SwiftUI
 
-[`UILabel`](https://developer.apple.com/documentation/UIKit/UILabel); UIKit
+[`UILabel`](https://developer.apple.com/documentation/UIKit/UILabel) — UIKit
 
-[`NSTextField`](https://developer.apple.com/documentation/AppKit/NSTextField); AppKit
+[`NSTextField`](https://developer.apple.com/documentation/AppKit/NSTextField) — AppKit
 
 ## [Change log](https://developer.apple.com/design/human-interface-guidelines/labels#Change-log)
 

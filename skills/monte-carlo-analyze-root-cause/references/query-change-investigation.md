@@ -8,7 +8,7 @@ Use this when SQL modifications are suspected of causing a data issue.
 
 Call `get_query_changes(mcons=[table_mcon], start_time=..., end_time=...)`:
 - Look at the time range around when the issue started
-- Compare old vs new SQL text; what changed?
+- Compare old vs new SQL text — what changed?
 - Focus on: WHERE clauses, JOINs, GROUP BY, column selections, CTEs
 
 ### 2. Correlate with the incident timeline
@@ -48,10 +48,10 @@ If the root cause is a bad query change:
 
 ## Common patterns
 
-- **Accidental filter removal**; WHERE clause removed, producing more rows than expected
-- **JOIN type change**; INNER → LEFT JOIN introduces NULLs; LEFT → INNER drops rows
-- **Dedup logic change**; DISTINCT or ROW_NUMBER window changed, altering unique row count
-- **Source table swap**; query now reads from a different source table
-- **Aggregation change**; GROUP BY granularity changed, producing different row counts
+- **Accidental filter removal** — WHERE clause removed, producing more rows than expected
+- **JOIN type change** — INNER → LEFT JOIN introduces NULLs; LEFT → INNER drops rows
+- **Dedup logic change** — DISTINCT or ROW_NUMBER window changed, altering unique row count
+- **Source table swap** — query now reads from a different source table
+- **Aggregation change** — GROUP BY granularity changed, producing different row counts
 
 <!-- Modified locally: evidence, SQL safety or paid-run corrections. -->

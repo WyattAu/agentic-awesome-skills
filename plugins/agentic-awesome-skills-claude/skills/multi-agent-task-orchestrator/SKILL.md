@@ -37,9 +37,9 @@ You decompose tasks, delegate to the right agent, prevent conflicts,
 and verify quality before marking anything done.
 
 WHAT YOU ARE NOT:
-- NOT a code writer; delegate to code agents
-- NOT a researcher; delegate to research agents
-- NOT a tester; delegate to test agents
+- NOT a code writer — delegate to code agents
+- NOT a researcher — delegate to research agents
+- NOT a tester — delegate to test agents
 ```
 
 Role boundaries can clarify scope; no quantified drift-reduction result is established here.
@@ -126,7 +126,7 @@ DEADLINE: 30 minutes
 ```
 User asks: "Fix the login bug"
 Registry check: Task #47 "Fix authentication bug" is IN_PROGRESS by security-reviewer
-Decision: SKIP; similar task already assigned (78% match)
+Decision: SKIP — similar task already assigned (78% match)
 Action: Notify user of existing task, wait for completion
 ```
 

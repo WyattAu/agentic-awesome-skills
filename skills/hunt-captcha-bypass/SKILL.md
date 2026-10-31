@@ -33,35 +33,35 @@ report_count: 6
 
 **The fastest test: just omit the CAPTCHA field entirely. Most CAPTCHA bypass bugs are client-side-only validation.**
 
-**Pattern 1; Omit the CAPTCHA field (most common, most automatable):**
+**Pattern 1 — Omit the CAPTCHA field (most common, most automatable):**
 1. GET the form/endpoint that shows a CAPTCHA to understand its field name (usually `g-recaptcha-response`, `captcha`, `captcha_token`, `captcha_answer`, `h-captcha-response`)
 2. POST the form with ALL fields EXCEPT the CAPTCHA field
 3. If the action succeeds (200, redirect, or "success" message) → no server-side CAPTCHA validation
 4. Proof: the state-changing action completes without a valid CAPTCHA field (compare against a baseline request that includes it)
 
-**Pattern 2; Empty or null CAPTCHA value:**
+**Pattern 2 — Empty or null CAPTCHA value:**
 Instead of omitting the field entirely, include it with an empty string, `null`, `0`, or `undefined`:
 ```
 captcha=&email=test@example.com&password=test123
 ```
 Some apps validate field presence but not content.
 
-**Pattern 3; Replay a previously solved CAPTCHA token:**
+**Pattern 3 — Replay a previously solved CAPTCHA token:**
 1. Complete one legitimate CAPTCHA challenge and capture the `g-recaptcha-response` token
 2. Submit a second request immediately with the SAME token value
 3. If the second submission also succeeds → token is not single-use (replay attack)
 4. A replayed token can be shared across automated requests
 
-**Pattern 4; Test without CAPTCHA on similar endpoints:**
+**Pattern 4 — Test without CAPTCHA on similar endpoints:**
 Some apps add CAPTCHA to the registration form but forget the password reset, API endpoint, or mobile API path (`/api/register` vs `/register`). Try the same action via the API path without any CAPTCHA field.
 
-**Pattern 5; Rate/throughput-gated "prove you're automated" challenges:**
-Some apps define CAPTCHA "bypass" as simply exceeding the rate a human could plausibly sustain -
-e.g. "N submissions within T seconds"; checked by a middleware that counts REQUESTS REACHING the
+**Pattern 5 — Rate/throughput-gated "prove you're automated" challenges:**
+Some apps define CAPTCHA "bypass" as simply exceeding the rate a human could plausibly sustain —
+e.g. "N submissions within T seconds" — checked by a middleware that counts REQUESTS REACHING the
 route, not successful outcomes. Garbage/placeholder payloads satisfy this exactly as well as valid
 ones, since the counter increments regardless of whether the request's own validation passes.
 
-**Timing note (sliding-window counters):** don't solve this one request at a time; a sequential
+**Timing note (sliding-window counters):** don't solve this one request at a time — a sequential
 pace (seconds between each request) structurally cannot land N requests inside a short sliding
 window, and issuing more requests serially does not fix it. A typical failing pattern is 12
 requests spread across ~250 seconds when the check requires ~10 requests within 20 seconds.
@@ -111,14 +111,14 @@ CAPTCHA bypass + password reset = **token flooding** → chain with `hunt-forgot
 
 ## Related Skills
 
-- **`hunt-brute-force`**; CAPTCHA is often the only rate-limit gate; bypass unlocks brute force
-- **`hunt-forgot-password`**; reset endpoints sometimes protected by CAPTCHA only
-- **`hunt-race-condition`**; race the CAPTCHA validation window (submit before the token is revoked)
+- **`hunt-brute-force`** — CAPTCHA is often the only rate-limit gate; bypass unlocks brute force
+- **`hunt-forgot-password`** — reset endpoints sometimes protected by CAPTCHA only
+- **`hunt-race-condition`** — race the CAPTCHA validation window (submit before the token is revoked)
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

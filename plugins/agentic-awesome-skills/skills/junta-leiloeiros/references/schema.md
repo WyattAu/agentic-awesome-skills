@@ -1,4 +1,4 @@
-# Schema de Dados: Leiloeiros das Juntas Comerciais
+# Schema de Dados — Leiloeiros das Juntas Comerciais
 
 ## Tabela `leiloeiros` (SQLite)
 

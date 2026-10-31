@@ -1,6 +1,6 @@
 ---
 name: screen-adverse-media
-description: Screen a person or organisation for adverse media coverage, PEP status, and sanctions exposure; corroboration-gated, returns "review" never "guilty". Use when the user asks to screen someone before onboarding, partnership, or investment; for AML/CTF flows; or for ongoing counterparty monitoring.
+description: Screen a person or organisation for adverse media coverage, PEP status, and sanctions exposure — corroboration-gated, returns "review" never "guilty". Use when the user asks to screen someone before onboarding, partnership, or investment; for AML/CTF flows; or for ongoing counterparty monitoring.
 category: document-verification
 risk: critical
 source: community
@@ -35,14 +35,14 @@ The documented Stipple endpoints, schemas and allowances are historical examples
 
 2. **Run the screen.**
 
-   Name-based (via MCP; the REST intake is document-based):
+   Name-based (via MCP — the REST intake is document-based):
    ```bash
    # Via any MCP client pointed at https://www.stipple.sh/mcp:
    # tool: screen_adverse_media
    # args: {"name": "John Citizen", "entity_type": "person"}
    ```
 
-   Document-based (REST; screens the person/org named in the uploaded document):
+   Document-based (REST — screens the person/org named in the uploaded document):
    ```bash
    curl -X POST https://www.stipple.sh/v1/adverse-media \
      -F "file=@company-extract.pdf" \
@@ -51,18 +51,18 @@ The documented Stipple endpoints, schemas and allowances are historical examples
 
 3. **Interpret the response.**
 
-   - `rating`; the overall screening result ("review", "clear", etc.)
-   - `hits[]`; adverse media articles: date, title, source, URL, summary
-   - `pep[]`; PEP signals (empty = none found)
-   - `sanctions[]`; sanctions list signals (empty = none found)
+   - `rating` — the overall screening result ("review", "clear", etc.)
+   - `hits[]` — adverse media articles: date, title, source, URL, summary
+   - `pep[]` — PEP signals (empty = none found)
+   - `sanctions[]` — sanctions list signals (empty = none found)
 
 4. **Report with the right framing.** Non-negotiable framing rules:
 
    | Finding | Correct framing |
    |---|---|
-   | Hits found | "Review recommended; see articles below" (never "guilty") |
-   | Nothing found | "No corroborated adverse media found; this is NOT a clean record; coverage is bounded by the source list" |
-   | PEP signal | "PEP status identified; enhanced due diligence may apply" |
+   | Hits found | "Review recommended — see articles below" (never "guilty") |
+   | Nothing found | "No corroborated adverse media found — this is NOT a clean record; coverage is bounded by the source list" |
+   | PEP signal | "PEP status identified — enhanced due diligence may apply" |
 
 5. **Contextualize.** Do not assume the API corroborates every hit. Inspect the linked primary records, resolve identity matches and distinguish allegations from findings. Date-range and source-coverage limitations must accompany the report.
 
@@ -80,7 +80,7 @@ adverse media hits:
 PEP signals: 0
 sanctions list signals: 0
 
-This screen returns "review", never "guilty"; every hit is corroboration-gated.
+This screen returns "review", never "guilty" — every hit is corroboration-gated.
 ```
 
 ## Limitations and Safety
@@ -100,5 +100,5 @@ This screen returns "review", never "guilty"; every hit is corroboration-gated.
 
 - Costs 3 credits per screen; free weekly allowance applies
 - For AML flows, pair with `check-identity-pack` (identity) and `verify-document` (document genuineness)
-- "Nothing found" ≠ "clean record"; always state this in reports
+- "Nothing found" ≠ "clean record" — always state this in reports
 - Free key at https://www.stipple.sh for metering beyond the anonymous allowance

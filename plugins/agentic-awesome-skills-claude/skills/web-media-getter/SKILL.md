@@ -25,7 +25,7 @@ tools:
 ---
 ## When to Use
 
-Use when a task needs a REAL or ARCHIVAL photo / clip (hero, texture, reference, historical footage) or a reaction / animated GIF, rather than a generated one; fan out across free image/video/GIF sources in one query and download license-tagged results.
+Use when a task needs a REAL or ARCHIVAL photo / clip (hero, texture, reference, historical footage) or a reaction / animated GIF, rather than a generated one — fan out across free image/video/GIF sources in one query and download license-tagged results.
 
 _Source: [connerkward/web-media-getter-skill](https://github.com/connerkward/web-media-getter-skill) (MIT)._
 
@@ -35,7 +35,7 @@ Query many free image/video sources in one fan-out, get a normalized result list
 optionally download top-K with an attribution sidecar. Zero-dep stdlib script.
 
 **Script prerequisite:** `webmedia.py` is not bundled in this catalog copy. The named central/scripts helpers and central/.env location are also external prerequisites; use only a separately reviewed upstream installation. **Keys:** `PEXELS_API_KEY`, `PIXABAY_API_KEY`
-in `central/.env` (optional; the 5 no-key sources work without them).
+in `central/.env` (optional — the 5 no-key sources work without them).
 
 ## Sources
 
@@ -48,13 +48,13 @@ in `central/.env` (optional; the 5 no-key sources work without them).
 | nasa | none | space imagery + video | image, video |
 | pexels | free key | modern stock photos + **short video clips** | image, video |
 | pixabay | free key | modern photos/illustrations + **short clips** | image, video |
-| klipy | free key | **GIFs**; recommended (free, unlimited, Tenor drop-in) | gif |
-| giphy | free key | **GIFs**; biggest library (prod key needs approval) | gif |
+| klipy | free key | **GIFs** — recommended (free, unlimited, Tenor drop-in) | gif |
+| giphy | free key | **GIFs** — biggest library (prod key needs approval) | gif |
 
 GIF sources fire only with `--type gif`. Keys: `KLIPY_API_KEY`, `GIPHY_API_KEY`
-in `central/.env`. (tenor adapter removed; Google EOL'd the API 2026-06-30.)
+in `central/.env`. (tenor adapter removed — Google EOL'd the API 2026-06-30.)
 Verify current provider pricing, quotas and API schema; no unlimited/free tier is established here.
-its adapter is **unverified; assumes Tenor-compatible** request/response;
+its adapter is **unverified — assumes Tenor-compatible** request/response;
 verify against docs.klipy.com when you key it. `webmedia.py "shrug" --type gif --count 6 --json`
 
 ## Usage
@@ -72,7 +72,7 @@ webmedia.py "car factory 1930s" --source all --download --out /tmp/cars
 
 ## Record schema
 
-`{source, title, url, thumb, dl, page_url, author, license, w, h, type}` -
+`{source, title, url, thumb, dl, page_url, author, license, w, h, type}` —
 `dl` is the directly-downloadable media URL (None when only a page exists).
 
 ## The video caveat (important)
@@ -81,7 +81,7 @@ Archival sources (Internet Archive, Europeana, LoC) host **whole films/documenta
 not single shots. So:
 - **Modern single clip** → `pexels` / `pixabay` (born as short clips, direct MP4). Done.
 - **Historical single shot** → retrieve the IA film here, then extract the shot:
-  - **Twelve Labs** Marengo search (free 600 min); pass the IA public MP4 URL, get a
+  - **Twelve Labs** Marengo search (free 600 min) — pass the IA public MP4 URL, get a
     timestamped moment for "car on assembly line", clip with ffmpeg. Semantic, cheap.
   - or **PySceneDetect** (free, local) to cut the film into shots, then rank keyframes
     with CLIP via the `muser` skill. Fully offline.
@@ -92,23 +92,23 @@ not single shots. So:
 **judging audio** (since Claude can't hear), two sibling scripts live in
 `central/scripts/`:
 
-- **`freesound-fetch.py "<query>" [count] [max_sec] [out_dir]`**; searches freesound.org
+- **`freesound-fetch.py "<query>" [count] [max_sec] [out_dir]`** — searches freesound.org
   and downloads short hq-mp3 previews. Prints one JSON line per file with
   `license`/`user` for attribution. Key: `FREESOUND_API_KEY` in `central/.env`
-  (token-based read; full originals would need OAuth; previews suffice for SFX).
-- **`audio-judge.py <file> "<target>"`**; sends the clip to OpenAI `gpt-audio`
+  (token-based read; full originals would need OAuth — previews suffice for SFX).
+- **`audio-judge.py <file> "<target>"`** — sends the clip to OpenAI `gpt-audio`
   (audio-native) and returns JSON `{heard, score, matches, suggestion}`, enabling a
   generate/fetch → judge → iterate loop. Use only the explicitly configured provider key/source; never search unrelated .env files for a usable key or override a local endpoint/key to force paid cloud usage. Pads sub-2s clips so the
   speech-tuned model doesn't refuse. **Caveat:** it reliably *describes* audio and
   filters obvious mismatches, but it is NOT a trustworthy judge of subjective qualities
-  like "grating"; it labels nearly any beep "sharp/high-pitched". Use it to cull, not
+  like "grating" — it labels nearly any beep "sharp/high-pitched". Use it to cull, not
   to make the final aesthetic call; confirm by ear.
 
 Downloads need an authorized output directory, HTTPS allowlisted destinations, bounded redirects/bytes/time and non-overwriting filenames. Verify the original asset page/license, commercial/redistribution/attribution and subject rights; preview availability is not a license. Hosted semantic search/audio judging transmits media and can incur costs, requiring destination/payload/budget authorization. Promotional credits and model hearing claims are historical, not verified capabilities.
 
 ## Where this fits
 
-This is the **internet-retrieval** capability; peer to `muser` (local semantic search)
+This is the **internet-retrieval** capability — peer to `muser` (local semantic search)
 and `fal` (generate). A future `media` router would fan out across all three and rank
 candidates by relevance (CLIP), handing aesthetic spreads to `lookdev`. Don't build that
 router until the model demonstrably mis-routes without it.

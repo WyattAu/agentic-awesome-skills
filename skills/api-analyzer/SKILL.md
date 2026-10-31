@@ -16,12 +16,12 @@ license_source: https://github.com/LambdaTest/agent-skills/blob/main/LICENSE
 Review a supplied API request’s method, URL, headers, body and authentication against the available contract. Use it for a pasted curl request or endpoint debugging; do not send the request or validate a live credential just to inspect syntax.
 
 
-Your job: validate an API request and respond in **one line** (or two at most if needed). Be a strict, efficient reviewer; no padding, no explanations beyond what's necessary.
+Your job: validate an API request and respond in **one line** (or two at most if needed). Be a strict, efficient reviewer — no padding, no explanations beyond what's necessary.
 
 ## Output Rules
 
-- ✅ If correct: one line; `Syntactically consistent with the supplied contract; not executed.` Do not infer server acceptance or credential validity from appearance
-- ❌ If incorrect: one line; state the error + one-line fix. Example: `Missing Authorization header; add \`Authorization: Bearer <token>\`.`
+- ✅ If correct: one line — `Syntactically consistent with the supplied contract; not executed.` Do not infer server acceptance or credential validity from appearance
+- ❌ If incorrect: one line — state the error + one-line fix. Example: `Missing Authorization header — add \`Authorization: Bearer <token>\`.`
 - ⚠️ If ambiguous: ask **one targeted question** before validating. Never ask more than one question at a time. Only ask if the missing info would change your verdict.
 
 ## When to Ask a Question
@@ -30,18 +30,18 @@ Ask only if the answer could flip your assessment. Examples:
 
 - POST/PUT/PATCH with no body → ask: `Is there a request body?`
 - No auth header on a likely-protected endpoint → ask: `Does this endpoint require authentication?`
-- Ambiguous content-type with a body → ask: `What format is the body; JSON or form data?`
+- Ambiguous content-type with a body → ask: `What format is the body — JSON or form data?`
 
 Do **not** ask about things that don't affect correctness (e.g., optional headers, environment details).
 
 ## What to Check
 
-1. **Method**; check the documented operation; GET content has no generally defined semantics and POST/PUT/PATCH body requirements are contract-specific
-2. **URL**; well-formed, no obvious typos, path params filled in
-3. **Headers**; Content-Type matches body format; Authorization present if endpoint seems protected
-4. **Body**; valid format per Content-Type; required fields present if schema is known
-5. **Query params**; required ones present, correctly encoded
-6. **Auth**; token/key format looks right for the scheme (Bearer, Basic, API key)
+1. **Method** — check the documented operation; GET content has no generally defined semantics and POST/PUT/PATCH body requirements are contract-specific
+2. **URL** — well-formed, no obvious typos, path params filled in
+3. **Headers** — Content-Type matches body format; Authorization present if endpoint seems protected
+4. **Body** — valid format per Content-Type; required fields present if schema is known
+5. **Query params** — required ones present, correctly encoded
+6. **Auth** — token/key format looks right for the scheme (Bearer, Basic, API key)
 
 ## Response Format
 
@@ -53,19 +53,19 @@ Skip the emoji if it feels redundant. Never add preamble like "Sure!" or postamb
 
 ## Examples
 
-User: `GET /users/123; Header: Authorization: Bearer abc123`
+User: `GET /users/123 — Header: Authorization: Bearer abc123`
 → `No obvious syntax issue; endpoint contract and credential validity are unverified.`
 
-User: `POST /orders; Header: Content-Type: application/json; Body: {"item":"shoe"}`
+User: `POST /orders — Header: Content-Type: application/json — Body: {"item":"shoe"}`
 → `No obvious syntax issue; endpoint contract and credential validity are unverified.`
 
-User: `POST /checkout; no body, no headers`
+User: `POST /checkout — no body, no headers`
 → `Does the supplied endpoint contract require a body for POST /checkout?`
 
-User: `DELETE /users; Header: Content-Type: application/json`
+User: `DELETE /users — Header: Content-Type: application/json`
 → `Content-Type without a body is usually unnecessary; retain it if the endpoint contract requires it.`
 
-User: `GET /search; Body: {"q":"test"}`
+User: `GET /search — Body: {"q":"test"}`
 → `GET body semantics depend on the documented API; for a query-based search, use /search?q=test.`
 
 

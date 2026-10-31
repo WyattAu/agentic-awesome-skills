@@ -28,7 +28,7 @@
 
 `vulnerable` 主题必须先接住人，再进入框架；不得把痛苦当纯逻辑材料。`high-stakes` 主题默认审计型处理，必须完成证据边界、判断责任、反证/申诉入口和必要查源。二者叠加时，先承接处境，再进入审计。
 
-## §3 快速检查表 -- 概念→概念卡→联读包
+## §3 快速检查表 —— 概念→概念卡→联读包
 
 | 触发词或判断动作 | 必读概念卡 | 必须联读包 | 降档条件 |
 | --- | --- | --- | --- |
@@ -46,9 +46,9 @@
 | 谁能改变条件/谁承担成本 | `responsibility-chain.md` | `diagnosis-mainline-pack` | 责任链不完整→降为轻量观察 |
 | 退出/转移/外部承接 | `exit-transfer.md` | `intimate-love-care-pack` 或 `public-power-governance-pack` | 无法退出主体→不得要求理想退出 |
 | 修复/复盘/道歉/承诺 | `repair-byproduct.md` | `diagnosis-mainline-pack` | 未见真实修复→不得判定"已修复" |
-| 锚点/多层锚/跨域互操作 | `anchor-group.md` | `long-evolution-deep-pack` | - |
-| 启动/转译/让渡/支撑通道 | `dynamics-group.md` | `long-evolution-deep-pack` | - |
-| 行动承接/中层耗竭/结构负荷 | `structure-process-group.md` | `long-evolution-deep-pack` | - |
+| 锚点/多层锚/跨域互操作 | `anchor-group.md` | `long-evolution-deep-pack` | — |
+| 启动/转译/让渡/支撑通道 | `dynamics-group.md` | `long-evolution-deep-pack` | — |
+| 行动承接/中层耗竭/结构负荷 | `structure-process-group.md` | `long-evolution-deep-pack` | — |
 | 框架失效/证伪/良性消亡 | `framework-governance-falsification.md` | `v3-framework-governance-falsification-pack` | 不得用框架自证框架安全 |
 | 共识程序/强判断/开放断言退场 | `procedural-judgment-responsibility.md` | `v3-procedural-judgment-pack` | 开放断言被处置化→立即退场 |
 | 沉默/缺席/不透明/弱信号 | `visibility-opacity-weak-signals.md` | `v3-evidence-visibility-pack` | 不得把缺席当不存在 |
@@ -96,7 +96,7 @@
 
 ## §4.2 Part 5 连续依赖链
 
-v3.0 第五部分（十六-四十）内部存在精确的前后依赖链，后一节总是在前一节建立的保护机制上追加更具体的条件：
+v3.0 第五部分（十六—四十）内部存在精确的前后依赖链，后一节总是在前一节建立的保护机制上追加更具体的条件：
 
 ```
 十六、框架自诊 ──→ 十七、共识程序 ──→ 十八、根假设证伪 ──→ 十九、案例库登记
@@ -128,7 +128,7 @@ v3.0 第五部分（十六-四十）内部存在精确的前后依赖链，后�
 三十八、开放断言退场 ──→ 三十九、框架良性消亡 ──→ 四十、总原则
 ```
 
-使用时不得跳过前置节点直接读取后置节点--例如读三十二（爱）前必须确认已理解三十（无法退出）和三十一（复杂创伤）的保护优先级。
+使用时不得跳过前置节点直接读取后置节点——例如读三十二（爱）前必须确认已理解三十（无法退出）和三十一（复杂创伤）的保护优先级。
 
 ## §5 v3.0 必须联读的高风险组合
 

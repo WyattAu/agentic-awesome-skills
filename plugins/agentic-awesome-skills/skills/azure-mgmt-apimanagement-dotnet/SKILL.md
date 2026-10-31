@@ -273,12 +273,12 @@ await service.RestoreAsync(WaitUntil.Completed, backupParams);
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** for long operations like service creation (30+ min)
-3. **Choose an explicit production identity**; never hardcode keys; constrain credential-chain fallbacks
+3. **Choose an explicit production identity** — never hardcode keys; constrain credential-chain fallbacks
 4. **Handle `RequestFailedException`** for ARM API errors
 5. **Use `CreateOrUpdateAsync`** for idempotent operations
 6. **Navigate hierarchy** via `Get*` methods (e.g., `service.GetApis()`)
-7. **Policy format**; Policies are XML (xml/rawxml or corresponding link formats); JSON is the transport envelope, not a policy language
-8. **Service creation**; Developer SKU is fastest for testing (~15-30 min)
+7. **Policy format** — Policies are XML (xml/rawxml or corresponding link formats); JSON is the transport envelope, not a policy language
+8. **Service creation** — Developer SKU is fastest for testing (~15-30 min)
 
 ## Error Handling
 

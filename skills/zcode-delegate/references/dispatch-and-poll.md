@@ -9,19 +9,19 @@ cat brief.txt | node "<skill-dir>/scripts/relay.mjs" --cd /path/to/repo
 
 ## How the relay finds ZCode
 
-ZCode does not install a `zcode` binary on PATH and does not publish one to npm; the CLI ships
+ZCode does not install a `zcode` binary on PATH and does not publish one to npm — the CLI ships
 inside the desktop app. The relay resolves it in this order, first hit wins:
 
 1. **`--zcode-path <file>`**, else the **`ZCODE_CLI`** environment variable.
-2. `zcode` on **PATH**; an actual executable/shim, not a shell alias.
+2. `zcode` on **PATH** — an actual executable/shim, not a shell alias.
 3. The installed **app bundle**: `%LOCALAPPDATA%\Programs\ZCode\resources\glm\zcode.cjs` on Windows,
    `/Applications/ZCode.app/…` (and `~/Applications/…`) on macOS. Linux ships an AppImage with no
-   fixed install path, so there is nothing to auto-discover there; use option 1 or 2.
+   fixed install path, so there is nothing to auto-discover there — use option 1 or 2.
 
 A resolved `.cjs` bundle is launched under `node`. `result.json` records which route was used in
 `zcodeSource` (`path` / `flag` / `env` / `bundle`), so a surprising install is visible after the run.
 
-If no CLI is found; including when you name one explicitly that does not exist; the relay exits
+If no CLI is found — including when you name one explicitly that does not exist — the relay exits
 **127** and still writes a `result.json` with `status: "zcode_unavailable"`.
 
 ## Options
@@ -59,7 +59,7 @@ Speaks `delegate-relay.result.v1`.
 | `exitCode` | ZCode's own exit code, or the relay's mapping for a killed run |
 | `signal` | The signal that killed the child, or `null` |
 | `finalMessage` | ZCode's final report (its `response` field) |
-| `sessionId` | The `sess_…` id; pass to `--session` to continue this exact session |
+| `sessionId` | The `sess_…` id — pass to `--session` to continue this exact session |
 | `touchedFiles` | Git porcelain paths. `[]` when the tree is clean, `null` when git cannot report. |
 | `mode` | The ZCode mode the run actually used |
 | `readOnlyViolation` | Tri-state. `false` = the tripwire saw no change on a plan run, `true` = it did, `null` = unknown or not applicable |
@@ -72,7 +72,7 @@ Exit codes: a pre-run usage error (bad args, empty brief, a rejected `--mode`) e
 **no** result file. A CLI that cannot be found exits **127** and *does* write one. Otherwise the exit
 code mirrors ZCode's, and a run killed by the watchdog reports `timeout`.
 
-An orchestrator that polls for the file must therefore also check the exit code; a non-zero exit
+An orchestrator that polls for the file must therefore also check the exit code — a non-zero exit
 with no file is a usage error, not a crashed run.
 
 ## Backgrounding
@@ -93,20 +93,20 @@ final report at `finalPath`, and truncation is reported. Output beyond the relay
 If the document cannot be parsed at all:
 
 - with exit 0, the run is still `completed`, `finalMessage` falls back to the raw stdout, and a
-  `parseWarning` field is set; read `outputPath` yourself.
+  `parseWarning` field is set — read `outputPath` yourself.
 - with a non-zero exit, the run is `failed` and `stderrTail` carries the last lines of stderr.
 
 ## When a run misbehaves
 
-- **`status: "timeout"`**; the watchdog fired. The whole ZCode process tree was killed. Inspect the
+- **`status: "timeout"`** — the watchdog fired. The whole ZCode process tree was killed. Inspect the
   working tree before re-dispatching; a killed run can leave partial edits.
-- **`status: "aborted"`**; the relay itself was killed and forwarded the kill. Same advice.
-- **`status: "zcode_unavailable"`**; no CLI found. Check the three resolution routes above.
-- **Exit 1 with `Session not found`**; the `--session` id does not exist. Session ids are
+- **`status: "aborted"`** — the relay itself was killed and forwarded the kill. Same advice.
+- **`status: "zcode_unavailable"`** — no CLI found. Check the three resolution routes above.
+- **Exit 1 with `Session not found`** — the `--session` id does not exist. Session ids are
   `sess_`-prefixed; copy them from a prior `result.json`, not from memory.
-- **`completed` but `touchedFiles` is empty on a write run**; read `finalMessage`. ZCode may have
+- **`completed` but `touchedFiles` is empty on a write run** — read `finalMessage`. ZCode may have
   reported that it could not proceed. That is a real outcome, not a relay bug.
-- **`(no final message captured)` on a resumed plan-mode run**; ZCode has been observed returning
+- **`(no final message captured)` on a resumed plan-mode run** — ZCode has been observed returning
   `"response": ""` while doing substantial work (658 output tokens across 602 events in one measured
   run). The relay reports what ZCode sent, so an empty report here is the CLI's, not a parse failure:
   `parseWarning` will be absent and `usage` non-zero. Read `outputPath` and the working tree rather

@@ -1,5 +1,5 @@
 <!-- Modified for AAS individual review: scope, consent, recovery and factual guidance corrected; upstream attribution retained. -->
-<h1 align="center">LWC; Proactive Memory for AI Agents</h1>
+<h1 align="center">LWC — Proactive Memory for AI Agents</h1>
 
 <p align="center">
   <strong>Agent-driven · Persistent · Source-grounded</strong>
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JanYork/llm-wiki-cli/main/docs/images/lwc-social-preview.png" alt="LWC; Proactive Memory for AI Agents" width="100%">
+  <img src="https://raw.githubusercontent.com/JanYork/llm-wiki-cli/main/docs/images/lwc-social-preview.png" alt="LWC — Proactive Memory for AI Agents" width="100%">
 </p>
 
 `lwc` is an agent-driven proactive memory CLI for AI agents. It lets Agents
@@ -76,7 +76,7 @@ recalling or writing back.
 
 Do not manually drive the routine `lwc` workflow unless you are developing or
 debugging the tool. Ask your Agent to activate the bundled canonical
-`using-lwc` Skill instead-usually as `$using-lwc`.
+`using-lwc` Skill instead—usually as `$using-lwc`.
 
 ## Recommended: Ask Your Agent to Set Up LWC
 
@@ -659,7 +659,7 @@ issues; there is no force or automatic merge. Use
 debt that the changeset did not introduce. After commit, rerun the same fixed
 retrieval checks against live state. Commit freezes the reviewed draft before
 publication; `changeset_frozen` blocks any later staged write. Retry the same
-commit for recovery, or discard after a reported conflict-never add more work
+commit for recovery, or discard after a reported conflict—never add more work
 to a frozen draft.
 
 ```bash
@@ -769,8 +769,8 @@ sensitive query into `--reason`. Mutations require an explicit `project` or
 ## Read-only Viewer and CodeGraph
 
 `lwc view` starts a foreground, loopback-only project inspector and opens the
-browser. It serves one embedded TS + Lit application-no CDN and no Node runtime
-at use time-and exposes GET/HEAD APIs only. Pages, sources, Markdown, the
+browser. It serves one embedded TS + Lit application—no CDN and no Node runtime
+at use time—and exposes GET/HEAD APIs only. Pages, sources, Markdown, the
 knowledge graph, and the optional code graph are read from the current project
 without migration, refresh, or graph construction:
 

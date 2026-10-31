@@ -1,6 +1,6 @@
 ---
 name: socialclaw
-description: "Agent-first social media publishing skill; schedule and publish posts across the listed platforms (X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, Pinterest) via a single workspace API key."
+description: "Agent-first social media publishing skill — schedule and publish posts across the listed platforms (X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, Pinterest) via a single workspace API key."
 category: marketing
 risk: critical
 source: community
@@ -18,7 +18,7 @@ plugin:
     claude: blocked
 ---
 
-# SocialClaw: Social Media Publisher
+# SocialClaw — Social Media Publisher
 
 ## Overview
 

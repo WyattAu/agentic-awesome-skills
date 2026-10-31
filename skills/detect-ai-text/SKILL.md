@@ -1,6 +1,6 @@
 ---
 name: detect-ai-text
-description: Estimate whether a document's prose was written by AI, with the linguistic tells and honest abstention on non-prose. Use when the user asks whether an essay, report, CV, submission, or article was AI-generated; for triage, not proof.
+description: Estimate whether a document's prose was written by AI, with the linguistic tells and honest abstention on non-prose. Use when the user asks whether an essay, report, CV, submission, or article was AI-generated — for triage, not proof.
 category: document-verification
 risk: critical
 source: community
@@ -41,12 +41,12 @@ Inspect a provider’s uncalibrated AI-style signal for a document’s prose, wi
 
 3. **Interpret the response.**
 
-   - `applicable: false`; the document is not prose (forms, tables, scans, spreadsheets). Detection is **deliberately refused** rather than guessed. Report this and stop.
-   - `probability`; model confidence (0–1), NOT a calibrated truth
-   - `lean`; "ai" | "human" | "unsure"
-   - `tells[]`; the specific phrases/patterns flagged (e.g. "It is important to note that", uniform sentence length, low burstiness)
-   - `reasoning`; why the model reached its verdict
-   - `limitations`; always present; the API states its own noise profile
+   - `applicable: false` — the document is not prose (forms, tables, scans, spreadsheets). Detection is **deliberately refused** rather than guessed. Report this and stop.
+   - `probability` — model confidence (0–1), NOT a calibrated truth
+   - `lean` — "ai" | "human" | "unsure"
+   - `tells[]` — the specific phrases/patterns flagged (e.g. "It is important to note that", uniform sentence length, low burstiness)
+   - `reasoning` — why the model reached its verdict
+   - `limitations` — always present; the API states its own noise profile
 
 4. **Report honestly.** This measures *style, not authenticity*:
 
@@ -86,6 +86,6 @@ limitations: The probability is the model's CONFIDENCE, not a calibrated truth.
 
 ## Notes
 
-- Non-prose documents (forms, tables, payslips) get `applicable: false`; the engine refuses rather than guessing
-- Can false-flag templated/coached or non-native-English writing; always present as one signal alongside human review
+- Non-prose documents (forms, tables, payslips) get `applicable: false` — the engine refuses rather than guessing
+- Can false-flag templated/coached or non-native-English writing — always present as one signal alongside human review
 - Verify current authentication/allowance on https://www.stipple.sh; do not guarantee a free anonymous tier or publish the submitted document.

@@ -106,9 +106,9 @@ The upstream contributor reports benchmark benefits, but this tree bundles no co
 
 ## Related Skills
 
-- `@lint-and-validate`; Complementary: run after logic-lens for style/syntax
-- `@security-auditor`; Specialized security-only deep scan
-- `@debugging-strategies`; Use when logic-lens findings need tracing
+- `@lint-and-validate` — Complementary: run after logic-lens for style/syntax
+- `@security-auditor` — Specialized security-only deep scan
+- `@debugging-strategies` — Use when logic-lens findings need tracing
 
 ## Additional Resources
 

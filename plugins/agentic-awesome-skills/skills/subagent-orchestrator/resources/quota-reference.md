@@ -1,4 +1,4 @@
-# Historical Quota Illustration: Not Provider Billing
+# Historical Quota Illustration — Not Provider Billing
 
 Quick reference for estimating and managing quota in every mission.
 
@@ -11,7 +11,7 @@ Quick reference for estimating and managing quota in every mission.
 | Sprint limit | 250 units | Every 5 hours |
 | Weekly baseline | 2,800 units | Once per week (hard cap) |
 
-The 5-hour refresh only refills the sprint; NOT the weekly baseline.
+The 5-hour refresh only refills the sprint — NOT the weekly baseline.
 
 ---
 

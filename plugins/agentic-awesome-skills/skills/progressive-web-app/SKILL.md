@@ -12,11 +12,11 @@ tools: [gemini, cursor, claude]
 
 ## Overview
 
-A Progressive Web App is a web application that uses modern browser capabilities to deliver a fast, reliable, and installable experience; even on unreliable networks. Common building blocks (install criteria vary by browser) are:
+A Progressive Web App is a web application that uses modern browser capabilities to deliver a fast, reliable, and installable experience — even on unreliable networks. Common building blocks (install criteria vary by browser) are:
 
-1. **HTTPS**; Required in production for service workers to register (localhost is exempt for development).
-2. **Web App Manifest** (`manifest.json`); Makes the app installable and defines its appearance on device home screens.
-3. **Service Worker** (`sw.js`); A background script that intercepts network requests, manages caches, and enables offline functionality.
+1. **HTTPS** — Required in production for service workers to register (localhost is exempt for development).
+2. **Web App Manifest** (`manifest.json`) — Makes the app installable and defines its appearance on device home screens.
+3. **Service Worker** (`sw.js`) — A background script that intercepts network requests, manages caches, and enables offline functionality.
 
 ## When to Use This Skill
 
@@ -24,17 +24,17 @@ A Progressive Web App is a web application that uses modern browser capabilities
 - Use when building a mobile-first web project where users should be able to install the app to their home screen.
 - Use when the user asks about caching strategies, service workers, or improving web app performance and resilience.
 - Use when the user mentions Workbox, web app manifests, background sync, or push notifications for the web.
-- Use when the user asks "can my website be installed like an app?" or "how do I make my site work offline?"; even if they don't use the word PWA.
+- Use when the user asks "can my website be installed like an app?" or "how do I make my site work offline?" — even if they don't use the word PWA.
 
 ## Deliverables Checklist
 
 This example layout uses the following files; these exact filenames are not a universal PWA requirement:
 
-- [ ] `index.html`; Links manifest, registers service worker
-- [ ] `manifest.json`; Full app metadata and icon set
-- [ ] `sw.js`; Service worker with install, activate, and fetch handlers
-- [ ] `app.js`; Main app logic with SW registration and install prompt handling
-- [ ] `offline.html`; Fallback page shown when navigation fails offline (required by this example's cache.addAll list, not by the PWA standard)
+- [ ] `index.html` — Links manifest, registers service worker
+- [ ] `manifest.json` — Full app metadata and icon set
+- [ ] `sw.js` — Service worker with install, activate, and fetch handlers
+- [ ] `app.js` — Main app logic with SW registration and install prompt handling
+- [ ] `offline.html` — Fallback page shown when navigation fails offline (required by this example's cache.addAll list, not by the PWA standard)
 
 ---
 
@@ -80,7 +80,7 @@ Defines how the app appears when installed. Must be linked from `<head>` via `<l
 
 **Key fields:**
 - `display`: `standalone` hides browser UI; `minimal-ui` shows minimal controls; `browser` is standard tab.
-- `purpose: "maskable"` on icons enables adaptive icons on Android (safe zone matters; keep content in center 80%).
+- `purpose: "maskable"` on icons enables adaptive icons on Android (safe zone matters — keep content in center 80%).
 - `screenshots` is optional but required for Chrome's enhanced install dialog on desktop.
 
 ---
@@ -142,7 +142,7 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt;
 const installBtn = document.getElementById('install-btn'); // may be null if omitted
 
-// Capture the browser's install prompt; it fires before the browser's own UI
+// Capture the browser's install prompt — it fires before the browser's own UI
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault(); // Stop automatic mini-infobar on mobile
   deferredPrompt = e;
@@ -170,7 +170,7 @@ window.addEventListener('appinstalled', () => {
 
 ## Step 4: Service Worker (`sw.js`)
 
-### Cache Versioning (critical: always increment on deploy)
+### Cache Versioning (critical — always increment on deploy)
 
 ```javascript
 const CACHE_VERSION = 'v1';
@@ -191,7 +191,7 @@ const APP_SHELL = [
 
 The hand-written strategies are teaching sketches. Coordinate updates before skipWaiting/clients.claim to avoid old-page/new-worker incompatibility. Bound cache size/retention, preserve other apps' caches, and tie background revalidation to event.waitUntil with rejection handling.
 
-### Install: Pre-cache the App Shell
+### Install — Pre-cache the App Shell
 
 ```javascript
 self.addEventListener('install', (event) => {
@@ -207,7 +207,7 @@ self.addEventListener('install', (event) => {
 });
 ```
 
-### Activate: Clean Up Old Caches
+### Activate — Clean Up Old Caches
 
 ```javascript
 self.addEventListener('activate', (event) => {
@@ -229,7 +229,7 @@ self.addEventListener('activate', (event) => {
 });
 ```
 
-### Fetch: Caching Strategies
+### Fetch — Caching Strategies
 
 Choose the right strategy per resource type:
 
@@ -245,13 +245,13 @@ self.addEventListener('fetch', (event) => {
   // HTML or API responses by URL; cache contents can survive logout/account changes.
   if (!APP_SHELL.includes(url.pathname)) return;
 
-  // Strategy A: Cache-First (for static assets; fast, tolerates stale)
+  // Strategy A: Cache-First (for static assets — fast, tolerates stale)
   if (url.pathname.match(/\.(css|js|png|jpg|svg|woff2)$/)) {
     event.respondWith(cacheFirst(request));
     return;
   }
 
-  // Strategy B: Network-First (for HTML pages; fresh, falls back to cache)
+  // Strategy B: Network-First (for HTML pages — fresh, falls back to cache)
   if (request.headers.get('Accept')?.includes('text/html')) {
     event.respondWith(networkFirst(request));
     return;
@@ -304,7 +304,7 @@ async function staleWhileRevalidate(request) {
 ## Edge Cases & Platform Notes
 
 ### iOS / Safari Quirks
-- Safari supports manifests and service workers but **does not support `beforeinstallprompt`**; users must install via the Share → "Add to Home Screen" menu manually.
+- Safari supports manifests and service workers but **does not support `beforeinstallprompt`** — users must install via the Share → "Add to Home Screen" menu manually.
 - Use the `apple-mobile-web-app-*` meta tags (shown in `index.html` above) for proper iOS integration.
 - Safari may clear service worker caches after ~7 days of inactivity (Intelligent Tracking Prevention).
 
@@ -327,7 +327,7 @@ async function staleWhileRevalidate(request) {
 For production apps, consider [Workbox](https://developer.chrome.com/docs/workbox) (Google's PWA library) instead of hand-rolling strategies. It handles edge cases, cache expiry, and versioning automatically.
 
 ```javascript
-// With Workbox (via CDN for simplicity; use npm + bundler in production)
+// With Workbox (via CDN for simplicity — use npm + bundler in production)
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox-sw.js');
 
 const { registerRoute } = workbox.routing;

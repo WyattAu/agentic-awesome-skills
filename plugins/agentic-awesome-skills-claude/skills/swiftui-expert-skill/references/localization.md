@@ -19,7 +19,7 @@ Guidance for user-facing text: `Text`, `Button`, `Label`, navigation/toolbar tit
 
 ## SwiftUI Localizes String Literals Automatically
 
-Initializers that accept `LocalizedStringKey` (`Text`, `Button`, `Label`, `.navigationTitle`, alert titles, and so on) treat string literals as localization keys automatically. Do not wrap literals in `NSLocalizedString`, `String(localized:)`, or `LocalizedStringResource`; that resolves the string eagerly and ignores `\.locale` overrides.
+Initializers that accept `LocalizedStringKey` (`Text`, `Button`, `Label`, `.navigationTitle`, alert titles, and so on) treat string literals as localization keys automatically. Do not wrap literals in `NSLocalizedString`, `String(localized:)`, or `LocalizedStringResource` — that resolves the string eagerly and ignores `\.locale` overrides.
 
 ```swift
 // AVOID: double work, and resolves eagerly
@@ -29,11 +29,11 @@ Text(String(localized: "start_workout"))
 Text("start_workout")
 ```
 
-Both opaque keys (`"start_workout"`) and natural-language strings (`"Start Workout"`) work as keys; pick whichever convention the project already uses. Use `Text(verbatim:)` only to opt a literal out of localization (e.g. a debug label interpolating a runtime value). When the argument is already a `String` variable, `Text(value)` calls the `StringProtocol` overload and skips localization on its own.
+Both opaque keys (`"start_workout"`) and natural-language strings (`"Start Workout"`) work as keys — pick whichever convention the project already uses. Use `Text(verbatim:)` only to opt a literal out of localization (e.g. a debug label interpolating a runtime value). When the argument is already a `String` variable, `Text(value)` calls the `StringProtocol` overload and skips localization on its own.
 
 ## String Catalogs
 
-Most projects localize through String Catalogs (`.xcstrings`). Each build syncs new keys from code into the catalog, but the catalog file must already exist; Xcode doesn't create one automatically. If a project already uses `.strings` / `.stringsdict`, add new strings there rather than migrating. Route groups of strings to a specific catalog with `tableName:`.
+Most projects localize through String Catalogs (`.xcstrings`). Each build syncs new keys from code into the catalog, but the catalog file must already exist — Xcode doesn't create one automatically. If a project already uses `.strings` / `.stringsdict`, add new strings there rather than migrating. Route groups of strings to a specific catalog with `tableName:`.
 
 ```swift
 Text("Explore", tableName: "Navigation",
@@ -42,7 +42,7 @@ Text("Explore", tableName: "Navigation",
 
 ## Bundle for Swift Packages and Frameworks
 
-Apps, app extensions, and XPC services are their own main bundle, so `bundle` can be omitted. Frameworks and Swift packages need an explicit `bundle:`; without one, SwiftUI looks up strings in `Bundle.main`, the lookup fails silently, and the string appears unlocalized at runtime.
+Apps, app extensions, and XPC services are their own main bundle, so `bundle` can be omitted. Frameworks and Swift packages need an explicit `bundle:` — without one, SwiftUI looks up strings in `Bundle.main`, the lookup fails silently, and the string appears unlocalized at runtime.
 
 ```swift
 // AVOID (inside a framework/package): searches the app's catalog
@@ -78,7 +78,7 @@ When a view or model exposes user-facing text, type the property as `LocalizedSt
 
 ## LocalizedStringResource for Non-View Types
 
-When a non-view type carries user-facing text; a model object, a tip, a queued notification; use `LocalizedStringResource` instead of `String`. It carries deferred localization information, including its locale and bundle. Do not assume every consumer automatically replaces a captured locale with the current SwiftUI environment; test environment changes and set locale explicitly when resolving outside views.
+When a non-view type carries user-facing text — a model object, a tip, a queued notification — use `LocalizedStringResource` instead of `String`. It carries deferred localization information, including its locale and bundle. Do not assume every consumer automatically replaces a captured locale with the current SwiftUI environment; test environment changes and set locale explicitly when resolving outside views.
 
 ```swift
 // AVOID: resolved at creation time, can't re-render in another locale
@@ -90,11 +90,11 @@ struct Tip { let headline: LocalizedStringResource }
 let tip = Tip(headline: "Tip of the Day")
 ```
 
-Apply this when designing new types or changing user-facing text; don't sweep through existing `String` properties as part of unrelated edits.
+Apply this when designing new types or changing user-facing text — don't sweep through existing `String` properties as part of unrelated edits.
 
 ## Interpolation vs Concatenation
 
-String interpolation preserves `LocalizedStringKey` and produces a format string in the catalog (e.g. `"Welcome, %@"`). Concatenation with `+` produces a plain `String` and is not localized. Never glue separately localized fragments into a sentence; word order varies across languages.
+String interpolation preserves `LocalizedStringKey` and produces a format string in the catalog (e.g. `"Welcome, %@"`). Concatenation with `+` produces a plain `String` and is not localized. Never glue separately localized fragments into a sentence — word order varies across languages.
 
 ```swift
 // AVOID: + produces String; sentence assembly breaks word order
@@ -139,7 +139,7 @@ Field components (`.month()`, `.day()`) choose which fields appear; the locale d
 
 ## Layout for Localization
 
-- Use `.leading` / `.trailing` instead of `.left` / `.right`; they flip for right-to-left locales.
+- Use `.leading` / `.trailing` instead of `.left` / `.right` — they flip for right-to-left locales.
 - Don't hardcode frame widths/heights for text; translations vary in length and scripts vary in height. Use `ViewThatFits` when a layout might not fit longer translations.
 - Use text styles (`.body`, `.headline`) rather than fixed point sizes, so line height adapts per script.
 
@@ -156,11 +156,11 @@ ViewThatFits {
 
 ## Reading the Current Locale
 
-Use `@Environment(\.locale)` for locale-dependent logic in views, not `Locale.current`; the environment respects preview overrides and per-view injection.
+Use `@Environment(\.locale)` for locale-dependent logic in views, not `Locale.current` — the environment respects preview overrides and per-view injection.
 
 ## String(localized:) Outside SwiftUI Views
 
-When you need a localized `String` outside a view, use `String(localized:)`, not `NSLocalizedString`. Don't interpolate inside `NSLocalizedString`; Xcode extracts keys from literals at build time and can't extract interpolated values. `String(localized:)` supports interpolation (it extracts the format string and treats values as runtime arguments) and is preferred over `String(format:)`, which always renders digits as 0–9 regardless of locale.
+When you need a localized `String` outside a view, use `String(localized:)`, not `NSLocalizedString`. Don't interpolate inside `NSLocalizedString` — Xcode extracts keys from literals at build time and can't extract interpolated values. `String(localized:)` supports interpolation (it extracts the format string and treats values as runtime arguments) and is preferred over `String(format:)`, which always renders digits as 0–9 regardless of locale.
 
 ```swift
 // PREFER
@@ -169,7 +169,7 @@ let title = String(localized: "activity_summary", comment: "Dashboard header")
 
 ## Comments for Translators
 
-Add a `comment:` describing the UI element and its purpose, especially for ambiguous strings. For interpolated strings, describe each placeholder by position; translators don't see Swift variable names. Comments can live at the call site or in the String Catalog's per-string Comment field; keep one source of truth per string.
+Add a `comment:` describing the UI element and its purpose, especially for ambiguous strings. For interpolated strings, describe each placeholder by position — translators don't see Swift variable names. Comments can live at the call site or in the String Catalog's per-string Comment field; keep one source of truth per string.
 
 ```swift
 // AVOID: "Edit" could be a noun or a verb
@@ -178,7 +178,7 @@ Text("Edit")
 // PREFER
 Text("Edit", comment: "Toolbar button that enters editing mode for the list.")
 Text("Completed \(count) of \(total)",
-     comment: "Progress label; first variable is finished items, second is the total.")
+     comment: "Progress label — first variable is finished items, second is the total.")
 ```
 
 ## Summary Checklist

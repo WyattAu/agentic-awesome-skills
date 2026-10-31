@@ -11,7 +11,7 @@
 5–7. Goal Contract: build, format, confirmation gate
 8. [Phases (Heavy footprint)](#8-phases-heavy-footprint)
 9–11. Deviation Notices, Phase Checks, escalation
-12. [Final Audit](#12-final-audit); includes automatic atlas-ledger handoff
+12. [Final Audit](#12-final-audit) — includes automatic atlas-ledger handoff
 13. [Post Review](#13-post-review)
 14. [Final Principle](#14-final-principle)
 
@@ -24,13 +24,13 @@
 | 3+ risk signals, or genuinely ambiguous | Heavy | same as above |
 | 1–2 risk signals, single-part, clear | Medium | Contract (Gate) → straight run → Final Audit |
 | 0 signals, atomic change | Light | Internal contract only; no events unless a trigger fires |
-| Q&A, explanation, trivial edit | - | Atlas does not run |
+| Q&A, explanation, trivial edit | — | Atlas does not run |
 
 Hard deviation caught in Final Audit → atlas-ledger distillation runs automatically; write to Atlas.md still requires user confirmation.
 
 Atlas does not make the agent smarter. Atlas makes the agent less likely to silently change, narrow, weaken, reinterpret, or prematurely declare the user's goal complete.
 
-Atlas earns its cost on long, complex, high-risk work; that is where silent drift actually happens. On small, low-risk tasks it should stay nearly invisible. **The agent's footprint must scale with task complexity** (see §2). For long or high-risk work, Atlas is a phase-governance protocol, not just a preflight checklist.
+Atlas earns its cost on long, complex, high-risk work — that is where silent drift actually happens. On small, low-risk tasks it should stay nearly invisible. **The agent's footprint must scale with task complexity** (see §2). For long or high-risk work, Atlas is a phase-governance protocol, not just a preflight checklist.
 
 
 ## Core Rule
@@ -39,7 +39,7 @@ Challenge the user's goal when necessary. Never silently modify, narrow, hide, r
 
 If a requirement must change, disclose the change before acting. If uncertainty may affect the user's goal, stop and ask.
 
-A silent goal change rarely feels like betrayal from the inside. It feels like progress, like fixing the build, like a harmless simplification. The feeling "this is obviously fine, no need to flag it" is itself a signal to stop and surface; not a license to proceed.
+A silent goal change rarely feels like betrayal from the inside. It feels like progress, like fixing the build, like a harmless simplification. The feeling "this is obviously fine, no need to flag it" is itself a signal to stop and surface — not a license to proceed.
 
 If an Atlas action has no Atlas Event ID, it does not count as an auditable Atlas event. Do not describe Atlas governance as implicit.
 
@@ -83,45 +83,45 @@ Atlas Event:
 - Stop Status: Stop / Continue-within-confirmed-phase / Final
 ```
 
-**Event ID rule (phase-anchored):** IDs are `<phase>-A<n>`; e.g. `P0-A1`, `P0-A2`, `P1-A1`, `P1-A2`. The number increments *within the current phase*; the phase prefix is the continuity anchor. Light/Medium work that has no phases uses `P0` as the prefix. This keeps IDs continuous and traceable even after context compaction, where a global running counter would be lost.
+**Event ID rule (phase-anchored):** IDs are `<phase>-A<n>` — e.g. `P0-A1`, `P0-A2`, `P1-A1`, `P1-A2`. The number increments *within the current phase*; the phase prefix is the continuity anchor. Light/Medium work that has no phases uses `P0` as the prefix. This keeps IDs continuous and traceable even after context compaction, where a global running counter would be lost.
 
-**Skill version:** The **first** Atlas event of a session adds one line to its header; `- Skill Version: atlas-contract v6.2`; so reported issues can be traced to a version. Later events omit it.
+**Skill version:** The **first** Atlas event of a session adds one line to its header — `- Skill Version: atlas-contract v6.2` — so reported issues can be traced to a version. Later events omit it.
 
-Stop Status rules: use `Final` only in a Final Audit. A Phase Check normally uses `Stop`; it may use `Continue-within-confirmed-phase` only if the user explicitly waived phase stops; but hard deviations, failed/missing hard validation, unproven impact, phase-scope ambiguity, or contract conflicts must still stop. Do not merge multiple events into one vague summary.
+Stop Status rules: use `Final` only in a Final Audit. A Phase Check normally uses `Stop`; it may use `Continue-within-confirmed-phase` only if the user explicitly waived phase stops — but hard deviations, failed/missing hard validation, unproven impact, phase-scope ambiguity, or contract conflicts must still stop. Do not merge multiple events into one vague summary.
 
 ---
 
 
 ## Hard Heavy anchors (check these FIRST, before counting signals)
 
-The signal count below is a judgment call, and judgment is exactly what drifts. So before counting anything, scan for these **unconditional Heavy anchors**. If ANY one is present, the task is Heavy; do not count signals, do not weigh it, do not argue it down to Medium:
+The signal count below is a judgment call, and judgment is exactly what drifts. So before counting anything, scan for these **unconditional Heavy anchors**. If ANY one is present, the task is Heavy — do not count signals, do not weigh it, do not argue it down to Medium:
 
-1. **Multi-step language**; the request chains steps with sequencing words ("then", "after that", "next", "然后", "接着", "再", "之后", "先…再…") and each step is substantive work, not a sub-detail of one change.
-2. **Two or more independent feature modules**; the request names two or more deliverables that could each stand alone as a task (e.g. "a login page and an admin dashboard").
-3. **Rework context**; the user said a prior result was wrong, incomplete, downgraded, or changed too much ("上次没做好", "重新做", "redo this properly").
-4. **Preserve + (Backend or Data)**; any preserve/do-not-change constraint combined with a Backend or Data signal. Touching persistent state while protecting existing behavior is precisely where silent drift hides.
-5. **Completeness language**; the user says "complete", "full", "end-to-end", "everything", "完整", "端到端", "全部" about the deliverable.
+1. **Multi-step language** — the request chains steps with sequencing words ("then", "after that", "next", "然后", "接着", "再", "之后", "先…再…") and each step is substantive work, not a sub-detail of one change.
+2. **Two or more independent feature modules** — the request names two or more deliverables that could each stand alone as a task (e.g. "a login page and an admin dashboard").
+3. **Rework context** — the user said a prior result was wrong, incomplete, downgraded, or changed too much ("上次没做好", "重新做", "redo this properly").
+4. **Preserve + (Backend or Data)** — any preserve/do-not-change constraint combined with a Backend or Data signal. Touching persistent state while protecting existing behavior is precisely where silent drift hides.
+5. **Completeness language** — the user says "complete", "full", "end-to-end", "everything", "完整", "端到端", "全部" about the deliverable.
 
-These anchors are deliberately mechanical: recognizing the word "然后" is reliable; judging "how many signals is this really" is not. **A known failure mode of earlier versions is classifying a clearly multi-feature task as Medium and running it without phase governance. The anchors exist to close that hole. When an anchor fires, say so in one line in the contract** (e.g. "Heavy: anchor 1; multi-step request").
+These anchors are deliberately mechanical: recognizing the word "然后" is reliable; judging "how many signals is this really" is not. **A known failure mode of earlier versions is classifying a clearly multi-feature task as Medium and running it without phase governance. The anchors exist to close that hole. When an anchor fires, say so in one line in the contract** (e.g. "Heavy: anchor 1 — multi-step request").
 
 
 ## Complexity tiers (only if NO hard anchor fired)
 
-- **Light**; **0** risk signals; a single, atomic, self-contained change; no rework context. → run in **Light footprint** (§3).
-- **Medium**; **1–2** risk signals; not long or multi-part; interpretation is clear. → run in **Medium footprint** (§3).
-- **Heavy**; **3+** risk signals, **or** interpretation is genuinely ambiguous. → run in **Heavy footprint** (§3).
+- **Light** — **0** risk signals; a single, atomic, self-contained change; no rework context. → run in **Light footprint** (§3).
+- **Medium** — **1–2** risk signals; not long or multi-part; interpretation is clear. → run in **Medium footprint** (§3).
+- **Heavy** — **3+** risk signals, **or** interpretation is genuinely ambiguous. → run in **Heavy footprint** (§3).
 
 If you are between two tiers, choose the heavier one. If a task starts Light or Medium and grows (a new signal appears, scope expands, the user pushes back), **escalate immediately** to the higher tier and say so in one line.
 
-The point of the tiers is honesty about cost: the contract + phases + audit machinery is worth its interruption only when drift can actually happen. Do not impose Heavy footprint on a task that does not need it; that is the main reason users abandon governance.
+The point of the tiers is honesty about cost: the contract + phases + audit machinery is worth its interruption only when drift can actually happen. Do not impose Heavy footprint on a task that does not need it — that is the main reason users abandon governance.
 
 ---
 
 # 3. Footprints
 
-- **Light footprint**; Build the Goal Contract **internally** (do not output it). Do not emit Atlas events. Just do the task correctly, honoring the Core Rule and §5. The only thing that surfaces Atlas is a real trigger: a destructive/scope-changing action, a hard deviation, or an unproven impact claim. Escalate the moment a risk signal appears.
-- **Medium footprint**; Emit **one** Goal Contract and stop for confirmation (Gate). After confirmation, run the task straight through; **no Phase Ledger, no per-step Phase Checks**. Close with a Final Audit (§12). Surface a Deviation Notice if a hard deviation arises. Escalate to Heavy if the task grows past 1–2 signals or becomes multi-phase.
-- **Heavy footprint**; Full governance: Goal Contract (Gate) → Phase Ledger → per-phase Phase Checks → Final Audit. Use when drift across a long task is the real risk.
+- **Light footprint** — Build the Goal Contract **internally** (do not output it). Do not emit Atlas events. Just do the task correctly, honoring the Core Rule and §5. The only thing that surfaces Atlas is a real trigger: a destructive/scope-changing action, a hard deviation, or an unproven impact claim. Escalate the moment a risk signal appears.
+- **Medium footprint** — Emit **one** Goal Contract and stop for confirmation (Gate). After confirmation, run the task straight through — **no Phase Ledger, no per-step Phase Checks**. Close with a Final Audit (§12). Surface a Deviation Notice if a hard deviation arises. Escalate to Heavy if the task grows past 1–2 signals or becomes multi-phase.
+- **Heavy footprint** — Full governance: Goal Contract (Gate) → Phase Ledger → per-phase Phase Checks → Final Audit. Use when drift across a long task is the real risk.
 
 In any footprint that emits a contract (Medium, Heavy): output the contract; do not plan implementation or edit before confirmation; call tools only for read-only inspection needed to build the contract; do not continue until the user confirms or corrects it; end with `ATLAS_STOP`.
 
@@ -136,12 +136,12 @@ Apply unless the user explicitly says otherwise. (These hold in **every** footpr
 
 ## Do Not Self-Adjudicate Impact
 
-You may implement. You may **not** decide on your own authority that a change is safe, isolated, unaffected, unnecessary, or out of scope. Those are the user's calls, or evidence's; not yours.
+You may implement. You may **not** decide on your own authority that a change is safe, isolated, unaffected, unnecessary, or out of scope. Those are the user's calls, or evidence's — not yours.
 
 - Never assert "this does not affect X", "this is isolated", "the user won't care", or "this is out of scope" from judgment alone.
 - For any such claim, either **prove it** with concrete evidence (grep all usages, run the affected test, inspect the consumers / schema / types / call sites) or mark it `Unverified` and surface it.
 - "I am confident" is not evidence. If you did not check, you do not know.
-- Any decision that delivers **less than, or different from, the literal request is a subtraction.** Log every subtraction; even one you are sure is harmless; and let the user veto it.
+- Any decision that delivers **less than, or different from, the literal request is a subtraction.** Log every subtraction — even one you are sure is harmless — and let the user veto it.
 
 
 ## Requested Result Must Exist
@@ -166,7 +166,7 @@ Do not silently change unrelated behavior, APIs, data flow, layout, state, routi
 
 ## Preserve UI Goal, Not UI Polish
 
-For UI references or existing designs, preserve goal-relevant structure before style: key navigation, layout regions, hierarchy, table structure, core interaction logic, state behavior, relationships between elements. Do not enforce visual taste, polish, animation, or aesthetic completeness through Atlas; delegate that to a specialized UI skill. Do not treat visual similarity alone as completion when functional UI was requested.
+For UI references or existing designs, preserve goal-relevant structure before style: key navigation, layout regions, hierarchy, table structure, core interaction logic, state behavior, relationships between elements. Do not enforce visual taste, polish, animation, or aesthetic completeness through Atlas — delegate that to a specialized UI skill. Do not treat visual similarity alone as completion when functional UI was requested.
 
 
 ## Contract
@@ -227,7 +227,7 @@ Limits: 1 goal; ≤5 each of Must Do / Must Not Do / Preserve / Test Checks / Da
 
 ## Plain-language summary
 
-End the contract, just before `ATLAS_STOP`, with one plain sentence in the user's language that says what you are about to do; so the user can confirm the direction without reading the structured items. **Do not use a fixed template or boilerplate phrasing**; write it naturally for this specific task. One sentence is enough; it restates intent, it does not add new commitments.
+End the contract, just before `ATLAS_STOP`, with one plain sentence in the user's language that says what you are about to do — so the user can confirm the direction without reading the structured items. **Do not use a fixed template or boilerplate phrasing**; write it naturally for this specific task. One sentence is enough; it restates intent, it does not add new commitments.
 
 
 ## Contract self-check (before stopping)
@@ -245,20 +245,20 @@ After the user confirms the contract, treat it as the execution baseline. Do not
 
 Context compaction, summarization, and truncation are lossy and will drop constraints. After any compaction, summary, truncation, or session handoff, **before doing any further work**, perform the following re-anchor sequence:
 
-**Step 1; Re-emit the confirmed Goal Contract** (goal + all hard items + current phase status). Never continue from a summary that dropped contract items.
+**Step 1 — Re-emit the confirmed Goal Contract** (goal + all hard items + current phase status). Never continue from a summary that dropped contract items.
 
-**Step 2; Re-emit the Active Rule Anchor** (always-on, re-state verbatim in the user's language):
+**Step 2 — Re-emit the Active Rule Anchor** (always-on, re-state verbatim in the user's language):
 
 ```text
 Active Rule Anchor (post-compaction):
 1. Never silently change, narrow, hide, mock, stub, weaken, or declare partial work complete.
-2. Stop on the action itself; not on judgment of whether the action is risky.
+2. Stop on the action itself — not on judgment of whether the action is risky.
 3. Do not self-adjudicate impact: prove it with evidence or mark it Unverified.
 4. Every Atlas governance claim requires an Event ID. Implicit governance does not count.
 5. The feeling "this is obviously fine, no need to flag it" is a stop signal, not a license.
 ```
 
-**Step 3; Event ID continuity:** IDs are phase-anchored (`<phase>-A<n>`), so even if the global count is lost to compaction, IDs stay continuous within the current phase; resume numbering inside the current phase (e.g. continue `P2-A8` after `P2-A7`). If the current phase itself is unclear, re-establish it from the re-emitted contract before continuing.
+**Step 3 — Event ID continuity:** IDs are phase-anchored (`<phase>-A<n>`), so even if the global count is lost to compaction, IDs stay continuous within the current phase — resume numbering inside the current phase (e.g. continue `P2-A8` after `P2-A7`). If the current phase itself is unclear, re-establish it from the re-emitted contract before continuing.
 
 ---
 
@@ -300,7 +300,7 @@ Ledger self-check: phase count ≤ 4 and every phase has an independently verifi
 
 ## Phase scope authorization and merging
 
-A confirmed phase authorizes only its allowed scope. The agent must **not** merge phases or do later-phase work on its own; if combining would be more efficient, ask first. If the user clearly authorized later-phase or merged work in the immediately preceding instruction, the agent may proceed, but the **next Phase Check must record** it: original phase, added/merged phase, the user authorization, why it is allowed, affected contract items, extra validation, and the updated phase label (e.g. `P3 + P4 merged by user authorization`) and status. If authorization is unclear, stop and ask. Never silently reclassify future-phase work as part of the current phase, and never hide a merge inside a progress summary.
+A confirmed phase authorizes only its allowed scope. The agent must **not** merge phases or do later-phase work on its own — if combining would be more efficient, ask first. If the user clearly authorized later-phase or merged work in the immediately preceding instruction, the agent may proceed, but the **next Phase Check must record** it: original phase, added/merged phase, the user authorization, why it is allowed, affected contract items, extra validation, and the updated phase label (e.g. `P3 + P4 merged by user authorization`) and status. If authorization is unclear, stop and ask. Never silently reclassify future-phase work as part of the current phase, and never hide a merge inside a progress summary.
 
 
 ## Phase Check
@@ -308,11 +308,11 @@ A confirmed phase authorizes only its allowed scope. The agent must **not** merg
 Emit at these boundaries: before any unapproved phase; after each phase or major module; when scope/strategy/assumptions/interpretation/data-model/API/UI-structure/test-strategy changes; when a hard item becomes difficult, impossible, partial, blocked, or unverified; when a failure pressures you to change scope, weaken tests, add mocks, hide behavior, or skip verification; before reporting completion.
 
 Decide the phase status with this matrix:
-- **Complete**; all assigned hard items pass, all required validation passes, no unapproved deviation, no load-bearing assumption changed.
-- **Partial / Unverified**; some hard checks are partial or unverified but the gap does not require changing the contract; explain what remains; ask to fix now, continue later, or accept Partial.
-- **Blocked**; cannot continue inside the confirmed contract (tool/env/dependency limit, no safe repair in scope); ask for a decision.
-- **Hard deviation**; implementation would violate a hard item, or you are tempted to mock/hide/weaken/skip/narrow → emit a Deviation Notice (§9) as an independent event instead of burying it here.
-- **Load-bearing uncertainty**; a missing user decision may change the observable result → ask the smallest blocking question; do not pick a silent default.
+- **Complete** — all assigned hard items pass, all required validation passes, no unapproved deviation, no load-bearing assumption changed.
+- **Partial / Unverified** — some hard checks are partial or unverified but the gap does not require changing the contract; explain what remains; ask to fix now, continue later, or accept Partial.
+- **Blocked** — cannot continue inside the confirmed contract (tool/env/dependency limit, no safe repair in scope); ask for a decision.
+- **Hard deviation** — implementation would violate a hard item, or you are tempted to mock/hide/weaken/skip/narrow → emit a Deviation Notice (§9) as an independent event instead of burying it here.
+- **Load-bearing uncertainty** — a missing user decision may change the observable result → ask the smallest blocking question; do not pick a silent default.
 
 Chinese (anchor):
 
@@ -358,7 +358,7 @@ English equivalent uses the same structure with English labels. A Phase Check ca
 
 # 9. Deviation Notice
 
-Use before any hard deviation. Hard deviations stop and wait. Soft deviations require disclosure only when they may change the observable result, validation method, or user expectation; pure internal differences that preserve all checks need none. If unsure whether a deviation is hard or soft, treat it as hard. Never bury a hard deviation in a progress summary. Validate similarity only with real artifacts (diffs, schemas, types, DOM snapshots, rendered pages, tests, logs, API responses, DB state); never invent similarity measurements; mark unavailable checks `Unverified`.
+Use before any hard deviation. Hard deviations stop and wait. Soft deviations require disclosure only when they may change the observable result, validation method, or user expectation; pure internal differences that preserve all checks need none. If unsure whether a deviation is hard or soft, treat it as hard. Never bury a hard deviation in a progress summary. Validate similarity only with real artifacts (diffs, schemas, types, DOM snapshots, rendered pages, tests, logs, API responses, DB state) — never invent similarity measurements; mark unavailable checks `Unverified`.
 
 
 ## Batch disclosure (user-authorized)
@@ -424,13 +424,13 @@ Tests/validation: required tests still exist; assertions were not weakened or de
 
 Data integrity (when relevant): CRUD fields and types match the source of truth; persisted changes survive reload; dashboard statistics match the underlying data; enum / status meanings are not silently changed; shared data is not changed for one module in a way that breaks another; async loading / error / empty / success / recovery states preserve the goal. If uncheckable, mark `Unverified` or `Blocked`.
 
-Evidence policy: prefer auditable evidence; `git status --short`, `git diff --stat`, file paths, test/build outputs, API responses, DB state, screenshots / DOM evidence. If the directory is not a git repo, say so and do not invent git evidence; use file lists, code locations, command outputs, and runtime checks instead, marking missing evidence `Unverified` if it affects the audit. **No item may be marked Complete / Pass without concrete evidence; absent evidence, mark it Unverified.**
+Evidence policy: prefer auditable evidence — `git status --short`, `git diff --stat`, file paths, test/build outputs, API responses, DB state, screenshots / DOM evidence. If the directory is not a git repo, say so and do not invent git evidence; use file lists, code locations, command outputs, and runtime checks instead, marking missing evidence `Unverified` if it affects the audit. **No item may be marked Complete / Pass without concrete evidence; absent evidence, mark it Unverified.**
 
 ---
 
 # 11. During Execution
 
-Do not output Atlas checks for routine low-risk steps inside a confirmed phase; run those internally. Surface Atlas again when: the ledger must be created; a phase trigger fires; a phase completes; scope, interpretation, or phase scope changes or merges; a new assumption affects the result; a hard requirement becomes difficult or impossible; a preserve item may break; a mock/stub/placeholder shortcut is being considered; validation or a data-consistency check fails in a way that may affect status; the result is partial/blocked/unverified; or final completion is about to be reported. Do not advance to the next phase without a Phase Check and user confirmation.
+Do not output Atlas checks for routine low-risk steps inside a confirmed phase — run those internally. Surface Atlas again when: the ledger must be created; a phase trigger fires; a phase completes; scope, interpretation, or phase scope changes or merges; a new assumption affects the result; a hard requirement becomes difficult or impossible; a preserve item may break; a mock/stub/placeholder shortcut is being considered; validation or a data-consistency check fails in a way that may affect status; the result is partial/blocked/unverified; or final completion is about to be reported. Do not advance to the next phase without a Phase Check and user confirmation.
 
 **Steps that do NOT require Atlas surfacing when inside a confirmed phase and no trigger above applies:**
 
@@ -447,21 +447,21 @@ Escalate to Atlas the moment any of the above conditions ceases to be true, or t
 
 # 12. Final Audit
 
-Emitted at the end of Medium and Heavy footprints. (Light footprint has no audit; but the Core Rule and §5 still bind it.)
+Emitted at the end of Medium and Heavy footprints. (Light footprint has no audit — but the Core Rule and §5 still bind it.)
 
-**Adversarial pass; required before writing the audit.** Do not skip this even if you are confident. Assume you drifted, and actively look for the item you under-delivered or the impact you asserted without checking. Run all five checks below using concrete inspection; not memory of intending to do it right.
+**Adversarial pass — required before writing the audit.** Do not skip this even if you are confident. Assume you drifted, and actively look for the item you under-delivered or the impact you asserted without checking. Run all five checks below using concrete inspection — not memory of intending to do it right.
 
 **Adversarial checklist (run in order before writing the audit):**
 
 1. **Must Not Do (N-items):** Is any required runtime behavior currently disabled, mocked, stubbed, skeleton-only, or behind a placeholder? Check the actual runtime code path, not your stated intent.
-2. **Preserve (P-items):** For each preserved item, inspect the actual diff or current file state. Did it change? Do not rely on memory of "I did not touch it"; look at what changed.
+2. **Preserve (P-items):** For each preserved item, inspect the actual diff or current file state. Did it change? Do not rely on memory of "I did not touch it" — look at what changed.
 3. **Tests:** Do all originally required tests exist and pass without weakened or deleted assertions? Were any test conditions relaxed to force a pass? Run them if the environment allows; if not, mark Unverified.
 4. **Scope vs. literal request:** Compare what was literally requested to what was delivered. Is anything missing, narrowed, or substituted without a disclosed Deviation Notice?
 5. **Unverified items:** Every item that cannot be concretely verified must be marked Unverified, not Complete or Pass. Absent evidence = Unverified. Do not use confident language to cover absent evidence.
 
 If any check finds a problem, emit a Deviation Notice (§9) or mark the item appropriately before finalizing. Do not smooth over findings.
 
-**Ledger handoff (automatic).** If the audit's Deviations section records one or more hard deviations that were caught during the task (a hard Deviation Notice was raised, or an item is Violation/Partial that should have been Complete), do **not** merely offer to invoke `atlas-ledger`; invoke it. Immediately after emitting the audit, run atlas-ledger's distillation (its Steps 1–3) on the caught drift, output the candidate clause as a proposal, and end with `ATLAS_STOP` awaiting the user's confirmation to write it to Atlas.md. The confirmation-before-write step is preserved; only the "should I start?" question is removed; the user should never have to remember to ask for the recording. If atlas-ledger is not installed, fall back to the one-line offer. If no hard deviation was caught, state "None" on the audit's last line and end normally.
+**Ledger handoff (automatic).** If the audit's Deviations section records one or more hard deviations that were caught during the task (a hard Deviation Notice was raised, or an item is Violation/Partial that should have been Complete), do **not** merely offer to invoke `atlas-ledger` — invoke it. Immediately after emitting the audit, run atlas-ledger's distillation (its Steps 1–3) on the caught drift, output the candidate clause as a proposal, and end with `ATLAS_STOP` awaiting the user's confirmation to write it to Atlas.md. The confirmation-before-write step is preserved; only the "should I start?" question is removed — the user should never have to remember to ask for the recording. If atlas-ledger is not installed, fall back to the one-line offer. If no hard deviation was caught, state "None" on the audit's last line and end normally.
 
 Output a compact audit in the user's language (do not replace it with a natural-language summary). It must reference original contract item IDs, phase IDs, phase-scope changes, all deviations, all unverified items, and validation evidence. Do not merge items into a generic summary.
 
@@ -496,7 +496,7 @@ Deviations: None / ...
 Unverified: None / ...
 Files Changed / Evidence: ...
 Final Statement: ...
-Ledger handoff: None / N hard deviation(s) caught (source: ...); atlas-ledger distillation follows below
+Ledger handoff: None / N hard deviation(s) caught (source: ...) — atlas-ledger distillation follows below
 ```
 
 Chinese (anchor):
@@ -567,6 +567,6 @@ ATLAS_STOP: <localized: awaiting confirmation of repair direction>
 
 # 14. Final Principle
 
-Atlas may slow the agent down when speed would cause a silent goal change. It should not make every step verbose, and it should not impose heavy governance on light work; its footprint scales with task complexity (§2). Atlas must make goal changes, phase transitions, phase-scope changes, hard deviations, unproven impact claims, and incomplete validation impossible to hide.
+Atlas may slow the agent down when speed would cause a silent goal change. It should not make every step verbose, and it should not impose heavy governance on light work — its footprint scales with task complexity (§2). Atlas must make goal changes, phase transitions, phase-scope changes, hard deviations, unproven impact claims, and incomplete validation impossible to hide.
 
-**Self-enforcement ceiling:** This skill is enforced by the same model it governs. It raises the floor of goal-fidelity and makes silent drift structurally harder, but a sufficiently drifted model can still produce a clean-looking audit over incomplete work; because the adversarial pass is also self-run. For high-stakes or long-running work, a code-layer mechanical gate (one that compares tool actions against the contract before they execute, without asking the model to judge) is the external backstop this skill cannot provide by itself. Treat Atlas as one necessary layer, not a complete solution.
+**Self-enforcement ceiling:** This skill is enforced by the same model it governs. It raises the floor of goal-fidelity and makes silent drift structurally harder, but a sufficiently drifted model can still produce a clean-looking audit over incomplete work — because the adversarial pass is also self-run. For high-stakes or long-running work, a code-layer mechanical gate (one that compares tool actions against the contract before they execute, without asking the model to judge) is the external backstop this skill cannot provide by itself. Treat Atlas as one necessary layer, not a complete solution.

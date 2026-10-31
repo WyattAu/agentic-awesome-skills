@@ -62,22 +62,22 @@ Before starting, establish two paths and one target identity:
 - **Output directory**: where all audit artifacts go. Ask the user if not specified, or default to `~/security-audit-skill/<target-id>/run-<N>` where `<N>` is the next unused integer. Create it if it doesn't exist. This ensures same-named repositories cannot share audit history.
 
 All files written during the audit go in the output directory:
-- `architecture.md`; Phase 1 output, fed into Phase 2 agent prompts
-- `REPORT.md`; human-readable report (Phase 4)
-- `FINDINGS-DETAIL.md`; detailed data flows for MEDIUM+ findings (Phase 4)
-- `findings.json`; machine-readable structured output (Phase 5)
-- `target.json`; canonical path, normalized origin, and target ID used to bind this run
+- `architecture.md` — Phase 1 output, fed into Phase 2 agent prompts
+- `REPORT.md` — human-readable report (Phase 4)
+- `FINDINGS-DETAIL.md` — detailed data flows for MEDIUM+ findings (Phase 4)
+- `findings.json` — machine-readable structured output (Phase 5)
+- `target.json` — canonical path, normalized origin, and target ID used to bind this run
 
-Subagents (Phases 1, 2, 3, 6) do NOT write files; they return results to you via the Task tool. You are responsible for writing all files to the output directory.
+Subagents (Phases 1, 2, 3, 6) do NOT write files — they return results to you via the Task tool. You are responsible for writing all files to the output directory.
 
 ### Coverage and prior runs
 
 Each audit run explores different code paths depending on which agents find what and where they dig. No single run finds everything. Coverage depends on the target, tooling, scope, and available evidence; no measured detection percentage is supplied with this bundle.
 
 **If prior runs exist** for the exact target ID, first require their `target.json` canonical path and normalized origin to match the current target byte-for-byte. Treat missing or mismatched manifests as unrelated and never read or summarize their findings. Do not search or reuse prior runs from a basename-only directory. After that identity check, read matching `findings.json` files before starting Phase 2. Use them to:
-1. **Skip known findings**; don't waste agents re-discovering the same status bypass. Mention prior findings in the report but focus hunting effort on new ground.
-2. **Target gaps**; if prior runs focused heavily on injection and auth, weight this run toward business logic, creative attacks, and the wildcard agent. If prior runs missed public endpoints, focus there.
-3. **Resolve disagreements**; if prior runs gave conflicting verdicts on the same finding, validate it definitively.
+1. **Skip known findings** — don't waste agents re-discovering the same status bypass. Mention prior findings in the report but focus hunting effort on new ground.
+2. **Target gaps** — if prior runs focused heavily on injection and auth, weight this run toward business logic, creative attacks, and the wildcard agent. If prior runs missed public endpoints, focus there.
+3. **Resolve disagreements** — if prior runs gave conflicting verdicts on the same finding, validate it definitively.
 
 Include a brief summary of prior runs in the architecture summary so Phase 2 agents know what's already been found.
 
@@ -91,7 +91,7 @@ Every finding must have a concrete attack scenario: who is the attacker, what do
 
 ### Confirm dynamically when you can
 
-This is a source-first audit, but a claim you can execute beats one you can only argue. Where the target is locally buildable; a parser, a library, a CLI, a native component; build and run it: reproduce the crash, run the payload, diff the two parsers on the same bytes. Better still, **extract the suspect code into a minimal standalone harness** and test the hypothesis in isolation; fuzz the one function, feed it the crafted input, watch what it does. Where confirmation needs infrastructure you don't have; a proxy chain, a live cache, production auth; you cannot confirm from source alone: mark it "requires deployment testing" and do not report it as confirmed. Dynamic evidence is what resolves the memory-safety and request-framing classes that static reading leaves ambiguous.
+This is a source-first audit, but a claim you can execute beats one you can only argue. Where the target is locally buildable — a parser, a library, a CLI, a native component — build and run it: reproduce the crash, run the payload, diff the two parsers on the same bytes. Better still, **extract the suspect code into a minimal standalone harness** and test the hypothesis in isolation — fuzz the one function, feed it the crafted input, watch what it does. Where confirmation needs infrastructure you don't have — a proxy chain, a live cache, production auth — you cannot confirm from source alone: mark it "requires deployment testing" and do not report it as confirmed. Dynamic evidence is what resolves the memory-safety and request-framing classes that static reading leaves ambiguous.
 
 ### Determine the baseline dynamically
 
@@ -108,27 +108,27 @@ If Layer A prevents the attack, the absence of Layer B is a hardening note, not 
 Severity is the combination of **likelihood** (how easy to exploit, what access is needed) and **impact** (what damage is achieved). Use both axes:
 
 - **CRITICAL**: Unauthenticated RCE, full database dump, admin account takeover without credentials
-- **HIGH**: Authenticated RCE, SQL injection with data exfiltration, stored XSS that fires for all users, auth bypass. Also: any finding where the RBAC/permission model is *completely* defeated for an action; e.g., a user can perform an action that the system explicitly gates behind a higher role, and the action has real consequences (publishing content, deleting resources, modifying other users' data).
-- **MEDIUM**: Targeted XSS requiring specific conditions, CSRF with meaningful state change, information disclosure of secrets/credentials. Also: business logic bypasses with real but limited consequences; e.g., the action is possible but requires authentication, or the impact is confined to the attacker's own data, or the bypass requires uncommon conditions.
+- **HIGH**: Authenticated RCE, SQL injection with data exfiltration, stored XSS that fires for all users, auth bypass. Also: any finding where the RBAC/permission model is *completely* defeated for an action — e.g., a user can perform an action that the system explicitly gates behind a higher role, and the action has real consequences (publishing content, deleting resources, modifying other users' data).
+- **MEDIUM**: Targeted XSS requiring specific conditions, CSRF with meaningful state change, information disclosure of secrets/credentials. Also: business logic bypasses with real but limited consequences — e.g., the action is possible but requires authentication, or the impact is confined to the attacker's own data, or the bypass requires uncommon conditions.
 - **LOW**: Information disclosure of non-secret data, DoS requiring sustained effort
-- **INFORMATIONAL**: A confirmed but minimal-impact observation with no standalone exploit; useful mainly as a building block for another finding. Pure defense-in-depth gaps belong in hardening notes, not here.
+- **INFORMATIONAL**: A confirmed but minimal-impact observation with no standalone exploit — useful mainly as a building block for another finding. Pure defense-in-depth gaps belong in hardening notes, not here.
 
 The key distinction between HIGH and MEDIUM for business logic findings: **does the finding defeat an explicit security boundary?** Crossing a role boundary can justify HIGH when consequences warrant it, but is not an automatic rating. Explain actual reach, attacker prerequisites, and damage; authentication alone does not reduce an otherwise severe finding to MEDIUM.
 
 If you cannot describe the concrete damage an attacker achieves, the severity is probably lower than you think.
 
-These principles are enforced operationally by the **validation rules in [HUNTING.md](references/HUNTING.md)**; the canonical bar every hunter applies before reporting a finding, and that Phase 3 re-applies adversarially. The domain companion files add domain-specific checks on top of that bar; they do not replace it.
+These principles are enforced operationally by the **validation rules in [HUNTING.md](references/HUNTING.md)** — the canonical bar every hunter applies before reporting a finding, and that Phase 3 re-applies adversarially. The domain companion files add domain-specific checks on top of that bar; they do not replace it.
 
 ## Workflow overview
 
 Follow all six phases in order:
 
-1. **Recon**; Run Phase 1 from [RECONNAISSANCE.md](references/RECONNAISSANCE.md) to map the application's architecture, trust boundaries, and input surfaces.
-2. **Hunt**; Use [HUNTING.md](references/HUNTING.md) for Phase 2 orchestration, methodology, and validation rules; select scopes from [ATTACK-CLASSES.md](references/ATTACK-CLASSES.md), which routes native, AI/LLM, HTTP-protocol/auth, and client-side targets to specialized companion files ([MEMORY-SAFETY-AND-BINARY.md](references/MEMORY-SAFETY-AND-BINARY.md), [AI-AND-LLM.md](references/AI-AND-LLM.md), [WEB-PROTOCOL-AND-AUTH.md](references/WEB-PROTOCOL-AND-AUTH.md), [CLIENT-SIDE.md](references/CLIENT-SIDE.md)).
-3. **Validate**; Use Phase 3 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) to consolidate duplicates and independently try to disprove every finding.
-4. **Report**; Use Phase 4 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) to write `REPORT.md` and `FINDINGS-DETAIL.md`.
-5. **Structured output**; Use Phase 5 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) and `resources/report-schema.json` to write `findings.json`, then validate the complete array against the bundled JSON Schema with a trusted validator already available in the user’s environment.
-6. **Independent verification**; Use Phase 6 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) to verify every factual claim and reconcile all outputs.
+1. **Recon** — Run Phase 1 from [RECONNAISSANCE.md](references/RECONNAISSANCE.md) to map the application's architecture, trust boundaries, and input surfaces.
+2. **Hunt** — Use [HUNTING.md](references/HUNTING.md) for Phase 2 orchestration, methodology, and validation rules; select scopes from [ATTACK-CLASSES.md](references/ATTACK-CLASSES.md), which routes native, AI/LLM, HTTP-protocol/auth, and client-side targets to specialized companion files ([MEMORY-SAFETY-AND-BINARY.md](references/MEMORY-SAFETY-AND-BINARY.md), [AI-AND-LLM.md](references/AI-AND-LLM.md), [WEB-PROTOCOL-AND-AUTH.md](references/WEB-PROTOCOL-AND-AUTH.md), [CLIENT-SIDE.md](references/CLIENT-SIDE.md)).
+3. **Validate** — Use Phase 3 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) to consolidate duplicates and independently try to disprove every finding.
+4. **Report** — Use Phase 4 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) to write `REPORT.md` and `FINDINGS-DETAIL.md`.
+5. **Structured output** — Use Phase 5 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) and `resources/report-schema.json` to write `findings.json`, then validate the complete array against the bundled JSON Schema with a trusted validator already available in the user’s environment.
+6. **Independent verification** — Use Phase 6 in [VALIDATION-AND-REPORTING.md](references/VALIDATION-AND-REPORTING.md) to verify every factual claim and reconcile all outputs.
 
 ## Limitations
 

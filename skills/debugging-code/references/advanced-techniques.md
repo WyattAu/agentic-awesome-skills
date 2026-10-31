@@ -2,7 +2,7 @@
 
 ## When the Program Hangs
 
-When a program runs but never returns, that *is* information; something is stuck. Don't guess; interrupt
+When a program runs but never returns, that *is* information — something is stuck. Don't guess; interrupt
 and observe.
 
 ```
@@ -29,7 +29,7 @@ If state is wrong but the code path looks correct, consider: is another thread m
 concurrently?
 
 **First move at any concurrent crash or hang:** run `dap threads`, then inspect every thread's stack with
-`dap thread <id>`; the thread causing the problem is often not the one currently stopped.
+`dap thread <id>` — the thread causing the problem is often not the one currently stopped.
 
 - **Deadlock pattern**: two or more threads each waiting for a resource the other holds. Check thread
   states to confirm.

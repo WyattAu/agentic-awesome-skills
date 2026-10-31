@@ -38,17 +38,17 @@ If you don't have the table MCON:
 If you already have the MCON:
 1. Call `get_table` with the MCON, `include_fields: true`, and `include_table_capabilities: true`.
 
-**If `search` returns zero results, or `get_table` shows the table is not ingested:** STOP. The table must already exist in Monte Carlo before a monitor can be created against it. Ask the user to confirm the correct table name, or to ingest the table first; do not call the creation tool with an unverified table.
+**If `search` returns zero results, or `get_table` shows the table is not ingested:** STOP. The table must already exist in Monte Carlo before a monitor can be created against it. Ask the user to confirm the correct table name, or to ingest the table first — do not call the creation tool with an unverified table.
 
 **CRITICAL: You need the actual column names from `get_table` results. NEVER guess or hallucinate column names.** This is the most common source of monitor creation failures.
 
 **Pre-call column-verification gate (run this immediately before calling any creation tool):**
 
 1. List every column name you plan to put in the tool arguments, in every slot the per-type reference describes (see the Tier-3 file for the authoritative list of column-bearing parameters).
-2. For each name, confirm it appears verbatim in the `get_table.fields` list you fetched in this step. Names are case-sensitive on most warehouses (Snowflake often returns uppercase column names; match exactly).
-3. If any name is missing, STOP. Do not call the creation tool. Ask the user to confirm the correct column name, or suggest the closest matches from the actual column list; do NOT substitute a similar-sounding name on your own.
+2. For each name, confirm it appears verbatim in the `get_table.fields` list you fetched in this step. Names are case-sensitive on most warehouses (Snowflake often returns uppercase column names — match exactly).
+3. If any name is missing, STOP. Do not call the creation tool. Ask the user to confirm the correct column name, or suggest the closest matches from the actual column list — do NOT substitute a similar-sounding name on your own.
 
-If you reached this step without calling `get_table` (or equivalent) for the target table, go back; you cannot skip the fetch.
+If you reached this step without calling `get_table` (or equivalent) for the target table, go back — you cannot skip the fetch.
 
 For monitor types that require a timestamp column (metric monitors), review the column names and identify likely timestamp candidates. Present them to the user if ambiguous.
 
@@ -56,7 +56,7 @@ For monitor types that require a timestamp column (metric monitors), review the 
 
 ### Step 3: Handle domain assignment
 
-**ALWAYS resolve a `domain_uuids` value BEFORE calling any creation tool.** Missing or empty domain assignment is one of the top failure modes; the backend will reject the monitor with `Domain assignment is required for this monitor. Please provide one and only one valid domain UUID.`
+**ALWAYS resolve a `domain_uuids` value BEFORE calling any creation tool.** Missing or empty domain assignment is one of the top failure modes — the backend will reject the monitor with `Domain assignment is required for this monitor. Please provide one and only one valid domain UUID.`
 
 The tool field is `domain_uuids` (a list). For data monitors, provide exactly one UUID.
 
@@ -68,7 +68,7 @@ Use the `domains` list on the `get_table` response (each entry has `uuid` and `n
 
 Do NOT present all account domains as options when the table already has domains listed -- prefer domains that contain the table.
 
-**Agent-onboarding context.** If this create is part of an agent-onboarding flow (the table is a customer agent's upstream/golden table and an agent is in scope; e.g. you arrived here from the Context pillar of `agent-monitor-creation.md`), every monitor you create must carry that agent's footprint tag `tags=[{"name": "agent", "value": "<AGENT_NAME>"}]` (display name from the onboarding flow, verbatim) and reuse the same `audiences` and `domain_uuids` the agent's monitors use; this keeps the agent's whole footprint retrievable with a single tag filter (`get_monitors(monitor_tags=["agent:<AGENT_NAME>"])`). Outside an agent-onboarding flow, do NOT add an `agent` tag.
+**Agent-onboarding context.** If this create is part of an agent-onboarding flow (the table is a customer agent's upstream/golden table and an agent is in scope — e.g. you arrived here from the Context pillar of `agent-monitor-creation.md`), every monitor you create must carry that agent's footprint tag `tags=[{"name": "agent", "value": "<AGENT_NAME>"}]` (display name from the onboarding flow, verbatim) and reuse the same `audiences` and `domain_uuids` the agent's monitors use — this keeps the agent's whole footprint retrievable with a single tag filter (`get_monitors(monitor_tags=["agent:<AGENT_NAME>"])`). Outside an agent-onboarding flow, do NOT add an `agent` tag.
 
 ### Step 3b: Ground thresholds and predicates in real data (profiling)
 
@@ -107,7 +107,7 @@ Based on the monitor type, read the detailed reference for parameter guidance:
 
 These per-type reference files are not included in this catalog tree. Resolve an inspected upstream version or authoritative schema before continuing.
 
-**CRITICAL: Every enum value comes from the per-type reference.** `metric`, `operator`, predicate `name`, `schedule.type`, `aggregate_by`, and any other enum-shaped parameter must match the exact strings documented in the Tier-3 file for this monitor type. Never invent values by analogy or adjust casing; the backend rejects anything outside the documented set. Subsets apply per threshold type (e.g. custom_sql Absolute Threshold allows fewer operators than the full list); the per-type file spells those out too. If you're unsure, ask the user rather than guessing.
+**CRITICAL: Every enum value comes from the per-type reference.** `metric`, `operator`, predicate `name`, `schedule.type`, `aggregate_by`, and any other enum-shaped parameter must match the exact strings documented in the Tier-3 file for this monitor type. Never invent values by analogy or adjust casing — the backend rejects anything outside the documented set. Subsets apply per threshold type (e.g. custom_sql Absolute Threshold allows fewer operators than the full list); the per-type file spells those out too. If you're unsure, ask the user rather than guessing.
 
 ### Step 5: Ask about scheduling
 
@@ -250,7 +250,7 @@ The published schema is available at `https://clidocs.getmontecarlo.com/mac/sche
 
 Generated YAML must not include fields that don't appear in the schema for that monitor type. Unknown fields are silently ignored by the CLI but indicate a misconfiguration and may break future validation.
 
-**Schema scope:** The schema validates field names, types, and enum values only. Cross-field semantic constraints (e.g. required field combinations, mutually exclusive options, conditional required fields) are NOT checked by the schema; they are enforced by the Monte Carlo backend at apply time. A file that passes schema validation may still fail on `montecarlo monitors apply`.
+**Schema scope:** The schema validates field names, types, and enum values only. Cross-field semantic constraints (e.g. required field combinations, mutually exclusive options, conditional required fields) are NOT checked by the schema — they are enforced by the Monte Carlo backend at apply time. A file that passes schema validation may still fail on `montecarlo monitors apply`.
 
 ---
 

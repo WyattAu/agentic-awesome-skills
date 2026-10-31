@@ -574,6 +574,6 @@ For route exit animations, give `Routes` the current `location` and a changing r
 
 ## Related Files
 
-- Design Tokens; Complete color system, spacing, typography scales
-- Components; Button, Card, Input, Dialog, Tabs, and more
-- Patterns; Page layouts, navigation, lists, forms
+- Design Tokens — Complete color system, spacing, typography scales
+- Components — Button, Card, Input, Dialog, Tabs, and more
+- Patterns — Page layouts, navigation, lists, forms

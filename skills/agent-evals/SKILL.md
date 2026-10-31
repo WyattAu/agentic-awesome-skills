@@ -45,7 +45,7 @@ The following are application templates, not bundled executable tests. Supply th
 
 ## Evaluation Layers
 
-### Unit Evals: Prompt-Level Correctness
+### Unit Evals — Prompt-Level Correctness
 
 Test individual prompt → response quality:
 
@@ -89,7 +89,7 @@ Golden dataset format:
 ]
 ```
 
-### Tool Evals: Decision Quality
+### Tool Evals — Decision Quality
 
 Validate the agent picks the right tools with correct parameters:
 
@@ -125,7 +125,7 @@ def test_tool_selection(case):
         assert matching["params"].get(key) == val
 ```
 
-### End-to-End Evals: Multi-Step Tasks
+### End-to-End Evals — Multi-Step Tasks
 
 ```python
 # evals/test_e2e.py
@@ -152,7 +152,7 @@ def test_max_steps_guard():
     assert len(result.steps) <= 5
 ```
 
-### Safety Evals: Adversarial Resistance
+### Safety Evals — Adversarial Resistance
 
 ```python
 # evals/test_safety.py
@@ -406,9 +406,9 @@ if __name__ == "__main__":
 
 ## Related Skills
 
-- github-actions (`github-actions`); Eval automation in CI
-- ai-agent-security (`ai-agent-security`); Security-focused eval cases
-- agent-observability (`agent-observability`); Production quality monitoring
+- github-actions (`github-actions`) — Eval automation in CI
+- ai-agent-security (`ai-agent-security`) — Security-focused eval cases
+- agent-observability (`agent-observability`) — Production quality monitoring
 
 ## Limitations
 

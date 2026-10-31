@@ -24,7 +24,7 @@ risk: critical
 
 Quantitative analysis frameworks and CLI indicator scripting via Longbridge.
 
-> **Response language**: match the user's input language; English / Simplified Chinese / Traditional Chinese.
+> **Response language**: match the user's input language — English / Simplified Chinese / Traditional Chinese.
 > **RULE: Response language priority**: English is the default when language is ambiguous. If the user input is only a slash command, command name, ticker / symbol, or contains no natural-language language signal, you MUST respond in English. Do not infer Chinese from trigger keywords, skill metadata, or examples.
 
 > **Data-source scope**: this skill documents Longbridge. If its data is unavailable or insufficient, report the gap rather than inventing data or asserting that other sources are disallowed.
@@ -74,7 +74,7 @@ Engle-Granger cointegration, hedge ratio via OLS, Z-score, half-life of mean rev
 Month-of-year returns (January Effect), day-of-week effects, pre/post-holiday drift, earnings season effect. See [references/seasonality.md].
 
 ### Multi-Factor Model
-Value (1/PE, 1/PB), momentum (60-day), quality (ROE), low-vol (60-day HV); Z-score composite, TopN portfolio. See [references/multifactor.md].
+Value (1/PE, 1/PB), momentum (60-day), quality (ROE), low-vol (60-day HV) — Z-score composite, TopN portfolio. See [references/multifactor.md].
 
 ### Factor Research
 IC, IR, factor decay, layer backtest, IC-weighted combination. See [references/factor-research.md].

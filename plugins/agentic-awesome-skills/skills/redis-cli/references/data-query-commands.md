@@ -66,7 +66,7 @@ SET key value IFDNE expected-digest    # Set only if digest differs
 
 ## Hashes
 
-Hashes map string fields to string values; ideal for representing objects. Compact hash encoding is version-dependent; modern versions use listpack rather than legacy ziplist.
+Hashes map string fields to string values — ideal for representing objects. Compact hash encoding is version-dependent; modern versions use listpack rather than legacy ziplist.
 
 ```
 # Read
@@ -184,7 +184,7 @@ SDIFFSTORE dest key [key ...]          # Difference → new set             O(N)
 - `SRANDMEMBER` with positive count returns distinct elements (may be fewer than count if count > set size)
 - `SRANDMEMBER` with negative count may return duplicates (always returns exactly count elements)
 - `SPOP` removes the element(s) from the set; `SRANDMEMBER` does not
-- `SDIFF` computes difference starting from the first key; order matters
+- `SDIFF` computes difference starting from the first key — order matters
 
 ## Sorted Sets
 
@@ -383,10 +383,10 @@ SORT_RO key [BY pattern] [LIMIT offset count] [GET pattern [GET pattern ...]] [A
 ```
 
 **Expiry options explained:**
-- `NX`; set expiry only if key has no expiry
-- `XX`; set expiry only if key already has an expiry
-- `GT`; set expiry only if new TTL is greater than current
-- `LT`; set expiry only if new TTL is less than current
+- `NX` — set expiry only if key has no expiry
+- `XX` — set expiry only if key already has an expiry
+- `GT` — set expiry only if new TTL is greater than current
+- `LT` — set expiry only if new TTL is less than current
 
 ## Database Operations
 
@@ -414,4 +414,4 @@ UNWATCH                                # Unwatch all keys
 **Behavioral notes:**
 - Commands between `MULTI` and `EXEC` are queued and executed atomically
 - If `WATCH` detects changes to watched keys, `EXEC` returns nil (transaction aborted)
-- Redis transactions are not rollback-capable; if one command fails, the rest still execute
+- Redis transactions are not rollback-capable — if one command fails, the rest still execute

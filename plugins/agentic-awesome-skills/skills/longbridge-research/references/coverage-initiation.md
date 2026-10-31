@@ -8,11 +8,11 @@ Generates a structured initiating-coverage report framework for a single listed 
 
 Five-step coverage initiation process:
 
-1. **Company overview**; business description, history, key products/services, geographic exposure
-2. **Industry positioning**; sector dynamics, competitive landscape, market share, tailwinds/headwinds
-3. **Financial modelling**; historical P&L, balance sheet health, free cash flow, key ratios
-4. **Valuation analysis**; current multiples vs peers vs historical range, DCF considerations, target price rationale
-5. **Investment conclusion**; rating (Buy / Hold / Sell), 12-month price target, key catalysts, key risks
+1. **Company overview** — business description, history, key products/services, geographic exposure
+2. **Industry positioning** — sector dynamics, competitive landscape, market share, tailwinds/headwinds
+3. **Financial modelling** — historical P&L, balance sheet health, free cash flow, key ratios
+4. **Valuation analysis** — current multiples vs peers vs historical range, DCF considerations, target price rationale
+5. **Investment conclusion** — rating (Buy / Hold / Sell), 12-month price target, key catalysts, key risks
 
 Run these CLI commands (parallel is fine):
 
@@ -20,7 +20,7 @@ Run these CLI commands (parallel is fine):
 # Company profile (business overview, sector, executives)
 longbridge company <SYMBOL> --format json
 
-# Full financial report (IS + BS + CF: all periods available)
+# Full financial report (IS + BS + CF — all periods available)
 longbridge financial-report <SYMBOL> --kind ALL --format json
 
 # Industry-level valuation comparison
@@ -34,7 +34,7 @@ longbridge news <SYMBOL> --format json
 
 ## Symbol format
 
-`<CODE>.<MARKET>`; e.g. `NVDA.US`, `700.HK`, `600519.SH`. If the market is ambiguous, ask the user.
+`<CODE>.<MARKET>` — e.g. `NVDA.US`, `700.HK`, `600519.SH`. If the market is ambiguous, ask the user.
 
 ## Output
 
@@ -42,11 +42,11 @@ Structure the output as a formatted research report with clearly labelled sectio
 
 **Cover page metadata**: Symbol, company name, date, analyst note (LLM-generated)
 
-**Section 1; Company overview**: 2–3 paragraphs on business model, history, geography
+**Section 1 — Company overview**: 2–3 paragraphs on business model, history, geography
 
-**Section 2; Industry positioning**: market size, growth drivers, Porter five-forces summary, competitive moat assessment
+**Section 2 — Industry positioning**: market size, growth drivers, Porter five-forces summary, competitive moat assessment
 
-**Section 3; Financial highlights** (table):
+**Section 3 — Financial highlights** (table):
 
 | Metric         | Year -2 | Year -1 | LTM |
 | -------------- | ------- | ------- | --- |
@@ -56,13 +56,13 @@ Structure the output as a formatted research report with clearly labelled sectio
 | Gross Margin % |         |         |     |
 | ROE            |         |         |     |
 
-**Section 4; Valuation**:
+**Section 4 — Valuation**:
 
 - Current PE / PB / PS vs industry median
 - Historical percentile (if available)
 - Implied price target rationale
 
-**Section 5; Investment conclusion**:
+**Section 5 — Investment conclusion**:
 
 - Rating, price target, upside/downside
 - Top 3 catalysts (bull case)

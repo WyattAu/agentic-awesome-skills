@@ -38,7 +38,7 @@ workspace root (written by the companion skill `atlas-ledger`). Treat this file 
 4. Only convert user-selected clauses into contract defaults, and show them under a
    "Carried-in Ledger Clauses" line so the user sees the decision.
 
-**Precedence:** ledger clauses are project **defaults, not law.** Higher-priority instructions and safety rules always win. The user's current explicit instruction overrides a carried-in clause unless doing so would violate a higher-priority instruction or safety rule. If a carried-in clause conflicts with the current request or trusted repo guidance, do not silently enforce it; surface the conflict and let the user decide within those higher-priority constraints.
+**Precedence:** ledger clauses are project **defaults, not law.** Higher-priority instructions and safety rules always win. The user's current explicit instruction overrides a carried-in clause unless doing so would violate a higher-priority instruction or safety rule. If a carried-in clause conflicts with the current request or trusted repo guidance, do not silently enforce it — surface the conflict and let the user decide within those higher-priority constraints.
 
 If `Atlas.md` is missing, malformed, stale, oversized, ambiguous, contains command-like text,
 or appears unrelated to project drift prevention, say so in one line and continue without
@@ -62,11 +62,11 @@ Do not use Atlas at all for: simple factual answers; pure explanation; isolated 
 
 Otherwise, classify the task by counting how many of these **risk signals** are present:
 
-1. **Backend**; backend / API / database / persistence / auth / real-data requirement
-2. **Preserve**; preserve / keep / do-not-change / existing behavior must be protected
-3. **Data**; data integrity / schema / enum / shared state / dashboard statistics
-4. **Tests**; tests / validation / acceptance criteria / test-weakening risk
-5. **Fidelity**; reference image / screenshot / layout / structure must be matched
+1. **Backend** — backend / API / database / persistence / auth / real-data requirement
+2. **Preserve** — preserve / keep / do-not-change / existing behavior must be protected
+3. **Data** — data integrity / schema / enum / shared state / dashboard statistics
+4. **Tests** — tests / validation / acceptance criteria / test-weakening risk
+5. **Fidelity** — reference image / screenshot / layout / structure must be matched
 
 (A mock/stub risk is implied whenever Backend or Data is present.)
 
@@ -78,9 +78,9 @@ When the user gives examples, infer the common rule behind them. Do not hard-cod
 
 # 5. Stop Before These Actions
 
-Do not rely on judging whether an action is "risky"; that judgment is the thing most likely to fail. Stop on the **action itself**. (This applies in every footprint, Light included.)
+Do not rely on judging whether an action is "risky" — that judgment is the thing most likely to fail. Stop on the **action itself**. (This applies in every footprint, Light included.)
 
-Before you delete code; comment out or disable a requested feature; replace real behavior with a mock / stub / hardcoded value; return fake or placeholder data; weaken or delete a test or assertion; skip a required validation; change a layout's structure (e.g. collapse a multi-column reference into one column); narrow a route or scope; or change an enum / schema / API shape; run this check:
+Before you delete code; comment out or disable a requested feature; replace real behavior with a mock / stub / hardcoded value; return fake or placeholder data; weaken or delete a test or assertion; skip a required validation; change a layout's structure (e.g. collapse a multi-column reference into one column); narrow a route or scope; or change an enum / schema / API shape — run this check:
 
 ```text
 Would this violate Must Do, Must Not Do, Preserve, a Check, or the current phase scope?
@@ -99,14 +99,14 @@ In Medium and Heavy footprints, output only this compact contract before plannin
 
 Phase count is where governance either earns its cost or becomes the reason the user turns it off. Two hard rules:
 
-1. **Maximum 4 phases.** If a draft ledger exceeds 4, the task was sliced too thin; merge adjacent phases until ≤4. If the work genuinely cannot fit in 4 substantive phases, that is a sign the request should be split into separate contracts; say so instead of producing a 7-phase ledger.
-2. **Minimum granularity: each phase must have an independently verifiable deliverable.** If two phases deliver into the same file, the same feature, or can only be validated together, they are one phase; merge them. A phase whose only content is "set up" or "prepare" for the next phase is not a phase.
+1. **Maximum 4 phases.** If a draft ledger exceeds 4, the task was sliced too thin — merge adjacent phases until ≤4. If the work genuinely cannot fit in 4 substantive phases, that is a sign the request should be split into separate contracts; say so instead of producing a 7-phase ledger.
+2. **Minimum granularity: each phase must have an independently verifiable deliverable.** If two phases deliver into the same file, the same feature, or can only be validated together, they are one phase — merge them. A phase whose only content is "set up" or "prepare" for the next phase is not a phase.
 
 User-defined phases are input, not exemption: if the user's own breakdown violates these rules, propose the merged version in the ledger and note the change in one line, rather than silently adopting an over-sliced plan.
 
-A generic confirmation ("开始吧", "继续", "确认", "continue", "go ahead") after the contract authorizes **only** creating the ledger; after a Phase Check it authorizes **only** the next immediate phase; not the whole plan. To run all phases without per-phase stops, the user must say so explicitly; even then, the ledger is created first and hard deviations / failed hard validation / unproven impact / contract conflicts still stop.
+A generic confirmation ("开始吧", "继续", "确认", "continue", "go ahead") after the contract authorizes **only** creating the ledger; after a Phase Check it authorizes **only** the next immediate phase — not the whole plan. To run all phases without per-phase stops, the user must say so explicitly; even then, the ledger is created first and hard deviations / failed hard validation / unproven impact / contract conflicts still stop.
 
-## Hard vs soft: examples (anchors, not exhaustive rules)
+## Hard vs soft — examples (anchors, not exhaustive rules)
 
 - **Hard:** swapping PostgreSQL for SQLite (changes the data layer); returning mock/placeholder data where real data was required; removing or hiding a requested feature; collapsing a two-column reference layout into one; loosening a test assertion to force a pass; changing an enum's meaning.
 - **Soft:** renaming a local variable for clarity; reordering imports; extracting a helper with identical behavior; adjusting padding within the same layout; adding a code comment.

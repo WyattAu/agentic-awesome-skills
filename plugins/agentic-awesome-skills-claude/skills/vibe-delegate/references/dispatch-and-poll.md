@@ -55,7 +55,7 @@ The relay always passes `--trust` so headless runs do not prompt for directory t
 a sandbox or tool permission.
 
 Default mode uses `accept-edits`: Vibe's built-in file edits are approved, while approval-gated shell
-commands; including most project gates; are denied headlessly rather than hanging. The orchestrator
+commands — including most project gates — are denied headlessly rather than hanging. The orchestrator
 runs the gates. Use `--full-access` only with explicit human authorization; it selects
 `auto-approve`, which approves all tool executions. Inspect `touchedFiles` and the diff after every run.
 
@@ -64,11 +64,11 @@ runs the gates. Use `--full-access` only with explicit human authorization; it s
 Artifacts live outside the repo by default, so they do not appear in `touchedFiles`; an `--out-dir`
 inside the worktree can make the artifacts appear there:
 
-- `brief.txt`; the exact brief.
-- `events.jsonl`; raw Vibe stdout in streaming JSON format.
-- `final.txt`; the last non-empty assistant message; absent if none was emitted.
-- `stderr.txt`; complete stderr.
-- `result.json`; the stable `delegate-relay.result.v1` contract.
+- `brief.txt` — the exact brief.
+- `events.jsonl` — raw Vibe stdout in streaming JSON format.
+- `final.txt` — the last non-empty assistant message; absent if none was emitted.
+- `stderr.txt` — complete stderr.
+- `result.json` — the stable `delegate-relay.result.v1` contract.
 
 `result.json` fields:
 
@@ -77,13 +77,13 @@ inside the worktree can make the artifacts appear there:
 - `workdir`, `agent` (`"accept-edits"`, `"plan"`, or `"auto-approve"`), `maxTurns`, `maxPrice`,
   `maxTokens`, `resumed`, `vibeVersion`, `sessionId`, `startedAt`, and `finishedAt`.
 - `briefPath`, `finalPath`, `eventsPath`, and `stderrPath`.
-- `finalMessage`; the last non-empty assistant content string; tool calls and tool results are excluded.
-- `touchedFiles`; `git status --porcelain` lines for the **final working tree under `--cd`**. Not
+- `finalMessage` — the last non-empty assistant content string; tool calls and tool results are excluded.
+- `touchedFiles` — `git status --porcelain` lines for the **final working tree under `--cd`**. Not
   an attribution of Vibe's edits: anything already dirty before dispatch shows up too. Dispatch from
   a clean tree when you want the list to read as "what Vibe changed". `null` means git could not
   report; `[]` means git ran and the tree is clean.
-- `stderrTail`; the last 20 non-empty stderr lines on a run that did not complete.
-- `error`; present for launch failures, `timeout`, and `aborted`.
+- `stderrTail` — the last 20 non-empty stderr lines on a run that did not complete.
+- `error` — present for launch failures, `timeout`, and `aborted`.
 
 Vibe's streaming output does not expose its session id, so `sessionId` is always `null` for schema
 compatibility. Use `--resume-last`; retain `--session <id>` only for an id obtained outside the relay.
@@ -119,8 +119,8 @@ A pre-run usage error exits 2 and writes no result. A missing `vibe` exits 127 a
 
 ## Recovering lost work
 
-`events.jsonl` records every message Vibe streamed. If finished work is lost; the run ended late or
-the tree was damaged afterward; read it before re-dispatching to scope which files and tools were
+`events.jsonl` records every message Vibe streamed. If finished work is lost — the run ended late or
+the tree was damaged afterward — read it before re-dispatching to scope which files and tools were
 involved. It may not contain the edit contents, so treat reconstruction as unverified until it matches
 a working-tree diff; when the tree still holds the work, preserve the tree rather than replaying the log.
 

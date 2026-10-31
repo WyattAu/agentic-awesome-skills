@@ -40,7 +40,7 @@ Common failures in sentence-transformers training, with root causes and fixes. O
 
 1. **Re-run dataset inspector** with `--loss <your-loss>`. Most likely cause: column order wrong, label column not detected, or loss expects a different shape.
 2. For retrieval: **your negatives are too easy**. Mine hard negatives (`scripts/mine_hard_negatives.py`).
-3. Check `metric_for_best_model`; if the key doesn't match what the evaluator writes, the trainer may raise a missing-metric error; inspect actual keys and stop on mismatch.
+3. Check `metric_for_best_model` — if the key doesn't match what the evaluator writes, the trainer may raise a missing-metric error; inspect actual keys and stop on mismatch.
 4. Confirm `BatchSamplers.NO_DUPLICATES` is set for MNRL-style losses. Without it, the in-batch negative signal is corrupted.
 5. Base model is wrong for the task (e.g. decoder-only LLM for short-text STS). Try a different base.
 6. Learning rate too low. Default `2e-5` works for encoders; LoRA wants `1e-4+`; static embeddings want about `2e-1` (much higher than transformers).
@@ -88,7 +88,7 @@ Same applies to `CachedSpladeLoss`, `CachedGISTEmbedLoss`, and any other `Cached
 
 **Fixes:**
 
-- Trackio: confirm `pip install trackio` succeeded. No login step; trackio uses your `HF_TOKEN` (set by `hf auth login` or the `HF_TOKEN` env var). On HF Jobs, `HF_TOKEN` must be in `secrets`.
+- Trackio: confirm `pip install trackio` succeeded. No login step — trackio uses your `HF_TOKEN` (set by `hf auth login` or the `HF_TOKEN` env var). On HF Jobs, `HF_TOKEN` must be in `secrets`.
 - W&B: confirm `wandb login` succeeded, or `WANDB_API_KEY` env var is set. On HF Jobs, `WANDB_API_KEY` must be in `secrets`.
 - `report_to` not set to the right tracker: `report_to="none"` (or `"wandb"`, or a list like `["trackio", "tensorboard"]`).
 - TensorBoard: check `logging_dir` (defaults to `output_dir/runs/<timestamp>`); point TB at the parent.
@@ -128,7 +128,7 @@ Same applies to `CachedSpladeLoss`, `CachedGISTEmbedLoss`, and any other `Cached
 
 **Symptom:** training loss looks healthy, baseline eval looked fine, but post-training eval nDCG drops a lot (e.g. 0.59 → 0.14). Every checkpoint after the first eval is below baseline.
 
-**Root cause:** the default `Sigmoid` activation function on `CrossEncoder(num_labels=1, ...)` saturates raw logits >5 to ~1.0. Distillation/listwise/pairwise losses (`MSELoss`, `MarginMSELoss`, `LambdaLoss`, `RankNetLoss`, `ListNetLoss`, `ListMLELoss`, `PListMLELoss`, `ADRMSELoss`) operate on raw logits; once the model learns to push positives past the saturation point, ranking information is lost.
+**Root cause:** the default `Sigmoid` activation function on `CrossEncoder(num_labels=1, ...)` saturates raw logits >5 to ~1.0. Distillation/listwise/pairwise losses (`MSELoss`, `MarginMSELoss`, `LambdaLoss`, `RankNetLoss`, `ListNetLoss`, `ListMLELoss`, `PListMLELoss`, `ADRMSELoss`) operate on raw logits — once the model learns to push positives past the saturation point, ranking information is lost.
 
 **Fix:** construct the model with an `Identity` activation:
 
@@ -153,11 +153,11 @@ Keep the default `Sigmoid` only for `BinaryCrossEntropyLoss` (which uses BCE-wit
 
 **Recovery order:**
 
-1. **Lower `mini_batch_size`** on the loss first. The internal forward chunking preserves the K-list semantic; this is the cheapest knob and doesn't change the experiment.
+1. **Lower `mini_batch_size`** on the loss first. The internal forward chunking preserves the K-list semantic — this is the cheapest knob and doesn't change the experiment.
 2. Lower `per_device_train_batch_size` and compensate with `gradient_accumulation_steps` to keep total batch fixed.
 3. **Reduce K (the candidate-list length per query) only as a last resort.** Lowering K changes what the loss is computing; this is an experimental change, not a memory tweak.
 
-For very large K (>=128), `NDCGLoss2PPScheme` materializes O(K²) weight buffers per query that aren't covered by the forward chunking, so even small `mini_batch_size` may not be enough; at that point K is the right knob.
+For very large K (>=128), `NDCGLoss2PPScheme` materializes O(K²) weight buffers per query that aren't covered by the forward chunking, so even small `mini_batch_size` may not be enough — at that point K is the right knob.
 
 ## Loading a model with a custom inline `nn.Module` raises `ImportError`
 
@@ -167,12 +167,12 @@ For very large K (>=128), `NDCGLoss2PPScheme` materializes O(K²) weight buffers
 ImportError: Module "__main__" does not define a "ClassifierHead" attribute
 ```
 
-**Root cause:** when a custom `nn.Module` is defined inline in a script, Python records its qualname as `__main__.ClassifierHead`. ST writes that qualname into `modules.json` at save time. Loading from a different entry point can't resolve `__main__.ClassifierHead`; the class doesn't exist in the loader's `__main__`.
+**Root cause:** when a custom `nn.Module` is defined inline in a script, Python records its qualname as `__main__.ClassifierHead`. ST writes that qualname into `modules.json` at save time. Loading from a different entry point can't resolve `__main__.ClassifierHead` — the class doesn't exist in the loader's `__main__`.
 
 **Fixes (any one):**
 
 1. Move the class to an importable module: `from my_pkg.heads import ClassifierHead`. Save again so `modules.json` records `my_pkg.heads.ClassifierHead`.
-2. Build the same shape using stock ST modules (`Dense + LayerNorm + Dense`) instead of a custom class; those are always loadable.
+2. Build the same shape using stock ST modules (`Dense + LayerNorm + Dense`) instead of a custom class — those are always loadable.
 3. Document that the model is only loadable from the same script (acceptable for one-off experiments, not for shipping models).
 
 ## SPLADE embeddings are dense (not sparse)
@@ -196,7 +196,7 @@ ImportError: Module "__main__" does not define a "ClassifierHead" attribute
 **Fixes:**
 
 - Ensure the model is on GPU: `model.to("cuda")` (or `device_map="auto"` when loading).
-- For genuine CPU inference (no GPU available), consider switching to a `StaticEmbedding`-based model; ~1000x faster on CPU than a transformer.
+- For genuine CPU inference (no GPU available), consider switching to a `StaticEmbedding`-based model — ~1000x faster on CPU than a transformer.
 
 ## Hub model loads, but `model.encode(prompt_name="query")` acts like no prompt was applied
 
@@ -220,7 +220,7 @@ This ensures gradient flow through the frozen base + trainable adapter.
 
 ## Related reference docs
 
-- `training_args.md` (shared); the args that affect all of the above.
-- `hardware_guide.md` (shared); VRAM sizing and multi-GPU.
-- `dataset_formats.md` (shared); column/loss validation.
-- `losses_sentence_transformer.md` / `losses_cross_encoder.md` / `losses_sparse_encoder.md` (per-model-type catalogs); loss-specific quirks.
+- `training_args.md` (shared) — the args that affect all of the above.
+- `hardware_guide.md` (shared) — VRAM sizing and multi-GPU.
+- `dataset_formats.md` (shared) — column/loss validation.
+- `losses_sentence_transformer.md` / `losses_cross_encoder.md` / `losses_sparse_encoder.md` (per-model-type catalogs) — loss-specific quirks.

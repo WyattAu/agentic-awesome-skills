@@ -98,7 +98,7 @@ See `./references/route-structure.md` for detailed route conventions.
 - `expo-image` Image component instead of intrinsic element `img`
 - `expo-glass-effect` for liquid glass backdrops
 - `Color` from `expo-router` for native semantic colors, not raw `PlatformColor` (type-safe, auto-adapts to light/dark)
-- In SDK 56+, never import from `@react-navigation/*` directly; use `expo-router/react-navigation` instead (covers `@react-navigation/native`, `/core`, `/elements`, `/routers`)
+- In SDK 56+, never import from `@react-navigation/*` directly — use `expo-router/react-navigation` instead (covers `@react-navigation/native`, `/core`, `/elements`, `/routers`)
 
 ## Responsiveness
 
@@ -185,7 +185,7 @@ import { colors } from "@/theme/colors";
 ```
 
 - iOS re-resolves these colors automatically when the system theme changes. On Android, call `useColorScheme()` inside any component that renders them so it re-renders when the theme flips (required when React Compiler memoizes the component).
-- Don't pass `Color` / `PlatformColor` values into Reanimated styles; use static colors there (see `references/animations.md`).
+- Don't pass `Color` / `PlatformColor` values into Reanimated styles — use static colors there (see `references/animations.md`).
 - `Platform.select({...})!` returns `string | OpaqueColorValue`. Most React Native style props accept `ColorValue` (`string | OpaqueColorValue`) so this works fine. But some third-party props only accept `string` (e.g. `tintColor` on `expo-image`). A TypeScript cast does not convert an opaque native color to a string; use a supported ColorValue prop or resolve a concrete color for string-only APIs.
 
 ## Text Styling
@@ -325,11 +325,11 @@ A standard app layout with tabs and stacks inside each tab:
 
 ```
 app/
-  _layout.tsx; <NativeTabs />
+  _layout.tsx — <NativeTabs />
   (index,search)/
-    _layout.tsx; <Stack />
-    index.tsx; Main list
-    search.tsx; Search view
+    _layout.tsx — <Stack />
+    index.tsx — Main list
+    search.tsx — Search view
 ```
 
 ```tsx

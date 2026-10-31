@@ -111,6 +111,6 @@ Report checks actually run and any provider behavior still requiring integration
 
 ## Related Skills
 
-- `@api-rate-limit-handler`; bounded replay-safe retry behavior.
-- `@deprecation-and-migration`; consumer migration and verified removal.
-- `@api-security-best-practices`; authorization and validation controls.
+- `@api-rate-limit-handler` — bounded replay-safe retry behavior.
+- `@deprecation-and-migration` — consumer migration and verified removal.
+- `@api-security-best-practices` — authorization and validation controls.

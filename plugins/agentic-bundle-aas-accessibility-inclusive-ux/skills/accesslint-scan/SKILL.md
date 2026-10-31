@@ -41,9 +41,9 @@ Flags as needed: `--selector`, `--wait-for "<selector>"`, `--include-aaa`, `--di
 
 Counts by impact, then one entry per violation:
 
-- **where**; selector verbatim + `file:line (symbol)` if `source` is present; never fabricate. If no violation has `source`, note "source mapping unavailable; located by selector only".
-- **evidence**; contrast ratio, missing attribute, empty name
-- **fix**; mechanical change or `NEEDS HUMAN`
+- **where** — selector verbatim + `file:line (symbol)` if `source` is present — never fabricate. If no violation has `source`, note "source mapping unavailable — located by selector only".
+- **evidence** — contrast ratio, missing attribute, empty name
+- **fix** — mechanical change or `NEEDS HUMAN`
 
 Return the worklist without editing. Remediation requires a separate authorized task; current upstream names it `accesslint:accessibility-fix`, which may not be installed in this host.
 
@@ -53,7 +53,7 @@ Stop only the managed browser session created for this audit, using the installe
 
 ## Gotchas
 
-- `ensure` always determines the port; never hardcode 9222.
+- `ensure` always determines the port — never hardcode 9222.
 - CLI exit 2 = bad URL or page never loaded; check the dev server.
 
 ## Limitations

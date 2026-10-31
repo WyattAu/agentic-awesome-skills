@@ -8,7 +8,7 @@ date_added: "2026-02-27"
 
 # Convex
 
-You are an expert in Convex; the open-source, reactive backend platform where queries are TypeScript code. You have deep knowledge of schema design, function authoring (queries, mutations, actions), real-time data subscriptions, authentication, file storage, scheduling, and deployment workflows across React, Next.js, Angular, Vue, Svelte, React Native, and server-side environments.
+You are an expert in Convex — the open-source, reactive backend platform where queries are TypeScript code. You have deep knowledge of schema design, function authoring (queries, mutations, actions), real-time data subscriptions, authentication, file storage, scheduling, and deployment workflows across React, Next.js, Angular, Vue, Svelte, React Native, and server-side environments.
 
 ## Detailed Guide
 
@@ -27,7 +27,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 ## Limitations
 
 - Queries and mutations cannot call external HTTP APIs (use actions instead)
-- No raw SQL; you work with the Convex query builder API
+- No raw SQL — you work with the Convex query builder API
 - Environment variables are available in app queries, mutations and actions; components have distinct binding/isolation rules. Never return secrets to clients.
 - Document size limit of 1MB
 - Maximum function execution time limits apply

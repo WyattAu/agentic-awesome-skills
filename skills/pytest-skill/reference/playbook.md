@@ -1,6 +1,6 @@
-# pytest: Advanced Implementation Playbook
+# pytest — Advanced Implementation Playbook
 
-## §1: Production Configuration
+## §1 — Production Configuration
 
 ```ini
 # pytest.ini
@@ -40,10 +40,10 @@ fail_under = 80
 show_missing = true
 ```
 
-## §2: Fixtures (Scoping, Factories, Teardown)
+## §2 — Fixtures (Scoping, Factories, Teardown)
 
 ```python
-# conftest.py: shared fixtures
+# conftest.py — shared fixtures
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -74,7 +74,7 @@ def db_session(engine):
             transaction.rollback()
         connection.close()
 
-# Factory fixture: create multiple instances
+# Factory fixture — create multiple instances
 @pytest.fixture
 def user_factory(db_session):
     from uuid import uuid4
@@ -86,7 +86,7 @@ def user_factory(db_session):
         return user
     return _create_user  # Outer test transaction handles rollback; no committed cleanup list.
 
-# Autouse fixture: runs for every test in module
+# Autouse fixture — runs for every test in module
 @pytest.fixture(autouse=True)
 def reset_cache():
     cache.clear()
@@ -102,7 +102,7 @@ def test_writes_output(tmp_path):
     assert data["status"] == "complete"
 ```
 
-## §3: Parameterized Tests
+## §3 — Parameterized Tests
 
 ```python
 import pytest
@@ -143,7 +143,7 @@ def test_permissions(user):
     assert user.can_view()
 ```
 
-## §4: Mocking with pytest-mock
+## §4 — Mocking with pytest-mock
 
 ```python
 # pip install pytest-mock
@@ -168,7 +168,7 @@ def test_database_error(mocker):
     with pytest.raises(DuplicateError):
         create_user("Alice", "alice@test.com")
 
-# Spy: track calls without replacing
+# Spy — track calls without replacing
 def test_logging(mocker):
     spy = mocker.spy(logger, "info")
     process_order(order)
@@ -183,7 +183,7 @@ def test_config(monkeypatch):
     assert config.debug is True
 ```
 
-## §5: Async Testing
+## §5 — Async Testing
 
 ```python
 # pip install pytest-asyncio
@@ -215,7 +215,7 @@ async def test_api_endpoint(async_client):
     assert len(response.json()) > 0
 ```
 
-## §6: Testing Exceptions & Warnings
+## §6 — Testing Exceptions & Warnings
 
 ```python
 # Exception testing
@@ -239,7 +239,7 @@ def test_deprecation_warning():
         old_func()
 ```
 
-## §7: Markers & Custom Plugins
+## §7 — Markers & Custom Plugins
 
 ```python
 # Custom marker usage
@@ -255,7 +255,7 @@ def test_database_connection():
 # Run by marker: pytest -m "not slow"
 # Run by marker: pytest -m "smoke and not integration"
 
-# Custom plugin: conftest.py
+# Custom plugin — conftest.py
 def pytest_collection_modifyitems(config, items):
     """Auto-mark tests in integration/ directory"""
     for item in items:
@@ -267,7 +267,7 @@ def pytest_report_header(config):
     return f"Environment: {os.getenv('ENV', 'local')}"
 ```
 
-## §8: Class-Based Test Organization
+## §8 — Class-Based Test Organization
 
 ```python
 class TestUserService:
@@ -304,7 +304,7 @@ class TestUserService:
 
 AsyncClient ASGITransport does not trigger application startup/shutdown lifespan automatically; wrap the test in the application’s supported lifespan manager when needed. The SQLite savepoint recipe requires a supported driver/transaction setup and is not proof of PostgreSQL behavior. For real database integration, use a disposable instance and verify rollback after both committed and failing test paths.
 
-## §9: CI/CD Integration
+## §9 — CI/CD Integration
 
 ```yaml
 # GitHub Actions
@@ -334,7 +334,7 @@ jobs:
 
 The CI example uploads only local test results. Do not send coverage or logs to external services without the project’s authorized configuration; pin actions to reviewed full commits for production use. Choose currently supported Python/package versions and retain secret-free diagnostics. Parallel workers need unique database/file/resource names; -n auto is not safe for shared mutable external fixtures.
 
-## §10: Debugging Quick-Reference
+## §10 — Debugging Quick-Reference
 
 | Problem | Cause | Fix |
 |---------|-------|-----|
@@ -349,7 +349,7 @@ The CI example uploads only local test results. Do not send coverage or logs to 
 | Monkeypatch not reverting | Using at module scope | Only use in function-scoped fixtures |
 | Marker warnings | Marker not registered | Add to `markers` in pytest.ini |
 
-## §11: Best Practices Checklist
+## §11 — Best Practices Checklist
 
 - ✅ Use fixtures over setup/teardown methods
 - ✅ Use `conftest.py` for shared fixtures (auto-discovered)

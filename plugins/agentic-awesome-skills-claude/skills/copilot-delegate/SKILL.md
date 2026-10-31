@@ -24,8 +24,8 @@ metadata:
 - You want to delegate a bounded coding task to a separate `copilot` implementer (`GitHub Copilot CLI`) and then review its diff yourself.
 - The user explicitly asked for delegation to this implementer.
 
-You are the **orchestrator**. Delegate a bounded coding task to a separate **implementer**; the
-GitHub Copilot CLI; then review what it produced and land it yourself. You write the brief and own
+You are the **orchestrator**. Delegate a bounded coding task to a separate **implementer** — the
+GitHub Copilot CLI — then review what it produced and land it yourself. You write the brief and own
 the judgment; the implementer makes changes in its own session in a clean working tree; you verify
 and commit.
 
@@ -36,7 +36,7 @@ The loop needs only a shell command and file access, so any comparable orchestra
 - The task is small enough to do inline; delegation overhead is not worth it.
 - The `copilot` CLI is not installed or authenticated.
 - You need a hard sandbox. Copilot exposes sandbox controls, but they are upstream-experimental
-  (MXC-based, controlled via the `/sandbox` command and settings, disabled by default); this relay
+  (MXC-based, controlled via the `/sandbox` command and settings, disabled by default) — this relay
   does not configure them. `--read-only` only disables edit tools (`--mode plan`); shell commands
   still run. If project files must not change at all, dispatch against a clean or isolated worktree.
 
@@ -47,7 +47,7 @@ This catalog distribution has no `scripts/relay.mjs`. Do not run the examples ag
 ## Prerequisites (check once)
 
 1. Install `copilot` (`npm install -g @github/copilot`; the CLI requires Node 22+, the relay
-   itself runs on Node 18+; the relay probes `copilot version`).
+   itself runs on Node 18+ — the relay probes `copilot version`).
 2. Authenticate: run `copilot login` (interactive web/device flow), or set
    `COPILOT_GITHUB_TOKEN` / `GH_TOKEN` / `GITHUB_TOKEN` in the environment.
 3. Confirm `copilot version` succeeds.
@@ -100,11 +100,11 @@ The relay blocks until copilot finishes. Run it with the orchestrator's backgrou
 facility, or background it in the shell and poll for `result.json`. A pre-run usage error exits 2
 and writes no result; a missing `copilot` exits 127 and writes `status: "copilot_unavailable"`.
 
-Completion means the process exited and `result.json` exists; trust process state and the
+Completion means the process exited and `result.json` exists — trust process state and the
 working tree, not the progress display. Copilot's final assistant message is the `finalMessage`
 field of `result.json`.
 
-### 4. Review: do not trust the self-report
+### 4. Review — do not trust the self-report
 
 - Re-run the project's gates yourself.
 - Read the diff against the brief, starting with `touchedFiles`.
@@ -114,7 +114,7 @@ See [references/review-and-land.md](references/review-and-land.md).
 
 ### 5. Land it
 
-If the work is good, commit it. The relay never commits; the diff and `result.json` are the
+If the work is good, commit it. The relay never commits — the diff and `result.json` are the
 record; run `git status` and `git diff` first to confirm exactly what changed. If the group has a
 PR flow, make the commit and push a branch; let human review happen. If the diff is wrong or
 incomplete, re-dispatch a corrected brief in a fresh run and review again.
@@ -123,7 +123,7 @@ incomplete, re-dispatch a corrected brief in a fresh run and review again.
 
 Without `--allow-all-tools`, copilot auto-denies tool calls in headless mode: the process exits 0
 but the relay detects the denial events and reports `status: "failed"` with the CLI's own error
-message and a hint to pass `--allow-all-tools`. This is the honest default; the orchestrator sees
+message and a hint to pass `--allow-all-tools`. This is the honest default — the orchestrator sees
 the failure rather than a silent no-op.
 
 `--allow-all-tools` explicitly grants full tool autonomy and requires explicit human authorization
@@ -145,19 +145,19 @@ the human first instead of encoding it in a brief.
 
 ## References
 
-- [references/writing-the-brief.md](references/writing-the-brief.md); structure, scope, gates,
+- [references/writing-the-brief.md](references/writing-the-brief.md) — structure, scope, gates,
   brief delivery.
-- [references/dispatch-and-poll.md](references/dispatch-and-poll.md); flags, artifacts,
+- [references/dispatch-and-poll.md](references/dispatch-and-poll.md) — flags, artifacts,
   `result.json`, and failure recovery.
-- [references/review-and-land.md](references/review-and-land.md); what to verify before calling
+- [references/review-and-land.md](references/review-and-land.md) — what to verify before calling
   the diff done, at the end of a run.
-- [references/multi-task-queues.md](references/multi-task-queues.md); sequential queues,
+- [references/multi-task-queues.md](references/multi-task-queues.md) — sequential queues,
   constraint carry-forward, progress tracking, and the final coherence pass.
 
 
 ## Limitations
 
-- Docs-only import; executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `copilot` CLI, Node 18+, git.
-- Relay never commits; it only returns structured result JSON; you review and land the commit.
+- Docs-only import — executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `copilot` CLI, Node 18+, git.
+- Relay never commits — it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); docs-only, runtime not bundled.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — docs-only, runtime not bundled.

@@ -1,6 +1,6 @@
 ---
 name: form-cro
-description: Optimize any form that is NOT signup or account registration; including lead capture, contact, demo request, application, survey, quote, and checkout forms.
+description: Optimize any form that is NOT signup or account registration — including lead capture, contact, demo request, application, survey, quote, and checkout forms.
 risk: critical
 source: community
 date_added: '2026-02-27'
@@ -440,7 +440,7 @@ This skill is applicable to execute the workflow or actions described in the ove
 
 **User request:**
 
-> Optimize any form that is NOT signup or account registration; including lead capture, contact, demo request, application, survey, quote, and checkout forms.
+> Optimize any form that is NOT signup or account registration — including lead capture, contact, demo request, application, survey, quote, and checkout forms.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

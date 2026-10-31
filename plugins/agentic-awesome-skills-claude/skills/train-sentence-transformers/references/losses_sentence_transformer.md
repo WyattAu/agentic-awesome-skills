@@ -10,7 +10,7 @@ Losses are grouped by data shape. The #1 rule: **pick a loss that matches your d
 | You have | Use |
 |---|---|
 | `(anchor, positive)` pairs | `MultipleNegativesRankingLoss` (or Cached variant for large batches) |
-| `(anchor, positive, negative)` triplets | `MultipleNegativesRankingLoss`; it handles triplets natively |
+| `(anchor, positive, negative)` triplets | `MultipleNegativesRankingLoss` — it handles triplets natively |
 | `(text1, text2, score)` with `score ∈ [-1, 1]` or `[0, 1]` | `CoSENTLoss` (strongly recommended) |
 | `(text1, text2, label)` with `label ∈ {0, 1}` | `OnlineContrastiveLoss` |
 | `(text, class_id)` single-column with integer class | `BatchAllTripletLoss` |
@@ -32,7 +32,7 @@ loss = MultipleNegativesRankingLoss(model, scale=20.0)  # similarity_fct default
 - **Data**: `(anchor, positive)` or `(anchor, positive, negative)`. More columns = more explicit hard negatives per row.
 - **Scale**: temperature. Default `scale=20.0` multiplies similarities by 20 (equivalent to softmax temperature 0.05). Tune only if cosine similarities end up saturated.
 - **Critical**: set `batch_sampler=BatchSamplers.NO_DUPLICATES` on training args. Otherwise duplicate anchors create false negatives.
-- **Tip**: batch size matters a lot; more in-batch negatives = better gradients.
+- **Tip**: batch size matters a lot — more in-batch negatives = better gradients.
 
 ### `CachedMultipleNegativesRankingLoss`
 
@@ -47,7 +47,7 @@ loss = CachedMultipleNegativesRankingLoss(model, mini_batch_size=32)
 
 ### `MultipleNegativesSymmetricRankingLoss`
 
-MNRL computed bidirectionally; scores positives from both (anchor -> positive) and (positive -> anchor) directions. Slightly better on retrieval tasks where the "anchor" and "positive" distinctions are soft (paraphrase, deduplication).
+MNRL computed bidirectionally — scores positives from both (anchor -> positive) and (positive -> anchor) directions. Slightly better on retrieval tasks where the "anchor" and "positive" distinctions are soft (paraphrase, deduplication).
 
 ### `CachedMultipleNegativesSymmetricRankingLoss`
 
@@ -75,7 +75,7 @@ In-batch margin-based triplet: for each anchor, find the hardest negative in the
 
 ### `TripletLoss`
 
-Classic triplet margin loss on explicit `(anchor, positive, negative)`. Uses a fixed margin and the hardest in-batch is not considered; only the provided triplet.
+Classic triplet margin loss on explicit `(anchor, positive, negative)`. Uses a fixed margin and the hardest in-batch is not considered — only the provided triplet.
 
 ```python
 loss = TripletLoss(model, distance_metric=TripletDistanceMetric.EUCLIDEAN, triplet_margin=5)
@@ -184,7 +184,7 @@ See `../scripts/train_sentence_transformer_distillation_example.py` for the end-
 
 ## Regularizer / wrapper losses
 
-These don't have their own data shape; they wrap another loss and add a regularization objective.
+These don't have their own data shape — they wrap another loss and add a regularization objective.
 
 ### `MatryoshkaLoss`
 
@@ -229,7 +229,7 @@ Stand-alone regularizer (not a wrapper, despite living in this section). Penaliz
 
 ### `DenoisingAutoEncoderLoss` (TSDAE)
 
-Sentence-level denoising autoencoder: corrupt a sentence (drop tokens), force the model to reconstruct it. Pretraining-style; useful for domain adaptation when you have unlabeled in-domain sentences.
+Sentence-level denoising autoencoder: corrupt a sentence (drop tokens), force the model to reconstruct it. Pretraining-style — useful for domain adaptation when you have unlabeled in-domain sentences.
 
 ### `ContrastiveTensionLoss`
 

@@ -80,11 +80,11 @@ QWeb is Odoo's primary templating engine, used for PDF reports, website pages, a
 
 ## Best Practices
 
-- ✅ **Do:** Use `t-field` for model fields; Odoo auto-formats dates, monetary values, and booleans correctly.
+- ✅ **Do:** Use `t-field` for model fields — Odoo auto-formats dates, monetary values, and booleans correctly.
 - ✅ **Do:** Use `t-out` for escaped output of ordinary strings; `t-esc` remains an alias in Odoo 17. Values already marked safe require separate trust review.
 - ✅ **Do:** Call `web.external_layout` for PDF reports to automatically include the company header, footer, and logo.
 - ✅ **Do:** Use `_lt()` (lazy translation) for translatable string literals inside Python report helpers, not inline `t-esc`.
-- ❌ **Don't:** Put complex business logic or side effects in QWeb; simple expressions are supported; compute complex values in a model or report `_get_report_values()` helper.
+- ❌ **Don't:** Put complex business logic or side effects in QWeb — simple expressions are supported; compute complex values in a model or report `_get_report_values()` helper.
 - ❌ **Don't:** Forget `t-as` when using `t-foreach`; without it, you can't access the current record in the loop body.
 - ❌ **Don't:** Bypass escaping to render untrusted HTML. Sanitize rich content using the target Odoo version's supported mechanisms; marking content safe is a security assertion.
 
@@ -92,7 +92,7 @@ Reference: [Odoo 17 QWeb](https://www.odoo.com/documentation/17.0/developer/refe
 
 ## Limitations
 
-- Does not cover **website controller routing** for dynamic QWeb pages; that requires Python `http.route` knowledge.
-- **Email template** QWeb has different variable scope than report QWeb (`object` vs `docs`); this skill primarily focuses on PDF reports.
+- Does not cover **website controller routing** for dynamic QWeb pages — that requires Python `http.route` knowledge.
+- **Email template** QWeb has different variable scope than report QWeb (`object` vs `docs`) — this skill primarily focuses on PDF reports.
 - QWeb JavaScript (used in Kanban/Form widgets) is a different engine; this skill covers **server-side QWeb only**.
 - Does not cover **wkhtmltopdf configuration** for PDF rendering issues (page size, margins, header/footer overlap).

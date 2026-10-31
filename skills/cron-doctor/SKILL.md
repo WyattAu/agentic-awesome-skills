@@ -18,11 +18,11 @@ license_source: "https://github.com/takeaseatventure/devops-skills/blob/main/LIC
 
 ## Overview
 
-Cron is deceptively error-prone. The failure mode is **silent**; a syntactically
+Cron is deceptively error-prone. The failure mode is **silent** — a syntactically
 valid expression that simply never fires, or fires far more often than intended.
 `0 0 30 2 *` parses cleanly and then sits dead forever (February has no 30th).
 `0 0 1,15 * 1` looks like "1st and 15th if Monday" but actually means "1st, 15th,
-**OR** every Monday"; ~6 fires/month instead of ~2.
+**OR** every Monday" — ~6 fires/month instead of ~2.
 
 This skill teaches an agent to catch those before they reach production. It comes
 with a zero-dependency validation engine (`scripts/cron-engine.js`, no install
@@ -30,7 +30,7 @@ needed) that parses, describes, deep-validates, and computes next fire times.
 
 ## When to Use This Skill
 
-- Use when a user writes, edits, reviews, or deploys a cron expression; in a
+- Use when a user writes, edits, reviews, or deploys a cron expression — in a
   crontab, a Kubernetes `CronJob`, a GitHub Actions `schedule`, an Airflow DAG,
   a Celery beat schedule, a systemd timer, or any scheduled task.
 - Use when debugging a job that "didn't fire" or "fired at the wrong time."
@@ -71,14 +71,14 @@ Check the five death-traps below and flag any that apply.
 ### Step 4: Calculate next runs and annual fire count
 
 Compute the next 5 fire times as concrete dates so the user can verify the
-schedule behaves as expected. Estimate annual fire count; a schedule that fires
+schedule behaves as expected. Estimate annual fire count — a schedule that fires
 365×/year vs. 12×/year is a ~30× cost and load difference.
 
 ## The Five Cron Death-Traps
 
 These are the bugs that pass `crontab -l` validation but break in production.
 
-### 1. Impossible dates: the "never fires" bug
+### 1. Impossible dates — the "never fires" bug
 
 ```
 0 0 30 2 *
@@ -91,7 +91,7 @@ that silently sits forever. The same applies to day 31 in any 30-day month:
 **Fix:** use `0 0 28-31 * *` and check for end-of-month in the script, or use `L`
 (last day) syntax if your scheduler supports it.
 
-### 2. OR-semantics: the "fires too often" bug
+### 2. OR-semantics — the "fires too often" bug
 
 ```
 0 0 1,15 * 1
@@ -111,39 +111,39 @@ script:
 0 0 * * 1 [ "$(date +\%d)" = "01" -o "$(date +\%d)" = "15" ] && your-command
 ```
 
-### 3. Midnight spike: the "everything at once" bug
+### 3. Midnight spike — the "everything at once" bug
 
 ```
 0 0 * * *
 ```
 
 Every job scheduled at `0 0` competes for resources at exactly 00:00. Database
-backups, log rotations, cert renewals, report generation; all fire simultaneously.
+backups, log rotations, cert renewals, report generation — all fire simultaneously.
 This causes load spikes, connection-pool exhaustion, and cascading timeouts.
 
 **Fix:** stagger jobs across the hour. Use `17 2 * * *` or `43 3 * * *` instead of
 `0 0`. Jitter is your friend.
 
-### 4. Uneven steps: the "drift" bug
+### 4. Uneven steps — the "drift" bug
 
 ```
 */7 * * * *
 ```
 
 **Does NOT mean** "every 7 minutes evenly." It means "every 7 minutes starting at
-0, then resets at 60." So: 0, 7, 14, 21, 28, 35, 42, 49, 56; then 0 again
+0, then resets at 60." So: 0, 7, 14, 21, 28, 35, 42, 49, 56 — then 0 again
 (a 4-minute gap). The intervals drift: 7,7,7,7,7,7,7,7,**4**.
 
 **Fix:** 60 is not divisible by 7. Use step values that divide 60 evenly: `*/5`,
 `*/10`, `*/15`, `*/20`, `*/30`. If you truly need every-7-minutes, use a supervised monotonic/interval scheduler; a sleep loop adds task duration and needs restart/overlap handling.
 
-### 5. Leap-year February 29: the "annual surprise"
+### 5. Leap-year February 29 — the "annual surprise"
 
 ```
 0 0 29 2 *
 ```
 
-Fires only on leap years; February 29, 2024 / 2028 / 2032… If someone writes this
+Fires only on leap years — February 29, 2024 / 2028 / 2032… If someone writes this
 expecting "end of February," they'll be confused for 3 out of every 4 years.
 
 **Fix:** for last day of February, run on 28 and 29 and use an explicit next-day-is-March guard; running only on the 28th cannot select the 29th.
@@ -154,7 +154,7 @@ This skill ships a zero-dependency engine at `scripts/cron-engine.js` (Node.js, 
 `npm install` needed). You can use it programmatically or from the CLI:
 
 ```javascript
-// Programmatic; Node.js, zero dependencies
+// Programmatic — Node.js, zero dependencies
 const { describe, validate, nextRuns, formatNextRuns } = require('./scripts/cron-engine.js');
 
 // Parse + describe -> returns { text, error, parsed }
@@ -199,7 +199,7 @@ node scripts/cli.js next "0 9 * * 1-5" 5
 - ✅ Prefer step values that divide 60 evenly (`*/5`, `*/15`, `*/30`).
 - ✅ Add a comment above every crontab line explaining intent.
 - ✅ Set an explicit timezone (`CRON_TZ`) on schedulers that support it.
-- ❌ Don't trust `crontab -l` validation; it lists the installed crontab; it is not a syntax or semantic validator.
+- ❌ Don't trust `crontab -l` validation — it lists the installed crontab; it is not a syntax or semantic validator.
 - ❌ Don't restrict both day-of-month and day-of-week without confirming OR-logic.
 - ❌ Don't schedule everything at `0 0`.
 
@@ -214,7 +214,7 @@ node scripts/cli.js next "0 9 * * 1-5" 5
   **Solution:** You hit OR-semantics (trap #2). If both day-of-month and
   day-of-week are set, cron ORs them. Move one to `*` or guard in-script.
 
-- **Problem:** "Intervals are uneven; sometimes 7 min, sometimes 4."
+- **Problem:** "Intervals are uneven — sometimes 7 min, sometimes 4."
   **Solution:** Step value doesn't divide 60 evenly (trap #4). Use a divisor of 60.
 
 - **Problem:** "My job works locally but not in the cluster."
@@ -233,12 +233,12 @@ node scripts/cli.js next "0 9 * * 1-5" 5
 
 ## Related Skills
 
-- `docker-expert`; when the cron job runs inside a container and the issue is the
+- `docker-expert` — when the cron job runs inside a container and the issue is the
   container/entrypoint rather than the schedule.
-- `kubernetes-deployment`; when validating a `CronJob` manifest's `spec.schedule`
+- `kubernetes-deployment` — when validating a `CronJob` manifest's `spec.schedule`
   field alongside the broader resource config.
 
 ## Security & Safety Notes
 
 This skill is read-only and `risk: safe`. The validation script performs no file
-writes, network calls, or mutations; it only parses and computes. It accepts data only, but inputs/counts must be bounded and execution should use reviewed local files. Parsing cannot guarantee a job will execute.
+writes, network calls, or mutations — it only parses and computes. It accepts data only, but inputs/counts must be bounded and execution should use reviewed local files. Parsing cannot guarantee a job will execute.

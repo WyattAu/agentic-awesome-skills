@@ -43,4 +43,4 @@ Head sampling can discard errors before tail sampling sees them. In-memory demos
 
 ## Sources
 
-- [OpenTelemetry exporter documentation](https://opentelemetry.io/docs/languages/python/exporters/); use the installed SDK's matching documentation.
+- [OpenTelemetry exporter documentation](https://opentelemetry.io/docs/languages/python/exporters/) — use the installed SDK's matching documentation.

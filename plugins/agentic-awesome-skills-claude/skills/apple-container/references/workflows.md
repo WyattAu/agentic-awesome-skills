@@ -1,8 +1,8 @@
-# `container`: Task-Oriented Workflows
+# `container` — Task-Oriented Workflows
 
 > Reference scope: this imported guide mixes release-era and later branch documentation; its `1.0.0+` annotations are not verified introduction versions. Match the installed `container --version` and subcommand `--help` to the same upstream release tag before using flags or defaults. Current branch documentation can describe unreleased behavior. No container runtime was executed for this static review.
 
-Copy-pasteable recipes for Apple's `container` CLI (`apple/container`); Linux containers as
+Copy-pasteable recipes for Apple's `container` CLI (`apple/container`) — Linux containers as
 lightweight VMs on Apple-silicon macOS. This is **Apple's `container`, not Docker**: flags,
 defaults, and the daemon model differ. See `commands.md` for the full flag reference. Use
 fully-qualified image refs (`docker.io/library/alpine`) in scripts. `container` targets
@@ -10,7 +10,7 @@ fully-qualified image refs (`docker.io/library/alpine`) in scripts. `container` 
 
 > **Version:** recipes track the **1.0.0** release. `container cp`, `container prune`,
 > `container image prune`, and `container system version` used below were added in 1.0.0 (not in
-> 0.7.1); run `container --help` to confirm your installed surface.
+> 0.7.1) — run `container --help` to confirm your installed surface.
 
 ## Recipes
 
@@ -131,11 +131,11 @@ container run --rm --mount source="${HOME}/Desktop/assets",target=/content/asset
 container volume create data
 container run --rm -v data:/var/lib/app docker.io/library/alpine:latest sh
 
-# Anonymous volume (-v /path): NOT auto-removed by --rm; delete it yourself.
+# Anonymous volume (-v /path) — NOT auto-removed by --rm; delete it yourself.
 container run --rm -v /data docker.io/library/alpine:latest sh
 # It leaves an anon-<id> volume. List to find the exact name, then remove THAT one by name:
 container volume list          # locate the new anon-<id> row
-container volume rm anon-<id>  # ⚠️ delete the specific volume; do NOT `grep anon | rm`, which
+container volume rm anon-<id>  # ⚠️ delete the specific volume — do NOT `grep anon | rm`, which
                               #    would match (and destroy) every anonymous volume on the machine
 
 # Read-only bind via --mount.
@@ -145,7 +145,7 @@ container run --rm --mount type=bind,source="${PWD}/conf",target=/etc/conf,reado
 container run --rm --tmpfs /scratch docker.io/library/alpine:latest sh -c 'df -h /scratch'
 ```
 
-Note: unlike Docker, anonymous volumes do not auto-clean with `--rm`; remove them via `container volume rm`.
+Note: unlike Docker, anonymous volumes do not auto-clean with `--rm` — remove them via `container volume rm`.
 
 ---
 
@@ -252,11 +252,11 @@ container ls                       # IP column shows e.g. 192.168.64.3
 # Scriptable IP lookup via inspect + jq.
 container inspect my-web-server | jq -r '.[0].networks[0].address'
 
-# Reach it from another container by IP (requires macOS 26: see note).
+# Reach it from another container by IP (requires macOS 26 — see note).
 container run --rm -it web-test curl http://192.168.64.3
 ```
 
-Note: container-to-container access over the virtual network requires macOS 26 and **does not work on macOS 15**, where containers are isolated from one another at the network layer (see `concepts.md` §3); a naming scheme cannot restore connectivity. The DNS domain in the next recipe resolves names **host-side only** (host → container); it does not enable container-to-container traffic on macOS 15.
+Note: container-to-container access over the virtual network requires macOS 26 and **does not work on macOS 15**, where containers are isolated from one another at the network layer (see `concepts.md` §3) — a naming scheme cannot restore connectivity. The DNS domain in the next recipe resolves names **host-side only** (host → container); it does not enable container-to-container traffic on macOS 15.
 
 ---
 
@@ -270,7 +270,7 @@ sudo container system dns create test
 ```
 
 Make it the default DNS domain by setting `dns.domain` in `~/.config/container/config.toml`
-(there is no `property set` command; properties are edited in the config file):
+(there is no `property set` command — properties are edited in the config file):
 
 ```toml
 [dns]
@@ -290,7 +290,7 @@ sudo container system dns delete test
 container system property list        # shows [dns] domain = "test"
 ```
 
-Note: `container system property` only supports `list`/`ls`; set `dns.domain` via `config.toml`, not a CLI setter. A container named `my-web-server` with domain `test` answers at `my-web-server.test`.
+Note: `container system property` only supports `list`/`ls` — set `dns.domain` via `config.toml`, not a CLI setter. A container named `my-web-server` with domain `test` answers at `my-web-server.test`.
 
 ---
 
@@ -314,7 +314,7 @@ container stop my-web-server
 container network delete foo
 ```
 
-Note: networks are mutually isolated; a container on `foo` has no connectivity to containers on `default`.
+Note: networks are mutually isolated — a container on `foo` has no connectivity to containers on `default`.
 
 ---
 
@@ -406,7 +406,7 @@ container builder start --cpus 8 --memory 32g
 container build -t big-app .
 
 # Change a running builder: stop, delete, restart with new limits.
-# ⚠️ `builder delete` discards the BuildKit builder and its layer cache: the next build
+# ⚠️ `builder delete` discards the BuildKit builder and its layer cache — the next build
 #    re-fetches base images and rebuilds every layer from scratch.
 container builder stop
 container builder delete
@@ -420,19 +420,19 @@ Note: memory accepts `K`/`M`/`G`/`T`/`P` suffixes. Monitor live usage with `cont
 ### Cleanup: stop, remove, prune
 
 > **⚠️ Scope matters.** The `-a`/`--all`/`prune` variants act on **every** container, image,
-> volume, or network on the machine; not just this project's. `container volume prune` and
+> volume, or network on the machine — not just this project's. `container volume prune` and
 > `container image rm --all` permanently delete data belonging to *unrelated* containers. To clean
 > up after one workload, use the **targeted** commands (by name/tag); reach for the machine-wide
 > ones only when you deliberately want a full sweep. Do not paste this whole block blindly.
 
 ```bash
-# --- Targeted (scoped to named resources: safe for cleaning up one workload) ---
+# --- Targeted (scoped to named resources — safe for cleaning up one workload) ---
 container stop my-web-server            # stop one container
 container delete my-web-server          # rm is an alias; add -f to remove a running one
 container image delete web-test         # remove one image by name/tag
 container volume rm data                # remove one volume by name
 
-# --- Machine-wide (destroys ALL matching resources: use deliberately) ---
+# --- Machine-wide (destroys ALL matching resources — use deliberately) ---
 container stop -a                       # stop every running container
 container rm --all                      # delete every container
 container image rm --all                # delete every image
@@ -470,7 +470,7 @@ container system start
 
 # Uninstall. Default to -k (keep user data) unless you truly want everything gone.
 /usr/local/bin/uninstall-container.sh -k      # keep images/containers/volumes for a later reinstall
-/usr/local/bin/uninstall-container.sh -d      # ⚠️ also deletes ALL user data (images, containers, volumes); irreversible
+/usr/local/bin/uninstall-container.sh -d      # ⚠️ also deletes ALL user data (images, containers, volumes) — irreversible
 ```
 
 Note: you can also upgrade/downgrade by re-downloading and double-clicking the signed `.pkg`. `-v` pins `update-container.sh` to a specific version.
@@ -497,7 +497,7 @@ container --debug run --rm docker.io/library/alpine:latest true
 container system version
 ```
 
-Note: an XPC/connection error may indicate stopped services, component mismatch, permissions or launch failures; inspect status and logs before retrying. Feature gates to keep in mind: container-to-container access and the `container network` group require **macOS 26** (both unavailable on **macOS 15**). The CLI refuses to run under Rosetta; Apple silicon only.
+Note: an XPC/connection error may indicate stopped services, component mismatch, permissions or launch failures; inspect status and logs before retrying. Feature gates to keep in mind: container-to-container access and the `container network` group require **macOS 26** (both unavailable on **macOS 15**). The CLI refuses to run under Rosetta — Apple silicon only.
 
 ## Operational boundaries
 

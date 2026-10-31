@@ -140,7 +140,7 @@ export const onRequestGet: PagesFunction = async (context) => {
   });
 };
 
-// functions/api/users/[id].ts; dynamic route parameter
+// functions/api/users/[id].ts — dynamic route parameter
 export const onRequestGet: PagesFunction = async (context) => {
   const userId = context.params.id;
   return new Response(JSON.stringify({ userId }), {
@@ -152,7 +152,7 @@ export const onRequestGet: PagesFunction = async (context) => {
 ### Middleware
 
 ```typescript
-// functions/_middleware.ts; runs before all routes
+// functions/_middleware.ts — runs before all routes
 export const onRequest: PagesFunction = async (context) => {
   const authHeader = context.request.headers.get("Authorization");
   // validateBearerToken is application code: verify signature/issuer/audience/expiry
@@ -167,7 +167,7 @@ export const onRequest: PagesFunction = async (context) => {
 ### Functions with Bindings
 
 ```typescript
-// functions/api/data.ts; using KV and D1 bindings
+// functions/api/data.ts — using KV and D1 bindings
 interface Env {
   MY_KV: KVNamespace;
   MY_DB: D1Database;
@@ -196,7 +196,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 ## Wrangler Configuration
 
 ```toml
-# wrangler.toml: Pages project configuration
+# wrangler.toml — Pages project configuration
 name = "my-site"
 compatibility_date = "2024-09-01"
 pages_build_output_dir = "dist"

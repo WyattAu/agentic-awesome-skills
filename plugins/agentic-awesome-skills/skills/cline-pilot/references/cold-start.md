@@ -20,8 +20,8 @@ python -c "import os,json;d=json.load(open(os.path.expanduser('~/.cline/data/glo
 
 检测顺序：先查注册表（上）；未命中再 `ls` 上述两个落点有无 memory-bank 提示词文件（有文件但 toggle 未开 = 配了没勾，引导用户打开）；都没有 = 未配置 → 第二步引导。
 
-2. **引导**（未配置时）：推荐用户配到**全局**（跨工程生效）--Cline 设置→自定义指令/Rules，粘贴 `assets/global-memory-bank-prompt.md` 全文（面向英文用户/工程给 `global-memory-bank-prompt.en.md`）；文件落点对应上表 OS 行；给用户明确操作说明后再继续
-3. **降级**（用户暂不配）：**注入模式**--把所选语言版提示词全文直接写进本次任务 prompt 的上下文，**然后再发 `active memory bank`**（顺序固定：先提示词、后激活）
+2. **引导**（未配置时）：推荐用户配到**全局**（跨工程生效）——Cline 设置→自定义指令/Rules，粘贴 `assets/global-memory-bank-prompt.md` 全文（面向英文用户/工程给 `global-memory-bank-prompt.en.md`）；文件落点对应上表 OS 行；给用户明确操作说明后再继续
+3. **降级**（用户暂不配）：**注入模式**——把所选语言版提示词全文直接写进本次任务 prompt 的上下文，**然后再发 `active memory bank`**（顺序固定：先提示词、后激活）
 
 - 提示词全文 = `assets/global-memory-bank-prompt.md`（中文）/ `global-memory-bank-prompt.en.md`（英文），逐字模板勿改语义
 - 来源：用户博客 https://gongdear.com/articles/2026/09/04/1788492620184.html 最后部分“自定义指令（完整版）”

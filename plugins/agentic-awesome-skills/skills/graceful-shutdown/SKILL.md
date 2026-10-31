@@ -54,7 +54,7 @@ Immediately stop the server from accepting new connections. For HTTP servers, ca
 async function shutdown(): Promise<void> {
   // 1. Stop accepting new connections
   server.close(() => {
-    console.log("Server closed; no new connections accepted");
+    console.log("Server closed — no new connections accepted");
   });
 
   // 2. Mark health check as not-ready so load balancers stop routing
@@ -71,7 +71,7 @@ const DRAIN_TIMEOUT_MS = 25_000; // must be less than orchestrator's termination
 
 async function drainAndExit(): Promise<void> {
   const deadline = setTimeout(() => {
-    console.error("Drain timeout reached; forcing exit");
+    console.error("Drain timeout reached — forcing exit");
     process.exit(1);
   }, DRAIN_TIMEOUT_MS);
   deadline.unref(); // don't keep the event loop alive just for the timer
@@ -167,7 +167,7 @@ let isShuttingDown = false;
 let activeRequests = 0;
 let drainResolve: (() => void) | null = null;
 
-// Health endpoints; registered BEFORE the drain-rejection middleware so it
+// Health endpoints — registered BEFORE the drain-rejection middleware so it
 // cannot turn liveness into a 503 while the listener is still available.
 app.get("/healthz", (_, res) => res.send("ok"));
 app.get("/readyz", (_, res) => {
@@ -210,23 +210,23 @@ app.get("/api/data", async (req, res) => {
 function shutdown(signal: string): void {
   if (isShuttingDown) return;
   isShuttingDown = true;
-  console.log(`${signal} received; draining ${activeRequests} active requests`);
+  console.log(`${signal} received — draining ${activeRequests} active requests`);
 
   server.close();
 
   const forceExit = setTimeout(() => {
-    console.error("Forced exit; drain timeout exceeded");
+    console.error("Forced exit — drain timeout exceeded");
     process.exit(1);
   }, 25_000);
   forceExit.unref();
 
   if (activeRequests === 0) {
-    console.log("No active requests; exiting cleanly");
+    console.log("No active requests — exiting cleanly");
     process.exit(0);
   }
 
   drainResolve = () => {
-    console.log("All requests drained; exiting cleanly");
+    console.log("All requests drained — exiting cleanly");
     process.exit(0);
   };
 }
@@ -319,13 +319,13 @@ For checkpointing, design cooperative cancellation inside job.execute and await 
 
 ## Best Practices
 
-- Always set a drain timeout shorter than the orchestrator's kill timeout (`terminationGracePeriodSeconds` in Kubernetes defaults to 30s; use 25s for your drain)
+- Always set a drain timeout shorter than the orchestrator's kill timeout (`terminationGracePeriodSeconds` in Kubernetes defaults to 30s — use 25s for your drain)
 - Return `Connection: close` header on responses sent during draining so HTTP/1.1 clients don't reuse the connection
 - Reject new requests with 503 during shutdown so load balancers learn faster
 - Unref your force-exit timer so it doesn't keep the event loop alive after all work is done
 - Flush async buffers (log transports, metric aggregators, write-ahead logs) before exiting
 - Use `process.exit(0)` for clean shutdown and `process.exit(1)` for timeout/error so orchestrators can distinguish the two
-- Test shutdown behavior explicitly; simulate SIGTERM in integration tests and verify no requests are dropped
+- Test shutdown behavior explicitly — simulate SIGTERM in integration tests and verify no requests are dropped
 
 ## Common Pitfalls
 
@@ -333,7 +333,7 @@ For checkpointing, design cooperative cancellation inside job.execute and await 
   **Solution:** Register health routes before that middleware and flip only readiness. Once the listener closes, new probes may no longer connect; the shutdown deadline, not a promise of HTTP liveness, bounds termination.
 
 - **Problem:** Drain hangs until the force-exit timeout even though all clients have disconnected.
-  **Solution:** Track request completion with both `finish` and `close` events (Node.js) or equivalent. If a client aborts the connection, `finish` may never fire; `close` will. Use a once guard to prevent double-decrementing the counter.
+  **Solution:** Track request completion with both `finish` and `close` events (Node.js) or equivalent. If a client aborts the connection, `finish` may never fire — `close` will. Use a once guard to prevent double-decrementing the counter.
 
 - **Problem:** A FastAPI application replaces Uvicorn's SIGTERM handler or waits for in-flight requests inside lifespan shutdown.
   **Solution:** Let Uvicorn own signal handling, connection/task draining, and `--timeout-graceful-shutdown`. Use lifespan shutdown for resource cleanup; it runs after Uvicorn's request-drain phase.
@@ -342,13 +342,13 @@ For checkpointing, design cooperative cancellation inside job.execute and await 
   **Solution:** Set it to at least drain timeout + 5s buffer. If your longest request takes 60s, use `terminationGracePeriodSeconds: 70` and drain timeout of 65s.
 
 - **Problem:** Load balancer keeps sending traffic after SIGTERM because readiness probe still returns 200.
-  **Solution:** Flip the readiness probe to 503 immediately on signal receipt; before starting to drain.
+  **Solution:** Flip the readiness probe to 503 immediately on signal receipt — before starting to drain.
 
 - **Problem:** `server.close()` resolves instantly but connections remain open (keep-alive).
   **Solution:** Track connections manually and destroy idle keep-alive sockets on shutdown. Active sockets with in-flight requests should drain normally.
 
 - **Problem:** Double shutdown from both SIGTERM and SIGINT (e.g., Docker sends SIGTERM then user hits Ctrl+C).
-  **Solution:** Guard with a `isShuttingDown` flag; ignore the second signal.
+  **Solution:** Guard with a `isShuttingDown` flag — ignore the second signal.
 
 - **Problem:** Deadlocked process never exits because drain waits forever.
   **Solution:** Always have a hard force-exit timeout as the final backstop.
@@ -381,12 +381,12 @@ spec:
 ## Limitations
 
 - This skill does not replace environment-specific validation, testing, or expert review.
-- WebSocket and SSE connections require application-level close frames before severing; `server.close()` alone won't gracefully end them.
+- WebSocket and SSE connections require application-level close frames before severing — `server.close()` alone won't gracefully end them.
 - In clustered/multi-process setups, coordinate master and child shutdown explicitly; do not assume signals are forwarded. Worker threads need an explicit message/abort protocol.
-- Some cloud platforms (Heroku, Railway) send SIGTERM with very short grace periods (10-30s); adjust drain timeouts accordingly.
+- Some cloud platforms (Heroku, Railway) send SIGTERM with very short grace periods (10-30s) — adjust drain timeouts accordingly.
 
 ## Related Skills
 
-- `@api-rate-limit-handler`; Resilient retry and backoff for outbound requests
-- `@circuit-breaker`; When to stop retrying entirely and fail fast
-- `@error-handling`; Structured error handling patterns
+- `@api-rate-limit-handler` — Resilient retry and backoff for outbound requests
+- `@circuit-breaker` — When to stop retrying entirely and fail fast
+- `@error-handling` — Structured error handling patterns

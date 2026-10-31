@@ -1,6 +1,6 @@
 # github-presence
 
-**Platform optimization skill**; Optimize GitHub for discoverability and conversions.
+**Platform optimization skill** — Optimize GitHub for discoverability and conversions.
 
 ## What It Does
 
@@ -25,12 +25,12 @@ more stars and contributors.
 
 ## Key Sections
 
-1. **README Structure**; Anatomy of a great README
-2. **Badges**; Which ones matter and how to add them
-3. **Profile README**; Personal branding on GitHub
-4. **Discoverability**; Topics, search, awesome lists
-5. **GitHub Actions**; Automation for marketing
-6. **GitHub Sponsors**; Monetization setup
+1. **README Structure** — Anatomy of a great README
+2. **Badges** — Which ones matter and how to add them
+3. **Profile README** — Personal branding on GitHub
+4. **Discoverability** — Topics, search, awesome lists
+5. **GitHub Actions** — Automation for marketing
+6. **GitHub Sponsors** — Monetization setup
 
 ## README Must-Haves
 
@@ -56,12 +56,12 @@ more stars and contributors.
 
 ## Tools
 
-- **[Octolens](https://octolens.com)**; Monitor GitHub mentions and discussions
-- **Shields.io**; Generate badges
-- **readme.so**; README generator
+- **[Octolens](https://octolens.com)** — Monitor GitHub mentions and discussions
+- **Shields.io** — Generate badges
+- **readme.so** — README generator
 
 ## Related Skills
 
-- `developer-audience-context`; Know who evaluates your repo
-- `hacker-news-strategy`; HN users check GitHub first
-- `reddit-engagement`; Redditors evaluate via GitHub
+- `developer-audience-context` — Know who evaluates your repo
+- `hacker-news-strategy` — HN users check GitHub first
+- `reddit-engagement` — Redditors evaluate via GitHub

@@ -7,13 +7,13 @@
 
 ## 15. Breach & Leak Data
 
-- [Have I Been Pwned](https://haveibeenpwned.com/); breach lookup; Pwned Passwords API (k-anonymity).
-- [Dehashed](https://dehashed.com/); credential search (paid).
-- [IntelX](https://intelx.io/); data intelligence.
+- [Have I Been Pwned](https://haveibeenpwned.com/) — breach lookup; Pwned Passwords API (k-anonymity).
+- [Dehashed](https://dehashed.com/) — credential search (paid).
+- [IntelX](https://intelx.io/) — data intelligence.
 - [LeakCheck](https://leakcheck.io/), [Snusbase](https://snusbase.com/), [BreachDirectory](https://breachdirectory.org/), [Scattered Secrets](https://scatteredsecrets.com/), [Phonebook](https://phonebook.cz/), [LeakPeek](https://leakpeek.com/).
-- [Cavalier (Hudson Rock)](https://cavalier.hudsonrock.com/); historical infostealer-log lookup reference; verify current access, costs and lawful purpose before use.
+- [Cavalier (Hudson Rock)](https://cavalier.hudsonrock.com/) — historical infostealer-log lookup reference; verify current access, costs and lawful purpose before use.
 
-### 15.0.1 HudsonRock Cavalier: direct API recipe
+### 15.0.1 HudsonRock Cavalier — direct API recipe
 
 The web UI wraps a historical JSON API shape. Verify current official access rules; use only an authorized identifier and minimize returned personal data:
 
@@ -37,15 +37,15 @@ $hr.data.clients_urls   | Sort-Object -Property occurrence -Descending | Select-
 ```
 
 **Top-level JSON fields:**
-- `total`; total stealer entries touching this domain.
-- `totalStealers`; global stealer-log corpus size (context only).
-- `employees`; count of `<*>@<domain>` accounts found.
-- `users`; count of accounts where the domain appeared as a *visited* URL (customers/vendors).
-- `third_parties`; accounts touching adjacent domains in the org.
-- `data.employees_urls[]`; `{occurrence, type, url}`; internal apps where employees were logging in when stolen. **Subdomain hits here = recon gold.**
-- `data.clients_urls[]`; same shape; user-facing apps (often reveals undocumented public portals).
-- `data.stealer_families[]`; `{_key, _value}` → which stealer (RedLine / Lumma / StealC / Vidar / Raccoon).
-- `data.dates_compromised[]`; `{_key, _value}` → temporal distribution.
+- `total` — total stealer entries touching this domain.
+- `totalStealers` — global stealer-log corpus size (context only).
+- `employees` — count of `<*>@<domain>` accounts found.
+- `users` — count of accounts where the domain appeared as a *visited* URL (customers/vendors).
+- `third_parties` — accounts touching adjacent domains in the org.
+- `data.employees_urls[]` — `{occurrence, type, url}` — internal apps where employees were logging in when stolen. **Subdomain hits here = recon gold.**
+- `data.clients_urls[]` — same shape; user-facing apps (often reveals undocumented public portals).
+- `data.stealer_families[]` — `{_key, _value}` → which stealer (RedLine / Lumma / StealC / Vidar / Raccoon).
+- `data.dates_compromised[]` — `{_key, _value}` → temporal distribution.
 
 **Historical provider caveats (not verified current guarantees):**
 - Subdomain hostnames in `data.*_urls[]` past the first few are **redacted with asterisks** (`*****.target.com`). Pivot to paid Cavalier tier or other sources for unredacted.
@@ -66,7 +66,7 @@ When you query a breach corpus by domain, map the result to severity like so:
 | ≥ 1 historical end-user match | Verify identity, timestamp and relevance |
 | Domain seen in breach with 0 named accounts | **INFO** |
 
-**Employees vs end-users distinction:** a target-domain address is a candidate association, not proof of current employment. A customer-associated address is not proof of password reuse; useful for credential-stuffing risk awareness but not directly compromising the target's identity fabric.
+**Employees vs end-users distinction:** a target-domain address is a candidate association, not proof of current employment. A customer-associated address is not proof of password reuse — useful for credential-stuffing risk awareness but not directly compromising the target's identity fabric.
 
 ### 15.2 SSO_EXPOSURE finding
 
@@ -109,12 +109,12 @@ Lowercase before lookup. Strip diacritics for ASCII fallback. If the org uses a 
 
 Select the authorized sources; deduplicate by address while retaining source, date and confidence. Do not automatically query all providers:
 
-1. **IntelX phonebook API**; 2-step search + poll. Largest single source for breach-era addresses.
-2. **Hunter.io**; domain-search endpoint. Verify current quotas and the provider’s meaning of “verified”; provider labels are not independent employee confirmation.
-3. **crt.sh**; extract X.509 SAN extensions. Many certs include admin/contact emails.
-4. **DuckDuckGo SERP scrape**; HTML scrape of `"@{target-domain}"` results.
-5. **Bing SERP scrape**; same query, complementary index.
-6. **Wayback CDX**; historic snapshots of the target's homepage / contact / about pages often contain emails removed from the live site.
+1. **IntelX phonebook API** — 2-step search + poll. Largest single source for breach-era addresses.
+2. **Hunter.io** — domain-search endpoint. Verify current quotas and the provider’s meaning of “verified”; provider labels are not independent employee confirmation.
+3. **crt.sh** — extract X.509 SAN extensions. Many certs include admin/contact emails.
+4. **DuckDuckGo SERP scrape** — HTML scrape of `"@{target-domain}"` results.
+5. **Bing SERP scrape** — same query, complementary index.
+6. **Wayback CDX** — historic snapshots of the target's homepage / contact / about pages often contain emails removed from the live site.
 
 **Email regex:**
 ```regex

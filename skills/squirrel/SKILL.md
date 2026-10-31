@@ -14,7 +14,7 @@ tags: [development, testing, planning, code-review, documentation, ci-cd]
 tools: [claude, cursor, codex, antigravity, gemini, windsurf, opencode, copilot]
 ---
 
-# Squirrel: Full-Cycle Software Development Skill
+# Squirrel — Full-Cycle Software Development Skill
 
 ## Overview
 
@@ -44,14 +44,14 @@ Squirrel classifies the project directory:
 
 ### The 8-Phase Pipeline
 
-1. **Discover**; Understand the project (audit existing code or gather requirements)
-2. **Plan**; Concrete task list with dependencies and done-criteria
-3. **Build**; Write or modify code (parallel sub-agents when supported)
-4. **Test**; Run existing tests, write new ones, 70%+ coverage target
-5. **Bug Hunt**; Static analysis + manual review
-6. **Polish**; Lint, format, type check, remove dead code
-7. **Document**; README + inline docs (update existing, don't overwrite)
-8. **Ship**; Final checklist: tests green, no secrets, CI configured
+1. **Discover** — Understand the project (audit existing code or gather requirements)
+2. **Plan** — Concrete task list with dependencies and done-criteria
+3. **Build** — Write or modify code (parallel sub-agents when supported)
+4. **Test** — Run existing tests, write new ones, 70%+ coverage target
+5. **Bug Hunt** — Static analysis + manual review
+6. **Polish** — Lint, format, type check, remove dead code
+7. **Document** — README + inline docs (update existing, don't overwrite)
+8. **Ship** — Final checklist: tests green, no secrets, CI configured
 
 ### Failure Recovery (3-Strike Rule)
 
@@ -75,19 +75,19 @@ Squirrel auto-detects greenfield mode and runs all 8 phases.
 > fix this bug in src/auth/login.py
 ```
 
-Squirrel enters targeted mode; abbreviated audit, scoped fix, verify.
+Squirrel enters targeted mode — abbreviated audit, scoped fix, verify.
 
 ### Example 3: Improve existing project
 
 ```text
-> squirrel this project; add tests, fix lint errors, write README
+> squirrel this project — add tests, fix lint errors, write README
 ```
 
 Squirrel audits the existing codebase, then applies phases 4-8.
 
 ## Best Practices
 
-- Respects existing code; matches naming conventions, test framework, import style, and architecture
+- Respects existing code — matches naming conventions, test framework, import style, and architecture
 - Reads 2-3 similar files before writing a new one
 - Never suppresses type errors with `as any` or `@ts-ignore`
 - Never deletes failing tests to "pass"

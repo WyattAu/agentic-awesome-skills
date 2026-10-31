@@ -1,6 +1,6 @@
 ---
 name: daily-gift
-description: "Relationship-aware daily gift engine with five-stage creative pipeline; editorial judgment, synthesis, concept generation, visual strategy, and rendering in H5, image, or video"
+description: "Relationship-aware daily gift engine with five-stage creative pipeline — editorial judgment, synthesis, concept generation, visual strategy, and rendering in H5, image, or video"
 category: productivity
 risk: critical
 source: community
@@ -18,7 +18,7 @@ license_source: "https://clawhub.ai/jiawei248/daily-gift"
 
 ## Overview
 
-A relationship-aware gift engine that decides *whether* a gift should exist before deciding *what* it should be. Uses a five-stage creative pipeline to generate personalized daily gifts in H5 (interactive web pages), AI-generated images, or AI-generated videos. The core design principle is "idea before medium"; the creative concept is locked before the output format is chosen.
+A relationship-aware gift engine that decides *whether* a gift should exist before deciding *what* it should be. Uses a five-stage creative pipeline to generate personalized daily gifts in H5 (interactive web pages), AI-generated images, or AI-generated videos. The core design principle is "idea before medium" — the creative concept is locked before the output format is chosen.
 
 Published on ClawHub: https://clawhub.ai/jiawei248/daily-gift
 
@@ -39,7 +39,7 @@ Decide whether a gift should exist today, how heavy it should be (skip / nudge /
 
 ### Stage 2: Synthesis + Gift Thesis
 
-Extract six content slots from conversation context (today_theme, emotion_peaks, historical_echo, open_loop, lobster_judgment, preference_hint). Form a gift thesis = anchor (which moment deserves the center) + return (what new perspective the agent gives back). If the thesis has no return, it's not a gift; it's a decorated log entry.
+Extract six content slots from conversation context (today_theme, emotion_peaks, historical_echo, open_loop, lobster_judgment, preference_hint). Form a gift thesis = anchor (which moment deserves the center) + return (what new perspective the agent gives back). If the thesis has no return, it's not a gift — it's a decorated log entry.
 
 ### Stage 2.5: Creative Concept
 
@@ -60,20 +60,20 @@ Produce the final artifact. H5 gifts use p5.js/canvas with a quality floor set b
 ## Key Features
 
 - **Five-stage creative pipeline** with explicit quality gates between stages
-- **Multi-layer anti-repetition**: concept family, visual elements, theme, style, content direction; each tracked across sliding windows of recent gifts
-- **Three-layer user taste profile**: Layer 1 (identity; stable), Layer 2 (context; updates every 5-7 gifts), Layer 3 (signals; auto-appended after every gift)
+- **Multi-layer anti-repetition**: concept family, visual elements, theme, style, content direction — each tracked across sliding windows of recent gifts
+- **Three-layer user taste profile**: Layer 1 (identity — stable), Layer 2 (context — updates every 5-7 gifts), Layer 3 (signals — auto-appended after every gift)
 - **Three runtime modes**: onboarding setup, daily cron, and manual trigger
 - **11 content directions**: reflect, extension, compass, mirror, gift-from-elsewhere, play, real-world-nudge, curation, delayed-payoff, openclaw-inner-life, utility
 - **8 concept families**: borrowed-media, interactive-object, transformation, narrative, data-viz, game-puzzle, real-world, poetic-literary
 
 ## Best Practices
 
-- ✅ Let the editorial judgment decide; not every day needs a gift
+- ✅ Let the editorial judgment decide — not every day needs a gift
 - ✅ Generate 5+ concept candidates before selecting one
 - ✅ Check recent gifts for visual and thematic collision before rendering
 - ✅ Use the taste profile to personalize over time
 - ❌ Don't skip straight from thesis to rendering without a real creative concept
-- ❌ Don't default to "reflect on today" every time; vary content direction
+- ❌ Don't default to "reflect on today" every time — vary content direction
 - ❌ Don't choose the format before locking the concept
 
 ## Example
@@ -84,7 +84,7 @@ Produce the final artifact. H5 gifts use p5.js/canvas with a quality floor set b
 
 ## Limitations
 
-- Requires API keys for image/video generation (optional; H5 works without them)
+- Requires API keys for image/video generation (optional — H5 works without them)
 - Cron mode runs in the agent's main session for full conversation context access
 - Shell scripts make external API calls for rendering and asset fetching
 - The skill creates and manages local workspace files for state, history, and taste profiling
@@ -94,9 +94,9 @@ Produce the final artifact. H5 gifts use p5.js/canvas with a quality floor set b
 - Create a recurring job only on an explicit user scheduling request; preserve cadence/timezone, quiet-skip behavior and disable path.
 - Shell scripts in `scripts/` call external APIs (image generation, video generation, asset hosting). Supply API keys only after reviewing which scripts use them.
 - User taste data and gift history are stored locally in `workspace/daily-gift/`. Inspect actual runtime/network behavior; this single-file entry cannot guarantee which data is transmitted.
-- The skill reads conversation context and memory files to inform editorial judgment; this is core to personalization but means it has broad read access within the agent's workspace.
+- The skill reads conversation context and memory files to inform editorial judgment — this is core to personalization but means it has broad read access within the agent's workspace.
 
 ## Related Skills
 
-- Image generation skills; for standalone image creation without the gift pipeline
-- Cron/scheduling skills; for understanding the daily trigger mechanism
+- Image generation skills — for standalone image creation without the gift pipeline
+- Cron/scheduling skills — for understanding the daily trigger mechanism

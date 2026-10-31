@@ -117,7 +117,7 @@ struct ItemRow: View {
 
 ### Prefer unary rows in `List`
 
-`List` needs the identity of every row up front. When each row's body produces a **single top-level view** (a "unary" row), SwiftUI can template the row id from the `ForEach` element's id alone, without running each row's `body`. When the body branches between different top-level shapes; a bare top-level `switch`, a top-level `if` without `else`, or an `AnyView`; structural identity varies per row, so SwiftUI falls back to evaluating every row's body just to compute ids. That cost scales with the number of rows.
+`List` needs the identity of every row up front. When each row's body produces a **single top-level view** (a "unary" row), SwiftUI can template the row id from the `ForEach` element's id alone, without running each row's `body`. When the body branches between different top-level shapes — a bare top-level `switch`, a top-level `if` without `else`, or an `AnyView` — structural identity varies per row, so SwiftUI falls back to evaluating every row's body just to compute ids. That cost scales with the number of rows.
 
 The fix is to wrap branching content in any single-root container (`VStack`, `HStack`, `ZStack`, or a custom wrapper) so the row is always exactly one top-level view, as shown above. A top-level `if` without an `else` is also "multi" (0 or 1 views); if some elements shouldn't be rows at all, filter the collection before it reaches the `ForEach` rather than producing a zero-view row.
 
@@ -127,7 +127,7 @@ To find non-constant row builders in an existing app, launch with `-LogForEachSl
 
 Three more identity rules that prevent subtle bugs:
 
-- **The id must outlive the view and not change on edit.** Don't derive `id` from a mutable property (e.g. `var id: String { title }`). Editing the title changes the id, so SwiftUI treats it as a removal plus insertion; focus and per-row state are lost mid-edit. Use a stable `let id: UUID` or a server-assigned key.
+- **The id must outlive the view and not change on edit.** Don't derive `id` from a mutable property (e.g. `var id: String { title }`). Editing the title changes the id, so SwiftUI treats it as a removal plus insertion — focus and per-row state are lost mid-edit. Use a stable `let id: UUID` or a server-assigned key.
 - **Don't synthesize a fresh id inside `body`.** `ForEach(items.map { Item(title: $0) })` creates new `UUID`s on every body pass, so the whole collection reads as replaced every update. Create ids once in storage that outlives `body` (the model layer), not inline.
 - **Keep the id cheap to hash.** Avoid `id: \.self` on a large `Hashable` struct; hashing walks every field on every diff. Use a small primitive (`UUID`, `Int`, short `String`, `URL`) and still pass the full element to the row.
 
@@ -155,7 +155,7 @@ struct Article: Identifiable {
 
 ## Enumerated Sequences
 
-**Using `.enumerated()` is fine; the index just must not be the identity.** Using `\.offset` as the id is the same anti-pattern as `\.self` on `items.indices`; the id becomes the position, not the element, so inserts and reorders reset row state and break animations. Keep the element's own identity as the id and treat the index as ordinary row data.
+**Using `.enumerated()` is fine; the index just must not be the identity.** Using `\.offset` as the id is the same anti-pattern as `\.self` on `items.indices` — the id becomes the position, not the element, so inserts and reorders reset row state and break animations. Keep the element's own identity as the id and treat the index as ordinary row data.
 
 ```swift
 // Wrong - offset is the position, not the element
@@ -169,7 +169,7 @@ ForEach(items.enumerated(), id: \.element.id) { index, item in
 }
 ```
 
-**No `Array(...)` wrapper is needed on Swift 6.2+.** As of Swift 6.2, the sequence returned by `.enumerated()` conditionally conforms to `RandomAccessCollection` when the base collection does, so `ForEach` accepts it directly. Check standard-library/runtime availability as well as the compiler. For older toolchains or deployment targets, wrap it in Array(...). Favor the direct form in new code; it avoids an eager copy on every body evaluation.
+**No `Array(...)` wrapper is needed on Swift 6.2+.** As of Swift 6.2, the sequence returned by `.enumerated()` conditionally conforms to `RandomAccessCollection` when the base collection does, so `ForEach` accepts it directly. Check standard-library/runtime availability as well as the compiler. For older toolchains or deployment targets, wrap it in Array(...). Favor the direct form in new code — it avoids an eager copy on every body evaluation.
 
 ## List with Custom Styling
 
@@ -310,7 +310,7 @@ struct SortableTable: View {
 }
 ```
 
-**Important:** The table does **not** sort data itself; you must re-sort the collection when `sortOrder` changes.
+**Important:** The table does **not** sort data itself — you must re-sort the collection when `sortOrder` changes.
 
 ### Adaptive Table for Compact Size Classes
 

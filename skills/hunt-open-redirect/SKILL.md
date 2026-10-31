@@ -29,17 +29,17 @@ report_count: 28
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-OPEN-REDIRECT: Open Redirect
+# HUNT-OPEN-REDIRECT — Open Redirect
 
 ## Crown Jewel Targets
 
 Open redirect alone is Low. Chained to OAuth = Critical (ATO).
 
 **Highest-value chains:**
-- **Open redirect → OAuth auth code theft**; redirect_uri contains open redirect on trusted domain → auth code sent to attacker → ATO
-- **Open redirect → phishing**; users trust the URL because it starts with target.com
-- **Open redirect → SSRF escalation**; if redirect followed server-side → SSRF
-- **Open redirect → session fixation**; force user to login endpoint with pre-set session
+- **Open redirect → OAuth auth code theft** — redirect_uri contains open redirect on trusted domain → auth code sent to attacker → ATO
+- **Open redirect → phishing** — users trust the URL because it starts with target.com
+- **Open redirect → SSRF escalation** — if redirect followed server-side → SSRF
+- **Open redirect → session fixation** — force user to login endpoint with pre-set session
 
 ---
 
@@ -92,7 +92,7 @@ Open redirect alone is Low. Chained to OAuth = Critical (ATO).
 
 ## Step-by-Step Hunting Methodology
 
-### Phase 1: Discover Redirect Parameters
+### Phase 1 — Discover Redirect Parameters
 ```bash
 # Extract all redirect candidates from crawl
 cat recon/$TARGET/urls.txt | gf redirect > recon/$TARGET/redirect-candidates.txt
@@ -103,7 +103,7 @@ grep -E "(\?|&)(return|next|dest|go|forward|location|to|jump|target|out|link|log
   recon/$TARGET/urls.txt >> recon/$TARGET/redirect-candidates.txt
 ```
 
-### Phase 2: Basic Test
+### Phase 2 — Basic Test
 ```bash
 COLLAB="https://redirect-test.example"
 cat recon/$TARGET/redirect-candidates.txt | qsreplace "$COLLAB" | while read url; do
@@ -113,7 +113,7 @@ cat recon/$TARGET/redirect-candidates.txt | qsreplace "$COLLAB" | while read url
 done
 ```
 
-### Phase 3: Bypass Techniques
+### Phase 3 — Bypass Techniques
 ```bash
 BASE_URL="https://$TARGET/redirect?url="
 PAYLOADS=(
@@ -130,7 +130,7 @@ for P in "${PAYLOADS[@]}"; do
 done
 ```
 
-### Phase 3b: DOM-based open redirect (client-side sink)
+### Phase 3b — DOM-based open redirect (client-side sink)
 Server-side `Location:` grepping misses redirects that happen purely in JS. Source (`location.hash`/`location.search`/`document.referrer`) assigned to a navigation sink.
 ```bash
 grep -rEn "location *=|location\.(href|assign|replace)\(|window\.open\(" recon/$TARGET/ --include="*.js" \
@@ -140,7 +140,7 @@ grep -rEn "location *=|location\.(href|assign|replace)\(|window\.open\(" recon/$
 ```
 (PortSwigger: DOM-based open redirection.)
 
-### Phase 4: OAuth Chain Test
+### Phase 4 — OAuth Chain Test
 ```bash
 # If target has OAuth, check if redirect_uri accepts open redirect
 grep -i "oauth\|authorize\|redirect_uri" recon/$TARGET/urls.txt | head -20
@@ -152,7 +152,7 @@ OAUTH_URL="https://$TARGET/oauth/authorize"
 curl -sv "$OAUTH_URL?response_type=code&client_id=CLIENT_ID&redirect_uri=https://$TARGET/redirect%3Furl%3Dhttps%3A%2F%2Fredirect-test.example" 2>&1 | grep -i "location:"
 ```
 
-### Phase 5: Server-Side Redirect (SSRF escalation)
+### Phase 5 — Server-Side Redirect (SSRF escalation)
 ```bash
 # If the app fetches the redirect target server-side (302 fetch follow)
 curl -s "https://$TARGET/proxy?url=https://redirect-test.example/redirect-to-169.254.169.254/latest/meta-data/"
@@ -205,7 +205,7 @@ cat recon/$TARGET/urls.txt | gf redirect | qsreplace "https://redirect-test.exam
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

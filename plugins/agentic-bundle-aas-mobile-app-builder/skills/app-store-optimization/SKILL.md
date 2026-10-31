@@ -204,37 +204,37 @@ Verified 2026-10-23 against [Google Play listing limits](https://support.google.
 
 ### Keyword Research
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you research the best keywords for a productivity app targeting professionals? Focus on keywords with good search volume but lower competition.
+Hey Claude—I just added the "app-store-optimization" skill. Can you research the best keywords for a productivity app targeting professionals? Focus on keywords with good search volume but lower competition.
 ```
 
 ### Optimize App Store Listing
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you optimize my app's metadata for the Apple App Store? Here's my current listing: [provide current metadata]. I want to rank for "task management" and "productivity tools".
+Hey Claude—I just added the "app-store-optimization" skill. Can you optimize my app's metadata for the Apple App Store? Here's my current listing: [provide current metadata]. I want to rank for "task management" and "productivity tools".
 ```
 
 ### Analyze Competitor Strategy
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you analyze the ASO strategies of Todoist, Any.do, and Microsoft To Do? I want to understand what they're doing well and where there are opportunities.
+Hey Claude—I just added the "app-store-optimization" skill. Can you analyze the ASO strategies of Todoist, Any.do, and Microsoft To Do? I want to understand what they're doing well and where there are opportunities.
 ```
 
 ### Review Sentiment Analysis
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you analyze recent reviews for my app (com.myapp.ios) and identify the most common user complaints and feature requests?
+Hey Claude—I just added the "app-store-optimization" skill. Can you analyze recent reviews for my app (com.myapp.ios) and identify the most common user complaints and feature requests?
 ```
 
 ### Calculate ASO Score
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you calculate my app's overall ASO health score and provide specific recommendations for improvement?
+Hey Claude—I just added the "app-store-optimization" skill. Can you calculate my app's overall ASO health score and provide specific recommendations for improvement?
 ```
 
 ### Plan A/B Test
 ```
-Hey Claude-I just added the "app-store-optimization" skill. I want to A/B test my app icon and first screenshot. Can you help me design the test and determine how long to run it?
+Hey Claude—I just added the "app-store-optimization" skill. I want to A/B test my app icon and first screenshot. Can you help me design the test and determine how long to run it?
 ```
 
 ### Pre-Launch Checklist
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you generate a comprehensive pre-launch checklist for submitting my app to both Apple App Store and Google Play Store?
+Hey Claude—I just added the "app-store-optimization" skill. Can you generate a comprehensive pre-launch checklist for submitting my app to both Apple App Store and Google Play Store?
 ```
 
 ## Scripts
@@ -326,7 +326,7 @@ Generates comprehensive pre-launch and update checklists.
 1. **Volume vs. Competition**: Balance high-volume keywords with achievable rankings
 2. **Relevance First**: Only target keywords genuinely relevant to your app
 3. **Long-Tail Strategy**: Include 3-4 word phrases with lower competition
-4. **Continuous Research**: Keyword trends change-research quarterly
+4. **Continuous Research**: Keyword trends change—research quarterly
 5. **Competitor Keywords**: Don't copy blindly; ensure relevance to your features
 
 ### Metadata Optimization
@@ -335,12 +335,12 @@ Generates comprehensive pre-launch and update checklists.
 3. **Feature Benefits**: Focus on user benefits, not just features
 4. **A/B Test Everything**: Test titles, descriptions, screenshots systematically
 5. **Update Regularly**: Refresh metadata every major update
-6. **Character Limits**: Use every character-don't waste valuable space
+6. **Character Limits**: Use every character—don't waste valuable space
 7. **Apple Keyword Field**: No plurals, duplicates, or spaces between commas
 
 ### Visual Assets
 1. **Icon**: Must be recognizable at small sizes (60x60px)
-2. **Screenshots**: First 2-3 are critical-most users don't scroll
+2. **Screenshots**: First 2-3 are critical—most users don't scroll
 3. **Captions**: Use screenshot captions to tell your value story
 4. **Consistency**: Match visual style to app design
 5. **A/B Test Icons**: Icon is the single most important visual element
@@ -416,7 +416,7 @@ This skill works well with:
 
 ## Version & Updates
 
-This skill is based on current Apple App Store and Google Play Store requirements as of November 2025. Store policies and best practices evolve-verify current requirements before major launches.
+This skill is based on current Apple App Store and Google Play Store requirements as of November 2025. Store policies and best practices evolve—verify current requirements before major launches.
 
 **Key Updates to Monitor:**
 - Apple App Store Connect updates (apple.com/app-store/review/guidelines)

@@ -20,7 +20,7 @@ These rules exist because coding agents over-generate tests. The common failure 
 
 ## When to Use
 
-Use this skill when reviewing generated or changed test code before it ships. Activate it reactively after an agent writes, edits, generates, or refactors tests; unit tests, integration tests, e2e tests, or snapshot tests in any framework.
+Use this skill when reviewing generated or changed test code before it ships. Activate it reactively after an agent writes, edits, generates, or refactors tests — unit tests, integration tests, e2e tests, or snapshot tests in any framework.
 
 ## When this skill activates
 
@@ -38,7 +38,7 @@ These rules are universal, but their application is not. Before reviewing:
    - Python / pytest → [references/pytest.md](references/pytest.md)
    - PHP / PHPUnit / Pest / WordPress → [references/phpunit.md](references/phpunit.md)
    - JavaScript / TypeScript / Jest / Vitest → [references/jest.md](references/jest.md)
-3. If the project calls LLM APIs, uses agent frameworks, or wires up observability/telemetry, also read [references/llm-app-testing.md](references/llm-app-testing.md); it adds three rules specific to LLM applications.
+3. If the project calls LLM APIs, uses agent frameworks, or wires up observability/telemetry, also read [references/llm-app-testing.md](references/llm-app-testing.md) — it adds three rules specific to LLM applications.
 4. Map the project's system boundaries: network calls, databases, filesystem, clock and randomness, third-party SDKs, LLM APIs. Existing fixtures and test helpers usually reveal where the project already draws these lines.
 
 ## What to do
@@ -46,7 +46,7 @@ These rules are universal, but their application is not. Before reviewing:
 1. Read the test code: the diff, the new file, or the section being modified.
 2. Check each test against the rules below.
 3. Report violations concisely: rule number, location, why it violates, suggested fix.
-4. If the user explicitly invokes this skill before test writing, apply the rules as you write; don't write violations and then flag them.
+4. If the user explicitly invokes this skill before test writing, apply the rules as you write — don't write violations and then flag them.
 
 When writing new tests, ask for each test: "What specific bug does this catch that no other test in this suite catches?" If you can't answer clearly, don't write it.
 
@@ -59,7 +59,7 @@ Test what code does from the caller's perspective. Assert return values and obse
 **Fix:** assert the return value or the state change the caller observes.
 
 ### Rule 2: Every mock must be justified
-Mock only at system boundaries: network and HTTP calls, LLM APIs, databases, filesystem I/O on external files, clock and randomness, third-party SDKs. Never mock internal classes or helper functions to isolate a "unit"; the seams you create hide the integration bugs worth catching.
+Mock only at system boundaries: network and HTTP calls, LLM APIs, databases, filesystem I/O on external files, clock and randomness, third-party SDKs. Never mock internal classes or helper functions to isolate a "unit" — the seams you create hide the integration bugs worth catching.
 
 When you mock a boundary, assert observable response handling and any required outbound contract, including target, method, authorization scope and exclusion of secrets.
 
@@ -83,7 +83,7 @@ Pattern: `test_<scenario>_<expected_outcome>`. The name should read like a requi
 | `test_add_tags_single_string` | `test_single_tag_normalizes_to_list` |
 
 ### Rule 6: Production regression tests are sacred
-Tests that reproduce a real production bug are always justified. Reference the incident (date, issue ID, or short description) in the name or a comment, and preserve their behavioral coverage. Consolidation or replacement is acceptable only when equivalent protection is demonstrated and the incident reference remains. They are exempt from Rule 4; their justification is the incident.
+Tests that reproduce a real production bug are always justified. Reference the incident (date, issue ID, or short description) in the name or a comment, and preserve their behavioral coverage. Consolidation or replacement is acceptable only when equivalent protection is demonstrated and the incident reference remains. They are exempt from Rule 4 — their justification is the incident.
 
 ### Rule 7: No tests for framework guarantees
 Don't test that the validation library validates, the ORM commits, the router returns 404, or the test framework's fixtures work. Test *your* logic that sits on top of the framework.
@@ -91,7 +91,7 @@ Don't test that the validation library validates, the ORM commits, the router re
 **Violation pattern:** a test that would still pass if you deleted all the project's custom code and kept only framework defaults.
 
 ### Rule 8: State and value objects are real, never mocked
-Never mock a data model, DTO, entity, or state object. Construct a real instance. Mocking state hides field-name typos and validation errors; exactly the bugs worth catching. If constructing the real object is painful, that is design feedback, not a reason to mock; add a small builder or factory helper.
+Never mock a data model, DTO, entity, or state object. Construct a real instance. Mocking state hides field-name typos and validation errors — exactly the bugs worth catching. If constructing the real object is painful, that is design feedback, not a reason to mock; add a small builder or factory helper.
 
 ### Rule 9: Infrastructure under test gets real infrastructure
 When database queries, schema behavior, or persistence logic *is the subject* of the test, run against a real test database with real migrations applied via fixtures. Mocking the session there tests nothing. Mocking the database is fine when persistence is only a side effect of the behavior under test.
@@ -112,17 +112,17 @@ Group violations by file. If a file has no violations, don't mention it.
 
 Not all violations are equal. Use judgment:
 
-- **Must fix:** Rules 1, 2, 8; these hide real bugs or make tests brittle
-- **Should fix:** Rules 3, 4, 5, 7; these cause bloat and maintenance drag
-- **Sacred:** Rule 6; never delete, always allow
-- **Worth noting:** Rule 9; test architecture; flag it, but don't block small changes on it
+- **Must fix:** Rules 1, 2, 8 — these hide real bugs or make tests brittle
+- **Should fix:** Rules 3, 4, 5, 7 — these cause bloat and maintenance drag
+- **Sacred:** Rule 6 — never delete, always allow
+- **Worth noting:** Rule 9 — test architecture; flag it, but don't block small changes on it
 
 ## References
 
-- [references/pytest.md](references/pytest.md); Python/pytest patterns: parametrize, fixtures, mock boundaries, real Pydantic instances
-- [references/phpunit.md](references/phpunit.md); PHP/PHPUnit/Pest patterns, including WordPress and WooCommerce test boundaries
-- [references/jest.md](references/jest.md); Jest/Vitest patterns: test.each, module mocks, msw, snapshot discipline
-- [references/llm-app-testing.md](references/llm-app-testing.md); three extra rules for LLM applications: prompt contracts, observability wiring, agent-flow transitions
+- [references/pytest.md](references/pytest.md) — Python/pytest patterns: parametrize, fixtures, mock boundaries, real Pydantic instances
+- [references/phpunit.md](references/phpunit.md) — PHP/PHPUnit/Pest patterns, including WordPress and WooCommerce test boundaries
+- [references/jest.md](references/jest.md) — Jest/Vitest patterns: test.each, module mocks, msw, snapshot discipline
+- [references/llm-app-testing.md](references/llm-app-testing.md) — three extra rules for LLM applications: prompt contracts, observability wiring, agent-flow transitions
 
 ## Limitations
 
@@ -131,6 +131,6 @@ These are review heuristics, not automatic deletion or merge authority. Preserve
 ## What this skill does NOT do
 
 - It does not run tests. Use the project's test runner for that.
-- It does not enforce code style; that's the linter's job.
-- It does not decide *what* to test; only reviews test design in the requested scope.
+- It does not enforce code style — that's the linter's job.
+- It does not decide *what* to test — only reviews test design in the requested scope.
 - It does not flag pre-existing violations in files you're not touching, unless asked to audit.

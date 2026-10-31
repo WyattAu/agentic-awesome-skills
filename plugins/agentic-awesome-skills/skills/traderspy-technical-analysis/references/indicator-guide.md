@@ -1,4 +1,4 @@
-# Indicator guide: fields and conventional readings
+# Indicator guide — fields and conventional readings
 
 Every indicator object carries `value`, `previous`, `direction` (rising / falling / flat) and
 `series` (history + 1 values, oldest → newest). Extra fields per indicator below. "Reading" is
@@ -7,9 +7,9 @@ the conventional interpretation, not a prediction.
 | Key | Extra fields | Reading |
 | --- | --- | --- |
 | `rsi` | `period`, `zone` (oversold < 30, neutral, overbought > 70), `divergence` `{type, barsAgo, priceFrom, priceTo, oscillatorFrom, oscillatorTo}` or null | 40–60 is neutral; a rising RSI from 30 is recovering momentum, not "still oversold". A bearish divergence (price higher high, RSI lower high) within the last ~60 bars is worth one sentence |
-| `macd` | `periods {fast, slow, signal}`, `macd`, `signal`, `histogram`, `previous {…}`, `crossover` (bullish / bearish / null; on the latest bar only), `divergence` | Histogram sign + direction is the state (`summary.momentum.macdState`: positive_rising, positive_falling, negative_rising, negative_falling). A cross on the latest bar is an event; report it as such |
+| `macd` | `periods {fast, slow, signal}`, `macd`, `signal`, `histogram`, `previous {…}`, `crossover` (bullish / bearish / null — on the latest bar only), `divergence` | Histogram sign + direction is the state (`summary.momentum.macdState`: positive_rising, positive_falling, negative_rising, negative_falling). A cross on the latest bar is an event; report it as such |
 | `ema` / `sma` | `values[] {period, value, previous, direction, priceAbove, distancePct, series}`, `stack` (bullish = fast > mid > slow, bearish, mixed), `pricePosition` (above_all / between / below_all) | Stack + price position is the trend structure. `distancePct` from the 200 is the "how extended" number |
-| `bollinger` | `upper`, `middle`, `lower`, `bandwidthPct`, `percentB`, `position` (above_upper / upper_half / lower_half / below_lower), `squeeze` | %B > 1 or < 0 = outside the bands; `squeeze` true = bands inside the Keltner channel (TTM); a historical compression label, not guaranteed expansion |
+| `bollinger` | `upper`, `middle`, `lower`, `bandwidthPct`, `percentB`, `position` (above_upper / upper_half / lower_half / below_lower), `squeeze` | %B > 1 or < 0 = outside the bands; `squeeze` true = bands inside the Keltner channel (TTM) — a historical compression label, not guaranteed expansion |
 | `atr` | `period`, `atrPct` | Volatility in price units and as % of price. ATR summarizes historical range; no multiple guarantees a safe stop or loss bound |
 | `adx` | `plusDI`, `minusDI`, `strength` (absent / weak / strong / very_strong), `diBias` (bullish when +DI > −DI) | ADX measures strength, not direction; the DI bias gives the direction |
 | `stochastic` | `k`, `d`, `zone`, `crossover` | < 20 oversold, > 80 overbought; a %K/%D cross inside a zone is the classic trigger |
@@ -31,11 +31,11 @@ the conventional interpretation, not a prediction.
 - `trend`: `direction` (up / down / sideways), `strength` (absent / weak / moderate / strong),
   `adx`, `emaStack`, `priceVsEma200`.
 - `momentum`: `rsi`, `rsiZone`, `macdHistogram`, `macdState`.
-- `volatility`: `atrPct`, `atrPercentile` (rank of today's ATR% in the last 100 bars; 90 means
+- `volatility`: `atrPct`, `atrPercentile` (rank of today's ATR% in the last 100 bars — 90 means
   unusually volatile), `bollingerBandwidthPct`, `state` (compressed / normal / expanded),
   `squeeze`, `squeezeBars`.
 - `volume.ratioVsAverage`: current bar ÷ 20-bar average (the current bar is partial on the live
-  candle; a ratio of 0.2 early in a 4h bar is normal).
+  candle — a ratio of 0.2 early in a 4h bar is normal).
 - `patterns[]`: `{name, bias, barsAgo}` from 18 candlestick finders (engulfing, hammer, doji
   variants, morning/evening star…). Patterns add notes, not score.
 - `notes[]`: quotable sentences; use them.

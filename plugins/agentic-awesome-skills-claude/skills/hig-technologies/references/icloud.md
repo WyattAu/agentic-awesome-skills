@@ -10,7 +10,7 @@ source: https://developer.apple.com/design/human-interface-guidelines/icloud
 **Implementation boundary.** Automatic synchronization is not instantaneous or guaranteed. Preserve local edits, handle offline operation, quota and authentication errors, account changes, and conflicts; communicate pending or failed sync when it affects the task.
 
 
-iCloud is a service that lets people seamlessly access the content they care about; photos, videos, documents, and more; from any device, without performing explicit synchronization.
+iCloud is a service that lets people seamlessly access the content they care about — photos, videos, documents, and more — from any device, without performing explicit synchronization.
 
 ![A sketch of the iCloud icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.](https://docs-assets.developer.apple.com/published/928d419006d55a9003163836f73f4339/technologies-iCloud-intro%402x.png)
 

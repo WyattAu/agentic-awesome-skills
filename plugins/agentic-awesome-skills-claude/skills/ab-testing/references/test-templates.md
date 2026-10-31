@@ -124,7 +124,7 @@ We'll know this is true when [metrics].
 ### Primary Metric: [Metric Name]
 | Variant | Value | 95% CI | vs. Control |
 |---------|-------|--------|-------------|
-| Control | X% | [X%, Y%] | - |
+| Control | X% | [X%, Y%] | — |
 | Variant | X% | [X%, Y%] | +X% |
 
 **Inference**: [method, sidedness, alpha, multiplicity/stopping rule], p = [value if applicable]; report an interval for the between-arm effect, not only per-arm intervals.

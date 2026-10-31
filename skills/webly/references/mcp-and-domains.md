@@ -116,7 +116,7 @@ second attempt while one is waiting. Other people and agents may edit the
 same site at once. Prefer `str_replace` for small edits. Send `baseVersion`
 (the `version` your read returned) with `put_source_file` /
 `delete_source_file`: their edits to other lines are merged with yours;
-`409 merge_conflict` means you both changed the same lines; read the file
+`409 merge_conflict` means you both changed the same lines — read the file
 again, re-apply your change keeping theirs, resend with the new version.
 `wait_for_changes` shows what others wrote since a version. Publish with
 `version` set to the one the person previewed. History is linear, so the

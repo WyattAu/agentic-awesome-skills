@@ -65,7 +65,7 @@ tofu --version
 ### 1. Verify Compatibility
 
 ```bash
-# OpenTofu reads Terraform state files directly: no migration needed
+# OpenTofu reads Terraform state files directly — no migration needed
 # Check exact Terraform/OpenTofu versions and their current migration compatibility
 terraform version
 
@@ -99,10 +99,10 @@ tofu providers
 
 ### 4. Update State Backend
 
-State files are compatible; no migration needed. Just verify:
+State files are compatible — no migration needed. Just verify:
 
 ```hcl
-# backend.tf: works identically with OpenTofu
+# backend.tf — works identically with OpenTofu
 terraform {
   backend "s3" {
     bucket         = "mycompany-tfstate"
@@ -331,17 +331,17 @@ fi
 | Issue | Solution |
 |-------|---------|
 | Provider not found | Inspect the existing lock/source and registry availability before any separately reviewed upgrade |
-| State lock conflict | Same as Terraform; check DynamoDB/blob lease |
+| State lock conflict | Same as Terraform — check DynamoDB/blob lease |
 | Version constraint error | Choose a tested version constraint compatible with the actual configuration |
-| Backend migration | State is compatible; just run `tofu init` |
+| Backend migration | State is compatible — just run `tofu init` |
 | Missing provider credentials | Same env vars work (`AWS_*`, `GOOGLE_*`, `ARM_*`) |
 
 ## Related Skills
 
-- terraform-aws (`terraform-aws`); AWS IaC patterns (works with both)
-- terraform-azure (`terraform-azure`); Azure IaC patterns
-- terraform-gcp (`terraform-gcp`); GCP IaC patterns
-- policy-as-code (`policy-as-code`); OPA policy checks for IaC
+- terraform-aws (`terraform-aws`) — AWS IaC patterns (works with both)
+- terraform-azure (`terraform-azure`) — Azure IaC patterns
+- terraform-gcp (`terraform-gcp`) — GCP IaC patterns
+- policy-as-code (`policy-as-code`) — OPA policy checks for IaC
 
 ## Limitations
 

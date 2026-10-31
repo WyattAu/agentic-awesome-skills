@@ -1,6 +1,6 @@
 ---
 name: odw
-description: Dynamic multi-agent workflows; plan first, then orchestrate parallel agents with adversarial verification via the local odw daemon. Use when the user asks for a "workflow", says "ultracode", or hands you a task spanning many files/items that benefits from parallel agents.
+description: Dynamic multi-agent workflows — plan first, then orchestrate parallel agents with adversarial verification via the local odw daemon. Use when the user asks for a "workflow", says "ultracode", or hands you a task spanning many files/items that benefits from parallel agents.
 risk: critical
 source: https://github.com/Suraj1235/open-dynamic-workflows/tree/main/packages/antigravity-adapter/skills/odw
 source_repo: Suraj1235/open-dynamic-workflows
@@ -21,22 +21,22 @@ Obtain the required material from the [declared upstream source](https://github.
 # Open Dynamic Workflows (Antigravity)
 ## When to Use
 
-Use this skill when you need dynamic multi-agent workflows; plan first, then orchestrate parallel agents with adversarial verification via the local odw daemon. Use when the user asks for a "workflow", says "ultracode", or hands you a task spanning many files/items that benefits from parallel agents.
+Use this skill when you need dynamic multi-agent workflows — plan first, then orchestrate parallel agents with adversarial verification via the local odw daemon. Use when the user asks for a "workflow", says "ultracode", or hands you a task spanning many files/items that benefits from parallel agents.
 
 
-Same canonical skill as the Codex adapter; only the install path differs
+Same canonical skill as the Codex adapter — only the install path differs
 (`~/.gemini/skills/odw/`). The upstream adapter expects bridge scripts alongside its installed skill; they are absent from this AAS tree.
 
 ## Model & API key (read this first)
 
-Antigravity locks model invocation to its internal engine; skills, workflows, MCP servers, `invoke_subagent`, and the SDK can use its *tools* but **cannot call its configured model (Gemini/Claude/GPT-OSS) from extension code**. So, unlike the OpenCode plugin (which runs ODW's real engine *through* OpenCode's model with no extra key), there are two honest paths:
+Antigravity locks model invocation to its internal engine — skills, workflows, MCP servers, `invoke_subagent`, and the SDK can use its *tools* but **cannot call its configured model (Gemini/Claude/GPT-OSS) from extension code**. So, unlike the OpenCode plugin (which runs ODW's real engine *through* OpenCode's model with no extra key), there are two honest paths:
 
-- **No-key path (Native fallback):** Antigravity's own agent orchestrates with `invoke_subagent` (real isolation/worktrees) using its own model; no extra key, but **not** the ODW engine.
+- **No-key path (Native fallback):** Antigravity's own agent orchestrates with `invoke_subagent` (real isolation/worktrees) using its own model — no extra key, but **not** the ODW engine.
 - **Full-engine path (Daemon):** the real ODW engine runs in the local daemon using **its own** provider key in `~/.odw/config.json` (Ollama is keyless/local). This is the only way to get the full engine on Antigravity today.
 
 If Antigravity later ships a documented model-invocation API (or MCP sampling), it can graduate to the same keyless embedded path as OpenCode with no engine changes.
 
-## Step 0: Daemon check
+## Step 0 — Daemon check
 
 Only after verifying the separately reviewed installation, run its absolute path: `node /absolute/reviewed/odw/scripts/daemon-bridge.js --check`. Do not resolve this command against the current project.
 - Exit 0 → daemon is up; use the daemon path below.
@@ -44,7 +44,7 @@ Only after verifying the separately reviewed installation, run its absolute path
 
 ## Daemon path
 
-1. **Plan:** `node scripts/daemon-bridge.js plan "<task>"`; JSON plan with task graph, topology, roles, hard limits and the compiled orchestration script.
+1. **Plan:** `node scripts/daemon-bridge.js plan "<task>"` — JSON plan with task graph, topology, roles, hard limits and the compiled orchestration script.
 2. **Confirm:** summarize topology / agent count / est. cost / est. time before executing anything beyond read-only work.
 3. **Execute:** `node scripts/daemon-bridge.js exec plan.json` → `wf_...` id. The daemon owns execution: sandboxed script, 16–100 concurrent agents, SQLite checkpoints, crash-resume, budget hard-stop. It keeps running even if this IDE session ends.
 4. **Report:** `node scripts/daemon-bridge.js result <wf_id>` blocks until done; relay the synthesized result.
@@ -62,7 +62,7 @@ Decompose → parallel work → adversarial verification → synthesis, inside t
 
 **User request:**
 
-> Use @odw for this task: Dynamic multi-agent workflows; plan first, then orchestrate parallel agents with adversarial verification via the local odw daemon.
+> Use @odw for this task: Dynamic multi-agent workflows — plan first, then orchestrate parallel agents with adversarial verification via the local odw daemon.
 
 ## Limitations
 

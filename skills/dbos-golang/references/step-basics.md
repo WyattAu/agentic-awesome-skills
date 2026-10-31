@@ -66,7 +66,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 Step type signature: `type Step[R any] func(ctx context.Context) (R, error)`
 
 Step requirements:
-- The function must accept a `context.Context` parameter; use the one provided, not the workflow's context
+- The function must accept a `context.Context` parameter — use the one provided, not the workflow's context
 - Inputs and outputs must be serializable to JSON
 - Cannot start or enqueue workflows from within steps
 - Calling a step from within another step makes the inner call part of the outer step's execution

@@ -4,7 +4,7 @@ Build a step-by-step DCF model for any listed company using Longbridge financial
 
 ## Workflow
 
-### Step 1: Fetch raw financial data
+### Step 1 — Fetch raw financial data
 
 ```bash
 # Cash flow statement (FCF inputs)
@@ -19,7 +19,7 @@ longbridge calc-index <SYMBOL> --format json
 
 Run `longbridge financial-report --help` and `longbridge calc-index --help` to verify available flags.
 
-### Step 2: Calculate historical FCF
+### Step 2 — Calculate historical FCF
 
 `FCFF = EBIT * (1 - tax rate) + D&A - capex outflow - change in operating working capital`
 
@@ -27,14 +27,14 @@ Use unlevered FCFF with WACC. Reported OCF minus capex may be levered and must b
 
 Extract the last 3–5 years of operating cash flow and capex from the CF statement. Compute FCF for each year and derive the compound annual growth rate (CAGR).
 
-### Step 3: Project FCF
+### Step 3 — Project FCF
 
 Use a two-stage model:
 
 - **Stage 1 (years 1–5)**: Apply an analyst-estimated or CAGR-derived growth rate. Ask the user if they want a bull / base / bear case.
 - **Stage 2 (terminal)**: Apply a long-run growth rate `g` (explicit scenario assumption consistent with cash-flow currency, nominal/real basis and mature long-run economics; require WACC > g).
 
-### Step 4: Estimate WACC
+### Step 4 — Estimate WACC
 
 ```
 WACC = Wd × Rd × (1 − t) + We × Re
@@ -50,13 +50,13 @@ Re  = Rf + β × ERP
 | Cost of debt (Rd)         | Interest expense / total debt from IS + BS                                        |
 | Tax rate (t)              | Effective tax rate from IS                                                        |
 
-### Step 5: Terminal value
+### Step 5 — Terminal value
 
 `TV = FCF₅ × (1 + g) / (WACC − g)`
 
-Common alternative: exit multiple method; apply an EV/EBITDA multiple consistent with mature peers.
+Common alternative: exit multiple method — apply an EV/EBITDA multiple consistent with mature peers.
 
-### Step 6: Intrinsic value
+### Step 6 — Intrinsic value
 
 1. Discount each projected FCF to present value at WACC.
 2. Discount terminal value to present value.
@@ -64,7 +64,7 @@ Common alternative: exit multiple method; apply an EV/EBITDA multiple consistent
 4. Subtract gross debt and other senior/noncontrolling claims, add excess cash/nonoperating assets once → Equity Value. If using net debt, do not add the same cash again.
 5. Divide by diluted shares outstanding → Intrinsic Value per Share.
 
-### Step 7: Margin of safety
+### Step 7 — Margin of safety
 
 `Margin of Safety = (Intrinsic Value − Current Price) / Intrinsic Value × 100%`
 

@@ -10,7 +10,7 @@ license: MIT
 license_source: https://github.com/hyhmrright/brooks-lint/blob/main/LICENSE
 ---
 
-# Brooks-Lint: Architecture Audit
+# Brooks-Lint — Architecture Audit
 ## When to Use
 
 Use this skill when you need architecture audit that maps module dependencies, checks layering integrity, and flags structural decay across a codebase, drawing on twelve classic engineering books. Triggers when: user asks to audit architecture, review folder/module structure, check for circular imports, understand...
@@ -32,17 +32,17 @@ The sibling `_shared` files below are absent from this bundle. Do not invent the
 **Onboarding mode:** If the user asks for an onboarding report, codebase tour, or
 "explain this codebase to a new developer", read `onboarding-guide.md` from this
 directory and follow it instead of `architecture-guide.md`. This mode explains rather
-than diagnoses; no Health Score, no Iron Law findings.
+than diagnoses — no Health Score, no Iron Law findings.
 
 **If the user has not specified files or a directory to audit:** apply Auto Scope
 Detection from `../_shared/common.md` to determine the audit scope before proceeding.
 
 1. Gather codebase context and draw the module dependency graph as Mermaid (Steps 0–1 of the guide)
 2. Scan for each decay risk in the order specified (Steps 2–4 of the guide)
-3. Assign node colors in the Mermaid diagram based on findings (red/yellow/green); after Step 4
+3. Assign node colors in the Mermaid diagram based on findings (red/yellow/green) — after Step 4
 4. Run the Testability Seam Assessment (Step 5 of the guide)
 5. Run the Conway's Law check (Step 6 of the guide)
-6. Output using the Report Template from common.md; Mermaid graph FIRST, then Findings
+6. Output using the Report Template from common.md — Mermaid graph FIRST, then Findings
 
 **Mode line in report:** `Architecture Audit`
 

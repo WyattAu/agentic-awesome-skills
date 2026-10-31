@@ -5,13 +5,13 @@ Why sound leads: sonic devices gave 2.3× the brand fluency of a visual logo acr
 
 ## 1 · Campaign brain (answer in one line each before any music)
 
-1. **Truth**; one thing the product really does that the film can *prove*, not claim. (Moldy Whopper: 34-day time-lapse proved "no preservatives". Hyundai "Night Fishing": shot only with the car's cameras.)
-2. **Tension**; a complaint, rival, debate or ritual to flip. (Hyundai "Coquí Alarmed", Cannes 2026 Audio GP: a tourist asked how to silence Puerto Rico's coquí frogs → rental-car lock beep replaced by the frog; buyers asked for it, it became a permanent feature. Whopper Detour: 1¢ Whopper unlocked only within 600 ft of a McDonald's. Biti's Hunter: a #teamđi vs #teamtrởvề debate, answered with an MV.)
-3. **Mechanic**; what people *do*, retellable in one sentence. (Field Barcode, Cannes 2026 Outdoor GP: the stadium grass mowed into a 104 m barcode, scannable from the TV broadcast for a discount. Uber Eats, Cannes 2026 Media GP: build your own Super Bowl ad from 1,000+ clips inside the app, each combination unlocks a deal. Budweiser "One Second Ads": guess the song from one beat.)
-4. **Hijacked channel**; put the brand inside something people already look at or hear: grass stripes, a car's lock beep, a shutter sound, a photo-booth countdown, a station departure melody, map pins, game worlds, receipts, notification sounds. The medium is the idea.
-5. **Audience as media**; they finish, remix, localise or star in it. (Mixue: public-domain melody, fan covers in 20+ languages. Spotify Wrapped. Shot on iPhone.)
-6. **Moment**; attach to a ritual or peak (Tet, Super Bowl, a derby, exam season, payday) or a place (a stadium, a station, a booth).
-7. **Afterlife**; the asset outlives the campaign: a sound in the product, a font, a feature (the coquí lock sound stayed).
+1. **Truth** — one thing the product really does that the film can *prove*, not claim. (Moldy Whopper: 34-day time-lapse proved "no preservatives". Hyundai "Night Fishing": shot only with the car's cameras.)
+2. **Tension** — a complaint, rival, debate or ritual to flip. (Hyundai "Coquí Alarmed", Cannes 2026 Audio GP: a tourist asked how to silence Puerto Rico's coquí frogs → rental-car lock beep replaced by the frog; buyers asked for it, it became a permanent feature. Whopper Detour: 1¢ Whopper unlocked only within 600 ft of a McDonald's. Biti's Hunter: a #teamđi vs #teamtrởvề debate, answered with an MV.)
+3. **Mechanic** — what people *do*, retellable in one sentence. (Field Barcode, Cannes 2026 Outdoor GP: the stadium grass mowed into a 104 m barcode, scannable from the TV broadcast for a discount. Uber Eats, Cannes 2026 Media GP: build your own Super Bowl ad from 1,000+ clips inside the app, each combination unlocks a deal. Budweiser "One Second Ads": guess the song from one beat.)
+4. **Hijacked channel** — put the brand inside something people already look at or hear: grass stripes, a car's lock beep, a shutter sound, a photo-booth countdown, a station departure melody, map pins, game worlds, receipts, notification sounds. The medium is the idea.
+5. **Audience as media** — they finish, remix, localise or star in it. (Mixue: public-domain melody, fan covers in 20+ languages. Spotify Wrapped. Shot on iPhone.)
+6. **Moment** — attach to a ritual or peak (Tet, Super Bowl, a derby, exam season, payday) or a place (a stadium, a station, a booth).
+7. **Afterlife** — the asset outlives the campaign: a sound in the product, a font, a feature (the coquí lock sound stayed).
 
 Tests: retellable in one sentence · "inevitable once you see it" · would a journalist write about the mechanic without seeing the film? · would someone do it with no prize?
 
@@ -34,26 +34,26 @@ Tests: retellable in one sentence · "inevitable once you see it" · would a jou
 | Truth | a sound made *by* the product or its action (shutter, punch, peel, scan beep) as the hook |
 | Tension | contrast section: the complaint sound → flipped into the hook |
 | Mechanic | a slot users fill: before/after glow-up, 4 photo slots on 4 hits, 1-second guessable fragments, a countdown |
-| Channel | the sonic logo is designed to live there (lock beep, shutter, booth countdown, notification, station melody); 1–3 s, recognisable alone |
+| Channel | the sonic logo is designed to live there (lock beep, shutter, booth countdown, notification, station melody) — 1–3 s, recognisable alone |
 | Audience | stems, a section that swaps per language/market, crowd recorded by real users |
 | Moment | the cultural sound of that moment (countdown, cheer, chant) |
 | Afterlife | motif short and clean enough to be the app's open / export sound |
 
 ## 3 · Sound plan (the wild part, with rails)
 
-**Fusion engine**; collide far-apart sources; each used as texture, never cliché:
+**Fusion engine** — collide far-apart sources; each used as texture, never cliché:
 - world instruments: gamelan, talking drum, Ethio-jazz brass, baile-funk tamborzão, tabla, Balkan brass, suona/pan-flute bursts, janggu, đàn bầu bends, chindon-ya, batucada;
 - niche timbres: Omnichord, ondes Martenot, glass harmonica, Stroh violin, musical saw, kalimba, Mellotron, toy piano, music box;
 - 2020s styles: live-drum new jazz, amapiano, 2020s J-pop band drive, Vietnamese folk-pop fusion, UK garage 2-step, Jersey club bounce, footwork, liquid DnB, ballroom vogue, digital cumbia, hip-hop breaks, R&B;
 - found objects / foley as instruments: camera, sticker, tape, stamp, bubble wrap, gacha capsule, nail-polish shaker, receipt printer, flipbook paper, squeegee, letterpress, ink; nature: water drops, leaves, fire, lightning, blades; "feminine" synaesthesia: stars, moon hum, lake, pink = soda fizz + wind chimes.
 
-**Sound-design toolbox**; hyperreal synthetic materials (SOPHIE: bubbles rise in pitch, metal clangs, latex stretches), found-sound chops (Fred again..), granular freeze/clouds, spectral resynthesis (Serum 2 imports PNGs), resonators tuned to the key fed by foley, physical-modelled mallets, FM / phase-distortion plucks, formant "talking" filters, stutter repeaters, extreme time-stretch, tape stops, reverse reverbs, dub throws. Mix: mono below 120 Hz, Haas 10–30 ms widening, M/S air on the sides, parallel-compressed drums, clear depth (dry close, huge space behind).
+**Sound-design toolbox** — hyperreal synthetic materials (SOPHIE: bubbles rise in pitch, metal clangs, latex stretches), found-sound chops (Fred again..), granular freeze/clouds, spectral resynthesis (Serum 2 imports PNGs), resonators tuned to the key fed by foley, physical-modelled mallets, FM / phase-distortion plucks, formant "talking" filters, stutter repeaters, extreme time-stretch, tape stops, reverse reverbs, dub throws. Mix: mono below 120 Hz, Haas 10–30 ms widening, M/S air on the sides, parallel-compressed drums, clear depth (dry close, huge space behind).
 
-**Voice palette**; crowds: stadium, cheer squad, kids, fans, megaphone, "everyone in the world". Processing per appearance: octave double, ping-pong delay, pitched-up formant, distorted megaphone, slowed giant, granular freeze, vocoder, harmonizer stack + gated reverb, reverse-reverb swell. Brand name: a few key moments, shouted by a group, same two-note interval (sonic logo).
+**Voice palette** — crowds: stadium, cheer squad, kids, fans, megaphone, "everyone in the world". Processing per appearance: octave double, ping-pong delay, pitched-up formant, distorted megaphone, slowed giant, granular freeze, vocoder, harmonizer stack + gated reverb, reverse-reverb swell. Brand name: a few key moments, shouted by a group, same two-note interval (sonic logo).
 
-**Concept devices that worked**; "everyone joins" parade (Tutti = full ensemble) · sticker-book page flips (new world every 2 bars) · object drum kit (a girl's desk) · synaesthesia (element = colour = sound, one key, one reverb) · animation-studio sounds + "on twos" stutter · photo-booth countdowns in each market's language · Morse / spectrogram signatures. A purely random concept with no campaign mechanic was "boring".
+**Concept devices that worked** — "everyone joins" parade (Tutti = full ensemble) · sticker-book page flips (new world every 2 bars) · object drum kit (a girl's desk) · synaesthesia (element = colour = sound, one key, one reverb) · animation-studio sounds + "on twos" stutter · photo-booth countdowns in each market's language · Morse / spectrogram signatures. A purely random concept with no campaign mechanic was "boring".
 
-**K-pop / TVC structure rails**; starts on the drop or hits by 3–5 s · beat switch every section · deliberate anti-drop or curveball once · chant slot · silence (½–1 beat) before the two biggest hits · surprise runs / fills between phrases (brass runs, harp glissandos, scratches, rewinds, pitch dives) · final peak *is* the logo · button ending · brand at 0 s and at the logo (bookend) · bars on round seconds (120 BPM → 2 s) so 6/15/full cut-downs splice cleanly · loopable end.
+**K-pop / TVC structure rails** — starts on the drop or hits by 3–5 s · beat switch every section · deliberate anti-drop or curveball once · chant slot · silence (½–1 beat) before the two biggest hits · surprise runs / fills between phrases (brass runs, harp glissandos, scratches, rewinds, pitch dives) · final peak *is* the logo · button ending · brand at 0 s and at the logo (bookend) · bars on round seconds (120 BPM → 2 s) so 6/15/full cut-downs splice cleanly · loopable end.
 
 ## 4 · Prompt craft (Suno / Udio / ElevenLabs)
 

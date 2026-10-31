@@ -1,6 +1,6 @@
 ---
 name: idea-darwin
-description: "Darwinian idea evolution engine; toss rough ideas onto an evolution island, let them compete, crossbreed, and mutate through structured rounds to surface your strongest concepts."
+description: "Darwinian idea evolution engine — toss rough ideas onto an evolution island, let them compete, crossbreed, and mutate through structured rounds to surface your strongest concepts."
 risk: safe
 source: community
 date_added: "2026-04-07"
@@ -8,11 +8,11 @@ date_added: "2026-04-07"
 
 # Idea Darwin Engine
 
-A round-based idea iteration system that treats ideas as competing organisms; scoring, selecting, crossing, and evolving them through structured rounds to surface the strongest concepts.
+A round-based idea iteration system that treats ideas as competing organisms — scoring, selecting, crossing, and evolving them through structured rounds to surface the strongest concepts.
 
 ## Overview
 
-Most idea management tools are filing cabinets: they store ideas, tag them, and let them rot. Idea Darwin flips the paradigm; instead of organizing ideas, it lets them **compete**. Every idea is a living species on an evolution island. Each round, the fittest get deepened, different ideas cross-pollinate to produce unexpected hybrids, and external stimuli trigger mutations.
+Most idea management tools are filing cabinets: they store ideas, tag them, and let them rot. Idea Darwin flips the paradigm — instead of organizing ideas, it lets them **compete**. Every idea is a living species on an evolution island. Each round, the fittest get deepened, different ideas cross-pollinate to produce unexpected hybrids, and external stimuli trigger mutations.
 
 ## When to Use This Skill
 
@@ -27,9 +27,9 @@ Most idea management tools are filing cabinets: they store ideas, tag them, and 
 
 Your ideas are alive on this island. Like organisms, they follow three core laws:
 
-1. **Evolution**; Each round, the system deepens the most viable ideas through structured research: filling logical gaps, clarifying paths, identifying risks.
-2. **Crossbreeding**; The system cross-pollinates different ideas. A technical approach from work meets an observation from daily life, producing directions you never imagined.
-3. **Mutation**; External stimuli (industry news, theories, conversations) trigger mutations, spawning entirely new species.
+1. **Evolution** — Each round, the system deepens the most viable ideas through structured research: filling logical gaps, clarifying paths, identifying risks.
+2. **Crossbreeding** — The system cross-pollinates different ideas. A technical approach from work meets an observation from daily life, producing directions you never imagined.
+3. **Mutation** — External stimuli (industry news, theories, conversations) trigger mutations, spawning entirely new species.
 
 ### Species Cards
 
@@ -109,10 +109,10 @@ Append new ideas to `ideas.md`, add environmental variables to `stimuli.md`.
 
 ## Best Practices
 
-- Do: Write ideas as rough as you want; the system structures them
+- Do: Write ideas as rough as you want — the system structures them
 - Do: Add external stimuli to prevent idea convergence
 - Do: Run disruption rounds to surface overlooked ideas
-- Don't: Over-curate initial ideas; let evolution filter
+- Don't: Over-curate initial ideas — let evolution filter
 - Don't: Ignore the "Decisions Needed" section in briefings
 
 ## Additional Resources

@@ -65,9 +65,9 @@ Unlike the [layered images](https://developer.apple.com/design/human-interface-g
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/launching#Developer-documentation)
 
-[Specifying your app’s launch screen](https://developer.apple.com/documentation/Xcode/specifying-your-apps-launch-screen); Xcode
+[Specifying your app’s launch screen](https://developer.apple.com/documentation/Xcode/specifying-your-apps-launch-screen) — Xcode
 
-[Responding to the launch of your app](https://developer.apple.com/documentation/UIKit/responding-to-the-launch-of-your-app); UIKit
+[Responding to the launch of your app](https://developer.apple.com/documentation/UIKit/responding-to-the-launch-of-your-app) — UIKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/launching#Videos)
 

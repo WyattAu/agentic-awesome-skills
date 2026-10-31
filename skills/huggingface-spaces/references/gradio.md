@@ -2,7 +2,7 @@
 
 Patterns and quirks specific to running Gradio inside a Space. Assumes you're already comfortable with stock Gradio components and `gr.Blocks` / `gr.Interface`.
 
-For deeper Gradio API guidance; components, layouts, event listeners, chatbots, the Gradio 5→6 migration; use the dedicated `huggingface-gradio` skill. Install it with `hf skills add huggingface-gradio` (add `--claude --global` to also install for Claude Code, user-level).
+For deeper Gradio API guidance — components, layouts, event listeners, chatbots, the Gradio 5→6 migration — use the dedicated `huggingface-gradio` skill. Install it with `hf skills add huggingface-gradio` (add `--claude --global` to also install for Claude Code, user-level).
 
 For ZeroGPU-specific decorator + worker semantics, see [`zerogpu.md`](zerogpu.md).
 
@@ -18,7 +18,7 @@ For ZeroGPU-specific decorator + worker semantics, see [`zerogpu.md`](zerogpu.md
   with gr.Blocks(theme=gr.themes.Soft(), css=CSS) as demo: ...
   ```
   The dark-mode override fixes a recurring Gradio bug where dark text inherits unset colors.
-- Width-cap with `!important` if Gradio 6's own breakpoints fight you; target `main`, `.gradio-container`, and the inner fillable wrapper, otherwise the width caps but goes flush-left.
+- Width-cap with `!important` if Gradio 6's own breakpoints fight you — target `main`, `.gradio-container`, and the inner fillable wrapper, otherwise the width caps but goes flush-left.
 
 ## Minimal layout most demos converge to
 
@@ -35,7 +35,7 @@ with gr.Accordion("Advanced settings", open=False):
 
 ## `gr.Markdown` for the intro
 
-Be succinct. Title, one-line description, a links section. Don't over-explain how it works; that's what the model card is for.
+Be succinct. Title, one-line description, a links section. Don't over-explain how it works — that's what the model card is for.
 
 ## `gr.Examples`
 
@@ -58,7 +58,7 @@ gr.Examples(
 Why these flags:
 
 - `cache_examples=True` makes example clicks instant (no re-inference per visitor).
-- **`cache_mode="lazy"`**; caches on first user click for each example. **Required on ZeroGPU** (Gradio's default on ZeroGPU is already lazy via `GRADIO_CACHE_MODE=lazy`). Eager would pre-run every example at app startup, but ZeroGPU has no GPU attached at startup; it'd fail and burn the creator's daily quota.
+- **`cache_mode="lazy"`** — caches on first user click for each example. **Required on ZeroGPU** (Gradio's default on ZeroGPU is already lazy via `GRADIO_CACHE_MODE=lazy`). Eager would pre-run every example at app startup, but ZeroGPU has no GPU attached at startup — it'd fail and burn the creator's daily quota.
 - `cache_examples=True` silently disables `run_on_click` / `run_examples_on_click`. If your app relies on click-only behavior, set `cache_examples=False`.
 
 The cache key is the **example row's file path**, not a content hash. Regenerating an asset in place serves the stale cached output forever. If you replace example files, bump a `cache_version` marker or wipe `.gradio/cached_examples/<id>/`.
@@ -78,9 +78,9 @@ def generate(prompt):
     yield gr.update(value=final, label="Done")
 ```
 
-Use `gr.update(label=...)` for status narration; feels like a status line without a separate component.
+Use `gr.update(label=...)` for status narration — feels like a status line without a separate component.
 
-**Caveat**: `gr.Progress(track_tqdm=True)` and `yield` partial outputs fight each other; pick one streaming mechanism.
+**Caveat**: `gr.Progress(track_tqdm=True)` and `yield` partial outputs fight each other — pick one streaming mechanism.
 
 ## Useful UX bits
 
@@ -110,7 +110,7 @@ Example with a 3D camera-angle picker that makes sense in context: https://huggi
 
 Don't reach for this if a stock component covers the need.
 
-## Custom frontends: `gr.Server`
+## Custom frontends — `gr.Server`
 
 For fully custom frontends with their own HTML/JS, while keeping Gradio's queue + GPU scheduling:
 
@@ -142,15 +142,15 @@ Required for the custom `/` route to actually serve:
 hf spaces variables add <ns>/<name> --env GRADIO_SSR_MODE=false
 ```
 
-`launch(ssr_mode=False)` is ignored on HF; must be the env var.
+`launch(ssr_mode=False)` is ignored on HF — must be the env var.
 
 Valid `@app.api` kwargs: `name`, `description`, `concurrency_limit`, `concurrency_id`, `queue`, `batch`, `max_batch_size`, `api_visibility`, `time_limit`, `stream_every`.
 
-**Don't stack `@spaces.GPU` and `@app.api`** on the same function; silently breaks request flow. Keep them on separate functions.
+**Don't stack `@spaces.GPU` and `@app.api`** on the same function — silently breaks request flow. Keep them on separate functions.
 
-**Two-ceiling coordination**: both `@spaces.GPU(duration=N)` and `@app.api(time_limit=M)` apply; the lower wins. Set `time_limit` to your max duration across modes; a too-low `time_limit` kills the request even if GPU duration would have allowed it.
+**Two-ceiling coordination**: both `@spaces.GPU(duration=N)` and `@app.api(time_limit=M)` apply; the lower wins. Set `time_limit` to your max duration across modes — a too-low `time_limit` kills the request even if GPU duration would have allowed it.
 
-Hot-reload (rung 1 in [`debugging.md`](debugging.md)) does **not** work with `gr.Server`; always `hf upload` or commit.
+Hot-reload (rung 1 in [`debugging.md`](debugging.md)) does **not** work with `gr.Server` — always `hf upload` or commit.
 
 Reference Space: https://huggingface.co/spaces/huggingface-projects/rf-detr-realtime-webcam
 
@@ -163,9 +163,9 @@ For Spaces that take 10–20 min to load weights:
 
 ## Don't
 
-- `gr.Button(text="X")`; `text=` was removed; use `gr.Button("X")`.
-- `gr.Button(type="button")`; drop the kwarg.
-- `.click(..., _js=share_js)`; renamed to `js=`.
-- `.style(height=...)`; removed in gradio 4+.
-- `gr.ImageMask(brush_color=...)`; kwarg removed.
-- `demo.launch(mcp_server=True)` on gradio 4.x; only valid on 5+.
+- `gr.Button(text="X")` — `text=` was removed; use `gr.Button("X")`.
+- `gr.Button(type="button")` — drop the kwarg.
+- `.click(..., _js=share_js)` — renamed to `js=`.
+- `.style(height=...)` — removed in gradio 4+.
+- `gr.ImageMask(brush_color=...)` — kwarg removed.
+- `demo.launch(mcp_server=True)` on gradio 4.x — only valid on 5+.

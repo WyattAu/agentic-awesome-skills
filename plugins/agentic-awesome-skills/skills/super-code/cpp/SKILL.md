@@ -40,7 +40,7 @@ auto w = std::make_unique<Widget>();
 auto w = std::make_shared<Widget>();
 transfer(w); // only one owner
 
-// ✅; unique_ptr; move when transferring
+// ✅ — unique_ptr; move when transferring
 auto w = std::make_unique<Widget>();
 transfer(std::move(w));
 ```
@@ -111,7 +111,7 @@ auto it = std::ranges::find(vec, target); // C++20
 auto it = map.find(key);
 if (it != map.end()) { use(it->second); }
 
-// ✅; one lookup when the value is needed
+// ✅ — one lookup when the value is needed
 if (auto it = map.find(key); it != map.end()) { use(it->second); }
 // or keep iterator version when you need the value without double lookup
 ```
@@ -126,7 +126,7 @@ if (auto it = map.find(key); it != map.end()) { use(it->second); }
 // ❌ Copying a large container into a function
 void process(std::vector<Data> items) { ... } // copies on call
 
-// ✅; const ref for read, move for sink
+// ✅ — const ref for read, move for sink
 void process(const std::vector<Data>& items) { ... }  // read-only
 void consume(std::vector<Data> items) { ... }          // sink: caller moves in
 ```
@@ -136,7 +136,7 @@ void consume(std::vector<Data> items) { ... }          // sink: caller moves in
 const std::string s = "hello";
 take(std::move(s)); // still copies
 
-// ✅; don't const things you intend to move
+// ✅ — don't const things you intend to move
 std::string s = "hello";
 take(std::move(s));
 ```
@@ -148,7 +148,7 @@ std::vector<int> build() {
     // ... fill ...
     return std::move(v); // pessimization
 
-// ✅; just return the local; compiler applies NRVO or implicit move
+// ✅ — just return the local; compiler applies NRVO or implicit move
     return v;
 }
 ```
@@ -173,11 +173,11 @@ template<typename T>
 void log(T msg) { std::cout << msg; }
 // Only ever called with std::string
 
-// ✅; don't templatize unless you need multiple types
+// ✅ — don't templatize unless you need multiple types
 void log(std::string_view msg) { std::cout << msg; }
 ```
 
-**Concepts make template errors readable; prefer them over SFINAE and static_assert.**
+**Concepts make template errors readable — prefer them over SFINAE and static_assert.**
 
 ---
 
@@ -187,7 +187,7 @@ void log(std::string_view msg) { std::cout << msg; }
 // ❌ Error codes via int returns (C-style in C++)
 int parse(const std::string& input, Data& out);
 
-// ✅; std::expected (C++23) or exceptions
+// ✅ — std::expected (C++23) or exceptions
 std::expected<Data, ParseError> parse(const std::string& input);
 // or throw for exceptional conditions
 Data parse(const std::string& input); // throws ParseError
@@ -207,7 +207,7 @@ catch (const std::exception& e) { ... }
 ~MyClass() {
     if (cleanup() < 0) throw CleanupError(); // terminates
 
-// ✅; destructors must be noexcept; log/swallow errors
+// ✅ — destructors must be noexcept; log/swallow errors
 ~MyClass() noexcept {
     if (cleanup() < 0) log_error("cleanup failed");
 }
@@ -243,12 +243,12 @@ mtx.unlock(); // missed on exception
 // ❌ Polling a shared bool for completion
 while (!done.load()) { std::this_thread::sleep_for(10ms); }
 
-// ✅; use std::future or condition_variable
+// ✅ — use std::future or condition_variable
 auto future = std::async(std::launch::async, compute);
 auto result = future.get();
 ```
 
-**Use `std::scoped_lock` over `lock_guard`; it handles multiple mutexes and avoids deadlock.**
+**Use `std::scoped_lock` over `lock_guard` — it handles multiple mutexes and avoids deadlock.**
 
 ---
 
@@ -262,7 +262,7 @@ auto result = future.get();
 | `NULL` | `nullptr` |
 | `using namespace std;` in headers | explicit `std::` prefix |
 | Manual loop for transform/filter | `std::ranges` or `<algorithm>` |
-| `std::endl` | `'\n'` (endl flushes; slow) |
+| `std::endl` | `'\n'` (endl flushes — slow) |
 | `char*` for string parameters | `std::string_view` |
 | Exception specification `throw()` | `noexcept` |
 | Inheriting from `std::` containers | composition, not inheritance |

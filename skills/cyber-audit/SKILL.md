@@ -26,13 +26,13 @@ disable-model-invocation: true
 
 - **Read-only.** No installs, removes, upgrades, restarts, network calls, or file modifications outside `~/Documents/security-audits/`.
 - **No `sudo`.** Never.
-- **One report per invocation.** Always end by writing the `.md` file (even if the verdict is "Not affected"; the audit trail matters).
+- **One report per invocation.** Always end by writing the `.md` file (even if the verdict is "Not affected" — the audit trail matters).
 - If a check requires a state-changing command, **skip it and note "not checked (would require state change)"** in the table. Do not run it.
 
 ## Workflow
 
 1. **Identify scope.** Extract from the advisory: package/binary name, affected versions, platform (macOS / Linux / Windows), attack vector (supply chain / RCE / local / network).
-2. **Run checks in parallel** (Bash tool, multiple calls in one message). Pick relevant checks for the advisory type; don't run all of them.
+2. **Run checks in parallel** (Bash tool, multiple calls in one message). Pick relevant checks for the advisory type — don't run all of them.
 3. **Build the table** as you go. Each row = one check + concrete result (version number, path, "None", "N/A").
 4. **Write the report** to `~/Documents/security-audits/YYYY-MM-DD-<short-kebab-slug>.md`. Use today's date from the environment header.
 5. **Tell the user** the verdict in one line + path to the report.
@@ -84,14 +84,14 @@ If the advisory mentions an ecosystem not above (Rust cargo, Go modules, Ruby ge
 File: `~/Documents/security-audits/YYYY-MM-DD-<short-kebab-slug>.md`
 
 ```markdown
-# <Subject>: Audit
+# <Subject> — Audit
 
 **Date:** YYYY-MM-DD
 **Host:** the user's Mac
 
 ## <CVEs | Advisory> in scope
 
-- **<ID or source> "<Name>"**; <one-line description>. <Affected versions or scope>.
+- **<ID or source> "<Name>"** — <one-line description>. <Affected versions or scope>.
 
 ## Audit results
 
@@ -120,10 +120,10 @@ Use terse, factual language while preserving uncertainty. Do not assume example 
 
 ## Verdict wording
 
-- **Not observed in checked scope.**; absent/patched within the explicitly searched paths; state coverage gaps. A stopped process alone does not prove absence of vulnerability.
-- **Affected.**; vulnerable version present *and* reachable by the attack vector.
-- **Mitigated exposure.**; affected version present with an observed mitigation; stopped services or loopback listeners may still be reachable by another attack path. State conditions and gaps.
-- **Inconclusive.**; advisory/version/coverage evidence missing. Do not infer safety from empty output or suppressed errors.
+- **Not observed in checked scope.** — absent/patched within the explicitly searched paths; state coverage gaps. A stopped process alone does not prove absence of vulnerability.
+- **Affected.** — vulnerable version present *and* reachable by the attack vector.
+- **Mitigated exposure.** — affected version present with an observed mitigation; stopped services or loopback listeners may still be reachable by another attack path. State conditions and gaps.
+- **Inconclusive.** — advisory/version/coverage evidence missing. Do not infer safety from empty output or suppressed errors.
 
 ## When to break the read-only rule
 
@@ -132,7 +132,7 @@ Never on your own. If the verdict is "Affected", list the remediation command in
 ## Reference
 
 Two existing reports in `~/Documents/security-audits/` show the expected style:
-- `baseline-audit.md` (long-form baseline audit; different format, do not mimic)
+- `baseline-audit.md` (long-form baseline audit — different format, do not mimic)
 - `YYYY-MM-DD-example-advisory.md` and any newer `YYYY-MM-DD-*.md` files (this is the format to match)
 
 ## Limitations

@@ -64,7 +64,7 @@ A `CLAUDE.md` supplies behavioral guidance, not an OS sandbox. Merge compatible 
 For agents that execute shell commands, define an explicit allowlist:
 
 ```yaml
-# .agent-permissions.yaml: conceptual schema, not consumed automatically by these clients
+# .agent-permissions.yaml — conceptual schema, not consumed automatically by these clients
 agent_permissions:
   allowed_commands:
     - "npm test"

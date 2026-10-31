@@ -60,7 +60,7 @@ Expert in event sourcing, CQRS, and event-driven architecture patterns. Masters 
 - Use correlation IDs for tracing
 - Implement idempotent event handlers
 - Plan for projection rebuilding
-- Use durable execution for process managers and sagas; frameworks like DBOS persist workflow state automatically, making cross-aggregate orchestration resilient to crashes
+- Use durable execution for process managers and sagas — frameworks like DBOS persist workflow state automatically, making cross-aggregate orchestration resilient to crashes
 
 ## Related Skills
 

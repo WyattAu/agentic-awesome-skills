@@ -12,10 +12,10 @@ uv run scripts/explore_collection.py "CollectionName" [--limit 5] [--no-metrics]
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `name` | - | Yes (positional) | - | Collection name |
+| `name` | — | Yes (positional) | — | Collection name |
 | `--limit` | `-l` | No | `5` | Number of sample objects to show |
-| `--no-metrics` | - | No | `false` | Skip calculating individual property metrics (faster) |
-| `--json` | - | No | `false` | Output in JSON format |
+| `--no-metrics` | — | No | `false` | Skip calculating individual property metrics (faster) |
+| `--json` | — | No | `false` | Output in JSON format |
 
 ## Metrics by Data Type
 

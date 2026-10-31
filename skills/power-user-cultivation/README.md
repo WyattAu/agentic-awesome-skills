@@ -1,10 +1,10 @@
 # power-user-cultivation
 
-**Turn users into advocates and contributors**; identifying, nurturing, and empowering your developer champions.
+**Turn users into advocates and contributors** — identifying, nurturing, and empowering your developer champions.
 
 ## What It Does
 
-Helps you identify your most engaged developers and create programs that turn them into advocates, content creators, and contributors. No forced evangelism; genuine value exchange for developers who love your product.
+Helps you identify your most engaged developers and create programs that turn them into advocates, content creators, and contributors. No forced evangelism — genuine value exchange for developers who love your product.
 
 ## When to Use
 
@@ -36,8 +36,8 @@ a champion program. We have about 5,000 active developers using our API.
 
 ## Key Principles
 
-1. **Don't push everyone up the spectrum; meet them where they are**
-2. **No content quotas; advocates create because they want to**
+1. **Don't push everyone up the spectrum — meet them where they are**
+2. **No content quotas — advocates create because they want to**
 3. **Choose affordable rewards participants value; disclose incentives**
 4. **Recognition should be specific, timely and public only with permission**
 5. **Start small (5-10 champions) and grow**
@@ -67,12 +67,12 @@ Look for signals:
 
 ## Tools
 
-- **[Octolens](https://octolens.com)**; Discover advocates through positive mentions, track content, identify power users
-- **FirstPromoter**; Referral management
+- **[Octolens](https://octolens.com)** — Discover advocates through positive mentions, track content, identify power users
+- **FirstPromoter** — Referral management
 
 ## Related Skills
 
-- `developer-audience-context`; What motivates your developers
-- `developer-churn`; Keep power users from leaving
-- `developer-listening`; Find candidates through monitoring
-- `hackathon-sponsorship`; Events where advocates shine
+- `developer-audience-context` — What motivates your developers
+- `developer-churn` — Keep power users from leaving
+- `developer-listening` — Find candidates through monitoring
+- `hackathon-sponsorship` — Events where advocates shine

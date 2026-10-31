@@ -12,7 +12,7 @@ Three short principles. Often confused. Often applied wrong by AI agents (and hu
 
 ---
 
-## DRY: Don't Repeat Yourself
+## DRY — Don't Repeat Yourself
 
 **Definition (Hunt & Thomas, *The Pragmatic Programmer*, verbatim).** *"Every piece of knowledge must have a single, unambiguous, authoritative representation within a system."*
 
@@ -31,11 +31,11 @@ These are textual signals that *probably* indicate knowledge duplication, but ve
 - The same magic number or string repeated ≥3 times outside a constants module.
 - The same validation branch (for example, "if value is missing, raise") duplicated across siblings of one module.
 
-### The Rule of 3: wait for the third occurrence
+### The Rule of 3 — wait for the third occurrence
 
-Don't extract an abstraction the first time you see duplication. Don't extract on the second. Wait for the third; by then you have enough signal about the *real* shape of the shared knowledge to abstract correctly. The Rule of 3 is folklore from refactoring practice; the underlying principle (don't abstract too early) is in Fowler's *Refactoring* (refactoring.com/catalog) and in the wrong-abstraction work below.
+Don't extract an abstraction the first time you see duplication. Don't extract on the second. Wait for the third — by then you have enough signal about the *real* shape of the shared knowledge to abstract correctly. The Rule of 3 is folklore from refactoring practice; the underlying principle (don't abstract too early) is in Fowler's *Refactoring* (refactoring.com/catalog) and in the wrong-abstraction work below.
 
-### The Sandi Metz corollary: wrong abstraction is worse than duplication
+### The Sandi Metz corollary — wrong abstraction is worse than duplication
 
 From Sandi Metz, "The Wrong Abstraction" (Jan 2016): *"duplication is far cheaper than the wrong abstraction."*
 
@@ -50,9 +50,9 @@ If an abstraction has accumulated per-caller branches and special cases, it is t
 
 ---
 
-## KISS: Keep It Simple, Stupid
+## KISS — Keep It Simple, Stupid
 
-**Origin.** Coined by Clarence "Kelly" Johnson at Lockheed's Skunk Works (U-2, SR-71). His designers were handed a basic toolkit; the aircraft had to be repairable by an average mechanic in a combat field with only those tools. The "stupid" refers to the mismatch between break-conditions and repair sophistication; not to the engineer.
+**Origin.** Coined by Clarence "Kelly" Johnson at Lockheed's Skunk Works (U-2, SR-71). His designers were handed a basic toolkit; the aircraft had to be repairable by an average mechanic in a combat field with only those tools. The "stupid" refers to the mismatch between break-conditions and repair sophistication — not to the engineer.
 
 Original phrasing: *"Keep it simple stupid"* (no comma). First documented use by the U.S. Navy in 1960.
 
@@ -62,18 +62,18 @@ Source: Wikipedia, KISS principle; Braithwaite background story.
 
 KISS is fuzzy without numbers. Use these as defaults:
 
-- **Cognitive Complexity ≤10 per function.** SonarSource's Cognitive Complexity metric measures *how hard the code is to understand* rather than the count of independent paths. It's the dominant 2026 metric; adopted by SonarQube, Biome, and ReSharper. Target <7 for greenfield code; <15 is the upper bound before refactor is mandatory.
+- **Cognitive Complexity ≤10 per function.** SonarSource's Cognitive Complexity metric measures *how hard the code is to understand* rather than the count of independent paths. It's the dominant 2026 metric — adopted by SonarQube, Biome, and ReSharper. Target <7 for greenfield code; <15 is the upper bound before refactor is mandatory.
 - **Cyclomatic complexity ≤10 per function.** McCabe's original 1976 metric, still useful as a structural floor. 11–20 is moderate risk; 21–50 is high risk; >50 is untestable. Source: McCabe NIST 235r; JetBrains ReSharper threshold guidance. Use Cognitive Complexity for human-readability judgement; use cyclomatic for "is this testable" judgement. When they disagree, prefer Cognitive Complexity.
 - **Nesting depth ≤5.** Source: Aivosto, Project Metrics: Complexity.
 - **Function length:** no canonical absolute, but common static-analysis defaults (SonarQube, PMD) flag >50–60 lines. Pair with complexity ceiling rather than relying on LOC alone.
 
 ### Self-check
 
-When you see a function exceed cyclo 10 or nest depth 5, refactor *before* finishing; not "later." Extract a helper, replace nested `if/else` with early returns or a lookup table.
+When you see a function exceed cyclo 10 or nest depth 5, refactor *before* finishing — not "later." Extract a helper, replace nested `if/else` with early returns or a lookup table.
 
 ---
 
-## YAGNI: You Aren't Gonna Need It
+## YAGNI — You Aren't Gonna Need It
 
 **Canonical reference.** Martin Fowler, *bliki: Yagni* (May 2015). *"A mantra from ExtremeProgramming... capabilities we presume our software needs in the future should not be built now because 'you aren't gonna need it.'"*
 
@@ -82,7 +82,7 @@ When you see a function exceed cyclo 10 or nest depth 5, refactor *before* finis
 When you build a presumptive feature, you pay:
 
 1. **Cost of build.** Analysis, coding, testing of a feature that ends up unused.
-2. **Cost of delay.** Opportunity cost; revenue-generating work you didn't do instead.
+2. **Cost of delay.** Opportunity cost — revenue-generating work you didn't do instead.
 3. **Cost of carry.** Added complexity makes every future modification and debug slower.
 4. **Cost of repair.** When the presumed feature turns out to be wrong, you pay to rip it out plus the technical debt accumulated against it.
 
@@ -105,20 +105,20 @@ For every parameter, class, file, or abstraction you introduce, answer: *who cal
 
 ---
 
-## Ranked list: where AI agents over-engineer
+## Ranked list — where AI agents over-engineer
 
 By frequency observed (engineering-blog-grade, not from a controlled study):
 
 1. **Premature interfaces/protocols** with one implementation.
-2. **Factory classes for trivial constructors**; `UserFactory.create(...)` wrapping `User(...)`.
-3. **DI containers in small apps**; wiring frameworks for 3–5 services where explicit construction in `main()` is shorter and traceable.
-4. **Try/catch wrappers that change nothing**; adds lines, hides tracebacks.
-5. **Speculative config surface**; settings objects with 15 fields where 3 are read.
+2. **Factory classes for trivial constructors** — `UserFactory.create(...)` wrapping `User(...)`.
+3. **DI containers in small apps** — wiring frameworks for 3–5 services where explicit construction in `main()` is shorter and traceable.
+4. **Try/catch wrappers that change nothing** — adds lines, hides tracebacks.
+5. **Speculative config surface** — settings objects with 15 fields where 3 are read.
 6. **Plugin / registry scaffolding for two cases.**
-7. **`utils.py` / `common.py` modules**; magnets for unrelated functions; violate DRY's "single authoritative representation" by location.
-8. **Re-implementing what the platform already gives you**; custom retry loops, enums, or record-like types the standard library provides; hand-rolled validation a database/schema constraint, the type system, or a framework's declarative rule would enforce; a native platform feature replaced by hand-written app code. Prefer the cheapest existing solution: stdlib or native feature over new code, a declarative constraint over an imperative check. The flip side is mode 15 in [ai-failure-modes.md](ai-failure-modes.md); don't reach for a *new* dependency for what a few lines already cover either.
-9. **Excessive layering** (Controller → Service → Manager → Repository) for CRUD; four files to read one row.
-10. **Wrapping libraries "to make them swappable"**; thin pass-through adapters around an HTTP, database, or SDK client you will never swap.
+7. **`utils.py` / `common.py` modules** — magnets for unrelated functions; violate DRY's "single authoritative representation" by location.
+8. **Re-implementing what the platform already gives you** — custom retry loops, enums, or record-like types the standard library provides; hand-rolled validation a database/schema constraint, the type system, or a framework's declarative rule would enforce; a native platform feature replaced by hand-written app code. Prefer the cheapest existing solution: stdlib or native feature over new code, a declarative constraint over an imperative check. The flip side is mode 15 in [ai-failure-modes.md](ai-failure-modes.md) — don't reach for a *new* dependency for what a few lines already cover either.
+9. **Excessive layering** (Controller → Service → Manager → Repository) for CRUD — four files to read one row.
+10. **Wrapping libraries "to make them swappable"** — thin pass-through adapters around an HTTP, database, or SDK client you will never swap.
 
 ---
 

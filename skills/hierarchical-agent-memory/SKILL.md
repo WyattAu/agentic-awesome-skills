@@ -54,7 +54,7 @@ The root CLAUDE.md includes a routing section that tells the agent exactly which
 → lib: src/lib/CLAUDE.md
 ```
 
-The agent reads root, then immediately loads the relevant subdirectory context; no guessing.
+The agent reads root, then immediately loads the relevant subdirectory context — no guessing.
 
 ### Step 3: Dashboard ("ham dashboard")
 
@@ -70,7 +70,7 @@ Launches a web dashboard at localhost:7777 that visualizes:
 
 | Trigger | What it does |
 |---|---|
-| `go ham` | Set up HAM; auto-detect platform, generate CLAUDE.md files |
+| `go ham` | Set up HAM — auto-detect platform, generate CLAUDE.md files |
 | `ham savings` | Show token and cost savings report |
 | `ham dashboard` | Launch the interactive web dashboard |
 | `ham audit` | Health check on memory files |
@@ -120,7 +120,7 @@ Agent:
 - Keep subdirectory CLAUDE.md files under 75 lines each
 - Run `ham audit` every 2 weeks to catch stale or missing context files
 - Use `ham route` after adding new directories to keep routing current
-- Review `.memory/inbox.md` periodically; confirm or reject inferred items
+- Review `.memory/inbox.md` periodically — confirm or reject inferred items
 
 ## Limitations
 
@@ -128,10 +128,10 @@ Agent:
 - Baseline savings comparisons are estimates based on typical agent behavior
 - Dashboard requires Node.js 18+ and reads session data from `~/.claude/projects/`
 - Context routing detection relies on CLAUDE.md read order in session JSONL files
-- Does not auto-update subdirectory CLAUDE.md content; you maintain those manually or via `ham audit`
+- Does not auto-update subdirectory CLAUDE.md content — you maintain those manually or via `ham audit`
 - Carbon estimates use regional grid averages, not real-time energy data
 
 ## Related Skills
 
-- `agent-memory-systems`; general agent memory architecture patterns
-- `agent-memory-mcp`; MCP-based memory integration
+- `agent-memory-systems` — general agent memory architecture patterns
+- `agent-memory-mcp` — MCP-based memory integration

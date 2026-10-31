@@ -154,6 +154,6 @@ non-blocking deviations) and **stop for scope changes** (ask before expanding be
 ## Limitations
 
 - Runtime helper `scripts/relay.mjs` is bundled from the revision recorded in `UPSTREAM-NOTICE.md`. Requires the corresponding installed and authenticated CLI, Node 18+, and git.
-- Relay never commits; it only returns structured result JSON; you review and land the commit.
+- Relay never commits — it only returns structured result JSON; you review and land the commit.
 
 > Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT). Runtime relay is bundled; local changes are recorded in the upstream notice.

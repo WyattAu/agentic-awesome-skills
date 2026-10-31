@@ -29,7 +29,7 @@ Activate this skill when:
 
 Agent evaluation requires outcome-focused approaches that account for non-determinism and multiple valid paths. Multi-dimensional rubrics capture various quality aspects: factual accuracy, completeness, citation accuracy, source quality, and tool efficiency. LLM-as-judge provides scalable evaluation while human evaluation catches edge cases.
 
-The key insight is that agents may find alternative paths to goals-the evaluation should judge whether they achieve right outcomes while following reasonable processes.
+The key insight is that agents may find alternative paths to goals—the evaluation should judge whether they achieve right outcomes while following reasonable processes.
 
 **Performance Drivers: The 95% Finding**
 [Anthropic's June 2025 engineering report](https://www.anthropic.com/engineering/multi-agent-research-system) described an analysis of BrowseComp in which three factors explained 95% of variance. This is a reported association in that setting, not a causal guarantee or a universal evaluation rule:

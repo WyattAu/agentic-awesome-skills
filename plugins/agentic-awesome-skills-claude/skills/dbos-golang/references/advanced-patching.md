@@ -71,7 +71,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 
 Lifecycle: `Patch()` → deploy → wait for old workflows → `DeprecatePatch()` → deploy → wait → remove patch entirely.
 
-**Required configuration**; patching must be explicitly enabled:
+**Required configuration** — patching must be explicitly enabled:
 
 ```go
 ctx, _ := dbos.NewDBOSContext(context.Background(), dbos.Config{

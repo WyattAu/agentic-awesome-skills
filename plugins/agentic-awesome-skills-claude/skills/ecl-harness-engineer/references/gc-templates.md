@@ -4,7 +4,7 @@
 
 > "Documentation entropy compounds. A single outdated comment erodes trust in all docs."
 
-Templates for automated documentation hygiene; detecting stale docs, broken links, interface drift,
+Templates for automated documentation hygiene — detecting stale docs, broken links, interface drift,
 and other forms of documentation rot before they erode agent trust.
 
 ## Table of Contents
@@ -22,7 +22,7 @@ and other forms of documentation rot before they erode agent trust.
 ## Why Garbage Collection
 
 Every outdated doc is a trap for agents. When an agent reads stale architecture docs, it makes
-decisions based on fiction; then validation catches the mismatch 30 tool calls later, wasting
+decisions based on fiction — then validation catches the mismatch 30 tool calls later, wasting
 tokens and time. Proactive garbage collection prevents this by catching documentation rot
 at the source.
 
@@ -216,9 +216,9 @@ def main():
             print(f"{severity_icon} {f['doc']} (last updated: {f['doc_last_modified'][:10]})")
             for ref in f["stale_references"]:
                 if ref["reason"] == "file_deleted":
-                    print(f"   ✗ {ref['file']}; DELETED (reference is broken)")
+                    print(f"   ✗ {ref['file']} — DELETED (reference is broken)")
                 else:
-                    print(f"   ✗ {ref['file']}; code updated {ref['detail']}")
+                    print(f"   ✗ {ref['file']} — code updated {ref['detail']}")
             print()
 
     sys.exit(1 if findings else 0)
@@ -268,7 +268,7 @@ def extract_links(md_path: Path) -> List[Dict]:
     content = md_path.read_text()
     links = []
 
-    # [text](target): skip external URLs
+    # [text](target) — skip external URLs
     link_pattern = r'\[([^\]]*)\]\(([^)]+)\)'
     for match in re.finditer(link_pattern, content):
         target = match.group(2)
@@ -293,7 +293,7 @@ def resolve_link(md_path: Path, target: str, project_root: Path) -> Dict:
         path_part, anchor = target, None
 
     if not path_part:
-        # Pure anchor link (#section): check current file
+        # Pure anchor link (#section) — check current file
         if anchor:
             return check_anchor(md_path, anchor)
         return {"valid": True}
@@ -403,7 +403,7 @@ if __name__ == "__main__":
 
 ## 3. Interface Drift Detector
 
-Detects when documented interfaces no longer match the actual code; the most insidious form
+Detects when documented interfaces no longer match the actual code — the most insidious form
 of documentation rot because the doc looks legitimate but leads agents astray.
 
 ```python
@@ -716,9 +716,9 @@ def format_report(report: dict) -> str:
     total = s["total_issues"]
 
     if total == 0:
-        return "✓ Documentation is clean; no issues found"
+        return "✓ Documentation is clean — no issues found"
 
-    lines.append(f"Documentation GC Report; {report['timestamp'][:10]}")
+    lines.append(f"Documentation GC Report — {report['timestamp'][:10]}")
     lines.append(f"{'=' * 50}")
     lines.append(f"Total issues: {total} (🔴 {s['high']} high, 🟡 {s['medium']} medium, 🟢 {s['low']} low)")
     lines.append("")
@@ -802,12 +802,12 @@ gc-docs:
 After completing a task that creates or modifies code, the executor can run a quick GC check:
 
 ```bash
-# Quick post-task check: just broken links on changed docs
+# Quick post-task check — just broken links on changed docs
 python3 scripts/gc_broken_links.py . --json | python3 -c "
 import sys, json
 data = json.load(sys.stdin)
 if data['broken_links']:
-    print('⚠ Task may have introduced broken doc links; review before committing')
+    print('⚠ Task may have introduced broken doc links — review before committing')
 "
 ```
 

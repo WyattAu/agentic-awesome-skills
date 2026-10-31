@@ -185,7 +185,7 @@ Subject: Guest Idea: [Specific Topic] for [Podcast Name]
 
 Hi [Host Name],
 
-I've been listening to [Podcast] for [time]; loved your episode on [specific episode].
+I've been listening to [Podcast] for [time] — loved your episode on [specific episode].
 
 I'd love to come on and talk about [specific topic]. Here's the angle:
 
@@ -412,11 +412,11 @@ Monthly advocacy report:
 
 ## Related Skills
 
-- `developer-audience-context`; Know who you're reaching
-- `devrel-content`; Written content strategy
-- `community-building`; Community management
-- `open-source-marketing`; OSS-specific advocacy
-- `hacker-news-strategy`; HN engagement
+- `developer-audience-context` — Know who you're reaching
+- `devrel-content` — Written content strategy
+- `community-building` — Community management
+- `open-source-marketing` — OSS-specific advocacy
+- `hacker-news-strategy` — HN engagement
 
 ## Limitations
 

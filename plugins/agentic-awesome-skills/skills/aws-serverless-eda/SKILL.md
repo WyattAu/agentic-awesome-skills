@@ -23,10 +23,10 @@ Verify changeable AWS facts with available official documentation tools or prima
 This skill leverages the CDK MCP server (provided via `aws-cdk-development` dependency) and AWS Documentation MCP for serverless guidance.
 
 > **Note**: The following AWS MCP servers are available separately via the Full AWS MCP Server (see `aws-mcp-setup` skill) and are not bundled with this plugin:
-> - AWS Serverless MCP; SAM CLI lifecycle (init, deploy, local test)
-> - AWS Lambda Tool MCP; Direct Lambda invocation
-> - AWS Step Functions MCP; Workflow orchestration
-> - Amazon SNS/SQS MCP; Messaging and queue management
+> - AWS Serverless MCP — SAM CLI lifecycle (init, deploy, local test)
+> - AWS Lambda Tool MCP — Direct Lambda invocation
+> - AWS Step Functions MCP — Workflow orchestration
+> - Amazon SNS/SQS MCP — Messaging and queue management
 
 ## When to Use This Skill
 

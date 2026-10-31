@@ -50,7 +50,7 @@ MUST NOT 在未明确允许时：
 
 ## 工作流
 
-### Phase 1: 分区与资产
+### Phase 1 — 分区与资产
 
 ```text
 □ Purdue L0–L5 草图：现场设备 → 控制 → 监督 → 站点 DMZ → 企业
@@ -58,7 +58,7 @@ MUST NOT 在未明确允许时：
 □ 协议与端口基线（仅授权网段）
 ```
 
-### Phase 2: 被动与只读
+### Phase 2 — 被动与只读
 
 ```text
 □ SPAN/镜像 PCAP → protocol-reverse / Wireshark 工控解析器
@@ -66,7 +66,7 @@ MUST NOT 在未明确允许时：
 □ 默认口令与明文协议（Modbus 无认证）记录为 Finding，不写盘改值
 ```
 
-### Phase 3: 受限主动（仅授权）
+### Phase 3 — 受限主动（仅授权）
 
 ```text
 □ 低速识别，维护窗口
@@ -74,7 +74,7 @@ MUST NOT 在未明确允许时：
 □ 每步 Evidence；异常立即停止并通报
 ```
 
-### Phase 4: 固件/补丁面
+### Phase 4 — 固件/补丁面
 
 ```text
 □ 控制器固件版本 → CVE 映射（不盲刷固件）

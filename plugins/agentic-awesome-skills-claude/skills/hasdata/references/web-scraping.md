@@ -1,4 +1,4 @@
-# Web Scraping API: `POST /scrape/web`
+# Web Scraping API — `POST /scrape/web`
 
 One endpoint to fetch any URL, optionally with JS rendering, proxies, AI extraction, and screenshots. Synchronous.
 
@@ -27,7 +27,7 @@ resp = requests.post(
     json={"url": "https://example.com", "outputFormat": ["markdown"]},
     timeout=300,
 )
-print(resp.text)            # raw markdown; no JSON parsing
+print(resp.text)            # raw markdown — no JSON parsing
 ```
 
 ## Body parameters
@@ -36,17 +36,17 @@ print(resp.text)            # raw markdown; no JSON parsing
 |---|---|---|
 | `url` | string | **Required.** Absolute URL. |
 | `outputFormat` | string[] | `html`, `text`, `markdown`, `json`. **Single non-JSON format → raw content as the body** (not JSON-wrapped); multiple formats → JSON object with one key per format. Always include `"json"` (or another format) when you also need `requestMetadata`. |
-| `proxyType` | enum | `datacenter` (default) or `residential`; use residential only for authorized geo/availability testing where terms and access controls permit it. |
-| `proxyCountry` | string | ISO 3166-1 alpha-2; `US`, `UK`, `DE`, `FR`, `IT`, `SE`, `BR`, `CA`, `JP`, `SG`, `IN`, `ID`, `IE`. |
-| `jsRendering` | bool | Headless browser; required for SPAs and dynamically-injected content. |
+| `proxyType` | enum | `datacenter` (default) or `residential` — use residential only for authorized geo/availability testing where terms and access controls permit it. |
+| `proxyCountry` | string | ISO 3166-1 alpha-2 — `US`, `UK`, `DE`, `FR`, `IT`, `SE`, `BR`, `CA`, `JP`, `SG`, `IN`, `ID`, `IE`. |
+| `jsRendering` | bool | Headless browser — required for SPAs and dynamically-injected content. |
 | `wait` / `waitFor` | int (ms) / CSS string | Fixed delay vs. wait-until-selector. Prefer `waitFor`. |
 | `jsScenario` | array | Sequence of click/fill/wait/scroll/evaluate. Requires `jsRendering`. |
-| `headers` | object | Custom headers. **Cookies go here too; no separate `cookies` parameter.** |
+| `headers` | object | Custom headers. **Cookies go here too — no separate `cookies` parameter.** |
 | `screenshot` | bool | Returns a CDN URL in the response. |
 | `extractRules` | object | CSS selectors → field text. `@attr` for attributes. **First match only**, missing → `null`. |
 | `aiExtractRules` | object | Typed LLM extraction. Types: `string`, `number`, `boolean`, `list`, `item`. |
 | `extractEmails` / `extractLinks` | bool | Quick helpers. |
-| `blockResources` / `blockAds` | bool | Skip images/CSS/ads; speeds text-only scrapes. |
+| `blockResources` / `blockAds` | bool | Skip images/CSS/ads — speeds text-only scrapes. |
 | `blockUrls` | string[] | Glob patterns to block subresources. |
 | `removeBase64Images` | bool | Strip inline base64 from response. |
 | `includeOnlyTags` / `excludeTags` | string[] | Trim DOM before serialization. |
@@ -98,7 +98,7 @@ Use when layout varies across pages; otherwise prefer `extractRules` for determi
 ]
 ```
 
-Actions: `click`, `fill: [sel, val]`, `wait: ms`, `waitFor: sel`, `waitForAndClick: sel`, `scrollX/scrollY: px`, `evaluate: "JS"`. Sequential. Missing element on `click`/`fill` fails the request; wrap with `waitFor` first.
+Actions: `click`, `fill: [sel, val]`, `wait: ms`, `waitFor: sel`, `waitForAndClick: sel`, `scrollX/scrollY: px`, `evaluate: "JS"`. Sequential. Missing element on `click`/`fill` fails the request — wrap with `waitFor` first.
 
 ## Auth via cookies
 
@@ -128,7 +128,7 @@ Reduces response size 60–90% on noisy pages.
 
 ## Response shape
 
-The wrapper is JSON **only when** the response is JSON-wrapped; i.e. multiple `outputFormat` values, or a single value that includes `"json"`. With a single non-JSON format the response body is the raw content (`text/markdown`, `text/html`, `text/plain`).
+The wrapper is JSON **only when** the response is JSON-wrapped — i.e. multiple `outputFormat` values, or a single value that includes `"json"`. With a single non-JSON format the response body is the raw content (`text/markdown`, `text/html`, `text/plain`).
 
 ```json
 {
@@ -151,9 +151,9 @@ Async wrapper for >1k URLs running the same extraction. Returns `jobId`; poll st
 
 ## Gotchas
 
-- **Disable `jsRendering` first**, enable only when the page needs it; most static pages parse fine without a headless browser.
+- **Disable `jsRendering` first**, enable only when the page needs it — most static pages parse fine without a headless browser.
 - **`waitFor` > `wait`.** Selector-based waits adapt to network speed.
 - **Cookies via `headers["Cookie"]` only.**
-- **`extractRules` returns first match**; for arrays use `aiExtractRules` `type: "list"`.
+- **`extractRules` returns first match** — for arrays use `aiExtractRules` `type: "list"`.
 - **Set client timeout ≥ 300 s** to match the server deadline.
 - **`requestMetadata.status === "ok"` is the only success signal.**

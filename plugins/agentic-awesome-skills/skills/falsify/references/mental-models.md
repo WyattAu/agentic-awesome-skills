@@ -13,7 +13,7 @@ Companion to `SKILL.md`. Use the model that fits the stage, never all of them. 2
 ## Stage 2 · Hypothesize (假设化)
 | Model | Question it answers |
 |---|---|
-| Falsifiability | What evidence would disprove this? If none; rewrite. |
+| Falsifiability | What evidence would disprove this? If none — rewrite. |
 | Base Rate Neglect | What is the prior probability before this specific case? |
 | Inversion | What would guarantee the wrong answer? Avoid it. |
 | Hypothesis-Driven Solving | What is the fastest test to confirm or kill this? |
@@ -21,7 +21,7 @@ Companion to `SKILL.md`. Use the model that fits the stage, never all of them. 2
 ## Stage 3 · Adversarialize (对抗)
 | Model | Question it answers |
 |---|---|
-| Pre-Mortem | It is a year later and this failed; why? |
+| Pre-Mortem | It is a year later and this failed — why? |
 | Chesterton's Fence | Do I understand why this exists before removing it? |
 | Red Team Analysis | How would an adversary defeat this plan? |
 | Survivorship Bias | Am I only looking at winners? |
@@ -66,7 +66,7 @@ Label which inference you used; the label describes inference, not a fixed confi
 | Counterfactual | decision-only | actual world vs imagined world stated explicitly |
 
 ## Frontier questioning (Stage 0)
-Ask the whole open frontier in one round; numbered questions, each with a recommended answer. Never ask what you could look up. Recomputed the frontier after each answer round.
+Ask the whole open frontier in one round — numbered questions, each with a recommended answer. Never ask what you could look up. Recomputed the frontier after each answer round.
 
 ## v0.4 additions (superforecaster / preregistration / MetaCrit)
 | Model | Question it answers | Stage |
@@ -80,7 +80,7 @@ Ask the whole open frontier in one round; numbered questions, each with a recomm
 | Multi-Perspective Review | Would the executor, the stakeholder, and the skeptic all sign this verdict? | 5 |
 | Strong Opinions, Weakly Held | What condition would make me revise this conclusion? | 5 |
 | Uncertainty Two-Signal | Action-confidence vs request-uncertainty (0/0.5/1) reported separately | 5 |
-| Socratic Taxonomy (Paul & Elder) | Clarity / precision / accuracy / relevance / depth / breadth / logic / significance / fairness; which dimension is weakest? | 0/3 |
+| Socratic Taxonomy (Paul & Elder) | Clarity / precision / accuracy / relevance / depth / breadth / logic / significance / fairness — which dimension is weakest? | 0/3 |
 | Circle of Competence | Am I (or my verified sources) actually qualified to answer this? | all |
 
 ## v0.5 additions (ACH / Heuer / Lakatos / Mayo)
@@ -99,33 +99,33 @@ Ask the whole open frontier in one round; numbered questions, each with a recomm
 |---|---|---|
 | Argument Mapping (Toulmin) | Can I draw contention → reasons → co-premises → warrant before attacking? | 2 |
 | Co-Premise Check (van Gelder) | What hidden assumption does each reason silently depend on? (weakest spot) | 2/3 |
-| Warrant Check (Toulmin) | What logical principle connects reason to claim; and is it actually stated? | 2/3 |
+| Warrant Check (Toulmin) | What logical principle connects reason to claim — and is it actually stated? | 2/3 |
 | Structure ≠ Truth (van Gelder) | Even if the logic holds, are the load-bearing premises true? | 3/all |
 | Causal Ladder (Pearl) | Am I claiming association, intervention do(x), or counterfactual? | 4 |
 | Backdoor Criterion (Pearl) | Is there a confounder I failed to condition on that manufactured the association? | 4 |
 | Collider Trap (Pearl) | Did conditioning on a collider open a path and create the bias I am now seeing? | 4 |
-| Self-Reflection Warning (Huang et al. 2023) | What external signal changed my confidence; or is the re-read just drift? | 4/5 |
+| Self-Reflection Warning (Huang et al. 2023) | What external signal changed my confidence — or is the re-read just drift? | 4/5 |
 | PR/FAQ Decision Artifact (Amazon) | Is this hard decision documented as evidence + assumptions + stop conditions, not a story? | 5 |
 
 ## v0.7 additions (Kahneman / Simon / Galef / decision theory / Bayes odds)
 | Model | Question it answers | Stage |
 |---|---|---|
-| Dual-Process Routing (Kahneman) | Which lane: System 1 fast or System 2 deliberate; and what is my effort budget right now? | 0 |
+| Dual-Process Routing (Kahneman) | Which lane: System 1 fast or System 2 deliberate — and what is my effort budget right now? | 0 |
 | Satisficing / Bounded Rationality (Simon) | What is the pre-declared aspiration threshold, and did I stop at the first option that clears it? | 0/5 |
 | Reversal Test (Galef) | Would I accept the same evidence pointing the other way, or is that special pleading? | 3 |
 | Scope Sensitivity (Galef) | Do my probabilities scale with magnitude, or am I scope-insensitive? | 3/4 |
 | Status Quo Bias (Galef) | Am I assuming "no change" needs no evidence while change needs a lot? | 3/4 |
 | Bias Audit (Galef / lex-bias) | Which of the six (confirmation/availability/anchoring/affect/overconfidence/sunk cost) is active, and by how much? | 4 |
-| CI Surprise Test | Do outcomes fall outside my intervals more often than they should; and if so, recalibrate against held-out coverage? | 4 |
+| CI Surprise Test | Do outcomes fall outside my intervals more often than they should — and if so, recalibrate against held-out coverage? | 4 |
 | Likelihood Ratio (Bayes odds form) | What is P(E|H)/P(E|¬H), and did I multiply the prior odds by it? | 4 |
-| Expected Value (vNM) | EV = Σ(pᵢ×vᵢ); which rule: max EV, max EU, minimax regret, or satisfice? | 5 |
+| Expected Value (vNM) | EV = Σ(pᵢ×vᵢ) — which rule: max EV, max EU, minimax regret, or satisfice? | 5 |
 | Risk Aversion / Utility | Is this a one-shot high-stakes bet where raw EV overstates the rational choice? | 5 |
 | Option Value | In sequential decisions, did I keep the value of stopping, pivoting, or waiting? | 5 |
 
 ## v0.8 additions (Cynefin / Kepner-Tregoe / Boyd OODA / debiasing / systems)
 | Model | Question it answers | Stage |
 |---|---|---|
-| Cynefin Classification (Snowden) | Which cause–effect domain am I in; clear/complicated/complex/chaotic/disorder; and which method does it demand? | 0 |
+| Cynefin Classification (Snowden) | Which cause–effect domain am I in — clear/complicated/complex/chaotic/disorder — and which method does it demand? | 0 |
 | OODA Loop (Boyd) | Is this moving + reversible → use an authorized bounded mitigation, re-observe, loop? | 0 |
 | IS/IS-NOT Matrix (Kepner-Tregoe) | For a selective defect: what/where/when/extent differs from the closest comparable non-affected side? | 1 |
 | Pre-Registered Update Rules (Galef debiasing) | Did I lock "if Z → update to W" + acceptance criteria before seeing the evidence? | 2/4 |

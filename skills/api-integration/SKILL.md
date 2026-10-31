@@ -54,11 +54,11 @@ if not hmac.compare_digest(f"sha256={expected}", request.headers.get("X-Webhook-
 
 ### Inbound Webhook Registration API
 ```
-POST   /api/v1/webhooks          ; register subscriber URL + events
-GET    /api/v1/webhooks          ; list subscriptions
-DELETE /api/v1/webhooks/{id}     ; unsubscribe
-POST   /api/v1/webhooks/{id}/test; fire test event
-GET    /api/v1/webhooks/{id}/deliveries; delivery history + status
+POST   /api/v1/webhooks           — register subscriber URL + events
+GET    /api/v1/webhooks           — list subscriptions
+DELETE /api/v1/webhooks/{id}      — unsubscribe
+POST   /api/v1/webhooks/{id}/test — fire test event
+GET    /api/v1/webhooks/{id}/deliveries — delivery history + status
 ```
 
 ---

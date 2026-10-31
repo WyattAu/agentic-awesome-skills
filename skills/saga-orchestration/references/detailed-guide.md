@@ -489,7 +489,7 @@ class TimeoutSagaOrchestrator(SagaOrchestrator):
 
 ## Durable Execution Alternative
 
-The templates above build saga infrastructure from scratch; saga stores, event publishers, compensation tracking. **Durable execution frameworks** (like DBOS) eliminate much of this boilerplate: the workflow runtime automatically persists state to a database, retries failed steps, and resumes from the last checkpoint after crashes. Instead of building a `SagaOrchestrator` base class, you write a workflow function with steps; the framework handles persistence, crash recovery, and framework-specific replay semantics. Consider durable execution when you want saga-like reliability without managing the coordination infrastructure yourself.
+The templates above build saga infrastructure from scratch — saga stores, event publishers, compensation tracking. **Durable execution frameworks** (like DBOS) eliminate much of this boilerplate: the workflow runtime automatically persists state to a database, retries failed steps, and resumes from the last checkpoint after crashes. Instead of building a `SagaOrchestrator` base class, you write a workflow function with steps — the framework handles persistence, crash recovery, and framework-specific replay semantics. Consider durable execution when you want saga-like reliability without managing the coordination infrastructure yourself.
 
 
 ## Best Practices

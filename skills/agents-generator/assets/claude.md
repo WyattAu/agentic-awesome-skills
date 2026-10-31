@@ -1,4 +1,4 @@
-# CLAUDE.md: Template
+# CLAUDE.md — Template
 
 ONLY generate if Claude Code is detected in the project. Detection signals:
 
@@ -23,9 +23,9 @@ See @AGENTS.md
 
 Only add if the project actually uses Claude-specific features. If none, omit entirely:
 
-- **`.claude/rules/`**; if modular rule files exist: `Additional rules in @.claude/rules/`
-- **`.claude/commands/`**; if custom slash commands exist: `Custom commands: @.claude/commands/`
-- **`.claude/agents/`**; if custom subagents exist: `Custom subagents: @.claude/agents/`
+- **`.claude/rules/`** — if modular rule files exist: `Additional rules in @.claude/rules/`
+- **`.claude/commands/`** — if custom slash commands exist: `Custom commands: @.claude/commands/`
+- **`.claude/agents/`** — if custom subagents exist: `Custom subagents: @.claude/agents/`
 - **Claude-only behavior**: "Use plan mode for non-trivial tasks", "Use subagents for parallel work"
 
 If none of these apply, CLAUDE.md is just:

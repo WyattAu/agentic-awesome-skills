@@ -11,10 +11,10 @@ checker but preserved by hand-editing, so it is safe to add notes.
 | `title` | string | yes | Shown in the report header |
 | `era.setting_period` | string | recommended | Human-readable window, e.g. `"1998-2005"`; used only in messages |
 | `era.forbidden_terms` | string[] | recommended | Strings that must never appear in this era (`"智能手机"`, `"微信"`, `"高铁"`) |
-| `pov.mode` | string | optional | `third-limited`, `first`, `omniscient`; documentary only |
+| `pov.mode` | string | optional | `third-limited`, `first`, `omniscient` — documentary only |
 | `pov.allowed_pov` | string[] | recommended | Characters allowed interior access |
 | `characters` | object[] | recommended | See below |
-| `timeline` | object[] | optional | `{id, date, summary, chapter}`; documentary; keeps dated events in one place |
+| `timeline` | object[] | optional | `{id, date, summary, chapter}` — documentary; keeps dated events in one place |
 | `foreshadowing` | object[] | recommended | See below |
 
 An empty `characters` array disables `name-drift`, `age-arithmetic`, and
@@ -26,14 +26,14 @@ cannot fire should be reported as "not configured", never as "clean".
 | Key | Type | Meaning |
 |---|---|---|
 | `name` | string | Canonical spelling used in prose |
-| `aliases` | string[] | Legitimate shorter forms / nicknames; never flagged |
+| `aliases` | string[] | Legitimate shorter forms / nicknames — never flagged |
 | `birth_year` | int\|null | Enables `age-arithmetic` |
-| `watch_spellings` | string[] | Known wrong spellings; flagged wherever they appear |
+| `watch_spellings` | string[] | Known wrong spellings — flagged wherever they appear |
 | `notes` | string | Free text, ignored by the checker |
 
 `watch_spellings` is data, not a guess: when a reviewer spots a typo the model
 keeps repeating, it belongs here so the next run catches it. `aliases` and
-`watch_spellings` are mutually exclusive; a spelling in both is skipped, so
+`watch_spellings` are mutually exclusive — a spelling in both is skipped, so
 remove the alias if the form is wrong.
 
 ## foreshadowing[]
@@ -49,7 +49,7 @@ remove the alias if the form is wrong.
 
 Severity: payoff chapter beyond the manuscript = **error**; deadline passed
 with no payoff = **warn**; payoff chapter present but `payoff_keyword` missing =
-**warn** (the payoff may be worded differently; reword the keyword, do not
+**warn** (the payoff may be worded differently — reword the keyword, do not
 assume the chapter is wrong).
 
 ## age arithmetic

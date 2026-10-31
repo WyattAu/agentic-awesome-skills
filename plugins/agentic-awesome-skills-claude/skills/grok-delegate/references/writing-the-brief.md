@@ -1,7 +1,7 @@
 # Writing the brief
 
 A brief is the entire task as Grok will see it. Grok runs in a fresh process with **no memory of
-your conversation, no access to your prior notes, and no shared context**; only the text you send and
+your conversation, no access to your prior notes, and no shared context** — only the text you send and
 whatever it can read from the working tree (including repo rules it discovers via `grok inspect`, and
 the repo's own `AGENTS.md` when present).
 If a constraint isn't in the brief or discoverable in the repo, it doesn't exist for Grok. The single
@@ -11,11 +11,11 @@ most common failure is a brief that assumes context Grok doesn't have.
 
 Grok responds best to compact, block-structured prompts with XML tags rather
 than long prose. State the task, what "done" looks like, how to behave by default, and the few
-constraints that actually matter. Add a block only when the task needs it; don't ship empty ceremony.
+constraints that actually matter. Add a block only when the task needs it — don't ship empty ceremony.
 
 ```xml
 <task>
-One or two sentences: the concrete job and where it lives. Then the specifics; current state, what to
+One or two sentences: the concrete job and where it lives. Then the specifics — current state, what to
 change, and explicitly what to leave untouched. The "leave untouched" list is what keeps Grok from
 wandering into unrelated refactors.
 </task>
@@ -30,7 +30,7 @@ Confirm the working tree shows only the intended changes afterward.
 
 <action_safety>
 Keep changes scoped to the task. No unrelated refactors, renames, or cleanup unless required for
-correctness. Do NOT run git add, git commit, git push, publish, or external messaging; the orchestrator commits after reviewing. Leave the
+correctness. Do NOT run git add, git commit, git push, publish, or external messaging — the orchestrator commits after reviewing. Leave the
 work uncommitted in the working tree.
 </action_safety>
 
@@ -46,29 +46,29 @@ End with a report in this exact shape:
 That four-block skeleton covers most implementation tasks. Reach for the extra blocks when the task
 profile calls for them:
 
-- **Debugging / open-ended fixes**; add `<completeness_contract>` (resolve fully, don't stop at the
+- **Debugging / open-ended fixes** — add `<completeness_contract>` (resolve fully, don't stop at the
   first plausible fix) and `<missing_context_gating>` (don't guess missing repo facts; find them or
   state what's unknown).
-- **Review / diagnosis (read-only)**; add `<grounding_rules>` (ground every claim in evidence; label
+- **Review / diagnosis (read-only)** — add `<grounding_rules>` (ground every claim in evidence; label
   inferences), tell Grok in the brief not to edit anything, and run with `--read-only`. Note
-  `--read-only` is best-effort on grok, not a hard block; verify `touchedFiles` after the run.
-- **Research / recommendations**; add `<research_mode>` (separate observed facts, inferences, open
+  `--read-only` is best-effort on grok, not a hard block — verify `touchedFiles` after the run.
+- **Research / recommendations** — add `<research_mode>` (separate observed facts, inferences, open
   questions).
 
-## Discover the real gates: don't hardcode
+## Discover the real gates — don't hardcode
 
 `<verification_loop>` is only useful if it names the project's *actual* commands. Read the repo's
 `CLAUDE.md` / `AGENTS.md` / `Makefile` / `package.json` first and copy the real ones in (`make test`,
 `npm run lint`, `cargo test`, `pytest -q`, whatever it is). A brief that says "run the tests" without
-naming them gets you a Grok that guesses; or skips.
+naming them gets you a Grok that guesses — or skips.
 
 ## Honor the repo's conventions
 
 Grok discovers project configuration for the current directory (`grok inspect` shows rules, skills,
 plugins, hooks, and MCP servers). House rules in the repo (style, forbidden patterns, commit
-conventions) already apply when configured. If the project forbids certain things in code; say,
+conventions) already apply when configured. If the project forbids certain things in code — say,
 spec/ticket IDs in comments, process language like "MVP"/"for now"/"phase N", or specific test
-conventions; restate the load-bearing ones in the brief too, because compliance is only as reliable
+conventions — restate the load-bearing ones in the brief too, because compliance is only as reliable
 as what's in front of the implementer.
 
 ## One task per brief
@@ -80,10 +80,10 @@ run → one commit keeps review and rollback clean, and lets a later task assume
 ## Premises freeze at dispatch
 
 The implementer starts from the brief's facts and there is no steering channel mid-run. Audit the
-fact block before sending; ownership, target branch, constraints, anything a judgment call rests
+fact block before sending — ownership, target branch, constraints, anything a judgment call rests
 on. If a premise turns out wrong while the run is live, stop the run and re-dispatch a corrected
 brief rather than discounting the output afterward; for a write-capable run, inspect the working
-tree and reconcile any partial or premise-contaminated edits; keep or revert them; before the
+tree and reconcile any partial or premise-contaminated edits — keep or revert them — before the
 re-dispatch.
 
 ## A worked example

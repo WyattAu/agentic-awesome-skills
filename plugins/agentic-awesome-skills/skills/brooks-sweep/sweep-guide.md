@@ -1,14 +1,14 @@
-# Brooks-Lint: Full Sweep Guide
+# Brooks-Lint — Full Sweep Guide
 
 Sequential autonomous pipeline: **review → test → debt → audit**. Fixes findings
 in place, iterates until clean or capped, reports residuals. One interaction point:
-Step 0 (pre-flight consent); after approval the pipeline runs hands-free until Step 8.
+Step 0 (pre-flight consent) — after approval the pipeline runs hands-free until Step 8.
 
 Every finding follows the Iron Law: **Symptom → Source → Consequence → Remedy**.
 
 ---
 
-### Step 0: Pre-flight consent gate
+### Step 0 — Pre-flight consent gate
 
 **Goal:** State scope, cost, and irreversibility up front; get explicit consent
 once so later steps never have to ask.
@@ -16,13 +16,13 @@ once so later steps never have to ask.
 0a. Estimate the file count using `git ls-files | wc -l` if in a git repo, or
    `find . -type f -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/.venv/*' -not -path '*/build/*' -not -path '*/dist/*' -not -path '*/vendor/*' -not -path '*/target/*' | wc -l` otherwise. Order-of-magnitude is enough.
 
-0b. Show this notice verbatim with the estimate filled in. Do not paraphrase -
+0b. Show this notice verbatim with the estimate filled in. Do not paraphrase —
    the user is agreeing to this exact scope.
 
    ```
-   ⚠️  /brooks-sweep; Full Repository Sweep & Auto-Fix
+   ⚠️  /brooks-sweep — Full Repository Sweep & Auto-Fix
 
-   Scope:    Four analysis dimensions run in sequence; PR code decay (R1–R6),
+   Scope:    Four analysis dimensions run in sequence — PR code decay (R1–R6),
              test quality (T1–T6), tech debt, architecture. Edits are made in
              place inside the detected project scope.
    Estimated files in scope: ~N
@@ -33,7 +33,7 @@ once so later steps never have to ask.
    Autonomy: Fully autonomous. Safe single-file fixes apply directly. Multi-file
              fixes that have test coverage AND do not break a public interface
              also apply directly. High-risk fixes (public API break, cross-module
-             structural change, or no test coverage) are NOT applied; they are
+             structural change, or no test coverage) are NOT applied — they are
              recorded in the residual report for human review.
 
    Iteration: After each dimension pass, modified files + same-module + static
@@ -50,28 +50,28 @@ once so later steps never have to ask.
    ```
 
 0c. Parse the reply (first match wins, evaluate rules in order):
-   1. **Hard negation** (`no`, `n`, `abort`, `cancel`, `取消`, `不要`): abort with "Aborted before scan; no files modified."
+   1. **Hard negation** (`no`, `n`, `abort`, `cancel`, `取消`, `不要`): abort with "Aborted before scan — no files modified."
    2. **Consent** (`Y`, `yes`, `ok`, `sure`, `proceed`, `go`, `continue`, `好`, `好的`, `行`, `可以`): proceed to Step 1.
    3. **Soft pause** (`wait`, `hold on`, `等一下`, `等我`, `let me`): acknowledge in one line ("Understood, waiting"), then wait for the user's next message and re-evaluate from rule 1.
-   4. **Question**: answer it, then re-show the notice once and wait for the next reply. If the next reply is not Consent (rule 2); whether a second question, another pause, or anything else; abort with "Aborted; did not receive consent after clarification."
+   4. **Question**: answer it, then re-show the notice once and wait for the next reply. If the next reply is not Consent (rule 2) — whether a second question, another pause, or anything else — abort with "Aborted — did not receive consent after clarification."
 
 0d. Existing scoped authorization suffices for routine fixes. Stop for a material scope change, destructive action or missing required input; a one-time approval does not authorize unknown future effects.
 
 ---
 
-### Step 1: Scope enumeration and state init
+### Step 1 — Scope enumeration and state init
 
 1a. Apply Auto Scope Detection from `../_shared/common.md` if the user did not
    specify files or a directory. Otherwise honor the user's explicit scope.
 
 1b. Read `.brooks-lint.yaml` from the project root if present. Apply `disable`,
    `severity`, `ignore`, `focus`, and `custom_risks` per common.md. Record the
-   applied config values and reuse them across all iteration rounds; do not
+   applied config values and reuse them across all iteration rounds — do not
    re-read the file in Step 6 even if files were modified.
 
 1c. Initialize pipeline state (persists across all rounds):
 
-   - **`unresolvable`** (set): findings retired after 3 failed attempts; keyed by stable `(file, risk_code, symptom_signature)`; line ranges are evidence only and can shift. Never re-queued.
+   - **`unresolvable`** (set): findings retired after 3 failed attempts — keyed by stable `(file, risk_code, symptom_signature)`; line ranges are evidence only and can shift. Never re-queued.
    - **`non_critical_rounds`** (int, 0): incremented each round producing Warning/Suggestion; reset on clean round.
    - **`fix_log`** (list): each fix with file, line range, risk code, description, and outcome (`applied` / `reverted` / `retired`).
 
@@ -79,7 +79,7 @@ once so later steps never have to ask.
 
 ---
 
-### Step 2: brooks-review pass (R1–R6 code decay)
+### Step 2 — brooks-review pass (R1–R6 code decay)
 
 Scan every file in scope against all R-series risks defined in
 `../_shared/decay-risks.md`.
@@ -95,7 +95,7 @@ Scan every file in scope against all R-series risks defined in
    |-------|----------|
    | **Safe** | Single-file AND fully local: rename a non-exported symbol, extract a constant, remove dead code, add a null guard at a leaf, add a test scaffold for an untested pure function. Any change that modifies or removes an exported symbol is NOT Safe even if in one file. |
    | **Extended-Safe** | Multi-file but (a) a project test command exists and passes pre-fix, AND affected behavior has meaningful test coverage, AND (b) the change does not rename, remove, or alter the signature of any publicly exported symbol, AND (c) touches ≤ 5 files in this pass. |
-   | **Residual** | Public API break, cross-service boundary change, no test coverage to fall back on, or remedy ambiguous. NOT applied; carried to the Step 8 residual report. |
+   | **Residual** | Public API break, cross-service boundary change, no test coverage to fall back on, or remedy ambiguous. NOT applied — carried to the Step 8 residual report. |
 
 2c. Skip any finding that matches an entry in the `unresolvable` set.
 
@@ -118,7 +118,7 @@ Scan every file in scope against all R-series risks defined in
 
 ---
 
-### Step 3: brooks-test pass (T1–T6 test decay)
+### Step 3 — brooks-test pass (T1–T6 test decay)
 
 Scan test files (and untested production code) against T-series risks defined
 in `../_shared/test-decay-risks.md`.
@@ -129,9 +129,9 @@ using T-prefix risk codes. For production files with no test coverage, record th
 
 ---
 
-### Step 4: brooks-debt pass (tech debt accumulation)
+### Step 4 — brooks-debt pass (tech debt accumulation)
 
-Re-classify R-findings through a debt lens; same symptoms at accumulation scale:
+Re-classify R-findings through a debt lens — same symptoms at accumulation scale:
 repeated duplication, layered workarounds, stale `TODO`/`FIXME` clusters, dead
 flags. Score each with **Pain (1–3) × Spread (1–3)**; total 7–9 = Critical,
 4–6 = Warning, 1–3 = Suggestion. Apply a severity bump for pattern-level
@@ -142,16 +142,16 @@ and are more likely to land in Extended-Safe or Residual than Safe.
 
 ---
 
-### Step 5: brooks-audit pass (architecture integrity)
+### Step 5 — brooks-audit pass (architecture integrity)
 
 Scan the full scope for architecture-level issues. The dependency-direction
 symptoms (inverted dependencies, circular imports, cross-domain coupling) are
-defined in `../_shared/decay-risks.md` Risk 5; use that checklist. Step 5
+defined in `../_shared/decay-risks.md` Risk 5 — use that checklist. Step 5
 additionally covers architecture-only concerns that R5 does not: missing
 abstraction layers, god modules, leaked infrastructure inside domain code,
 and seam-boundary violations.
 
-Most architecture findings are **Residual** by definition; they require human
+Most architecture findings are **Residual** by definition — they require human
 judgment on module boundaries. A few are Extended-Safe (e.g. extract a shared
 constant used in 3+ modules into a new module that nothing else imports yet).
 Do not auto-refactor module layouts, rename packages, or change public exports.
@@ -160,7 +160,7 @@ Follow the same sub-steps as Step 2.
 
 ---
 
-### Step 6: Iteration loop
+### Step 6 — Iteration loop
 
 **Goal:** Re-scan what the fixes touched and converge. Stop on clean round,
 cap, or no progress.
@@ -190,7 +190,7 @@ cap, or no progress.
      increment `non_critical_rounds` by 1. If it reaches the cap (default 3,
      or `sweep.max_iterations` from `.brooks-lint.yaml`), proceed to Step 7
      with remaining non-critical findings recorded as
-     `"Unresolved; iteration cap reached"`. Otherwise return to 6a.
+     `"Unresolved — iteration cap reached"`. Otherwise return to 6a.
 
 6d. Fix-retry rule: if a single finding fails verification (Step 2e) 3 times
    across any combination of rounds, retire it to `unresolvable` with reason
@@ -198,7 +198,7 @@ cap, or no progress.
 
 ---
 
-### Step 7: Residual aggregation
+### Step 7 — Residual aggregation
 
 Collect everything that was NOT fixed in place, de-duplicated:
 
@@ -213,13 +213,13 @@ applied (`public API break` / `no test coverage` / `3-retry budget` /
 
 ---
 
-### Step 8: Sweep report
+### Step 8 — Sweep report
 
 Output the final report. Use the standard Report Template from
 `../_shared/common.md` with these additions:
 
 ```
-# Brooks-Lint: Full Sweep Report
+# Brooks-Lint — Full Sweep Report
 Mode: Full Sweep | Scope: <files or directory>
 Config: .brooks-lint.yaml applied (N risks disabled, M paths ignored)   # omit if no config
 
@@ -232,7 +232,7 @@ Config: .brooks-lint.yaml applied (N risks disabled, M paths ignored)   # omit i
 | Audit          | ... | ... | ... | ... | ... |
 
 ## Iteration History
-Round 1: <classification; clean / critical-only / mixed>, <N> new findings
+Round 1: <classification — clean / critical-only / mixed>, <N> new findings
 Round 2: ...
 Stopped at: clean round | iteration cap | no outstanding criticals
 

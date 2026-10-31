@@ -1,7 +1,7 @@
 # Writing the brief
 
 A brief is the entire task as Vibe will see it. It runs in a separate session with **no memory of your
-conversation, no access to prior notes, and no shared context**; only the text you send and whatever
+conversation, no access to prior notes, and no shared context** — only the text you send and whatever
 it can inspect in the workspace. If a constraint is not in the brief or discoverable in the repo, it
 does not exist for Vibe.
 
@@ -17,7 +17,7 @@ matter, and the report Vibe must return.
 
 ```xml
 <task>
-One or two sentences: the concrete job and where it lives. Then the specifics; current state, what to
+One or two sentences: the concrete job and where it lives. Then the specifics — current state, what to
 change, and explicitly what to leave untouched. The leave-untouched list prevents unrelated refactors.
 </task>
 
@@ -32,7 +32,7 @@ Otherwise do not claim they ran; perform the inspections available to you and re
 
 <action_safety>
 Keep changes scoped to the task. No unrelated refactors, renames, or cleanup unless required for
-correctness. Do NOT run git add or git commit; the orchestrator commits after reviewing. Leave the
+correctness. Do NOT run git add or git commit — the orchestrator commits after reviewing. Leave the
 work uncommitted in the working tree.
 </action_safety>
 
@@ -47,10 +47,10 @@ End with a report in this exact shape:
 
 Add extra blocks only when the task needs them:
 
-- **Debugging or open-ended fixes**; add `<completeness_contract>` (resolve fully, not just the
+- **Debugging or open-ended fixes** — add `<completeness_contract>` (resolve fully, not just the
   first plausible cause) and `<missing_context_gating>` (find missing repo facts or state what is
   unknown).
-- **Research or recommendations**; add `<research_mode>` (separate observed facts, inferences, and
+- **Research or recommendations** — add `<research_mode>` (separate observed facts, inferences, and
   open questions).
 
 ## Always ask for the report explicitly

@@ -1,6 +1,6 @@
 Part of the psql meta-command reference. See also: meta-commands-core.md, meta-commands-inspection.md
 
-# psql Meta-Commands: Output Formatting & Pipeline Mode
+# psql Meta-Commands — Output Formatting & Pipeline Mode
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ Sets options affecting query result table output. Without arguments, displays cu
 | `csv_fieldsep` | character | CSV field separator (default: comma) |
 | `expanded` (or `x`) | `on`, `off`, `auto` | Vertical display. `auto` uses expanded when wider than screen. Note: `auto` is only effective in `aligned` and `wrapped` formats. |
 | `fieldsep` | string | Field separator for unaligned output (default: `\|`) |
-| `fieldsep_zero` | - | Set field separator to NUL byte |
+| `fieldsep_zero` | — | Set field separator to NUL byte |
 | `footer` | `on`, `off` | Toggle row count footer display |
 | `format` | `aligned`, `asciidoc`, `csv`, `html`, `latex`, `latex-longtable`, `troff-ms`, `unaligned`, `wrapped` | Output format. See format descriptions below. |
 | `linestyle` | `ascii`, `old-ascii`, `unicode` | Border character style. `ascii` uses `+`, `-`, `|` characters. `old-ascii` uses `:` and `;` for borders. `unicode` uses Unicode box-drawing characters. |
@@ -32,7 +32,7 @@ Sets options affecting query result table output. Without arguments, displays cu
 | `pager` | `on`, `off`, `always` | Pager control. Uses `PSQL_PAGER` or `PAGER` env. For `\watch` output, `PSQL_WATCH_PAGER` takes precedence over both. |
 | `pager_min_lines` | integer | Minimum lines before pager activates (default: 0) |
 | `recordsep` | string | Record separator for unaligned mode (default: newline) |
-| `recordsep_zero` | - | Set record separator to NUL byte |
+| `recordsep_zero` | — | Set record separator to NUL byte |
 | `tableattr` (or `T`) | string | HTML: table tag attributes (e.g., `border=1`). latex-longtable: whitespace-separated proportional column widths (e.g., `'0.2 0.2 0.6'`). |
 | `title` (or `C`) | string | Table title. Unset with no value. |
 | `tuples_only` (or `t`) | `on`, `off` | Show only data, no headers/footers |
@@ -117,7 +117,7 @@ Opens the query buffer (or a file) in the external editor. On save, the buffer i
 
 Edits a function or procedure definition as a `CREATE OR REPLACE FUNCTION/PROCEDURE` command. Specify function by name or name and argument types. Without arguments, shows a blank template. Line number positions within the function body.
 
-Unlike most meta-commands, the entire line is the argument; no variable interpolation.
+Unlike most meta-commands, the entire line is the argument — no variable interpolation.
 
 ### `\ev [ view_name [ line_number ] ]`
 

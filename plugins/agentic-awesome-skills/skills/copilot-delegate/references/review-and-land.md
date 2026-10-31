@@ -22,9 +22,9 @@ build commands in the working tree and read their output. Passing is necessary, 
 
 Start with `touchedFiles`, open the diff, and compare it to the brief:
 
-- **Scope creep**; changes the brief excluded.
-- **Scope shortfall**; missed behavior, edges, or cleanup.
-- **Quiet judgment calls**; defensible but unasked decisions that need review.
+- **Scope creep** — changes the brief excluded.
+- **Scope shortfall** — missed behavior, edges, or cleanup.
+- **Quiet judgment calls** — defensible but unasked decisions that need review.
 
 ## The implementer sweep
 
@@ -48,8 +48,8 @@ When the gates pass and the diff holds, **the orchestrator commits**, never the 
 Write a clear message describing what landed.
 
 From dispatch until that commit, the uncommitted working tree is the authoritative copy of the
-implementer's work; the only one you can commit from, and often the only copy at all. Never run
-`git checkout`, `reset`, `clean`, or a branch switch in the workspace between those two points -
+implementer's work — the only one you can commit from, and often the only copy at all. Never run
+`git checkout`, `reset`, `clean`, or a branch switch in the workspace between those two points —
 however messy an interrupted run looks, inspect it first: `git status`, `git diff`,
 `git diff --cached` for anything the implementer staged (plain `git diff` is blind to the index),
 and commit the intended files explicitly.

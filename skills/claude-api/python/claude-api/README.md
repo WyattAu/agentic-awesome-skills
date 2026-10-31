@@ -1,4 +1,4 @@
-# Claude API: Python
+# Claude API — Python
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -113,7 +113,7 @@ Cache large context to reduce costs (up to 90% savings).
 
 ### Automatic Caching (Recommended)
 
-Use top-level `cache_control` to automatically cache the last cacheable block in the request; no need to annotate individual content blocks:
+Use top-level `cache_control` to automatically cache the last cacheable block in the request — no need to annotate individual content blocks:
 
 ```python
 response = client.messages.create(
@@ -211,7 +211,7 @@ except anthropic.APIConnectionError:
 
 ## Multi-Turn Conversations
 
-The API is stateless; send the full conversation history each time.
+The API is stateless — send the full conversation history each time.
 
 ```python
 class ConversationManager:
@@ -262,7 +262,7 @@ response2 = conversation.send("What's my name?")  # Claude remembers "Alice"
 
 ### Compaction (long conversations)
 
-> **Version-sensitive compaction example.** Verify the selected model, context limit, trigger and required beta header before enabling server-side history summarization. The API returns a `compaction` block; you must pass it back on subsequent requests; append `response.content`, not just the text.
+> **Version-sensitive compaction example.** Verify the selected model, context limit, trigger and required beta header before enabling server-side history summarization. The API returns a `compaction` block; you must pass it back on subsequent requests — append `response.content`, not just the text.
 
 ```python
 import anthropic
@@ -283,7 +283,7 @@ def chat(user_message: str) -> str:
         }
     )
 
-    # Append full content: compaction blocks must be preserved
+    # Append full content — compaction blocks must be preserved
     messages.append({"role": "assistant", "content": response.content})
 
     return next(block.text for block in response.content if block.type == "text")
@@ -305,9 +305,9 @@ The `stop_reason` field in the response indicates why the model stopped generati
 | `end_turn` | Claude finished its response naturally |
 | `max_tokens` | Output is truncated; review and adjust within the selected model and budget limits |
 | `stop_sequence` | Hit a custom stop sequence |
-| `tool_use` | Claude wants to call a tool; execute it and continue |
+| `tool_use` | Claude wants to call a tool — execute it and continue |
 | `pause_turn` | Model paused and can be resumed (agentic flows) |
-| `refusal` | Claude refused for safety reasons; output may not match your schema |
+| `refusal` | Claude refused for safety reasons — output may not match your schema |
 
 ---
 
@@ -316,7 +316,7 @@ The `stop_reason` field in the response indicates why the model stopped generati
 ### 1. Use Prompt Caching for Repeated Context
 
 ```python
-# Automatic caching (simplest: caches the last cacheable block)
+# Automatic caching (simplest — caches the last cacheable block)
 response = client.messages.create(
     model="claude-opus-5-5",
     max_tokens=1024,

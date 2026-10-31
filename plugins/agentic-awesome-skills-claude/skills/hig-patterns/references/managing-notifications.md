@@ -30,7 +30,7 @@ Important
 
 Focus and summaries can affect presentation; do not treat receipt or immediate availability as guaranteed, because network, APNs and device state can delay or prevent delivery.
 
-To support these behavior customizations, you first identify the types of notifications your app or game can send. If you support direct communications; like phone calls and messages; you use _communication_ notifications; for all other types of tasks, you use _noncommunication_ notifications. To support communication notifications, you adopt SiriKit intents, which means people can use Siri to customize notification behaviors; for developer guidance, see [`INSendMessageIntent`](https://developer.apple.com/documentation/Intents/INSendMessageIntent) and [`UNNotificationContentProviding`](https://developer.apple.com/documentation/UserNotifications/UNNotificationContentProviding).
+To support these behavior customizations, you first identify the types of notifications your app or game can send. If you support direct communications — like phone calls and messages — you use _communication_ notifications; for all other types of tasks, you use _noncommunication_ notifications. To support communication notifications, you adopt SiriKit intents, which means people can use Siri to customize notification behaviors; for developer guidance, see [`INSendMessageIntent`](https://developer.apple.com/documentation/Intents/INSendMessageIntent) and [`UNNotificationContentProviding`](https://developer.apple.com/documentation/UserNotifications/UNNotificationContentProviding).
 
 You need to specify a system-defined interruption level for each noncommunication notification you send. The system uses the interruption level to help determine when to deliver the alert; when a communication notification arrives, the system uses the sender to determine when to deliver the alert.
 
@@ -62,7 +62,7 @@ Because a Critical notification can override the Ring/Silent switch and break th
 
 ## [Best practices](https://developer.apple.com/design/human-interface-guidelines/managing-notifications#Best-practices)
 
-**Build trust by accurately representing the urgency of each notification.** People have several ways to adjust how they receive your notifications; including turning off all notifications; so it’s essential to be as realistic as possible when assigning an interruption level. You don’t want people to feel that a notification uses a high level of urgency to interrupt them with low-priority information.
+**Build trust by accurately representing the urgency of each notification.** People have several ways to adjust how they receive your notifications — including turning off all notifications — so it’s essential to be as realistic as possible when assigning an interruption level. You don’t want people to feel that a notification uses a high level of urgency to interrupt them with low-priority information.
 
 **Use the Time Sensitive interruption level only for notifications that are relevant in the moment.** To help people understand the benefits of letting Time Sensitive notifications break through a Focus or scheduled delivery, make sure the notification is about an event that’s happening now or will happen within an hour. The first time a Time Sensitive notification arrives from your app, the system describes how such a notification works and gives people a way to turn it off if they don’t agree that the information requires their immediate attention. Going forward, the system periodically gives people additional opportunities to evaluate how your Time Sensitive notification is working for them. For developer guidance, see [`UNNotificationInterruptionLevel`](https://developer.apple.com/documentation/UserNotifications/UNNotificationInterruptionLevel).
 
@@ -82,7 +82,7 @@ Don’t use notifications to send marketing or promotional content unless people
 
 ### [watchOS](https://developer.apple.com/design/human-interface-guidelines/managing-notifications#watchOS)
 
-By default, the notification settings people use for apps on their iPhone apply to the same apps on their Apple Watch. People can manage these settings in the Apple Watch app on iPhone, or they can access per-notification options; such as Mute 1 Hour or Turn off Time Sensitive; by swiping left when a notification arrives on their Apple Watch.
+By default, the notification settings people use for apps on their iPhone apply to the same apps on their Apple Watch. People can manage these settings in the Apple Watch app on iPhone, or they can access per-notification options — such as Mute 1 Hour or Turn off Time Sensitive — by swiping left when a notification arrives on their Apple Watch.
 
 ## [Resources](https://developer.apple.com/design/human-interface-guidelines/managing-notifications#Resources)
 

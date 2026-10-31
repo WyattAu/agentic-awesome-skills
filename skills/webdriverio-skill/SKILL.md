@@ -16,11 +16,11 @@ license_source: https://github.com/LambdaTest/agent-skills/blob/main/LICENSE
 Use this skill when you need generates WebdriverIO (WDIO) automation tests in JavaScript or TypeScript. Supports local and TestMu AI cloud. Use when user mentions "WebdriverIO", "WDIO", "wdio.conf", "browser.url", "$", "$$". Triggers on: "WebdriverIO", "WDIO", "wdio", "browser.$".
 
 
-## Step 1: Execution Target
+## Step 1 — Execution Target
 
 Default local. If mentions "cloud", "TestMu", "LambdaTest" → cloud via WDIO LambdaTest service.
 
-## Step 2: Framework
+## Step 2 — Framework
 
 | Signal | Runner |
 |--------|--------|

@@ -25,14 +25,14 @@ a website, codebase, URL, page, or content set for SEO and AEO performance. Trig
 ## Input Format
 ```json
 {
-  "content": "string; paste raw content, provide a URL, or provide a project path",
+  "content": "string — paste raw content, provide a URL, or provide a project path",
   "input_type": "text | url | website | codebase",
-  "primary_keyword": "string; the main keyword this content should rank for",
+  "primary_keyword": "string — the main keyword this content should rank for",
   "secondary_keywords": ["string"],
   "content_type": "landing-page | blog-post | pillar-page | product-page",
-  "word_count_target": "integer; expected word count, default 1500",
-  "business_context": "string; optional description of the business and conversion goal",
-  "existing_content": ["string; optional URLs or titles already published"]
+  "word_count_target": "integer — expected word count, default 1500",
+  "business_context": "string — optional description of the business and conversion goal",
+  "existing_content": ["string — optional URLs or titles already published"]
 }
 ```
 
@@ -48,8 +48,8 @@ Scores are uncalibrated editorial heuristics, not search-engine grades or measur
 
 | Score     | Status   | Label                        |
 |-----------|----------|------------------------------|
-| 85–100    | ✅ Pass   | Strong; minor polish needed |
-| 70–84     | ⚠️ Warn  | Acceptable; fixes recommended |
+| 85–100    | ✅ Pass   | Strong — minor polish needed |
+| 70–84     | ⚠️ Warn  | Acceptable — fixes recommended |
 | 50–69     | 🔶 Weak  | Needs work before publishing |
 | 0–49      | ❌ Fail   | Do not publish as-is         |
 
@@ -77,13 +77,13 @@ and the single most important fix needed.]
 
 ## SEO Report
 
-### Score: [X/100]: [Status Label]
+### Score: [X/100] — [Status Label]
 
 #### ✅ Passing Checks
 - [Check name]: [what was found]
 - [Check name]: [what was found]
 
-#### ❌ Critical Issues: Fix Before Publishing
+#### ❌ Critical Issues — Fix Before Publishing
 
 **Issue:** [Specific problem, e.g. "Primary keyword missing from H1"]
 **Severity:** Critical
@@ -94,7 +94,7 @@ naturally within the first 6 words"]
 **Severity:** Critical
 **Fix:** [Exact instruction]
 
-#### ⚠️ Warnings: Fix Soon
+#### ⚠️ Warnings — Fix Soon
 
 **Issue:** [Specific problem]
 **Severity:** Medium
@@ -115,9 +115,9 @@ naturally within the first 6 words"]
 | H2 #1   | [heading text]              | Yes/No           | ✅ / ❌ |
 | H2 #2   | [heading text]              | Yes/No           | ✅ / ❌ |
 
-H1 count: [n]; inspect meaningful page/section hierarchy; multiple H1s alone do not establish a critical SEO failure
-H2 count: [n]; fit the topic and page structure, no quota
-H3 count: [n]; should only appear inside H2 sections
+H1 count: [n] — inspect meaningful page/section hierarchy; multiple H1s alone do not establish a critical SEO failure
+H2 count: [n] — fit the topic and page structure, no quota
+H3 count: [n] — should only appear inside H2 sections
 
 #### Meta Elements
 
@@ -127,7 +127,7 @@ H3 count: [n]; should only appear inside H2 sections
 | Meta Description | Yes/No   | [content or "missing"]           | ✅ / ❌ |
 | Title Length     | [n] chars| Target: 50–60 characters         | ✅ / ❌ |
 | Meta Length      | [n] chars| Target: 140–160 characters       | ✅ / ❌ |
-| Keyword in Title | Yes/No   | - | ✅ / ❌ |
+| Keyword in Title | Yes/No   | —                                | ✅ / ❌ |
 
 #### Word Count
 
@@ -141,21 +141,21 @@ H3 count: [n]; should only appear inside H2 sections
 
 ## AEO Report
 
-### Score: [X/100]: [Status Label]
+### Score: [X/100] — [Status Label]
 
 #### ✅ Passing Checks
 - [Check name]: [what was found]
 
-#### ❌ Critical Issues: Fix Before Publishing
+#### ❌ Critical Issues — Fix Before Publishing
 
 **Issue:** [Specific AEO problem,
 e.g. "No TL;DR or direct-answer block found"]
 **Severity:** Critical
 **Fix:** [Exact instruction, e.g. "Add a TL;DR block immediately
-after the H1; 2–3 sentences that directly answer the article's
+after the H1 — 2–3 sentences that directly answer the article's
 core question. This improves answer clarity; actual engine selection is unverified."]
 
-#### ⚠️ Warnings: Fix Soon
+#### ⚠️ Warnings — Fix Soon
 
 **Issue:** [Specific problem]
 **Severity:** Medium
@@ -165,14 +165,14 @@ core question. This improves answer clarity; actual engine selection is unverifi
 
 | Signal                              | Found    | Count    | Target       | Status  |
 |-------------------------------------|----------|----------|--------------|---------|
-| TL;DR / Direct Answer Block         | Yes/No   | - | Required     | ✅ / ❌ |
+| TL;DR / Direct Answer Block         | Yes/No   | —        | Required     | ✅ / ❌ |
 | Definition Sentence ("X is...")     | Yes/No   | [n]      | Min 1        | ✅ / ❌ |
 | FAQ Section                         | Yes/No   | [n] Qs   | Min 4        | ✅ / ❌ |
 | Numbered or Bullet Lists            | Yes/No   | [n]      | Min 2        | ✅ / ❌ |
 | Comparison Table                    | Yes/No   | [n]      | Recommended  | ✅ / ❌ |
-| Primary Keyword in First 100 Words  | Yes/No   | - | Required     | ✅ / ❌ |
+| Primary Keyword in First 100 Words  | Yes/No   | —        | Required     | ✅ / ❌ |
 | Concise Answers Under 50 Words      | Yes/No   | [n]      | Min 2        | ✅ / ❌ |
-| Schema Markup Detected              | Yes/No   | - | Recommended  | ✅ / ❌ |
+| Schema Markup Detected              | Yes/No   | —        | Recommended  | ✅ / ❌ |
 
 #### Extractability Assessment
 
@@ -189,7 +189,7 @@ Rate how likely AI engines are to extract answers from this content:
 
 ## Readability Report
 
-### Score: [X/100]: [Status Label]
+### Score: [X/100] — [Status Label]
 
 | Check                        | Result         | Target             | Status  |
 |------------------------------|----------------|--------------------|---------|
@@ -205,15 +205,15 @@ Rate how likely AI engines are to extract answers from this content:
 
 Work through these in order:
 
-### 🔴 Do First (Critical: blocks publishing)
+### 🔴 Do First (Critical — blocks publishing)
 1. [Fix instruction]
 2. [Fix instruction]
 
-### 🟡 Do Second (Important: affects ranking)
+### 🟡 Do Second (Important — affects ranking)
 3. [Fix instruction]
 4. [Fix instruction]
 
-### 🟢 Do Last (Polish: improves performance)
+### 🟢 Do Last (Polish — improves performance)
 5. [Fix instruction]
 6. [Fix instruction]
 
@@ -235,7 +235,7 @@ The output checklist’s FAQ/list/word/character counts are optional editorial d
 
 ## Execution Steps
 
-1. Detect `input_type`; inspect the project structure for a codebase, fetch a URL when allowed, or analyze supplied text.
+1. Detect `input_type` — inspect the project structure for a codebase, fetch a URL when allowed, or analyze supplied text.
 2. Establish the business, audience, conversion goal, existing content, and known target keywords. If keywords are missing, produce candidate keywords but ask for confirmation before treating them as final.
 3. Check technical SEO: crawlability, indexability, robots.txt, sitemap, canonical URLs, redirects, status codes, metadata, structured data, mobile/performance signals, image text alternatives, and broken links.
 4. Check information architecture and content: page purpose, search intent, H1/H2 hierarchy, topical coverage, duplication, cannibalization, thin pages, internal links, orphan pages, and conversion paths.

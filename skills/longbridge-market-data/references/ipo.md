@@ -1,7 +1,7 @@
 # ipo
 
 ```
-IPO (new listings) commands; subscriptions, calendar, orders, profit/loss
+IPO (new listings) commands — subscriptions, calendar, orders, profit/loss
 
 Example: longbridge ipo subscriptions Example: longbridge ipo calendar
 

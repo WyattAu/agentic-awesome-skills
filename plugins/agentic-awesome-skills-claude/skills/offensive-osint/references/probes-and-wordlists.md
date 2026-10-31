@@ -9,7 +9,7 @@
 
 Select individual reference entries after scope confirmation. Listed severity labels are historical review priorities, not automatic findings; intended public behavior and actual impact must be verified.
 
-### 16.1 Swagger / OpenAPI discovery: 28 paths
+### 16.1 Swagger / OpenAPI discovery — 28 paths
 
 Probe only approved host/path combinations within a finite request budget; HEAD is not a way around provider limits. Public API specifications may be intentional.
 
@@ -47,7 +47,7 @@ api/documentation
 - Reachable Swagger/OpenAPI without auth → review intended publication and actual restricted information; public documentation alone is not a vulnerability.
 - Authenticated specification access → assess the intended audience and any demonstrated authorization failure.
 
-### 16.2 GraphQL discovery: 13 paths
+### 16.2 GraphQL discovery — 13 paths
 
 ```
 graphql
@@ -81,7 +81,7 @@ api/v1/graphql
 UI markers (lower severity but still discoverable):
 - HTML response contains `graphiql`, `playground`, `apollo studio`, `altair` → GraphiQL UI exposed (often shipped accidentally on prod).
 
-### 16.3 High-risk ports: 35 services
+### 16.3 High-risk ports — 35 services
 
 Record open ports as asset observations. The service and historical severity columns are hypotheses; confirm the actual protocol, authentication, configuration and affected version before creating a finding. Source for the open-port observation: Shodan InternetDB (free, 1 req/sec) is the recommended starting point.
 
@@ -134,7 +134,7 @@ Record open ports as asset observations. The service and historical severity col
 
 When Shodan InternetDB returns `vulns[]` for a port, record a dated external CVE lead and verify affected versions and prerequisites; never escalate severity from a provider tag alone.
 
-### 16.4 Missing security headers: 6 findings
+### 16.4 Missing security headers — 6 findings
 
 For every alive webapp, audit response headers. Evaluate applicability and effective replacements first (for example CSP frame-ancestors); a missing header alone is a hardening observation, not an automatic finding.
 
@@ -147,7 +147,7 @@ For every alive webapp, audit response headers. Evaluate applicability and effec
 | `Referrer-Policy` | INFO | INFO | Outbound link leakage. |
 | `Permissions-Policy` | INFO | INFO | Feature-policy hardening. |
 
-### 16.5 Always-on HTTP checks: 15 paths
+### 16.5 Always-on HTTP checks — 15 paths
 
 Use only selected approved paths with a request/response budget. Do not fetch heap dumps, private environments or sensitive content to manufacture evidence.
 
@@ -169,9 +169,9 @@ Use only selected approved paths with a request/response budget. Do not fetch he
 | `/wp-admin/install.php` | Orphaned WP install | LOW | Body contains `WordPress Installation` |
 | `/.well-known/security.txt` | Disclosure policy info | INFO | Parse contact + policy fields |
 
-Plus parse `/robots.txt` for `Disallow:` paths; those become the next-tier wordlist for that target.
+Plus parse `/robots.txt` for `Disallow:` paths — those become the next-tier wordlist for that target.
 
-### 16.6 SAML metadata: 5 paths
+### 16.6 SAML metadata — 5 paths
 
 ```
 /saml/metadata
@@ -183,7 +183,7 @@ Plus parse `/robots.txt` for `Disallow:` paths; those become the next-tier wordl
 
 Public SAML metadata can be intentionally published for federation. Reachable metadata reveals: `EntityID`, signing certs (often pinned → cert-reuse pivot), `SingleSignOnService` URL, `NameIDFormat`. Record intended-public metadata as informational. Signing certificates contain public keys; they are not private-key exposure. Assign severity only for demonstrated unintended sensitive information.
 
-### 16.7 SSO subdomain prefixes: 8 prefixes
+### 16.7 SSO subdomain prefixes — 8 prefixes
 
 Probe each against root domain + every sibling brand domain:
 ```
@@ -285,18 +285,18 @@ For approved JS resources, a map URL is a candidate. A public source map is not 
 
 Three tiers, run in order on every JS body + every sourcesContent[] blob:
 
-**Tier 1; generic quoted paths:**
+**Tier 1 — generic quoted paths:**
 ```regex
 ['"`](/[A-Za-z0-9_\-./{}\[\]?=&%:]+)['"`]
 ```
-Match group: the path. High recall, lots of false positives; apply allowlist downstream.
+Match group: the path. High recall, lots of false positives — apply allowlist downstream.
 
-**Tier 2; API-ish paths (biased filter on tier 1):**
+**Tier 2 — API-ish paths (biased filter on tier 1):**
 ```regex
 ['"`](/(?:api|graphql|gql|v\d+|swagger|openapi|rest|services|internal|admin|auth|oauth|user|users|account|accounts|search|export|upload|file|files|download|webhook|hooks|callback|admin)/[A-Za-z0-9_\-./{}\[\]?=&%:]+)['"`]
 ```
 
-**Tier 3; fully-qualified URLs:**
+**Tier 3 — fully-qualified URLs:**
 ```regex
 \bhttps?://[A-Za-z0-9.\-]+\.[A-Za-z]{2,}(?::\d+)?[/A-Za-z0-9_\-./{}\[\]?=&%:#]*
 ```
@@ -364,7 +364,7 @@ For provider-specific detection signatures, review and pin an exact fingerprint-
 
 ### 16.13 Copy-Paste Probes (curl one-liners)
 
-Selected §16.1–16.12 examples; placeholders must be replaced with approved values and individually confirmed before execution. Examples use `-sS` (show errors, preserve TLS verification) and `-m 10` (10s max). Before any approved capture, set `umask 077`, create a fresh private case directory and use exclusive output paths there; fixed `/tmp` names below are historical placeholders, not safe destinations, `-w '%{http_code}\n'` (print status code), `-A "Mozilla/5.0"` (UA; change per persona).
+Selected §16.1–16.12 examples; placeholders must be replaced with approved values and individually confirmed before execution. Examples use `-sS` (show errors, preserve TLS verification) and `-m 10` (10s max). Before any approved capture, set `umask 077`, create a fresh private case directory and use exclusive output paths there; fixed `/tmp` names below are historical placeholders, not safe destinations, `-w '%{http_code}\n'` (print status code), `-A "Mozilla/5.0"` (UA — change per persona).
 
 **Always-on HTTP checks (§16.5):**
 
@@ -398,7 +398,7 @@ curl -sS -m 10 "$T/info.php" | grep -E 'phpinfo\(\)|PHP Version'
 # Spring Boot /actuator/env (CRITICAL)
 curl -sS -m 10 "$T/actuator/env" | grep -E '"propertySources"|systemProperties|systemEnvironment'
 
-# Spring Boot /actuator/heapdump (CRITICAL: saves binary; check size)
+# Spring Boot /actuator/heapdump (CRITICAL — saves binary; check size)
 # No heap download by default: require explicit sensitive-data and byte-budget approval.
 # Confirm the endpoint from approved metadata or an owner-provided fixture.
 
@@ -488,7 +488,7 @@ curl -sS -m 15 -X POST "$H" \
 # Postman PMAK
 curl -sS -m 10 -H "X-Api-Key: PMAK-..." https://api.getpostman.com/me | jq .
 
-# AWS (use boto3 instead of curl: pre-signing complexity)
+# AWS (use boto3 instead of curl — pre-signing complexity)
 python3 -c "import boto3; print(boto3.client('sts', aws_access_key_id='AKIA...', aws_secret_access_key='...').get_caller_identity())"
 
 # GitHub PAT (note scope header)
@@ -781,11 +781,11 @@ done | grep -vE '^(===|$)' | sort -u
 
 Cross-reference any returned IP against CDN ranges.
 
-**Historical email-header technique; separate communication approval required:**
+**Historical email-header technique — separate communication approval required:**
 
-Do not send unsolicited messages during reconnaissance. If the owner supplies an approved test message/bounce, its `Received:` headers showing the inbound mail server's actual IP; sometimes co-located with web origin.
+Do not send unsolicited messages during reconnaissance. If the owner supplies an approved test message/bounce, its `Received:` headers showing the inbound mail server's actual IP — sometimes co-located with web origin.
 
-**CDN error-page analysis; use existing captures or an approved lab:**
+**CDN error-page analysis — use existing captures or an approved lab:**
 
 Some historical CDN error pages leaked upstream details. Error-triggering and oversized-header probes require separate load/disruption approval; do not run them as default origin discovery:
 ```bash
@@ -801,16 +801,16 @@ Common edge appliances / products on the target's perimeter, with fingerprint pa
 
 | Product | Fingerprint paths | Notes |
 |---|---|---|
-| **Citrix Netscaler / Gateway** | `/vpn/index.html`, `/logon/LogonPoint/tmindex.html`, `/citrix/` | Version in HTML; CVE-2023-3519 (RCE), CVE-2019-19781 (path traversal RCE); both KEV-listed. |
-| **F5 BIG-IP TMUI** | `/tmui/login.jsp`, `/mgmt/tm/sys/` | Banner reveals version; CVE-2022-1388 (auth bypass), CVE-2023-46747; KEV-listed. |
+| **Citrix Netscaler / Gateway** | `/vpn/index.html`, `/logon/LogonPoint/tmindex.html`, `/citrix/` | Version in HTML; CVE-2023-3519 (RCE), CVE-2019-19781 (path traversal RCE) — both KEV-listed. |
+| **F5 BIG-IP TMUI** | `/tmui/login.jsp`, `/mgmt/tm/sys/` | Banner reveals version; CVE-2022-1388 (auth bypass), CVE-2023-46747 — KEV-listed. |
 | **Cisco ASA / AnyConnect** | `/+CSCOE+/`, `/CSCOE/index.html`, `/webvpn.html`, `/+CSCOE+/portal.html` | CVE-2020-3452 (file read), CVE-2018-0101 (RCE). |
-| **Pulse Secure / Ivanti Connect** | `/dana-na/`, `/dana-na/auth/url_default/welcome.cgi`, `/api/v1/` | CVE-2024-21887 (KEV), CVE-2023-46805 (KEV); chained command injection. |
+| **Pulse Secure / Ivanti Connect** | `/dana-na/`, `/dana-na/auth/url_default/welcome.cgi`, `/api/v1/` | CVE-2024-21887 (KEV), CVE-2023-46805 (KEV) — chained command injection. |
 | **FortiGate / FortiOS** | `/remote/login`, `/remote/info`, `/api/v2/` | CVE-2022-42475 (RCE, KEV), CVE-2024-21762 (RCE, KEV). |
 | **PaloAlto GlobalProtect** | `/global-protect/`, `/global-protect/portal/css/login.css`, `/api/?type=keygen` | CVE-2024-3400 (RCE, KEV), CVE-2019-1579. |
 | **VMware Horizon** | `/portal/info.jsp`, `/broker/xml`, `/login.jsp` | log4shell exposure (CVE-2021-44228, KEV). |
 | **VMware vCenter** | `/sdk`, `/ui/`, `/vsphere-client/`, `/websso/SAML2/` | CVE-2021-21972 (RCE, KEV), CVE-2021-22005. |
 | **VMware ESXi** | `/sdk`, `/ui/`, `/folder` | CVE-2021-21974 (heap overflow → ESXiArgs ransomware, KEV). |
-| **Microsoft Exchange OWA** | `/owa/`, `/ews/exchange.asmx`, `/ecp/` | ProxyShell (CVE-2021-34473), ProxyLogon (CVE-2021-26855), ProxyNotShell (CVE-2022-41040); all KEV. |
+| **Microsoft Exchange OWA** | `/owa/`, `/ews/exchange.asmx`, `/ecp/` | ProxyShell (CVE-2021-34473), ProxyLogon (CVE-2021-26855), ProxyNotShell (CVE-2022-41040) — all KEV. |
 | **WatchGuard Firebox** | `/auth/`, `/wgcgi.cgi` | CVE-2022-26318 (CGI). |
 | **SonicWall SMA** | `/cgi-bin/welcome`, `/__api__/v1/`, `/diagnostics/` | CVE-2021-20016, CVE-2024-40766 (KEV). |
 | **Sophos UTM/XG/XGS** | `/userportal/`, `/webconsole/`, `/cgi-bin/` | CVE-2022-1040 (RCE, KEV). |
@@ -819,7 +819,7 @@ Common edge appliances / products on the target's perimeter, with fingerprint pa
 | **Atlassian Confluence** | `/confluence/`, `/login.action`, `/rest/api/space` | CVE-2022-26134 (OGNL RCE, KEV), CVE-2023-22515 (KEV). |
 | **Atlassian Jira** | `/secure/Dashboard.jspa`, `/rest/api/2/serverInfo` | Multiple CVEs; check version. |
 | **GitLab self-hosted** | `/users/sign_in`, `/-/oauth/applications`, `/help` | Version in HTML footer; CVE-2021-22205 (RCE, KEV). |
-| **Telerik UI** | `/Telerik.Web.UI.WebResource.axd?type=rau` | CVE-2017-9248, CVE-2019-18935; old but still found. |
+| **Telerik UI** | `/Telerik.Web.UI.WebResource.axd?type=rau` | CVE-2017-9248, CVE-2019-18935 — old but still found. |
 | **ConnectWise ScreenConnect** | `/SetupWizard.aspx`, `/Bin/SetupWizard.aspx` | CVE-2024-1709 (auth bypass, KEV). |
 | **SolarWinds Orion** | `/Orion/Login.aspx` | CVE-2020-10148 authentication bypass; distinct from the SUNBURST supply-chain incident. |
 | **Kaseya VSA** | `/dl.asp`, `/userFilterTableRpt.asp` | CVE-2021-30116 (REvil supply-chain). |
@@ -836,7 +836,7 @@ grep -iE 'NetScaler|Citrix|version' "${PRIVATE_CASE_DIR}/c1"
 # F5
 curl -sS -m 10 "$T/tmui/login.jsp" -o "${PRIVATE_CASE_DIR}/c2" -w '%{http_code}\n'
 grep -iE 'BIG-IP|version' "${PRIVATE_CASE_DIR}/c2"
-# (etc: repeat per product)
+# (etc — repeat per product)
 ```
 
 **Auto-fingerprint with Nuclei:**
@@ -897,7 +897,7 @@ Increasingly common; often forgotten when behind a NAT.
 | **kube-controller-manager** | 10257 | `curl -sS -m 10 https://${IP}:10257/metrics` | MEDIUM |
 | **kube-scheduler** | 10259 | `curl -sS -m 10 https://${IP}:10259/metrics` | MEDIUM |
 | **cAdvisor** | 4194 (deprecated) | `curl -sS -m 10 http://${IP}:4194/metrics` | LOW (resource metrics) |
-| **Helm Tiller** (Helm 2; deprecated but found) | 44134 | `helm --host ${IP}:44134 list` | HIGH (Tiller had cluster-admin) |
+| **Helm Tiller** (Helm 2 — deprecated but found) | 44134 | `helm --host ${IP}:44134 list` | HIGH (Tiller had cluster-admin) |
 
 **Public container registries to check for leaks:**
 
@@ -914,7 +914,7 @@ Increasingly common; often forgotten when behind a NAT.
 1. `docker pull <registry>/<image>:<tag>` (or `skopeo inspect`).
 2. `docker save <image> -o "${PRIVATE_CASE_DIR}/img.tar"`.
 3. Extract layers; scan with secret catalog (§17).
-4. Inspect `Dockerfile` history (`docker history <image>`); sometimes reveals build args or COPY of secrets.
+4. Inspect `Dockerfile` history (`docker history <image>`) — sometimes reveals build args or COPY of secrets.
 
 ### 16.19 CI/CD Platform Exposure
 
@@ -924,7 +924,7 @@ Increasingly common; often forgotten when behind a NAT.
 | **GitLab self-hosted** | `/users/sign_in` (version in HTML), `/-/oauth/applications` (auth-required), `/api/v4/version`, `/-/snippets/<id>/raw` | `curl -sS -m 10 "${T}/api/v4/version"` |
 | **GitHub Actions workflow files** | `.github/workflows/*.yml` in any public repo | Search via GitHub code search: `path:.github/workflows extension:yml secrets` |
 | **CircleCI config** | `.circleci/config.yml` in any repo | Search: `path:.circleci/config.yml` |
-| **TeamCity** | `/login.html`, `/agent.html?agentId=*`, `/admin/admin.html` | `curl -sS -m 10 "${T}/login.html" \| grep -i 'TeamCity'`; version disclosure. CVE-2024-27198 (KEV). |
+| **TeamCity** | `/login.html`, `/agent.html?agentId=*`, `/admin/admin.html` | `curl -sS -m 10 "${T}/login.html" \| grep -i 'TeamCity'` — version disclosure. CVE-2024-27198 (KEV). |
 | **Bamboo (Atlassian)** | `/userlogin.action`, `/rest/api/latest/info` | `curl -sS -m 10 "${T}/rest/api/latest/info"` |
 | **Drone CI** | `/api/info`, `/login` | `curl -sS -m 10 "${T}/api/info"` |
 | **Travis CI (legacy)** | `.travis.yml` in repos; `https://api.travis-ci.com/repos/<owner>/<repo>` | API often exposes build env. |
@@ -1103,7 +1103,7 @@ Corroborate each service association with current organization-controlled eviden
 
 **Autodiscover-as-confirmation pattern:**
 
-`autodiscover.<domain>` resolving to Microsoft IP space (`40.96.0.0/13`, `52.96.0.0/14`, `13.107.0.0/16`) is a hosting lead, not proof of M365 Exchange Online tenancy; even when MX records are obscured by Mimecast/Proofpoint/Barracuda inbound filtering. Probe:
+`autodiscover.<domain>` resolving to Microsoft IP space (`40.96.0.0/13`, `52.96.0.0/14`, `13.107.0.0/16`) is a hosting lead, not proof of M365 Exchange Online tenancy — even when MX records are obscured by Mimecast/Proofpoint/Barracuda inbound filtering. Probe:
 
 ```powershell
 Resolve-DnsName "autodiscover.$D" -Type A | Select Name,IPAddress
@@ -1136,13 +1136,13 @@ curl -sS -m 15 "https://web.archive.org/cdx/search/cdx?url=${D}/*&output=json&fl
 Returns JSON array of `[timestamp, original_url]` tuples.
 
 **Useful filters:**
-- `&from=20200101&to=20231231`; date range.
-- `&filter=mimetype:application/json`; only JSON responses (often APIs).
-- `&filter=mimetype:application/javascript`; JS bundles.
-- `&filter=statuscode:200`; only successful captures.
-- `&filter=urlkey:.*api.*`; only URLs containing "api".
-- `&collapse=urlkey`; dedup by URL.
-- `&collapse=digest`; dedup by content (catches identical pages re-archived).
+- `&from=20200101&to=20231231` — date range.
+- `&filter=mimetype:application/json` — only JSON responses (often APIs).
+- `&filter=mimetype:application/javascript` — JS bundles.
+- `&filter=statuscode:200` — only successful captures.
+- `&filter=urlkey:.*api.*` — only URLs containing "api".
+- `&collapse=urlkey` — dedup by URL.
+- `&collapse=digest` — dedup by content (catches identical pages re-archived).
 
 **Get specific snapshot:**
 ```bash
@@ -1195,11 +1195,11 @@ for ext in json xml yml yaml ini conf; do
   curl -sS -m 15 "https://web.archive.org/cdx/search/cdx?url=${D}/*.${ext}&output=json&fl=timestamp,original&filter=statuscode:200&collapse=urlkey&limit=100"
 done
 
-# Anything indexed (broad sweep: useful for legacy enumeration)
+# Anything indexed (broad sweep — useful for legacy enumeration)
 curl -sS -m 15 "https://web.archive.org/cdx/search/cdx?url=${D}/*&output=json&fl=timestamp,original&filter=statuscode:200&collapse=urlkey&limit=10000"
 ```
 
-Legacy `.asp` / `.cfm` / `.jsp` URLs often reveal: forgotten admin panels, old user-enum endpoints, legacy auth flows, SQL-injection-prone parameters. Cross-reference with current DNS; many legacy hosts now NXDOMAIN but the URL paths sometimes survive on a renamed host.
+Legacy `.asp` / `.cfm` / `.jsp` URLs often reveal: forgotten admin panels, old user-enum endpoints, legacy auth flows, SQL-injection-prone parameters. Cross-reference with current DNS — many legacy hosts now NXDOMAIN but the URL paths sometimes survive on a renamed host.
 
 ### 16.24 Common-Prefix Subdomain Sweep (active, low-detectability)
 
@@ -1264,6 +1264,6 @@ puredns resolve <(awk -v d="$D" '{print $1"."d}' assetnote-best-dns-wordlist.txt
 - For `staging.*` / `dev.*` / `uat.*` → seed for §16.5 always-on HTTP checks (often weaker auth + debug endpoints).
 - For `intranet.*` / `eapps.*` / `eproc.*` / similar internal-app shortnames → public-intranet finding (often MEDIUM; per §40).
 
-**Real-engagement validation:** in an internal smoke test, prefix-sweep found `vpn.`, `api.`, `intranet.`, `staging.`, `support.`, `eapps.`, `eproc.`, `autodiscover.`; all of which crt.sh missed (or returned 502 for). Treat passive + active as **complementary, not alternatives**.
+**Real-engagement validation:** in an internal smoke test, prefix-sweep found `vpn.`, `api.`, `intranet.`, `staging.`, `support.`, `eapps.`, `eproc.`, `autodiscover.` — all of which crt.sh missed (or returned 502 for). Treat passive + active as **complementary, not alternatives**.
 
 ---

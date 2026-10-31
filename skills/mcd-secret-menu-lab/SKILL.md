@@ -60,11 +60,11 @@ User: "I want to try fries dipped in a McFlurry."
 
 ### Example 2: Invent within a budget
 User: "Something new at most ¥10, I like cold-sweet."
-→ 黑洋酥小圆子风味派 (¥5) + 圆筒冰淇淋 (¥5) = **¥10.00**, ~325 kcal → assembly: crack the pie open, press the cone on top; fire-and-ice contrast.
+→ 黑洋酥小圆子风味派 (¥5) + 圆筒冰淇淋 (¥5) = **¥10.00**, ~325 kcal → assembly: crack the pie open, press the cone on top — fire-and-ice contrast.
 
 ## Best Practices
 
-- ✅ Always re-verify price and availability at query time; never serve cached prices
+- ✅ Always re-verify price and availability at query time — never serve cached prices
 - ✅ Include source-backed nutrition and explain uncertainty; never infer allergy safety or medical suitability from a score
 - ✅ For verified results, state the store and observation time; otherwise label the plan unverified
 - ❌ Don't fabricate items that aren't in the live menu
@@ -80,7 +80,7 @@ User: "Something new at most ¥10, I like cold-sweet."
 
 ## Limitations
 
-- Prices and availability vary by city/store/season; outputs are verified samples, not guarantees
+- Prices and availability vary by city/store/season — outputs are verified samples, not guarantees
 - Covers McDonald's China only (requires the official MCP token from open.mcd.cn/mcp)
 - Nutrition matching uses the official table; unlisted items are marked "reference only"
 - This skill does not replace on-site confirmation or personal dietary advice

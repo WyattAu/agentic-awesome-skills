@@ -29,7 +29,7 @@ Apply only within the requested scope and current project conventions. Preserve 
 // ❌ Force unwrap
 let name = user.name!
 
-// ✅; guard or if-let
+// ✅ — guard or if-let
 guard let name = user.name else { return }
 ```
 
@@ -43,7 +43,7 @@ if let user = fetchUser() {
     }
 }
 
-// ✅; chained optional binding
+// ✅ — chained optional binding
 if let city = fetchUser()?.address?.city {
     display(city)
 }
@@ -64,7 +64,7 @@ let name = user.name ?? "Unknown"
 // ❌ Optional map when if-let is clearer for side effects
 user.name.map { display($0) }
 
-// ✅; map for transforms, if-let for side effects
+// ✅ — map for transforms, if-let for side effects
 let upper = user.name.map { $0.uppercased() }
 if let name = user.name { display(name) }
 ```
@@ -138,7 +138,7 @@ struct Point { var x, y: Double }
 struct HugeData { var buffer: [UInt8] /* thousands of elements */ }
 func process(_ data: HugeData) { ... } // Array is copy-on-write; read-only passing need not copy the buffer
 
-// ✅; use class or pass inout for mutation
+// ✅ — use class or pass inout for mutation
 func process(_ data: inout HugeData) { ... }
 // or use copy-on-write wrapper for large value types
 ```
@@ -174,7 +174,7 @@ do {
 // ❌ Generic Error type
 enum AppError: Error { case generic(String) }
 
-// ✅; specific, actionable error cases
+// ✅ — specific, actionable error cases
 enum AppError: Error {
     case networkUnreachable
     case invalidInput(field: String, reason: String)
@@ -250,7 +250,7 @@ class Animal { ... }
 class Dog: Animal { ... }
 class GuideDog: Dog { ... }
 
-// ✅; protocols + composition
+// ✅ — protocols + composition
 protocol Animal { var name: String { get } }
 protocol Trainable { func train() }
 struct Dog: Animal, Trainable { ... }
@@ -264,9 +264,9 @@ protocol Renderable {
 extension Renderable {
     func render() { /* default */ }
 }
-// Every conformer uses default; protocol serves no purpose
+// Every conformer uses default — protocol serves no purpose
 
-// ✅; only default implementations that provide genuine shared logic
+// ✅ — only default implementations that provide genuine shared logic
 ```
 
 ```swift
@@ -276,7 +276,7 @@ protocol Container {
     func get() -> Element
 }
 
-// ✅; use `some` or generic parameter for simple cases
+// ✅ — use `some` or generic parameter for simple cases
 func process(_ item: some Equatable) { ... }
 ```
 

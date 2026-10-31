@@ -51,7 +51,7 @@ Before writing code, ask yourself: is there a simpler way?
 
 If 3 lines get the job done, write 3 lines. Do not write 30 lines because they "look more professional."
 
-### Rule 3: When Unsure, Ask: Don't Assume
+### Rule 3: When Unsure, Ask — Don't Assume
 
 Stop and ask the user when:
 
@@ -82,7 +82,7 @@ Every row is a real scenario. Left is what to avoid. Right is what to do.
 
 | Grinding (Junior) | Moyu (Senior) |
 |---|---|
-| One implementation with interface + factory + strategy | Write the implementation directly; no interface needed without a second implementation |
+| One implementation with interface + factory + strategy | Write the implementation directly — no interface needed without a second implementation |
 | Reading JSON with config class + validator + builder | `json.load(f)` |
 | Splitting 30 lines into 5 files across 5 directories | 30 lines in one file |
 | Creating `utils/`, `helpers/`, `services/`, `types/` | Code lives where it's used |
@@ -118,7 +118,7 @@ Every row is a real scenario. Left is what to avoid. Right is what to do.
 
 | Grinding (Junior) | Moyu (Senior) |
 |---|---|
-| Deleting code you think is "unused" | If unsure, ask; don't delete |
+| Deleting code you think is "unused" | If unsure, ask — don't delete |
 | Rewriting functions to be "more elegant" | Preserve existing behavior unless asked to refactor |
 | Changing indentation, import order, quote style while fixing a bug | Change only functionality, don't touch formatting |
 | Renaming `x` to `currentItemIndex` | Match existing code style |
@@ -178,7 +178,7 @@ When you feel these urges, stop. That's the grind talking.
 
 When these signals are detected, the corresponding intervention level activates automatically.
 
-### L1: Minor Over-Reach (Self-Reminder)
+### L1 — Minor Over-Reach (Self-Reminder)
 
 **Trigger:** Diff contains 1-2 unnecessary changes (e.g., formatting tweaks, added comments)
 
@@ -187,7 +187,7 @@ When these signals are detected, the corresponding intervention level activates 
 - If not, revert that specific change
 - Continue completing the user's actual task
 
-### L2: Clear Over-Engineering (Course Correction)
+### L2 — Clear Over-Engineering (Course Correction)
 
 **Trigger:**
 - Created files or directories the user didn't ask for
@@ -201,7 +201,7 @@ When these signals are detected, the corresponding intervention level activates 
 - Re-implement using the simplest possible approach
 - Run the Moyu Checklist before delivery
 
-### L3: Severe Scope Violation (Scope Reset)
+### L3 — Severe Scope Violation (Scope Reset)
 
 **Trigger:**
 - Modified 3+ files the user didn't mention
@@ -216,7 +216,7 @@ When these signals are detected, the corresponding intervention level activates 
 - Revert all non-essential changes
 - Keep only changes the user explicitly requested
 
-### L4: Total Loss of Control (Emergency Brake)
+### L4 — Total Loss of Control (Emergency Brake)
 
 **Trigger:**
 - Diff exceeds 200 lines for what was a small request
@@ -253,8 +253,8 @@ When you achieve any of the following, this is Staff-level delivery:
 
 Moyu and PUA solve opposite problems. They are complementary:
 
-- **PUA**: When the AI is too passive or gives up easily; push it forward
-- **Moyu**: When the AI is too aggressive or over-engineers; pull it back
+- **PUA**: When the AI is too passive or gives up easily — push it forward
+- **Moyu**: When the AI is too aggressive or over-engineers — pull it back
 
 Install both for the best results. PUA sets the floor (don't slack), Moyu sets the ceiling (don't over-do).
 

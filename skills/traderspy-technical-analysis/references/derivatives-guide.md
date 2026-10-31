@@ -1,11 +1,11 @@
-# Derivatives guide: `get_derivatives`
+# Derivatives guide — `get_derivatives`
 
 Source: Binance USDⓈ-M perpetual futures public endpoints, snapshot cached 60 s. One entry per
 symbol; an unknown or non-Binance symbol comes back as `{ symbol, error, message }`.
 
 ## Fields
 
-- `markPrice`, `indexPrice`, `premiumPct`; mark vs index; a persistent positive premium is
+- `markPrice`, `indexPrice`, `premiumPct` — mark vs index; a persistent positive premium is
   another face of long crowding.
 - `funding`: `rate` (raw, verify actual funding interval), `ratePct`, `annualizedPct`, `nextFundingTime`,
   `minutesToNextFunding`, `avg24hPct`, `avg3dPct`, `label`.
@@ -14,7 +14,7 @@ symbol; an unknown or non-Binance symbol comes back as `{ symbol, error, message
 - `positioning`: `globalLongShortRatio`, `globalLongPct` (all accounts), `topTraderLongShortRatio`,
   `topTraderLongPct` (top traders, by position size), `takerBuySellRatio` (last hour),
   `label`.
-- `notes[]`; the interpretation in sentences; quote them.
+- `notes[]` — the interpretation in sentences; quote them.
 
 ## Labels
 
@@ -30,7 +30,7 @@ See [Binance market-data definitions](https://developers.binance.info/en/docs/ca
 | `extreme_shorts_paying` | ≤ −0.05% | Shorts crowded and paying heavily; squeeze risk |
 | `shorts_paying` | ≤ −0.01% | Shorts paying longs |
 | `neutral` | between −0.01% and +0.03% (Binance's baseline is +0.01%) | No crowding signal |
-| `longs_paying` | ≥ +0.03% | Longs paying shorts; leverage leaning long |
+| `longs_paying` | ≥ +0.03% | Longs paying shorts — leverage leaning long |
 | `extreme_longs_paying` | ≥ +0.10% | Longs crowded and paying heavily; long-squeeze / flush risk |
 
 For a verified 8-hour interval, 0.05% × 3 × 365 ≈ 54.75% simple annualized rate. This assumes an unchanged rate and is not compounded yield; intervals can change.

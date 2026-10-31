@@ -100,7 +100,7 @@ Edit `/etc/postgresql/15/main/postgresql.conf` (path varies by OS and version).
 listen_addresses = 'localhost' # add only the required private interface after access/TLS review
 max_connections = 200
 
-# Memory: adjust to ~25% of total RAM for shared_buffers
+# Memory — adjust to ~25% of total RAM for shared_buffers
 shared_buffers = 4GB
 effective_cache_size = 12GB
 work_mem = 16MB
@@ -132,7 +132,7 @@ sudo -u postgres psql -c "SELECT pg_reload_conf();"
 sudo systemctl restart postgresql
 ```
 
-## pg_hba.conf: Client Authentication
+## pg_hba.conf — Client Authentication
 
 ```
 # /etc/postgresql/15/main/pg_hba.conf

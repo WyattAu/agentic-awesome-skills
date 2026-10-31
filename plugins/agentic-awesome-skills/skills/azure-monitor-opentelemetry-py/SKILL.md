@@ -217,7 +217,7 @@ Configure once per process. Pin and inspect the installed distro: supported libr
 
 ## Best Practices
 
-1. **Call configure_azure_monitor() early**; Before importing instrumented libraries
+1. **Call configure_azure_monitor() early** — Before importing instrumented libraries
 2. **Use environment variables** for connection string in production
 3. **Set cloud role name** for multi-service applications
 4. **Enable sampling** in high-traffic applications

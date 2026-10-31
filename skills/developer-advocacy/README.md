@@ -89,14 +89,14 @@ Specific Problem + Unique Angle + Clear Takeaways = Stronger Proposal (acceptanc
 
 ## Tools
 
-- **[Octolens](https://octolens.com)**; Monitor mentions, find podcast opportunities
-- **Cal.com**; Schedule appearances
-- **StreamYard**; Live streaming
-- **Descript**; Video/podcast editing
-- **Typefully**; Social scheduling
+- **[Octolens](https://octolens.com)** — Monitor mentions, find podcast opportunities
+- **Cal.com** — Schedule appearances
+- **StreamYard** — Live streaming
+- **Descript** — Video/podcast editing
+- **Typefully** — Social scheduling
 
 ## Related Skills
 
-- `developer-audience-context`; Know your audience
-- `devrel-content`; Written content
-- `community-building`; Community management
+- `developer-audience-context` — Know your audience
+- `devrel-content` — Written content
+- `community-building` — Community management

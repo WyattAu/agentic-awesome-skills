@@ -38,7 +38,7 @@ This proxies through Postman's web app to their internal search service. Paginat
 1. Open `https://www.postman.com/explore` in a browser.
 2. Open DevTools → Network tab.
 3. Search for any term.
-4. Find the request to `_api/...`; copy as cURL; adapt.
+4. Find the request to `_api/...` — copy as cURL — adapt.
 
 **Per-workspace walk:**
 
@@ -69,7 +69,7 @@ curl -sS -m 10 "https://www.postman.com/_api/collection/$COL_ID" | jq '.collecti
 
 ## 25. Stack Exchange OSINT Sweep
 
-Stack Exchange and its sister sites collect code paste-ins from developers; many include secrets, internal hostnames, and proprietary code excerpts.
+Stack Exchange and its sister sites collect code paste-ins from developers — many include secrets, internal hostnames, and proprietary code excerpts.
 
 **Sites to query (8 with highest signal):**
 ```
@@ -102,7 +102,7 @@ GET https://api.stackexchange.com/2.3/search/advanced
 1. Search each site for the target name, brand, root domain.
 2. Extract code blocks from `body` HTML.
 3. Run secret catalog (§17) over each block.
-4. Cross-reference post author email (where exposed in profile) against email_osint discoveries; is only a lead; verify identity and employment independently, minimize personal data and do not infer authorship from a name/email match.
+4. Cross-reference post author email (where exposed in profile) against email_osint discoveries — is only a lead; verify identity and employment independently, minimize personal data and do not infer authorship from a name/email match.
 5. Extract hostnames from code blocks → upsert as `subdomain` assets.
 
 **Quota:** Stack Exchange API returns quota and may return backoff fields; consult current official API limits and obey response-directed backoff. A fixed two-second delay is not a quota guarantee.

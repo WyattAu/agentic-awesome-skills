@@ -3,7 +3,7 @@
 > Catalog correction (CC-BY-SA-4.0 adaptation; original attribution/license in UPSTREAM-NOTICE.md): snippets are isolated teaching fragments, not production implementations or an assertion of exploitability. Confirm the installed language/library version, trust boundary, reachable input and impact. Use inert local fixtures only; do not execute the intentionally unsafe snippets, untrusted audited code or destructive payloads. No network attack or configuration change is authorized by this guide.
 
 
-General programming footguns by language-not limited to cryptography.
+General programming footguns by language—not limited to cryptography.
 
 ## C / C++
 
@@ -22,7 +22,7 @@ size_t size = user_count * sizeof(struct User);
 void *buf = malloc(size);
 ```
 
-**The Problem**: Signed integer overflow is undefined behavior. Compilers assume it never happens and optimize accordingly-including removing overflow checks.
+**The Problem**: Signed integer overflow is undefined behavior. Compilers assume it never happens and optimize accordingly—including removing overflow checks.
 
 ### Buffer Handling
 
@@ -168,7 +168,7 @@ unsafe {
     // Can access mutable statics
 }
 
-// Common in FFI-audit all unsafe blocks carefully
+// Common in FFI—audit all unsafe blocks carefully
 ```
 
 ### Mem::forget Skips Destructors

@@ -186,8 +186,8 @@ GET 突变 → CSRF 风险
 
 ## 参考
 
-- `references/rest-graphql-testing.md`; REST + GraphQL 深度测试
-- `references/jwt-oauth-testing.md`; JWT + OAuth 安全测试
+- `references/rest-graphql-testing.md` — REST + GraphQL 深度测试
+- `references/jwt-oauth-testing.md` — JWT + OAuth 安全测试
 
 
 ## 任务完成自检（声称完成前 MUST 通过）

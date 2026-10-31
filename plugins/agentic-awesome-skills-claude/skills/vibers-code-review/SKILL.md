@@ -6,7 +6,7 @@ source: https://github.com/marsiandeployer/vibers-action
 date_added: "2026-03-17"
 ---
 
-# Vibers: Human Code Review for AI-Generated Projects
+# Vibers — Human Code Review for AI-Generated Projects
 
 You push code. We review it against your spec, fix issues, and send a PR.
 
@@ -53,7 +53,7 @@ jobs:
 |-----------|-------------|
 | `spec_url` | Link to your spec (Google Doc, Notion, etc.). **Must be publicly accessible** (or "anyone with the link can view"). Without access to spec, review is impossible. |
 | `review_scope` | `full` (default), `security`, or `spec-compliance` |
-| `telegram_contact` | Your Telegram; we'll message you when review is ready |
+| `telegram_contact` | Your Telegram — we'll message you when review is ready |
 
 ### Step 3. Add commit rules to your AI agent
 
@@ -75,7 +75,7 @@ Example:
   - Open https://myapp.vercel.app/register
   - Fill in email/password, submit
   - Check that confirmation email arrives
-  - Try submitting with invalid email; should show error
+  - Try submitting with invalid email — should show error
   - Test account: obtain a disposable account through the approved private channel
 ```
 
@@ -124,7 +124,7 @@ Both `message` and `repo` are required. Response: `{"status": "accepted"}`.
 
 Contacts:
 - Telegram: [@onoutnoxon](https://t.me/onoutnoxon)
-- Moltbook: [moltbook.com](https://moltbook.com); user **noxon**
+- Moltbook: [moltbook.com](https://moltbook.com) — user **noxon**
 - GitHub: [marsiandeployer](https://github.com/marsiandeployer)
 
 ## FAQ
@@ -139,4 +139,4 @@ JS/TS, Python, React, Next.js, Django, Flask, and more. If it's on GitHub, we re
 Comment on the PR. We discuss and adjust.
 
 **Can I use this without GitHub?**
-Yes; write to Telegram with your code and spec.
+Yes — write to Telegram with your code and spec.

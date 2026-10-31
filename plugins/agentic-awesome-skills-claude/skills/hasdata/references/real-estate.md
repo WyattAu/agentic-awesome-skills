@@ -1,4 +1,4 @@
-# Real Estate APIs: Zillow, Redfin
+# Real Estate APIs — Zillow, Redfin
 
 | Endpoint | Returns |
 |---|---|
@@ -41,7 +41,7 @@ Python `requests` does not flatten nested dictionaries into bracketed query keys
 | `daysOnZillow` | `24h`, `7d`, `14d`, `30d`, `90d`, `6m`, `12m`. |
 | `page` | Pagination. |
 
-Response: `requestMetadata`, `searchInformation`, **`properties`** (the listings array; not `listings`), `pagination`.
+Response: `requestMetadata`, `searchInformation`, **`properties`** (the listings array — not `listings`), `pagination`.
 
 ## Zillow Property
 
@@ -78,7 +78,7 @@ ppsf = [(l["price"] / l["livingArea"]) for l in sold if l.get("livingArea")]
 
 ## Gotchas
 
-- **Bracketed query keys**; construct explicitly in `requests` and `URLSearchParams`; verify Axios serialization.
+- **Bracketed query keys** — construct explicitly in `requests` and `URLSearchParams`; verify Axios serialization.
 - **`type=sold` + `daysOnZillow` = comps recipe.** Without `daysOnZillow`, history is unbounded.
 - **Property endpoints take URLs**, not IDs.
 - **Agent emails are best-effort.**

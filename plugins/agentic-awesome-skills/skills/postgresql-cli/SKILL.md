@@ -10,9 +10,9 @@ license: Apache-2.0
 license_source: https://github.com/chaunsin/agent-skills/blob/master/LICENSE
 ---
 
-# psql: PostgreSQL Interactive Terminal
+# psql — PostgreSQL Interactive Terminal
 
-psql is PostgreSQL's feature-rich interactive terminal. It lets you write and execute queries, inspect database objects, import/export data, script batch operations, and customize output formatting; all from the command line.
+psql is PostgreSQL's feature-rich interactive terminal. It lets you write and execute queries, inspect database objects, import/export data, script batch operations, and customize output formatting — all from the command line.
 
 ## Execution boundary
 
@@ -34,10 +34,10 @@ sudo yum install postgresql
 # Alpine
 apk add postgresql-client
 
-# Windows: install PostgreSQL via the official installer or use WSL
+# Windows — install PostgreSQL via the official installer or use WSL
 ```
 
-psql ships as part of the `postgresql-client` package. The server (`postgresql`) is not required; you only need the client to connect to a remote PostgreSQL instance.
+psql ships as part of the `postgresql-client` package. The server (`postgresql`) is not required — you only need the client to connect to a remote PostgreSQL instance.
 
 ## Quick Reference
 
@@ -88,7 +88,7 @@ On connection failure: interactive mode keeps the previous connection; script mo
 
 Key flags: `-h` host, `-p` port, `-U` user, `-d` database, `-w` no password prompt, `-W` force password prompt, `-1` single transaction, `-f` execute file, `-c` execute command, `-t` tuples only, `-x` expanded, `-A` unaligned, `-E` echo hidden queries (`\d` internals), `-L` log file, `-X` skip `~/.psqlrc`.
 
-**Connection precedence**: CLI flags > environment variables > `pg_service.conf` > defaults. **Password precedence**: connection string/password flag > `PGPASSWORD` env > `~/.pgpass`. Use `~/.pgpass` instead of `PGPASSWORD` in production; `PGPASSWORD` is visible in process listings (`ps aux`).
+**Connection precedence**: CLI flags > environment variables > `pg_service.conf` > defaults. **Password precedence**: connection string/password flag > `PGPASSWORD` env > `~/.pgpass`. Use `~/.pgpass` instead of `PGPASSWORD` in production — `PGPASSWORD` is visible in process listings (`ps aux`).
 
 ### Object Inspection (\d family)
 
@@ -143,9 +143,9 @@ Key flags: `-h` host, `-p` port, `-U` user, `-d` database, `-w` no password prom
 
 **Modifiers** (append to most `\d` commands):
 
-- `+`; extra info (size, description): `\dt+`, `\l+`, `\du+`
-- `S`; include system objects: `\dtS`, `\dfS+`
-- `x`; expanded display mode: `\dt+x` (note: `\dx` is a different command; `x` must follow `S` or `+`)
+- `+` — extra info (size, description): `\dt+`, `\l+`, `\du+`
+- `S` — include system objects: `\dtS`, `\dfS+`
+- `x` — expanded display mode: `\dt+x` (note: `\dx` is a different command; `x` must follow `S` or `+`)
 
 Provide a name for details: `\d table_name` shows columns, types, indexes, constraints, foreign keys.
 
@@ -188,7 +188,7 @@ Provide a name for details: `\d table_name` shows columns, types, indexes, const
 COPY table TO '/path/file.csv' WITH (FORMAT csv, HEADER true);
 COPY table FROM '/path/file.csv' WITH (FORMAT csv, HEADER true);
 
--- Client-side (runs with client permissions, no superuser needed); preferred
+-- Client-side (runs with client permissions, no superuser needed) — preferred
 \copy table TO '/path/file.csv' WITH (FORMAT csv, HEADER true)
 \copy table FROM '/path/file.csv' WITH (FORMAT csv, HEADER true)
 \copy (SELECT ...) TO '/path/output.csv' WITH (FORMAT csv, HEADER true)
@@ -197,7 +197,7 @@ COPY table FROM '/path/file.csv' WITH (FORMAT csv, HEADER true);
 \copy table (col1, col2) FROM 'data.csv' WITH (FORMAT csv, HEADER true, NULL 'N/A')
 ```
 
-`\copy` is the go-to for day-to-day work; it uses the client's filesystem and permissions, not the server's.
+`\copy` is the go-to for day-to-day work — it uses the client's filesystem and permissions, not the server's.
 
 **\copy syntax detail:**
 
@@ -289,7 +289,7 @@ Large object OIDs are persistent references. Always associate a human-readable c
 
 `\if` and `\elif` evaluate their argument as a boolean. Valid values (case-insensitive, unambiguous prefix matching): `true`, `false`, `1`, `0`, `on`, `off`, `yes`, `no`. Expressions that don't evaluate to true/false generate a warning and are treated as false. Variable references in skipped lines are NOT expanded.
 
-Variables in SQL: `:'varname'` (quoted string value, escapes embedded quotes), `:"varname"` (double-quoted identifier), `:'varname'::type` (with cast), `:varname` (unquoted; can break SQL), `:{?varname}` (tests existence, expands to TRUE/FALSE).
+Variables in SQL: `:'varname'` (quoted string value, escapes embedded quotes), `:"varname"` (double-quoted identifier), `:'varname'::type` (with cast), `:varname` (unquoted — can break SQL), `:{?varname}` (tests existence, expands to TRUE/FALSE).
 
 ### Session Management
 
@@ -329,13 +329,13 @@ Pipeline mode sends multiple queries without waiting for each result, reducing r
 
 **Pipeline commands:**
 
-- `\startpipeline`; begin pipeline block
-- `\endpipeline`; end pipeline block and process remaining results
-- `\sendpipeline`; append current query buffer to pipeline without waiting
-- `\syncpipeline`; send sync message without ending pipeline
-- `\flushrequest`; request server flush without sync
-- `\flush`; manually push unsent data to server
-- `\getresults [N]`; read pending results (N=0 or omitted means all)
+- `\startpipeline` — begin pipeline block
+- `\endpipeline` — end pipeline block and process remaining results
+- `\sendpipeline` — append current query buffer to pipeline without waiting
+- `\syncpipeline` — send sync message without ending pipeline
+- `\flushrequest` — request server flush without sync
+- `\flush` — manually push unsent data to server
+- `\getresults [N]` — read pending results (N=0 or omitted means all)
 
 **Pipeline limitations:**
 
@@ -353,9 +353,9 @@ Pipeline mode sends multiple queries without waiting for each result, reducing r
 
 `count` and `min_rows` require PostgreSQL 17+.
 
-- `interval`; seconds between executions (default: 2, overridable via `WATCH_INTERVAL` variable)
-- `count`; stop after N executions
-- `min_rows`; stop if query returns fewer than N rows
+- `interval` — seconds between executions (default: 2, overridable via `WATCH_INTERVAL` variable)
+- `count` — stop after N executions
+- `min_rows` — stop if query returns fewer than N rows
 
 If the query buffer is empty, `\watch` re-executes the most recently sent query.
 
@@ -424,7 +424,7 @@ SELECT * FROM users WHERE name = $1
 \bind 'Robert' \g
 ```
 
-The `:'varname'` form (quoted) is always safer than `:varname` (unquoted), because unquoted substitution can break SQL syntax or enable injection. Use `:"varname"` for identifiers (table/column names); it properly escapes embedded double quotes.
+The `:'varname'` form (quoted) is always safer than `:varname` (unquoted), because unquoted substitution can break SQL syntax or enable injection. Use `:"varname"` for identifiers (table/column names) — it properly escapes embedded double quotes.
 
 ## When to Use What
 
@@ -447,12 +447,12 @@ The `:'varname'` form (quoted) is always safer than `:varname` (unquoted), becau
 | Handle large result sets      | `\set FETCH_COUNT 1000` then run query                       |
 | Auto-savepoint on errors      | `\set ON_ERROR_ROLLBACK on` then use transactions            |
 
-- **`references/meta-commands-core.md`**; Core meta-commands: query buffer behavior, argument parsing rules, connection management, query execution, `\copy` syntax, and scripting commands (`\if`, `\i`, `\o`, backquote expansion). Read this when you need exact syntax or behavioral details for any backslash command.
-- **`references/meta-commands-inspection.md`**; Full `\d` command reference: all object inspection commands, modifiers (`S`, `+`, `x`), and pattern matching rules. Read this when exploring database schema or when the user needs to inspect tables, indexes, views, functions, privileges, etc.
-- **`references/meta-commands-formatting.md`**; Output formatting (`\pset` options and all format descriptions), pipeline mode, `\watch`, `\crosstabview`, and session management (`\e`, `\ef`, `\ev`, `\timing`, etc.). Read this when the user needs to control output format or use pipeline mode.
-- **`references/cli-options-and-variables.md`**; All CLI flags, environment variables, psql internal variables (AUTOCOMMIT, ON_ERROR_STOP, ECHO, FETCH_COUNT, etc.), prompt customization, `~/.psqlrc` configuration, and SQL interpolation syntax. Read this when configuring psql startup behavior, writing scripts that depend on variable state, or customizing prompts.
-- **`references/tips-workflows.md`**; Practical workflows (exploring a new database, understanding table structure), scripting patterns (safe scripts, conditional execution, `\gexec`), output control for automation, and data import/export patterns. Read this when the user asks how to accomplish a specific task with psql.
-- **`references/tips-advanced.md`**; Performance tips, debugging/introspection (`EXPLAIN`, lock analysis, `ECHO_HIDDEN`), safety best practices (ON_ERROR_STOP, transaction patterns, search_path safety), and common gotchas. Read this for lock analysis, query plan inspection, and troubleshooting.
+- **`references/meta-commands-core.md`** — Core meta-commands: query buffer behavior, argument parsing rules, connection management, query execution, `\copy` syntax, and scripting commands (`\if`, `\i`, `\o`, backquote expansion). Read this when you need exact syntax or behavioral details for any backslash command.
+- **`references/meta-commands-inspection.md`** — Full `\d` command reference: all object inspection commands, modifiers (`S`, `+`, `x`), and pattern matching rules. Read this when exploring database schema or when the user needs to inspect tables, indexes, views, functions, privileges, etc.
+- **`references/meta-commands-formatting.md`** — Output formatting (`\pset` options and all format descriptions), pipeline mode, `\watch`, `\crosstabview`, and session management (`\e`, `\ef`, `\ev`, `\timing`, etc.). Read this when the user needs to control output format or use pipeline mode.
+- **`references/cli-options-and-variables.md`** — All CLI flags, environment variables, psql internal variables (AUTOCOMMIT, ON_ERROR_STOP, ECHO, FETCH_COUNT, etc.), prompt customization, `~/.psqlrc` configuration, and SQL interpolation syntax. Read this when configuring psql startup behavior, writing scripts that depend on variable state, or customizing prompts.
+- **`references/tips-workflows.md`** — Practical workflows (exploring a new database, understanding table structure), scripting patterns (safe scripts, conditional execution, `\gexec`), output control for automation, and data import/export patterns. Read this when the user asks how to accomplish a specific task with psql.
+- **`references/tips-advanced.md`** — Performance tips, debugging/introspection (`EXPLAIN`, lock analysis, `ECHO_HIDDEN`), safety best practices (ON_ERROR_STOP, transaction patterns, search_path safety), and common gotchas. Read this for lock analysis, query plan inspection, and troubleshooting.
 
 ## Important Notes
 
@@ -461,7 +461,7 @@ psql handles two comment styles differently:
 - **C-style block comments** (`/* ... */`): Passed to the server for processing and removal.
 - **SQL-standard comments** (`--`): Removed by psql itself, before sending to the server.
 
-This distinction matters when writing scripts that rely on comment behavior; only SQL-standard comments are stripped client-side.
+This distinction matters when writing scripts that rely on comment behavior — only SQL-standard comments are stripped client-side.
 
 ### Variable Variables (Soft References)
 

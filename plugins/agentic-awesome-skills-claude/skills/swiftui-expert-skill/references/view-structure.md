@@ -30,7 +30,7 @@ SwiftUI's diffing algorithm compares view hierarchies to determine what needs up
 
 ## View File Structure (optional readability suggestion)
 
-Property ordering has no effect on correctness or performance, so treat this as a personal/team readability preference rather than a rule. Some developers find a consistent order easier to scan; for example, environment, then state, then passed-in properties, then `init`, body, and helper subviews. Adopt it only if your team wants the consistency; never reorder existing code solely to match it.
+Property ordering has no effect on correctness or performance, so treat this as a personal/team readability preference rather than a rule. Some developers find a consistent order easier to scan — for example, environment, then state, then passed-in properties, then `init`, body, and helper subviews. Adopt it only if your team wants the consistency; never reorder existing code solely to match it.
 
 ```swift
 struct ContentView: View {
@@ -172,13 +172,13 @@ Text("Hello")
     .foregroundStyle(isError ? .red : .primary)
 ```
 
-When writing new code, never reach for a `.if` modifier. When reviewing existing code that already uses one, point out the identity/animation risk and show the ternary alternative, but don't silently refactor it as part of an unrelated change; swapping it can alter behavior (state resets, transition timing) and belongs in its own focused edit.
+When writing new code, never reach for a `.if` modifier. When reviewing existing code that already uses one, point out the identity/animation risk and show the ternary alternative, but don't silently refactor it as part of an unrelated change — swapping it can alter behavior (state resets, transition timing) and belongs in its own focused edit.
 
 ## Extract Subviews, Not Computed Properties
 
-A view is SwiftUI's unit of invalidation. When an input changes, SwiftUI re-runs the body of the smallest enclosing **view type** that depends on it; every conditional, modifier chain, and string interpolation in that body, even if only one leaf actually depends on what changed. A computed property or `@ViewBuilder` helper is inlined into the parent's body, so it shares the parent's invalidation boundary and does not reduce update cost; it only reorganizes the code. A separate `View` type with narrow inputs becomes its own boundary and re-runs only when its own inputs change.
+A view is SwiftUI's unit of invalidation. When an input changes, SwiftUI re-runs the body of the smallest enclosing **view type** that depends on it — every conditional, modifier chain, and string interpolation in that body, even if only one leaf actually depends on what changed. A computed property or `@ViewBuilder` helper is inlined into the parent's body, so it shares the parent's invalidation boundary and does not reduce update cost; it only reorganizes the code. A separate `View` type with narrow inputs becomes its own boundary and re-runs only when its own inputs change.
 
-This is why "split your body for readability" is also a performance tool; but only when you split into real `View` types, not computed properties.
+This is why "split your body for readability" is also a performance tool — but only when you split into real `View` types, not computed properties.
 
 ### The Problem with @ViewBuilder Functions
 
@@ -250,7 +250,7 @@ struct ComplexSection: View {
 
 ### Multi-section detail views
 
-The most common place this rule gets dropped is a detail screen with several distinct sections; `header + gallery + description + reviews`, `header + ingredients + steps`, `hero + specs + related`. The tempting shape is one big view with `private var header: some View`, `private var gallery: some View`, and so on. That shape shares one invalidation boundary, so a change that affects one section re-evaluates all of them. Factor each named section into its own `View` type that takes only the fields it renders, and keep the parent thin; it just composes the sections.
+The most common place this rule gets dropped is a detail screen with several distinct sections — `header + gallery + description + reviews`, `header + ingredients + steps`, `hero + specs + related`. The tempting shape is one big view with `private var header: some View`, `private var gallery: some View`, and so on. That shape shares one invalidation boundary, so a change that affects one section re-evaluates all of them. Factor each named section into its own `View` type that takes only the fields it renders, and keep the parent thin — it just composes the sections.
 
 ```swift
 // PREFER: each section is its own type with narrow inputs.
@@ -271,7 +271,7 @@ struct ProductDetailView: View {
 }
 ```
 
-This generalizes to every `*DetailView`: one `View` type per section, narrow inputs each, a thin parent that composes them. Small `@ViewBuilder` fragments reused two or three times within the same body are still fine; the rule targets factoring done for organization or to manage body length, where a real `View` type does the right thing.
+This generalizes to every `*DetailView`: one `View` type per section, narrow inputs each, a thin parent that composes them. Small `@ViewBuilder` fragments reused two or three times within the same body are still fine — the rule targets factoring done for organization or to manage body length, where a real `View` type does the right thing.
 
 ## @ViewBuilder
 
@@ -362,7 +362,7 @@ General guidance:
 
 ## Keep View `init` Cheap
 
-A view's `init` runs every time the parent re-evaluates its body, which can be many times per second for views inside `List`, `LazyVStack`, scroll containers, or animated parents. Treat `init` as a constant-time copy of inputs into stored properties. Don't decode JSON, build a `DateFormatter`, touch the file system, or allocate large structures there; that work repeats on every parent body pass even when the inputs are identical.
+A view's `init` runs every time the parent re-evaluates its body, which can be many times per second for views inside `List`, `LazyVStack`, scroll containers, or animated parents. Treat `init` as a constant-time copy of inputs into stored properties. Don't decode JSON, build a `DateFormatter`, touch the file system, or allocate large structures there — that work repeats on every parent body pass even when the inputs are identical.
 
 ```swift
 // AVOID: decoding and formatting on every init
@@ -385,11 +385,11 @@ var body: some View {
 }
 ```
 
-If a derived value genuinely needs to be computed once and kept, store it on an `@State`-owned `@Observable` model or compute it asynchronously in `.task`; not in `init`. `init` is not a one-time setup hook; it runs as often as the parent's body does.
+If a derived value genuinely needs to be computed once and kept, store it on an `@State`-owned `@Observable` model or compute it asynchronously in `.task` — not in `init`. `init` is not a one-time setup hook; it runs as often as the parent's body does.
 
 ## Single-Child Group
 
-`Group { SomeView() }`; a `Group` with exactly one concrete child; wraps the view in an extra `Group<SomeView>` type for no visual benefit. Every modifier chained after it must be type-checked against that wrapper, adding avoidable type-checking overhead in long chains. Drop the `Group` and chain modifiers directly on the child.
+`Group { SomeView() }` — a `Group` with exactly one concrete child — wraps the view in an extra `Group<SomeView>` type for no visual benefit. Every modifier chained after it must be type-checked against that wrapper, adding avoidable type-checking overhead in long chains. Drop the `Group` and chain modifiers directly on the child.
 
 ```swift
 // AVOID: single concrete child wrapped in Group
@@ -403,7 +403,7 @@ Text(status)
     .background(.thinMaterial, in: Capsule())
 ```
 
-The rule is specifically about one concrete view. A `Group` whose content is a `ForEach`, multiple sibling views, or an `if`/`else` (which produces `_ConditionalContent`) is doing real work; applying a shared modifier across siblings or both branches; and is fine.
+The rule is specifically about one concrete view. A `Group` whose content is a `ForEach`, multiple sibling views, or an `if`/`else` (which produces `_ConditionalContent`) is doing real work — applying a shared modifier across siblings or both branches — and is fine.
 
 ## When to Extract Subviews
 
@@ -499,7 +499,7 @@ A key difference is **size proposal behavior**:
 - In `overlay` / `background`, the child view implicitly adopts the size proposed to the parent when it doesn’t define its own size, making decorative attachments feel natural and predictable.
 - In `ZStack`, each child participates independently in layout, and no implicit size inheritance exists. This makes it better suited for peer composition, but less intuitive for simple decoration.
 
-Use `ZStack` (or another container) when the “decoration” **must explicitly participate in layout sizing**-for example, when reserving space, extending tappable/visible bounds, or preventing overlap with neighboring views.
+Use `ZStack` (or another container) when the “decoration” **must explicitly participate in layout sizing**—for example, when reserving space, extending tappable/visible bounds, or preventing overlap with neighboring views.
 
 ### Examples
 
@@ -523,7 +523,7 @@ HStack(spacing: 12) { Text("Inbox"); Text("Next") }
 
 ## Compositing Group Before Clipping
 
-**Consider `.compositingGroup()` before `.clipShape()` when a reproduced layered-edge artifact warrants it.** Without it, each layer is antialiased separately and then composited. Where antialiased edges overlap; typically at rounded corners; you get visible color fringes (semi-transparent pixels of different colors blending together).
+**Consider `.compositingGroup()` before `.clipShape()` when a reproduced layered-edge artifact warrants it.** Without it, each layer is antialiased separately and then composited. Where antialiased edges overlap — typically at rounded corners — you get visible color fringes (semi-transparent pixels of different colors blending together).
 
 ```swift
 let shape = RoundedRectangle(cornerRadius: 16)

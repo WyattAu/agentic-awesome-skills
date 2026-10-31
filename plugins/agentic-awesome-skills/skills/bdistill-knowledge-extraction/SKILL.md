@@ -12,19 +12,19 @@ tools: [claude, cursor, codex, copilot]
 
 # Knowledge Extraction
 
-Extract structured, quality-scored domain knowledge from any AI model; in-session from closed models (no API key) or locally from open-source models via Ollama.
+Extract structured, quality-scored domain knowledge from any AI model — in-session from closed models (no API key) or locally from open-source models via Ollama.
 
 ## Overview
 
 bdistill turns your AI subscription sessions into a compounding knowledge base. The agent answers targeted domain questions, bdistill structures and quality-scores the responses, and the output accumulates into a searchable, exportable reference dataset.
 
-Adversarial mode challenges the agent's claims; forcing evidence, corrections, and acknowledged limitations; producing model-generated candidates for independent source review; adversarial self-correction is not external validation.
+Adversarial mode challenges the agent's claims — forcing evidence, corrections, and acknowledged limitations — producing model-generated candidates for independent source review; adversarial self-correction is not external validation.
 
 ## When to Use This Skill
 
 - Use when you need structured reference data on any domain (medical, legal, finance, cybersecurity)
 - Use when building lookup tables, Q&A datasets, or research corpora
-- Use when generating training data for traditional ML models (regression, classification; NOT competing LLMs)
+- Use when generating training data for traditional ML models (regression, classification — NOT competing LLMs)
 - Use when you want cross-model comparison on domain knowledge
 
 ## How It Works
@@ -55,7 +55,7 @@ bdistill kb export -d medical -f markdown      # Readable knowledge document
 
 ## Output Format
 
-Structured reference JSONL; not training data:
+Structured reference JSONL — not training data:
 
 ```json
 {
@@ -97,7 +97,7 @@ bdistill extract --domain medical --model qwen3:4b
 
 ## Security & Safety Notes
 
-- In-session extraction uses your existing subscription; no additional API keys
+- In-session extraction uses your existing subscription — no additional API keys
 - Local extraction runs entirely on your machine via Ollama
 - In-session extraction uses the host provider and its data policy; it is not offline. A genuinely local Ollama endpoint keeps inference local, but downloading models/installing packages uses the network. Verify endpoints and approved data processing before use
 - Output is reference data, not LLM training format

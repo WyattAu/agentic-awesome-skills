@@ -8,7 +8,7 @@ date_added: "2026-03-07"
 
 # Git Hooks Automation
 
-Automate code quality enforcement at the Git level. Set up hooks that lint, format, test, and validate before commits and pushes ever reach your CI pipeline; catching issues in seconds instead of minutes.
+Automate code quality enforcement at the Git level. Set up hooks that lint, format, test, and validate before commits and pushes ever reach your CI pipeline — catching issues in seconds instead of minutes.
 
 ## When to Use This Skill
 
@@ -22,7 +22,7 @@ Automate code quality enforcement at the Git level. Set up hooks that lint, form
 
 ## Git Hooks Fundamentals
 
-Git hooks are scripts that run automatically at specific points in the Git workflow. They live in `.git/hooks/` and are not version-controlled by default; which is why tools like Husky exist.
+Git hooks are scripts that run automatically at specific points in the Git workflow. They live in `.git/hooks/` and are not version-controlled by default — which is why tools like Husky exist.
 
 ### Hook Types & When They Fire
 
@@ -67,7 +67,7 @@ npm install --save-dev husky lint-staged
 # Initialize Husky (creates .husky/ directory)
 npx husky init
 
-# The init command creates a pre-commit hook: edit it:
+# The init command creates a pre-commit hook — edit it:
 echo "npx lint-staged" > .husky/pre-commit
 ```
 
@@ -218,7 +218,7 @@ For projects not using Node or Python, write hooks directly in shell.
 
 ```bash
 #!/bin/sh
-# .githooks/pre-commit: Team-shared hooks directory
+# .githooks/pre-commit — Team-shared hooks directory
 set -e
 
 echo "=== Pre-Commit Checks ==="
@@ -353,7 +353,7 @@ git push --no-verify
 SKIP=eslint git commit -m "fix: update config"
 ```
 
-> **Warning**: Bypassing hooks should be rare. If your team frequently bypasses, the hooks are too slow or too strict; fix them.
+> **Warning**: Bypassing hooks should be rare. If your team frequently bypasses, the hooks are too slow or too strict — fix them.
 
 ## Migration Guide
 
@@ -375,7 +375,7 @@ npx husky init
 echo "npx lint-staged" > .husky/pre-commit
 echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 
-# 5. Clean up: old Husky used package.json config,
+# 5. Clean up — old Husky used package.json config,
 #    new Husky uses .husky/ directory with plain scripts
 ```
 
@@ -397,13 +397,13 @@ echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 
 ## Key Principles
 
-- **Staged files only**; Never lint the entire codebase on every commit
-- **Auto-fix when possible**; `--fix` flags reduce developer friction
-- **Fast hooks**; Pre-commit should complete in < 5 seconds
-- **Fail loud**; Clear error messages with actionable fixes
-- **Team-shared**; Use Husky or `core.hooksPath` so hooks are version-controlled
-- **CI as backup**; Hooks are convenience; CI is the enforcer
-- **Gradual adoption**; Start with formatting, add linting, then testing
+- **Staged files only** — Never lint the entire codebase on every commit
+- **Auto-fix when possible** — `--fix` flags reduce developer friction
+- **Fast hooks** — Pre-commit should complete in < 5 seconds
+- **Fail loud** — Clear error messages with actionable fixes
+- **Team-shared** — Use Husky or `core.hooksPath` so hooks are version-controlled
+- **CI as backup** — Hooks are convenience; CI is the enforcer
+- **Gradual adoption** — Start with formatting, add linting, then testing
 
 ## Related Skills
 

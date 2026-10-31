@@ -4,7 +4,7 @@
 
 ## Overview
 
-You need web search + URL fetch for this to work. Whatever your host calls them; `web_search`/`web_fetch`, `WebSearch`/`WebFetch`, an MCP tool; use those.
+You need web search + URL fetch for this to work. Whatever your host calls them — `web_search`/`web_fetch`, `WebSearch`/`WebFetch`, an MCP tool — use those.
 
 This skill covers 6 scenarios: 3 content types (video, podcast, short-form) × 2 states (new or underperforming). Each has its own mode below.
 
@@ -22,8 +22,8 @@ The fixed counts and word targets below are editorial suggestions, not ranking g
 
 The sections below are organized as: **Steps → Rules → Templates → Checks**. Follow them in order:
 
-1. **Read the user's request**; scope check first (see below)
-2. **Steps 0-2**; Classify, find the keyword, research it, gather missing info
+1. **Read the user's request** — scope check first (see below)
+2. **Steps 0-2** — Classify, find the keyword, research it, gather missing info
 3. **Pick your mode** (A-F) from the templates below
 4. **Build what they asked for** using the rules (Title Rules, Tags Strategy, etc.)
 5. **Run the Quality Checklist** before sending
@@ -31,15 +31,15 @@ The sections below are organized as: **Steps → Rules → Templates → Checks*
 ---
 
 
-## Step 0: Check scope then classify
+## Step 0 — Check scope then classify
 
-**Scope check first.** This skill handles one video, podcast episode, or short-form clip at a time; not entire channels or playlists. If the user asks for something outside that, say: *"I can optimize individual videos or episodes. Which one should I start with?"* Once they pick one, restart the flow from Step 0 with that specific item.
+**Scope check first.** This skill handles one video, podcast episode, or short-form clip at a time — not entire channels or playlists. If the user asks for something outside that, say: *"I can optimize individual videos or episodes. Which one should I start with?"* Once they pick one, restart the flow from Step 0 with that specific item.
 
-**Then classify.** Read the user's message first; they might have already told you everything. Don't ask something they just said.
+**Then classify.** Read the user's message first — they might have already told you everything. Don't ask something they just said.
 
-**Content type**; If unclear from what they said, ask once: *"Is this a regular video, a podcast episode, or a Short/Reel?"*
+**Content type** — If unclear from what they said, ask once: *"Is this a regular video, a podcast episode, or a Short/Reel?"*
 
-**Status**; Did they give a URL? Fetch it. Did they say "no views" or "not ranking"? It's existing. Did they say "uploading" or "about to post"? It's new. If you can't tell, ask once.
+**Status** — Did they give a URL? Fetch it. Did they say "no views" or "not ranking"? It's existing. Did they say "uploading" or "about to post"? It's new. If you can't tell, ask once.
 
 | Content type | New | Existing |
 |---|---|---|
@@ -47,19 +47,19 @@ The sections below are organized as: **Steps → Rules → Templates → Checks*
 | Podcast episode | Mode C | Mode D |
 | Short-form clip / Reel | Mode E | Mode F |
 
-If they gave a URL, fetch the live metadata; don't ask them to repeat what's already there.
+If they gave a URL, fetch the live metadata — don't ask them to repeat what's already there.
 
 ---
 
 
-## Step 1: Find the target keyword
+## Step 1 — Find the target keyword
 
 Check if they already named one. If not, extract it from their topic/outline and propose it. Only ask if you genuinely can't infer it.
 
-If the user asked for just a title or just tags, skip the full research batch; but still do one quick search to validate the keyword angle. Otherwise run the full research:
-- `[target keyword]`; see what's ranking
+If the user asked for just a title or just tags, skip the full research batch — but still do one quick search to validate the keyword angle. Otherwise run the full research:
+- `[target keyword]` — see what's ranking
 - `[target keyword] [current year]`
-- `[niche/topic] trending` or `[target keyword] reddit`; real phrasing people use
+- `[niche/topic] trending` or `[target keyword] reddit` — real phrasing people use
 - For podcasts: also search the guest's name
 
 Pull 3-6 related phrases as secondary/long-tail keywords.
@@ -68,12 +68,12 @@ Pull 3-6 related phrases as secondary/long-tail keywords.
 
 **Use today's real date** for every "[Year]" slot.
 
-**Verify superlatives.** If they say "top 10," "#1," "fastest-growing"; search for proof. If unverified, drop it or mark `[VERIFY: ...]`.
+**Verify superlatives.** If they say "top 10," "#1," "fastest-growing" — search for proof. If unverified, drop it or mark `[VERIFY: ...]`.
 
 ---
 
 
-## Step 2: Gather what you still need (scrape first, ask last)
+## Step 2 — Gather what you still need (scrape first, ask last)
 
 Before writing the Resources/CTA block, check what info the user already gave or that you can scrape from their URL/name/channel. For anything still unknown, look it up. Ask the user only if you hit a dead end:
 
@@ -82,7 +82,7 @@ Before writing the Resources/CTA block, check what info the user already gave or
 - Offer, lead magnet, discount code, or sponsor
 - For podcasts: guest name, bio, links; episode number; sponsor details; platform links (Spotify, Apple Podcasts, etc.)
 
-One question at a time. After each answer, see if you can fill the rest from what you learned. If they say "placeholders," use `[ADD: ...]` markers; never fake URLs.
+One question at a time. After each answer, see if you can fill the rest from what you learned. If they say "placeholders," use `[ADD: ...]` markers — never fake URLs.
 
 ---
 
@@ -150,11 +150,11 @@ Rules:
 Use for every mode that includes hashtags (A-F).
 
 - 5-8 hashtags (video/podcast); 3-5 (short-form)
-- First 3 hashtags surface below the title; choose strategically
-- Placement: final line of the description only; never in the tags field
+- First 3 hashtags surface below the title — choose strategically
+- Placement: final line of the description only — never in the tags field
 - Format: CamelCase (`#AgritechNepal`)
 - Mix: 2 broad + 2 specific + 1-2 geo + 1 branded
-- Don't reuse an identical set across every upload; vary 3-6 per video
+- Don't reuse an identical set across every upload — vary 3-6 per video
 
 ---
 
@@ -163,20 +163,20 @@ Use for every mode that includes hashtags (A-F).
 
 Use for every mode that includes a description (A-F).
 
-### Block 1: Hook (first ~150 characters, shown in search results)
+### Block 1 — Hook (first ~150 characters, shown in search results)
 - Sentence 1: Step 1 target keyword used naturally
 - Sentence 2: core promise
 - Sentence 3: who this is for
 - 80-120 words total
 
-### Block 2: Body
+### Block 2 — Body
 - 4-6 short paragraphs or ▶-marked list
-- Weave in secondary keywords; one per paragraph, naturally
+- Weave in secondary keywords — one per paragraph, naturally
 - Geo signal: mention location 2-4 times
 - For podcasts: guest bio paragraph with links
 - 450-650 words (video); podcasts can run slightly longer
 
-### Block 3: Footer
+### Block 3 — Footer
 - 🔗 Resources & Links with real links from Step 2
 - Subscribe CTA, 2 sentences
 - For podcasts: "Listen on" platform-links block
@@ -186,7 +186,7 @@ Use for every mode that includes a description (A-F).
 
 ### Full description template
 ```
-[Hook; target keyword in sentence 1. Core promise. Who this is for.]
+[Hook — target keyword in sentence 1. Core promise. Who this is for.]
 
 In this video/episode you'll learn:
 ▶ [Point 1]
@@ -195,13 +195,13 @@ In this video/episode you'll learn:
 ▶ [Point 4]
 ▶ [Point 5]
 
-[Body paragraph; secondary keyword woven in naturally]
+[Body paragraph — secondary keyword woven in naturally]
 
-[Body paragraph; secondary keyword woven in naturally]
+[Body paragraph — secondary keyword woven in naturally]
 
-[Body paragraph; geo signal if applicable]
+[Body paragraph — geo signal if applicable]
 
-[Body paragraph; guest bio (podcast) or credentials (video)]
+[Body paragraph — guest bio (podcast) or credentials (video)]
 
 Use the chapters below to jump to any section ↓
 
@@ -215,9 +215,9 @@ Use the chapters below to jump to any section ↓
 💼 LinkedIn: [real link from Step 2]
 📺 Subscribe: [real link from Step 2]
 📧 Contact: [real link from Step 2]
-[Podcast; 🎧 Listen on: Spotify | Apple Podcasts | ...]
+[Podcast — 🎧 Listen on: Spotify | Apple Podcasts | ...]
 
-[Subscribe CTA; 2 sentences, includes channel/show name]
+[Subscribe CTA — 2 sentences, includes channel/show name]
 
 #Hashtag1 #Hashtag2 #Hashtag3 #Hashtag4 #Hashtag5 [#Tag6 #Tag7 optional]
 ```
@@ -229,7 +229,7 @@ Use the chapters below to jump to any section ↓
 
 Use for modes A-D. Use as many real sections as the content warrants; 6-10 is not a platform cap. Manual YouTube chapters need at least three ascending timestamps beginning at 0:00, each at least ten seconds long. Confirm access/eligibility.
 
-- First chapter MUST be `0:00`; YouTube ignores all chapters without it
+- First chapter MUST be `0:00` — YouTube ignores all chapters without it
 - Each title: 3-6 words, action-oriented, keyword signal where natural
 - Titles must reflect actual content
 - For podcast episodes: mark guest intro and sponsor reads in the timestamps
@@ -254,12 +254,12 @@ Do this when the content is tied to a place:
 
 Use when the user asks for a Short cut from a specific video they mentioned.
 
-If they ask for a Short without mentioning a source video, ask: *"Which video should I pull the Short from?"*; once they tell you, treat the Short as the primary request and use Mode E directly (no need to also package the source video).
+If they ask for a Short without mentioning a source video, ask: *"Which video should I pull the Short from?"* — once they tell you, treat the Short as the primary request and use Mode E directly (no need to also package the source video).
 
 If they ask for both a main video SEO package + a Short cut from it, produce the main mode first, then append this as a separate block.
 
 - **Title:** 60-70 characters, keyword in first 3 words
-- **Description:** 150-200 words; hook + hashtags, no chapters
+- **Description:** 150-200 words — hook + hashtags, no chapters
 - **Hashtags:** 3-5 with `#Shorts`, placed in description
 - **Tags:** reuse 5-8 from the main video
 - No chapters (Shorts don't support them)
@@ -269,7 +269,7 @@ Output this as a separate block after the main package if they ask for it.
 ---
 
 
-## Mode A: New Video Upload Package
+## Mode A — New Video Upload Package
 
 ### Required input (minimum one)
 - Video topic, title idea, or the Step 1 target keyword
@@ -286,19 +286,19 @@ If only a topic is given, extract the keyword, research it. When sections of the
 ### Output template
 ```
 ==================================================
-📺 YOUTUBE SEO PACKAGE; NEW UPLOAD
+📺 YOUTUBE SEO PACKAGE — NEW UPLOAD
 ==================================================
 
 ① SEO TITLE (Primary)
-[Title; 60-70 characters, built around Step 1 target keyword]
+[Title — 60-70 characters, built around Step 1 target keyword]
 Character count: [N]/70
 
 ② SEO TITLE (A/B Variant)
-[Alternative title; different hook, same keyword]
+[Alternative title — different hook, same keyword]
 Character count: [N]/70
 
 ③ DESCRIPTION
-[Full description; see Description Structure section]
+[Full description — see Description Structure section]
 
 ④ PRIMARY KEYWORDS
 1. [Step 1 target keyword, exact phrase]
@@ -335,7 +335,7 @@ Description if new: [50-100 word SEO description]
 [2-3 sentences. Target keyword + chapter teaser + question]
 
 ⑫ END SCREEN SCRIPT
-"[2-3 sentences; natural speech, next topic + subscribe]"
+"[2-3 sentences — natural speech, next topic + subscribe]"
 
 ==================================================
 ```
@@ -343,10 +343,10 @@ Description if new: [50-100 word SEO description]
 ---
 
 
-## Mode B: Existing Video Audit + Fix
+## Mode B — Existing Video Audit + Fix
 
 ### Required input
-- YouTube URL (preferred; fetch live metadata) or current title/description
+- YouTube URL (preferred — fetch live metadata) or current title/description
 - Views/performance complaint
 
 ### Output template
@@ -360,7 +360,7 @@ TARGET KEYWORD: [confirmed in Step 1]
 AUDIT DATE: [today's date]
 
 ==================================================
-SECTION 1; AUDIT SCORECARD
+SECTION 1 — AUDIT SCORECARD
 ==================================================
 
 | Element            | Score     | Issue Found |
@@ -380,7 +380,7 @@ OVERALL SEO SCORE: [X/10]
 PRIORITY FIXES: [Top 3 issues]
 
 ==================================================
-SECTION 2; DETAILED FINDINGS
+SECTION 2 — DETAILED FINDINGS
 ==================================================
 
 TITLE ANALYSIS
@@ -412,15 +412,15 @@ GEO / LOCAL SEO
 Location signals: Yes / No
 
 ==================================================
-SECTION 3; FULL REWRITTEN METADATA
+SECTION 3 — FULL REWRITTEN METADATA
 ==================================================
 
 ① REWRITTEN TITLE (Primary)
-[New title; 60-70 chars]
+[New title — 60-70 chars]
 Character count: [N]/70
 
 ② REWRITTEN TITLE (A/B Variant)
-[Alternative title; different hook]
+[Alternative title — different hook]
 Character count: [N]/70
 
 ③ REWRITTEN DESCRIPTION
@@ -444,22 +444,22 @@ Note: [needs change?]
 [Target keyword + value teaser]
 
 ==================================================
-SECTION 4; POST-FIX ACTION PLAN
+SECTION 4 — POST-FIX ACTION PLAN
 ==================================================
 
-Step 1; Do immediately (YouTube Studio):
+Step 1 — Do immediately (YouTube Studio):
   □ Replace title
   □ Replace description
   □ Replace tags
   □ Add chapters if missing
   □ Post new pinned comment
 
-Step 2; Within 48 hours:
+Step 2 — Within 48 hours:
   □ Update thumbnail if flagged
   □ Add to correct playlist
   □ Share updated link
 
-Step 3; Check in 7 days:
+Step 3 — Check in 7 days:
   □ Monitor CTR in Analytics
   □ If impressions up but CTR flat, fix thumbnail
   □ Try A/B title after 14 days if no improvement
@@ -470,7 +470,7 @@ Step 3; Check in 7 days:
 ---
 
 
-## Mode C: New Podcast Episode Package
+## Mode C — New Podcast Episode Package
 
 ### Podcast-specific inputs (gather alongside Steps 1-2)
 - Show name and episode number
@@ -484,11 +484,11 @@ If Step 1 research shows people search the guest's name, lead the title with it.
 ### Output template
 ```
 ==================================================
-🎙️ PODCAST EPISODE SEO PACKAGE; NEW EPISODE
+🎙️ PODCAST EPISODE SEO PACKAGE — NEW EPISODE
 ==================================================
 
 ① SEO TITLE (Primary)
-[Title; 60-70 chars. Lead with guest name if searchable, else keyword.]
+[Title — 60-70 chars. Lead with guest name if searchable, else keyword.]
 Character count: [N]/70
 
 ② SEO TITLE (A/B Variant)
@@ -496,7 +496,7 @@ Character count: [N]/70
 Character count: [N]/70
 
 ③ DESCRIPTION
-[Full description; guest bio in Block 2, platform links in Block 3]
+[Full description — guest bio in Block 2, platform links in Block 3]
 
 ④ PRIMARY KEYWORDS
 1. [Step 1 target keyword]
@@ -506,7 +506,7 @@ Character count: [N]/70
 5. [show name + topic]
 
 ⑤ TAGS
-[tag1], [tag2] ... [tag14-19; include show + guest name]
+[tag1], [tag2] ... [tag14-19 — include show + guest name]
 Total: [N]/500
 
 ⑥ HASHTAGS
@@ -542,7 +542,7 @@ Description: [50-100 word SEO description]
 🎧 [Other platforms as supplied]
 
 ⑬ END SCREEN SCRIPT
-"[2-3 sentences; thank guest, tease next, subscribe]"
+"[2-3 sentences — thank guest, tease next, subscribe]"
 
 ==================================================
 ```
@@ -550,10 +550,10 @@ Description: [50-100 word SEO description]
 ---
 
 
-## Mode D: Existing Podcast Episode Audit + Fix
+## Mode D — Existing Podcast Episode Audit + Fix
 
 ### Required input
-- YouTube URL (preferred; fetch live metadata) or current title/description
+- YouTube URL (preferred — fetch live metadata) or current title/description
 - Views/performance complaint
 
 ### Output template
@@ -568,7 +568,7 @@ TARGET KEYWORD: [confirmed in Step 1]
 AUDIT DATE: [today's date]
 
 ==================================================
-SECTION 1; SCORECARD
+SECTION 1 — SCORECARD
 ==================================================
 
 | Element              | Score     | Issue Found |
@@ -589,7 +589,7 @@ OVERALL SCORE: [X/10]
 PRIORITY FIXES: [Top 3]
 
 ==================================================
-SECTION 2; DETAILED FINDINGS
+SECTION 2 — DETAILED FINDINGS
 ==================================================
 
 TITLE ANALYSIS
@@ -613,11 +613,11 @@ Present: Yes / No | Starts at 0:00: Yes / No
 Sponsor marked (if applicable): Yes / No
 
 ==================================================
-SECTION 3; FULL REWRITTEN METADATA
+SECTION 3 — FULL REWRITTEN METADATA
 ==================================================
 
 ① REWRITTEN TITLE (Primary)
-[New title; 60-70 chars]
+[New title — 60-70 chars]
 Character count: [N]/70
 
 ② REWRITTEN TITLE (A/B Variant)
@@ -645,23 +645,23 @@ Note: [needs change?]
 [Rewritten comment]
 
 ==================================================
-SECTION 4; ACTION PLAN
+SECTION 4 — ACTION PLAN
 ==================================================
 
-Step 1; Do immediately (YouTube Studio):
+Step 1 — Do immediately (YouTube Studio):
   □ Replace title
   □ Replace description
   □ Replace tags
   □ Add/fix timestamps
   □ Post new pinned comment
 
-Step 2; Within 48 hours:
+Step 2 — Within 48 hours:
   □ Update thumbnail if flagged
   □ Add to correct playlist
   □ Cross-post platform links
   □ Share with guest
 
-Step 3; Check in 7 days:
+Step 3 — Check in 7 days:
   □ Monitor CTR
   □ Try A/B title after 14 days if flat
 
@@ -671,7 +671,7 @@ Step 3; Check in 7 days:
 ---
 
 
-## Mode E: New Short-Form / Reel Package
+## Mode E — New Short-Form / Reel Package
 
 ### Required input
 - Clip's topic/hook or the Step 1 target keyword
@@ -681,11 +681,11 @@ Step 3; Check in 7 days:
 ### Output template
 ```
 ==================================================
-🎬 SHORT-FORM SEO PACKAGE; NEW SHORT / REEL / CLIP
+🎬 SHORT-FORM SEO PACKAGE — NEW SHORT / REEL / CLIP
 ==================================================
 
 ① YOUTUBE SHORTS TITLE (Primary)
-[Title; 60-70 chars. Keyword in first 3 words. One power word/hook.]
+[Title — 60-70 chars. Keyword in first 3 words. One power word/hook.]
 Character count: [N]/70
 
 ② TITLE (A/B Variant)
@@ -707,7 +707,7 @@ If cut from a longer video: reuse 5-8 of its tags.
 ⑥ HASHTAGS (3-5, #Shorts always included)
 #Shorts #Tag2 #Tag3 [#Tag4 #Tag5 optional]
 
-⑦ CROSS-POST CAPTION (Reels / TikTok; if cross-posting)
+⑦ CROSS-POST CAPTION (Reels / TikTok — if cross-posting)
 [60-150 words. Keyword in first ~125 chars. End with 3-5 hashtags.]
 
 ⑧ COVER FRAME / THUMBNAIL TEXT
@@ -717,7 +717,7 @@ If cut from a longer video: reuse 5-8 of its tags.
 [1-2 sentences. Keyword + question]
 
 ⑩ END-OF-CLIP CTA
-[1 sentence; "full episode linked above", "part 2 tomorrow", etc.]
+[1 sentence — "full episode linked above", "part 2 tomorrow", etc.]
 
 ==================================================
 ```
@@ -725,7 +725,7 @@ If cut from a longer video: reuse 5-8 of its tags.
 ---
 
 
-## Mode F: Existing Short-Form Audit + Fix
+## Mode F — Existing Short-Form Audit + Fix
 
 ### Required input
 - URL (preferred) or current title/description/hashtags
@@ -742,7 +742,7 @@ TARGET KEYWORD: [confirmed in Step 1]
 AUDIT DATE: [today's date]
 
 ==================================================
-SECTION 1; SCORECARD
+SECTION 1 — SCORECARD
 ==================================================
 
 | Element             | Score     | Issue Found |
@@ -757,7 +757,7 @@ OVERALL SCORE: [X/10]
 PRIORITY FIXES: [Top 3]
 
 ==================================================
-SECTION 2; DETAILED FINDINGS
+SECTION 2 — DETAILED FINDINGS
 ==================================================
 
 TITLE ANALYSIS
@@ -775,7 +775,7 @@ Count: [N] (ideal: 3-5)
 Placement: [description vs title]
 
 ==================================================
-SECTION 3; REWRITTEN METADATA
+SECTION 3 — REWRITTEN METADATA
 ==================================================
 
 ① REWRITTEN TITLE (Primary)
@@ -805,15 +805,15 @@ Character count: [N]/70
 [Rewritten comment]
 
 ==================================================
-SECTION 4; ACTION PLAN
+SECTION 4 — ACTION PLAN
 ==================================================
 
-Step 1; Do immediately:
+Step 1 — Do immediately:
   □ Replace title, description, hashtags, tags
   □ Move hashtags out of title into description if needed
   □ Update cover frame if flagged
 
-Step 2; Check in 7 days:
+Step 2 — Check in 7 days:
   □ Monitor retention/completion rate
   □ If impressions up but completion flat, fix hook first
 
@@ -829,7 +829,7 @@ Now assemble the output. Deliver only what the user asked for:
 
 - **Full package**: Use your mode's template, fill every numbered section
 - **Single item** (title/description/tags only): Deliver just that + anything naturally attached (e.g., description should include its hashtags and chapters; title should include its A/B variant)
-- **Only say what they need**; don't dump sections they didn't request
+- **Only say what they need** — don't dump sections they didn't request
 
 Reference the rules by section:
 1. **Title** → Title Rules
@@ -844,7 +844,7 @@ Then run the Quality Checklist below.
 ---
 
 
-## Quality Checklist: run before sending
+## Quality Checklist — run before sending
 
 ### Completeness
 - [ ] Requested sections contain verified content or explicitly labeled missing inputs; no invented timestamps or content
@@ -852,7 +852,7 @@ Then run the Quality Checklist below.
 
 ### Research
 - [ ] Target keyword confirmed (or proposed + confirmed)
-- [ ] Step 1 search batch run; secondary keywords from real results
+- [ ] Step 1 search batch run — secondary keywords from real results
 - [ ] Current year from today's date
 - [ ] No fabricated search-volume or view-count claims
 - [ ] Superlative claims verified or marked `[VERIFY: ...]`

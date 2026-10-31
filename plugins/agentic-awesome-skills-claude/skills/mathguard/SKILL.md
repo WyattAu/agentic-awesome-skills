@@ -1,6 +1,6 @@
 ---
 name: mathguard
-description: "Math-heavy escalation for n >= 10^6; Bloom, HyperLogLog, Count-Min, MinHash/LSH, FFT, JL projection, sweep line. Use when classical O(n log n) is the floor and approximate or math wins."
+description: "Math-heavy escalation for n >= 10^6 — Bloom, HyperLogLog, Count-Min, MinHash/LSH, FFT, JL projection, sweep line. Use when classical O(n log n) is the floor and approximate or math wins."
 risk: safe
 source: community
 source_repo: morsechimwai/lemmaly
@@ -13,9 +13,9 @@ license: "Apache-2.0"
 license_source: "https://github.com/morsechimwai/lemmaly/blob/main/LICENSE"
 ---
 
-# mathguard: Math-Heavy Optimization for AI Code
+# mathguard — Math-Heavy Optimization for AI Code
 
-`lemmaly` makes you pick the right classical algorithm. `mathguard` kicks in when the classical algorithm is already optimal but **mathematics gives a better bound**; usually by accepting bounded approximation, exploiting structure, or moving to a smarter algebraic space.
+`lemmaly` makes you pick the right classical algorithm. `mathguard` kicks in when the classical algorithm is already optimal but **mathematics gives a better bound** — usually by accepting bounded approximation, exploiting structure, or moving to a smarter algebraic space.
 
 The model knows these techniques. It almost never proposes them spontaneously. mathguard fixes that.
 
@@ -54,7 +54,7 @@ This rule has saved more incidents than any other in this skill. Do not soften i
 1. **Declare exact vs approximate up front.** Before suggesting a math-level technique, state:
    - `mode: exact` or `mode: approximate`
    - If approximate: the error parameter (ε, δ, false-positive rate) and a sentence on whether the caller can tolerate it.
-   - If the caller needs exact and there is no exact win, say so and stop; do not silently degrade to approximate.
+   - If the caller needs exact and there is no exact win, say so and stop — do not silently degrade to approximate.
 
 2. **Cite the technique by name.** Never describe a probabilistic or numerical trick in vague terms. Name it: `Bloom filter`, `HyperLogLog`, `Count-Min Sketch`, `MinHash + LSH`, `Johnson–Lindenstrauss projection`, `FFT`, `NTT`, `fast exponentiation`, `Karatsuba`, `Strassen`, `sweep line`, `kd-tree`, `BVH`, `union-find with path compression`, `Floyd's cycle detection`, `Boyer-Moore majority`, `reservoir sampling`, `Knuth shuffle`, `Aho-Corasick`, `suffix automaton`, `segment tree with lazy propagation`, `Fenwick tree`, `monoid scan / parallel prefix`. A named technique is auditable; "a smart approximation" is not.
 
@@ -72,26 +72,26 @@ This rule has saved more incidents than any other in this skill. Do not soften i
 
 5. **Forbid math cargo-culting.** Do not introduce these techniques when:
    - n is small enough that a linear scan finishes in microseconds (n < ~10⁴ unless it is a hot path).
-   - The problem is I/O-bound; the math win disappears behind network/disk.
+   - The problem is I/O-bound — the math win disappears behind network/disk.
    - Exact answers are required and no exact technique exists.
    - The team will not maintain it (write that down: "team familiarity: ?").
 
 ## The pre-proposal protocol
 
-Before suggesting a math-level technique, your message must contain; in this order:
+Before suggesting a math-level technique, your message must contain — in this order:
 
-1. **The classical floor**; what is the best non-mathy algorithm and its Big-O? ("Hash join is O(n+m); we're already there.")
-2. **Why classical is not enough**; n too large, space blows up, real-time deadline, etc.
-3. **The math technique**; named (rule 2).
-4. **Exact or approximate**; with ε if approximate (rule 1).
-5. **The new bound**; with one-line derivation (rule 4).
-6. **The trade**; buys/costs (rule 3).
-7. **When NOT to use this**; at least one disqualifier.
+1. **The classical floor** — what is the best non-mathy algorithm and its Big-O? ("Hash join is O(n+m); we're already there.")
+2. **Why classical is not enough** — n too large, space blows up, real-time deadline, etc.
+3. **The math technique** — named (rule 2).
+4. **Exact or approximate** — with ε if approximate (rule 1).
+5. **The new bound** — with one-line derivation (rule 4).
+6. **The trade** — buys/costs (rule 3).
+7. **When NOT to use this** — at least one disqualifier.
 8. **The code or pseudocode.**
 
 If any of 1–7 is missing, do not propose the technique.
 
-## Playbook: math technique → problem → win → caveat
+## Playbook — math technique → problem → win → caveat
 
 ### Sketches and probabilistic structures (massive data, approximate)
 
@@ -110,7 +110,7 @@ If any of 1–7 is missing, do not propose the technique.
 
 | Problem | Classical | Math technique | Win | Caveat |
 |---|---|---|---|---|
-| Multiply two polynomials / big integers | O(n²) | **FFT / NTT / Karatsuba** | FFT/NTT O(n log n); Karatsuba O(n^log₂3) | Floating FFT loses precision; use NTT for integers |
+| Multiply two polynomials / big integers | O(n²) | **FFT / NTT / Karatsuba** | FFT/NTT O(n log n); Karatsuba O(n^log₂3) | Floating FFT loses precision — use NTT for integers |
 | Convolution of two signals | O(n·m) | **FFT-based convolution** | O((n+m) log(n+m)) | Numerical noise at very small magnitudes |
 | `pow(a, b) mod p`, b large | O(b) multiplications | **Fast exponentiation (square-and-multiply)** | O(log b) | Watch for overflow inside; use modular arithmetic |
 | GCD of large integers | repeated subtraction | **Euclidean algorithm** | O(log min) | Standard; AI sometimes still writes the subtraction loop |
@@ -158,14 +158,14 @@ If any of 1–7 is missing, do not propose the technique.
 | Online interval scheduling | re-sort by deadline | **Greedy with priority queue** | O(log n) per arrival | Specific objective; check problem fit |
 | Sliding-window max | O(n·k) | **Monotonic deque** | O(n) total | Window invariant subtle to maintain |
 
-## Canonical example: counting distinct users
+## Canonical example — counting distinct users
 
 **Problem.** Count unique users seen across a 24-hour event stream. ~2B events/day, ~50M unique users. Reported on a dashboard, ±2% is acceptable.
 
-### Without the protocol: silent OOM, or worse, silent billing error
+### Without the protocol — silent OOM, or worse, silent billing error
 
 ```ts
-// "Just use a Set"; silently OOMs the box at ~50M strings
+// "Just use a Set" — silently OOMs the box at ~50M strings
 const seen = new Set<string>();
 for await (const event of stream) {
   seen.add(event.userId);
@@ -173,9 +173,9 @@ for await (const event of stream) {
 return seen.size; // exact, but the process died at row 41M
 ```
 
-Or worse; proposed *with* a HyperLogLog "for performance" but plugged into the billing pipeline, which keys off the result. Billing then sees 49.7M instead of 50.0M users and a fraction never get charged.
+Or worse — proposed *with* a HyperLogLog "for performance" but plugged into the billing pipeline, which keys off the result. Billing then sees 49.7M instead of 50.0M users and a fraction never get charged.
 
-### With the protocol: auditable HLL
+### With the protocol — auditable HLL
 
 ```ts
 // Classical floor: O(unique) memory for an exact Set. At 50M strings × ~50B each, ~2.5GB.
@@ -185,7 +185,7 @@ Or worse; proposed *with* a HyperLogLog "for performance" but plugged into the b
 // Trade: O(m log log U) bits; ~0.81% relative STANDARD ERROR, not a hard ± bound.
 // About 95% confidence is roughly ±1.6% under the estimator/hash assumptions.
 // When NOT to use: anything that flows into billing, primary keys, or per-user actions.
-// Caller acceptance: confirmed; dashboard product owner accepts ±2%, written in PR.
+// Caller acceptance: confirmed — dashboard product owner accepts ±2%, written in PR.
 
 // Adapter pseudocode: choose a reviewed version-pinned HLL implementation.
 // No package or createHLL API is supplied by this skill.
@@ -196,7 +196,7 @@ for await (const event of stream) {
 return hll.estimate(); // An estimate; display uncertainty, not invented measured output.
 ```
 
-The first version is not "no HLL"; it is "HLL without writing down ε and who tolerates it." The second is identical in technique but auditable: ε is in the comment, the caller is named, the disqualifier (billing) is explicit.
+The first version is not "no HLL" — it is "HLL without writing down ε and who tolerates it." The second is identical in technique but auditable: ε is in the comment, the caller is named, the disqualifier (billing) is explicit.
 
 ## Output discipline
 
@@ -218,14 +218,14 @@ Code that uses a math-level technique must include:
 
 | Excuse | Reality |
 | --- | --- |
-| "A `set` works; I'll flag the memory issue in a comment." | Noticing the problem is not solving it. If memory is the budget, ship the structure that respects it. |
+| "A `set` works — I'll flag the memory issue in a comment." | Noticing the problem is not solving it. If memory is the budget, ship the structure that respects it. |
 | "Probabilistic structures sound fancy / academic." | Cloudflare runs Bloom filters in the request path. Redis ships HyperLogLog. These are production-tested, not academic. |
-| "Approximate is risky; I'll do exact and let it OOM later." | Silent OOM at 3am is riskier than a stated 0.81% error. State the ε, pick parameters, ship. |
+| "Approximate is risky — I'll do exact and let it OOM later." | Silent OOM at 3am is riskier than a stated 0.81% error. State the ε, pick parameters, ship. |
 | "I'll just shard the set across machines." | Sharding multiplies your infra cost; HLL solves it in 12KB on one box. Ask whether you actually need exact. |
 | "FFT is overkill for this." | True 99% of the time. But state the n. The crossover depends on implementation, coefficients, hardware and precision; benchmark it. |
-| "JL projection feels too lossy for embeddings." | At ε = 0.1, JL preserves pairwise distances within 10%. This does not guarantee preserved neighbor rankings or ANN recall; measure recall, do not eyeball. |
+| "JL projection feels too lossy for embeddings." | At ε = 0.1, JL preserves pairwise distances within 10%. This does not guarantee preserved neighbor rankings or ANN recall — measure recall, do not eyeball. |
 
-## Red flags: STOP
+## Red flags — STOP
 
 - Proposing a probabilistic structure without stating ε and δ.
 - Saying "we can use FFT here" without writing the n at which FFT actually beats schoolbook.
@@ -253,11 +253,11 @@ Cannot check every box? The technique is not ready to ship. Keep classical, or s
 
 ## Limitations
 
-- **Not for exact-required pipelines.** Any system where the result is a primary key, dedup key, billing input, or auth decision is out of scope; keep classical.
+- **Not for exact-required pipelines.** Any system where the result is a primary key, dedup key, billing input, or auth decision is out of scope — keep classical.
 - **Assumes representative inputs.** ε/δ bounds are average-case or high-probability; adversarial inputs can blow past them. State the threat model.
-- **Library quality varies.** Bloom / HLL / MinHash implementations differ in seed strategy, hash function, and memory layout; pick a maintained library and pin the version.
+- **Library quality varies.** Bloom / HLL / MinHash implementations differ in seed strategy, hash function, and memory layout — pick a maintained library and pin the version.
 - **Numerical stability.** Floating FFT, randomized SVD, and JL projection accumulate float error; for combinatorial exactness use NTT or exact integer variants.
-- **Team-familiarity risk.** A technique nobody can debug at 3 a.m. is a liability; write the maintainer note next to the trade-off.
+- **Team-familiarity risk.** A technique nobody can debug at 3 a.m. is a liability — write the maintainer note next to the trade-off.
 - **Not a profiler.** mathguard tells you which asymptotic ceiling you can break; it does not measure constant factors. Benchmark before claiming a wall-clock win.
 
 ## The thesis, in one line
@@ -266,9 +266,9 @@ Cannot check every box? The technique is not ready to ship. Keep classical, or s
 
 ## Related Skills
 
-- `lemmaly`; gateway; pick the classical algorithm first before reaching for math.
-- `invariant-guard`; for stating ε-bounds as part of the postcondition of an approximate algorithm.
-- `complexity-cuts`; when baseline code already exists and the bottleneck is CPU/memory, not approximation.
+- `lemmaly` — gateway; pick the classical algorithm first before reaching for math.
+- `invariant-guard` — for stating ε-bounds as part of the postcondition of an approximate algorithm.
+- `complexity-cuts` — when baseline code already exists and the bottleneck is CPU/memory, not approximation.
 
 ### Bound reference
 

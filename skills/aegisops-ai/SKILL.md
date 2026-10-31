@@ -7,7 +7,7 @@ author: Champbreed
 date_added: "2026-03-24"
 ---
 
-# /aegisops-ai: Autonomous Governance Orchestrator
+# /aegisops-ai — Autonomous Governance Orchestrator
 
 AegisOps-AI is described by its upstream as a governance pipeline
 that integrates advanced AI reasoning directly into
@@ -58,7 +58,7 @@ AegisOps-AI leverages the **Google GenAI SDK** to implement a "Reasoning Path" f
 ### 2. 💰 FinOps & Cloud Auditor (`cost_auditor.py`)
 
 * **Problem:** Infrastructure-as-Code (IaC) changes can lead to accidental "Silent Disasters" and massive cloud bill spikes.
-* **Solution:** Analyzes `terraform plan` output to identify cost anomalies-such as accidental upgrades from `t3.micro` to high-performance GPU instances.
+* **Solution:** Analyzes `terraform plan` output to identify cost anomalies—such as accidental upgrades from `t3.micro` to high-performance GPU instances.
 * **Key Output:** `infrastructure_audit_report.json`
 
 ### 3. ☸️ K8s Policy Hardener (`k8s_policy_generator.py`)

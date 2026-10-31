@@ -51,19 +51,19 @@ Authentication requires an API key passed as `x-api-key` header.
 
 ### Core Endpoints
 
-- `GET /balance/{chain}/{address}`; Check wallet balance
-- `POST /swap`; Execute token swap
-- `GET /portfolio/{address}`; Portfolio overview
-- `GET /token/{chain}/{contract}`; Token information
-- `POST /transfer`; Send tokens
+- `GET /balance/{chain}/{address}` — Check wallet balance
+- `POST /swap` — Execute token swap
+- `GET /portfolio/{address}` — Portfolio overview
+- `GET /token/{chain}/{contract}` — Token information
+- `POST /transfer` — Send tokens
 
 ## Key Behaviors
 
-1. **Exact transaction authorization**; before signing/submitting, show chain/network, verified token/asset address, source wallet, recipient, amount, fees, slippage, minimum received, approvals/allowance, spender, expiry and actual simulation result; obtain confirmation for that exact transaction. A quote/portfolio request does not authorize a swap or transfer
+1. **Exact transaction authorization** — before signing/submitting, show chain/network, verified token/asset address, source wallet, recipient, amount, fees, slippage, minimum received, approvals/allowance, spender, expiry and actual simulation result; obtain confirmation for that exact transaction. A quote/portfolio request does not authorize a swap or transfer
 2. **Check balances first** before attempting swaps or transfers
 3. **Verify asset identity** independently using authoritative chain/explorer/project sources; a third-party rugcheck score is advisory and cannot prove legitimacy
 4. **Report gas estimates** when available
-5. **Protect credentials and verify custody**; never send private keys or seed phrases through chat, logs or unapproved APIs. Provider claims about server-side vault signing need verification; do not guarantee custody architecture from this index
+5. **Protect credentials and verify custody** — never send private keys or seed phrases through chat, logs or unapproved APIs. Provider claims about server-side vault signing need verification; do not guarantee custody architecture from this index
 
 ## Links
 

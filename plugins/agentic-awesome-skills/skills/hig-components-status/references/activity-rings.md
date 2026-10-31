@@ -86,7 +86,7 @@ Because iOS shows Activity rings whether or not an Apple Watch is paired, activi
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/activity-rings#Developer-documentation)
 
-[`HKActivityRingView`](https://developer.apple.com/documentation/HealthKitUI/HKActivityRingView); HealthKit
+[`HKActivityRingView`](https://developer.apple.com/documentation/HealthKitUI/HKActivityRingView) — HealthKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/activity-rings#Videos)
 

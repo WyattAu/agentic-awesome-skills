@@ -45,7 +45,7 @@ For each ticker:
 ## Example Output
 
 ```
-Illustrative calculation; synthetic, not live prices or a trade signal
+Illustrative calculation — synthetic, not live prices or a trade signal
 Raw put volume: 120; raw call volume: 200 → raw P/C 0.60
 Excluded puts: 20; excluded calls: 150
 Retained puts: 100; retained calls: 50 → filtered P/C 2.00

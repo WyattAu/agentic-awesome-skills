@@ -32,11 +32,11 @@ The most effective feedback tends to match the significance of the information t
 
 **Consider integrating status feedback into your interface.** When status feedback is available near the items it describes, people get important information without having to take action or leave their current context. For example, Mail in iOS and iPadOS describes the most recent update and displays the number of unread messages in the toolbar of the mailbox screen, making the information unobtrusive but easy for people to check when they’re interested.
 
-**Use alerts to deliver critical; and ideally actionable; information.** By design, alerts disrupt the current context, so you need to match the importance of the information to the level of interruption. Alerts can lose their impact if you use them too often or to deliver unimportant information. For guidance, see [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts).
+**Use alerts to deliver critical — and ideally actionable — information.** By design, alerts disrupt the current context, so you need to match the importance of the information to the level of interruption. Alerts can lose their impact if you use them too often or to deliver unimportant information. For guidance, see [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts).
 
 **Warn people when they initiate a task that can cause data loss that’s unexpected and irreversible.** Avoid repeated warnings for expected reversible actions, such as moving a file to Trash. Permanent deletion, collateral loss or an external effect still needs clear scope and an appropriate safeguard.
 
-**When it makes sense, confirm that a significant action or task has completed.** For example, people appreciate getting feedback that confirms a successful Apple Pay transaction. It’s generally best to reserve this type of confirmation for activities that are sufficiently important; because people typically expect their action or task to succeed, they only need to know when it doesn’t.
+**When it makes sense, confirm that a significant action or task has completed.** For example, people appreciate getting feedback that confirms a successful Apple Pay transaction. It’s generally best to reserve this type of confirmation for activities that are sufficiently important — because people typically expect their action or task to succeed, they only need to know when it doesn’t.
 
 **Show people when a command can’t be carried out and help them understand why.** For example, if people request directions without specifying a destination, Maps tells them that it can’t provide directions to and from the same location.
 
@@ -46,7 +46,7 @@ The most effective feedback tends to match the significance of the information t
 
 ### [watchOS](https://developer.apple.com/design/human-interface-guidelines/feedback#watchOS)
 
-**Avoid displaying an indeterminate progress indicator; such as a loading indicator; in a watchOS app.** An animated indicator can make people think they need to continue paying attention to the display, which isn’t a good user experience. For a long task, offer an appropriate completion signal if notifications are authorized and available; also make status discoverable in the app rather than promising delivery.
+**Avoid displaying an indeterminate progress indicator — such as a loading indicator — in a watchOS app.** An animated indicator can make people think they need to continue paying attention to the display, which isn’t a good user experience. For a long task, offer an appropriate completion signal if notifications are authorized and available; also make status discoverable in the app rather than promising delivery.
 
 ## [Resources](https://developer.apple.com/design/human-interface-guidelines/feedback#Resources)
 
@@ -60,7 +60,7 @@ The most effective feedback tends to match the significance of the information t
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/feedback#Developer-documentation)
 
-[Animation and haptics](https://developer.apple.com/documentation/UIKit/animation-and-haptics); UIKit
+[Animation and haptics](https://developer.apple.com/documentation/UIKit/animation-and-haptics) — UIKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/feedback#Videos)
 

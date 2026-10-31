@@ -9,13 +9,13 @@
 
 ## Figma Config openers (Relay, Copenhagen; Figma brand blog)
 - 2025: frame rate dropped 60 → 15 fps for a tactile, handmade feel.
-- 2026: glyphs and textures thread, stack, loop and break out of containers; "looser, more collage-y".
+- 2026: glyphs and textures thread, stack, loop and break out of containers — "looser, more collage-y".
 - Static design and motion developed together; dedicated sound design.
 
-## Ordinary Folk: Gemini app launch (2D UI MG)
+## Ordinary Folk — Gemini app launch (2D UI MG)
 - Soft pastel gradient fields, one centred line with a single highlighted word, UI crops, floating phones, dark section for contrast, glowing ring for the climax.
 
-## OpenAI: ChatGPT Pulse launch
+## OpenAI — ChatGPT Pulse launch
 - White canvas, small centred type, huge whitespace, a plain white phone, beautiful illustrations as the hero, UI chips animating in.
 
 ## Linear / Cursor / Raycast (Impractical breakdowns)

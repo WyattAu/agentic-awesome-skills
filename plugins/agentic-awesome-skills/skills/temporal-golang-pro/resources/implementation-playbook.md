@@ -208,7 +208,7 @@ w := worker.New(c, "task-queue", worker.Options{
 
 ## 7. SideEffect and MutableSideEffect
 
-Use `workflow.SideEffect` when you need a **single non-deterministic value** captured once and replayed identically; for example, generating a UUID or reading a one-time config snapshot inside a workflow.
+Use `workflow.SideEffect` when you need a **single non-deterministic value** captured once and replayed identically — for example, generating a UUID or reading a one-time config snapshot inside a workflow.
 
 ```go
 // SideEffect: called only on first execution; result is recorded in history and

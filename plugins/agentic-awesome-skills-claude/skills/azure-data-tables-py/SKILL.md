@@ -242,7 +242,7 @@ asyncio.run(table_operations())
 3. **Use batch operations** for multiple entities in same partition
 4. **Choose upsert mode deliberately**; idempotence also depends on business effects and concurrency
 5. **Use parameterized queries** to prevent injection
-6. **Keep entities small**; max 1MB per entity
+6. **Keep entities small** — max 1MB per entity
 7. **Use async client** for high-throughput scenarios
 
 ## When to Use

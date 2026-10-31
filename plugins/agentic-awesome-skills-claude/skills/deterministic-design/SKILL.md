@@ -24,30 +24,30 @@ tools:
 ---
 ## When to Use
 
-Use to catch AI-generated UI that "looks off", is misaligned or centered-mush, or fails usability; when you need reproducible spatial measurements and an evidence-based usability review. Metrics do not prove user success, accessibility or overall design quality. Compose it with any taste/token design skill before reporting design "done".
+Use to catch AI-generated UI that "looks off", is misaligned or centered-mush, or fails usability — when you need reproducible spatial measurements and an evidence-based usability review. Metrics do not prove user success, accessibility or overall design quality. Compose it with any taste/token design skill before reporting design "done".
 
 _Source: [connerkward/deterministic-design-skill](https://github.com/connerkward/deterministic-design-skill) (MIT)._
 
 # deterministic-design
 
-Thesis: **determinism beats AI randomness.** A model can't trust its own eye on layout; so
+Thesis: **determinism beats AI randomness.** A model can't trust its own eye on layout — so
 don't. Render the UI and *measure* it.
 
 Two sub-skills (load as needed):
-- **[design-spatial](https://github.com/connerkward/deterministic-design-skill/blob/main/design-spatial/SKILL.md)**; deterministic layout audit: explicit grid
+- **[design-spatial](https://github.com/connerkward/deterministic-design-skill/blob/main/design-spatial/SKILL.md)** — deterministic layout audit: explicit grid
   + 8-pt spacing, and `layout-audit.js` computes centroid / optical-center / pixel-oracle
   balance and draws an annotated screenshot. **Numbers, not vibes.** Plus a render-then-
   critique vision loop.
-- **[design-ux](https://github.com/connerkward/deterministic-design-skill/blob/main/design-ux/SKILL.md)**; usability audit: scores the rendered UI against
+- **[design-ux](https://github.com/connerkward/deterministic-design-skill/blob/main/design-ux/SKILL.md)** — usability audit: scores the rendered UI against
   Nielsen's 10 + interaction heuristics via an authorized separate judge or clearly disclosed self-review → prioritized fix list.
 
 This **improves** existing design skills (including the default Anthropic one) by adding the
-layer they lack; it doesn't just advise on taste, it renders, measures, and judges the
+layer they lack — it doesn't just advise on taste, it renders, measures, and judges the
 output. Composable with any design skill.
 
 In central this lives as a subdir of ckw-design; it **publishes separately** as
 `deterministic-design-skill` (its own distribution) via publish-skill. One of the two
-flagship narratives; the *determinism* one; its sibling is human-in-the-loop (lookdev).
+flagship narratives — the *determinism* one; its sibling is human-in-the-loop (lookdev).
 
 ## Example
 

@@ -1,4 +1,4 @@
-# WP Guard: Security Reference
+# WP Guard — Security Reference
 
 ## Contents
 
@@ -20,12 +20,12 @@ Escape at the moment of output, with the function matching the destination conte
 | HTML body text | `esc_html()` |
 | HTML attribute | `esc_attr()` |
 | URL (href/src/action) | `esc_url()` (display) / `esc_url_raw()` (storage/redirects) |
-| Data for inline JS | `wp_json_encode()` + `wp_add_inline_script()`; `esc_js()` is legacy; single-quoted strings in inline attributes only |
+| Data for inline JS | `wp_json_encode()` + `wp_add_inline_script()`; `esc_js()` is legacy — single-quoted strings in inline attributes only |
 | Textarea content | `esc_textarea()` |
 | Rich/user HTML | `wp_kses_post()` or `wp_kses()` with an explicit allowlist |
-| Translation + output | `esc_html__()`, `esc_html_e()`, `esc_attr__()`; escape and translate in one call |
+| Translation + output | `esc_html__()`, `esc_html_e()`, `esc_attr__()` — escape and translate in one call |
 
-Trust nothing at output time; not even your own stored options; another plugin or a compromised import may have written them. "Escaped on save" is not a defense.
+Trust nothing at output time — not even your own stored options; another plugin or a compromised import may have written them. "Escaped on save" is not a defense.
 
 ## Sanitization: input type → function
 
@@ -57,16 +57,16 @@ $status = sanitize_key( wp_unslash( $raw ) );
 
 For cookie-authenticated privileged browser actions, both checks apply. Application Passwords or other validated non-cookie REST authentication have different CSRF requirements; always enforce authorization. They answer different questions:
 
-- `current_user_can( 'manage_options' )`; is this user *allowed* to do this? (authorization)
-- `check_admin_referer( 'ncs_save_settings' )` / `check_ajax_referer( 'ncs_action', 'nonce' )`; did this request *intend* this action? (CSRF protection)
+- `current_user_can( 'manage_options' )` — is this user *allowed* to do this? (authorization)
+- `check_admin_referer( 'ncs_save_settings' )` / `check_ajax_referer( 'ncs_action', 'nonce' )` — did this request *intend* this action? (CSRF protection)
 
-A nonce without a capability check lets any logged-in subscriber fire admin actions. A capability check without a nonce leaves CSRF open. AI-generated handlers routinely have one, the other, or neither; verify both exist on every `admin_post_*`, `wp_ajax_*`, and form handler.
+A nonce without a capability check lets any logged-in subscriber fire admin actions. A capability check without a nonce leaves CSRF open. AI-generated handlers routinely have one, the other, or neither — verify both exist on every `admin_post_*`, `wp_ajax_*`, and form handler.
 
 Generate nonces with `wp_nonce_field()` (forms) or `wp_create_nonce()` (AJAX/REST payloads). Nonces are per-user and time-limited; do not cache pages containing them.
 
 ## REST API permissions
 
-- Every route registers a real `permission_callback`. `__return_true` is acceptable only for genuinely public read-only data; never for writes.
+- Every route registers a real `permission_callback`. `__return_true` is acceptable only for genuinely public read-only data — never for writes.
 - Validate and sanitize via the route's `args` schema (`validate_callback`, `sanitize_callback`) instead of manual checks inside the handler.
 - Cookie-authenticated REST requests require the `X-WP-Nonce` header (`wp_rest` nonce); custom auth schemes must fail closed.
 
@@ -83,20 +83,20 @@ $row = $wpdb->get_row(
 ```
 
 - Placeholders: `%s`, `%d`, `%f`; `%i` for table/column identifiers (WP ≥ 6.2).
-- `IN ( … )` lists: build placeholders dynamically; `implode( ',', array_fill( 0, count( $ids ), '%d' ) )`; then prepare with the spread array.
+- `IN ( … )` lists: build placeholders dynamically — `implode( ',', array_fill( 0, count( $ids ), '%d' ) )` — then prepare with the spread array.
 - LIKE queries: `$wpdb->esc_like()` the term *before* passing it as a `%s` parameter.
 - Never interpolate `$_REQUEST` data anywhere near SQL, even "validated" data.
-- Prefer `WP_Query`, `get_posts()`, meta/term/option APIs when they can express the query; they bring caching for free.
+- Prefer `WP_Query`, `get_posts()`, meta/term/option APIs when they can express the query — they bring caching for free.
 
 ## File uploads
 
-Use `wp_handle_upload()` / media APIs; never move `$_FILES` manually. Validate type with `wp_check_filetype_and_ext()` against an allowlist; never trust the client MIME. The API alone does not guarantee private storage or a server execution ban. Enforce upload authorization, size/type restrictions, web-server non-execution and private access controls where needed.
+Use `wp_handle_upload()` / media APIs — never move `$_FILES` manually. Validate type with `wp_check_filetype_and_ext()` against an allowlist; never trust the client MIME. The API alone does not guarantee private storage or a server execution ban. Enforce upload authorization, size/type restrictions, web-server non-execution and private access controls where needed.
 
 ## Common AI-generated violations
 
-1. `echo '<div>' . $title . '</div>';`; unescaped output (Rule 1). Published research: XSS appears in 86% of AI generations tested on XSS-prone tasks (see [sources.md](sources.md)).
+1. `echo '<div>' . $title . '</div>';` — unescaped output (Rule 1). Published research: XSS appears in 86% of AI generations tested on XSS-prone tasks (see [sources.md](sources.md)).
 2. `wp_ajax_` handler with neither `check_ajax_referer()` nor `current_user_can()` (Rule 3).
-3. `"SELECT * FROM {$wpdb->posts} WHERE post_title = '$title'"`; interpolated SQL (Rule 4).
+3. `"SELECT * FROM {$wpdb->posts} WHERE post_title = '$title'"` — interpolated SQL (Rule 4).
 4. `permission_callback => '__return_true'` on a POST route (Rule 3).
-5. `curl_init()` inside a plugin (Rule 5); breaks proxies, blocks, and filters that `wp_remote_*` honors.
-6. Echoed `<script>` blocks with interpolated PHP; combines Rules 1 and 5; use `wp_enqueue_script()` + `wp_add_inline_script()`/`wp_localize_script()`.
+5. `curl_init()` inside a plugin (Rule 5) — breaks proxies, blocks, and filters that `wp_remote_*` honors.
+6. Echoed `<script>` blocks with interpolated PHP — combines Rules 1 and 5; use `wp_enqueue_script()` + `wp_add_inline_script()`/`wp_localize_script()`.

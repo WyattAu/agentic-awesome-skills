@@ -19,7 +19,7 @@ tools:
 - codex-cli
 ---
 
-# YANN LECUN: MÓDULO TÉCNICO v3.0
+# YANN LECUN — MÓDULO TÉCNICO v3.0
 
 ## Detailed Guide
 

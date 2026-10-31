@@ -59,9 +59,9 @@ Prompt-only 港股打新分析。给定一只新股代码或公司名，输出�
 
 并行调用：模式确定后，单股 / 次新股模式默认并行拉取 `ipo detail`、`peer-comparison`、`ipo listed`（破发率）、`index-quote HSI.HK`、`news`、`basicinfo`；招股书更深章节缺失时再按 `longbridge ipo --help` 选具体子命令补拉，仍缺则 WebSearch HKEXnews。日历模式只拉 `ipo subscriptions` + `ipo wait-listing` + `ipo listed`（计算近期破发率作为市场时机锚）。
 
-### WebSearch fallback: only for data Longbridge does not provide
+### WebSearch fallback — only for data Longbridge does not provide
 
-WebSearch 是兜底，**不是默认路径**。仅在 Longbridge CLI + MCP 都拿不到时使用，且必须在附录显式标 `[WebSearch; <publisher>, <date>, <url>]`，禁止伪造来源。
+WebSearch 是兜底，**不是默认路径**。仅在 Longbridge CLI + MCP 都拿不到时使用，且必须在附录显式标 `[WebSearch — <publisher>, <date>, <url>]`，禁止伪造来源。
 
 | 缺失数据                                  | WebSearch 查询模式                                                          | 可接受的来源权威                                             |
 | ----------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------ |
@@ -79,15 +79,15 @@ WebSearch 是兜底，**不是默认路径**。仅在 Longbridge CLI + MCP 都�
 
 输出由 `references/output.md` 模板驱动，按用户输入语言整体翻译后发出。三类主报告 + 两类异常报告：
 
-- **场景 A; 单只新股深度分析**（招股期内或刚开始招股）：评级条 → 核心数据卡 → 四维评分明细 → 招股书精华（行业空间 / 商业模式 / 三年财务表 / 募资用途 / 增长驱动 / 管理层）→ 3 条具体风险 → 申购手数参考（稳健 / 进取，附孖展提示）→ 延伸查询入口 → **数据来源明细附录** → 免责声明。
-- **场景 B; 打新日历**：未来 4 周日程表（公司名 / 截止日 / 上市日 / 募资规模 / 评级）→ 1–2 只重点关注 + 一句话理由 → 市场整体打新环境评估（基于近 3 月破发率） → **数据来源明细附录** → 免责声明。
-- **场景 C; 次新股追涨**：上市首日实际表现（开 / 收 / 振幅 / 当前价偏离发行价幅度）→ 简化四维（重点强调"市场时机"与"基本面展望"）→ 参考目标价区间（基于同业估值倒推，明确标"区间"非"目标点"）→ 3 条具体风险（强调追高与流动性）→ **数据来源明细附录** → 免责声明。
-- **异常 D; 数据不足，无法评级**：列出已尝试拉取但缺失的关键字段 → 引导用户等待招股截止日下午（超购倍数公告）或刷新数据源 → **数据来源明细附录**（仍然印出已成功获取的部分） → 免责声明。
-- **异常 E; 拒绝接管**：非港股 / 已上市 > 30 天 / 介绍上市 / SPAC 等，给出原因与替代 Skill 推荐，不再进入分析。
+- **场景 A — 单只新股深度分析**（招股期内或刚开始招股）：评级条 → 核心数据卡 → 四维评分明细 → 招股书精华（行业空间 / 商业模式 / 三年财务表 / 募资用途 / 增长驱动 / 管理层）→ 3 条具体风险 → 申购手数参考（稳健 / 进取，附孖展提示）→ 延伸查询入口 → **数据来源明细附录** → 免责声明。
+- **场景 B — 打新日历**：未来 4 周日程表（公司名 / 截止日 / 上市日 / 募资规模 / 评级）→ 1–2 只重点关注 + 一句话理由 → 市场整体打新环境评估（基于近 3 月破发率） → **数据来源明细附录** → 免责声明。
+- **场景 C — 次新股追涨**：上市首日实际表现（开 / 收 / 振幅 / 当前价偏离发行价幅度）→ 简化四维（重点强调"市场时机"与"基本面展望"）→ 参考目标价区间（基于同业估值倒推，明确标"区间"非"目标点"）→ 3 条具体风险（强调追高与流动性）→ **数据来源明细附录** → 免责声明。
+- **异常 D — 数据不足，无法评级**：列出已尝试拉取但缺失的关键字段 → 引导用户等待招股截止日下午（超购倍数公告）或刷新数据源 → **数据来源明细附录**（仍然印出已成功获取的部分） → 免责声明。
+- **异常 E — 拒绝接管**：非港股 / 已上市 > 30 天 / 介绍上市 / SPAC 等，给出原因与替代 Skill 推荐，不再进入分析。
 
 字数约束：场景 A 快速模式（仅评级 + 核心数据 + 四维评分 + 风险 + 申购参考）≤ 400 字；详细模式（含完整招股书精华）≤ 2000 字。场景 B / C / D / E ≤ 800 字。
 
-> **数据来源明细附录是强制输出**。无论评级、日历、追涨、数据不足、拒绝接管哪条分支，都必须以「数据来源明细」结尾，每一行须包含：字段类别 / 来源（CLI 子命令 / MCP 工具 / WebSearch URL）/ 抓取时间（YYYY-MM-DD HH:MM）/ 数据期间。WebSearch 行必须额外给出 publisher + 报告名 + 文章日期。任何数据缺失项必须在附录里以 `[unavailable]` 或 `[未披露; 等待公告]` 注明。
+> **数据来源明细附录是强制输出**。无论评级、日历、追涨、数据不足、拒绝接管哪条分支，都必须以「数据来源明细」结尾，每一行须包含：字段类别 / 来源（CLI 子命令 / MCP 工具 / WebSearch URL）/ 抓取时间（YYYY-MM-DD HH:MM）/ 数据期间。WebSearch 行必须额外给出 publisher + 报告名 + 文章日期。任何数据缺失项必须在附录里以 `[unavailable]` 或 `[未披露 — 等待公告]` 注明。
 
 ## Error handling
 
@@ -98,8 +98,8 @@ WebSearch 是兜底，**不是默认路径**。仅在 Longbridge CLI + MCP 都�
 | 非港股 IPO 输入                               | 本 Skill 仅覆盖港股主板与 GEM，美股 / A 股请用 `longbridge-ipo` + 对应市场的分析 Skill。                                        | 本 Skill 僅覆蓋港股主板與 GEM，美股 / A 股請用 `longbridge-ipo` + 對應市場的分析 Skill。                                        | This skill covers HK Main Board + GEM only; for US / A-share IPOs use `longbridge-ipo` + a market-specific analysis skill.      |
 | 已上市 > 30 天的标的                          | 本 Skill 已不覆盖，请改用 `longbridge-stock-research` / `longbridge-fundamental`。                                              | 本 Skill 已不覆蓋，請改用 `longbridge-stock-research` / `longbridge-fundamental`。                                              | Out of scope; switch to `longbridge-stock-research` / `longbridge-fundamental`.                                                 |
 | 介绍上市 / SPAC / 债券上市                    | 本 Skill 仅评估有募资的常规 IPO，不分析介绍上市 / SPAC / 债券。                                                                 | 本 Skill 僅評估有募資的常規 IPO，不分析介紹上市 / SPAC / 債券。                                                                 | Listings without fundraising (介绍上市 / SPAC / bond listing) are out of scope.                                                 |
-| 关键数据 ≥ 2 项缺失（发行价、基石、超购倍数） | 不出评级，仅出「数据不足，无法评级」并在附录列出缺失项。                                                                        | 不出評級，僅出「資料不足，無法評級」並在附錄列出缺失項。                                                                        | Do not emit a rating; emit "Insufficient data; no rating" and list missing fields in the appendix.                             |
+| 关键数据 ≥ 2 项缺失（发行价、基石、超购倍数） | 不出评级，仅出「数据不足，无法评级」并在附录列出缺失项。                                                                        | 不出評級，僅出「資料不足，無法評級」並在附錄列出缺失項。                                                                        | Do not emit a rating; emit "Insufficient data — no rating" and list missing fields in the appendix.                             |
 | 超购倍数尚未公布（招股期未结束）              | 在「发行质量」维度标「等待招股截止日下午公告」，不强行评分。                                                                    | 在「發行質量」維度標「等待招股截止日下午公告」，不強行評分。                                                                    | Tag the "Issue quality" dimension "awaiting close-of-book disclosure"; do not force-score.                                      |
-| WebSearch 找不到引用源                        | 该数据点附录写 `[unavailable]`，对应章节给定性描述而非编造数字。                                                                | 該數據點附錄寫 `[unavailable]`，對應章節給定性描述而非編造數字。                                                                | Tag the row `[unavailable]`; qualitative discussion only; never fabricate.                                                     |
+| WebSearch 找不到引用源                        | 该数据点附录写 `[unavailable]`，对应章节给定性描述而非编造数字。                                                                | 該數據點附錄寫 `[unavailable]`，對應章節給定性描述而非編造數字。                                                                | Tag the row `[unavailable]`; qualitative discussion only — never fabricate.                                                     |
 | 用户问孖展具体杠杆产品                        | 本 Skill 不推荐具体孖展产品；提示杠杆风险并引导至客服或 Longbridge 孖展页面。                                                   | 本 Skill 不推薦具體孖展產品；提示槓桿風險並引導至客服或 Longbridge 孖展頁面。                                                   | This skill does not recommend specific margin products; surface leverage risk and redirect to support / Longbridge margin page. |
 | 其他 stderr                                   | 原样透传错误，不静默重试。                                                                                                      | 原樣透傳錯誤，不靜默重試。                                                                                                      | Surface a redacted stderr summary; never silently retry.                                                                                  |

@@ -16,7 +16,7 @@ tags:
   - career-change
 ---
 
-# CV Generator Skill: FlowCV / Canva Edition
+# CV Generator Skill — FlowCV / Canva Edition
 
 ## Detailed Guide
 
@@ -31,7 +31,7 @@ Use this skill when you need to:
 - Prepare a paste-ready version of your CV for tools like FlowCV or Canva.
 
 Turns raw profile data into a polished, ATS-ready CV. Outputs a paste-ready plain-text
-version formatted for FlowCV, Canva, Google Docs, or Word; with a flaw report and
+version formatted for FlowCV, Canva, Google Docs, or Word — with a flaw report and
 missing-info checklist.
 
 ---
@@ -39,8 +39,8 @@ missing-info checklist.
 ## Limitations
 
 - **No hallucination.** Never invent a title, company, date, degree, cert, skill, metric, or award.
-- **No fake metrics.** If the user says "we grew a lot", ask for specifics; never insert a percentage.
-- **Respect source truth.** "Junior Developer" stays "Junior Developer"; suggest a reframe if needed; never silently change it.
+- **No fake metrics.** If the user says "we grew a lot", ask for specifics — never insert a percentage.
+- **Respect source truth.** "Junior Developer" stays "Junior Developer" — suggest a reframe if needed; never silently change it.
 - **No silent changes.** If something is materially reworded, note the change.
 - **One version at a time.** Complete the CV before offering variants.
 - **Privacy.** Omit unnecessary home address, IDs, DOB, marital status and religion. A country convention alone is not a requirement; include sensitive details only with the user's informed choice and verified need.

@@ -35,13 +35,13 @@ Prioritize demonstrated security impact under the engagement rules. Product fing
 
 **Highest-value targets:**
 
-- **SharePoint farms** (any version; 2013/2016/2019/SE); sign-only ViewState + permissive ToolPane.aspx + anonymous FormDigest creates the CVE-2025-53770 ToolShell precondition chain
-- **Telerik UI for ASP.NET AJAX**; `Telerik.Web.UI.WebResource.axd` is a documented RCE sink when keys leak (CVE-2017-11317, CVE-2017-11357, CVE-2019-18935)
-- **Classic ASP.NET Webforms enterprise apps**; banking portals, dealer portals, HR systems left on .NET Framework 4.x
-- **WCF services** (`*.svc?WSDL`); often forgotten admin endpoints with looser auth than the main app
-- **Sitecore CMS**; ViewState + Sitecore-specific deserialization chains (CVE-2021-42237)
-- **DotNetNuke (DNN)**; historic ViewState RCE chains
-- **Umbraco CMS**; ViewState + custom deserialization sinks
+- **SharePoint farms** (any version — 2013/2016/2019/SE) — sign-only ViewState + permissive ToolPane.aspx + anonymous FormDigest creates the CVE-2025-53770 ToolShell precondition chain
+- **Telerik UI for ASP.NET AJAX** — `Telerik.Web.UI.WebResource.axd` is a documented RCE sink when keys leak (CVE-2017-11317, CVE-2017-11357, CVE-2019-18935)
+- **Classic ASP.NET Webforms enterprise apps** — banking portals, dealer portals, HR systems left on .NET Framework 4.x
+- **WCF services** (`*.svc?WSDL`) — often forgotten admin endpoints with looser auth than the main app
+- **Sitecore CMS** — ViewState + Sitecore-specific deserialization chains (CVE-2021-42237)
+- **DotNetNuke (DNN)** — historic ViewState RCE chains
+- **Umbraco CMS** — ViewState + custom deserialization sinks
 
 **Asset types that pay most:** internet-reachable ASP.NET Webforms apps > WCF admin services > Telerik-integrated sites > Classic ASP.NET MVC with VSF (very rare)
 
@@ -51,7 +51,7 @@ Prioritize demonstrated security impact under the engagement rules. Product fing
 
 **Response headers indicating ASP.NET:**
 ```
-X-AspNet-Version: 4.0.30319          (classic; disclosure on its own)
+X-AspNet-Version: 4.0.30319          (classic — disclosure on its own)
 X-Powered-By: ASP.NET
 X-AspNetMvc-Version: 5.2
 Server: Microsoft-IIS/10.0
@@ -93,11 +93,11 @@ Set-Cookie: ASP.NET_SessionId=...; SameSite=None  (suggests cross-origin embeddi
 ```
 
 **Tech-stack signals:**
-- `Server: Microsoft-IIS/10.0` (or `/8.5`, `/7.5`); possible IIS fingerprint; headers can be rewritten or spoofed
-- `X-AspNet-Version` header; classic .NET Framework (4.x); .NET Core/5+ does NOT emit this
-- Cookies with `ASP.NET_SessionId`, `.ASPXAUTH`, `FedAuth`; Forms or claims auth
-- `__VIEWSTATE` in form bodies; Webforms (NOT MVC, NOT Razor Pages, NOT Blazor)
-- `MicrosoftSharePointTeamServices` header (sometimes stripped by ELB but leaks in `start.aspx` body); SharePoint
+- `Server: Microsoft-IIS/10.0` (or `/8.5`, `/7.5`) — possible IIS fingerprint; headers can be rewritten or spoofed
+- `X-AspNet-Version` header — classic .NET Framework (4.x); .NET Core/5+ does NOT emit this
+- Cookies with `ASP.NET_SessionId`, `.ASPXAUTH`, `FedAuth` — Forms or claims auth
+- `__VIEWSTATE` in form bodies — Webforms (NOT MVC, NOT Razor Pages, NOT Blazor)
+- `MicrosoftSharePointTeamServices` header (sometimes stripped by ELB but leaks in `start.aspx` body) — SharePoint
 
 ---
 
@@ -126,9 +126,9 @@ Set-Cookie: ASP.NET_SessionId=...; SameSite=None  (suggests cross-origin embeddi
 7. **Enumerate WCF services (`.svc`).** For each, fetch `?wsdl` and `?mex` (metadata exchange). MEX endpoints sometimes return full service contracts including admin operations.
 
 8. **Test request-validator bypass.** ASP.NET's request validator blocks `<` in query strings by default. Bypass categories that may still get through:
-   - HTML-entity-encoded payloads (`&lt;script&gt;`; but these don't execute)
+   - HTML-entity-encoded payloads (`&lt;script&gt;` — but these don't execute)
    - Encoded inside JSON / XML POST bodies (different content-type ≠ same validator)
-   - In path segments (not query); validator scope depends on framework version
+   - In path segments (not query) — validator scope depends on framework version
    - In Cookie / Referer headers (varies)
    - Inside `<%@ ... %>` ASP directives if reached via WebDAV PUT (rare)
 
@@ -136,9 +136,9 @@ Set-Cookie: ASP.NET_SessionId=...; SameSite=None  (suggests cross-origin embeddi
 
 10. **Look for Telerik components.** `Telerik.Web.UI.WebResource.axd?type=rau` is the historic upload-to-RCE chain (CVE-2017-11317). The `dialogParametersHolder` parameter chain (CVE-2019-18935) requires the encryption key but is otherwise RCE.
 
-11. **SharePoint-specific deserialization paths**; see `hunt-sharepoint` skill for the ToolPane.aspx + anonymous FormDigest + unencrypted ViewState chain.
+11. **SharePoint-specific deserialization paths** — see `hunt-sharepoint` skill for the ToolPane.aspx + anonymous FormDigest + unencrypted ViewState chain.
 
-12. **SafeControl enumeration via reflection.** SharePoint's `Picker.aspx?PickerDialogType=<TypeName>` (and DNN-equivalent endpoints) accept class names and return DIFFERENT error messages for "type exists but not whitelisted" vs "type does not exist." Feed a wordlist of `Microsoft.SharePoint.*.WebControls.*` types to enumerate the SafeControl list; useful for CVE-2019-0604-family hunting.
+12. **SafeControl enumeration via reflection.** SharePoint's `Picker.aspx?PickerDialogType=<TypeName>` (and DNN-equivalent endpoints) accept class names and return DIFFERENT error messages for "type exists but not whitelisted" vs "type does not exist." Feed a wordlist of `Microsoft.SharePoint.*.WebControls.*` types to enumerate the SafeControl list — useful for CVE-2019-0604-family hunting.
 
 ---
 
@@ -179,7 +179,7 @@ for label, vs in [
                data={"__VIEWSTATE": vs, "__VIEWSTATEGENERATOR": real_vsg},
                timeout=(5, 15), allow_redirects=False)
     title = re.search(r'<title>([^<]+)</title>', r.text)
-    title = title.group(1)[:100] if title else "-"
+    title = title.group(1)[:100] if title else "—"
     print(f"  [{label:14s}] {r.status_code}  {title}")
 ```
 
@@ -203,15 +203,15 @@ curl -sS "https://target.example/Service.svc?wsdl" | xmllint --format - | head -
 ```
 # Default: <script>alert(1)</script> in ?q= → "Potentially dangerous Request.QueryString value detected"
 # Bypasses that sometimes work:
-?q=%3cscript%3e            (URL-encoded; depends on validator config)
+?q=%3cscript%3e            (URL-encoded — depends on validator config)
 ?q=<svg/onload=alert(1)>  (depends on validator version)
 ?q=<%00script>             (NUL-byte; older validators)
-?q=javascript:alert(1)     (no < at all; passes validator)
+?q=javascript:alert(1)     (no < at all — passes validator)
 Cookie: foo=<script>       (cookie body not validated by default)
 Referer: http://x.com/<script>  (referer not validated in classic ASP.NET)
 ```
 
-**Telerik exploit gate (CVE-2019-18935; requires encryption keys):**
+**Telerik exploit gate (CVE-2019-18935 — requires encryption keys):**
 ```bash
 # Fingerprint Telerik
 curl -sS "https://target.example/Telerik.Web.UI.WebResource.axd?type=rau" -X POST
@@ -223,7 +223,7 @@ curl -sS "https://target.example/Telerik.Web.UI.WebResource.axd?type=rau" -X POS
 
 ## Common Root Causes
 
-1. **`viewStateEncryption="Auto"` defaults to signed-only on pages without sensitive ViewState data.** Many SharePoint pages are configured this way. The empty marker does not establish whether ViewState is encrypted; applicable exposed keys and context can enable forgery; verify exact runtime/page protections.
+1. **`viewStateEncryption="Auto"` defaults to signed-only on pages without sensitive ViewState data.** Many SharePoint pages are configured this way. The empty marker does not establish whether ViewState is encrypted — applicable exposed keys and context can enable forgery; verify exact runtime/page protections.
 
 2. **`<machineKey>` AutoGenerate in a Web Farm.** Each WFE generates a different key on first boot; ViewState issued by one WFE fails MAC validation on another. Operationally produces 500s; security-wise broadcasts the topology (the error message names the cluster).
 
@@ -248,12 +248,12 @@ curl -sS "https://target.example/Telerik.Web.UI.WebResource.axd?type=rau" -X POS
 | Defense | Bypass |
 |---|---|
 | `__VIEWSTATEENCRYPTED` non-empty (encrypted) | Recover both decryption + validation keys from any source-code leak / config-disclosure / VS forge primitive; without keys, deserialization cannot be triggered |
-| Request validator blocks `<` in querystring | Move payload to Cookie / Referer / JSON body / multipart filename; validator doesn't reach those contexts in classic ASP.NET |
+| Request validator blocks `<` in querystring | Move payload to Cookie / Referer / JSON body / multipart filename — validator doesn't reach those contexts in classic ASP.NET |
 | `EnableViewStateMac="true"` enforced | Recover `validationKey` from web.config disclosure or `<machineKey>` AutoGenerate fingerprinting (ysoserial.net `--minify --islegacy` mode generates ViewState that passes some MAC-validation gaps) |
 | `trace.axd` localhost-only | Set `X-Forwarded-For: 127.0.0.1` if the trace mode is `localOnly` and the validation uses Request.UserHostAddress (some apps use Forwarded-For instead) |
 | WCF `.svc` 401 on anonymous | Try `?wsdl` and `?mex` first; metadata is sometimes anonymously enumerable even when service ops require auth |
 | Telerik upload patched | Check the Telerik version: anything pre-2017Q1 (build 2017.1.118 or earlier) is the original RAU RCE. Check 2017Q3 - 2019Q3 for CVE-2019-18935 |
-| `SafeControl` whitelist enforced | Inheritance gate (`instanceof PickerDialog`) IS the gate on patched SP; bypass requires finding a SafeControl subclass with a deserialization sink; enumerate via Picker.aspx |
+| `SafeControl` whitelist enforced | Inheritance gate (`instanceof PickerDialog`) IS the gate on patched SP — bypass requires finding a SafeControl subclass with a deserialization sink; enumerate via Picker.aspx |
 | `customErrors mode="On"` (no stack traces) | Force a different error path: invalid Content-Length, malformed ViewState that triggers a parser-level exception below the customErrors handler |
 
 ---
@@ -280,15 +280,15 @@ Before writing the report, confirm:
 
 ## Illustrative Impact Scenarios (not verified engagement evidence)
 
-### Scenario A: Unverified SharePoint preconditions
+### Scenario A — Unverified SharePoint preconditions
 
 A reachable ToolPane route, issued request digest, ViewState field or error differential is not proof of CVE-2025-53770 or a complete RCE chain. Match the exact supported product/version to the Microsoft advisory and validate approved non-destructive evidence before claiming impact. Do not assert that EoL versions inherit a later CVE solely from similar routes.
 
-### Scenario B: Telerik fingerprint
+### Scenario B — Telerik fingerprint
 
 An upload-handler response and version hint are leads, not an RCE demonstration. Verify the exact vendor advisory, keys/configuration, accepted upload behavior and execution constraints. A write under App_Data does not itself prove a web-executable path. Do not claim an engagement occurred or severity was verified from this illustrative scenario.
 
-### Scenario C: trace.axd + elmah.axd both exposed on enterprise HR portal
+### Scenario C — trace.axd + elmah.axd both exposed on enterprise HR portal
 
 `trace.axd` 200 returns 50 most recent requests, including `Authorization: Bearer eyJ...` headers on API requests. `elmah.axd` 200 returns full error log with database connection-string in one of the exceptions. Reported severity: **Critical** (credentials in plaintext to anonymous internet).
 
@@ -296,16 +296,16 @@ An upload-handler response and version hint are leads, not an RCE demonstration.
 
 ## Related Skills & Chains
 
-- **`hunt-rce`**; ViewState deserialization is the headline ASP.NET RCE path; signed-only ViewState with exposed applicable keys can enable code injection under additional page/runtime/gadget preconditions. Chain primitive: ASP.NET ViewState dual-parser MAC-bypass anti-pattern detected (signed but not encrypted, `<%@ Page enableViewStateMac="true" viewStateEncryptionMode="Never" %>`) + machineKey recovered (from web.config disclosure, `elmah.axd`, source leak, or GitHub) → `hunt-rce` ysoserial.net `TypeConfuseDelegate` gadget → arbitrary command in `w3wp.exe` worker-process identity.
-- **`hunt-sharepoint`**; SharePoint farms inherit every ASP.NET anti-pattern plus their own surface. Chain primitive: ASP.NET fingerprint reveals SharePoint (X-SharePoint headers + `/_layouts/` reachable) → pivot to `hunt-sharepoint` for SP-specific RCE paths (ToolShell, SafeControl reflection) before generic ViewState attack.
-- **`hunt-ntlm-info`**; IIS sites that advertise NTLM/Negotiate anonymously leak AD topology. Chain primitive: ASP.NET app behind IIS with `WWW-Authenticate: NTLM` → `hunt-ntlm-info` Type-2 challenge capture → internal forest name → cross-reference Entra tenant via `m365-entra-attack` discovery.
-- **`hunt-file-upload`**; Telerik RadAsyncUpload, Kentico, Umbraco, and DotNetNuke all have historical upload-handler RCE. Chain primitive: ASP.NET CMS fingerprinted → `hunt-file-upload` bypass matrix against the CMS upload handler → `.aspx` written into web-accessible path → request → RCE under app-pool identity.
-- **`triage-validation`**; `trace.axd`/`elmah.axd` disclosure is only Critical when it actually leaks live credentials/tokens; pure stack traces are usually Low. Chain primitive: pull every reported finding through `triage-validation` 7-Question Gate before submission; distinguish "verbose error" (informational) from "live bearer token in error log" (Critical) before writing the report (`redteam-report-template`).
+- **`hunt-rce`** — ViewState deserialization is the headline ASP.NET RCE path; signed-only ViewState with exposed applicable keys can enable code injection under additional page/runtime/gadget preconditions. Chain primitive: ASP.NET ViewState dual-parser MAC-bypass anti-pattern detected (signed but not encrypted, `<%@ Page enableViewStateMac="true" viewStateEncryptionMode="Never" %>`) + machineKey recovered (from web.config disclosure, `elmah.axd`, source leak, or GitHub) → `hunt-rce` ysoserial.net `TypeConfuseDelegate` gadget → arbitrary command in `w3wp.exe` worker-process identity.
+- **`hunt-sharepoint`** — SharePoint farms inherit every ASP.NET anti-pattern plus their own surface. Chain primitive: ASP.NET fingerprint reveals SharePoint (X-SharePoint headers + `/_layouts/` reachable) → pivot to `hunt-sharepoint` for SP-specific RCE paths (ToolShell, SafeControl reflection) before generic ViewState attack.
+- **`hunt-ntlm-info`** — IIS sites that advertise NTLM/Negotiate anonymously leak AD topology. Chain primitive: ASP.NET app behind IIS with `WWW-Authenticate: NTLM` → `hunt-ntlm-info` Type-2 challenge capture → internal forest name → cross-reference Entra tenant via `m365-entra-attack` discovery.
+- **`hunt-file-upload`** — Telerik RadAsyncUpload, Kentico, Umbraco, and DotNetNuke all have historical upload-handler RCE. Chain primitive: ASP.NET CMS fingerprinted → `hunt-file-upload` bypass matrix against the CMS upload handler → `.aspx` written into web-accessible path → request → RCE under app-pool identity.
+- **`triage-validation`** — `trace.axd`/`elmah.axd` disclosure is only Critical when it actually leaks live credentials/tokens; pure stack traces are usually Low. Chain primitive: pull every reported finding through `triage-validation` 7-Question Gate before submission — distinguish "verbose error" (informational) from "live bearer token in error log" (Critical) before writing the report (`redteam-report-template`).
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

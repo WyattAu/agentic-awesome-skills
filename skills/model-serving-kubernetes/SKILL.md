@@ -20,7 +20,7 @@ metadata:
 
 # Model Serving on Kubernetes
 
-Production ML model serving with KServe and Triton; canary deployments, autoscaling, and GPU-aware scheduling.
+Production ML model serving with KServe and Triton — canary deployments, autoscaling, and GPU-aware scheduling.
 
 ## When to Use This Skill
 
@@ -298,7 +298,7 @@ curl -X POST http://triton:8000/v2/repository/models/text-classifier/load
 # Unload a model (requires explicit model-control mode)
 curl -X POST http://triton:8000/v2/repository/models/text-classifier/unload
 
-# KServe: watch rollout status
+# KServe — watch rollout status
 kubectl rollout status deployment/llama-3-8b-predictor -n models
 kubectl get inferenceservice llama-3-8b -n models -w
 ```
@@ -315,8 +315,8 @@ kubectl get inferenceservice llama-3-8b -n models -w
 
 ## Best Practices
 
-- Use canary deployments for all model updates; roll back in seconds if metrics degrade.
-- Enable Triton dynamic batching; benchmark throughput and latency for your model and request distribution.
+- Use canary deployments for all model updates — roll back in seconds if metrics degrade.
+- Enable Triton dynamic batching — benchmark throughput and latency for your model and request distribution.
 - Store models in S3/GCS with versioned paths (`s3://bucket/model/v1/`, `v2/`).
 - Pin GPU node selectors to prevent model pods landing on CPU-only nodes.
 - Monitor p99 latency and error rates per model version during canary rollouts.

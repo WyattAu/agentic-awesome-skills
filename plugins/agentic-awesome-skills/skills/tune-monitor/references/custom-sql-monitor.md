@@ -10,7 +10,7 @@ Read this file after determining the monitor type in Phase 1.5.
 Extract these from the `get_monitors` config response for your Phase 2 analysis:
 
 - SQL query text (`sql` or `custom_sql`)
-- Alert conditions; each has an `operator` and either a `threshold_value` (explicit) or ML
+- Alert conditions — each has an `operator` and either a `threshold_value` (explicit) or ML
   threshold configuration
 - Warehouse name
 - Schedule interval
@@ -27,7 +27,7 @@ This affects which tuning levers are available. ML-threshold monitors support se
 For monitors with explicit thresholds (`GT`, `LT`, `GTE`, `LTE`, `EQ`, `NE`):
 
 **When to recommend loosening a threshold:**
-- Anomalies are consistently marginal; the observed value just barely crosses the threshold
+- Anomalies are consistently marginal — the observed value just barely crosses the threshold
 - The margin between observed and threshold is small relative to the metric's natural variance
 - Most alerts are assessed as normal variation, not genuine issues
 
@@ -89,11 +89,11 @@ Use `create_or_update_sql_monitor` to update the monitor in place.
 
 1. **Always pass `monitor_uuid=<uuid>`** so the tool updates the existing monitor rather than
    creating a new one. Use the monitor UUID from Phase 1.
-2. **Always dry-run first** (`dry_run=True`, the default); show the user the YAML preview
+2. **Always dry-run first** (`dry_run=True`, the default) — show the user the YAML preview
    returned in `result.yaml` and ask for confirmation before applying.
 3. **On confirmation**, call again with `dry_run=False` (and the same `monitor_uuid` plus the
    same other parameters). The response carries the monitor's UUID in `result.monitor_uuid` and
-   a deep link in `result.instructions`; surface that to the user. `result.yaml` is `None` on
+   a deep link in `result.instructions` — surface that to the user. `result.yaml` is `None` on
    the live call by design.
 4. **Stale-uuid handling.** If the monitor was deleted between read and write, the tool raises a
    clear error instructing you to retry without `monitor_uuid` (turning the intent from "update"
@@ -101,16 +101,16 @@ Use `create_or_update_sql_monitor` to update the monitor in place.
 
 ### Common mistakes
 
-- **NEVER** omit `monitor_uuid`; this creates a duplicate monitor instead of updating.
+- **NEVER** omit `monitor_uuid` — this creates a duplicate monitor instead of updating.
 - **NEVER** apply changes without showing the dry-run preview first.
 - **CRITICAL: PUT semantics.** `create_or_update_sql_monitor` with `monitor_uuid` fully replaces
-  the monitor's configuration; fields you omit revert to tool defaults, they are NOT left
+  the monitor's configuration — fields you omit revert to tool defaults, they are NOT left
   untouched. The full config from Phase 1's `get_monitors(monitor_ids=[<uuid>],
   include_fields=["config"])` call is your source of truth: re-pass every field you want to
   keep (sql, all alert_conditions, schedule, warehouse, audiences, notes, priority, tags, etc.)
   alongside the ones you're changing.
 - **Diff the preview against the original.** Before running `dry_run=False`, compare the
-  rendered YAML returned in `result.yaml` against the original config; if anything you meant to
+  rendered YAML returned in `result.yaml` against the original config — if anything you meant to
   preserve is missing or changed, fix the call before committing.
 - **CRITICAL:** When modifying the SQL query, ensure the query still returns a single numeric
   value. A query that returns multiple rows or non-numeric data will break the monitor.

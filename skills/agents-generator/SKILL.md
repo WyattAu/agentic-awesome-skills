@@ -33,7 +33,7 @@ Use this skill when the user wants to:
 
 Do not use it to invent conventions without inspecting the target project, to overwrite instructions outside the user's scope, or to treat generated guidance as a substitute for human review.
 
-Generates a tailored AGENTS.md + `.agents/rules/*.md` for the target project; not a template with placeholders, but a living document that matches the project's real toolchain.
+Generates a tailored AGENTS.md + `.agents/rules/*.md` for the target project — not a template with placeholders, but a living document that matches the project's real toolchain.
 
 ## What you get
 
@@ -59,7 +59,7 @@ Rules NOT generated: `backend.md` (no NestJS), `database.md` (no ORM), `i18n.md`
 
 ## Activation Contract
 
-Generate AGENTS.md + `.agents/rules/*.md` for the target project. Never guess; read the project's actual files first.
+Generate AGENTS.md + `.agents/rules/*.md` for the target project. Never guess — read the project's actual files first.
 
 ### Mode selection
 
@@ -96,7 +96,7 @@ If the user asks to "preview", "show what would change", "dry-run": run all dete
 
 ### Full mode
 
-1. Read `assets/agents-full.md`; this is the AGENTS.md structure with all sections and filling rules.
+1. Read `assets/agents-full.md` — this is the AGENTS.md structure with all sections and filling rules.
 2. Read project files and fill every placeholder with real data. Never use generic text.
 3. Generate `AGENTS.md` at project root. Wrap content in `<!-- AGENTS-GENERATED-START -->` / `<!-- AGENTS-GENERATED-END -->`.
 4. For each applicable rule category, read the corresponding template from `assets/` and generate the rule file in `.agents/rules/`.
@@ -105,7 +105,7 @@ If the user asks to "preview", "show what would change", "dry-run": run all dete
 
 ### Minimal mode
 
-1. Read `assets/agents-minimal.md`; 30-line agents.md standard format.
+1. Read `assets/agents-minimal.md` — 30-line agents.md standard format.
 2. Generate single `AGENTS.md`.
 
 ### Update mode
@@ -156,7 +156,7 @@ Return:
 | Full mode | `assets/database.md` | Database rules template |
 | Full mode | `assets/i18n.md` | i18n rules template |
 | Full mode | `assets/backend.md` | Backend/NestJS template |
-| Conditional | `assets/claude.md` | CLAUDE.md; only if Claude detected |
+| Conditional | `assets/claude.md` | CLAUDE.md — only if Claude detected |
 | Conditional | `assets/platform.md` | Multi-platform files |
 | Conditional | `assets/agents-nested.md` | Monorepo nested AGENTS.md |
 | Reference | `references/decision-matrix.md` | Full detection logic and edge cases |

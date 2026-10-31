@@ -16,7 +16,7 @@ license_source: https://github.com/alapha888/agent-skills-en/blob/main/LICENSE
 
 # Meeting Notes
 
-Turn messy meeting notes into minutes that let someone who missed the meeting catch up in 3 minutes; and let attendees know exactly what they owe.
+Turn messy meeting notes into minutes that let someone who missed the meeting catch up in 3 minutes — and let attendees know exactly what they owe.
 
 ## When to Use
 
@@ -28,16 +28,16 @@ Turn messy meeting notes into minutes that let someone who missed the meeting ca
 1. **Read the raw notes**: read the transcript or jotted notes the user pasted. Find "what was finally decided" first, then look back for the reasoning. Minutes record conclusions and points of disagreement, not the full discussion.
 2. **Sort into three buckets**:
    - **Decisions**: one per line, phrased as "Decided to do X", never "Discussed X".
-   - **Action items**: each must have an owner + a deadline. If the notes name no owner, mark `[unassigned]`; if no deadline, mark `[TBD]`; never invent them.
+   - **Action items**: each must have an owner + a deadline. If the notes name no owner, mark `[unassigned]`; if no deadline, mark `[TBD]` — never invent them.
    - **Open questions**: issues left undecided that need a follow-up; state "what is blocking, and who owns the next step."
 3. **Conclusion first**: open the minutes with ≤3 lines on "what this meeting decided", then expand the three buckets.
-4. **Self-check before output**: does every action item have an owner? A deadline? Are decisions affirmative statements? Do open questions have a next step? Flag any "no"; don't gloss over it.
+4. **Self-check before output**: does every action item have an owner? A deadline? Are decisions affirmative statements? Do open questions have a next step? Flag any "no" — don't gloss over it.
 
 ## Rules
 
 - Do not fabricate. Names, dates, and numbers not in the notes must not appear; mark missing ones `[to confirm]`.
-- Do not editorialize. No "Maria's proposal seemed shaky"; only "Maria's proposal was rejected because…" (if a reason was stated).
-- Length control: the minutes body must be ≤1/3 of the raw notes. Longer means you didn't distill; redo it.
+- Do not editorialize. No "Maria's proposal seemed shaky" — only "Maria's proposal was rejected because…" (if a reason was stated).
+- Length control: the minutes body must be ≤1/3 of the raw notes. Longer means you didn't distill — redo it.
 
 ## Minimal example
 
@@ -75,6 +75,6 @@ Output:
 ## Anti-patterns
 
 - ❌ Chronological minutes: replaying two hours of discussion in order is the same as not organizing it.
-- ❌ Ownerless action items: "everyone please follow up"; an action item without an owner and a deadline is not an action item.
+- ❌ Ownerless action items: "everyone please follow up" — an action item without an owner and a deadline is not an action item.
 - ❌ Invented details: guessing dates or names the notes never mentioned turns minutes into fiction.
-- ❌ Decisions written as discussion: "Discussed the feasibility of a caching layer"; did the meeting adopt it or not? Minutes need affirmative statements.
+- ❌ Decisions written as discussion: "Discussed the feasibility of a caching layer" — did the meeting adopt it or not? Minutes need affirmative statements.

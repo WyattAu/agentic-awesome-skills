@@ -23,14 +23,14 @@ Use this skill for unattended workflows, webhook/API response contracts, retry d
 
 Make retries bounded and idempotent, especially for sends, payments, and writes. Redact credentials, personal data, request bodies, and stack details from caller-facing responses and alerts; expose only the minimum diagnostic context required.
 
-By default, when an n8n node throws, the **whole workflow halts**. For an interactive run you're watching, that's fine; you see the red node and fix it. For anything unattended (a webhook API, a cron job, a queue worker, an agent tool), it's the wrong default: the caller gets a timeout or an empty 500, the operator gets no alert, and the symptom is "the integration just stopped working" with no log and no clue.
+By default, when an n8n node throws, the **whole workflow halts**. For an interactive run you're watching, that's fine — you see the red node and fix it. For anything unattended (a webhook API, a cron job, a queue worker, an agent tool), it's the wrong default: the caller gets a timeout or an empty 500, the operator gets no alert, and the symptom is "the integration just stopped working" with no log and no clue.
 
-This skill is about making failures **loud, structured, and recoverable**; and, best case, **self-healing** so transient blips never reach a human at all.
+This skill is about making failures **loud, structured, and recoverable** — and, best case, **self-healing** so transient blips never reach a human at all.
 
 The two ideas that prevent most silent failures:
 
-- **Per-node error outputs**; a node's failure routes down a second output you control, instead of killing the run.
-- **A workflow-level error workflow**; a catch-all that fires for anything that escapes per-node handling (timeouts, crashes between nodes, unwired failures).
+- **Per-node error outputs** — a node's failure routes down a second output you control, instead of killing the run.
+- **A workflow-level error workflow** — a catch-all that fires for anything that escapes per-node handling (timeouts, crashes between nodes, unwired failures).
 
 ---
 
@@ -40,9 +40,9 @@ The two ideas that prevent most silent failures:
 |---|---|
 | Webhook / API (anything with `Respond to Webhook`) | **Required.** Every fallible node's error output wired; status code matches cause. |
 | Scheduled / cron / queue worker / agent tool (unattended) | **Required.** A workflow-level error workflow, plus bounded retries on retry-safe nodes. |
-| Internal one-off you run and watch yourself | **Optional.** Default `onError: "stopWorkflow"` is fine; you'll see the red node and re-run. |
+| Internal one-off you run and watch yourself | **Optional.** Default `onError: "stopWorkflow"` is fine — you'll see the red node and re-run. |
 
-The dividing line: **if anyone other than you sees the output**; a downstream system, an end user, an on-call engineer; the failure has to be handled, not swallowed. If you're the only watcher and the cost of failure is "I notice and re-run", looser is fine.
+The dividing line: **if anyone other than you sees the output** — a downstream system, an end user, an on-call engineer — the failure has to be handled, not swallowed. If you're the only watcher and the cost of failure is "I notice and re-run", looser is fine.
 
 ---
 
@@ -57,7 +57,7 @@ Get one without the other and you hit a failure mode:
 
 | What you did | What happens at runtime |
 |---|---|
-| `onError` set, error output **not** wired | Error data is silently discarded. Downstream doesn't fire. The dashboard shows the run as **succeeded**. Worst case; no error logged anywhere. |
+| `onError` set, error output **not** wired | Error data is silently discarded. Downstream doesn't fire. The dashboard shows the run as **succeeded**. Worst case — no error logged anywhere. |
 | Error output wired, `onError` **not** set | The slot never fires; the handler is unreachable. On failure the workflow just **halts** (default `stopWorkflow`). |
 | Both done | Failure routes down `main[1]` to your handler. ✅ |
 
@@ -77,7 +77,7 @@ Get one without the other and you hit a failure mode:
 
 `sourceIndex: 0` is the success path, `sourceIndex: 1` is the error path. (For IF nodes the aliases `branch: "true"`/`"false"` map to index 0/1; for a generic fallible node, use the explicit `sourceIndex: 1`.)
 
-**Then verify.** This trap doesn't surface in `validate_workflow`; a half-wired error output validates clean. Pull the workflow with `n8n_get_workflow` and confirm **both** halves:
+**Then verify.** This trap doesn't surface in `validate_workflow` — a half-wired error output validates clean. Pull the workflow with `n8n_get_workflow` and confirm **both** halves:
 
 - The node's `onError` is `"continueErrorOutput"`.
 - `connections["HTTP Request"].main[1]` contains your handler.
@@ -87,7 +87,7 @@ Valid `onError` values:
 | Value | Effect |
 |---|---|
 | `"stopWorkflow"` (default) | Error halts the whole workflow. |
-| `"continueRegularOutput"` | Error item flows out the **normal** output. Rare, usually wrong; downstream gets error-shaped data and keeps going. |
+| `"continueRegularOutput"` | Error item flows out the **normal** output. Rare, usually wrong — downstream gets error-shaped data and keeps going. |
 | `"continueErrorOutput"` | Error item flows out the **separate** error output (`main[1]`). The one you wire. |
 
 Full failure-mode catalog, fan-in/fan-out shapes, and verification: **references/NODE_ERROR_OUTPUTS.md**.
@@ -96,7 +96,7 @@ Full failure-mode catalog, fan-in/fan-out shapes, and verification: **references
 
 ## Self-healing first: `retryOnFail` before you wire error paths
 
-Before you build error branches, absorb the transient failures so they never reach those branches. On a network node **only after verifying its retry safety**; HTTP Request, comms (Gmail/Slack/Discord), databases, AI nodes, third-party integrations; set node-level retry:
+Before you build error branches, absorb the transient failures so they never reach those branches. On a network node **only after verifying its retry safety** — HTTP Request, comms (Gmail/Slack/Discord), databases, AI nodes, third-party integrations — set node-level retry:
 
 ```javascript
 { type: "updateNode", nodeName: "HTTP Request",
@@ -107,15 +107,15 @@ Before you build error branches, absorb the transient failures so they never rea
   } }
 ```
 
-Why this comes **first**: a 429 or a brief upstream hiccup will retry and usually succeed on its own. The error output then fires only on *real, persistent* failures; so your 5xx responses and on-call alerts reflect actual problems instead of noise.
+Why this comes **first**: a 429 or a brief upstream hiccup will retry and usually succeed on its own. The error output then fires only on *real, persistent* failures — so your 5xx responses and on-call alerts reflect actual problems instead of noise.
 
-Engine limits to know: retry fires on **any** error (there's no per-status-code filter), `maxTries` caps at 5, and `waitBetweenTries` caps at 5000ms; so 5000 is both the max and a sensible default. See **n8n-node-configuration** (NODE_FAMILY_GOTCHAS.md) for node-specific notes.
+Engine limits to know: retry fires on **any** error (there's no per-status-code filter), `maxTries` caps at 5, and `waitBetweenTries` caps at 5000ms — so 5000 is both the max and a sensible default. See **n8n-node-configuration** (NODE_FAMILY_GOTCHAS.md) for node-specific notes.
 
 ---
 
 ## API workflows: the canonical shape
 
-A webhook-triggered workflow that responds to its caller has one rule that overrides everything else: **no hanging branches**. Every path; success and every error; must end at a `Respond to Webhook`, or the caller sits there until it times out.
+A webhook-triggered workflow that responds to its caller has one rule that overrides everything else: **no hanging branches**. Every path — success and every error — must end at a `Respond to Webhook`, or the caller sits there until it times out.
 
 ```
 Webhook (responseMode: "responseNode")
@@ -128,8 +128,8 @@ Webhook (responseMode: "responseNode")
 Three things make this work:
 
 1. **Fan-in to one error responder.** Many fallible nodes can route their `main[1]` to a single `Respond` node. Keeps the graph readable.
-2. **Validation failures (4xx) are checked *upstream*, not via error outputs.** A missing field isn't a node *crashing*; it's an expected outcome with a known response. Branch on it with IF/Switch (or the schema validator below) and return 400/401/403/404 directly. Error outputs are for *unexpected* failures (5xx).
-3. **`responseCode` defaults to 200; even on error branches.** This is its own silent trap (see references/RESPONSE_SHAPES.md and **n8n-node-configuration** at `../n8n-node-configuration/references/NODE_FAMILY_GOTCHAS.md`): an error branch that returns 200 with an error body looks like success to the caller's HTTP client, so their error handling never fires. Set `responseCode` explicitly on every Respond node.
+2. **Validation failures (4xx) are checked *upstream*, not via error outputs.** A missing field isn't a node *crashing* — it's an expected outcome with a known response. Branch on it with IF/Switch (or the schema validator below) and return 400/401/403/404 directly. Error outputs are for *unexpected* failures (5xx).
+3. **`responseCode` defaults to 200 — even on error branches.** This is its own silent trap (see references/RESPONSE_SHAPES.md and **n8n-node-configuration** at `../n8n-node-configuration/references/NODE_FAMILY_GOTCHAS.md`): an error branch that returns 200 with an error body looks like success to the caller's HTTP client, so their error handling never fires. Set `responseCode` explicitly on every Respond node.
 
 ### Input validation: the Set-node schema validator
 
@@ -141,7 +141,7 @@ For any endpoint doing structured input validation, run the check as an IIFE ins
 
 A 5xx with `text/plain "Internal Server Error"` is technically an error response and practically useless. And not every failure is a 5xx. **Match the status code to *why* the request failed**, because the caller branches on it: their monitoring alerts on 5xx (your fault) but not 4xx (their fault), and 5xx suggests "retry" while 4xx suggests "don't".
 
-**The common mistake:** wiring everything; including bad input; to one `Respond` that returns 500 `internal_error`. Now the caller can't tell their bug from your outage, and your error rates can't separate real incidents from client noise.
+**The common mistake:** wiring everything — including bad input — to one `Respond` that returns 500 `internal_error`. Now the caller can't tell their bug from your outage, and your error rates can't separate real incidents from client noise.
 
 | Cause | Status | `error` code | Where it's handled |
 |---|---|---|---|
@@ -158,7 +158,7 @@ A 5xx with `text/plain "Internal Server Error"` is technically an error response
 
 So there are two distinct flows: **4xx is decided before the work** (IF/Switch + dedicated Respond), **5xx comes out of error outputs** ("we tried, it broke").
 
-**One Respond, expression-driven code.** When error paths differ only by *number and message* (same body shape, same headers), don't fan out to N Respond nodes through a Switch. The Respond node accepts expressions in both `Response Code` and body; compute the code inline:
+**One Respond, expression-driven code.** When error paths differ only by *number and message* (same body shape, same headers), don't fan out to N Respond nodes through a Switch. The Respond node accepts expressions in both `Response Code` and body — compute the code inline:
 
 ```javascript
 // Response Code field on a single Respond to Webhook:
@@ -174,7 +174,7 @@ So there are two distinct flows: **4xx is decided before the work** (IF/Switch +
 
 Reserve Switch + multiple Responds for paths that diverge *structurally* (different headers, different body shapes, redirects). Same shape with a different number is one expression-driven Respond.
 
-The default envelope is `{ "error": "<code>", "message": "<human text>" }`; the HTTP status already says success-vs-failure, so no `ok: false` flag. **Never leak internals** (stack traces, SQL, upstream bodies, tokens) into the response; log those privately, return a sanitized message. Correlation IDs, `retry_after`, validation `details`, and the full do-not-leak list are in **references/RESPONSE_SHAPES.md**.
+The default envelope is `{ "error": "<code>", "message": "<human text>" }` — the HTTP status already says success-vs-failure, so no `ok: false` flag. **Never leak internals** (stack traces, SQL, upstream bodies, tokens) into the response — log those privately, return a sanitized message. Correlation IDs, `retry_after`, validation `details`, and the full do-not-leak list are in **references/RESPONSE_SHAPES.md**.
 
 ---
 
@@ -192,7 +192,7 @@ Build it as a separate workflow starting with an **Error Trigger** node. n8n inv
 }
 ```
 
-Minimal version; **capture → notify**:
+Minimal version — **capture → notify**:
 
 ```
 Error Trigger → Set (build alert from execution + error) → Slack/email (post to #incidents)
@@ -202,10 +202,10 @@ A good alert includes the workflow name, a link to the editor and a link to the 
 
 Two traps worth flagging up front:
 
-- **The recursion trap.** If the error workflow notifies Slack and Slack is what's down, the error workflow fails too; and the original error vanishes. Notify on a *different* channel than your monitored workflows use (most workflows alert Slack → error workflow uses email), and add a fallback (write to a Data Table) so a failed notification still leaves a trace.
+- **The recursion trap.** If the error workflow notifies Slack and Slack is what's down, the error workflow fails too — and the original error vanishes. Notify on a *different* channel than your monitored workflows use (most workflows alert Slack → error workflow uses email), and add a fallback (write to a Data Table) so a failed notification still leaves a trace.
 - **A "handled" error won't bubble up.** If a node's error output is wired to a no-op that drops the data, n8n considers the error *handled* and the error workflow does **not** fire. Only catch per-node when you're actually doing something with the error.
 
-> **What the community MCP can't do:** assigning the error workflow (instance default or per-workflow override) is an n8n **setting available through the UI and, on supported versions/connectors, an API**; Workflow Settings → Error Workflow. Inspect the actual connector schema before claiming it is unsupported. Build the error workflow with the MCP, then tell the user the exact UI step to wire it up, and to repeat it (or set the instance default) for every unattended workflow.
+> **What the community MCP can't do:** assigning the error workflow (instance default or per-workflow override) is an n8n **setting available through the UI and, on supported versions/connectors, an API** — Workflow Settings → Error Workflow. Inspect the actual connector schema before claiming it is unsupported. Build the error workflow with the MCP, then tell the user the exact UI step to wire it up, and to repeat it (or set the instance default) for every unattended workflow.
 
 ---
 
@@ -214,7 +214,7 @@ Two traps worth flagging up front:
 | Want to do | Reality |
 |---|---|
 | Set a workflow's **Error Workflow** setting | Connector/version dependent; UI fallback (Workflow Settings → Error Workflow). No MCP tool. Build the workflow, then hand the user the UI step. |
-| Toggle other **workflow settings** (Save Execution Data, timezone, timeout, caller policy) | Connector/version dependent; UI fallback. `n8n_update_partial_workflow` has `updateSettings`, but the error-workflow assignment is not reliably exposed; confirm in the UI. |
+| Toggle other **workflow settings** (Save Execution Data, timezone, timeout, caller policy) | Connector/version dependent; UI fallback. `n8n_update_partial_workflow` has `updateSettings`, but the error-workflow assignment is not reliably exposed — confirm in the UI. |
 | Enable instance-wide error logging (Sentry, server logs) | Instance config, outside n8n workflows entirely. |
 
 What the MCP **can** do: build the error workflow, set `onError`/`retryOnFail` on nodes (`updateNode`/`patchNodeField`), wire error outputs (`addConnection` with `sourceIndex: 1`), validate (`validate_workflow`, `n8n_validate_workflow`), auto-fix common issues (`n8n_autofix_workflow`), test (`n8n_test_workflow`), and inspect failures (`n8n_executions`).
@@ -252,13 +252,13 @@ What the MCP **can** do: build the error workflow, set `onError`/`retryOnFail` o
 
 ## Integration with other skills
 
-- **n8n-workflow-patterns**; the webhook/API and scheduled patterns are where error handling lives. Use it for the overall shape; use this skill to harden it.
-- **n8n-node-configuration**; `onError`/`retryOnFail` are node config; NODE_FAMILY_GOTCHAS.md covers the Webhook/Respond response-code traps in depth.
-- **n8n-validation-expert**; the half-wired error output (one of the two steps missing) is a connection/config audit item, not a validation error. This skill is the fix.
-- **n8n-expression-syntax**; the expression-driven `Response Code` and the alert-message expressions rely on correct `{{ }}` syntax and `$json.error` access.
-- **n8n-code-javascript / n8n-code-python**; if you catch errors *inside* a Code node, decide deliberately: re-throw to use the error output, or handle and continue. Don't return error-shaped data and pretend it succeeded.
-- **n8n-code-tool**; an agent's Code Tool surfaces thrown errors back to the LLM, which then retries; that's a different error contract from workflow nodes.
-- **n8n-binary-and-data**; file/binary operations are fallible too; wire their error outputs like any network node.
+- **n8n-workflow-patterns** — the webhook/API and scheduled patterns are where error handling lives. Use it for the overall shape; use this skill to harden it.
+- **n8n-node-configuration** — `onError`/`retryOnFail` are node config; NODE_FAMILY_GOTCHAS.md covers the Webhook/Respond response-code traps in depth.
+- **n8n-validation-expert** — the half-wired error output (one of the two steps missing) is a connection/config audit item, not a validation error. This skill is the fix.
+- **n8n-expression-syntax** — the expression-driven `Response Code` and the alert-message expressions rely on correct `{{ }}` syntax and `$json.error` access.
+- **n8n-code-javascript / n8n-code-python** — if you catch errors *inside* a Code node, decide deliberately: re-throw to use the error output, or handle and continue. Don't return error-shaped data and pretend it succeeded.
+- **n8n-code-tool** — an agent's Code Tool surfaces thrown errors back to the LLM, which then retries; that's a different error contract from workflow nodes.
+- **n8n-binary-and-data** — file/binary operations are fallible too; wire their error outputs like any network node.
 
 ---
 
@@ -272,7 +272,7 @@ For an **API / webhook** workflow:
 - [ ] Network nodes have `retryOnFail: true, maxTries: 3, waitBetweenTries: 5000`
 - [ ] Error path ends at a Respond with an **explicit** 4xx/5xx `responseCode`
 - [ ] Status code matches cause (4xx caller, 5xx you)
-- [ ] Error body is `{ error, message }`; no stack traces, SQL, or tokens
+- [ ] Error body is `{ error, message }` — no stack traces, SQL, or tokens
 - [ ] Verified with `n8n_get_workflow`: both `onError` and `main[1]` present on each fallible node
 
 For an **unattended** (scheduled/cron/queue) workflow:
@@ -284,7 +284,7 @@ For an **unattended** (scheduled/cron/queue) workflow:
 
 ---
 
-**Remember**: the default is silence. Error handling is two moves; make the failure *route* (per-node `onError` + wired output, or a catch-all error workflow) and make it *speak* (a status code and body that tell the truth). Half a move is worse than none, because it looks done.
+**Remember**: the default is silence. Error handling is two moves — make the failure *route* (per-node `onError` + wired output, or a catch-all error workflow) and make it *speak* (a status code and body that tell the truth). Half a move is worse than none, because it looks done.
 
 ## Limitations
 

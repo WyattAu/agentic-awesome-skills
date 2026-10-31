@@ -18,20 +18,20 @@ Use these fields when supplied. Infer only what is obvious; otherwise list missi
 ```json
 {
   "product_name": "string",
-  "business_type": "string; what the product or service does",
+  "business_type": "string — what the product or service does",
   "target_audience": "string",
-  "primary_keyword": "string; exact target phrase, if known",
+  "primary_keyword": "string — exact target phrase, if known",
   "secondary_keywords": ["string"],
-  "usp": ["string; differentiators, up to 5"],
+  "usp": ["string — differentiators, up to 5"],
   "pain_points": ["string"],
   "features": ["string"],
-  "benefits": ["string; user outcomes mapped to features"],
+  "benefits": ["string — user outcomes mapped to features"],
   "social_proof": {"testimonials": ["string"], "logos": ["string"], "stats": ["string"]},
   "cta_primary": "string",
   "cta_secondary": "string",
-  "offer": "string; optional and factual",
-  "keyword_data": "string; optional seo-aeo-keyword-research output",
-  "competitor": "string; optional named alternative",
+  "offer": "string — optional and factual",
+  "keyword_data": "string — optional seo-aeo-keyword-research output",
+  "competitor": "string — optional named alternative",
   "tone": "professional | conversational | bold | empathetic | authoritative"
 }
 ```
@@ -94,7 +94,7 @@ URL Slug: /[short lowercase hyphenated slug]
 ## Social Proof
 ## Mid-page CTA
 ## How It Works
-1. **Step**; [short description]
+1. **Step** — [short description]
 
 ## Comparison or Alternatives
 | Dimension | Product | Alternative |

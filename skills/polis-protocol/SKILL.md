@@ -1,6 +1,6 @@
 ---
 name: polis-protocol
-description: "Coordinate multi-vendor AI agents as a self-improving team; a learning router assigns work by track record and citizens can amend the protocol's own rules."
+description: "Coordinate multi-vendor AI agents as a self-improving team — a learning router assigns work by track record and citizens can amend the protocol's own rules."
 category: orchestration
 risk: critical
 source: community
@@ -18,18 +18,18 @@ plugin:
     claude: blocked
 ---
 
-# Polis Protocol: a team of agents that develops
+# Polis Protocol — a team of agents that develops
 
 ## Overview
 
-Most agent coordination is a passive board: claim a task, do it, mark it done. It records, but it never gets smarter, and its rules are frozen. Polis Protocol is the active alternative; a folder of markdown where each agent is a "citizen" with a capability card, work is routed by a learning bandit to whoever has the best track record on the task's tags, settled work files lessons that update the routing, and citizens can propose and vote on amendments to the protocol itself. It is vendor-agnostic: Antigravity, Claude, Codex, and Gemini agents can all share one `_polis/`.
+Most agent coordination is a passive board: claim a task, do it, mark it done. It records, but it never gets smarter, and its rules are frozen. Polis Protocol is the active alternative — a folder of markdown where each agent is a "citizen" with a capability card, work is routed by a learning bandit to whoever has the best track record on the task's tags, settled work files lessons that update the routing, and citizens can propose and vote on amendments to the protocol itself. It is vendor-agnostic: Antigravity, Claude, Codex, and Gemini agents can all share one `_polis/`.
 
 In Antigravity specifically, this turns Manager View's fixed pipeline into a team that learns who is actually best at each kind of work, instead of running the same roles in the same order every time.
 
 ## When to Use This Skill
 
 - Use when 2+ agents (especially across vendors) work on one project and "who should do this" is a real question.
-- Use when you want the team to measurably improve over time; routing that adapts from outcomes, not static role labels.
+- Use when you want the team to measurably improve over time — routing that adapts from outcomes, not static role labels.
 - Use when you need a durable, git-auditable record of who did what, what was learned, and which rules changed.
 - Use when Antigravity's default orchestration is too rigid and you want routing + governance on top of it.
 
@@ -64,7 +64,7 @@ polis route --polis-root _polis \
   --contract _polis/contracts/open/your-task.md --explain
 ```
 
-The router prints a score breakdown (history / self-rating / cost / availability / applied lessons) and recommends the citizen with the strongest record on the task's tags. Agents can also reserve files (`polis reserve src/auth --as <citizen>`) so two agents never edit the same path at once; overlapping claims are rejected with the holder named.
+The router prints a score breakdown (history / self-rating / cost / availability / applied lessons) and recommends the citizen with the strongest record on the task's tags. Agents can also reserve files (`polis reserve src/auth --as <citizen>`) so two agents never edit the same path at once — overlapping claims are rejected with the holder named.
 
 ### Step 4: Settle, learn, and amend
 
@@ -73,7 +73,7 @@ polis contract settle <contract-id> --quality 5
 polis reconcile --polis-root _polis
 ```
 
-A settled contract files a lesson; accepted lessons carry a bounded `routing_effect` the router reads; and names in `--explain`; on the next similar task. Failures become guardrails (`polis guardrail add …`) that future contracts on those tags inherit as must-pass acceptance criteria. When a rule stops working, a citizen proposes an amendment and the others vote. Reproduce the learning claim yourself: `polis bench --mode learning`.
+A settled contract files a lesson; accepted lessons carry a bounded `routing_effect` the router reads — and names in `--explain` — on the next similar task. Failures become guardrails (`polis guardrail add …`) that future contracts on those tags inherit as must-pass acceptance criteria. When a rule stops working, a citizen proposes an amendment and the others vote. Reproduce the learning claim yourself: `polis bench --mode learning`.
 
 The scripts are not bundled. Review all initializer/demo code and preview exact writes before executing; do not initialize the cloned protocol repository accidentally. Agent votes, learned lessons and routing scores cannot amend user/system instructions, repository protection or authorization. Reservations coordinate cooperating clients, not filesystem access control; verify integration/diffs and tests independently. A self-assigned quality score or toy benchmark is not measured improvement on the user's workload.
 
@@ -88,7 +88,7 @@ git checkout <reviewed-commit-sha>
 bash scripts/demo.sh
 ```
 
-The router recommends Gemini for a Spanish-translation contract; because settled work taught it she has the best record on that tag, not because anyone reassigned it.
+The router recommends Gemini for a Spanish-translation contract — because settled work taught it she has the best record on that tag, not because anyone reassigned it.
 
 ### Example 2: Explain any routing decision
 
@@ -99,7 +99,7 @@ python3 scripts/route_contract.py --polis-root examples/research-team/_polis \
 
 ## Notes
 
-- No server, no runtime, no database; the whole protocol is markdown plus two small Python scripts.
+- No server, no runtime, no database — the whole protocol is markdown plus two small Python scripts.
 - Vendor-agnostic by design; a Claude or Codex agent can join the same polis an Antigravity agent created.
 - Full Antigravity integration guide: https://github.com/yehudalevy-collab/polis-protocol/blob/main/docs/antigravity.md
 

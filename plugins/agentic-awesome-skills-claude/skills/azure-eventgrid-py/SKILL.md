@@ -164,7 +164,7 @@ Namespace topics support CloudEvents; construct the namespace client with `names
 2. **Batch events** when publishing multiple events
 3. **Include meaningful subjects** for filtering
 4. **Use async client** for high-throughput scenarios
-5. **Handle retries**; Event Grid has built-in retry
+5. **Handle retries** — Event Grid has built-in retry
 6. **Set appropriate event types** for routing and filtering
 
 ## When to Use

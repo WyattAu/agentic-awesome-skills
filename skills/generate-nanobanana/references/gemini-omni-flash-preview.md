@@ -1,13 +1,13 @@
 # Gemini Omni Flash Video (`gemini-omni-flash-preview`)
 
 ## Overview
-Gemini Omni Flash generates and edits video. It supports text-to-video, image-to-video, subject-reference video, stateful multi-turn video editing, and editing a user's own uploaded video. **Every paid run requires explicit user cost approval before execution; see the skill's cost-approval rule.**
+Gemini Omni Flash generates and edits video. It supports text-to-video, image-to-video, subject-reference video, stateful multi-turn video editing, and editing a user's own uploaded video. **Every paid run requires explicit user cost approval before execution — see the skill's cost-approval rule.**
 
 ## Model Specification
 - **Model ID**: `gemini-omni-flash-preview`
-- **API**: Interactions API (`client.interactions.create`); this model does not use the older `generate_videos` or `:predictLongRunning` methods.
+- **API**: Interactions API (`client.interactions.create`) — this model does not use the older `generate_videos` or `:predictLongRunning` methods.
 - **Primary Use**: Text-to-video, image-to-video, subject-reference video, video editing.
-- **Cost**: Billable per call, priced per output. Quote the current price from the live [pricing page](https://ai.google.dev/gemini-api/docs/pricing) and get explicit user approval before submitting; one approval covers exactly one run.
+- **Cost**: Billable per call, priced per output. Quote the current price from the live [pricing page](https://ai.google.dev/gemini-api/docs/pricing) and get explicit user approval before submitting — one approval covers exactly one run.
 - **Aspect ratios**: `16:9`, `9:16` documented for aspect-ratio-controlled requests.
 - **Reproducibility**: No `seed` parameter is documented for this model. Treat every generation as non-deterministic.
 
@@ -76,7 +76,7 @@ interaction = client.interactions.create(
 ```
 
 ### Stateful Multi-Turn Video Editing
-Chain an edit onto a prior generation with `previous_interaction_id`; this is the closest thing this model offers to controlled reruns, not a seed:
+Chain an edit onto a prior generation with `previous_interaction_id` — this is the closest thing this model offers to controlled reruns, not a seed:
 ```python
 # Turn 1: generate
 res1 = client.interactions.create(model="gemini-omni-flash-preview", input="A woman playing violin outdoors.")
@@ -159,6 +159,6 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-The response's `output_video.data` field holds base64-encoded video bytes (or `output_video.uri` when `delivery: "uri"` was requested); decode/download and write to the target file. The response envelope also includes an `id` field; log it so multi-turn edits can chain via `previous_interaction_id`.
+The response's `output_video.data` field holds base64-encoded video bytes (or `output_video.uri` when `delivery: "uri"` was requested); decode/download and write to the target file. The response envelope also includes an `id` field — log it so multi-turn edits can chain via `previous_interaction_id`.
 
 These snippets omit robust output existence/MIME/schema checks and protected no-overwrite writes; they are not ready-made production helpers. Raw REST resource shape can differ from SDK convenience properties, so inspect actual response steps/metadata and the pinned reference. Use secure header/config input rather than exposing API keys in process arguments. A polling deadline is not remote cancellation.

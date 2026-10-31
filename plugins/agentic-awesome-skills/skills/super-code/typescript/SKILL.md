@@ -97,7 +97,7 @@ const merged = [...a, ...b, ...c]
 const copy = { ...obj }
 delete copy.password
 
-// ✅; destructure to omit
+// ✅ — destructure to omit
 const { password, ...safe } = obj
 ```
 
@@ -127,7 +127,7 @@ try {
 const user = await fetchUser(id)
 const config = await fetchConfig()
 
-// ✅; run in parallel
+// ✅ — run in parallel
 const [user, config] = await Promise.all([fetchUser(id), fetchConfig()])
 ```
 
@@ -176,7 +176,7 @@ function greet(name?: string) {
     doSomething(x)
 })()
 
-// ✅; just top-level statements in a module
+// ✅ — just top-level statements in a module
 const x = compute()
 doSomething(x)
 ```
@@ -191,7 +191,7 @@ function add(a: number, b: number): number {
     return a + b
 }
 
-// ✅; let TS infer simple return types
+// ✅ — let TS infer simple return types
 function add(a: number, b: number) {
     return a + b
 }
@@ -201,7 +201,7 @@ function add(a: number, b: number) {
 // ❌ any
 function process(data: any) { ... }
 
-// ✅; use unknown + type guard, or a proper type/generic
+// ✅ — use unknown + type guard, or a proper type/generic
 function process<T extends Record<string, unknown>>(data: T) { ... }
 ```
 
@@ -210,7 +210,7 @@ function process<T extends Record<string, unknown>>(data: T) { ... }
 interface UserNameProps { name: string }
 function UserName({ name }: UserNameProps) { ... }
 
-// ✅; inline for single-use
+// ✅ — inline for single-use
 function UserName({ name }: { name: string }) { ... }
 // Extract interface when reused in 2+ places
 ```
@@ -237,7 +237,7 @@ el.innerText = "hi"
 const [doubled, setDoubled] = useState(0)
 useEffect(() => { setDoubled(count * 2) }, [count])
 
-// ✅; compute during render
+// ✅ — compute during render
 const doubled = count * 2
 ```
 
@@ -245,7 +245,7 @@ const doubled = count * 2
 // ❌ useCallback everywhere by default
 const handler = useCallback(() => doSomething(id), [id])
 
-// ✅; only when passed to memoized child or used as effect dep
+// ✅ — only when passed to memoized child or used as effect dep
 // Otherwise: const handler = () => doSomething(id)
 ```
 

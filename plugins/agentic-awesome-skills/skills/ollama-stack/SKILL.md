@@ -76,7 +76,7 @@ ollama pull llama3.1:8b-instruct-q4_K_M
 | `deepseek-coder-v2:16b` | 9 GB | 12 GB | Code generation |
 | `qwen2.5:14b` | 9 GB | 12 GB | Multilingual, reasoning |
 
-## Docker Compose: Full Stack
+## Docker Compose — Full Stack
 
 ```yaml
 # docker-compose.yml
@@ -375,10 +375,10 @@ server {
 
 ## Related Skills
 
-- mac-mini-llm-lab (`mac-mini-llm-lab`); Apple Silicon optimization
-- docker-compose (`docker-compose`); Service orchestration
-- vllm-server (`vllm-server`); High-throughput production inference
-- llm-gateway (`llm-gateway`); Unified API routing
+- mac-mini-llm-lab (`mac-mini-llm-lab`) — Apple Silicon optimization
+- docker-compose (`docker-compose`) — Service orchestration
+- vllm-server (`vllm-server`) — High-throughput production inference
+- llm-gateway (`llm-gateway`) — Unified API routing
 
 ## Limitations
 

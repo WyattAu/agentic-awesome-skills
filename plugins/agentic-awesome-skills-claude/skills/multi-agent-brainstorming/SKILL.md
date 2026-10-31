@@ -152,7 +152,7 @@ Focus areas:
 
 ## The Process
 
-### Phase 1: Single-Agent Design
+### Phase 1 — Single-Agent Design
 
 1. Primary Designer runs the **standard `brainstorming` skill**
 2. Understanding Lock is completed and confirmed
@@ -163,7 +163,7 @@ No other agents participate yet.
 
 ---
 
-### Phase 2: Structured Review Loop
+### Phase 2 — Structured Review Loop
 
 Agents are invoked **one at a time**, in the following order:
 
@@ -183,7 +183,7 @@ Primary Designer must:
 
 ---
 
-### Phase 3: Integration & Arbitration
+### Phase 3 — Integration & Arbitration
 
 The Integrator / Arbiter reviews:
 - the final design

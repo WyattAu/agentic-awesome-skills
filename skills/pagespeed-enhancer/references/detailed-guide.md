@@ -15,7 +15,7 @@ PHASE 5 → Verification Checklist
 ---
 
 
-## PHASE 1: Ingest & Classify
+## PHASE 1 — Ingest & Classify
 
 When the user provides a PageSpeed Insights report (pasted text, screenshot, or URL):
 
@@ -27,10 +27,10 @@ When the user provides a PageSpeed Insights report (pasted text, screenshot, or 
 ```
 | Pillar          | Score | Status  | Critical Issue                      |
 |-----------------|-------|---------|-------------------------------------|
-| Performance     | 80    | ⚠️ Warn | LCP 4.0s; element render delay     |
-| Accessibility   | 100   | ✅ Pass | - |
+| Performance     | 80    | ⚠️ Warn | LCP 4.0s — element render delay     |
+| Accessibility   | 100   | ✅ Pass | —                                   |
 | Best Practices  | 100   | ✅ Pass | CSP missing (unscored)              |
-| SEO             | 100   | ✅ Pass | - |
+| SEO             | 100   | ✅ Pass | —                                   |
 ```
 
 Then proceed immediately to Phase 2 without waiting for user input unless the report is ambiguous.
@@ -38,11 +38,11 @@ Then proceed immediately to Phase 2 without waiting for user input unless the re
 ---
 
 
-## PHASE 2: Batch Scan (4 Sections)
+## PHASE 2 — Batch Scan (4 Sections)
 
 Run all four section scans. Present as collapsible sections in output.
 
-### Batch A: Performance Scan
+### Batch A — Performance Scan
 
 Audit these in order (highest Lighthouse weight first):
 
@@ -50,7 +50,7 @@ Audit these in order (highest Lighthouse weight first):
 |-------|--------------|---------------|
 | LCP breakdown | LCP | Is the LCP element lazily loaded? Is TTFB > 600ms? Is element render delay > 1s? |
 | Render-blocking resources | FCP, LCP | Which CSS/JS files block the critical path? Can they be deferred or inlined? |
-| CSS `@import` rules | FCP, LCP | Are external stylesheets loaded via `@import url()` in CSS? This can add a sequential discovery dependency; browser must fetch CSS, parse it, then fetch imported CSS. Use `<link>` instead. |
+| CSS `@import` rules | FCP, LCP | Are external stylesheets loaded via `@import url()` in CSS? This can add a sequential discovery dependency — browser must fetch CSS, parse it, then fetch imported CSS. Use `<link>` instead. |
 | Unused JavaScript | FCP, LCP, TBT | What % of the main bundle is unused? Is code-splitting possible? |
 | Network dependency tree | LCP | What is the critical path chain? Max latency? |
 | Forced reflows | TBT | Which JS functions query geometry after DOM mutation? |
@@ -66,7 +66,7 @@ For each audit item, output:
 - **Root Cause**: Why it's happening
 - **Fix Category**: Quick Win / Medium Effort / Refactor Required
 
-### Batch B: Accessibility Scan
+### Batch B — Accessibility Scan
 
 Focus on any failed audits. For a 100-score page, still check:
 
@@ -83,7 +83,7 @@ Focus on any failed audits. For a 100-score page, still check:
 | `lang` attribute | `<html lang="en">` present and valid BCP 47 |
 | `font-display` | Set to `swap` or `optional` to prevent FOIT |
 
-### Batch C: Best Practices Scan
+### Batch C — Best Practices Scan
 
 Security headers are often unflagged by Lighthouse score but are critical. Check ALL deployment targets:
 
@@ -97,13 +97,13 @@ Security headers are often unflagged by Lighthouse score but are critical. Check
 | X-Content-Type-Options | `nosniff` header | Same as above | 🟡 Medium |
 | Referrer-Policy | `strict-origin-when-cross-origin` | Same as above | 🟡 Medium |
 | Permissions-Policy | Restrict camera/mic/geolocation | Same as above | 🟡 Medium |
-| Third-party cookies | Any `SameSite=None` cookies without `Secure`? | - | 🟡 Medium |
-| Deprecated APIs | Any browser-deprecated JS APIs in use? | - | 🟢 Low |
-| Source maps | Are source maps deployed for debugging? | - | 🟢 Low |
+| Third-party cookies | Any `SameSite=None` cookies without `Secure`? | — | 🟡 Medium |
+| Deprecated APIs | Any browser-deprecated JS APIs in use? | — | 🟢 Low |
+| Source maps | Are source maps deployed for debugging? | — | 🟢 Low |
 
 When both `netlify.toml` and `vercel.json` exist, check BOTH. Each has a different syntax (TOML vs JSON).
 
-### Batch D: SEO Scan
+### Batch D — SEO Scan
 
 | Check | What to Verify |
 |-------|---------------|
@@ -117,12 +117,12 @@ When both `netlify.toml` and `vercel.json` exist, check BOTH. Each has a differe
 | Link descriptiveness | No "click here" / "read more" link text |
 | Crawlability | No `noindex` on important pages |
 | HTTP status | 200 on main page and critical resources |
-| SPA meta injection | If using react-helmet-async / Next.js Head: verify via "View Page Source", not DevTools Elements; meta tags may be JS-injected |
+| SPA meta injection | If using react-helmet-async / Next.js Head: verify via "View Page Source", not DevTools Elements — meta tags may be JS-injected |
 
 ---
 
 
-## PHASE 3: Risk Report
+## PHASE 3 — Risk Report
 
 After completing all four batch scans, output a consolidated **Risk vs Impact Matrix**:
 
@@ -147,21 +147,21 @@ Always recommend: fix P1 (Low Risk, High Impact) items first, then P2, then P3.
 ---
 
 
-## PHASE 4: Fix Batches
+## PHASE 4 — Fix Batches
 
 Apply fixes in risk order. For each fix, provide:
 
-1. **What to change**; file, line, specific change
+1. **What to change** — file, line, specific change
 2. **Before** (code snippet)
 3. **After** (code snippet)
-4. **Expected effect**; hypothesis unless measured
-5. **How to verify**; what to check after deploying
+4. **Expected effect** — hypothesis unless measured
+5. **How to verify** — what to check after deploying
 
-### Fix Batch 1: Candidate quick wins (verify before authorized deployment)
+### Fix Batch 1 — Candidate quick wins (verify before authorized deployment)
 
 Examples from common audits:
 
-**F1.1; Move CSS `@import` to `<link>` tag**
+**F1.1 — Move CSS `@import` to `<link>` tag**
 
 CSS @import can delay stylesheet discovery; the effect is not a fixed multiplier. Move to `<link>` in `<head>`:
 
@@ -177,7 +177,7 @@ CSS @import can delay stylesheet discovery; the effect is not a fixed multiplier
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap" /></noscript>
 ```
 
-**F1.2; Defer render-blocking CSS (if not above-fold critical)**
+**F1.2 — Defer render-blocking CSS (if not above-fold critical)**
 ```html
 <!-- Before -->
 <link rel="stylesheet" href="/assets/index.css">
@@ -187,9 +187,9 @@ CSS @import can delay stylesheet discovery; the effect is not a fixed multiplier
 <noscript><link rel="stylesheet" href="/assets/index.css"></noscript>
 ```
 
-**F1.3; Fix broken preconnect (crossorigin mismatch)**
+**F1.3 — Fix broken preconnect (crossorigin mismatch)**
 ```html
-<!-- Before (broken; no crossorigin on font CDN) -->
+<!-- Before (broken — no crossorigin on font CDN) -->
 <link rel="preconnect" href="https://api.rss2json.com">
 
 <!-- After -->
@@ -197,7 +197,7 @@ CSS @import can delay stylesheet discovery; the effect is not a fixed multiplier
 <!-- Only preconnect origins used in critical path, max 4 -->
 ```
 
-**F1.4; Convert images to WebP**
+**F1.4 — Convert images to WebP**
 ```bash
 # Using cwebp
 cwebp -q 80 input.jpeg -o output.webp
@@ -215,7 +215,7 @@ Image.open('input.jpg').save('output.webp', 'WebP', quality=80)
 "
 ```
 
-**F1.5; Add explicit image dimensions (CLS fix)**
+**F1.5 — Add explicit image dimensions (CLS fix)**
 ```html
 <!-- Before -->
 <img src="hero.webp" alt="...">
@@ -224,7 +224,7 @@ Image.open('input.jpg').save('output.webp', 'WebP', quality=80)
 <img src="hero.webp" alt="..." width="800" height="400">
 ```
 
-**F1.6; Add security headers (netlify.toml)**
+**F1.6 — Add security headers (netlify.toml)**
 ```toml
 [[headers]]
   for = "/*"
@@ -238,7 +238,7 @@ Image.open('input.jpg').save('output.webp', 'WebP', quality=80)
     Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.rss2json.com"
 ```
 
-**F1.7; Add security headers (vercel.json)**
+**F1.7 — Add security headers (vercel.json)**
 ```json
 {
   "headers": [
@@ -258,7 +258,7 @@ Image.open('input.jpg').save('output.webp', 'WebP', quality=80)
 }
 ```
 
-**F1.8; Self-host Google Fonts (eliminate external CSS request)**
+**F1.8 — Self-host Google Fonts (eliminate external CSS request)**
 
 Download woff2 files and serve them locally to remove the Google Fonts CSS round-trip entirely:
 
@@ -305,7 +305,7 @@ body { font-family: 'Inter', sans-serif; }
 
 **Expected effect to measure:** removes the external font CSS request. Font availability, fallback behavior, layout shift and offline caching still require validation.
 
-**F1.9; Resize oversized icons**
+**F1.9 — Resize oversized icons**
 
 Choose budgets per asset role; an OG social image is not a small favicon and has different dimensions/quality requirements. Check and resize:
 ```bash
@@ -318,20 +318,20 @@ img.resize((16, 16)).save('favicon-16x16.png', 'PNG', optimize=True)
 "
 ```
 
-### Fix Batch 2: Medium Effort (staging test recommended)
+### Fix Batch 2 — Medium Effort (staging test recommended)
 
-**F2.1; Remove LCP element lazy loading**
+**F2.1 — Remove LCP element lazy loading**
 
 The LCP element must NEVER be lazy-loaded:
 ```html
-<!-- Before: wrong; LCP image is lazy -->
+<!-- Before: wrong — LCP image is lazy -->
 <img src="hero.webp" loading="lazy" ...>
 
 <!-- After: eager load the above-fold LCP element -->
 <img src="hero.webp" loading="eager" fetchpriority="high" ...>
 ```
 
-**F2.2; Preload LCP image**
+**F2.2 — Preload LCP image**
 
 ⚠️ Preload must reference the exact emitted URL and responsive candidate. Bundlers can inject hashed asset URLs into preload links; picture/fetchPriority does not replace correct discovery in every case:
 ```html
@@ -345,9 +345,9 @@ The LCP element must NEVER be lazy-loaded:
 </picture>
 ```
 
-**F2.3; Reduce unused JS (Vite/Rollup config)**
+**F2.3 — Reduce unused JS (Vite/Rollup config)**
 ```js
-// vite.config.js; enable manual chunking
+// vite.config.js — enable manual chunking
 build: {
   rollupOptions: {
     output: {
@@ -360,7 +360,7 @@ build: {
 }
 ```
 
-**F2.4; Eliminate forced reflows**
+**F2.4 — Eliminate forced reflows**
 ```js
 // Before: reads layout property inside animation loop
 element.addEventListener('scroll', () => {
@@ -377,16 +377,16 @@ element.addEventListener('scroll', () => {
 });
 ```
 
-**F2.5; Optimise DOM size**
+**F2.5 — Optimise DOM size**
 
 If DOM > 1,500 elements:
 - Use virtual scrolling for long lists (react-virtual, TanStack Virtual)
 - Lazy-render off-screen sections
 - Remove hidden/display:none nodes that never become visible
 
-### Fix Batch 3: Refactor Required (full QA cycle)
+### Fix Batch 3 — Refactor Required (full QA cycle)
 
-**F3.1; External API in critical path (e.g. api.rss2json.com)**
+**F3.1 — External API in critical path (e.g. api.rss2json.com)**
 
 Current: HTML → JS bundle → external API (adds 1,574ms to critical path)
 
@@ -403,7 +403,7 @@ export async function getStaticProps() {
 // Cache RSS response at CDN edge, return stale-while-revalidate
 ```
 
-**F3.2; Content Security Policy (full CSP)**
+**F3.2 — Content Security Policy (full CSP)**
 
 Build the CSP iteratively:
 1. Deploy in report-only mode first: `Content-Security-Policy-Report-Only`
@@ -420,8 +420,8 @@ Before deploying any fix batch, run these checks:
 
 ```
 Build:
-□ npm run build (or equivalent); exits 0
-□ npm run lint / typecheck; no new errors vs baseline
+□ npm run build (or equivalent) — exits 0
+□ npm run lint / typecheck — no new errors vs baseline
 □ Inspect dist/ output:
    - No single JS chunk > 500KB (gzipped)
    - CSS < 100KB
@@ -435,13 +435,13 @@ Asset verification:
 Deploy target:
 □ If dual-deployed (Netlify + Vercel), verify headers on BOTH
 □ If using SPA framework: verify meta tags via "View Page Source", not DevTools Elements
-  (react-helmet-async injects at runtime; check prerendered/SSR output)
+  (react-helmet-async injects at runtime — check prerendered/SSR output)
 ```
 
 ---
 
 
-## PHASE 5: Verification Checklist
+## PHASE 5 — Verification Checklist
 
 After deploying each fix batch, verify:
 
@@ -481,7 +481,7 @@ SEO:
 - Use emoji severity indicators: 🔴 Critical / 🟡 Warning / 🟢 Pass / ℹ️ Info
 - Always show "Before" and "After" code for every fix
 - Report metric deltas only from measured evidence; otherwise state improvement not yet measured
-- Never suggest fixes that conflict with each other; sequence matters
+- Never suggest fixes that conflict with each other — sequence matters
 
 ---
 
@@ -505,21 +505,21 @@ After each fix batch, log what changed and whether it caused build failures:
 
 | Fix | File(s) Modified | Build Pass? | Errors | Revert Steps |
 |-----|-----------------|-------------|--------|-------------|
-| F1.1; CSS @import → `<link>` | `index.html`, `src/styles/*.css` | □ Yes □ No | | Restore original `<link>` tags |
-| F1.2; Defer render-blocking CSS | `index.html` | □ Yes □ No | | Remove `media="print"` + `onload` |
-| F1.4; WebP conversion | `public/images/*.webp` | □ Yes □ No | | Delete .webp files, restore originals |
-| F1.5; Image dimensions | `src/components/*.tsx` | □ Yes □ No | | Remove `width`/`height`/`loading` attrs |
-| F1.6; Security headers (Netlify) | `netlify.toml` | □ Yes □ No | | Delete the `[[headers]]` block |
-| F1.7; Security headers (Vercel) | `vercel.json` | □ Yes □ No | | Remove the `"headers"` array entry |
-| F1.8; Self-host fonts | `public/fonts/*.woff2`, `src/styles/fonts.css`, `index.html` | □ Yes □ No | | Delete font files, remove `@font-face`, restore Google Fonts `<link>` |
-| F1.9; Resize icons | `public/favicon*`, `public/apple-touch-icon*`, `public/og-image*` | □ Yes □ No | | Restore original icon files |
-| F2.1; LCP eager loading | `src/components/*.tsx` | □ Yes □ No | | Change `loading="eager"` back to `loading="lazy"` |
-| F2.2; Preload LCP image | `index.html` or `src/components/*.tsx` | □ Yes □ No | | Remove `<link rel="preload">` or revert `<picture>` |
-| F2.3; Code-split JS | `vite.config.ts` | □ Yes □ No | | Remove `manualChunks` config |
-| F2.4; Fix forced reflows | `src/**/*.ts` | □ Yes □ No | | Revert geometry caching changes |
-| F2.5; Optimise DOM | `src/components/*.tsx` | □ Yes □ No | | Restore removed hidden nodes |
-| F3.1; External API to build time | `src/**/*.ts`, config files | □ Yes □ No | | Restore client-side fetch |
-| F3.2; CSP headers | `netlify.toml` / `vercel.json` | □ Yes □ No | | Remove or relax CSP directives |
+| F1.1 — CSS @import → `<link>` | `index.html`, `src/styles/*.css` | □ Yes □ No | | Restore original `<link>` tags |
+| F1.2 — Defer render-blocking CSS | `index.html` | □ Yes □ No | | Remove `media="print"` + `onload` |
+| F1.4 — WebP conversion | `public/images/*.webp` | □ Yes □ No | | Delete .webp files, restore originals |
+| F1.5 — Image dimensions | `src/components/*.tsx` | □ Yes □ No | | Remove `width`/`height`/`loading` attrs |
+| F1.6 — Security headers (Netlify) | `netlify.toml` | □ Yes □ No | | Delete the `[[headers]]` block |
+| F1.7 — Security headers (Vercel) | `vercel.json` | □ Yes □ No | | Remove the `"headers"` array entry |
+| F1.8 — Self-host fonts | `public/fonts/*.woff2`, `src/styles/fonts.css`, `index.html` | □ Yes □ No | | Delete font files, remove `@font-face`, restore Google Fonts `<link>` |
+| F1.9 — Resize icons | `public/favicon*`, `public/apple-touch-icon*`, `public/og-image*` | □ Yes □ No | | Restore original icon files |
+| F2.1 — LCP eager loading | `src/components/*.tsx` | □ Yes □ No | | Change `loading="eager"` back to `loading="lazy"` |
+| F2.2 — Preload LCP image | `index.html` or `src/components/*.tsx` | □ Yes □ No | | Remove `<link rel="preload">` or revert `<picture>` |
+| F2.3 — Code-split JS | `vite.config.ts` | □ Yes □ No | | Remove `manualChunks` config |
+| F2.4 — Fix forced reflows | `src/**/*.ts` | □ Yes □ No | | Revert geometry caching changes |
+| F2.5 — Optimise DOM | `src/components/*.tsx` | □ Yes □ No | | Restore removed hidden nodes |
+| F3.1 — External API to build time | `src/**/*.ts`, config files | □ Yes □ No | | Restore client-side fetch |
+| F3.2 — CSP headers | `netlify.toml` / `vercel.json` | □ Yes □ No | | Remove or relax CSP directives |
 
 If **Build Pass?** is **No**, run `npm run build` to see the exact error, revert the failed fix immediately, and re-test before applying the next batch.
 
@@ -529,6 +529,6 @@ If **Build Pass?** is **No**, run `npm run build` to see the exact error, revert
 ## References
 
 The following upstream deep-dives are not bundled in this tree; do not claim they were read:
-- `references/performance-deep-dive.md`; LCP, CLS, TBT root cause trees
-- `references/security-headers.md`; Complete CSP/HSTS/COOP reference
-- `references/image-optimization.md`; WebP/AVIF conversion pipelines
+- `references/performance-deep-dive.md` — LCP, CLS, TBT root cause trees
+- `references/security-headers.md` — Complete CSP/HSTS/COOP reference
+- `references/image-optimization.md` — WebP/AVIF conversion pipelines

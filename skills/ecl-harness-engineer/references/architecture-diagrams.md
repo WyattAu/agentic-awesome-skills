@@ -3,7 +3,7 @@
 > Review boundary: Diagrams below are illustrative templates, not generated facts about the target repository. Replace every path, line, relationship and interface with inspected evidence; partial text searches cannot establish a complete call/import graph.
 
 Auto-generated Mermaid diagrams for visualizing codebase structure. These diagrams are derived
-from actual code analysis; not hand-drawn, not aspirational. Every diagram should reflect
+from actual code analysis — not hand-drawn, not aspirational. Every diagram should reflect
 what the code **actually does**, not what the author wishes it did.
 
 ## Table of Contents
@@ -73,26 +73,26 @@ Shows which packages depend on which. The most important diagram for understandi
 ````markdown
 ```mermaid
 graph TD
-    subgraph "Layer 5; Entry Points"
+    subgraph "Layer 5 — Entry Points"
         CMD[cmd/]
     end
-    subgraph "Layer 4; Interfaces"
+    subgraph "Layer 4 — Interfaces"
         UI[ui/]
         SDK[sdk/]
         API[api/]
     end
-    subgraph "Layer 3; Business Logic"
+    subgraph "Layer 3 — Business Logic"
         CORE[core/]
         SVC[services/]
     end
-    subgraph "Layer 2; Infrastructure"
+    subgraph "Layer 2 — Infrastructure"
         CFG[config/]
         LOG[logging/]
     end
-    subgraph "Layer 1; Utilities"
+    subgraph "Layer 1 — Utilities"
         UTIL[utils/]
     end
-    subgraph "Layer 0; Types"
+    subgraph "Layer 0 — Types"
         TYPES[types/]
     end
 
@@ -171,7 +171,7 @@ To map data flow accurately:
 
 1. Find entry points (`main()`, HTTP handlers, CLI command handlers)
 2. Trace what happens to user input step by step
-3. Note which files/functions are involved at each step; include the actual file path
+3. Note which files/functions are involved at each step — include the actual file path
 4. Identify where data is transformed, stored, or returned
 5. Show config/logging as dotted lines (support infrastructure, not primary flow)
 
@@ -260,7 +260,7 @@ graph TD
 2. Use LSP `outgoingCalls` to trace the call chain, or grep for function invocations
 3. Include the file and line number for each function
 4. Show error paths as labeled edges
-5. Keep it to 8-12 nodes max; if more complex, split into sub-diagrams
+5. Keep it to 8-12 nodes max — if more complex, split into sub-diagrams
 
 ---
 
@@ -320,7 +320,7 @@ classDiagram
 2. Find implementations by matching method signatures
 3. For each implementation, list its struct fields (private) and methods (public)
 4. Add source file location as notes
-5. Focus on the most important interfaces; don't try to diagram everything
+5. Focus on the most important interfaces — don't try to diagram everything
 
 ---
 

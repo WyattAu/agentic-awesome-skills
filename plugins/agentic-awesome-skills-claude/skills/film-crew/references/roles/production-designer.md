@@ -22,8 +22,8 @@ PALETTE
 ```
 
 Every entry gets two versions:
-- **FULL**; the whole description, for shots where the whole subject is in frame.
-- **TIGHT**; only what a close-up can see (e.g. `C1-TIGHT: weathered hands, short
+- **FULL** — the whole description, for shots where the whole subject is in frame.
+- **TIGHT** — only what a close-up can see (e.g. `C1-TIGHT: weathered hands, short
   clean nails, a thin silver ring, sleeves of a faded olive sweatshirt pushed up`).
 
 Close-ups use TIGHT verbatim; wider shots use FULL verbatim. Pasting a whole-person

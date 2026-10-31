@@ -2,12 +2,12 @@
 
 > Extended reference content for `mdm-device-management`, kept under `references/` so the entrypoint stays within the audit budget.
 
-## 6. Security Policies: Cross-Platform
+## 6. Security Policies — Cross-Platform
 
 ### 6.1 Password / passcode requirements
 
 ```xml
-<!-- macOS configuration profile; password policy -->
+<!-- macOS configuration profile — password policy -->
 <dict>
     <key>PayloadType</key>
     <string>com.apple.mobiledevice.passwordpolicy</string>
@@ -38,14 +38,14 @@
 ### 6.2 Screen lock enforcement
 
 ```bash
-# macOS: require password after sleep/screensaver (via script or profile)
+# macOS — require password after sleep/screensaver (via script or profile)
 sudo defaults write /Library/Preferences/com.apple.screensaver askForPassword -int 1
 sudo defaults write /Library/Preferences/com.apple.screensaver askForPasswordDelay -int 0
 sudo defaults write /Library/Preferences/com.apple.screensaver idleTime -int 300
 ```
 
 ```powershell
-# Windows: lock screen after 5 minutes of inactivity
+# Windows — lock screen after 5 minutes of inactivity
 powercfg /change monitor-timeout-ac 5
 # Registry-based enforcement
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
@@ -67,10 +67,10 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 
 ## 7. Software Deployment
 
-### 7.1 macOS: Homebrew Bundle
+### 7.1 macOS — Homebrew Bundle
 
 ```ruby
-# Brewfile: deploy via MDM script or Git checkout
+# Brewfile — deploy via MDM script or Git checkout
 tap "homebrew/bundle"
 
 # Core tools
@@ -104,7 +104,7 @@ cask "zoom"
 brew bundle --file=/path/to/Brewfile --no-lock
 ```
 
-### 7.2 Windows: winget / Chocolatey
+### 7.2 Windows — winget / Chocolatey
 
 ```powershell
 # winget import from a JSON manifest
@@ -137,7 +137,7 @@ winget import -i packages.json --accept-package-agreements --accept-source-agree
 ### 7.3 Automatic update enforcement
 
 ```bash
-# macOS: enable automatic updates via MDM or command
+# macOS — enable automatic updates via MDM or command
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool true
@@ -145,7 +145,7 @@ sudo softwareupdate --schedule on
 ```
 
 ```powershell
-# Windows: configure Windows Update via registry
+# Windows — configure Windows Update via registry
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" `
   -Name "NoAutoUpdate" -Value 0
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" `
@@ -222,7 +222,7 @@ WHERE domain = 'com.apple.SoftwareUpdate'
 # Lock a device immediately with a 6-digit PIN
 fleetctl mdm lock --host "serial=C02X12345678"
 
-# Wipe a device (factory reset): DESTRUCTIVE
+# Wipe a device (factory reset) — DESTRUCTIVE
 fleetctl mdm erase --host "serial=C02X12345678"
 
 # Or via the Fleet API
@@ -262,13 +262,13 @@ Invoke-MgGraphRequest -Method POST `
 ---
 
 
-## 10. Onboarding Automation: Zero-Touch Enrollment
+## 10. Onboarding Automation — Zero-Touch Enrollment
 
 ### 10.1 macOS zero-touch flow
 
 ```bash
 #!/usr/bin/env bash
-# onboard-mac.sh: runs as a post-enrollment script via MDM
+# onboard-mac.sh — runs as a post-enrollment script via MDM
 set -euo pipefail
 
 LOG="/var/log/onboarding.log"
@@ -316,7 +316,7 @@ echo "=== Onboarding complete $(date) ==="
 ### 10.2 Windows zero-touch flow (Autopilot + Intune)
 
 ```powershell
-# deploy.ps1: assigned as an Intune PowerShell script
+# deploy.ps1 — assigned as an Intune PowerShell script
 $ErrorActionPreference = "Stop"
 $logFile = "C:\ProgramData\onboarding.log"
 # Do not transcript recovery-password operations; use a private redacted deployment log.
@@ -363,7 +363,7 @@ Write-Host "=== Onboarding complete $(Get-Date) ==="
 ### 10.3 Onboarding checklist (for IT automation)
 
 ```yaml
-# onboarding-checklist.yml: track in your ticketing system or Fleet
+# onboarding-checklist.yml — track in your ticketing system or Fleet
 new_hire_onboarding:
   pre_day_one:
     - Purchase and ship device via CDW/Apple Business Manager
@@ -376,7 +376,7 @@ new_hire_onboarding:
     - Device powers on and auto-enrolls in MDM (zero-touch)
     - MDM pushes security profiles (encryption, firewall, password policy)
     - Software bundle installs automatically
-    - User signs into SSO; all apps authenticate via SAML/OIDC
+    - User signs into SSO — all apps authenticate via SAML/OIDC
     - Compliance policies begin evaluation
 
   day_one_manual:

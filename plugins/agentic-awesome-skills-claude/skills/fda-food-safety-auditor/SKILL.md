@@ -23,7 +23,7 @@ This skill assists a qualified food-safety reviewer; it does not confer FDA auth
 
 1. **Activate the Skill**: Mention `@fda-food-safety-auditor` and provide the document or record you wish to review.
 2. **Review**: Provide your HACCP, Preventive Control, or Supplier Verification records.
-3. **Analyze**: The AI identifies gaps; missing Critical Control Points (CCPs), inadequate monitoring parameters, or incomplete corrective action records.
+3. **Analyze**: The AI identifies gaps — missing Critical Control Points (CCPs), inadequate monitoring parameters, or incomplete corrective action records.
 4. **Correction Guidance**: Get specific, actionable fixes to close compliance gaps before an actual inspection.
 
 ## Examples
@@ -37,7 +37,7 @@ This skill assists a qualified food-safety reviewer; it does not confer FDA auth
 ```text
 FDA AUDIT FINDING
 Review priority: urgent; qualified reviewer determines finding severity
-Citation: 21 CFR 117.150; Corrective Actions and Corrections
+Citation: 21 CFR 117.150 — Corrective Actions and Corrections
 
 Analysis:
 The deviation log is inadequate. Dropping below a critical limit means

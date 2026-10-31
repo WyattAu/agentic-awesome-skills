@@ -10,11 +10,11 @@ license: MIT
 license_source: https://github.com/Wolfe-Jam/faf-skills/blob/main/LICENSE
 ---
 
-# FAF Go: Guided Path to 100% ✪
+# FAF Go — Guided Path to 100% ✪
 
 **"Just type /faf-go, answer questions till you're done. 100% target."**
 
-`.faf` is an **IANA-registered context format** (`application/vnd.faf+yaml`); a typed, portable file *you own*, readable by any AI. **faf-cli scores on 21 slots**; your `app_type` selects which are *active*, and **100% ✪ = every active slot filled**. This skill is the guided interview that gets you there: the AI fills what it can detect, then asks you; via Claude Code's AskUserQuestion; only for the gaps it can't source.
+`.faf` is an **IANA-registered context format** (`application/vnd.faf+yaml`) — a typed, portable file *you own*, readable by any AI. **faf-cli scores on 21 slots**; your `app_type` selects which are *active*, and **100% ✪ = every active slot filled**. This skill is the guided interview that gets you there: the AI fills what it can detect, then asks you — via Claude Code's AskUserQuestion — only for the gaps it can't source.
 
 ## When to Use This Skill
 
@@ -64,7 +64,7 @@ Or get it as structured data for programmatic use:
 faf score --json
 ```
 
-`--json` returns the score + per-slot breakdown; the empty slots are what you interview on (the priority order is in Step 2).
+`--json` returns the score + per-slot breakdown — the empty slots are what you interview on (the priority order is in Step 2).
 
 ### Step 2: Ask Questions Using AskUserQuestion
 
@@ -296,7 +296,7 @@ Outside Claude Code, the same destination is reached with the CLI's own interact
 faf go            # interactive terminal interview (--resume continues a session)
 ```
 
-This skill is the **Claude-native** version of that interview; AskUserQuestion instead of terminal prompts. For structured, programmatic data, use `faf score --json`.
+This skill is the **Claude-native** version of that interview — AskUserQuestion instead of terminal prompts. For structured, programmatic data, use `faf score --json`.
 
 ## Success Metrics
 
@@ -310,7 +310,7 @@ This skill is the **Claude-native** version of that interview; AskUserQuestion i
 When 100% ✪ is achieved:
 
 ```
-✪ 100%; Gold Code
+✪ 100% — Gold Code
 
 project.faf: complete
 CLAUDE.md:   synced from .faf
@@ -320,9 +320,9 @@ Optionally run `faf sync` to emit CLAUDE.md / AGENTS.md from the .faf. Your AI n
 
 ## Related Skills
 
-- **faf-context**; the builder's quickstart: hand the AI what it needs to hit 100%, fast
-- **faf-wizard**; done-for-you, one-click .faf for any project
-- **faf-expert**; master the format: scoring internals, MCP config, bi-sync, the full 21-slot model
+- **faf-context** — the builder's quickstart: hand the AI what it needs to hit 100%, fast
+- **faf-wizard** — done-for-you, one-click .faf for any project
+- **faf-expert** — master the format: scoring internals, MCP config, bi-sync, the full 21-slot model
 
 ---
 

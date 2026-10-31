@@ -28,7 +28,7 @@ loss = BinaryCrossEntropyLoss(model, pos_weight=torch.tensor(5.0))
 ```
 
 - `pos_weight`: upweight positives when your dataset is imbalanced (e.g. 1 positive + N hard negatives). A good default is `pos_weight = num_hard_negatives`.
-- Handles both binary labels and continuous relevance scores; if you have graded relevance (0.0, 0.5, 1.0) BCE still works.
+- Handles both binary labels and continuous relevance scores — if you have graded relevance (0.0, 0.5, 1.0) BCE still works.
 
 ### `CrossEntropyLoss`
 
@@ -45,7 +45,7 @@ Contrastive training mirroring bi-encoder MNRL. Applies in-batch negatives: for 
 
 ### `CachedMultipleNegativesRankingLoss`
 
-Cached variant (GradCache); decouples per-device batch size from effective in-batch negatives, same as the bi-encoder cached version.
+Cached variant (GradCache) — decouples per-device batch size from effective in-batch negatives, same as the bi-encoder cached version.
 
 ```python
 loss = CachedMultipleNegativesRankingLoss(model, mini_batch_size=16)
@@ -56,7 +56,7 @@ loss = CachedMultipleNegativesRankingLoss(model, mini_batch_size=16)
 
 ## Distillation losses
 
-> **`activation_fn=nn.Identity()` is mandatory** for all distillation, listwise, and pairwise losses below; only `BinaryCrossEntropyLoss` and `CrossEntropyLoss` tolerate the default `Sigmoid`. The loss sees raw logits during training, but the model's `activation_fn` is applied at evaluation via `predict()`; the default `Sigmoid` (with `num_labels=1`) saturates raw logits >5 to ~1.0 inside `predict()`, silently collapsing eval ranking (training loss looks healthy while nDCG crashes from ~0.59 to ~0.14). Construct as `CrossEncoder("...", num_labels=1, activation_fn=torch.nn.Identity())`. See `troubleshooting.md` ("CrossEncoder eval nDCG crashes after distillation / listwise / pairwise training") for the failure-mode walkthrough.
+> **`activation_fn=nn.Identity()` is mandatory** for all distillation, listwise, and pairwise losses below — only `BinaryCrossEntropyLoss` and `CrossEntropyLoss` tolerate the default `Sigmoid`. The loss sees raw logits during training, but the model's `activation_fn` is applied at evaluation via `predict()`; the default `Sigmoid` (with `num_labels=1`) saturates raw logits >5 to ~1.0 inside `predict()`, silently collapsing eval ranking (training loss looks healthy while nDCG crashes from ~0.59 to ~0.14). Construct as `CrossEncoder("...", num_labels=1, activation_fn=torch.nn.Identity())`. See `troubleshooting.md` ("CrossEncoder eval nDCG crashes after distillation / listwise / pairwise training") for the failure-mode walkthrough.
 
 ### `MSELoss` (cross-encoder)
 
@@ -74,7 +74,7 @@ Regress the **difference** between positive and negative scores against the teac
 
 ## Listwise losses
 
-All listwise losses expect the dataset to have per-query **lists** of candidate passages and their scores; typically via a collator that groups rows by query.
+All listwise losses expect the dataset to have per-query **lists** of candidate passages and their scores — typically via a collator that groups rows by query.
 
 > Listwise and pairwise losses below also require `activation_fn=nn.Identity()` (see the Distillation-section callout above).
 
@@ -98,7 +98,7 @@ loss = LambdaLoss(model, weighting_scheme=NDCGLoss2PPScheme())
 #### LambdaLoss-specific operational notes
 
 - **OOM recovery order**: drop `mini_batch_size` first (chunking inside the loss preserves the K-list semantic), then `per_device_train_batch_size` paired with `gradient_accumulation_steps`, then reduce K (the per-query candidate-list length) only as a last resort. Lowering K changes the experiment; the others don't.
-- **Tiny loss at large K is expected.** With `NDCGLoss2PPScheme`, the loss normalizes by the discount-weighted pair count; at K=128 the loss can scale to ~`1e-4` numerically. That's not "training broken"; read `eval_NanoBEIR_R100_mean_ndcg@10` (or your equivalent) instead of the training loss to judge progress.
+- **Tiny loss at large K is expected.** With `NDCGLoss2PPScheme`, the loss normalizes by the discount-weighted pair count — at K=128 the loss can scale to ~`1e-4` numerically. That's not "training broken"; read `eval_NanoBEIR_R100_mean_ndcg@10` (or your equivalent) instead of the training loss to judge progress.
 - For very large K (>=128), the O(K²) weight buffer per query is materialized outside of the forward chunking, so even small `mini_batch_size` may not be enough. Consider scoring strategy: top-K hard negatives often beat random K.
 
 ### `ListNetLoss`
@@ -111,7 +111,7 @@ Maximum-likelihood estimation over permutations. Simpler than LambdaLoss; decent
 
 ### `PListMLELoss`
 
-Position-aware ListMLE; weights higher-ranked items more heavily. Often outperforms plain ListMLE on top-k metrics.
+Position-aware ListMLE — weights higher-ranked items more heavily. Often outperforms plain ListMLE on top-k metrics.
 
 ### `RankNetLoss`
 
@@ -132,7 +132,7 @@ Hard-negative mining is essential for any contrastive reranker (random negatives
 - **`CachedMultipleNegativesRankingLoss` + `gradient_checkpointing=True`**: crash. Pick one.
 - **Listwise losses with wildly different list lengths per query**: some losses don't handle ragged lists well. Pad or truncate to a fixed length.
 - **`MarginMSELoss` without precomputed teacher score diffs**: this loss needs the `score_diff` label column populated from a teacher pass; it does not compute the teacher internally.
-- **Training a cross-encoder with `num_labels=1` then using `CrossEntropyLoss`**: mismatch; BCE is for num_labels=1, CE is for num_labels>=2.
+- **Training a cross-encoder with `num_labels=1` then using `CrossEntropyLoss`**: mismatch — BCE is for num_labels=1, CE is for num_labels>=2.
 - **Default `Sigmoid` activation under any non-BCE loss**: silently destroys eval ranking. Pass `activation_fn=torch.nn.Identity()` to `CrossEncoder(...)` for distillation, listwise, and pairwise losses (everything except BCE/CE). See the callouts in the Distillation and Listwise sections.
 - **Custom CE head writing to the wrong feature key**: a custom scoring head must populate `features["scores"]` (not `features["sentence_embedding"]`). Otherwise `CrossEncoder.predict()` raises `KeyError: 'scores'` at inference time, even though training succeeds.
 - **Loading a CE with a custom-class head fails from a different script**: if you defined a `class ClassifierHead(nn.Module)` inline in `train.py` and saved the model, `modules.json` records `__main__.ClassifierHead`. Loading via `CrossEncoder("path")` from any other entry point raises `ImportError: Module '__main__' does not define a 'ClassifierHead' attribute`. Either move the class into an importable file (`my_pkg/heads.py`), build the same shape from stock ST modules (`Dense + LayerNorm + Dense`), or document that the model is only loadable from the same script.

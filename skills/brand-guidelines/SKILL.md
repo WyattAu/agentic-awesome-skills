@@ -117,7 +117,7 @@ Sentry Voice adds personality in appropriate moments. It's empathetic, self-awar
 |------|-----|---------|
 | Hyphen (-) | Compound words, ranges | "real-time", "1-10" |
 | En dash (–) | Ranges, relationships | "2023–2024", "parent–child" |
-| Em dash (-) | Interruption, emphasis | "Errors-even small ones-matter" |
+| Em dash (—) | Interruption, emphasis | "Errors—even small ones—matter" |
 
 In most UI contexts, use hyphens. Reserve en-dashes for date ranges and em-dashes for longer prose.
 

@@ -189,7 +189,7 @@ struct ItemRow: View {
 
 **Avoid storing frequently-changing values in the environment.** Environment dependency tracking is implementation-specific; a high-frequency environment value can broaden work among dependent views, but unrelated key writes are not guaranteed to reevaluate every reader. So a high-frequency value (scroll offset, window/container size, drag translation, per-frame animation progress, timer ticks, hover location) flowing into an `@Entry` or `.environment(\.key, value)` becomes an invalidation storm.
 
-Instead, hold the value in an `@Observable` model and expose a **coarsened** value; a boolean threshold rather than the raw measurement; so views invalidate only when crossing a meaningful boundary:
+Instead, hold the value in an `@Observable` model and expose a **coarsened** value — a boolean threshold rather than the raw measurement — so views invalidate only when crossing a meaningful boundary:
 
 ```swift
 @MainActor @Observable
@@ -199,9 +199,9 @@ final class ViewportModel {
 }
 ```
 
-The same shape applies per row in a list: storing the raw offset on a model and having every row read it still invalidates all visible rows every frame. Give each item its own `@Observable` whose properties track only that item's derived state (e.g. `isVisible`), so each row invalidates on each actual enter/leave change (which can occur repeatedly); see item #10 below.
+The same shape applies per row in a list: storing the raw offset on a model and having every row read it still invalidates all visible rows every frame. Give each item its own `@Observable` whose properties track only that item's derived state (e.g. `isVisible`), so each row invalidates on each actual enter/leave change (which can occur repeatedly) — see item #10 below.
 
-For purely visual effects driven by scroll position (opacity, scale, rotation), prefer `scrollTransition` or `visualEffect(in:)`; they push the per-frame work to the renderer and skip body re-evaluation entirely. Reach for the `@Observable` + coarsening pattern only when the scroll-derived value must drive non-rendering logic (model updates, prefetches, sibling state).
+For purely visual effects driven by scroll position (opacity, scale, rotation), prefer `scrollTransition` or `visualEffect(in:)` — they push the per-frame work to the renderer and skip body re-evaluation entirely. Reach for the `@Observable` + coarsening pattern only when the scroll-derived value must drive non-rendering logic (model updates, prefetches, sibling state).
 
 > Source: "Optimize SwiftUI performance with Instruments" (WWDC25, session 306)
 

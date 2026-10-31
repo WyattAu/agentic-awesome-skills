@@ -36,20 +36,20 @@ Cross-project access is disabled by default. The source `.juno_task/config.json`
 
 ### Legacy Task compatibility commands
 
-**CREATE**; Add a new task
+**CREATE** — Add a new task
 ```bash
 yy ledger create "Task description here" --status backlog --tags feature,backend
 ```
 Options: `--status` (backlog|todo|in_progress|done), `--tags` (comma/space-separated), `--blocked-by` (task IDs), `--related-tasks` (task IDs)
 
-**LIST**; Browse tasks with summary stats
+**LIST** — Browse tasks with summary stats
 ```bash
 yy ledger list --limit 5 --sort asc
 yy ledger list --status todo --sort asc
 yy ledger list --status todo,in_progress --limit 10
 ```
 
-**SEARCH**; Find tasks by criteria
+**SEARCH** — Find tasks by criteria
 ```bash
 yy ledger search --status todo --tag backend --limit 10
 yy ledger search --body "OAuth" --open
@@ -57,12 +57,12 @@ yy ledger search --commit abc123
 ```
 Filters: `--status`, `--tag`, `--body`, `--response`, `--commit`, `--open` (no agent_response), `--recent`, `--exclude` (exclude tags)
 
-**GET**; Full task details (including dependency info and related task details)
+**GET** — Full task details (including dependency info and related task details)
 ```bash
 yy ledger get TASK_ID
 ```
 
-**MARK**; Update status with required response message
+**MARK** — Update status with required response message
 ```bash
 yy ledger mark in_progress --id TASK_ID --response "Starting work on this"
 yy ledger mark done --id TASK_ID --response "Completed: implemented X, tested Y" --commit abc123def
@@ -70,14 +70,14 @@ yy ledger mark todo --id TASK_ID --response "Reopening: found regression"
 ```
 Required: `--id` and `--response`. Optional: `--commit` (recommended for done).
 
-**UPDATE**; Modify task fields
+**UPDATE** — Modify task fields
 ```bash
 yy ledger update TASK_ID --status todo --tags backend,urgent
 yy ledger update TASK_ID --commit abc123def
 yy ledger update TASK_ID --response "Additional context"
 ```
 
-**ARCHIVE**; Soft delete (preserves data, sets status to archive)
+**ARCHIVE** — Soft delete (preserves data, sets status to archive)
 ```bash
 yy ledger archive TASK_ID
 ```
@@ -105,7 +105,7 @@ A stale plan or selected-task/worktree conflict must fail closed: discard the pl
 
 ### Dependency Management
 
-**DEPS**; View, add, or remove task dependencies
+**DEPS** — View, add, or remove task dependencies
 ```bash
 # View dependency info (blockers, dependents, priority score)
 yy ledger deps TASK_ID
@@ -118,14 +118,14 @@ yy ledger deps remove --id TASK_ID --blocked-by BLOCKER1
 ```
 Cycle detection prevents circular dependencies automatically.
 
-**READY**; Tasks with all blockers satisfied (safe to work on)
+**READY** — Tasks with all blockers satisfied (safe to work on)
 ```bash
 yy ledger ready
 yy ledger ready --tag backend --limit 5
 ```
 Returns tasks where status is backlog/todo/in_progress AND all `blocked_by` tasks are done/archive.
 
-**ORDER**; Topological sort of open tasks respecting dependencies
+**ORDER** — Topological sort of open tasks respecting dependencies
 ```bash
 yy ledger order
 yy ledger order --scores
@@ -137,10 +137,10 @@ Use for determining safe parallel execution order.
 Declare dependencies and relations directly in task body text:
 
 ```
-[blocked_by]TASK_ID[/blocked_by]         ; This task is blocked by TASK_ID
-[blocked_by]ID1, ID2[/blocked_by]        ; Blocked by multiple tasks
-[task_id]RELATED_ID[/task_id]            ; Reference a related task
-[task_id]ID1 ID2[/task_id]               ; Multiple related tasks
+[blocked_by]TASK_ID[/blocked_by]          — This task is blocked by TASK_ID
+[blocked_by]ID1, ID2[/blocked_by]         — Blocked by multiple tasks
+[task_id]RELATED_ID[/task_id]             — Reference a related task
+[task_id]ID1 ID2[/task_id]                — Multiple related tasks
 ```
 
 These are parsed automatically when the task is created/updated.
@@ -168,30 +168,30 @@ Add `--raw` for compact output. Add `-p` for pretty print.
 
 1. **Task sizing**: Create tasks small enough to complete in one iteration without filling the context window
 2. **Status flow**: backlog → todo → in_progress → done (or archive for abandoned tasks)
-3. **Always include `--response`** when using `mark`; document what you did and how you tested it
+3. **Always include `--response`** when using `mark` — document what you did and how you tested it
 4. **Attach commits**: Use `--commit HASH` when marking done, then `update TASK_ID --commit HASH` to link the git history
 5. **Use `ready`** before starting work to find unblocked tasks
 6. **Use `order --scores`** to plan parallel execution pipelines
 7. **Use `[blocked_by]` markup** in task body when creating tasks that depend on others
 8. **Use `[task_id]` markup** in task body to cross-reference related tasks
 9. **Use `get TASK_ID`** to see full task details including resolved dependency and related task info
-10. **Concurrent features are supported**; start each selected task with `yy task start TASK_ID`; each gets a dedicated product worktree, while `yy merge` serializes only target updates
+10. **Concurrent features are supported** — start each selected task with `yy task start TASK_ID`; each gets a dedicated product worktree, while `yy merge` serializes only target updates
 
 ### Canonical Controller Routing
 
-YYLO Ledger mutation resolves the controller in this order: explicit `JUNO_TASK_ROOT`, repository-local registration, then the current project root. Diagnose before orchestration with `.juno_task/scripts/controller_resolver.py --cwd "$PWD" --operation kanban`. The resolver may bootstrap or idempotently confirm a registration, but changing an existing controller requires `yy migrate registration plan` followed by a separately authorized apply. Explicit/registered path or branch errors fail closed-YYLO Ledger never switches Git branches or falls back silently.
+YYLO Ledger mutation resolves the controller in this order: explicit `JUNO_TASK_ROOT`, repository-local registration, then the current project root. Diagnose before orchestration with `.juno_task/scripts/controller_resolver.py --cwd "$PWD" --operation kanban`. The resolver may bootstrap or idempotently confirm a registration, but changing an existing controller requires `yy migrate registration plan` followed by a separately authorized apply. Explicit/registered path or branch errors fail closed—YYLO Ledger never switches Git branches or falls back silently.
 
 Run YYLO Ledger and workflows from the controller. A task checkout may implement/test but routes task/session writes to that controller. An integration-owner checkout stays clean and refuses Kanban/orchestration/session writes in strict mode; launch from the controller and pass the product checkout separately as `TASK_ROOT`.
 
 ### Environment Variables
 
-- `JUNO_TASK_ROOT`; Explicit canonical controller/task-storage root (not the product `TASK_ROOT`)
-- `JUNO_CONTROLLER_BRANCH`; Expected controller branch for environment-based routing
-- `JUNO_WORKSPACE_ROLE`; `controller`, `task`, or `integration-owner`
-- `JUNO_WORKSPACE_ENFORCEMENT`; `off`, `warn`, or `strict`
-- `JUNO_DEBUG=true`; Show diagnostic messages
-- `JUNO_VERBOSE=true`; Show informational messages
-- `JUNO_KANBAN_LIST_BODY_TRUNCATE_CHARS=N`; Override list body truncation (default: 1200)
+- `JUNO_TASK_ROOT` — Explicit canonical controller/task-storage root (not the product `TASK_ROOT`)
+- `JUNO_CONTROLLER_BRANCH` — Expected controller branch for environment-based routing
+- `JUNO_WORKSPACE_ROLE` — `controller`, `task`, or `integration-owner`
+- `JUNO_WORKSPACE_ENFORCEMENT` — `off`, `warn`, or `strict`
+- `JUNO_DEBUG=true` — Show diagnostic messages
+- `JUNO_VERBOSE=true` — Show informational messages
+- `JUNO_KANBAN_LIST_BODY_TRUNCATE_CHARS=N` — Override list body truncation (default: 1200)
 
 $ARGUMENTS
 

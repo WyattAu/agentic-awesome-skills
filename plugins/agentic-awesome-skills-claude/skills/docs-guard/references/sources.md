@@ -1,4 +1,4 @@
-# Docs Guard: Sources
+# Docs Guard — Sources
 
 Central bibliography. Operational guidance lives in the other references; read this file only when a source URL is needed.
 
@@ -18,7 +18,7 @@ Historical reading candidates, not verified current model benchmarks. Confirm th
 
 ## Documentation craft references
 
-- Diátaxis; the four documentation modes (tutorial, how-to, reference, explanation): https://diataxis.fr/
-- Write the Docs; style guide collection: https://www.writethedocs.org/guide/writing/style-guides/
-- RFC 5737; IPv4 address blocks reserved for documentation: https://www.rfc-editor.org/rfc/rfc5737
+- Diátaxis — the four documentation modes (tutorial, how-to, reference, explanation): https://diataxis.fr/
+- Write the Docs — style guide collection: https://www.writethedocs.org/guide/writing/style-guides/
+- RFC 5737 — IPv4 address blocks reserved for documentation: https://www.rfc-editor.org/rfc/rfc5737
 - Google developer documentation style guide: https://developers.google.com/style

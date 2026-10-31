@@ -28,7 +28,7 @@ tools: [claude, cursor, gemini, copilot]
 
 ## Overview
 
-A collection of 6 structured, expert-level workflows that turn your AI coding assistant into a senior AI engineering partner. Each skill encodes a repeatable methodology; not just "ask AI to help," but a step-by-step decision framework with quantitative scoring, checklists, and decision trees.
+A collection of 6 structured, expert-level workflows that turn your AI coding assistant into a senior AI engineering partner. Each skill encodes a repeatable methodology — not just "ask AI to help," but a step-by-step decision framework with quantitative scoring, checklists, and decision trees.
 
 The key difference from ad-hoc AI assistance: Scores and qualitative outputs can vary by evaluator, model and context; calibrate rubrics and record versions before making comparisons. You can use the scoring systems as team baselines and write them into CI/CD pipelines.
 
@@ -53,7 +53,7 @@ A defined evaluator can score prompts across 8 dimensions (Clarity, Specificity,
 
 ### Skill 2: Context Budget Planner
 
-Analyzes token distribution across 5 context zones (System, Few-shot, User input, Retrieval, Output) and produces an optimized allocation plan. Includes a compression strategy decision tree for each zone. Common finding: output zone squeezed to under 6%; this skill catches that before truncation happens.
+Analyzes token distribution across 5 context zones (System, Few-shot, User input, Retrieval, Output) and produces an optimized allocation plan. Includes a compression strategy decision tree for each zone. Common finding: output zone squeezed to under 6% — this skill catches that before truncation happens.
 
 ### Skill 3: RAG Pipeline Architect
 
@@ -91,17 +91,17 @@ Illustrative report format only: 65 tests executed. 3 critical failures found: B
 
 ## Best Practices
 
-- ✅ Run prompt-evaluator before any production deployment; set a team baseline (e.g., ≥70/100)
+- ✅ Run prompt-evaluator before any production deployment — set a team baseline (e.g., ≥70/100)
 - ✅ Use context-budget-planner early in development, not after hitting truncation issues
 - ✅ Run agent-safety-guard as a pre-launch gate, not post-incident
 - ✅ Combine skills in sequence: RAG design → context optimization → prompt polish → security audit → eval setup
-- ❌ Don't rely on a single dimension score; look at the full profile
+- ❌ Don't rely on a single dimension score — look at the full profile
 - ❌ Don't skip the security audit because "it's just an internal tool"
 
 ## Security & Safety Notes
 
 - This overview is advisory. Executing an external harness may read/write files, transmit prompts or incur costs; those effects require actual scope and authorization.
-- The agent-safety-guard skill constructs adversarial test prompts for evaluation purposes only; these are contained within the evaluation context and do not interact with external systems.
+- The agent-safety-guard skill constructs adversarial test prompts for evaluation purposes only — these are contained within the evaluation context and do not interact with external systems.
 - **agent-safety-guard is classified as an offensive skill**: it generates attack payloads (prompt injection, SQL injection, command injection) for authorized security testing. The skill requires explicit user confirmation before executing each test phase. Run in a sandboxed environment when possible.
 - No weaponized payloads are included. All adversarial prompts are educational in nature.
 

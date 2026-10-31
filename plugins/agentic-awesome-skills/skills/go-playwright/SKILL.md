@@ -18,7 +18,7 @@ This skill provides a comprehensive framework for writing high-performance, prod
 - Use when debugging existing Playwright scripts.
 
 ## Safety & Risk
-**Risk Level: Critical; executes browser actions and application scripts**
+**Risk Level: Critical — executes browser actions and application scripts**
 
 - **Session isolation:** Contexts separate cookies/storage; they are not an OS sandbox or a guarantee of no host/network effects.
 - **Resource Management:** Designed to close browsers and contexts via `defer` to prevent memory leaks.

@@ -28,7 +28,7 @@ Apply only within the requested scope and current project conventions. Preserve 
 // ❌ Ignoring errors
 result, _ := os.Open(path)
 
-// ✅; always handle; only use _ when error is provably irrelevant
+// ✅ — always handle; only use _ when error is provably irrelevant
 result, err := os.Open(path)
 if err != nil {
     return fmt.Errorf("open %s: %w", path, err)
@@ -42,7 +42,7 @@ if err != nil { return err }
 err = doB()
 if err != nil { return err }
 
-// ✅; each :=/:  is fine; this is idiomatic Go. Don't try to "fix" it.
+// ✅ — each :=/:  is fine; this is idiomatic Go. Don't try to "fix" it.
 // What you CAN simplify: collapsing to one-liners where the if body is a single return
 if err := doA(); err != nil { return err }
 if err := doB(); err != nil { return err }
@@ -53,7 +53,7 @@ if err := doB(); err != nil { return err }
 type MyError struct{ msg string }
 func (e MyError) Error() string { return e.msg }
 
-// ✅; use errors.New or fmt.Errorf unless callers need to inspect type
+// ✅ — use errors.New or fmt.Errorf unless callers need to inspect type
 var ErrNotFound = errors.New("not found")
 return fmt.Errorf("lookup %q: %w", key, ErrNotFound)
 ```
@@ -85,7 +85,7 @@ if _, ok := m[key]; !ok {
 }
 m[key] = append(m[key], value)
 
-// ✅; append to nil slice is valid Go
+// ✅ — append to nil slice is valid Go
 m[key] = append(m[key], value)
 ```
 
@@ -106,7 +106,7 @@ for k, v := range original { copy[k] = v }
 // ❌ Fire-and-forget goroutine with no lifecycle
 go doWork()
 
-// ✅; use errgroup or WaitGroup to track completion
+// ✅ — use errgroup or WaitGroup to track completion
 var wg sync.WaitGroup
 wg.Add(1)
 go func() {
@@ -122,7 +122,7 @@ ch := make(chan Result)
 go func() { ch <- compute() }()
 result := <-ch
 
-// ✅; for single-result, buffered channel avoids goroutine leak if receiver exits early
+// ✅ — for single-result, buffered channel avoids goroutine leak if receiver exits early
 ch := make(chan Result, 1)
 go func() { ch <- compute() }()
 result := <-ch
@@ -139,7 +139,7 @@ for {
     }
 }
 
-// ✅; blocking select unless you genuinely need non-blocking
+// ✅ — blocking select unless you genuinely need non-blocking
 for v := range ch {
     process(v)
 }
@@ -161,7 +161,7 @@ type Storage interface {
     // ... 10 more methods
 }
 
-// ✅; small, composable interfaces
+// ✅ — small, composable interfaces
 type Getter interface { Get(key string) ([]byte, error) }
 type Setter interface { Set(key string, val []byte) error }
 type Storage interface { Getter; Setter }
@@ -180,7 +180,7 @@ func NewStore() Storage { return &RedisStore{...} }
 // ❌ Pointer receiver for tiny value types
 func (p *Point) X() float64 { return p.x }
 
-// ✅; value receiver for small immutable types
+// ✅ — value receiver for small immutable types
 func (p Point) X() float64 { return p.x }
 ```
 
@@ -197,7 +197,7 @@ func divide(a, b float64) (result float64, err error) {
     return
 }
 
-// ✅; named returns are worth it only for deferred mutation or documentation
+// ✅ — named returns are worth it only for deferred mutation or documentation
 func divide(a, b float64) (float64, error) {
     if b == 0 { return 0, errors.New("division by zero") }
     return a / b, nil
@@ -211,7 +211,7 @@ for i := 0; i < n; i++ {
     go func() { use(i) }()
 }
 
-// ✅ (Go <1.22; pass as parameter)
+// ✅ (Go <1.22 — pass as parameter)
 for i := 0; i < n; i++ {
     go func(i int) { use(i) }(i)
 }
@@ -224,7 +224,7 @@ for i := 0; i < n; i++ {
 
 | Anti-pattern | Preferred |
 |---|---|
-| `if err != nil { return err }` repeated 5+ times | acceptable; it's idiomatic Go |
+| `if err != nil { return err }` repeated 5+ times | acceptable — it's idiomatic Go |
 | `panic` for expected errors | `return err` |
 | `init()` with side effects | explicit initialization in `main` or constructors |
 | `interface{}` / `any` without generics | use generics (Go 1.18+) or typed interfaces |

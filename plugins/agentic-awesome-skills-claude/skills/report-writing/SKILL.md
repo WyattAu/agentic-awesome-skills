@@ -45,7 +45,7 @@ GOOD: "An attacker can access any user's order history by changing the user_id
 ```
 IDOR in /api/v2/invoices/{id} allows authenticated user to read any customer's invoice data
 Missing auth on POST /api/admin/users allows unauthenticated attacker to create admin accounts
-Stored XSS in profile bio field executes in admin panel; allows privilege escalation
+Stored XSS in profile bio field executes in admin panel — allows privilege escalation
 SSRF via image import URL parameter reaches AWS EC2 metadata service
 Race condition in coupon redemption allows same code to be used unlimited times
 ```
@@ -78,7 +78,7 @@ account are required."
 ## Vulnerability Details
 
 **Vulnerability Type:** IDOR / Broken Object Level Authorization
-**CVSS 3.1 Score:** 6.5 (Medium); AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
+**CVSS 3.1 Score:** 6.5 (Medium) — AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
 **Affected Endpoint:** GET /api/users/{user_id}/orders
 
 ## Steps to Reproduce
@@ -150,7 +150,7 @@ if order.user_id != current_user.id:
 
 ## Steps to Reproduce
 
-[Same structured steps; exact HTTP requests, exact responses]
+[Same structured steps — exact HTTP requests, exact responses]
 
 ## Proof of Concept
 
@@ -163,7 +163,7 @@ if order.user_id != current_user.id:
 
 ## Severity Justification
 
-P2 (High); Direct read access to other users' PII. Affects all user accounts.
+P2 (High) — Direct read access to other users' PII. Affects all user accounts.
 No user interaction required. Exploitable by any authenticated user.
 Automated enumeration could exfil all [N] user records in minutes.
 
@@ -216,7 +216,7 @@ Content-Type: application/json
 
 [Specific, quantified impact. What data, how many users, what can attacker do.]
 
-CVSS 3.1 Score: X.X ([Severity]); AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
+CVSS 3.1 Score: X.X ([Severity]) — AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
 
 ## Remediation
 
@@ -224,14 +224,14 @@ CVSS 3.1 Score: X.X ([Severity]); AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
 
 ## Attachments
 
-[Screenshot or Loom video showing the impact; Intigriti triagers prefer video for complex bugs]
+[Screenshot or Loom video showing the impact — Intigriti triagers prefer video for complex bugs]
 ```
 
 **Intigriti-specific notes:**
 - Title format: `[Bug Class]: [One-line impact]` (no formula required, but keep it specific)
 - Severity is set by you: Critical/High/Medium/Low/Exceptional
 - CVSS 3.1 is standard (CVSS 4.0 also accepted on newer programs)
-- PoC video is valued much more than screenshot alone; record with Loom
+- PoC video is valued much more than screenshot alone — record with Loom
 - Safe harbor and testing limits are program-specific; read the exact terms and never infer permission for more aggressive tests
 
 ---
@@ -239,7 +239,7 @@ CVSS 3.1 Score: X.X ([Severity]); AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
 ## IMMUNEFI REPORT TEMPLATE
 
 ```markdown
-# [Bug Class]: [Protocol Name]: [Severity]
+# [Bug Class] — [Protocol Name] — [Severity]
 
 ## Summary
 
@@ -262,7 +262,7 @@ Include numbers where possible: "attacker can drain $X in Y transactions."]
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-// Foundry PoC; run: forge test --match-test test_exploit -vvvv
+// Foundry PoC — run: forge test --match-test test_exploit -vvvv
 
 contract ExploitTest is Test {
     // ... full working exploit
@@ -340,11 +340,11 @@ These are evidence questions, not an additive severity formula:
 
 | Program Says | Counter With |
 |---|---|
-| "Requires authentication" | "Attacker needs only a free account; no special role or permission" |
+| "Requires authentication" | "Attacker needs only a free account — no special role or permission" |
 | "Limited impact" | "Affects [N] users / exposes [PII type] / $[amount] at risk" |
-| "Already known" | "Show me the report number; I searched hacktivity and found none" |
+| "Already known" | "Show me the report number — I searched hacktivity and found none" |
 | "By design" | "Show me the documentation stating this is intended behavior" |
-| "Low CVSS" | "CVSS doesn't capture business impact; attacker can extract [X] in [Y] minutes" |
+| "Low CVSS" | "CVSS doesn't capture business impact — attacker can extract [X] in [Y] minutes" |
 | "Not exploitable" | "Here is the exact response showing victim's data returned to attacker session" |
 
 ---
@@ -356,12 +356,12 @@ These are evidence questions, not an additive severity formula:
 [ ] First sentence states exact impact in plain English
 [ ] Steps to Reproduce has exact HTTP request (copy-paste ready)
 [ ] Response showing the bug is included (screenshot or JSON body)
-[ ] Two test accounts used; not just one account testing itself
+[ ] Two test accounts used — not just one account testing itself
 [ ] CVSS score calculated and included
 [ ] Recommended fix is 1-2 sentences (not a lecture)
 [ ] No typos in endpoint paths or parameter names
-[ ] Report is < 600 words; triagers skim long reports
-[ ] Severity claimed matches impact described; don't overclaim
+[ ] Report is < 600 words — triagers skim long reports
+[ ] Severity claimed matches impact described — don't overclaim
 [ ] Observed facts and untested hypotheses are clearly separated
 [ ] PoC is reproducible by triager from a fresh state
 ```
@@ -384,7 +384,7 @@ These are evidence questions, not an additive severity formula:
 
 ## Limitations
 
-- Process guidance only; it does not authorize probing or exploitation; those steps need their own authorized skill and confirmation gate.
+- Process guidance only; it does not authorize probing or exploitation — those steps need their own authorized skill and confirmation gate.
 - Docs-only import: upstream templates, commands, and research assets are not bundled.
 
 ### Example

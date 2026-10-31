@@ -1,12 +1,12 @@
 # Mastra agents with Mastra Studio observability
 
-A Neon Function is a long-lived Node.js 24 process, which makes it a natural host for a [Mastra](https://mastra.ai) agent: the agent keeps running for the life of the request, and you point its model at the Neon AI Gateway so there are no extra provider keys. You can keep **running the agent on Neon Functions** while shipping its traces to a **Mastra Studio (Mastra Cloud) project** for observability; the agent runs on Neon, the traces are viewable in Mastra.
+A Neon Function is a long-lived Node.js 24 process, which makes it a natural host for a [Mastra](https://mastra.ai) agent: the agent keeps running for the life of the request, and you point its model at the Neon AI Gateway so there are no extra provider keys. You can keep **running the agent on Neon Functions** while shipping its traces to a **Mastra Studio (Mastra Cloud) project** for observability — the agent runs on Neon, the traces are viewable in Mastra.
 
 The shape mirrors any other Node integration (see `references/sentry.md`): instantiate at module load, gate on env vars so local dev and unconfigured branches stay a no-op, and pass secrets at deploy time via `neon.ts`. `@mastra/core` and `@mastra/observability` bundle cleanly through `neon deploy`'s esbuild with no extra config.
 
 ## 1. Define the agent against the Neon AI Gateway
 
-Use the gateway's **MLflow (chat-completions) dialect**, which serves every provider (OpenAI, Anthropic, …); derive it from the injected `aiGateway.baseUrl` (see the `neon-ai-gateway` skill). `parseEnv` reads the injected gateway credentials from your `neon.ts`.
+Use the gateway's **MLflow (chat-completions) dialect**, which serves every provider (OpenAI, Anthropic, …) — derive it from the injected `aiGateway.baseUrl` (see the `neon-ai-gateway` skill). `parseEnv` reads the injected gateway credentials from your `neon.ts`.
 
 ```typescript
 // src/mastra/agents/pricing.ts
@@ -31,7 +31,7 @@ Traces can disclose prompts, tool inputs, generated content and identifiers to a
 
 The `MastraPlatformExporter` (from `@mastra/observability`) sends traces to a Mastra Studio project. It reads `MASTRA_PLATFORM_ACCESS_TOKEN` and `MASTRA_PROJECT_ID` from the environment.
 
-Gotcha: `Observability` requires **at least one exporter**; passing an empty `exporters` array throws `OBSERVABILITY_INVALID_INSTANCE_CONFIG`. So omit the `observability` option entirely until the platform creds are present, keeping the app runnable before the Mastra project exists (and in local dev).
+Gotcha: `Observability` requires **at least one exporter** — passing an empty `exporters` array throws `OBSERVABILITY_INVALID_INSTANCE_CONFIG`. So omit the `observability` option entirely until the platform creds are present, keeping the app runnable before the Mastra project exists (and in local dev).
 
 ```typescript
 // src/mastra/index.ts
@@ -72,7 +72,7 @@ const result = await agent.generate(prompt, {
 const data = result.object; // validated against myZodSchema
 ```
 
-For resilience, register a second agent on a different model (e.g. `neon/claude-haiku-4-5`) and fall back to it if the primary attempt throws; the same provider-fallback pattern works because both are reachable on the MLflow dialect.
+For resilience, register a second agent on a different model (e.g. `neon/claude-haiku-4-5`) and fall back to it if the primary attempt throws — the same provider-fallback pattern works because both are reachable on the MLflow dialect.
 
 ## 4. Create the Mastra project + token with the CLI
 
@@ -95,7 +95,7 @@ Use that `projectId` as `MASTRA_PROJECT_ID`.
 
 Two gotchas:
 
-- **Don't set `MASTRA_API_TOKEN` in the env for project/deploy commands**; it makes the CLI report `No organizations found`. Rely on the interactive login session instead.
+- **Don't set `MASTRA_API_TOKEN` in the env for project/deploy commands** — it makes the CLI report `No organizations found`. Rely on the interactive login session instead.
 - If you keep multiple env files (e.g. `.env.deploy` and `.env.local`), `studio deploy` errors with `Multiple env files found`; pass `--env-file <file>` to disambiguate.
 
 ## 5. Pass the creds via `neon.ts` (third-party env)
@@ -124,7 +124,7 @@ neon deploy --env .env.deploy
 
 ## 6. Verify
 
-Send a request that exercises the agent, then open the Mastra Studio project's **Observability / Traces** view; you'll see the agent run (model calls, latency, token usage) under the `serviceName` you configured. Only `SPAN_ENDED` events are exported, buffered and flushed periodically, so a trace appears a few seconds after the agent run completes.
+Send a request that exercises the agent, then open the Mastra Studio project's **Observability / Traces** view — you'll see the agent run (model calls, latency, token usage) under the `serviceName` you configured. Only `SPAN_ENDED` events are exported, buffered and flushed periodically, so a trace appears a few seconds after the agent run completes.
 
 ## Further reading
 

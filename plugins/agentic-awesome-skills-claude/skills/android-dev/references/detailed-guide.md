@@ -4,26 +4,26 @@
 
 ## Overview
 
-This skill guides production-grade Android and cross-platform (non-iOS) app development following practices used at big tech companies. It covers the entire development lifecycle; architecture, UI, code quality, testing, error handling, release, and maintenance.
+This skill guides production-grade Android and cross-platform (non-iOS) app development following practices used at big tech companies. It covers the entire development lifecycle — architecture, UI, code quality, testing, error handling, release, and maintenance.
 
 
 ## §1 Stack Selection
 
 Choose based on team, requirements, and platform targets. **Do not recommend iOS-specific paths.**
 
-### Native Android: Kotlin + Jetpack Compose
+### Native Android — Kotlin + Jetpack Compose
 **Best for:** Android-only apps, hardware-intensive features, best-in-class UX, new projects.
 - Language: **Kotlin**
 - UI: **Jetpack Compose** (modern declarative UI)
 - Key libs: Room, Retrofit/Ktor, Hilt, WorkManager, DataStore, Navigation Compose
 - Reference: `references/native-android.md`
 
-### Native Android: Java + XML Views
+### Native Android — Java + XML Views
 **Best for:** Existing Java codebases, teams without Kotlin experience, legacy app maintenance, incremental Kotlin migration.
 - Language: **Java** (fully supported by Google, not deprecated)
 - UI: **XML Layouts** (ConstraintLayout, RecyclerView, ViewBinding)
 - Key libs: Room, Retrofit, Hilt, WorkManager, LiveData, ViewModel
-- Java and Kotlin **coexist seamlessly** in the same project; migrate incrementally
+- Java and Kotlin **coexist seamlessly** in the same project — migrate incrementally
 - Reference: `references/java-android.md`
 
 ### Flutter (Dart)
@@ -137,11 +137,11 @@ User Action → ViewModel/Store → Use Case → Repository → Data Source
 
 ### Design System First
 Before writing screens, define:
-1. **Color tokens**; Primary, secondary, surface, on-surface, error; light + dark variants
-2. **Typography scale**; Display, headline, title, body, label (Material 3 type system)
-3. **Spacing scale**; 4dp grid system (4, 8, 12, 16, 24, 32, 48dp)
-4. **Shape tokens**; Corner radii per component family
-5. **Component library**; Button, TextField, Card, BottomSheet, TopAppBar, etc.
+1. **Color tokens** — Primary, secondary, surface, on-surface, error; light + dark variants
+2. **Typography scale** — Display, headline, title, body, label (Material 3 type system)
+3. **Spacing scale** — 4dp grid system (4, 8, 12, 16, 24, 32, 48dp)
+4. **Shape tokens** — Corner radii per component family
+5. **Component library** — Button, TextField, Card, BottomSheet, TopAppBar, etc.
 
 ### Jetpack Compose UI Rules
 - Use `MaterialTheme` tokens; never hardcode colors/dimensions
@@ -164,7 +164,7 @@ Before writing screens, define:
 - **Flutter:** `go_router` with named routes and guards
 - **RN:** React Navigation v7 with typed `NavigationProp`
 - Deep link handling registered for every screen that can be externally opened
-- Back stack managed deliberately; don't push duplicates, use `popUpTo` / `launchSingleTop`
+- Back stack managed deliberately — don't push duplicates, use `popUpTo` / `launchSingleTop`
 
 ### Responsive & Adaptive UI
 - Support all screen sizes: phones, foldables, tablets (`WindowSizeClass`)
@@ -181,37 +181,37 @@ Before writing screens, define:
 
 **Kotlin:**
 - Prefer `data class`, `sealed class`, `object`, `enum class` appropriately
-- No `!!` null assertions; use `?.let`, `?: return`, `requireNotNull` with message
+- No `!!` null assertions — use `?.let`, `?: return`, `requireNotNull` with message
 - Coroutines: always specify `CoroutineScope` + `Dispatcher` explicitly; never `GlobalScope`
 - Use `@Stable` / `@Immutable` on Compose state classes for smart recomposition
 
 **Java:**
 - `@NonNull` / `@Nullable` annotations on every method param and return type
-- Never call methods on unchecked objects; null-check explicitly or use `Objects.requireNonNull`
+- Never call methods on unchecked objects — null-check explicitly or use `Objects.requireNonNull`
 - Always null `binding` reference in Fragment's `onDestroyView()` to prevent memory leaks
-- Use `ExecutorService` (not `AsyncTask`; deprecated) for background work; or `LiveData` + Room's built-in threading
+- Use `ExecutorService` (not `AsyncTask` — deprecated) for background work; or `LiveData` + Room's built-in threading
 - Prefer `ListAdapter` + `DiffUtil` over manual `notifyDataSetChanged()` in RecyclerView
-- Use `ViewBinding`; never `findViewById`
+- Use `ViewBinding` — never `findViewById`
 
 **Dart (Flutter):**
-- Null safety required; no `!` without explicit null check above
+- Null safety required — no `!` without explicit null check above
 - Immutable state objects with `copyWith`
 - `const` constructors on all stateless widgets
 
 **TypeScript (RN):**
 - `strict: true` in tsconfig always
 - Zod or io-ts for runtime type validation of API responses
-- No `any`; use `unknown` and narrow
+- No `any` — use `unknown` and narrow
 
 ### Dependency Management
 - Pin all dependency versions in `build.gradle.kts` / `pubspec.yaml` / `package.json`
 - Audit dependencies monthly for security vulnerabilities
-- Avoid transitive dependency conflicts; use dependency resolution strategies
-- Keep dependency count minimal; every added lib is a maintenance burden
+- Avoid transitive dependency conflicts — use dependency resolution strategies
+- Keep dependency count minimal — every added lib is a maintenance burden
 
 ### Code Review Checklist (PR gate)
 - [ ] New public APIs have KDoc / DartDoc / JSDoc
-- [ ] No hardcoded strings; use string resources / l10n
+- [ ] No hardcoded strings — use string resources / l10n
 - [ ] No hardcoded dimensions or colors outside design tokens
 - [ ] No blocking I/O on main thread
 - [ ] No memory leaks (no `Activity` context stored in singletons)
@@ -321,7 +321,7 @@ release     → prod API, logging off, minified, signed
 ```
 
 ### Gradle Best Practices (Native)
-- `build.gradle.kts` only; no Groovy DSL in new projects
+- `build.gradle.kts` only — no Groovy DSL in new projects
 - Version catalog (`libs.versions.toml`) for all dependency versions
 - `buildConfig` for environment-specific constants
 - Baseline profiles for startup performance
@@ -373,7 +373,7 @@ Release tag
 - Measure with **Android Studio Profiler** + `FrameMetrics` API
 - Avoid allocation in `draw()` / `onMeasure()` / composition
 - Use `derivedStateOf` in Compose to avoid unnecessary recompositions
-- Image loading: Coil (Compose) / Glide / Picasso; never load full-res in thumbnails
+- Image loading: Coil (Compose) / Glide / Picasso — never load full-res in thumbnails
 
 ### Memory
 - No `Activity` / `Context` references in ViewModels or singletons
@@ -400,13 +400,13 @@ Release tag
 
 ### Debugging Process
 
-1. **Reproduce reliably**; document exact steps, device, OS version, account state
-2. **Isolate**; is it UI, business logic, network, or persistence?
-3. **Instrument**; add targeted logs / breakpoints, NOT shotgun logging
-4. **Hypothesize**; form 1-3 specific hypotheses before touching code
-5. **Fix the root cause**; never patch symptoms; trace back to the source
-6. **Regression test**; write a test that fails before fix, passes after
-7. **Document**; comment explaining why the fix works, not just what it does
+1. **Reproduce reliably** — document exact steps, device, OS version, account state
+2. **Isolate** — is it UI, business logic, network, or persistence?
+3. **Instrument** — add targeted logs / breakpoints, NOT shotgun logging
+4. **Hypothesize** — form 1-3 specific hypotheses before touching code
+5. **Fix the root cause** — never patch symptoms; trace back to the source
+6. **Regression test** — write a test that fails before fix, passes after
+7. **Document** — comment explaining why the fix works, not just what it does
 
 ### Common Android Bug Patterns
 
@@ -424,11 +424,11 @@ Release tag
 - **Production:** Firebase Crashlytics only (no `Log.d` in release builds)
 - **Debug/Staging:** Timber with debug tree
 - Log levels: ERROR (crashes), WARN (recoverable), INFO (key events), DEBUG (dev only)
-- Never log PII; mask emails, phone numbers, tokens in logs
+- Never log PII — mask emails, phone numbers, tokens in logs
 
 ### OEM-Specific Issues
 - Test on **Samsung**, **Xiaomi/MIUI**, **OnePlus/OxygenOS**, **Huawei (no GMS)** for critical flows
-- Background restrictions vary widely by OEM; test push, alarms, background sync
+- Background restrictions vary widely by OEM — test push, alarms, background sync
 - Maintain a physical or cloud device farm with top market-share devices
 
 ---
@@ -438,7 +438,7 @@ Release tag
 
 Follow this phase structure for any new Android project:
 
-### Phase 0: Foundation (Week 1-2)
+### Phase 0 — Foundation (Week 1-2)
 - [ ] Stack decision documented with rationale
 - [ ] Module structure defined
 - [ ] Design system tokens defined (colors, type, spacing, shapes)
@@ -450,7 +450,7 @@ Follow this phase structure for any new Android project:
 - [ ] Navigation skeleton implemented
 - [ ] Flavor/build variant config complete
 
-### Phase 1: Core Features (Weeks 3-8)
+### Phase 1 — Core Features (Weeks 3-8)
 - [ ] Auth flow (login, register, token refresh, logout)
 - [ ] Core screen shells with real navigation
 - [ ] Network layer (client, interceptors, error handling)
@@ -460,7 +460,7 @@ Follow this phase structure for any new Android project:
 - [ ] Unit tests for all ViewModels + use cases
 - [ ] Feature flags infrastructure
 
-### Phase 2: Polish (Weeks 9-12)
+### Phase 2 — Polish (Weeks 9-12)
 - [ ] Design QA pass against Figma/spec
 - [ ] Accessibility audit (TalkBack, contrast, touch targets)
 - [ ] Dark mode implementation + verification
@@ -470,7 +470,7 @@ Follow this phase structure for any new Android project:
 - [ ] Widget / notification implementation
 - [ ] Offline mode verification
 
-### Phase 3: Hardening (Weeks 12-14)
+### Phase 3 — Hardening (Weeks 12-14)
 - [ ] Performance profiling (startup, scroll, memory)
 - [ ] E2E test suite on device farm (Firebase Test Lab)
 - [ ] Security review (certificate pinning, biometrics, secure storage)
@@ -478,14 +478,14 @@ Follow this phase structure for any new Android project:
 - [ ] Crash-free rate ≥ 99.5% on staging
 - [ ] Play Store listing, screenshots, privacy policy
 
-### Phase 4: Release
+### Phase 4 — Release
 - [ ] AAB signed and uploaded to internal track
 - [ ] Staged rollout plan defined
 - [ ] Monitoring dashboard set up (Crashlytics, Play Console vitals)
 - [ ] Rollback plan documented
 - [ ] On-call rotation assigned
 
-### Phase 5: Post-Launch (Ongoing)
+### Phase 5 — Post-Launch (Ongoing)
 - Crash-free rate monitored daily
 - ANR rate measured against current Play Console thresholds for the relevant metric; verify the current policy
 - App rating monitored; negative reviews triaged weekly
@@ -498,9 +498,9 @@ Follow this phase structure for any new Android project:
 ## Additional Resources
 
 For stack-specific deep dives, read:
-- `references/native-android.md`; Kotlin, Compose, Room, Hilt, Coroutines
-- `references/java-android.md`; Java, XML Views, ViewBinding, LiveData, Retrofit, Room, Hilt, migration path
-- `references/flutter.md`; Dart, BLoC/Riverpod, Drift, go_router
-- `references/react-native.md`; TypeScript, RN architecture, Hermes, New Architecture
-- `references/kmm.md`; KMM shared modules, SQLDelight, Ktor, Compose Multiplatform
-- `references/hybrid.md`; Capacitor, Ionic, PWA considerations
+- `references/native-android.md` — Kotlin, Compose, Room, Hilt, Coroutines
+- `references/java-android.md` — Java, XML Views, ViewBinding, LiveData, Retrofit, Room, Hilt, migration path
+- `references/flutter.md` — Dart, BLoC/Riverpod, Drift, go_router
+- `references/react-native.md` — TypeScript, RN architecture, Hermes, New Architecture
+- `references/kmm.md` — KMM shared modules, SQLDelight, Ktor, Compose Multiplatform
+- `references/hybrid.md` — Capacitor, Ionic, PWA considerations

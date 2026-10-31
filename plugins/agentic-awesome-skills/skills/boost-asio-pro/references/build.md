@@ -16,7 +16,7 @@ target_link_libraries(myapp PRIVATE
 
 target_compile_features(myapp PRIVATE cxx_std_20)
 
-# REQUIRED for GCC coroutine support: build will fail without this
+# REQUIRED for GCC coroutine support — build will fail without this
 target_compile_options(myapp PRIVATE
     $<$<CXX_COMPILER_ID:GNU>:-fcoroutines>
 )
@@ -28,7 +28,7 @@ target_compile_definitions(myapp PRIVATE BOOST_ERROR_CODE_HEADER_ONLY)
 ### Standalone Asio (always header-only)
 
 ```cmake
-# Standalone Asio has no CMake config: use pkg-config or manual path
+# Standalone Asio has no CMake config — use pkg-config or manual path
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
@@ -72,7 +72,7 @@ target_compile_options(myapp PRIVATE $<$<CXX_COMPILER_ID:GNU>:-fcoroutines>)
 
 **Boost.Asio:** Asio is header-only by default. The only thing that pulls in a Boost library to link is `boost::system::error_code`'s out-of-line symbols, so for a truly link-free build define **`BOOST_ERROR_CODE_HEADER_ONLY`**. `BOOST_ASIO_HEADER_ONLY` is rarely needed and only relevant if separate compilation was previously enabled; you do **not** normally need both.
 
-**Define `BOOST_ERROR_CODE_HEADER_ONLY` in exactly ONE place; prefer CMake** (`target_compile_definitions`, as shown above). Defining it in CMake *and* with a source `#define` triggers `-Wmacro-redefined`. So in source, just include; no `#define`:
+**Define `BOOST_ERROR_CODE_HEADER_ONLY` in exactly ONE place — prefer CMake** (`target_compile_definitions`, as shown above). Defining it in CMake *and* with a source `#define` triggers `-Wmacro-redefined`. So in source, just include — no `#define`:
 ```cpp
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
@@ -84,5 +84,5 @@ target_compile_options(myapp PRIVATE $<$<CXX_COMPILER_ID:GNU>:-fcoroutines>)
 #include <asio.hpp>
 #include <asio/ssl.hpp>
 #include <asio/experimental/awaitable_operators.hpp>
-// No macros needed; always header-only
+// No macros needed — always header-only
 ```

@@ -15,7 +15,7 @@ For each task in the queue:
 2. Dispatch.
 3. Wait for `result.json`.
 4. Review: re-run the gates, read the diff, check scope.
-5. Land it; a commit per task, not one commit at the end.
+5. Land it — a commit per task, not one commit at the end.
 6. Note anything learned that the next brief needs.
 
 A commit per task is what makes a queue recoverable. When task 6 of 9 goes wrong, you revert one
@@ -39,7 +39,7 @@ forbid it explicitly. The block is how a queue gets *more* reliable as it runs r
 
 ## Fresh session per task, usually
 
-Start each task cold; a new dispatch with no `--session`. Independent tasks should not inherit an
+Start each task cold — a new dispatch with no `--session`. Independent tasks should not inherit an
 earlier task's context, which can carry over assumptions you rejected in review.
 
 Use `--session` **within** a task, for rework, not **between** tasks. The exception is a genuinely
@@ -48,7 +48,7 @@ context that a cold brief would have to restate.
 
 ## Tracking progress
 
-Keep a visible checklist; the queue, one line each, marked as landed. Update it after the commit,
+Keep a visible checklist — the queue, one line each, marked as landed. Update it after the commit,
 not after the dispatch. A task is done when it is committed and the gates passed, not when ZCode
 said it finished.
 
@@ -66,10 +66,10 @@ git diff <commit-before-the-queue>..HEAD
 
 Look for what per-task review structurally cannot catch:
 
-- **Drift**; the same problem solved three different ways across tasks.
-- **Duplication**; a helper invented in task 2 and reinvented in task 7.
-- **Dead ends**; code added for a task that a later task made unnecessary.
-- **Half-migrations**; the old and new patterns now both present, with no task left to finish it.
+- **Drift** — the same problem solved three different ways across tasks.
+- **Duplication** — a helper invented in task 2 and reinvented in task 7.
+- **Dead ends** — code added for a task that a later task made unnecessary.
+- **Half-migrations** — the old and new patterns now both present, with no task left to finish it.
 
 Then run the gates once more over the final state. A queue where every task passed its own gates can
 still end with a broken tree, because task N's gates ran before task N+1 existed.
@@ -78,7 +78,7 @@ still end with a broken tree, because task N's gates ran before task N+1 existed
 
 Stop and go back to the human when:
 
-- Two consecutive tasks need rework for the same reason; the standing constraints are wrong, not
+- Two consecutive tasks need rework for the same reason — the standing constraints are wrong, not
   the implementer.
 - A task reveals the plan was based on a wrong assumption about the codebase.
 - Correct completion needs a scope change. Ask; do not expand the mandate yourself.

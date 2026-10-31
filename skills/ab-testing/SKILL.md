@@ -292,18 +292,18 @@ Track your experimentation rate as a leading indicator of growth:
 
 ### The Experiment Playbook
 
-When a test wins, don't just implement it; document the pattern:
+When a test wins, don't just implement it — document the pattern:
 
 ```
 ## [Experiment Name]
 **Date**: [date]
 **Hypothesis**: [the hypothesis]
 **Sample size**: [n per variant]
-**Result**: [winner/loser/inconclusive]; [primary metric] changed by [X%] (95% CI: [range], p=[value])
+**Result**: [winner/loser/inconclusive] — [primary metric] changed by [X%] (95% CI: [range], p=[value])
 **Guardrails**: [any guardrail metrics and their outcomes]
 **Segment deltas**: [notable differences by device, segment, or cohort]
 **Why it worked/failed**: [analysis]
-**Pattern**: [the reusable insight; e.g., "social proof near pricing CTAs increases plan selection"]
+**Pattern**: [the reusable insight — e.g., "social proof near pricing CTAs increases plan selection"]
 **Apply to**: [other pages/flows where this pattern might work]
 **Status**: [implemented / parked / needs follow-up test]
 ```
@@ -312,7 +312,7 @@ Over time, your playbook becomes a library of proven growth patterns specific to
 
 ### Experiment Cadence
 
-**Weekly (30 min)**: Review running experiments for technical issues and guardrail metrics. Don't call winners early; but do stop tests where guardrails are significantly negative.
+**Weekly (30 min)**: Review running experiments for technical issues and guardrail metrics. Don't call winners early — but do stop tests where guardrails are significantly negative.
 
 **Bi-weekly**: Conclude completed experiments. Analyze results, update playbook, launch next experiment from backlog.
 

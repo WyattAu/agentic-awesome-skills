@@ -2,7 +2,7 @@
 
 > Review boundary: These are starter fragments with placeholders and optional integrations, not a complete installable project. Instantiate identifiers safely, choose supported runtime/dependency versions from the project, and verify every advertised command. Jest/ESLint require real test/configuration files before those scripts can pass. Bind local development servers to loopback, keep unknown commands nonzero, and preserve any pre-existing workflow. Keep each Go tool in its own scripts/<tool>/ directory so go build ./... does not see duplicate main/Violation declarations. No template score or generated file grants review/merge authority.
 
-Complete, ready-to-use templates for 0→1 project scaffolding. Each section provides real file contents; not placeholders; for bootstrapping a new project with core harness infrastructure.
+Complete, ready-to-use templates for 0→1 project scaffolding. Each section provides real file contents — not placeholders — for bootstrapping a new project with core harness infrastructure.
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@ Complete, ready-to-use templates for 0→1 project scaffolding. Each section pro
 - [TypeScript/Node Web API](#typescriptnode-web-api)
 - [Python CLI](#python-cli)
 - [Python Web API](#python-web-api)
-- [Shared Templates](#shared-templates) (docs, exec-plans, quality; same for all stacks)
+- [Shared Templates](#shared-templates) (docs, exec-plans, quality — same for all stacks)
 
 ---
 
@@ -277,7 +277,7 @@ main();
 ### src/types/index.ts
 
 ```typescript
-// Layer 0: Core types; no internal imports allowed
+// Layer 0: Core types — no internal imports allowed
 export interface Config {
   // Add configuration types here
 }
@@ -290,10 +290,10 @@ export interface Config {
 /**
  * Validates that imports respect the layer hierarchy.
  *
- * Layer 0: src/types/    ; No internal imports
- * Layer 1: src/core/     ; May import types only
- * Layer 2: src/commands/ ; May import core and types
- * Layer 3: src/index.ts  ; May import anything
+ * Layer 0: src/types/     — No internal imports
+ * Layer 1: src/core/      — May import types only
+ * Layer 2: src/commands/  — May import core and types
+ * Layer 3: src/index.ts   — May import anything
  */
 import * as fs from "fs";
 import * as path from "path";
@@ -334,7 +334,7 @@ function checkFile(filePath: string): void {
       for (const forbidden of rule.forbiddenImports) {
         if (importPath.includes(forbidden)) {
           console.error(
-            `✗ ${filePath}:${i + 1}; Layer ${rule.layer} cannot import "${importPath}"`,
+            `✗ ${filePath}:${i + 1} — Layer ${rule.layer} cannot import "${importPath}"`,
           );
           console.error(
             `  Fix: Move this logic to a higher layer, or pass the dependency as a parameter.`,
@@ -405,7 +405,7 @@ function checkFile(filePath: string): void {
     lines.forEach((line, i) => {
       if (line.match(/console\.log\(/) && !line.trim().startsWith("//")) {
         console.error(
-          `✗ ${filePath}:${i + 1}; Use structured logger instead of console.log`,
+          `✗ ${filePath}:${i + 1} — Use structured logger instead of console.log`,
         );
         console.error(
           `  Fix: Import the logger from src/utils/logger.ts and use logger.info() instead.`,
@@ -638,10 +638,10 @@ clean:
 """
 Validates that imports respect the layer hierarchy.
 
-Layer 0: src/{package}/types.py    ; No internal imports
-Layer 1: src/{package}/core/       ; May import types only
-Layer 2: src/{package}/api/        ; May import core and types
-Layer 3: src/{package}/main.py     ; May import anything
+Layer 0: src/{package}/types.py     — No internal imports
+Layer 1: src/{package}/core/        — May import types only
+Layer 2: src/{package}/api/         — May import core and types
+Layer 3: src/{package}/main.py      — May import anything
 """
 import ast
 import sys
@@ -774,7 +774,7 @@ def check_file(filepath: Path) -> None:
                 continue
             if "print(" in stripped:
                 violations.append(
-                    f"  ✗ {filepath}:{i}; Use logging instead of print()\n"
+                    f"  ✗ {filepath}:{i} — Use logging instead of print()\n"
                     f"    Fix: import logging; logger = logging.getLogger(__name__); logger.info(...)"
                 )
 
@@ -864,8 +864,8 @@ These files are the same regardless of tech stack. All templates use:
 
 ## 1 Quick Start
 
-- [Architecture Overview](docs/ARCHITECTURE.md); System design, layers, data flow
-- [Development Setup](docs/DEVELOPMENT.md); Build, test, environment
+- [Architecture Overview](docs/ARCHITECTURE.md) — System design, layers, data flow
+- [Development Setup](docs/DEVELOPMENT.md) — Build, test, environment
 
 ## 2 Architecture
 
@@ -893,8 +893,8 @@ See [Development Setup](docs/DEVELOPMENT.md) for complete reference.
 
 ## 5 Execution Plans
 
-- [Active Plans](docs/exec-plans/active/); Work in progress
-- [Completed Plans](docs/exec-plans/completed/); Historical record
+- [Active Plans](docs/exec-plans/active/) — Work in progress
+- [Completed Plans](docs/exec-plans/completed/) — Historical record
 - [Tech Debt Tracker](docs/exec-plans/tech-debt-tracker.md)
 
 ## 6 Key Directories
@@ -903,9 +903,9 @@ See [Development Setup](docs/DEVELOPMENT.md) for complete reference.
 |-----------|-------|---------|
 | \`{main-source-dir}/\` | L2-L3 | Application code |
 | \`{types-dir}/\` | L0 | Type definitions |
-| \`docs/\` | - | All documentation |
-| \`scripts/\` | - | Linters and tooling |
-| \`harness/\` | - | Eval and quality |
+| \`docs/\` | — | All documentation |
+| \`scripts/\` | — | Linters and tooling |
+| \`harness/\` | — | Eval and quality |
 
 ---
 
@@ -922,7 +922,7 @@ will be created by the execution plan.
 # Architecture
 
 > Project initialized: {today's date}
-> Status: Greenfield; structure defined, implementation pending
+> Status: Greenfield — structure defined, implementation pending
 
 ## 1 Overview
 
@@ -934,13 +934,13 @@ will be created by the execution plan.
 
 \`\`\`mermaid
 graph TD
-    subgraph "Layer 2; Entry Points"
+    subgraph "Layer 2 — Entry Points"
         CMD[cmd/]
     end
-    subgraph "Layer 1; Business Logic"
+    subgraph "Layer 1 — Business Logic"
         CORE[internal/core/]
     end
-    subgraph "Layer 0; Types"
+    subgraph "Layer 0 — Types"
         TYPES[internal/types/]
     end
 
@@ -960,7 +960,7 @@ graph TD
 |-------|----------|------------|---------------|---------|
 | L0 | \`internal/types/\` | stdlib only | anything internal | Shared type definitions |
 | L1 | \`internal/core/\` | L0 | L2 | Business logic |
-| L2 | \`cmd/\` | L0, L1 | - | CLI commands, entry points |
+| L2 | \`cmd/\` | L0, L1 | — | CLI commands, entry points |
 
 > Will be enforced by: [\`scripts/lint-deps/main.go\`]()
 
@@ -1046,8 +1046,8 @@ go {version}
 
 ## See Also
 
-- [Development Setup](DEVELOPMENT.md); Build and test commands
-- [Quality Score](QUALITY_SCORE.md); Quality tracking
+- [Development Setup](DEVELOPMENT.md) — Build and test commands
+- [Quality Score](QUALITY_SCORE.md) — Quality tracking
 ```
 
 ### docs/PRODUCT_SENSE.md
@@ -1092,7 +1092,7 @@ Last updated: {today's date}
 
 | Domain | Grade | Issues | Trend | Notes |
 |--------|-------|--------|-------|-------|
-| Core | N/A | 0 | - | New project |
+| Core | N/A | 0 | — | New project |
 
 ## 2 Architectural Layers
 
@@ -1128,9 +1128,9 @@ Last updated: {today's date}
 
 \`\`\`
 tests/
-├── unit/         ; Fast, isolated tests
-├── integration/  ; Tests with real dependencies
-└── fixtures/     ; Shared test data
+├── unit/          — Fast, isolated tests
+├── integration/   — Tests with real dependencies
+└── fixtures/      — Shared test data
 \`\`\`
 
 ## 2 Running Tests
@@ -1225,13 +1225,13 @@ make build
 
 \`\`\`
 .
-├── cmd/          ; CLI commands (Layer 2)
-├── internal/     ; Private packages
-│   ├── types/    ; Core types (Layer 0)
-│   └── core/     ; Business logic (Layer 1)
-├── docs/         ; Documentation
-├── scripts/      ; Linters and tools
-└── harness/      ; Eval and quality
+├── cmd/           — CLI commands (Layer 2)
+├── internal/      — Private packages
+│   ├── types/     — Core types (Layer 0)
+│   └── core/      — Business logic (Layer 1)
+├── docs/          — Documentation
+├── scripts/       — Linters and tools
+└── harness/       — Eval and quality
 \`\`\`
 
 ## 5 Environment Variables
@@ -1296,7 +1296,7 @@ When you notice tech debt during development:
 
 Reference documents provide agent-readable summaries of external dependencies, APIs, and schemas.
 
-Format: `{dependency-name}-llms.txt` style; concise, focused on API surface and common patterns.
+Format: `{dependency-name}-llms.txt` style — concise, focused on API surface and common patterns.
 ```
 
 ### .github/workflows/ci.yml (Go version)

@@ -64,4 +64,4 @@ After changes to {{TESTED_AREA}}:
   - If using inline factories/builders: document the pattern.
   - If there are type narrowing tests (type guards): document it.
 - **NEW_TEST_RULES**: Project-specific rules for new tests (where to create, naming, what to cover).
-- **TESTED_AREA**: "lib/" or "src/"; the main tested directory.
+- **TESTED_AREA**: "lib/" or "src/" — the main tested directory.

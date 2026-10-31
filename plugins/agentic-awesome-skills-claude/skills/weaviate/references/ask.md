@@ -12,9 +12,9 @@ uv run scripts/ask.py --query "USER_QUESTION" --collections "Collection1,Collect
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--query` | `-q` | Yes | - | Natural language question |
-| `--collections` | `-c` | Yes | - | Comma-separated collection names to query across |
-| `--json` | - | No | `false` | Output in JSON format |
+| `--query` | `-q` | Yes | — | Natural language question |
+| `--collections` | `-c` | Yes | — | Comma-separated collection names to query across |
+| `--json` | — | No | `false` | Output in JSON format |
 
 ## Output
 

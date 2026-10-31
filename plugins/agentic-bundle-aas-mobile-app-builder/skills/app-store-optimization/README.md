@@ -235,7 +235,7 @@ ls ~/.claude/skills/app-store-optimization/
 ### Example 1: Complete Keyword Research
 
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Can you research keywords for my fitness app? I'm targeting people who want home workouts, yoga, and meal planning. Analyze top competitors like Nike Training Club and Peloton.
+Hey Claude—I just added the "app-store-optimization" skill. Can you research keywords for my fitness app? I'm targeting people who want home workouts, yoga, and meal planning. Analyze top competitors like Nike Training Club and Peloton.
 ```
 
 **What Claude will do**:
@@ -248,7 +248,7 @@ Hey Claude-I just added the "app-store-optimization" skill. Can you research key
 ### Example 2: Optimize App Store Metadata
 
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Optimize my app's metadata for both Apple App Store and Google Play Store:
+Hey Claude—I just added the "app-store-optimization" skill. Optimize my app's metadata for both Apple App Store and Google Play Store:
 - App: FitFlow
 - Category: Health & Fitness
 - Features: AI workout plans, nutrition tracking, progress photos
@@ -266,7 +266,7 @@ Hey Claude-I just added the "app-store-optimization" skill. Optimize my app's me
 ### Example 3: Calculate ASO Health Score
 
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Calculate my app's ASO score:
+Hey Claude—I just added the "app-store-optimization" skill. Calculate my app's ASO score:
 - Average rating: 4.3 stars (8,200 ratings)
 - Keywords in top 10: 4
 - Keywords in top 50: 15
@@ -285,7 +285,7 @@ Hey Claude-I just added the "app-store-optimization" skill. Calculate my app's A
 ### Example 4: A/B Test Planning
 
 ```
-Hey Claude-I just added the "app-store-optimization" skill. I want to A/B test my app icon. My current conversion rate is 4.2%. How many visitors do I need and how long should I run the test?
+Hey Claude—I just added the "app-store-optimization" skill. I want to A/B test my app icon. My current conversion rate is 4.2%. How many visitors do I need and how long should I run the test?
 ```
 
 **What Claude will do**:
@@ -298,7 +298,7 @@ Hey Claude-I just added the "app-store-optimization" skill. I want to A/B test m
 ### Example 5: Review Sentiment Analysis
 
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Analyze my last 500 reviews and tell me:
+Hey Claude—I just added the "app-store-optimization" skill. Analyze my last 500 reviews and tell me:
 - Overall sentiment
 - Most common complaints
 - Top feature requests
@@ -316,7 +316,7 @@ Hey Claude-I just added the "app-store-optimization" skill. Analyze my last 500 
 ### Example 6: Pre-Launch Checklist
 
 ```
-Hey Claude-I just added the "app-store-optimization" skill. Generate a complete pre-launch checklist for both app stores. My launch date is March 15, 2026.
+Hey Claude—I just added the "app-store-optimization" skill. Generate a complete pre-launch checklist for both app stores. My launch date is March 15, 2026.
 ```
 
 **What Claude will do**:

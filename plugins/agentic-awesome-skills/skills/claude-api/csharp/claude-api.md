@@ -1,4 +1,4 @@
-# Claude API: C#
+# Claude API — C#
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -18,7 +18,7 @@ using Anthropic;
 // Default (uses ANTHROPIC_API_KEY env var)
 AnthropicClient client = new();
 
-// Explicit API key (use environment variables; never hardcode keys)
+// Explicit API key (use environment variables — never hardcode keys)
 AnthropicClient client = new() {
     ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
 };

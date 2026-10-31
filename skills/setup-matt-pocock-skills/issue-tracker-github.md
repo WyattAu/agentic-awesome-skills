@@ -23,7 +23,7 @@ When set to `yes`, PRs run through the same labels and states as issues, using t
 - **List external PRs for triage**: `gh pr list --state open --limit 100 --json number,title,body,labels,author,comments,isCrossRepository` returns supported fields. `authorAssociation` is not a `gh pr list` JSON field; use an approved API query for that field and verify the author’s current repository permissions separately. Fork origin or association alone does not prove the author lacks collaborator access. Paginate the API for complete queues.
 - **Comment / label / close**: `gh pr comment`, `gh pr edit --add-label`/`--remove-label`, `gh pr close`.
 
-GitHub shares one number space across issues and PRs, so a bare `#42` may be either; resolve with `gh pr view 42` and fall back to `gh issue view 42`.
+GitHub shares one number space across issues and PRs, so a bare `#42` may be either — resolve with `gh pr view 42` and fall back to `gh issue view 42`.
 
 ## When a skill says "publish to the issue tracker"
 

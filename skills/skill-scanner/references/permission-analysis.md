@@ -6,12 +6,12 @@ Framework for evaluating tool permissions granted to agent skills.
 
 | Tier | Tools | Risk Level | Notes |
 |------|-------|------------|-------|
-| **Tier 1; Read-Only** | `Read`, `Grep`, `Glob` | Low | No direct write tools; reads can still expose private data and untrusted instructions |
-| **Tier 2; Execution** | `Bash` | Medium | Can run arbitrary commands; should have clear justification |
-| **Tier 3; Modification** | `Write`, `Edit`, `NotebookEdit` | High | Can modify files; verify the skill needs to create/edit files |
-| **Tier 4; Network** | `WebFetch`, `WebSearch` | High | Can access external URLs; verify domains are necessary |
-| **Tier 5; Delegation** | `Task` | High | Can spawn subagents; increases attack surface |
-| **Tier 6; Unrestricted** | `*` (wildcard) | Critical | Full access to all tools; almost never justified |
+| **Tier 1 — Read-Only** | `Read`, `Grep`, `Glob` | Low | No direct write tools; reads can still expose private data and untrusted instructions |
+| **Tier 2 — Execution** | `Bash` | Medium | Can run arbitrary commands; should have clear justification |
+| **Tier 3 — Modification** | `Write`, `Edit`, `NotebookEdit` | High | Can modify files; verify the skill needs to create/edit files |
+| **Tier 4 — Network** | `WebFetch`, `WebSearch` | High | Can access external URLs; verify domains are necessary |
+| **Tier 5 — Delegation** | `Task` | High | Can spawn subagents; increases attack surface |
+| **Tier 6 — Unrestricted** | `*` (wildcard) | Critical | Full access to all tools; almost never justified |
 
 ## Least Privilege Assessment
 
@@ -25,9 +25,9 @@ For each tool in `allowed-tools`, verify:
 
 | Tool | Justified When | Unjustified When |
 |------|---------------|-----------------|
-| `Read` | Skill reads files for analysis |; (almost always justified) |
-| `Grep` | Skill searches file contents |; (almost always justified) |
-| `Glob` | Skill finds files by pattern |; (almost always justified) |
+| `Read` | Skill reads files for analysis | — (almost always justified) |
+| `Grep` | Skill searches file contents | — (almost always justified) |
+| `Glob` | Skill finds files by pattern | — (almost always justified) |
 | `Bash` | Running bundled scripts (`uv run`), git/gh CLI, build tools | No scripts or CLI commands in instructions |
 | `Write` | Skill creates new files (reports, configs) | Skill only reads and analyzes |
 | `Edit` | Skill modifies existing files | Skill only reads and analyzes |
@@ -61,7 +61,7 @@ Expected tool sets by skill type:
 
 ### Full-Access Skills
 - **Expected**: Almost never
-- **If seen**: Requires strong justification; the skill should be doing something that genuinely needs broad access
+- **If seen**: Requires strong justification — the skill should be doing something that genuinely needs broad access
 - **Flag**: `*` wildcard, or more than 5 distinct tools
 
 ## Red Flags
@@ -73,7 +73,7 @@ Combinations and patterns that warrant scrutiny:
 | `Bash` + no scripts in skill directory | Why does it need shell access? |
 | `Write` or `Edit` + skill described as "analysis" or "review" | Analysis skills shouldn't modify files |
 | `WebFetch` + no URLs in instructions | What is it fetching? |
-| `Task` + `Bash` + `Write` | Can spawn subagents with write access; high risk |
+| `Task` + `Bash` + `Write` | Can spawn subagents with write access — high risk |
 | `*` (unrestricted) | Maximum attack surface; almost never appropriate |
 | Tools granted but never referenced in instructions | Overly permissive; violates least privilege |
 

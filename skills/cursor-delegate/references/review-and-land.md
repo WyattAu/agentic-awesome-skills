@@ -27,9 +27,9 @@ For changes with a specialized verification shape:
 
 Start with `touchedFiles`, open the diff, and compare it to the brief:
 
-- **Scope creep**; changes the brief excluded.
-- **Scope shortfall**; missed behavior, edges, or cleanup.
-- **Quiet judgment calls**; defensible but unasked decisions that need review.
+- **Scope creep** — changes the brief excluded.
+- **Scope shortfall** — missed behavior, edges, or cleanup.
+- **Quiet judgment calls** — defensible but unasked decisions that need review.
 
 ## The implementer sweep
 
@@ -53,14 +53,14 @@ When the gates pass and the diff holds, **the orchestrator commits**, never the 
 clear message describing what landed.
 
 From dispatch until that commit, the uncommitted working tree is the authoritative copy of the
-implementer's work; the only one you can commit from, and often the only copy at all. Never run `git checkout`, `reset`, `clean`, or a branch switch in the
-workspace between those two points; however messy an interrupted run looks, inspect it first:
+implementer's work — the only one you can commit from, and often the only copy at all. Never run `git checkout`, `reset`, `clean`, or a branch switch in the
+workspace between those two points — however messy an interrupted run looks, inspect it first:
 `git status`, `git diff`, `git diff --cached` for anything the implementer staged (plain
-`git diff` is blind to the index), and open any untracked files (`??` in `git status`) directly -
+`git diff` is blind to the index), and open any untracked files (`??` in `git status`) directly —
 they are the implementer's new files, and no diff shows their contents. The tree is evidence,
 not clutter. After that inspection the
-verdict can legitimately be to discard; work built on a premise you have since corrected, for
-example; and then `git checkout`/`clean` is the right tool. The ban is on reflexive cleanup
+verdict can legitimately be to discard — work built on a premise you have since corrected, for
+example — and then `git checkout`/`clean` is the right tool. The ban is on reflexive cleanup
 before anyone has looked.
 
 ## Rework: send the delta
@@ -76,7 +76,7 @@ Use `--session <id>` instead when resuming the specific id recorded in `result.j
 rejects `--resume-last` plus `--session` before launch. Rework gets the same gate rerun, test
 review, diff review, and implementer sweep.
 
-A resumed run carries the same autonomy flags as a fresh one; write-capable with `--force` by
+A resumed run carries the same autonomy flags as a fresh one — write-capable with `--force` by
 default, write-capable without automatic command approval under `--no-force`, or plan mode under
 `--read-only`. Confirm `touchedFiles` after every fresh or resumed run.
 

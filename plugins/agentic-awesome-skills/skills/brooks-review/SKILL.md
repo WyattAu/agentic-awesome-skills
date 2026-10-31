@@ -10,7 +10,7 @@ license: MIT
 license_source: https://github.com/hyhmrright/brooks-lint/blob/main/LICENSE
 ---
 
-# Brooks-Lint: PR Review
+# Brooks-Lint — PR Review
 ## When to Use
 
 Use this skill when you need pR code review that surfaces decay risks, design smells, and maintainability issues with concrete Symptom → Source → Consequence → Remedy findings, drawing on twelve classic engineering books. Triggers when: user asks to review code, check a PR, shares a diff or pastes code asking...
@@ -33,7 +33,7 @@ For an upstream installation that actually includes the shared files:
 from `../_shared/common.md` to determine the review scope before proceeding.
 
 1. Understand the review scope, then scan for each decay risk in the order specified (Steps 1–6 of the guide)
-2. Run the Quick Test Check (Step 7 of the guide); skip for docs-only or non-production changes
+2. Run the Quick Test Check (Step 7 of the guide) — skip for docs-only or non-production changes
 3. Apply the Iron Law to every finding
 4. Output using the Report Template from common.md
 

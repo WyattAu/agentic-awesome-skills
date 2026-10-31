@@ -19,12 +19,12 @@ You are a Snowflake development expert. Apply these rules when writing SQL, buil
 
 ### Naming and Style
 
-- Use `snake_case` for all identifiers. Avoid double-quoted identifiers; they create case-sensitive names requiring constant quoting.
+- Use `snake_case` for all identifiers. Avoid double-quoted identifiers — they create case-sensitive names requiring constant quoting.
 - Use CTEs (`WITH` clauses) over nested subqueries.
 - Use `CREATE OR REPLACE` for idempotent DDL.
-- Use explicit column lists; never `SELECT *` in production (Snowflake's columnar storage scans only referenced columns).
+- Use explicit column lists — never `SELECT *` in production (Snowflake's columnar storage scans only referenced columns).
 
-### Stored Procedures: Colon Prefix Rule
+### Stored Procedures — Colon Prefix Rule
 
 In SQL stored procedures (BEGIN...END blocks), variables and parameters **must** use the colon `:` prefix inside SQL statements. Without it, Snowflake raises "invalid identifier" errors.
 
@@ -88,7 +88,7 @@ CREATE OR REPLACE DYNAMIC TABLE cleaned_events
 Key rules:
 - Set `TARGET_LAG` progressively: tighter at top, looser at bottom.
 - Incremental DTs **cannot** depend on Full refresh DTs.
-- `SELECT *` breaks on schema changes; use explicit column lists.
+- `SELECT *` breaks on schema changes — use explicit column lists.
 - Change tracking must stay enabled on base tables.
 - Views cannot sit between two Dynamic Tables.
 
@@ -103,7 +103,7 @@ CREATE OR REPLACE TASK process_events
     WHEN SYSTEM$STREAM_HAS_DATA('raw_stream')
     AS INSERT INTO cleaned_events SELECT ... FROM raw_stream;
 
--- Tasks start SUSPENDED; you MUST resume them
+-- Tasks start SUSPENDED — you MUST resume them
 ALTER TASK process_events RESUME;
 ```
 
@@ -123,7 +123,7 @@ ALTER TASK process_events RESUME;
 
 **Deprecated (do NOT use):** `COMPLETE`, `CLASSIFY_TEXT`, `EXTRACT_ANSWER`, `PARSE_DOCUMENT`, `SUMMARIZE`, `TRANSLATE`, `SENTIMENT`, `EMBED_TEXT_768`.
 
-### TO_FILE: Common Error Source
+### TO_FILE — Common Error Source
 
 Stage path and filename are **SEPARATE** arguments:
 
@@ -162,9 +162,9 @@ Agent rules:
 - Use `$spec$` delimiter (not `$$`).
 - `models` must be an object, not an array.
 - `tool_resources` is a separate top-level object, not nested inside tools.
-- Do NOT include empty/null values in edit specs; clears existing values.
+- Do NOT include empty/null values in edit specs — clears existing values.
 - Tool descriptions are the #1 quality factor.
-- Never modify production agents directly; clone first.
+- Never modify production agents directly — clone first.
 
 ## Snowpark Python
 
@@ -182,8 +182,8 @@ session = Session.builder.configs({
 ```
 
 - Never hardcode credentials.
-- DataFrames are lazy; executed on `collect()`/`show()`.
-- Do NOT use `collect()` on large DataFrames; process server-side.
+- DataFrames are lazy — executed on `collect()`/`show()`.
+- Do NOT use `collect()` on large DataFrames — process server-side.
 - Use **vectorized UDFs** (10-100x faster) for batch/ML workloads instead of scalar UDFs.
 
 ## dbt on Snowflake

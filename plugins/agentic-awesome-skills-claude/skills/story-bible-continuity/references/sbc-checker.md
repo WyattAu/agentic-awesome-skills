@@ -6,7 +6,7 @@ bible file, or run it straight from a heredoc. Stdlib only, Python 3.8+.
 
 ```python
 #!/usr/bin/env python3
-"""sbc.py; story-bible-continuity checker.
+"""sbc.py — story-bible-continuity checker.
 
 Deterministic, offline, stdlib only. Compares a manuscript folder against a
 story bible (JSON) and reports the continuity defects that a language model
@@ -193,7 +193,7 @@ def check_name_drift(bible, chapter_texts):
                 if near:
                     issues.append(issue(
                         "error", "name-drift", "%s:%d" % (name, lineno),
-                        '"%s" speaks here, one character off "%s"; fix it or declare it'
+                        '"%s" speaks here, one character off "%s" — fix it or declare it'
                         % (token, near[0])))
     return issues
 

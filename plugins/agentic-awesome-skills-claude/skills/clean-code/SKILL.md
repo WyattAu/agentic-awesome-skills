@@ -11,7 +11,7 @@ date_added: "2026-02-27"
 This skill embodies the principles of "Clean Code" by Robert C. Martin (Uncle Bob). Use it to transform "code that works" into "code that is clean."
 
 ## 🧠 Core Philosophy
-> "Code is clean if it can be read, and enhanced by a developer other than its original author."; Grady Booch
+> "Code is clean if it can be read, and enhanced by a developer other than its original author." — Grady Booch
 
 ## When to Use
 Use this skill when:
@@ -39,7 +39,7 @@ These are design heuristics, not universal language rules or authority to change
 - **No Side Effects**: Functions shouldn't secretly change global state.
 
 ## 3. Comments
-- **Don't Comment Bad Code-Rewrite It**: Most comments are a sign of failure to express ourselves in code.
+- **Don't Comment Bad Code—Rewrite It**: Most comments are a sign of failure to express ourselves in code.
 - **Explain Yourself in Code**: 
   ```python
   # Check if employee is eligible for full benefits

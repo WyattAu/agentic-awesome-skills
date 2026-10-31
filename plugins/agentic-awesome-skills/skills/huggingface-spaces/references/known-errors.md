@@ -1,6 +1,6 @@
 # Known errors
 
-Check if this is a known issue before trying your own fix. Entries are keyed by the substring that actually appears in `runtime.errorMessage`, the build log, or a Python traceback; grep this file for the error you saw.
+Check if this is a known issue before trying your own fix. Entries are keyed by the substring that actually appears in `runtime.errorMessage`, the build log, or a Python traceback — grep this file for the error you saw.
 
 If you hit something not listed here and figure out a fix, please ask your human to PR it back so future runs benefit.
 
@@ -8,12 +8,12 @@ If you hit something not listed here and figure out a fix, please ask your human
 
 ## Build / config errors
 
-These come from the Space build pipeline before the app starts. Read with `hf spaces logs <id> --build --tail 500`; find the **first** error, not the last.
+These come from the Space build pipeline before the app starts. Read with `hf spaces logs <id> --build --tail 500` — find the **first** error, not the last.
 
 ### `CONFIG_ERROR: torch version in requirements.txt is not compatible with ZeroGPU`
 
 **Cause**: `requirements.txt` pins `torch==X.Y.Z` to a version outside the current platform-supported set (check the live compatibility table).
-**Fix**: Unpin torch (preferred; the runtime preinstalls the latest supported version), or pin to one of the supported values.
+**Fix**: Unpin torch (preferred — the runtime preinstalls the latest supported version), or pin to one of the supported values.
 
 ### `Cannot install … because these package versions have conflicting dependencies` / `ResolutionImpossible`
 
@@ -28,11 +28,11 @@ These come from the Space build pipeline before the app starts. Read with `hf sp
 ### `ModuleNotFoundError: No module named 'pkg_resources'`
 
 **Cause**: setuptools 81 dropped `pkg_resources`; an old package's `setup.py` imports it.
-**Fix**: Bump or unpin the offender. Typical culprits: `deepspeed==0.15.x` (training-only; usually safe to drop from inference Spaces), `openai-whisper==20231117`.
+**Fix**: Bump or unpin the offender. Typical culprits: `deepspeed==0.15.x` (training-only — usually safe to drop from inference Spaces), `openai-whisper==20231117`.
 
 ### `400 Bad Request` from `/api/validate-yaml` during `create_repo` / `upload_file`
 
-**Cause**: README frontmatter failed server validation. Most common: `short_description` over the (undocumented) character cap; target ≤ 60.
+**Cause**: README frontmatter failed server validation. Most common: `short_description` over the (undocumented) character cap — target ≤ 60.
 **Fix**: Shorten `short_description`. Long descriptions go in the README body. Also double-check `colorFrom`/`colorTo` are one of `red|yellow|green|blue|indigo|purple|pink|gray`.
 
 ### `403 Forbidden` from `create_repo` with `space_hardware="zero-a10g"`
@@ -130,7 +130,7 @@ These appear in `hf spaces logs <id> --follow` while a request is running.
 
 ### `ZeroGPU quota exceeded (X requested vs Y left)`
 
-**Cause**: The visitor's remaining quota < `requested duration`. The comparison is `requested vs remaining`, not `actual vs remaining`; a 10-second task left at the default 60 s blocks the user as soon as their remaining drops below 60 s.
+**Cause**: The visitor's remaining quota < `requested duration`. The comparison is `requested vs remaining`, not `actual vs remaining` — a 10-second task left at the default 60 s blocks the user as soon as their remaining drops below 60 s.
 **Fix**: Lower `duration` to the realistic worst case. For input-dependent runtime, use a callable estimator.
 
 ### `RuntimeError: NVML_SUCCESS == r INTERNAL ASSERT FAILED at .../CUDACachingAllocator.cpp`
@@ -152,23 +152,23 @@ Usually a single-line fix that replaces lowering resolution or moving to `xlarge
 
 ### `PicklingError` at call entry
 
-**Cause**: An argument crossing the fork boundary contains an unpicklable object; file handle, lock, lambda, closure, or `gr.SelectData`.
+**Cause**: An argument crossing the fork boundary contains an unpicklable object — file handle, lock, lambda, closure, or `gr.SelectData`.
 **Fix**: Extract the picklable fields in a thin un-decorated wrapper, pass plain values to the `@spaces.GPU` function. For `gr.SelectData` specifically, pull out `evt.index[0]`, `evt.index[1]` etc. outside the decorator.
 
 ### `RecursionError` inside `gr.SelectData.__getattr__`
 
-**Cause**: Same as above; `gr.SelectData` doesn't survive pickle.
-**Fix**: Same; extract its fields before crossing the boundary.
+**Cause**: Same as above — `gr.SelectData` doesn't survive pickle.
+**Fix**: Same — extract its fields before crossing the boundary.
 
 ### `CUDA error … flash_fwd_launch_template.h: no kernel image is available for execution on the device` (or `:188: invalid argument`)
 
-**Cause**: A Flash Attention 3 kernel was loaded; directly via `kernels-community/{flash-attn3,vllm-flash-attn3,sgl-flash-attn3}`, or indirectly via an old `xformers` wheel that auto-dispatched to FA3. FA3 has no Blackwell sm_120 build.
-**Fix**: Use `attn_implementation="sdpa"`, or `"flash_attention_2"` with the FA2 wheel from `multimodalart/zerogpu-blackwell-wheels`. For xformers, the prebuilt wheel from the same dataset auto-dispatches to FA2; no monkey-patch.
+**Cause**: A Flash Attention 3 kernel was loaded — directly via `kernels-community/{flash-attn3,vllm-flash-attn3,sgl-flash-attn3}`, or indirectly via an old `xformers` wheel that auto-dispatched to FA3. FA3 has no Blackwell sm_120 build.
+**Fix**: Use `attn_implementation="sdpa"`, or `"flash_attention_2"` with the FA2 wheel from `multimodalart/zerogpu-blackwell-wheels`. For xformers, the prebuilt wheel from the same dataset auto-dispatches to FA2 — no monkey-patch.
 
 ### `NotImplementedError: sgl_flash_attn3 is only supported on sm80 and above with CUDA >= 12.3`
 
 **Cause**: `kernels-community/sgl-flash-attn3` rejects sm_120 at runtime despite the error wording. Same root cause as the FA3 entry above.
-**Fix**: Same; SDPA or FA2.
+**Fix**: Same — SDPA or FA2.
 
 ### `ImportError: cannot import name 'flash_attn_varlen_func' from 'flash_attn'` / model insists on `attn_implementation="flash_attention_2"`
 
@@ -179,7 +179,7 @@ For transformers `AutoModel`-style configs that aren't a hard import, swap `attn
 
 ### `selective_scan_cuda.so undefined symbol` / `_torchaudio.abi3.so undefined symbol`
 
-**Cause**: A direct-URL prebuilt CUDA wheel pinned to an old torch ABI (`cu12torch2.4cxx11abiFALSE`, etc.); won't load on the current runtime.
+**Cause**: A direct-URL prebuilt CUDA wheel pinned to an old torch ABI (`cu12torch2.4cxx11abiFALSE`, etc.) — won't load on the current runtime.
 **Fix**: Drop the URL-pinned wheel from `requirements.txt`. Use a torch-current wheel from `multimodalart/zerogpu-blackwell-wheels`, kernels-community, or upstream's release page.
 
 ### `TypeError: 'dict' object is not hashable` inside `jinja2/utils.py:get`
@@ -204,7 +204,7 @@ For transformers `AutoModel`-style configs that aren't a hard import, swap `attn
 ### `404` on what looks like a valid endpoint name
 
 **Cause**: Streaming endpoint (function uses `yield`), or a custom `gr.Server` `@app.get/post` route that doesn't appear in `view_api()`.
-**Fix**: For streaming, use `client.submit(...).result()` (or iterate the job). For custom routes, use `httpx.post(base_url + "/route", ...)` directly; bypass `gradio_client`.
+**Fix**: For streaming, use `client.submit(...).result()` (or iterate the job). For custom routes, use `httpx.post(base_url + "/route", ...)` directly — bypass `gradio_client`.
 
 ### Result file looks empty / dimensions wrong
 

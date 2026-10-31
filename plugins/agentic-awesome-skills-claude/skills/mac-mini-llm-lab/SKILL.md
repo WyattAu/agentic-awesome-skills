@@ -343,9 +343,9 @@ mdutil -i off ~/.ollama
 
 ## Related Skills
 
-- ollama-stack (`ollama-stack`); Software stack with Docker Compose and LiteLLM
-- ssh-configuration (`ssh-configuration`); Secure remote access
-- vpn-setup (`vpn-setup`); Remote access via WireGuard/Tailscale
+- ollama-stack (`ollama-stack`) — Software stack with Docker Compose and LiteLLM
+- ssh-configuration (`ssh-configuration`) — Secure remote access
+- vpn-setup (`vpn-setup`) — Remote access via WireGuard/Tailscale
 
 ## Limitations
 

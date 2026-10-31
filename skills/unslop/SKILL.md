@@ -14,13 +14,13 @@ license: "MIT"
 license_source: "https://github.com/MohamedAbdallah-14/unslop/blob/main/LICENSE"
 ---
 
-# unslop: Strip AI Writing Patterns via CLI
+# unslop — Strip AI Writing Patterns via CLI
 
 ## Overview
 
 unslop is a CLI tool that post-processes text to remove AI writing patterns programmatically. Unlike skills that ask the agent to avoid AI-isms, unslop runs as a deterministic pipeline step: pipe text in, get clean text out. Use it as a final pass before committing docs, publishing posts, or sending any AI-generated content to production.
 
-The `--deterministic` flag makes output reproducible; same input always produces same output. The `--stdin` flag reads from stdin, enabling shell pipeline composition.
+The `--deterministic` flag makes output reproducible — same input always produces same output. The `--stdin` flag reads from stdin, enabling shell pipeline composition.
 
 ## When to Use This Skill
 
@@ -123,19 +123,19 @@ done
 - ✅ Use `--deterministic` in CI and automation to ensure reproducible output
 - ✅ Run on the final draft, not intermediate iterations
 - ✅ Combine with the `avoid-ai-writing` skill for both generation-time guidance and post-processing
-- ❌ Don't run on code files; unslop targets prose, not source code
+- ❌ Don't run on code files — unslop targets prose, not source code
 - ❌ Don't skip review after unslop: automated cleanup can occasionally change meaning; read the output
 
 ## Limitations
 
-- Processes prose only; not code, JSON, or structured data
+- Processes prose only — not code, JSON, or structured data
 - Does not catch factual errors or substantive writing issues
 - Some replacements may not fit every context; review the output before publishing
 - Requires Python tooling such as `pipx` or `uv` for standalone CLI installation
 
 ## Security & Safety Notes
 
-- unslop reads from stdin and writes to stdout; no file system side effects by default
+- unslop reads from stdin and writes to stdout — no file system side effects by default
 - `--deterministic` mode is local and does not make LLM API calls
 - Default LLM mode may use `ANTHROPIC_API_KEY` or the Claude CLI; use `--deterministic` for sensitive local files and CI gates
 - Safe to run in CI pipelines and commit hooks when pinned to deterministic mode

@@ -52,7 +52,7 @@ Await asynchronous wrapper operations and catch failures. Constructor calls are 
 ---
 
 
-## Step 1: Embed
+## Step 1 — Embed
 
 The container `<div>` **must** have a fixed width and height before calling `createEmbed`.
 
@@ -89,7 +89,7 @@ export default function Editor() {
 ---
 
 
-## Step 2: Opening Files
+## Step 2 — Opening Files
 
 ```js
 // Remote URL → new document
@@ -114,7 +114,7 @@ await pea.runScript(`app.open("data:image/png;base64,iVBORw0...");`);
 ---
 
 
-## Step 3: Running Scripts
+## Step 3 — Running Scripts
 
 `runScript` sends a JS string, returns an array of `app.echoToOE(...)` values + `"done"` last.
 
@@ -136,7 +136,7 @@ const info = JSON.parse(out[0]);
 ---
 
 
-## Step 4: Exporting
+## Step 4 — Exporting
 
 ```js
 // PNG Blob (via exportImage)
@@ -180,7 +180,7 @@ async function download(pea, filename = "export.png") {
 ---
 
 
-## Step 5: Loading Assets
+## Step 5 — Loading Assets
 
 ```js
 // Font
@@ -198,7 +198,7 @@ await pea.loadAsset(await (await fetch("Gradients.GRD")).arrayBuffer());
 ---
 
 
-## Step 6: Plugin Mode
+## Step 6 — Plugin Mode
 
 ```js
 // Your page is inside Photopea's sidebar iframe
@@ -230,7 +230,7 @@ Plugin config:
 
 ## Utility Patterns
 
-### addImageAndWait: robust async layer insertion
+### addImageAndWait — robust async layer insertion
 ```js
 async function addImageAndWait(pea, imgURI) {
   const deadline = Date.now() + 20000;
@@ -256,7 +256,7 @@ async function addImageAndWait(pea, imgURI) {
 
 Run this only with exclusive document access: layer-count changes do not identify a specific asset if the user or another script edits concurrently.
 
-### getDocumentAsImage: returns `<img>` element
+### getDocumentAsImage — returns `<img>` element
 ```js
 async function getDocumentAsImage(pea) {
   const result = await pea.runScript(`app.activeDocument.saveToOE('png')`);
@@ -273,7 +273,7 @@ async function getDocumentAsImage(pea) {
 
 ## Real-World Patterns
 
-### Pattern A: Open + Export UI
+### Pattern A — Open + Export UI
 
 Minimal sketch: additionally disable controls until ready, show initialization/export errors, enforce file type/size limits, and serialize operations. The React snippet above does not implement cancellation/listener teardown and is not StrictMode-safe production lifecycle code; an unresolved createEmbed Promise can create duplicates. Implement and verify a version-specific owned-iframe/listener cleanup mechanism before mounting/unmounting.
 ```html
@@ -302,7 +302,7 @@ document.getElementById("exportBtn").addEventListener("click", async () => {
 </script>
 ```
 
-### Pattern B: Template + Text Edit + Export
+### Pattern B — Template + Text Edit + Export
 ```js
 async function generateCard(pea, name, tagline) {
   await pea.openFromURL("https://example.com/card.psd", false);
@@ -316,7 +316,7 @@ async function generateCard(pea, name, tagline) {
 }
 ```
 
-### Pattern C: Batch Watermark
+### Pattern C — Batch Watermark
 ```js
 async function batchWatermark(pea, imageURLs, watermarkURL) {
   const results = [];
@@ -346,7 +346,7 @@ async function batchWatermark(pea, imageURLs, watermarkURL) {
 ---
 
 
-## `app`: Application Object
+## `app` — Application Object
 
 ### Properties
 
@@ -368,9 +368,9 @@ async function batchWatermark(pea, imageURLs, watermarkURL) {
 |--------|-------------|
 | `app.open(url)` | Open URL as new document |
 | `app.open(url, null, true)` | Open URL as smart object layer in active document |
-| `app.echoToOE(string)` | **Photopea extension**; send string to host page (captured by `runScript`) |
-| `app.showWindow("magiccut")` | **Photopea extension**; open Magic Cut panel |
-| `app.showWindow("vbitmap")` | **Photopea extension**; open Vectorize Bitmap panel |
+| `app.echoToOE(string)` | **Photopea extension** — send string to host page (captured by `runScript`) |
+| `app.showWindow("magiccut")` | **Photopea extension** — open Magic Cut panel |
+| `app.showWindow("vbitmap")` | **Photopea extension** — open Vectorize Bitmap panel |
 | `app.UI.zoomIn()` | Zoom in |
 | `app.UI.zoomOut()` | Zoom out |
 | `app.UI.fitTheArea()` | Fit canvas to viewport |
@@ -390,7 +390,7 @@ app.preferences.rulerUnits = savedUnits;
 ---
 
 
-## `Document`: Document Object
+## `Document` — Document Object
 
 Access via `app.activeDocument` or `app.documents[i]`.
 
@@ -401,8 +401,8 @@ Access via `app.activeDocument` or `app.documents[i]`.
 | `width` | number | R | Document width in current ruler units |
 | `height` | number | R | Document height in current ruler units |
 | `resolution` | number | R | DPI (pixels per inch) |
-| `name` | string | **R/W** | **Photopea extension**; display label (no history step) |
-| `source` | string | **R/W** | **Photopea extension**; file origin URL or `"local,X,NAME"` |
+| `name` | string | **R/W** | **Photopea extension** — display label (no history step) |
+| `source` | string | **R/W** | **Photopea extension** — file origin URL or `"local,X,NAME"` |
 | `mode` | DocumentMode | R | `DocumentMode.RGB`, `GRAYSCALE`, `CMYK`, `LAB`, `BITMAP`, `INDEXEDCOLOR`, `MULTICHANNEL` |
 | `bitsPerChannel` | BitsPerChannelType | R | `BitsPerChannelType.EIGHT`, `SIXTEEN`, `THIRTYTWO` |
 | `colorProfileName` | string | R | Name of embedded color profile |
@@ -444,8 +444,8 @@ Access via `app.activeDocument` or `app.documents[i]`.
 | `duplicate` | `(name, mergedLayers)` | Duplicate the document |
 | `close` | `(saveOptions)` | Close document. SaveOptions: `DONOTSAVECHANGES`, `SAVECHANGES`, `PROMPTTOSAVECHANGES` |
 | `save` | `()` | Save (requires server config in embed) |
-| `saveToOE` | `(format)` | **Photopea extension**; send binary to host. Formats: `"png"`, `"jpg:0.8"`, `"webp:0.7"`, `"psd:true"`, `"svg:true"` |
-| `clearHistory` | `()` | **Photopea extension**; clear undo history to free RAM |
+| `saveToOE` | `(format)` | **Photopea extension** — send binary to host. Formats: `"png"`, `"jpg:0.8"`, `"webp:0.7"`, `"psd:true"`, `"svg:true"` |
+| `clearHistory` | `()` | **Photopea extension** — clear undo history to free RAM |
 | `exportDocument` | `(file, exportType, options)` | Export to filesystem (triggers ZIP). ExportType: `SAVEFORWEB` |
 | `paste` | `(intoSelection)` | Paste clipboard into document |
 | `suspendHistory` | `(historyName, callback)` | Wrap multiple ops in one history state |
@@ -533,7 +533,7 @@ walkLayers(doc);
 ---
 
 
-## `ArtLayer`: Individual Layer
+## `ArtLayer` — Individual Layer
 
 ### Properties
 
@@ -549,7 +549,7 @@ walkLayers(doc);
 | `bounds` | array | R | `[left, top, right, bottom]` in current ruler units |
 | `parent` | Document/LayerSet | R | Containing object |
 | `typename` | string | R | Always `"ArtLayer"` |
-| `selected` | boolean | R | **Photopea extension**; is layer highlighted in panel |
+| `selected` | boolean | R | **Photopea extension** — is layer highlighted in panel |
 | `isBackgroundLayer` | boolean | R | Is this the locked background layer |
 | `grouped` | boolean | R | Is clipping mask applied |
 | `pixelsLocked` | boolean | R | Pixels locked |
@@ -691,7 +691,7 @@ layer.move(target, ElementPlacement.PLACEAFTER);
 ---
 
 
-## `LayerSet`: Group Layer
+## `LayerSet` — Group Layer
 
 A LayerSet is a folder/group in the Layers panel. It has the same layer management methods as `Document`.
 
@@ -733,7 +733,7 @@ var innerLayer = doc.layerSets.getByName("Header Group").artLayers.getByName("Ti
 ---
 
 
-## `TextItem`: Text Layer Content
+## `TextItem` — Text Layer Content
 
 Access via `layer.textItem` on any layer with `layer.kind === LayerKind.TEXT`.
 
@@ -804,7 +804,7 @@ Access via `layer.textItem` on any layer with `layer.kind === LayerKind.TEXT`.
 | Property | Type | Description |
 |----------|------|-------------|
 | `totalTextStyle` | string | JSON string with ALL style parameters of the text |
-| `transform` | string | JSON array; the affine transform matrix of the text |
+| `transform` | string | JSON array — the affine transform matrix of the text |
 
 ### Methods
 
@@ -881,7 +881,7 @@ text.color = color;
 ---
 
 
-## `SolidColor`: Color Object
+## `SolidColor` — Color Object
 
 ```js
 // RGB (most common in Photopea)
@@ -926,7 +926,7 @@ doc.selection.deselect();
 ---
 
 
-## `Selection`: Selection Object
+## `Selection` — Selection Object
 
 Access via `doc.selection`.
 
@@ -1006,7 +1006,7 @@ sel.deselect();
 ---
 
 
-## `BlendMode` Enum: All Values
+## `BlendMode` Enum — All Values
 
 Used in `layer.blendMode` (string form in Photopea) and `BlendMode` constant (standard):
 
@@ -1161,7 +1161,7 @@ Used with `doc.close(saveOption)`:
 ---
 
 
-## `ExportOptionsSaveForWeb`: Export to Filesystem
+## `ExportOptionsSaveForWeb` — Export to Filesystem
 
 Used with `doc.exportDocument()` to write files that Photopea packages into a ZIP.
 
@@ -1192,7 +1192,7 @@ doc.exportDocument(new File("/export.gif"), ExportType.SAVEFORWEB, gifOpts);
 ---
 
 
-## `executeAction`: Advanced Operations
+## `executeAction` — Advanced Operations
 
 Used for operations not exposed in the standard DOM (adjustments applied as adjustment layers,
 Smart Object editing, etc.). Takes the Photoshop Action Manager approach.

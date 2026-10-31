@@ -232,7 +232,7 @@ await workspace.Value.DeleteAsync(WaitUntil.Completed);
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** when you want to poll manually or run operations in parallel
-3. **Always use `DefaultAzureCredential`**; never hardcode keys
+3. **Always use `DefaultAzureCredential`** — never hardcode keys
 4. **Handle `RequestFailedException`** for ARM API errors
 5. **Use `CreateOrUpdateAsync`** for idempotent operations
 6. **Navigate hierarchy** via `Get*` methods (e.g., `resourceGroup.GetPlaywrightWorkspaces()`)

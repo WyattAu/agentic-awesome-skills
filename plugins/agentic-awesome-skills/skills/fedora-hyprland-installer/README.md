@@ -6,7 +6,7 @@
 
 ## 🎯 Why This Project Exists
 
-Setting up Hyprland on Fedora can be tedious. You have to configure Wayland portals, sort out PipeWire audio, select launcher/terminal defaults, and configure GPU flags-especially if you're running NVIDIA or hybrid graphics.
+Setting up Hyprland on Fedora can be tedious. You have to configure Wayland portals, sort out PipeWire audio, select launcher/terminal defaults, and configure GPU flags—especially if you're running NVIDIA or hybrid graphics.
 
 After installing this skill through your agent's supported skill mechanism, ask:
 

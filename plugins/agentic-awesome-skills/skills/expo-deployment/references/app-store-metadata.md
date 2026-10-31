@@ -228,7 +228,7 @@ Primary category is most important for browsing and rankings.
 
 ## Localization
 
-Localize metadata for each target market. Keywords should be researched per locale-direct translations often miss regional search terms.
+Localize metadata for each target market. Keywords should be researched per locale—direct translations often miss regional search terms.
 
 ```json
 {

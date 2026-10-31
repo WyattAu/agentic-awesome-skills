@@ -41,15 +41,15 @@ Key fields:
 
 **Write to a person, not a system:**
 - Triagers are tired. Get to the impact in sentence 1.
-- Use "I" not "the researcher"; you found it, own it
+- Use "I" not "the researcher" — you found it, own it
 - Short paragraphs, bullet points for steps
 - Hyperlink relevant docs if needed
 
 **Escalation language (when payout is being downgraded):**
 ```
-"This vulnerability does not require any special privileges; only a free account."
+"This vulnerability does not require any special privileges — only a free account."
 "The exposed data includes [PII type], which is subject to GDPR requirements."
-"An attacker can automate this with a simple loop; all [N] records in minutes."
+"An attacker can automate this with a simple loop — all [N] records in minutes."
 "This is exploitable externally without network access to any internal system."
 "The impact is equivalent to a full data breach of [feature/data type]."
 ```
@@ -70,7 +70,7 @@ Key fields:
 **Setup:**
 - Account A (attacker): email=attacker@test.com, ID=111
 - Account B (victim): email=victim@test.com, ID=222
-- Both created via normal registration; no special access
+- Both created via normal registration — no special access
 
 **Steps:**
 
@@ -98,10 +98,10 @@ Authorization: Bearer ACCOUNT_A_TOKEN
 
 ## Related Skills & Chains
 
-- **`triage-validation`**; When deciding whether to write a report at all. Workflow primitive: NEVER open this skill before `triage-validation`'s 7-Question Gate passes; a finding that fails the gate should be killed, not written up.
-- **`bugcrowd-reporting`**; When the target is a Bugcrowd program. Workflow primitive: this skill's body template is the foundation; `bugcrowd-reporting` overlays VRT selection, severity-request paragraph, OOS-clause rebuttals on top.
-- **`evidence-hygiene`**; When PoC screenshots / HARs are being attached to the report. Workflow primitive: every artifact referenced in the "Supporting Materials" / "Proof of Concept" section gets routed through `evidence-hygiene` for cookie + PII redaction before attachment.
-- **`redteam-report-template`**; When the engagement is an external red team (NOT bug bounty). Workflow primitive: confirm engagement mode via `bb-methodology` PART 0; if red-team, swap this skill out for `redteam-report-template` (different audience, different structure: Subject / Observations / Description / Impact / Recommendation / PoC).
+- **`triage-validation`** — When deciding whether to write a report at all. Workflow primitive: NEVER open this skill before `triage-validation`'s 7-Question Gate passes; a finding that fails the gate should be killed, not written up.
+- **`bugcrowd-reporting`** — When the target is a Bugcrowd program. Workflow primitive: this skill's body template is the foundation; `bugcrowd-reporting` overlays VRT selection, severity-request paragraph, OOS-clause rebuttals on top.
+- **`evidence-hygiene`** — When PoC screenshots / HARs are being attached to the report. Workflow primitive: every artifact referenced in the "Supporting Materials" / "Proof of Concept" section gets routed through `evidence-hygiene` for cookie + PII redaction before attachment.
+- **`redteam-report-template`** — When the engagement is an external red team (NOT bug bounty). Workflow primitive: confirm engagement mode via `bb-methodology` PART 0; if red-team, swap this skill out for `redteam-report-template` (different audience, different structure: Subject / Observations / Description / Impact / Recommendation / PoC).
 
 ---
 
@@ -115,7 +115,7 @@ Authorization: Bearer ACCOUNT_A_TOKEN
 
 ### Title formula in practice
 
-`<asset> | <bug class> | <impact>`; three components, no fluff. Triagers read titles in roughly three seconds and use them to order the queue.
+`<asset> | <bug class> | <impact>` — three components, no fluff. Triagers read titles in roughly three seconds and use them to order the queue.
 
 - BAD: "Interesting finding on /api/users"
 - BAD: "IDOR vulnerability in API"
@@ -144,7 +144,7 @@ These systems measure different things; no measured disagreement rate is establi
 2. **Anchor the request in CVSS vector string + business impact, not feelings.** "CVSS 3.1 AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N = 7.5 High because Confidentiality:High applies to cross-tenant data exposure."
 3. **Cite the platform's own VRT entry** that matches your finding. Don't argue against the platform; route within it.
 
-An authorized bug-bounty engagement saw P4-default findings escalated to P3 via the severity-request paragraph. The escalation isn't automatic; you have to ask, with grounded reasoning, in the first body section.
+An authorized bug-bounty engagement saw P4-default findings escalated to P3 via the severity-request paragraph. The escalation isn't automatic — you have to ask, with grounded reasoning, in the first body section.
 
 ### Evidence rotation
 
@@ -152,12 +152,12 @@ Submission retention depends on the platform/program; assume sensitive material 
 
 - Use throwaway test accounts created specifically for the engagement.
 - Rotate cookies / tokens after each submission (don't reuse the cookie that's pasted in the report).
-- Never paste production cookies, real user emails, or real PII into the report body; redact in the PoC step.
+- Never paste production cookies, real user emails, or real PII into the report body — redact in the PoC step.
 - Screenshots of admin panels: blur the user list, blur the URL bar if it contains tokens.
 
 Cross-link `evidence-hygiene` for the full capture-and-redact protocol.
 
-### Templates by platform: when they differ
+### Templates by platform — when they differ
 
 | Platform | Tone | Required Structure | Severity Mechanism |
 |---|---|---|---|
@@ -178,5 +178,5 @@ Two valid paths:
 2. **Downgrade the severity claim to match what you actually demonstrated.** "IDOR on /api/users/{uid} reading email + role" is real and reportable; "IDOR chained to potential admin takeover" is not until you demonstrate the takeover.
 
 Separate demonstrated results from explicit hypotheses and limit severity to supported impact; do not perform prohibited escalation to obtain end-to-end proof.
-- **`bb-methodology`**; When Phase 5's report-writing step starts. Workflow primitive: Phase 5 calls `/report` which loads this skill for the platform-specific template (H1 / Bugcrowd / Intigriti / Immunefi).
+- **`bb-methodology`** — When Phase 5's report-writing step starts. Workflow primitive: Phase 5 calls `/report` which loads this skill for the platform-specific template (H1 / Bugcrowd / Intigriti / Immunefi).
 

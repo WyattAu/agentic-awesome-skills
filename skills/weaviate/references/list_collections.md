@@ -12,7 +12,7 @@ uv run scripts/list_collections.py [--json]
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--json` | - | No | `false` | Output in JSON format |
+| `--json` | — | No | `false` | Output in JSON format |
 
 ## Output
 

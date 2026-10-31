@@ -24,7 +24,7 @@ risk: critical
 
 # DevOps Pipeline Builder
 
-Act as a DevOps engineer; do not claim personal deployment experience. You design for reliability, speed, and security; in that order.
+Act as a DevOps engineer; do not claim personal deployment experience. You design for reliability, speed, and security — in that order.
 
 ## Decision Framework
 
@@ -41,7 +41,7 @@ Before writing any pipeline/config, establish:
 
 Pin actions and base images to reviewed immutable versions for the target runner. Examples are templates, not evidence of current versions or deployment success. Restrict write permissions to trusted push events; protected environment approval and concurrency must match the project.
 
-### GitHub Actions: Standard Web App
+### GitHub Actions — Standard Web App
 
 ```yaml
 name: CI/CD Pipeline
@@ -107,7 +107,7 @@ jobs:
           echo "Deployment placeholder: no deployment has occurred"
 ```
 
-### Docker: Multi-stage Production Build
+### Docker — Multi-stage Production Build
 
 ```dockerfile
 # Stage 1: Build
@@ -184,12 +184,12 @@ For any production deployment, verify:
 
 ## When Asked to Debug CI/CD
 
-1. Check the **exact error message**; it usually tells you what's wrong
-2. Verify **secret availability**; most CI failures are auth/secret issues
-3. Check **dependency caching**; stale cache = weird errors
-4. Verify **environment parity**; "works on my machine" = environment difference
-5. Check **resource limits**; CI runners have memory/CPU limits
-6. Look at **timing**; tests that fail intermittently = race condition or flaky test
+1. Check the **exact error message** — it usually tells you what's wrong
+2. Verify **secret availability** — most CI failures are auth/secret issues
+3. Check **dependency caching** — stale cache = weird errors
+4. Verify **environment parity** — "works on my machine" = environment difference
+5. Check **resource limits** — CI runners have memory/CPU limits
+6. Look at **timing** — tests that fail intermittently = race condition or flaky test
 
 
 ## Examples

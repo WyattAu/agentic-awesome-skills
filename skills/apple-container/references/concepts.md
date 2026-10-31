@@ -1,4 +1,4 @@
-# `container`: Concepts & Architecture
+# `container` — Concepts & Architecture
 
 > Reference scope: this imported guide mixes release-era and later branch documentation; its `1.0.0+` annotations are not verified introduction versions. Match the installed `container --version` and subcommand `--help` to the same upstream release tag before using flags or defaults. Current branch documentation can describe unreleased behavior. No container runtime was executed for this static review.
 
@@ -17,11 +17,11 @@ version, open the matching tag on the
 > **Not Docker.** The CLI is deliberately Docker-like (`container run`, `container build`, image
 > ops under `container image`), but `container` is a distinct tool with a different runtime model.
 > Do not assume Docker command paths, flags, defaults, or daemon behavior carry over (there is no
-> `container images`/`push`/`pull` top-level command); verify in `references/commands.md`.
+> `container images`/`push`/`pull` top-level command) — verify in `references/commands.md`.
 
 ---
 
-## 1. What `container` is: one lightweight VM per container
+## 1. What `container` is — one lightweight VM per container
 
 `container` builds and runs standard **OCI/Linux containers** on **Apple-silicon** Macs. It's
 written in Swift and built on Apple's open-source
@@ -33,8 +33,8 @@ lightweight Linux VM.** This is the opposite of the usual macOS approach (Docker
 Podman, Lima), where a *single* long-lived Linux VM hosts a daemon and *all* containers share
 that one kernel via namespaces.
 
-Each per-container VM boots a **minimal Linux**; a small set of core utilities and dynamic
-libraries plus a `vminitd` init; rather than a full userland. Consequences of the model:
+Each per-container VM boots a **minimal Linux** — a small set of core utilities and dynamic
+libraries plus a `vminitd` init — rather than a full userland. Consequences of the model:
 
 | Property | What the per-container VM gives you |
 |----------|-------------------------------------|
@@ -48,7 +48,7 @@ There is no Linux `dockerd` daemon inside a common VM. Shared per-user backgroun
 
 ---
 
-## 2. Architecture: CLI, API server, and helper services
+## 2. Architecture — CLI, API server, and helper services
 
 You drive everything through the **`container` CLI**. The CLI uses a **client library**
 (`ContainerClient`) that talks over **XPC** to `container-apiserver` and its helpers.
@@ -70,7 +70,7 @@ container CLI
 | `container-core-images` | XPC helper exposing the **image-management API**; owns the **local content store**. | Started by the apiserver. |
 | `container-network-vmnet` | XPC helper managing the **virtual network** via the vmnet framework; allocates container IPs. | Started by the apiserver. |
 | `builder` (`buildkit`) | Utility VM that runs `container build`; communicates over gRPC. | On demand; runs as a container named `buildkit`. |
-| `container-runtime-linux` | Container **runtime helper**; **one instance per container**; exposing the management API for that specific container's VM. | One per running container. |
+| `container-runtime-linux` | Container **runtime helper** — **one instance per container** — exposing the management API for that specific container's VM. | One per running container. |
 
 `container system` is the control plane for this topology: `start`/`stop` bring the
 apiserver and helpers up/down, `status` health-checks them, and `logs`/`df`/`kernel`/`dns`/
@@ -97,7 +97,7 @@ macOS frameworks `container` builds on: **Virtualization** (VMs + attached devic
 | Requirement | Detail |
 |-------------|--------|
 | **Chip** | **Apple silicon only** (M1 or later). Intel Macs are not supported. |
-| **macOS** | **macOS 26 is the supported target**; `container` relies on new virtualization/networking features there. It **runs on macOS 15** but with the limitations in §7. Maintainers typically will not address issues that can't be reproduced on macOS 26. |
+| **macOS** | **macOS 26 is the supported target** — `container` relies on new virtualization/networking features there. It **runs on macOS 15** but with the limitations in §7. Maintainers typically will not address issues that can't be reproduced on macOS 26. |
 | **Install** | Download the signed `.pkg` from the GitHub release page and run it (installs under `/usr/local`, admin password required). Then `container system start`. |
 
 Some features are **gated on macOS 26** because they depend on vmnet capabilities absent in
@@ -105,12 +105,12 @@ macOS 15 (see §4/§7). This gating is enforced at runtime: using a macOS-26-onl
 `container network create`, or `--network <name>`) on macOS 15 **errors** rather than
 degrading silently.
 
-### macOS 26 vs macOS 15: feature differences
+### macOS 26 vs macOS 15 — feature differences
 
 | Capability | macOS 26 | macOS 15 |
 |------------|----------|----------|
-| Container-to-container traffic over the virtual network | Works | **Not possible**; vmnet only creates networks where attached containers are isolated from one another. |
-| Multiple / custom networks (`container network` group, `--network <name>`) | Available | **Unavailable**; all containers attach to the single `default` vmnet network; `container network …` and `--network` **error**. |
+| Container-to-container traffic over the virtual network | Works | **Not possible** — vmnet only creates networks where attached containers are isolated from one another. |
+| Multiple / custom networks (`container network` group, `--network <name>`) | Available | **Unavailable** — all containers attach to the single `default` vmnet network; `container network …` and `--network` **error**. |
 | Container network creation timing | Robust | Network is created only when the **first container starts**; the network helper (which hands out IPs) and vmnet can **disagree on the subnet**, potentially cutting containers off. See "All networking fails on macOS 15" in the upstream `troubleshooting.md`. |
 
 > Build-from-source requirement differs slightly: building needs **macOS 15 minimum, macOS 26
@@ -126,7 +126,7 @@ degrading silently.
   **192.168.64.0/24** (gateway **192.168.64.1**). Containers attach to `default` unless
   `--network` names another.
 - **Each container is a first-class network endpoint with its own dedicated IP** on that
-  network (a direct consequence of the per-container-VM model; there is no shared Docker
+  network (a direct consequence of the per-container-VM model — there is no shared Docker
   bridge). The network helper allocates the IP; read it with `container ls` or
   `container inspect <name>` (`.networks[].address`).
 - **Reach a container by IP directly.** For name-based access, register a **local DNS domain**
@@ -135,7 +135,7 @@ degrading silently.
   ```bash
   sudo container system dns create test    # register domain "test" on the host resolver
   # make it the default suffix by editing ~/.config/container/config.toml:  [dns] domain = "test"
-  # (there is NO `property set` CLI: only `container system property list` to view values)
+  # (there is NO `property set` CLI — only `container system property list` to view values)
   # restart services within task scope to apply configuration; a container named my-web-server is then reachable as my-web-server.test
   ```
 
@@ -150,7 +150,7 @@ degrading silently.
   [/protocol]`. If a container is on multiple networks, published ports forward to the
   interface on the **first** network.
 - **Custom / isolated networks require macOS 26.** Create with `container network create
-  <name> [--subnet … --subnet-v6 …]`. Networks are **mutually isolated**; a container on one
+  <name> [--subnet … --subnet-v6 …]`. Networks are **mutually isolated** — a container on one
   network has no connectivity to containers on another. Default subnets for new networks come
   from the `[network]` config (`network.subnet` / `subnetv6`) or are auto-allocated
   non-overlapping; the system rejects overlapping custom subnets. Networks support IPv4 and
@@ -170,10 +170,10 @@ degrading silently.
   fully-qualified references (`docker.io/library/alpine`, not bare `alpine`) when the source
   registry matters. Registry credentials are stored in the macOS **Keychain**.
 - **Selective host data sharing.** Only the data a given container needs is mounted into that
-  container's VM; a privacy/isolation win over the shared-VM model where everything must be
+  container's VM — a privacy/isolation win over the shared-VM model where everything must be
   mounted into the one VM up front.
 - The application **data root** (default `~/Library/Application Support/com.apple.container/`)
-  holds `content/`, `containers/`, `images`, `kernels/`, `networks/`, `volumes/`, etc.; see
+  holds `content/`, `containers/`, `images`, `kernels/`, `networks/`, `volumes/`, etc. — see
   the data-locations table in `references/configuration.md`.
 
 ---
@@ -213,7 +213,7 @@ BUILD_CONFIGURATION=release make install
 
 To develop against a local checkout of the Containerization package or `container-builder-shim`,
 point the runtime config (`~/.config/container/config.toml`) at your local `vminit`/builder
-image and restart the services; see `BUILDING.md` for the exact swift-package steps. Attach a
+image and restart the services — see `BUILDING.md` for the exact swift-package steps. Attach a
 debugger to an XPC helper by exporting `CONTAINER_DEBUG_LAUNCHD_LABEL=<launchd-label>` before
 `container system start`.
 
@@ -254,7 +254,7 @@ Docker-flag/ecosystem compatibility.
 
 ---
 
-## 8. Container machines: a related but distinct concept
+## 8. Container machines — a related but distinct concept
 
 > **⚠️ Requires 1.0.0+.** The `container machine` group was added in 1.0.0 (not in 0.7.1). Check
 > `container machine --help` on your install.

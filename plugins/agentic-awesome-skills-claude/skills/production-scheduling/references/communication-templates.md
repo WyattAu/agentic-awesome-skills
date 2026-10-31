@@ -1,6 +1,6 @@
-# Communication Templates: Production Scheduling
+# Communication Templates — Production Scheduling
 
-> **Reference Type:** Tier 3; Load on demand when composing or reviewing production scheduling communications.
+> **Reference Type:** Tier 3 — Load on demand when composing or reviewing production scheduling communications.
 >
 > **Usage:** Each template includes variable placeholders in `{{double_braces}}` for direct substitution. Templates are organized by audience and purpose. Select the template matching your scenario, substitute variables and prepare a draft for the authorised sender.
 
@@ -37,7 +37,7 @@ Common variables used across templates:
 |---|---|---|
 | `{{date}}` | Date of communication | `2025-09-15` |
 | `{{shift}}` | Shift identifier | `Day Shift (06:00–14:00)` |
-| `{{line_id}}` | Production line identifier | `Line 3; CNC Machining Cell` |
+| `{{line_id}}` | Production line identifier | `Line 3 — CNC Machining Cell` |
 | `{{work_order}}` | Work order number | `WO-2025-04823` |
 | `{{product}}` | Product name/number | `Valve Body Assembly VB-220` |
 | `{{customer}}` | Customer name | `Apex Automotive GmbH` |
@@ -49,8 +49,8 @@ Common variables used across templates:
 | `{{scheduler_title}}` | Scheduler title | `Senior Production Scheduler` |
 | `{{scheduler_email}}` | Scheduler email | `d.morrison@mfgco.com` |
 | `{{scheduler_phone}}` | Scheduler phone | `(513) 555-0147` |
-| `{{plant}}` | Plant name/location | `Cincinnati Plant; Building 2` |
-| `{{constraint_wc}}` | Constraint work centre | `CNC Horizontal Boring; WC 420` |
+| `{{plant}}` | Plant name/location | `Cincinnati Plant — Building 2` |
+| `{{constraint_wc}}` | Constraint work centre | `CNC Horizontal Boring — WC 420` |
 | `{{oee_value}}` | OEE percentage | `72%` |
 | `{{downtime_hrs}}` | Downtime hours | `4.5 hours` |
 | `{{changeover_time}}` | Changeover duration | `45 minutes` |
@@ -70,7 +70,7 @@ Common variables used across templates:
 
 ---
 
-**Subject:** Production Schedule; {{plant}}; {{shift}}; {{date}}
+**Subject:** Production Schedule — {{plant}} — {{shift}} — {{date}}
 
 **Schedule published by:** {{scheduler_name}} at {{date}} {{time}}
 
@@ -78,7 +78,7 @@ Common variables used across templates:
 
 | Seq | Work Order | Product | Qty | Start Time | End Time | Work Centre | Operator | Priority | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | {{work_order}} | {{product}} | {{qty}} | 06:00 | 08:30 | {{line_id}} | {{operator_name}} | 🔴 | Rush; customer line-down |
+| 1 | {{work_order}} | {{product}} | {{qty}} | 06:00 | 08:30 | {{line_id}} | {{operator_name}} | 🔴 | Rush — customer line-down |
 | 2 | WO-2025-04824 | Housing H-340 | 200 | 08:45 | 11:15 | {{line_id}} | {{operator_name}} | 🟢 | Std changeover at 08:30 |
 | 3 | WO-2025-04826 | Bracket BR-110 | 350 | 11:30 | 14:00 | {{line_id}} | {{operator_name}} | 🟡 | Material confirm by 10:00 |
 
@@ -89,13 +89,13 @@ Common variables used across templates:
 **Material Status:**
 - WO-04823: All material staged ✅
 - WO-04824: All material staged ✅
-- WO-04826: Bracket raw material pending; confirm with stores by 10:00 ⚠️
+- WO-04826: Bracket raw material pending — confirm with stores by 10:00 ⚠️
 
 **Labour Notes:**
 - {{operator_name}} certified on all three jobs
 - Relief operator for 10:00 break: M. Thompson
 
-**Constraint Status:** {{constraint_wc}}; current OEE {{oee_value}}. Buffer status: GREEN.
+**Constraint Status:** {{constraint_wc}} — current OEE {{oee_value}}. Buffer status: GREEN.
 
 **Do not deviate from this sequence without scheduler approval.**
 
@@ -113,7 +113,7 @@ Common variables used across templates:
 
 ---
 
-**Subject:** ⚠️ SCHEDULE CHANGE; {{line_id}}; Effective {{effective_time}}
+**Subject:** ⚠️ SCHEDULE CHANGE — {{line_id}} — Effective {{effective_time}}
 
 **Change issued by:** {{scheduler_name}} at {{date}} {{time}}
 **Approved by:** {{supervisor_name}} (Production Manager approval required for frozen-zone changes)
@@ -129,7 +129,7 @@ Common variables used across templates:
 | WO-04824 start time | 08:45 | 11:30 |
 | Changeover | Tooling → Fixture (15 min) | Fixture → Tooling (20 min) |
 
-**Why:** {{detailed_reason}}; e.g., "WO-04826 material (bracket raw stock) arrived early. WO-04826 due date is 1 day earlier than WO-04824. The illustrated transition increases from15 to20minutes, adding5minutes. Recalculate the entire sequence, setup state, durations and downstream effects before claiming a benefit."
+**Why:** {{detailed_reason}} — e.g., "WO-04826 material (bracket raw stock) arrived early. WO-04826 due date is 1 day earlier than WO-04824. The illustrated transition increases from15 to20minutes, adding5minutes. Recalculate the entire sequence, setup state, durations and downstream effects before claiming a benefit."
 
 **Impact on other work centres:** {{verified_downstream_impact_or_unresolved_assessment}}
 
@@ -141,7 +141,7 @@ Common variables used across templates:
 
 ---
 
-**Tone guidance:** Authoritative but explanatory. The "why" is important because frequent unexplained changes erode shop floor trust in the schedule. Always include who approved the change (accountability). End with a stability commitment; "no further changes"; to prevent the shop floor from anticipating constant flux.
+**Tone guidance:** Authoritative but explanatory. The "why" is important because frequent unexplained changes erode shop floor trust in the schedule. Always include who approved the change (accountability). End with a stability commitment — "no further changes" — to prevent the shop floor from anticipating constant flux.
 
 ---
 
@@ -149,11 +149,11 @@ Common variables used across templates:
 
 **Audience:** Production manager, maintenance manager, shift supervisors, planning
 **Trigger:** Any unplanned event affecting the constraint or customer deliveries
-**Delivery:** Immediate; phone/radio for constraint events, email for non-constraint
+**Delivery:** Immediate — phone/radio for constraint events, email for non-constraint
 
 ---
 
-**Subject:** 🔴 DISRUPTION ALERT; {{disruption_type}} at {{line_id}}; {{date}} {{time}}
+**Subject:** 🔴 DISRUPTION ALERT — {{disruption_type}} at {{line_id}} — {{date}} {{time}}
 
 **Reported by:** {{scheduler_name}}
 **Severity:** {{severity}} (Critical / Major / Minor)
@@ -165,13 +165,13 @@ Example: "Hydraulic pump failure on CNC Horizontal Boring Mill (WC 420) at 09:15
 **Impact:**
 - **Constraint affected:** Yes / No
 - **Estimated downtime:** {{downtime_hrs}}
-- **Throughput loss:** {{throughput_loss}} (e.g., "$4,800; 6 hours × $800/hr constraint throughput")
+- **Throughput loss:** {{throughput_loss}} (e.g., "$4,800 — 6 hours × $800/hr constraint throughput")
 - **Customer orders at risk:** {{at_risk_orders}} (e.g., "3 orders totalling $220,000, due dates within 2 weeks")
 - **Current buffer status:** {{buffer_status}} (e.g., "Buffer was GREEN, will reach RED in 4 hours if not resolved")
 
 **Immediate actions taken:**
 1. {{verified_isolation_status_and_authorised_maintenance_owner}}
-2. {{verified_parts_order_status}}; ETA {{pump_eta}}.
+2. {{verified_parts_order_status}} — ETA {{pump_eta}}.
 3. {{engineering_assessment_of_part_and_safe_restart_status}}
 4. {{verified_eligible_alternate_routing_count_and_approval}}
 
@@ -184,7 +184,7 @@ Example: "Hydraulic pump failure on CNC Horizontal Boring Mill (WC 420) at 09:15
 
 ---
 
-**Tone guidance:** Lead with impact, not description. The production manager needs to know "how bad is this?" before "what exactly happened." Quantify everything in hours and dollars. Present decisions as explicit Y/N choices; do not leave it ambiguous. Set a next-update cadence so management isn't chasing you for information.
+**Tone guidance:** Lead with impact, not description. The production manager needs to know "how bad is this?" before "what exactly happened." Quantify everything in hours and dollars. Present decisions as explicit Y/N choices — do not leave it ambiguous. Set a next-update cadence so management isn't chasing you for information.
 
 ---
 
@@ -196,7 +196,7 @@ Example: "Hydraulic pump failure on CNC Horizontal Boring Mill (WC 420) at 09:15
 
 ---
 
-**Subject:** Overtime Request; {{line_id}}; {{date_range}}
+**Subject:** Overtime Request — {{line_id}} — {{date_range}}
 
 **Requested by:** {{scheduler_name}}
 **Date of request:** {{date}}
@@ -213,7 +213,7 @@ Example: "Constraint work centre (CNC Boring, WC 420) lost 20 hours due to unpla
 | Date(s) | {{overtime_dates}} (e.g., Saturday 9/20, 06:00–14:00) |
 | Duration | {{overtime_hours}} hours |
 | Personnel required | {{personnel_count}} (e.g., 2 CNC operators + 1 setup tech) |
-| Personnel names | {{personnel_names}} (voluntary; confirmed availability) |
+| Personnel names | {{personnel_names}} (voluntary — confirmed availability) |
 | Estimated cost | ${{overtime_cost}} ({{hours}} hrs × ${{rate}}/hr × {{multiplier}} OT premium) |
 | Union compliance | {{verified_consent_assignment_notice_rest_and_fatigue_requirements_with_evidence}} |
 
@@ -232,7 +232,7 @@ Example: "Constraint work centre (CNC Boring, WC 420) lost 20 hours due to unpla
 
 ---
 
-**Tone guidance:** Treat overtime requests as business cases, not pleas. Quantify both the cost and the benefit. Include union compliance confirmation proactively; the production manager should not have to ask. Provide the approval deadline because overtime notification requirements are contractual, not flexible.
+**Tone guidance:** Treat overtime requests as business cases, not pleas. Quantify both the cost and the benefit. Include union compliance confirmation proactively — the production manager should not have to ask. Provide the approval deadline because overtime notification requirements are contractual, not flexible.
 
 ---
 
@@ -246,7 +246,7 @@ Example: "Constraint work centre (CNC Boring, WC 420) lost 20 hours due to unpla
 
 **Internal Version (to Sales/Account Manager):**
 
-**Subject:** Delivery Impact; {{customer}}; Order {{customer_po}}; Revised ETA {{revised_date}}
+**Subject:** Delivery Impact — {{customer}} — Order {{customer_po}} — Revised ETA {{revised_date}}
 
 **From:** {{scheduler_name}}, Production Scheduling
 **Date:** {{date}}
@@ -271,7 +271,7 @@ Example: "Customer A framework agreement includes $25,000/day late delivery pena
 
 **External Version (to Customer):**
 
-**Subject:** Delivery Update; Order {{customer_po}}
+**Subject:** Delivery Update — Order {{customer_po}}
 
 Dear {{customer_contact}},
 
@@ -295,9 +295,9 @@ Regards,
 
 ---
 
-**Tone guidance; internal:** Factual, quantified, includes penalty exposure. The account manager needs the full picture to make the right call on messaging.
+**Tone guidance — internal:** Factual, quantified, includes penalty exposure. The account manager needs the full picture to make the right call on messaging.
 
-**Tone guidance; external:** Proactive (before the customer discovers the delay), accountable (acknowledge the impact), action-oriented (show what you're doing), no blame (do not name internal equipment or personnel). Never use "we apologise for any inconvenience"; that phrase signals insincerity. Instead, acknowledge the specific impact on their operations.
+**Tone guidance — external:** Proactive (before the customer discovers the delay), accountable (acknowledge the impact), action-oriented (show what you're doing), no blame (do not name internal equipment or personnel). Never use "we apologise for any inconvenience" — that phrase signals insincerity. Instead, acknowledge the specific impact on their operations.
 
 ---
 
@@ -309,7 +309,7 @@ Regards,
 
 ---
 
-**Subject:** Maintenance Window Request; {{line_id}}; {{requested_date_range}}
+**Subject:** Maintenance Window Request — {{line_id}} — {{requested_date_range}}
 
 **From:** {{scheduler_name}}, Production Scheduling
 **Date:** {{date}}
@@ -331,7 +331,7 @@ Example: "Saturday window avoids impacting the Week 39 production plan, which is
 - Production orders at risk: {{at_risk_orders}}
 
 **Production impact of performing the PM:**
-- Lost production during the PM window: {{lost_production}} (e.g., "0; Saturday is non-scheduled overtime; if OT was planned, 8 hours of production displaced")
+- Lost production during the PM window: {{lost_production}} (e.g., "0 — Saturday is non-scheduled overtime; if OT was planned, 8 hours of production displaced")
 - Recovery plan: {{recovery_plan}} (e.g., "displaced OT production moved to Friday evening shift extension")
 
 **Coordination requirements:**
@@ -353,13 +353,13 @@ Example: "Saturday window avoids impacting the Week 39 production plan, which is
 
 ---
 
-**Subject:** 🔴 QUALITY HOLD; {{product}}; Batch {{batch_id}}; {{qty_affected}} units
+**Subject:** 🔴 QUALITY HOLD — {{product}} — Batch {{batch_id}} — {{qty_affected}} units
 
 **Issued by:** {{scheduler_name}} in coordination with {{quality_lead}}
 **Date/Time:** {{date}} {{time}}
 
 **Defect summary:** {{defect_description}}
-Example: "Dimensional defect on stamped chassis frames; hole pattern shifted 2mm from specification due to suspected die wear. Discovered at weld inspection station."
+Example: "Dimensional defect on stamped chassis frames — hole pattern shifted 2mm from specification due to suspected die wear. Discovered at weld inspection station."
 
 **Scope of hold:**
 
@@ -384,12 +384,12 @@ Example: "Dimensional defect on stamped chassis frames; hole pattern shifted 2mm
 **Disposition pending from Quality:**
 - Rework feasibility assessment requested by {{rework_assessment_deadline}}
 - If reworkable: estimated rework time = {{rework_time}} per unit
-- If not reworkable: replacement production order required; estimated lead time {{replacement_lead_time}}
+- If not reworkable: replacement production order required — estimated lead time {{replacement_lead_time}}
 
 **Immediate actions taken:**
 1. All affected WIP physically segregated and tagged
 2. Die #{{die_number}} removed from service for inspection
-3. Production schedule revised; constraint fed from alternate work orders
+3. Production schedule revised — constraint fed from alternate work orders
 4. Customer notification drafted (pending quality disposition)
 
 ---
@@ -402,7 +402,7 @@ Example: "Dimensional defect on stamped chassis frames; hole pattern shifted 2mm
 
 ---
 
-**Subject:** Capacity Overload Alert; {{constraint_wc}}; Week {{week_number}}
+**Subject:** Capacity Overload Alert — {{constraint_wc}} — Week {{week_number}}
 
 **From:** {{scheduler_name}}, Production Scheduling
 **Date:** {{date}}
@@ -424,10 +424,10 @@ MRP-generated load for {{constraint_wc}} in Week {{week_number}} exceeds availab
 |---|---|---|---|---|
 | Saturday overtime (1 shift) | {{verified_machine_hours_with_full_crew}} hrs | ${{ot_cost}} | {{verified_staffing_fatigue_and_support_risk}} | ✅ Recommended |
 | Defer {{defer_count}} lower-priority orders to Week {{next_week_number}} | {{defer_hours}} hrs | {{verified_deferral_cost}} | Delivery impact requires agreement | Acceptable if customers agree |
-| Subcontract {{subcontract_ops}} | {{subcontract_hours}} hrs | ${{subcontract_cost}} | Medium; quality and lead time | Last resort |
+| Subcontract {{subcontract_ops}} | {{subcontract_hours}} hrs | ${{subcontract_cost}} | Medium — quality and lead time | Last resort |
 | Reduce constraint changeovers (campaign scheduling) | {{co_hours}} hrs | {{verified_changeover_plan_cost}} | Check inventory, cleaning, capacity and due-date impacts | ✅ Recommended in combination |
 
-**Recommended plan:** Combine overtime ({{ot_hours}} hrs) + changeover reduction ({{co_hours}} hrs) to close the gap. Total gap closed: {{total_recovered}} hrs. Remaining gap: {{remaining_gap}} hrs; address by deferring {{defer_count}} Tier-3 orders with customer agreement.
+**Recommended plan:** Combine overtime ({{ot_hours}} hrs) + changeover reduction ({{co_hours}} hrs) to close the gap. Total gap closed: {{total_recovered}} hrs. Remaining gap: {{remaining_gap}} hrs — address by deferring {{defer_count}} Tier-3 orders with customer agreement.
 
 **Decision needed by:** {{decision_deadline}} (to allow operator notification and material staging)
 
@@ -441,11 +441,11 @@ MRP-generated load for {{constraint_wc}} in Week {{week_number}} exceeds availab
 
 ---
 
-**Subject:** NPI Trial Run Request; {{npi_product}}; {{requested_dates}}
+**Subject:** NPI Trial Run Request — {{npi_product}} — {{requested_dates}}
 
 **From:** {{scheduler_name}} in coordination with {{engineering_lead}}
 
-**Product:** {{npi_product}} (e.g., "EV Battery Enclosure; Part #BE-4400")
+**Product:** {{npi_product}} (e.g., "EV Battery Enclosure — Part #BE-4400")
 **Customer:** {{customer}}
 **Qualification deadline:** {{qualification_deadline}}
 
@@ -464,7 +464,7 @@ MRP-generated load for {{constraint_wc}} in Week {{week_number}} exceeds availab
 
 **Proposed scheduling approach:**
 - Schedule trials on Friday PM / Saturday AM to contain overrun risk
-- {{buffer_hours}} hrs/week reserved as "trial buffer"; converts to regular production if trial is cancelled or completes early
+- {{buffer_hours}} hrs/week reserved as "trial buffer" — converts to regular production if trial is cancelled or completes early
 - Existing customer commitments are not moved to accommodate trials
 
 **Risk mitigation:**
@@ -484,7 +484,7 @@ MRP-generated load for {{constraint_wc}} in Week {{week_number}} exceeds availab
 
 ---
 
-**Subject:** Priority Alignment Request; Week {{week_number}} / Month {{month}}
+**Subject:** Priority Alignment Request — Week {{week_number}} / Month {{month}}
 
 **From:** {{scheduler_name}}, Production Scheduling
 
@@ -495,9 +495,9 @@ The current production plan contains conflicting priorities that cannot be resol
 
 | # | Conflict | Departments Involved | Scheduler's Assessment |
 |---|---|---|---|
-| 1 | Customer A rush order vs. Customer B committed delivery; both need CNC constraint, 16-hour gap | Sales + Production | Need commercial decision: which customer takes priority? |
-| 2 | NPI trial run vs. production schedule; trial requires 14 hrs of constraint time in a week loaded at 94% | Engineering + Production | Recommend scheduling trial on Saturday to avoid displacement |
-| 3 | Maintenance PM window vs. peak production week; PM deferred twice already | Maintenance + Production | Recommend executing PM this week; deferral risk exceeds production value of the PM window |
+| 1 | Customer A rush order vs. Customer B committed delivery — both need CNC constraint, 16-hour gap | Sales + Production | Need commercial decision: which customer takes priority? |
+| 2 | NPI trial run vs. production schedule — trial requires 14 hrs of constraint time in a week loaded at 94% | Engineering + Production | Recommend scheduling trial on Saturday to avoid displacement |
+| 3 | Maintenance PM window vs. peak production week — PM deferred twice already | Maintenance + Production | Recommend executing PM this week; deferral risk exceeds production value of the PM window |
 
 **For each conflict, scheduling needs:**
 1. A single, clear priority decision
@@ -508,4 +508,4 @@ The current production plan contains conflicting priorities that cannot be resol
 
 ---
 
-**Tone guidance:** Neutral facilitator, not advocate. The scheduler's role in priority alignment is to surface conflicts, quantify tradeoffs, and execute decisions; not to make commercial or strategic calls. Make it clear that you need a decision, not a discussion. Provide the data that enables the decision.
+**Tone guidance:** Neutral facilitator, not advocate. The scheduler's role in priority alignment is to surface conflicts, quantify tradeoffs, and execute decisions — not to make commercial or strategic calls. Make it clear that you need a decision, not a discussion. Provide the data that enables the decision.

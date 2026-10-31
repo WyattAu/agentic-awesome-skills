@@ -199,12 +199,12 @@ def smart_llm_call(query: str, model: str = "gpt-4o-mini") -> dict:
 ## Layer 3: Provider-Side Prompt Caching
 
 ```python
-# Anthropic: cache long system prompts (saves 90% on cached input tokens)
+# Anthropic — cache long system prompts (saves 90% on cached input tokens)
 import anthropic
 
 anthropic_client = anthropic.Anthropic()
 
-# Long system prompt: mark for caching
+# Long system prompt — mark for caching
 SYSTEM_PROMPT = open("knowledge-base.txt").read()  # e.g., 50k tokens
 
 def call_with_prompt_cache(user_question: str) -> str:
@@ -228,7 +228,7 @@ def call_with_prompt_cache(user_question: str) -> str:
           f"(saved ~${cache_savings * 3.0 / 1_000_000:.4f})")
     return response.content[0].text
 
-# OpenAI: automatic for repeated prefixes (≥1,024 tokens)
+# OpenAI — automatic for repeated prefixes (≥1,024 tokens)
 # No code change needed; cached tokens appear in usage.prompt_tokens_details
 response = client.chat.completions.create(
     model="gpt-4o-mini",
@@ -310,10 +310,10 @@ tcp-keepalive 60
 
 ## Best Practices
 
-- Start with exact cache; zero cost, instant wins for identical queries.
+- Start with exact cache — zero cost, instant wins for identical queries.
 - Semantic threshold of 0.88–0.92 balances hit rate vs. accuracy; tune with your data.
 - Set per-model TTLs: longer for stable knowledge (1 week), shorter for news/events (1 hour).
-- Always filter by model name in semantic cache; different models give different answers.
+- Always filter by model name in semantic cache — different models give different answers.
 - Log cache hit rate as a KPI; target 30%+ for FAQ-style applications.
 
 ## Related Skills

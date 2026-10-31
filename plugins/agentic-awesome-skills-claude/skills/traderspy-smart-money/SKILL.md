@@ -18,7 +18,7 @@ license_source: "https://github.com/target1m/traderspy-mcp/blob/069aae5a84640d67
 
 TraderSpy follows thousands of top-ranked accounts on four exchanges and records their positions as
 they open, change and close. This skill turns that feed into answers about positioning and about
-individual traders. Positions are observations of what other people did with their own money -
+individual traders. Positions are observations of what other people did with their own money —
 present them as evidence, never as instructions.
 
 ## When to Use
@@ -48,8 +48,8 @@ returns nothing. Take `source` from the row you got the id from.
 
 **Symbols differ per exchange.** Hyperliquid rows use bare coins (`BTC`, `ZEC`) and prefix
 tokenized stocks with `xyz:` (`xyz:AVGO`); Binance, Bybit and OKX rows use `BTCUSDT`. When the
-user asks about "BTC positions", pass `symbol: "BTC"`; the filter matches both `BTC` and
-`BTCUSDT` exactly; and read the `symbol` field before summing anything. Tokenized stocks
+user asks about "BTC positions", pass `symbol: "BTC"` — the filter matches both `BTC` and
+`BTCUSDT` exactly — and read the `symbol` field before summing anything. Tokenized stocks
 (`xyz:AVGO`) are not reachable through the filter; fetch without `symbol` and pick them out.
 
 **Position rows**: `side` LONG / SHORT, `size` in coins, `entryPrice`, `markPrice`, `leverage`,
@@ -58,14 +58,14 @@ user asks about "BTC positions", pass `symbol: "BTC"`; the filter matches both `
 notional, not row count, for the observed sample. Verify contract size/units for each instrument before aggregation; a leaderboard sample does not establish whole-market net exposure.
 
 **Freshness.** Binance and Bybit snapshots refresh every 5–15 minutes, Hyperliquid every 15 minutes
-plus live fills, OKX every 10–60 minutes. On a free-tier key the feed is delayed 15 minutes; if
+plus live fills, OKX every 10–60 minutes. On a free-tier key the feed is delayed 15 minutes — if
 `get_positions` returns nothing newer than that, say the feed is delayed rather than "no activity".
 
 **Leaderboard rows** (`get_top_traders`) carry the exchange's own ranking snapshot: `roi`, `pnl`,
-`assets` (account size), `winRate` (null on Hyperliquid; the exchange does not publish it),
+`assets` (account size), `winRate` (null on Hyperliquid — the exchange does not publish it),
 `rankings[]` with the same trader across every window, and `smartScore` when TraderSpy has scored
 them. `traderName` is a shortened address when the account has no public name. A trader who is
-#1 on 30-day ROI with `assets` of $5k is a different animal from #19 with $3.4M: quote both.
+#1 on 30-day ROI with `assets` of $5k is a different animal from #19 with $3.4M — quote both.
 
 **Smart score** (`get_elite_leaderboard`, 0–100, recomputed daily): realized PnL 30% (all-time
 blended with the last 30 days), effective win rate 22%, ROI edge 18%, consistency 14%, longevity
@@ -73,7 +73,7 @@ blended with the last 30 days), effective win rate 22%, ROI edge 18%, consistenc
 about three weeks idle). `scoreBreakdown` shows each part, `rationale[]` is a ready-made
 plain-language justification, `metrics` has the raw counts (`closedTrades`, `profitFactor`,
 `realizedPnl30d`, `openPositionCount`, `worstDayPnl`). `reliabilityMultiplier` below 1 means a
-short history dragged the score down; say so when a 6-day-old account ranks top-5.
+short history dragged the score down — say so when a 6-day-old account ranks top-5.
 
 **Market stats** aggregate every tracked position, thousands of them, so `realizedPnl` can be a
 large negative number even when the leaders are winning; the tracked universe includes traders
@@ -96,7 +96,7 @@ penalise exactly that.
 `get_trader_position_history`. From the history compute what the user actually needs: win rate
 from closed rows, typical hold time (`closeTime − openTime`), typical leverage, how concentrated
 in one coin, worst single trade, and whether the recent month looks like the all-time record.
-Present it as a profile. Copying is the user's decision; this connector cannot follow anyone.
+Present it as a profile. Copying is the user's decision — this connector cannot follow anyone.
 
 **"Are the pros long or short?" (whole market)** → `get_positions` `status: open` on the majors
 plus `get_market_stats`; for exchange-wide long/short ratios of ALL accounts use
@@ -104,7 +104,7 @@ plus `get_market_stats`; for exchange-wide long/short ratios of ALL accounts use
 
 ## Presenting
 
-Positions: one row per position -
+Positions: one row per position —
 
 | Trader | Exchange | Side | Size (notional) | Entry | Mark | Lev | uPnL | Opened |
 
@@ -117,7 +117,7 @@ addresses shortened as returned, and always say which window a ROI belongs to.
 - Positions are what other traders did, with their capital, their hedges and their exits, which
   you cannot see in full. Present them as evidence about positioning, never as a recommendation to
   mirror them; a leader's long can be one leg of a hedge.
-- Past ROI and win rates describe a past sample; do not present a leaderboard as a forecast of
+- Past ROI and win rates describe a past sample — do not present a leaderboard as a forecast of
   who will win next. Point out short histories and small samples.
 - Nothing in this connector trades or copies. There is no order, follow, transfer or withdrawal
   tool, by design. If asked to copy or execute a trade, say so plainly; the decision and the trade stay

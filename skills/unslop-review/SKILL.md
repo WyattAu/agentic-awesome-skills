@@ -29,10 +29,10 @@ Rewrite or generate PR review comments that sound like a teammate, not a politen
 Default shape: `L<line>: <severity prefix> <observation>. <fix>.`
 
 Severity prefixes (optional but use them when severity matters):
-- `bug:`; code is broken or will break
-- `risk:`; works today, fragile tomorrow (perf, race, missing test)
-- `nit:`; style, naming, dead code, "while you're here"
-- `q:`; genuine question, not a hidden complaint
+- `bug:` — code is broken or will break
+- `risk:` — works today, fragile tomorrow (perf, race, missing test)
+- `nit:` — style, naming, dead code, "while you're here"
+- `q:` — genuine question, not a hidden complaint
 
 Multi-file: `<file>:L<line>: <severity> <observation>. <fix>.`
 
@@ -58,7 +58,7 @@ Range: `L88-140: ...` when the issue spans lines.
 
 ### Tone
 
-Human, not corporate. "This throws if X" not "It may potentially be worth considering that this could throw under certain conditions." Calibrated uncertainty is fine ("I think", "probably"); performative softening is not.
+Human, not corporate. "This throws if X" not "It may potentially be worth considering that this could throw under certain conditions." Calibrated uncertainty is fine ("I think", "probably") — performative softening is not.
 
 ### Auto-clarity (use full prose, not one-liners)
 
@@ -83,7 +83,7 @@ In those cases use a short paragraph, then resume terse for the rest.
 - Good: `L23: risk: no retry on 429. Wrap the call in \`withBackoff(3)\` so we don't drop legitimate requests.`
 
 - Bad: `This implementation leverages a robust caching strategy.`
-- Good: (delete; empty praise. If the caching is genuinely interesting, explain why specifically.)
+- Good: (delete — empty praise. If the caching is genuinely interesting, explain why specifically.)
 
 ### Approval
 

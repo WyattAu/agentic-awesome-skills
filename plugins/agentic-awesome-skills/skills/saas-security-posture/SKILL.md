@@ -22,22 +22,22 @@ Secure every SaaS tool your company relies on with practical, command-driven har
 
 ## When to Use This Skill
 
-- **SOC 2 preparation**; auditors need evidence of MFA, access controls, and OAuth governance.
-- **Suspicious OAuth app**; an employee authorized a third-party app with broad scopes.
-- **SaaS sprawl**; teams sign up for tools with company email and nobody tracks them.
-- **Post-incident hardening**; after phishing or credential leaks, tighten every surface.
+- **SOC 2 preparation** — auditors need evidence of MFA, access controls, and OAuth governance.
+- **Suspicious OAuth app** — an employee authorized a third-party app with broad scopes.
+- **SaaS sprawl** — teams sign up for tools with company email and nobody tracks them.
+- **Post-incident hardening** — after phishing or credential leaks, tighten every surface.
 
 Start with authorized read-only inventory. Broad MFA/OAuth/SSO/retention/SCP changes can lock out users, destroy retained evidence or stop services. Record exact targets and existing state, validate recovery, and apply only approved changes in staged scope. Export files may contain sensitive grants/identifiers: use restrictive permissions and minimize/redact output. Before branch-protection PUT, fetch and merge existing settings rather than replacing required checks or actor restrictions with this example.
 
 ## 2. SaaS Inventory Audit
 
-### Google Workspace: OAuth Grants
+### Google Workspace — OAuth Grants
 
 ```bash
 gam all users show tokens > oauth_tokens_audit.csv
 ```
 
-### GitHub: Installed Apps
+### GitHub — Installed Apps
 
 ```bash
 gh api /orgs/{ORG}/installations --paginate \
@@ -46,7 +46,7 @@ gh api /orgs/{ORG}/credential-authorizations --paginate \
   --jq '.[] | {login: .login, credential_type: .credential_type}'
 ```
 
-### Slack: Approved and Pending Apps
+### Slack — Approved and Pending Apps
 
 ```bash
 curl -s -H "Authorization: Bearer ${SLACK_ADMIN_TOKEN}" \
@@ -55,7 +55,7 @@ curl -s -H "Authorization: Bearer ${SLACK_ADMIN_TOKEN}" \
   "https://slack.com/api/admin.apps.requests.list" | jq '.app_requests[]'
 ```
 
-### AWS: IAM Credential Report
+### AWS — IAM Credential Report
 
 ```bash
 aws iam generate-credential-report
@@ -150,7 +150,7 @@ Use the Admin console and the installed GAM version's documented commands; the g
 ## 6. AWS Account Security
 
 ```bash
-# Root account lockdown: verify MFA, remove access keys
+# Root account lockdown — verify MFA, remove access keys
 aws iam get-account-summary --query 'SummaryMap.AccountMFAEnabled'
 aws iam get-account-summary --query 'SummaryMap.AccountAccessKeysPresent'
 
@@ -195,10 +195,10 @@ aws cloudtrail start-logging --name org-security-trail
 ### Identify High-Risk Grants
 
 ```bash
-# Google: find apps with dangerous scopes
+# Google — find apps with dangerous scopes
 gam all users show tokens | grep -E "(drive|gmail|admin)" > high_risk_oauth.txt
 
-# GitHub: find apps with write access
+# GitHub — find apps with write access
 gh api /orgs/{ORG}/installations --paginate \
   --jq '.installations[] | select(.permissions.contents == "write") | {app: .app_slug}'
 ```
@@ -217,11 +217,11 @@ curl -s -X POST -H "Authorization: Bearer ${SLACK_ADMIN_TOKEN}" \
 ### Scope Risk Classification
 
 ```
-CRITICAL; revoke unless justified:
+CRITICAL — revoke unless justified:
   Google: mail.google.com, admin.directory.user | GitHub: admin:org, repo | Slack: admin
-HIGH; review carefully:
+HIGH — review carefully:
   Google: googleapis.com/auth/drive | GitHub: contents:write | Slack: channels:read
-LOW; generally safe:
+LOW — generally safe:
   Google: userinfo.email | GitHub: read:org | Slack: identity.basic
 ```
 
@@ -236,11 +236,11 @@ MFA policies must account for IAM-user sessions, service roles and federated/SSO
 ## 9. Data Loss Prevention
 
 ```bash
-# Google Drive: block external sharing and restrict viewers
+# Google Drive — block external sharing and restrict viewers
 gam update org "/" settings drive sharing_outside_domain off
 gam update org "/" settings drive disable_download_print_copy_for_viewers on
 
-# GitHub: enable secret scanning and push protection org-wide
+# GitHub — enable secret scanning and push protection org-wide
 # Configure secret scanning/push protection using organization security configurations
 # in Settings > Advanced Security, reviewing repository scope and license impact.
 gh api /orgs/{ORG}/secret-scanning/alerts --paginate \
@@ -249,7 +249,7 @@ gh api /orgs/{ORG}/secret-scanning/alerts --paginate \
 # Slack export permissions: use supported plan-specific admin settings.
 # No setExportRestrictions Web API method is assumed here.
 
-# AWS: block all public S3 access at account level
+# AWS — block all public S3 access at account level
 aws s3control put-public-access-block --account-id "${AWS_ACCOUNT_ID}" \
   --public-access-block-configuration \
   "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
@@ -267,7 +267,7 @@ SHADOW_IT_DOMAINS=("airtable.com" "notion.so" "trello.com" "asana.com"
   "zapier.com" "dropbox.com" "box.com" "wetransfer.com")
 for domain in "${SHADOW_IT_DOMAINS[@]}"; do
   count=$(grep -Fc -- "$domain" /var/log/dns/query.log) || { code=$?; [ "$code" -eq 1 ] || exit "$code"; }
-  [ "${count}" -gt 0 ] && echo "DETECTED: ${domain}; ${count} queries"
+  [ "${count}" -gt 0 ] && echo "DETECTED: ${domain} — ${count} queries"
 done
 ```
 
@@ -292,7 +292,7 @@ comm -23 <(awk '{print $2}' top_domains.txt | sort) \
 
 Prepare a local review report first. Validate the DNS log format, exact domain normalization, date parsing and approved inventory schema with trusted fixtures. Use a private temporary directory, not a shared predictable /tmp file. DNS queries are leads, not proof a user adopted a service. Scheduling privileged collectors and sending mail require authorization for the target host, schedule and recipient; do not append cron entries or install a root script during discovery.
 
-## Quick Reference: Top 10 Priority Actions
+## Quick Reference — Top 10 Priority Actions
 
 | # | Action | Scope |
 |---|--------|-------|

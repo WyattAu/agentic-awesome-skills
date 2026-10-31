@@ -32,7 +32,7 @@ report_count: 0
 
 
 
-# HUNT-WEBSOCKET: WebSocket Security
+# HUNT-WEBSOCKET — WebSocket Security
 
 ## When to Use
 

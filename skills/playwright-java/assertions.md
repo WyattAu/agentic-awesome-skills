@@ -93,7 +93,7 @@ assertThat(locator)
 
 ## Soft Assertions (AssertJ)
 
-Collect all failures before reporting; critical for form validation tests:
+Collect all failures before reporting — critical for form validation tests:
 
 ```java
 @Test
@@ -134,23 +134,23 @@ Java's Playwright assertion API does not provide the Playwright Test JavaScript 
 ## Common Anti-Patterns to Avoid
 
 ```java
-// ❌ WRONG; no auto-retry, brittle
+// ❌ WRONG — no auto-retry, brittle
 assertTrue(page.locator(".spinner").isHidden());
 Thread.sleep(2000);
 
-// ✅ CORRECT; auto-retry until timeout
+// ✅ CORRECT — auto-retry until timeout
 assertThat(page.locator(".spinner")).isHidden();
 
-// ❌ WRONG; getText() can return stale value
+// ❌ WRONG — getText() can return stale value
 String text = locator.textContent();
 assertEquals("Done", text);
 
-// ✅ CORRECT; assertion retries until text matches
+// ✅ CORRECT — assertion retries until text matches
 assertThat(locator).hasText("Done");
 
-// ❌ WRONG; count check without waiting
+// ❌ WRONG — count check without waiting
 assertEquals(5, page.locator("li").count());
 
-// ✅ CORRECT; waits until count stabilizes
+// ✅ CORRECT — waits until count stabilizes
 assertThat(page.locator("li")).hasCount(5);
 ```

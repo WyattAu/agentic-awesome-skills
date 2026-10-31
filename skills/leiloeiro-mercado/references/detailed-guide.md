@@ -1,4 +1,4 @@
-# SKILL DE MERCADO: ANALISTA DE ATIVOS IMOBILIÁRIOS EM LEILÃO - Detailed Guide
+# SKILL DE MERCADO — ANALISTA DE ATIVOS IMOBILIÁRIOS EM LEILÃO - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -58,7 +58,7 @@ investimento, liquidez, retorno e timing de mercado.
   - Deságio máximo observado: até 65-70% (imóveis problemáticos)
 ```
 
-**Leilões Extrajudiciais (Lei 9.514/97; Bancos):**
+**Leilões Extrajudiciais (Lei 9.514/97 — Bancos):**
 ```
 1º Leilão (mínimo = valor do imóvel, dado em contrato):
   - Frequência de arrematação: 30-50%
@@ -96,7 +96,7 @@ Negociação direta (sem concorrência):
 ---
 
 
-## Estratégia A: Flip Rápido (Curto Prazo)
+## Estratégia A — Flip Rápido (Curto Prazo)
 
 **Perfil:** Investidor com capital e rede de compradores finais.
 
@@ -119,7 +119,7 @@ Lucro bruto: 15-20% sobre o investido em 3-9 meses
 - Capital necessário: 100% do lance + custos
 
 
-## Estratégia B: Reforma E Valorização (Médio Prazo)
+## Estratégia B — Reforma E Valorização (Médio Prazo)
 
 **Perfil:** Investidor com capital e conhecimento em obras.
 
@@ -140,7 +140,7 @@ Lucro bruto: 30-50% sobre o investido
 - Capital necessário: 100% lance + 20-30% do lance em reforma
 
 
-## Estratégia C: Renda (Longo Prazo)
+## Estratégia C — Renda (Longo Prazo)
 
 **Perfil:** Investidor que busca fluxo de caixa passivo.
 
@@ -160,7 +160,7 @@ Yield superior ao mercado pela base de custo menor
 - Yield em imóvel arrematado com 40% de deságio: 7-12% a.a.
 
 
-## Estratégia D: Regularização E Revenda (Especialista)
+## Estratégia D — Regularização E Revenda (Especialista)
 
 **Perfil:** Advogado/especialista com capacidade de resolver situações complexas.
 
@@ -238,8 +238,8 @@ BAIXA DE JUROS (SELIC baixa):
 
 **Sazonalidade:**
 - **Dezembro/Janeiro:** Leilões com menos concorrência (férias, festas)
-- **Março-Abril:** Início de ano fiscal; leilões da Caixa com novos lotes
-- **Julho:** Período de férias; competição reduzida
+- **Março-Abril:** Início de ano fiscal — leilões da Caixa com novos lotes
+- **Julho:** Período de férias — competição reduzida
 - **Outubro/Novembro:** Alta temporada de leilões judiciais (fim do ano processual)
 
 
@@ -248,7 +248,7 @@ BAIXA DE JUROS (SELIC baixa):
 **Caixa Econômica Federal:**
 - Maior estoque de imóveis retomados do Brasil (>20.000 imóveis em 2024)
 - Programas próprios: Venda Online, Licitação Aberta, Proposta Online
-- Forte em imóveis do PMCMV/MCMV; popular/econômico
+- Forte em imóveis do PMCMV/MCMV — popular/econômico
 - Financia arrematação: até 80% do valor de avaliação
 - Diferencial: possibilidade de usar FGTS para completar o pagamento
 
@@ -328,7 +328,7 @@ Identificar o perfil correto do comprador final aumenta a velocidade de venda:
 ---
 
 
-## Indicadores Históricos Ilustrativos De 2025: Não São Taxas Atuais
+## Indicadores Históricos Ilustrativos De 2025 — Não São Taxas Atuais
 
 ```
 SELIC Meta (fev/2025):           13,25% a.a.
@@ -390,9 +390,9 @@ Para superar CDI em 12 meses:
 | FIIs (IFIX) | 10-12% a.a. | Médio | D+2 | R$ 100 |
 | LCI/LCA | 10-12% a.a. | Baixo | Carência 90d | R$ 1.000 |
 | Imóvel compra direta | 4-8% a.a. (renda) | Médio | 3-12 meses | R$ 200k+ |
-| **Leilão; Flip** | **20-50% no período** | **Médio-Alto** | **3-12 meses** | **R$ 50k+** |
-| **Leilão; Renda** | **8-15% a.a.** | **Médio** | **12+ meses** | **R$ 100k+** |
-| **Leilão; Reforma** | **30-60% no período** | **Alto** | **6-18 meses** | **R$ 150k+** |
+| **Leilão — Flip** | **20-50% no período** | **Médio-Alto** | **3-12 meses** | **R$ 50k+** |
+| **Leilão — Renda** | **8-15% a.a.** | **Médio** | **12+ meses** | **R$ 100k+** |
+| **Leilão — Reforma** | **30-60% no período** | **Alto** | **6-18 meses** | **R$ 150k+** |
 
 **Conclusão:** Leilão só supera CDI de forma consistente com:
 1. Deságio mínimo de 25-30%
@@ -456,13 +456,13 @@ Políticas adicionais:
 ## Referências
 
 Fontes e referências de mercado:
-- ZAP Imóveis (zapimoveis.com.br); dados de mercado
-- Viva Real (vivareal.com.br); comparativos de preço
-- FIPEZAP; índice de preços imobiliários
-- IFIX (B3); índice de fundos imobiliários
-- SINDUSCON-SP; CUB e custos de construção
-- Banco Central; Selic, CDI, séries históricas
-- CEF; portal de imóveis retomados
+- ZAP Imóveis (zapimoveis.com.br) — dados de mercado
+- Viva Real (vivareal.com.br) — comparativos de preço
+- FIPEZAP — índice de preços imobiliários
+- IFIX (B3) — índice de fundos imobiliários
+- SINDUSCON-SP — CUB e custos de construção
+- Banco Central — Selic, CDI, séries históricas
+- CEF — portal de imóveis retomados
 
 
 ## Best Practices

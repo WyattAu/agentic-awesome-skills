@@ -18,7 +18,7 @@ tools:
 - codex-cli
 ---
 
-# Stability AI: Gerador de Imagens Profissional
+# Stability AI — Gerador de Imagens Profissional
 
 ## Overview
 
@@ -146,9 +146,9 @@ python scripts/generate.py --prompt "anime warrior girl, widescreen" --analyze -
 | landscape | 3:2 | paisagem, horizontal | Paisagem, banner |
 | photo | 4:5 | ig-feed | Instagram feed otimizado |
 | wide | 16:9 | widescreen, youtube, cinema, wallpaper | Cinema, YT |
-| ultrawide | 21:9 | - | Monitor ultrawide |
+| ultrawide | 21:9 | — | Monitor ultrawide |
 | stories | 9:16 | vertical, tiktok, ig-stories | Stories, Reels |
-| phone | 9:21 | - | Wallpaper celular |
+| phone | 9:21 | — | Wallpaper celular |
 
 ## 4. Estilos (15 Presets)
 
@@ -180,7 +180,7 @@ Metadados salvos em `.meta.json` com: prompt original, prompt final, modelo, asp
 
 ## Integracao Com Outras Skills
 
-- **ai-studio-image**: Complementar; Stability AI para arte, Gemini para fotos humanizadas
+- **ai-studio-image**: Complementar — Stability AI para arte, Gemini para fotos humanizadas
 - **instagram**: Gerar arte → publicar no Instagram
 - **telegram**: Gerar imagem → enviar via bot
 

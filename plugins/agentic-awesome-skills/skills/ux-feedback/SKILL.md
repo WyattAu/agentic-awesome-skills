@@ -21,7 +21,7 @@ Use this skill when you need add appropriate user feedback states (loading, succ
 - For only the words inside a state → use `/ss-copy`
 - For accessibility issues in existing states → use `/ss-a11y`
 - For brand-new component creation → use `/ss-component`
-- For analytics or error-logging plumbing; UI presentation only
+- For analytics or error-logging plumbing — UI presentation only
 
 Target: **$ARGUMENTS**
 
@@ -108,7 +108,7 @@ function DataCard({ data, isLoading, error, refetch }) {
 }
 ```
 
-5. Check `prefers-reduced-motion`; disable `animate-pulse` when reduced motion is preferred.
+5. Check `prefers-reduced-motion` — disable `animate-pulse` when reduced motion is preferred.
 
 ## Limitations
 

@@ -38,9 +38,9 @@ client = ContentUnderstandingClient(endpoint=endpoint, credential=credential)
 
 Content Understanding operations are asynchronous long-running operations:
 
-1. **Begin Analysis**; Start the analysis operation with `begin_analyze()` (returns a poller)
-2. **Poll for Results**; Poll until analysis completes (SDK handles this with `.result()`)
-3. **Process Results**; Extract structured results from `AnalyzeResult.contents`
+1. **Begin Analysis** — Start the analysis operation with `begin_analyze()` (returns a poller)
+2. **Poll for Results** — Poll until analysis completes (SDK handles this with `.result()`)
+3. **Process Results** — Extract structured results from `AnalyzeResult.contents`
 
 ## Prebuilt Analyzers
 
@@ -266,12 +266,12 @@ from azure.ai.contentunderstanding.models import (
 
 ## Best Practices
 
-1. **Use `begin_analyze` with `AnalyzeInput`**; this is the correct method signature
-2. **Access results via `result.contents[0]`**; results are returned as a list
+1. **Use `begin_analyze` with `AnalyzeInput`** — this is the correct method signature
+2. **Access results via `result.contents[0]`** — results are returned as a list
 3. **Use prebuilt analyzers** for common scenarios (document/image/audio/video search)
 4. **Create custom analyzers** only for domain-specific field extraction
 5. **Use async client** for high-throughput scenarios with `azure.identity.aio` credentials
-6. **Handle long-running operations**; video/audio analysis can take minutes
+6. **Handle long-running operations** — video/audio analysis can take minutes
 7. **Use URL sources** when possible to avoid upload overhead
 
 ## When to Use

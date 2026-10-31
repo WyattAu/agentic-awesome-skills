@@ -1,6 +1,6 @@
 # longbridge-strategy-optimizer
 
-Quantitative strategy generation and optimisation framework; grid search, walk-forward validation, and overfitting detection.
+Quantitative strategy generation and optimisation framework — grid search, walk-forward validation, and overfitting detection.
 
 ## Workflow
 
@@ -22,14 +22,14 @@ Quantitative strategy generation and optimisation framework; grid search, walk-f
 ## CLI
 
 ```bash
-# Daily OHLCV: backtest data (up to 500 trading days)
+# Daily OHLCV — backtest data (up to 500 trading days)
 longbridge kline <SYMBOL> --period day --count 500 --format json
 ```
 
 ## Output structure
 
 ```
-STRATEGY OPTIMISATION REPORT; <SYMBOL>  <Date>
+STRATEGY OPTIMISATION REPORT — <SYMBOL>  <Date>
 
 STRATEGY: <Name / Type>
 Universe:  <SYMBOL>
@@ -62,7 +62,7 @@ PYTHON CODE FRAMEWORK
 
 | Situation                       | 简体回复                                     | 繁體回復                                     | English reply                                           |
 | ------------------------------- | -------------------------------------------- | -------------------------------------------- | ------------------------------------------------------- |
-| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found; verify exchange and ticker.          |
-| Insufficient history            | 历史数据不足，回测结果可靠性下降。           | 歷史數據不足，回測結果可靠性下降。           | Insufficient history; backtest reliability is reduced. |
+| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found — verify exchange and ticker.          |
+| Insufficient history            | 历史数据不足，回测结果可靠性下降。           | 歷史數據不足，回測結果可靠性下降。           | Insufficient history — backtest reliability is reduced. |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。 | 請安裝 longbridge-terminal 或透過 MCP 連線。 | Install longbridge-terminal or connect via MCP.         |
 | `not logged in`                 | 请运行 `longbridge auth login`。             | 請執行 `longbridge auth login`。             | Run `longbridge auth login`.                            |

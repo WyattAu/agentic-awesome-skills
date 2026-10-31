@@ -34,7 +34,7 @@ Example:
 Base styles → Variants → Sizes → States → Overrides
 ```
 
-## Quick Start: Tailwind v3-style configuration
+## Quick Start — Tailwind v3-style configuration
 
 These snippets use the v3 config/directive model; Tailwind v4 uses a different
 CSS-first setup and integration. Pin the intended major version, compatible plugins,

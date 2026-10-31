@@ -328,15 +328,15 @@ done
 ## Email Security Records
 
 ```bash
-# SPF: authorize sending servers
+# SPF — authorize sending servers
 # TXT record on example.com
 "v=spf1 include:_spf.google.com include:sendgrid.net -all"
 
-# DKIM: email signing verification
+# DKIM — email signing verification
 # TXT record on google._domainkey.example.com
 # (value provided by your email provider)
 
-# DMARC: policy for failed SPF/DKIM
+# DMARC — policy for failed SPF/DKIM
 # TXT record on _dmarc.example.com
 "v=DMARC1; p=reject; rua=mailto:dmarc-reports@example.com; pct=100"
 ```

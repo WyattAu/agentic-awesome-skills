@@ -119,7 +119,7 @@ as a fresh run.
 ## Brief delivery
 
 The relay reads `--brief <file>` or stdin, saves the exact text as `brief.txt`, and sends it to
-`claude -p` through stdin; never as an argv value. It therefore stays out of the process list and
+`claude -p` through stdin — never as an argv value. It therefore stays out of the process list and
 needs no shell quoting. Claude Code caps piped stdin at 10 MB; the relay rejects a larger brief before
 dispatch. Put large context in workspace files and reference those paths instead.
 

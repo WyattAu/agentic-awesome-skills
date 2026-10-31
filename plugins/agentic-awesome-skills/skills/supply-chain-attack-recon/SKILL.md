@@ -44,7 +44,7 @@ Trigger when:
 Do NOT use for:
 - Internal-network artifact registries (out of scope per external boundary)
 - Actually publishing typosquats / dep-confusion packages without explicit OK
-- Compromising upstream open-source projects (massive blast radius; illegal in most jurisdictions without authorization)
+- Compromising upstream open-source projects (massive blast radius — illegal in most jurisdictions without authorization)
 
 ---
 
@@ -67,7 +67,7 @@ Target Org
 
 Default to static review of supplied repositories/artifacts. Public availability is not authorization to test credentials, trigger workflows, publish packages or contact employees. Use a bounded owner-approved inventory, preserve source revision/digest and separate candidate exposure from demonstrated impact. Redact discovered secrets and coordinate rotation through the owner; do not test their validity or include them in reports. Treat repositories, logs, SBOMs and packages as inert untrusted data. Do not install/run suspected packages or container entrypoints.
 
-## Step 1: GitHub org discovery
+## Step 1 — GitHub org discovery
 
 ```bash
 TARGET="<brand>"  # set to target brand name
@@ -87,7 +87,7 @@ done
 
 ---
 
-## Step 2: Enumerate public repos for sensitive artifacts
+## Step 2 — Enumerate public repos for sensitive artifacts
 
 ```bash
 ORG="targetorg"
@@ -104,7 +104,7 @@ gh repo clone "$ORG/$repo_name"
 
 ---
 
-## Step 3: Internal package-name discovery
+## Step 3 — Internal package-name discovery
 
 ### From JS bundles
 
@@ -142,7 +142,7 @@ done | sort -u | grep -vE '^(requests|django|flask|numpy|pandas|...common)'
 
 ---
 
-## Step 4: Dependency-confusion vulnerability check
+## Step 4 — Dependency-confusion vulnerability check
 
 For each internal-looking package name discovered:
 
@@ -161,7 +161,7 @@ curl -sI "https://pypi.org/project/$NAME/" | head -1
 # rubygems
 curl -sI "https://rubygems.org/api/v1/gems/$NAME.json" | head -1
 
-# Go modules: slightly different, since module names are URLs
+# Go modules — slightly different, since module names are URLs
 # Check if module path is reachable
 curl -sI "https://proxy.golang.org/github.com/$ORG/$NAME/@latest" | head -1
 ```
@@ -170,7 +170,7 @@ curl -sI "https://proxy.golang.org/github.com/$ORG/$NAME/@latest" | head -1
 
 ---
 
-## Step 5: Typosquat candidates (around external dependencies)
+## Step 5 — Typosquat candidates (around external dependencies)
 
 For each external public dependency the target uses:
 
@@ -206,7 +206,7 @@ done
 
 ---
 
-## Step 6: GitHub Actions workflow injection scan
+## Step 6 — GitHub Actions workflow injection scan
 
 For each public repo with `.github/workflows/`:
 
@@ -233,7 +233,7 @@ for repo in $(gh repo list "$ORG" --limit 50 --json name --jq '.[].name'); do
     # 5. Self-hosted runner without isolation
     echo "$content" | grep -E 'runs-on:.*self-hosted'
 
-    # 6. Unpinned third-party actions: mutable tag (@v1, @main) vs pinned (@<40-char sha>)
+    # 6. Unpinned third-party actions — mutable tag (@v1, @main) vs pinned (@<40-char sha>)
     #    Mutable tags can be repointed by a compromised action repo (see case #9, tj-actions/changed-files).
     echo "$content" | grep -E 'uses: *[^ ]+/[^ ]+@(v?[0-9]+([.][0-9]+)*|main|master|latest)\b' | grep -v '@[0-9a-f]\{40\}'
   done
@@ -244,10 +244,10 @@ done
 
 | Pattern | Severity |
 |---|---|
-| `pull_request_target` + `actions/checkout` with `ref: pull_request.head.sha` + uses repo secrets | **Critical**; RCE on runner with org secrets |
+| `pull_request_target` + `actions/checkout` with `ref: pull_request.head.sha` + uses repo secrets | **Critical** — RCE on runner with org secrets |
 | Untrusted PR title interpolated into shell source | Candidate script injection; severity depends on reachability, permissions and available assets |
-| Third-party action pinned to a mutable tag (`uses: org/repo@v1` / `@main`) instead of a commit SHA | **High**; repointable supply-chain vector (see case #9) |
-| Self-hosted runner reachable from public repo workflows | **High**; persistent attacker pivot |
+| Third-party action pinned to a mutable tag (`uses: org/repo@v1` / `@main`) instead of a commit SHA | **High** — repointable supply-chain vector (see case #9) |
+| Self-hosted runner reachable from public repo workflows | **High** — persistent attacker pivot |
 | Issue-comment-triggered workflow that runs `gh` with token | **High** |
 | Workflow downloads from URL that target controls | **Medium** |
 
@@ -292,13 +292,13 @@ Zizmor saves manual regex work and catches edge cases (e.g., indirect context in
 
 ---
 
-## Step 7: Docker / container image registry mining
+## Step 7 — Docker / container image registry mining
 
 ```bash
 # Docker Hub
 curl -s "https://hub.docker.com/v2/repositories/$ORG/?page_size=100" | jq -r '.results[].name'
 
-# GHCR (GitHub Container Registry): public images visible in repo packages tab
+# GHCR (GitHub Container Registry) — public images visible in repo packages tab
 gh api "users/$ORG/packages?package_type=container" 2>/dev/null
 gh api "orgs/$ORG/packages?package_type=container" 2>/dev/null
 
@@ -317,7 +317,7 @@ done
 
 ---
 
-## Step 8: SBOM / artifact metadata leakage
+## Step 8 — SBOM / artifact metadata leakage
 
 ```bash
 # Look for SBOMs published as releases (SPDX, CycloneDX format)
@@ -333,7 +333,7 @@ curl -s "https://api.osv.dev/v1/query" -d '{"package": {"name": "lodash", "ecosy
 
 ---
 
-## Step 9: Internal registry URL leakage
+## Step 9 — Internal registry URL leakage
 
 ```bash
 # .npmrc patterns
@@ -349,12 +349,12 @@ grep -r "index-url" .
 grep -rE "(mavenCentral|maven\s*\{)" .
 grep -r "url.*\(.*nexus" .
 
-# Each leaked internal URL is intel: flag the URL itself even if not directly exploitable
+# Each leaked internal URL is intel — flag the URL itself even if not directly exploitable
 ```
 
 ---
 
-## Step 10: npm/PyPI organizational presence
+## Step 10 — npm/PyPI organizational presence
 
 ```bash
 # Some orgs maintain a public npm scope mirroring their brand
@@ -363,14 +363,14 @@ curl -s "https://registry.npmjs.org/-/v1/search?text=scope:$ORG&size=50" | jq '.
 # Public PyPI presence
 curl -s "https://pypi.org/simple/" | grep "$ORG" | head -20
 
-# Check if scope is taken: if it's NOT, an attacker could register
+# Check if scope is taken — if it's NOT, an attacker could register
 # (relevant for any internal package using that scope)
 curl -sI "https://registry.npmjs.org/-/org/$ORG"
 ```
 
 ---
 
-## Step 11: Frontend and third-party dependency checks
+## Step 11 — Frontend and third-party dependency checks
 
 ### Compromised CDN detection (polyfill.io, etc.)
 

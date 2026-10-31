@@ -378,8 +378,8 @@ By the end, you'll have:
 
 ### Required Knowledge
 
-- [Concept 1]; [link to learn]
-- [Concept 2]; [link to learn]
+- [Concept 1] — [link to learn]
+- [Concept 2] — [link to learn]
 
 ## Step 1: Project Setup
 
@@ -478,9 +478,9 @@ Before publishing, verify:
 
 ## Related Skills
 
-- `developer-audience-context`; Understand skill level and environment
-- `devrel-content`; General technical writing principles
-- `developer-onboarding`; Optimize time to first success
-- `developer-seo`; Get tutorials found via search
+- `developer-audience-context` — Understand skill level and environment
+- `devrel-content` — General technical writing principles
+- `developer-onboarding` — Optimize time to first success
+- `developer-seo` — Get tutorials found via search
 
 Do not claim a tutorial was executed or cross-platform verified from inspection alone. These templates contain placeholders and are not a tested SDK integration. Use synthetic data and local-only demo listeners; avoid logging credentials or real user payloads.

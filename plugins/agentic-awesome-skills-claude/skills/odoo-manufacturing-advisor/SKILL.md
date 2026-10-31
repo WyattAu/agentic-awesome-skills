@@ -48,9 +48,9 @@ Operations Tab (requires "Work Orders" enabled in MFG Settings):
 
 > **BoM Types explained:**
 >
-> - **Manufacture This Product**; standard production BoM, creates a Manufacturing Order
-> - **Kit**; sold as a bundle; components are delivered separately (no MO created)
-> - **Subcontracting**; components are sent to a subcontractor who returns the finished product
+> - **Manufacture This Product** — standard production BoM, creates a Manufacturing Order
+> - **Kit** — sold as a bundle; components are delivered separately (no MO created)
+> - **Subcontracting** — components are sent to a subcontractor who returns the finished product
 
 ### Example 2: Configure a Work Center
 
@@ -78,23 +78,23 @@ After running, review procurement exceptions:
 Menu: Inventory → Operations → Replenishment
 
 Message Types:
-  "Replenish"  ; Stock is below minimum; needs a PO or MO
-  "Reschedule" ; An order's scheduled date conflicts with demand
-  "Cancel"     ; Demand no longer exists; the order can be cancelled
+  "Replenish"   — Stock is below minimum; needs a PO or MO
+  "Reschedule"  — An order's scheduled date conflicts with demand
+  "Cancel"      — Demand no longer exists; the order can be cancelled
 ```
 
 ## Best Practices
 
 - ✅ **Do:** Enable **Work Orders** in Manufacturing Settings to use routing and time-tracking per operation.
-- ✅ **Do:** Use **BoM with variants** (via product attributes) for products that come in multiple configurations (color, size, voltage); avoids duplicate BoMs.
+- ✅ **Do:** Use **BoM with variants** (via product attributes) for products that come in multiple configurations (color, size, voltage) — avoids duplicate BoMs.
 - ✅ **Do:** Set **Lead Times** on components (vendor lead time + security lead time) so MRP schedules purchase orders in advance.
-- ✅ **Do:** Use **Scrap Orders** when discarding defective components during production; never adjust stock manually.
-- ❌ **Don't:** Manually create purchase orders for MRP-managed items; override MRP suggestions only when justified.
-- ❌ **Don't:** Confuse **Kit** BoM with **Manufacture This Product**; a Kit never creates a Manufacturing Order.
+- ✅ **Do:** Use **Scrap Orders** when discarding defective components during production — never adjust stock manually.
+- ❌ **Don't:** Manually create purchase orders for MRP-managed items — override MRP suggestions only when justified.
+- ❌ **Don't:** Confuse **Kit** BoM with **Manufacture This Product** — a Kit never creates a Manufacturing Order.
 
 ## Limitations
 
 - This skill targets **Odoo Manufacturing (mrp)**. Maintenance, PLM and Quality are separate apps not covered here; edition availability and menus vary by Odoo version. Do not assume all are Enterprise-only.
 - **Subcontracting** workflows (sending components to a third-party manufacturer) have additional receipt and valuation steps not fully detailed here.
 - **Lot/serial number traceability** in production (tracking which lot was consumed per MO) adds complexity; test with small batches before full rollout.
-- MRP calculations assume demand comes from **Sale Orders** and **Reordering Rules**; forecasts from external systems require custom integration.
+- MRP calculations assume demand comes from **Sale Orders** and **Reordering Rules** — forecasts from external systems require custom integration.

@@ -16,7 +16,7 @@ license_source: "https://github.com/Sketchjar/stipple-agent-skills/blob/main/LIC
 
 # Find Matching Tenders
 
-Search live AU/NZ government tenders, rank them against what a company actually does (read from its website), and explain why each opportunity is relevant; including the capability gaps to prepare evidence for. The examples use the third-party Stipple API. Verify current access requirements, pricing and feed availability before relying on it.
+Search live AU/NZ government tenders, rank them against what a company actually does (read from its website), and explain why each opportunity is relevant — including the capability gaps to prepare evidence for. The examples use the third-party Stipple API. Verify current access requirements, pricing and feed availability before relying on it.
 
 ## When to use
 
@@ -62,7 +62,7 @@ Search live AU/NZ government tenders, rank them against what a company actually 
    curl --fail-with-body --connect-timeout 10 --max-time 30 "https://www.stipple.sh/v1/tenders/sources"
    ```
 
-   Shows which government feeds are indexed and their freshness; explains why a search can be empty.
+   Shows which government feeds are indexed and their freshness — explains why a search can be empty.
 
 6. **Report honestly.** Match scores are *fit signals*, not win probabilities. Present `gaps[]` as "prepare evidence for this", not disqualification.
 

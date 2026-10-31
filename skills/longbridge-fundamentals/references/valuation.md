@@ -7,11 +7,11 @@ Prompt-only analysis skill. Orchestrates Longbridge CLI commands to answer _"is 
 Run `longbridge --help` to see all available subcommands, then `longbridge <subcommand> --help` before calling. Types of data needed (run concurrently):
 
 - Current valuation snapshot + peer comparison
-- Historical valuation series (PE, PB; run `--help` for available indicators and range flags)
+- Historical valuation series (PE, PB — run `--help` for available indicators and range flags)
 - Daily industry percentile rank for PE / PB / PS (run `--help` for date range flags)
 - Industry median + distribution
 - Industry percentile distribution
-- Optional intraday valuation correction (for live mid-day prices; run `--help` for the relevant subcommand)
+- Optional intraday valuation correction (for live mid-day prices — run `--help` for the relevant subcommand)
 
 ```bash
 longbridge <subcommand> TSLA.US --format json   # run --help for available flags and subcommand names
@@ -21,7 +21,7 @@ longbridge <subcommand> TSLA.US --format json   # run --help for available flags
 
 1. **Resolve symbol** to `<CODE>.<MARKET>` (rules in `longbridge-quote`). Multiple symbols → route to `longbridge-peer-comparison`.
 2. **Concurrently call** CLI commands above. If `longbridge` is not installed, fall back to MCP (see MCP fallback section).
-3. Optional intraday correction (only when needed): run `longbridge --help` to find the subcommand for live intraday valuation; note that the standard valuation subcommand is often EOD only.
+3. Optional intraday correction (only when needed): run `longbridge --help` to find the subcommand for live intraday valuation — note that the standard valuation subcommand is often EOD only.
 
 4. **Compute** in the LLM:
 
@@ -32,14 +32,14 @@ longbridge <subcommand> TSLA.US --format json   # run --help for available flags
    | Industry premium         | `(current PE − industry median PE) / industry median PE`                                                       |
    | Industry rank            | bucket from industry valuation distribution data                                                               |
 
-   If history is sparse (< 1y) or the industry has fewer than 5 peers, **degrade gracefully**; show snapshot + relative-to-industry only, drop the percentile claim.
+   If history is sparse (< 1y) or the industry has fewer than 5 peers, **degrade gracefully** — show snapshot + relative-to-industry only, drop the percentile claim.
 
 5. **Output the three sections** (template below). Cite **Longbridge Securities**.
 
 ## Output template
 
 ```
-{Symbol} ({code}) valuation snapshot; Source: Longbridge Securities
+{Symbol} ({code}) valuation snapshot — Source: Longbridge Securities
 
 [Current snapshot]
 - PE (TTM): X
@@ -57,16 +57,16 @@ longbridge <subcommand> TSLA.US --format json   # run --help for available flags
 - Industry rank: {position} / N (high / mid / low bucket)
 
 [Combined]
-From historical + industry views, valuation is {low / neutral / high}; historical N-th pct, {N% above/below} industry median.
+From historical + industry views, valuation is {low / neutral / high} — historical N-th pct, {N% above/below} industry median.
 
 ⚠️ 以上数据仅供参考，不构成投资建议。/ 以上數據僅供參考，不構成投資建議。/ For reference only. Not investment advice.
 ```
 
 (Translate into the user's language; keep numeric values as-is.)
 
-## Cyclical industries: special handling
+## Cyclical industries — special handling
 
-Energy / chemicals / steel / shipping / banks / property are cyclical: PE inverts (high PE near troughs because earnings are depressed; low PE near peaks may signal a top). When the symbol is in such an industry, **add the caveat**: _"Cyclical industry; PE percentile must be interpreted alongside industry cycle position; do not read 'high PE = expensive' mechanically."_
+Energy / chemicals / steel / shipping / banks / property are cyclical: PE inverts (high PE near troughs because earnings are depressed; low PE near peaks may signal a top). When the symbol is in such an industry, **add the caveat**: _"Cyclical industry — PE percentile must be interpreted alongside industry cycle position; do not read 'high PE = expensive' mechanically."_
 
 ## Output constraints
 

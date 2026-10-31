@@ -48,8 +48,8 @@ trackio.alert(
 ```
 
 Environment variables:
-- `TRACKIO_WEBHOOK_URL`; global webhook URL
-- `TRACKIO_WEBHOOK_MIN_LEVEL`; minimum level for webhook delivery (`info`, `warn`, `error`)
+- `TRACKIO_WEBHOOK_URL` — global webhook URL
+- `TRACKIO_WEBHOOK_MIN_LEVEL` — minimum level for webhook delivery (`info`, `warn`, `error`)
 
 ## Retrieving Alerts (CLI)
 
@@ -110,7 +110,7 @@ for step in range(num_steps):
     if step > 200 and loss > 5.0:
         trackio.alert(
             title="Loss divergence",
-            text=f"Loss {loss:.4f} still above 5.0 after {step} steps; learning rate may be too high",
+            text=f"Loss {loss:.4f} still above 5.0 after {step} steps — learning rate may be too high",
             level=trackio.AlertLevel.ERROR,
         )
 
@@ -124,7 +124,7 @@ for step in range(num_steps):
     if not math.isfinite(loss):
         trackio.alert(
             title="NaN loss",
-            text="Nonfinite loss; preserve checkpoint and diagnose numeric/data errors",
+            text="Nonfinite loss — preserve checkpoint and diagnose numeric/data errors",
             level=trackio.AlertLevel.ERROR,
         )
         break
@@ -134,7 +134,7 @@ trackio.finish()
 
 ### 2. Monitor Alerts
 
-Alerts are automatically printed to the terminal when fired. If the agent is watching the training script's output (e.g. running in the foreground or tailing logs), it will see alerts immediately; no polling needed.
+Alerts are automatically printed to the terminal when fired. If the agent is watching the training script's output (e.g. running in the foreground or tailing logs), it will see alerts immediately — no polling needed.
 
 For background or detached runs, poll for alerts via CLI:
 
@@ -148,7 +148,7 @@ trackio list alerts --project hyperparam-sweep --json --since "2025-06-01T00:00:
 When an alert fires, use `trackio get snapshot` to see all metrics at that point:
 
 ```bash
-# Alert fired at step 200: get all metrics in a ±5 step window
+# Alert fired at step 200 — get all metrics in a ±5 step window
 trackio get snapshot --project hyperparam-sweep --run run-1 --around 200 --window 5 --json
 
 # Or inspect a single metric around the alert's timestamp

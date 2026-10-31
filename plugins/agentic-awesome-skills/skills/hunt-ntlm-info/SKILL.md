@@ -31,7 +31,7 @@ report_count: 1
 
 ## Crown Jewel Targets
 
-NTLM info disclosure is a protocol observation whose severity depends on demonstrated impact and program scope; the leak itself is intentional protocol behavior (MS-NLMP NTLMSSP challenge), but on internet-exposed enterprise infrastructure it provides exact reconnaissance for the next stage of an attack. Highest-value targets:
+NTLM info disclosure is a protocol observation whose severity depends on demonstrated impact and program scope — the leak itself is intentional protocol behavior (MS-NLMP NTLMSSP challenge), but on internet-exposed enterprise infrastructure it provides exact reconnaissance for the next stage of an attack. Highest-value targets:
 
 - **Internet-reachable IIS / SharePoint / Exchange / OWA** with dual-auth (Forms + NTLM, or NTLM + Kerberos)
 - **Citrix NetScaler / VMware Horizon View** internet-facing gateways with NTLM-backed AD auth
@@ -89,7 +89,7 @@ WWW-Authenticate: Negotiate, NTLM
    ```
    Authorization: NTLM TlRMTVNTUAABAAAAB4IIogAAAAAAAAAAAAAAAAAAAAAGAbEdAAAADw==
    ```
-   This is the standard test Type-1 with negotiate flags `NTLMSSP_NEGOTIATE_UNICODE | NTLMSSP_NEGOTIATE_OEM | NTLMSSP_NEGOTIATE_NTLM | NTLMSSP_NEGOTIATE_ALWAYS_SIGN | NTLMSSP_NEGOTIATE_KEY_EXCH | NTLMSSP_NEGOTIATE_56 | NTLMSSP_NEGOTIATE_128 | NTLMSSP_NEGOTIATE_TARGET_INFO`. The `OS Version` field (`06 01 B1 1D 00 00 00 0F`) is Windows 7 build 7601; accepted by virtually every NTLM responder.
+   This is the standard test Type-1 with negotiate flags `NTLMSSP_NEGOTIATE_UNICODE | NTLMSSP_NEGOTIATE_OEM | NTLMSSP_NEGOTIATE_NTLM | NTLMSSP_NEGOTIATE_ALWAYS_SIGN | NTLMSSP_NEGOTIATE_KEY_EXCH | NTLMSSP_NEGOTIATE_56 | NTLMSSP_NEGOTIATE_128 | NTLMSSP_NEGOTIATE_TARGET_INFO`. The `OS Version` field (`06 01 B1 1D 00 00 00 0F`) is Windows 7 build 7601 — accepted by virtually every NTLM responder.
 
 3. **Use a maintained HTTP client with an approved target and bounded TLS request.**
    Type-2 arrives in the response to Type-1; a one-shot request can receive it.
@@ -190,7 +190,7 @@ Read a bounded locally captured test challenge, pass its base64 string to the
 function, and redact returned names before sharing. It is not an NTLM stack or
 proof of server identity. [MS-NLMP structure](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-nlmp/801a4681-8809-4be9-ab0d-61dcfe762786).
 
-**Burp Collaborator NOT needed** for this finding class; the data leak is in the synchronous response, not via OOB.
+**Burp Collaborator NOT needed** for this finding class — the data leak is in the synchronous response, not via OOB.
 
 ---
 
@@ -217,7 +217,7 @@ password spraying, relay or service-account credential tests.
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
 
 ## Limitations
 

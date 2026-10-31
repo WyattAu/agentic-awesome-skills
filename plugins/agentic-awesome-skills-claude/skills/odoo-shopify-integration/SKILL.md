@@ -10,7 +10,7 @@ date_added: "2026-03-04"
 
 ## Overview
 
-This skill guides you through integrating Odoo with Shopify; syncing your product catalog, real-time inventory levels, incoming orders, and customer data. It covers evaluating a connector and designing a custom integration. Verify each connector's actual publisher, support, license and version compatibility; do not assume an official Enterprise connector. Select Shopify and Odoo API versions supported by the deployed systems before implementation.
+This skill guides you through integrating Odoo with Shopify — syncing your product catalog, real-time inventory levels, incoming orders, and customer data. It covers evaluating a connector and designing a custom integration. Verify each connector's actual publisher, support, license and version compatibility; do not assume an official Enterprise connector. Select Shopify and Odoo API versions supported by the deployed systems before implementation.
 
 ## When to Use This Skill
 
@@ -90,7 +90,7 @@ See [Shopify webhook verification and duplicate handling](https://shopify.dev/do
 - ✅ **Do:** Use Shopify's **webhook system** for real-time order sync instead of polling.
 - ✅ **Do:** Reconcile shop-scoped variant mappings; enforce any SKU uniqueness assumption explicitly before using it as a secondary key.
 - ✅ **Do:** Validate Shopify webhook HMAC signatures before processing any payload.
-- ❌ **Don't:** Sync inventory from both systems simultaneously without a "master system"; pick one as the source of truth.
+- ❌ **Don't:** Sync inventory from both systems simultaneously without a "master system" — pick one as the source of truth.
 - Maintain explicit Shopify variant-to-Odoo variant mappings scoped to the shop. Use SKUs only after checking uniqueness and handling changes; neither a product ID nor a SKU alone identifies all cross-system variants.
 
 ## Limitations

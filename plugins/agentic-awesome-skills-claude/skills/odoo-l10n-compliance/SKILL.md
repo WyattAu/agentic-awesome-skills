@@ -99,11 +99,11 @@ accountant first. Prefer the localization's supplied taxes and fiscal positions.
 
 ## Best Practices
 
-- ✅ **Do:** Install the localization module **before** creating any accounting entries; it sets up the correct accounts.
+- ✅ **Do:** Install the localization module **before** creating any accounting entries — it sets up the correct accounts.
 - ✅ **Do:** Use **Fiscal Positions** to automate tax switching for international customers (B2B vs B2C, domestic vs export).
 - ✅ **Do:** Test e-invoicing in the **SAT/tax authority test environment** before going live.
 - ❌ **Don't:** Manually create a chart of accounts if a localization module exists for your country.
-- ❌ **Don't:** Mix localization tax accounts with custom accounts; it breaks fiscal reports.
+- ❌ **Don't:** Mix localization tax accounts with custom accounts — it breaks fiscal reports.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

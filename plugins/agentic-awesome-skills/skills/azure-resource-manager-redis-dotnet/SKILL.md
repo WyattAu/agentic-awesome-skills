@@ -285,14 +285,14 @@ await cache.Value.ForceRebootAsync(rebootContent);
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** when you want to poll manually or run operations in parallel
-3. **Always use `DefaultAzureCredential`**; never hardcode keys
+3. **Always use `DefaultAzureCredential`** — never hardcode keys
 4. **Handle `RequestFailedException`** for ARM API errors
 5. **Use `CreateOrUpdateAsync`** for idempotent operations
 6. **Navigate hierarchy** via `Get*` methods (e.g., `cache.GetRedisFirewallRules()`)
 7. **Use Premium SKU** for production workloads requiring geo-replication, clustering, or persistence
-8. **Enable TLS 1.2 minimum**; set `MinimumTlsVersion = RedisTlsVersion.Tls1_2`
-9. **Disable non-SSL port**; set `EnableNonSslPort = false` for security
-10. **Rotate keys regularly**; use `RegenerateKeyAsync` and update connection strings
+8. **Enable TLS 1.2 minimum** — set `MinimumTlsVersion = RedisTlsVersion.Tls1_2`
+9. **Disable non-SSL port** — set `EnableNonSslPort = false` for security
+10. **Rotate keys regularly** — use `RegenerateKeyAsync` and update connection strings
 
 ## Error Handling
 
@@ -320,13 +320,13 @@ catch (RequestFailedException ex)
 
 ## Common Pitfalls
 
-1. **SKU downgrades not allowed**; You cannot downgrade from Premium to Standard/Basic
-2. **Clustering requires Premium**; Shard configuration only available on Premium SKU
-3. **Geo-replication requires Premium**; Linked servers only work with Premium caches
-4. **VNet injection requires Premium**; Virtual network support is Premium-only
-5. **Patch schedules require Premium**; Maintenance windows only configurable on Premium
-6. **Cache name globally unique**; Redis cache names must be unique across all Azure subscriptions
-7. **Long provisioning times**; Cache creation can take 15-20 minutes; use `WaitUntil.Started` for async patterns
+1. **SKU downgrades not allowed** — You cannot downgrade from Premium to Standard/Basic
+2. **Clustering requires Premium** — Shard configuration only available on Premium SKU
+3. **Geo-replication requires Premium** — Linked servers only work with Premium caches
+4. **VNet injection requires Premium** — Virtual network support is Premium-only
+5. **Patch schedules require Premium** — Maintenance windows only configurable on Premium
+6. **Cache name globally unique** — Redis cache names must be unique across all Azure subscriptions
+7. **Long provisioning times** — Cache creation can take 15-20 minutes; use `WaitUntil.Started` for async patterns
 
 ## Connecting with StackExchange.Redis (Data Plane)
 

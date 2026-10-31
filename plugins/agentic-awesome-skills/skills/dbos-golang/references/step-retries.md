@@ -54,7 +54,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 ```
 
 Retry parameters:
-- `WithStepMaxRetries(n)`: Maximum retry attempts (default: `0`; no retries)
+- `WithStepMaxRetries(n)`: Maximum retry attempts (default: `0` — no retries)
 - `WithBaseInterval(d)`: Initial delay between retries (default: `100ms`)
 - `WithBackoffFactor(f)`: Multiplier for exponential backoff (default: `2.0`)
 - `WithMaxInterval(d)`: Maximum delay between retries (default: `5s`)

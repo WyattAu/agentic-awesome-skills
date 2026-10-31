@@ -13,7 +13,7 @@ license: "Apache-2.0"
 license_source: "https://github.com/morsechimwai/lemmaly/blob/main/LICENSE"
 ---
 
-# complexity-cuts: Lower Big-O on Existing Code
+# complexity-cuts — Lower Big-O on Existing Code
 
 `lemmaly` prevents bad complexity before code is written. **complexity-cuts** fixes it after the fact: code already exists, it works, but its time or space complexity is worse than necessary.
 
@@ -36,7 +36,7 @@ For *preventing* bad complexity before code is written, use **`lemmaly`**. For m
 NO TRANSFORMATION WITHOUT EXISTING TESTS GREEN BEFORE AND AFTER
 ```
 
-If the code has no tests, you write a characterization test first (golden input → current output). Then transform. Then verify the test still passes. If you skip this, the optimization can silently break callers; and faster-but-wrong is worse than slow-and-right.
+If the code has no tests, you write a characterization test first (golden input → current output). Then transform. Then verify the test still passes. If you skip this, the optimization can silently break callers — and faster-but-wrong is worse than slow-and-right.
 
 ## Non-negotiable rules
 
@@ -54,7 +54,7 @@ If the code has no tests, you write a characterization test first (golden input 
    1. Apply exactly one transformation from the playbook.
    2. Run the existing test suite (or the characterization test you wrote per the Iron Law).
    3. If any test breaks: **revert immediately.** Do not patch the test. Do not patch around the failure. Revert.
-   4. Count reverts on this piece of code. If **3 reverts in a row**, STOP optimizing. The bottleneck is wrong, the transformation is wrong, or the code has invariants you have not modeled. Escalate to `invariant-guard` and write the missing contract; do not try a fourth transformation.
+   4. Count reverts on this piece of code. If **3 reverts in a row**, STOP optimizing. The bottleneck is wrong, the transformation is wrong, or the code has invariants you have not modeled. Escalate to `invariant-guard` and write the missing contract — do not try a fourth transformation.
    5. Only after a transformation lands green: pick the next one.
 
    Stacked changes hide regressions. Patched tests hide regressions louder.
@@ -69,7 +69,7 @@ If the code has no tests, you write a characterization test first (golden input 
    p50:  186 ms → 1.1 ms   (169× faster, n=20,000, 200 samples)
    ```
 
-   If you cannot measure (e.g. the win is purely asymptotic on inputs you don't have), say so explicitly: `asymptotic only, no measurement; O(n²) → O(n)`. Never silently skip this step.
+   If you cannot measure (e.g. the win is purely asymptotic on inputs you don't have), say so explicitly: `asymptotic only, no measurement — O(n²) → O(n)`. Never silently skip this step.
 
 ## The transformation playbook
 
@@ -136,13 +136,13 @@ For each piece of code you optimize:
 6. **State new Big-O.** Time and space.
 7. **Repeat if more wins exist and are worth the complexity cost.**
 
-## Canonical example: workflow vs no-workflow
+## Canonical example — workflow vs no-workflow
 
 The same optimization with and without the verify-revert-stop loop.
 
 **Bottleneck.** `getOrdersWithUsers()` runs 10s on 10k orders. Cause: `users.find(u => u.id === o.userId)` inside the map → O(n·m).
 
-### Without the workflow: changes semantics AND patches the test
+### Without the workflow — changes semantics AND patches the test
 
 ```ts
 // No workflow: change semantics + the optimization in one go
@@ -154,9 +154,9 @@ export function getOrdersWithUsers(orders, users) {
 }
 ```
 
-Faster, *and* changes the result set. Existing tests catch it; but the diff also "fixes" a flaky test by removing the assertion that checked the old behavior. Ships green. Breaks the billing report two weeks later.
+Faster, *and* changes the result set. Existing tests catch it — but the diff also "fixes" a flaky test by removing the assertion that checked the old behavior. Ships green. Breaks the billing report two weeks later.
 
-### With the workflow: one transformation, semantics preserved
+### With the workflow — one transformation, semantics preserved
 
 ```ts
 // Workflow applied:
@@ -177,28 +177,28 @@ export function getOrdersWithUsers(orders, users) {
 }
 ```
 
-The example assumes finite integer IDs and side-effect-free ordinary objects; add duplicate-ID and missing-ID characterization cases before transforming. NaN IDs or getters require a different equivalence argument. One transformation. Existing tests stay untouched. Run them. If green, ship. If red, revert (don't patch). After 3 reverts, stop and load `invariant-guard`; the bottleneck is wrong, or the function has a contract no one wrote down.
+The example assumes finite integer IDs and side-effect-free ordinary objects; add duplicate-ID and missing-ID characterization cases before transforming. NaN IDs or getters require a different equivalence argument. One transformation. Existing tests stay untouched. Run them. If green, ship. If red, revert (don't patch). After 3 reverts, stop and load `invariant-guard` — the bottleneck is wrong, or the function has a contract no one wrote down.
 
 ## Output discipline
 
-When proposing or applying an optimization, your message must contain; in this order:
+When proposing or applying an optimization, your message must contain — in this order:
 
-1. **Bottleneck**; file:line and one-sentence reason.
-2. **Current complexity**; `time = O(?)`, `space = O(?)`.
-3. **Transformation**; name from the playbook (or describe it if novel).
-4. **New complexity**; `time = O(?)`, `space = O(?)`.
-5. **Semantic risk**; anything callers might notice (ordering, stability, error timing). "None" is a valid answer if true.
-6. **Measured speedup**; `before → after` with the ratio as `N× faster` (or `asymptotic only` if not measured). One line, honest numbers.
+1. **Bottleneck** — file:line and one-sentence reason.
+2. **Current complexity** — `time = O(?)`, `space = O(?)`.
+3. **Transformation** — name from the playbook (or describe it if novel).
+4. **New complexity** — `time = O(?)`, `space = O(?)`.
+5. **Semantic risk** — anything callers might notice (ordering, stability, error timing). "None" is a valid answer if true.
+6. **Measured speedup** — `before → after` with the ratio as `N× faster` (or `asymptotic only` if not measured). One line, honest numbers.
 7. **The diff.**
 
 If any of 1–6 is missing, the optimization is not ready to apply.
 
-## Stop conditions: do not optimize further when
+## Stop conditions — do not optimize further when
 
 - Asymptotic Big-O already matches a known lower bound for the problem.
 - The input is provably small and bounded (n < ~100 and not on a hot path).
 - The optimization would obscure correctness or harm readability without a measured win.
-- The bottleneck is I/O or external service latency, not CPU/memory; go fix that instead.
+- The bottleneck is I/O or external service latency, not CPU/memory — go fix that instead.
 
 Premature optimization past these points adds risk without payoff.
 
@@ -206,14 +206,14 @@ Premature optimization past these points adds risk without payoff.
 
 | Excuse | Reality |
 | --- | --- |
-| "I already solved this in my head; just paste the diff and add labels after." | Retrofitted labels lie about the reasoning order. Write bottleneck → complexity → transformation → diff in that order, or you are writing fiction. |
-| "Stating the current Big-O is busywork; everyone can see the nested loop." | If everyone can see it, writing one line costs nothing. If only you can see it, you just saved the reviewer's time. |
-| "Semantic risk is None, skip that step." | "None" is a valid answer; but write it. The next reader does not know which guarantees you considered. |
+| "I already solved this in my head — just paste the diff and add labels after." | Retrofitted labels lie about the reasoning order. Write bottleneck → complexity → transformation → diff in that order, or you are writing fiction. |
+| "Stating the current Big-O is busywork — everyone can see the nested loop." | If everyone can see it, writing one line costs nothing. If only you can see it, you just saved the reviewer's time. |
+| "Semantic risk is None, skip that step." | "None" is a valid answer — but write it. The next reader does not know which guarantees you considered. |
 | "I'll do all three transformations in one diff." | Stacked transformations hide regressions. One transformation, verify, repeat. |
 | "It's just a small refactor, the workflow is overkill." | Then it takes 30 seconds. The cases where you skip the workflow are the ones where you miss the optimization next to the obvious one. |
 | "I'll measure later." | Later is `<measured: TBD>` forever. Either measure now or accept the asymptotic argument as the only claim. |
 
-## Red flags: STOP
+## Red flags — STOP
 
 - Optimizing without stating current Big-O.
 - "This should be faster" without identifying a specific bottleneck line.
@@ -236,7 +236,7 @@ Before claiming an optimization is complete:
 - [ ] If a measured claim was made (e.g. "3x faster"), the measurement command is included.
 - [ ] Revert count on this code is < 3.
 
-Cannot check every box? The optimization is not done. Either revert or finish the gap; do not ship a half-verified speedup.
+Cannot check every box? The optimization is not done. Either revert or finish the gap — do not ship a half-verified speedup.
 
 ## Limitations
 
@@ -244,15 +244,15 @@ Cannot check every box? The optimization is not done. Either revert or finish th
 - **Asymptotic wins only; constant-factor work is a separate mode** (clearly labeled). The playbook will not improve cache locality or SIMD utilization on its own.
 - **Single-process scope.** Distributed-system bottlenecks (consensus latency, replication lag, queue backpressure) are out of scope.
 - **3-revert rule is firm.** If three transformations failed, the skill explicitly forces escalation to `invariant-guard`; it does not let you try a fourth.
-- **Measurement is on the author.** complexity-cuts requires the ratio to be reported but does not run the benchmark for you; you must produce a representative input.
-- **Won't help I/O-bound code.** If the dominant term is network latency or disk, the playbook will not move the needle; fix the I/O pattern instead.
+- **Measurement is on the author.** complexity-cuts requires the ratio to be reported but does not run the benchmark for you — you must produce a representative input.
+- **Won't help I/O-bound code.** If the dominant term is network latency or disk, the playbook will not move the needle — fix the I/O pattern instead.
 
 ## The thesis, in one line
 
-> **Existing code earned its slowness one shortcut at a time. complexity-cuts removes them one transformation at a time; and refuses to ship the optimization without a green test.**
+> **Existing code earned its slowness one shortcut at a time. complexity-cuts removes them one transformation at a time — and refuses to ship the optimization without a green test.**
 
 ## Related Skills
 
-- `lemmaly`; prevention gateway; use when writing new code instead of refactoring existing.
-- `invariant-guard`; escalation target when 3+ transformations have failed tests; the missing piece is a contract, not an optimization.
-- `mathguard`; escalation when the classical floor is reached and an approximate or math-heavy structure could win.
+- `lemmaly` — prevention gateway; use when writing new code instead of refactoring existing.
+- `invariant-guard` — escalation target when 3+ transformations have failed tests — the missing piece is a contract, not an optimization.
+- `mathguard` — escalation when the classical floor is reached and an approximate or math-heavy structure could win.

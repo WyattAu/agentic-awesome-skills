@@ -77,7 +77,7 @@ Every item is tagged: **`[BLOCKS]`** items cause errors or broken behavior if mi
 - [ ] Replaced `response.text` → `interaction.output_text (when supported); otherwise collect all text model_output parts safely`
 - [ ] Replaced `response.candidates[0].content.parts` → iterate `interaction.steps`
 - [ ] Replaced `client.chats.create()` / manual history → `previous_interaction_id`
-- [ ] Removed all `types.*` wrappers (`GenerateContentConfig`, `Tool`, `Content`, `Part`); Interactions API uses plain dicts. Check feature docs for exact format.
+- [ ] Removed all `types.*` wrappers (`GenerateContentConfig`, `Tool`, `Content`, `Part`) — Interactions API uses plain dicts. Check feature docs for exact format.
 - [ ] Moved `response_format` from `GenerateContentConfig` to top-level parameter
 - [ ] Replaced `generate_content_stream()` → `stream=True` + step-based event handling
 - [ ] Updated function calling: candidates-based → step-based tool lifecycle

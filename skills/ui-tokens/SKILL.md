@@ -20,8 +20,8 @@ Use this skill when you need view, add, or modify design tokens in the StyleSeed
 
 - For applying tokens in components → use `/ss-component` or `/ss-pattern`
 - For finding token violations in existing code → use `/ss-lint`
-- For brand-wide color/font choices that don't exist yet; define a skin first, then add tokens
-- For non-CSS token systems (Figma, native iOS/Android); Tailwind v4 / CSS variables only
+- For brand-wide color/font choices that don't exist yet — define a skin first, then add tokens
+- For non-CSS token systems (Figma, native iOS/Android) — Tailwind v4 / CSS variables only
 
 Action: **$0** | Token type: **$1**
 Arguments: $ARGUMENTS
@@ -38,16 +38,16 @@ Arguments: $ARGUMENTS
 
 ## Instructions
 
-### `list`: Show current tokens
+### `list` — Show current tokens
 Read and display the requested token file in a formatted table.
 
-### `add`: Add new token
+### `add` — Add new token
 1. Add the token to the JSON source file (`tokens/*.json`)
 2. Add the CSS custom property to `css/theme.css` under `:root`
 3. If it needs a Tailwind utility, add to the `@theme inline` block
 4. If it has a dark mode variant, add to the `.dark` block
 
-### `update`: Modify existing token
+### `update` — Modify existing token
 1. Update the value in the JSON source file
 2. Update the CSS custom property in `theme.css`
 3. Check all components for direct usage that might need updating

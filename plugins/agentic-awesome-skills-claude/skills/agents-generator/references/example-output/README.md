@@ -1,4 +1,4 @@
-# Example Output: sssall (Next.js 16 + Bun + Server Actions)
+# Example Output — sssall (Next.js 16 + Bun + Server Actions)
 
 This is the concrete output the skill should produce for a project with this stack. Use it as a quality benchmark: your generated AGENTS.md should be this specific, this actionable, and this free of placeholder text.
 
@@ -53,12 +53,12 @@ Compare your generated AGENTS.md against these criteria:
 
 1. **Commands are exact**: The AGENTS.md says `bun dev`, not `npm run dev` or `pnpm dev`. It reads `package.json` scripts: `"doctor": "npx react-doctor@latest"` → `bun doctor`.
 2. **Verification cycle is real**: `bunx tsc --noEmit → bun run lint → bun run test:run → bun doctor`. Every command exists in `package.json`.
-3. **Global conventions match the stack**: "Sin librería de validación externa; TypeScript types + guards manuales (`isDownloadError()`)." Not "Zod para validación."
+3. **Global conventions match the stack**: "Sin librería de validación externa — TypeScript types + guards manuales (`isDownloadError()`)." Not "Zod para validación."
 4. **Architecture diagram is specific**: ASCII art shows actual directories (`app/`, `components/`, `lib/downloader/`), not generic placeholders.
 5. **Data flow names real functions**: `detectPlatform()` → `downloadVideo()` → `downloadFromUrl()` → `ttdl()/igdl()/fbdown()/twitter()`. Not "validation → API call → database."
 6. **Route table is complete**: Every route file listed with its type (client/server) and description in Spanish.
 7. **Test count is accurate**: "74 tests" counted from actual test files, not estimated.
-8. **No placeholder text anywhere**: Search for `{{`, `TODO`, `add here`, `...` in the output; there should be zero matches.
+8. **No placeholder text anywhere**: Search for `{{`, `TODO`, `add here`, `...` in the output — there should be zero matches.
 
 ## Reference Project
 
@@ -75,4 +75,4 @@ AGENTS.md                              ← Main file with commands, conventions,
   sdd-workflow.md                      ← Preflight defaults, post-apply verification
 ```
 
-Use this as a quality benchmark when generating for any project; your output should match this level of specificity regardless of the target stack.
+Use this as a quality benchmark when generating for any project — your output should match this level of specificity regardless of the target stack.

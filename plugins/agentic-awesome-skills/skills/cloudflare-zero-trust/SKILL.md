@@ -94,7 +94,7 @@ ingress:
   - hostname: ssh.example.com
     service: ssh://localhost:22
 
-  # Catch-all: required as the last rule
+  # Catch-all — required as the last rule
   - service: http_status:404
 ```
 
@@ -158,7 +158,7 @@ Access policies control who can reach applications behind Cloudflare.
 ### Create an Access Application
 
 ```bash
-# Via API: create a self-hosted application
+# Via API — create a self-hosted application
 curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps" \
   -H "Authorization: Bearer $CF_API_TOKEN" \
   -H "Content-Type: application/json" \
@@ -175,7 +175,7 @@ curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/a
 ### Policy Types and Examples
 
 ```bash
-# Allow policy: members of the engineering group
+# Allow policy — members of the engineering group
 curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies" \
   -H "Authorization: Bearer $CF_API_TOKEN" \
   -H "Content-Type: application/json" \
@@ -282,7 +282,7 @@ curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/
 Deploy the Cloudflare WARP client to route traffic through Gateway.
 
 ```bash
-# MDM deployment: macOS configuration profile
+# MDM deployment — macOS configuration profile
 # Use Cloudflare's managed deployment:
 # Dashboard: Settings > WARP Client > Device enrollment
 
@@ -314,7 +314,7 @@ curl https://connectivity.cloudflare.com/cdn-cgi/trace
 ## SSH and Browser-Based Terminal
 
 ```yaml
-# In cloudflared config.yml: expose SSH via browser rendering
+# In cloudflared config.yml — expose SSH via browser rendering
 ingress:
   - hostname: ssh.example.com
     service: ssh://localhost:22

@@ -1,6 +1,6 @@
 ---
 name: pydantic-ai
-description: "Build production-ready AI agents with PydanticAI; type-safe tool use, structured outputs, dependency injection, and multi-model support."
+description: "Build production-ready AI agents with PydanticAI — type-safe tool use, structured outputs, dependency injection, and multi-model support."
 category: ai-agents
 risk: safe
 source: community
@@ -10,11 +10,11 @@ tags: [pydantic-ai, ai-agents, llm, openai, anthropic, gemini, tool-use, structu
 tools: [claude, cursor, gemini]
 ---
 
-# PydanticAI: Typed AI Agents in Python
+# PydanticAI — Typed AI Agents in Python
 
 ## Overview
 
-PydanticAI is a Python agent framework from the Pydantic team that brings the same type-safety and validation guarantees as Pydantic to LLM-based applications. It supports structured outputs (validated with Pydantic models), dependency injection for testability, streamed responses, multi-turn conversations, and tool use; across OpenAI, Anthropic, Google Gemini, Groq, Mistral, and Ollama. Use this skill when building production AI agents, chatbots, or LLM pipelines where correctness and testability matter.
+PydanticAI is a Python agent framework from the Pydantic team that brings the same type-safety and validation guarantees as Pydantic to LLM-based applications. It supports structured outputs (validated with Pydantic models), dependency injection for testability, streamed responses, multi-turn conversations, and tool use — across OpenAI, Anthropic, Google Gemini, Groq, Mistral, and Ollama. Use this skill when building production AI agents, chatbots, or LLM pipelines where correctness and testability matter.
 
 ## When to Use This Skill
 
@@ -46,7 +46,7 @@ pip install 'pydantic-ai[vertexai]'     # Google Vertex AI
 ```python
 from pydantic_ai import Agent
 
-# Simple agent: returns a plain string
+# Simple agent — returns a plain string
 agent = Agent(
     'anthropic:claude-sonnet-4-6',
     system_prompt='You are a helpful assistant. Be concise.',
@@ -84,7 +84,7 @@ print(f"Recommended: {review.recommended}")
 
 ### Step 4: Tool Use
 
-Register tools with `@agent.tool`; the LLM can call them during a run:
+Register tools with `@agent.tool` — the LLM can call them during a run:
 
 ```python
 from pydantic_ai import Agent, RunContext
@@ -224,7 +224,7 @@ agent = Agent('openai:gpt-4o', system_prompt='You are a helpful assistant.')
 result1 = agent.run_sync('My name is Alice.')
 history = result1.all_messages()
 
-# Second turn: passes conversation history
+# Second turn — passes conversation history
 result2 = agent.run_sync('What is my name?', message_history=history)
 print(result2.output)  # "Your name is Alice."
 ```
@@ -316,43 +316,43 @@ async def research_and_write(topic: str) -> BlogPost:
 
 ## Best Practices
 
-- ✅ Always define `output_type` with a Pydantic model; avoid returning raw strings in production
-- ✅ Use `deps_type` with a dataclass for dependency injection; makes agents testable
-- ✅ Use `TestModel` in unit tests; never hit a real LLM in CI
+- ✅ Always define `output_type` with a Pydantic model — avoid returning raw strings in production
+- ✅ Use `deps_type` with a dataclass for dependency injection — makes agents testable
+- ✅ Use `TestModel` in unit tests — never hit a real LLM in CI
 - ✅ Add `@agent.output_validator` for business-logic checks beyond Pydantic validation
 - ✅ Use `run_stream` for long outputs in user-facing applications to show progressive results
-- ❌ Don't put secrets (API keys) in `Agent()` arguments; use environment variables
-- ❌ Don't share a single `Agent` instance across async tasks if deps differ; create per-request instances or use `agent.run()` with per-call `deps`
-- ❌ Don't catch `ValidationError` broadly; let PydanticAI retry with `ModelRetry` for recoverable LLM output errors
+- ❌ Don't put secrets (API keys) in `Agent()` arguments — use environment variables
+- ❌ Don't share a single `Agent` instance across async tasks if deps differ — create per-request instances or use `agent.run()` with per-call `deps`
+- ❌ Don't catch `ValidationError` broadly — let PydanticAI retry with `ModelRetry` for recoverable LLM output errors
 
 ## Security & Safety Notes
 
-- Set API keys via environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, etc.); never hardcode them.
-- Validate all tool inputs before passing to external systems; use Pydantic models or manual checks.
+- Set API keys via environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, etc.) — never hardcode them.
+- Validate all tool inputs before passing to external systems — use Pydantic models or manual checks.
 - Tools that mutate data (write to DB, send emails, call payment APIs) should require explicit user confirmation before the agent invokes them in production.
 - Store minimal redacted audit metadata for consequential actions; full messages can contain secrets and personal data.
 - Set `retries=` limits on `Agent()` to prevent runaway loops on persistent validation failures.
 
 ## Common Pitfalls
 
-- **Problem:** `ValidationError` on every LLM response; structured output never validates
+- **Problem:** `ValidationError` on every LLM response — structured output never validates
   **Solution:** Simplify `output_type` fields. Use `Optional` and `default` where appropriate. The model may struggle with overly strict schemas.
 
 - **Problem:** Tool is never called by the LLM
-  **Solution:** Write a clear, specific docstring for the tool function; PydanticAI sends the docstring as the tool description to the LLM.
+  **Solution:** Write a clear, specific docstring for the tool function — PydanticAI sends the docstring as the tool description to the LLM.
 
 - **Problem:** `RunContext` dependency is `None` inside a tool
   **Solution:** Pass `deps=` when calling `agent.run()` or `agent.run_sync()`. Dependencies are not set globally.
 
 - **Problem:** `asyncio.run()` error when calling `agent.run()` inside FastAPI
-  **Solution:** Use `await agent.run()` directly in async FastAPI route handlers; don't wrap in `asyncio.run()`.
+  **Solution:** Use `await agent.run()` directly in async FastAPI route handlers — don't wrap in `asyncio.run()`.
 
 ## Related Skills
 
-- `@langchain-architecture`; Alternative Python AI framework (more flexible, less type-safe)
-- `@llm-application-dev-ai-assistant`; General LLM application development patterns
-- `@fastapi-templates`; Serving PydanticAI agents via FastAPI endpoints
-- `@agent-orchestration-multi-agent-optimize`; Orchestrating multiple PydanticAI agents
+- `@langchain-architecture` — Alternative Python AI framework (more flexible, less type-safe)
+- `@llm-application-dev-ai-assistant` — General LLM application development patterns
+- `@fastapi-templates` — Serving PydanticAI agents via FastAPI endpoints
+- `@agent-orchestration-multi-agent-optimize` — Orchestrating multiple PydanticAI agents
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

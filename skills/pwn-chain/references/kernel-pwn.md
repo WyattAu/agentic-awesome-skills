@@ -214,7 +214,7 @@ uint64_t rop[] = {
 };
 ```
 
-实际上**真实利用基本不走这条路**; 直接 commit_creds ROP 更短更稳。
+实际上**真实利用基本不走这条路** — 直接 commit_creds ROP 更短更稳。
 
 ## KASLR leak 渠道
 
@@ -245,7 +245,7 @@ unsigned long kbase = commit_creds - 0xXXXXX;  // 偏移看 vmlinux
 ## 完整 exploit 模板（用户态 + ioctl 触发 + ROP 提权 + shell）
 
 ```c
-// exploit.c; 内核 pwn 通用骨架
+// exploit.c — 内核 pwn 通用骨架
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -359,4 +359,4 @@ int main(void) {
 - **KPTI** 让用户态/内核态页表分离，返回用户态必须走 `swapgs_restore_regs_and_return_to_usermode` 这个 trampoline，不能直接 swapgs+iretq
 - **FG-KASLR**（function-granular KASLR）让函数级别随机化，需要 leak 多个符号反推每个函数偏移
 - **CET / IBT**（Intel 控制流强制）让间接跳转必须落在 ENDBR 指令，部分 gadget 失效
-- **不要在内核里调 printk 输出测试**; 串口 IO 会改变时序，破坏 race；用一个 magic 寄存器值（rcx=0xdeadbeef）+ gdb watch 来调试
+- **不要在内核里调 printk 输出测试** — 串口 IO 会改变时序，破坏 race；用一个 magic 寄存器值（rcx=0xdeadbeef）+ gdb watch 来调试

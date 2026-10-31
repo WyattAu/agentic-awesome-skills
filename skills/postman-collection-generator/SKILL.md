@@ -23,7 +23,7 @@ Generates a valid, import-ready **Postman Collection v2.1** JSON from:
 
 ---
 
-## Step 1: Extract API Information
+## Step 1 — Extract API Information
 
 Parse the user's input and extract for **each endpoint**:
 
@@ -41,7 +41,7 @@ If input is ambiguous, label method/auth/schema assumptions rather than claiming
 
 ---
 
-## Step 2: Build the Collection JSON
+## Step 2 — Build the Collection JSON
 
 Use this v2.1 template, replacing placeholders with valid JSON and validating the final document against the actual schema:
 
@@ -99,10 +99,10 @@ Use this v2.1 template, replacing placeholders with valid JSON and validating th
 
 ---
 
-## Step 3: Environment Variables
+## Step 3 — Environment Variables
 
 Extract names into a companion **Postman Environment** file with empty secret values. Never copy real credentials from cURL into exported/shared artifacts; parse cURL as inert text, not shell code:
-- `base_url`; the API host
+- `base_url` — the API host
 - Any tokens, API keys, or IDs mentioned
 
 ```json
@@ -119,7 +119,7 @@ Extract names into a companion **Postman Environment** file with empty secret va
 
 ---
 
-## Step 4: Output
+## Step 4 — Output
 
 1. Output the **Collection JSON** in a code block labeled `collection.json`
 2. Output the **Environment JSON** in a code block labeled `environment.json`

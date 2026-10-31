@@ -53,7 +53,7 @@ d = {k: v for k, v in pairs}
 # ❌ Generator converted to list unnecessarily
 total = sum(list(x * 2 for x in nums))
 
-# ✅: generator expression works directly in sum()
+# ✅ — generator expression works directly in sum()
 total = sum(x * 2 for x in nums)
 ```
 
@@ -124,8 +124,8 @@ groups = defaultdict(list)
 for item in items:
     groups[item.category].append(item)
 
-# ✅: same thing, just be explicit about defaultdict; it IS the right tool
-# (this example is already correct: don't replace defaultdict with a loop)
+# ✅ — same thing, just be explicit about defaultdict; it IS the right tool
+# (this example is already correct — don't replace defaultdict with a loop)
 ```
 
 ```python
@@ -174,7 +174,7 @@ def append_to(item, lst=None):
 # ❌ Positional args for everything when keyword clarity helps
 create_user("Alice", True, False, 30)
 
-# ✅: use keyword args at call site for boolean/ambiguous params
+# ✅ — use keyword args at call site for boolean/ambiguous params
 create_user("Alice", is_admin=True, is_active=False, age=30)
 ```
 
@@ -185,7 +185,7 @@ def process_and_save(data):
     # 20 lines of DB write
     ...
 
-# ✅: split only if each part is reused OR independently testable
+# ✅ — split only if each part is reused OR independently testable
 def _transform(data): ...
 def _save(record): ...
 def process_and_save(data): _save(_transform(data))
@@ -217,13 +217,13 @@ class MathUtils:
     @staticmethod
     def add(a, b): return a + b
 
-# ✅: module-level functions; classes for state + behavior
+# ✅ — module-level functions; classes for state + behavior
 def add(a, b): return a + b
 ```
 
 ```python
 # ❌ __repr__ written manually when dataclass gives it free
-# (see above: use @dataclass)
+# (see above — use @dataclass)
 ```
 
 **Use `@dataclass(frozen=True)` for immutable value objects. Use `NamedTuple` when you need tuple unpacking.**
@@ -239,7 +239,7 @@ try:
 except:
     pass
 
-# ✅: catch the specific exception; don't swallow silently
+# ✅ — catch the specific exception; don't swallow silently
 try:
     risky()
 except ValueError as e:
@@ -294,7 +294,7 @@ T = TypeVar("T")
 def first(lst: list[T]) -> T: ...
 ```
 
-**Don't add type hints to every local variable; annotate function signatures and class fields; leave obvious locals inferred.**
+**Don't add type hints to every local variable — annotate function signatures and class fields; leave obvious locals inferred.**
 
 ---
 

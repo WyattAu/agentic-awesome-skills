@@ -38,7 +38,7 @@ Full argument list:
 ## Time and dates
 
 - `when` dates are **UTC days**. A late-evening kick-off in the Americas can fall on the next UTC
-  day; if a match seems missing, check the adjacent day.
+  day — if a match seems missing, check the adjacent day.
 - Kick-off times are UTC timestamps. Convert them to the user's time zone when you know it and
   name the zone you used.
 
@@ -48,13 +48,13 @@ Full argument list:
   minute; for an update, call again.
 - A match that hasn't started has no events yet, and line-ups only appear shortly before
   kick-off.
-- xG and some team statistics are not available for every competition; leave them out rather
+- xG and some team statistics are not available for every competition — leave them out rather
   than estimating.
 
 ## Tables
 
 - Qualification and relegation zones come with the table, along with each team's recent form.
-- Some competitions return more than one table (groups); present the one the user asked about.
+- Some competitions return more than one table (groups) — present the one the user asked about.
 
 ## Examples
 

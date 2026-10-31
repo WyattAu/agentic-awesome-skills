@@ -114,7 +114,7 @@ struct NeoCard: View {
 ```
 - `.shadow(radius: 0)` is the secret. Set an offset (e.g. `x: 6, y: 6`).
 - For interactions, remove the shadow and translate the element by the same offset amounts using `.offset()`.
-- Ensure `.animation(.none)`; Neo-brutalism interactions should be instant, snapping like physical switches.
+- Ensure `.animation(.none)` — Neo-brutalism interactions should be instant, snapping like physical switches.
 
 ### Flutter
 ```dart

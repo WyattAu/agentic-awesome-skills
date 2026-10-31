@@ -30,7 +30,7 @@ If you need to provide a list of mutually exclusive choices that aren’t comman
 
 **Balance menu length with ease of use.** Because people have to interact with a pull-down button before they can view its menu, listing a minimum of three items can help the interaction feel worthwhile. If you need to list only one or two items, consider using alternative components to present them, such as buttons to perform actions and toggles or switches to present selections. In contrast, listing too many items in a pull-down button’s menu can slow people down because it takes longer to find a specific item.
 
-**Display a succinct menu title only if it adds meaning.** In general, a pull-down button’s content; combined with descriptive menu items; provides all the context people need, making a menu title unnecessary.
+**Display a succinct menu title only if it adds meaning.** In general, a pull-down button’s content — combined with descriptive menu items — provides all the context people need, making a menu title unnecessary.
 
 **Let people know when a pull-down button’s menu item is destructive, and ask them to confirm their intent.** Menus use red text to highlight actions that you identify as potentially destructive. A destructive role or red label does not automatically present confirmation. Implement an appropriate [confirmation dialog or action sheet](https://developer.apple.com/design/human-interface-guidelines/action-sheets) when the action’s consequences warrant it, or provide reliable undo for reversible actions. Because an action sheet appears in a different location from the menu and requires deliberate dismissal, it can help people avoid losing data by mistake.
 
@@ -64,11 +64,11 @@ You can also let people reveal a pull-down menu by performing a specific gesture
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons#Developer-documentation)
 
-[`Menu`](https://developer.apple.com/documentation/SwiftUI/Menu); SwiftUI; use a Picker with a menu style for selection rather than a command menu
+[`Menu`](https://developer.apple.com/documentation/SwiftUI/Menu) — SwiftUI; use a Picker with a menu style for selection rather than a command menu
 
-[`showsMenuAsPrimaryAction`](https://developer.apple.com/documentation/UIKit/UIButton/showsMenuAsPrimaryAction); UIKit
+[`showsMenuAsPrimaryAction`](https://developer.apple.com/documentation/UIKit/UIButton/showsMenuAsPrimaryAction) — UIKit
 
-[`pullsDown`](https://developer.apple.com/documentation/AppKit/NSPopUpButton/pullsDown); AppKit
+[`pullsDown`](https://developer.apple.com/documentation/AppKit/NSPopUpButton/pullsDown) — AppKit
 
 ## [Change log](https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons#Change-log)
 
