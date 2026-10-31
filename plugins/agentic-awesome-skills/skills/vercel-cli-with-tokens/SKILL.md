@@ -1,6 +1,6 @@
 ---
 name: vercel-cli-with-tokens
-description: "Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. \"deploy to vercel\", \"set up vercel\", \"add environment variables to vercel\"."
+description: "Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login; e.g. \"deploy to vercel\", \"set up vercel\", \"add environment variables to vercel\"."
 risk: safe
 source: "https://github.com/vercel-labs/agent-skills"
 date_added: "2026-06-02"
@@ -11,7 +11,7 @@ date_added: "2026-06-02"
 Deploy and manage projects on Vercel using the CLI with token-based authentication, without relying on `vercel login`.
 
 ## When to Use
-- Use this skill when the task matches this description: Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. "deploy to vercel", "set up vercel", "add environment variables to vercel".
+- Use this skill when the task matches this description: Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login; e.g. "deploy to vercel", "set up vercel", "add environment variables to vercel".
 
 ## Step 1: Locate the Vercel Token
 
@@ -54,19 +54,19 @@ VERCEL_TOKEN="$(sed -n "s/^${vercel_var}=//p" .env | tail -n 1)"
 export VERCEL_TOKEN
 ```
 
-### D) No token found — ask the user
+### D) No token found: ask the user
 
 If none of the above yield a token, ask the user to configure one in approved local secret storage, never paste it into chat. They can create a Vercel access token at vercel.com/account/tokens.
 
 ---
 
-**Important:** Once `VERCEL_TOKEN` is exported as an environment variable, the Vercel CLI reads it natively — **do not pass it as a `--token` flag**. Putting secrets in command-line arguments exposes them in shell history and process listings.
+**Important:** Once `VERCEL_TOKEN` is exported as an environment variable, the Vercel CLI reads it natively; **do not pass it as a `--token` flag**. Putting secrets in command-line arguments exposes them in shell history and process listings.
 
 ```bash
-# Bad — token visible in shell history and process listings
+# Bad: token visible in shell history and process listings
 vercel deploy --token "vca_abc123"
 
-# Good — CLI reads VERCEL_TOKEN from the environment
+# Good: CLI reads VERCEL_TOKEN from the environment
 [ -n "${VERCEL_TOKEN:-}" ] || { echo "Set VERCEL_TOKEN first" >&2; exit 1; }
 vercel deploy
 ```
@@ -91,14 +91,14 @@ sed -nE 's/^([A-Z0-9_]*VERCEL[A-Z0-9_]*)=.*/\1/p' .env 2>/dev/null
 echo "$PROJECT_URL" | sed 's|https://vercel.com/||' | cut -d/ -f1
 ```
 
-**If you have both `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` in your environment**, export them — the CLI will use these automatically and skip any `.vercel/` directory:
+**If you have both `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` in your environment**, export them; the CLI will use these automatically and skip any `.vercel/` directory:
 
 ```bash
 export VERCEL_ORG_ID="<org-id>"
 export VERCEL_PROJECT_ID="<project-id>"
 ```
 
-Note: `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` must be set together — setting only one causes an error.
+Note: `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` must be set together; setting only one causes an error.
 
 ## CLI Setup
 
@@ -113,7 +113,7 @@ vercel --version
 
 Always deploy as **preview** unless the user explicitly requests production. Choose a method based on what you have available.
 
-### Quick Deploy (have project ID — no linking needed)
+### Quick Deploy (have project ID: no linking needed)
 
 When `VERCEL_TOKEN` and `VERCEL_PROJECT_ID` are set in the environment, deploy directly:
 
@@ -139,7 +139,7 @@ Check status:
 vercel inspect <deployment-url>
 ```
 
-### Full Deploy Flow (no project ID — need to link)
+### Full Deploy Flow (no project ID: need to link)
 
 Use this when you have a token and team but no pre-existing project ID.
 
@@ -181,7 +181,7 @@ If the project is already linked, check `orgId` in `.vercel/project.json` or `.v
 
 #### Deploy after linking
 
-**A) Git Push Deploy — has git remote (preferred)**
+**A) Git Push Deploy; has git remote (preferred)**
 
 Git pushes trigger automatic Vercel deployments.
 
@@ -200,7 +200,7 @@ Git pushes trigger automatic Vercel deployments.
    ```
    Find the latest entry in the `deployments` array.
 
-**B) CLI Deploy — no git remote**
+**B) CLI Deploy; no git remote**
 
 ```bash
 vercel deploy --scope <team-slug> -y --no-wait
@@ -228,12 +228,12 @@ vercel inspect <deployment-url>
 ### About `.vercel/` Directory
 
 A linked project has either:
-- `.vercel/project.json` — from `vercel link`. Contains `projectId` and `orgId`.
-- `.vercel/repo.json` — from `vercel link --repo`. Contains `orgId`, `remoteName`, and a `projects` map.
+- `.vercel/project.json`; from `vercel link`. Contains `projectId` and `orgId`.
+- `.vercel/repo.json`; from `vercel link --repo`. Contains `orgId`, `remoteName`, and a `projects` map.
 
 Not needed when `VERCEL_ORG_ID` + `VERCEL_PROJECT_ID` are both set in the environment.
 
-**Do NOT** run `vercel project inspect` or `vercel link` in an unlinked directory to detect state — they will interactively prompt or silently link as a side-effect. `vercel ls` is safe (in an unlinked directory it defaults to showing all deployments for the scope). `vercel whoami` is safe anywhere.
+**Do NOT** run `vercel project inspect` or `vercel link` in an unlinked directory to detect state; they will interactively prompt or silently link as a side-effect. `vercel ls` is safe (in an unlinked directory it defaults to showing all deployments for the scope). `vercel whoami` is safe anywhere.
 
 ## Managing Environment Variables
 
@@ -276,10 +276,10 @@ vercel logs <deployment-url>
 # List domains
 vercel domains ls --scope <team-slug>
 
-# Add a domain to the project — linked or env-linked directory (1 arg)
+# Add a domain to the project: linked or env-linked directory (1 arg)
 vercel domains add <domain> --scope <team-slug>
 
-# Add a domain — unlinked directory (requires <project> positional)
+# Add a domain: unlinked directory (requires <project> positional)
 vercel domains add <domain> <project> --scope <team-slug>
 ```
 
@@ -287,7 +287,7 @@ Static plan prices/allocations below are historical examples; verify current off
 
 ## Stripe Projects Plan Changes
 
-If this project is managed by Stripe Projects. **Ask the user before running any paid or destructive plan change** — upgrades bill a real card, downgrades remove seats.
+If this project is managed by Stripe Projects. **Ask the user before running any paid or destructive plan change**; upgrades bill a real card, downgrades remove seats.
 
 First run `stripe projects status --json` to confirm the Vercel resource's local name. The examples below assume the default (`vercel-plan`); substitute the actual name if it was renamed at `stripe projects add` time.
 
@@ -297,7 +297,7 @@ First run `stripe projects status --json` to confirm the Vercel resource's local
 ### What Pro gives you
 
 - $20/month platform fee, includes $20/month of usage credit.
-- Turbo build machines (30 vCPUs, 60 GB memory) by default for new projects — significantly faster builds than Hobby.
+- Turbo build machines (30 vCPUs, 60 GB memory) by default for new projects; significantly faster builds than Hobby.
 - 1 deploying seat + unlimited free Viewer seats (read-only collaborators, preview comments).
 - Higher included allocations (1 TB Fast Data Transfer, 10M Edge Requests per month).
 - Paid add-ons available: SAML SSO, HIPAA BAA, Flags Explorer, Observability Plus, Speed Insights, Web Analytics Plus.
@@ -350,9 +350,9 @@ vercel inspect <deployment-url> --logs
 ```
 
 Common causes:
-- Missing dependencies — ensure `package.json` is complete and committed.
-- Missing environment variables — add with `vercel env add`.
-- Framework misconfiguration — check `vercel.json`. Vercel auto-detects frameworks (Next.js, Remix, Vite, etc.) from `package.json`; override with `vercel.json` if detection is wrong.
+- Missing dependencies; ensure `package.json` is complete and committed.
+- Missing environment variables; add with `vercel env add`.
+- Framework misconfiguration; check `vercel.json`. Vercel auto-detects frameworks (Next.js, Remix, Vite, etc.) from `package.json`; override with `vercel.json` if detection is wrong.
 
 ### CLI not installed
 

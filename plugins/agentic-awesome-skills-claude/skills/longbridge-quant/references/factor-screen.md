@@ -16,7 +16,7 @@ Fundamental multi-factor screener. Applies user-defined thresholds across PE, PB
 
 ## Workflow
 
-1. **Collect screening criteria** — ask the user if not given. Example defaults:
+1. **Collect screening criteria**; ask the user if not given. Example defaults:
    - Value screen: PE < 20, PB < 2, ROE > 12%, dividend yield > 2%
    - Growth screen: revenue YoY > 20%, net profit YoY > 20%, PE < 40
 2. **Obtain a candidate universe**. Options (ask user):
@@ -52,7 +52,7 @@ longbridge valuation --help
 longbridge dividend --help
 
 # Step 1: get universe (if using an index)
-# NOTE: JSON response uses key "stocks" (not "list") — extract symbols from data["stocks"]
+# NOTE: JSON response uses key "stocks" (not "list"): extract symbols from data["stocks"]
 longbridge constituent 000300.SH --format json   # run --help for available flags
 
 # Step 2: per-symbol data (repeat for each candidate)
@@ -66,7 +66,7 @@ longbridge dividend 600519.SH --format json        # dividend history
 ## Output
 
 ```
-Factor Screen Results — Source: Longbridge Securities
+Factor Screen Results; Source: Longbridge Securities
 Criteria: PE < 20, ROE > 15%, Revenue YoY > 10%
 Universe: CSI 300 (300 stocks checked)  |  Passed: N
 
@@ -86,7 +86,7 @@ Notes:
 
 ## Limitations
 
-- Screening is applied to a **user-supplied list or index constituents** — this is not a real-time full-market screener.
+- Screening is applied to a **user-supplied list or index constituents**; this is not a real-time full-market screener.
 - Data is point-in-time from the last available report; forward-looking factors require analyst consensus (`longbridge-fundamental`).
 - If the candidate list exceeds ~30 symbols, process in batches and note that partial results are shown.
 

@@ -1,13 +1,13 @@
 # Gemini 3.1 Flash Lite Image (`gemini-3.1-flash-lite-image`)
 
 ## Overview
-Nano Banana 2 Lite is Google's fastest and cheapest Gemini image model — the draft tier for rapid concept exploration and quick visual iteration before promoting a picked result to a higher tier.
+Nano Banana 2 Lite is Google's fastest and cheapest Gemini image model; the draft tier for rapid concept exploration and quick visual iteration before promoting a picked result to a higher tier.
 
 ## Model Specification
 - **Model ID**: `gemini-3.1-flash-lite-image`
-- **API**: Interactions API (`client.interactions.create`) — this example uses Interactions; verify other endpoint support rather than assuming generateContent is unavailable.
+- **API**: Interactions API (`client.interactions.create`); this example uses Interactions; verify other endpoint support rather than assuming generateContent is unavailable.
 - **Primary Use**: Image drafts, rapid prototyping, thumbnail concepts.
-- **Cost**: Billable per call. Quote the current price from the live [pricing page](https://ai.google.dev/gemini-api/docs/pricing) and get explicit user approval before every generation — see the skill's cost-approval rule.
+- **Cost**: Billable per call. Quote the current price from the live [pricing page](https://ai.google.dev/gemini-api/docs/pricing) and get explicit user approval before every generation; see the skill's cost-approval rule.
 - **Reference images**: Model/version-specific input limits; check the current model documentation before selecting multiple references.
 - **Reproducibility**: No `seed` parameter is documented for this model. Treat every generation as non-deterministic; for "same image but change X" requests, reuse the exact original prompt and reference images rather than promising an identical re-roll.
 

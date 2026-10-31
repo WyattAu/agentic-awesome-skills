@@ -70,9 +70,9 @@ function Page() {
 
 ### Layout Animations
 
-- `LinearTransition` — Smooth linear interpolation
-- `SequencedTransition` — Sequenced property changes
-- `FadingTransition` — Fade between states
+- `LinearTransition`; Smooth linear interpolation
+- `SequencedTransition`; Sequenced property changes
+- `FadingTransition`; Fade between states
 
 ## Customizing Animations
 
@@ -218,6 +218,6 @@ Animate list items with delays:
 - You can't pass `Color` (from expo-router) or `PlatformColor` values to reanimated views or styles; use static colors instead
 - Keep animations under 300ms for responsive feel
 - Use spring animations for natural movement
-- Avoid animating layout properties (width, height) when possible — prefer transforms
+- Avoid animating layout properties (width, height) when possible; prefer transforms
 
 All shared-value hooks run inside a component/custom hook; examples showing only statements are excerpts. Import Easing for easing examples and provide styles.box. Respect reduced motion and avoid unbounded stagger delays.

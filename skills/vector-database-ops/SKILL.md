@@ -43,7 +43,7 @@ Use this skill when:
 
 Single-node unauthenticated containers below are local examples, not a production security/availability configuration. Pin reviewed images/config schemas, use authenticated encrypted access and restore-tested backups. Derive tenant filters from authenticated server identity, never an arbitrary client tenant string. Match embedding dimensions/model/metric on ingestion and query; table scale labels are qualitative. `indexing_threshold=0` disables indexing rather than forcing it; restore an appropriate nonzero threshold after bulk upload and verify actual index state with a bounded wait.
 
-## Qdrant — Production Deployment
+## Qdrant: Production Deployment
 
 ```bash
 # Docker (single node)
@@ -103,7 +103,7 @@ client.create_collection(
     vectors_config=VectorParams(
         size=1536,                         # OpenAI ada-002 / text-embedding-3-small
         distance=Distance.COSINE,
-        on_disk=True,                      # save RAM — vectors stored on disk
+        on_disk=True,                      # save RAM; vectors stored on disk
     ),
     hnsw_config=HnswConfigDiff(
         m=32,                              # higher = better recall, more RAM
@@ -159,7 +159,7 @@ results = client.query_points(
 )
 ```
 
-## pgvector — PostgreSQL Extension
+## pgvector: PostgreSQL Extension
 
 ```sql
 -- Enable extension
@@ -237,7 +237,7 @@ volumes:
 ## Backup and Restore
 
 ```bash
-# Qdrant — snapshot backup
+# Qdrant: snapshot backup
 curl -X POST "http://localhost:6333/collections/documents/snapshots"
 # Download snapshot
 curl -O "http://localhost:6333/collections/documents/snapshots/documents-snapshot.snapshot"
@@ -246,7 +246,7 @@ curl -X POST "http://localhost:6333/collections/documents/snapshots/recover" \
   -H "Content-Type: application/json" \
   -d '{"location": "/qdrant/snapshots/documents-snapshot.snapshot"}'
 
-# pgvector — standard pg_dump
+# pgvector: standard pg_dump
 pg_dump -h localhost -U postgres -d vectordb \
   --table=documents --format=custom > documents-backup.dump
 
@@ -257,7 +257,7 @@ pg_restore -h localhost -U postgres -d vectordb documents-backup.dump
 ## Performance Tuning
 
 ```python
-# Qdrant — optimize collection after bulk load
+# Qdrant: optimize collection after bulk load
 client.update_collection(
     collection_name="documents",
     optimizers_config={"indexing_threshold": 10000},  # illustrative nonzero threshold; restore the reviewed value

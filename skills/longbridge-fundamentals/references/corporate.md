@@ -20,7 +20,7 @@ Single symbol per call. The CLI accepts `--lang zh-CN` or `--lang en` for conten
 
 1. Resolve to `<CODE>.<MARKET>` (e.g. `AAPL.US`, `700.HK`).
 2. Pick the matching subcommand from the prompt cue (table above).
-3. For composite questions ("give me a full picture of X as a company") — call several subcommands concurrently and merge.
+3. For composite questions ("give me a full picture of X as a company"); call several subcommands concurrently and merge.
 4. Render a structured summary; cite **Longbridge Securities** and the report date when applicable.
 
 ## CLI
@@ -41,17 +41,17 @@ longbridge <invest-relation-subcommand> 700.HK --format json
 
 Render results in the user's language. Suggested layouts:
 
-**`shareholder`** — table of name / % held / change / report date. Highlight the top 3 by holding and any change > ±10% if `--range` is `all`.
+**`shareholder`**; table of name / % held / change / report date. Highlight the top 3 by holding and any change > ±10% if `--range` is `all`.
 
-**`executive`** — list of name / title / appointment date (if available). Group by role (CEO / CFO / Chair / others).
+**`executive`**; list of name / title / appointment date (if available). Group by role (CEO / CFO / Chair / others).
 
-**`company`** — short profile paragraph: founding year, headquarters, employees, IPO date + price, business description.
+**`company`**; short profile paragraph: founding year, headquarters, employees, IPO date + price, business description.
 
-**`corp-action`** — chronological list (most recent first): date / type (split / dividend / rights / bonus) / ratio or amount. Annotate split adjustments.
+**`corp-action`**; chronological list (most recent first): date / type (split / dividend / rights / bonus) / ratio or amount. Annotate split adjustments.
 
-**`invest-relation`** — tree-like list: parent → company → subsidiaries (with stake % when available). Note cross-listed sister tickers.
+**`invest-relation`**; tree-like list: parent → company → subsidiaries (with stake % when available). Note cross-listed sister tickers.
 
-When data is empty, state so explicitly (e.g. _"No corporate actions on record."_) — do not invent.
+When data is empty, state so explicitly (e.g. _"No corporate actions on record."_); do not invent.
 
 ## Error handling
 
@@ -61,4 +61,4 @@ When data is empty, state so explicitly (e.g. _"No corporate actions on record."
 | stderr `not logged in` / `unauthorized`     | These subcommands are public quote scope; if auth is requested, hint `longbridge auth login`. |
 | Empty result (no shareholders / no actions) | State explicitly: _"No data for this symbol."_ Do not invent.                                 |
 | Symbol mapping fails                        | Ask the user for the `<CODE>.<MARKET>` form.                                                  |
-| Other stderr                                | Relay a redacted error summary — never silently retry.                                                        |
+| Other stderr                                | Relay a redacted error summary; never silently retry.                                                        |

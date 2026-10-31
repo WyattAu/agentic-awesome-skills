@@ -64,7 +64,7 @@ Models develop attention patterns from training data distributions where shorter
 Position encoding interpolation allows models to handle longer sequences by adapting them to originally trained smaller contexts. However, this adaptation introduces degradation in token position understanding. Models remain highly capable at longer contexts but show reduced precision for information retrieval and long-range reasoning compared to performance on shorter contexts.
 
 **The Progressive Disclosure Principle**
-Progressive disclosure manages context efficiently by loading information only as needed. At startup, agents load only skill names and descriptions—sufficient to know when a skill might be relevant. Full content loads only when a skill is activated for specific tasks.
+Progressive disclosure manages context efficiently by loading information only as needed. At startup, agents load only skill names and descriptions-sufficient to know when a skill might be relevant. Full content loads only when a skill is activated for specific tasks.
 
 This approach keeps agents fast while giving them access to more context on demand. The principle applies at multiple levels: skill selection, document loading, and even tool result retrieval.
 
@@ -72,7 +72,7 @@ This approach keeps agents fast while giving them access to more context on dema
 
 The assumption that larger context windows solve memory problems has been empirically debunked. Context engineering means finding the smallest possible set of high-signal tokens that maximize the likelihood of desired outcomes.
 
-Several factors create pressure for context efficiency. Processing cost grows disproportionately with context length—not just double the cost for double the tokens, but potentially superlinear prefill work for dense attention, with actual cost depending on architecture, kernels, caching and provider pricing. Model performance degrades beyond certain context lengths even when the window technically supports more tokens. Long inputs remain expensive even with prefix caching.
+Several factors create pressure for context efficiency. Processing cost grows disproportionately with context length-not just double the cost for double the tokens, but potentially superlinear prefill work for dense attention, with actual cost depending on architecture, kernels, caching and provider pricing. Model performance degrades beyond certain context lengths even when the window technically supports more tokens. Long inputs remain expensive even with prefix caching.
 
 The guiding principle is informativity over exhaustiveness. Include what matters for the decision at hand, exclude what does not, and design systems that can access additional information on demand.
 

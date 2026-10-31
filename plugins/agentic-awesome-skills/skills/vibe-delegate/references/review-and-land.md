@@ -27,9 +27,9 @@ For changes with a specialized verification shape:
 
 Start with `touchedFiles`, open the diff, and compare it to the brief:
 
-- **Scope creep** — changes the brief excluded.
-- **Scope shortfall** — missed behavior, edges, or cleanup.
-- **Quiet judgment calls** — defensible but unasked decisions that need review.
+- **Scope creep**; changes the brief excluded.
+- **Scope shortfall**; missed behavior, edges, or cleanup.
+- **Quiet judgment calls**; defensible but unasked decisions that need review.
 
 ## The implementer sweep
 

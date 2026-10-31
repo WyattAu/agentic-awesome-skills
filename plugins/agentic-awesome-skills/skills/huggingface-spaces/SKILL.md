@@ -1,6 +1,6 @@
 ---
 name: huggingface-spaces
-description: "Build, deploy, and maintain applications on Hugging Face Spaces — Gradio / Docker / Static SDKs, ZeroGPU and dedicated hardware, model loading, debugging, buckets, inference providers, community grants."
+description: "Build, deploy, and maintain applications on Hugging Face Spaces; Gradio / Docker / Static SDKs, ZeroGPU and dedicated hardware, model loading, debugging, buckets, inference providers, community grants."
 risk: critical
 source: https://github.com/huggingface/skills/tree/main/skills/huggingface-spaces
 source_repo: huggingface/skills
@@ -13,7 +13,7 @@ license_source: https://github.com/huggingface/skills/blob/main/LICENSE
 # Hugging Face Spaces
 ## When to Use
 
-Use this skill when you need build, deploy, and maintain applications on Hugging Face Spaces — Gradio / Docker / Static SDKs, ZeroGPU and dedicated hardware, model loading, debugging, buckets, inference providers, community grants. Use whenever the user asks to create or host an app on Hugging Face, port existing code to a Space, diagnose build/runtime errors, or choose storage and inference hardware.
+Use this skill when you need build, deploy, and maintain applications on Hugging Face Spaces; Gradio / Docker / Static SDKs, ZeroGPU and dedicated hardware, model loading, debugging, buckets, inference providers, community grants. Use whenever the user asks to create or host an app on Hugging Face, port existing code to a Space, diagnose build/runtime errors, or choose storage and inference hardware.
 
 
 Hugging Face Spaces host machine-learning applications. Each Space has a git repository; live catalog totals change. This skill covers creating, building, debugging, and maintaining them.
@@ -25,8 +25,8 @@ Modified 2026-10-23: corrected eligibility/version assumptions, deployment/testi
 Before anything else:
 
 1. Check the `hf` CLI is installed: `which hf`. If not, `pip install -U huggingface_hub`.
-2. Check the user is logged in: `hf auth whoami`. If not, ask them to authenticate locally with `hf auth login`; never paste the token into chat or logs — they'll need a write-scoped token from https://huggingface.co/settings/tokens.
-3. Note `whoami`'s `canPay` and `isPro` flags — they gate hardware choices below.
+2. Check the user is logged in: `hf auth whoami`. If not, ask them to authenticate locally with `hf auth login`; never paste the token into chat or logs; they'll need a write-scoped token from https://huggingface.co/settings/tokens.
+3. Note `whoami`'s `canPay` and `isPro` flags; they gate hardware choices below.
 
 The `hf-cli` skill teaches an agent every `hf` command and is the recommended companion to this one. Install it with `hf skills add hf-cli` (add `--claude --global` to install for Claude Code as well, user-level).
 
@@ -34,19 +34,19 @@ The `hf-cli` skill teaches an agent every `hf` command and is the recommended co
 
 A Space is a git repo with three possible SDKs:
 
-- **Gradio** — most Spaces. Python, fast iteration, supports ZeroGPU.
-- **Docker** — arbitrary container. Use when you need a non-Python stack or a pre-built template (Streamlit, Argilla, Shiny, etc. — full list at https://huggingface.co/docs/hub/spaces-sdks-docker). Does **not** support ZeroGPU.
-- **Static** — plain HTML, or a React/Svelte/Vue project built at deploy time. Use for in-browser ML (transformers.js / WebGPU / WebAssembly / onnxruntime-web), project pages, interactive reports, or Spaces that orchestrate other Spaces. No hardware needed.
+- **Gradio**; most Spaces. Python, fast iteration, supports ZeroGPU.
+- **Docker**; arbitrary container. Use when you need a non-Python stack or a pre-built template (Streamlit, Argilla, Shiny, etc.; full list at https://huggingface.co/docs/hub/spaces-sdks-docker). Does **not** support ZeroGPU.
+- **Static**; plain HTML, or a React/Svelte/Vue project built at deploy time. Use for in-browser ML (transformers.js / WebGPU / WebAssembly / onnxruntime-web), project pages, interactive reports, or Spaces that orchestrate other Spaces. No hardware needed.
 
 ### Hardware tiers
 
 Free, no creator cost: **`cpu-basic`** and **`zero-a10g`** (ZeroGPU). Static Spaces are also free and don't need hardware.
 
-**`cpu-basic`** — 2 vCPU / 16 GB. For data viz, API-proxy Spaces, small CPU-bound models.
+**`cpu-basic`**; 2 vCPU / 16 GB. For data viz, API-proxy Spaces, small CPU-bound models.
 
-**ZeroGPU (`zero-a10g`)** — dynamic, per-request GPU allocation on NVIDIA RTX PRO 6000 Blackwell (sm_120). Two sizes: `large` (half MIG, 48 GB, 1× quota) and `xlarge` (full, 96 GB, 2× quota). Free for the Space creator; Space visitors consume their own daily quota (~5 min free / 40 min Pro / 60 min Enterprise). **Gradio-only**, **PyTorch-first**. Hosting eligibility depends on account age/standing and plan; check current ZeroGPU hosting limits before choosing hardware.
+**ZeroGPU (`zero-a10g`)**; dynamic, per-request GPU allocation on NVIDIA RTX PRO 6000 Blackwell (sm_120). Two sizes: `large` (half MIG, 48 GB, 1× quota) and `xlarge` (full, 96 GB, 2× quota). Free for the Space creator; Space visitors consume their own daily quota (~5 min free / 40 min Pro / 60 min Enterprise). **Gradio-only**, **PyTorch-first**. Hosting eligibility depends on account age/standing and plan; check current ZeroGPU hosting limits before choosing hardware.
 
-**Dedicated GPU** (T4, L4, A10G, L40S, A100, H200) — billed to the Space creator by the hour. List + pricing: `hf spaces hardware`. Only the creator can attach these, and only if `canPay=True`. Use when ZeroGPU genuinely doesn't fit — non-PyTorch main model with heavy init, very-large-model long-context inference, etc.
+**Dedicated GPU** (T4, L4, A10G, L40S, A100, H200); billed to the Space creator by the hour. List + pricing: `hf spaces hardware`. Only the creator can attach these, and only if `canPay=True`. Use when ZeroGPU genuinely doesn't fit; non-PyTorch main model with heavy init, very-large-model long-context inference, etc.
 
 If a non-PRO user has a use case that wants ZeroGPU, you first check whether their account qualifies for free ZeroGPU hosting. If it does not, prepare a CPU-safe skeleton and discuss a grant request. See [`references/grants.md`](references/grants.md).
 
@@ -60,7 +60,7 @@ Before deciding how to build anything, search for prior art:
 hf spaces search "<model name or task>" --sdk gradio --limit 10
 ```
 
-If someone has built a similar Space, read its `app.py` and `requirements.txt` — that gives you the working pattern. Saves a lot of blind iteration. Mention to the user what you found before committing to an approach.
+If someone has built a similar Space, read its `app.py` and `requirements.txt`; that gives you the working pattern. Saves a lot of blind iteration. Mention to the user what you found before committing to an approach.
 
 ## 3. Decide SDK and hardware
 
@@ -75,10 +75,10 @@ Follow the user's explicit request first. If they were vague:
 
 ### Sourcing the model
 
-- **GitHub repo** — clone locally to read structure. If it already has a Gradio demo, the minimal viable path is to adapt it onto ZeroGPU (see [`references/zerogpu.md`](references/zerogpu.md)). Otherwise: read the README + inference code, prefer the PyTorch path, estimate VRAM (bf16 ≈ `params_B × 2` GB; 48 GB holds at most 24B bf16 parameters in theory, with no room left for activations, KV cache or runtime overhead, or much larger with quantization — see [`references/zerogpu.md`](references/zerogpu.md) for quantization on ZeroGPU).
-- **HF model repo** — read its README, follow any linked GitHub.
-- **Paper / blog post** — look for an official or unofficial implementation. Don't reimplement unless trivial or the user explicitly asks.
-- **Vague request** — search Spaces first; surface results.
+- **GitHub repo**; clone locally to read structure. If it already has a Gradio demo, the minimal viable path is to adapt it onto ZeroGPU (see [`references/zerogpu.md`](references/zerogpu.md)). Otherwise: read the README + inference code, prefer the PyTorch path, estimate VRAM (bf16 ≈ `params_B × 2` GB; 48 GB holds at most 24B bf16 parameters in theory, with no room left for activations, KV cache or runtime overhead, or much larger with quantization; see [`references/zerogpu.md`](references/zerogpu.md) for quantization on ZeroGPU).
+- **HF model repo**; read its README, follow any linked GitHub.
+- **Paper / blog post**; look for an official or unofficial implementation. Don't reimplement unless trivial or the user explicitly asks.
+- **Vague request**; search Spaces first; surface results.
 
 If the model genuinely won't fit, check **Inference Providers** as an alternative: see [`references/inference-providers.md`](references/inference-providers.md). This avoids hosting the model at all.
 
@@ -96,9 +96,9 @@ hf repos create <namespace>/<name> --type space --space-sdk <gradio|docker|stati
 - `--flavor` selects hardware. `zero-a10g` is the (legacy) identifier for ZeroGPU. Omit for `cpu-basic`. Run `hf spaces hardware` for the full paid list and pricing.
 - Visibility: `--public` (anyone can view), `--private` (only you), `--protected` (app is reachable but git repo / Files tab is private).
 - `--secrets KEY=val` becomes an environment variable inside the Space and is **not** visible to visitors. Use for API keys, gated-repo tokens (`HF_TOKEN=hf_…`), etc. Can also be set later via `hf spaces secrets set <id> KEY=val`.
-- `--env KEY=val` is **visible to visitors** — use only for non-sensitive config (`GRADIO_SSR_MODE=false`, `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`, etc.).
+- `--env KEY=val` is **visible to visitors**; use only for non-sensitive config (`GRADIO_SSR_MODE=false`, `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`, etc.).
 
-> Note: `hardware:` in the README YAML is silently ignored — hardware is only set via `--flavor` at creation, or later via `hf spaces settings <id> --hardware <name>`.
+> Note: `hardware:` in the README YAML is silently ignored; hardware is only set via `--flavor` at creation, or later via `hf spaces settings <id> --hardware <name>`.
 
 ## 5. Build the app
 
@@ -144,7 +144,7 @@ def generate(prompt):
 gr.Interface(fn=generate, inputs=gr.Text(), outputs=gr.Image()).launch()
 ```
 
-Three rules — full treatment in [`references/zerogpu.md`](references/zerogpu.md):
+Three rules; full treatment in [`references/zerogpu.md`](references/zerogpu.md):
 
 1. **`import spaces` before torch / any CUDA-touching import.** It monkey-patches `torch.cuda.*`; once CUDA is initialized in the main process, it's too late.
 2. **Load the model at module scope, `.to("cuda")` eagerly.** ZeroGPU intercepts the call, packs weights to disk, and streams them into VRAM on the first `@spaces.GPU` entry. Lazy loading inside the decorator costs every user.
@@ -164,18 +164,18 @@ Short version:
 - **Gradio patterns** (themes, `gr.Examples`, streaming, custom HTML components, `gr.Server`): [`references/gradio.md`](references/gradio.md).
 - **Docker**: https://huggingface.co/docs/hub/spaces-sdks-docker. Examples: `hf spaces list --filter docker`.
 - **Static**: https://huggingface.co/docs/hub/spaces-sdks-static. For built SPAs, set `app_build_command: npm run build` and `app_file: dist/index.html` in frontmatter.
-- **ZeroGPU specifics** (decorator semantics, sizing, AoTI, generators, concurrency, pickle / `gr.State` across the worker boundary): [`references/zerogpu.md`](references/zerogpu.md) — read this whenever the Space targets ZeroGPU.
+- **ZeroGPU specifics** (decorator semantics, sizing, AoTI, generators, concurrency, pickle / `gr.State` across the worker boundary): [`references/zerogpu.md`](references/zerogpu.md); read this whenever the Space targets ZeroGPU.
 
 
 ## 6. Iterate on the Space, not locally
 
-Build a release candidate from the user request and deploy within the agreed visibility and cost scope — then use the live URL as your test loop. Run useful local parsing, unit and input-validation checks first. Then test an authorized private/staging Space: local success cannot establish ZeroGPU/runtime compatibility, and publication is a separate effect.
+Build a release candidate from the user request and deploy within the agreed visibility and cost scope; then use the live URL as your test loop. Run useful local parsing, unit and input-validation checks first. Then test an authorized private/staging Space: local success cannot establish ZeroGPU/runtime compatibility, and publication is a separate effect.
 
-Once pushed, pick the cheapest update mechanism for each change — hot-reload for pure Python edits, `hf upload` for code-only files hot-reload can't touch, full rebuild only when `requirements.txt` / `Dockerfile` / README frontmatter actually changed. Full ladder + footguns (hot-reload poisoning factory reboot, runtime.sha lag, etc.) in [`references/debugging.md`](references/debugging.md).
+Once pushed, pick the cheapest update mechanism for each change; hot-reload for pure Python edits, `hf upload` for code-only files hot-reload can't touch, full rebuild only when `requirements.txt` / `Dockerfile` / README frontmatter actually changed. Full ladder + footguns (hot-reload poisoning factory reboot, runtime.sha lag, etc.) in [`references/debugging.md`](references/debugging.md).
 
 ## 7. Verify
 
-Don't trust `RUNNING` alone — the app can be running but broken. Four steps, in order:
+Don't trust `RUNNING` alone; the app can be running but broken. Four steps, in order:
 
 **A. Alive?** Stage + hardware:
 ```bash
@@ -193,7 +193,7 @@ Look for model-load completion, no import warnings, no "falling back to CPU" / d
 from gradio_client import Client, handle_file
 import os
 c = Client("<ns>/<name>", token=os.environ["HF_TOKEN"], httpx_kwargs={"timeout": 600})
-print(c.view_api())                    # discover endpoints — don't guess
+print(c.view_api())                    # discover endpoints; don't guess
 result = c.predict(..., api_name="/generate")
 ```
 
@@ -202,13 +202,13 @@ result = c.predict(..., api_name="/generate")
 head = open(result, "rb").read(16)
 # glTF / \x89PNG / RIFF…WEBP / RIFF…WAVE / [4:8]==b"ftyp" → png/jpg/webp/wav/mp4
 ```
-And look at the run log emitted during the call — silent fallbacks (model snapping to a different size, missing optional dep, dtype downgrade) only show up there.
+And look at the run log emitted during the call; silent fallbacks (model snapping to a different size, missing optional dep, dtype downgrade) only show up there.
 
 Full smoke-test patterns (streaming endpoints, OAuth-gated Spaces, `gr.Server` custom routes): [`references/debugging.md`](references/debugging.md).
 
 ## 8. Permanent storage (buckets)
 
-Spaces are stateless — `/data` is wiped on restart. If the Space needs to persist user uploads, generations, logs, or interact with a long-lived store, mount a **bucket**:
+Spaces are stateless; `/data` is wiped on restart. If the Space needs to persist user uploads, generations, logs, or interact with a long-lived store, mount a **bucket**:
 
 ```bash
 hf buckets create <ns>/<bucket-name>                                          # --private optional
@@ -222,7 +222,7 @@ Buckets are paid storage; check `canPay` and confirm with the user. Full pattern
 Order of operations:
 
 1. Read the logs: `hf spaces logs <id> --build --follow` (build error) or `hf spaces logs <id> --follow` (runtime error). Find the **first** error, not the last.
-2. Grep [`references/known-errors.md`](references/known-errors.md) for the error string. Check if this is a known issue before trying your own fix — most common ZeroGPU / Gradio / dependency errors have a 1–2 line fix there.
+2. Grep [`references/known-errors.md`](references/known-errors.md) for the error string. Check if this is a known issue before trying your own fix; most common ZeroGPU / Gradio / dependency errors have a 1–2 line fix there.
 3. Iterate using the cheapest rung from [`references/debugging.md`](references/debugging.md). The vast majority of issues resolve with log-reading + smoke-test loops; interactive dev mode + SSH is a heavy-hammer last resort.
 
 If you solve an error that wasn't in the known-errors list, suggest the user PR it back to this skill so future runs benefit.
@@ -235,7 +235,7 @@ If you solve an error that wasn't in the known-errors list, suggest the user PR 
 |---|---|
 | **How ZeroGPU works** + correct patterns (decorator, sizing, pickle, generators, real-time, AoTI) | [`references/zerogpu.md`](references/zerogpu.md) |
 | **Iterate + debug**: logs, rung ladder, smoke testing (and dev mode + SSH as a last resort) | [`references/debugging.md`](references/debugging.md) |
-| **Error-string lookup** — the single place for all error symptoms (Spaces, ZeroGPU, Gradio, deps) | [`references/known-errors.md`](references/known-errors.md) |
+| **Error-string lookup**; the single place for all error symptoms (Spaces, ZeroGPU, Gradio, deps) | [`references/known-errors.md`](references/known-errors.md) |
 | Pinning deps, picking wheels, torch-family alignment | [`references/requirements.md`](references/requirements.md) |
 | `gr.Examples` caching, themes, custom HTML components, `gr.Server` | [`references/gradio.md`](references/gradio.md) |
 | Persistent storage, public bucket URLs | [`references/buckets.md`](references/buckets.md) |

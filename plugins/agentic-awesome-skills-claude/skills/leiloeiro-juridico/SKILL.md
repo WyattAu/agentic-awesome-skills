@@ -18,7 +18,7 @@ tools:
 - codex-cli
 ---
 
-# SKILL JURÍDICA — LEILÕES DE IMÓVEIS
+# SKILL JURÍDICA: LEILÕES DE IMÓVEIS
 
 ## Overview
 
@@ -54,7 +54,7 @@ Forneça apoio educativo para revisão por advogado habilitado, sem alegar crede
 
 O art. 891 usa o mínimo judicial constante do edital; na falta dele, o parâmetro é 50% da avaliação. O art. 895 tem regras próprias para propostas parceladas. A tabela anterior atribuía conteúdos a artigos errados e estava truncada; usar os tópicos oficiais: 880 iniciativa particular, 881 leilão, 884 atribuições do leiloeiro, 885 condições, 886 edital, 887 publicação, 889 ciência, 890 impedimentos, 892 pagamento, 895 parcelamento e 901 auto/carta.
 
-### 1.2 Leilão Extrajudicial — Alienação Fiduciária (Lei 9.514/97)
+### 1.2 Leilão Extrajudicial: Alienação Fiduciária (Lei 9.514/97)
 
 **Roteiro após a Lei 14.711/2023:** verificar contrato, intimação, purga, consolidação e se incide a regra residencial especial do art. 26-A ou o regime geral do art. 27. Este prevê leilão em 60 dias da consolidação e segundo leilão nos 15 dias seguintes ao primeiro frustrado; os mínimos incluem encargos e hipóteses específicas. Não presumir extinção de toda dívida: o art. 27 §5º-A admite saldo remanescente, ressalvada a exceção do art. 26-A §4º. Art. 30 prevê reintegração em favor do fiduciário/sucessores, incluindo adquirente, não um direito do devedor à imissão. Conferir direito intertemporal e decisão aplicável com advogado.
 
@@ -62,7 +62,7 @@ O art. 891 usa o mínimo judicial constante do edital; na falta dele, o parâmet
 
 ### 2.1 Risco De Nulidade Da Hasta Pública
 
-**ALTO RISCO — Verificar Sempre:**
+**ALTO RISCO; Verificar Sempre:**
 
 **a) Intimação do cônjuge (Art. 842 CPC)**
 - Verificar intimação do cônjuge na penhora de imóvel e a exceção do regime de separação absoluta do art. 842
@@ -86,20 +86,20 @@ O art. 891 usa o mínimo judicial constante do edital; na falta dele, o parâmet
 
 **e) Ressalva de Impenhorabilidade Não Declarada**
 - Bem de família não declarado nos autos pode ser arguido após leilão
-- Risco: arrematação anulada (Art. 903, §1º, II CPC — até 10 dias após)
+- Risco: arrematação anulada (Art. 903, §1º, II CPC; até 10 dias após)
 
 ### 2.2 Bem De Família (Lei 8.009/90)
 
 **Regra Geral (Art. 1º):**
 O imóvel utilizado como residência pela família é impenhorável.
 
-**Exceções (Art. 3º) — Imóvel PODE ser penhorado quando:**
+**Exceções (Art. 3º); Imóvel PODE ser penhorado quando:**
 1. O antigo inciso sobre trabalhadores domésticos foi revogado pela LC 150/2015; não aplicar como exceção vigente
 2. Financiamento para construção ou aquisição do próprio imóvel (SFH, alienação fiduciária)
 3. Impostos, predial ou territorial, taxas e contribuições devidas ao imóvel
 4. Execução de hipoteca sobre o imóvel (nas condições do art. 3º V e jurisprudência aplicável; não há essa regra temporal genérica)
 5. Aquisição criminosa do bem
-6. Fiança em contrato de locação (Súmula 549 STJ — controverso)
+6. Fiança em contrato de locação (Súmula 549 STJ; controverso)
 7. Obrigação decorrente de pensão alimentícia
 
 **Como verificar se é bem de família:**
@@ -109,7 +109,7 @@ O imóvel utilizado como residência pela família é impenhorável.
 
 **ATENÇÃO:** Se o bem de família não foi arguido antes do leilão e o arrematante está
 de boa-fé, jurisprudência tende a preservar a arrematação (Art. 903, §1º CPC).
-Mas o risco existe — avaliar caso a caso.
+Mas o risco existe; avaliar caso a caso.
 
 ### 2.3 Ônus Reais Que Acompanham O Imóvel
 
@@ -121,9 +121,9 @@ Mas o risco existe — avaliar caso a caso.
 | Hipoteca posterior à penhora | Não acompanha | Art. 908 CPC |
 | IPTU atrasado | Verificar sub-rogação sobre preço na hasta pública | Art. 130, parágrafo único CTN |
 | Condomínio atrasado | Verificar regime da alienação e sub-rogação | CPC art. 908 §1º e caso concreto |
-| Usufruto registrado | Sim — respeita o usufrufrutuário | Art. 1.394 CC |
-| Servidão registrada | Sim — acompanha o imóvel | Art. 1.378 CC |
-| Aforamento (laudêmio) | Sim — se terreno de marinha | SPU |
+| Usufruto registrado | Sim; respeita o usufrufrutuário | Art. 1.394 CC |
+| Servidão registrada | Sim; acompanha o imóvel | Art. 1.378 CC |
+| Aforamento (laudêmio) | Sim; se terreno de marinha | SPU |
 | Penhoras de outros processos | Verificar ordem de preferência | Art. 908 CPC |
 
 **IPTU e condomínio:** distinguir obrigação ordinária e efeito da alienação judicial. CTN art. 130, parágrafo único, prevê sub-rogação dos tributos na hasta pública sobre o preço; CPC art. 908 §1º trata de créditos sobre o bem, inclusive propter rem. Não transferir débitos anteriores automaticamente ao arrematante nem supor que o edital prevalece sobre norma obrigatória. Obter parecer para a modalidade concreta.
@@ -138,25 +138,25 @@ Art. 903 §1º distingue invalidação por preço vil/vício, ineficácia por ar
 
 **O que verificar:**
 1. Identificação do imóvel (número, área, confrontações)
-2. Titularidade atual — quem é o proprietário
+2. Titularidade atual; quem é o proprietário
 3. Ônus e gravames registrados:
    - Hipotecas e sua ordem
    - Penhoras já registradas (outros processos)
    - Usufruto, servidão, habitação
    - Cláusulas de inalienabilidade, impenhorabilidade, incomunicabilidade
    - Alienação fiduciária em favor de banco
-4. Histórico de proprietários — rastrear vício de origem
+4. Histórico de proprietários; rastrear vício de origem
 5. Área de preservação permanente, faixa de marinha (laudêmio)
 6. Existência de ação de usucapião, retificação, etc.
 
 ### 3.2 Leitura Do Processo Judicial
 
 **O que buscar nos autos:**
-- Petição inicial da execução — valor do débito original
+- Petição inicial da execução; valor do débito original
 - Certidão de penhora registrada
-- Laudo de avaliação — data e valor
-- Intimações realizadas — cônjuge, devedor, credores
-- Edital publicado — verificar conformidade com Art. 887 CPC
+- Laudo de avaliação; data e valor
+- Intimações realizadas; cônjuge, devedor, credores
+- Edital publicado; verificar conformidade com Art. 887 CPC
 - Embargos opostos e sua situação
 - Certidões do distribuidor do foro
 
@@ -175,7 +175,7 @@ Art. 903 §1º distingue invalidação por preço vil/vício, ineficácia por ar
 ## Para O Devedor/Executado:
 
 - Pode apresentar impugnação ao cumprimento de sentença no art. 525; embargos à execução seguem outro regime
-- Pode requerer parcelamento (Art. 916 CPC — 30% + parcelas)
+- Pode requerer parcelamento (Art. 916 CPC; 30% + parcelas)
 - Verificar prazo de purga e eventual direito de preferência após consolidação; não são o mesmo instituto
 - Pode requerer adjudicação para parentes (Art. 876, §5º CPC)
 - Pode arguir bem de família antes do leilão
@@ -199,7 +199,7 @@ Art. 903 §1º distingue invalidação por preço vil/vício, ineficácia por ar
 | Propter Rem | Obrigação que segue o bem (IPTU, condomínio) |
 | Purga da Mora | Pagamento do débito para impedir a perda do imóvel |
 | Usufruto | Direito real de uso e fruição de bem alheio |
-| Vil Preço | Lance irrisório — inferior ao mínimo judicial do edital; sem mínimo fixado, inferior a 50% da avaliação (CPC art. 891) |
+| Vil Preço | Lance irrisório; inferior ao mínimo judicial do edital; sem mínimo fixado, inferior a 50% da avaliação (CPC art. 891) |
 
 ---
 
@@ -212,19 +212,19 @@ A alienação de bem é considerada fraude à execução quando:
 
 **Relevância para o arrematante:**
 - Se o devedor vendeu o imóvel a terceiro APÓS a citação na execução, essa venda
-  pode ser declarada fraudulenta — o imóvel pode ser penhorado mesmo em nome do comprador
+  pode ser declarada fraudulenta; o imóvel pode ser penhorado mesmo em nome do comprador
 - Não concluir automaticamente que o arrematante adquire livre de todo vício (adquire de forma originária
-  conforme parte da doutrina, ou derivada mas com proteção — divergência)
+  conforme parte da doutrina, ou derivada mas com proteção; divergência)
 - **Não usar REsp 1.141.990/SP como garantia geral:** conferir objeto, tese e aplicabilidade do julgado; a boa-fé não afasta automaticamente vícios e direitos de terceiros
 
 ---
 
-## 7. Regularização Fundiária (Lei 13.465/2017 — Reurb)
+## 7. Regularização Fundiária (Lei 13.465/2017: Reurb)
 
 **Relevância para leilões:**
 - Imóveis sem matrícula plena ou em ocupação informal podem ser regularizados via REURB
-- REURB-S (Social): moradores de baixa renda — gratuita
-- REURB-E (Específica): demais situações — custos do interessado
+- REURB-S (Social): moradores de baixa renda; gratuita
+- REURB-E (Específica): demais situações; custos do interessado
 
 **Quando considerar:**
 - Imóvel de leilão sem habite-se, com área divergente ou em loteamento irregular
@@ -243,7 +243,7 @@ A alienação de bem é considerada fraude à execução quando:
   compulsória é a via para obter a escritura
 
 **Para imóveis de leilão extrajudicial:**
-- O credor fiduciário já tem a propriedade consolidada — não precisa de adjudicação
+- O credor fiduciário já tem a propriedade consolidada; não precisa de adjudicação
 - O arrematante recebe escritura diretamente do credor fiduciário
 
 ---
@@ -260,10 +260,10 @@ A alienação de bem é considerada fraude à execução quando:
 
 ## Itbi
 
-- Base de cálculo: divergência — alguns municípios cobram sobre o VALOR DE MERCADO
+- Base de cálculo: divergência; alguns municípios cobram sobre o VALOR DE MERCADO
   e não sobre o valor da arrematação
-- STJ (Tema 1.113): valor declarado tem presunção relativa de valor de mercado, afastável em processo próprio; vedado valor de referência unilateral prévio — o arrematante pode contestar cobrança sobre VMP
-- Atenção: muitos municípios ainda cobram sobre VMP — possível impugnação administrativa
+- STJ (Tema 1.113): valor declarado tem presunção relativa de valor de mercado, afastável em processo próprio; vedado valor de referência unilateral prévio; o arrematante pode contestar cobrança sobre VMP
+- Atenção: muitos municípios ainda cobram sobre VMP; possível impugnação administrativa
 
 ## Ir Ganho De Capital (Na Revenda)
 
@@ -281,18 +281,18 @@ O orquestrador, scan_registry.py, match_skills.py e skill-sentinel não estão i
 ## Referências
 
 Fontes normativas e referências:
-- CPC/2015 (Lei 13.105/2015) — Arts. 774-925 (Execução completa)
-- Lei 9.514/1997 — Alienação Fiduciária de Imóvel (Art. 22-30)
-- Lei 8.009/1990 — Bem de Família
-- Lei 13.465/2017 — REURB (Regularização Fundiária)
-- Lei 6.766/1979 — Parcelamento do Solo Urbano
-- Código Civil/2002 — Arts. 1.227-1.247 (registro), Arts. 1.361-1.368 (propriedade fiduciária)
-- Lei 6.015/1973 — Lei de Registros Públicos
-- Lei 11.196/2005 — Isenção IR ganho de capital (Art. 39)
-- CTN Art. 130 — Responsabilidade por tributos propter rem
-- Decreto 21.981/1932 — Regulamento de Leiloeiros
-- STJ — Informativos de Jurisprudência sobre arrematação e leilão
-- STJ Tema 1.113 — ITBI sobre valor da transação efetiva
+- CPC/2015 (Lei 13.105/2015); Arts. 774-925 (Execução completa)
+- Lei 9.514/1997; Alienação Fiduciária de Imóvel (Art. 22-30)
+- Lei 8.009/1990; Bem de Família
+- Lei 13.465/2017; REURB (Regularização Fundiária)
+- Lei 6.766/1979; Parcelamento do Solo Urbano
+- Código Civil/2002; Arts. 1.227-1.247 (registro), Arts. 1.361-1.368 (propriedade fiduciária)
+- Lei 6.015/1973; Lei de Registros Públicos
+- Lei 11.196/2005; Isenção IR ganho de capital (Art. 39)
+- CTN Art. 130; Responsabilidade por tributos propter rem
+- Decreto 21.981/1932; Regulamento de Leiloeiros
+- STJ; Informativos de Jurisprudência sobre arrematação e leilão
+- STJ Tema 1.113; ITBI sobre valor da transação efetiva
 
 ## Best Practices
 
@@ -323,6 +323,6 @@ Fontes normativas e referências:
 
 Não há parecer jurídico de caso concreto. Nenhuma referência de jurisprudência sem inteiro teor e aderência fática deve sustentar recomendação de lance ou defesa. Conferir vigência, modalidade, contrato, registro, edital e decisões antes de calcular prazo ou responsabilidade. Os exemplos de tributação, isenção, REURB e título extrajudicial são apenas tópicos para revisão profissional, sem elegibilidade ou prazo garantido. Ausência de documento essencial é pendência impeditiva, não risco baixo. Os helpers de log não são controle atômico de taxa, integridade de auditoria ou sistema de retenção; não incluir segredos ou dados processuais desnecessários. Não houve consulta de autos, operação em tribunal ou execução do script.
 
-## Example — revisão documental
+## Example: revisão documental
 
 > Revise o edital e a matrícula fornecidos, identifique documentos ausentes e separe fatos comprovados de questões para o advogado. Não calcule prazo nem recomende lance sem os documentos e a regra aplicável.

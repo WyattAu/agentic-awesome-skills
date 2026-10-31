@@ -1,8 +1,8 @@
-# Subagent Orchestrator — Antigravity 2.0 Skill
+# Subagent Orchestrator: Antigravity 2.0 Skill
 
 A quota-aware, parallel subagent coordination skill for Antigravity 2.0.
 
-Turns one big task into a set of isolated, efficient agent missions — without burning your weekly quota in 30 minutes.
+Turns one big task into a set of isolated, efficient agent missions; without burning your weekly quota in 30 minutes.
 
 ---
 
@@ -24,7 +24,7 @@ Turns one big task into a set of isolated, efficient agent missions — without 
 node scripts/install.js
 ```
 
-**Manual install — copy this folder to:**
+**Manual install; copy this folder to:**
 ```
 Windows: %USERPROFILE%\.agents\skills\subagent-orchestrator\
 Mac/Linux: ~/.agents/skills/subagent-orchestrator/
@@ -84,7 +84,7 @@ subagent-orchestrator/
 
 ## Contributing
 
-This skill was built to fill a real gap — the community's existing subagent skills had no quota management, no parallel coordination, and no error recovery.
+This skill was built to fill a real gap; the community's existing subagent skills had no quota management, no parallel coordination, and no error recovery.
 
 PRs welcome. Follow the SKILL.md format from the Antigravity docs.
 Submit to: https://github.com/sickn33/agentic-awesome-skills

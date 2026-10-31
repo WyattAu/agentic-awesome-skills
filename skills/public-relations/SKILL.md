@@ -16,7 +16,7 @@ license_source: https://github.com/coreyhaines31/marketingskills/blob/main/LICEN
 Use this skill when the user wants help with public relations, earned media, press coverage, journalist outreach, or media strategy. Resolve ambiguous “PR” from context; repository pull requests are outside this skill.
 
 
-You are an expert in earned media for software products. Your goal is to help the user get covered by journalists, podcasts, and newsletters — efficiently, with respect for the people on the other end of the pitch.
+You are an expert in earned media for software products. Your goal is to help the user get covered by journalists, podcasts, and newsletters; efficiently, with respect for the people on the other end of the pitch.
 
 ## Before Starting
 
@@ -40,15 +40,15 @@ PR is not a substitute for distribution. It's a multiplier for it.
 
 ### When PR is worth it
 
-- You have **a real story** — proprietary data, a strong opinion, a milestone, a customer with a sharp before/after, or a fresh angle on a trending topic
-- You have **founder/exec time** — journalists want quotes from people with skin in the game, not from a PR rep
-- You have **a destination** — a press page, blog post, or product launch that converts attention into something useful
+- You have **a real story**; proprietary data, a strong opinion, a milestone, a customer with a sharp before/after, or a fresh angle on a trending topic
+- You have **founder/exec time**; journalists want quotes from people with skin in the game, not from a PR rep
+- You have **a destination**; a press page, blog post, or product launch that converts attention into something useful
 
 ### When to skip PR (for now)
 
 - Pre-launch with no story beyond "we exist"
 - No one on the team can sustain pitching for 4–6 weeks (PR is a momentum game)
-- You don't have a clear ICP — journalists ask "who reads my piece because of this?" and if you can't answer, neither can they
+- You don't have a clear ICP; journalists ask "who reads my piece because of this?" and if you can't answer, neither can they
 
 ---
 
@@ -63,13 +63,13 @@ Four modes. Most teams over-index on one. Run at least three.
 | **Inbound (press requests)** | Respond to journalist queries on HARO/Qwoted/Featured | Low | Days to weeks |
 | **Owned (press page + media kit)** | Make it easy for journalists to find you | One-time setup | N/A |
 
-**For the reactive newsjacking workflow** — see [references/newsjacking.md](references/newsjacking.md)
+**For the reactive newsjacking workflow**; see [references/newsjacking.md](references/newsjacking.md)
 
-**For proactive journalist pitching** — see [references/journalist-pitching.md](references/journalist-pitching.md)
+**For proactive journalist pitching**; see [references/journalist-pitching.md](references/journalist-pitching.md)
 
-**For inbound press-request platforms (HARO, Qwoted, etc.)** — see [references/press-platforms.md](references/press-platforms.md)
+**For inbound press-request platforms (HARO, Qwoted, etc.)**; see [references/press-platforms.md](references/press-platforms.md)
 
-**For where to pitch (media outlets, podcasts, newsletters)** — see [references/media-outlets.md](references/media-outlets.md). For startup/SaaS/AI directories, use the separate `directory-submissions` skill — different intent, different list.
+**For where to pitch (media outlets, podcasts, newsletters)**; see [references/media-outlets.md](references/media-outlets.md). For startup/SaaS/AI directories, use the separate `directory-submissions` skill; different intent, different list.
 
 ---
 
@@ -84,10 +84,10 @@ Set this up once. It's the cheapest PR investment with the highest ROI on every 
 - Product screenshots (high-res)
 - Recent coverage list (social proof for the next journalist)
 - Founding date, employee count, funding (if disclosed)
-- Press contact email (not a form — journalists hate forms)
+- Press contact email (not a form; journalists hate forms)
 - Recent press releases / announcements
 
-**One sentence at the top:** "For interview requests or assets, email press@yourcompany.com — we respond within 24 hours."
+**One sentence at the top:** "For interview requests or assets, email press@yourcompany.com; we respond within 24 hours."
 
 Then *actually* respond within 24 hours.
 
@@ -98,7 +98,7 @@ Then *actually* respond within 24 hours.
 Before sending any pitch, the answer to all of these should be yes:
 
 - [ ] Does this journalist cover this beat? (Check their last 5 articles.)
-- [ ] Is there a clear news hook — something that just happened or is about to?
+- [ ] Is there a clear news hook; something that just happened or is about to?
 - [ ] Could this journalist write a complete story from this email alone? (Data, quotes, customer name, contact.)
 - [ ] Is the subject line specific enough to predict the article's headline?
 - [ ] Is the pitch under 150 words?
@@ -122,7 +122,7 @@ What to track:
 | **AI citation rate** (ChatGPT, Perplexity quote your brand?) | The new measurement that matters |
 | **Sales conversations citing the article** | The only one that matters for revenue |
 
-What not to obsess over: AVE (advertising value equivalency) — it's a vanity metric PR firms invented.
+What not to obsess over: AVE (advertising value equivalency); it's a vanity metric PR firms invented.
 
 ---
 
@@ -141,7 +141,7 @@ Combine: recent product milestones + active news cycles + any data you've collec
 Go to [press-platforms.md](references/press-platforms.md), use the response template, keep it under 200 words.
 
 ### "Build my press page"
-Use the checklist above. Most companies do this in an afternoon and forget about it for a year — that's fine.
+Use the checklist above. Most companies do this in an afternoon and forget about it for a year; that's fine.
 
 ## Limitations
 

@@ -249,7 +249,7 @@ import { api } from "../convex/_generated/api";
 import type { Id } from "../convex/_generated/dataModel";
 
 export function Chat({ channelId }: { channelId: Id<"channels"> }) {
-  // Real-time query — auto-updates when data changes
+  // Real-time query; auto-updates when data changes
   const messages = useQuery(api.messages.listByChannel, { channelId });
   const sendMessage = useMutation(api.messages.send);
 
@@ -333,9 +333,9 @@ export const getFileUrl = query({
 
 ## Related Skills
 
-- firebase-app-platform (`firebase-app-platform`) — Alternative managed backend
-- vercel-deployments (`vercel-deployments`) — Frontend hosting
-- agent-observability (`agent-observability`) — Instrument AI-driven backend flows
+- firebase-app-platform (`firebase-app-platform`); Alternative managed backend
+- vercel-deployments (`vercel-deployments`); Frontend hosting
+- agent-observability (`agent-observability`); Instrument AI-driven backend flows
 
 ## Limitations
 

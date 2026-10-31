@@ -1,6 +1,6 @@
 # Merge for Keeping Binary in Context
 
-A common, maddening bug: an item carries both `json` and `binary`, it runs through a JSON-only node (Edit Fields, Code, IF), the binary slot quietly disappears, and the email node three steps later has nothing to attach. No error, no validation warning — just a missing file.
+A common, maddening bug: an item carries both `json` and `binary`, it runs through a JSON-only node (Edit Fields, Code, IF), the binary slot quietly disappears, and the email node three steps later has nothing to attach. No error, no validation warning; just a missing file.
 
 The fix is to keep the binary on a branch that doesn't touch it, and recombine. This is the same Merge node covered in **n8n-node-configuration**'s gotchas; here it's used specifically to re-attach binary.
 
@@ -27,10 +27,10 @@ Split the stream at the source: one branch does the JSON work, the other carries
                       │                                 ├─→ [Merge: combineByPosition] ─→ [Email: attach]
                       │                                 │
                       └──────────────────────────────────┘
-                          (bypass — binary passes through unchanged)
+                          (bypass; binary passes through unchanged)
 ```
 
-- **Transform branch:** does the JSON work; may lose binary. That's fine — this branch only contributes the JSON.
+- **Transform branch:** does the JSON work; may lose binary. That's fine; this branch only contributes the JSON.
 - **Bypass branch:** the original item, with binary. No node needed; just route the connection straight into the Merge.
 
 The merged item gets its JSON from the transform branch and its binary from the bypass branch.
@@ -56,7 +56,7 @@ The source already feeds the transform branch. You add the bypass connection and
 }
 ```
 
-The exact parameter names (`mode`, `combineBy`, `combineByPosition`, and how `numberOfInputs` is expressed) have shifted across Merge node versions — confirm the current shape with `get_node` on `nodes-base.merge` for the user's version before committing the structure. The principle is stable; the field names move.
+The exact parameter names (`mode`, `combineBy`, `combineByPosition`, and how `numberOfInputs` is expressed) have shifted across Merge node versions; confirm the current shape with `get_node` on `nodes-base.merge` for the user's version before committing the structure. The principle is stable; the field names move.
 
 Two wiring details that bite (both detailed in **n8n-node-configuration**'s Merge section):
 
@@ -73,10 +73,10 @@ For re-attaching binary, you want position-based combination:
 |---|---|---|
 | `combineByPosition` | Pairs item N from input 1 with item N from input 2 | ✅ Yes |
 | `combineBySql` / `combineByFields` | Joins on a key | Only if the two branches share a join key |
-| `combineAll` | Cartesian product (N×M items) | ❌ No — explodes the item count |
-| `append` | Concatenates inputs end to end | ❌ No — doesn't pair items |
+| `combineAll` | Cartesian product (N×M items) | ❌ No; explodes the item count |
+| `append` | Concatenates inputs end to end | ❌ No; doesn't pair items |
 
-`combineByPosition` is the right default: it keeps the item count at N and pairs each transformed JSON item with its corresponding binary-bearing original. For this to work, both branches must emit items in the same order and count — sharing a source alone does not guarantee this after filtering, sorting or retries. Prefer a stable session/item key when either can change.
+`combineByPosition` is the right default: it keeps the item count at N and pairs each transformed JSON item with its corresponding binary-bearing original. For this to work, both branches must emit items in the same order and count; sharing a source alone does not guarantee this after filtering, sorting or retries. Prefer a stable session/item key when either can change.
 
 ---
 
@@ -88,11 +88,11 @@ A Merge combines both `json` and `binary` from the items it pairs. When one inpu
 
 ## Cheaper alternative: pass-through on the transform
 
-If the transforming node can preserve binary itself, do that instead — it's one node, not three:
+If the transforming node can preserve binary itself, do that instead; it's one node, not three:
 
 - **Edit Fields (Set):** enable `includeOtherFields` so the node carries unmentioned fields and the binary slot forward.
 - **Code node:** return `binary: $input.item.binary` explicitly in the returned item (see `BINARY_BASICS.md`).
-- **IF / Filter:** these route items rather than rebuild them, and generally preserve binary on the items they pass — but verify in the execution rather than assuming.
+- **IF / Filter:** these route items rather than rebuild them, and generally preserve binary on the items they pass; but verify in the execution rather than assuming.
 
 Reach for Merge only when the transforming node genuinely can't carry the binary, or when the JSON and binary come from genuinely different upstream nodes.
 
@@ -100,12 +100,12 @@ Reach for Merge only when the transforming node genuinely can't carry the binary
 
 ## When Merge isn't enough
 
-If the chain has many strip points, threading binary through all of them — and Merging at each one — becomes more work than it's worth. Two better routes:
+If the chain has many strip points, threading binary through all of them; and Merging at each one; becomes more work than it's worth. Two better routes:
 
 - **Upload early.** Push the bytes to object storage as soon as they exist, carry the URL/key as plain JSON through the whole chain (JSON survives every transform trivially), and re-fetch only at the node that needs the bytes. This is also the right move for large files (see `BINARY_BASICS.md`).
 - **Push the binary work into a sub-workflow.** Hand the file to a sub-workflow that does the binary handling and returns the final result. The Execute Workflow Trigger's input mode matters: the default typed-input mode carries only named JSON fields and drops `$binary`, so use the passthrough input mode if the sub-workflow must receive bytes directly.
 
-Past a couple of strip points, one of these is usually less work — and less fragile — than keeping every node in a long chain honest about binary.
+Past a couple of strip points, one of these is usually less work; and less fragile; than keeping every node in a long chain honest about binary.
 
 ---
 

@@ -11,7 +11,7 @@ Multitasking lets people switch quickly from one app to another, performing task
 
 ![A sketch of two side-by-side windows in a split view arrangement, suggesting multitasking. The image is overlaid with rectangular and circular grid lines and is tinted orange to subtly reflect the orange in the original six-color Apple logo.](https://docs-assets.developer.apple.com/published/94f1391bf700ee7af09ad0f966dd7b36/patterns-multitasking-intro%402x.png)
 
-People expect to use multitasking on their devices, and they may think something is wrong if your app doesn’t allow it. With rare exceptions — such as some games, and Apple Vision Pro apps running in a Full Space — every app needs to work well with multitasking.
+People expect to use multitasking on their devices, and they may think something is wrong if your app doesn’t allow it. With rare exceptions; such as some games, and Apple Vision Pro apps running in a Full Space; every app needs to work well with multitasking.
 
 In addition to app switching, multitasking can present different experiences on different devices; see [Platform considerations](https://developer.apple.com/design/human-interface-guidelines/multitasking#Platform-considerations).
 
@@ -114,9 +114,9 @@ Play
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/multitasking#Developer-documentation)
 
-[Responding to the launch of your app](https://developer.apple.com/documentation/UIKit/responding-to-the-launch-of-your-app) — UIKit
+[Responding to the launch of your app](https://developer.apple.com/documentation/UIKit/responding-to-the-launch-of-your-app); UIKit
 
-[Multitasking on iPad, Mac, and Apple Vision Pro](https://developer.apple.com/documentation/UIKit/multitasking-on-ipad-mac-and-apple-vision-pro) — UIKit
+[Multitasking on iPad, Mac, and Apple Vision Pro](https://developer.apple.com/documentation/UIKit/multitasking-on-ipad-mac-and-apple-vision-pro); UIKit
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/multitasking#Videos)
 

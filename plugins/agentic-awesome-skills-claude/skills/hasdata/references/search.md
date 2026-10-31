@@ -4,7 +4,7 @@ Pre-parsed JSON for Google, AI Mode, Bing, and the specialized Google panels. Sy
 
 | Endpoint | Returns |
 |---|---|
-| `/scrape/google/serp` | Full SERP — organic + every rich-snippet block |
+| `/scrape/google/serp` | Full SERP; organic + every rich-snippet block |
 | `/scrape/google-light/serp` | Organic only |
 | `/scrape/google/ai-mode` | Gemini answer + references |
 | `/scrape/google/ai-overview` | AI Overview block |
@@ -38,19 +38,19 @@ for hit in resp.json().get("organicResults", []):
 
 | Param | Default | Notes |
 |---|---|---|
-| `q` | — | **Required.** |
-| `location` | — | Canonical, e.g. `"Austin,Texas,United States"`. Hyper-local. |
-| `uule` | — | Pre-encoded location (mutually exclusive with `location`). |
+| `q` | - | **Required.** |
+| `location` | - | Canonical, e.g. `"Austin,Texas,United States"`. Hyper-local. |
+| `uule` | - | Pre-encoded location (mutually exclusive with `location`). |
 | `domain` | `google.com` | `google.co.uk`, `google.de`, … |
-| `gl` | — | 2-letter country (`us`, `de`, `jp`). |
-| `hl` | — | 2-letter UI language. |
-| `lr` | — | Content-language filter (`lang_en`). |
-| `tbs` | — | Filters — `qdr:d|w|m|y` for time, `li:1` verbatim, sort, image type. |
-| `safe` | — | `active` / `off`. |
+| `gl` | - | 2-letter country (`us`, `de`, `jp`). |
+| `hl` | - | 2-letter UI language. |
+| `lr` | - | Content-language filter (`lang_en`). |
+| `tbs` | - | Filters; `qdr:d|w|m|y` for time, `li:1` verbatim, sort, image type. |
+| `safe` | - | `active` / `off`. |
 | `start` | `0` | Pagination offset. |
 | `num` | `10` | Results/page. **Max 100** |
-| `tbm` | — | `isch` images, `vid`, `nws`, `shop`, `lcl`. |
-| `deviceType` | — | `desktop`, `mobile`, `tablet`. |
+| `tbm` | - | `isch` images, `vid`, `nws`, `shop`, `lcl`. |
+| `deviceType` | - | `desktop`, `mobile`, `tablet`. |
 
 ### Response keys
 
@@ -61,7 +61,7 @@ inlineVideos, inlineImages, recipesResults, perspectives, discussionsAndForums,
 relatedQuestions, relatedSearches, adResults, pagination
 ```
 
-Rich-snippet keys appear **only when the SERP shows that block** — always `data.get(key, default)`.
+Rich-snippet keys appear **only when the SERP shows that block**; always `data.get(key, default)`.
 
 ### Tips
 
@@ -70,7 +70,7 @@ Rich-snippet keys appear **only when the SERP shows that block** — always `dat
 
 ## Google Light SERP
 
-Same params as full SERP, but the response is trimmed to a few keys — typically `requestMetadata`, `searchInformation`, `organicResults`, `relatedSearches`, and `pagination` when present. Use for crawler seeding and link discovery when you don't need the heavier rich-snippet blocks.
+Same params as full SERP, but the response is trimmed to a few keys; typically `requestMetadata`, `searchInformation`, `organicResults`, `relatedSearches`, and `pagination` when present. Use for crawler seeding and link discovery when you don't need the heavier rich-snippet blocks.
 
 ## Google AI Mode
 
@@ -105,7 +105,7 @@ Pattern: AI Mode for the answer → `/scrape/web` (markdown) on each `references
 
 ## Google News / Shopping / Bing
 
-Same shape: `q` + `gl`/`hl`/`location`. News supports `tbs=qdr:d|w|m|y` for time windows. Bing returns the same key set as Google SERP — useful for cross-engine consensus (disagreement = contested topic).
+Same shape: `q` + `gl`/`hl`/`location`. News supports `tbs=qdr:d|w|m|y` for time windows. Bing returns the same key set as Google SERP; useful for cross-engine consensus (disagreement = contested topic).
 
 ## Patterns
 

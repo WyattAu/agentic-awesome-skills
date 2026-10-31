@@ -6,7 +6,7 @@ source: community
 date_added: '2026-02-27'
 ---
 
-# Crypto BD Agent — Autonomous Business Development for Exchanges
+# Crypto BD Agent: Autonomous Business Development for Exchanges
 
 > Reference patterns (upstream reports, not independently verified here) for building AI agents that autonomously discover,
 > evaluate, and acquire token listings for cryptocurrency exchanges.
@@ -18,7 +18,7 @@ promising tokens across chains, score them with a 100-point weighted system,
 investigate risk signals through wallet analysis, and manage outreach pipelines with
 human-in-the-loop oversight.
 
-Built from production experience running Buzz BD Agent by SolCex Exchange —
+Built from production experience running Buzz BD Agent by SolCex Exchange -
 an autonomous agent on decentralized infrastructure with 13 intelligence
 sources, x402 micropayments, and dual-chain ERC-8004 registration.
 
@@ -103,7 +103,7 @@ Always exhaust free data before paying. Target: $0/day for 90% of intelligence.
 ### Rules
 1. Cross-reference: every prospect needs 2+ independent source confirmations
 2. Multi-source cross-match gets +5 score bonus
-3. Track ROI per paid source — did this call produce a qualified prospect?
+3. Track ROI per paid source; did this call produce a qualified prospect?
 4. Store insights in experience memory for continuous calibration
 
 ---
@@ -149,22 +149,22 @@ simple scanners.
 
 ### 5-Step Deployer Analysis
 
-1. **Funded-By** — Where did deployer get funds? (exchange, mixer, other wallet)
-2. **Balances** — Current holdings across chains
-3. **Transfer History** — Dump patterns, accumulation, LP activity
-4. **Identity** — ENS, social links, KYC indicators
-5. **Score Adjustment** — Apply flags based on findings
+1. **Funded-By**; Where did deployer get funds? (exchange, mixer, other wallet)
+2. **Balances**; Current holdings across chains
+3. **Transfer History**; Dump patterns, accumulation, LP activity
+4. **Identity**; ENS, social links, KYC indicators
+5. **Score Adjustment**; Apply flags based on findings
 
 ### Wallet Flags
 
 | Flag | Impact |
 |------|--------|
-| WALLET VERIFIED — clean, authorities revoked | +3 to +5 |
-| INSTITUTIONAL — VC backing | +5 to +10 |
-| NET POSITIVE — profitable wallet | +2 |
-| SERIAL CREATOR — many tokens created | -5 |
-| DUMP ALERT — >50% dump in 7 days | -10 to -15 |
-| MIXER SIGNAL — possible mixer association | Review attribution/context; no automatic misconduct conclusion |
+| WALLET VERIFIED; clean, authorities revoked | +3 to +5 |
+| INSTITUTIONAL; VC backing | +5 to +10 |
+| NET POSITIVE; profitable wallet | +2 |
+| SERIAL CREATOR; many tokens created | -5 |
+| DUMP ALERT; >50% dump in 7 days | -10 to -15 |
+| MIXER SIGNAL; possible mixer association | Review attribution/context; no automatic misconduct conclusion |
 
 ### Dual-Source Pattern
 Combine chain-specific depth (e.g., Helius for Solana) with multi-chain
@@ -195,7 +195,7 @@ tracking + code verification scores + agent verification systems.
 → 6. Human Approved → 7. Sent → 8. Responded → 9. Negotiating → 10. Listed
 
 ### Required Data for Entry
-- Contract address (verified — NEVER rely on token name alone)
+- Contract address (verified; NEVER rely on token name alone)
 - Pair address from DEX aggregator
 - Pair age from pair creation date; token deployment age requires separate chain evidence
 - Current liquidity

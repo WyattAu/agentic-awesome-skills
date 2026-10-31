@@ -15,7 +15,7 @@ The Qwen-Image family is fully supported in `diffusers`. Both base and edit vari
 | `Qwen/Qwen-Image-Edit-2509`           | `QwenImageEditPlusPipeline`   | Image editing, multi-image input    |
 | `Qwen/Qwen-Image-Edit-2511`           | `QwenImageEditPlusPipeline`   | Image editing, latest variant       |
 
-The 2509 and 2511 variants use a *different* pipeline class than the original `QwenImageEditPipeline` — they take a list of input images and have different default parameters. Don't assume that variants in the same family share a pipeline class. Loading a 2511-trained LoRA onto `QwenImageEditPipeline` produces broken output; the failure is silent (no exception), so verifying against the base model card is the only way to catch it.
+The 2509 and 2511 variants use a *different* pipeline class than the original `QwenImageEditPipeline`; they take a list of input images and have different default parameters. Don't assume that variants in the same family share a pipeline class. Loading a 2511-trained LoRA onto `QwenImageEditPipeline` produces broken output; the failure is silent (no exception), so verifying against the base model card is the only way to catch it.
 
 The 2511 variant integrates several popular community LoRAs into the base, which can mean a LoRA trained against earlier Qwen-Image-Edit may behave subtly differently when loaded against 2511; if the LoRA's model card specifies which Edit variant it was trained on, match it.
 
@@ -23,8 +23,8 @@ The 2511 variant integrates several popular community LoRAs into the base, which
 
 Qwen-Image and Qwen-Image-Edit pipelines need extras beyond the standard diffusers/transformers/peft set, because the text encoder is `Qwen2_5_VLForConditionalGeneration` (Qwen 2.5-VL):
 
-- **`torchvision`** — required by `Qwen2VLVideoProcessor`, which the text encoder's processor pulls in transitively. Missing this is a startup-time `ImportError` ("Qwen2VLVideoProcessor requires the Torchvision library"). Always include in `requirements.txt` for any Qwen-Image Space.
-- **`sentencepiece`** — required by some Qwen tokenizer paths. Include if you see tokenizer-related ImportErrors at startup.
+- **`torchvision`**; required by `Qwen2VLVideoProcessor`, which the text encoder's processor pulls in transitively. Missing this is a startup-time `ImportError` ("Qwen2VLVideoProcessor requires the Torchvision library"). Always include in `requirements.txt` for any Qwen-Image Space.
+- **`sentencepiece`**; required by some Qwen tokenizer paths. Include if you see tokenizer-related ImportErrors at startup.
 
 The 2511 variant in particular often requires the latest `diffusers` from git, since `QwenImageEditPlusPipeline` and 2511-specific fixes land before pip releases:
 
@@ -87,7 +87,7 @@ pipe.to("cuda")
 pipe.load_lora_weights("user/my-qwen-edit-lora")
 ```
 
-`QwenImageEditPlusPipeline` accepts `image=<PIL>` or `image=[<PIL>, <PIL>, ...]` for multi-image edits. `QwenImageEditPipeline` accepts a single image. Default parameters differ slightly between the two — see "Inference defaults" below.
+`QwenImageEditPlusPipeline` accepts `image=<PIL>` or `image=[<PIL>, <PIL>, ...]` for multi-image edits. `QwenImageEditPipeline` accepts a single image. Default parameters differ slightly between the two; see "Inference defaults" below.
 
 ## Inference defaults
 
@@ -108,9 +108,9 @@ For Qwen-Image-Edit-2509 / 2511 (`QwenImageEditPlusPipeline`):
 - Input is a list of one or more PIL images.
 
 For Lightning / few-step LoRAs (e.g. `lightx2v/Qwen-Image-Lightning-*`):
-- `num_inference_steps`: 4 or 8 (read the LoRA's model card — they ship 4-step and 8-step variants).
+- `num_inference_steps`: 4 or 8 (read the LoRA's model card; they ship 4-step and 8-step variants).
 - `true_cfg_scale`: usually 1.0 (CFG disabled).
-- Often comes with a custom scheduler config — see the lightx2v README for the exact `FlowMatchEulerDiscreteScheduler` config to use.
+- Often comes with a custom scheduler config; see the lightx2v README for the exact `FlowMatchEulerDiscreteScheduler` config to use.
 
 ## Resolution buckets
 
@@ -137,8 +137,8 @@ Set `@spaces.GPU(duration=...)` accordingly.
 
 - **Style LoRAs (T2I).** Standard load. Trigger word usually present. UI: prompt + aspect ratio.
 - **Subject / character LoRAs (T2I).** Standard load. Trigger word almost always present. UI: prompt with the trigger pre-prepended in code, possibly an example prompt highlighting the trigger.
-- **Lighting / aesthetic LoRAs (T2I).** Often paired with a recommended LoRA scale ≠ 1.0 — check the model card.
-- **Edit LoRAs (image-to-image, on Qwen-Image-Edit).** Specific instructions baked in. The LoRA might require a specific instruction phrasing — match the pattern from the model card. UI: input image + instruction textbox.
+- **Lighting / aesthetic LoRAs (T2I).** Often paired with a recommended LoRA scale ≠ 1.0; check the model card.
+- **Edit LoRAs (image-to-image, on Qwen-Image-Edit).** Specific instructions baked in. The LoRA might require a specific instruction phrasing; match the pattern from the model card. UI: input image + instruction textbox.
 - **Lightning-distilled LoRAs.** Lock step count and CFG to recommended values; hide the sliders.
 
 ## Things to watch

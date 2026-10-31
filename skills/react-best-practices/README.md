@@ -1,4 +1,4 @@
-# React Best Practices — catalog adaptation
+# React Best Practices: catalog adaptation
 
 Adapted from guidance originally created by @shuding at Vercel; this catalog copy has local corrections and is not a claim of ongoing upstream maintenance.
 

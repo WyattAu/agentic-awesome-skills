@@ -240,7 +240,7 @@ The interrupt system is critical for natural conversations.
 
 ### How Interrupts Work
 
-**Scenario**: Bot is saying "I think the weather will be nice today and tomorrow and—" when user interrupts with "Stop".
+**Scenario**: Bot is saying "I think the weather will be nice today and tomorrow and-" when user interrupts with "Stop".
 
 **Step 1: User starts speaking**
 ```python

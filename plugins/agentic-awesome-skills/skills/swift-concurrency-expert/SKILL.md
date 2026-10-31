@@ -39,12 +39,12 @@ Common fixes:
 ### 3. Verify the fix
 
 - Rebuild and confirm all concurrency diagnostics are resolved with no new warnings introduced.
-- Run the test suite to check for regressions — concurrency changes can introduce subtle runtime issues even when the build is clean.
+- Run the test suite to check for regressions; concurrency changes can introduce subtle runtime issues even when the build is clean.
 - If the fix surfaces new warnings, treat each one as a fresh triage (return to step 1) and resolve iteratively until the build is clean and tests pass.
 
 ### Examples
 
-**UI-bound type — adding `@MainActor`**
+**UI-bound type; adding `@MainActor`**
 
 ```swift
 // Before: mutable model lacks actor isolation; an actual diagnostic depends
@@ -66,7 +66,7 @@ class ViewModel: ObservableObject {
 **Protocol conformance isolation**
 
 ```swift
-// Before: compiler error — SomeProtocol method is nonisolated but the
+// Before: compiler error; SomeProtocol method is nonisolated but the
 // conforming type is @MainActor
 @MainActor
 class Foo: SomeProtocol {

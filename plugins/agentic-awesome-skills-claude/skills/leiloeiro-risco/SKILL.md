@@ -18,7 +18,7 @@ tools:
 - codex-cli
 ---
 
-# SKILL DE RISCO — AUDITOR DE RISCO EM LEILÕES
+# SKILL DE RISCO: AUDITOR DE RISCO EM LEILÕES
 
 ## Detailed Guide
 

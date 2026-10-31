@@ -13,8 +13,8 @@ Systematic competitor analysis for developer tools. Track features, pricing, pos
 
 ## Recommended Tools
 
-- **Social listening tools** — Monitor competitor sentiment across developer platforms
-- **GitHub/npm monitoring** — Track competitor traction signals
+- **Social listening tools**; Monitor competitor sentiment across developer platforms
+- **GitHub/npm monitoring**; Track competitor traction signals
 
 ## Quick Start
 

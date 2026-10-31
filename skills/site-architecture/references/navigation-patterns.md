@@ -278,7 +278,7 @@ Rules:
 
 - **Too many header items** (8+): causes decision paralysis, nav becomes unreadable on smaller screens
 - **Dropdown inception**: dropdowns inside dropdowns inside dropdowns
-- **Mystery icons**: icons without labels — users don't know what they mean
+- **Mystery icons**: icons without labels; users don't know what they mean
 - **Hidden primary nav**: burying important pages in hamburger menus on desktop
 - **Inconsistent nav between pages**: nav should be identical across the site (except app vs marketing)
 - **No mobile consideration**: desktop nav that doesn't translate to mobile
@@ -301,9 +301,9 @@ Rules:
 
 Internal links in navigation pass PageRank. Use this strategically:
 
-- **Header nav** — make frequent tasks easy to reach; no universal link-weight ranking is asserted
-- **Footer links** — group genuinely useful secondary destinations; do not add pages solely to manipulate rankings
-- **Sidebar links** help with section-level authority — good for blog categories, doc sections
-- **Breadcrumbs** provide structural signals to search engines — implement with schema markup
-- **Don't use JavaScript-only nav** — search engines need crawlable HTML links
-- **Use descriptive anchor text** — "Analytics Features" not just "Features"
+- **Header nav**; make frequent tasks easy to reach; no universal link-weight ranking is asserted
+- **Footer links**; group genuinely useful secondary destinations; do not add pages solely to manipulate rankings
+- **Sidebar links** help with section-level authority; good for blog categories, doc sections
+- **Breadcrumbs** provide structural signals to search engines; implement with schema markup
+- **Don't use JavaScript-only nav**; search engines need crawlable HTML links
+- **Use descriptive anchor text**; "Analytics Features" not just "Features"

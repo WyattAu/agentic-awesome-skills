@@ -1,4 +1,4 @@
-# ADVOGADO ESPECIALISTA ELITE — JURISTA COMPLETO - Detailed Guide
+# ADVOGADO ESPECIALISTA ELITE: JURISTA COMPLETO - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -65,8 +65,8 @@ Atue como assistente de pesquisa juridica, sem alegar experiencia, habilitacao o
 
 | Modalidade | Descricao |
 |------------|-----------|
-| **Consensual** | Ambos concordam — homologacao pelo juiz (Art. 731 CPC) |
-| **Litigioso** | Nao ha acordo — juiz decide (Art. 693 CPC) |
+| **Consensual** | Ambos concordam; homologacao pelo juiz (Art. 731 CPC) |
+| **Litigioso** | Nao ha acordo; juiz decide (Art. 693 CPC) |
 | **Competencia** | Domicilio do guardiao dos filhos ou ultimo domicilio do casal (Art. 53, I CPC) |
 
 #### Regimes de Bens (Art. 1.639-1.688 CC)
@@ -79,7 +79,7 @@ Atue como assistente de pesquisa juridica, sem alegar experiencia, habilitacao o
 | **Separacao obrigatoria** | Imposta por lei (Art. 1.641 CC) | Sumula 377 STF: aquestos sao meados |
 | **Participacao final nos aquestos** | Separacao na constancia + comunhao na dissolucao | 50% da valorizacao |
 
-#### Sumula 377 STF — Separacao Obrigatoria
+#### Sumula 377 STF: Separacao Obrigatoria
 No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na constancia do casamento.
 
 **Aplicacao concreta:** Nao presumir meacao automatica. Verificar regime efetivo, declaracao de vontade, data, prova de esforco comum e jurisprudencia atual do STF/STJ antes de aplicar a Sumula 377.
@@ -87,9 +87,9 @@ No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na consta
 ### 1.2 Alimentos
 
 #### Base Legal
-- **Art. 1.694-1.710 CC** — Alimentos entre parentes, conjuges e companheiros
-- **Lei 5.478/1968** — Lei de Alimentos (rito especial)
-- **Art. 528-533 CPC** — Execucao de alimentos (prisao, penhora, desconto em folha)
+- **Art. 1.694-1.710 CC**; Alimentos entre parentes, conjuges e companheiros
+- **Lei 5.478/1968**; Lei de Alimentos (rito especial)
+- **Art. 528-533 CPC**; Execucao de alimentos (prisao, penhora, desconto em folha)
 
 #### Tipos de Alimentos
 
@@ -98,7 +98,7 @@ No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na consta
 | **Provisorios** | Fixados liminarmente na acao de alimentos (Art. 4 Lei 5.478) |
 | **Provisionais** | Fixados em tutela de urgencia (Art. 300 CPC) |
 | **Definitivos** | Fixados em sentenca |
-| **Compensatorios** | Para equalizar desequilibrio patrimonial (STJ — REsp 1.954.279) |
+| **Compensatorios** | Para equalizar desequilibrio patrimonial (STJ; REsp 1.954.279) |
 | **Gravividos** | Para gestante (Lei 11.804/2008) |
 | **Transitivos** | Temporarios para ex-conjuge se reabilitar |
 
@@ -106,11 +106,11 @@ No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na consta
 
 | Via | Procedimento | Prazo |
 |-----|-------------|-------|
-| **Prisao civil** | Art. 528, par. 3 — regime fechado 1-3 meses | 3 prestacoes (Sumula 309 STJ) |
+| **Prisao civil** | Art. 528, par. 3; regime fechado 1-3 meses | 3 prestacoes (Sumula 309 STJ) |
 | **Penhora** | Execucao por quantia certa | Prescricao 2 anos cada prestacao |
-| **Desconto em folha** | Art. 529 CPC — ordem ao empregador | Ate 50% dos rendimentos liquidos |
+| **Desconto em folha** | Art. 529 CPC; ordem ao empregador | Ate 50% dos rendimentos liquidos |
 | **SISBAJUD** | Bloqueio de contas | Imediato |
-| **Protesto** | Art. 528, par. 1 — protesto do titulo | Sem limite |
+| **Protesto** | Art. 528, par. 1; protesto do titulo | Sem limite |
 
 #### Binomio Necessidade x Possibilidade (Art. 1.694, par. 1 CC)
 - **Necessidade do alimentando:** custos de vida, saude, educacao, moradia
@@ -126,10 +126,10 @@ Nao ha percentual legal geral de 30% por filho. Demonstrar necessidades, recurso
 | Aspecto | Detalhe |
 |---------|---------|
 | **Requisitos** | Convivencia publica, continua, duradoura, objetivo de familia |
-| **Regime de bens** | Comunhao parcial (salvo contrato em contrario — Art. 1.725 CC) |
+| **Regime de bens** | Comunhao parcial (salvo contrato em contrario; Art. 1.725 CC) |
 | **Reconhecimento** | Pode ser judicial, extrajudicial (escritura) ou post mortem |
-| **Direitos sucessorios** | Companheiro concorre com descendentes e ascendentes (Art. 1.790 CC — declarado inconstitucional pelo STF RE 878.694) |
-| **Direito real de habitacao** | Sim (analogia com casamento — STJ) |
+| **Direitos sucessorios** | Companheiro concorre com descendentes e ascendentes (Art. 1.790 CC; declarado inconstitucional pelo STF RE 878.694) |
+| **Direito real de habitacao** | Sim (analogia com casamento; STJ) |
 | **Dissolucao** | Identica ao divorcio (Art. 7, par. 2 Lei 9.278/96) |
 
 ### 1.4 Investigacao De Paternidade
@@ -139,15 +139,15 @@ Nao ha percentual legal geral de 30% por filho. Demonstrar necessidades, recurso
 | **Base legal** | Lei 8.560/1992 + Art. 1.606-1.617 CC |
 | **Acao** | Investigacao de paternidade c/c alimentos |
 | **Competencia** | Domicilio do menor (Art. 53, II CPC) |
-| **DNA** | Prova pericial por excelencia — mas recusa gera presuncao (Sumula 301 STJ) |
-| **Imprescritivel** | Art. 27 ECA — a acao e imprescritivel |
-| **Negatoria** | Art. 1.601 CC — marido pode contestar paternidade |
-| **Socioafetiva** | STF Tema 622 — paternidade socioafetiva nao impede biologica |
+| **DNA** | Prova pericial por excelencia; mas recusa gera presuncao (Sumula 301 STJ) |
+| **Imprescritivel** | Art. 27 ECA; a acao e imprescritivel |
+| **Negatoria** | Art. 1.601 CC; marido pode contestar paternidade |
+| **Socioafetiva** | STF Tema 622; paternidade socioafetiva nao impede biologica |
 
 ---
 
 
-## Modulo 2 — Direito Criminal E Penal (Resumo Executivo)
+## Modulo 2: Direito Criminal E Penal (Resumo Executivo)
 
 Para analises criminais aprofundadas, este modulo orquestra com `advogado-criminal`.
 
@@ -158,12 +158,12 @@ Para analises criminais aprofundadas, este modulo orquestra com `advogado-crimin
 | 1 | Tipificar o crime (qual artigo CP/legislacao especial) |
 | 2 | Classificar (doloso/culposo, tentado/consumado, comum/hediondo) |
 | 3 | Verificar materialidade e autoria |
-| 4 | Estimar dosimetria (sistema trifasico — Art. 68 CP) |
+| 4 | Estimar dosimetria (sistema trifasico; Art. 68 CP) |
 | 5 | Verificar prescricao (Art. 109 CP) |
 | 6 | Identificar teses defensivas e acusatorias |
 | 7 | Definir estrategia (acordo/defesa/recurso) |
 
-### 2.2 Crimes Mais Comuns — Referencia Rapida
+### 2.2 Crimes Mais Comuns: Referencia Rapida
 
 | Crime | Artigo | Pena |
 |-------|--------|------|
@@ -182,7 +182,7 @@ Para analises criminais aprofundadas, este modulo orquestra com `advogado-crimin
 ---
 
 
-## Modulo 3 — Maria Da Penha (Resumo Executivo)
+## Modulo 3: Maria Da Penha (Resumo Executivo)
 
 Para casos de Maria da Penha, orquestrar com `advogado-criminal` que contem o modulo completo.
 
@@ -229,14 +229,14 @@ SINAL VERMELHO → X na mao em farmacia/hospital participante
 | Investimentos com renda do trabalho | Bens sub-rogados dos particulares (Art. 1.659, II CC) |
 | Saldo de conta conjunta | Bens gravados com incomunicabilidade (Art. 1.659, III CC) |
 | FGTS acumulado na constancia (STJ) | Bens de uso pessoal, livros, instrumentos profissao (Art. 1.659, V CC) |
-| Previdencia privada (STJ — divergencia) | Proventos do trabalho pessoal (Art. 1.659, VI CC) — controverso |
+| Previdencia privada (STJ; divergencia) | Proventos do trabalho pessoal (Art. 1.659, VI CC); controverso |
 
 #### Avaliacao de Bens
 
 | Metodo | Quando usar |
 |--------|-------------|
 | Avaliacao pericial (Art. 464 CPC) | Imoveis, empresas, bens de alto valor |
-| Acordo entre as partes | Divorcio consensual — partes definem valores |
+| Acordo entre as partes | Divorcio consensual; partes definem valores |
 | Avaliacao de mercado (corretor/avaliador) | Imoveis residenciais, veiculos |
 | Balanco patrimonial | Quotas sociais, participacoes empresariais |
 
@@ -249,9 +249,9 @@ SINAL VERMELHO → X na mao em farmacia/hospital participante
 | Herdeiros menores/incapazes | Pode haver via extrajudicial nas condicoes da Resolucao CNJ 571/2024, inclusive protecao do quinhao e manifestacao do Ministerio Publico |
 | Consenso sobre partilha | Todos concordam |
 | Sem testamento | Regra geral (excepcao: Resolucao CNJ 35/2007 alterada pela 571/2024: verificar art. 12-B, autorizacao judicial e demais requisitos) |
-| Escritura publica | Cartorio de notas — qualquer comarca |
+| Escritura publica | Cartorio de notas; qualquer comarca |
 | Advogado | Obrigatorio |
-| Prazo | 60 dias da abertura da sucessao (Art. 611 CPC) — multa ITCMD se ultrapassar |
+| Prazo | 60 dias da abertura da sucessao (Art. 611 CPC); multa ITCMD se ultrapassar |
 
 #### Inventario Judicial (Art. 610-673 CPC)
 
@@ -276,12 +276,12 @@ SINAL VERMELHO → X na mao em farmacia/hospital participante
 |----------------|--------------------------|------|
 | Comunhao parcial | Sim, sobre bens PARTICULARES do falecido | Art. 1.829, I CC |
 | Comunhao universal | Nao concorre | Art. 1.829, I CC |
-| Separacao obrigatoria | Nao concorre (controverso — Sumula 377 STF) | Art. 1.829, I CC |
-| Separacao convencional | Sim, concorre sobre tudo | STJ — REsp 1.382.170 |
+| Separacao obrigatoria | Nao concorre (controverso; Sumula 377 STF) | Art. 1.829, I CC |
+| Separacao convencional | Sim, concorre sobre tudo | STJ; REsp 1.382.170 |
 
 #### Companheiro (Uniao Estavel)
 - **STF RE 878.694 (Tema 809):** equiparou companheiro a conjuge para fins sucessorios
-- Art. 1.790 CC declarado inconstitucional — aplica-se Art. 1.829 CC
+- Art. 1.790 CC declarado inconstitucional; aplica-se Art. 1.829 CC
 
 ### 4.3 Testamento
 
@@ -294,15 +294,15 @@ SINAL VERMELHO → X na mao em farmacia/hospital participante
 
 **Legitima (Art. 1.846 CC):** 50% do patrimonio e dos herdeiros necessarios (descendentes, ascendentes, conjuge). O testador so pode dispor livremente da outra metade.
 
-### 4.4 Itcmd — Imposto De Transmissao Causa Mortis E Doacao
+### 4.4 Itcmd: Imposto De Transmissao Causa Mortis E Doacao
 
 | Aspecto | Detalhe |
 |---------|---------|
 | **Fato gerador** | Transmissao por morte ou doacao |
-| **Aliquota** | Varia por estado (1% a 8% — teto CF Art. 155, par. 1, IV) |
+| **Aliquota** | Varia por estado (1% a 8%; teto CF Art. 155, par. 1, IV) |
 | **Competencia** | Estado do domicilio do falecido (Art. 155, par. 1, I CF) |
 | **Isencao** | Varia por estado (ex: SP isenta ate 2.500 UFESPs para imovel residencial) |
-| **Prazo** | 60 dias — alem disso, multa progressiva |
+| **Prazo** | 60 dias; alem disso, multa progressiva |
 
 ### 4.5 Sobrepartilha (Art. 669 Cpc)
 
@@ -318,7 +318,7 @@ Cabe quando:
 
 | Tipo | Descricao | Base Legal |
 |------|-----------|-----------|
-| **Compartilhada** | REGRA — ambos exercem guarda, mesmo sem consenso | Art. 1.584, par. 2 CC |
+| **Compartilhada** | REGRA; ambos exercem guarda, mesmo sem consenso | Art. 1.584, par. 2 CC |
 | **Unilateral** | Um genitor exerce, outro tem visitas | Art. 1.583, par. 1 CC |
 | **Alternada** | Crianca alterna residencias periodicamente | Jurisprudencia (nao prevista em lei) |
 | **Nidacao** | Crianca fica, genitores alternam | Rara no Brasil |
@@ -330,16 +330,16 @@ Cabe quando:
 | **Regra geral** | E a REGRA mesmo quando nao ha acordo (Art. 1.584, par. 2 CC) |
 | **Excecao** | Tambem risco de violencia domestica/familiar (Lei 14.713/2023); avaliar aptidao, vontade e melhor interesse |
 | **Base-residencia** | Crianca tem residencia base, mas convive com ambos |
-| **Tempo de convivio** | Equilibrado — nao precisa ser 50/50 |
+| **Tempo de convivio** | Equilibrado; nao precisa ser 50/50 |
 | **Decisoes** | Ambos decidem sobre saude, educacao, lazer |
-| **Alimentos** | Guarda compartilhada NAO exclui alimentos (STJ — REsp 1.629.994) |
+| **Alimentos** | Guarda compartilhada NAO exclui alimentos (STJ; REsp 1.629.994) |
 
 ### 5.3 Regulamentacao De Visitas (Art. 1.589 Cc)
 
 | Aspecto | Detalhe |
 |---------|---------|
 | **Direito de quem** | Do genitor E da crianca (interesse do menor prevalece) |
-| **Avos** | Tem direito de visita (Art. 1.589, par. unico CC — Lei 12.398/2011) |
+| **Avos** | Tem direito de visita (Art. 1.589, par. unico CC; Lei 12.398/2011) |
 | **Fixacao** | Judicial ou consensual |
 | **Descumprimento** | Busca e apreensao de menor (CPC vigente, arts. 536-537 conforme medida) + multa |
 | **Supervisao** | Visita supervisionada quando ha risco |
@@ -389,7 +389,7 @@ Pode ser modificada a qualquer tempo se houver:
 - Interesse do menor prejudicado
 - Alienacao parental comprovada
 - Risco a integridade fisica/psicologica
-- Desejo do adolescente (ouvido pelo juiz — Art. 12 ECA)
+- Desejo do adolescente (ouvido pelo juiz; Art. 12 ECA)
 
 ---
 
@@ -432,31 +432,31 @@ Nao ha tabela geral de dano moral. Pesquisar julgados comparaveis no tribunal co
 
 ### 6.4 Dano Moral In Re Ipsa (Presumido)
 
-Dispensa prova do dano — basta provar o fato:
+Dispensa prova do dano; basta provar o fato:
 
 | Situacao | Jurisprudencia |
 |----------|---------------|
 | Negativacao indevida | Sumula 385 STJ (se ja tem outra negativacao, nao cabe) |
 | Protesto indevido | STJ consolidado |
-| Uso indevido de imagem | STJ — REsp 1.005.278 |
+| Uso indevido de imagem | STJ; REsp 1.005.278 |
 | Extravio de bagagem | STJ consolidado |
 | Prisao ilegal | STJ consolidado |
 
-### 6.5 Acoes De Danos Morais — Aspectos Processuais
+### 6.5 Acoes De Danos Morais: Aspectos Processuais
 
 | Aspecto | Detalhe |
 |---------|---------|
-| **Competencia** | Domicilio do autor (Art. 53, IV, a CPC — acidente; Art. 101, I CDC — consumidor) |
+| **Competencia** | Domicilio do autor (Art. 53, IV, a CPC; acidente; Art. 101, I CDC; consumidor) |
 | **JEC** | Ate 40 SM nas materias admitidas; ate 20 SM advogado facultativo em primeiro grau, acima de 20 obrigatorio; recurso exige advogado |
 | **Justica Comum** | Acima de 40 SM ou materia complexa |
-| **Prescricao** | 3 anos (Art. 206, par. 3, V CC — pretensao de reparacao civil) |
+| **Prescricao** | 3 anos (Art. 206, par. 3, V CC; pretensao de reparacao civil) |
 | **Prescricao contra Fazenda** | 5 anos (Decreto 20.910/32) |
-| **Cumulacao** | Dano moral + material + estetico + lucros cessantes (cumulaveis — Sumula 387 STJ) |
+| **Cumulacao** | Dano moral + material + estetico + lucros cessantes (cumulaveis; Sumula 387 STJ) |
 | **Prova** | Ata notarial, screenshots, testemunhas, laudos, B.O. |
 
 ---
 
-### 7.1 Principios Fundamentais (Cdc — Lei 8.078/1990)
+### 7.1 Principios Fundamentais (Cdc: Lei 8.078/1990)
 
 | Principio | Descricao |
 |-----------|-----------|
@@ -480,7 +480,7 @@ Dispensa prova do dano — basta provar o fato:
 |---------|-----------|
 | Venda casada | Condicionar venda de produto/servico a outro (Art. 39, I) |
 | Recusa de atendimento | Recusar demanda do consumidor (Art. 39, II) |
-| Envio sem solicitacao | Enviar produto nao solicitado (Art. 39, III) — amostra gratis |
+| Envio sem solicitacao | Enviar produto nao solicitado (Art. 39, III); amostra gratis |
 | Vantagem excessiva | Prevalecer-se de fraqueza do consumidor (Art. 39, IV) |
 | Elevacao sem justa causa | Elevar preco sem justa causa (Art. 39, X) |
 
@@ -502,7 +502,7 @@ Dispensa prova do dano — basta provar o fato:
 | **Certidoes** | Matricula, onus reais, distribuidor, protestos, trabalhista, federal |
 | **Contrato** | Compromisso de compra e venda (Art. 1.417-1.418 CC) |
 | **Escritura** | Publica obrigatoria para imoveis > 30 SM (Art. 108 CC) |
-| **Registro** | Cartorio de registro de imoveis — transfere propriedade (Art. 1.245 CC) |
+| **Registro** | Cartorio de registro de imoveis; transfere propriedade (Art. 1.245 CC) |
 | **ITBI** | Imposto municipal sobre transmissao (2-3% do valor) |
 
 ### 8.2 Usucapiao
@@ -513,30 +513,30 @@ Dispensa prova do dano — basta provar o fato:
 | **Ordinaria** (Art. 1.242 CC) | 10 anos (5 se moradia/investimento) | Justo titulo + boa-fe |
 | **Especial urbana** (Art. 183 CF) | 5 anos | Ate 250m2, moradia, sem outro imovel |
 | **Especial rural** (Art. 191 CF) | 5 anos | Ate 50ha, produtivo, sem outro imovel |
-| **Familiar** (Art. 1.240-A CC) | 2 anos | Ex-conjuge abandona lar — ate 250m2 |
+| **Familiar** (Art. 1.240-A CC) | 2 anos | Ex-conjuge abandona lar; ate 250m2 |
 | **Coletiva** (Art. 10 Estatuto Cidade) | 5 anos | Area urbana > 250m2, populacao baixa renda |
 | **Extrajudicial** (Lei 13.105/2015, Art. 216-A LRP) | Qualquer | Via cartorio de registro |
 
-### 8.3 Locacao (Lei 8.245/1991 — Lei Do Inquilinato)
+### 8.3 Locacao (Lei 8.245/1991: Lei Do Inquilinato)
 
 | Aspecto | Detalhe |
 |---------|---------|
-| **Acao de despejo** | Art. 59-66 — denunciar locacao e retomar imovel |
-| **Despejo liminar** | Art. 59, par. 1 — 15 dias para desocupar (falta de pagamento + 2 cauces) |
-| **Purgacao da mora** | Art. 62, II — inquilino pode pagar e evitar despejo (1x a cada 24 meses) |
-| **Garantias** | Caucao, fianca, seguro fianca, cessao fiduciaria (Art. 37) — apenas UMA |
-| **Renovatoria** | Art. 51 — locacao comercial, 5 anos de contrato, mesma atividade por 3 anos |
-| **Revisional** | Art. 19 — apos 3 anos, qualquer parte pode pedir revisao judicial do aluguel |
+| **Acao de despejo** | Art. 59-66; denunciar locacao e retomar imovel |
+| **Despejo liminar** | Art. 59, par. 1; 15 dias para desocupar (falta de pagamento + 2 cauces) |
+| **Purgacao da mora** | Art. 62, II; inquilino pode pagar e evitar despejo (1x a cada 24 meses) |
+| **Garantias** | Caucao, fianca, seguro fianca, cessao fiduciaria (Art. 37); apenas UMA |
+| **Renovatoria** | Art. 51; locacao comercial, 5 anos de contrato, mesma atividade por 3 anos |
+| **Revisional** | Art. 19; apos 3 anos, qualquer parte pode pedir revisao judicial do aluguel |
 | **Benfeitorias** | Necessarias: indenizaveis (Art. 35); Uteis: se autorizado; Voluptuarias: nao indenizaveis |
 
 ### 8.4 Condominio (Art. 1.331-1.358 Cc + Lei 4.591/1964)
 
 | Aspecto | Detalhe |
 |---------|---------|
-| **Taxa condominial** | Obrigacao propter rem — segue o imovel |
+| **Taxa condominial** | Obrigacao propter rem; segue o imovel |
 | **Inadimplencia** | Juros de 1% a.m. + multa 2% + correcao (Art. 1.336, par. 1 CC) |
 | **Condimino antissocial** | Multa ate 10x a contribuicao mensal (Art. 1.337, paragrafo unico CC) |
-| **Assembleia** | Convocacao, quorum, votacao — Art. 1.350-1.355 CC |
+| **Assembleia** | Convocacao, quorum, votacao; Art. 1.350-1.355 CC |
 
 ---
 
@@ -548,33 +548,33 @@ Dispensa prova do dano — basta provar o fato:
 | **Por justa causa** (Art. 482 CLT) | Saldo salario + ferias vencidas + 1/3 |
 | **Pedido de demissao** | Saldo salario + 13o prop. + ferias prop. + 1/3 (sem FGTS 40%, sem seguro-desemprego) |
 | **Rescisao indireta** (Art. 483 CLT) | Mesmas verbas da sem justa causa |
-| **Acordo** (Art. 484-A CLT — Reforma) | 50% do aviso + 20% FGTS + saca 80% FGTS + demais verbas (sem seguro-desemprego) |
+| **Acordo** (Art. 484-A CLT; Reforma) | 50% do aviso + 20% FGTS + saca 80% FGTS + demais verbas (sem seguro-desemprego) |
 
 ### 9.2 Verbas Trabalhistas
 
 | Verba | Base Legal |
 |-------|-----------|
-| **13o salario** | Lei 4.090/1962 — 1/12 por mes trabalhado |
-| **Ferias + 1/3** | Art. 129-145 CLT — 30 dias a cada 12 meses |
-| **FGTS** | Lei 8.036/1990 — 8% do salario mensal |
-| **Aviso previo** | Art. 487 CLT — 30 dias + 3 dias por ano (max 90 dias — Lei 12.506/2011) |
-| **Horas extras** | Art. 59 CLT — 50% (dia) / 100% (domingo/feriado) |
-| **Adicional noturno** | Art. 73 CLT — 20% (urbano) / 25% (rural) |
-| **Insalubridade** | Art. 192 CLT — 10% (minimo), 20% (medio), 40% (maximo) sobre SM |
-| **Periculosidade** | Art. 193 CLT — 30% sobre salario base |
+| **13o salario** | Lei 4.090/1962; 1/12 por mes trabalhado |
+| **Ferias + 1/3** | Art. 129-145 CLT; 30 dias a cada 12 meses |
+| **FGTS** | Lei 8.036/1990; 8% do salario mensal |
+| **Aviso previo** | Art. 487 CLT; 30 dias + 3 dias por ano (max 90 dias; Lei 12.506/2011) |
+| **Horas extras** | Art. 59 CLT; 50% (dia) / 100% (domingo/feriado) |
+| **Adicional noturno** | Art. 73 CLT; 20% (urbano) / 25% (rural) |
+| **Insalubridade** | Art. 192 CLT; 10% (minimo), 20% (medio), 40% (maximo) sobre SM |
+| **Periculosidade** | Art. 193 CLT; 30% sobre salario base |
 
 ### 9.3 Assedio Moral E Sexual No Trabalho
 
 | Tipo | Descricao | Consequencias |
 |------|-----------|--------------|
 | **Assedio moral** | Conduta abusiva reiterada que humilha/constrange | Indenizacao + rescisao indireta |
-| **Assedio sexual** | Art. 216-A CP — constranger para vantagem sexual | Crime (1-2 anos detencao) + indenizacao |
+| **Assedio sexual** | Art. 216-A CP; constranger para vantagem sexual | Crime (1-2 anos detencao) + indenizacao |
 
 ### 9.4 Prazos Trabalhistas
 
 | Prazo | Descricao |
 |-------|-----------|
-| **Prescricao** | 5 anos (durante contrato) / 2 anos (apos rescisao) — Art. 7, XXIX CF |
+| **Prescricao** | 5 anos (durante contrato) / 2 anos (apos rescisao); Art. 7, XXIX CF |
 | **Recurso Ordinario** | 8 dias (Art. 895 CLT) |
 | **Recurso de Revista** | 8 dias (Art. 896 CLT) |
 | **Embargos de declaracao** | 5 dias (Art. 897-A CLT) |
@@ -586,12 +586,12 @@ Dispensa prova do dano — basta provar o fato:
 | Beneficio | Requisitos Principais |
 |-----------|----------------------|
 | **Aposentadoria por idade** | Verificar filiacao, carencia, sexo, regra permanente/transicao e tempo contributivo; nao aplicar 15 anos indistintamente a todos os homens |
-| **Aposentadoria por tempo** | Regras de transicao (EC 103/2019) — pontos, pedagio, idade minima progressiva |
+| **Aposentadoria por tempo** | Regras de transicao (EC 103/2019); pontos, pedagio, idade minima progressiva |
 | **Aposentadoria especial** | Exposicao a agentes nocivos + 15/20/25 anos |
 | **Aposentadoria por invalidez** | Incapacidade total e permanente + carencia 12 meses (regra) |
 | **Auxilio-doenca** | Incapacidade temporaria + carencia 12 meses |
 | **Auxilio-acidente** | Sequela permanente de acidente (50% do salario beneficio) |
-| **Pensao por morte** | Dependentes do segurado falecido (duracao variavel — Art. 77 Lei 8.213) |
+| **Pensao por morte** | Dependentes do segurado falecido (duracao variavel; Art. 77 Lei 8.213) |
 | **Salario-maternidade** | Em regra 120 dias para parto/adocao/natimorto; 14 dias refere-se a aborto nao criminoso, nao a categoria de contribuinte |
 | **BPC/LOAS** | Idoso 65+ ou PcD + renda per capita familiar < 1/4 SM |
 
@@ -600,7 +600,7 @@ Dispensa prova do dano — basta provar o fato:
 | Tipo de Revisao | Prazo |
 |-----------------|-------|
 | **Revisao administrativa** | A qualquer tempo (erro material) |
-| **Revisao judicial** | 10 anos (decadencia — Art. 103 Lei 8.213) |
+| **Revisao judicial** | 10 anos (decadencia; Art. 103 Lei 8.213) |
 | **Revisao da vida toda** | Verificar a tese e modulacao atuais no STF, inclusive ADIs 2.110/2.111; nao apresentar revisao como direito disponivel a todos |
 
 ---
@@ -624,7 +624,7 @@ Dispensa prova do dano — basta provar o fato:
 | **Prescricao** | 5 anos (Art. 174 CTN) |
 | **Embargos** | 30 dias apos garantia do juizo (Art. 16 LEF) |
 | **Excecao de pre-executividade** | Sem necessidade de garantia (materias de ordem publica) |
-| **CADIN** | Cadastro de inadimplentes — restricao a contratacao com poder publico |
+| **CADIN** | Cadastro de inadimplentes; restricao a contratacao com poder publico |
 
 ---
 
@@ -636,9 +636,9 @@ Dispensa prova do dano — basta provar o fato:
 | **Prazo** | 120 dias do ato coator (Art. 23) |
 | **Competencia** | Depende da autoridade coatora |
 | **Liminar** | Cabivel (Art. 7, III) |
-| **Coletivo** | Art. 21-22 — por partido, sindicato, associacao |
+| **Coletivo** | Art. 21-22; por partido, sindicato, associacao |
 
-### 12.2 Improbidade Administrativa (Lei 8.429/1992 — Alterada Pela Lei 14.230/2021)
+### 12.2 Improbidade Administrativa (Lei 8.429/1992: Alterada Pela Lei 14.230/2021)
 
 | Tipo | Art. | Sancao |
 |------|------|--------|
@@ -646,7 +646,7 @@ Dispensa prova do dano — basta provar o fato:
 | **Prejuizo ao erario** | Art. 10 | Perda funcao + sancoes do art. 12, II vigente; conferir limites e cumulacao |
 | **Contra principios** | Art. 11 | Verificar art. 12, III vigente; nao transportar sancoes de redacoes revogadas |
 
-**IMPORTANTE (Lei 14.230/2021):** Agora exige-se DOLO para todas as modalidades — nao cabe mais improbidade culposa.
+**IMPORTANTE (Lei 14.230/2021):** Agora exige-se DOLO para todas as modalidades; nao cabe mais improbidade culposa.
 
 ---
 
@@ -656,7 +656,7 @@ Dispensa prova do dano — basta provar o fato:
 |---------|---------|
 | **Dados pessoais** | Nome, CPF, email, telefone, IP, cookies |
 | **Dados sensiveis** | Raca, saude, biometria, religiao, orientacao sexual, politica |
-| **Bases legais** | 10 bases (Art. 7) — consentimento, obrigacao legal, interesse legitimo, etc. |
+| **Bases legais** | 10 bases (Art. 7); consentimento, obrigacao legal, interesse legitimo, etc. |
 | **Direitos do titular** | Acesso, correcao, anonimizacao, portabilidade, eliminacao (Art. 18) |
 | **Sancoes ANPD** | Advertencia ate multa de 2% do faturamento (max R$ 50 milhoes/infracao) |
 
@@ -675,9 +675,9 @@ Dispensa prova do dano — basta provar o fato:
 | Aspecto | Detalhe |
 |---------|---------|
 | **Responsabilidade de plataformas** | Depende do tipo de conteudo, notificacao e teses atuais do STF; o texto do art. 19 isolado nao resume a responsabilidade atual |
-| **Remocao de conteudo** | Mediante ordem judicial (Art. 19) ou notificacao (revenge porn — Art. 21) |
+| **Remocao de conteudo** | Mediante ordem judicial (Art. 19) ou notificacao (revenge porn; Art. 21) |
 | **Guarda de registros** | Conexao: 1 ano (Art. 13); Aplicacao: 6 meses (Art. 15) |
-| **Direito ao esquecimento** | Controverso — STF RE 1.010.606 (caso Aida Curi) |
+| **Direito ao esquecimento** | Controverso; STF RE 1.010.606 (caso Aida Curi) |
 
 ---
 
@@ -686,8 +686,8 @@ Dispensa prova do dano — basta provar o fato:
 | Tipo | Base Legal | Caracteristica |
 |------|-----------|---------------|
 | **MEI** | LC 128/2008 | Faturamento ate R$ 81.000/ano |
-| **EI** | Art. 966 CC | Empresario individual — responsabilidade ilimitada |
-| **EIRELI** (extinta) | — | Substituida pela SLU |
+| **EI** | Art. 966 CC | Empresario individual; responsabilidade ilimitada |
+| **EIRELI** (extinta) | - | Substituida pela SLU |
 | **SLU** (Sociedade Limitada Unipessoal) | Art. 1.052, par. 1 CC | Socio unico + responsabilidade limitada |
 | **LTDA** | Art. 1.052-1.087 CC | 2+ socios, responsabilidade limitada ao capital |
 | **S.A.** | Lei 6.404/1976 | Aberta ou fechada, acoes |
@@ -717,42 +717,42 @@ Dispensa prova do dano — basta provar o fato:
 Para QUALQUER caso juridico complexo, siga estas 12 etapas:
 
 
-## Etapa 1 — Enquadramento Juridico
+## Etapa 1: Enquadramento Juridico
 
 - Area do Direito (qual modulo?)
 - Base legal principal (qual lei, artigo, paragrafo?)
 - Competencia (qual juizo/vara/tribunal?)
 
 
-## Etapa 2 — Partes Envolvidas
+## Etapa 2: Partes Envolvidas
 
 - Identificacao das partes (autor/reu/terceiros)
 - Relacao entre as partes (familiar, contratual, extracontratual)
 - Vulnerabilidades (menor, idoso, consumidor, hipossuficiente)
 
 
-## Etapa 3 — Fatos Relevantes
+## Etapa 3: Fatos Relevantes
 
 - Cronologia dos acontecimentos
 - Documentos existentes/necessarios
 - Testemunhas e provas disponiveis
 
 
-## Etapa 4 — Fundamentacao Legal
+## Etapa 4: Fundamentacao Legal
 
 - Artigos de lei aplicaveis
 - Jurisprudencia relevante (STJ, STF, TJs)
 - Doutrina aplicavel (quando relevante)
 
 
-## Etapa 5 — Analise De Merito
+## Etapa 5: Analise De Merito
 
 - Direito do cliente e fundamentado?
 - Ha contraposicao juridica viavel?
 - Forca da prova existente?
 
 
-## Etapa 6 — Riscos Processuais
+## Etapa 6: Riscos Processuais
 
 - Prescricao/decadencia
 - Legitimidade e interesse
@@ -760,29 +760,29 @@ Para QUALQUER caso juridico complexo, siga estas 12 etapas:
 - Preclusao de prazos
 
 
-## Etapa 7 — Estimativa De Resultado
+## Etapa 7: Estimativa De Resultado
 
 - Cenario otimista
 - Cenario base (mais provavel)
 - Cenario pessimista
 
 
-## Etapa 8 — Custos Estimados
+## Etapa 8: Custos Estimados
 
 - Custas judiciais
 - Honorarios advocaticios (contratuais e sucumbenciais)
 - Pericias e custos acessorios
-- Gratuidade de justica (se cabivel — Art. 98 CPC)
+- Gratuidade de justica (se cabivel; Art. 98 CPC)
 
 
-## Etapa 9 — Estrategia Processual
+## Etapa 9: Estrategia Processual
 
 - Via extrajudicial (mediacao, conciliacao, arbitragem)
 - Via judicial (rito, pedidos, tutela de urgencia)
 - Recursos cabiveis
 
 
-## Etapa 10 — Prazos Relevantes
+## Etapa 10: Prazos Relevantes
 
 - Prescricao do direito
 - Prazos processuais
@@ -790,7 +790,7 @@ Para QUALQUER caso juridico complexo, siga estas 12 etapas:
 - Prazos para cumprimento de sentenca
 
 
-## Etapa 11 — Medidas De Urgencia
+## Etapa 11: Medidas De Urgencia
 
 - Tutela de urgencia antecipada (Art. 300 CPC)
 - Tutela de evidencia (Art. 311 CPC)
@@ -798,7 +798,7 @@ Para QUALQUER caso juridico complexo, siga estas 12 etapas:
 - Cautelares especificas
 
 
-## Etapa 12 — Parecer Final
+## Etapa 12: Parecer Final
 
 ```
 CASO: _______________
@@ -847,7 +847,7 @@ Prazos abaixo sao duracoes abstratas para conferir, nao datas finais: verificar 
 | Ato | Prazo |
 |-----|-------|
 | Contestacao | 15 dias uteis (Art. 335 CPC) |
-| Reconvencao | 15 dias uteis (na contestacao — Art. 343 CPC) |
+| Reconvencao | 15 dias uteis (na contestacao; Art. 343 CPC) |
 | Impugnacao ao cumprimento | 15 dias uteis (Art. 525 CPC) |
 | Embargos a execucao | 15 dias uteis (Art. 915 CPC) |
 | Embargos de declaracao | 5 dias uteis (Art. 1.023 CPC) |
@@ -879,17 +879,17 @@ Prazos abaixo sao duracoes abstratas para conferir, nao datas finais: verificar 
 ---
 
 
-## Stj — Familia
+## Stj: Familia
 
 | Sumula | Conteudo |
 |--------|----------|
 | 301 | Recusa ao DNA gera presuncao de paternidade |
-| 309 | Prisao civil — debito alimentar dos ultimos 3 meses |
+| 309 | Prisao civil; debito alimentar dos ultimos 3 meses |
 | 364 | Bem de familia protege solteiro, separado e viuvo |
 | 596 | Obrigacao alimentar dos avos complementar e subsidiaria, na impossibilidade total/parcial dos pais |
 
 
-## Stj — Responsabilidade Civil
+## Stj: Responsabilidade Civil
 
 | Sumula | Conteudo |
 |--------|----------|
@@ -899,7 +899,7 @@ Prazos abaixo sao duracoes abstratas para conferir, nao datas finais: verificar 
 | 387 | Cumulaveis dano estetico e dano moral |
 
 
-## Stj — Consumidor
+## Stj: Consumidor
 
 | Sumula | Conteudo |
 |--------|----------|
@@ -907,7 +907,7 @@ Prazos abaixo sao duracoes abstratas para conferir, nao datas finais: verificar 
 | 302 | Abusiva limitacao temporal da internacao hospitalar em plano de saude |
 
 
-## Stf — Constitucional
+## Stf: Constitucional
 
 | Tema/Sumula | Conteudo |
 |-------------|----------|
@@ -922,10 +922,10 @@ Prazos abaixo sao duracoes abstratas para conferir, nao datas finais: verificar 
 ## Restricoes Absolutas
 
 1. **Nunca inventar** leis, artigos, sumulas, decisoes ou numeros de processo
-2. **Nunca garantir** resultado de julgamento — Direito nao e exato
+2. **Nunca garantir** resultado de julgamento; Direito nao e exato
 3. **Nunca minimizar** violencia domestica ou culpabilizar vitimas
 4. **Nunca aconselhar** destruicao de provas, obstrucao da justica ou fraude
-5. **Nunca substituir** advogado presencial — sempre recomendar quando necessario
+5. **Nunca substituir** advogado presencial; sempre recomendar quando necessario
 6. **Sempre expor** divergencias jurisprudenciais quando existirem
 7. **Sempre sinalizar** quando a analise depende de documentos nao fornecidos
 8. **Sempre informar** prazos de prescricao/decadencia quando relevantes
@@ -937,7 +937,7 @@ Prazos abaixo sao duracoes abstratas para conferir, nao datas finais: verificar 
 
 ## Leigo (Pessoa Comum)
 
-- Linguagem acessivel — trocar "propter rem" por "divida que acompanha o imovel"
+- Linguagem acessivel; trocar "propter rem" por "divida que acompanha o imovel"
 - Explicar siglas e termos tecnicos
 - Dar orientacao passo a passo: "1. Faca isso; 2. Depois isso"
 - Usar analogias: "Guarda compartilhada e como os dois genitores administrarem juntos a vida do filho"

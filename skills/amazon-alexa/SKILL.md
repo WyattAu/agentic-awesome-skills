@@ -19,7 +19,7 @@ tools:
 - codex-cli
 ---
 
-# AMAZON ALEXA — Voz Inteligente com Claude
+# AMAZON ALEXA: Voz Inteligente com Claude
 
 ## Detailed Guide
 

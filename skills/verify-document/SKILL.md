@@ -16,7 +16,7 @@ license_source: "https://github.com/Sketchjar/stipple-agent-skills/blob/main/LIC
 
 # Document Verification
 
-Inspect a document for forensic authenticity signals — not a fraud verdict, but a risk band with the evidence behind it. Uses the Stipple API (free anonymous tier, no signup).
+Inspect a document for forensic authenticity signals; not a fraud verdict, but a risk band with the evidence behind it. Uses the Stipple API (free anonymous tier, no signup).
 
 ## When to use
 
@@ -49,18 +49,18 @@ The documented Stipple endpoints, schemas and allowances are historical examples
 
    Add `?fresh=true` to force re-inspection of a previously cached document. Add `?deep=true` for deep inspection (more thorough, more credits).
 
-4. **Interpret the response.** Two independent axes — read both:
+4. **Interpret the response.** Two independent axes; read both:
 
    | Axis | Question it answers |
    |---|---|
    | `risk_band` | Does anything look tampered? (low / medium / high) |
    | `inspection_quality` | Could the engine actually see enough to judge? (thorough / limited / poor) |
 
-   A clean phone photo of a real payslip is commonly `low` risk + `limited` quality — **low coverage is not risk**. Per-signal `evidence` includes: amount/words mismatch, font discontinuity in values, date anomalies, document label integrity, identifier checksums (ABN/ACN/TFN), table arithmetic.
+   A clean phone photo of a real payslip is commonly `low` risk + `limited` quality; **low coverage is not risk**. Per-signal `evidence` includes: amount/words mismatch, font discontinuity in values, date anomalies, document label integrity, identifier checksums (ABN/ACN/TFN), table arithmetic.
 
 5. **Report honestly.** This is a *signal with evidence*, not a verdict:
-   - "risk_band: LOW — nothing looks tampered"
-   - "inspection_quality: limited — couldn't inspect everything; low coverage is NOT fraud"
+   - "risk_band: LOW; nothing looks tampered"
+   - "inspection_quality: limited; couldn't inspect everything; low coverage is NOT fraud"
    - Show the per-signal evidence for anything flagged
 
 6. **Pair with related checks.** For identity documents, follow with a 100-point identity check (`/v1/identity-check`). For extraction, use `extract-document-data`.
@@ -68,7 +68,7 @@ The documented Stipple endpoints, schemas and allowances are historical examples
 ## Output format
 
 ```
-risk_band:           LOW — Nothing looks tampered.
+risk_band:           LOW; Nothing looks tampered.
 inspection_quality:  limited
 recommended action:  review_before_action
 
@@ -92,7 +92,7 @@ evidence (signals):
 
 ## Notes
 
-- Document types the engine recognizes (payslips, invoices, bank statements) get type-specific checks; unrecognized types get generic checks only — say so in your report
+- Document types the engine recognizes (payslips, invoices, bank statements) get type-specific checks; unrecognized types get generic checks only; say so in your report
 - Historical content-hash caching claims do not establish current speed, retention or cost; verify the active service contract.
 - This measures forensic signals, not authorship style. AI-text detectors cannot establish who wrote a document and should not be used as proof of misconduct.
 - Historical anonymous/key allowances are unverified; do not assume a free tier or enter credentials at an unconfirmed provider domain.

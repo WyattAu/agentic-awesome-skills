@@ -71,9 +71,9 @@ struct ClayCard: View {
         .padding(40)
         .background(Color(red: 0.97, green: 0.71, blue: 0.65)) // Soft coral
         .cornerRadius(32)
-        // Outer shadow — detaches from background
+        // Outer shadow; detaches from background
         .shadow(color: .black.opacity(0.15), radius: 12, x: 8, y: 8)
-        // Inner highlight (top-left) — faked with overlay
+        // Inner highlight (top-left); faked with overlay
         .overlay(
             RoundedRectangle(cornerRadius: 32)
                 .stroke(
@@ -98,7 +98,7 @@ struct ClayCard: View {
 }
 ```
 - The "clay" volume comes from a gradient stroke overlay: white on top-left, dark on bottom-right.
-- Use `.interpolatingSpring(stiffness: 300, damping: 10)` for the bouncy feel — critical for clay aesthetics.
+- Use `.interpolatingSpring(stiffness: 300, damping: 10)` for the bouncy feel; critical for clay aesthetics.
 - Background color should be pastel/bright but NOT the same as the parent (unlike neumorphism).
 
 ### Flutter
@@ -153,7 +153,7 @@ class _ClayCardState extends State<ClayCard> with SingleTickerProviderStateMixin
   }
 }
 ```
-- Use `Curves.elasticOut` or `Curves.bounceOut` for the spring animation — essential for the clay feeling.
+- Use `Curves.elasticOut` or `Curves.bounceOut` for the spring animation; essential for the clay feeling.
 - Gradient borders require a custom `ShapeDecoration` or a `Stack` with a gradient container behind the main container.
 - Alternative for inner shadow: use `flutter_inset_box_shadow` package with light top-left and dark bottom-right insets.
 
@@ -196,7 +196,7 @@ const ClayCard = () => {
         elevation: 8,
         // Gradient border must be faked with a wrapper or SVG
         borderWidth: 3,
-        borderColor: 'rgba(255,255,255,0.3)', // Simplified — top highlight
+        borderColor: 'rgba(255,255,255,0.3)', // Simplified; top highlight
       }}>
         <Text style={{ fontSize: 48 }}>☀️</Text>
         <Text style={{
@@ -210,7 +210,7 @@ const ClayCard = () => {
 };
 ```
 - Use `Animated.spring` with low `friction` (3-5) for the signature bouncy clay behavior.
-- Gradient borders aren't possible natively — use a solid white-tinted border as a simplified approximation, or wrap in an `expo-linear-gradient` View.
+- Gradient borders aren't possible natively; use a solid white-tinted border as a simplified approximation, or wrap in an `expo-linear-gradient` View.
 
 ### Jetpack Compose
 ```kotlin
@@ -263,7 +263,7 @@ fun ClayCard() {
     }
 }
 ```
-- Use `spring(dampingRatio = 0.3f)` — low damping = bouncy. This is the core of the clay feeling.
+- Use `spring(dampingRatio = 0.3f)`; low damping = bouncy. This is the core of the clay feeling.
 - Gradient borders work natively in Compose via `Modifier.border(width, Brush.linearGradient(...), shape)`.
 - Use `Modifier.clip()` before `.background()` to ensure the rounded corners clip content properly.
 

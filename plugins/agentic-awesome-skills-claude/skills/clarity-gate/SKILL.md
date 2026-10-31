@@ -52,7 +52,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 > **Clarity Gate verifies FORM, not TRUTH.**
 >
-> This skill checks whether claims are properly marked as uncertain—it cannot verify if claims are actually true. 
+> This skill checks whether claims are properly marked as uncertain-it cannot verify if claims are actually true. 
 >
 > **Risk:** An LLM can hallucinate facts INTO a document, then "pass" Clarity Gate by adding source markers to false claims.
 >

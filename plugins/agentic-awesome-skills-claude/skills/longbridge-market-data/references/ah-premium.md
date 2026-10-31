@@ -1,6 +1,6 @@
 # longbridge-ah-premium
 
-A/H premium ratio for dual-listed Mainland-Chinese companies — historical kline or today's intraday curve.
+A/H premium ratio for dual-listed Mainland-Chinese companies; historical kline or today's intraday curve.
 
 ## Symbol format
 
@@ -14,7 +14,7 @@ Always pass the **HK side** (`<CODE>.HK`) of the dual-listed pair. The Longbridg
 | 招商银行 / CMB        | `3968.HK` | `600036.SH` |
 | 中国人寿 / China Life | `2628.HK` | `601628.SH` |
 
-If the user gives an A-share symbol, translate to the HK side. If the stock is not dual-listed (e.g. `700.HK`), the API returns no data — report that, don't retry.
+If the user gives an A-share symbol, translate to the HK side. If the stock is not dual-listed (e.g. `700.HK`), the API returns no data; report that, don't retry.
 
 ## Subcommands
 
@@ -62,6 +62,6 @@ Each row carries a timestamp and provider-defined premium ratio. Verify numerato
 | Situation                             | LLM response                                                                            |
 | ------------------------------------- | --------------------------------------------------------------------------------------- |
 | Shell `command not found: longbridge` | Fall back to MCP if configured; otherwise tell the user to install longbridge-terminal. |
-| Empty array                           | "No A/H premium data — verify the dual-listing, coverage, date and entitlements before inferring why data is absent."               |
+| Empty array                           | "No A/H premium data; verify the dual-listing, coverage, date and entitlements before inferring why data is absent."               |
 | stderr `param_error`                  | Verify the symbol is an HK ticker of a dual-listed pair.                                |
 | Other stderr                          | Surface verbatim.                                                                       |

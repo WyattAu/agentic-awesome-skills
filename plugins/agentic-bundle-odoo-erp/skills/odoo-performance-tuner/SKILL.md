@@ -11,7 +11,7 @@ metadata:
 
 ## Overview
 
-This skill helps diagnose and resolve Odoo performance problems — from slow page loads and database bottlenecks to worker misconfiguration and memory bloat. It covers PostgreSQL query tuning, Odoo worker settings, and built-in profiling tools.
+This skill helps diagnose and resolve Odoo performance problems; from slow page loads and database bottlenecks to worker misconfiguration and memory bloat. It covers PostgreSQL query tuning, Odoo worker settings, and built-in profiling tools.
 
 ## When to Use This Skill
 
@@ -31,12 +31,12 @@ This skill helps diagnose and resolve Odoo performance problems — from slow pa
 ### Example 1: Recommended Worker Configuration
 
 ```ini
-# odoo.conf — illustrative values only; measure workload and total memory before use
+# odoo.conf: illustrative values only; measure workload and total memory before use
 
 workers = 4                   # illustrative; budget HTTP, cron, DB and OS memory together
 max_cron_threads = 2          # background cron jobs; keep ≤ 2 to preserve user-facing capacity
-limit_memory_soft = 1610612736  # 1.5 GB — worker is recycled gracefully after this
-limit_memory_hard = 2147483648  # 2.0 GB — worker is killed immediately; prevents OOM crashes
+limit_memory_soft = 1610612736  # 1.5 GB; worker is recycled gracefully after this
+limit_memory_hard = 2147483648  # 2.0 GB; worker is killed immediately; prevents OOM crashes
 limit_time_cpu = 600          # max CPU seconds per request
 limit_time_real = 1200        # max wall-clock seconds per request
 limit_request = 8192          # max requests before worker recycles (prevents memory leaks)
@@ -78,7 +78,7 @@ Prerequisites: Run Odoo with ?debug=1 in the URL to enable debug mode.
 Menu: Settings → Technical → Profiling
 
 Steps:
-  1. Click "Enable Profiling" — set a duration (e.g., 60 seconds)
+  1. Click "Enable Profiling"; set a duration (e.g., 60 seconds)
   2. Navigate to and reproduce the slow action
   3. Return to Settings → Technical → Profiling → View Results
 
@@ -97,13 +97,13 @@ What to look for:
 - ✅ **Do:** Add PostgreSQL B-tree indexes on columns frequently used in domain filters (`partner_id`, `state`, `date_order`).
 - ✅ **Do:** Enable Odoo's HTTP caching for static assets and put a CDN (Cloudflare, AWS CloudFront) in front of the website.
 - ✅ **Do:** Use `@tools.ormcache` decorator on methods pulled repeatedly with the same arguments.
-- ❌ **Don't:** Set `workers = 0` in production — the non-worker server has different concurrency characteristics; use a deployment mode supported by the target OS and measured workload.
-- ❌ **Don't:** Ignore `limit_memory_soft` — workers exceeding it are recycled between requests; without the limit they grow unbounded and crash.
-- ❌ **Don't:** Directly manipulate `prefetch_ids` on recordsets — rely on Odoo's automatic batch prefetching, which activates by default.
+- ❌ **Don't:** Set `workers = 0` in production; the non-worker server has different concurrency characteristics; use a deployment mode supported by the target OS and measured workload.
+- ❌ **Don't:** Ignore `limit_memory_soft`; workers exceeding it are recycled between requests; without the limit they grow unbounded and crash.
+- ❌ **Don't:** Directly manipulate `prefetch_ids` on recordsets; rely on Odoo's automatic batch prefetching, which activates by default.
 
 ## Limitations
 
-- PostgreSQL tuning (`shared_buffers`, `work_mem`, `effective_cache_size`) is highly server-specific and not covered in depth here — use [PGTune](https://pgtune.leopard.in.ua/) as a starting baseline.
+- PostgreSQL tuning (`shared_buffers`, `work_mem`, `effective_cache_size`) is highly server-specific and not covered in depth here; use [PGTune](https://pgtune.leopard.in.ua/) as a starting baseline.
 - The built-in Odoo profiler only captures **Python + SQL** traces; JavaScript rendering performance requires browser DevTools.
-- **Odoo.sh** managed hosting restricts direct PostgreSQL and `odoo.conf` access — some tuning options are unavailable.
+- **Odoo.sh** managed hosting restricts direct PostgreSQL and `odoo.conf` access; some tuning options are unavailable.
 - Does not cover **Redis-based session store** or **Celery task queue** optimizations, which are advanced patterns for very high-traffic instances.

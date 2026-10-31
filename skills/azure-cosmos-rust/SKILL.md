@@ -8,7 +8,7 @@ date_added: '2026-02-27'
 
 # Azure Cosmos DB SDK for Rust
 
-Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database.
+Client library for Azure Cosmos DB NoSQL API; globally distributed, multi-model database.
 
 The examples below require a reviewed compatible crate set and replacement of every resource placeholder. Do not use production data for demonstration writes.
 
@@ -125,11 +125,11 @@ cargo add azure_data_cosmos@=0.37.1 --features key_auth
 
 ## Best Practices
 
-1. **Always specify partition key** — required for point reads and writes
-2. **Use `into_model()?`** — to deserialize responses into your types
-3. **Derive `Serialize` and `Deserialize`** — for all document types
-4. **Use Entra ID auth** — prefer `DeveloperToolsCredential` over key auth
-5. **Reuse client instances** — clients are thread-safe and reusable
+1. **Always specify partition key**; required for point reads and writes
+2. **Use `into_model()?`**; to deserialize responses into your types
+3. **Derive `Serialize` and `Deserialize`**; for all document types
+4. **Use Entra ID auth**; prefer `DeveloperToolsCredential` over key auth
+5. **Reuse client instances**; clients are thread-safe and reusable
 
 The reviewed example set uses `azure_data_cosmos 0.37.1` and compatible Azure core/credential crates. Record and commit Cargo.lock; source/API review is not a compiler or live-service test.
 

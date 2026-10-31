@@ -192,7 +192,7 @@ its own assumptions, coverage, latency, and quality limitations.
 ## Reliability and Cache Behavior
 
 - Cache by product, domain, timestamped source URL, byte identity, and local
-  checksum—not by `latest` or a friendly timestamp alone.
+  checksum-not by `latest` or a friendly timestamp alone.
 - Retry timeouts and transient server failures with bounded backoff and jitter.
 - Honor service limits and avoid parallel directory-wide downloads.
 - Keep partial compressed or decompressed files outside accepted cache entries.

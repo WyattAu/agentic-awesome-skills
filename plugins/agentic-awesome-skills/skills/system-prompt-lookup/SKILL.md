@@ -28,7 +28,7 @@ license_source: "https://github.com/Continuum-AI-Corp/OrcaPromptVault/blob/main/
 ## Overview
 
 [OrcaPromptVault](https://github.com/Continuum-AI-Corp/OrcaPromptVault) is a dated archive of the
-system prompts and tool-call schemas that shipped AI products send — one directory per product,
+system prompts and tool-call schemas that shipped AI products send; one directory per product,
 schemas stored as JSON. Each artifact records how it was obtained: captured off the wire while the
 harness ran unmodified, or reported by the vendor.
 
@@ -42,7 +42,7 @@ Reads public reference files from GitHub. Comparison downloads write only inside
 
 - Use when the user asks what a product's system prompt says, or quotes one and asks whether it is
   real.
-- Use when you are about to state that some agent is instructed to do something — check first.
+- Use when you are about to state that some agent is instructed to do something; check first.
 - Use when comparing products: how large a prompt is, how many tools it ships, how it phrases a
   refusal or a safety rule.
 - Use when someone shows you an extracted or leaked prompt and wants it verified.
@@ -85,7 +85,7 @@ Quote from what you fetched. If you did not fetch it, say so rather than reconst
 
 `docs/CAPTURES.md` lists every artifact that was pulled off the wire, with the date, the character
 count, and the command that reproduces it. Anything absent from that table came from a vendor
-publication or an upstream collection — still useful, but it is the vendor's account of its own
+publication or an upstream collection; still useful, but it is the vendor's account of its own
 prompt, which is a different kind of evidence.
 
 ```bash
@@ -119,7 +119,7 @@ User: Is this really in Claude Code's system prompt? "You are a Claude agent, bu
 Anthropic's Claude Agent SDK."
 ```
 
-Fetch both modes for that model, grep for the line, and answer with the mode it belongs to — here
+Fetch both modes for that model, grep for the line, and answer with the mode it belongs to; here
 the headless/SDK capture rather than the interactive one. Give the file name and its capture date,
 not a summary.
 
@@ -145,7 +145,7 @@ a match on generic safety boilerplate is not.
 
 - ✅ Cite file name plus capture date every time you quote.
 - ✅ State whether the artifact was captured off the wire or reported by the model itself.
-- ✅ Treat every number — characters, tool counts — as tied to one dated file.
+- ✅ Treat every number; characters, tool counts; as tied to one dated file.
 - ✅ Say plainly when the archive has no entry for the product being asked about.
 - ❌ Do not paraphrase a prompt you did not fetch in this session.
 - ❌ Do not generalise from one product's prompt to how AI agents are instructed in general.

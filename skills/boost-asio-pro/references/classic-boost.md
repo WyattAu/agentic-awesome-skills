@@ -1,7 +1,7 @@
-# Classic Boost (pre-1.66, the `io_service` era — verified to 1.62)
+# Classic Boost (pre-1.66, the `io_service` era: verified to 1.62)
 
 
-To support Boost older than 1.66 (no `io_context`, no `make_strand`, no `any_io_executor`), drop to the classic API — verified building **back to Boost 1.62** (Debian 9) while still compiling on current Boost via a tiny shim:
+To support Boost older than 1.66 (no `io_context`, no `make_strand`, no `any_io_executor`), drop to the classic API; verified building **back to Boost 1.62** (Debian 9) while still compiling on current Boost via a tiny shim:
 
 | Modern (1.66+) | Classic (pre-1.66) |
 |----------------|--------------------|
@@ -12,7 +12,7 @@ To support Boost older than 1.66 (no `io_context`, no `make_strand`, no `any_io_
 | move-return `async_accept()` | `async_accept(socket_, handler)` |
 | header-only `error_code` | link **Boost.System** (`find_package(Boost COMPONENTS system)`) |
 
-Only the `io_service`/`io_context` name and the `expires_after`/`expires_from_now` call actually differ across 1.62…1.90 — isolate both behind `#if BOOST_VERSION >= 106600`:
+Only the `io_service`/`io_context` name and the `expires_after`/`expires_from_now` call actually differ across 1.62…1.90; isolate both behind `#if BOOST_VERSION >= 106600`:
 ```cpp
 #include <boost/version.hpp>
 #include <boost/asio/steady_timer.hpp>     // not pulled in by <boost/asio.hpp> on old Boost

@@ -230,7 +230,7 @@ single-site sweep geometry or present the composite as a custom mosaic.
 
 ## Export and Verify
 
-For static output, verify the actual rendered file—not only the plotting call.
+For static output, verify the actual rendered file-not only the plotting call.
 Open or inspect the image and confirm:
 
 - nonblank data and expected radar coverage;

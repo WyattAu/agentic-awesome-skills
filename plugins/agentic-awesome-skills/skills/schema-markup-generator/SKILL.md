@@ -281,7 +281,7 @@ export default function ToolPage() {
 }
 ```
 
-Each schema lives in its own `<script>` tag — do NOT merge them into one object.
+Each schema lives in its own `<script>` tag; do NOT merge them into one object.
 
 ---
 
@@ -289,8 +289,8 @@ Each schema lives in its own `<script>` tag — do NOT merge them into one objec
 
 Always validate schema before deploying:
 
-1. **Google Rich Results Test** — https://search.google.com/test/rich-results
-2. **Schema.org Validator** — https://validator.schema.org/
+1. **Google Rich Results Test**; https://search.google.com/test/rich-results
+2. **Schema.org Validator**; https://validator.schema.org/
 3. **Google Search Console** → Enhancements → check for warnings after deployment
 
 ```bash

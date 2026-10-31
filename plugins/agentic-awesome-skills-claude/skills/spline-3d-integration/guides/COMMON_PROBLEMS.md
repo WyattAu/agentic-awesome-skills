@@ -8,7 +8,7 @@ These are the real-world issues that only surface after integration. Read this b
 
 ---
 
-### 1. Scroll Hijacking — Page Won't Scroll
+### 1. Scroll Hijacking: Page Won't Scroll
 
 **What happens:** After adding Spline, the whole page stops scrolling. Users are stuck.
 
@@ -16,7 +16,7 @@ These are the real-world issues that only surface after integration. Read this b
 
 **Fix:**
 ```css
-/* Add this to your CSS — overrides Spline's injection */
+/* Add this to your CSS; overrides Spline's injection */
 body {
   overflow: auto !important;
 }
@@ -36,7 +36,7 @@ Or in Play Settings (Spline editor → Export → Play Settings), **disable "Pag
 
 **Fix:**
 1. In Spline editor → Export → Play Settings → toggle **Hide Background** ON
-2. Click **Generate Draft** or **Promote to Production** — the URL does NOT auto-update with new settings
+2. Click **Generate Draft** or **Promote to Production**; the URL does NOT auto-update with new settings
 3. Copy the new URL
 
 For the web component you can also override inline:
@@ -52,12 +52,12 @@ For the web component you can also override inline:
 
 **Why:** The `prod.spline.design` CDN occasionally has latency or drops requests. There's no built-in retry or error handling.
 
-**Fix — add a timeout fallback:**
+**Fix; add a timeout fallback:**
 ```js
 const TIMEOUT_MS = 8000;
 
 const timeoutId = setTimeout(() => {
-  // Spline didn't load in time — show fallback
+  // Spline didn't load in time; show fallback
   document.getElementById('spline-fallback').style.display = 'block';
   document.querySelector('.spline-wrapper').style.display = 'none';
 }, TIMEOUT_MS);
@@ -74,11 +74,11 @@ spline.load(sceneUrl).then(() => {
 
 ### 4. Scene Looks Fine on Mac, Lags on Everything Else
 
-**What happens:** Buttery smooth on MacBook Pro or M-chip Mac. Completely broken — laggy, stuttering, sometimes crashing — on mid-range Windows laptops or Android phones.
+**What happens:** Buttery smooth on MacBook Pro or M-chip Mac. Completely broken; laggy, stuttering, sometimes crashing; on mid-range Windows laptops or Android phones.
 
 **Why:** Spline uses WebGL which runs on the GPU. Apple Silicon Macs have exceptional GPU performance. Most Windows laptops and Android devices do not have dedicated GPUs.
 
-**Fix — detect capability before loading:**
+**Fix; detect capability before loading:**
 ```js
 function shouldLoadSpline() {
   const isMobile = window.innerWidth < 768;
@@ -101,13 +101,13 @@ if (shouldLoadSpline()) {
 
 ---
 
-### 5. Layout Shift — Page Jumps When Scene Loads
+### 5. Layout Shift: Page Jumps When Scene Loads
 
 **What happens:** User sees the page layout, then everything shifts/jumps when the 3D scene loads in.
 
 **Why:** The canvas has no reserved height before loading, so the browser doesn't know how much space to allocate. HTML renders → space collapses → scene loads → everything jumps. This tanks your CLS (Cumulative Layout Shift) Core Web Vitals score.
 
-**Fix — pre-allocate space:**
+**Fix; pre-allocate space:**
 ```css
 spline-viewer, canvas.spline-canvas {
   display: block;
@@ -180,7 +180,7 @@ Note: When both have `pointer-events: all`, the topmost element (by z-index) win
 
 **Options:**
 
-**Option A — Upgrade to a Spline paid plan.** Then in Export → Play Settings → toggle "Hide Spline Logo" ON.
+**Option A; Upgrade to a Spline paid plan.** Then in Export → Play Settings → toggle "Hide Spline Logo" ON.
 
 Use the product's documented plan/export controls and applicable license terms; do not hide required branding with CSS workarounds.
 
@@ -192,7 +192,7 @@ Use the product's documented plan/export controls and applicable license terms; 
 
 **Why:** Browser security blocks cross-origin requests in some environments (especially localhost dev servers with certain configurations).
 
-**Fix — self-host the scene file:**
+**Fix; self-host the scene file:**
 1. In Spline → Export → Code Export → click the download icon next to the URL
 2. Download the `.splinecode` file
 3. Host it on your own server or CDN (same origin as your site)
@@ -228,7 +228,7 @@ const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
 **Fix:** Every time you make changes in the Spline editor, you must:
 1. Go to Export → Code Export
 2. Click **"Promote to Production"** (or "Generate Draft" for a new draft URL)
-3. The existing prod URL will now serve the updated scene — no need to change the URL in your code
+3. The existing prod URL will now serve the updated scene; no need to change the URL in your code
 
 ---
 

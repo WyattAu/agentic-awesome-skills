@@ -15,11 +15,11 @@ You will receive:
 
 ### scripts/lint-deps.{ext}
 
-**Purpose**: Enforce layer boundaries — prevent forbidden imports.
+**Purpose**: Enforce layer boundaries; prevent forbidden imports.
 
 **Must include**:
 - Complete layer map with EVERY package from the architecture analysis
-- No blind spots — if a package exists, it must be in the layer map
+- No blind spots; if a package exists, it must be in the layer map
 - Layer rules: Layer N can only import from layers < N
 
 **Error message format** (agent-actionable):

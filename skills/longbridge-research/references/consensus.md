@@ -12,7 +12,7 @@ Run `longbridge --help` to see all available subcommands, then `longbridge <subc
 - Revenue / EPS estimates (high / low / mean / median)
 - Forward EPS by period
 - Institution rating distribution + median target price
-- Rating and target price change history (for revision trend — run `--help` for available history flags)
+- Rating and target price change history (for revision trend; run `--help` for available history flags)
 
 ```bash
 longbridge <subcommand> TSLA.US --format json   # run --help for available flags and subcommand names
@@ -45,7 +45,7 @@ longbridge <subcommand> TSLA.US --format json   # run --help for available flags
 ## Output template
 
 ```
-{Symbol} ({code}) Analyst Consensus — Source: Longbridge Securities
+{Symbol} ({code}) Analyst Consensus; Source: Longbridge Securities
 As of: {date}
 
 [Coverage & ratings]
@@ -88,7 +88,7 @@ As of: {date}
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `command not found: longbridge`      | 回退到 MCP；如 MCP 也不可用，请用户安装 longbridge-terminal。 | 回退到 MCP；如也不可用，請安裝 longbridge-terminal。/ Fall back to MCP; if also unavailable, tell user to install longbridge-terminal. |
 | stderr `not logged in`               | 请运行 `longbridge auth login` 登录。                         | 請執行 `longbridge auth login`。/ Run `longbridge auth login`.                                                                         |
-| Consensus data has < 3 analysts      | 覆盖分析师不足 3 位，一致预期仅供参考。                       | 覆蓋分析師不足 3 位，僅供參考。/ Fewer than 3 analysts — consensus is indicative only.                                                 |
+| Consensus data has < 3 analysts      | 覆盖分析师不足 3 位，一致预期仅供参考。                       | 覆蓋分析師不足 3 位，僅供參考。/ Fewer than 3 analysts; consensus is indicative only.                                                 |
 | Analyst estimates data returns empty | "{symbol} 暂无分析师预期数据。"                               | "{symbol} 暫無分析師預期。" / "{symbol} has no analyst estimates."                                                                     |
 | No actuals for beat/miss             | 跳过超预期/低于预期分析，注明无历史实际值。                   | 跳過超預期分析，注明無歷史數據。/ Skip beat/miss analysis; note no historical actuals available.                                       |
-| Other stderr                         | 直接显示原始错误，不静默重试。                                | 顯示原始錯誤。/ Surface a redacted error summary — do not retry silently.                                                                              |
+| Other stderr                         | 直接显示原始错误，不静默重试。                                | 顯示原始錯誤。/ Surface a redacted error summary; do not retry silently.                                                                              |

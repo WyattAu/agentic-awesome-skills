@@ -1,9 +1,9 @@
-# Client Types — Variations by Business Model
+# Client Types: Variations by Business Model
 
 Planning contract: user-selected scope, length, language and one-shot/interactive cadence override template defaults. All tier amounts, channel rankings, growth bands and hiring patterns below are illustrative hypotheses, not validated benchmarks. Draft completion is distinct from user approval. Use only available verified skill/tool IDs; missing dependencies are optional. No external execution is authorized by this document.
 The 13-section plan structure stays consistent across client types. What changes is the **content emphasis** within each section. This doc names the dominant patterns by client archetype.
 
-## Archetype 1 — B2B SaaS
+## Archetype 1: B2B SaaS
 
 ### Core characteristics
 - Subscription revenue
@@ -23,7 +23,7 @@ The 13-section plan structure stays consistent across client types. What changes
 **Activation:**
 - Signup → trial → first key action (PLG products)
 - Trial → demo → POC (sales-led products)
-- Empty states matter — guide users to first value action
+- Empty states matter; guide users to first value action
 
 **Retention:**
 - Product engagement metrics (DAU, feature adoption)
@@ -54,7 +54,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 ---
 
-## Archetype 2 — D2C Consumer App (Subscription)
+## Archetype 2: D2C Consumer App (Subscription)
 
 ### Core characteristics
 - Lower ACV ($5–$30/mo typically)
@@ -79,7 +79,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 **Retention:**
 - Lifecycle email + push
-- In-app reminders (carefully — overuse = churn)
+- In-app reminders (carefully; overuse = churn)
 - Subscription preference center
 - Win-back campaigns
 
@@ -107,7 +107,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 ---
 
-## Archetype 3 — Hybrid Hardware + Software
+## Archetype 3: Hybrid Hardware + Software
 
 ### Core characteristics
 - Physical product + software companion (e.g., Quietude's eye mask + app)
@@ -120,7 +120,7 @@ The 13-section plan structure stays consistent across client types. What changes
 **Acquisition:**
 - Shopify storefront SEO (hardware product pages target consumer search)
 - Amazon listing (high-discovery, takes margin)
-- PR amplification (hardware is photogenic — high-profile influencer endorsements move volume)
+- PR amplification (hardware is photogenic; high-profile influencer endorsements move volume)
 - Paid social for hardware (Meta + Instagram, eye-catching creative)
 
 **Activation:**
@@ -158,7 +158,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 ---
 
-## Archetype 4 — Marketplace
+## Archetype 4: Marketplace
 
 ### Core characteristics
 - Two-sided product (supply + demand)
@@ -169,7 +169,7 @@ The 13-section plan structure stays consistent across client types. What changes
 ### AARRR emphasis
 
 **Acquisition:**
-- Two funnels — supply and demand
+- Two funnels; supply and demand
 - Supply often acquired through outbound / partnership / cold email
 - Demand often acquired through SEO / paid / content
 - City-by-city programmatic SEO common
@@ -207,7 +207,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 ---
 
-## Archetype 5 — Developer Tool / Open Source
+## Archetype 5: Developer Tool / Open Source
 
 ### Core characteristics
 - Technical buyer (developer or eng leader)
@@ -257,7 +257,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 ---
 
-## Archetype 6 — Deep-Tech / Scientific / Clinical
+## Archetype 6: Deep-Tech / Scientific / Clinical
 
 ### Core characteristics
 - Long sales cycles
@@ -307,7 +307,7 @@ The 13-section plan structure stays consistent across client types. What changes
 
 ---
 
-## Archetype 7 — Commerce / DTC (non-subscription)
+## Archetype 7: Commerce / DTC (non-subscription)
 
 ### Core characteristics
 - Physical or digital products sold transactionally
@@ -367,10 +367,10 @@ When in doubt, lead with the archetype that best fits the *primary monetization 
 ## When the client doesn't fit cleanly
 
 Some clients defy archetype:
-- **Content / media businesses** — neither SaaS nor commerce; ad revenue or subscription model
-- **Social networks** — own category, network effects dominate
-- **Real estate / events** — physical + service model
+- **Content / media businesses**; neither SaaS nor commerce; ad revenue or subscription model
+- **Social networks**; own category, network effects dominate
+- **Real estate / events**; physical + service model
 
-For these, identify the closest archetype and adjust. Don't force-fit — name the deviation in the plan's Strategic Frame.
+For these, identify the closest archetype and adjust. Don't force-fit; name the deviation in the plan's Strategic Frame.
 
 Archetypes are starting hypotheses, not universal channel rankings or statistical benchmarks. Validate with customer evidence, margin, actual capacity and approved budgets. Clinical/scientific marketing requires substantiation and appropriate review of each health claim; peer review alone does not prove product efficacy. Avoid sensitive-trait targeting, pressure-based annual defaults, hidden cancellation friction and undisclosed endorsements.

@@ -209,7 +209,7 @@ request = AnalyzeTextOptions(
 
 1. **Use blocklists** for domain-specific terms
 2. **Set severity thresholds** appropriate for your use case
-3. **Handle multiple categories** — content can be harmful in multiple ways
+3. **Handle multiple categories**; content can be harmful in multiple ways
 4. **Use halt_on_blocklist_hit** for immediate rejection
 5. **Log analysis results** for audit and improvement
 6. **Consider 8-severity mode** for finer-grained control

@@ -285,7 +285,7 @@ client = weaviate.use_async_with_weaviate_cloud(
 )
 ```
 
-**Rule:** For Weaviate Cloud, always use `use_async_with_weaviate_cloud()` — it selects the supported Cloud transport configuration; do not assume self-hosted port 50051 for Cloud.
+**Rule:** For Weaviate Cloud, always use `use_async_with_weaviate_cloud()`; it selects the supported Cloud transport configuration; do not assume self-hosted port 50051 for Cloud.
 
 ## Multi-Cluster Example
 

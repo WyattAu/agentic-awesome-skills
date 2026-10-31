@@ -36,9 +36,9 @@ If production, rendering, or paid tools are explicitly unavailable, still select
 
 A finished video is built from one or more of three orthogonal axes. Decide which dominate, then lock them.
 
-- **Generate (A)** — AI-generated footage/imagery: photoreal shots, b-roll, motion, talking-head. Use when the brief needs real-looking or cinematic visuals.
-- **Compose (B)** — deterministic HTML composition: explainers, kinetic typography, motion graphics, captions / lower-thirds / overlays, data viz, title cards, transitions. Use when the visuals are designed rather than filmed. This is the default for explainer/animation work.
-- **Edit (C)** — intelligent editing of supplied footage: evidence-based selection/cleanup, deterministic cut/join/reframe/captions/audio work, and semantic AI video editing for bounded pixel-level changes.
+- **Generate (A)**; AI-generated footage/imagery: photoreal shots, b-roll, motion, talking-head. Use when the brief needs real-looking or cinematic visuals.
+- **Compose (B)**; deterministic HTML composition: explainers, kinetic typography, motion graphics, captions / lower-thirds / overlays, data viz, title cards, transitions. Use when the visuals are designed rather than filmed. This is the default for explainer/animation work.
+- **Edit (C)**; intelligent editing of supplied footage: evidence-based selection/cleanup, deterministic cut/join/reframe/captions/audio work, and semantic AI video editing for bounded pixel-level changes.
 
 ## Decision Rules
 
@@ -50,15 +50,15 @@ A finished video is built from one or more of three orthogonal axes. Decide whic
 3. For supplied reference media, classify the requested relationship as `reproduce`, `edit`, or `guide` before choosing execution. Apply the same classification regardless of origin. Images can control content/identity/composition/structure/style; videos can additionally control motion/timing/audio through temporal anchors.
 4. Aspect ratio drives the canvas: 16:9 → 1920×1080, 9:16 → 1080×1920, 1:1 → 1080×1080.
 
-## End-to-End (AUTO) — When the Job Spans Lines
+## End-to-End (AUTO): When the Job Spans Lines
 
-Pick a **single line** when one axis cleanly dominates (just trim a clip; just an explainer; just generate a scene). Route to **AUTO end-to-end** when the deliverable genuinely needs MORE THAN ONE axis woven together — most often the user supplies their own material AND wants finished framing/voice/motion around it:
+Pick a **single line** when one axis cleanly dominates (just trim a clip; just an explainer; just generate a scene). Route to **AUTO end-to-end** when the deliverable genuinely needs MORE THAN ONE axis woven together; most often the user supplies their own material AND wants finished framing/voice/motion around it:
 
 - "trim my clip, add a title card + captions, and a voiceover" (edit + compose + narration)
 - "my footage in the middle, generate an opener, compose the stats" (edit + generate + compose)
 - "make a finished video from these assets" where the assets alone are not the deliverable.
 
-AUTO does not abandon the axes — it sequences them through one cross-modal plan (`stage-plan` builds the EDL, `stage-assemble` walks it), delegating each segment back to the generate / compose / edit lines. Choosing AUTO is itself the lock: the *primary* still gets named via the plan's `delivery_promise` (source_led / motion_led / compose_led / hybrid).
+AUTO does not abandon the axes; it sequences them through one cross-modal plan (`stage-plan` builds the EDL, `stage-assemble` walks it), delegating each segment back to the generate / compose / edit lines. Choosing AUTO is itself the lock: the *primary* still gets named via the plan's `delivery_promise` (source_led / motion_led / compose_led / hybrid).
 
 ## Lock the Runtime
 

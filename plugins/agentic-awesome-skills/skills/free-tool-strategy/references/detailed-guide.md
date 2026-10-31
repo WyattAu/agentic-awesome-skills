@@ -283,7 +283,7 @@ Explain data collection and retention, separate requested report delivery from o
 - Immediate email with results/link
 - Nurture sequence relevant to tool topic
 - Clear path to main product
-- Don't spam—provide value
+- Don't spam-provide value
 
 ---
 

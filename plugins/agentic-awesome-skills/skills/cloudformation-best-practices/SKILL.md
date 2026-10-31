@@ -70,7 +70,7 @@ Outputs:
 - ✅ **Do:** Use `Outputs` with `Export` for cross-stack references
 - ✅ **Do:** Add `DeletionPolicy` and `UpdateReplacePolicy` on stateful resources
 - ✅ **Do:** Use `cfn-lint` and `cfn-nag` in CI pipelines
-- ❌ **Don't:** Hardcode ARNs or account IDs — use `!Sub` with pseudo parameters
+- ❌ **Don't:** Hardcode ARNs or account IDs; use `!Sub` with pseudo parameters
 - ❌ **Don't:** Put all resources in a single monolithic template
 
 ## Troubleshooting

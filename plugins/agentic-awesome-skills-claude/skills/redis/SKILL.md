@@ -80,7 +80,7 @@ tcp-keepalive 60
 loglevel notice
 logfile /var/log/redis/redis-server.log
 
-# Security — disable dangerous commands in production
+# Security: disable dangerous commands in production
 rename-command FLUSHALL ""
 rename-command FLUSHDB ""
 rename-command CONFIG ""
@@ -141,12 +141,12 @@ BRPOP queue:emails 30
 ### Set and Sorted Set Operations
 
 ```
-# Sets — unique tags
+# Sets: unique tags
 SADD article:1:tags "redis" "database" "caching"
 SMEMBERS article:1:tags
 SISMEMBER article:1:tags "redis"
 
-# Sorted sets — leaderboards
+# Sorted sets: leaderboards
 ZADD leaderboard 1500 "player:1" 2300 "player:2" 1800 "player:3"
 ZREVRANGE leaderboard 0 9 WITHSCORES
 ZINCRBY leaderboard 100 "player:1"
@@ -156,7 +156,7 @@ ZRANK leaderboard "player:2"
 ### Key Management
 
 ```
-KEYS user:*             # avoid in production — use SCAN instead
+KEYS user:*             # avoid in production; use SCAN instead
 SCAN 0 MATCH user:* COUNT 100
 TTL session:abc123
 PERSIST session:abc123
@@ -170,7 +170,7 @@ TYPE user:1
 ### RDB Snapshots
 
 ```ini
-# redis.conf — save snapshots at intervals
+# redis.conf: save snapshots at intervals
 save 900 1       # snapshot if >= 1 key changed in 900 seconds
 save 300 10      # snapshot if >= 10 keys changed in 300 seconds
 save 60 10000    # snapshot if >= 10000 keys changed in 60 seconds
@@ -291,11 +291,11 @@ EXPIRE ratelimit:user:42 60
 ### Pub/Sub Messaging
 
 ```bash
-# Terminal 1 — subscriber
+# Terminal 1: subscriber
 redis-cli -a strong_redis_password
 SUBSCRIBE notifications:order-updates
 
-# Terminal 2 — publisher
+# Terminal 2: publisher
 redis-cli -a strong_redis_password
 PUBLISH notifications:order-updates '{"orderId":42,"status":"shipped"}'
 
@@ -384,7 +384,7 @@ redis-cli -a strong_redis_password INFO replication
 
 # Key metrics to watch
 redis-cli -a strong_redis_password INFO stats | grep -E "keyspace_hits|keyspace_misses"
-# Hit ratio = hits / (hits + misses) — aim for > 95%
+# Hit ratio = hits / (hits + misses): aim for > 95%
 
 # Memory usage breakdown
 redis-cli -a strong_redis_password MEMORY STATS
@@ -393,7 +393,7 @@ redis-cli -a strong_redis_password MEMORY STATS
 redis-cli -a strong_redis_password SLOWLOG GET 10
 redis-cli -a strong_redis_password SLOWLOG LEN
 
-# Monitor all commands in real time (debugging only — impacts performance)
+# Monitor all commands in real time (debugging only: impacts performance)
 redis-cli -a strong_redis_password MONITOR
 
 # Connected clients

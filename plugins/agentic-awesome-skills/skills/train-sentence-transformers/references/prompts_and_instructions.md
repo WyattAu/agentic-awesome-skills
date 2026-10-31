@@ -1,7 +1,7 @@
 # Prompts and Instructions
 
 AAS adaptation: follow the root execution/data contract. Examples are version-sensitive sketches; verify APIs in a reviewed lockfile and cached revisions. Local-only/no publication/no remote telemetry defaults override older Hub/tracker recipes below. Numerical hardware, speed, quality, data-volume and loss-ranking claims are illustrative hypotheses, not guaranteed thresholds.
-Modern embedding models (E5, BGE, GTE, Qwen3-Embedding, Nomic, Instructor, etc.) use **prompts** / **instructions** at encode time — short prefixes like `"query: "`, `"passage: "`, or `"Represent this sentence for retrieval:"` — to signal task intent.
+Modern embedding models (E5, BGE, GTE, Qwen3-Embedding, Nomic, Instructor, etc.) use **prompts** / **instructions** at encode time; short prefixes like `"query: "`, `"passage: "`, or `"Represent this sentence for retrieval:"`; to signal task intent.
 
 In sentence-transformers, prompts work during both **training** and **inference**, and the library keeps them aligned automatically.
 
@@ -108,9 +108,9 @@ Sparse encoders support prompts with the same four shapes as bi-encoders (added 
 
 When using mean/last-token pooling with prompt prefixes, the prompt tokens themselves can either:
 - **Be included** in the pooled embedding (default behavior). Simpler, what most models do.
-- **Be excluded** — only the actual content tokens are pooled.
+- **Be excluded**; only the actual content tokens are pooled.
 
-To exclude, flip `include_prompt` on the Pooling module — found via `isinstance` rather than a fixed index, since multimodal / Router pipelines don't always put Pooling at position 1:
+To exclude, flip `include_prompt` on the Pooling module; found via `isinstance` rather than a fixed index, since multimodal / Router pipelines don't always put Pooling at position 1:
 
 ```python
 from sentence_transformers.sentence_transformer.modules import Pooling
@@ -137,7 +137,7 @@ If the saved model's `config_sentence_transformers.json` has `prompts` + `defaul
 
 ## Instruction tuning (different from prompts)
 
-Some models (Instructor, Qwen3-Embedding) use **instructions** — longer descriptions like `"Represent the biomedical query for retrieving relevant passages:"`. In sentence-transformers these are modeled the same way: just set them as prompts.
+Some models (Instructor, Qwen3-Embedding) use **instructions**; longer descriptions like `"Represent the biomedical query for retrieving relevant passages:"`. In sentence-transformers these are modeled the same way: just set them as prompts.
 
 The model-card convention is to list available instructions/prompts in a dict:
 
@@ -156,6 +156,6 @@ Users call `model.encode(["..."], prompt_name="msmarco-query")`.
 
 - **Training with prompts but forgetting to set them on the model before `save_pretrained`**: the saved model won't know about the prompts. Users will encode *without* the prefix and get bad results. Fix: `model.prompts = args.prompts` before saving, or use `SentenceTransformerModelCardData(...)` with the prompt info.
 - **Using `encode_query()` at inference but didn't train with a "query" prompt**: the method will just call regular `encode` (no prefix applied), which is fine. But the documentation implies you use it, and users may be confused.
-- **Trailing spaces matter**: `"query: "` vs `"query:"` — the former has a trailing space before the real text. Inspect your training data to know which one your model was trained with.
+- **Trailing spaces matter**: `"query: "` vs `"query:"`; the former has a trailing space before the real text. Inspect your training data to know which one your model was trained with.
 - **Mixing prompted and non-prompted data in multi-dataset training** is fine as long as your `prompts` dict covers it per-dataset (e.g. `{"dataset_a": "query: ", "dataset_b": ""}`).
 - **`include_prompt=False` with small datasets**: the model may under-fit because you've effectively shortened every input. Usually leave as True.

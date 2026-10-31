@@ -34,7 +34,7 @@ node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
 | `--provider <name>` | omp `--provider` (default: omp's own default). Token-validated. |
 | `--model <pattern>` | omp `--model` id or fuzzy pattern (default: omp's own default). Token-validated: letters, digits, `. _ : / -`. Pick the value from `omp models`, not from memory. |
 | `--thinking <level>` | omp `--thinking`: `off`, `auto`, `minimal`, `low`, `medium`, `high`, `xhigh`, or `max`. |
-| `--session <id>` | Resume a specific omp session (`--session` / `--resume`); send only the delta brief. A value is required — bare `--resume` would open omp's picker and hang. |
+| `--session <id>` | Resume a specific omp session (`--session` / `--resume`); send only the delta brief. A value is required; bare `--resume` would open omp's picker and hang. |
 | `--resume-last` | Continue the most recent omp session for this cwd (`omp --continue`); send only the delta brief. |
 | `--read-only` | Restrict omp to `--tools read,grep,glob`. |
 | `--approve` | Load project-local `.omp` extensions, skills, and rules. The default passes `--no-extensions --no-skills --no-rules`. |
@@ -117,7 +117,7 @@ A pre-run usage error exits 2 and writes no result. A missing `omp` exits 127 an
 - **`status: "timeout"`:** the `--timeout` watchdog killed the run; `error` reads
   `omp did not finish within --timeout <dur>; killed by the relay watchdog`. Increase `--timeout`
   or split the task. On POSIX the relay sends SIGTERM to the process group, waits 10 seconds,
-  then sends SIGKILL if needed; on Windows there is no escalation phase — the whole process tree
+  then sends SIGKILL if needed; on Windows there is no escalation phase; the whole process tree
   is felled immediately with `taskkill /pid <pid> /t /f`.
 - **Empty `finalMessage`:** inspect `touchedFiles` and the diff. Add a
   `<structured_output_contract>` to the next brief to require a closing report.
@@ -125,10 +125,10 @@ A pre-run usage error exits 2 and writes no result. A missing `omp` exits 127 an
 ## Recovering lost work
 
 `events.jsonl` in the run directory records every event the implementer streamed. If finished
-work is lost — the run killed late, or the working tree damaged afterward — read the event log
+work is lost; the run killed late, or the working tree damaged afterward; read the event log
 before re-dispatching: it identifies which files and tool commands were involved, which scopes
 what needs redoing. Tool execution events carry the write/edit arguments, but treat any
-reconstruction as unverified until it matches a working-tree diff — when the tree still holds the
+reconstruction as unverified until it matches a working-tree diff; when the tree still holds the
 work, preserve the tree rather than replaying the log.
 
 ## What the relay runs

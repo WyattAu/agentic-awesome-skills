@@ -21,16 +21,16 @@ rank for", "keyword analysis", "best keywords for [topic]",
 ## Input Format
 ```json
 {
-  "topic": "string — the subject to research keywords for",
-  "business_type": "string — what the business or site does",
-  "target_audience": "string — who the content is for",
+  "topic": "string; the subject to research keywords for",
+  "business_type": "string; what the business or site does",
+  "target_audience": "string; who the content is for",
   "content_goal": "rank | convert | educate | all",
-  "location": "string — optional, country or city for local SEO",
+  "location": "string; optional, country or city for local SEO",
   "intent_focus": "informational | transactional | commercial | navigational | all",
-  "competitor_urls": ["string — optional, up to 3 competitor URLs to inform keyword gaps"],
-  "user_keywords": ["string — optional keywords the owner already cares about"],
-  "site_context": "string — optional audit findings, page list, or product description",
-  "research_mode": "browser | api | both | unavailable — default both"
+  "competitor_urls": ["string; optional, up to 3 competitor URLs to inform keyword gaps"],
+  "user_keywords": ["string; optional keywords the owner already cares about"],
+  "site_context": "string; optional audit findings, page list, or product description",
+  "research_mode": "browser | api | both | unavailable; default both"
 }
 ```
 
@@ -67,7 +67,7 @@ to a full content strategy.
 | 21–40  | Moderate    | Some established content exists, beatable with quality |
 | 41–60  | Competitive | Strong content exists, needs solid authority         |
 | 61–80  | Hard        | Dominated by high-authority sites                    |
-| 81–100 | Very Hard   | Reserved for the biggest players — avoid early on   |
+| 81–100 | Very Hard   | Reserved for the biggest players; avoid early on   |
 
 ### Volume Scale (Estimated Monthly Searches)
 
@@ -83,7 +83,7 @@ to a full content strategy.
 
 CPC (Cost Per Click) signals commercial value even for
 organic content. Use it to prioritise keywords where
-advertisers are spending — this means the intent is
+advertisers are spending; this means the intent is
 likely transactional and conversions are valuable.
 
 | CPC Range   | Signal                                               |
@@ -91,7 +91,7 @@ likely transactional and conversions are valuable.
 | $0–$1       | Low commercial value, good for awareness content     |
 | $1–$5       | Moderate value, mix of info and commercial intent    |
 | $5–$15      | High commercial value, strong conversion potential   |
-| $15+        | Very high value — transactional, competitive space  |
+| $15+        | Very high value; transactional, competitive space  |
 
 ---
 
@@ -125,7 +125,7 @@ Core terms that define the topic's search territory:
 
 ## Priority Keyword Tiers
 
-### 🟢 Tier 1 — Target First (High Value, Achievable)
+### 🟢 Tier 1: Target First (High Value, Achievable)
 Low-to-moderate difficulty. Should anchor your first
 wave of content.
 
@@ -137,7 +137,7 @@ wave of content.
 
 ---
 
-### 🟡 Tier 2 — Build Toward (Medium Difficulty)
+### 🟡 Tier 2: Build Toward (Medium Difficulty)
 Competitive but winnable with topical authority.
 Target after Tier 1 content is live.
 
@@ -148,7 +148,7 @@ Target after Tier 1 content is live.
 
 ---
 
-### 🔴 Tier 3 — Long-Term Goals (High Difficulty)
+### 🔴 Tier 3: Long-Term Goals (High Difficulty)
 Dominated by high-authority sites. Do not target these
 until significant topical authority is established.
 
@@ -184,7 +184,7 @@ People Also Ask boxes.
 | How does [topic] work?                         | [label]     | informational | Numbered steps         |
 | What is the best [topic] for [audience]?       | [label]     | commercial    | Comparison table       |
 | How much does [topic] cost?                    | [label]     | transactional | Direct number + range  |
-| [topic] vs [alternative] — which is better?   | [label]     | commercial    | Comparison block       |
+| [topic] vs [alternative]; which is better?   | [label]     | commercial    | Comparison block       |
 | Is [topic] worth it?                           | [label]     | commercial    | FAQ answer block       |
 | [Common question your audience asks]           | [label]     | [intent]      | [format]               |
 | [Common question your audience asks]           | [label]     | [intent]      | [format]               |
@@ -194,7 +194,7 @@ People Also Ask boxes.
 ## Related Semantic Vocabulary
 
 Related terms that reinforce topical authority.
-Use these naturally throughout content —
+Use these naturally throughout content -
 do not force them as primary targets.
 
 - [Related term 1]
@@ -213,10 +213,10 @@ for this topic and audience:
 
 | Keyword              | Reason to Avoid                                        |
 |----------------------|--------------------------------------------------------|
-| [keyword]            | Wrong intent — attracts audience not looking to convert|
-| [keyword]            | Too broad — dominated by global brands                 |
-| [keyword]            | Cannibalises [other keyword] — similar enough to split traffic |
-| [keyword]            | Seasonal — only relevant [month/period]                |
+| [keyword]            | Wrong intent; attracts audience not looking to convert|
+| [keyword]            | Too broad; dominated by global brands                 |
+| [keyword]            | Cannibalises [other keyword]; similar enough to split traffic |
+| [keyword]            | Seasonal; only relevant [month/period]                |
 
 ---
 
@@ -252,10 +252,10 @@ in production order:
 
 The 3 keywords to act on immediately:
 
-1. **[keyword]** — [one sentence on why this is the best
+1. **[keyword]**; [one sentence on why this is the best
    first target]
-2. **[keyword]** — [one sentence on why]
-3. **[keyword]** — [one sentence on why]
+2. **[keyword]**; [one sentence on why]
+3. **[keyword]**; [one sentence on why]
 ```
 
 ## Foundational Content Plan
@@ -280,17 +280,17 @@ Do not fill the table with near-duplicates to reach ten. If fewer than five dist
 
 1. Parse `topic`, `business_type`, `site_context`, and any
    `user_keywords` together to define
-   the full semantic territory — not just the obvious
+   the full semantic territory; not just the obvious
    head term but adjacent terms the audience uses
-2. Generate seed keywords — 3–5 core terms that
+2. Generate seed keywords; 3–5 core terms that
    anchor the topic
 3. Expand each seed keyword into long-tail variations
    using question formats, modifier patterns
    ("best", "how to", "for [audience]", "vs"),
    and location modifiers if `location` is provided
-4. Generate AEO keyword list — convert the most common
+4. Generate AEO keyword list; convert the most common
    audience questions into direct-answer keyword targets
-5. Generate related semantic terms — identify semantically related
+5. Generate related semantic terms; identify semantically related
    vocabulary that reinforces topical authority
    without targeting directly
 6. If live browser or API research is available, collect
@@ -302,12 +302,12 @@ Do not fill the table with near-duplicates to reach ten. If fewer than five dist
 8. Assign intent category to every keyword
 9. Sort all keywords into Tier 1, 2, and 3
    based on difficulty and estimated volume
-10. Run cannibalization check — flag any two keywords
+10. Run cannibalization check; flag any two keywords
     that are similar enough to split traffic if
     targeted on separate pages
-11. Build Keywords to Avoid list — flag wrong-intent,
+11. Build Keywords to Avoid list; flag wrong-intent,
     too-broad, cannibalistic, and seasonal keywords
-12. Build the Keyword → Content Map — recommend the landing page,
+12. Build the Keyword → Content Map; recommend the landing page,
     5–10 foundational pages (default 10), supporting articles,
     and production order. Every page must own a distinct intent.
 13. Mark which keyword choices require owner confirmation before

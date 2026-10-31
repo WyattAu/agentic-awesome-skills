@@ -64,7 +64,7 @@ python -c "import httpx, arxiv, fitz"
 ```
 
 If `python` is not on PATH, fall back to `py` (Windows launcher) or the
-absolute interpreter path — and remember to invoke pip via the same
+absolute interpreter path; and remember to invoke pip via the same
 interpreter, e.g. `py -m pip install httpx arxiv PyMuPDF`.
 
 ### Step 2: Invoke the bundled CLI
@@ -136,7 +136,7 @@ follow-ups.
 - ✅ For PDFs you download, always report the absolute save path.
 - ❌ Don't crawl. The script auto-retries 429s with exponential backoff;
   don't pile on parallel queries.
-- ❌ Don't raise `--max-pages` to 100+ without warning the user — it can
+- ❌ Don't raise `--max-pages` to 100+ without warning the user; it can
   consume a large amount of context.
 
 ## Limitations
@@ -161,7 +161,7 @@ follow-ups.
 - `download` writes a PDF to the directory the user specifies (default: the
   current working directory). Confirm the save path with the user before
   downloading to an unexpected location.
-- `read` opens a local PDF file with PyMuPDF — make sure the path the user
+- `read` opens a local PDF file with PyMuPDF; make sure the path the user
   supplies is one they trust.
 - No credentials or API keys are needed or stored anywhere.
 

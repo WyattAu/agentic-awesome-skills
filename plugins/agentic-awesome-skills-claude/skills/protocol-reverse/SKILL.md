@@ -34,7 +34,7 @@ license_source: "https://github.com/zhaoxuya520/reverse-skill/blob/main/LICENSE"
 
 ## 工作流
 
-### Phase 1 — 采集与分诊
+### Phase 1: 采集与分诊
 
 ```text
 □ 拿到样本：PCAP / 代理导出 / 客户端日志 / 二进制
@@ -44,7 +44,7 @@ license_source: "https://github.com/zhaoxuya520/reverse-skill/blob/main/LICENSE"
 □ tshark -r cap.pcap -T fields -e frame.number -e ip.src -e tcp.payload
 ```
 
-### Phase 2 — 帧布局还原
+### Phase 2: 帧布局还原
 
 ```text
 □ 对齐多个同类消息，找不变字节 / 自增序列号
@@ -54,7 +54,7 @@ license_source: "https://github.com/zhaoxuya520/reverse-skill/blob/main/LICENSE"
 □ 工具：Wireshark 自定义 dissector 草稿 / ImHex / 010 Editor 模板 / Kaitai Struct
 ```
 
-### Phase 3 — 序列化与加密
+### Phase 3: 序列化与加密
 
 ```text
 □ Protobuf：.proto 恢复（blackboxprotobuf / pbtk / protoc --decode_raw）
@@ -63,7 +63,7 @@ license_source: "https://github.com/zhaoxuya520/reverse-skill/blob/main/LICENSE"
 □ 重放：仅在授权 scope 内；先无害字段再敏感操作
 ```
 
-### Phase 4 — 产物
+### Phase 4: 产物
 
 ```text
 MUST 产出：
@@ -84,7 +84,7 @@ MUST 产出：
 
 ## 参考
 
-- `references/protocol-workflow.md` — 帧布局与 Protobuf 速查
+- `references/protocol-workflow.md`; 帧布局与 Protobuf 速查
 - 相关：`../ida-reverse/` `../js-reverse/` `../firmware-pentest/` `../pentest-tools/`
 
 ## 路由上下文

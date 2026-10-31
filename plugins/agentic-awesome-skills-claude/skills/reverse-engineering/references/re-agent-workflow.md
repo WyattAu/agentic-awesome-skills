@@ -79,7 +79,7 @@
   → 直接进入 §2 Static（.NET 走等价锚点）
 
 分支 B：有壳 / 强混淆
-  Step 1：尝试脱壳（自动脱壳机 / 手动找 OEP）— 须在授权与隔离环境
+  Step 1：尝试脱壳（自动脱壳机 / 手动找 OEP）- 须在授权与隔离环境
   Step 2：尝试修复 IAT
     工具：x86 → ImportREC（或等价）；x64 → Scylla（或等价）。禁止 64 位样本死磕 ImportREC。
     情况 B1：修复成功且可解析 → 记 E-imports（修复后）→ §2 Static
@@ -127,7 +127,7 @@
 1. **TLS 回调**断点（调试器 EP 之前可能已跑）
 2. **入口点 EP** 断点
 3. **敏感 API** 断点（如 `CreateRemoteThread` / 网络 / 文件写）
-4. **保底**：`ExitProcess` / 进程退出路径断点（补丁 10）— 一旦因反调试直接退出，**不急着重启**；立即 dump memory，将崩溃前镜像路径写入 Evidence，供字符串/数据恢复
+4. **保底**：`ExitProcess` / 进程退出路径断点（补丁 10）- 一旦因反调试直接退出，**不急着重启**；立即 dump memory，将崩溃前镜像路径写入 Evidence，供字符串/数据恢复
 
 ```text
 □ Frida / x64dbg / gdb / emulator：验证静态假设
@@ -208,7 +208,7 @@
 
 The upstream analysis-decision-framework.md is not bundled; use the following explicit local reporting principles: R41 grounded claims, R4* validated sufficiency, R1 confidence->dynamic, R2 hypothesis exit, R43 deadlock replan (under feasibility gate), R8/R23 no default malice/IOC. Multi-module -> R50; anti-analysis effort -> R51 + A-T cookbook.
 
-Blindspots (Rust/Go/VMP/injection/OLE/PDF/agent-meta): upstream analysis-blindspot-cookbook.md (not bundled) R52-R81 — detection-oriented; not a parallel master flow.
+Blindspots (Rust/Go/VMP/injection/OLE/PDF/agent-meta): upstream analysis-blindspot-cookbook.md (not bundled) R52-R81; detection-oriented; not a parallel master flow.
 
 
 

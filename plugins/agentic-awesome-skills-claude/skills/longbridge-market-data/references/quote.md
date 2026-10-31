@@ -25,7 +25,7 @@ Run `longbridge --help` to see all available subcommands, then `longbridge <subc
 - Static reference data (name, industry, lot size, total/circulating shares, EPS, BPS, dividend yield, currency)
 - Valuation indices (PE, PB, turnover rate, total market cap, change rates, etc.)
 
-> **Always run `longbridge <subcommand> --help` first** — every Longbridge CLI subcommand self-documents its arguments, defaults, and examples. Do not hard-code flag names from this SKILL.md if the CLI version may have evolved.
+> **Always run `longbridge <subcommand> --help` first**; every Longbridge CLI subcommand self-documents its arguments, defaults, and examples. Do not hard-code flag names from this SKILL.md if the CLI version may have evolved.
 
 ## Workflow
 
@@ -46,7 +46,7 @@ Run `longbridge --help` to see all available subcommands, then `longbridge <subc
 # Always check available flags first:
 longbridge <subcommand> --help
 
-# Then call with --format json — example structure (verify subcommand names and flags with --help):
+# Then call with --format json: example structure (verify subcommand names and flags with --help):
 longbridge <quote-subcommand>      NVDA.US --format json
 longbridge <quote-subcommand>      NVDA.US 700.HK 600519.SH --format json   # multi-symbol
 longbridge <static-subcommand>     600519.SH --format json
@@ -75,4 +75,4 @@ Each subcommand returns a JSON array, one object per requested symbol. Missing p
 | Shell `command not found: longbridge`             | Fall back to MCP if configured (see below); otherwise tell the user to install [longbridge-terminal](https://github.com/longportapp/longbridge-terminal). |
 | stderr contains `not logged in` / `unauthorized`  | Tell the user to run `longbridge auth login`.                                                                                                             |
 | stderr contains `param_error` or "invalid symbol" | Re-check the `<CODE>.<MARKET>` format with the user.                                                                                                      |
-| Other stderr                                      | Surface verbatim — never silently retry.                                                                                                                  |
+| Other stderr                                      | Surface verbatim; never silently retry.                                                                                                                  |

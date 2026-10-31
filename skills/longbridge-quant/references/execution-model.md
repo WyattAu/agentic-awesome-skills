@@ -1,6 +1,6 @@
 # longbridge-execution-model
 
-Trade execution modelling framework for backtesting — slippage, VWAP/TWAP, market impact, and volume participation.
+Trade execution modelling framework for backtesting; slippage, VWAP/TWAP, market impact, and volume participation.
 
 ## Workflow
 
@@ -21,17 +21,17 @@ Trade execution modelling framework for backtesting — slippage, VWAP/TWAP, mar
 ## CLI
 
 ```bash
-# 1-minute OHLCV — intraday volume distribution reference
+# 1-minute OHLCV: intraday volume distribution reference
 longbridge kline <SYMBOL> --period 1m --count 200 --format json
 
-# Tick-by-tick trades — for Kyle lambda estimation
+# Tick-by-tick trades: for Kyle lambda estimation
 longbridge trades <SYMBOL> --count 100 --format json
 ```
 
 ## Output structure
 
 ```
-EXECUTION MODEL REPORT — <SYMBOL>  <Date>
+EXECUTION MODEL REPORT; <SYMBOL>  <Date>
 
 VOLUME PROFILE
 ADV (20d):    xx.xM shares
@@ -62,7 +62,7 @@ Estimated λ:  x.xxe-6  ($/share per share traded)
 
 | Situation                       | 简体回复                                     | 繁體回復                                     | English reply                                       |
 | ------------------------------- | -------------------------------------------- | -------------------------------------------- | --------------------------------------------------- |
-| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found — verify exchange and ticker.      |
-| Insufficient tick data          | 逐笔数据不足，结果仅供参考。                 | 逐筆數據不足，結果僅供參考。                 | Insufficient tick data — estimates are approximate. |
+| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found; verify exchange and ticker.      |
+| Insufficient tick data          | 逐笔数据不足，结果仅供参考。                 | 逐筆數據不足，結果僅供參考。                 | Insufficient tick data; estimates are approximate. |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。 | 請安裝 longbridge-terminal 或透過 MCP 連線。 | Install longbridge-terminal or connect via MCP.     |
 | `not logged in`                 | 请运行 `longbridge auth login`。             | 請執行 `longbridge auth login`。             | Run `longbridge auth login`.                        |

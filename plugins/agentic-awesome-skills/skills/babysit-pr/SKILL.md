@@ -346,6 +346,6 @@ Some situations are not yours to grind through:
 ## Limitations
 
 - Requires authenticated `gh`/`glab`, `jq` and bash; harvests threads and reviews.
-- Docs-only import — executable helper (`scripts/threads.sh`) not included; see upstream for full runtime. Fixes are to PR branch only, never merges.
+- Docs-only import; executable helper (`scripts/threads.sh`) not included; see upstream for full runtime. Fixes are to PR branch only, never merges.
 
-> Adapted from [amElnagdy/review-skills](https://github.com/amElnagdy/review-skills) (MIT) — docs-only, runtime not bundled.
+> Adapted from [amElnagdy/review-skills](https://github.com/amElnagdy/review-skills) (MIT); docs-only, runtime not bundled.

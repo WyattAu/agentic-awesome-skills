@@ -15,11 +15,11 @@ date_added: "2026-04-11"
 ## Rules
 
 - **Read-only**: never modify skill files. Only output report.
-- **All 8 dimensions**: do not skip any. If data is insufficient, report "N/A — insufficient session data" rather than omitting.
+- **All 8 dimensions**: do not skip any. If data is insufficient, report "N/A; insufficient session data" rather than omitting.
 - **Quantify**: "you had 12 research tasks last week but the skill never triggered" beats "you often do research".
 - **Suggest, don't prescribe**: give specific wording suggestions for description improvements, but frame as suggestions.
 - **Show evidence**: for undertrigger claims, quote the actual user message that should have triggered the skill.
-- **Evidence-based suggestions**: when suggesting description rewrites, cite the specific research finding that motivates the change (e.g., "front-load trigger keywords — MCP study shows 3.6x selection rate improvement").
+- **Evidence-based suggestions**: when suggesting description rewrites, cite the specific research finding that motivates the change (e.g., "front-load trigger keywords; MCP study shows 3.6x selection rate improvement").
 
 ## Overview
 
@@ -39,7 +39,7 @@ Auto-detect the current agent platform and scan the corresponding paths:
 
 | Source | Claude Code | Codex | Shared |
 |--------|------------|-------|--------|
-| Session transcripts | `~/.claude/projects/**/*.jsonl` | `~/.codex/sessions/**/*.jsonl` | — |
+| Session transcripts | `~/.claude/projects/**/*.jsonl` | `~/.codex/sessions/**/*.jsonl` | - |
 | Skill files | `~/.claude/skills/*/SKILL.md` | `~/.codex/skills/*/SKILL.md` | `~/.agents/skills/*/SKILL.md` |
 
 **Platform detection:** Check which directories exist. Use only user-authorized platforms, date ranges and transcripts. Directory existence does not authorize reading unrelated chat histories. Redact private messages and secrets from reports; prefer minimal excerpts and local analysis.
@@ -93,7 +93,7 @@ Use python3 scripts via Bash to scan session JSONL files. Extract:
 
 ### Step 3: Run 8 Analysis Dimensions
 
-**You MUST run ALL 8 dimensions.** The baseline behavior without this skill is to skip dimensions 4.2, 4.3, 4.5b, and 4.8. These are the most valuable dimensions — do not skip them.
+**You MUST run ALL 8 dimensions.** The baseline behavior without this skill is to skip dimensions 4.2, 4.3, 4.5b, and 4.8. These are the most valuable dimensions; do not skip them.
 
 #### 4.1 Trigger Rate
 
@@ -159,12 +159,12 @@ Skill was invoked but user immediately rejected or ignored it.
 
 #### 4.5b Undertrigger Detection
 
-**This is the highest-value dimension.** For each skill, extract its **capability keywords** (not just trigger keywords — what the skill CAN do). Then scan user messages for tasks that match those capabilities but where the skill was NOT invoked.
+**This is the highest-value dimension.** For each skill, extract its **capability keywords** (not just trigger keywords; what the skill CAN do). Then scan user messages for tasks that match those capabilities but where the skill was NOT invoked.
 
 Report: which user messages SHOULD have triggered the skill but didn't, and suggest description improvements.
 
 **Compounding Risk Assessment:**
-For skills with chronic undertriggering (0 triggers across 5+ sessions where relevant tasks appeared), flag as "compounding risk" — undertriggered skills cannot self-improve through usage feedback, causing the gap to widen over time. Recommend immediate description rewrite as P0.
+For skills with chronic undertriggering (0 triggers across 5+ sessions where relevant tasks appeared), flag as "compounding risk"; undertriggered skills cannot self-improve through usage feedback, causing the gap to widen over time. Recommend immediate description rewrite as P0.
 
 #### 4.6 Cross-Skill Conflicts
 
@@ -261,11 +261,11 @@ Rate each skill on a 5-point scale:
 The cited studies concern specific models/tasks and do not establish universal skill-routing improvement, word-count limits or causal effects. Verify each paper and its experimental setting before quoting a numerical effect. Treat static scores, undertrigger matches and token ratios as advisory heuristics, not functionality, safety or merge certification. If a dimension lacks reliable evidence, report N/A rather than imputing it into a composite score.
 
 The analysis dimensions in this report are grounded in the following research:
-- **Undertrigger detection**: Memento-Skills (arXiv:2603.18743) — skills as structured files require accurate routing; unrouted skills cannot self-improve via the read-write learning loop
-- **Description quality**: MCP Description Quality (arXiv:2602.18914) — well-written descriptions achieve 72% tool selection rate vs. 20% random baseline (3.6x improvement)
-- **Information position**: Lost in the Middle (Liu et al., TACL 2024) — U-shaped LLM attention curve
-- **Format impact**: He et al. (arXiv:2411.10541) — format changes alone can cause 9-40% performance variance
-- **Instruction compliance**: IFEval (arXiv:2311.07911) — LLMs struggle with multi-constraint prompts
+- **Undertrigger detection**: Memento-Skills (arXiv:2603.18743); skills as structured files require accurate routing; unrouted skills cannot self-improve via the read-write learning loop
+- **Description quality**: MCP Description Quality (arXiv:2602.18914); well-written descriptions achieve 72% tool selection rate vs. 20% random baseline (3.6x improvement)
+- **Information position**: Lost in the Middle (Liu et al., TACL 2024); U-shaped LLM attention curve
+- **Format impact**: He et al. (arXiv:2411.10541); format changes alone can cause 9-40% performance variance
+- **Instruction compliance**: IFEval (arXiv:2311.07911); LLMs struggle with multi-constraint prompts
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

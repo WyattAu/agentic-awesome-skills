@@ -3,7 +3,7 @@
 读完产出：`refs/style-refs/INDEX.md`（用 `scripts/ref_archive.py add`）+ `docs/competitors.md`。门槛：≥8 个来源、≥4 个不是 App、每个写"取什么/不取什么"。
 
 ## 顺序（每一步都有用户被"UI 像 web"打回的教训）
-1. **GitHub 开源项目与高质量库**——能拆源码的才是真参考，不是看图：
+1. **GitHub 开源项目与高质量库**--能拆源码的才是真参考，不是看图：
    - 动效/组件灵感库：React Bits、Codrops（每个 demo 带源码）、Shadertoy（shader 可移植到 Metal）、Rive 社区（可 remix 的 .riv）。
    - 平台开源样板：开源 SwiftUI 应用（大图、字少、一屏一个焦点是它们的共性）、Apple 官方示例工程。
    - 搜法：`firecrawl_search` 的 `developer` 类别，或 GitHub 搜 `swiftui animation`/`metal shader` + stars 排序。把"抓到的机制"写进表，不是链接堆。

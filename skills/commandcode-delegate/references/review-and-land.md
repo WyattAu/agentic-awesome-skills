@@ -2,7 +2,7 @@
 
 Command Code did the typing; you own the judgment. This is where delegation earns its keep or quietly
 ships a mistake. The discipline is simple to state and easy to skip under time pressure: **verify
-against reality, never against the self-report — and read the diff as generated code, which fails in
+against reality, never against the self-report; and read the diff as generated code, which fails in
 ways a green gate can't see.**
 
 One thing to add to the usual routine here: the run had no sandbox. An implementation dispatch goes out
@@ -11,7 +11,7 @@ not one the tooling answered for you.
 
 ## Check the tests before trusting the gates
 
-If the diff touches existing tests, review those edits *first* — before the gate re-run means anything.
+If the diff touches existing tests, review those edits *first*; before the gate re-run means anything.
 A weakened assertion, an added skip, or a deleted test makes the gate measure less than it did before
 the run; green is only meaningful if the yardstick wasn't shortened.
 
@@ -25,9 +25,9 @@ the run; green is only meaningful if the yardstick wasn't shortened.
 ## Re-run the gates yourself
 
 `result.json` carries Command Code's own claim that the gates passed. Treat that as a claim, not
-evidence — re-run the project's actual test/lint/build commands in the working tree and read the output.
+evidence; re-run the project's actual test/lint/build commands in the working tree and read the output.
 And keep the result in proportion: **passing is necessary, not sufficient.** An implementer can *game* a
-gate, not just misreport it — that is what the test check above and the sweep below exist to catch.
+gate, not just misreport it; that is what the test check above and the sweep below exist to catch.
 
 For changes with their own verification shape, go further:
 
@@ -41,58 +41,58 @@ For changes with their own verification shape, go further:
 Open the diff (`touchedFiles` in the result is your starting list) and hold it against what you asked
 for:
 
-- **Out-of-scope writes** — this is the first check here, not an afterthought. Under `--yolo` there was
+- **Out-of-scope writes**; this is the first check here, not an afterthought. Under `--yolo` there was
   nothing stopping a write outside `--cd` or outside the paths the brief named. `touchedFiles` is a
   `git status` review aid, not containment proof: it misses ignored files and anything outside the
   repository. A worktree isolates the checkout but not the process. Use a container or another
   OS-enforced boundary when writes outside the target tree are unacceptable.
-- **Scope creep** — did it change things the brief said to leave untouched? Unasked refactors, renames,
+- **Scope creep**; did it change things the brief said to leave untouched? Unasked refactors, renames,
   "while I was here" edits. These are the most common quality problem in delegated work.
-- **Scope shortfall** — did it do the whole task, including the edge cases and cleanup, or stop at the
+- **Scope shortfall**; did it do the whole task, including the edge cases and cleanup, or stop at the
   first plausible version? A `stopReason` of `max_turns` in `result.json` is a strong hint of a run that
   stopped mid-task rather than finishing.
-- **Quiet judgment calls** — sometimes Command Code makes a defensible decision the brief didn't
+- **Quiet judgment calls**; sometimes Command Code makes a defensible decision the brief didn't
   anticipate. Don't just accept it because it looks reasonable; understand it and decide.
-- **A commit it made itself** — the brief forbids it, but nothing enforced that. Compare `HEAD` with
+- **A commit it made itself**; the brief forbids it, but nothing enforced that. Compare `HEAD` with
   the pre-dispatch baseline, then inspect status, staged and unstaged diffs, and the intervening log.
   Review the full baseline-to-HEAD range directly and preserve a recovery ref before any optional soft reset on an isolated unshared branch. Never uncommit unrelated/shared history.
 
 ## The implementer sweep
 
-Generated code fails in systematic ways that gates are structurally blind to — each of these can sit in
+Generated code fails in systematic ways that gates are structurally blind to; each of these can sit in
 a diff whose tests are all green. Walk them against every diff before you commit:
 
-- **Hardcoded success or fixture data** on a path the brief says does real work — a canned
+- **Hardcoded success or fixture data** on a path the brief says does real work; a canned
   `{status: "ok"}` or default return passes tests *by design*. If Command Code couldn't implement
   something, the diff should fail loudly, not pretend.
-- **Catch-all error handling that returns a default** instead of propagating — the suppressed failure is
+- **Catch-all error handling that returns a default** instead of propagating; the suppressed failure is
   exactly what the gate would have caught. A broad catch is only acceptable with a recovery path the
   contract documents.
-- **Unverified imports and API calls** — confirm every new dependency, method, and signature exists in
+- **Unverified imports and API calls**; confirm every new dependency, method, and signature exists in
   the *installed* version (read the lockfile or the package, don't trust plausibility).
-- **Dead weight** — unused imports, helpers nothing calls, unreachable branches, "Step 1/Step 2"
+- **Dead weight**; unused imports, helpers nothing calls, unreachable branches, "Step 1/Step 2"
   comment scaffolding, comments that restate the line below them.
-- **A second way to do what the file already does** — a new HTTP client, error idiom, or logging style
+- **A second way to do what the file already does**; a new HTTP client, error idiom, or logging style
   introduced beside the existing one instead of reusing it.
-- **New tests that assert internals** — asserting that an internal helper was called, or mocking the
+- **New tests that assert internals**; asserting that an internal helper was called, or mocking the
   project's own functions to isolate a "unit." Assess whether the mock tests a real external boundary or only mirrors internals; prefer observable behavior for regression coverage.
-- **Near-duplicate test bodies** differing by one value — fold into one data-driven test or drop the
+- **Near-duplicate test bodies** differing by one value; fold into one data-driven test or drop the
   copies; bloat reads as coverage but isn't.
-- **Speculative surface** — optional parameters, config flags, or abstractions with no caller in this
+- **Speculative surface**; optional parameters, config flags, or abstractions with no caller in this
   diff or the repo. Delegated work gets the concrete behavior the brief asked for, nothing extra.
-- **Guards for impossible cases** — null/type checks for values the code's own contract already
+- **Guards for impossible cases**; null/type checks for values the code's own contract already
   excludes. Noise that buries the validation that matters at real trust boundaries.
 
 Anything the sweep catches goes back to Command Code as a delta brief (below) or gets fixed in the tree
-before commit — and either way is reported to the user (see "Surface, don't absorb").
+before commit; and either way is reported to the user (see "Surface, don't absorb").
 
-If the `guard-skills` package is installed, run the relevant guard on the diff for the full treatment —
+If the `guard-skills` package is installed, run the relevant guard on the diff for the full treatment -
 `clean-code-guard` on production code, `test-guard` on tests, `docs-guard` on documentation. The sweep
 above is the built-in floor; the guards go deeper.
 
 ## The commit boundary
 
-When the gates pass and the diff holds, **you commit** — the orchestrator, never Command Code. This
+When the gates pass and the diff holds, **you commit**; the orchestrator, never Command Code. This
 isn't a workaround for a missing feature; it's the deliberate boundary. Under `--yolo` Command Code is
 perfectly capable of committing, and that is precisely the problem: committing should be the act of the
 party that verified the work, and a self-committed run has to be unpicked before it can be reviewed.
@@ -100,13 +100,13 @@ Write a clear message describing what landed. If your project attributes co-auth
 for it.
 
 From dispatch until that commit, the uncommitted working tree is the authoritative copy of the
-implementer's work — the only one you can commit from, and often the only copy at all. Never run
-`git checkout`, `reset`, `clean`, or a branch switch in the workspace between those two points —
+implementer's work; the only one you can commit from, and often the only copy at all. Never run
+`git checkout`, `reset`, `clean`, or a branch switch in the workspace between those two points -
 however messy an interrupted run looks, inspect it first: `git status`, `git diff`, `git diff --cached`
 for anything the implementer staged (plain `git diff` is blind to the index), and open any untracked
-files (`??` in `git status`) directly — they are the implementer's new files, and no diff shows their
+files (`??` in `git status`) directly; they are the implementer's new files, and no diff shows their
 contents. The tree is evidence, not clutter. After that inspection the verdict can legitimately be to
-discard — work built on a premise you have since corrected, for example — and then `git checkout`/`clean`
+discard; work built on a premise you have since corrected, for example; and then `git checkout`/`clean`
 is the right tool. The ban is on reflexive cleanup before anyone has looked.
 
 ## Reworking: send the delta, not the whole task
@@ -119,12 +119,12 @@ echo "The fix is right, but the test mocks the DB session - use the real migrate
 drop the now-unused import." | node "<skill-dir>/scripts/relay.mjs" --session <sessionId> --cd /path/to/repo
 ```
 
-(`<skill-dir>` is this skill's install directory — see [dispatch-and-poll.md](dispatch-and-poll.md).
+(`<skill-dir>` is this skill's install directory; see [dispatch-and-poll.md](dispatch-and-poll.md).
 `<sessionId>` is the field of that name from the prior `result.json`.)
 
 `--session <sessionId>` keeps the context from the first run, so a short delta is enough; use
 `--continue-last` only when no session id came back, since "most recent" is global and another run can
-steal it. Then review again — rework gets the same gate-rerun, test check, diff-read, and sweep as the
+steal it. Then review again; rework gets the same gate-rerun, test check, diff-read, and sweep as the
 original, no shortcuts. Repeat until it's right, then commit.
 
 ## Surface, don't absorb
@@ -137,8 +137,8 @@ But keep them in the loop on anything that changes the shape of the work:
 - **Report any write outside the brief's paths**, and any `readOnlyViolation: true` on a read-only
   dispatch, even when the change itself looks harmless. Those say something about the run's containment,
   which is the human's call to weigh, not yours to normalize.
-- **Stop and ask** if correct completion requires going beyond the brief — don't expand the mandate on
+- **Stop and ask** if correct completion requires going beyond the brief; don't expand the mandate on
   your own. A scope change is the human's call, not yours or Command Code's.
 
-For a multi-task run, capture these in the progress file rather than letting them scroll past — see
+For a multi-task run, capture these in the progress file rather than letting them scroll past; see
 [multi-task-queues.md](multi-task-queues.md).

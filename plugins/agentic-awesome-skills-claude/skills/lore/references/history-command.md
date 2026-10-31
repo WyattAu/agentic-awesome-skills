@@ -1,4 +1,4 @@
-# `lore history` — full specification
+# `lore history`: full specification
 
 Read-only command. Lists git commits related to a memory entry, a file,
 or a scope, since the entry's `#added` date. Output to stdout only;
@@ -35,9 +35,9 @@ $ lore history --follow-superseded DEC-2026-07-10-ee31
 # history: [DEC-2026-07-10-ee31] --follow-superseded
 
 ## Chain
-1. [DEC-2026-07-10-ee31] (scopes/backend/DECISIONS.md) — SHA-256 + salt
+1. [DEC-2026-07-10-ee31] (scopes/backend/DECISIONS.md); SHA-256 + salt
    → superseded-by → DEC-2026-07-10-e45d
-2. [DEC-2026-07-10-e45d] (scopes/backend/DECISIONS.md) — bcrypt (rounds=12)
+2. [DEC-2026-07-10-e45d] (scopes/backend/DECISIONS.md); bcrypt (rounds=12)
    → no successor
 
 # history: [DEC-2026-07-10-ee31]
@@ -120,13 +120,13 @@ When `--follow-superseded` is set, `chain` is an array of `{entry_id, lore_file,
 
 ## Exit codes summary
 
-- `0` — success (including "0 commits found" case)
-- `2` — usage / configuration error
-- `3` — entry lookup failure
-- `4` — not a git repo
-- `5` — git CLI missing
-- `6` — invalid scope
-- `7` — git command failed
+- `0`; success (including "0 commits found" case)
+- `2`; usage / configuration error
+- `3`; entry lookup failure
+- `4`; not a git repo
+- `5`; git CLI missing
+- `6`; invalid scope
+- `7`; git command failed
 
 ## Why this exists
 

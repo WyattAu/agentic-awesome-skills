@@ -32,10 +32,10 @@ in fresh sessions.
 
 For more than two or three tasks, maintain one progress file beside the work:
 
-- **Status table** — queued / at-implementer / reviewed+committed, with the commit hash.
-- **Per-task review notes** — what landed, what you verified, and gate outcomes.
-- **Needs your eyes** — design decisions, non-blocking nitpicks, and questions for the human.
-- **End-of-run checklist** — the final cross-task verification.
+- **Status table**; queued / at-implementer / reviewed+committed, with the commit hash.
+- **Per-task review notes**; what landed, what you verified, and gate outcomes.
+- **Needs your eyes**; design decisions, non-blocking nitpicks, and questions for the human.
+- **End-of-run checklist**; the final cross-task verification.
 
 Update it when each task lands, not in one batch at the end.
 

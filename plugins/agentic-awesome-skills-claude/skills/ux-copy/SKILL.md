@@ -18,15 +18,15 @@ Use this skill when you need generate UX microcopy (button labels, error message
 
 ## When NOT to use
 
-- For long-form content (blog posts, docs, marketing pages) — out of scope
+- For long-form content (blog posts, docs, marketing pages); out of scope
 - For full feedback state design (not just text) → use `/ss-feedback`
-- For brand voice/tone definition itself — this skill consumes a voice spec, doesn't create it
-- For translations to non-English languages — single-language only
+- For brand voice/tone definition itself; this skill consumes a voice spec, doesn't create it
+- For translations to non-English languages; single-language only
 
 Context: **$0**
 Description: $ARGUMENTS
 
-> **Read `engine/UX-WRITING.md` if it exists in the target project** (not bundled here) — it's the rule set this skill applies: buttons
+> **Read `engine/UX-WRITING.md` if it exists in the target project** (not bundled here); it's the rule set this skill applies: buttons
 > name the action (not "Submit"), errors help instead of blame, empty states invite,
 > money copy stays calm, one term per concept. Korean/CJK projects: see §W8 for the
 > clear-calm-human "Toss feel" (존댓말 일관성, 사용자 관점 "내 계좌", 군더더기 빼기).

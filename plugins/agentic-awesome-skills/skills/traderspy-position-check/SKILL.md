@@ -19,7 +19,7 @@ license_source: "https://github.com/target1m/traderspy-mcp/blob/069aae5a84640d67
 A position check answers, in order: how much room is left before this position is taken away
 (liquidation), how much before the user's own plan says it is wrong (stop), what the chart and
 the derivatives market are doing around it, and who else is positioned the same way. Report those
-facts with numbers. The decision — hold, trim, close, add — belongs to the person whose money it
+facts with numbers. The decision; hold, trim, close, add; belongs to the person whose money it
 is.
 
 ## When to Use
@@ -34,7 +34,7 @@ The position always comes from the user. TraderSpy has no account tool: it canno
 or an open position on any exchange, so never offer to "check the account".
 
 Ask for whatever is missing among side, entry, leverage (and stop / target / the exchange's
-liquidation price if they have them). Size is optional — the analysis works in percentages. The
+liquidation price if they have them). Size is optional; the analysis works in percentages. The
 current price is the `price` that `get_technical_indicators` returns.
 
 Map the symbol to Binance naming for the data tools: `BTC` → `BTCUSDT`, `kPEPE` → `1000PEPEUSDT`,
@@ -42,12 +42,12 @@ Map the symbol to Binance naming for the data tools: `BTC` → `BTCUSDT`, `kPEPE
 
 ## Calls per position (keep it to what matters)
 
-1. `get_technical_indicators` — `intervals: ["1h","4h","1d"]`, `indicators: ["rsi","macd","ema",
+1. `get_technical_indicators`; `intervals: ["1h","4h","1d"]`, `indicators: ["rsi","macd","ema",
    "atr","adx","supertrend","levels"]`. One call. This gives the trend on three timeframes, ATR
    for stop sanity and the nearest levels.
-2. `get_derivatives` — up to five coins in ONE call for all positions at once. Funding is a cost
+2. `get_derivatives`; up to five coins in ONE call for all positions at once. Funding is a cost
    or an income for this position; the OI regime says whether the move is being funded.
-3. `get_positions` — `symbol`, `status: "open"`, `limit: 20`. Optional; skip on a tight quota.
+3. `get_positions`; `symbol`, `status: "open"`, `limit: 20`. Optional; skip on a tight quota.
    Tells you whether tracked top traders are on the same side.
 
 Three positions ≈ 3 + 1 (+3) calls. If the quota is tight, do derivatives for all coins first,
@@ -79,8 +79,8 @@ ALWAYS use this template per position:
 **<COIN> <SIDE> · <leverage>x · <marginMode>**
 
 - Entry <entry> → mark <mark> (<±x.x%> on price, <±y%> on margin) · uPnL <$, when the size is known>
-- Liquidation <liq> — <d%> away → **<at risk / watch / comfortable>**
-- Stop <stop or "none stated"> — <d%> / <n> ATR(4h) away · Target <if any>
+- Liquidation <liq>; <d%> away → **<at risk / watch / comfortable>**
+- Stop <stop or "none stated">; <d%> / <n> ATR(4h) away · Target <if any>
 - Chart: 1h <bias, RSI, trend> · 4h <…> · 1d <…> · confluence <aligned / mixed>
 - Nearest levels: support <price (d%)>, resistance <price (d%)>
 - Derivatives: funding <label, annualized → cost or income for this side>, OI <regime>, top
@@ -103,7 +103,7 @@ noise" is a report; "move your stop" is not.
   close", lay out what supports staying in and what argues against, then hand it back.
 - Distances and scenarios are arithmetic on current prices and levels the tools returned; they are
   not predictions of where price will go.
-- Nothing in this connector trades — no order, close, transfer or withdrawal tool exists, by
+- Nothing in this connector trades; no order, close, transfer or withdrawal tool exists, by
   design. Say so when asked to act; the decision and any trade stay with the user.
 - Position details the user shares stay in the conversation; do not restate them in later
   unrelated answers.

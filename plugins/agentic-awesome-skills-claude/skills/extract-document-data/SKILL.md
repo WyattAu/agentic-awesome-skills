@@ -1,6 +1,6 @@
 ---
 name: extract-document-data
-description: Extract structured, grounded fields from documents — values cite their page, missing values abstain instead of hallucinating. Use for parsing invoices, payslips, statements, contracts.
+description: Extract structured, grounded fields from documents; values cite their page, missing values abstain instead of hallucinating. Use for parsing invoices, payslips, statements, contracts.
 category: document-verification
 risk: critical
 source: community
@@ -29,15 +29,15 @@ Extract structured JSON from documents with per-value grounding: every extracted
 1. **Get the document.** URL or local file path (PDF, PNG, JPEG, DOCX).
 
 2. **Choose the extraction mode:**
-   - **Ad-hoc fields** — tell the API exactly which fields you want:
+   - **Ad-hoc fields**; tell the API exactly which fields you want:
      ```bash
      curl -X POST https://www.stipple.sh/v1/extract \
        -F "file=@payslip.pdf" \
        -F 'fields=[{"name":"employer_name"},{"name":"net_pay"},{"name":"pay_date"}]' \
        -H "Authorization: Bearer $STIPPLE_API_KEY"
      ```
-   - **Template** — use a built-in schema: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract`
-   - **Schema-free** — omit `fields` and let the model extract what it finds
+   - **Template**; use a built-in schema: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract`
+   - **Schema-free**; omit `fields` and let the model extract what it finds
 
 3. **Interpret the response.**
 
@@ -55,12 +55,12 @@ Extract structured JSON from documents with per-value grounding: every extracted
    ```
 
    - Every value carries `confidence` (the model's self-report) and `page` (grounding)
-   - `not_found[]` lists requested fields the model couldn't find — **absences are reported, never guessed**
+   - `not_found[]` lists requested fields the model couldn't find; **absences are reported, never guessed**
    - `pages_read` shows how many pages were processed (page limits apply per document)
 
-4. **Report honestly.** This is *extraction, not verification* — values are what the document **shows**, not proof it's genuine:
+4. **Report honestly.** This is *extraction, not verification*; values are what the document **shows**, not proof it's genuine:
    - "Employer: Acme Cleaning Pty Ltd (confidence 0.95, page 1)"
-   - "ytd_tax: not found in document" — never "ytd_tax: 0" or a guess
+   - "ytd_tax: not found in document"; never "ytd_tax: 0" or a guess
    - For "is this document genuine?", pair with the `verify-document` skill first
 
 ## Output format
@@ -93,7 +93,7 @@ not_found: ytd_tax
 ## Notes
 
 - Costs 1 credit per page read by the model (minimum 1); free weekly allowance applies
-- Templates: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract` — pass as the `template` form field
+- Templates: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract`; pass as the `template` form field
 - Tables are extracted with structure preserved; multi-page documents are processed page by page
-- Pairs with `verify-document` (run first, for authenticity) — an extracted value from a tampered document is still wrong
+- Pairs with `verify-document` (run first, for authenticity); an extracted value from a tampered document is still wrong
 - Free key at https://www.stipple.sh for metering beyond the anonymous allowance

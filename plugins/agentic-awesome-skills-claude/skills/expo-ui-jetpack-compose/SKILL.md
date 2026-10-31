@@ -44,8 +44,8 @@ import { fillMaxWidth, paddingAll } from "@expo/ui/jetpack-compose/modifiers";
 
 ## Key Components
 
-- **LazyColumn** — Use for a Compose-native list when the platform-specific design calls for it; do not replace React Native lists universally. Wrap in `<Host style={{ flex: 1 }}>`.
-- **Icon** — Use `<Icon source={require('./icon.xml')} size={24} />` with Android XML vector drawables from [Material Symbols](https://fonts.google.com/icons).
+- **LazyColumn**; Use for a Compose-native list when the platform-specific design calls for it; do not replace React Native lists universally. Wrap in `<Host style={{ flex: 1 }}>`.
+- **Icon**; Use `<Icon source={require('./icon.xml')} size={24} />` with Android XML vector drawables from [Material Symbols](https://fonts.google.com/icons).
 
 ## Limitations
 - APIs target SDK 55; check that version’s actual Expo docs and installed package before editing. Android/iOS examples are platform-specific, not interchangeable or proof of real-device behavior. Existing framework and user requirements take precedence.

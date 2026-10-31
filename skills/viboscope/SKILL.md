@@ -1,6 +1,6 @@
 ---
 name: viboscope
-description: "Psychological compatibility matching — find cofounders, collaborators, and friends with explicit consent and unverified provider scoring"
+description: "Psychological compatibility matching; find cofounders, collaborators, and friends with explicit consent and unverified provider scoring"
 category: collaboration
 risk: safe
 source: community
@@ -14,7 +14,7 @@ tools: [claude, cursor, codex, gemini, windsurf]
 
 ## Overview
 
-Viboscope helps find compatible people — cofounders, project partners, friends, romantic partners — through provider-defined compatibility scoring. This entrypoint does not establish the scientific validity of those scores.
+Viboscope helps find compatible people; cofounders, project partners, friends, romantic partners; through provider-defined compatibility scoring. This entrypoint does not establish the scientific validity of those scores.
 
 ## When to Use This Skill
 
@@ -35,7 +35,7 @@ Save outside active skill directories for review; do not activate downloaded ins
 ### Step 2: Build Profile
 
 The skill guides a 5-minute onboarding that builds a psychological profile using:
-- AI assistant portrait (fastest — 2 min for 90%+ profile)
+- AI assistant portrait (fastest; 2 min for 90%+ profile)
 - 5 validated questionnaires (Big Five, Values, Attachment, Conflict, Work Style)
 - Do not scan workspace files to build a psychological profile
 

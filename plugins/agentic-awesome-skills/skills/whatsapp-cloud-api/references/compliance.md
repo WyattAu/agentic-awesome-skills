@@ -82,14 +82,14 @@ Se voce atende clientes na UE, o GDPR (Regulamento 2016/679) se aplica.
 
 ### Requisitos Especificos
 
-1. **Opt-in Duplo (Double Opt-in) — opcao de comprovacao, nao obrigacao universal do GDPR**
+1. **Opt-in Duplo (Double Opt-in); opcao de comprovacao, nao obrigacao universal do GDPR**
    - Primeiro opt-in: cliente fornece numero (site, formulario, QR code)
    - Segundo opt-in: enviar mensagem de confirmacao via WhatsApp
    - Cliente responde com keyword (ex: "SIM") para confirmar
 
 2. **BSP Certificado EU**
    - Avalie DPA, transferencias internacionais e salvaguardas aplicaveis; residencia na UE nao e obrigacao universal
-   - A WhatsApp Cloud API da Meta e hospedada nos EUA — verifique se ha adequacao para seu caso
+   - A WhatsApp Cloud API da Meta e hospedada nos EUA; verifique se ha adequacao para seu caso
 
 3. **DPA (Data Processing Agreement)**
    - Contrato formal com a Meta sobre processamento de dados
@@ -288,7 +288,7 @@ O WhatsApp faz upgrade automatico quando:
 ### Mudancas 2026
 
 - **Q1 2026:** Tiers 2K e 10K serao removidos para parceiros selecionados
-- **Q2 2026:** Remocao completa — apos verificacao de negocio, limite imediato de 100K
+- **Q2 2026:** Remocao completa; apos verificacao de negocio, limite imediato de 100K
 - **Business Portfolio Pacing:** Novo recurso para campanhas em massa com pausa automatica baseada em feedback
 
 ### Regra Importante

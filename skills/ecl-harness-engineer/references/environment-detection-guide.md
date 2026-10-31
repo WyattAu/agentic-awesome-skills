@@ -2,9 +2,9 @@
 
 > Review boundary: The v1 examples below are legacy design sketches, not runnable scripts or a bundled executor. Prefer the actual consumer schema (the separate configuration guide proposes v2). Handlebars placeholders require an explicitly implemented, escaped renderer; never paste unresolved templates into a shell. Dependency imports suggest candidates, not required services: SQLAlchemy/Prisma/TypeORM do not identify a database vendor. SQLite/in-memory substitutes need explicit application support and cannot certify PostgreSQL behavior. Never include discovered secret values in generated configuration, even after a confirmation prompt.
 
-This document defines **environment.json** — the environment contract between ecl-harness-engineer and harness-executor — and explains how to detect, collect, and generate environment information for a project.
+This document defines **environment.json**; the environment contract between ecl-harness-engineer and harness-executor; and explains how to detect, collect, and generate environment information for a project.
 
-> **Key Insight**: Environment is not just configuration — it's the complete runtime ecosystem including databases, services, secrets, and the **executable scripts** to bring it all up.
+> **Key Insight**: Environment is not just configuration; it's the complete runtime ecosystem including databases, services, secrets, and the **executable scripts** to bring it all up.
 
 ---
 
@@ -14,7 +14,7 @@ This document defines **environment.json** — the environment contract between 
 
 | File | Purpose | Consumer |
 |------|---------|----------|
-| `environment.json` | "What the environment is" — full ecosystem description | `preflight.py`, `verifier subagent`, setup scripts |
+| `environment.json` | "What the environment is"; full ecosystem description | `preflight.py`, `verifier subagent`, setup scripts |
 
 `ecl-harness-engineer` creates `environment.json` only. Runtime verification plans such as
 `verify.json` are generated later by harness-executor or another runtime from `environment.json`

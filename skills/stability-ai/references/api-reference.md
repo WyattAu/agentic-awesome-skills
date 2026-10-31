@@ -1,4 +1,4 @@
-# API Reference — Stability AI v2beta
+# API Reference: Stability AI v2beta
 
 ## Indice
 
@@ -43,9 +43,9 @@ Gera imagens com Stable Diffusion 3.5.
 | `mode` | string | Nao | `text-to-image` (default) ou `image-to-image` |
 
 **Modelos disponiveis:**
-- `sd3.5-large` — Melhor qualidade geral (recomendado)
-- `sd3.5-large-turbo` — Rapido, menos passos
-- `sd3.5-medium` — Balanco velocidade/qualidade
+- `sd3.5-large`; Melhor qualidade geral (recomendado)
+- `sd3.5-large-turbo`; Rapido, menos passos
+- `sd3.5-medium`; Balanco velocidade/qualidade
 
 ### POST /stable-image/generate/ultra
 
@@ -163,7 +163,7 @@ Aumenta resolucao mantendo fidelidade maxima ao original.
 Aumenta resolucao adicionando detalhes criativamente.
 
 Fluxo em 2 etapas:
-1. POST para iniciar — retorna `generation_id`
+1. POST para iniciar; retorna `generation_id`
 2. GET para buscar resultado (pode demorar)
 
 | Campo | Tipo | Obrigatorio | Descricao |
@@ -181,9 +181,9 @@ Fluxo em 2 etapas:
 Ratios suportados: `1:1`, `2:3`, `3:2`, `4:5`, `5:4`, `9:16`, `16:9`, `9:21`, `21:9`
 
 ### output_format
-- `png` — Sem perda, maior arquivo
-- `jpeg` — Comprimido, menor arquivo
-- `webp` — Moderno, bom balanco
+- `png`; Sem perda, maior arquivo
+- `jpeg`; Comprimido, menor arquivo
+- `webp`; Moderno, bom balanco
 
 ### seed
 - Range: 0 a 4294967294

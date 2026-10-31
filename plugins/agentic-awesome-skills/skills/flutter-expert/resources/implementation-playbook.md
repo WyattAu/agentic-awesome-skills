@@ -55,7 +55,7 @@ class ProductsController extends _$ProductsController {
 }
 ```
 
-Consume it with explicit loading/error/data states — never assume data is
+Consume it with explicit loading/error/data states; never assume data is
 ready:
 
 ```dart
@@ -122,7 +122,7 @@ class ProductRepository {
 
 ## 4. Performance: rebuilds, const, and keys
 
-- Mark widgets `const` whenever their inputs are compile-time constants — this
+- Mark widgets `const` whenever their inputs are compile-time constants; this
   can let Flutter reuse unchanged widget instances; inherited dependencies and other invalidations can still rebuild them.
 - Split large `build` methods into smaller widgets so only the changing subtree
   rebuilds.

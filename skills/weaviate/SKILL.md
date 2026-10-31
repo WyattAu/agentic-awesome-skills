@@ -52,7 +52,7 @@ Provider keys require the explicit `WEAVIATE_PROVIDER_KEYS` allowlist. Set only 
 ### Collection Management
 
 - [List Collections](references/list_collections.md): Use to **discover what collections exist** in the Weaviate instance. This should typically be the first step before performing any search or data operation.
-- [Get Collection Details](references/get_collection.md): Use to **understand a collection's schema** — its properties, data types, vectorizer configuration, replication factor, and multi-tenancy status. Helpful before running searches or imports.
+- [Get Collection Details](references/get_collection.md): Use to **understand a collection's schema**; its properties, data types, vectorizer configuration, replication factor, and multi-tenancy status. Helpful before running searches or imports.
 - [Explore Collection](references/explore_collection.md): Use to **analyze data distribution, top values, and inspect actual content** in a collection. Helpful for understanding what data looks like before querying.
 - [Create Collection](references/create_collection.md): Use to **create new collections with custom schemas** before importing data. Select an explicitly approved vectorizer. The default is `none` (self-provided vectors), which avoids automatic external inference; text semantic search requires a compatible configured vectorizer or supplied vectors.
 
@@ -88,7 +88,7 @@ Provider keys require the explicit `WEAVIATE_PROVIDER_KEYS` allowlist. Set only 
    uv run scripts/explore_collection.py "COLLECTION_NAME"
    ```
 
-5. **Create a collection** if importing a new CSV, JSON, or JSONL file — the collection must exist before importing:
+5. **Create a collection** if importing a new CSV, JSON, or JSONL file; the collection must exist before importing:
 
    ```bash
    uv run scripts/create_collection.py CollectionName --allow-write \
@@ -101,7 +101,7 @@ Provider keys require the explicit `WEAVIATE_PROVIDER_KEYS` allowlist. Set only 
    ```bash
    uv run scripts/import.py "data.csv" --allow-write --collection "CollectionName"
    ```
-   > For PDF imports, the collection is created automatically — skip step 5.
+   > For PDF imports, the collection is created automatically; skip step 5.
 
 7. **Choose the right search type:**
    - Get AI-powered answers with source citations across multiple collections → `ask.py`

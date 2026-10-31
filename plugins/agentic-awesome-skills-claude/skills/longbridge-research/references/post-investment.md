@@ -2,7 +2,7 @@
 
 Scope: read-only research template; verify current CLI flags/entitlements, cite actual sources and timestamps, and distinguish estimates from observations. Never expose account credentials or raw sensitive error output. Examples and thresholds are illustrative, not current quotes or validated trading signals. Account-specific data is optional and requires user-authorized minimum read access.
 
-Quarterly / monthly post-investment monitoring — track KPIs, flag deviations, and generate action recommendations.
+Quarterly / monthly post-investment monitoring; track KPIs, flag deviations, and generate action recommendations.
 
 ## Workflow
 
@@ -71,8 +71,8 @@ Next review trigger: ...
 
 | Situation                       | 简体回复                                     | 繁體回復                                     | English reply                                                           |
 | ------------------------------- | -------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------- |
-| No recent earnings data         | 暂无最新财报数据，无法完成 KPI 对比。        | 暫無最新財報數據，無法完成 KPI 對比。        | No recent earnings data available — KPI comparison cannot be completed. |
-| Consensus data unavailable      | 分析师预期数据不可用，仅展示实际数据。       | 分析師預期數據不可用，僅展示實際數據。       | Consensus data unavailable — showing actuals only.                      |
-| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found — verify the exchange and ticker.                      |
+| No recent earnings data         | 暂无最新财报数据，无法完成 KPI 对比。        | 暫無最新財報數據，無法完成 KPI 對比。        | No recent earnings data available; KPI comparison cannot be completed. |
+| Consensus data unavailable      | 分析师预期数据不可用，仅展示实际数据。       | 分析師預期數據不可用，僅展示實際數據。       | Consensus data unavailable; showing actuals only.                      |
+| Symbol not found                | 未找到该代码，请确认市场和格式。             | 找不到該代碼，請確認市場和格式。             | Symbol not found; verify the exchange and ticker.                      |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。 | 請安裝 longbridge-terminal 或透過 MCP 連線。 | Install longbridge-terminal or connect via MCP.                         |
 | `not logged in`                 | 请运行 `longbridge auth login`。             | 請執行 `longbridge auth login`。             | Run `longbridge auth login`.                                            |

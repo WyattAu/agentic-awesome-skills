@@ -63,34 +63,34 @@ If the context file doesn't exist, run the `developer-audience-context` skill fi
 
 ```
 📢 INFORMATION
-├── #welcome — First landing, rules, links
-├── #announcements — Official updates (admin-only posting)
-├── #rules — Code of conduct
-└── #introductions — New member intros
+├── #welcome; First landing, rules, links
+├── #announcements; Official updates (admin-only posting)
+├── #rules; Code of conduct
+└── #introductions; New member intros
 
 💬 GENERAL
-├── #general — Main discussion
-├── #off-topic — Non-project chat
-└── #show-what-you-built — Share projects
+├── #general; Main discussion
+├── #off-topic; Non-project chat
+└── #show-what-you-built; Share projects
 
 ❓ SUPPORT
-├── #help — General questions
-├── #troubleshooting — Bug help
-└── #feature-requests — Suggestions
+├── #help; General questions
+├── #troubleshooting; Bug help
+└── #feature-requests; Suggestions
 
 🔧 TECHNICAL
-├── #backend — Backend discussions
-├── #frontend — Frontend discussions
-└── #devops — Infrastructure discussions
+├── #backend; Backend discussions
+├── #frontend; Frontend discussions
+└── #devops; Infrastructure discussions
 
 🤝 COMMUNITY
-├── #jobs — Job postings (if allowed)
-├── #events — Meetups, conferences
-└── #content — Blog posts, videos
+├── #jobs; Job postings (if allowed)
+├── #events; Meetups, conferences
+└── #content; Blog posts, videos
 
 📚 RESOURCES
-├── #learning — Tutorials, courses
-└── #tools — Useful tools and libraries
+├── #learning; Tutorials, courses
+└── #tools; Useful tools and libraries
 ```
 
 ### Slack Channel Template
@@ -149,7 +149,7 @@ Here's how to get started:
 
 1. Read the rules in #rules
 2. Introduce yourself in #introductions
-3. Ask questions in #help — we're friendly!
+3. Ask questions in #help; we're friendly!
 
 Quick links:
 • Documentation: [link]
@@ -265,10 +265,10 @@ Schedule regular engagement:
 
 ## Enforcement
 
-1. **Warning** — First offense, good faith
-2. **Temp mute** — Repeated issues
-3. **Temp ban** — Serious violations
-4. **Permanent ban** — Egregious or repeated
+1. **Warning**; First offense, good faith
+2. **Temp mute**; Repeated issues
+3. **Temp ban**; Serious violations
+4. **Permanent ban**; Egregious or repeated
 
 ## Reporting
 
@@ -289,11 +289,11 @@ Limit reports to authorized moderators on a need-to-know basis. Explain retentio
 
 ### De-escalation Techniques
 
-1. **Acknowledge feelings** — "I can see this is frustrating"
-2. **Move to DM** — "Let's continue this privately"
-3. **Take a break** — "Let's pause and revisit tomorrow"
-4. **Clarify intent** — "I think there might be a misunderstanding"
-5. **Set boundaries** — "We're here to help, but not to be yelled at"
+1. **Acknowledge feelings**; "I can see this is frustrating"
+2. **Move to DM**; "Let's continue this privately"
+3. **Take a break**; "Let's pause and revisit tomorrow"
+4. **Clarify intent**; "I think there might be a misunderstanding"
+5. **Set boundaries**; "We're here to help, but not to be yelled at"
 
 ### Moderator Self-Care
 
@@ -407,10 +407,10 @@ Installing bots, granting permissions, scheduling posts, sending DMs/pings and c
 
 ## Related Skills
 
-- `developer-audience-context` — Know your community members
-- `open-source-marketing` — OSS community building
-- `developer-advocacy` — Personal brand in community
-- `developer-newsletter` — Community digest content
+- `developer-audience-context`; Know your community members
+- `open-source-marketing`; OSS community building
+- `developer-advocacy`; Personal brand in community
+- `developer-newsletter`; Community digest content
 
 ## Limitations
 

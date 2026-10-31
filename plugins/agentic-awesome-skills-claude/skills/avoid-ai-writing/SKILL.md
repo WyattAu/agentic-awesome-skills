@@ -6,7 +6,7 @@ source: https://github.com/conorbronsdon/avoid-ai-writing
 date_added: "2026-03-06"
 ---
 
-# Avoid AI Writing — Audit & Rewrite
+# Avoid AI Writing: Audit & Rewrite
 
 Detects and fixes AI writing patterns ("AI-isms") that make text sound machine-generated. Covers 21 pattern categories with examples of plainer alternatives. The full upstream pattern catalog is not bundled in this AAS entrypoint; do not claim a complete 43-entry table is present.
 
@@ -31,16 +31,16 @@ Audit this for AI writing patterns:
 ```
 
 **Output:** The skill returns four sections:
-1. **Issues found** — every AI-ism quoted (landscape, embarking, pivotal, leverage, cutting-edge, streamline, robust, serves as, testament to, fostering, seamless, Moreover, In today's rapidly evolving...)
-2. **Rewritten version** — "Developers are starting to use newer AI tools to simplify their work. These tools are reliable, and they're making development less painful."
-3. **What changed** — summary of edits
-4. **Second-pass audit** — re-reads the rewrite to catch any surviving tells
+1. **Issues found**; every AI-ism quoted (landscape, embarking, pivotal, leverage, cutting-edge, streamline, robust, serves as, testament to, fostering, seamless, Moreover, In today's rapidly evolving...)
+2. **Rewritten version**; "Developers are starting to use newer AI tools to simplify their work. These tools are reliable, and they're making development less painful."
+3. **What changed**; summary of edits
+4. **Second-pass audit**; re-reads the rewrite to catch any surviving tells
 
 ## Limitations
 - These are editorial heuristics, not proof of AI authorship. Preserve factual claims, uncertainty, attributed quotations, code, identifiers, and the requested scope.
 - For audit-only requests, report findings without rewriting. Avoid replacing a precise technical term merely because it appears on a word list.
 
 - Does not detect AI-generated code, only prose
-- Pattern matching is guideline-based, not absolute — some flagged words are fine in context
+- Pattern matching is guideline-based, not absolute; some flagged words are fine in context
 - The replacement table suggests alternatives but the best choice depends on context
 - Cannot verify factual claims or find real citations to replace vague attributions

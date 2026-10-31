@@ -30,7 +30,7 @@ Report declared ranges from `package.json` as ranges; resolve exact installed ve
 
 ### `{{ARCHITECTURE_DIAGRAM}}`
 
-ASCII art using **actual directory names** from the project. Show real connections — which file imports which. No boxes labeled "Component" or "Service". For monorepos, show package dependency arrows. For single apps, show app/ → components/ + lib/ → external services.
+ASCII art using **actual directory names** from the project. Show real connections; which file imports which. No boxes labeled "Component" or "Service". For monorepos, show package dependency arrows. For single apps, show app/ → components/ + lib/ → external services.
 
 ### `{{DATA_FLOW}}`
 
@@ -42,7 +42,7 @@ Numbered steps with **real function names**: `detectPlatform()` not "validate in
 
 ### `{{ESSENTIAL_COMMANDS}}`
 
-Only commands whose **script key exists** in `package.json`. Use `{pm} run <key>` or `{pm} <key>` format matching the package manager. If a script is missing, omit that row — don't invent commands. Core rows: dev, build, lint, test, test:run, test:coverage, and quality tool (doctor/lint-staged) if present.
+Only commands whose **script key exists** in `package.json`. Use `{pm} run <key>` or `{pm} <key>` format matching the package manager. If a script is missing, omit that row; don't invent commands. Core rows: dev, build, lint, test, test:run, test:coverage, and quality tool (doctor/lint-staged) if present.
 
 ### `{{TEST_COUNT}}`
 
@@ -62,6 +62,6 @@ Assemble from validated commands: `{typecheck} → {lint} → {test} → {doctor
 List 5-8 project-specific conventions. Each must be verifiable from config files, not generic advice. Examples:
 
 - ✅ "Bun siempre. No npm ni yarn." (detected from bun.lock)
-- ✅ "Sin librería de validación externa — TypeScript types + guards manuales." (no zod in deps)
+- ✅ "Sin librería de validación externa; TypeScript types + guards manuales." (no zod in deps)
 - ❌ "Usar buenas prácticas de TypeScript." (generic, unverifiable)
 - ❌ "Código limpio y documentado." (generic, unverifiable)

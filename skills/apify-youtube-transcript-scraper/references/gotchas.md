@@ -1,4 +1,4 @@
-# Gotchas — harshmaur/youtube-transcript-scraper
+# Gotchas: harshmaur/youtube-transcript-scraper
 
 ## What `maxVideos` limits
 
@@ -45,7 +45,7 @@ Failed rows and filtered videos are free. Paid plans pay $4.00 to $4.67 per 1,00
 | `mcpConnector` | Connector ID that the user created in Apify Console. |
 | `mcpTarget` | Slack channel, Notion page or database, or Google Sheet ID. |
 | `mcpMode` | `perPost` (one message per video, default) or `summary`. |
-| `mcpMessage` | Template with `{{field}}` placeholders. Default `*{{title}}* — {{channelName}}\n{{url}}`. |
+| `mcpMessage` | Template with `{{field}}` placeholders. Default `*{{title}}*; {{channelName}}\n{{url}}`. |
 | `mcpMaxItems` | Most transcripts to send. Default 50. |
 
 A delivery problem never fails the run.

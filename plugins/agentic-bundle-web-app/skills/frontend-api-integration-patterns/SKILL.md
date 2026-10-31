@@ -17,7 +17,7 @@ metadata:
 
 This skill provides production-ready patterns for integrating frontend applications with backend APIs.
 
-Most frontend issues are not caused by APIs being difficult to call, but by **incorrect handling of asynchronous behavior**—leading to race conditions, stale data, duplicated requests, and poor user experience.
+Most frontend issues are not caused by APIs being difficult to call, but by **incorrect handling of asynchronous behavior**-leading to race conditions, stale data, duplicated requests, and poor user experience.
 
 This skill focuses on **correctness, resilience, and user experience**, not just making API calls work.
 

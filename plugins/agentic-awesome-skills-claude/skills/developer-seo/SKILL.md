@@ -18,7 +18,7 @@ Use this skill when you need sEO strategy for technical queries and developer au
 
 ## Overview
 
-Developer SEO differs fundamentally from traditional SEO. Developers search with precise technical intent—error messages, API questions, "how to X in Y language" queries. They bounce immediately from thin content and respect sites that actually solve problems. Your competition isn't other marketing sites; it's Stack Overflow, official docs, and GitHub issues.
+Developer SEO differs fundamentally from traditional SEO. Developers search with precise technical intent-error messages, API questions, "how to X in Y language" queries. They bounce immediately from thin content and respect sites that actually solve problems. Your competition isn't other marketing sites; it's Stack Overflow, official docs, and GitHub issues.
 
 This skill covers SEO strategies that work for technical audiences without compromising on substance.
 
@@ -79,7 +79,7 @@ Technical long-tail keywords have lower volume but extremely high intent. A deve
 
 ### Error Message SEO
 
-Error messages are SEO gold—developers copy-paste them directly into search.
+Error messages are SEO gold-developers copy-paste them directly into search.
 
 **Strategy:**
 1. Create dedicated pages for common errors
@@ -250,7 +250,7 @@ Developer content becomes outdated quickly:
 
 ### Metrics to Interpret Carefully
 
-- Bounce rate (developers often find answer and leave—that's success)
+- Bounce rate (developers often find answer and leave-that's success)
 - Pages per session (for reference content, one page is fine)
 - Conversion rate (long attribution windows for developer tools)
 

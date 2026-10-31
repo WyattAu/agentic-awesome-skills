@@ -20,14 +20,14 @@ Trigger phrases include: "build a content cluster", "create a topic map",
 ## Input Format
 ```json
 {
-  "pillar_topic": "string — the main subject to build authority around",
-  "primary_keyword": "string — the keyword the pillar page targets",
-  "target_audience": "string — who this content is for",
-  "existing_content": ["string — titles of pages/posts already published"],
-  "target_keywords": ["string — additional keywords to work into the cluster"],
-  "cluster_size": "integer — foundational pages to generate, 5–10, default 10",
-  "search_intent_evidence": "string — optional browser/API research",
-  "conversion_goal": "string — what the content should move readers to do"
+  "pillar_topic": "string; the main subject to build authority around",
+  "primary_keyword": "string; the keyword the pillar page targets",
+  "target_audience": "string; who this content is for",
+  "existing_content": ["string; titles of pages/posts already published"],
+  "target_keywords": ["string; additional keywords to work into the cluster"],
+  "cluster_size": "integer; foundational pages to generate, 5–10, default 10",
+  "search_intent_evidence": "string; optional browser/API research",
+  "conversion_goal": "string; what the content should move readers to do"
 }
 ```
 
@@ -47,15 +47,15 @@ The skill must always produce output in this exact format:
 | Primary Keyword    | [keyword]                                  |
 | Search Intent      | informational / transactional / commercial |
 | Target Audience    | [audience]                                 |
-| Page Type          | Pillar — comprehensive, high-level guide   |
+| Page Type          | Pillar; comprehensive, high-level guide   |
 | Word Count Target  | As much as needed to satisfy intent                            |
-| AEO Priority       | High — this page anchors the whole cluster |
+| AEO Priority       | High; this page anchors the whole cluster |
 
 ---
 
 ## Cluster Articles
 
-### Priority 1 — Write These First
+### Priority 1: Write These First
 These articles build the foundation. State measured volume with source/date or label demand unknown.
 
 | # | Title                        | Target Keyword       | Intent          | Content Type     | Links To         |
@@ -66,7 +66,7 @@ These articles build the foundation. State measured volume with source/date or l
 
 ---
 
-### Priority 2 — Write These Second
+### Priority 2: Write These Second
 These deepen authority. Medium volume, long-tail focus.
 
 | # | Title                        | Target Keyword       | Intent          | Content Type     | Links To         |
@@ -77,7 +77,7 @@ These deepen authority. Medium volume, long-tail focus.
 
 ---
 
-### Priority 3 — Write These Last
+### Priority 3: Write These Last
 Long-tail reinforcement. Lower volume, high conversion intent.
 
 | # | Title                        | Target Keyword       | Intent          | Content Type     | Links To         |
@@ -100,7 +100,7 @@ Pillar Page
 └── Article 8 → links to Article 2, Article 4
 
 Rule: Every cluster article must link back to the Pillar Page.
-Rule: No orphan articles — every article links to at least one other article.
+Rule: No orphan articles; every article links to at least one other article.
 
 ## Foundational Page Plan
 
@@ -123,9 +123,9 @@ Propose up to 20 distinct topics after the foundation is mapped; use fewer when 
 ## Content Gap Analysis
 
 Potential gaps (verify competitor coverage before claiming absence):
-- [Gap 1 — underserved angle on the pillar topic]
-- [Gap 2 — long-tail question with no strong existing answer]
-- [Gap 3 — AEO opportunity: question AI engines commonly surface]
+- [Gap 1; underserved angle on the pillar topic]
+- [Gap 2; long-tail question with no strong existing answer]
+- [Gap 3; AEO opportunity: question AI engines commonly surface]
 
 Topics to deliberately exclude from this cluster
 (belong to a different cluster):
@@ -181,11 +181,11 @@ When assigning content types, use only from this list:
 
 ## Execution Steps
 
-1. Read `existing_content` — mark any titles that already exist
+1. Read `existing_content`; mark any titles that already exist
    so the cluster doesn't duplicate them
-2. Identify the pillar topic's full semantic territory —
+2. Identify the pillar topic's full semantic territory -
    what questions, angles, and sub-topics surround it
-3. Run a content gap pass — what angles are underserved
+3. Run a content gap pass; what angles are underserved
    or missing entirely in this space
 4. Assign each subtopic a unique keyword with no overlap
    between articles or with the pillar keyword
@@ -193,7 +193,7 @@ When assigning content types, use only from this list:
 6. Sort all subtopics into Priority 1, 2, and 3 tiers
    based on search volume and foundational relevance
 7. Build the 5–10-page foundational plan before expanding to the 20-day calendar
-8. Build the internal link map — verify no orphan articles exist
+8. Build the internal link map; verify no orphan articles exist
 9. Flag the 2 highest AEO-opportunity articles in the cluster
 10. Complete the content gap section and editorial calendar before outputting
 

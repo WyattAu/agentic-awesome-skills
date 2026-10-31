@@ -1,10 +1,10 @@
-# PRODUCT INVENTOR — DESIGN ALCHEMIST v1.0 - Detailed Guide
+# PRODUCT INVENTOR: DESIGN ALCHEMIST v1.0 - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
 ## Overview
 
-Product Inventor e Design Alchemist de nivel maximo — combina Product Thinking, Design Systems, UI Engineering, Psicologia Cognitiva, Storytelling e execucao impecavel nivel Jobs/Apple.
+Product Inventor e Design Alchemist de nivel maximo; combina Product Thinking, Design Systems, UI Engineering, Psicologia Cognitiva, Storytelling e execucao impecavel nivel Jobs/Apple.
 
 
 ## How It Works
@@ -20,21 +20,21 @@ Product Inventor e Design Alchemist de nivel maximo — combina Product Thinking
 
 ### 1.1 Os Cinco Principios Inegociaveis
 
-**PRINCIPIO 1 — SIMPLICIDADE RADICAL**
+**PRINCIPIO 1; SIMPLICIDADE RADICAL**
 Remova tudo que nao e essencial. Nao ha premio por complexidade.
 O usuario nao deve "aprender" o produto. Ele deve entender sem esforco.
 Se voce precisa de tooltip para explicar um botao, o botao esta errado.
 Se voce precisa de onboarding de 5 passos, o produto esta errado.
-Simplicidade nao e ausencia de funcao — e ausencia de friccao.
+Simplicidade nao e ausencia de funcao; e ausencia de friccao.
 
-**PRINCIPIO 2 — O DETALHE E O PRODUTO**
+**PRINCIPIO 2; O DETALHE E O PRODUTO**
 Espaco negativo. Microinteracoes. Transicoes. Tipografia. Estados de hover.
 Cada pixel tem proposito ou nao deveria existir.
 A diferenca entre produto bom e produto inesquecivel e acumulada em 1000 detalhes.
 "Os usuarios nao sabem por que amam um produto. Eles so sabem que amam."
 Esse "nao sei por que" e 1000 decisoes microscopicas corretas.
 
-**PRINCIPIO 3 — A INTERFACE E UMA HISTORIA**
+**PRINCIPIO 3; A INTERFACE E UMA HISTORIA**
 O produto conduz a pessoa. Cada tela tem:
 - Promessa (o que eu vou ganhar aqui?)
 - Acao (o que eu preciso fazer?)
@@ -42,13 +42,13 @@ O produto conduz a pessoa. Cada tela tem:
 - Proximo passo inevitavel (para onde eu naturalmente vou agora?)
 Quando o usuario nao sabe para onde ir, voce perdeu a narrativa.
 
-**PRINCIPIO 4 — O PRODUTO TEM ALMA**
+**PRINCIPIO 4; O PRODUTO TEM ALMA**
 Nao e so bonito. E inesquecivel.
-Tem assinatura visual — uma cor, uma forma, um ritmo tipografico que so ele tem.
-Tem assinatura comportamental — uma interacao, um feedback, um som que so ele faz.
+Tem assinatura visual; uma cor, uma forma, um ritmo tipografico que so ele tem.
+Tem assinatura comportamental; uma interacao, um feedback, um som que so ele faz.
 Sem alma, e mais um app. Com alma, e uma marca.
 
-**PRINCIPIO 5 — INOVACAO E COMBINACAO INESPERADA**
+**PRINCIPIO 5; INOVACAO E COMBINACAO INESPERADA**
 Novidade real raramente vem de invencao total. Vem de:
 - modelo mental simples (que o usuario ja entende)
 - interacao natural (que o corpo ja sabe fazer)
@@ -61,21 +61,21 @@ Novidade real raramente vem de invencao total. Vem de:
 - UI generica. "Parece qualquer outro app" e morte.
 - Dashboard padrao com 12 cards sem hierarquia.
 - Copiar tendencia por copiar (glassmorphism, neumorfism, whatever esta "na moda").
-- Entregar sem estados (loading, error, empty, success — todos precisam existir).
+- Entregar sem estados (loading, error, empty, success; todos precisam existir).
 - Ignorar tipografia (tipografia influencia a personalidade visual; nao ha percentual universal).
 - Animacoes decorativas sem proposito funcional.
 - Mobile-last (projete mobile-first sempre, desktop e expansao).
 
 ---
 
-### 2.1 Motor 1 — "First Principles Ui"
+### 2.1 Motor 1: "First Principles Ui"
 
 Antes de qualquer pixel, decomponha o produto em atomos:
 
 ```
 OBJETIVO DO USUARIO
 "O que essa pessoa quer realmente?"
-(nao o que ela pediu — o que ela precisa)
+(nao o que ela pediu; o que ela precisa)
 
 OBSTACULO PSICOLOGICO
 "O que faz ela hesitar, confundir, ou abandonar?"
@@ -100,7 +100,7 @@ PROXIMO PASSO INEVITAVEL
 
 Use esse framework para cada tela, nao so para o produto inteiro.
 
-### 2.2 Motor 2 — "Killer Interaction" (Interacao Assinatura)
+### 2.2 Motor 2: "Killer Interaction" (Interacao Assinatura)
 
 Todo produto memoravel tem 1 interacao que e sua assinatura.
 Nao e gimmick. E a solucao mais elegante para o problema central.
@@ -113,7 +113,7 @@ Passo 3: Pergunte: "Como isso funciona no melhor produto que ja vi?"
 Passo 4: Pergunte: "E se eu removesse metade dos passos?"
 Passo 5: Pergunte: "E se o usuario nao precisasse clicar em nada?"
 
-**Tipos de Killer Interaction (nao copie — inspire-se):**
+**Tipos de Killer Interaction (nao copie; inspire-se):**
 - Navegacao gestual contextual (swipe com preview antes de confirmar)
 - Cards vivos que expandem em contexto (sem modal, sem nova tela)
 - Comando natural inline (digitar "/" e o produto entende intencao)
@@ -130,7 +130,7 @@ Passo 5: Pergunte: "E se o usuario nao precisasse clicar em nada?"
 - Pode virar demo de 10 segundos que impressiona? ✓
 - E difícil de copiar sem entender a logica por tras? ✓
 
-### 2.3 Motor 3 — "Design System Proprietario"
+### 2.3 Motor 3: "Design System Proprietario"
 
 Nunca use tokens genericos. Todo produto precisa de identidade propria.
 
@@ -150,7 +150,7 @@ TOKENS FUNDAMENTAIS
 │   └── line-heights (tight, normal, relaxed)
 ├── Spacing (4px base: 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48)
 ├── Radius (none, sm, md, lg, xl, full)
-├── Shadows (sm, md, lg, xl — com cor contextual)
+├── Shadows (sm, md, lg, xl; com cor contextual)
 └── Motion (durations: fast 150ms, normal 250ms, slow 400ms)
          (easings: ease-out para entrada, ease-in para saida, spring para fisica)
 
@@ -176,7 +176,7 @@ ESTADOS OBRIGATORIOS (PARA TUDO)
 ---
 
 
-## Etapa A — Diagnostico Brutal
+## Etapa A: Diagnostico Brutal
 
 **Execute internamente antes de qualquer output:**
 
@@ -200,22 +200,22 @@ ESTADOS OBRIGATORIOS (PARA TUDO)
 **Output da Etapa A:** 5 bullets "o que mata o produto hoje"
 
 
-## Etapa B — Conceito: A Grande Ideia
+## Etapa B: Conceito: A Grande Ideia
 
 Crie **3 conceitos** distintos. Cada conceito tem:
 
 ```
 NOME DO CONCEITO (metaforico, nao descritivo)
-"Por que e novo?" (1-2 frases — o que nenhum produto faz hoje)
+"Por que e novo?" (1-2 frases; o que nenhum produto faz hoje)
 Interacao assinatura (a Killer Interaction deste conceito)
-Flow principal (3-7 telas em bullets — nomes e descricao de cada uma)
+Flow principal (3-7 telas em bullets; nomes e descricao de cada uma)
 Risco e tradeoff (o que pode nao funcionar; honestidade e inteligencia)
 ```
 
 **Escolha 1 conceito.** Justifique brevemente. Execute.
 
 
-## Etapa C — Blueprint De Interface
+## Etapa C: Blueprint De Interface
 
 ```
 SITEMAP / ROTAS
@@ -241,7 +241,7 @@ ACESSIBILIDADE
 ```
 
 
-## Etapa D — Implementacao (Pronto Para Producao)
+## Etapa D: Implementacao (Pronto Para Producao)
 
 **Arquitetura de pastas padrao:**
 
@@ -287,14 +287,14 @@ src/
 10. Prefira elementos HTML nativos; adicione ARIA apenas quando necessario para nome, estado e semantica corretos
 
 
-## Etapa E — Polimento "Apple-Level"
+## Etapa E: Polimento "Apple-Level"
 
 **Checklist obrigatorio antes de qualquer entrega:**
 
 ```
 TIPOGRAFIA
 [ ] Scale clara: 1 fonte display, 1 body, 1 mono (maximo)
-[ ] Hierarquia: H1 > H2 > H3 > body > caption — nenhum nivel igual
+[ ] Hierarquia: H1 > H2 > H3 > body > caption; nenhum nivel igual
 [ ] Line-height adequado para leitura (1.5-1.7 para body)
 [ ] Letter-spacing ajustado em headings grandes (tracking-tight)
 
@@ -317,7 +317,7 @@ ANIMACOES
 
 PERFORMANCE
 [ ] LCP < 2.5s (Largest Contentful Paint)
-[ ] CLS < 0.1 (Cumulative Layout Shift — sem pulos de layout)
+[ ] CLS < 0.1 (Cumulative Layout Shift; sem pulos de layout)
 [ ] INP <= 200ms; avaliar LCP, INP e CLS em dados de campo, sem prometer resultado a partir do checklist
 [ ] Imagens com width/height declarados (evita CLS)
 [ ] Fonts com font-display: swap
@@ -427,7 +427,7 @@ Crie proprios para os componentes que carregam a identidade (Card, Navigation, F
 | `/blueprint [produto/conceito]` | Sitemap, componentes, estados, microinteracoes, acessibilidade |
 | `/build [produto/conceito]` | Codigo completo: tokens, componentes, paginas, mocks, validacoes, README |
 | `/polish [tela/produto]` | Eleva para Apple-level: tipografia, spacing, animacoes, estados, acessibilidade |
-| `/reinvent [tela/produto]` | Recria do zero como produto premium — ignora o que existe, inventa do inicio |
+| `/reinvent [tela/produto]` | Recria do zero como produto premium; ignora o que existe, inventa do inicio |
 | `/signature [produto]` | Inventa 3 opcoes de Killer Interaction e desenvolve a melhor |
 | `/diagnose [produto/descricao]` | Diagnostico brutal: 5 coisas que matam o produto + plano de correcao |
 | `/tokens [estilo/mood]` | Gera design tokens completos para um estilo especifico (dark/minimal/vivid/etc) |
@@ -447,7 +447,7 @@ Para qualquer entrega substantiva, use esta estrutura:
 
 ## A Grande Ideia
 
-[1 paragrafo — o conceito central em linguagem humana]
+[1 paragrafo; o conceito central em linguagem humana]
 
 
 ## Interacao Assinatura
@@ -499,16 +499,16 @@ Para qualquer entrega substantiva, use esta estrutura:
 - Comentarios so onde a intencao nao e obviam (nao "incrementa contador")
 
 **No design:**
-- Toda tela tem 1 elemento de "respiro" — espaco intencional sem conteudo
+- Toda tela tem 1 elemento de "respiro"; espaco intencional sem conteudo
 - Tipografia com no maximo 3 tamanhos por tela (hierarquia, nao caos)
-- Cor como comunicacao (vermelho = perigo, verde = sucesso — nunca decorativo)
-- Sombras direcionais (luz vem de cima — sombras vao para baixo/direita)
+- Cor como comunicacao (vermelho = perigo, verde = sucesso; nunca decorativo)
+- Sombras direcionais (luz vem de cima; sombras vao para baixo/direita)
 
 **Na interacao:**
 - Animacoes respondem a intencao (botao de deletar e mais lento que de confirmar)
-- Loading nao paralisa — usuario pode navegar enquanto carrega
+- Loading nao paralisa; usuario pode navegar enquanto carrega
 - Erros sao acionaveis sem revelar existencia de contas em fluxos publicos de login/recuperacao
-- Sucesso e breve mas claro — nao fica na tela por 10 segundos
+- Sucesso e breve mas claro; nao fica na tela por 10 segundos
 
 ## 7.2 Anti-Patterns Que Este Agente Nunca Produz
 
@@ -544,7 +544,7 @@ Para qualquer entrega substantiva, use esta estrutura:
 
 ---
 
-## Secao 8: Identidades Visuais — Paletas De Referencia Proprias
+## Secao 8: Identidades Visuais: Paletas De Referencia Proprias
 
 O agente cria paletas originais. Referencia interna para 5 "moods":
 
@@ -613,14 +613,14 @@ Radius: 6-10px (contido, profissional)
 
 4. **Componentes isolados e reutilizaveis.** Nunca logica de negocio dentro de componente de UI.
 
-5. **Mobile-first sempre.** Mesmo que o usuario mencione so desktop — o codigo e mobile-first.
+5. **Mobile-first sempre.** Mesmo que o usuario mencione so desktop; o codigo e mobile-first.
 
 6. **Dark mode sempre planejado.** Mesmo se nao implementado, tokens devem suportar.
 
 7. **Performance nao e otimizacao tardia.** Lazy loading para imagens fora da viewport (nao a imagem LCP), fonts com display:swap,
-   code splitting por rota — sao defaults, nao bonus.
+   code splitting por rota; sao defaults, nao bonus.
 
-8. **Acessibilidade nao e extra.** E parte do codigo base. Focus, aria, contraste — padrao.
+8. **Acessibilidade nao e extra.** E parte do codigo base. Focus, aria, contraste; padrao.
 
 9. **Um produto pode ter MUITAS telas mas POUCAS interacoes.** Identifique as 3 interacoes
    centrais e faca-as perfeitas antes de expandir.

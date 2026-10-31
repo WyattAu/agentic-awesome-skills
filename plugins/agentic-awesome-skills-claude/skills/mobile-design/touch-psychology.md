@@ -530,7 +530,7 @@ Warning:  Attention needed
 
 ---
 
-> **Remember:** Every touch is a conversation between user and device. Make it feel natural, responsive, and respectful of human fingers—not precise cursor points.
+> **Remember:** Every touch is a conversation between user and device. Make it feel natural, responsive, and respectful of human fingers-not precise cursor points.
 
 Official target-size reference: https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html .
 Haptic, visual and sound feedback must respect user settings and cannot be the sole feedback channel.

@@ -43,18 +43,18 @@ As you approach the job of integrating your app with Siri, assess the actions yo
 
   * For actions that people can perform through voice interaction, design functional conversational flows that feel natural.
 
-  * Explore the various ways people might perform your app’s tasks — such as in a hands-free situation — and the devices they might be using, such as Apple Watch or iPad.
+  * Explore the various ways people might perform your app’s tasks; such as in a hands-free situation; and the devices they might be using, such as Apple Watch or iPad.
 
 
 
 
 ## [Integrating your app with Siri](https://developer.apple.com/design/human-interface-guidelines/siri#Integrating-your-app-with-Siri)
 
-Tasks are at the core of your app’s integration with Siri. SiriKit builds on the idea of a person’s intention to perform a task by using the term _intent_ to represent a task an app supports. The communication between your app and Siri is based on the intents — that is, the tasks — your app helps people perform.
+Tasks are at the core of your app’s integration with Siri. SiriKit builds on the idea of a person’s intention to perform a task by using the term _intent_ to represent a task an app supports. The communication between your app and Siri is based on the intents; that is, the tasks; your app helps people perform.
 
-SiriKit defines _system intents_ that represent common tasks — such as sending a message, calling a friend, and starting a workout — and groups related intents into domains. A _domain_ is a category of tasks that Siri knows how to talk about, like messaging, calling, and workouts. For a complete list of domains and the actions in each domain that iOS and watchOS support, see [System intents](https://developer.apple.com/design/human-interface-guidelines/siri#System-intents).
+SiriKit defines _system intents_ that represent common tasks; such as sending a message, calling a friend, and starting a workout; and groups related intents into domains. A _domain_ is a category of tasks that Siri knows how to talk about, like messaging, calling, and workouts. For a complete list of domains and the actions in each domain that iOS and watchOS support, see [System intents](https://developer.apple.com/design/human-interface-guidelines/siri#System-intents).
 
-When possible, take advantage of the intents that SiriKit defines. Using system-provided intents can make your job easier, while still giving you opportunities to customize the experience. However, if your app offers tasks that aren’t represented by system-defined intents — like ordering a meal or shopping for groceries — you can create a _custom intent_ (for guidance, see [Custom intents](https://developer.apple.com/design/human-interface-guidelines/siri#Custom-intents)).
+When possible, take advantage of the intents that SiriKit defines. Using system-provided intents can make your job easier, while still giving you opportunities to customize the experience. However, if your app offers tasks that aren’t represented by system-defined intents; like ordering a meal or shopping for groceries; you can create a _custom intent_ (for guidance, see [Custom intents](https://developer.apple.com/design/human-interface-guidelines/siri#Custom-intents)).
 
 ### [A closer look at intents](https://developer.apple.com/design/human-interface-guidelines/siri#A-closer-look-at-intents)
 
@@ -64,7 +64,7 @@ As a designer, your main job is to present clear, actionable content that helps 
 
 First, your app and SiriKit must agree on what the request means in the _resolve_ phase. You can think of this phase as the time to ask people for everything your app needs and, if necessary, ask for additional information or clarification. For example, if people ask to send a message to Amy, and they have multiple contacts named Amy, a messaging app can have Siri ask which Amy they mean. Details related to an intent, like a message recipient’s name, are known as _parameters_. In the resolve phase, you can indicate the parameters that are required to complete an action and those that are optional. For developer guidance, see [Resolving the Parameters of an Intent](https://developer.apple.com/documentation/SiriKit/resolving-the-parameters-of-an-intent).
 
-The second phase — called the _confirm_ phase — happens when you have all the information you need to handle the intent. This phase can give people a chance to make sure they want to complete the task. For example, tasks that have financial impact require confirmation. In addition to asking for a person’s consent, you can present an error during this phase if something will prevent your app from completing the action. For example, if people use an app to order an item for pickup when the pickup location is closed, the app can describe why it can’t complete the action right now. Presenting this error during the confirm phase avoids making people wait until they’re paying for the item to find out that their request has failed. For developer guidance, see [Confirming the Details of an Intent](https://developer.apple.com/documentation/SiriKit/confirming-the-details-of-an-intent).
+The second phase; called the _confirm_ phase; happens when you have all the information you need to handle the intent. This phase can give people a chance to make sure they want to complete the task. For example, tasks that have financial impact require confirmation. In addition to asking for a person’s consent, you can present an error during this phase if something will prevent your app from completing the action. For example, if people use an app to order an item for pickup when the pickup location is closed, the app can describe why it can’t complete the action right now. Presenting this error during the confirm phase avoids making people wait until they’re paying for the item to find out that their request has failed. For developer guidance, see [Confirming the Details of an Intent](https://developer.apple.com/documentation/SiriKit/confirming-the-details-of-an-intent).
 
 Third, your app performs the task and tells SiriKit what it actually did in the _handle_ phase. You can provide both visual and textual information that tells people what your app did to handle their request. For example, an app that lets people order coffee might present a receipt that describes the order. Siri can speak or display the information your app provides. For developer guidance, see [Handling an Intent](https://developer.apple.com/documentation/SiriKit/handling-an-intent).
 
@@ -72,7 +72,7 @@ Third, your app performs the task and tells SiriKit what it actually did in the 
 
 Most apps support large numbers of actions, but people tend to perform only a handful of them on a regular basis. When you tell the system about people’s regular actions and describe new ones you think they’ll want to perform in the future, Siri can _suggest_ shortcuts for both types of actions when people are likely to be interested in them.
 
-For example, in an app that’s all about coffee, the most frequent action might be to order a cup of coffee, while less frequent actions might include buying coffee beans or locating a new coffee shop. In this example, the coffee app would share information about the _order coffee_ action so that Siri can suggest a shortcut for this action when people usually want to do it, like weekday mornings. The app could also tell Siri about an action that people haven’t performed yet, but might be interested in — like ordering a new seasonal variation of their favorite coffee — so that Siri might suggest a shortcut for this action.
+For example, in an app that’s all about coffee, the most frequent action might be to order a cup of coffee, while less frequent actions might include buying coffee beans or locating a new coffee shop. In this example, the coffee app would share information about the _order coffee_ action so that Siri can suggest a shortcut for this action when people usually want to do it, like weekday mornings. The app could also tell Siri about an action that people haven’t performed yet, but might be interested in; like ordering a new seasonal variation of their favorite coffee; so that Siri might suggest a shortcut for this action.
 
 Siri can use signals like location, time of day, and type of motion (such as walking, running, or driving), to intelligently predict just the right time and place to suggest actions from your app. Depending on the information your app shares and people’s current context, Siri can offer shortcut _suggestions_ on the lock screen, in search results, or on the [Siri watch face](https://support.apple.com/guide/watch/faces-and-features-apde9218b440/watchos#apdcc88df92c). Siri can also use some types of information to suggest actions that system apps support, such as using Calendar to add an event shared by your app. Here are some example scenarios.
 
@@ -146,7 +146,7 @@ People use Siri for convenience, and they expect a fast response. Your app needs
 
 **When people request media playback from your app, consider providing alternative results if the request is ambiguous.** When you display alternative results within the Siri UI, people can easily choose a different piece of content if your first offering isn’t what they want.
 
-**On Apple Watch, design a streamlined workflow that requires minimal interaction.** Whenever possible, use intelligent defaults instead of asking for input. For example, a music app could respond to a nonspecific request — like “Play music with MyMusicApp” — by playing a favorite playlist. If you must present options to people, offer a small number of relevant choices that reduce the need for additional prompting.
+**On Apple Watch, design a streamlined workflow that requires minimal interaction.** Whenever possible, use intelligent defaults instead of asking for input. For example, a music app could respond to a nonspecific request; like “Play music with MyMusicApp”; by playing a favorite playlist. If you must present options to people, offer a small number of relevant choices that reduce the need for additional prompting.
 
 ### [Enhance the voice experience for system intents](https://developer.apple.com/design/human-interface-guidelines/siri#Enhance-the-voice-experience-for-system-intents)
 
@@ -180,7 +180,7 @@ If your app lets people perform an everyday task that doesn’t fit into any of 
 
 ### [Custom intent categories and responses](https://developer.apple.com/design/human-interface-guidelines/siri#Custom-intent-categories-and-responses)
 
-Although your custom intent won’t belong to a SiriKit domain, you’ll need to model it on a system-defined _intent category_ that’s related to your action. SiriKit defines several categories that represent generic tasks, like create, order, share, and search. Because these definitions are in the system, Siri knows how to communicate with people about common actions that are associated with each category — like placing an order or sharing content — in ways that feel natural.
+Although your custom intent won’t belong to a SiriKit domain, you’ll need to model it on a system-defined _intent category_ that’s related to your action. SiriKit defines several categories that represent generic tasks, like create, order, share, and search. Because these definitions are in the system, Siri knows how to communicate with people about common actions that are associated with each category; like placing an order or sharing content; in ways that feel natural.
 
 It’s important to choose the category that best represents your action because the category influences the ways Siri speaks about it and the controls people might see in the interface. For example, a coffee app would likely choose the order category to represent its custom _order coffee_ intent, and as a result, Siri can speak default responses that make sense in the context of this action, like “Ready to order?” and “OK. Ordering.” Category choice can have other effects, too: Because the order category includes actions that have financial impact, using this category for the _order coffee_ intent means that people will be asked to authenticate before completing the action.
 
@@ -221,11 +221,11 @@ Depending on the response type, your custom dialogue is presented before or afte
 
 If a built-in SiriKit intent represents your action’s purpose, adopt that intent instead of defining a custom intent. For example, if you’d like to offer a shortcut for sending a message, adopt [`INSendMessageIntent`](https://developer.apple.com/documentation/Intents/INSendMessageIntent); if you’d like to offer a shortcut for playing media, adopt [`INPlayMediaIntent`](https://developer.apple.com/documentation/Intents/INPlayMediaIntent). For guidance, see [System intents](https://developer.apple.com/design/human-interface-guidelines/siri#System-intents).
 
-**If your app’s action requires a custom intent, pick the category that most closely matches the action.** A category informs the system about the general function of an intent or shortcut — like order, download, or search — and affects the text and spoken dialogue presented to people when a shortcut is offered by the system or used with Siri. You design the flow of conversation for the custom intents you offer, so it’s essential that you choose a category that corresponds to the meaning of each intent.
+**If your app’s action requires a custom intent, pick the category that most closely matches the action.** A category informs the system about the general function of an intent or shortcut; like order, download, or search; and affects the text and spoken dialogue presented to people when a shortcut is offered by the system or used with Siri. You design the flow of conversation for the custom intents you offer, so it’s essential that you choose a category that corresponds to the meaning of each intent.
 
 Tip
 
-If your action’s primary purpose is to retrieve information or show something to people — like displaying a sports score or the weather — use the information category. Using a different category requires people to make additional taps to get the information.
+If your action’s primary purpose is to retrieve information or show something to people; like displaying a sports score or the weather; use the information category. Using a different category requires people to make additional taps to get the information.
 
 **Design custom intents that accelerate common, useful tasks.** Take advantage of the familiarity people have with your app, and make it easier for them to initiate the tasks they perform most often.
 
@@ -235,7 +235,7 @@ If your action’s primary purpose is to retrieve information or show something 
 
 **Design your intents to be long-lived.** Avoid offering intents that are date-specific or associated with temporary data. For example, it’s not a good idea for a travel app to offer a custom intent for each specific itinerary. A better intent might use follow-up questions to let people get the itinerary for one of their upcoming trips.
 
-**Don’t request permission to use Siri.** If your app supports only custom intents — and not system intents — you don’t need to get permission to use Siri before letting people create and use voice shortcuts for your intents. Asking for permission can slow people down and could discourage them from using your app’s custom intents.
+**Don’t request permission to use Siri.** If your app supports only custom intents; and not system intents; you don’t need to get permission to use Siri before letting people create and use voice shortcuts for your intents. Asking for permission can slow people down and could discourage them from using your app’s custom intents.
 
 **Support background operation.** The best intents support shortcuts that run quickly and don’t pull people out of their current context. Strive to support custom intents that can run in the background without bringing your app to the front. Supporting background operation also ensures that people can complete the task in hands-free and voice-only scenarios.
 
@@ -342,11 +342,11 @@ You can also tell the system about shortcuts for actions people haven’t taken 
 
 **Make a donation every time people perform the action.** When you donate a shortcut each time people perform the associated action, you help the system more accurately predict the best time and place to offer the shortcut.
 
-**Only donate actions that people actually perform.** For example, a coffee-ordering app donates the _Order coffee_ shortcut every time people order coffee, but not when people do something else, like browse the menu. Similarly, a media app donates information about a song — like its title and album — only when people are actually listening to it. (For developer guidance, see [Improving Siri Media Interactions and App Selection](https://developer.apple.com/documentation/SiriKit/improving-siri-media-interactions-and-app-selection).)
+**Only donate actions that people actually perform.** For example, a coffee-ordering app donates the _Order coffee_ shortcut every time people order coffee, but not when people do something else, like browse the menu. Similarly, a media app donates information about a song; like its title and album; only when people are actually listening to it. (For developer guidance, see [Improving Siri Media Interactions and App Selection](https://developer.apple.com/documentation/SiriKit/improving-siri-media-interactions-and-app-selection).)
 
 **Remove donations for actions that require corresponding data.** If information required by a donated action no longer exists, your app needs to delete the donation so the shortcut isn’t suggested anymore. For example, if people delete a contact in a messaging app, the app needs to delete donations for messaging that contact. When people create a shortcut themselves, only they can delete it. For developer guidance, see [Deleting Donated Shortcuts](https://developer.apple.com/documentation/SiriKit/deleting-donated-shortcuts).
 
-**If your app handles reservations, consider donating them to the system.** These items — like ticketed events, travel itineraries, or reservations for restaurants, flights, or movies — automatically appear as suggestions in Calendar or Maps. When you donate a reservation, it can appear on the lock screen with a suggestion to check in with your app or as a reminder that uses current traffic conditions to recommend when people should leave. For developer guidance, see [Donating Reservations](https://developer.apple.com/documentation/SiriKit/donating-reservations).
+**If your app handles reservations, consider donating them to the system.** These items; like ticketed events, travel itineraries, or reservations for restaurants, flights, or movies; automatically appear as suggestions in Calendar or Maps. When you donate a reservation, it can appear on the lock screen with a suggestion to check in with your app or as a reminder that uses current traffic conditions to recommend when people should leave. For developer guidance, see [Donating Reservations](https://developer.apple.com/documentation/SiriKit/donating-reservations).
 
 #### [Suggest Shortcuts people might want to add to Siri](https://developer.apple.com/design/human-interface-guidelines/siri#Suggest-Shortcuts-people-might-want-to-add-to-Siri)
 
@@ -366,7 +366,7 @@ For developer guidance, see [Defining Relevant Shortcuts for the Siri Watch Face
 
 Shortcut titles and subtitles appear when the system suggests them. In Siri Suggestions on iPhone and Apple Watch, a shortcut can also display an image.
 
-**Be concise but descriptive.** An effective title conveys what happens when the shortcut runs. A subtitle can provide additional detail that supplements — but doesn’t duplicate — the title.
+**Be concise but descriptive.** An effective title conveys what happens when the shortcut runs. A subtitle can provide additional detail that supplements; but doesn’t duplicate; the title.
 
 **Start titles with a verb and use sentence-style capitalization without punctuation.** Think of a shortcut title as a brief instruction.
 
@@ -410,9 +410,9 @@ To show people which details they can edit and how their edits affect the action
 
 **Provide a parameter summary for each custom intent you support.** At minimum, include in your parameter summary all parameters your intent requires and any parameters that receive values from other apps or actions. The summary doesn’t have to include optional parameters or parameters that people aren’t likely to edit; if you omit parameters like these from the summary, people can still access them in the Show More section.
 
-**Craft a short parameter summary that’s clearly related to your intent’s title.** When the intent title and the parameter summary are similar, it’s easy for people to recognize the action regardless of where they view it. Aim to use the same words in the summary and the title — in particular, it’s helpful to begin both phrases with the same verb. For example, if your intent title is “Search encyclopedia,” a good parameter summary could be “Search encyclopedia for _search term_.”
+**Craft a short parameter summary that’s clearly related to your intent’s title.** When the intent title and the parameter summary are similar, it’s easy for people to recognize the action regardless of where they view it. Aim to use the same words in the summary and the title; in particular, it’s helpful to begin both phrases with the same verb. For example, if your intent title is “Search encyclopedia,” a good parameter summary could be “Search encyclopedia for _search term_.”
 
-**Aim for a parameter summary that reads like a sentence.** Use sentence-style capitalization, but don’t include ending punctuation. When possible, avoid punctuation entirely. Punctuation within a summary — especially colons, semicolons, and parentheses — can make the summary hard to read and understand.
+**Aim for a parameter summary that reads like a sentence.** Use sentence-style capitalization, but don’t include ending punctuation. When possible, avoid punctuation entirely. Punctuation within a summary; especially colons, semicolons, and parentheses; can make the summary hard to read and understand.
 
 **Provide multiple parameter summaries when necessary.** If your action includes a parameter that has a parent-child relationship with other parameters, you can provide multiple variants of the summary based on the current value of the parent parameter. For example, if your _order coffee_ shortcut lets people specify whether they want to pick up their order or have it delivered, your parameter summary can reflect the current choice. In this scenario, create one parameter summary that helps people pick a store location and another summary that helps them pick a delivery address. Be sure to use a consistent grammatical structure and parameter order in all variants of the summary that you create.
 
@@ -473,11 +473,11 @@ fr_BE| Dis Siri| |
 
 **Use the right terminology when describing how people can use Shortcuts in your app.** People run shortcuts by asking Siri, so your wording needs to be very similar to phrases like _Run a shortcut by asking Siri_ or _Run the shortcut by asking Siri with your personalized phrase_ (localized as appropriate). Avoid using phrases like _add voice shortcuts_ , _make a voice command_ , _create a voice prompt_ , or any other variation. Instead, consider a phrase like _Add a shortcut to Siri to run with your voice_ (localized as appropriate).
 
-To encourage people to create or use shortcuts in ways other than voice — like automations, Home Screen shortcuts, and other methods — use a phrase that doesn’t specify a particular method, like _For quick access, add to Shortcuts_.
+To encourage people to create or use shortcuts in ways other than voice; like automations, Home Screen shortcuts, and other methods; use a phrase that doesn’t specify a particular method, like _For quick access, add to Shortcuts_.
 
 Note
 
-Use translations of your app name and the word _Shortcuts_ — but not _Siri_ — when referring to them in a localized context.
+Use translations of your app name and the word _Shortcuts_; but not _Siri_; when referring to them in a localized context.
 
 ### [Referring to Apple products](https://developer.apple.com/design/human-interface-guidelines/siri#Referring-to-Apple-products)
 

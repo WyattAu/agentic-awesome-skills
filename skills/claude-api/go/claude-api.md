@@ -1,4 +1,4 @@
-# Claude API — Go
+# Claude API: Go
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -77,7 +77,7 @@ if err := stream.Err(); err != nil {
 
 ## Tool Use
 
-### Tool Runner (Beta — Recommended)
+### Tool Runner (Beta: Recommended)
 
 **Beta:** The Go SDK provides `BetaToolRunner` for automatic tool use loops via the `toolrunner` package.
 

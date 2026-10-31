@@ -22,7 +22,7 @@ Entrez.email = "your.email@example.com"
 
 ### API Key (Recommended)
 
-Using an API key increases rate limits from 3 to 10 requests per second. Register at https://www.ncbi.nlm.nih.gov/account/settings/ and read the key from the environment — do not hardcode it:
+Using an API key increases rate limits from 3 to 10 requests per second. Register at https://www.ncbi.nlm.nih.gov/account/settings/ and read the key from the environment; do not hardcode it:
 
 ```python
 import os

@@ -70,10 +70,10 @@ Developer blogging platforms offer built-in audiences of hundreds of thousands o
 
 ### Best Practice: Your Blog + Cross-Post
 
-1. **Publish on your blog first** — This is canonical
-2. **Verify the original URL** — Indexing timing varies; waiting does not guarantee canonical selection
-3. **Cross-post to Dev.to** — Set canonical URL to your blog
-4. **Cross-post to Hashnode** — Set canonical URL to your blog
+1. **Publish on your blog first**; This is canonical
+2. **Verify the original URL**; Indexing timing varies; waiting does not guarantee canonical selection
+3. **Cross-post to Dev.to**; Set canonical URL to your blog
+4. **Cross-post to Hashnode**; Set canonical URL to your blog
 
 ### Setting Canonical URLs
 
@@ -143,7 +143,7 @@ series: "Building a CLI from Scratch"
 
 | Feature | How to use |
 |---------|------------|
-| **Reactions** | Heart, unicorn, saved, fire — different meanings |
+| **Reactions** | Heart, unicorn, saved, fire; different meanings |
 | **Comments** | Reply to every comment for algorithm boost |
 | **Series** | Group related posts, drives binge reading |
 | **Discussion** | Tag #discuss for opinion/question posts |
@@ -163,7 +163,7 @@ series: "Building a CLI from Scratch"
 | **SEO description** | 155 characters max |
 | **Canonical URL** | Your original if cross-posting |
 | **Enable table of contents** | Yes for long posts |
-| **Disable comments** | No — engagement helps |
+| **Disable comments** | No; engagement helps |
 
 ### Tag Strategy
 
@@ -209,7 +209,7 @@ Hashnode tags work differently:
 ````markdown
 # Title
 
-[Compelling hook — why should they care?]
+[Compelling hook; why should they care?]
 
 ## Table of Contents (for long posts)
 - [Section 1](#section-1)
@@ -232,9 +232,9 @@ const example = "explained";
 
 ## Step-by-Step
 
-1. **Step one** — Explanation
-2. **Step two** — Explanation
-3. **Step three** — Explanation
+1. **Step one**; Explanation
+2. **Step two**; Explanation
+3. **Step three**; Explanation
 
 ## Common Pitfalls
 
@@ -318,7 +318,7 @@ const example = "explained";
 1. **Don't** post identical content without canonical URLs
 2. **Don't** ignore comments
 3. **Don't** use only self-promotional content
-4. **Don't** neglect tags — they're discovery mechanisms
+4. **Don't** neglect tags; they're discovery mechanisms
 5. **Don't** forget mobile readability
 6. **Don't** publish unfinished drafts
 7. **Don't** keyword stuff your content
@@ -386,11 +386,11 @@ const example = "explained";
 
 ## Related Skills
 
-- `developer-audience-context` — Know who you're writing for
-- `hacker-news-strategy` — Drive traffic from HN to your posts
-- `reddit-engagement` — Share posts in relevant subreddits
-- `github-presence` — Link from READMEs to your content
-- `x-devs` — Promote posts on Twitter/X
+- `developer-audience-context`; Know who you're writing for
+- `hacker-news-strategy`; Drive traffic from HN to your posts
+- `reddit-engagement`; Share posts in relevant subreddits
+- `github-presence`; Link from READMEs to your content
+- `x-devs`; Promote posts on Twitter/X
 
 ## Limitations
 

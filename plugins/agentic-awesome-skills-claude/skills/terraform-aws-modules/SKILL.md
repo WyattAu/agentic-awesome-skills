@@ -1,6 +1,6 @@
 ---
 name: terraform-aws-modules
-description: "Terraform module creation for AWS — reusable modules, state management, and HCL best practices. Use when building or reviewing Terraform AWS infrastructure."
+description: "Terraform module creation for AWS; reusable modules, state management, and HCL best practices. Use when building or reviewing Terraform AWS infrastructure."
 risk: critical
 source: community
 date_added: "2026-02-27"
@@ -72,7 +72,7 @@ terraform {
 - ✅ **Do:** Pin provider versions in `versions.tf`
 - ✅ **Do:** Use `terraform plan` output in PR reviews
 - ✅ **Do:** Store state in S3 with DynamoDB locking and encryption
-- ❌ **Don't:** Use `count` when resource identity matters — use `for_each`
+- ❌ **Don't:** Use `count` when resource identity matters; use `for_each`
 - ❌ **Don't:** Commit `.tfstate` files to version control
 
 ## Troubleshooting

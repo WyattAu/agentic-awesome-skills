@@ -4,7 +4,7 @@
 
 This cookbook provides instructions for implementing a Multimodal Retrieval-Augmented Generation (RAG) system over PDF document collections using Weaviate Embeddings multimodal model for embeddings and Ollama with a Vision Language Model (VLM) for generation.
 
-Weaviate Embeddings handles all embedding generation server-side — no local GPU or model downloads required. Simply upload document images as base64 blobs and Weaviate generates multi-vector embeddings automatically.
+Weaviate Embeddings handles all embedding generation server-side; no local GPU or model downloads required. Simply upload document images as base64 blobs and Weaviate generates multi-vector embeddings automatically.
 
 ### Architecture
 
@@ -70,7 +70,7 @@ uv add weaviate-client
 ```
 
 **Package breakdown:**
-- `weaviate-client`: Python client for Weaviate vector database (v4.x) — Weaviate Embeddings handles all embedding generation
+- `weaviate-client`: Python client for Weaviate vector database (v4.x); Weaviate Embeddings handles all embedding generation
 
 #### Additional Dependencies (Install as Needed)
 
@@ -164,9 +164,9 @@ collection = client.collections.create(
 ```
 
 **Key Configuration Options:**
-- **`doc_page`**: BLOB property that holds base64-encoded page images — the vectorizer reads this field
+- **`doc_page`**: BLOB property that holds base64-encoded page images; the vectorizer reads this field
 - **`image_field`**: Must match the BLOB property name (`"doc_page"`)
-- **`model`**: `ModernVBERT/colmodernvbert` — 250M parameter late-interaction vision-language encoder, fine-tuned for visual document retrieval
+- **`model`**: `ModernVBERT/colmodernvbert`; 250M parameter late-interaction vision-language encoder, fine-tuned for visual document retrieval
 - **MUVERA encoding**: Compresses multi-vectors into efficient single vectors while preserving retrieval quality
   - `ksim`: Number of similar vectors to consider (default: 4)
   - `dprojections`: Number of projection dimensions (default: 16)
@@ -208,7 +208,7 @@ def image_to_base64(image):
 
 #### Batch Import
 
-Weaviate Embeddings generates embeddings server-side during import — no local model needed:
+Weaviate Embeddings generates embeddings server-side during import; no local model needed:
 
 ```python
 collection = client.collections.get(collection_name)
@@ -218,7 +218,7 @@ with collection.batch.dynamic() as batch:
         # Convert image to base64
         img_base64 = image_to_base64(document["image"])
 
-        # Add object to batch — Weaviate generates embeddings automatically
+        # Add object to batch: Weaviate generates embeddings automatically
         batch.add_object(
             properties={
                 "doc_page": img_base64,
@@ -250,7 +250,7 @@ print(f"Total documents indexed: {collection.aggregate.over_all(total_count=True
 
 #### Basic Query Function
 
-Weaviate handles query embedding automatically — just pass text:
+Weaviate handles query embedding automatically; just pass text:
 
 ```python
 from weaviate.classes.query import MetadataQuery
@@ -267,7 +267,7 @@ def search_documents(query_text, limit=3):
     """
     collection = client.collections.get(collection_name)
 
-    # Search — Weaviate embeds the query server-side
+    # Search: Weaviate embeds the query server-side
     # Include doc_page in return_properties to get the base64-encoded image blob
     response = collection.query.near_text(
         query=query_text,
@@ -576,8 +576,8 @@ ollama pull qwen3-vl:4b
 **Symptoms:** Out of memory errors when generating answers.
 
 **Solutions:**
-- Reduce `num_documents` — retrieve fewer documents (even 1 can work well)
-- Reduce `max_tokens` — shorter responses use less memory
+- Reduce `num_documents`; retrieve fewer documents (even 1 can work well)
+- Reduce `max_tokens`; shorter responses use less memory
 - Use a smaller model variant (`qwen3-vl:4b` instead of `8b`)
 - Use API-based VLMs (GPT-4V, Claude, Gemini) to avoid local resource requirements entirely
 

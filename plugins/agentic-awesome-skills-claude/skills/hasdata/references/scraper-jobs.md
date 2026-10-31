@@ -1,4 +1,4 @@
-# Scraper Jobs — async, bulk
+# Scraper Jobs: async, bulk
 
 Use only when there's no Scraper-API equivalent (`crawler`, `contacts`, `sec-edgar`, `amazon-bestsellers`, `amazon-product-reviews`) or when you want webhook-driven fan-out without managing your own polling loop. Otherwise the matching Scraper API + paginated client loop is simpler.
 
@@ -16,10 +16,10 @@ Use only when there's no Scraper-API equivalent (`crawler`, `contacts`, `sec-edg
 
 ## Lifecycle
 
-1. `POST /scrapers/<slug>/jobs` → returns the full job record. **The handle is `body.id` (numeric integer), not `jobId`** despite older doc snippets — store this. Status starts as `pending`.
-2. `GET /scrapers/jobs/<id>` — poll status.
-3. `GET /scrapers/jobs/<id>/results?page=…&limit=100` — once `status === "finished"`.
-4. `DELETE /scrapers/jobs/<id>` — stop early (rows produced before stop are kept).
+1. `POST /scrapers/<slug>/jobs` → returns the full job record. **The handle is `body.id` (numeric integer), not `jobId`** despite older doc snippets; store this. Status starts as `pending`.
+2. `GET /scrapers/jobs/<id>`; poll status.
+3. `GET /scrapers/jobs/<id>/results?page=…&limit=100`; once `status === "finished"`.
+4. `DELETE /scrapers/jobs/<id>`; stop early (rows produced before stop are kept).
 
 Status values: `pending` → `in_progress` → `finished` (or `stopped` if cancelled).
 
@@ -33,7 +33,7 @@ Status values: `pending` → `in_progress` → `finished` (or `stopped` if cance
 }
 ```
 
-For one-shot ingestion, fetch `data.json` directly instead of paging `/results`. **These URLs are short-lived** — download immediately on `finished`.
+For one-shot ingestion, fetch `data.json` directly instead of paging `/results`. **These URLs are short-lived**; download immediately on `finished`.
 
 ## End-to-end (Python)
 
@@ -47,7 +47,7 @@ BASE = "https://api.hasdata.com"
 def submit(slug, body):
     r = requests.post(f"{BASE}/scrapers/{slug}/jobs", headers=H, json=body, timeout=60)
     r.raise_for_status()
-    return r.json()["id"]                            # numeric job id — not "jobId"
+    return r.json()["id"]                            # numeric job id; not "jobId"
 
 def wait(job_id, poll=10, cap=60, timeout=3600):
     deadline = time.monotonic() + timeout
@@ -69,7 +69,7 @@ def results(job_id):
             headers=H, params={"page": page, "limit": 100}, timeout=120,
         ).json()
         for row in body["data"]:
-            yield row["data"]                       # double-wrapped — see below
+            yield row["data"]                       # double-wrapped; see below
         if body["meta"]["currentPage"] >= body["meta"]["lastPage"]:
             return
         page += 1
@@ -128,12 +128,12 @@ Results page:
 }
 ```
 
-**Double `data`** — the row is `body["data"][i]["data"]`; the outer wraps with `id`, `jobId`, `dataId`, `createdAt`, `updatedAt`.
+**Double `data`**; the row is `body["data"][i]["data"]`; the outer wraps with `id`, `jobId`, `dataId`, `createdAt`, `updatedAt`.
 
 ## Common body fields
 
-- `limit` (int) — max rows. `0` = no cap.
-- `webhook.url` (string, https), `webhook.events` (any subset of `scraper.job.started`, `scraper.data.scraped`, `scraper.job.finished`), `webhook.headers` (sent on every callback — pin a shared secret here).
+- `limit` (int); max rows. `0` = no cap.
+- `webhook.url` (string, https), `webhook.events` (any subset of `scraper.job.started`, `scraper.data.scraped`, `scraper.job.finished`), `webhook.headers` (sent on every callback; pin a shared secret here).
 
 ## Webhooks
 
@@ -170,13 +170,13 @@ def hook():
 ```
 
 - Validate the event/job relationship against durable submitted job IDs, deduplicate delivery IDs, and retrieve authoritative results with your own API credentials. A shared secret alone does not prevent replay.
-- Async with **3 retries** on non-2xx. **Order not guaranteed** — payload is the source of truth.
+- Async with **3 retries** on non-2xx. **Order not guaranteed**; payload is the source of truth.
 - **No documented HMAC.** Pin a shared secret via `webhook.headers`, or just fetch results via the API on `scraper.job.finished` and ignore per-row deliveries.
 - **Always pair webhooks with polling.** A long quiet period probably means missed callbacks.
 
 ## Per-scraper bodies
 
-### `crawler` — recursive site crawl
+### `crawler`: recursive site crawl
 
 Accepts every Web Scraping API parameter applied to **every page**.
 
@@ -198,7 +198,7 @@ job = submit("crawler", {
 })
 ```
 
-### `contacts` — URLs → contact info
+### `contacts`: URLs → contact info
 
 ```python
 submit("contacts", {"urls": ["https://example.com/about", "https://example.com/team"]})
@@ -212,7 +212,7 @@ Illustrative row schema (one row per input URL):
   "emails":       ["..."],
   "phoneNumbers": ["..."],
   "linkedin":     ["..."],
-  "xcom":         ["..."],          // X / Twitter — note key is "xcom"
+  "xcom":         ["..."],          // X / Twitter; note key is "xcom"
   "facebook":     ["..."],
   "instagram":    ["..."],
   "dribbble":     ["..."],
@@ -220,9 +220,9 @@ Illustrative row schema (one row per input URL):
 }
 ```
 
-Empty arrays for missing categories — never null. If you only have a domain, discover URLs first via SERP `site:example.com`.
+Empty arrays for missing categories; never null. If you only have a domain, discover URLs first via SERP `site:example.com`.
 
-### `sec-edgar` — bulk SEC filings
+### `sec-edgar`: bulk SEC filings
 
 ```python
 submit("sec-edgar", {
@@ -242,16 +242,16 @@ submit("sec-edgar", {
 
 ### Crawler vs Contacts vs Web Scraping batch
 
-- **crawler** — unknown URL set, recursive discovery.
-- **contacts** — known URL list, want extracted contact fields.
-- **`/scrape/batch/web`** — known URL list, want full HTML/markdown/AI extraction at >1k scale.
+- **crawler**; unknown URL set, recursive discovery.
+- **contacts**; known URL list, want extracted contact fields.
+- **`/scrape/batch/web`**; known URL list, want full HTML/markdown/AI extraction at >1k scale.
 
 ## Gotchas
 
-- **Persist the job `id` immediately** (the integer from the submit response — *not* `jobId`). Only handle to status, results, stop.
+- **Persist the job `id` immediately** (the integer from the submit response; *not* `jobId`). Only handle to status, results, stop.
 - **Result file retention is short.** Download right after `finished`.
 - **Webhooks are best-effort.** Always poll as a backup.
 - **`includePaths` regex is case-sensitive.**
 - **Status `stopped` is terminal.** Rows already produced remain available.
-- **Don't poll faster than every 10 s** — wastes concurrency cap.
-- **Double-wrapped results** — `body["data"][i]["data"]`, not `body["data"][i]`.
+- **Don't poll faster than every 10 s**; wastes concurrency cap.
+- **Double-wrapped results**; `body["data"][i]["data"]`, not `body["data"][i]`.

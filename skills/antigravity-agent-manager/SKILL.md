@@ -34,8 +34,8 @@ Version, app names/icons and installation layout are version-specific. Verify cu
 1. **Keep your current Antigravity IDE**: Do not uninstall the classic IDE (black icon).
 2. **Download Antigravity 2.0**: Fetch the standalone Agent Manager application from the official Antigravity downloads page.
 3. **Install**: Run the installer. Check the official installer/version behavior and preserve settings/projects before installing; do not assume side-by-side installation is guaranteed. You should now have both:
-   - **Antigravity IDE** (Black Icon) — Your code editor and manual development workspace.
-   - **Antigravity 2.0** (White Icon) — Your multi-agent orchestrator dashboard.
+   - **Antigravity IDE** (Black Icon); Your code editor and manual development workspace.
+   - **Antigravity 2.0** (White Icon); Your multi-agent orchestrator dashboard.
 
 ### Step 2: Dual-Workspace Setup
 

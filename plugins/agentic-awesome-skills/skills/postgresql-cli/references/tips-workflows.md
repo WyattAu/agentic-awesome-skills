@@ -1,4 +1,4 @@
-# psql Tips — Workflows & Patterns
+# psql Tips: Workflows & Patterns
 
 Part of the psql tips reference. See also: tips-advanced.md
 

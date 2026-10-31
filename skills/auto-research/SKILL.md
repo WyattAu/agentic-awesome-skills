@@ -16,7 +16,7 @@ license: MIT
 
 ## Overview
 
-When implementing tasks, Claude Code can encounter uncertainties — design choices, algorithm details, API usage, or best practices. This skill provides an explicit-consent research path, presents findings, and waits for user approval before writing code.
+When implementing tasks, Claude Code can encounter uncertainties; design choices, algorithm details, API usage, or best practices. This skill provides an explicit-consent research path, presents findings, and waits for user approval before writing code.
 
 The skill supports web research and an optional ChatGPT consultation. It never sends
 conversation context, files, browser state, or credentials to a third party without the
@@ -31,20 +31,20 @@ user's explicit approval of the exact, redacted text.
 
 ## How It Works
 
-**Step 1: Propose the research boundary** — State the source to use, the exact query or
+**Step 1: Propose the research boundary**; State the source to use, the exact query or
 redacted prompt, whether any local/workspace text would leave the machine, and the likely
 cost. Wait for the user to approve that exact boundary.
 
-**Step 2: Research** — After approval, use web search or a browser session the user has
+**Step 2: Research**; After approval, use web search or a browser session the user has
 explicitly selected and authorized. Use a pinned, user-configured browser automation
 connector; do not install packages automatically, use `@latest`, or access browser cookies,
 other tabs, saved passwords, or sessions.
 
-**Step 3: Present** — Distill findings into concise options with sources, presented to the user.
+**Step 3: Present**; Distill findings into concise options with sources, presented to the user.
 
-**Step 4: Await Approval** — Do NOT write code until the user says "go ahead" or picks an option.
+**Step 4: Await Approval**; Do NOT write code until the user says "go ahead" or picks an option.
 
-**Step 5: Implement** — Once approved, execute with confidence.
+**Step 5: Implement**; Once approved, execute with confidence.
 
 ### Explicit ChatGPT Consultation
 
@@ -105,7 +105,7 @@ Claude: [Implements]
 - ChatGPT consultation is optional; use ordinary web search when it meets the need
 - GPT response time varies (10-30s typically)
 - Web search quality depends on available sources
-- Does not replace expert domain knowledge — always let user make the final call
+- Does not replace expert domain knowledge; always let user make the final call
 
 ## Security & Safety Notes
 - Obtain explicit consent for each third-party submission, including the exact redacted text
@@ -122,5 +122,5 @@ Claude: [Implements]
 | Browser automation is unavailable | Use web search or stop and ask the user for a different approved method |
 
 ## Related Skills
-- @systematic-debugging — use when debugging Playwright interactions with ChatGPT
-- @condition-based-waiting — use when waiting for GPT responses in the browser
+- @systematic-debugging; use when debugging Playwright interactions with ChatGPT
+- @condition-based-waiting; use when waiting for GPT responses in the browser

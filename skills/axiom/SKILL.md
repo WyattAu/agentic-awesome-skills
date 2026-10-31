@@ -6,10 +6,10 @@ source: community
 date_added: "2026-04-13"
 ---
 
-# Axiom — First-Principles Assumption Auditor / 第一性原理拆解器
+# Axiom: First-Principles Assumption Auditor / 第一性原理拆解器
 
 Strip any question down to its irreducible truths, then rebuild from there.
-This is not framework fill-in-the-blank — it is assumption prosecution.
+This is not framework fill-in-the-blank; it is assumption prosecution.
 
 把任何问题强制剥离到"不可再拆的最小真相单元"，再从那里重建。
 不是框架填空，是假设审判。
@@ -39,19 +39,19 @@ This is not framework fill-in-the-blank — it is assumption prosecution.
 
 ## What This Skill Does / 核心能力
 
-1. **Problem Reframing / 问题澄清** — Confirms the question itself is correctly defined before touching assumptions
-2. **Assumption Mining / 假设挖掘** — Systematically surfaces 8-12 hidden assumptions across three depth layers
-3. **Assumption Classification / 假设分类** — Tentatively classifies each material assumption into one of four types with different challenge strategies
-4. **Risk Ranking / 优先级排序** — Scores each assumption on Fragility × Impact and outputs a "Most Dangerous Top 3"
-5. **Reconstruction / 重建** — Rebuilds conclusions from verified premises only, explicitly comparing "before vs after" cognitive shift
+1. **Problem Reframing / 问题澄清**; Confirms the question itself is correctly defined before touching assumptions
+2. **Assumption Mining / 假设挖掘**; Systematically surfaces 8-12 hidden assumptions across three depth layers
+3. **Assumption Classification / 假设分类**; Tentatively classifies each material assumption into one of four types with different challenge strategies
+4. **Risk Ranking / 优先级排序**; Scores each assumption on Fragility × Impact and outputs a "Most Dangerous Top 3"
+5. **Reconstruction / 重建**; Rebuilds conclusions from verified premises only, explicitly comparing "before vs after" cognitive shift
 
 ---
 
-## The 5-Phase Process / 拆解流程 — 5 阶段
+## The 5-Phase Process / 拆解流程: 5 阶段
 
-### Phase 1: Problem Reframing — What are you REALLY trying to solve?
+### Phase 1: Problem Reframing: What are you REALLY trying to solve?
 
-**阶段1：问题澄清 — 你真正想解决的是什么？**
+**阶段1：问题澄清; 你真正想解决的是什么？**
 
 Do NOT start decomposing assumptions yet. First confirm the problem itself is correctly defined.
 
@@ -71,9 +71,9 @@ Many people ask "Should I quit my job?" when the real question is "Why can't I g
 
 ---
 
-### Phase 2: Assumption Mining — What are you believing without proof?
+### Phase 2: Assumption Mining: What are you believing without proof?
 
-**阶段2：假设挖掘 — 你在相信什么？**
+**阶段2：假设挖掘; 你在相信什么？**
 
 Systematically mine hidden assumptions in three layers:
 
@@ -83,7 +83,7 @@ Systematically mine hidden assumptions in three layers:
 | **Middle** | Industry conventions, common wisdom | "A degree is required for good jobs" |
 | **Deep** | Never questioned, feels like gravity | "Success means financial independence" |
 
-**Goal:** Surface the material assumptions; 8-12 is an optional working range, not a quota. Do not attribute assumptions to the user without evidence. The more concrete, the better. Reject vague statements like "I think this is right" — force specificity.
+**Goal:** Surface the material assumptions; 8-12 is an optional working range, not a quota. Do not attribute assumptions to the user without evidence. The more concrete, the better. Reject vague statements like "I think this is right"; force specificity.
 
 **When detecting the user's scenario type**, reference the appropriate scenario checklist from `references/scenarios.md` to ensure thorough mining.
 
@@ -97,9 +97,9 @@ Systematically mine hidden assumptions in three layers:
 
 ---
 
-### Phase 3: Assumption Classification — What is the nature of this belief?
+### Phase 3: Assumption Classification: What is the nature of this belief?
 
-**阶段3：假设分类 — 这个信念的本质是什么？**
+**阶段3：假设分类; 这个信念的本质是什么？**
 
 Use the four labels as overlapping lenses. Mark empirical hypotheses, definitions, value judgments and unresolved claims explicitly when none fits; incentives do not establish falsity. Each type has a fundamentally different challenge strategy:
 
@@ -115,13 +115,13 @@ Use the four labels as overlapping lenses. Mark empirical hypotheses, definition
 For detailed identification methods, examples, and edge cases, reference `references/assumption-types.md`.
 
 > 对每个假设打标签。不同性质的假设有不同的质疑方式，处理策略也不同。
-> **分类本身就是洞见** — 很多人第一次发现某个"事实"其实是"惯例"。
+> **分类本身就是洞见**; 很多人第一次发现某个"事实"其实是"惯例"。
 
 ---
 
-### Phase 4: Risk Ranking — Which assumptions to investigate first?
+### Phase 4: Risk Ranking: Which assumptions to investigate first?
 
-**阶段4：优先级排序 — 先查哪个？**
+**阶段4：优先级排序; 先查哪个？**
 
 Score every assumption on two dimensions:
 
@@ -131,7 +131,7 @@ Score every assumption on two dimensions:
 
 **Impact / 影响力 (1-5):** If this assumption is wrong, how much does your conclusion collapse?
 - 1 = Barely affects the final conclusion
-- 5 = Foundational pillar — if wrong, everything falls apart
+- 5 = Foundational pillar; if wrong, everything falls apart
 
 ```
 Risk Score = Fragility × Impact
@@ -149,15 +149,15 @@ Each Top 3 entry MUST include a specific, actionable verification question.
 
 ---
 
-### Phase 5: Reconstruction — Rebuild from verified ground truth
+### Phase 5: Reconstruction: Rebuild from verified ground truth
 
-**阶段5：重建 — 从真相出发，你会怎么做？**
+**阶段5：重建; 从真相出发，你会怎么做？**
 
 Separate supported facts, unresolved hypotheses and the user’s values. Passing scrutiny does not prove a premise; rebuild conditional options and identify which new evidence could change the conclusion. Scores are ordinal prioritization aids, not probabilities or precise expected losses.
 
 **Critical requirements:**
 - Explicitly compare "Original Thinking" vs "Rebuilt Thinking" side by side
-- If the rebuilt conclusion is identical to the original, explain WHY — the analysis must demonstrate that either a genuine shift occurred, or provide specific reasons why the original reasoning was already sound
+- If the rebuilt conclusion is identical to the original, explain WHY; the analysis must demonstrate that either a genuine shift occurred, or provide specific reasons why the original reasoning was already sound
 - Highlight the cognitive shift so the user can see what changed and why
 
 **If the user doesn't have time for a full reconstruction:**
@@ -244,10 +244,10 @@ See `examples/walkthrough-en.md` for a complete 5-phase walkthrough using: "I'm 
 
 ## Related Resources / 参考文件
 
-- `references/scenarios.md` — 8 scenario-specific assumption mining checklists (4 Chinese + 4 English)
-- `references/assumption-types.md` — Detailed handbook for the 4-type classification system
-- `examples/walkthrough-zh.md` — Complete Chinese example (辞职创业)
-- `examples/walkthrough-en.md` — Complete English example (dropping out for startup)
+- `references/scenarios.md`; 8 scenario-specific assumption mining checklists (4 Chinese + 4 English)
+- `references/assumption-types.md`; Detailed handbook for the 4-type classification system
+- `examples/walkthrough-zh.md`; Complete Chinese example (辞职创业)
+- `examples/walkthrough-en.md`; Complete English example (dropping out for startup)
 
 ## Limitations
 - This is a qualitative reasoning aid, not a validated diagnostic, calibrated risk model or authority to make the user’s life decisions. Use current primary evidence for consequential financial/legal/medical claims and leave gaps unresolved.

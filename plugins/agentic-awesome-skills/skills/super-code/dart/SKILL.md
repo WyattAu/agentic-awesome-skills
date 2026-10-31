@@ -53,7 +53,7 @@ if (city != null) print(city);
 // ❌ Late field when nullable is correct
 late String name; // crashes if accessed before assignment
 
-// ✅ — use late only when you guarantee initialization before access
+// ✅; use late only when you guarantee initialization before access
 String? name; // honestly nullable
 // late is fine for: late final _controller = TextEditingController();
 ```
@@ -63,7 +63,7 @@ String? name; // honestly nullable
 final name = user.name!;
 final city = user.address!.city!;
 
-// ✅ — promote through null checks
+// ✅; promote through null checks
 final name = user.name;
 if (name == null) return;
 // name is now non-null (promoted)
@@ -94,7 +94,7 @@ for (final item in items) {
   map.putIfAbsent(item.category, () => []).add(item);
 }
 
-// ✅ (using collection-if/for in a different way — but groupBy isn't built-in)
+// ✅ (using collection-if/for in a different way; but groupBy isn't built-in)
 // The loop above is actually idiomatic Dart. Use package:collection for groupBy:
 import 'package:collection/collection.dart';
 final map = groupBy(items, (Item i) => i.category);
@@ -107,7 +107,7 @@ widgets.add(Header());
 if (showSubtitle) widgets.add(Subtitle());
 widgets.add(Body());
 
-// ✅ — collection-if
+// ✅; collection-if
 final widgets = [
   Header(),
   if (showSubtitle) Subtitle(),
@@ -157,7 +157,7 @@ class User {
   User(String name, int age) : name = name, age = age;
 }
 
-// ✅ — initializing formals
+// ✅; initializing formals
 class User {
   final String name;
   final int age;
@@ -238,7 +238,7 @@ StreamBuilder(
   },
 )
 
-// ✅ — extract widget, or use listen + setState for simple cases
+// ✅; extract widget, or use listen + setState for simple cases
 ```
 
 ---
@@ -250,7 +250,7 @@ StreamBuilder(
 try { process(); }
 on Exception catch (e) { print(e); }
 
-// ✅ — catch specific types
+// ✅; catch specific types
 try {
   process();
 } on FormatException catch (e) {
@@ -267,7 +267,7 @@ Future<User?> fetchUser() async {
   catch (_) { return null; } // caller doesn't know why
 }
 
-// ✅ — let exceptions propagate, or use sealed Result type
+// ✅; let exceptions propagate, or use sealed Result type
 sealed class Result<T> {}
 class Success<T> extends Result<T> { final T value; Success(this.value); }
 class Failure<T> extends Result<T> { final Object error; Failure(this.error); }
@@ -283,7 +283,7 @@ setState(() {
   // changes a single value, but the build() method builds 200 widgets
 });
 
-// ✅ — extract subtrees into separate widgets or use ValueListenableBuilder
+// ✅; extract subtrees into separate widgets or use ValueListenableBuilder
 ValueListenableBuilder<int>(
   valueListenable: counter,
   builder: (_, value, __) => Text('$value'),
@@ -303,7 +303,7 @@ const ColoredBox(color: Colors.blue)
 // ❌ Navigator.push with MaterialPageRoute everywhere
 Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage()));
 
-// ✅ — named routes or GoRouter
+// ✅; named routes or GoRouter
 context.push('/detail'); // GoRouter; preserves push/back-stack intent
 ```
 

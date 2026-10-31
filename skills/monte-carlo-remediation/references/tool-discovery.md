@@ -15,11 +15,11 @@ mcp__<server_name>__<tool_name>
 ```
 
 For example:
-- `mcp__airflow__trigger_dag_run` — an Airflow MCP tool
-- `mcp__dbt_cloud__trigger_run` — a dbt Cloud MCP tool
-- `mcp__github__create_pull_request` — a GitHub MCP tool
+- `mcp__airflow__trigger_dag_run`; an Airflow MCP tool
+- `mcp__dbt_cloud__trigger_run`; a dbt Cloud MCP tool
+- `mcp__github__create_pull_request`; a GitHub MCP tool
 
-Monte Carlo's own tools are bundled by this plugin and namespaced under the plugin server — see the **Monte Carlo tool routing** block at the top of the skill. Examples:
+Monte Carlo's own tools are bundled by this plugin and namespaced under the plugin server; see the **Monte Carlo tool routing** block at the top of the skill. Examples:
 - `mcp__plugin_mc-agent-toolkit_monte-carlo-mcp__get_alerts`
 - `mcp__plugin_mc-agent-toolkit_monte-carlo-mcp__search`
 
@@ -43,7 +43,7 @@ You have shell access. Many remediation actions can be done via CLI tools that m
 
 ## Category 3: APIs (via curl or HTTP)
 
-If neither an MCP server nor a CLI tool is available for a service, you can often call its REST API directly using `curl`. This is the most flexible option — any service with an API is reachable.
+If neither an MCP server nor a CLI tool is available for a service, you can often call its REST API directly using `curl`. This is the most flexible option; any service with an API is reachable.
 
 Examples:
 ```
@@ -60,7 +60,7 @@ curl -X POST "https://cloud.getdbt.com/api/v2/accounts/<account_id>/jobs/<job_id
   -d '{"cause": "Triggered by remediation skill"}'
 ```
 
-**Note:** API calls require credentials. If you don't have the right tokens or environment variables, ask the user to configure secure credentials locally — never request tokens in chat.
+**Note:** API calls require credentials. If you don't have the right tokens or environment variables, ask the user to configure secure credentials locally; never request tokens in chat.
 
 ## Discovery procedure
 
@@ -70,33 +70,33 @@ Scan your tool list for `mcp__*__*` patterns. Common MCP servers relevant to rem
 
 | Server Name Pattern | Capability |
 | ------------------- | ---------- |
-| `*airflow*` | Pipeline orchestration — trigger DAG runs, retry failed tasks |
-| `*dagster*` | Pipeline orchestration — launch runs, check status |
-| `*prefect*` | Pipeline orchestration — create flow runs, check status |
-| `*dbt*` | dbt operations — trigger job runs, get status, list jobs |
-| `*github*` | Code changes — create PRs, issues, branches |
-| `*gitlab*` | Code changes — create merge requests, issues |
-| `*snowflake*` | Warehouse access — execute queries, get table info |
-| `*bigquery*` | Warehouse access — execute queries, get table info |
-| `*databricks*` | Warehouse access + orchestration — queries, trigger jobs |
-| `*fivetran*` | Ingestion — trigger connector sync, check status |
-| `*jira*` | Issue tracking — create issues, update status |
+| `*airflow*` | Pipeline orchestration; trigger DAG runs, retry failed tasks |
+| `*dagster*` | Pipeline orchestration; launch runs, check status |
+| `*prefect*` | Pipeline orchestration; create flow runs, check status |
+| `*dbt*` | dbt operations; trigger job runs, get status, list jobs |
+| `*github*` | Code changes; create PRs, issues, branches |
+| `*gitlab*` | Code changes; create merge requests, issues |
+| `*snowflake*` | Warehouse access; execute queries, get table info |
+| `*bigquery*` | Warehouse access; execute queries, get table info |
+| `*databricks*` | Warehouse access + orchestration; queries, trigger jobs |
+| `*fivetran*` | Ingestion; trigger connector sync, check status |
+| `*jira*` | Issue tracking; create issues, update status |
 
 ### Step 2: Check CLI tools
 
 For any capability not covered by MCP, check if a relevant CLI tool is available. The most common:
 
-- `gh` — covers GitHub operations (PRs, issues, API calls) without needing a GitHub MCP
-- `dbt` — covers dbt operations (run, test, retry) without needing a dbt Cloud MCP
-- `git` — check availability for code changes
-- `curl` — check availability for calling any REST API
+- `gh`; covers GitHub operations (PRs, issues, API calls) without needing a GitHub MCP
+- `dbt`; covers dbt operations (run, test, retry) without needing a dbt Cloud MCP
+- `git`; check availability for code changes
+- `curl`; check availability for calling any REST API
 
 ### Step 3: Assess coverage
 
 For the current remediation task, determine:
 
-1. **Can I investigate?** — Monte Carlo MCP is always needed. If it's not connected, you cannot proceed.
-2. **Can I execute the fix?** — Check MCP servers first, then CLI tools, then API access.
+1. **Can I investigate?**; Monte Carlo MCP is always needed. If it's not connected, you cannot proceed.
+2. **Can I execute the fix?**; Check MCP servers first, then CLI tools, then API access.
 
 ### Step 4: Report capabilities
 
@@ -105,7 +105,7 @@ Present what you found to the user before proceeding:
 > "For this remediation, I can:
 > - ✅ Investigate the issue (Monte Carlo MCP)
 > - ✅ Restart the Airflow DAG (Airflow MCP connected)
-> - ✅ Create a code fix (`gh` CLI available — no GitHub MCP needed)
+> - ✅ Create a code fix (`gh` CLI available; no GitHub MCP needed)
 > - ❌ Rerun the dbt job (no dbt Cloud MCP or `dbt` CLI found)"
 
 ## Graceful degradation
@@ -171,6 +171,6 @@ createOrUpdateAlertComment(
 **CLI:** `gh pr create`, `gh issue create`, `gh api`
 **Git:** `git checkout -b`, `git commit`, `git push`
 
-The `gh` CLI is often the most practical option — it doesn't require a GitHub MCP server and supports the full GitHub API via `gh api`.
+The `gh` CLI is often the most practical option; it doesn't require a GitHub MCP server and supports the full GitHub API via `gh api`.
 
 **Best practice:** For code fixes, create a branch → make the change → open a PR. Don't push directly to main.

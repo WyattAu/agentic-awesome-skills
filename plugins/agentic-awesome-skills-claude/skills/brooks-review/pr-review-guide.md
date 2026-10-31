@@ -1,4 +1,4 @@
-# PR Review Guide — Mode 1
+# PR Review Guide: Mode 1
 
 **Purpose:** Analyze a code diff or specific files for decay risks that are directly visible
 in the changed code. Every finding must follow the Iron Law: Symptom → Source → Consequence → Remedy.
@@ -16,7 +16,7 @@ ORM migrations, lock files, minified bundles), inspect their security and behavi
 |---------|----------|
 | < 50 lines | Focus on Steps 1–3 only; run Step 6a only if imports changed; run Step 6b if any class, method, or variable was renamed or introduced |
 | 50–300 lines | Full process, all steps |
-| > 300 lines | Full process; note in the Scope line that review is sampled — cover the highest-risk areas rather than every file |
+| > 300 lines | Full process; note in the Scope line that review is sampled; cover the highest-risk areas rather than every file |
 
 For PRs > 500 lines: flag in the Summary that a PR this size is itself a Change Propagation signal. Size is a review-cost signal, not proof of tangled responsibilities; distinguish mechanical migrations and independent catalog changes.
 
@@ -31,13 +31,13 @@ Work through these seven steps in order. Do not skip steps.
 Read the diff or files and answer:
 - What is the stated purpose of this change?
 - Which files were modified?
-- Flag immediately if the PR changes more than 10 unrelated files — that itself is a
+- Flag immediately if the PR changes more than 10 unrelated files; that itself is a
   🟡 Warning: Change Propagation (a PR that touches many unrelated things is a sign
   that responsibilities are tangled).
 
 ### Step 2: Scan for Change Propagation
 
-*Scan this first — it is the most visible risk in a diff.*
+*Scan this first; it is the most visible risk in a diff.*
 
 Look for:
 - Does this change touch files in modules that have no conceptual connection to the stated purpose?
@@ -90,11 +90,11 @@ If no new imports and no structural changes → skip, no finding.
 ## Severity Calibration
 
 Apply the Iron Law format from `../_shared/common.md`. Each risk in `../_shared/decay-risks.md` has its own Severity
-Guide with numeric thresholds — use those as the primary reference. When a finding sits
+Guide with numeric thresholds; use those as the primary reference. When a finding sits
 on the boundary between two tiers, use this as a tiebreaker:
-- 🔴 Critical — actively breaking velocity or creating production risk *today*
-- 🟡 Warning — will if left unaddressed through the next few features
-- 🟢 Suggestion — worth fixing when nearby, not urgent
+- 🔴 Critical; actively breaking velocity or creating production risk *today*
+- 🟡 Warning; will if left unaddressed through the next few features
+- 🟢 Suggestion; worth fixing when nearby, not urgent
 
 When multiple findings exist, list Critical items first. If there are more than 5 findings,
 add a one-line "Recommended fix order" at the end of the Findings section.
@@ -103,7 +103,7 @@ add a one-line "Recommended fix order" at the end of the Findings section.
 
 ## Step 7: Quick Test Check
 
-*Run this last. Three signals only — this is not a full Mode 4 review.*
+*Run this last. Three signals only; this is not a full Mode 4 review.*
 
 If the diff contains only generated files, configuration, or documentation with no
 production logic changes → skip Step 7 entirely.
@@ -113,8 +113,8 @@ production logic changes → skip Step 7 entirely.
 - Does the diff modify production code?
 - Are corresponding test file changes included in the diff?
 - If new public behavior was added with no new tests:
-  → 🟡 Warning: Coverage Illusion — new behavior is untested
-  → Source: Feathers — Working Effectively with Legacy Code, Ch. 1
+  → 🟡 Warning: Coverage Illusion; new behavior is untested
+  → Source: Feathers; Working Effectively with Legacy Code, Ch. 1
 - If the change is a pure refactor and existing tests cover the behavior → no finding.
 
 **Signal 2: Quick Mock Abuse sniff**
@@ -126,8 +126,8 @@ Only check if the diff includes test file changes.
 - Does the diff add any methods to production classes that are only called from test files?
 
 If any of these are true:
-  → 🟡 Warning: Mock Abuse — test complexity exceeds behavior complexity
-  → Source: Osherove — The Art of Unit Testing, mock usage guidelines
+  → 🟡 Warning: Mock Abuse; test complexity exceeds behavior complexity
+  → Source: Osherove; The Art of Unit Testing, mock usage guidelines
 
 **Signal 3: Quick Test Obscurity sniff**
 
@@ -138,8 +138,8 @@ Only check if the diff includes test file changes.
 - Are there new tests with multiple assertions and no message strings on any of them?
 
 If test names are vague or assertions lack messages:
-  → 🟢 Suggestion: Test Obscurity — test intent is unclear from the test name or assertions
-  → Source: Meszaros — xUnit Test Patterns, Assertion Roulette (p.224)
+  → 🟢 Suggestion: Test Obscurity; test intent is unclear from the test name or assertions
+  → Source: Meszaros; xUnit Test Patterns, Assertion Roulette (p.224)
 
 **Output rule:**
 

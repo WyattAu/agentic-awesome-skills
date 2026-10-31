@@ -94,7 +94,7 @@ Generate the following document, filling all `[PLACEHOLDERS]` with real audit da
 
 ```markdown
 # GEO Optimization Proposal
-## [COMPANY NAME] — AI Search Visibility
+## [COMPANY NAME]: AI Search Visibility
 
 **Prepared by:** [YOUR AGENCY NAME]
 **Prepared for:** [CONTACT NAME], [COMPANY NAME]
@@ -110,13 +110,13 @@ Generate the following document, filling all `[PLACEHOLDERS]` with real audit da
 Our GEO audit of [DOMAIN], conducted on [DATE], reveals a GEO Readiness Score
 of **[SCORE]/100 ([TIER LABEL])**.
 
-This means your website currently has [TIER DESCRIPTION — use score interpretation table].
+This means your website currently has [TIER DESCRIPTION; use score interpretation table].
 [Describe a measured audience/search change with its dated source and relevant scope. If evidence is unavailable, state that the business impact is unquantified.]
 
 The three most urgent issues are:
-1. **[CRITICAL FINDING 1]** — [Business impact in one sentence]
-2. **[CRITICAL FINDING 2]** — [Business impact in one sentence]
-3. **[CRITICAL FINDING 3]** — [Business impact in one sentence]
+1. **[CRITICAL FINDING 1]**; [Business impact in one sentence]
+2. **[CRITICAL FINDING 2]**; [Business impact in one sentence]
+3. **[CRITICAL FINDING 3]**; [Business impact in one sentence]
 
 We recommend the **[TIER NAME] package** at **€[PRICE]/month**, which addresses
 the agreed findings and deliverables on a confirmed schedule; search outcomes remain uncertain.
@@ -163,7 +163,7 @@ We offer three engagement models based on the scope of optimization needed.
 
 ---
 
-### BASIC — [CONFIRMED PRICE]/month
+### BASIC: [CONFIRMED PRICE]/month
 *Best for: Sites with score 61-75 needing targeted improvements*
 
 **What's included:**
@@ -178,7 +178,7 @@ We offer three engagement models based on the scope of optimization needed.
 
 ---
 
-### STANDARD — [CONFIRMED PRICE]/month
+### STANDARD: [CONFIRMED PRICE]/month
 *Best for: Sites with score 40-60 needing structured monthly work*
 
 **Everything in Basic, plus:**
@@ -194,7 +194,7 @@ We offer three engagement models based on the scope of optimization needed.
 
 ---
 
-### PREMIUM — [CONFIRMED PRICE]/month
+### PREMIUM: [CONFIRMED PRICE]/month
 *Best for: Sites with score 0-40 with critical issues, or competitive industries*
 
 **Everything in Standard, plus:**
@@ -218,23 +218,23 @@ We offer three engagement models based on the scope of optimization needed.
 
 ## Engagement Timeline
 
-### Month 1 — Foundation
+### Month 1: Foundation
 - Kick-off call and onboarding (Week 1)
 - Full technical audit + baseline metrics capture
 - Quick wins implementation: robots.txt, schema, llms.txt, meta descriptions
 
-### Month 2-3 — Optimization
+### Month 2-3: Optimization
 - Content citability rewrites (top 10 pages)
 - E-E-A-T improvements: author pages, credentials, dates
 - Platform-specific optimization (Google AIO, ChatGPT, Perplexity)
 - Brand presence: LinkedIn, Wikipedia/Wikidata groundwork
 
-### Month 4-6 — Authority Building
+### Month 4-6: Authority Building
 - Brand mention campaigns (Reddit, industry sites, YouTube)
 - Topical authority content strategy
 - Monthly reports showing score improvements
 
-### Month 6 — Review
+### Month 6: Review
 - Full re-audit with before/after comparison
 - ROI report
 - Renewal discussion
@@ -304,7 +304,7 @@ are based on current industry best practices for Generative Engine Optimization.
    ```
    ✓ Proposal generated: ~/.geo-prospects/proposals/electron-srl.com-proposal-2026-03-12.md
    ✓ Prospect status updated: Qualified → Proposal
-   ✓ Recommended package: STANDARD (€5,000/month) — Score 32/100
+   ✓ Recommended package: STANDARD (€5,000/month); Score 32/100
 
    Next: Share the proposal file or run `/geo report-pdf` for a visual version.
    ```

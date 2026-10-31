@@ -48,7 +48,7 @@ Fallbacks supply a default when a variable is empty.
 
 Loops iterate over array values (e.g. ingredients, instructions, tags).
 
-- **Loop sources:** The array to iterate over—typically a variable that returns a list (e.g. `{{schema:@Recipe:recipeIngredient}}`, `{{schema:@Recipe:recipeInstructions}}`).
+- **Loop sources:** The array to iterate over-typically a variable that returns a list (e.g. `{{schema:@Recipe:recipeIngredient}}`, `{{schema:@Recipe:recipeInstructions}}`).
 - **Loop variables:** Inside the loop you get a variable for the current item; you may also get an index or other loop metadata. Names and behavior are described in the official "Loop variables" and "Accessing array items by index" sections.
 - **Accessing array items by index:** When you need the nth item of an array outside a loop, or need the current index inside a loop, the syntax is defined in the official documentation.
 - **Nested loops:** Loops can be nested when you have arrays of structured data (e.g. steps each with sub-steps).

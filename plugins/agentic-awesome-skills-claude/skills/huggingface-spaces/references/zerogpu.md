@@ -8,15 +8,15 @@ For numerical limits (per-tier daily quota minutes, runs-per-day caps, current b
 
 A ZeroGPU Space runs as **two processes**:
 
-- **Main web process** — long-lived. Imports `app.py`, launches Gradio. Holds no VRAM and, after the startup "pack" step, no model weights in RAM either.
-- **GPU worker** — short-lived. Forked per `@spaces.GPU` request (or reused if warm). Eventually killed by the ZeroGPU scheduler when another Space needs the slot. Your code never kills its own worker.
+- **Main web process**; long-lived. Imports `app.py`, launches Gradio. Holds no VRAM and, after the startup "pack" step, no model weights in RAM either.
+- **GPU worker**; short-lived. Forked per `@spaces.GPU` request (or reused if warm). Eventually killed by the ZeroGPU scheduler when another Space needs the slot. Your code never kills its own worker.
 
 `import spaces` monkey-patches `torch.cuda.*` in the main process so that `.to("cuda")` and `torch.cuda.is_available()` work at module scope **without** a real GPU attached. Module-level `model.to("cuda")` is intercepted: the tensor data physically stays in main-process RAM at this point, with a CUDA-presenting "fake" tensor registered alongside. At a startup "pack" step, the backend writes those original CPU tensors to disk via `O_DIRECT` and frees the RAM. After packing, the main process is expected to release weight RAM; disk artifacts and runtime metadata remain.
 
 When a `@spaces.GPU` call lands, the scheduler routes it to a worker:
 
-- **Cold worker** — forked from the main process; torch is unpatched; real CUDA is initialized; weights are streamed disk → pinned host → VRAM via a double-buffered pipeline. This is the cold-start cost.
-- **Warm worker** — alive worker bound to the same slot; init is skipped; weights stay on VRAM from the previous call.
+- **Cold worker**; forked from the main process; torch is unpatched; real CUDA is initialized; weights are streamed disk → pinned host → VRAM via a double-buffered pipeline. This is the cold-start cost.
+- **Warm worker**; alive worker bound to the same slot; init is skipped; weights stay on VRAM from the previous call.
 
 A warm worker eventually dies when another Space needs the slot. Occasional cold starts on a low-traffic Space are normal.
 
@@ -45,11 +45,11 @@ pipe = DiffusionPipeline.from_pretrained("...", torch_dtype=torch.bfloat16).to("
 
 Do **not** lazy-load inside `@spaces.GPU`. The hijack is designed for module-level placement; deferring it puts tens of seconds of checkpoint I/O + dtype cast + GPU move inside every cold request.
 
-Use the **string `"cuda"`** — never an integer device id. ZeroGPU re-allocates device ids per request, so `.to(0)`, `device_map={"": 0}`, `torch.cuda.set_device(0)` silently break.
+Use the **string `"cuda"`**; never an integer device id. ZeroGPU re-allocates device ids per request, so `.to(0)`, `device_map={"": 0}`, `torch.cuda.set_device(0)` silently break.
 
-For plain `from_pretrained` loads, use `.to("cuda")`, **not** `device_map="cuda"` (which routes through `accelerate.set_module_tensor_to_device` and calls `torch._C._cuda_init()` at load time, bypassing the hijack). The exception is loaders that are ZeroGPU-aware — notably the `bitsandbytes` quantization path; `from_pretrained(..., quantization_config=BitsAndBytesConfig(...))` works with `device_map="cuda"`.
+For plain `from_pretrained` loads, use `.to("cuda")`, **not** `device_map="cuda"` (which routes through `accelerate.set_module_tensor_to_device` and calls `torch._C._cuda_init()` at load time, bypassing the hijack). The exception is loaders that are ZeroGPU-aware; notably the `bitsandbytes` quantization path; `from_pretrained(..., quantization_config=BitsAndBytesConfig(...))` works with `device_map="cuda"`.
 
-**Preloading multiple variants** (e.g. base + refiner, image + video model) is fine as long as their combined VRAM fits. Load all of them sequentially at module scope into a dict, then key per request. Don't unload/reload between requests — that puts the load cost back on the user.
+**Preloading multiple variants** (e.g. base + refiner, image + video model) is fine as long as their combined VRAM fits. Load all of them sequentially at module scope into a dict, then key per request. Don't unload/reload between requests; that puts the load cost back on the user.
 
 ### 3. Decorate the function Gradio binds
 
@@ -67,12 +67,12 @@ btn.click(fn=generate, inputs=prompt_box, outputs=image_out)
 
 `@spaces.GPU(duration=N)` means "reserve N seconds of GPU time." Two failure modes:
 
-- **`ZeroGPU illegal duration`** — `N` exceeds the visitor's tier cap. Lowering `duration` is the only fix.
-- **`ZeroGPU quota exceeded`** — the visitor's remaining quota is less than `requested`. Compared as `requested vs remaining`, not `actual vs remaining` — so a 10-second task left at the default 60 s blocks the user as soon as their remaining drops below 60 s.
+- **`ZeroGPU illegal duration`**; `N` exceeds the visitor's tier cap. Lowering `duration` is the only fix.
+- **`ZeroGPU quota exceeded`**; the visitor's remaining quota is less than `requested`. Compared as `requested vs remaining`, not `actual vs remaining`; so a 10-second task left at the default 60 s blocks the user as soon as their remaining drops below 60 s.
 
 Smaller `duration` also ranks **higher** in the queue. Both reasons push toward declaring the realistic worst case, not a comfortable margin.
 
-**Pick the value — don't guess.** A too-high duration deploys cleanly then errors on the first call; too-low silently truncates. Methodology:
+**Pick the value; don't guess.** A too-high duration deploys cleanly then errors on the first call; too-low silently truncates. Methodology:
 
 1. Ship with a placeholder (e.g. 180 s).
 2. Instrument with `time.perf_counter()` and return the seconds in the response.
@@ -83,7 +83,7 @@ For input-dependent runtime, pass a **callable**:
 
 ```python
 def _estimate(prompt, steps, *args, **kwargs):
-    # Swallow extras with *args, **kwargs — Gradio passes progress= positionally
+    # Swallow extras with *args, **kwargs: Gradio passes progress= positionally
     # and a strict signature will raise "takes 5 positional arguments but 6 were given"
     return min(240, 60 + int(steps * 3.5))
 
@@ -94,7 +94,7 @@ def generate(prompt, steps, ..., progress=gr.Progress(track_tqdm=True)):
 
 ## Sizing memory: `large` vs `xlarge`
 
-`size="large"` (default) is half the backing card (48 GB on Blackwell). `size="xlarge"` is the full card (96 GB) and costs **2× quota** per second — plus higher queue waits. Use `large` unless the workload genuinely OOMs.
+`size="large"` (default) is half the backing card (48 GB on Blackwell). `size="xlarge"` is the full card (96 GB) and costs **2× quota** per second; plus higher queue waits. Use `large` unless the workload genuinely OOMs.
 
 Rough VRAM sizing:
 
@@ -126,14 +126,14 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_ID,
     quantization_config=bnb,
-    device_map="cuda",            # OK here — bnb's loader is ZeroGPU-aware
+    device_map="cuda",            # OK here; bnb's loader is ZeroGPU-aware
     dtype=torch.bfloat16,
 ).eval()
 ```
 
 This is the one case where `device_map="cuda"` is **safe** on ZeroGPU at module scope (bitsandbytes' loader path intercepts cleanly). For non-bnb loads, stick to `.to("cuda")`.
 
-`load_in_8bit=True` swaps the 4-bit block for int8 — same hijack-safe loader. Bigger but higher quality, no `compute_dtype` knob.
+`load_in_8bit=True` swaps the 4-bit block for int8; same hijack-safe loader. Bigger but higher quality, no `compute_dtype` knob.
 
 ### torchao
 
@@ -146,17 +146,17 @@ pipe = DiffusionPipeline.from_pretrained(MODEL_ID, torch_dtype=torch.bfloat16).t
 quantize_(pipe.transformer, Int8WeightOnlyConfig())   # mutates in place
 ```
 
-`torchao` is more flexible (fine-grained per-module quantization, `Int4WeightOnlyConfig`, `Float8WeightOnlyConfig`, etc.) and works with diffusers' `from_pretrained(..., quantization_config=TorchAoConfig(...))` integration too. No CUDA build dependency — installs as a wheel.
+`torchao` is more flexible (fine-grained per-module quantization, `Int4WeightOnlyConfig`, `Float8WeightOnlyConfig`, etc.) and works with diffusers' `from_pretrained(..., quantization_config=TorchAoConfig(...))` integration too. No CUDA build dependency; installs as a wheel.
 
 ### Attention backends
 
-Default to `attn_implementation="sdpa"` — torch-native, works everywhere. Reach for an FA backend only when the upstream repo uses it by default or strongly recommends it. If it breaks on Blackwell, fall back to SDPA.
+Default to `attn_implementation="sdpa"`; torch-native, works everywhere. Reach for an FA backend only when the upstream repo uses it by default or strongly recommends it. If it breaks on Blackwell, fall back to SDPA.
 
 **Flash Attention 2** works via the prebuilt wheel at `multimodalart/zerogpu-blackwell-wheels` ([`requirements.md`](requirements.md)). The wheel's real `flash_attn_2_cuda` also satisfies xformers' import-time probes.
 
 **Flash Attention 3** is not currently usable on Blackwell sm_120. `kernels-community/flash-attn3`, `vllm-flash-attn3`, and `sgl-flash-attn3` all fail with `no kernel image is available` or `NotImplementedError`. Use SDPA or FA2 instead.
 
-**xformers** is available via the prebuilt wheel — auto-dispatch picks FA2 on sm_120 with no monkey-patch.
+**xformers** is available via the prebuilt wheel; auto-dispatch picks FA2 on sm_120 with no monkey-patch.
 
 ## Concurrency
 
@@ -164,7 +164,7 @@ Handlers run **concurrently by default**. Three rules:
 
 1. **No mutable global state.** Handlers writing to a module-level dict / list race each other.
 2. **No fixed output paths.** Two concurrent calls writing to `output.png` clobber each other (and leak data across users). Use `tempfile.NamedTemporaryFile(suffix=...)`.
-3. **Read-only globals are safe** — models, tokenizers, configs loaded once and only read inside handlers.
+3. **Read-only globals are safe**; models, tokenizers, configs loaded once and only read inside handlers.
 
 ## Process isolation and pickle
 
@@ -173,20 +173,20 @@ Handlers run **concurrently by default**. Three rules:
 - **Only picklable objects** in/out. File handles, locks, lambdas, closures over unpicklable state → `PicklingError`.
 - **Never return CUDA tensors.** Unpickling in the main process triggers `torch.cuda._lazy_init()`, which ZeroGPU blocks → the call hangs. Convert to CPU first: `return tensor.cpu()` or `.cpu().numpy()`.
 - CPU tensors, numpy arrays, PIL Images, plain Python objects work fine.
-- `gr.SelectData` is a special case — its `__getattr__` recurses under pickle. Extract the fields you need (`evt.index[0]`, etc.) in a thin un-decorated wrapper, pass plain values to the `@spaces.GPU` function.
+- `gr.SelectData` is a special case; its `__getattr__` recurses under pickle. Extract the fields you need (`evt.index[0]`, etc.) in a thin un-decorated wrapper, pass plain values to the `@spaces.GPU` function.
 
 ### `gr.State` across the fork
 
 `gr.State` is pickled on every yield. The handler receives a **copy**:
 
 - In-place mutations inside the fork are invisible to other handlers until you explicitly `yield` the mutated value back.
-- Yielding `gr.update()` for a state slot **skips** the update — other handlers continue to see pre-yield value.
-- For large state, minimize how often you yield it — ideally once at the end.
+- Yielding `gr.update()` for a state slot **skips** the update; other handlers continue to see pre-yield value.
+- For large state, minimize how often you yield it; ideally once at the end.
 - CUDA tensors inside state must be CPU-d before yielding (same `_lazy_init` issue).
 
 ## Generators and streaming
 
-`@spaces.GPU` supports generator functions — first-class for progressive UI updates:
+`@spaces.GPU` supports generator functions; first-class for progressive UI updates:
 
 ```python
 @spaces.GPU(duration=120)
@@ -198,7 +198,7 @@ def generate(prompt):
     yield gr.update(value=final_image, label="Done")
 ```
 
-`gr.Progress(track_tqdm=True)` and `yield` compete with each other — pick one.
+`gr.Progress(track_tqdm=True)` and `yield` compete with each other; pick one.
 
 For streaming previews **inside** a diffusers `callback_on_step_end`, use a thread + queue created inside the worker (pre-existing threads are not shared across fork):
 
@@ -222,7 +222,7 @@ def generate(prompt, num_steps):
         yield gr.update(value=payload, label=f"Step {idx+1}/{num_steps}")
 ```
 
-**Do not** use `ProcessPoolExecutor` / `multiprocessing.Pool` inside `@spaces.GPU` — the daemonic fork can't spawn children (`AssertionError: daemonic processes are not allowed to have children`). Threads only.
+**Do not** use `ProcessPoolExecutor` / `multiprocessing.Pool` inside `@spaces.GPU`; the daemonic fork can't spawn children (`AssertionError: daemonic processes are not allowed to have children`). Threads only.
 
 ## Compilation
 
@@ -230,9 +230,9 @@ def generate(prompt, num_steps):
 
 ## Local development
 
-**Do NOT** wrap `import spaces` in `try/except` with a no-op fallback. Off-ZeroGPU, the `spaces` package is *already* a true no-op — the heavyweight behavior is gated on `SPACES_ZERO_GPU=1`, set only on ZeroGPU. `@spaces.GPU` returns the undecorated function unchanged elsewhere. The Gradio base image installs `spaces` on every hardware tier, so a duplicate onto T4 / A10G / CPU works without code changes too.
+**Do NOT** wrap `import spaces` in `try/except` with a no-op fallback. Off-ZeroGPU, the `spaces` package is *already* a true no-op; the heavyweight behavior is gated on `SPACES_ZERO_GPU=1`, set only on ZeroGPU. `@spaces.GPU` returns the undecorated function unchanged elsewhere. The Gradio base image installs `spaces` on every hardware tier, so a duplicate onto T4 / A10G / CPU works without code changes too.
 
-That said: **iterate ON the Space, not locally.** The Space environment (Python, torch, CUDA, drivers, env vars) differs from yours; passing local tests doesn't prove the Space works. Run useful local tests, then deploy a staging candidate within the agreed scope — and use the rung ladder ([`debugging.md`](debugging.md)) against the live URL.
+That said: **iterate ON the Space, not locally.** The Space environment (Python, torch, CUDA, drivers, env vars) differs from yours; passing local tests doesn't prove the Space works. Run useful local tests, then deploy a staging candidate within the agreed scope; and use the rung ladder ([`debugging.md`](debugging.md)) against the live URL.
 
 ## Allocator config for memory pressure
 
@@ -260,11 +260,11 @@ Often single-line fix for what looks like an OOM. See [`known-errors.md`](known-
 - `cache_examples=True`
 - `cache_mode="lazy"` (eager would pre-run examples at startup, but no GPU is attached at startup)
 
-Don't override to `cache_mode="eager"` on ZeroGPU — it will fail or burn the creator's daily quota. The cache is keyed by example **file path**, not content hash: regenerating an asset in place serves the stale cached output. Bump a `cache_version` constant if you replace example files.
+Don't override to `cache_mode="eager"` on ZeroGPU; it will fail or burn the creator's daily quota. The cache is keyed by example **file path**, not content hash: regenerating an asset in place serves the stale cached output. Bump a `cache_version` constant if you replace example files.
 
 ## Real-time sessions
 
-For real-time apps (webcam, audio streaming), the per-call fork model is too costly. ZeroGPU supports reusable "real-time sessions" — one GPU allocation amortized across many small requests. Reference Spaces:
+For real-time apps (webcam, audio streaming), the per-call fork model is too costly. ZeroGPU supports reusable "real-time sessions"; one GPU allocation amortized across many small requests. Reference Spaces:
 
 - https://huggingface.co/spaces/diffusers/unofficial-SDXL-Turbo-i2i-t2i
 - https://huggingface.co/spaces/huggingface-projects/rf-detr-realtime-webcam
@@ -273,4 +273,4 @@ For real-time apps (webcam, audio streaming), the per-call fork model is too cos
 
 For specific error strings (CUDA init order, illegal duration, allocator asserts, PicklingError, returning CUDA tensors, …): [`known-errors.md`](known-errors.md). It covers the ZeroGPU-specific patterns alongside everything else and is the single error lookup for the skill.
 
-When the log endpoint can't explain a failure (device-side asserts, OOM under specific shapes, race conditions in pickle), dev mode + SSH is the last-resort tool — see [`debugging.md`](debugging.md).
+When the log endpoint can't explain a failure (device-side asserts, OOM under specific shapes, race conditions in pickle), dev mode + SSH is the last-resort tool; see [`debugging.md`](debugging.md).

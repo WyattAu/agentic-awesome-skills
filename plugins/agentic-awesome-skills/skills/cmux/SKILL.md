@@ -33,17 +33,17 @@ cmux is a native macOS terminal app for running multiple AI coding agents in par
 
 ## Core Concepts
 
-- **Window** — top-level macOS cmux window
-- **Workspace** — sidebar tab within a window (one git branch / project context)
-- **Pane** — split region inside a workspace
-- **Surface** — tab inside a pane (terminal or browser)
+- **Window**; top-level macOS cmux window
+- **Workspace**; sidebar tab within a window (one git branch / project context)
+- **Pane**; split region inside a workspace
+- **Surface**; tab inside a pane (terminal or browser)
 
 Handles default to short refs (`workspace:2`, `pane:1`, `surface:7`); UUIDs accepted as input. Add `--id-format uuids|both` for UUID output.
 
-### Ref syntax — get this right or fail silently
+### Ref syntax: get this right or fail silently
 
-- **Always use PREFIXED refs** (`pane:38`, `surface:46`). A **bare number is treated as an INDEX, not an ID** — `--surface 46` means "the surface at index 46" (usually nonexistent → silent failure), NOT `surface:46`.
-- **`read-screen` and `capture-pane` have NO `--pane` flag** — they target `--workspace` or `--surface` only. Passing `--pane` errors, and a bare/missing target falls back to your OWN surface (you'll read your own footer and draw wrong conclusions). To read a pane: resolve it to a surface FIRST with `cmux list-pane-surfaces --pane pane:N`, then `cmux read-screen --surface surface:N`.
+- **Always use PREFIXED refs** (`pane:38`, `surface:46`). A **bare number is treated as an INDEX, not an ID**; `--surface 46` means "the surface at index 46" (usually nonexistent → silent failure), NOT `surface:46`.
+- **`read-screen` and `capture-pane` have NO `--pane` flag**; they target `--workspace` or `--surface` only. Passing `--pane` errors, and a bare/missing target falls back to your OWN surface (you'll read your own footer and draw wrong conclusions). To read a pane: resolve it to a surface FIRST with `cmux list-pane-surfaces --pane pane:N`, then `cmux read-screen --surface surface:N`.
 - **Never append `2>/dev/null` to cmux commands.** Errors go to stderr with exit code 1; suppressing them blinds you to your own ref/flag mistakes (the #1 cause of "(no output)").
 
 ## Detect cmux in a Shell
@@ -53,11 +53,11 @@ Handles default to short refs (`workspace:2`, `pane:1`, `surface:7`); UUIDs acce
 [ -n "${CMUX_WORKSPACE_ID:-}" ] && echo "inside cmux surface"
 ```
 
-Injected env vars in every cmux-spawned terminal: `CMUX_WORKSPACE_ID`, `CMUX_SURFACE_ID`, `CMUX_SOCKET_PATH`, `CMUX_PORT`. **Always anchor automation to `CMUX_WORKSPACE_ID`** — the visually focused workspace may not be the agent's caller workspace.
+Injected env vars in every cmux-spawned terminal: `CMUX_WORKSPACE_ID`, `CMUX_SURFACE_ID`, `CMUX_SOCKET_PATH`, `CMUX_PORT`. **Always anchor automation to `CMUX_WORKSPACE_ID`**; the visually focused workspace may not be the agent's caller workspace.
 
 Before using example refs, list actual topology and validate ownership. A workspace is not automatically a separate Git checkout; creating one does not isolate branch/file changes. Verify each command against local help/capabilities because these notes include version-specific workarounds.
 
-## Fast Start — Topology
+## Fast Start: Topology
 
 ```bash
 cmux identify --json                              # who am I (window/workspace/pane/surface)
@@ -75,7 +75,7 @@ cmux reorder-surface --surface surface:7 --before surface:3
 cmux close-surface --surface surface:7
 ```
 
-## Polling Pi Agents in Panes — Keep Sleeps Short
+## Polling Pi Agents in Panes: Keep Sleeps Short
 
 Use event-driven completion or bounded polling with backoff based on actual progress. No particular model/provider, token speed or user setup is implied by this skill. Report meaningful changes rather than every unchanged poll.
 
@@ -139,7 +139,7 @@ cmux markdown open plan.md --direction right                 # live-watching ren
 cmux open file.pdf                                           # auto-routes to right viewer
 ```
 
-`cmux markdown open` flags: `--workspace`, `--surface`, `--window`, `--direction <right|down|left|up>`, `--focus <true|false>`. There is **NO `--pane` flag** — passing it errors. To target a pane, pass `--surface <existing-md-surface-in-that-pane>`.
+`cmux markdown open` flags: `--workspace`, `--surface`, `--window`, `--direction <right|down|left|up>`, `--focus <true|false>`. There is **NO `--pane` flag**; passing it errors. To target a pane, pass `--surface <existing-md-surface-in-that-pane>`.
 
 ### Reuse the existing right markdown pane (don't spawn strays)
 
@@ -160,7 +160,7 @@ cmux list-panes --workspace "$CMUX_WORKSPACE_ID"   # confirm stray pane is gone
 
 ### Swapping the file in the single right pane (close-FIRST, then open)
 
-To replace the doc shown in your one right markdown pane, an upstream workaround is **close the previous surface FIRST, then `markdown open` the new file fresh** — never move an existing viewer, never open-then-close.
+To replace the doc shown in your one right markdown pane, an upstream workaround is **close the previous surface FIRST, then `markdown open` the new file fresh**; never move an existing viewer, never open-then-close.
 
 ```bash
 # 1. close the previous right markdown surface (right side goes empty)
@@ -174,15 +174,15 @@ Verify local behavior and ownership before closing any viewer; preserve unsaved 
 
 ### Hard-won lessons (avoid the trial-and-error)
 
-- **Surface refs are global, not per-workspace.** A ref like `surface:126` from an earlier `markdown open` may live in a different window/workspace. Always re-list (`list-panes` / `list-pane-surfaces`) before reusing a ref — never assume a ref from a previous turn is still in the right pane.
-- **`move-surface`-ing a markdown viewer often leaves it BLANK.** The moved surface keeps `type=markdown` and `surface-health` looks fine, but renders nothing. Fix: `close-surface` it and `cmux markdown open <path>` fresh, then move the *fresh* surface if needed. Don't waste time on `refresh-surfaces` — it usually won't fix a moved-then-blank viewer.
+- **Surface refs are global, not per-workspace.** A ref like `surface:126` from an earlier `markdown open` may live in a different window/workspace. Always re-list (`list-panes` / `list-pane-surfaces`) before reusing a ref; never assume a ref from a previous turn is still in the right pane.
+- **`move-surface`-ing a markdown viewer often leaves it BLANK.** The moved surface keeps `type=markdown` and `surface-health` looks fine, but renders nothing. Fix: `close-surface` it and `cmux markdown open <path>` fresh, then move the *fresh* surface if needed. Don't waste time on `refresh-surfaces`; it usually won't fix a moved-then-blank viewer.
 - **You cannot screenshot or `read-screen` a markdown surface** (`Surface is not a terminal` / browser screenshot is WKWebView-only). To verify a markdown viewer rendered, ask the user or open the file in a browser surface instead. Don't burn turns trying to capture it.
 - **`cmux list-surfaces` does not exist.** Use `cmux list-pane-surfaces [--pane ...]`.
 
 ## Settings & Config
 
 ```bash
-cmux docs settings        # prints paths, schema URL, reload cmd — read BEFORE editing
+cmux docs settings        # prints paths, schema URL, reload cmd; read BEFORE editing
 cmux settings path        # path to cmux.json
 cmux settings cmux-json   # open in editor
 cmux reload-config        # hot-reload cmux.json + ~/.config/ghostty/config (Cmd+Shift+,)
@@ -190,7 +190,7 @@ cmux reload-config        # hot-reload cmux.json + ~/.config/ghostty/config (Cmd
 
 Locations:
 - cmux settings: `~/.config/cmux/cmux.json` (canonical). Project-local override: `.cmux/cmux.json` or `./cmux.json`.
-- Terminal rendering (font, cursor, theme, scrollback, opacity, blur): `~/.config/ghostty/config` — NOT cmux.json.
+- Terminal rendering (font, cursor, theme, scrollback, opacity, blur): `~/.config/ghostty/config`; NOT cmux.json.
 
 Before editing `cmux.json`, copy it to a timestamped `.bak` next to it so the user can revert. Schema: `https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json`.
 
@@ -208,7 +208,7 @@ Native session-resume supported for: Claude Code, Codex, Grok, OpenCode, Pi, Amp
 
 ## Socket API (advanced)
 
-`/tmp/cmux.sock` — Unix socket, JSON-RPC v2. Use for tight loops where subprocess spawn cost matters; otherwise prefer the CLI.
+`/tmp/cmux.sock`; Unix socket, JSON-RPC v2. Use for tight loops where subprocess spawn cost matters; otherwise prefer the CLI.
 
 ```bash
 echo '{"id":"1","method":"workspace.list","params":{}}' | nc -U /tmp/cmux.sock
@@ -216,9 +216,9 @@ echo '{"id":"1","method":"workspace.list","params":{}}' | nc -U /tmp/cmux.sock
 
 Method prefixes: `system.*`, `window.*`, `workspace.*`, `pane.*`, `surface.*`, `notification.*`, `browser.*`. Full list and Python client example in `references/socket-api.md`.
 
-Access modes: `cmuxOnly` (default — only cmux-spawned processes), `automation` (any local process), `password`, `allowAll` (unsafe). If you hit `Failed to connect to socket`, you're likely an external process under `cmuxOnly` — run from an authorized cmux terminal; broadening socket access needs explicit authorization and least-privilege configuration.
+Access modes: `cmuxOnly` (default; only cmux-spawned processes), `automation` (any local process), `password`, `allowAll` (unsafe). If you hit `Failed to connect to socket`, you're likely an external process under `cmuxOnly`; run from an authorized cmux terminal; broadening socket access needs explicit authorization and least-privilege configuration.
 
-## Critical Rules — Non-Disruptive Automation
+## Critical Rules: Non-Disruptive Automation
 
 These rules come from the `cmux-workspace` skill and prevent agents from yanking the user's focus:
 
@@ -237,7 +237,7 @@ These rules come from the `cmux-workspace` skill and prevent agents from yanking
 - **Resume strips sensitive env vars.** Re-inject tokens at resume time if the agent needs them.
 - **Skills snapshot at app start.** Edits to skill files require a restart of the consuming agent.
 - **Legacy v1 socket payloads (`{"command":...}`) rejected.** Use v2 JSON-RPC only.
-- **Don't `cat ~/.cmuxterm/*-hook-sessions.json`** expecting secrets — they're scrubbed. Look there for session/surface mappings only.
+- **Don't `cat ~/.cmuxterm/*-hook-sessions.json`** expecting secrets; they're scrubbed. Look there for session/surface mappings only.
 
 ## Reference: Full CLI Help
 

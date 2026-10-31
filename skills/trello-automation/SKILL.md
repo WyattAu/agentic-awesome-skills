@@ -67,8 +67,8 @@ Automate Trello board management, card creation, and team workflows through Comp
 - `idBoard`: 24-char hex or 8-char shortLink (NOT board name)
 
 **Pitfalls**:
-- Some runs return boards under response.data.details[]—don't assume flat top-level array
-- Lists may be nested under results[0].response.data.details—parse defensively
+- Some runs return boards under response.data.details[]-don't assume flat top-level array
+- Lists may be nested under results[0].response.data.details-parse defensively
 - ISO 8601 timestamps with trailing 'Z' must be parsed as timezone-aware
 
 ### 3. Move Cards Between Lists

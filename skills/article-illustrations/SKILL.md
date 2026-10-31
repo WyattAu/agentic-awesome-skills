@@ -14,13 +14,13 @@ tags: [illustration, article-graphics, visual-metaphors, image-generation, white
 tools: [image-generation]
 ---
 
-# Article Illustrations — Grav Hand-Drawn Style
+# Article Illustrations: Grav Hand-Drawn Style
 
 ## Overview
 
 Generate 16:9 landscape hand-drawn illustrations for articles, blog posts, and technical content. Each illustration captures one cognitive anchor point from an article and turns it into a clean, absurd, memorable whiteboard-sketch explanation.
 
-The skill uses a recurring character IP called **Grav**: a small, round, always-floating figure with dot eyes and a thin antenna. Grav participates in the core action of every illustration — never just decoration.
+The skill uses a recurring character IP called **Grav**: a small, round, always-floating figure with dot eyes and a thin antenna. Grav participates in the core action of every illustration; never just decoration.
 
 **Repository:** [vipin-si/article-illustrations](https://github.com/vipin-si/article-illustrations)
 
@@ -35,7 +35,7 @@ The skill uses a recurring character IP called **Grav**: a small, round, always-
 
 ### Step 1: Digest the Article
 
-Read the article and identify cognitive anchor points — core judgments, turning points, input/output loops, before/after contrasts, and common pitfalls. Don't distribute illustrations evenly; prioritize moments that benefit from visual explanation.
+Read the article and identify cognitive anchor points; core judgments, turning points, input/output loops, before/after contrasts, and common pitfalls. Don't distribute illustrations evenly; prioritize moments that benefit from visual explanation.
 
 ### Step 2: Plan a Shot List
 
@@ -67,7 +67,7 @@ Verify each image against the QA checklist: correct format, Grav present and act
 
 ```
 Analyze this article and create a shot list of 5 illustrations.
-Don't generate images yet — just plan which cognitive anchor points
+Don't generate images yet; just plan which cognitive anchor points
 deserve illustrations and what each image should convey.
 
 <paste article>
@@ -87,7 +87,7 @@ line art, sparse red/orange/blue English annotations.
 
 ```
 Generate one 16:9 illustration for this concept:
-"Trust isn't declared — it's built one piece of evidence at a time."
+"Trust isn't declared; it's built one piece of evidence at a time."
 Grav must perform the core action. Maximum 5 annotation labels.
 ```
 
@@ -103,7 +103,7 @@ driving the structure.
 
 | Element | Rule |
 |:--------|:-----|
-| Background | Pure white — no cream, texture, gradients, or shadows |
+| Background | Pure white; no cream, texture, gradients, or shadows |
 | Line art | Black, hand-drawn, slightly wobbly, not mechanical |
 | Whitespace | Main subject 40–60% of canvas, 35%+ empty space |
 | Annotations | Handwritten English, 2–5 words each, max 5–8 per image |
@@ -119,17 +119,17 @@ driving the structure.
 - Two dot eyes (slightly asymmetric)
 - One thin bent antenna with tiny circle tip
 - Thin stick legs that dangle without touching surfaces
-- Always hovering — visible gap between Grav and any surface
+- Always hovering; visible gap between Grav and any surface
 - Expression: calm, focused, deadpan
 - Role: active participant in the system, never decoration
 
 ## Best Practices
 
 - ✅ Start with a shot list before generating images
-- ✅ Invent a new metaphor for every illustration — never reuse compositions
+- ✅ Invent a new metaphor for every illustration; never reuse compositions
 - ✅ Make Grav the action protagonist, not a bystander
 - ✅ Keep it absurd but structurally clear
-- ✅ Use color sparingly — when in doubt, use black
+- ✅ Use color sparingly; when in doubt, use black
 - ❌ Don't make PPT infographics or formal flowcharts
 - ❌ Don't add title bars or decorative frames
 - ❌ Don't let Grav touch the ground or stand on surfaces
@@ -148,10 +148,10 @@ driving the structure.
   **Solution:** Remove 30% of elements, increase whitespace, make it weirder
 
 - **Problem:** Grav is just standing next to the action
-  **Solution:** Redesign so Grav IS the mechanism — becomes the funnel, dangles from the lever, is suspended inside the machine
+  **Solution:** Redesign so Grav IS the mechanism; becomes the funnel, dangles from the lever, is suspended inside the machine
 
 - **Problem:** Same metaphor as a previous illustration
-  **Solution:** Replace the physical object entirely — same concept, different analogy
+  **Solution:** Replace the physical object entirely; same concept, different analogy
 
 ## Additional Resources
 

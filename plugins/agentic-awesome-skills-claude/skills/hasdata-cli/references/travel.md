@@ -4,9 +4,9 @@ Snapshot: verify flags, response fields and current credit costs against install
 
 
 Subcommands:
-- `airbnb-listing`, `airbnb-property` (5 credits each) — short-term rentals.
-- `booking-search`, `booking-place` (10 credits each) — hotels and other lodging on Booking.com.
-- `google-flights` (15 credits) — flight prices and itineraries via Google Flights.
+- `airbnb-listing`, `airbnb-property` (5 credits each); short-term rentals.
+- `booking-search`, `booking-place` (10 credits each); hotels and other lodging on Booking.com.
+- `google-flights` (15 credits); flight prices and itineraries via Google Flights.
 
 `*-listing` / `*-search` is the filtered search; `*-property` / `*-place` is a single-property deep dive.
 
@@ -94,12 +94,12 @@ Round-trip vs. one-way controlled by presence/absence of `--return-date`. Run `-
 
 ## Non-obvious use cases
 
-- **Hotel-vs-rental arbitrage** — same dates and party size via `booking-search` and `airbnb-listing`; compare nightly cost percentile-for-percentile. The cheaper platform isn't always the same one across cities.
-- **Conference-room pricing audit** — `booking-search --keyword "$CITY" --check-in-date $START --check-out-date $END --sort priceHighestFirst` during a known conference window vs an idle week; the delta is the conference premium.
-- **Family-friendly filter** — `--children-ages-json '[5,9]' --children 2 --rooms 1 --travel-group family` and Booking returns only properties that accept the party size with appropriate beds.
-- **Loyalty-program portfolio** — `booking-search --keyword "$CITY" --raw | jq '.results[] | select(.title | test("Marriott|Hilton|Hyatt"))'` filters to chains you collect points with.
-- **Airbnb price-arbitrage check** — same dates, same area, two `airbnb-listing` calls with different `--adults` counts to surface listings that don't scale per-person price. Sometimes the difference is the deal.
-- **STR-vs-LTR feasibility** — pair `airbnb-listing` for nightly rates with `zillow-listing --type forSale` (see `real-estate.md`) for purchase price in the same area; compute gross yield client-side.
-- **Flights without a travel API** — `google-flights` with `--departure-id`, `--arrival-id`, dates, and `--currency` for ad-hoc fare checks against a vendor like Skyscanner.
-- **Multi-leg cost planning** — chain `google-flights` calls for each leg and select one compatible itinerary per leg and sum those prices (do not sum alternative flights); cheaper than the round-trip price-bot SaaS for one-off itineraries.
-- **Trip-cost preview** — combine `google-flights` (transport) + `booking-search` / `airbnb-listing` (lodging) + `google-events` (activities, see `search.md`) into one cost estimate before pitching a destination.
+- **Hotel-vs-rental arbitrage**; same dates and party size via `booking-search` and `airbnb-listing`; compare nightly cost percentile-for-percentile. The cheaper platform isn't always the same one across cities.
+- **Conference-room pricing audit**; `booking-search --keyword "$CITY" --check-in-date $START --check-out-date $END --sort priceHighestFirst` during a known conference window vs an idle week; the delta is the conference premium.
+- **Family-friendly filter**; `--children-ages-json '[5,9]' --children 2 --rooms 1 --travel-group family` and Booking returns only properties that accept the party size with appropriate beds.
+- **Loyalty-program portfolio**; `booking-search --keyword "$CITY" --raw | jq '.results[] | select(.title | test("Marriott|Hilton|Hyatt"))'` filters to chains you collect points with.
+- **Airbnb price-arbitrage check**; same dates, same area, two `airbnb-listing` calls with different `--adults` counts to surface listings that don't scale per-person price. Sometimes the difference is the deal.
+- **STR-vs-LTR feasibility**; pair `airbnb-listing` for nightly rates with `zillow-listing --type forSale` (see `real-estate.md`) for purchase price in the same area; compute gross yield client-side.
+- **Flights without a travel API**; `google-flights` with `--departure-id`, `--arrival-id`, dates, and `--currency` for ad-hoc fare checks against a vendor like Skyscanner.
+- **Multi-leg cost planning**; chain `google-flights` calls for each leg and select one compatible itinerary per leg and sum those prices (do not sum alternative flights); cheaper than the round-trip price-bot SaaS for one-off itineraries.
+- **Trip-cost preview**; combine `google-flights` (transport) + `booking-search` / `airbnb-listing` (lodging) + `google-events` (activities, see `search.md`) into one cost estimate before pitching a destination.

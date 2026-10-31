@@ -52,7 +52,7 @@ Do not substitute retries, broad exception handling, disabled validation, extra 
 
 - Reuse the application's established patterns and naming.
 - Keep business rules in the layer where this codebase already places comparable rules.
-- Use Eloquent relationships, form requests, policies, actions, services, events, or jobs when they improve this change or match local conventions—not as mandatory ceremony.
+- Use Eloquent relationships, form requests, policies, actions, services, events, or jobs when they improve this change or match local conventions-not as mandatory ceremony.
 - Treat authorization and validation as explicit behavior at the system boundary.
 - Preserve backwards compatibility unless the request requires a breaking change.
 - Keep migrations reversible and safe for the application's supported database engines.

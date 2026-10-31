@@ -1,4 +1,4 @@
-# Gotchas — harshmaur/facebook-ads-library-scraper
+# Gotchas: harshmaur/facebook-ads-library-scraper
 
 ## What Meta discloses
 

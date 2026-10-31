@@ -23,7 +23,7 @@ license_source: "https://github.com/davidondrej/skills/blob/main/LICENSE"
 
 ## The Problem
 
-`cmux markdown open` defaults to **spawning a brand-new pane** every time, even with `--direction right`. The common "fix" — moving the new markdown surface into the existing right pane with `move-surface` — **bugs out: the moved viewer renders BLANK.** The surface keeps `type=markdown` and looks healthy, but shows nothing.
+`cmux markdown open` defaults to **spawning a brand-new pane** every time, even with `--direction right`. The common "fix"; moving the new markdown surface into the existing right pane with `move-surface`; **bugs out: the moved viewer renders BLANK.** The surface keeps `type=markdown` and looks healthy, but shows nothing.
 
 So you get stuck: either a stray extra pane, or a blank viewer after moving it.
 
@@ -31,7 +31,7 @@ So you get stuck: either a stray extra pane, or a blank viewer after moving it.
 
 The contributor observed two workarounds for a particular cmux version. Verify the installed command/version; the blank-render issue may have changed. Prefer reopening an owned viewer without altering unrelated panes.
 
-### Option A — Open it right on the first try
+### Option A: Open it right on the first try
 
 If there is no usable right pane yet, just let cmux create one and leave it where it lands:
 
@@ -41,7 +41,7 @@ cmux markdown open /abs/path/file.md --direction right --focus false
 
 Do NOT then move it. If it spawned where you want it, you're done.
 
-### Option B — Close existing right pane(s), then open fresh
+### Option B: Close existing right pane(s), then open fresh
 
 If there are other right panes in the way (and they're unused or irrelevant), **close them first**, then open the markdown fresh as a new right pane:
 
@@ -53,7 +53,7 @@ cmux list-panes --workspace "$CMUX_WORKSPACE_ID"
 cmux list-pane-surfaces --pane pane:NN
 cmux close-surface --surface surface:XX     # repeat per surface in that pane
 
-# 3. THEN open the markdown fresh — it creates its own clean right pane
+# 3. THEN open the markdown fresh: it creates its own clean right pane
 cmux markdown open /abs/path/file.md --direction right --focus false
 ```
 

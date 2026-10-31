@@ -40,7 +40,7 @@ Tools are contracts between deterministic systems and non-deterministic agents. 
 This fundamental difference requires rethinking API design. The contract must be unambiguous, examples must illustrate expected patterns, and error messages must guide correction. Every ambiguity in tool definitions becomes a potential failure mode.
 
 **Tool Description as Prompt**
-Tool descriptions are loaded into agent context and collectively steer behavior. The descriptions are not just documentation—they are prompt engineering that shapes how agents reason about tool use.
+Tool descriptions are loaded into agent context and collectively steer behavior. The descriptions are not just documentation-they are prompt engineering that shapes how agents reason about tool use.
 
 Poor descriptions like "Search the database" with cryptic parameter names force agents to guess. Optimized descriptions include usage context, examples, and defaults. The description answers: what the tool does, when to use it, and what it produces.
 

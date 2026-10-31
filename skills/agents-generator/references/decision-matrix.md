@@ -1,4 +1,4 @@
-# Decision Matrix — Project Detection and Rule Selection
+# Decision Matrix: Project Detection and Rule Selection
 
 ## Detection Order
 
@@ -58,7 +58,7 @@ Read `packageManager` and documented CI commands first. If conflicting lockfiles
 | `jest`                             | Jest       | Check `jest.config.*` for env                          |
 | `playwright` or `@playwright/test` | Playwright | E2E tests present                                      |
 | `cypress`                          | Cypress    | E2E tests present                                      |
-| None                               | —          | Skip testing rules                                     |
+| None                               | - | Skip testing rules                                     |
 
 ### 8. Validation
 
@@ -135,7 +135,7 @@ Server-state libraries (React Query, SWR) need different rules than client-state
 | `@supabase/supabase-js` + `@supabase/ssr` | Supabase Auth         | Check for middleware                                  |
 | `firebase` + `firebase/auth`              | Firebase Auth         | Check for `firebase.ts` config                        |
 | `@auth0/*`                                | Auth0                 | Check for `auth0.ts`                                  |
-| None                                      | No auth or custom     | —                                                     |
+| None                                      | No auth or custom     | - |
 
 ### 14. i18n library
 

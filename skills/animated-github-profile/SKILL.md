@@ -366,7 +366,7 @@ Use HTML `<picture>` elements for native dark/light mode switching and add cache
 
 ## Related Skills
 
-- `@github-presence` — Comprehensive README structure, SEO, and discoverability.
-- `@github-actions` — Building and debugging automated CI/CD workflows.
+- `@github-presence`; Comprehensive README structure, SEO, and discoverability.
+- `@github-actions`; Building and debugging automated CI/CD workflows.
 
 The SVG prompts are design specifications, not bundled working assets. Test through the hosted README image path, not only a locally opened SVG. Keep descriptive alt text and a static readable fallback. Do not fabricate clearance, employment or contribution claims. The city example writes to its current branch and may be blocked by protection; publish generated assets through an approved branch/PR workflow instead of weakening protection. Review each pinned third-party action and its output paths before granting write access; a pinned SHA alone is not a safety audit.

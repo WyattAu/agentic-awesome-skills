@@ -13,7 +13,7 @@ Design frictionless signup experiences for developers including GitHub OAuth, AP
 
 ## Key Principle
 
-Every extra field, every extra click, every verification step tells developers you don't value their time. The best signup flows are nearly invisible—developers go from curiosity to code in under 60 seconds.
+Every extra field, every extra click, every verification step tells developers you don't value their time. The best signup flows are nearly invisible-developers go from curiosity to code in under 60 seconds.
 
 ## Quick Reference
 

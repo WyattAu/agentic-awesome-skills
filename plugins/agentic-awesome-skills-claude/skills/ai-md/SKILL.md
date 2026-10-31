@@ -6,7 +6,7 @@ source: community
 date_added: "2026-03-11"
 ---
 
-# AI.MD v4 — The Complete AI-Native Conversion System
+# AI.MD v4: The Complete AI-Native Conversion System
 
 ## Detailed Guide
 

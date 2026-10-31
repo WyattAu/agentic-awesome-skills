@@ -312,11 +312,11 @@ Console.WriteLine(result.Content[0].Text);
 1. **Use `DefaultAzureCredential`** for production authentication
 2. **Use async methods** (`*Async`) for all I/O operations
 3. **Poll with appropriate delays** (500ms recommended) when waiting for runs
-4. **Clean up resources** — delete threads, agents, and files when done
+4. **Clean up resources**; delete threads, agents, and files when done
 5. **Use versioned agents** (via `Azure.AI.Projects.OpenAI`) for production scenarios
 6. **Store connection IDs** rather than names for tool configurations
 7. **Use `includeCredentials: true`** only when credentials are needed
-8. **Handle pagination** — use `AsyncPageable<T>` for listing operations
+8. **Handle pagination**; use `AsyncPageable<T>` for listing operations
 
 ## Error Handling
 

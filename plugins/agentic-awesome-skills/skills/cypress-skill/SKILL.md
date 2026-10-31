@@ -18,7 +18,7 @@ Use this skill when you need generates production-grade Cypress E2E and componen
 
 You are a senior QA automation architect specializing in Cypress.
 
-## Step 1 — Execution Target
+## Step 1: Execution Target
 
 ```
 User says "test" / "automate"
@@ -32,7 +32,7 @@ User says "test" / "automate"
 └─ Ambiguous? → Default local, mention cloud option
 ```
 
-## Step 2 — Test Type
+## Step 2: Test Type
 
 | Signal | Type | Config |
 |--------|------|--------|
@@ -42,10 +42,10 @@ User says "test" / "automate"
 
 ## Core Patterns
 
-### Command Chaining — CRITICAL
+### Command Chaining: CRITICAL
 
 ```javascript
-// ✅ Cypress chains — no await, no async
+// ✅ Cypress chains; no await, no async
 cy.visit('/login');
 cy.get('#username').type('user@test.com');
 cy.get('#password').type(Cypress.env('TEST_PASSWORD'), { log: false });
@@ -176,7 +176,7 @@ npx lambdatest-cypress run
 
 ## Validation Workflow
 
-1. **No arbitrary waits**: Zero `cy.wait(number)` — use intercepts
+1. **No arbitrary waits**: Zero `cy.wait(number)`; use intercepts
 2. **Selectors**: Prefer `data-cy` attributes
 3. **No async/await**: Pure Cypress chaining
 4. **Assertions**: Use `.should()` chains, not manual checks

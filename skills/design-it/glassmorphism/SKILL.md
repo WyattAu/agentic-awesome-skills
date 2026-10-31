@@ -96,7 +96,7 @@ struct GlassCard: View {
     }
 }
 ```
-- Use `.ultraThinMaterial`, `.thinMaterial`, `.regularMaterial`, `.thickMaterial` — Apple built glassmorphism natively.
+- Use `.ultraThinMaterial`, `.thinMaterial`, `.regularMaterial`, `.thickMaterial`; Apple built glassmorphism natively.
 - Add `.overlay(RoundedRectangle().stroke(.white.opacity(0.3)))` for the light edge catch.
 - Glass only works if there's a vibrant background visible behind it.
 
@@ -162,9 +162,9 @@ class GlassCard extends StatelessWidget {
   }
 }
 ```
-- **Critical**: `BackdropFilter` MUST be wrapped in `ClipRRect` — without clipping, the blur applies to the entire screen.
+- **Critical**: `BackdropFilter` MUST be wrapped in `ClipRRect`; without clipping, the blur applies to the entire screen.
 - Use `ImageFilter.blur(sigmaX: 10...20, sigmaY: 10...20)` for the frosted effect.
-- Set the container color to `Colors.white.withOpacity(0.1...0.2)` — too opaque kills the glass look.
+- Set the container color to `Colors.white.withOpacity(0.1...0.2)`; too opaque kills the glass look.
 
 ### React Native
 ```jsx
@@ -212,7 +212,7 @@ const GlassCard = () => (
   </View>
 );
 ```
-- Install `@react-native-community/blur` — React Native has NO native blur support.
+- Install `@react-native-community/blur`; React Native has NO native blur support.
 - Wrap the `BlurView` parent in a `View` with `overflow: 'hidden'` and `borderRadius` to clip the blur.
 - Use `blurType: 'light'` for light glass, `'dark'` for dark glass, `'chromeMaterial'` for iOS Chrome effect.
 - **Android limitation**: `BlurView` performance varies on Android. Test thoroughly.
@@ -232,7 +232,7 @@ fun GlassCard() {
             ))
         )
 
-        // Glass panel — Compose lacks native backdrop-filter,
+        // Glass panel; Compose lacks native backdrop-filter,
         // so use a semi-transparent surface with blur via Modifier.blur()
         Card(
             modifier = Modifier
@@ -260,12 +260,12 @@ fun GlassCard() {
 }
 ```
 - **Compose limitation**: True `backdrop-filter` blur doesn't exist natively. Use `Modifier.blur()` (API 31+) on the background, `RenderEffect.createBlurEffect()` also requires API 31 and is not a lower-API fallback. Use an opaque/tinted surface on unsupported devices.
-- Use the `haze` library (`dev.chrisbanes.haze`) for proper glassmorphism in Compose — check the chosen Haze version documentation for its source/effect APIs rather than assuming historical modifier names remain current.
+- Use the `haze` library (`dev.chrisbanes.haze`) for proper glassmorphism in Compose; check the chosen Haze version documentation for its source/effect APIs rather than assuming historical modifier names remain current.
 - Without native blur, fallback to `Color.White.copy(alpha = 0.15f)` with a strong `border` to simulate the glass edge.
 
 ## Do's and Don'ts
 - **DO**: Ensure there is enough contrast between text and the blurred background. Accessibility is often a challenge with this style.
-- **DON'T**: Use Glassmorphism on a solid white or solid black background—the effect will be completely invisible.
+- **DON'T**: Use Glassmorphism on a solid white or solid black background-the effect will be completely invisible.
 
 ## Limitations
 - This is a styling reference and does not replace environment-specific validation, accessibility testing, or expert review.

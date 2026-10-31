@@ -30,7 +30,7 @@ Generate or rewrite commit messages so they read like a real engineer wrote them
 
 - Format: `<type>(<scope>): <imperative summary>`
 - Scope optional. Types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `perf`, `build`, `ci`, `revert`.
-- Imperative mood: `add`, `fix`, `move`, `remove` — not `added`, `fixes`, `fixing`.
+- Imperative mood: `add`, `fix`, `move`, `remove`; not `added`, `fixes`, `fixing`.
 - ≤50 chars when possible. Hard cap 72.
 - No trailing period.
 - Lowercase after `:` unless the project capitalizes.
@@ -39,7 +39,7 @@ Generate or rewrite commit messages so they read like a real engineer wrote them
 
 - Add for: non-obvious "why", breaking changes, migrations, security context, data integrity.
 - Wrap at 72 chars. Bullets `-` for two or more independent points. Single paragraph for one thought.
-- End with refs: `Closes #42`, `Refs #17`. No `BREAKING CHANGE:` unless truly breaking — and then write it.
+- End with refs: `Closes #42`, `Refs #17`. No `BREAKING CHANGE:` unless truly breaking; and then write it.
 
 ### Never include
 

@@ -12,8 +12,8 @@ Monitor developer conversations across GitHub, Hacker News, Reddit, Stack Overfl
 
 ## Recommended Tools
 
-- **Social listening tools** — Monitor developer platforms (GitHub, HN, Reddit, SO, Twitter)
-- **Platform-specific search** — Native search on each platform for targeted monitoring
+- **Social listening tools**; Monitor developer platforms (GitHub, HN, Reddit, SO, Twitter)
+- **Platform-specific search**; Native search on each platform for targeted monitoring
 
 ## Quick Start
 

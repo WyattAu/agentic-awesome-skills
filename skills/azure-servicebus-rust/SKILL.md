@@ -16,7 +16,7 @@ license_source: https://github.com/microsoft/skills/blob/main/LICENSE
 Use this skill when you need azure Service Bus library for Rust. Send and receive messages using queues, topics, and subscriptions. Triggers: "service bus rust", "ServiceBusClient rust", "send message servicebus rust", "receive message servicebus rust", "queue rust messaging", "topic subscription rust".
 
 
-Client library for Azure Service Bus — enterprise message broker with queues and publish-subscribe topics.
+Client library for Azure Service Bus; enterprise message broker with queues and publish-subscribe topics.
 
 > **⚠️ WARNING:** This crate is in early development and **SHOULD NOT** be used in production. APIs may change without notice.
 
@@ -40,7 +40,7 @@ cargo add azure_messaging_servicebus azure_identity tokio
 ## Environment Variables
 
 ```bash
-SERVICEBUS_NAMESPACE=<namespace>.servicebus.windows.net # Required — fully qualified namespace
+SERVICEBUS_NAMESPACE=<namespace>.servicebus.windows.net # Required; fully qualified namespace
 ```
 
 ## Key Concepts
@@ -49,7 +49,7 @@ SERVICEBUS_NAMESPACE=<namespace>.servicebus.windows.net # Required — fully qua
 | ---------------- | --------------------------------------------------------------- |
 | **Namespace**    | Container for all messaging components                          |
 | **Queue**        | Point-to-point messaging with competing consumers               |
-| **Topic**        | Publish-subscribe messaging — one sender, many subscribers      |
+| **Topic**        | Publish-subscribe messaging; one sender, many subscribers      |
 | **Subscription** | Receives messages from a topic                                  |
 | **Message**      | Package of data and metadata, with completion/abandon semantics |
 
@@ -141,8 +141,8 @@ for message in messages {
 
 | Action     | Purpose                                            |
 | ---------- | -------------------------------------------------- |
-| `complete` | Remove message from queue — processing succeeded   |
-| `abandon`  | Release lock — message becomes available for retry |
+| `complete` | Remove message from queue; processing succeeded   |
+| `abandon`  | Release lock; message becomes available for retry |
 
 Always complete messages after successful processing to prevent redelivery.
 
@@ -160,12 +160,12 @@ For Entra ID auth, assign one of these roles:
 
 1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.
 2. **Add `azure_core` only when importing `azure_core` types directly.** If your code imports `azure_core::http::Url`, `azure_core::http::RequestContent`, or `azure_core::error::ErrorKind`, include `azure_core`; otherwise a direct dependency is optional.
-3. **Use `DeveloperToolsCredential`** for local dev, **`ManagedIdentityCredential`** for production — Rust does not provide a single `DefaultAzureCredential` type
-4. **Never hardcode credentials** — use environment variables or managed identity
-5. **Assign RBAC roles** — ensure the identity has appropriate Service Bus data roles
-6. **Always complete messages** — call `complete_message` after processing to remove from queue
-7. **Use topics for fan-out** — when multiple consumers need the same messages, use topics with subscriptions
-8. **This crate is pre-production** — APIs may change; pin your dependency version with cargo commands in your dependency workflow
+3. **Use `DeveloperToolsCredential`** for local dev, **`ManagedIdentityCredential`** for production; Rust does not provide a single `DefaultAzureCredential` type
+4. **Never hardcode credentials**; use environment variables or managed identity
+5. **Assign RBAC roles**; ensure the identity has appropriate Service Bus data roles
+6. **Always complete messages**; call `complete_message` after processing to remove from queue
+7. **Use topics for fan-out**; when multiple consumers need the same messages, use topics with subscriptions
+8. **This crate is pre-production**; APIs may change; pin your dependency version with cargo commands in your dependency workflow
 
 ## Reference Links
 

@@ -32,7 +32,7 @@ if value != nil do
   process(value)
 end
 
-# ✅ — pattern match directly
+# ✅: pattern match directly
 case map do
   %{key: value} when not is_nil(value) -> process(value)
   _ -> :noop
@@ -52,7 +52,7 @@ case fetch_user(id) do
   {:error, reason} -> {:error, reason}
 end
 
-# ✅ — with clause
+# ✅: with clause
 with {:ok, user} <- fetch_user(id),
      {:ok, valid_user} <- validate(user) do
   save(valid_user)
@@ -69,7 +69,7 @@ def area(shape) do
   end
 end
 
-# ✅ — multi-clause function with pattern match
+# ✅: multi-clause function with pattern match
 def area(%{type: :circle, radius: r}), do: :math.pi() * r * r
 def area(%{type: :rect, width: w, height: h}), do: w * h
 ```
@@ -82,7 +82,7 @@ def process(x) do
   end
 end
 
-# ✅ — guard clause
+# ✅: guard clause
 def process(x) when is_integer(x) and x > 0, do: x * 2
 def process(_), do: {:error, :invalid_input}
 ```
@@ -107,7 +107,7 @@ input
 data
 |> (fn x -> x * 2 end).()
 
-# ✅ — use then/1 or named function
+# ✅: use then/1 or named function
 data
 |> then(&(&1 * 2))
 # or better: extract a named function
@@ -118,7 +118,7 @@ data |> double()
 # ❌ Single-step pipe (no gain in readability)
 result = list |> Enum.count()
 
-# ✅ — direct call for single operation
+# ✅: direct call for single operation
 result = Enum.count(list)
 ```
 
@@ -133,7 +133,7 @@ result = Enum.count(list)
 pid = spawn(fn -> loop(%{count: 0}) end)
 send(pid, {:increment})
 
-# ✅ — GenServer for stateful processes
+# ✅: GenServer for stateful processes
 defmodule Counter do
   use GenServer
 
@@ -152,7 +152,7 @@ end
 # ❌ Spawning without linking (orphan process on crash)
 spawn(fn -> do_work() end)
 
-# ✅ — Task for fire-and-forget with supervision
+# ✅: Task for fire-and-forget with supervision
 Task.Supervisor.start_child(MyTaskSupervisor, fn -> do_work() end) # supervisor must already be started
 # or for awaitable result:
 task = Task.async(fn -> do_work() end)
@@ -163,7 +163,7 @@ result = Task.await(task)
 # ❌ Manual process registry
 Process.register(self(), :my_worker)
 
-# ✅ — use Registry or named GenServer
+# ✅: use Registry or named GenServer
 {:ok, _} = Registry.start_link(keys: :unique, name: MyRegistry)
 GenServer.start_link(Worker, arg, name: {:via, Registry, {MyRegistry, :my_worker}})
 ```
@@ -179,7 +179,7 @@ def handle_call(:work, _from, state) do
   end
 end
 
-# ✅ — let it crash; supervisor restarts
+# ✅: let it crash; supervisor restarts
 def handle_call(:work, _from, state) do
   result = risky_operation()
   {:reply, result, state}
@@ -201,7 +201,7 @@ def find_user(id) do
   end
 end
 
-# ✅ — tagged tuples for expected outcomes
+# ✅: tagged tuples for expected outcomes
 def find_user(id) do
   case Repo.get(User, id) do
     nil -> {:error, :not_found}
@@ -214,7 +214,7 @@ end
 # ❌ Ignoring error tuple
 {:ok, result} = might_fail()  # crashes on {:error, _}
 
-# ✅ — handle both cases
+# ✅: handle both cases
 case might_fail() do
   {:ok, result} -> process(result)
   {:error, reason} -> Logger.error("Failed: #{inspect(reason)}")
@@ -225,7 +225,7 @@ end
 # ❌ String errors
 {:error, "something went wrong"}
 
-# ✅ — atom or struct errors (matchable, cheap)
+# ✅: atom or struct errors (matchable, cheap)
 {:error, :timeout}
 {:error, %ValidationError{field: :email, reason: :invalid_format}}
 ```
@@ -265,7 +265,7 @@ items
 |> Enum.filter(&(&1.active))
 |> Enum.map(&(&1.name))
 
-# ✅ — for comprehension when filter + transform
+# ✅: for comprehension when filter + transform
 for %{active: true, name: name} <- items, do: name
 ```
 
@@ -291,13 +291,13 @@ Map.new(users, &{&1.id, &1})
 ```
 
 ```elixir
-# ❌ Enum on large dataset (eager — builds intermediate lists)
+# ❌ Enum on large dataset (eager: builds intermediate lists)
 huge_list
 |> Enum.map(&transform/1)
 |> Enum.filter(&valid?/1)
 |> Enum.take(10)
 
-# ✅ — Stream for lazy evaluation
+# ✅: Stream for lazy evaluation
 huge_list
 |> Stream.map(&transform/1)
 |> Stream.filter(&valid?/1)
@@ -315,7 +315,7 @@ huge_list
 user = %{name: "Alice", email: "a@b.com", age: 30}
 # typo in key goes unnoticed: user.emaail
 
-# ✅ — struct enforces keys
+# ✅: struct enforces keys
 defmodule User do
   @enforce_keys [:name, :email]
   defstruct [:name, :email, age: 0]
@@ -330,7 +330,7 @@ defprotocol Renderable do
 end
 defimpl Renderable, for: HtmlPage do ... end
 
-# ✅ — just a function until you need polymorphism
+# ✅: just a function until you need polymorphism
 def render(%HtmlPage{} = page), do: ...
 ```
 

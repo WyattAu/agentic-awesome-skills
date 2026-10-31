@@ -4,7 +4,7 @@ Version and safety boundary: these are illustrative fragments, not certified liv
 
 The default agent-tool shape for anything beyond one node is the Tool Workflow node (`@n8n/n8n-nodes-langchain.toolWorkflow`). Any sub-workflow becomes a tool the agent calls, with typed inputs filled by `$fromAI()`. It composes with everything good about n8n: branching, error handling, sub-workflow reuse, native nodes, custom logic.
 
-For the sub-workflow primitive itself (Execute Workflow Trigger inputs/outputs, stateless design, naming, search-before-build), see **n8n-subworkflows** — this reference only covers the *agent-tool* angle.
+For the sub-workflow primitive itself (Execute Workflow Trigger inputs/outputs, stateless design, naming, search-before-build), see **n8n-subworkflows**; this reference only covers the *agent-tool* angle.
 
 ---
 
@@ -26,7 +26,7 @@ A function-as-tool can't do most of that without growing into a workflow anyway.
 
 ## The shape: two halves
 
-### 1. The sub-workflow side — an Execute Workflow Trigger with typed inputs
+### 1. The sub-workflow side: an Execute Workflow Trigger with typed inputs
 
 ```json
 {
@@ -45,11 +45,11 @@ A function-as-tool can't do most of that without growing into a workflow anyway.
 }
 ```
 
-Each declared input becomes a parameter the caller can fill. **The trigger must be in "Define Below" mode (typed fields), not passthrough** — passthrough has no schema, so the agent has nothing to fill via `$fromAI`. Two exceptions: (a) the sub-workflow needs binary (it can't be an agent tool directly — pre-stage to storage and pass storage keys as typed string fields, see **n8n-binary-and-data**), or (b) the tool takes no inputs at all (passthrough is the only option, and the tool's only decision is whether to invoke).
+Each declared input becomes a parameter the caller can fill. **The trigger must be in "Define Below" mode (typed fields), not passthrough**; passthrough has no schema, so the agent has nothing to fill via `$fromAI`. Two exceptions: (a) the sub-workflow needs binary (it can't be an agent tool directly; pre-stage to storage and pass storage keys as typed string fields, see **n8n-binary-and-data**), or (b) the tool takes no inputs at all (passthrough is the only option, and the tool's only decision is whether to invoke).
 
 Type enforcement happens on the **agent side** via the `type` argument of `$fromAI`, not at the trigger. Allowed types: `string`, `number`, `boolean`, `json`. Match them.
 
-### 2. The Tool Workflow side — points at the sub-workflow, binds params
+### 2. The Tool Workflow side: points at the sub-workflow, binds params
 
 ```json
 {
@@ -86,16 +86,16 @@ Wire it into the agent with `ai_tool`:
 
 The mapping is per-input:
 
-- **Agent-filled**: `={{ $fromAI('paramName', 'description', 'string') }}` — the agent decides.
-- **Plumbed**: `={{ $('SourceNode').first().json.field }}` — your workflow fills it.
+- **Agent-filled**: `={{ $fromAI('paramName', 'description', 'string') }}`; the agent decides.
+- **Plumbed**: `={{ $('SourceNode').first().json.field }}`; your workflow fills it.
 
-The `sessionId` line is critical: it is **NOT** an agent decision. Plumb it from the trigger so memory and session-keyed work stay consistent. **Never put `sessionId` behind `$fromAI`** — the agent will fabricate a UUID.
+The `sessionId` line is critical: it is **NOT** an agent decision. Plumb it from the trigger so memory and session-keyed work stay consistent. **Never put `sessionId` behind `$fromAI`**; the agent will fabricate a UUID.
 
 ---
 
 ## What the agent sees (and doesn't)
 
-The agent sees the tool's **name** (the Tool Workflow node's name) and **description** (a parameter on the node) — both follow the **TOOLS.md** rules: specific, API-doc style, treated as prompt.
+The agent sees the tool's **name** (the Tool Workflow node's name) and **description** (a parameter on the node); both follow the **TOOLS.md** rules: specific, API-doc style, treated as prompt.
 
 The model does not receive sub-workflow internals automatically. Deterministic values can still leak through prompts, outputs or errors; do not rely on plumbing as secrecy or authorization. Only `$fromAI` parameters appear in the tool schema. So you can refactor the sub-workflow heavily without changing what the agent sees.
 
@@ -122,7 +122,7 @@ Goal: an agent that can generate or edit images. Both share most logic; they dif
                                             [Set: { imageUrl, imageKey }]
 ```
 
-The agent picks the mode by what it puts in `imageName`. Two near-identical tools would have made selection harder — collapse them.
+The agent picks the mode by what it puts in `imageName`. Two near-identical tools would have made selection harder; collapse them.
 
 ---
 
@@ -136,7 +136,7 @@ The caller receives whatever the last node outputs. Pick a shape and keep it acr
 { "imageUrl": "https://...", "imageKey": "abc123.png" }
 ```
 
-Don't sometimes return `{ url, key }` and other times `{ result: { url, key } }`. The output shape is a contract every caller depends on — agents read it as part of the prompt, deterministic callers wire downstream nodes to specific paths. Drift breaks callers silently.
+Don't sometimes return `{ url, key }` and other times `{ result: { url, key } }`. The output shape is a contract every caller depends on; agents read it as part of the prompt, deterministic callers wire downstream nodes to specific paths. Drift breaks callers silently.
 
 For calls that fail "expectedly" (search with no results), return a branchable shape:
 
@@ -184,9 +184,9 @@ A sub-workflow tool can be tested without the agent:
 
 ## When NOT to use sub-workflow as tool
 
-- **Simple one-node wrappers** — "call this endpoint and return" is shorter as an HTTP Request Tool.
-- **One-off code-only logic specific to this agent** — a few lines of pure JS/Python that exist nowhere else work fine as a Custom Code Tool (`.toolCode`, see **n8n-code-tool**). Decision rule: reusable business logic → sub-workflow; one-off agent-specific transform → Code Tool.
-- **Capabilities that already exist as native tool nodes** — don't wrap `slackTool` in a sub-workflow.
+- **Simple one-node wrappers**; "call this endpoint and return" is shorter as an HTTP Request Tool.
+- **One-off code-only logic specific to this agent**; a few lines of pure JS/Python that exist nowhere else work fine as a Custom Code Tool (`.toolCode`, see **n8n-code-tool**). Decision rule: reusable business logic → sub-workflow; one-off agent-specific transform → Code Tool.
+- **Capabilities that already exist as native tool nodes**; don't wrap `slackTool` in a sub-workflow.
 
 For everything else, sub-workflow as tool is the default.
 

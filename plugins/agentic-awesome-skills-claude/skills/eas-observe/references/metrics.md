@@ -1,20 +1,20 @@
-# EAS Observe metrics — interpretation cheatsheet
+# EAS Observe metrics: interpretation cheatsheet
 
 Quick reference for reading EAS Observe dashboards and CLI output.
 
-> Source: https://docs.expo.dev/eas/observe/reference/metrics/ — this is the canonical reference for metrics. Consult this page for the latest guidance, full prose definitions, optimization tips, and rationale.
+> Source: https://docs.expo.dev/eas/observe/reference/metrics/; this is the canonical reference for metrics. Consult this page for the latest guidance, full prose definitions, optimization tips, and rationale.
 
-All durations are in seconds. Metric data is retained for a minimum of 60 days. By default, every installation dispatches all of its events; high-volume apps can sample per installation with `configure({ sampleRate })` — see [Sampling](https://docs.expo.dev/eas/observe/configuration/#sampling).
+All durations are in seconds. Metric data is retained for a minimum of 60 days. By default, every installation dispatches all of its events; high-volume apps can sample per installation with `configure({ sampleRate })`; see [Sampling](https://docs.expo.dev/eas/observe/configuration/#sampling).
 
 ## Illustrative targets (validate by device and release cohort)
 
 | Metric | Full name | Target | Auto-collected? |
 |---|---|---|---|
-| Cold launch | `expo.app_startup.cold_launch_time` | **< 1.5s** | Yes (native-only — JS code does not affect it) |
+| Cold launch | `expo.app_startup.cold_launch_time` | **< 1.5s** | Yes (native-only; JS code does not affect it) |
 | Warm launch | `expo.app_startup.warm_launch_time` | **< 0.5s** | Yes (OS decides when warm vs cold happens) |
 | Bundle load | `expo.app_startup.bundle_load_time` | **< 0.3s** | Yes (JS load + evaluation, before `runApplication`) |
 | Time to first render (TTR) | `expo.app_startup.ttr` | **< 2s** incl. cold launch | Yes when root is wrapped with `AppMetricsRoot` (SDK 55) / `ObserveRoot` (SDK 56+) |
-| Time to interactive (TTI) | `expo.app_startup.tti` | **< 3s** incl. cold launch | **No** — call `markInteractive()` once the screen is genuinely usable |
+| Time to interactive (TTI) | `expo.app_startup.tti` | **< 3s** incl. cold launch | **No**; call `markInteractive()` once the screen is genuinely usable |
 
 Both TTR and TTI are measured *from native launch* through the React render, so the cold-launch portion counts against them.
 
@@ -22,13 +22,13 @@ Both TTR and TTI are measured *from native launch* through the React render, so 
 
 Every TTI event carries automatic params in three groups: frame rate, device state, and network state. Read the frame-rate group to classify *what kind* of slowness you're seeing, then read the device and network groups to decide whether the cause is the code or the conditions.
 
-### Frame rate — what kind of slowness
+### Frame rate: what kind of slowness
 
 | Param | Definition | What it indicates |
 |---|---|---|
 | `expo.frameRate.slowFrames` | Count of frames ≥ 17ms | Main thread consistently busy during launch (heavy layout, sync bridge calls, too many components rendering) |
 | `expo.frameRate.frozenFrames` | Count of frames ≥ 700ms | Hard freezes. Even one during startup is a serious issue (sync I/O, large JSON parsing, blocking network) |
-| `expo.frameRate.totalDelay` | Total accumulated time (seconds) frames exceeded their target duration | Best single "smoothness" number — compare to TTI |
+| `expo.frameRate.totalDelay` | Total accumulated time (seconds) frames exceeded their target duration | Best single "smoothness" number; compare to TTI |
 
 **Diagnostic patterns:**
 
@@ -36,7 +36,7 @@ Every TTI event carries automatic params in three groups: frame rate, device sta
 - **High TTI + high totalDelay + many slowFrames** → main-thread contention. Offload work, simplify the initial render tree.
 - **High TTI + high totalDelay + any frozenFrames** → something is blocking hard. Look for synchronous I/O, large JSON parsing, or blocking network calls.
 
-### Device state — is the regression environmental?
+### Device state: is the regression environmental?
 
 | Param | Type | What it indicates |
 |---|---|---|
@@ -45,7 +45,7 @@ Every TTI event carries automatic params in three groups: frame rate, device sta
 | `expo.device.batteryLevel` | number, 0–1 | Fractional charge at TTI. May help investigate power-related throttling; battery level alone cannot rule it out. Omitted when the OS reports no value. |
 | `expo.device.batteryCharging` | boolean | Charging raises sustained CPU ceilings on iOS and some Android OEMs. Non-charging samples are the more conservative population. |
 
-### Network state — is startup network-bound?
+### Network state: is startup network-bound?
 
 | Param | Type | What it indicates |
 |---|---|---|
@@ -55,9 +55,9 @@ Every TTI event carries automatic params in three groups: frame rate, device sta
 | `expo.network.isConstrained` | boolean | **iOS only.** Low Data Mode is on for this path, so the system defers background transfers. |
 | `expo.network.dataSaverEnabled` | boolean | **Android only.** Data Saver is on. It is the nearest equivalent of Low Data Mode, but process-wide rather than per-path, hence the separate key. |
 
-### Network requests — was the network the cause?
+### Network requests: was the network the cause?
 
-TTI events summarize the HTTP requests made during launch, from the end of the native launch to the `markInteractive()` call. Traffic is observed automatically — `URLSession` on iOS, `OkHttpClient` on Android, which covers `fetch` — and Observe's own uploads are excluded. All of these are omitted when the window held no requests.
+TTI events summarize the HTTP requests made during launch, from the end of the native launch to the `markInteractive()` call. Traffic is observed automatically; `URLSession` on iOS, `OkHttpClient` on Android, which covers `fetch`; and Observe's own uploads are excluded. All of these are omitted when the window held no requests.
 
 | Param | Unit | What it indicates |
 |---|---|---|
@@ -88,7 +88,7 @@ You can attach your own params to the TTI event, and override the route name it 
 ## Dispatch caveats
 
 - **Debug builds** (native debug OR JS bundle with `__DEV__` = true) do **not** dispatch metrics unless `configure({ dispatchInDebug: true })` is set.
-- The `environment` tag (defaults to `process.env.NODE_ENV`) is metadata only — it does not gate dispatch by itself.
+- The `environment` tag (defaults to `process.env.NODE_ENV`) is metadata only; it does not gate dispatch by itself.
 - Offline events are buffered on-device and flushed when the app backgrounds or `Observe.dispatchEvents()` is called.
 
 ## Cross-references

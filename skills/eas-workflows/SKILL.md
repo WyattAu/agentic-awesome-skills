@@ -43,19 +43,19 @@ resolved directory; do not pass an unresolved `${CLAUDE_SKILL_DIR}` literal:
 node scripts/fetch.js 'https://api.expo.dev/v2/workflows/schema'
 ```
 
-1. **JSON Schema** — https://api.expo.dev/v2/workflows/schema
+1. **JSON Schema**; https://api.expo.dev/v2/workflows/schema
    - Obtain this schema before making schema-based claims; if retrieval fails, report the missing validation instead of inventing it. The endpoint returns an envelope: extract and inspect its `data` object, including `$schema`, before using a JSON Schema validator.
    - Source of truth for the workflow YAML structure; EAS CLI remains the authoritative final validator
    - All job types and their required/optional parameters
    - Trigger types and configurations
    - Runner types, VM images, and all enums
 
-2. **Syntax Documentation** — https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/syntax.mdx
+2. **Syntax Documentation**; https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/syntax.mdx
    - Overview of workflow YAML syntax
    - Examples and English explanations
    - Expression syntax and contexts
 
-3. **Pre-packaged Jobs** — https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/pre-packaged-jobs.mdx
+3. **Pre-packaged Jobs**; https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/pre-packaged-jobs.mdx
    - Documentation for supported pre-packaged job types
    - Job-specific parameters and outputs
 
@@ -69,12 +69,12 @@ Workflows live in `.eas/workflows/*.yml` (or `.yaml`). Each file must be 16 KiB 
 
 A workflow file has these top-level keys:
 
-- `name` — Display name for the workflow
-- `run_name` — Name for an individual run; allowed expression contexts differ from job contexts
-- `on` — Optional triggers; a workflow can also be run manually. The current schema requires `jobs`, not `on`.
-- `jobs` — Job definitions (required)
-- `defaults` — Shared defaults for all jobs
-- `concurrency` — Control parallel workflow runs
+- `name`; Display name for the workflow
+- `run_name`; Name for an individual run; allowed expression contexts differ from job contexts
+- `on`; Optional triggers; a workflow can also be run manually. The current schema requires `jobs`, not `on`.
+- `jobs`; Job definitions (required)
+- `defaults`; Shared defaults for all jobs
+- `concurrency`; Control parallel workflow runs
 
 Consult the schema for the full specification of each section.
 
@@ -82,11 +82,11 @@ Consult the schema for the full specification of each section.
 
 Use `${{ }}` syntax for dynamic values. Allowed contexts depend on the field and execution stage; consult the [current syntax documentation](https://docs.expo.dev/eas/workflows/syntax/) rather than assuming every context is globally available. Common contexts include:
 
-- `github.*` — GitHub repository and event information
-- `inputs.*` — Values from `workflow_dispatch` inputs
-- `needs.*` — Outputs and status from dependent jobs
-- `steps.*` — Step outputs within custom jobs
-- `workflow.*` — Workflow metadata
+- `github.*`; GitHub repository and event information
+- `inputs.*`; Values from `workflow_dispatch` inputs
+- `needs.*`; Outputs and status from dependent jobs
+- `steps.*`; Step outputs within custom jobs
+- `workflow.*`; Workflow metadata
 
 Use documented `needs.<job>.outputs` for dependency outputs. Do not invent a `jobs.*` alternative or use job-level contexts such as `needs`/`steps` in a workflow-level run name.
 

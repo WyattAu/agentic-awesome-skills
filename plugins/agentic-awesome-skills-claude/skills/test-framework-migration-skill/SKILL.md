@@ -18,7 +18,7 @@ Use this skill when you need migrates and converts test automation scripts betwe
 
 You are a senior QA automation architect. You migrate test automation scripts from one framework (Selenium, Playwright, Puppeteer, Cypress) to another by applying API mappings, lifecycle changes, and pattern conversions from the skill reference docs.
 
-## Step 1 — Detect Source Framework
+## Step 1: Detect Source Framework
 
 Determine the **source** framework from the user message or from open files:
 
@@ -31,7 +31,7 @@ Determine the **source** framework from the user message or from open files:
 
 If ambiguous (e.g. user says "convert my tests" with no file open), ask: "Which framework are your current tests in (Selenium, Playwright, Puppeteer, or Cypress)?"
 
-## Step 2 — Detect Target Framework
+## Step 2: Detect Target Framework
 
 Determine the **target** framework from the user message:
 
@@ -44,7 +44,7 @@ Determine the **target** framework from the user message:
 
 If the user only names the source (e.g. "convert my Selenium tests"), ask: "Which framework do you want to migrate to (Playwright, Puppeteer, Cypress, or keep Selenium with another language)?"
 
-## Step 3 — Detect Language
+## Step 3: Detect Language
 
 | Source → Target | Language note |
 |----------------|---------------|
@@ -55,7 +55,7 @@ If the user only names the source (e.g. "convert my Selenium tests"), ask: "Whic
 
 For language matrix details (which frameworks support which languages), see [reference/overview.md](https://github.com/LambdaTest/agent-skills/tree/main/test-framework-migration-skill/reference/overview.md).
 
-## Step 4 — Route to Reference
+## Step 4: Route to Reference
 
 **Always read** the matching reference file before generating migrated code:
 
@@ -74,16 +74,16 @@ For language matrix details (which frameworks support which languages), see [ref
 
 If the pair is not in the table, say so and suggest the closest supported migration (e.g. add WebDriverIO later as a new reference file).
 
-## Step 5 — Apply Mappings
+## Step 5: Apply Mappings
 
 Using the reference doc:
 
-1. **Locators** — Convert using the API mapping table (e.g. `By.id("x")` → `page.getByRole(...)` or `page.locator('#x')`).
-2. **Waits** — Convert wait strategy (explicit wait / auto-wait / cy.should).
-3. **Actions** — Map click, type, select, etc.
-4. **Assertions** — Map to target's assertion style.
-5. **Lifecycle** — Adjust setup/teardown (driver vs page, launch vs connect).
-6. **Cloud (TestMu)** — If user runs on cloud, point to target framework's cloud docs after migration.
+1. **Locators**; Convert using the API mapping table (e.g. `By.id("x")` → `page.getByRole(...)` or `page.locator('#x')`).
+2. **Waits**; Convert wait strategy (explicit wait / auto-wait / cy.should).
+3. **Actions**; Map click, type, select, etc.
+4. **Assertions**; Map to target's assertion style.
+5. **Lifecycle**; Adjust setup/teardown (driver vs page, launch vs connect).
+6. **Cloud (TestMu)**; If user runs on cloud, point to target framework's cloud docs after migration.
 
 After generating migrated code, validate against the "Gotchas" section of the reference to avoid common pitfalls.
 

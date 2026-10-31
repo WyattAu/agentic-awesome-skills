@@ -8,7 +8,7 @@ date_added: "2026-03-21"
 
 # Defuddle
 
-Use Defuddle CLI to extract clean readable content from web pages. Prefer over WebFetch for standard web pages — it removes navigation, ads, and clutter, reducing token usage.
+Use Defuddle CLI to extract clean readable content from web pages. Prefer over WebFetch for standard web pages; it removes navigation, ads, and clutter, reducing token usage.
 
 ## When to Use
 - Use when the user provides a normal webpage URL to read, summarize, or analyze.

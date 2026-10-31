@@ -55,4 +55,4 @@ LONG ETH 10x cross, entry 2,434, mark 2,534, liq 2,290, stop 2,380, ATR(4h) 62, 
 - Scenarios: at 2,470 → +1.5% on price (+15% on margin); at 2,380 (stop) → −2.2% / −22%; at 2,290
   → liquidated.
 
-Reported as facts and scenarios — no instruction about what to do.
+Reported as facts and scenarios; no instruction about what to do.

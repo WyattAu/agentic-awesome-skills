@@ -19,7 +19,7 @@ license_source: "https://github.com/target1m/traderspy-mcp/blob/069aae5a84640d67
 Two tools, one vocabulary. `screen_symbols` evaluates up to three AND-ed conditions across the
 most-traded pairs (or a list you give it) on one timeframe, in ONE quota unit. `backtest_condition`
 takes the same conditions, one symbol and one timeframe, and reports what price did after every
-past occurrence — with the unconditional baseline so the edge is separated from the tape's drift.
+past occurrence; with the unconditional baseline so the edge is separated from the tape's drift.
 
 Together they answer the two questions traders actually ask: "what fits this pattern right now?"
 and "has this pattern meant anything before?"
@@ -46,17 +46,17 @@ A condition is `{ metric, op, value, period?, period2? }`. `op` is `lt` / `gt` (
 | `adx` | 14 | trend strength; > 25 strong, < 20 absent |
 | `roc` | 12 | rate of change, % |
 | `macdHistogram` | 12, 26 (signal 9) | histogram in price units; `crossAbove 0` = bullish MACD cross |
-| `atrPct` | 14 | ATR as % of price — volatility |
+| `atrPct` | 14 | ATR as % of price; volatility |
 | `volumeRatio` | 20 | bar volume ÷ average of the previous N bars |
 | `bbPercentB` | 20 (2σ) | 0 = lower band, 1 = upper band; < 0 or > 1 = outside |
-| `bbWidthPct` | 20 | band width as % of the middle — small = squeeze |
+| `bbWidthPct` | 20 | band width as % of the middle; small = squeeze |
 | `priceVsEma` | 50 | % distance of close from EMA(period); > 0 above |
 | `emaSpread` | 50, 200 | % of EMA(period) over EMA(period2); `crossAbove 0` = golden cross |
 | `supertrend` | 10 (×3) | +1 up-trend, −1 down-trend |
 | `changePct` | 24 | % change of close over the last N BARS (on 1h, 24 = one day) |
-| `price` | — | close |
+| `price` | - | close |
 
-Periods clamp to 2–200. Conditions are AND-ed; there is no OR — run two scans for an OR and merge.
+Periods clamp to 2–200. Conditions are AND-ed; there is no OR; run two scans for an OR and merge.
 Unknown metrics are rejected, so stick to the table (the full recipe list is in
 `references/condition-cookbook.md`).
 
@@ -73,7 +73,7 @@ Every result row carries the metric values under their labels (`values["RSI(14)"
 `change24hPct`, `volume24hUsd`, `bias`, `trend`, `rsi14`, `adx14`, `atrPct`, `volumeRatio`,
 `squeeze`. When `matched` > `returned`, say so and offer to raise `limit`.
 
-**Comparison mode**: `symbols` with no `conditions` returns every listed symbol as a table — this is
+**Comparison mode**: `symbols` with no `conditions` returns every listed symbol as a table; this is
 how you answer "compare BTC, ETH and SOL" or "how do my five coins look on the daily".
 
 **Translate intent to conditions before calling**, and say what you translated it to:
@@ -82,7 +82,7 @@ how you answer "compare BTC, ETH and SOL" or "how do my five coins look on the d
 - "overbought" → `rsi gt 70`
 - "in an uptrend" → `priceVsEma gt 0 period 200` + `supertrend gt 0`
 - "with rising volume" → `volumeRatio gt 1.5`
-- "squeezing" → `bbWidthPct lt 4` on 4h (lower on 1h) — then sort by metric ascending
+- "squeezing" → `bbWidthPct lt 4` on 4h (lower on 1h); then sort by metric ascending
 - "dumped today" → `changePct lt -5 period 24` on 1h, or `period 6` on 4h
 - "golden cross" → `emaSpread crossAbove 0 period 50 period2 200` on 1d
 
@@ -91,7 +91,7 @@ how you answer "compare BTC, ETH and SOL" or "how do my five coins look on the d
 Arguments: `symbol`, `interval`, `conditions` (same vocabulary), `horizons` in bars (≤ 4; defaults
 documented defaults: 1h → [4, 24, 72] (4h/1d/3d), 4h → [6, 18, 42] (1d/3d/7d), 1d → [1, 3, 7] (1d/3d/7d)).
 
-The study runs over the whole stored tape — up to 1000 candles, so roughly 41 days on 1h, 166
+The study runs over the whole stored tape; up to 1000 candles, so roughly 41 days on 1h, 166
 days on 4h, 3 years on 1d. An "occurrence" is the FIRST bar of each run where the condition held
 (ten consecutive oversold bars are one episode). For each horizon you get `samples`,
 `avgReturnPct`, `medianReturnPct`, `winRatePct`, `avgMaxUpPct` / `avgMaxDownPct` (average best and
@@ -107,7 +107,7 @@ How to read it honestly:
   it. Say which.
 - **Excursions are the risk picture**: `avgMaxDownPct −5.1` on a "bullish" setup means the average
   episode went 5% against you before the horizon ended. That belongs next to the win rate.
-- **Horizons that disagree** (positive at 1d, negative at 3d) usually mean a bounce that fades —
+- **Horizons that disagree** (positive at 1d, negative at 3d) usually mean a bounce that fades -
   report the shape, do not pick the flattering horizon.
 - Recent episodes newer than a horizon are excluded from that horizon (`null` in `recent`), never
   counted as zero.
@@ -138,11 +138,11 @@ Screen: state the conditions in words and in the tool's labels, the timeframe, a
 
 | Symbol | Price | 24h % | <metric labels…> | Bias | Trend | ADX | ATR% |
 
-Backtest: one header line (symbol, timeframe, condition, occurrences, coverage), a horizon table —
+Backtest: one header line (symbol, timeframe, condition, occurrences, coverage), a horizon table -
 
 | Horizon | Samples | Avg % | Median % | Win % | Avg best % | Avg worst % | Baseline % | Edge % |
 
-— then the last episodes and whether the condition is active now. Close with the sample-size
+- then the last episodes and whether the condition is active now. Close with the sample-size
 caveat in your own words.
 
 ## Study limits
@@ -153,9 +153,9 @@ Report timestamp, venue, instrument, closed-versus-open candle status and actual
 
 - A screen describes the returned chart snapshot; a backtest is a sample of
   what followed in the past. Neither is a recommendation. Present the evidence, note what would
-  invalidate the setup, and leave the trade — and the sizing — to the user.
+  invalidate the setup, and leave the trade; and the sizing; to the user.
 - Never turn "70% win rate on 12 samples" into a forecast; historical stats describe their sample.
-- Nothing in this connector trades — no order, close, transfer or withdrawal tool exists by design.
+- Nothing in this connector trades; no order, close, transfer or withdrawal tool exists by design.
   If asked to execute, say so plainly; the decision and the trade stay with the user.
 - Quote only what the tools returned; when a symbol is missing from the universe say it was not
   scanned rather than implying it failed the filter.

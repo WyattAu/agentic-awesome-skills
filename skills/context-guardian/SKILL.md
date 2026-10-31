@@ -60,7 +60,7 @@ preservacao com verificacao redundante.
 ## Por Que Isto Existe
 
 O Claude Code compacta automaticamente mensagens antigas quando o contexto se
-aproxima do limite da janela. Essa compactacao e heuristica — ela resume mensagens
+aproxima do limite da janela. Essa compactacao e heuristica; ela resume mensagens
 para liberar espaco, mas inevitavelmente perde detalhes. Para projetos simples,
 isso funciona bem. Mas para projetos tecnicos pesados (como ecossistemas com 21+
 skills, auditorias de seguranca, refatoracoes de arquitetura), a perda de um unico
@@ -126,7 +126,7 @@ Percorrer toda a conversa ate o momento e extrair categorias criticas.
 Para cada categoria, classificar por prioridade (P0 = perda fatal, P1 = perda grave,
 P2 = perda toleravel).
 
-**P0 — Perda Fatal (preservar com redundancia tripla)**
+**P0; Perda Fatal (preservar com redundancia tripla)**
 
 | Categoria | O que extrair | Exemplo |
 |-----------|--------------|---------|
@@ -137,7 +137,7 @@ P2 = perda toleravel).
 | Erros encontrados | Mensagem exata, stack trace relevante, como resolveu | "TypeError at line 45 → cast para int" |
 | Comandos que funcionaram | Comando completo que produziu resultado correto | "python verify_zips.py → 22/22 OK" |
 
-**P1 — Perda Grave (preservar com verificacao)**
+**P1; Perda Grave (preservar com verificacao)**
 
 | Categoria | O que extrair |
 |-----------|--------------|
@@ -147,7 +147,7 @@ P2 = perda toleravel).
 | Contexto de projeto | Estrutura de diretorios, arquivos-chave, proposito |
 | Questoes em aberto | Perguntas sem resposta, ambiguidades nao resolvidas |
 
-**P2 — Perda Toleravel (resumo compacto)**
+**P2; Perda Toleravel (resumo compacto)**
 
 | Categoria | O que extrair |
 |-----------|--------------|
@@ -181,7 +181,7 @@ Para detalhes sobre verificacao avancada, ler `references/verification-checklist
 
 Salvar as informacoes extraidas em 3 camadas de redundancia:
 
-**Camada 1 — Snapshot estruturado (arquivo .md)**
+**Camada 1; Snapshot estruturado (arquivo .md)**
 
 ```bash
 python C:\Users\renat\skills\context-guardian\scripts\context_snapshot.py save
@@ -193,13 +193,13 @@ todas as informacoes extraidas em formato estruturado.
 Se o script nao estiver disponivel, criar manualmente o arquivo seguindo o formato
 descrito em `references/extraction-protocol.md`.
 
-**Camada 2 — MEMORY.md atualizado**
+**Camada 2; MEMORY.md atualizado**
 
 Atualizar `C:\Users\renat\.claude\projects\C--Users-renat-Skill-JUD\memory\MEMORY.md`
 com as informacoes P0 mais criticas em formato ultra-compacto. O MEMORY.md e carregado
 automaticamente em toda nova sessao, entao ele e a ultima linha de defesa.
 
-**Camada 3 — Context-agent save**
+**Camada 3; Context-agent save**
 
 ```bash
 python C:\Users\renat\skills\context-agent\scripts\context_manager.py save
@@ -225,13 +225,13 @@ da compactacao, para que fique no topo do contexto compactado.
 
 ## O Que Foi Feito Nesta Sessao
 
-1. [tarefa 1 — resultado]
-2. [tarefa 2 — resultado]
+1. [tarefa 1; resultado]
+2. [tarefa 2; resultado]
 ...
 
 ## O Que Falta Fazer
 
-1. [tarefa pendente — prioridade] [dependencia se houver]
+1. [tarefa pendente; prioridade] [dependencia se houver]
 2. ...
 
 ## Decisoes Criticas (Nao Alterar Sem Motivo)
@@ -241,7 +241,7 @@ da compactacao, para que fique no topo do contexto compactado.
 
 ## Correcoes Aplicadas (Nao Reverter)
 
-- [arquivo]: [correcao] — [motivo]
+- [arquivo]: [correcao]; [motivo]
 
 ## Caminhos Importantes
 
@@ -264,10 +264,10 @@ da compactacao, para que fique no topo do contexto compactado.
 
 Se a compactacao esta iminente e nao ha tempo para o protocolo completo de 4 fases:
 
-1. **30 segundos** — Escrever um mini-briefing com: tarefas pendentes, decisoes
+1. **30 segundos**; Escrever um mini-briefing com: tarefas pendentes, decisoes
    criticas, caminhos de arquivo modificados
-2. **1 minuto** — Atualizar MEMORY.md com informacoes P0
-3. **2 minutos** — Executar context-agent save
+2. **1 minuto**; Atualizar MEMORY.md com informacoes P0
+3. **2 minutos**; Executar context-agent save
 
 Mesmo o protocolo rapido e melhor que nenhuma protecao.
 

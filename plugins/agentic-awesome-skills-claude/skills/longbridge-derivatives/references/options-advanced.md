@@ -1,13 +1,13 @@
 # longbridge-options-advanced
 
-Prompt-only analysis skill. Covers advanced options and volatility strategies for experienced traders — calendar/diagonal spreads, dynamic delta hedging, vol arbitrage, and skew trading — grounded in live Longbridge data.
+Prompt-only analysis skill. Covers advanced options and volatility strategies for experienced traders; calendar/diagonal spreads, dynamic delta hedging, vol arbitrage, and skew trading; grounded in live Longbridge data.
 
 ## CLI
 
 Run `longbridge <subcommand> --help` to verify exact flags.
 
 ```bash
-# Option chain across expiries — compare IV term structure
+# Option chain across expiries: compare IV term structure
 longbridge option chain <SYMBOL> --format json
 longbridge option chain <SYMBOL> --date <NEAR_EXPIRY> --format json
 longbridge option chain <SYMBOL> --date <FAR_EXPIRY> --format json
@@ -40,7 +40,7 @@ longbridge quote <SYMBOL> --format json
 - **Gamma scalping**: long gamma + delta-neutral → profit from re-hedging realised vol > IV paid.
 - **Short gamma**: short options + hedged → profit if realised vol < IV collected.
 
-### Vol arbitrage — Long Vol / Short Vol
+### Vol arbitrage: Long Vol / Short Vol
 
 - **Long Vol**: buy options (straddle/strangle) when IV cheap vs expected realised vol.
 - **Short Vol**: sell options (strangle/condor) when IV rich; manage gamma risk with hedges.
@@ -55,7 +55,7 @@ longbridge quote <SYMBOL> --format json
 
 ### SABR model (conceptual)
 
-- Stochastic Alpha Beta Rho — captures vol smile dynamics analytically.
+- Stochastic Alpha Beta Rho; captures vol smile dynamics analytically.
 - Parameters: α (vol level), β (CEV exponent), ρ (spot-vol correlation), ν (vol of vol).
 - Longbridge data supports manual calibration: extract IV smile from chain, fit SABR numerically.
 
@@ -71,7 +71,7 @@ longbridge quote <SYMBOL> --format json
 ## Output template
 
 ```
-{Symbol} advanced options analysis — Source: Longbridge Securities
+{Symbol} advanced options analysis; Source: Longbridge Securities
 
 [Vol regime]
 - ATM near-month IV: X%  |  ATM far-month IV: X%  |  Term ratio: X
@@ -97,5 +97,5 @@ Re-hedge trigger (if delta-hedged): Delta drift ±{threshold}
 | ------------------------------- | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------- |
 | `command not found: longbridge` | 切换到 MCP；若不可用，请安装 longbridge-terminal | 切換至 MCP；若不可用，請安裝 longbridge-terminal | Fall back to MCP; if unavailable, install longbridge-terminal |
 | stderr `not logged in`          | 请执行 `longbridge auth login`                   | 請執行 `longbridge auth login`                   | Run `longbridge auth login`                                   |
-| Only one expiry available       | 无法构建日历价差，仅有单一到期日                 | 無法構建日曆價差，僅有單一到期日                 | Cannot build calendar spread — only one expiry available      |
+| Only one expiry available       | 无法构建日历价差，仅有单一到期日                 | 無法構建日曆價差，僅有單一到期日                 | Cannot build calendar spread; only one expiry available      |
 | Kline < 60 bars                 | HV 样本不足，波动率比较仅供参考                  | HV 樣本不足，波動率比較僅供參考                  | HV sample insufficient; vol comparison is indicative only     |

@@ -24,7 +24,7 @@ plugin:
 # Apple Notes search & connection-discovery
 
 `apple-notes` is an MCP server for semantic search and connection-discovery across the
-user's own Apple Notes — hybrid search, Swanson-ABC bridges, entity threads, and cited
+user's own Apple Notes; hybrid search, Swanson-ABC bridges, entity threads, and cited
 synthesis over everything they've written. Embeddings, search, BM25, clustering, and
 bridges run **on-device**; only **synthesis generation** calls an LLM (local OR cloud,
 the user's choice).
@@ -45,11 +45,11 @@ tool to reach for, since the server exposes many.
 
 ## First: is the MCP connected?
 
-If `apple-notes` tools are not available, the server isn't registered yet — do the
+If `apple-notes` tools are not available, the server isn't registered yet; do the
 **Setup** below before anything else. If tools exist but a search returns "not indexed"
 or empty, run `index-notes` first (see Ranking caveats).
 
-## Setup (walk the user through this — it's the skill's real value)
+## Setup (walk the user through this: it's the skill's real value)
 
 The server reads Apple Notes' SQLite store directly, so the **bun** binary needs Full
 Disk Access. Steps, in order:
@@ -79,7 +79,7 @@ Disk Access. Steps, in order:
 5. **Restart the client**, then tell the user to ask **"Index my Apple Notes"** (or call
    `index-notes`). First index of ~1,800 notes takes a few seconds.
 
-## Tool map — which tool for which job
+## Tool map: which tool for which job
 
 | Tool | Use when |
 |------|----------|
@@ -91,7 +91,7 @@ Disk Access. Steps, in order:
 | `list-folders` | All folders + note counts. |
 | `list-tags` / `search-by-tag` | `#hashtag` inventory / notes carrying a given tag. |
 | `related-notes` | Notes related to a given one via shared tags, `[[wikilinks]]`, and vector similarity. "Show me related notes." |
-| `bridge-notes` | **Swanson-ABC bridges** — non-obvious connections: pairs (A, C) not directly similar but both strongly tied to a shared intermediary B. "Find non-obvious connections across my notes." Optional `folder`, `limit`. No LLM. |
+| `bridge-notes` | **Swanson-ABC bridges**; non-obvious connections: pairs (A, C) not directly similar but both strongly tied to a shared intermediary B. "Find non-obvious connections across my notes." Optional `folder`, `limit`. No LLM. |
 | `feed` | Ranked evidence-first connection stream (bridges + abstraction pairs + entity threads) as JSON. Optional `limit`. |
 | `entity-notes` / `list-entities` | "Where else do I talk about Mercedes?" Entity chips → notes by mention weight. **Needs the optional entity graph db** (`~/.mcp-apple-notes/layered_graph.db`); if absent these report how to generate it. |
 | `get-tables` | Pull pipe/tab tables out of a note. |
@@ -107,7 +107,7 @@ which writes a grounded answer with inline `[n]` citations back to source notes.
 
 - **Index before the first search.** No index → empty/garbage results; run `index-notes`.
 - **Auto re-index:** each search does ~1ms change detection and kicks ONE background
-  incremental index if notes changed — search returns immediately from the current index
+  incremental index if notes changed; search returns immediately from the current index
   and catches up when the job lands. If a just-edited note is missing, it's the catch-up
   lag; re-run the search.
 - **Score:** `score = RRF(vector, BM25) × title_boost × recency_factor`.
@@ -116,7 +116,7 @@ which writes a grounded answer with inline `[n]` citations back to source notes.
 - **Synthesis is the only cloud-capable part.** It needs an LLM: local via LM Studio /
   Ollama (`SYNTH_BASE_URL=http://localhost:1234/v1 SYNTH_MODEL=<model> OPENAI_API_KEY=local`,
   notes stay on-device) or real OpenAI (funded `OPENAI_API_KEY`, defaults to `gpt-4o-mini`).
-  Everything else — embeddings, search, BM25, clustering, bridges, entities — is on-device.
+  Everything else; embeddings, search, BM25, clustering, bridges, entities; is on-device.
 
 ## Example
 

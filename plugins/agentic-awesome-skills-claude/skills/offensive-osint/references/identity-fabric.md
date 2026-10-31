@@ -1,11 +1,11 @@
-# Identity Fabric — Concrete Endpoints
+# Identity Fabric: Concrete Endpoints
 
 > **AAS adaptation:** Read the authorization gate in [the skill](../SKILL.md) before any target request, credential use, or data collection. These are reference examples, not an instruction to run a sweep. Select only explicitly approved targets and techniques; set request, time, byte and concurrency limits and stop on errors or scope changes. Preserve TLS verification. Treat discoveries, pattern matches and historical provider claims as leads, not verified ownership, permission or severity. Minimize personal data and redact credentials before reports; do not send private evidence to public services. Prices, quotas, API shapes and tool availability require current official documentation. Changes and original source hashes are recorded in [the notice](../UPSTREAM-NOTICE.md).
 
 
 > Reference content for the `offensive-osint` skill. Originally §22 of the monolithic SKILL.md (refactored 2026-05-02 for size/load efficiency).
 
-## 22. Identity Fabric — Concrete Endpoints
+## 22. Identity Fabric: Concrete Endpoints
 
 Methodology lives in the companion `osint-methodology` skill §11. This is the URL/payload reference.
 
@@ -21,7 +21,7 @@ Response field `issuer` contains the tenant GUID. GUID regex:
 ```
 Detectability: low.
 
-**getuserrealm.srf — managed vs federated probe:**
+**getuserrealm.srf; managed vs federated probe:**
 ```
 GET https://login.microsoftonline.com/getuserrealm.srf?login=<probe-user>@<domain>
 ```
@@ -49,7 +49,7 @@ Microsoft Exchange Online IPs (truncated common ranges): `40.96.0.0/13`, `52.96.
 
 Microsoft IP space is only a hosting lead: shared infrastructure and stale records prevent tenant confirmation from an IP match alone. Corroborate current tenant metadata and official domain bindings. Live DNS lookup is an active request to resolvers, not cached passive evidence.
 
-**GetCredentialType — user-enum (deep mode only):**
+**GetCredentialType; user-enum (deep mode only):**
 ```
 POST https://login.microsoftonline.com/common/GetCredentialType
 Content-Type: application/json
@@ -188,11 +188,11 @@ for sub in "" "-my" "-admin"; do
 done
 ```
 
-**Reading the result correctly:** `HTTP 200` from these probes is **not sufficient to prove the tenant exists** (Microsoft serves a generic redirect-to-auth page) — it does **NOT** mean anonymous access is granted to the tenant's content. Distinguish:
+**Reading the result correctly:** `HTTP 200` from these probes is **not sufficient to prove the tenant exists** (Microsoft serves a generic redirect-to-auth page); it does **NOT** mean anonymous access is granted to the tenant's content. Distinguish:
 - 200 → service response only; corroborate tenant identity and intended content access (INFO).
 - An anonymous-share URL is a candidate; prove unintended sensitive content access using minimum approved evidence, without exposing the share token.
 - 401/403 → rejected request only; tenant identity and resource existence remain unconfirmed.
-- 404 / NXDOMAIN → tenant not provisioned at this stem (or vanity-named — check known stems from cert transparency).
+- 404 / NXDOMAIN → tenant not provisioned at this stem (or vanity-named; check known stems from cert transparency).
 
 PowerShell:
 ```powershell
@@ -263,10 +263,10 @@ curl -sS -m 10 -X POST "$T/graphql" \
 Iterate over a candidate-field wordlist (use SecLists `Discovery/Web-Content/graphql.txt` or `clairvoyance` library's seed list). Each suggestion reveals real field names. Stop at the approved finite request/depth/byte budget; suggestions alone do not prove restricted data access.
 
 **Tooling:**
-- **Clairvoyance** (`pip install clairvoyance`) — automated field-suggestion enumerator. `clairvoyance -w wordlist.txt -o schema.json https://target.example/graphql`.
-- **GraphQL-Cop** — auditor that probes for introspection, batching, depth-limit, suggestion config. `pip install graphql-cop`.
-- **InQL** (Burp extension) — Burp Suite extension for GraphQL endpoint analysis.
-- **GraphQL Voyager** — visualize once schema is reconstructed.
+- **Clairvoyance** (`pip install clairvoyance`); automated field-suggestion enumerator. `clairvoyance -w wordlist.txt -o schema.json https://target.example/graphql`.
+- **GraphQL-Cop**; auditor that probes for introspection, batching, depth-limit, suggestion config. `pip install graphql-cop`.
+- **InQL** (Burp extension); Burp Suite extension for GraphQL endpoint analysis.
+- **GraphQL Voyager**; visualize once schema is reconstructed.
 
 **Other GraphQL-when-introspection-disabled techniques:**
 

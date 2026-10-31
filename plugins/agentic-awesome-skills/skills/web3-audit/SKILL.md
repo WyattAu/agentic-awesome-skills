@@ -41,7 +41,7 @@ sources: public_research, community
 1. **TVL < $500K** → max payout capped too low for effort
 2. **2+ top-tier audits** (Halborn, ToB, Cyfrin, OpenZeppelin) on simple protocol → bugs already found
 3. **Protocol < 500 lines, single A→B→C flow** → minimal attack surface
-4. **Formula**: `max_realistic_payout = min(10% × TVL, program_cap)` — if < $10K, skip
+4. **Formula**: `max_realistic_payout = min(10% × TVL, program_cap)`; if < $10K, skip
 
 **Soft kill:** OZ/ToB/Cyfrin audit on current version + codebase > 500K LOC → expect 40+ hours for maybe 1 finding. Only proceed if bounty floor > $50K AND you have protocol-specific expertise.
 
@@ -77,7 +77,7 @@ If A updated but B isn't → Real Value appears larger → phantom value
 
 ### Root Cause Patterns
 
-**Variant 1: Phantom Yield** (Yeet protocol — 35 duplicate reports)
+**Variant 1: Phantom Yield** (Yeet protocol; 35 duplicate reports)
 ```solidity
 function startUnstake(uint256 amount) external {
     totalSupply -= amount;  // decremented BEFORE transfer
@@ -92,7 +92,7 @@ function claimRedemption(uint256 tokenId) external {
     if (transmuter.balance >= amount) {
         transmuter.transfer(user, amount);
         _burn(tokenId);
-        return;  // EARLY RETURN — cumulativeEarmarked, _redemptionWeight, totalDebt never updated
+        return;  // EARLY RETURN; cumulativeEarmarked, _redemptionWeight, totalDebt never updated
     }
     // Slow path: updates all state vars correctly
     alchemist.redeem(...);
@@ -162,7 +162,7 @@ function initialize(address _owner) public {  // MISSING: initializer modifier
 
 ### Grep Patterns
 ```bash
-# Find sibling function families — do ALL have the same modifier set?
+# Find sibling function families: do ALL have the same modifier set?
 grep -rn "function vote\|function poke\|function reset\|function update\|function claim\|function harvest" contracts/ -A2
 
 # Ownership check: existence vs ownership?
@@ -247,7 +247,7 @@ grep -rn "function deposit\|function mint\|function withdraw\|function redeem" c
 
 ### Root Cause
 ```solidity
-// VeChain Stargate — post-exit reward drain:
+// VeChain Stargate; post-exit reward drain:
 function _claimableDelegationPeriods(address delegator) internal view returns (uint256) {
     if (endPeriod > nextClaimablePeriod) {  // BUG: should be >=
         return 0;  // exited users get nothing
@@ -332,10 +332,10 @@ uint price = getUniswapSpotPrice(token);  // flash loan manipulatable
 # Missing staleness check
 grep -rn "latestRoundData" contracts/ -A5 | grep -v "updatedAt\|timestamp"
 
-# Pyth price usage — confidence interval checked?
+# Pyth price usage: confidence interval checked?
 grep -rn "getPriceUnsafe\|getPrice\b" contracts/ -A8 | grep -v "conf\|confidence"
 
-# TWAP windows — short TWAP flag
+# TWAP windows: short TWAP flag
 grep -rn "secondsAgo\|TWAP\|cardinality" contracts/ -A5
 ```
 
@@ -345,7 +345,7 @@ grep -rn "secondsAgo\|TWAP\|cardinality" contracts/ -A5
 
 ### Exchange Rate Manipulation (near-empty vault)
 ```solidity
-// VULNERABLE — first depositor attack:
+// VULNERABLE; first depositor attack:
 // 1. Attacker deposits 1 wei → gets 1 share
 // 2. Attacker donates large amount directly (transfer, not deposit)
 // 3. Exchange rate: 1 share = (1 + donation) assets
@@ -394,7 +394,7 @@ function withdraw(uint256 amount) external {
     balances[msg.sender] -= amount;  // EFFECT after → reentrancy window
 }
 
-// CORRECT (CEI — Checks, Effects, Interactions):
+// CORRECT (CEI; Checks, Effects, Interactions):
 function withdraw(uint256 amount) external {
     require(balances[msg.sender] >= amount);  // CHECK
     balances[msg.sender] -= amount;            // EFFECT
@@ -430,7 +430,7 @@ grep -rn "nonReentrant\|ReentrancyGuard\|_notEntered" contracts/
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

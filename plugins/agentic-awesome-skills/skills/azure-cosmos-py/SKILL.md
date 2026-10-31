@@ -19,7 +19,7 @@ Do not invoke a step that requires one of these files. Obtain the original mater
 
 # Azure Cosmos DB SDK for Python
 
-Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database.
+Client library for Azure Cosmos DB NoSQL API; globally distributed, multi-model database.
 
 ## Installation
 

@@ -10,7 +10,7 @@ date_added: "2026-03-04"
 
 ## Overview
 
-This skill transforms weak, vague, or inconsistent prompts into precision-engineered instructions that reliably produce high-quality outputs from any LLM (Claude, Gemini, GPT-4, Llama, etc.). It applies systematic prompt engineering frameworks — from zero-shot to few-shot, chain-of-thought, and structured output patterns.
+This skill transforms weak, vague, or inconsistent prompts into precision-engineered instructions that reliably produce high-quality outputs from any LLM (Claude, Gemini, GPT-4, Llama, etc.). It applies systematic prompt engineering frameworks; from zero-shot to few-shot, chain-of-thought, and structured output patterns.
 
 ## When to Use This Skill
 
@@ -39,11 +39,11 @@ Before optimizing, identify which problem pattern applies:
 
 Every optimized prompt should have:
 
-- **R** — **Role**: Who is the AI in this interaction?
-- **S** — **Situation**: What context does it need?
-- **C** — **Constraints**: What are the rules and limits?
-- **I** — **Instructions**: What exactly should it do?
-- **T** — **Template**: What should the output look like?
+- **R**; **Role**: Who is the AI in this interaction?
+- **S**; **Situation**: What context does it need?
+- **C**; **Constraints**: What are the rules and limits?
+- **I**; **Instructions**: What exactly should it do?
+- **T**; **Template**: What should the output look like?
 
 **Before (weak prompt):**
 ```
@@ -105,7 +105,7 @@ Review: "[your review here]" ->
 
 ```
 Extract the following information from the text below and return it as valid JSON only.
-Do not include any explanation or markdown — just the raw JSON object.
+Do not include any explanation or markdown; just the raw JSON object.
 
 Schema:
 {
@@ -151,9 +151,9 @@ what it does, how it works, and any potential issues you might find."
 - ✅ **Do:** Test prompts with edge cases (empty input, unusual data)
 - ✅ **Do:** Version your system prompts in source control
 - ✅ **Do:** Add "think step by step" for math, logic, or multi-step tasks
-- ❌ **Don't:** Use negative-only instructions ("don't be verbose") — add positive alternatives
-- ❌ **Don't:** Assume the model knows your codebase context — always include it
-- ❌ **Don't:** Use the same prompt across different models without testing — they behave differently
+- ❌ **Don't:** Use negative-only instructions ("don't be verbose"); add positive alternatives
+- ❌ **Don't:** Assume the model knows your codebase context; always include it
+- ❌ **Don't:** Use the same prompt across different models without testing; they behave differently
 
 ## Prompt Audit Checklist
 

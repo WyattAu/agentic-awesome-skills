@@ -97,7 +97,7 @@ onMounted(() => {
 })
 ```
 
-Use `setup()` with `onMounted`, NOT `enhanceApp()` — DOM doesn't exist during SSR.
+Use `setup()` with `onMounted`, NOT `enhanceApp()`; DOM doesn't exist during SSR.
 
 ## Click-to-Zoom for Mermaid Diagrams
 
@@ -146,10 +146,10 @@ Output goes to `wiki-site/.vitepress/dist/`.
 
 ## Known Gotchas
 
-- Mermaid renders async — SVGs don't exist when `onMounted` fires. Must poll.
-- `isCustomElement` compiler option for bare `<T>` causes worse crashes — do NOT use it
-- Node text in Mermaid uses inline `style` with highest specificity — CSS alone won't fix it
-- `enhanceApp()` runs during SSR where `document` doesn't exist — use `setup()` only
+- Mermaid renders async; SVGs don't exist when `onMounted` fires. Must poll.
+- `isCustomElement` compiler option for bare `<T>` causes worse crashes; do NOT use it
+- Node text in Mermaid uses inline `style` with highest specificity; CSS alone won't fix it
+- `enhanceApp()` runs during SSR where `document` doesn't exist; use `setup()` only
 
 ### When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

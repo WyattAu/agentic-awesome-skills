@@ -423,7 +423,7 @@ Long text: 1.5-1.75
 
 ---
 
-> **Remember:** If users can't read your text, your app is broken. Typography isn't decoration—it's the primary interface. Test on real devices, in real conditions, with accessibility settings enabled.
+> **Remember:** If users can't read your text, your app is broken. Typography isn't decoration-it's the primary interface. Test on real devices, in real conditions, with accessibility settings enabled.
 
 Official spacing reference: https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html .
 RN Text normally enables allowFontScaling by default; fontSize alone does not disable it.

@@ -220,9 +220,9 @@ For each platform, use WebFetch to search and assess presence:
 4. Check: `reddit.com/user/[brand-name]` for official account
 5. Note: Thread count, dominant subreddits, sentiment (positive/negative/neutral), recommendation frequency
 
-**Wikipedia Check (IMPORTANT — use BOTH methods to avoid false negatives):**
+**Wikipedia Check (IMPORTANT; use BOTH methods to avoid false negatives):**
 
-**Method 1 — Python API check (MOST RELIABLE, do this FIRST):**
+**Method 1; Python API check (MOST RELIABLE, do this FIRST):**
 Write the exact brand as a JSON string field `brand` in `brand-input.json` using a structured file writer. Never paste report or website content into command source. Run this as a reviewed Python file, without a shell:
 
 ```python
@@ -250,14 +250,14 @@ r2.raise_for_status()
 wd = r2.json()
 entities = wd.get('search', [])
 if entities:
-    print(f'WIKIDATA ENTRY: {entities[0].get("id", "")} — {entities[0].get("description", "")}')
+    print(f'WIKIDATA ENTRY: {entities[0].get("id", "")}; {entities[0].get("description", "")}')
 ```
 
-**Method 2 — Direct URL check (backup verification):**
-1. WebFetch: `https://en.wikipedia.org/wiki/[Brand_Name]` — check if the page loads (not a redirect to search)
+**Method 2; Direct URL check (backup verification):**
+1. WebFetch: `https://en.wikipedia.org/wiki/[Brand_Name]`; check if the page loads (not a redirect to search)
 2. WebFetch: `https://en.wikipedia.org/wiki/[Founder_Name]` for founder article
 
-**Method 3 — Search (least reliable, use only for supplemental info):**
+**Method 3; Search (least reliable, use only for supplemental info):**
 1. Search: `[brand name] site:wikipedia.org`
 2. Search: `[brand name] site:wikidata.org`
 

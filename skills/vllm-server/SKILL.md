@@ -20,7 +20,7 @@ metadata:
 
 # vLLM Server Management
 
-Deploy production-grade LLM inference servers with vLLM — the fastest open-source LLM serving engine with PagedAttention and continuous batching.
+Deploy production-grade LLM inference servers with vLLM; the fastest open-source LLM serving engine with PagedAttention and continuous batching.
 
 ## When to Use This Skill
 
@@ -221,9 +221,9 @@ curl http://localhost:8000/metrics  # Prometheus metrics
 - Use `--gpu-memory-utilization 0.90` to leave headroom for CUDA kernels.
 - Pin model versions with `--revision` for reproducible deployments.
 - Set `HF_HUB_OFFLINE=1` in production to prevent unexpected downloads.
-- Use AWQ or GPTQ quantization before tensor parallelism — lower VRAM first.
+- Use AWQ or GPTQ quantization before tensor parallelism; lower VRAM first.
 - Enable `--enable-chunked-prefill` for long-context workloads.
-- Monitor `gpu_cache_usage_perc` — above 95% causes queuing.
+- Monitor `gpu_cache_usage_perc`; above 95% causes queuing.
 
 ## Related Skills
 

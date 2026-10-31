@@ -218,7 +218,7 @@ REST reference: `https://docs.apify.com/api/v2`. OpenAPI spec: `https://apify.co
 
 ## 7. Best practices
 
-- **Set timeouts:** pass `timeoutSecs` as a run option / query parameter on `.call()` or `.start()`, or use `waitSecs` on `.call()`. Never put `timeoutSecs` in Actor input — it is a run option and an Actor whose schema rejects unknown fields will fail on it.
+- **Set timeouts:** pass `timeoutSecs` as a run option / query parameter on `.call()` or `.start()`, or use `waitSecs` on `.call()`. Never put `timeoutSecs` in Actor input; it is a run option and an Actor whose schema rejects unknown fields will fail on it.
 - **Paginate large datasets:** use `limit` and `offset` when retrieving dataset items.
 - **Reuse clients:** create one `ApifyClient` instance and reuse it across calls.
 - **Handle Actor-specific input:** every Actor has its own input schema. Use `fetch-actor-details` MCP tool or append `.md` to the Actor's Store URL to get the schema before constructing input.

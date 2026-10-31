@@ -222,7 +222,7 @@ spec:
 ## Cluster Autoscaler for GPU Nodes
 
 ```bash
-# AWS EKS — enable cluster autoscaler for GPU node group
+# AWS EKS: enable cluster autoscaler for GPU node group
 helm install cluster-autoscaler autoscaler/cluster-autoscaler \
   --namespace kube-system \
   --set autoDiscovery.clusterName=my-cluster \

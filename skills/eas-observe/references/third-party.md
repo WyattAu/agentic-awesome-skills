@@ -2,7 +2,7 @@
 
 This reference is for **package authors**, not app developers. It describes how a library ships an optional EAS Observe integration so that apps using the library get events about problems that application code cannot detect on its own.
 
-> Source: https://docs.expo.dev/eas/observe/integrations/third-party/ — consult this page for the latest guidance.
+> Source: https://docs.expo.dev/eas/observe/integrations/third-party/; consult this page for the latest guidance.
 
 App-side setup lives in [`./setup.md`](./setup.md). Querying the resulting events is in [`./queries.md`](./queries.md).
 
@@ -21,7 +21,7 @@ Do not use it for general product analytics or for anything the app author could
 - **Expo SDK 57 or later.** `Observe.registerIntegration()` is not available earlier.
 - The consuming app must already have `expo-observe` installed and a build produced.
 
-## Step 1 — Depend on `expo-observe` optionally
+## Step 1: Depend on `expo-observe` optionally
 
 The package must keep working when `expo-observe` is absent. Declare it as an **optional peer dependency** plus a dev dependency for types and tests. Never make it a required runtime dependency.
 
@@ -46,7 +46,7 @@ try {
 }
 ```
 
-## Step 2 — Declare the integration config
+## Step 2: Declare the integration config
 
 Use declaration merging to add your integration key to `ObserveIntegrationsConfig`:
 
@@ -75,7 +75,7 @@ Observe.configure({
 });
 ```
 
-## Step 3 — Register the integration
+## Step 3: Register the integration
 
 `Observe.registerIntegration(name, callback)` invokes the callback once, when the named integration config becomes available. The callback does not run when the key is omitted or set to `false`.
 
@@ -108,7 +108,7 @@ initObserveIntegration();
 
 Note the `config === true` normalization: the key accepts either a boolean or an options object, so collapse `true` to `{}` before using it.
 
-## Step 4 — Log events
+## Step 4: Log events
 
 Emit through `Observe.logEvent()` when the package detects an actionable issue. Guard on both module presence and enablement, so a disabled integration costs nothing.
 

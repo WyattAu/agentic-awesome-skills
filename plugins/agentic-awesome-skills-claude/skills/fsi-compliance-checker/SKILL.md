@@ -18,7 +18,7 @@ license_source: "https://github.com/timwukp/agent-skills-best-practice/blob/main
 
 ## Overview
 
-Maps a concrete change (code diff, architecture design, IaC, pipeline config) to the specific controls it touches in financial services compliance frameworks — PCI-DSS v4.0.1 for payment card data and MAS TRM for Singapore-regulated institutions — and reports gaps with actionable remediation. This is engineering-level compliance triage: it helps teams catch violations before audit, but it does not replace a qualified assessor (QSA) or the institution's compliance function. Say so in every report.
+Maps a concrete change (code diff, architecture design, IaC, pipeline config) to the specific controls it touches in financial services compliance frameworks; PCI-DSS v4.0.1 for payment card data and MAS TRM for Singapore-regulated institutions; and reports gaps with actionable remediation. This is engineering-level compliance triage: it helps teams catch violations before audit, but it does not replace a qualified assessor (QSA) or the institution's compliance function. Say so in every report.
 
 ## When to Use This Skill
 
@@ -48,7 +48,7 @@ Identify what the diff/design actually touches: data elements (card data? custom
 
 ### Step 3: Assess applicable controls
 
-Select the applicable controls from the loaded reference file(s) — typically 5-15 controls, not the whole framework. List what you ruled out and why (one line each) so the scoping is auditable. Assess each as `Supported by reviewed evidence` / `Gap` / `Needs evidence` (can't tell from the artifact — name the evidence required).
+Select the applicable controls from the loaded reference file(s); typically 5-15 controls, not the whole framework. List what you ruled out and why (one line each) so the scoping is auditable. Assess each as `Supported by reviewed evidence` / `Gap` / `Needs evidence` (can't tell from the artifact; name the evidence required).
 
 ### Step 4: Report
 
@@ -58,7 +58,7 @@ Every Gap gets: the control ID, what's wrong in this specific change, concrete r
 # Compliance Review: [change title]
 **Frameworks:** [PCI-DSS v4.0.1 / MAS TRM 2021] · **Date:** [YYYY-MM-DD]
 **Scope:** [what was reviewed: files, design doc, pipeline]
-> Engineering triage only — not a substitute for QSA assessment or the compliance function.
+> Engineering triage only; not a substitute for QSA assessment or the compliance function.
 
 ## Data & Boundary Analysis
 - Data elements touched: [e.g. PAN (masked), customer NRIC, none]
@@ -70,7 +70,7 @@ Every Gap gets: the control ID, what's wrong in this specific change, concrete r
 | 1 | [PCI 3.5.1] | Gap | Critical | [specific issue in this change] | [specific fix] |
 
 ## Ruled Out (not applicable)
-- [Control area] — [one-line reason]
+- [Control area]; [one-line reason]
 
 ## Evidence Needed
 - [Control]: [what artifact would demonstrate compliance]
@@ -86,7 +86,7 @@ Offer to turn findings into backlog items with the control ID in each story for 
 
 **User**: "Is this PCI-DSS compliant: we log the full request body of card authorization calls for debugging?"
 
-**Skill**: Loads pci-dss.md → Critical findings against 3.3.1 (CVV must never be stored post-authorization — logs are storage), 3.4.1 (PAN display masking), 3.5.1 (PAN unreadable at rest); remediation: remove the log line or apply a field-allowlist redaction filter; flags downstream log-pipeline scoping (10.3.x); QSA disclaimer included.
+**Skill**: Loads pci-dss.md → Critical findings against 3.3.1 (CVV must never be stored post-authorization; logs are storage), 3.4.1 (PAN display masking), 3.5.1 (PAN unreadable at rest); remediation: remove the log line or apply a field-allowlist redaction filter; flags downstream log-pipeline scoping (10.3.x); QSA disclaimer included.
 
 ### Example 2: Cloud migration
 
@@ -96,9 +96,9 @@ Offer to turn findings into backlog items with the control ID in each story for 
 
 ## Common FSI Engineering Triggers
 
-Changes that almost always have compliance impact — check proactively when they appear in a diff:
+Changes that almost always have compliance impact; check proactively when they appear in a diff:
 
-- Logging statements near payment or authentication flows (CVV must not be stored after authorization; avoid full PAN logs and evaluate any storage against the applicable controls; MAS TRM requires security event logging — both directions matter)
+- Logging statements near payment or authentication flows (CVV must not be stored after authorization; avoid full PAN logs and evaluate any storage against the applicable controls; MAS TRM requires security event logging; both directions matter)
 - New data stores or caches receiving customer or card data (encryption at rest, retention, residency)
 - Authentication/session changes (MFA requirements, session timeout, credential storage)
 - New third-party SDKs or API integrations (outsourcing/vendor controls, data flows leaving the boundary)
@@ -109,7 +109,7 @@ Changes that almost always have compliance impact — check proactively when the
 
 - Cite control IDs precisely (e.g. "PCI-DSS 8.3.6", "MAS TRM 9.1.1") so findings are traceable in audit tooling; verify each ID in the official version; the bundled MAS topic map is not paragraph-level authority.
 - Severity discipline: don't inflate. A missing comment is not a Critical; unencrypted PAN at rest is.
-- When the reviewed artifact supports a control, state that limited evidence result per control — "no findings" plus the checked-control list is a useful audit artifact.
+- When the reviewed artifact supports a control, state that limited evidence result per control; "no findings" plus the checked-control list is a useful audit artifact.
 - Never output real card numbers, even as examples; use the standard test PANs (e.g. 4111 1111 1111 1111) when illustrating.
 - Read-only: this skill reviews and reports; it never modifies code, infrastructure, or configuration.
 

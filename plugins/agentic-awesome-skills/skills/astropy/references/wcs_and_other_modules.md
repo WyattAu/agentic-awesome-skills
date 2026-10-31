@@ -1,4 +1,4 @@
-# astropy.wcs and other modules — Reference
+# astropy.wcs and other modules: Reference
 
 This file is a placeholder for the extended `astropy.wcs` (and related modules) reference promised in the skill workflow.
 

@@ -8,7 +8,7 @@ version: "1.0"
 tags: [analysis, diagnostics, meta, root-cause, project-health, session-review]
 ---
 
-# /analyze-project — Root Cause Analyst Workflow
+# /analyze-project: Root Cause Analyst Workflow
 
 Analyze AI-assisted coding sessions in `~/.gemini/antigravity/brain/` and produce a report that explains not just **what happened**, but **why it happened**, **who/what caused it**, and **what should change next time**.
 
@@ -177,9 +177,9 @@ Do not punish short prompts by default; a narrow, obvious task can still have hi
 
 Classify scope change into:
 
-- **Human-added scope** — new asks beyond the original task
-- **Necessary discovered scope** — work required to complete the original task correctly
-- **Agent-introduced scope** — likely unnecessary work introduced by the agent
+- **Human-added scope**; new asks beyond the original task
+- **Necessary discovered scope**; work required to complete the original task correctly
+- **Agent-introduced scope**; likely unnecessary work introduced by the agent
 
 Record:
 - `scope_change_type_primary`
@@ -331,7 +331,7 @@ Examples of strong findings:
 
 Create `session_analysis_report.md` with this structure:
 
-# 📊 Session Analysis Report — [Project Name]
+# 📊 Session Analysis Report: [Project Name]
 
 **Generated**: [timestamp]  
 **Conversations Analyzed**: [N]  
@@ -345,7 +345,7 @@ Create `session_analysis_report.md` with this structure:
 | Completion Rate | X% | 🟢/🟡/🔴 |
 | Avg Scope Growth | X% | 🟢/🟡/🔴 |
 | Replan Rate | X% | 🟢/🟡/🔴 |
-| Median Duration | Xm | — |
+| Median Duration | Xm | - |
 | Avg Session Severity | X | 🟢/🟡/🔴 |
 | High-Severity Sessions | X / N | 🟢/🟡/🔴 |
 

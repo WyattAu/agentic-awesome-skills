@@ -12,11 +12,11 @@ Apply only within the requested scope and current project conventions. Preserve 
 
 ## Overview
 
-Produce code that is correct, clear, appropriately robust, idiomatic and concise — in that priority order.
+Produce code that is correct, clear, appropriately robust, idiomatic and concise; in that priority order.
 This skill addresses two distinct inefficiency types that must be fixed independently:
 
-1. **Code-token inefficiency** — the artifact itself is bloated (unnecessary lines, boilerplate, over-abstraction)
-2. **Generation-token inefficiency** — how the agent operates during a session (full-file rewrites, unrequested files, prose padding before/after changes)
+1. **Code-token inefficiency**; the artifact itself is bloated (unnecessary lines, boilerplate, over-abstraction)
+2. **Generation-token inefficiency**; how the agent operates during a session (full-file rewrites, unrequested files, prose padding before/after changes)
 
 Both matter. Fixing only one is not enough.
 
@@ -38,7 +38,7 @@ Conciseness **never** wins over correctness or readability. If a compression wou
 
 ---
 
-## Workflow — apply to every coding task
+## Workflow: apply to every coding task
 
 ### Step 1: Commit to minimal correct shape BEFORE writing
 
@@ -86,7 +86,7 @@ Before presenting any code, scan it for:
 | Extra config/files/parameters not requested | Remove |
 | Unused import or variable | Remove |
 
-### Step 4: Guardrail check — run this before presenting
+### Step 4: Guardrail check: run this before presenting
 
 Ask yourself (silently):
 - [ ] Did I remove handling for a case that **can** actually happen?
@@ -95,7 +95,7 @@ Ask yourself (silently):
 
 If yes to any: undo that specific compression and keep the rest.
 
-### Step 5: Present output — generation-token rules
+### Step 5: Present output: generation-token rules
 
 **Always:**
 - Edit files via targeted patches/diffs, not full rewrites, unless the file is new or the change touches >70% of lines
@@ -103,9 +103,9 @@ If yes to any: undo that specific compression and keep the rest.
 
 **Never:**
 - Generate unrequested files (tests, READMEs, configs, types) unless the user asked
-- Add prose blocks before/after code explaining what you're about to do or just did — just do it
+- Add prose blocks before/after code explaining what you're about to do or just did; just do it
 - Re-explain the user's own requirement back to them before writing
-- Restate what changed in a paragraph after showing the diff — the diff is self-evident
+- Restate what changed in a paragraph after showing the diff; the diff is self-evident
 
 ---
 
@@ -130,7 +130,7 @@ These apply in every language. The language-specific files extend this list.
 
 ### Scaffolding
 - No placeholder TODOs unless the user asked for a scaffold
-- No `// TODO: add error handling` — either add it or don't
+- No `// TODO: add error handling`; either add it or don't
 - No empty catch blocks "just in case"
 - No parameters the current callers don't use
 
@@ -147,7 +147,7 @@ These govern how you operate inside the session, not just what you produce:
 
 ### Unrequested artifacts
 - Create tests and supporting files when necessary to deliver and verify the requested change; avoid unrelated additions
-- If you believe a test file would be valuable, offer it in one sentence after the main output — don't generate it unasked
+- If you believe a test file would be valuable, offer it in one sentence after the main output; don't generate it unasked
 
 ### Prose overhead
 - No "Here's what I'm going to do:" preambles

@@ -9,7 +9,7 @@ Enriching a company, domain, or authorized contact list with public data. Use th
 
 `google-serp` is your primary enrichment tool. Reasons:
 
-- **Google has already extracted the structured fields you want.** `.knowledge_graph` carries HQ, founder, founded year, parent company, employees, industry. `.organic_results[]` titles and snippets carry person → role → employer mappings (LinkedIn titles are literally `Name — Role at Company`). `.local_results[]` carry phone/address/hours.
+- **Google has already extracted the structured fields you want.** `.knowledge_graph` carries HQ, founder, founded year, parent company, employees, industry. `.organic_results[]` titles and snippets carry person → role → employer mappings (LinkedIn titles are literally `Name; Role at Company`). `.local_results[]` carry phone/address/hours.
 - **It avoids unnecessary direct access.** Many target sites gate, rate-limit, or restrict scraping. Google's snippets can answer public, high-level questions without rendering the target page.
 - **It's a broad public index.** Quoted queries (`--q '"info@example.com"'`, `--q '"+1 555 123 4567"'`, `--q '"Acme Corp"'`) can find publicly indexed business contact or company references.
 
@@ -24,7 +24,7 @@ The patterns below show the full chain so you understand when to escalate. Most 
 
 ## Person enrichment
 
-### Step 1 — SERP for role, employer, LinkedIn URL
+### Step 1: SERP for role, employer, LinkedIn URL
 
 ```bash
 hasdata google-serp --q '"Jane Doe" linkedin' --num 5 --raw \
@@ -36,15 +36,15 @@ The result usually looks like:
 
 ```json
 {
-  "title": "Jane Doe — Senior Engineer at Acme Corp | LinkedIn",
+  "title": "Jane Doe; Senior Engineer at Acme Corp | LinkedIn",
   "snippet": "San Francisco, CA · 500+ connections · Engineering @ Acme. Previously...",
   "link": "https://www.linkedin.com/in/janedoe"
 }
 ```
 
-You now have role, employer, location, LinkedIn URL, and a connection-count hint — without scraping anything. **Stop here unless a specific extra field is required.**
+You now have role, employer, location, LinkedIn URL, and a connection-count hint; without scraping anything. **Stop here unless a specific extra field is required.**
 
-### Step 2 — Refine with targeted SERP queries
+### Step 2: Refine with targeted SERP queries
 
 If step 1 didn't carry what you need, ask Google more specifically:
 
@@ -62,7 +62,7 @@ hasdata google-serp --q '"Jane Doe" bio OR background OR experience' --num 5 --r
   | jq -r '.organic_results[].snippet'
 ```
 
-### Step 3 — Web-scraping (only if SERP came up short)
+### Step 3: Web-scraping (only if SERP came up short)
 
 When SERP snippets truncated the field you need, or the user explicitly wants full profile content, first confirm the profile is public or the user has authorization to access it:
 
@@ -90,7 +90,7 @@ hasdata web-scraping --url "https://www.linkedin.com/in/janedoe" \
   }' --raw | jq .
 ```
 
-LinkedIn sometimes blocks the public preview; if it does, fall back to step 2 (combining SERP snippets) — it's almost always enough.
+LinkedIn sometimes blocks the public preview; if it does, fall back to step 2 (combining SERP snippets); it's almost always enough.
 
 ### Email lookup
 
@@ -113,7 +113,7 @@ for guess in "jane.doe" "jdoe" "jane" "j.doe" "janed"; do
   [ "$count" -gt 0 ] && echo "$guess@acme.com  (appears in SERP)"
 done
 
-# 4. Last resort — scrape the company's public contact / about / team pages for emails
+# 4. Last resort: scrape the company's public contact / about / team pages for emails
 hasdata web-scraping --url "https://acme.com/about" --extract-emails --raw \
   | jq -r '.emails // [] | .[]'
 ```
@@ -124,7 +124,7 @@ Always tell the user when an email is a pattern-guess vs. confirmed via SERP/scr
 
 ## Company enrichment
 
-### Step 1 — SERP knowledge_graph
+### Step 1: SERP knowledge_graph
 
 ```bash
 hasdata google-serp --q "Acme Corp" --num 5 --raw | jq '.knowledge_graph // {}'
@@ -132,7 +132,7 @@ hasdata google-serp --q "Acme Corp" --num 5 --raw | jq '.knowledge_graph // {}'
 
 `.knowledge_graph` typically contains: founder, founded (year), headquarters, parent_organization, ceo, employees (range), revenue, stock_price, industry, products. **For the majority of company enrichment requests, this single call is the entire answer.**
 
-### Step 2 — Targeted SERP for specific fields
+### Step 2: Targeted SERP for specific fields
 
 ```bash
 # Headquarters
@@ -157,7 +157,7 @@ hasdata google-serp \
   | jq -r '.organic_results[] | "\(.title)\t\(.link)"'
 ```
 
-### Step 3 — Web-scraping (only when SERP can't fill a specific field)
+### Step 3: Web-scraping (only when SERP can't fill a specific field)
 
 ```bash
 # Company About page → AI-extract structured fields
@@ -222,10 +222,10 @@ Only scrape the domain (`web-scraping --url "https://example.com"`) when you spe
 
 ## Tips for reliable enrichment
 
-- **Quote names to narrow text matches** — an exact phrase does not uniquely identify a person.
-- **Use `site:` aggressively** — `site:linkedin.com/in/`, `site:linkedin.com/company/`, `site:github.com`, `site:crunchbase.com`. Google's `site:` is the cheapest way to scope an enrichment search.
+- **Quote names to narrow text matches**; an exact phrase does not uniquely identify a person.
+- **Use `site:` aggressively**; `site:linkedin.com/in/`, `site:linkedin.com/company/`, `site:github.com`, `site:crunchbase.com`. Google's `site:` is the cheapest way to scope an enrichment search.
 - **Read the `.knowledge_graph`** before doing anything else for a company. If it's populated, you're often done.
-- **AI-extract over CSS selectors** when you do need to scrape — LinkedIn / Crunchbase / About-page markup changes constantly; AI extraction with field names + descriptions survives layout churn.
-- **Cross-source verify** — never enrich from a single source. If LinkedIn's title says "Acme Corp" and a `--q '"Jane Doe" "Acme Corp"'` SERP corroborates with multiple results, the results may still repeat the same underlying source; independently verify identity and recency.
-- **Mark guesses** — pattern-guessed emails, inferred locations, single-source roles should be flagged to the user as unverified.
-- **Respect privacy and authorization** — do not collect or infer personal contact details without a legitimate purpose and user authority.
+- **AI-extract over CSS selectors** when you do need to scrape; LinkedIn / Crunchbase / About-page markup changes constantly; AI extraction with field names + descriptions survives layout churn.
+- **Cross-source verify**; never enrich from a single source. If LinkedIn's title says "Acme Corp" and a `--q '"Jane Doe" "Acme Corp"'` SERP corroborates with multiple results, the results may still repeat the same underlying source; independently verify identity and recency.
+- **Mark guesses**; pattern-guessed emails, inferred locations, single-source roles should be flagged to the user as unverified.
+- **Respect privacy and authorization**; do not collect or infer personal contact details without a legitimate purpose and user authority.

@@ -215,9 +215,9 @@ foreach (var cs in connectionStrings.Value.ConnectionStrings)
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** when you want to poll manually or run operations in parallel
-3. **Use a deliberate credential chain** — prefer managed identity in production; never hardcode keys
+3. **Use a deliberate credential chain**; prefer managed identity in production; never hardcode keys
 4. **Handle `RequestFailedException`** for ARM API errors
-5. **Review the full desired state before `CreateOrUpdateAsync`** — repeated requests may converge but updates can change networking, retention and cost
+5. **Review the full desired state before `CreateOrUpdateAsync`**; repeated requests may converge but updates can change networking, retention and cost
 6. **Navigate hierarchy** via `Get*` methods (e.g., `account.GetCosmosDBSqlDatabases()`)
 
 ## Error Handling

@@ -80,11 +80,11 @@ Every code block must:
 
 ## Tools
 
-- **[Octolens](https://octolens.com)** — Find common questions for troubleshooting content
-- **Replit/CodeSandbox** — Embed runnable examples
-- **Excalidraw** — Architecture diagrams
+- **[Octolens](https://octolens.com)**; Find common questions for troubleshooting content
+- **Replit/CodeSandbox**; Embed runnable examples
+- **Excalidraw**; Architecture diagrams
 
 ## Related Skills
 
-- `developer-audience-context` — Understand skill level
-- `devrel-content` — General technical writing
+- `developer-audience-context`; Understand skill level
+- `devrel-content`; General technical writing

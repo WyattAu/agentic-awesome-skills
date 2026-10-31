@@ -230,7 +230,7 @@ Verify the complete artifact inventory against a manifest signed by a trusted pu
 ## Network Isolation for AI Services
 
 ```yaml
-# Kubernetes NetworkPolicy — isolate LLM API
+# Kubernetes NetworkPolicy: isolate LLM API
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -259,7 +259,7 @@ spec:
     ports:
     - protocol: TCP
       port: 9090
-  # Block egress to internet — prevent data exfiltration
+  # Block egress to internet: prevent data exfiltration
   # (allow only internal cluster traffic)
 ```
 
@@ -290,7 +290,7 @@ def log_llm_interaction(
         completion_tokens=completion_tokens,
         was_filtered=was_filtered,
         injection_detected=injection_detected,
-        # DO NOT log prompt/completion content — PII risk
+        # DO NOT log prompt/completion content: PII risk
     )
 ```
 
@@ -306,8 +306,8 @@ def log_llm_interaction(
 
 ## Best Practices
 
-- Never log raw prompts or completions — they may contain PII or sensitive data.
-- Treat LLM output as untrusted input — always encode before rendering in HTML.
+- Never log raw prompts or completions; they may contain PII or sensitive data.
+- Treat LLM output as untrusted input; always encode before rendering in HTML.
 - Use network policies to prevent LLM pods from making outbound internet calls.
 - Rotate API keys quarterly; use short-lived JWT tokens for service-to-service auth.
 - Run `modelscan` on any model downloaded from the internet before serving.

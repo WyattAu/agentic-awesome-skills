@@ -39,11 +39,11 @@ Create zero-dependency, animation-rich HTML presentations that run entirely in t
 
 ## Core Principles
 
-1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools.
-2. **Show, Don't Tell** — Generate visual previews, not abstract choices. People discover what they want by seeing it.
-3. **Distinctive Design** — No generic "AI slop." Every presentation must feel custom-crafted.
-4. **Progressive Disclosure** — Read lightweight style indexes first. For bold templates, use small preview cards for style previews and load the full `design.md` only after the user picks that template.
-5. **Fixed 16:9 Stage (NON-NEGOTIABLE)** — Every deck uses a 1920×1080 slide canvas scaled as a whole to the viewport. Slides must stay 16:9 on every screen, including phones. Do not reflow slide content to fit the device.
+1. **Zero Dependencies**; Single HTML files with inline CSS/JS. No npm, no build tools.
+2. **Show, Don't Tell**; Generate visual previews, not abstract choices. People discover what they want by seeing it.
+3. **Distinctive Design**; No generic "AI slop." Every presentation must feel custom-crafted.
+4. **Progressive Disclosure**; Read lightweight style indexes first. For bold templates, use small preview cards for style previews and load the full `design.md` only after the user picks that template.
+5. **Fixed 16:9 Stage (NON-NEGOTIABLE)**; Every deck uses a 1920×1080 slide canvas scaled as a whole to the viewport. Slides must stay 16:9 on every screen, including phones. Do not reflow slide content to fit the device.
 
 ## Design Aesthetics
 
@@ -77,7 +77,7 @@ These invariants apply to EVERY slide in EVERY presentation:
 - Slide visibility must be controlled by `.active` / `.visible` using `visibility`, `opacity`, and `pointer-events` from `viewport-base.css`. Do not use `display: none` / `display: block` for slide switching; later layout classes such as `.slide-content { display: flex; }` can override them and make every slide visible at once.
 - Use `clamp()` only for non-slide UI outside the stage, or for small fallback previews where a full stage is impractical.
 - Include `prefers-reduced-motion` support
-- Never negate CSS functions directly (`-clamp()`, `-min()`, `-max()` are silently ignored) — use `calc(-1 * clamp(...))` instead
+- Never negate CSS functions directly (`-clamp()`, `-min()`, `-max()` are silently ignored); use `calc(-1 * clamp(...))` instead
 
 **When generating, read `viewport-base.css` and include its full contents in every presentation.**
 
@@ -98,9 +98,9 @@ Baseline limits still apply: no scrolling, no overflow, no overlapping panels, a
 
 Determine what the user wants:
 
-- **Mode A: New Presentation** — Create from scratch. Go to Phase 1.
-- **Mode B: PPT Conversion** — Convert a .pptx file. Go to Phase 4.
-- **Mode C: Enhancement** — Improve an existing HTML presentation. Read it, understand it, enhance. **Follow Mode C modification rules below.**
+- **Mode A: New Presentation**; Create from scratch. Go to Phase 1.
+- **Mode B: PPT Conversion**; Convert a .pptx file. Go to Phase 4.
+- **Mode C: Enhancement**; Improve an existing HTML presentation. Read it, understand it, enhance. **Follow Mode C modification rules below.**
 
 ### Mode C: Modification Rules
 
@@ -120,20 +120,20 @@ When enhancing existing presentations, fixed-stage fitting is the biggest risk:
 
 **Ask ALL questions together** so the user fills everything out at once. If the current environment provides a native structured-question UI, use it; otherwise ask in one concise message with clearly numbered choices:
 
-**Question 1 — Purpose** (header: "Purpose"):
+**Question 1; Purpose** (header: "Purpose"):
 What is this presentation for? Options: Pitch deck / Teaching-Tutorial / Conference talk / Internal presentation
 
-**Question 2 — Length** (header: "Length"):
+**Question 2; Length** (header: "Length"):
 Approximately how many slides? Options: Short 5-10 / Medium 10-20 / Long 20+
 
-**Question 3 — Content** (header: "Content"):
+**Question 3; Content** (header: "Content"):
 Do you have content ready? Options: All content ready / Rough notes / Topic only
 
-**Question 4 — Density** (header: "Density"):
+**Question 4; Density** (header: "Density"):
 How dense should the deck feel? Options:
 
-- "Low density / speaker-led" — Big ideas, fewer words, more visual breathing room
-- "High density / reading-first" — More self-contained detail for async reading
+- "Low density / speaker-led"; Big ideas, fewer words, more visual breathing room
+- "High density / reading-first"; More self-contained detail for async reading
 
 **Do not ask about inline editing during Phase 1.** Users should not have to choose editing behavior before seeing a draft. Inline editing is a post-draft affordance: include it by default unless the user explicitly asks for a locked/export-only file.
 
@@ -147,13 +147,13 @@ If user selected "No images" → skip to Phase 2.
 
 If user provides an image folder:
 
-1. **Scan** — List all image files (.png, .jpg, .svg, .webp, etc.)
-2. **Inspect each image** — Use the agent's available image-understanding capability. If image reading is unavailable, use filenames/metadata and ask the user to clarify only when needed
-3. **Evaluate** — For each: what it shows, USABLE or NOT USABLE (with reason), what concept it represents, dominant colors
-4. **Co-design the outline** — Curated images inform slide structure alongside text. This is NOT "plan slides then add images" — design around both from the start (e.g., 3 screenshots → 3 feature slides, 1 logo → title/closing slide)
+1. **Scan**; List all image files (.png, .jpg, .svg, .webp, etc.)
+2. **Inspect each image**; Use the agent's available image-understanding capability. If image reading is unavailable, use filenames/metadata and ask the user to clarify only when needed
+3. **Evaluate**; For each: what it shows, USABLE or NOT USABLE (with reason), what concept it represents, dominant colors
+4. **Co-design the outline**; Curated images inform slide structure alongside text. This is NOT "plan slides then add images"; design around both from the start (e.g., 3 screenshots → 3 feature slides, 1 logo → title/closing slide)
 5. **Confirm the outline** using the same structured-question mechanism when available: "Does this slide outline and image selection look right?" Options: Looks good / Adjust images / Adjust outline
 
-**Logo in previews:** If a usable logo was identified, embed it (base64) into each style preview in Phase 2 — the user sees their brand styled three different ways.
+**Logo in previews:** If a usable logo was identified, embed it (base64) into each style preview in Phase 2; the user sees their brand styled three different ways.
 
 ---
 
@@ -233,7 +233,7 @@ If "Mix elements", ask for specifics.
 
 Generate the full presentation using content from Phase 1 (text, or text + curated images) and style from Phase 2.
 
-If images were provided, the slide outline already incorporates them from Step 1.2. If not, CSS-generated visuals (gradients, shapes, patterns) provide visual interest — this is a fully supported first-class path.
+If images were provided, the slide outline already incorporates them from Step 1.2. If not, CSS-generated visuals (gradients, shapes, patterns) provide visual interest; this is a fully supported first-class path.
 
 Apply the user's density choice throughout the deck:
 
@@ -263,9 +263,9 @@ If the user selected a self-generated custom wildcard, treat that preview's CSS 
 
 **Before generating, read these supporting files:**
 
-- [html-template.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/html-template.md) — HTML architecture and JS features
-- [viewport-base.css](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/viewport-base.css) — Mandatory CSS (include in full)
-- [animation-patterns.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/animation-patterns.md) — Animation reference for the chosen feeling
+- [html-template.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/html-template.md); HTML architecture and JS features
+- [viewport-base.css](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/viewport-base.css); Mandatory CSS (include in full)
+- [animation-patterns.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/animation-patterns.md); Animation reference for the chosen feeling
 
 **Key requirements:**
 
@@ -281,18 +281,18 @@ If the user selected a self-generated custom wildcard, treat that preview's CSS 
 
 When converting PowerPoint files:
 
-1. **Extract content** — Run `python scripts/extract-pptx.py <input.pptx> <output_dir>` (install python-pptx if needed: `pip install python-pptx`)
-2. **Confirm with user** — Present extracted slide titles, content summaries, and image counts
-3. **Style selection** — Proceed to Phase 2 for style discovery
-4. **Generate HTML** — Convert to chosen style, preserving all text, images (from assets/), slide order, and notes only if explicitly requested; HTML comments remain visible in shared source
+1. **Extract content**; Run `python scripts/extract-pptx.py <input.pptx> <output_dir>` (install python-pptx if needed: `pip install python-pptx`)
+2. **Confirm with user**; Present extracted slide titles, content summaries, and image counts
+3. **Style selection**; Proceed to Phase 2 for style discovery
+4. **Generate HTML**; Convert to chosen style, preserving all text, images (from assets/), slide order, and notes only if explicitly requested; HTML comments remain visible in shared source
 
 ---
 
 ## Phase 5: Delivery
 
-1. **Clean up** — Remove only task-created previews after checking ownership and whether the user needs them; preserve pre-existing files
-2. **Open** — Use `open [filename].html` to launch in browser
-3. **Summarize** — Tell the user:
+1. **Clean up**; Remove only task-created previews after checking ownership and whether the user needs them; preserve pre-existing files
+2. **Open**; Use `open [filename].html` to launch in browser
+3. **Summarize**; Tell the user:
    - File location, style name, slide count
    - Navigation: Arrow keys, Space, swipe/tap if enabled
    - How to customize: `:root` CSS variables for colors, font link for typography, `.reveal` class for animations
@@ -307,8 +307,8 @@ After delivery, **ask the user:** _"Would you like to share this presentation? I
 
 Options:
 
-- **Deploy to URL** — Shareable link that works on any device
-- **Export to PDF** — Universal file for email, Slack, print
+- **Deploy to URL**; Shareable link that works on any device
+- **Export to PDF**; Universal file for email, Slack, print
 - **Both**
 - **No thanks**
 
@@ -322,7 +322,7 @@ The upstream deploy helper is unavailable in this catalog copy. Do not invoke it
 
 This captures each slide as a screenshot and combines them into a PDF. Perfect for email attachments, embedding in documents, or printing.
 
-**Note:** Animations and interactivity are not preserved — the PDF is a static snapshot. This is normal and expected; mention it to the user so they're not surprised.
+**Note:** Animations and interactivity are not preserved; the PDF is a static snapshot. This is normal and expected; mention it to the user so they're not surprised.
 
 1. **Run the export script:**
 
@@ -342,17 +342,17 @@ This captures each slide as a screenshot and combines them into a PDF. Perfect f
    - The most common issue is Chromium not downloading. Run: `npx playwright install chromium`
    - If that fails too, it may be a network/firewall issue. Ask the user to try on a different network.
 
-4. **Deliver the PDF** — The script auto-opens it. Tell the user:
+4. **Deliver the PDF**; The script auto-opens it. Tell the user:
    - The file location and size
-   - That it works everywhere — email, Slack, Notion, Google Docs, print
+   - That it works everywhere; email, Slack, Notion, Google Docs, print
    - Animations are replaced by their final visual state (still looks great, just static)
 
 **⚠ PDF export gotchas:**
 
 - **Dependencies are separate.** Review and install Playwright/Chromium explicitly if missing; the exporter exits when unavailable.
 - **Slides must use `class="slide"`.** The export script finds slides by querying `.slide` elements. If the presentation uses a different class name, the script will report "0 slides found" and fail. All presentations generated by this skill use `.slide`, so this only matters for externally-created HTML.
-- **Local images must be loadable via HTTP.** The script starts a local server and loads the HTML through it (so Google Fonts and relative image paths work). If images use absolute filesystem paths (e.g., `src="/Users/name/photo.png"`) instead of relative paths (e.g., `src="photo.png"`), they won't load. Generated presentations always use relative paths, but converted or user-provided decks might not — check and fix if needed.
-- **Local images appear in the PDF** as long as they are in the same directory as (or relative to) the HTML file. The export script serves the HTML's parent directory over HTTP, so relative paths like `src="photo.png"` resolve correctly — including filenames with spaces. If images still don't appear, check: (1) the image files actually exist at the referenced path, (2) the paths are relative, not absolute filesystem paths like `/Users/name/photo.png`.
+- **Local images must be loadable via HTTP.** The script starts a local server and loads the HTML through it (so Google Fonts and relative image paths work). If images use absolute filesystem paths (e.g., `src="/Users/name/photo.png"`) instead of relative paths (e.g., `src="photo.png"`), they won't load. Generated presentations always use relative paths, but converted or user-provided decks might not; check and fix if needed.
+- **Local images appear in the PDF** as long as they are in the same directory as (or relative to) the HTML file. The export script serves the HTML's parent directory over HTTP, so relative paths like `src="photo.png"` resolve correctly; including filenames with spaces. If images still don't appear, check: (1) the image files actually exist at the referenced path, (2) the paths are relative, not absolute filesystem paths like `/Users/name/photo.png`.
 - **Large presentations produce large PDFs.** Each slide is captured as a full 1920×1080 PNG screenshot. An 18-slide deck can produce a ~20MB PDF. If the PDF exceeds 10MB, ask the user: _"The PDF is [size]. Would you like me to compress it? It'll look slightly less sharp but the file will be much smaller."_ If yes, re-run the export with the `--compact` flag:
   ```bash
   bash scripts/export-pdf.sh <path-to-html> [output.pdf] --compact
@@ -369,7 +369,7 @@ This captures each slide as a screenshot and combines them into a PDF. Perfect f
 | [bold-template-pack/selection-index.json](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/bold-template-pack/selection-index.json) | Compact bold template metadata for candidate selection | Phase 2 (style selection) |
 | [bold-template-pack/templates/*/preview.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/bold-template-pack/templates/) | Lightweight style cards for shortlisted bold title previews | Phase 2 after shortlisting |
 | [bold-template-pack/templates/*/design.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/bold-template-pack/templates/) | Detailed design-system docs for the selected bold template only | Phase 3 after user selection |
-| [viewport-base.css](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/viewport-base.css)             | Mandatory fixed-stage CSS — copy into every presentation             | Phase 3 (generation)      |
+| [viewport-base.css](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/viewport-base.css)             | Mandatory fixed-stage CSS; copy into every presentation             | Phase 3 (generation)      |
 | [html-template.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/html-template.md)               | HTML structure, JS features, code quality standards                  | Phase 3 (generation)      |
 | [animation-patterns.md](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/animation-patterns.md)     | CSS/JS animation snippets and effect-to-feeling guide                | Phase 3 (generation)      |
 | [scripts/extract-pptx.py](https://github.com/zarazhangrui/frontend-slides/tree/main/plugins/frontend-slides/skills/frontend-slides/scripts/extract-pptx.py) | Python script for PPT content extraction                             | Phase 4 (conversion)      |

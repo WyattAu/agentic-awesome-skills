@@ -7,7 +7,7 @@ risk: safe
 reports-to: monopoly
 ---
 
-# MONOPOLY — Design Patterns Deep Dive
+# MONOPOLY: Design Patterns Deep Dive
 
 ## When to Use
 - Use this skill when the task matches this description: Reference document for monopoly patterns.
@@ -279,7 +279,7 @@ An elected leader does not by itself prevent an expired/partitioned leader from 
 - Primary/replica database failover coordination
 - Distributed lock management
 
-**Tools:** etcd, ZooKeeper, Consul, Redis (Redlock — use with caution)
+**Tools:** etcd, ZooKeeper, Consul, Redis (Redlock; use with caution)
 
 ---
 

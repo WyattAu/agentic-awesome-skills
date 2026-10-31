@@ -278,10 +278,10 @@ armClient.GetDurableTaskHubResource(id);           // Get task hub by ID
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** when you want to poll manually or run operations in parallel
-3. **Always use `DefaultAzureCredential`** — never hardcode keys
+3. **Always use `DefaultAzureCredential`**; never hardcode keys
 4. **Handle `RequestFailedException`** for ARM API errors
 5. **Use `CreateOrUpdateAsync`** for idempotent operations
-6. **Delete task hubs before schedulers** — schedulers with task hubs cannot be deleted
+6. **Delete task hubs before schedulers**; schedulers with task hubs cannot be deleted
 7. **Use IP allowlists** for network security in production
 
 ## Error Handling

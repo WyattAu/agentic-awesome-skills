@@ -44,13 +44,13 @@ Examples use historical model IDs and SDK helper paths; verify availability and 
 
 3. Write the schema definition in the user's language. For Python, define a Pydantic `BaseModel`. For TypeScript, define a Zod schema and convert it with `zodResponseFormat()`. For raw API calls, write JSON Schema directly.
 
-4. Include field-level descriptions in the schema. Every field should have a `description` string that tells the model what to put there. Models use these descriptions as implicit prompt instructions — a field described as `"The user's sentiment as positive, negative, or neutral"` produces better results than a bare `sentiment: str` with no context.
+4. Include field-level descriptions in the schema. Every field should have a `description` string that tells the model what to put there. Models use these descriptions as implicit prompt instructions; a field described as `"The user's sentiment as positive, negative, or neutral"` produces better results than a bare `sentiment: str` with no context.
 
 5. Set the system prompt to reinforce structure. Tell the model its job is data extraction, not conversation. Example: `"You are a data extraction system. Analyze the input and return the requested fields. Do not include explanations outside the JSON structure."`
 
 6. If using OpenAI's `json_schema` mode, set `"strict": true` in the schema definition. This activates constrained decoding where the model can only output tokens that conform to the schema. Without `strict: true`, the model may still produce invalid JSON.
 
-7. If using Anthropic's tool_use approach, extract the structured data from `response.content` by finding the block where `type == "tool_use"` and reading its `input` field. Do not parse the text blocks — the structured data lives exclusively in the tool_use block.
+7. If using Anthropic's tool_use approach, extract the structured data from `response.content` by finding the block where `type == "tool_use"` and reading its `input` field. Do not parse the text blocks; the structured data lives exclusively in the tool_use block.
 
 8. Validate the response against the schema in your application code. Even with constrained decoding, validate with Pydantic's `model_validate()` or Zod's `.parse()` before passing data downstream. This catches semantic issues (empty strings, out-of-range numbers) that schema conformance alone cannot prevent.
 
@@ -133,7 +133,7 @@ response = client.messages.create(
     tool_choice={"type": "tool", "name": "extract_invoice"},
     messages=[{"role": "user", "content": "Invoice from Acme Corp: 3x Widget A at $10 each, 1x Widget B at $25. Total: $55."}]
 )
-# Find the tool_use block — do NOT parse text blocks
+# Find the tool_use block: do NOT parse text blocks
 blocks = [b for b in response.content if b.type == "tool_use" and b.name == "extract_invoice"]
 if response.stop_reason != "tool_use" or len(blocks) != 1:
     raise ValueError("Missing, ambiguous or truncated extraction")
@@ -175,13 +175,13 @@ const event = EventSchema.parse(message.parsed);
 
 ## Never Do This
 
-1. **Never use `response_format: { type: "json_object" }` without a schema.** This is OpenAI's legacy JSON mode — it guarantees valid JSON syntax but not schema conformance. The model can return `{"result": "hello"}` when you expected `{"name": str, "age": int}`. Always use `json_schema` with a full schema definition instead.
+1. **Never use `response_format: { type: "json_object" }` without a schema.** This is OpenAI's legacy JSON mode; it guarantees valid JSON syntax but not schema conformance. The model can return `{"result": "hello"}` when you expected `{"name": str, "age": int}`. Always use `json_schema` with a full schema definition instead.
 
-2. **Never parse Anthropic's text blocks for structured data.** When using `tool_choice` to force structured output, the data is in the `tool_use` content block, not in any `text` block. Parsing `response.content[0].text` will either return empty string or a conversational preamble — never the data you need.
+2. **Never parse Anthropic's text blocks for structured data.** When using `tool_choice` to force structured output, the data is in the `tool_use` content block, not in any `text` block. Parsing `response.content[0].text` will either return empty string or a conversational preamble; never the data you need.
 
 3. **Never define schema fields without descriptions.** A field named `status` with no description can mean HTTP status, order status, or review status. Models use field descriptions as extraction instructions. Omitting them is equivalent to omitting half your prompt.
 
-4. **Never use `additionalProperties: true` in strict mode schemas.** OpenAI's strict mode requires `additionalProperties: false` on every object in the schema. If you set it to true or omit it, the API rejects the request with a 400 error, not at response time — you will never get a response at all.
+4. **Never use `additionalProperties: true` in strict mode schemas.** OpenAI's strict mode requires `additionalProperties: false` on every object in the schema. If you set it to true or omit it, the API rejects the request with a 400 error, not at response time; you will never get a response at all.
 
 5. **Never put extraction instructions only in the user message and not the system prompt.** The system prompt has higher attention weight for behavioral instructions. Putting "extract the following fields" only in the user message alongside the source text forces the model to split attention between the instruction and the data. System prompt defines behavior; user message provides input data.
 
@@ -213,7 +213,7 @@ const event = EventSchema.parse(message.parsed);
 
 5. **Use `default` values in Pydantic models for optional fields.** When a field might not have relevant data in the source text, use a required nullable field in the provider schema (for example `str | None` or `.nullable()`), with instructions to return null for unknown facts. OpenAI strict schemas require every property in `required`; absent/optional keys are not the same as a nullable value. Map nulls to application defaults only after validation.
 
-6. **Separate extraction schemas from application schemas.** Your LLM extraction schema should match what the model can reliably produce. Your application database schema may have additional computed fields, foreign keys, or constraints. Map between them in application code — do not force the LLM to understand your database schema.
+6. **Separate extraction schemas from application schemas.** Your LLM extraction schema should match what the model can reliably produce. Your application database schema may have additional computed fields, foreign keys, or constraints. Map between them in application code; do not force the LLM to understand your database schema.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

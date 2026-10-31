@@ -1,19 +1,19 @@
 # Spot / Preemption Resilience
 
-Make a job survive being killed at a random instant — the price of riding the 50–90 %-cheaper
+Make a job survive being killed at a random instant; the price of riding the 50–90 %-cheaper
 spot/preemptible/interruptible tier. The whole layer reduces to **principle #8**
 (`references/principles.md`): checkpoint full state to durable storage on a Young/Daly timer, load-latest
 unconditionally on startup, write atomically, treat the preemption signal only as an opportunistic
 last-flush. This file is the deep form: per-platform grace windows, the cadence formula with a worked
 number, the atomic-write resume recipe, and a commented Python skeleton.
 
-To jump: `grep -in '<keyword>' references/spot-resilience.md` — keywords: `grace`, `signal`, `young`,
+To jump: `grep -in '<keyword>' references/spot-resilience.md`; keywords: `grace`, `signal`, `young`,
 `daly`, `cadence`, `atomic`, `rename`, `resume`, `skeleton`, `managed`, `skypilot`, `sagemaker`, `slurm`.
 
 ## Table of contents
 
 1. [Preemption signals + grace windows (per platform)](#1-preemption-signals--grace-windows-per-platform)
-2. [Checkpoint cadence — the Young/Daly formula](#2-checkpoint-cadence--the-youngdaly-formula)
+2. [Checkpoint cadence; the Young/Daly formula](#2-checkpoint-cadence--the-youngdaly-formula)
 3. [The atomic-write resume recipe](#3-the-atomic-write-resume-recipe)
 4. [Managed-spot frameworks move the box; the checkpoint-load restores the state](#4-managed-spot-frameworks-move-the-box-the-checkpoint-load-restores-the-state)
 5. [Python checkpoint/resume skeleton](#5-python-checkpointresume-skeleton)
@@ -23,7 +23,7 @@ To jump: `grep -in '<keyword>' references/spot-resilience.md` — keywords: `gra
 ## 1. Preemption signals + grace windows (per platform)
 
 The grace window dictates the design: it decides whether checkpoint-on-signal is even possible, or
-whether the timer is the *only* durability. **The window is NOT the safety net** — see the design-breaking
+whether the timer is the *only* durability. **The window is NOT the safety net**; see the design-breaking
 gotcha below the table. Concrete per-platform reach/billing detail lives in each `profiles/<platform>.md`
 §4; this is the cross-platform signal map.
 
@@ -34,8 +34,8 @@ gotcha below the table. Concrete per-platform reach/billing detail lives in each
 | **GCP Preemptible (legacy)** | same signal, **plus a hard 24 h cap** regardless of capacity | ~30 s **+ guillotined at 24 h** | Prefer Spot for long runs; Preemptible dies at 24 h even idle |
 | **Azure Spot** | IMDS Scheduled Events `/metadata/scheduledevents`, event type `Preempt` | **≥30 s** (Preempt is the short event; others give ≥5 min) | Timer-primary |
 | **Slurm preemption / walltime** | `SIGTERM` (then `SIGKILL`); with `#SBATCH --signal=B:SIGTERM@360` the batch step gets SIGTERM ~360 s before the kill | **SIGTERM → ~30 s** default; widen via `--signal` lead time | `--requeue` + an in-script SIGTERM trap to checkpoint, then resume on requeue |
-| **RunPod Spot** | OS **SIGTERM → SIGKILL** (also "interruptible without notice") | **~5 s** | Far too short to flush a large checkpoint — timer is the only real durability |
-| **vast.ai Interruptible** | **no signal** — bid-based; instance is *paused* (processes killed) the instant it is outbid | **~0 s (abrupt)** | Pure timer; assume cold restart + reload every time |
+| **RunPod Spot** | OS **SIGTERM → SIGKILL** (also "interruptible without notice") | **~5 s** | Far too short to flush a large checkpoint; timer is the only real durability |
+| **vast.ai Interruptible** | **no signal**; bid-based; instance is *paused* (processes killed) the instant it is outbid | **~0 s (abrupt)** | Pure timer; assume cold restart + reload every time |
 
 URLs: AWS [spot-instance-termination-notices](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html),
 [rebalance-recommendations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/rebalance-recommendations.html);
@@ -46,22 +46,22 @@ Slurm [sbatch `--signal`](https://slurm.schedmd.com/sbatch.html);
 RunPod [spot-vs-on-demand](https://www.runpod.io/blog/spot-vs-on-demand-instances-runpod);
 vast.ai [Rental-Types](https://vast.ai/article/Rental-Types).
 
-**Gotcha — the design-breaking one.**
+**Gotcha; the design-breaking one.**
 Symptom: a "catch SIGTERM, flush the 40 GB checkpoint to durable storage" handler works in testing on AWS
 (120 s) but the job dies before the flush completes on RunPod (5 s) / vast.ai (0 s).
-Root cause: treating the grace window as the *primary* durability mechanism — it spans 2 min down to ~0
+Root cause: treating the grace window as the *primary* durability mechanism; it spans 2 min down to ~0
 across platforms, so any handler that needs more than a few seconds is a coin flip.
 Fix: checkpoint on a **periodic timer to durable storage** (§2); use the signal trap **only** as an
 opportunistic "save a final partial checkpoint if there is time" bonus, never as the safety net.
 
-**Gotcha — GCP Preemptible 24 h guillotine.**
+**Gotcha; GCP Preemptible 24 h guillotine.**
 Symptom: a multi-day run on a Preemptible VM stops dead at 24 h even though nothing reclaimed it.
 Root cause: legacy Preemptible has a hard 24 h max runtime; Spot VMs have no cap.
 Fix: use **Spot, not Preemptible** for anything past a day (prefer Spot over legacy Preemptible for any run past a day).
 
 ---
 
-## 2. Checkpoint cadence — the Young/Daly formula
+## 2. Checkpoint cadence: the Young/Daly formula
 
 Cadence is a **formula, not a guess.** The optimal checkpoint interval that minimizes total wasted
 wall-clock (rollback re-compute after a kill **plus** checkpoint-write overhead) is the Young/Daly result:
@@ -125,7 +125,7 @@ filesystem (and, unlike `os.rename`, overwrites atomically on Windows too), so:
 4. Keep the previous `latest.pt` until the new one is committed; a kill at any point leaves one intact file.
 
 **Checkpoint to the platform's DURABLE location, not local scratch** (principle #4). A managed replacement
-node is *fresh* — anything not on a cloud bucket / network volume / shared FS is gone. On a marketplace box
+node is *fresh*; anything not on a cloud bucket / network volume / shared FS is gone. On a marketplace box
 where local disk persists across a pause, still mirror to durable storage at intervals.
 
 **Load-latest UNCONDITIONALLY on startup.** Use the *same code path* for first launch (no checkpoint →
@@ -142,32 +142,32 @@ URLs: [Check-N-Run, arXiv](https://arxiv.org/pdf/2010.08679),
 
 ## 4. Managed-spot frameworks move the box; the checkpoint-load restores the state
 
-Managed frameworks **auto-provision a replacement** on preemption — but they restart the **process from
+Managed frameworks **auto-provision a replacement** on preemption; but they restart the **process from
 scratch**. The framework moves the box; the checkpoint-load written in §3/§5 is what restores progress.
 This is the single most-misunderstood point: the framework does **not** resume training on its own.
 
-- **SkyPilot Managed Jobs** — strongest cross-cloud recommendation (re-provisions in a different
+- **SkyPilot Managed Jobs**; strongest cross-cloud recommendation (re-provisions in a different
   region/cloud to chase capacity, then re-runs the task). Caveat: it auto-recovers **only**
-  preemption/hardware failures — a user-code non-zero exit is **not** auto-recovered.
+  preemption/hardware failures; a user-code non-zero exit is **not** auto-recovered.
   [managed-jobs](https://docs.skypilot.co/en/latest/examples/managed-jobs.html).
-- **AWS SageMaker Managed Spot** — set `use_spot_instances=True` + `checkpoint_s3_uri`; SageMaker syncs the
+- **AWS SageMaker Managed Spot**; set `use_spot_instances=True` + `checkpoint_s3_uri`; SageMaker syncs the
   checkpoint dir to S3 during training and copies it back on restart (up to ~90 % savings). Gotcha:
-  **`max_wait` must be greater than `max_run`** — `max_wait` covers wait-for-capacity *plus* run time
+  **`max_wait` must be greater than `max_run`**; `max_wait` covers wait-for-capacity *plus* run time
   *plus* interruption gaps; set it too tight and the job is killed mid-resume.
   [managed-spot docs](https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 
-Universal multi-cloud auto-failover is **out of scope for this skill** — use SkyPilot/dstack for that, then
+Universal multi-cloud auto-failover is **out of scope for this skill**; use SkyPilot/dstack for that, then
 return here to make the *code* resume-correct so their recovery actually lands on progress
 (`superpowers:verification-before-completion` gates the "it resumed" claim against a loaded checkpoint, not
 a log line). For the elastic / multi-node tier (torchrun `--max-restarts`, Elastic Horovod) see
-`references/multinode.md`; the same invariant holds — the framework restarts processes, the per-epoch
+`references/multinode.md`; the same invariant holds; the framework restarts processes, the per-epoch
 snapshot restores state.
 
 ---
 
 ## 5. Python checkpoint/resume skeleton
 
-Read this for the algorithm; adapt into the training script. The shape is platform-agnostic — only
+Read this for the algorithm; adapt into the training script. The shape is platform-agnostic; only
 `DURABLE_DIR` changes per profile (§8 SCRIPT OVERRIDES). This is an incomplete algorithm sketch:
 implement sampler position/epoch, per-rank RNG, optional AMP scaler/EMA, final save and distributed
 coordination before using it for a real resumable job. Incrementing the counter alone does not skip

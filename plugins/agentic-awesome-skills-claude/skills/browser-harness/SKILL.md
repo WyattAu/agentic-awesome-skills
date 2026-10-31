@@ -23,7 +23,7 @@ license_source: "https://github.com/davidondrej/skills/blob/main/LICENSE"
 
 Direct browser control via CDP. For task-specific edits, use `agent-workspace/agent_helpers.py`. For setup, install, or connection problems, read install.md.
 
-**Routing check first:** if the task needs no interaction (no clicks, logins, or forms) and you just want page content, prefer an available read-only retrieval tool; DeepAPI is an optional external service requiring separate configuration and data-transfer approval — see the `deepapi` skill. Use browser-harness when the task needs a real browser: interaction, JS-heavy flows, logged-in sessions, or visual verification.
+**Routing check first:** if the task needs no interaction (no clicks, logins, or forms) and you just want page content, prefer an available read-only retrieval tool; DeepAPI is an optional external service requiring separate configuration and data-transfer approval; see the `deepapi` skill. Use browser-harness when the task needs a real browser: interaction, JS-heavy flows, logged-in sessions, or visual verification.
 
 Domain skills (community-contributed per-site playbooks under `agent-workspace/domain-skills/`) are off by default. Set `BH_DOMAIN_SKILLS=1` to enable them; see the bottom section.
 
@@ -40,7 +40,7 @@ print(page_info())
 ```
 
 - First verify the installed executable and reviewed version; this catalog does not bundle the runtime or prove it is on PATH.
-- First navigation is new_tab(url), not goto_url(url) — goto runs in the user's active tab and clobbers their work.
+- First navigation is new_tab(url), not goto_url(url); goto runs in the user's active tab and clobbers their work.
 
 ## Tool call shape
 
@@ -50,7 +50,7 @@ browser-harness -c '
 '
 ```
 
-run.py calls ensure_daemon() before exec — you never start/stop manually unless you want to.
+run.py calls ensure_daemon() before exec; you never start/stop manually unless you want to.
 
 ### Remote browsers
 
@@ -62,7 +62,7 @@ Claude Code cmux note: after Claude finishes, it may prefill a predicted next us
 
 ```bash
 browser-harness -c '
-start_remote_daemon("work")                               # default — clean browser, no profile
+start_remote_daemon("work")                               # default; clean browser, no profile
 # start_remote_daemon("work", profileName="my-work")      # reuse a cloud profile (already logged in)
 # start_remote_daemon("work", profileId="<uuid>")         # same, but by UUID
 # start_remote_daemon("work", proxyCountryCode="de", timeout=120)   # DE proxy, 2-hour timeout
@@ -75,9 +75,9 @@ print(page_info())
 '
 ```
 
-start_remote_daemon prints liveUrl and auto-opens it in the local browser (if a GUI is detected) so the user can watch along. Headless servers print only — share the URL with the user. The daemon PATCHes the cloud browser to stop on shutdown, which persists profile state. Running remote daemons bill until timeout.
+start_remote_daemon prints liveUrl and auto-opens it in the local browser (if a GUI is detected) so the user can watch along. Headless servers print only; share the URL with the user. The daemon PATCHes the cloud browser to stop on shutdown, which persists profile state. Running remote daemons bill until timeout.
 
-Profiles (cookies-only login state) live in interaction-skills/profile-sync.md — covers list_cloud_profiles(), the chat-driven "which profile?" pattern, and sync_local_profile() for uploading a local Chrome profile.
+Profiles (cookies-only login state) live in interaction-skills/profile-sync.md; covers list_cloud_profiles(), the chat-driven "which profile?" pattern, and sync_local_profile() for uploading a local Chrome profile.
 
 ## Interaction skills
 
@@ -103,7 +103,7 @@ If you start struggling with a specific mechanic while navigating, look in inter
 ## What actually works
 
 - Screenshots first: use capture_screenshot() to understand the current page quickly, find visible targets, and decide whether you need a click, a selector, or more navigation.
-- Clicking: capture_screenshot() → read the pixel off the image → click_at_xy(x, y) → capture_screenshot() to verify. Suppress the Playwright-habit reflex of "locate first, then click" — no getBoundingClientRect, no selector hunt. Drop to DOM only when the target has no visible geometry (hidden input, 0×0 node). Hit-testing happens in Chrome's browser process, so clicks go through iframes / shadow DOM / cross-origin without extra work.
+- Clicking: capture_screenshot() → read the pixel off the image → click_at_xy(x, y) → capture_screenshot() to verify. Suppress the Playwright-habit reflex of "locate first, then click"; no getBoundingClientRect, no selector hunt. Drop to DOM only when the target has no visible geometry (hidden input, 0×0 node). Hit-testing happens in Chrome's browser process, so clicks go through iframes / shadow DOM / cross-origin without extra work.
 - Bulk HTTP: http_get(url) + ThreadPoolExecutor. No browser for static pages (249 Netflix pages in 2.8s).
 - After goto: wait_for_load().
 - Wrong/stale tab: ensure_real_tab(). Use it when the current tab is stale or internal; the daemon also auto-recovers from stale sessions on the next call.
@@ -132,7 +132,7 @@ Example upstream installation paths are `~/Developer/browser-harness`, `~/.local
 
 ## Authenticated content extraction (proven pattern)
 
-browser-harness connects to the user's real browser with their active sessions — ideal for extracting content from login-walled sites where `web_extract` or Hermes's built-in `browser_navigate` fail (e.g. X/Twitter articles, LinkedIn, paywalled sites).
+browser-harness connects to the user's real browser with their active sessions; ideal for extracting content from login-walled sites where `web_extract` or Hermes's built-in `browser_navigate` fail (e.g. X/Twitter articles, LinkedIn, paywalled sites).
 
 **Pattern:**
 ```bash
@@ -157,7 +157,7 @@ print("Written", len(text), "chars to private file", output_path)
 
 - Write to a temp file to avoid shell escaping issues with large text
 - Use `time.sleep()` generously for JS-heavy SPAs (X, LinkedIn need 3-5s)
-- X/Twitter articles render inline — just scroll/extract via DOM, no extra click needed
+- X/Twitter articles render inline; just scroll/extract via DOM, no extra click needed
 - For very long pages, `innerText` extracts currently rendered DOM text; virtualized, collapsed, paginated or lazy content may be absent
 
 ## Hermes Agent integration
@@ -170,7 +170,7 @@ Example upstream installation paths are `~/Developer/browser-harness`, `~/.local
 
 ## Authenticated content extraction (proven pattern)
 
-browser-harness connects to the user's real browser with active sessions — ideal for login-walled sites where `web_extract` or Hermes's built-in `browser_navigate` fail (X/Twitter articles, LinkedIn, paywalled sites).
+browser-harness connects to the user's real browser with active sessions; ideal for login-walled sites where `web_extract` or Hermes's built-in `browser_navigate` fail (X/Twitter articles, LinkedIn, paywalled sites).
 
 ```bash
 browser-harness -c '
@@ -194,7 +194,7 @@ print("Written", len(text), "chars to private file", output_path)
 
 - Write to a temp file to avoid shell escaping issues with large text
 - Use `time.sleep()` generously for JS-heavy SPAs (X, LinkedIn need 3-5s)
-- X/Twitter articles render inline — just scroll/extract via DOM, no extra click needed
+- X/Twitter articles render inline; just scroll/extract via DOM, no extra click needed
 - `innerText` extracts currently rendered DOM text; virtualized, collapsed, paginated or lazy content may be absent
 
 ## Gotchas (field-tested)
@@ -214,11 +214,11 @@ print("Written", len(text), "chars to private file", output_path)
 
 ## Domain skills (opt-in)
 
-Only applies when `BH_DOMAIN_SKILLS=1`. Otherwise ignore — `agent-workspace/domain-skills/` is dormant and `goto_url` won't surface skill files.
+Only applies when `BH_DOMAIN_SKILLS=1`. Otherwise ignore; `agent-workspace/domain-skills/` is dormant and `goto_url` won't surface skill files.
 
 When enabled, search `agent-workspace/domain-skills/<host>/` before inventing an approach. `goto_url` returns up to 10 skill filenames for the navigated host.
 
-If you learn anything non-obvious — a private API, stable selector, framework quirk, URL pattern, hidden wait, or site-specific trap — prepare an optional local note; open a PR only if the user explicitly authorized publication to that repository. Capture the durable shape of the site (the map, not the diary). Don't write pixel coordinates (break on layout), task narration, or secrets — the directory is public.
+If you learn anything non-obvious; a private API, stable selector, framework quirk, URL pattern, hidden wait, or site-specific trap; prepare an optional local note; open a PR only if the user explicitly authorized publication to that repository. Capture the durable shape of the site (the map, not the diary). Don't write pixel coordinates (break on layout), task narration, or secrets; the directory is public.
 
 ## Limitations
 

@@ -9,7 +9,7 @@ determining the monitor type in Phase 1.5.
 
 Extract these from the `get_monitors` config response for your Phase 2 analysis:
 
-- Alert condition tree (`alert_condition`) — a FilterGroup with UNARY, BINARY, SQL, and/or
+- Alert condition tree (`alert_condition`); a FilterGroup with UNARY, BINARY, SQL, and/or
   nested GROUP nodes
 - Table being validated
 - Schedule interval
@@ -19,7 +19,7 @@ Extract these from the `get_monitors` config response for your Phase 2 analysis:
 
 ## Key constraint: limited incident detail
 
-Validation incidents only report **invalid row counts** — not what the rows contained. This
+Validation incidents only report **invalid row counts**; not what the rows contained. This
 fundamentally limits what you can recommend without troubleshooting analysis (TSA).
 
 **Without TSA:** You cannot determine _why_ rows are invalid or whether the alert condition
@@ -77,7 +77,7 @@ false positives:
 
 ### Produce the full FilterGroup tree
 
-When recommending changes, always output the **complete** `alert_condition` tree — not just the
+When recommending changes, always output the **complete** `alert_condition` tree; not just the
 modified node. The tool replaces the full condition, not individual nodes.
 
 **NEVER** simplify or restructure the condition tree beyond the targeted change. Preserve the
@@ -105,12 +105,12 @@ Use `create_or_update_validation_monitor` to update the monitor in place.
 
 1. **Always pass `monitor_uuid=<uuid>`** so the tool updates the existing monitor rather than
    creating a new one. Use the monitor UUID from Phase 1.
-2. **Always dry-run first** (`dry_run=True`, the default) — show the user the YAML preview
+2. **Always dry-run first** (`dry_run=True`, the default); show the user the YAML preview
    returned in `result.yaml`, including the full updated `alert_condition` tree, and ask for
    confirmation before applying.
 3. **On confirmation**, call again with `dry_run=False` (and the same `monitor_uuid` plus the
    same other parameters). The response carries the monitor's UUID in `result.monitor_uuid` and
-   a deep link in `result.instructions` — surface that to the user. `result.yaml` is `None` on
+   a deep link in `result.instructions`; surface that to the user. `result.yaml` is `None` on
    the live call by design.
 4. **Stale-uuid handling.** If the monitor was deleted between read and write, the tool raises a
    clear error instructing you to retry without `monitor_uuid` (turning the intent from "update"
@@ -118,19 +118,19 @@ Use `create_or_update_validation_monitor` to update the monitor in place.
 
 ### Common mistakes
 
-- **NEVER** omit `monitor_uuid` — this creates a duplicate monitor instead of updating.
+- **NEVER** omit `monitor_uuid`; this creates a duplicate monitor instead of updating.
 - **NEVER** apply changes without showing the dry-run preview first.
 - **CRITICAL: PUT semantics.** `create_or_update_validation_monitor` with `monitor_uuid` fully
-  replaces the monitor's configuration — fields you omit revert to tool defaults, they are NOT
+  replaces the monitor's configuration; fields you omit revert to tool defaults, they are NOT
   left untouched. The full config from Phase 1's `get_monitors(monitor_ids=[<uuid>],
   include_fields=["config"])` call is your source of truth: re-pass every field you want to
   keep (the full alert_condition tree, schedule, table, audiences, notes, priority, tags, etc.)
   alongside the ones you're changing.
 - **Diff the preview against the original.** Before running `dry_run=False`, compare the
-  rendered YAML returned in `result.yaml` against the original config — if anything you meant to
+  rendered YAML returned in `result.yaml` against the original config; if anything you meant to
   preserve is missing or changed, fix the call before committing.
 - **CRITICAL:** The `alert_condition` must be a dict (JSON object), never a JSON-encoded string.
 - **IMPORTANT:** Always produce the full `alert_condition` tree, not just the changed node.
   The tool replaces the entire condition tree.
-- **NEVER** recommend condition changes without TSA evidence — schedule changes are the only
+- **NEVER** recommend condition changes without TSA evidence; schedule changes are the only
   available lever to assess without row-level cause evidence; it still changes detection risk.

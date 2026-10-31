@@ -9,7 +9,7 @@ The most common failure modes for `@n8n/n8n-nodes-langchain.toolCode`, with exac
 **Full message (wrapped by n8n):**
 > There was an error: "Cannot assign to read only property 'name' of object 'Error: No execution data available'"
 
-**Cause**: Calling `$fromAI()` inside the Code Tool sandbox. `$fromAI()` is a helper intended for *other* tool-enabled nodes (HTTP Request Tool, SendGrid Tool, `toolWorkflow`) where AI-supplied values flow through workflow execution data. The Code Tool sandbox has no execution data — it receives input directly via `query`. The helper throws, n8n tries to annotate the error's `name` property, and that assignment fails because the error object is frozen.
+**Cause**: Calling `$fromAI()` inside the Code Tool sandbox. `$fromAI()` is a helper intended for *other* tool-enabled nodes (HTTP Request Tool, SendGrid Tool, `toolWorkflow`) where AI-supplied values flow through workflow execution data. The Code Tool sandbox has no execution data; it receives input directly via `query`. The helper throws, n8n tries to annotate the error's `name` property, and that assignment fails because the error object is frozen.
 
 **Fix**: remove `$fromAI()`. Read from `query` (or define an input schema, see [INPUT_SCHEMA.md](INPUT_SCHEMA.md)).
 
@@ -17,11 +17,11 @@ The most common failure modes for `@n8n/n8n-nodes-langchain.toolCode`, with exac
 // ❌ Broken
 const price = $fromAI('price', 'Car price in SEK', 'number');
 
-// ✅ Unstructured — parse a JSON string
+// ✅ Unstructured; parse a JSON string
 const params = JSON.parse(query);
 const price = Number(params.price);
 
-// ✅ Structured — with specifyInputSchema: true
+// ✅ Structured; with specifyInputSchema: true
 const { price } = query;
 ```
 
@@ -56,12 +56,12 @@ Where `<type>` is `object`, `undefined`, `function`, etc.
 | *(no `return`)* | `...is an undefined` | Add a `return` |
 | `undefined` | `...is an undefined` | Return something |
 
-**Numbers are fine** — n8n auto-converts them to strings:
+**Numbers are fine**; n8n auto-converts them to strings:
 ```javascript
 return 42;  // ✅ becomes "42"
 ```
 
-**Booleans are NOT auto-converted** — stringify explicitly:
+**Booleans are NOT auto-converted**; stringify explicitly:
 ```javascript
 return String(someBoolean);  // ✅
 return JSON.stringify(someBoolean);  // ✅
@@ -132,12 +132,12 @@ return JSON.stringify(someBoolean);  // ✅
 **Fix**:
 - Pure computation? Stay in Code Tool, use plain JS.
 - Need HTTP? Move to **HTTP Request Tool** (with `$fromAI()` in URL/body).
-- Need other-node data or credentials? Move to **Call Sub-workflow Tool (`toolWorkflow`)** — its sub-workflow has a full Code node sandbox.
+- Need other-node data or credentials? Move to **Call Sub-workflow Tool (`toolWorkflow`)**; its sub-workflow has a full Code node sandbox.
 - Need state across calls? Not possible in Code Tool. Use a sub-workflow that reads/writes a Data Table, Redis, etc.
 
 ---
 
-## Error 7: Python-specific — `"name 'query' is not defined"`
+## Error 7: Python-specific: `"name 'query' is not defined"`
 
 **Cause**: in Python, the input variable is `_query` (underscore prefix), not `query`.
 
@@ -158,7 +158,7 @@ Before saving a Code Tool:
 - [ ] Tool **name** is snake_case, descriptive, and unique
 - [ ] **Description** tells the LLM when to call it, with an example if unstructured
 - [ ] **No `$fromAI()`** in the code body
-- [ ] **No `$input`, `$json`, `$helpers`** — not in this sandbox
+- [ ] **No `$input`, `$json`, `$helpers`**; not in this sandbox
 - [ ] Input read from `query` (JS) or `_query` (Python)
 - [ ] All code paths `return` a string (or a number that auto-converts)
 - [ ] If returning structured data, wrapped in `JSON.stringify(...)`
@@ -169,7 +169,7 @@ Before saving a Code Tool:
 
 ## Debugging tips
 
-- **Use the Execution view**, not just the test output. The agent's tool invocation and raw input/output are visible there — you can see exactly what `query` the LLM sent.
+- **Use the Execution view**, not just the test output. The agent's tool invocation and raw input/output are visible there; you can see exactly what `query` the LLM sent.
 - **Log inside the tool** by including fields in the returned JSON:
   ```javascript
   return JSON.stringify({ input_validated: true, result: /* ... */ }); // omit raw sensitive query

@@ -239,7 +239,7 @@ with producer:
 2. **Use checkpoint store** in production for reliable processing
 3. **Use async client** for high-throughput scenarios
 4. **Use partition keys** for ordered delivery within a partition
-5. **Handle batch size limits** — catch ValueError when batch is full
+5. **Handle batch size limits**; catch ValueError when batch is full
 6. **Use context managers** (`with`/`async with`) for proper cleanup
 7. **Set appropriate consumer groups** for different applications
 

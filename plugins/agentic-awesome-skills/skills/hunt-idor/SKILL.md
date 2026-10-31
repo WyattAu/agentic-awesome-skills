@@ -33,7 +33,7 @@ report_count: 39
 ## Crown Jewel Targets
 
 **Why IDOR pays big:**
-- Direct access to other users' data without authentication bypass — clear, demonstrable impact
+- Direct access to other users' data without authentication bypass; clear, demonstrable impact
 - Chains easily with privilege escalation, financial fraud, and account takeover
 - Affects virtually every application with user-owned resources
 
@@ -92,7 +92,7 @@ state.currentUser.organizationId
 - REST APIs with sequential integer IDs (discoverability is not authorization)
 - UUIDs that are predictable or leaked in other responses
 - Multi-tenant SaaS apps with `org_id`, `account_id`, `business_id` params
-- Mobile apps (Burp the APK — mobile APIs often skip authorization checks)
+- Mobile apps (Burp the APK; mobile APIs often skip authorization checks)
 
 ---
 
@@ -293,11 +293,11 @@ done
 - Bypass: Slow enumeration (1 req/5s), do not bypass agreed rate limits; use non-enumeration IDORs (you already know the target's ID from another leak)
 
 **Defense: Checking `user_id` in WHERE clause**
-- Bypass: Check if the same endpoint exists at a different API version (`/v1/` vs `/v2/`) — authorization logic is often version-specific
+- Bypass: Check if the same endpoint exists at a different API version (`/v1/` vs `/v2/`); authorization logic is often version-specific
 - Technique: Check JS bundles for older API version calls
 
 **Defense: CORS restrictions**
-- Bypass: IDOR doesn't require cross-origin exploitation — you're testing API endpoints directly with your own session
+- Bypass: IDOR doesn't require cross-origin exploitation; you're testing API endpoints directly with your own session
 
 **Defense: "Opaque" references via server-side sessions**
 - Bypass: Look for any endpoint that *returns* the internal ID, then use it elsewhere; APIs often expose IDs in `Location` headers, error messages, or metadata
@@ -312,10 +312,10 @@ done
 Before writing the report, answer all three:
 
 1. **What can the attacker DO right now?**
-   Be specific: "Attacker with a valid account can send a GET request to `/api/v1/invoices/{victim_invoice_id}` and receive the victim's full billing document including name, address, and payment amount — without any relationship to that account."
+   Be specific: "Attacker with a valid account can send a GET request to `/api/v1/invoices/{victim_invoice_id}` and receive the victim's full billing document including name, address, and payment amount; without any relationship to that account."
 
 2. **What does the victim LOSE?**
-   Map to CIA triad: confidentiality (data exposed), integrity (data modified), or availability (data deleted). "Victim loses confidentiality of private financial records" or "Victim's content is deleted by a third party" — vague answers fail.
+   Map to CIA triad: confidentiality (data exposed), integrity (data modified), or availability (data deleted). "Victim loses confidentiality of private financial records" or "Victim's content is deleted by a third party"; vague answers fail.
 
 3. **Can it be reproduced in 10 minutes from scratch?**
    - Two fresh accounts created ✓
@@ -330,59 +330,59 @@ Before writing the report, answer all three:
 ## Real Impact Examples
 
 **Scenario 1: Financial Data Exposure + Cross-Account Billing Fraud (Uber-style)**
-An attacker discovers two related IDORs: one allows reading any organization's voucher policy configuration (exposing org IDs, employee email lists, and payment methods), and a second allows modifying voucher policies using those leaked IDs. Chained together, this enables the attacker to redirect charges to an arbitrary business account, expose employee PII across organizations, and take over invitation links — all without any elevated privileges beyond a basic user account. Impact: financial fraud + mass PII exposure across the B2B platform.
+An attacker discovers two related IDORs: one allows reading any organization's voucher policy configuration (exposing org IDs, employee email lists, and payment methods), and a second allows modifying voucher policies using those leaked IDs. Chained together, this enables the attacker to redirect charges to an arbitrary business account, expose employee PII across organizations, and take over invitation links; all without any elevated privileges beyond a basic user account. Impact: financial fraud + mass PII exposure across the B2B platform.
 
 **Scenario 2: Private Repository Read via IDOR on Migration Endpoint (GitHub-style)**
-A migration feature allows users to upload files to a migration job. The `migration_id` parameter is not validated against the authenticated user's ownership. An attacker creates their own migration, observes the ID format, and substitutes another user's private migration ID — gaining read access to source code files from private repositories they have no access to. Impact: complete confidentiality bypass for private intellectual property.
+A migration feature allows users to upload files to a migration job. The `migration_id` parameter is not validated against the authenticated user's ownership. An attacker creates their own migration, observes the ID format, and substitutes another user's private migration ID; gaining read access to source code files from private repositories they have no access to. Impact: complete confidentiality bypass for private intellectual property.
 
 **Scenario 3: Account Takeover Chain via Message IDOR (Reddit-style)**
-An attacker accesses another user's private message threads by substituting their `thread_id` in a messaging API endpoint. The response includes message content, metadata, and — critically — session or verification tokens sent via internal messages. The attacker leverages the token found in the messages to perform account recovery steps, escalating a read-only IDOR into full account takeover. Impact: complete account compromise of targeted users at scale.
+An attacker accesses another user's private message threads by substituting their `thread_id` in a messaging API endpoint. The response includes message content, metadata, and; critically; session or verification tokens sent via internal messages. The attacker leverages the token found in the messages to perform account recovery steps, escalating a read-only IDOR into full account takeover. Impact: complete account compromise of targeted users at scale.
 
 ---
 
 ## Chains & Compositions (Senior Hunting)
 
-Standalone IDOR gets paid at Low-Medium for cross-tenant *read*. The real money is in chaining IDOR to a *state-change* primitive that doesn't normally permit cross-tenant action — turning "I can see victim's data" into "I own victim's account". The six chains below are the highest-paying IDOR compositions on modern bug-bounty programs.
+Standalone IDOR gets paid at Low-Medium for cross-tenant *read*. The real money is in chaining IDOR to a *state-change* primitive that doesn't normally permit cross-tenant action; turning "I can see victim's data" into "I own victim's account". The six chains below are the highest-paying IDOR compositions on modern bug-bounty programs.
 
-### Chain 1 — IDOR on `/api/users/{id}/email` + Missing Re-Auth → Password Reset → ATO
+### Chain 1: IDOR on `/api/users/{id}/email` + Missing Re-Auth → Password Reset → ATO
 
-- **A.** Confirm IDOR on the email-change endpoint — request `PUT /api/users/{victim_id}/email {"email":"attacker@evil"}` from attacker's session; server changes the victim's email without ownership check.
-- **B.** Hit the password-reset flow on the victim's account — server emails reset link to the **new** email (attacker's).
+- **A.** Confirm IDOR on the email-change endpoint; request `PUT /api/users/{victim_id}/email {"email":"attacker@evil"}` from attacker's session; server changes the victim's email without ownership check.
+- **B.** Hit the password-reset flow on the victim's account; server emails reset link to the **new** email (attacker's).
 - **C.** Open reset link, set new password, log in as victim.
 - **Impact:** Potential ATO only if the controlled email change, recovery and session prerequisites are demonstrated; notification/audit behavior must be observed, not inferred from API usage.
 - **Real shape:** Classic ATO pattern across many SaaS bug-bounty disclosures 2018-2024. Cross-refs `hunt-ato` Path 2 (email change without re-auth).
 
-### Chain 2 — IDOR plus a separately demonstrated content-handling flaw
+### Chain 2: IDOR plus a separately demonstrated content-handling flaw
 
 Content-Disposition filename text is not interpreted as HTML merely because it contains a script tag. A separate proven header-splitting, response-body/content-type or same-origin rendering weakness would be required. Use inert canary filenames and controlled accounts; do not infer session theft, cookie readability or takeover from filename reflection. The former SharePoint/GitLab attributions did not substantiate the asserted generic browser mechanism and are not evidence of it.
 
-### Chain 3 — IDOR via GraphQL `node(id:)` GID + Relay Relation Traversal → Cross-Tenant Mass Data Extraction
+### Chain 3: IDOR via GraphQL `node(id:)` GID + Relay Relation Traversal → Cross-Tenant Mass Data Extraction
 
 - **A.** Target uses GraphQL with Relay-style global IDs (`gid://shopify/Customer/<n>` or base64-encoded `type:id` patterns).
-- **B.** `node(id:"<victim_gid>") { ... on Customer { email orders { totalPrice paymentMethods { cardLast4 } } } }` — the top-level `node()` resolver auths the requester, but nested relations don't re-check ownership against the resolved Customer.
+- **B.** `node(id:"<victim_gid>") { ... on Customer { email orders { totalPrice paymentMethods { cardLast4 } } } }`; the top-level `node()` resolver auths the requester, but nested relations don't re-check ownership against the resolved Customer.
 - **C.** Iterate IDs (decoding base64 to extract numeric, incrementing) to exfil emails, order totals, payment methods across the entire customer base.
 - **Impact:** Mass cross-tenant PII / financial data extraction. Single bug, full database.
 - **Real shape:** Shopify Billing IDOR H1 #2207248 ($5,000); HackerOne PolicyPageAssetGroup IDOR H1 #1618347 ($25,000). Cross-refs `hunt-graphql` Disclosed Report Citation #5 and #2.
 
-### Chain 4 — IDOR on `/api/teams/{id}/members` + Mass-Assignment in Body → Role Escalation on Victim Team
+### Chain 4: IDOR on `/api/teams/{id}/members` + Mass-Assignment in Body → Role Escalation on Victim Team
 
-- **A.** Standard horizontal IDOR — `POST /api/teams/{victim_team_id}/members {"email":"attacker@evil"}` adds attacker as a normal member without ownership check.
-- **B.** The body accepts additional fields the API didn't filter: `{"email":"attacker@evil", "role":"OWNER", "permissions":["*"]}` — mass assignment leaks into the role field.
+- **A.** Standard horizontal IDOR; `POST /api/teams/{victim_team_id}/members {"email":"attacker@evil"}` adds attacker as a normal member without ownership check.
+- **B.** The body accepts additional fields the API didn't filter: `{"email":"attacker@evil", "role":"OWNER", "permissions":["*"]}`; mass assignment leaks into the role field.
 - **C.** Attacker is added to the victim team as OWNER. Now has full admin access to the victim team's resources and can remove the real owners.
 - **Impact:** Cross-tenant privilege escalation via IDOR + mass assignment. The single most efficient takeover chain on SaaS team-management APIs.
 - **Real shape:** Shopify undocumented `fileCopy` mutation H1 #981472 (2020, $2,000); Stripe `UpdateAtlasApplicationPerson` cross-tenant mutation H1 #1066203 (2020). Cross-refs `hunt-graphql` Disclosed Report Citation #7 and #8; pairs with `hunt-api-misconfig` Mass Assignment section.
 
-### Chain 5 — Soft-Delete IDOR + Post-Removal Token Validity → Persistent Cross-Tenant Access
+### Chain 5: Soft-Delete IDOR + Post-Removal Token Validity → Persistent Cross-Tenant Access
 
 - **A.** Identify the "remove member" endpoint that flips an `active=false` flag but doesn't invalidate the session/PAT.
 - **B.** Log in as the to-be-removed user; capture session cookie or PAT.
-- **C.** Have the org admin remove the user via the normal flow. Wait. Re-issue API calls using the captured token — IDOR is now *temporal* (the user no longer has permission per the policy table, but the cached auth context still passes).
+- **C.** Have the org admin remove the user via the normal flow. Wait. Re-issue API calls using the captured token; IDOR is now *temporal* (the user no longer has permission per the policy table, but the cached auth context still passes).
 - **Impact:** Weeks of post-termination cross-tenant access; GDPR/CCPA breach exposure; potential extortion leverage.
-- **Real shape:** Shopify removed-staff persistence class (2022). Cross-refs `hunt-misc` Chain 1 — same root cause shape, different starting primitive.
+- **Real shape:** Shopify removed-staff persistence class (2022). Cross-refs `hunt-misc` Chain 1; same root cause shape, different starting primitive.
 
-### Chain 6 — Double-IDOR (`/users/{id}/orders → /orders/{order_id}/refund`) → Financial Impact on Victim Merchant
+### Chain 6: Double-IDOR (`/users/{id}/orders → /orders/{order_id}/refund`) → Financial Impact on Victim Merchant
 
-- **A.** First IDOR: `GET /api/users/{victim_id}/orders` returns the victim's order list without ownership check — yields legitimate `order_id` values.
+- **A.** First IDOR: `GET /api/users/{victim_id}/orders` returns the victim's order list without ownership check; yields legitimate `order_id` values.
 - **B.** Second IDOR: `POST /api/orders/{order_id}/refund` issues refunds without checking that the requester owns the merchant/order.
 - **C.** Trigger refund on each of the victim merchant's recent orders. Money moves from merchant to customer (who is also attacker-controlled).
 - **Impact:** Direct financial loss to the victim merchant. Mass-exploitable across the platform's merchant base.
@@ -390,29 +390,29 @@ Content-Disposition filename text is not interpreted as HTML merely because it c
 
 ### Operator-level pattern
 
-When you confirm a read-IDOR at A, immediately ask: *what state-change accepts the same ID and might also be IDOR'd?* The chain is usually one of: (1) password reset / email change at terminal step → ATO; (2) refund / withdraw / transfer → financial; (3) role-change / membership-add → privilege escalation. If your read-IDOR doesn't compose to one of those, the standalone payout is what you get. Hunt for both halves — the second is often easier to find because it shares the same auth bug class as the first.
+When you confirm a read-IDOR at A, immediately ask: *what state-change accepts the same ID and might also be IDOR'd?* The chain is usually one of: (1) password reset / email change at terminal step → ATO; (2) refund / withdraw / transfer → financial; (3) role-change / membership-add → privilege escalation. If your read-IDOR doesn't compose to one of those, the standalone payout is what you get. Hunt for both halves; the second is often easier to find because it shares the same auth bug class as the first.
 
 Cross-references:
-- `hunt-ato` — Chain 1, 5
-- `hunt-xss` — Chain 2
-- `hunt-graphql` — Chains 3, 4
-- `hunt-misc` — Chain 5
-- `hunt-business-logic` — Chain 6
+- `hunt-ato`; Chain 1, 5
+- `hunt-xss`; Chain 2
+- `hunt-graphql`; Chains 3, 4
+- `hunt-misc`; Chain 5
+- `hunt-business-logic`; Chain 6
 
 ---
 
 ## Related Skills & Chains
 
-- **`hunt-auth-bypass`** — Object-level authorization failure plus route-level auth absence is the canonical IDOR-amplifier. Chain primitive: missing `req.user.id` scoping in ORM query + missing middleware on legacy `/v1/` route = unauthenticated cross-tenant data read via direct ID substitution → bulk PII dump without any session at all.
-- **`hunt-ato`** — Profile-edit IDOR is the most direct path from "read someone's data" to "own their account." Chain primitive: `PATCH /api/users/{victim_uid}` accepts attacker's session + victim UID → set `email=attacker@evil.com` → trigger password reset → reset link arrives at attacker → full ATO without ever knowing victim credentials.
-- **`hunt-graphql`** — GraphQL resolvers require effective object/field authorization, which may be enforced in shared business logic; introspection hands you the schema. Chain primitive: `__schema` introspection → enumerate every mutation accepting `id:` argument → substitute victim IDs across `updateUser`, `deleteOrg`, `transferBilling` mutations → mass IDOR fan-out from one introspection query.
-- **`security-arsenal`** — Pull the IDOR Bypass Tables section for HTTP-parameter-pollution payloads (`?id=own&id=victim`), nested-JSON wrappers (`{"data":{"id":"VICTIM"}}`), and parameter-name variations (`uid`/`userId`/`user_id`/`account`) when the first direct substitution returns 403.
-- **`triage-validation`** — Run the Pre-Severity Gate before claiming Critical on an IDOR that returns 200 but doesn't actually leak data (empty array, redacted fields, "access denied" in body with 200 status). The 200-but-no-data IDOR is the #1 N/A driver on H1/Bugcrowd.
+- **`hunt-auth-bypass`**; Object-level authorization failure plus route-level auth absence is the canonical IDOR-amplifier. Chain primitive: missing `req.user.id` scoping in ORM query + missing middleware on legacy `/v1/` route = unauthenticated cross-tenant data read via direct ID substitution → bulk PII dump without any session at all.
+- **`hunt-ato`**; Profile-edit IDOR is the most direct path from "read someone's data" to "own their account." Chain primitive: `PATCH /api/users/{victim_uid}` accepts attacker's session + victim UID → set `email=attacker@evil.com` → trigger password reset → reset link arrives at attacker → full ATO without ever knowing victim credentials.
+- **`hunt-graphql`**; GraphQL resolvers require effective object/field authorization, which may be enforced in shared business logic; introspection hands you the schema. Chain primitive: `__schema` introspection → enumerate every mutation accepting `id:` argument → substitute victim IDs across `updateUser`, `deleteOrg`, `transferBilling` mutations → mass IDOR fan-out from one introspection query.
+- **`security-arsenal`**; Pull the IDOR Bypass Tables section for HTTP-parameter-pollution payloads (`?id=own&id=victim`), nested-JSON wrappers (`{"data":{"id":"VICTIM"}}`), and parameter-name variations (`uid`/`userId`/`user_id`/`account`) when the first direct substitution returns 403.
+- **`triage-validation`**; Run the Pre-Severity Gate before claiming Critical on an IDOR that returns 200 but doesn't actually leak data (empty array, redacted fields, "access denied" in body with 200 status). The 200-but-no-data IDOR is the #1 N/A driver on H1/Bugcrowd.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

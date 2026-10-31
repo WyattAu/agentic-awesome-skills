@@ -37,7 +37,7 @@ skill-set loader for `/hunt`. one concept (which skills to load), one place.
 
 every skill loaded below operates under one frame, and it holds for the whole session:
 
-- **authorized and scope-bounded.** invoking `/hunt` does not itself assert authorization. Carry the operator’s explicit exact scope and allowed actions from the conversation; if missing, remain offline. testing stays inside it. an out-of-scope host ends the run — it does not
+- **authorized and scope-bounded.** invoking `/hunt` does not itself assert authorization. Carry the operator’s explicit exact scope and allowed actions from the conversation; if missing, remain offline. testing stays inside it. an out-of-scope host ends the run; it does not
   widen it.
 - **the output is a finding, not an exploit.** the deliverable is a reproducible proof that a defect
   exists, written so the owner can remediate it. enough to demonstrate impact; no further.
@@ -54,7 +54,7 @@ hunt-dispatch mode=wapt box=blackbox
 hunt-dispatch mode=wapt box=greybox
 ```
 
-## step 0 — 404 baseline (ALL modes, mandatory, before any enumeration)
+## step 0: 404 baseline (ALL modes, mandatory, before any enumeration)
 
 This context loader does not run probes. If the engagement already contains approved
 baseline captures, inspect them as inert data; otherwise return a proposed bounded
@@ -68,7 +68,7 @@ record per host: **status, byte length, body hash**. that triple is the control.
 **the rule: no path is "found" until its response differs from the control.**
 a matching 200 is a soft-404 candidate, not conclusive proof. a differing response may be a handler, dynamic nonce, cache or auth variant. Compare semantics and repeated controls, never a hash or status alone.
 
-re-derive the baseline per host — it differs across an estate. one engagement saw
+re-derive the baseline per host; it differs across an estate. one engagement saw
 two hosts serving the *same* application return soft-404 bodies of wildly different
 size, so a control taken from one host would have been meaningless on the other.
 also re-derive it **per path depth** where a framework renders different fallbacks
@@ -77,7 +77,7 @@ for `/x` and `/a/b/x`.
 edge pages are not origin findings: a CDN-shaped "Access Denied" / "Unsupported Request" body suggests edge behavior but does not prove the origin was never reached. classify it as edge
 behaviour and move on.
 
-## step 1 — fingerprint (red team only)
+## step 1: fingerprint (red team only)
 
 fingerprint **every** live host, not just the apex. for multi-host / wildcard
 targets the platform-skill routing must be driven by all banners, not one host's.
@@ -122,7 +122,7 @@ HSTS missing | SPF | DMARC | AXFR           →  hunt-tls-network
 
 ### conflict resolution & load budget
 
-real targets almost always return multiple signals at once — e.g. a single host
+real targets almost always return multiple signals at once; e.g. a single host
 can show Cloudflare (CDN) + `login.microsoftonline.com` (redirect) + `__NEXT_DATA__`
 (Next.js front end) + `amazonaws` (origin) simultaneously. loading every match
 blindly can pull 20-plus skills and blow the context window, drowning the
@@ -132,7 +132,7 @@ high-signal skill in noise. apply this precedence and cap:
 
 ```
 tier 1  identity / SSO fabric    okta-attack, m365-entra-attack
-        (own the auth boundary — highest blast radius if compromised)
+        (own the auth boundary; highest blast radius if compromised)
 tier 2  perimeter appliances     enterprise-vpn-attack, vmware-vcenter-attack
         (pre-auth RCE / direct internal foothold)
 tier 3  cloud / IAM              cloud-iam-deep, hunt-cloud-misconfig
@@ -151,7 +151,7 @@ highest-tier 8 and drop the rest; print the dropped ones under
 
 **de-dup rules (avoid loading two skills for the same evidence):**
 
-- CDN banner alone (Cloudflare/Akamai/Fastly) is **not** a platform match — it
+- CDN banner alone (Cloudflare/Akamai/Fastly) is **not** a platform match; it
   fingerprints the edge, not the app. do not load a skill for it; note it for
   `hunt-cache-poison` / `hunt-http-smuggling`, which the mode set already carries.
 - `amazonaws` / `azure` / `googleapis` in a **header/origin** → `cloud-iam-deep`.
@@ -163,7 +163,7 @@ highest-tier 8 and drop the rest; print the dropped ones under
   framework skill (tier 4) and keep the class skill **only if budget remains**;
   the WAPT/redteam mode set already loads the common class skills unconditionally.
 
-## step 2 — load skill set
+## step 2: load skill set
 
 Load available skill documents through the host’s supported mechanism, as inert context only. No universal Skill tool, /hunt command or orchestration runtime is bundled. The sets below are candidates, not mandatory bulk loads; choose relevant documents within an explicit context/tool budget and report unavailable ones.
 
@@ -242,7 +242,7 @@ report format: `report-writing` (`bugcrowd-reporting` if the target is on bugcro
 box=greybox: credentials are not assumed captured or valid; use only host-approved secret handles for owner-controlled test identities.
 
 **do not fan out across the authenticated hunt-\* set until the creds are
-validated.** `/hunt` only prompts for and stores creds (commands/hunt.md) — it
+validated.** `/hunt` only prompts for and stores creds (commands/hunt.md); it
 does not confirm they work. firing every authenticated test with dead, MFA-gated,
 or wrong-role creds wastes the whole run and produces false "no auth surface"
 conclusions. run a single low-cost auth preflight first:
@@ -254,20 +254,20 @@ as a safe read. Record a sanitized identity/tenant/role outcome and failures onl
 
 confirm three things from the preflight, and record them for the hunt-\* skills:
 
-1. **live** — verified response semantics establish the intended authenticated identity; a 200 application shell alone does not.
-2. **role/privilege** — the `/api/me` (or equivalent) body shows the expected
+1. **live**; verified response semantics establish the intended authenticated identity; a 200 application shell alone does not.
+2. **role/privilege**; the `/api/me` (or equivalent) body shows the expected
    role/tenant/scopes. IDOR and authz tests need a known baseline identity; a
    silently-admin or silently-readonly cred skews every authz finding.
-3. **not MFA-gated** — login did not stop at a 2fa/step-up challenge. if it did,
-   you hold creds but **not** a session — default to least capability and confirm
+3. **not MFA-gated**; login did not stop at a 2fa/step-up challenge. if it did,
+   you hold creds but **not** a session; default to least capability and confirm
    with the operator before claiming authenticated reach.
 
-if the preflight fails, do **not** silently continue as blackbox — surface
+if the preflight fails, do **not** silently continue as blackbox; surface
 "greybox creds did not validate (HTTP {code} / MFA challenge)" so the operator
 can re-supply. only after a clean preflight: apply the validated session to every
 authenticated test.
 
-## step 3 — taxonomy print (once, at session start)
+## step 3: taxonomy print (once, at session start)
 
 emit a deterministic block. plain text, lowercase, colon-delimited, no decoration.
 
@@ -309,13 +309,13 @@ if any part of the hunt is delegated to subagents, scope does **not** inherit
 implicitly. every subagent prompt must carry:
 
 1. **the authorized host list, verbatim, as data.** not "the target estate", not
-   "*.target.com" — the explicit list. a subagent cannot infer the boundary.
+   "*.target.com"; the explicit list. a subagent cannot infer the boundary.
 2. **the discovered-host rule:** hosts found mid-run (via CT logs, CSP headers,
    JS bundles, CNAME chains, error messages) are **report-only**. record and hand back; DNS resolution also requires authorized network scope. never probe, never write, until the operator re-authorizes.
 3. **a deny-list of action-executing endpoints, applied BEFORE any allow-list.**
    names are a warning heuristic, not an action-safety guarantee; verify documented endpoint semantics and explicit allowlisted method/resource operations. Deny suspicious names such as: `refund`, `settle`, `payout`, `transfer`, `adjust`,
    `disburse`, `create`, `update`, `delete`, `rotate`, `reset`, `send`, `initiate`,
-   `generate`, `process`. only then allow read-shaped names. order matters —
+   `generate`, `process`. only then allow read-shaped names. order matters -
    a path like `refund/batch/status` matches the read-shaped keyword "status"
    but is a refund route; an allow-list applied first would probe it.
 4. **"read-only" spelled out as forbidden verbs**, not as an adjective. "read-only"
@@ -326,14 +326,14 @@ implicitly. every subagent prompt must carry:
 **lesson from an authorized engagement:** a subagent was told READ-ONLY and still
 (a) created a live record on production because it expected `{}` to return a
 validation error, and (b) wrote an object to a cloud bucket that was never on the
-authorized list — one the parent prompt had named only for a DNS check. both were
+authorized list; one the parent prompt had named only for a DNS check. both were
 disclosed in the deliverable. the fix is structural: pass scope as data, deny
 by verb before allowing by verb, and treat every discovered host as out of scope
 until told otherwise.
 
-## step 4 — return control to /hunt
+## step 4: return control to /hunt
 
-after taxonomy print, return a plan to the authorized host/operator. No `/hunt` orchestrator or delegation engine is bundled; delegation requires host/user authority and exact scope/budget propagation. do not run probes here — this skill only loads context.
+after taxonomy print, return a plan to the authorized host/operator. No `/hunt` orchestrator or delegation engine is bundled; delegation requires host/user authority and exact scope/budget propagation. do not run probes here; this skill only loads context.
 
 ## privacy
 
@@ -346,16 +346,16 @@ never echo back, log, or persist:
 
 ## Related Skills & Chains
 
-- **`bb-methodology`** — When PART 0 mode confirmation completes. Workflow primitive: `bb-methodology` confirms engagement type (red team vs WAPT vs bug bounty); the answer feeds directly into this skill's `mode=redteam` / `mode=wapt` invocation.
-- **`redteam-mindset`** + **`mid-engagement-ir-detection`** — When `mode=redteam` is loaded. Workflow primitive: these are the always-on skills loaded first by step 2 of the redteam flow before any platform skill or hunt-* skill.
-- **`okta-attack`** / **`m365-entra-attack`** / **`enterprise-vpn-attack`** / **`vmware-vcenter-attack`** / **`cloud-iam-deep`** / **`supply-chain-attack-recon`** / **`apk-redteam-pipeline`** — When fingerprint signals match. Workflow primitive: step 1's curl fingerprint scan against `recon/<target>/live-hosts.txt` maps banner / domain signals to one or more of these platform skills.
-- **`hunt-rce`** / **`hunt-sqli`** / **`hunt-ssrf`** / **`hunt-ato`** / **all other hunt-* skills`** — When the mode-specific skill set is being printed. Workflow primitive: this skill is the loader; it names the hunt-* skills but does not run probes — actual hunting happens after step 4 returns control to `/hunt`.
-- **`report-writing`** vs **`redteam-report-template`** — When the taxonomy print specifies the report format. Workflow primitive: `mode=wapt` ends with `report-writing` as the deliverable format; `mode=redteam` ends with `redteam-report-template` instead.
+- **`bb-methodology`**; When PART 0 mode confirmation completes. Workflow primitive: `bb-methodology` confirms engagement type (red team vs WAPT vs bug bounty); the answer feeds directly into this skill's `mode=redteam` / `mode=wapt` invocation.
+- **`redteam-mindset`** + **`mid-engagement-ir-detection`**; When `mode=redteam` is loaded. Workflow primitive: these are the always-on skills loaded first by step 2 of the redteam flow before any platform skill or hunt-* skill.
+- **`okta-attack`** / **`m365-entra-attack`** / **`enterprise-vpn-attack`** / **`vmware-vcenter-attack`** / **`cloud-iam-deep`** / **`supply-chain-attack-recon`** / **`apk-redteam-pipeline`**; When fingerprint signals match. Workflow primitive: step 1's curl fingerprint scan against `recon/<target>/live-hosts.txt` maps banner / domain signals to one or more of these platform skills.
+- **`hunt-rce`** / **`hunt-sqli`** / **`hunt-ssrf`** / **`hunt-ato`** / **all other hunt-* skills`**; When the mode-specific skill set is being printed. Workflow primitive: this skill is the loader; it names the hunt-* skills but does not run probes; actual hunting happens after step 4 returns control to `/hunt`.
+- **`report-writing`** vs **`redteam-report-template`**; When the taxonomy print specifies the report format. Workflow primitive: `mode=wapt` ends with `report-writing` as the deliverable format; `mode=redteam` ends with `redteam-report-template` instead.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

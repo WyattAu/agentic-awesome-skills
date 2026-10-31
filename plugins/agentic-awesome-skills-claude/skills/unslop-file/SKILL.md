@@ -22,8 +22,8 @@ Rewrite natural-language memory files (CLAUDE.md, AGENTS.md, todos, preferences,
 
 Two modes:
 
-- **`--deterministic`** — fast regex pass that strips canonical AI-isms and tightens tricolons. No API call, no `ANTHROPIC_API_KEY` needed. Best for batch processing and CI.
-- **LLM mode (default)** — calls Claude (via Anthropic SDK or `claude --print` CLI fallback) to do a full rewrite that engineers burstiness, restructures performative paragraphs, and matches voice. Slower but better quality.
+- **`--deterministic`**; fast regex pass that strips canonical AI-isms and tightens tricolons. No API call, no `ANTHROPIC_API_KEY` needed. Best for batch processing and CI.
+- **LLM mode (default)**; calls Claude (via Anthropic SDK or `claude --print` CLI fallback) to do a full rewrite that engineers burstiness, restructures performative paragraphs, and matches voice. Slower but better quality.
 
 Humanized version overwrites the original. A `FILE.original.md` backup is written first. Re-run after editing the `.original.md` to regenerate.
 
@@ -85,17 +85,17 @@ Before using LLM mode, confirm authorization to send the file contents to the se
 - **Performative balance**: "however" / "on the other hand" appended to every claim.
 - **Em-dash pileups** (more than two em-dashes per paragraph).
 - **Filler phrases** (`--mode full` only): "in order to" → "to", "due to the fact that" → "because", "prior to" → "before", "with regard to" → "about", "a wide variety of" → "many", "at this point in time" → "now", "the fact that" → "that", etc.
-- **Negative-parallelism tricolons** (`--mode full` only): "No guesswork, no bloat, no surprises." — the rhetorical triple-no punch.
+- **Negative-parallelism tricolons** (`--mode full` only): "No guesswork, no bloat, no surprises."; the rhetorical triple-no punch.
 
 ### Tighten
 
-- Tricolons: "X, Y, and Z" stacks where two would suffice — keep two, drop the weakest
+- Tricolons: "X, Y, and Z" stacks where two would suffice; keep two, drop the weakest
 - Bullet soup: three bullets that say the same thing → merge into one sentence
 - Five-paragraph essay shapes: vary paragraph length; don't write four paragraphs of identical length
 
 ### Preserve EXACTLY (never modify)
 
-- Fenced code blocks (```...```) — every byte
+- Fenced code blocks (```...```); every byte
 - Indented code blocks (4-space)
 - Inline code (`...`)
 - URLs and markdown links
@@ -138,8 +138,8 @@ Everything inside ` ``` ... ``` ` is read-only. No comment changes, no whitespac
 
 ### Reference
 
-- `blader/unslop` — Claude-Code skill listing 30+ AI tells; we incorporated the strongest signals.
-- Wikipedia: *Signs of AI writing* — public taxonomy cross-referenced for vocab.
+- `blader/unslop`; Claude-Code skill listing 30+ AI tells; we incorporated the strongest signals.
+- Wikipedia: *Signs of AI writing*; public taxonomy cross-referenced for vocab.
 - Full comparison + gap analysis: `docs/research/IMPLEMENTATION_TRACE.md`.
 
 ## Boundaries

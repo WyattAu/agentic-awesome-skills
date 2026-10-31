@@ -18,7 +18,7 @@ plugin:
     claude: blocked
 ---
 
-# TokenWise — Measurement-Driven Model Router
+# TokenWise: Measurement-Driven Model Router
 
 ## Overview
 
@@ -35,11 +35,11 @@ This entry describes the upstream workflow; it does not bundle its commands or m
 
 ## Subcommands
 
-- `/tokenwise:install` — guided installer with diff preview, automatic backups, and `--dry-run` mode
-- `/tokenwise:report` — per-session token + cost summary vs all-Opus baseline
-- `/tokenwise:summary [--week|--month|--all]` — historical aggregate with trend
-- `/tokenwise:ab "<task>"` — A/B test the same task at multiple tiers, generates a markdown comparison
-- `/tokenwise:undo` — restore CLAUDE.md / settings.json from backup
+- `/tokenwise:install`; guided installer with diff preview, automatic backups, and `--dry-run` mode
+- `/tokenwise:report`; per-session token + cost summary vs all-Opus baseline
+- `/tokenwise:summary [--week|--month|--all]`; historical aggregate with trend
+- `/tokenwise:ab "<task>"`; A/B test the same task at multiple tiers, generates a markdown comparison
+- `/tokenwise:undo`; restore CLAUDE.md / settings.json from backup
 
 ## Routing taxonomy
 
@@ -52,7 +52,7 @@ This entry describes the upstream workflow; it does not bundle its commands or m
 Safety caps:
 - Haiku never spawns further subagents
 - Max spawn depth = 2
-- Subagents that need a smarter model return to parent — they never escalate on their own
+- Subagents that need a smarter model return to parent; they never escalate on their own
 - Tasks under 100 chars with no file context run inline (subagent overhead > savings)
 - Subagent context >30k tokens bumps a tier
 
@@ -74,7 +74,7 @@ Then run `/tokenwise:install` and follow the guided prompts.
 ## Limitations
 
 - Treat reported costs as estimates until reconciled with actual provider usage and current pricing; no billing-error bound is established by this catalog entry
-- A/B test mode costs extra tokens (one task × N tiers) — intentional one-time validation
+- A/B test mode costs extra tokens (one task × N tiers); intentional one-time validation
 - Anthropic-only by design (use LiteLLM or OpenRouter for cross-vendor)
 - Verify the selected model in actual execution evidence; do not assume a model parameter or an installer probe guarantees that a specific client build honored routing
 

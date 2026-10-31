@@ -211,7 +211,7 @@ Use `faf-expert` for:
 
 ## Validation & Security
 
-**Upstream quality and packaging claims — verify against the selected version:**
+**Upstream quality and packaging claims; verify against the selected version:**
 - ✅ **800+ comprehensive tests** across CLI and MCP
 - ✅ **No credentials ever stored** in .faf files
 - ✅ **YAML format validation** prevents malformed files

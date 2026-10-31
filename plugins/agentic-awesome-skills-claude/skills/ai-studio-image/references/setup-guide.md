@@ -1,4 +1,4 @@
-# AI Studio Image — Guia de Setup Completo
+# AI Studio Image: Guia de Setup Completo
 
 ## 1. Obter API Key
 
@@ -86,7 +86,7 @@ python <skill-root>/scripts\generate.py \
 | Nivel | Descricao | Quando Usar |
 |-------|-----------|-------------|
 | ultra | Parece celular amador | Conteudo muito casual, BTS |
-| natural | Celular moderno, equilibrado | **Padrao — maioria dos casos** |
+| natural | Celular moderno, equilibrado | **Padrao; maioria dos casos** |
 | polished | Natural mas caprichado | Conteudo profissional |
 | editorial | Estilo revista | Branding, editorial |
 

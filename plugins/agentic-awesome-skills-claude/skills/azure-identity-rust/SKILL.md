@@ -103,11 +103,11 @@ let credential = ClientSecretCredential::new(
 
 ## Best Practices
 
-1. **Use `DeveloperToolsCredential` for local dev** — automatically picks up Azure CLI
-2. **Use `ManagedIdentityCredential` in production** — no secrets to manage
-3. **Clone credentials** — credentials are `Arc`-wrapped and cheap to clone
-4. **Reuse credential instances** — same credential can be used with multiple clients
-5. **Provide the async runtime** — add Tokio with the features required by your application; do not assume a crate-specific `tokio` feature exists
+1. **Use `DeveloperToolsCredential` for local dev**; automatically picks up Azure CLI
+2. **Use `ManagedIdentityCredential` in production**; no secrets to manage
+3. **Clone credentials**; credentials are `Arc`-wrapped and cheap to clone
+4. **Reuse credential instances**; same credential can be used with multiple clients
+5. **Provide the async runtime**; add Tokio with the features required by your application; do not assume a crate-specific `tokio` feature exists
 
 The reviewed example set uses `azure_identity 1.0.0` and compatible Azure core/credential crates. Record and commit Cargo.lock; source/API review is not a compiler or live-service test.
 

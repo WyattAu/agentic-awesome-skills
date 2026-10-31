@@ -4,7 +4,7 @@
 
 Em projetos tecnicos complexos, a perda de um unico detalhe pode causar horas de
 re-trabalho. Este checklist ajuda a revisar se a extracao pre-compactacao esta completa
-e consistente. Execute CADA item — nao pule nenhum.
+e consistente. Execute CADA item; nao pule nenhum.
 
 ## Verificacao de Completude
 
@@ -31,7 +31,7 @@ e consistente. Execute CADA item — nao pule nenhum.
 ```
 □ Cada bug tem: sintoma, causa raiz, correcao, arquivo afetado
 □ A correcao foi verificada (teste rodou, output confirmou)
-□ Nenhum bug "parcialmente corrigido" — se nao terminou, esta em pendentes
+□ Nenhum bug "parcialmente corrigido"; se nao terminou, esta em pendentes
 □ Vulnerabilidades de seguranca tem classificacao (SQLi, XSS, token leak, etc)
 ```
 
@@ -102,5 +102,5 @@ Apos todas as verificacoes passarem:
 3. Executar context-agent save
 4. Escrever briefing de transicao como ultima mensagem
 
-O briefing de transicao e a peca mais importante — ele fica no topo do contexto
+O briefing de transicao e a peca mais importante; ele fica no topo do contexto
 compactado e e a primeira coisa que o proximo Claude le.

@@ -10,7 +10,7 @@ date_added: "2026-03-04"
 
 ## Overview
 
-Electronic Data Interchange (EDI) is the standard for automated B2B document exchange — purchase orders, invoices, ASNs (Advance Shipping Notices). This skill guides you through mapping EDI transactions (ANSI X12 or EDIFACT) to Odoo business objects, setting up trading partner configurations, and automating inbound/outbound document flows.
+Electronic Data Interchange (EDI) is the standard for automated B2B document exchange; purchase orders, invoices, ASNs (Advance Shipping Notices). This skill guides you through mapping EDI transactions (ANSI X12 or EDIFACT) to Odoo business objects, setting up trading partner configurations, and automating inbound/outbound document flows.
 
 ## When to Use This Skill
 
@@ -58,9 +58,9 @@ A 997 reports syntax/functional acceptance according to the negotiated guide; it
 
 - ✅ **Do:** Store every raw EDI transaction in an audit log table before processing.
 - ✅ **Do:** Send the negotiated acknowledgment within the partner-agreed deadline; do not assume 997 or a universal 24-hour rule.
-- ✅ **Do:** Negotiate a test cycle with trading partners before going live — use the partner-agreed test environment and ISA15 usage indicator `T`.
-- ❌ **Don't:** Process EDI files synchronously in web requests — queue them for async processing.
-- ❌ **Don't:** Hardcode trading partner qualifiers — store them in a configuration table per partner.
+- ✅ **Do:** Negotiate a test cycle with trading partners before going live; use the partner-agreed test environment and ISA15 usage indicator `T`.
+- ❌ **Don't:** Process EDI files synchronously in web requests; queue them for async processing.
+- ❌ **Don't:** Hardcode trading partner qualifiers; store them in a configuration table per partner.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

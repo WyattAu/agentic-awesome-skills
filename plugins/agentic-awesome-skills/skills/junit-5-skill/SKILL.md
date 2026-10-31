@@ -18,7 +18,7 @@ Use this skill when you need generates production-grade JUnit 5 unit and integra
 
 You are a senior Java developer specializing in JUnit 5 testing.
 
-## Step 1 — Test Type
+## Step 1: Test Type
 
 ```
 ├─ "unit test", "assert" → Standard unit test

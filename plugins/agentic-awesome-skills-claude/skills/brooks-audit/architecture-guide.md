@@ -1,4 +1,4 @@
-# Architecture Audit Guide — Mode 2
+# Architecture Audit Guide: Mode 2
 
 **Purpose:** Analyze the module and dependency structure of a system for decay risks that
 operate at the architectural level. Every finding must follow the Iron Law:
@@ -23,19 +23,19 @@ proactive reading below and proceed to Step 1.
 
 **Otherwise, proactively read the project using these tools:**
 
-1. **Top-level structure** — glob top two levels to identify module boundaries:
+1. **Top-level structure**; glob top two levels to identify module boundaries:
    ```
    Glob: **/*(depth 2, directories only)
    ```
-2. **Entry points** — read the package manifest or main config file (e.g., `package.json`,
+2. **Entry points**; read the package manifest or main config file (e.g., `package.json`,
    `go.mod`, `pom.xml`, `Cargo.toml`, `pyproject.toml`) to confirm language, framework,
    and declared dependencies.
-3. **Dependency edges** — grep import statements to discover inter-module calls. Run once
+3. **Dependency edges**; grep import statements to discover inter-module calls. Run once
    per language present; limit to the first 200 matches to avoid token overrun:
    ```
    Grep: "^\s*(import|from|require\(|use )" across *.ts|*.py|*.go|*.rs|*.java
    ```
-4. **Large modules** — for any top-level directory with > 10 files, read the file matching
+4. **Large modules**; for any top-level directory with > 10 files, read the file matching
    `index.*`, `main.*`, or `__init__.*` to understand its stated responsibility.
 
 **Stop when you can answer all three:**
@@ -87,24 +87,24 @@ graph TD
   class Database,MessageQueue,AuthService,WebApp,MobileApp clean
 ````
 
-Draw the graph structure first — nodes, subgraphs, and edges — without any `classDef` or
+Draw the graph structure first; nodes, subgraphs, and edges; without any `classDef` or
 `class` lines. You cannot assign colors until you have completed the risk scan in Steps 2–4.
 
 **After completing Step 4**, return to this graph and add the `classDef` and `class` lines
 based on findings. The example above shows the final colored output.
 
 Rules:
-1. **Nodes** — Use top-level directories or services as nodes, not individual files
-2. **Grouping** — One `subgraph` per architectural layer or top-level directory (e.g., UI, Domain, Infrastructure)
-3. **Edges** — Solid arrows (`-->`) point FROM the depending module TO the dependency; use dotted arrows with label (`-.->|circular|`) for circular dependencies. If no circular dependencies exist, use only solid arrows
-4. **Node limit** — Keep the graph to ~50 nodes maximum; collapse low-risk leaf modules into their parent if needed
-5. **Fan-out** — For any node with fan-out > 5, use a descriptive label: `HighFanOutModule["ModuleName (fan-out: 7)"]`
-6. **Colors** — Apply `classDef` colors AFTER completing Steps 2-4: `critical` (red `#ff6b6b`) for nodes with Critical findings, `warning` (yellow `#ffd43b`) for Warning findings, `clean` (green `#51cf66`) for nodes with no findings or only Suggestions. If no findings were observed in a reviewed node, label it no findings observed; sampled/unread nodes remain unknown, not clean
-7. **Direction** — Default to `graph TD` (top-down); use `graph LR` only if the architecture is clearly a left-to-right pipeline
+1. **Nodes**; Use top-level directories or services as nodes, not individual files
+2. **Grouping**; One `subgraph` per architectural layer or top-level directory (e.g., UI, Domain, Infrastructure)
+3. **Edges**; Solid arrows (`-->`) point FROM the depending module TO the dependency; use dotted arrows with label (`-.->|circular|`) for circular dependencies. If no circular dependencies exist, use only solid arrows
+4. **Node limit**; Keep the graph to ~50 nodes maximum; collapse low-risk leaf modules into their parent if needed
+5. **Fan-out**; For any node with fan-out > 5, use a descriptive label: `HighFanOutModule["ModuleName (fan-out: 7)"]`
+6. **Colors**; Apply `classDef` colors AFTER completing Steps 2-4: `critical` (red `#ff6b6b`) for nodes with Critical findings, `warning` (yellow `#ffd43b`) for Warning findings, `clean` (green `#51cf66`) for nodes with no findings or only Suggestions. If no findings were observed in a reviewed node, label it no findings observed; sampled/unread nodes remain unknown, not clean
+7. **Direction**; Default to `graph TD` (top-down); use `graph LR` only if the architecture is clearly a left-to-right pipeline
 
 ### Step 2: Scan for Dependency Disorder
 
-*The most architecturally consequential risk — scan this first.*
+*The most architecturally consequential risk; scan this first.*
 
 Look for:
 - Circular dependencies (any `-.->|circular|` edge in the map above)
@@ -145,7 +145,7 @@ Check each in turn:
 ### Step 5: Testability Seam Assessment
 
 A *seam* is a place in the architecture where behavior can be altered without editing source
-code — typically an interface, a configuration point, or a dependency injection boundary.
+code; typically an interface, a configuration point, or a dependency injection boundary.
 Seam density is a proxy for testability and evolvability.
 
 Scan for:
@@ -156,14 +156,14 @@ Scan for:
   (e.g., direct constructor instantiation replaced a dependency injection point, or a global
   singleton replaced an injected collaborator).
 - **Missing seam in legacy areas**: modules without an obvious injection point or interface
-  boundary — any change requires touching the entire call stack to substitute behavior.
+  boundary; any change requires touching the entire call stack to substitute behavior.
 
 If all modules have clear seams at their infrastructure boundaries → no finding.
 
 If seams are absent or collapsed: flag as 🟡 Warning with a Remedy pointing to the specific
 module and the injection point that needs to be restored or introduced.
 
-Source: Feathers — Working Effectively with Legacy Code, Ch. 4: The Seam Model
+Source: Feathers; Working Effectively with Legacy Code, Ch. 4: The Seam Model
 
 ### Step 6: Conway's Law Check
 
@@ -177,11 +177,11 @@ After the six-risk scan, assess the relationship between architecture and team s
 - If team structure is unknown, note this as context missing and skip the check. A mismatch alone does not establish Critical severity; use concrete observed impact, confidence and project priorities.
 
 **Calibration examples:**
-- 🔴 Critical: the Payments module is owned by Team A but contains auth logic owned by Team B —
+- 🔴 Critical: the Payments module is owned by Team A but contains auth logic owned by Team B -
   every Payments change requires a sync meeting with Team B
 - 🟡 Warning: two separate teams own the `utils/` and `helpers/` directories which do the same
-  things — theoretically painful but not yet causing release coordination issues
-- Not a finding: a single team owns a monorepo with multiple logical modules — Conway's Law
+  things; theoretically painful but not yet causing release coordination issues
+- Not a finding: a single team owns a monorepo with multiple logical modules; Conway's Law
   misalignment requires *separate teams* to be meaningful
 
 ---

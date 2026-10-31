@@ -46,7 +46,7 @@ Completed work is routed through an adversarial verification pass that challenge
 ### Example 1: Run a parallel workflow
 
 ODW requires a separately installed upstream runtime; this single-file skill does not bundle its daemon, bridge, plugin or workflow scripts. Inspect the full upstream tree and pin a reviewed immutable revision before installation. Dependency installation can execute lifecycle scripts; inspect those scripts and the lockfile first, and use an isolated environment. The CLI is
-`odw-daemon` — run it as `npm run odw -- <args>` from inside the repo, or as
+`odw-daemon`; run it as `npm run odw -- <args>` from inside the repo, or as
 `npx odw-daemon <args>` / a global `odw-daemon` if you link the bin.
 
 ```bash

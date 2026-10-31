@@ -20,7 +20,7 @@ Create signup experiences that respect developers' time and get them to code as 
 
 ## Overview
 
-Developer signup is your first chance to demonstrate that you understand developers. Every unnecessary form field, every extra click, every "verify your email before continuing" is a message that you don't value their time. The best developer signups feel like they barely exist—developers go from "I want to try this" to "I'm writing code" in under 60 seconds.
+Developer signup is your first chance to demonstrate that you understand developers. Every unnecessary form field, every extra click, every "verify your email before continuing" is a message that you don't value their time. The best developer signups feel like they barely exist-developers go from "I want to try this" to "I'm writing code" in under 60 seconds.
 
 This skill covers OAuth integration, API key generation UX, progressive profiling, and measuring what actually matters in signup conversion.
 
@@ -82,7 +82,7 @@ Email+password signup should exist but not dominate. It serves:
 - Situations where GitHub/Google accounts don't reflect professional identity
 
 **If you support email signup:**
-- Allow signup with just email—send magic link, don't require password creation
+- Allow signup with just email-send magic link, don't require password creation
 - A read-only preview may precede verification; verify ownership before account linking, secrets, paid resources or sensitive workspace access
 - Offer "Set password later" for developers who prefer magic links
 

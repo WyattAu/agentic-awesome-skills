@@ -6,7 +6,7 @@ source: community
 date_added: "2026-03-03"
 ---
 
-# AgentMail — Email for AI Agents
+# AgentMail: Email for AI Agents
 
 AgentMail gives AI agents real email addresses (`@theagentmail.net`) with a REST API. Agents can send and receive email, sign up for services (GitHub, AWS, Slack, etc.), and get verification codes. This guide targets the separate `theagentmail.net` service, not `agentmail.to`; do not interchange domains, SDK publishers or credentials. Current access, limits, delivery and abuse controls must be verified.
 

@@ -3,9 +3,9 @@
 # Example Competitor Research File
 
 ## Contents
-- [Template](#template) — full worked example for a fictional "Rival Co"
-- [Field Rules](#field-rules) — frontmatter fields, body section order, mention/findings format
-- [Writing via Bash Heredoc](#writing-via-bash-heredoc) — required pattern for subagents to avoid permission prompts
+- [Template](#template); full worked example for a fictional "Rival Co"
+- [Field Rules](#field-rules); frontmatter fields, body section order, mention/findings format
+- [Writing via Bash Heredoc](#writing-via-bash-heredoc); required pattern for subagents to avoid permission prompts
 
 Each enrichment subagent writes one markdown file per competitor to `{OUTPUT_DIR}/{competitor-slug}.md`, where `{OUTPUT_DIR}` is the per-run Desktop directory set up by the main agent in Step 0 (e.g., `~/Desktop/acme_competitors_2026-04-23/`). The YAML frontmatter contains structured fields for report/matrix compilation. The body contains per-section research plus aggregated mentions and benchmarks.
 
@@ -60,18 +60,18 @@ Marketing emphasizes "AI-native" and developer-first DX. Landing page hero:
 - **Where you win**: Stronger neural relevance (per public benchmarks), research API, larger integration ecosystem
 
 ## Mentions
-- **[Benchmark]** retrieval-quality leaderboard — Rival Co 73% nDCG@10, 4th of 7 tested (source: https://github.com/example-org/search-bench/pull/92, 2026-03-14)
-- **[Comparison]** Exa vs Rival Co — side-by-side review (source: https://example.com/exa-vs-rivalco, 2026-02-01)
-- **[Reddit]** r/LangChain thread: "Moved from Rival Co to X after relevance issues" — 24 upvotes (source: https://reddit.com/r/LangChain/comments/abc123)
-- **[HN]** "Show HN: Rival Co raises seed to build..." — 112 points, 48 comments (source: https://news.ycombinator.com/item?id=12345)
-- **[LinkedIn]** CEO post on product launch — 412 reactions (source: https://linkedin.com/posts/rivalco-launch)
-- **[YouTube]** "Rival Co vs Exa" review by Dev YouTuber — 8.2K views (source: https://youtube.com/watch?v=xyz)
+- **[Benchmark]** retrieval-quality leaderboard; Rival Co 73% nDCG@10, 4th of 7 tested (source: https://github.com/example-org/search-bench/pull/92, 2026-03-14)
+- **[Comparison]** Exa vs Rival Co; side-by-side review (source: https://example.com/exa-vs-rivalco, 2026-02-01)
+- **[Reddit]** r/LangChain thread: "Moved from Rival Co to X after relevance issues"; 24 upvotes (source: https://reddit.com/r/LangChain/comments/abc123)
+- **[HN]** "Show HN: Rival Co raises seed to build..."; 112 points, 48 comments (source: https://news.ycombinator.com/item?id=12345)
+- **[LinkedIn]** CEO post on product launch; 412 reactions (source: https://linkedin.com/posts/rivalco-launch)
+- **[YouTube]** "Rival Co vs Exa" review by Dev YouTuber; 8.2K views (source: https://youtube.com/watch?v=xyz)
 - **[News]** TechCrunch coverage of seed round (source: https://techcrunch.com/2024/11/rival-co-seed)
 - **[Review]** G2 4.3/5 (31 reviews), main complaint: stale results (source: https://g2.com/products/rival-co)
 
 ## Benchmarks
-- **search-bench PR #92** — Rival Co 73% nDCG@10 on retrieval quality, 4th of 7 tested (https://github.com/example-org/search-bench/pull/92)
-- **retrieval-latency blog** — Rival Co 480ms p50, 2nd fastest (https://example.com/search-latency-2026)
+- **search-bench PR #92**; Rival Co 73% nDCG@10 on retrieval quality, 4th of 7 tested (https://github.com/example-org/search-bench/pull/92)
+- **retrieval-latency blog**; Rival Co 480ms p50, 2nd fastest (https://example.com/search-latency-2026)
 
 ## Research Findings
 - **[high]** Usage-based pricing starts at $99/mo for 100K searches (source: rivalco.com/pricing)
@@ -82,12 +82,12 @@ Marketing emphasizes "AI-native" and developer-first DX. Landing page hero:
 ## Battle Card
 
 ### Landmines
-- **Rival Co scores 73% nDCG@10 on the search-bench leaderboard (4th of 7 tested)** — use against relevance-sensitive prospects; they rank below Exa on the same test. (source: https://github.com/example-org/search-bench/pull/92)
-- **G2 average 4.3/5 with "stale results" as top complaint across 31 reviews** — cite when prospect raises freshness concerns. (source: https://g2.com/products/rival-co)
+- **Rival Co scores 73% nDCG@10 on the search-bench leaderboard (4th of 7 tested)**; use against relevance-sensitive prospects; they rank below Exa on the same test. (source: https://github.com/example-org/search-bench/pull/92)
+- **G2 average 4.3/5 with "stale results" as top complaint across 31 reviews**; cite when prospect raises freshness concerns. (source: https://g2.com/products/rival-co)
 
 ### Objection Handlers
-- If they say: "Rival Co is $99/mo — cheaper than your Pro tier"
-  You say: "Cheaper upfront, but compare total cost of poor relevance — their 73% nDCG@10 means more irrelevant results your agent has to filter or re-query, and re-queries aren't free." (evidence: https://github.com/example-org/search-bench/pull/92)
+- If they say: "Rival Co is $99/mo; cheaper than your Pro tier"
+  You say: "Cheaper upfront, but compare total cost of poor relevance; their 73% nDCG@10 means more irrelevant results your agent has to filter or re-query, and re-queries aren't free." (evidence: https://github.com/example-org/search-bench/pull/92)
 
 ### Talk Tracks
 1. For RAG pipelines where relevance drives answer quality, Exa ships a neural index and a dedicated research/answer endpoint as table stakes; Rival Co has neither in their 2024 product set.
@@ -100,13 +100,13 @@ Marketing emphasizes "AI-native" and developer-first DX. Landing page hero:
 - **`key_features`**, **`integrations`**: Pipe-separated lists.
 - **`strategic_diff`**: One-line summary (shown in overview table).
 - **Body sections**: `## Product`, `## Pricing`, `## Features`, `## Positioning`, `## Comparison vs {user_company}`, `## Mentions`, `## Benchmarks`, `## Research Findings`, `## Battle Card` (deep/deeper modes only; synthesized by the Battle lane after fact-check).
-- **Mentions format**: `- **[SourceType]** title | snippet (source: url, date)` — `SourceType` is one of `Benchmark`, `Comparison`, `News`, `Reddit`, `HN`, `LinkedIn`, `YouTube`, `Review`, `Podcast`, `X`.
-- **Findings format**: `- **[confidence]** fact (source: url)` — `confidence` is `high`, `medium`, or `low`.
+- **Mentions format**: `- **[SourceType]** title | snippet (source: url, date)`; `SourceType` is one of `Benchmark`, `Comparison`, `News`, `Reddit`, `HN`, `LinkedIn`, `YouTube`, `Review`, `Podcast`, `X`.
+- **Findings format**: `- **[confidence]** fact (source: url)`; `confidence` is `high`, `medium`, or `low`.
 - **Filename**: `{OUTPUT_DIR}/{competitor-slug}.md` where slug is lowercase, hyphenated.
 
 ## Writing via Bash Heredoc
 
-Subagents write these files using bash heredoc to avoid security prompts. Use the full literal `{OUTPUT_DIR}` path — no `~` or `$HOME`:
+Subagents write these files using bash heredoc to avoid security prompts. Use the full literal `{OUTPUT_DIR}` path; no `~` or `$HOME`:
 
 ```bash
 cat << 'COMPETITOR_MD' > {OUTPUT_DIR}/rival-co.md

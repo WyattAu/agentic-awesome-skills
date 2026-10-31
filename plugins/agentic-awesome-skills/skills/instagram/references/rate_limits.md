@@ -1,4 +1,4 @@
-# Rate Limits — Instagram Graph API
+# Rate Limits: Instagram Graph API
 
 > Historical reference, not current Meta documentation. This bundle implements Facebook Login with a linked Page for both Business and Creator accounts. Verify the selected API version, permissions, media types, metrics, quotas and app-review requirements before use. Local scripts and their documented limitations take precedence over examples below.
 
@@ -11,7 +11,7 @@
 | Publicação de conteúdo | 25 posts | 24 horas | Por conta IG |
 | Pesquisa de hashtags | 30 hashtags únicas | 7 dias (rolling) | Por conta IG |
 | DMs (envio) | 200 mensagens | 1 hora | Human Agent messaging |
-| Stories | Sem limite oficial | — | Mas recomenda-se < 25/dia |
+| Stories | Sem limite oficial | - | Mas recomenda-se < 25/dia |
 
 ## Como a Skill Rastreia
 
@@ -34,9 +34,9 @@ WHERE account_id = ? AND searched_at >= datetime('now', '-7 days')
 ```
 
 ### Thresholds de Warning
-- **80%**: Info log — "Approaching rate limit"
-- **90%**: Warning — "Near rate limit, consider slowing down"
-- **100%**: Block — Retorna erro com tempo de espera estimado
+- **80%**: Info log; "Approaching rate limit"
+- **90%**: Warning; "Near rate limit, consider slowing down"
+- **100%**: Block; Retorna erro com tempo de espera estimado
 
 ## Respostas de Rate Limit da API
 
@@ -70,7 +70,7 @@ Alguns endpoints retornam HTTP 429 em vez de erro JSON.
 
 ## Estratégias de Backoff
 
-### api_client.py — Exponential Backoff
+### api_client.py: Exponential Backoff
 ```
 Tentativa 1: espera 2s
 Tentativa 2: espera 4s
@@ -94,7 +94,7 @@ GET /me?fields=id,username,followers_count,media{id,caption,media_type,permalink
 ```
 
 ### Caching Local
-O `db.py` persiste dados em SQLite — evita refazer chamadas para dados recentes.
+O `db.py` persiste dados em SQLite; evita refazer chamadas para dados recentes.
 
 ### Sync Inteligente
 O `run_all.py` processa em ordem de prioridade:

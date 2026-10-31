@@ -1,6 +1,6 @@
 ---
 name: pagespeed-enhancer
-description: "Scan, audit, and fix web performance issues across all four Lighthouse/PageSpeed Insights pillars — Performance, Accessibility, Best Practices, and SEO — in structured batches."
+description: "Scan, audit, and fix web performance issues across all four Lighthouse/PageSpeed Insights pillars; Performance, Accessibility, Best Practices, and SEO; in structured batches."
 risk: safe
 source: personal
 date_added: "2026-06-14"
@@ -34,8 +34,8 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 **User:** "My site scores 65 on Performance. LCP is 4.2s."
 
 **Agent:**
-1. Parses the score summary table — identifies LCP as critical bottleneck
-2. Runs Batch A scan — finds lazy-loaded hero image and render-blocking CSS
+1. Parses the score summary table; identifies LCP as critical bottleneck
+2. Runs Batch A scan; finds lazy-loaded hero image and render-blocking CSS
 3. Outputs risk report: F1.1 (CSS @import → link) ranked P1, F1.5 (LCP image eager) ranked P1
 4. Applies Fix Batch 1, verifies with re-test
 
@@ -45,7 +45,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 **Agent:**
 1. Asks for a PageSpeed report URL or pasted results
-2. Runs LCP-specific audit from Batch A — checks TTFB, element render delay, lazy loading
+2. Runs LCP-specific audit from Batch A; checks TTFB, element render delay, lazy loading
 3. Identifies the LCP element, its current loading strategy, and the critical path chain
 4. Recommends targeted fix (preload, eager loading, or server response time improvement)
 
@@ -53,12 +53,12 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 ## Limitations
 
-- Does not run actual Lighthouse or PageSpeed tests — the user must provide the report or URL
+- Does not run actual Lighthouse or PageSpeed tests; the user must provide the report or URL
 - Security header recommendations assume the user controls the deployment platform (Netlify, Vercel, etc.)
 - Fixes are general patterns; exact file paths and config syntax may vary by project setup
 - Does not cover server-level optimisations (CDN config, PHP opcode caching, database queries, etc.)
 - Image conversion commands assume the user has the required tools installed (cwebp, sharp, Pillow)
-- CSP guidance uses a report-only iterative approach — the final policy must be tuned to each project's actual resource origins
+- CSP guidance uses a report-only iterative approach; the final policy must be tuned to each project's actual resource origins
 
 ---
 

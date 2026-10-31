@@ -265,10 +265,10 @@ async def translate_text():
 
 ## Best Practices
 
-1. **Batch translations** — Send multiple texts in one request (up to 100)
+1. **Batch translations**; Send multiple texts in one request (up to 100)
 2. **Specify source language** when known to improve accuracy
 3. **Use async client** for high-throughput scenarios
-4. **Cache language list** — Supported languages don't change frequently
+4. **Cache language list**; Supported languages don't change frequently
 5. **Handle profanity** appropriately for your application
 6. **Use html text_type** when translating HTML content
 7. **Include alignment** for applications needing word mapping

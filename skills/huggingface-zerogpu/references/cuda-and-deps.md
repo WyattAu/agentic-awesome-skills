@@ -1,15 +1,15 @@
 <!-- Modified 2026-10-23: qualify binary dependency and historical compatibility claims. Apache-2.0 retained. -->
 # CUDA Dependencies on ZeroGPU
 
-Detailed guidance for installing CUDA-dependent packages on ZeroGPU. SKILL.md establishes the bottom line — wheels are the recommended path because the ZeroGPU build phase has no `nvcc`. This document covers wheel filename tag reading, the kernels-community fallback, and torch-family side-car drift.
+Detailed guidance for installing CUDA-dependent packages on ZeroGPU. SKILL.md establishes the bottom line; wheels are the recommended path because the ZeroGPU build phase has no `nvcc`. This document covers wheel filename tag reading, the kernels-community fallback, and torch-family side-car drift.
 
 ## When no wheel is available on PyPI
 
 Common workarounds, in preference order:
 
-1. **Pre-built wheel via direct URL.** For `flash-attn`, the upstream project ships a fairly complete matrix at https://github.com/Dao-AILab/flash-attention/releases — check there first and pin the matching wheel URL.
+1. **Pre-built wheel via direct URL.** For `flash-attn`, the upstream project ships a fairly complete matrix at https://github.com/Dao-AILab/flash-attention/releases; check there first and pin the matching wheel URL.
 2. **Build the wheel yourself and host it** (e.g. on a public HF Hub repo) when no upstream wheel matches the Space environment.
-3. **Use a kernels-community kernel** (see below) — handles ABI matching for you, still review and pin the supported kernel revision/runtime where available.
+3. **Use a kernels-community kernel** (see below); handles ABI matching for you, still review and pin the supported kernel revision/runtime where available.
 
 ## Reading a CUDA wheel filename
 
@@ -42,13 +42,13 @@ If you are not sure about the ZeroGPU runtime's torch / Python / ABI combination
 
 ## torch-family side-car drift
 
-`torchvision`, `torchaudio`, `torchcodec`, and similar side-car packages are built against a specific `torch` major.minor (and CUDA major). On ZeroGPU, the runtime's supported `torch` list lags behind PyPI, so projects often pin a non-latest `torch` — and a bare `uv add <side-car>` can silently resolve to a newer release that targets a different `torch` / CUDA, producing ABI/import failures even though `uv lock` succeeded without warnings.
+`torchvision`, `torchaudio`, `torchcodec`, and similar side-car packages are built against a specific `torch` major.minor (and CUDA major). On ZeroGPU, the runtime's supported `torch` list lags behind PyPI, so projects often pin a non-latest `torch`; and a bare `uv add <side-car>` can silently resolve to a newer release that targets a different `torch` / CUDA, producing ABI/import failures even though `uv lock` succeeded without warnings.
 
 Historical imported examples (2026-04), not independently reproduced here; verify release metadata rather than assuming these versions/constraints are current:
 
 - `torchaudio` resolves to `2.11.0`, which targets torch 2.11 / CUDA 13. The `2.11.0` release **dropped the `Requires-Dist: torch==X.Y.Z` line** that every earlier release had, so uv sees no constraint and picks it.
 - `torchcodec` resolves to a release targeting torch 2.11. No torchcodec release on PyPI declares a `torch` dependency at all; the compatibility table lives only in the project README.
-- `torchvision` happens to resolve correctly because torchvision still declares `Requires-Dist: torch==X.Y.Z`. Which side-cars are affected changes over time — treat every torch-family package as suspect, not just these.
+- `torchvision` happens to resolve correctly because torchvision still declares `Requires-Dist: torch==X.Y.Z`. Which side-cars are affected changes over time; treat every torch-family package as suspect, not just these.
 
 ### Verify at add/upgrade time
 
@@ -59,8 +59,8 @@ After any `uv add <torch-side-car>` or `uv lock --upgrade`, verify the resolved 
    curl -s https://pypi.org/pypi/<pkg>/<version>/json \
      | python3 -c "import json,sys,re; rd=json.load(sys.stdin)['info'].get('requires_dist') or []; print('\n'.join(x for x in rd if re.match(r'^torch(?![a-z])', x)) or '(no torch constraint declared)')"
    ```
-   If a `torch==X.Y.Z` line appears and matches the pinned torch, good. If it appears and does NOT match, the side-car is wrong — pin it down explicitly.
-2. If the query prints `(no torch constraint declared)`, PyPI metadata is silent and cannot be trusted. Fall back to the project's own compatibility table (GitHub README / docs site) — torchcodec, for example, maintains one at https://github.com/pytorch/torchcodec. Pick the side-car version the table maps to the pinned torch major.minor, and pin it explicitly.
+   If a `torch==X.Y.Z` line appears and matches the pinned torch, good. If it appears and does NOT match, the side-car is wrong; pin it down explicitly.
+2. If the query prints `(no torch constraint declared)`, PyPI metadata is silent and cannot be trusted. Fall back to the project's own compatibility table (GitHub README / docs site); torchcodec, for example, maintains one at https://github.com/pytorch/torchcodec. Pick the side-car version the table maps to the pinned torch major.minor, and pin it explicitly.
 
 ### Preventive pin
 

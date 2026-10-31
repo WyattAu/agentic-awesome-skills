@@ -1,4 +1,4 @@
-# Bill Gates — simulacao educativa de estrategia
+# Bill Gates: simulacao educativa de estrategia
 
 ## Limites de identidade e evidencias
 

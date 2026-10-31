@@ -7,12 +7,12 @@ Training embedding models is memory-bound more often than compute-bound.
 
 Try in this order:
 
-1. **Reduce `per_device_train_batch_size`**. Raise `gradient_accumulation_steps` to keep the effective batch size for regression losses. (For MNRL, effective batch via grad-accum is **not** equivalent — see point 3.)
+1. **Reduce `per_device_train_batch_size`**. Raise `gradient_accumulation_steps` to keep the effective batch size for regression losses. (For MNRL, effective batch via grad-accum is **not** equivalent; see point 3.)
 2. **Enable `gradient_checkpointing=True`**. ~30% slower, ~40% less activation memory. Incompatible with `Cached*` losses.
 3. **Switch to a `Cached*` loss**:
-   - `CachedMultipleNegativesRankingLoss(model, mini_batch_size=32)` — forwards in mini-batches, accumulates the contrastive loss over the full batch. Can simulate batch sizes of 1024+ on a 24GB GPU.
-   - `CachedSpladeLoss(model, loss=..., mini_batch_size=16)` — same trick for sparse.
-   - `CachedGISTEmbedLoss(model, guide_model, mini_batch_size=32)` — GIST variant.
+   - `CachedMultipleNegativesRankingLoss(model, mini_batch_size=32)`; forwards in mini-batches, accumulates the contrastive loss over the full batch. Can simulate batch sizes of 1024+ on a 24GB GPU.
+   - `CachedSpladeLoss(model, loss=..., mini_batch_size=16)`; same trick for sparse.
+   - `CachedGISTEmbedLoss(model, guide_model, mini_batch_size=32)`; GIST variant.
 4. **Enable PEFT / LoRA** for decoder models >1B. `LoraConfig(r=64, lora_alpha=128, task_type="FEATURE_EXTRACTION")`. See `../scripts/train_sentence_transformer_with_lora_example.py` (docstring covers when to use, hyperparams, QLoRA, sharing).
 5. **Move to multi-GPU**. See below.
 6. **Shorten sequences**. If truncating to 128 is already sufficient for your task, set `max_seq_length` on the transformer module.
@@ -36,7 +36,7 @@ accelerate launch --multi_gpu --num_processes=4 train.py
 
 ### FSDP / DeepSpeed
 
-For models >3B, use `accelerate config` to enable FSDP or DeepSpeed ZeRO. Both are supported — `sentence-transformers` doesn't require any code changes, only the launch config.
+For models >3B, use `accelerate config` to enable FSDP or DeepSpeed ZeRO. Both are supported; `sentence-transformers` doesn't require any code changes, only the launch config.
 
 ```bash
 accelerate config                   # interactive; choose FSDP or DeepSpeed
@@ -46,9 +46,9 @@ accelerate launch train.py
 With FSDP full-shard: a 7B model trains on 4×24GB GPUs that would OOM on any single one of them.
 
 **FSDP caveats** (from the [distributed training docs](https://sbert.net/docs/sentence_transformer/training/distributed.html)):
-- **Evaluators don't run under FSDP** as of writing — the eval hooks call `model.encode()` which FSDP-wrapped modules can't service mid-training. Plan to evaluate post-training on a single-GPU load of the final checkpoint instead, or train with DDP if you need mid-training evaluation.
+- **Evaluators don't run under FSDP** as of writing; the eval hooks call `model.encode()` which FSDP-wrapped modules can't service mid-training. Plan to evaluate post-training on a single-GPU load of the final checkpoint instead, or train with DDP if you need mid-training evaluation.
 - **Layer wrapping must be specified**, e.g. `fsdp_config={"transformer_layer_cls_to_wrap": "BertLayer"}` (substitute the right layer class for your model: `BertLayer`, `LlamaDecoderLayer`, `Qwen2DecoderLayer`, etc.). Without this FSDP sharding can silently misbehave.
-- **Slower than DDP** for models that fit on a single GPU — only reach for FSDP when you actually need the memory savings.
+- **Slower than DDP** for models that fit on a single GPU; only reach for FSDP when you actually need the memory savings.
 
 DeepSpeed ZeRO-2/3 is an alternative with its own config; works identically at the `accelerate config` level.
 
@@ -73,7 +73,7 @@ For large corpora (retrieval), push toward 512+ effective negatives. For small, 
 |---|---|
 | T4, V100, GTX 1xxx, RTX 2xxx | `fp16=True` |
 | RTX 3xxx, A10G, A100, L4 | `bf16=True` |
-| RTX 4xxx, H100, B200 | `bf16=True` (or fp8 on H100 via specific kernels — not default) |
+| RTX 4xxx, H100, B200 | `bf16=True` (or fp8 on H100 via specific kernels; not default) |
 | Apple M-series / ROCm | MPS/ROCm support is variable; `fp16` or `fp32` most reliable |
 
 bf16 is more numerically stable and almost always preferred when available.

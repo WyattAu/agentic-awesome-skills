@@ -94,7 +94,7 @@ process has exited and `result.json` is written.
   its first-launch setup, then re-dispatch.
 - **`status: timeout`:** the relay watchdog killed the run. Inspect `error` to see whether the selected
   limit was explicit `--timeout` or the derived `--print-timeout` plus 60s grace. The working tree may
-  hold a half-applied change — inspect it before changing that limit, reducing the brief, or resuming.
+  hold a half-applied change; inspect it before changing that limit, reducing the brief, or resuming.
 - **`status: aborted`:** the relay itself was killed (its parent's timeout, a stopped task, a
   closed terminal) and forwarded the kill to agy. The result is written before the relay exits;
   inspect the working tree before re-dispatching. On native Windows a hard kill of the relay is

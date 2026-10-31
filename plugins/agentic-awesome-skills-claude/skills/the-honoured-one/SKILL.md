@@ -6,13 +6,13 @@ source: community
 date_added: "2026-06-25"
 ---
 
-# the-honoured-one — Full Context Load Protocol
+# the-honoured-one: Full Context Load Protocol
 
 ## Overview
 
-> Gojo at full power means all six eyes open — everything visible, nothing assumed, no blind spots. The Honoured One doesn't act on guesses. This skill enforces the same: the AI must earn the right to act by reading and understanding first.
+> Gojo at full power means all six eyes open; everything visible, nothing assumed, no blind spots. The Honoured One doesn't act on guesses. This skill enforces the same: the AI must earn the right to act by reading and understanding first.
 
-The most common AI coding failure is **confident wrongness** — the AI proposes or implements something based on how it assumes the code is structured, not how it actually is. It gets the architecture wrong, uses a pattern inconsistent with the rest of the codebase, or integrates with a module it never actually opened. This skill reduces that failure mode by making relevant context-loading explicit; reading alone cannot guarantee correctness.
+The most common AI coding failure is **confident wrongness**; the AI proposes or implements something based on how it assumes the code is structured, not how it actually is. It gets the architecture wrong, uses a pattern inconsistent with the rest of the codebase, or integrates with a module it never actually opened. This skill reduces that failure mode by making relevant context-loading explicit; reading alone cannot guarantee correctness.
 
 ---
 
@@ -29,18 +29,18 @@ The most common AI coding failure is **confident wrongness** — the AI proposes
 
 ## How It Works
 
-### PHASE 1 — Context Audit
+### PHASE 1: Context Audit
 
 When given any complex task, the AI must immediately perform a context audit before proposing anything. It declares:
 
-1. **What files are relevant to this task?** — Every file that will be read, changed, or is upstream/downstream of the change
-2. **Which of those has the AI actually read this session?** — Honest accounting, no assumptions
-3. **What gaps exist?** — Files that are relevant but unread
+1. **What files are relevant to this task?**; Every file that will be read, changed, or is upstream/downstream of the change
+2. **Which of those has the AI actually read this session?**; Honest accounting, no assumptions
+3. **What gaps exist?**; Files that are relevant but unread
 
 The AI outputs this before doing anything else:
 
 ```
-THE HONOURED ONE — CONTEXT AUDIT
+THE HONOURED ONE; CONTEXT AUDIT
 ─────────────────────────────────────────
 Task: [what was asked]
 
@@ -58,38 +58,38 @@ Unread but relevant (blind spots):
   - src/models/user.model.ts    → ✗ not read
   - src/utils/token.ts          → ✗ not read
 ─────────────────────────────────────────
-Cannot proceed — reading blind spots now.
+Cannot proceed; reading blind spots now.
 ```
 
 > **The AI cannot propose a solution, make a plan, or write any code while blind spots exist.**
 
 ---
 
-### PHASE 2 — Mandatory Read Pass
+### PHASE 2: Mandatory Read Pass
 
-The AI reads every file listed as a blind spot. Not summaries, not assumptions based on filename or folder structure — actual reads.
+The AI reads every file listed as a blind spot. Not summaries, not assumptions based on filename or folder structure; actual reads.
 
 Rules for this phase:
 - If a file imports from another file that is also relevant, that file gets added to the read list
 - If reading a file reveals unexpected structure or patterns, the AI notes this before continuing
-- The AI does not form opinions or solutions while reading — this phase is observation only
+- The AI does not form opinions or solutions while reading; this phase is observation only
 
 > **Shortcut rule:** The AI cannot say "I'm familiar with this pattern so I don't need to read it." Familiarity with a pattern is not familiarity with this codebase's implementation of it.
 
 ---
 
-### PHASE 3 — Orientation Statement
+### PHASE 3: Orientation Statement
 
 After all relevant files are read, the AI outputs an orientation statement before proposing anything. This is its proof that it understands the codebase well enough to act:
 
 ```
-THE HONOURED ONE — CONTEXT LOADED
+THE HONOURED ONE; CONTEXT LOADED
 ─────────────────────────────────────────
 Files read: [complete list]
 
 Current architecture (what I now know):
   [2-3 sentences describing how the relevant system actually works,
-   based on what was read — not assumed]
+   based on what was read; not assumed]
 
 What this task touches:
   - [file/component 1] → [how it's involved]
@@ -100,13 +100,13 @@ Existing patterns I must follow:
   - [any other conventions seen in the actual code]
 
 Remaining unknowns:
-  - [anything still unclear — or "None, ready to proceed"]
+  - [anything still unclear; or "None, ready to proceed"]
 ─────────────────────────────────────────
 ```
 
 ---
 
-### PHASE 4 — Confidence Gate
+### PHASE 4: Confidence Gate
 
 After the orientation statement, the AI applies a confidence gate before acting:
 
@@ -129,16 +129,16 @@ Before writing any code or making any proposal, the AI must answer:
 
 | # | Question | Required |
 |---|---|---|
-| 1 | Have I read every file this task touches? | Yes — or stop and read |
-| 2 | Do I understand how this codebase handles [relevant pattern]? | Yes, from reading — not assuming |
-| 3 | Am I following the conventions I actually observed in the code? | Yes — or flag the deviation |
-| 4 | Do I have any remaining blind spots? | No — or resolve them first |
+| 1 | Have I read every file this task touches? | Yes; or stop and read |
+| 2 | Do I understand how this codebase handles [relevant pattern]? | Yes, from reading; not assuming |
+| 3 | Am I following the conventions I actually observed in the code? | Yes; or flag the deviation |
+| 4 | Do I have any remaining blind spots? | No; or resolve them first |
 
 ---
 
 ## Hard Rules (Never Violated)
 
-- **No proposing solutions before reading.** Proposals based on assumptions are not proposals — they are guesses.
+- **No proposing solutions before reading.** Proposals based on assumptions are not proposals; they are guesses.
 - **No "I assume this file does X."** If you haven't read it, you don't know what it does.
 - **No skipping files because their names look obvious.** A file called `utils.ts` can contain anything.
 - **No importing or calling code from files that haven't been read.** You cannot use what you haven't seen.
@@ -161,10 +161,10 @@ Before writing any code or making any proposal, the AI must answer:
 
 | Phase | Action | May Propose/Code? |
 |---|---|---|
-| 1 — Audit | List relevant files, identify blind spots | ❌ No |
-| 2 — Read | Read all blind spot files | ❌ No |
-| 3 — Orient | Output orientation statement | ❌ No |
-| 4 — Gate | Confirm no unknowns remain | ✅ Yes, if gate passes |
+| 1; Audit | List relevant files, identify blind spots | ❌ No |
+| 2; Read | Read all blind spot files | ❌ No |
+| 3; Orient | Output orientation statement | ❌ No |
+| 4; Gate | Confirm no unknowns remain | ✅ Yes, if gate passes |
 
 ---
 

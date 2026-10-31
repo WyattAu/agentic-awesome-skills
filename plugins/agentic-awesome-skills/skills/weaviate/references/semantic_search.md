@@ -12,12 +12,12 @@ uv run scripts/semantic_search.py --query "USER_QUERY" --collection "CollectionN
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--query` | `-q` | Yes | — | Search query text |
-| `--collection` | `-c` | Yes | — | Collection name |
+| `--query` | `-q` | Yes | - | Search query text |
+| `--collection` | `-c` | Yes | - | Collection name |
 | `--limit` | `-l` | No | `10` | Maximum number of results |
-| `--distance` | `-d` | No | — | Maximum distance threshold (filters out less similar results) |
-| `--target-vector` | `-t` | No | — | Target vector name for named vector collections |
-| `--json` | — | No | `false` | Output in JSON format |
+| `--distance` | `-d` | No | - | Maximum distance threshold (filters out less similar results) |
+| `--target-vector` | `-t` | No | - | Target vector name for named vector collections |
+| `--json` | - | No | `false` | Output in JSON format |
 
 ## Output
 

@@ -1,6 +1,6 @@
 # SSL/TLS
 
-Applies to every style — `ssl::stream<>` is a library feature, not a language one.
+Applies to every style; `ssl::stream<>` is a library feature, not a language one.
 
 
 ```cpp
@@ -38,4 +38,4 @@ asio::awaitable<void> tls_client(asio::io_context& io) {
 }
 ```
 
-**Critical:** SSL streams require strand-based synchronization for all async operations — no concurrent reads/writes without a strand.
+**Critical:** SSL streams require strand-based synchronization for all async operations; no concurrent reads/writes without a strand.

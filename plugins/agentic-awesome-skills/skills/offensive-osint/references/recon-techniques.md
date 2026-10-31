@@ -23,16 +23,16 @@ site:linkedin.com/in "<company name>" "<location>" # location filter
 site:linkedin.com/in "<company name>" -inurl:/posts
 ```
 
-**Bing/DuckDuckGo equivalents** — sometimes return different result sets; cross-engine union.
+**Bing/DuckDuckGo equivalents**; sometimes return different result sets; cross-engine union.
 
 **LinkedIn Sales Navigator (paid):**
 - Most efficient if available. Lead lists by company × role × seniority. Export CSV.
 
 **Tools:**
 - **theHarvester** with `-b linkedin` source (uses search-engine-driven enum).
-- **CrossLinked** — `https://github.com/m8r0wn/CrossLinked` — CLI tool that does the LinkedIn dorking.
-- **LinkedInDumper** / **Linkook** — open-source enum tools (verify currency; they break frequently).
-- **PhantomBuster** / **Apollo.io** / **RocketReach** / **Hunter.io Email Finder** — paid SaaS that does the enum + email derivation in one workflow.
+- **CrossLinked**; `https://github.com/m8r0wn/CrossLinked`; CLI tool that does the LinkedIn dorking.
+- **LinkedInDumper** / **Linkook**; open-source enum tools (verify currency; they break frequently).
+- **PhantomBuster** / **Apollo.io** / **RocketReach** / **Hunter.io Email Finder**; paid SaaS that does the enum + email derivation in one workflow.
 
 ### 41.2 Role inference for prioritization
 
@@ -41,7 +41,7 @@ For each enumerated employee, capture:
 - **Job title** (raw + normalized to a role tier).
 - **Tenure** (dated profile claim; it does not establish current employment or access).
 - **Location** (city / region; informs phishing time-of-day).
-- **Recent activity** (posts, comments, articles — informs pretext).
+- **Recent activity** (posts, comments, articles; informs pretext).
 
 **Role priority for breach lookup + phishing target list:**
 
@@ -64,7 +64,7 @@ For each captured name, derive candidate emails using §11 templates. Cross-refe
 
 - **Never connect from the corporate persona.** LinkedIn shows "viewed your profile" notifications.
 - Use only an engagement-approved research identity and comply with platform rules. Do not impersonate a real person, contact employees or manufacture relationships to obtain access.
-- **LinkedIn "private mode" (anonymous viewing)** — toggle in settings; reduces one signal but Sales Navigator can still see anonymized "someone viewed your profile."
+- **LinkedIn "private mode" (anonymous viewing)**; toggle in settings; reduces one signal but Sales Navigator can still see anonymized "someone viewed your profile."
 - **Connection requests are detectable.** Don't send any during recon.
 - **Profile views accumulate suspicion** if you view 100+ employees of one company in a day. Throttle: <20/day per persona.
 
@@ -103,7 +103,7 @@ Job postings reveal the target's internal tech stack with surprising precision. 
 | LinkedIn Jobs | `https://www.linkedin.com/jobs/search/?keywords=&f_C=<company-id>` | Most current; require LI account. |
 | Indeed | `https://www.indeed.com/cmp/<company>` | Company page with job feed. |
 | Glassdoor | `https://www.glassdoor.com/Jobs/<company>-Jobs-E<id>.htm` | Plus salary data + employee reviews. |
-| Lever (ATS) | `https://jobs.lever.co/<company>` | Direct ATS — full job descriptions. |
+| Lever (ATS) | `https://jobs.lever.co/<company>` | Direct ATS; full job descriptions. |
 | Greenhouse (ATS) | `https://boards.greenhouse.io/<company>` | Direct ATS. |
 | Workable (ATS) | `https://apply.workable.com/<company>/` | Direct ATS. |
 | AshbyHQ (ATS) | `https://jobs.ashbyhq.com/<company>` | Direct ATS. |
@@ -126,10 +126,10 @@ For each job posting, harvest:
 
 ### 42.3 Tooling
 
-- **scrapy / BeautifulSoup** — custom scrapers per ATS.
+- **scrapy / BeautifulSoup**; custom scrapers per ATS.
 - **theHarvester** with appropriate sources.
 - **JobScraper** scripts on GitHub.
-- **Manual** — for small targets, manual review of 20–30 postings is fast and high-fidelity.
+- **Manual**; for small targets, manual review of 20–30 postings is fast and high-fidelity.
 
 ### 42.4 Output
 
@@ -157,9 +157,9 @@ Aggregate to a **target tech-stack profile** that informs:
 ### 43.1 Slack
 
 - **Public workspace search** (limited; Slack used to have one but deprecated):
-  - **Slofile** (third-party): `https://slofile.com/` — community Slack workspace directory.
-  - **Slacklist** / **Slack Communities** — community-curated lists.
-- **Invite-link enumeration** — Slack invite URLs follow `https://join.slack.com/t/<workspace-slug>/shared_invite/<token>`. Common discovery:
+  - **Slofile** (third-party): `https://slofile.com/`; community Slack workspace directory.
+  - **Slacklist** / **Slack Communities**; community-curated lists.
+- **Invite-link enumeration**; Slack invite URLs follow `https://join.slack.com/t/<workspace-slug>/shared_invite/<token>`. Common discovery:
   - Google: `site:join.slack.com "{target}"` or `inurl:slack.com inurl:shared_invite "{target}"`.
   - GitHub: `"join.slack.com/t/<target-stem>"` filename:README.
   - Twitter/X / Reddit: search for shared invite links.
@@ -169,8 +169,8 @@ Aggregate to a **target tech-stack profile** that informs:
 ### 43.2 Discord
 
 - **Discord server discovery** is harder (no central public directory).
-- **DiscordServers.com** — third-party directory.
-- **Discord.me** / **Top.gg** — community directories.
+- **DiscordServers.com**; third-party directory.
+- **Discord.me** / **Top.gg**; community directories.
 - Google: `site:discord.gg "{target}"` or `site:discord.com "{target}"`.
 - **Confirm server**: invite URLs `https://discord.gg/<token>` resolve to a JSON via `https://discord.com/api/v9/invites/<token>?with_counts=true`. Returns server name, ID, member count, channel info.
 - **Bot enumeration**: if you find a bot token (catalog §17 row 47), Discord does not use Telegram’s `getMe` method. Refer to current official Discord API documentation and the separate credential-use gate; bot identity does not prove access to every server.
@@ -178,9 +178,9 @@ Aggregate to a **target tech-stack profile** that informs:
 ### 43.3 Telegram
 
 Already covered in §38. Quick reference:
-- TGStat — channel analytics + search.
-- Telemetr — channel growth + overlaps.
-- Combot — group analytics.
+- TGStat; channel analytics + search.
+- Telemetr; channel growth + overlaps.
+- Combot; group analytics.
 - View public channels: `https://t.me/s/<channel>`.
 - Invite link enum: search Google `site:t.me "{target}"`.
 
@@ -210,7 +210,7 @@ Public package registries (npm, PyPI, RubyGems, Docker Hub, etc.) often contain 
   npm view @<scope>/<package-name>
   ```
 - **List org's packages:** `https://www.npmjs.com/org/<org>` or `https://registry.npmjs.org/-/org/<org>/package`.
-- **Per-package historical versions:** `https://registry.npmjs.org/<package>` — JSON with all versions.
+- **Per-package historical versions:** `https://registry.npmjs.org/<package>`; JSON with all versions.
 - **Tarball download for scan:**
   ```bash
   npm pack <package>@<version> --ignore-scripts
@@ -310,34 +310,34 @@ For engagements that include a physical-touch component (badge access, tailgatin
 
 ### 45.2 What to extract for physical recon
 
-- **Building entrance count + locations** — main entrance, employee entrances, loading docks, fire exits.
-- **Parking lot ingress / egress** — single guarded entry vs open lot.
-- **Fence lines + camera locations** — physical perimeter.
-- **HVAC / utility access** — roof access, service entries.
-- **Adjacent occupants** — neighboring tenants in same building / business park.
-- **Vehicle types in lot** — proxy for executive presence + employee count.
-- **Smoking area locations** — common social-engineering staging area.
+- **Building entrance count + locations**; main entrance, employee entrances, loading docks, fire exits.
+- **Parking lot ingress / egress**; single guarded entry vs open lot.
+- **Fence lines + camera locations**; physical perimeter.
+- **HVAC / utility access**; roof access, service entries.
+- **Adjacent occupants**; neighboring tenants in same building / business park.
+- **Vehicle types in lot**; proxy for executive presence + employee count.
+- **Smoking area locations**; common social-engineering staging area.
 
 ### 45.3 OSINT-derived physical intel beyond satellites
 
-- **LinkedIn employee photos** — badge templates often visible in profile photos taken at the office.
-- **Glassdoor "office tour" photos** — employees post interior photos.
-- **Indeed / Glassdoor reviews** — sometimes describe security culture ("loose badge enforcement", "tailgating common").
-- **Instagram geotagged photos** — at the office address; reveals interior layout, badge designs, kitchen / common-area locations.
-- **Public press releases** — often contain "ribbon cutting" photos of new offices showing layout + executive faces.
-- **Conference talks by IT/security staff** — sometimes describe physical security setup.
-- **Meetup / workshop event listings** — at the target's office; may include photos.
+- **LinkedIn employee photos**; badge templates often visible in profile photos taken at the office.
+- **Glassdoor "office tour" photos**; employees post interior photos.
+- **Indeed / Glassdoor reviews**; sometimes describe security culture ("loose badge enforcement", "tailgating common").
+- **Instagram geotagged photos**; at the office address; reveals interior layout, badge designs, kitchen / common-area locations.
+- **Public press releases**; often contain "ribbon cutting" photos of new offices showing layout + executive faces.
+- **Conference talks by IT/security staff**; sometimes describe physical security setup.
+- **Meetup / workshop event listings**; at the target's office; may include photos.
 
 ### 45.4 Vehicle / fleet intel
 
-- **License plates** in LinkedIn/Instagram backgrounds — sometimes correlates to specific exec.
-- **Company-branded vehicles** in sat imagery — fleet count + location.
-- **Helicopter pad** / **executive parking** — clue to senior-leadership routine.
+- **License plates** in LinkedIn/Instagram backgrounds; sometimes correlates to specific exec.
+- **Company-branded vehicles** in sat imagery; fleet count + location.
+- **Helicopter pad** / **executive parking**; clue to senior-leadership routine.
 
 ### 45.5 Discipline
 
 - Document that imagery + photos are public-source.
-- Don't trespass for "verification" — physical recon during OSINT phase = look only.
-- Note imagery date — buildings change.
+- Don't trespass for "verification"; physical recon during OSINT phase = look only.
+- Note imagery date; buildings change.
 
 ---

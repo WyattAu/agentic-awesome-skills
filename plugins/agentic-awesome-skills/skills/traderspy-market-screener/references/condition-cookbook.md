@@ -43,7 +43,7 @@ Ready-made `conditions` arrays for the intents users actually voice. Combine at 
 
 | Intent | Conditions |
 | --- | --- |
-| Bollinger squeeze (4h) | `[{"metric":"bbWidthPct","op":"lt","value":4}]` — sort by metric ascending |
+| Bollinger squeeze (4h) | `[{"metric":"bbWidthPct","op":"lt","value":4}]`; sort by metric ascending |
 | Bollinger squeeze (1h) | `[{"metric":"bbWidthPct","op":"lt","value":2.5}]` |
 | Quiet, low-ATR names | `[{"metric":"atrPct","op":"lt","value":1.5}]` |
 | High-ATR names | `[{"metric":"atrPct","op":"gt","value":5}]` |
@@ -60,10 +60,10 @@ Ready-made `conditions` arrays for the intents users actually voice. Combine at 
 - Oversold bounce: `rsi lt 30` on 4h, default horizons → answers "does buying the dip work here".
 - Golden cross: `emaSpread crossAbove 0 (50,200)` on 1d, horizons `[5, 10, 20, 40]`.
 - Two-day capitulation (periods clamp to at least 2): `changePct lt -8 period 2` on 1d, horizons `[1, 3, 7, 14]`.
-- Squeeze release: `bbWidthPct lt 3` on 4h — note that a squeeze describes contracted volatility, not a guaranteed future move or direction; report actual observed returns and excursions.
+- Squeeze release: `bbWidthPct lt 3` on 4h; note that a squeeze describes contracted volatility, not a guaranteed future move or direction; report actual observed returns and excursions.
 
 ## Reading `values`
 
 Every row's `values` map is keyed by the tool's label (`RSI(14)`, `EMA spread(50,200)`,
-`Price vs EMA(200)`), and the same labels appear in the `conditions` echo — use them in the table
+`Price vs EMA(200)`), and the same labels appear in the `conditions` echo; use them in the table
 header so the user can see exactly what was tested.

@@ -12,7 +12,7 @@ tools: ["claude", "cursor", "gemini"]
 
 # Landing Page Generator
 
-Generate high-converting landing pages from a product description. Output complete Next.js/React components with multiple section variants, proven copy frameworks, SEO optimization, and performance-first patterns. Not lorem ipsum — actual copy that converts.
+Generate high-converting landing pages from a product description. Output complete Next.js/React components with multiple section variants, proven copy frameworks, SEO optimization, and performance-first patterns. Not lorem ipsum; actual copy that converts.
 
 **Target:** LCP < 1s · CLS < 0.1 · INP < 200ms
 **Output:** TSX components + Tailwind styles + SEO meta + copy variants
@@ -43,17 +43,17 @@ No conversion outcome is guaranteed. Framework examples use fictional numbers/cu
 
 Follow these steps in order for every landing page request:
 
-1. **Gather inputs** — collect product name, tagline, audience, pain point, key benefit, pricing tiers, design style, and copy framework using the trigger format below. Ask only for missing fields.
-2. **Analyze brand voice** (recommended) — if the user has existing brand content (website copy, blog posts, marketing materials), run it through `marketing-skill/content-production/scripts/brand_voice_analyzer.py` to get a voice profile (formality, tone, perspective). Use the profile to inform design style and copy framework selection:
+1. **Gather inputs**; collect product name, tagline, audience, pain point, key benefit, pricing tiers, design style, and copy framework using the trigger format below. Ask only for missing fields.
+2. **Analyze brand voice** (recommended); if the user has existing brand content (website copy, blog posts, marketing materials), run it through `marketing-skill/content-production/scripts/brand_voice_analyzer.py` to get a voice profile (formality, tone, perspective). Use the profile to inform design style and copy framework selection:
    - formal + professional → **enterprise** style, **AIDA** framework
    - casual + friendly → **bold-startup** style, **BAB** framework
    - professional + authoritative → **dark-saas** style, **PAS** framework
    - casual + conversational → **clean-minimal** style, **BAB** framework
-3. **Select design style** — map the user's choice (or infer from brand voice analysis) to one of the four Tailwind class sets in the Design Style Reference.
-4. **Apply copy framework** — write all headline and body copy using the chosen framework (PAS / AIDA / BAB) before generating components. Match the voice profile's formality and tone throughout.
-5. **Generate sections in order** — Hero → Features → Pricing → FAQ → Testimonials → CTA → Footer. Skip sections not relevant to the product.
-6. **Validate against SEO checklist** — run through every item in the SEO Checklist before outputting final code. Fix any gaps inline.
-7. **Output final components** — deliver complete, copy-paste-ready TSX files with all Tailwind classes, SEO meta, and structured data included.
+3. **Select design style**; map the user's choice (or infer from brand voice analysis) to one of the four Tailwind class sets in the Design Style Reference.
+4. **Apply copy framework**; write all headline and body copy using the chosen framework (PAS / AIDA / BAB) before generating components. Match the voice profile's formality and tone throughout.
+5. **Generate sections in order**; Hero → Features → Pricing → FAQ → Testimonials → CTA → Footer. Skip sections not relevant to the product.
+6. **Validate against SEO checklist**; run through every item in the SEO Checklist before outputting final code. Fix any gaps inline.
+7. **Output final components**; deliver complete, copy-paste-ready TSX files with all Tailwind classes, SEO meta, and structured data included.
 
 ---
 
@@ -91,7 +91,7 @@ Copy framework: PAS | AIDA | BAB
 - H1: Painful state they're in
 - Sub: What happens if they don't fix it
 - CTA: What you offer
-- *Example — H1:* "Your team wastes 3 hours a day on manual reporting" / *Sub:* "Every hour spent on spreadsheets is an hour not closing deals. Your competitors are already automated." / *CTA:* "Automate your reports in 10 minutes →"
+- *Example; H1:* "Your team wastes 3 hours a day on manual reporting" / *Sub:* "Every hour spent on spreadsheets is an hour not closing deals. Your competitors are already automated." / *CTA:* "Automate your reports in 10 minutes →"
 
 **AIDA (Attention → Interest → Desire → Action)**
 - H1: Bold attention-grabbing statement → Sub: Interesting fact or benefit → Features: Desire-building proof points → CTA: Clear action
@@ -101,7 +101,7 @@ Copy framework: PAS | AIDA | BAB
 
 ---
 
-## Representative Component: Hero (Centered Gradient — Dark SaaS)
+## Representative Component: Hero (Centered Gradient: Dark SaaS)
 
 Use this as the structural template for all hero variants. Swap layout classes, gradient direction, and image placement for split, video-bg, and minimal variants.
 
@@ -179,7 +179,7 @@ Inject `FAQPage` JSON-LD via `<script type="application/ld+json" dangerouslySetI
 - [ ] Mobile viewport meta tag present
 - [ ] Internal linking to pricing and docs
 
-> **Validation step:** Before outputting final code, verify every checklist item above is satisfied. Fix any gaps inline — do not skip items.
+> **Validation step:** Before outputting final code, verify every checklist item above is satisfied. Fix any gaps inline; do not skip items.
 
 ---
 
@@ -197,19 +197,19 @@ Inject `FAQPage` JSON-LD via `<script type="application/ld+json" dangerouslySetI
 
 ## Common Pitfalls
 
-- Hero image not preloaded — add `priority` prop to first `<Image>`
-- Missing mobile breakpoints — always design mobile-first with `sm:` prefixes
-- CTA copy too vague — "Get started" beats "Learn more"; "Start free trial" beats "Sign up"
-- Pricing page missing trust signals — add money-back guarantee and testimonials near CTA
-- No above-the-fold CTA on mobile — ensure button is visible without scrolling on 375px viewport
+- Hero image not preloaded; add `priority` prop to first `<Image>`
+- Missing mobile breakpoints; always design mobile-first with `sm:` prefixes
+- CTA copy too vague; "Get started" beats "Learn more"; "Start free trial" beats "Sign up"
+- Pricing page missing trust signals; add money-back guarantee and testimonials near CTA
+- No above-the-fold CTA on mobile; ensure button is visible without scrolling on 375px viewport
 
 ---
 
 ## Related Skills
 
-- **Brand Voice Analyzer** (`marketing-skill/content-production/scripts/brand_voice_analyzer.py`) — Run before generation to establish voice profile and ensure copy consistency
-- **UI Design System** (`product-team/ui-design-system/`) — Generate design tokens from brand color before building the page
-- **Competitive Teardown** (`product-team/competitive-teardown/`) — Competitive positioning informs landing page messaging and differentiation
+- **Brand Voice Analyzer** (`marketing-skill/content-production/scripts/brand_voice_analyzer.py`); Run before generation to establish voice profile and ensure copy consistency
+- **UI Design System** (`product-team/ui-design-system/`); Generate design tokens from brand color before building the page
+- **Competitive Teardown** (`product-team/competitive-teardown/`); Competitive positioning informs landing page messaging and differentiation
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

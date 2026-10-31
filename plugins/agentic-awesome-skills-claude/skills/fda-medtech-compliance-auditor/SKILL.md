@@ -30,7 +30,7 @@ This skill assists a qualified medical-device quality/regulatory reviewer; it do
 
 ### Example 1: CAPA Root Cause Review
 
-**Scenario:** A CAPA was opened for a software defect in a Class II device. The documented root cause is “developer error — unclear requirements.” The corrective action is developer retraining.
+**Scenario:** A CAPA was opened for a software defect in a Class II device. The documented root cause is “developer error; unclear requirements.” The corrective action is developer retraining.
 
 **Finding:**
 
@@ -57,7 +57,7 @@ Required Actions:
 ## Best Practices
 
 - ✅ **Do:** Provide exact wording from SOPs, risk tables, or validation plans for the most accurate review.
-- ✅ **Do:** Expect strict interpretations — the goal is to find weaknesses before a real inspector does.
+- ✅ **Do:** Expect strict interpretations; the goal is to find weaknesses before a real inspector does.
 - ✅ **Do:** Assess each software defect for safety impact and document the rationale; link safety-relevant defects to the applicable risk analysis rather than inventing a clinical-risk link for every defect.
 - ❌ **Don't:** Assume "we tested it and it works" satisfies IEC 62304 software verification requirements.
 

@@ -40,7 +40,7 @@ Trigger when:
 - You found a vuln on app A and there are sister apps B, C, D you haven't touched
 
 DO NOT use for:
-- Bug bounty programs (use bug-bounty skill — different scope rules)
+- Bug bounty programs (use bug-bounty skill; different scope rules)
 - WAPT/PCI-style assessments (use OWASP-aligned skills)
 - Pure compliance audits
 
@@ -64,26 +64,26 @@ Shared infrastructure, robots.txt, sitemaps and app catalogs produce leads, not 
 
 ---
 
-## Mindset correction #1 — The blocker is data, not the stop sign
+## Mindset correction #1: The blocker is data, not the stop sign
 
 **Anti-pattern (what I did wrong):**
-> "Recheck under load showed no timing differential — recanting the SQLi as indeterminate."
+> "Recheck under load showed no timing differential; recanting the SQLi as indeterminate."
 
 **The correct frame:**
 > "Preserve the original timing samples, then investigate the failed recheck with interleaved controls and enough comparable observations. Three samples alone do not establish statistical certainty; downgrade to historical or inconclusive when current reproducibility is missing."
 
 When a defense suddenly appears mid-engagement:
-1. **Original PoC artifacts are forever** — capture them BEFORE recheck. Screenshots, request/response pairs, timing samples.
-2. **Diff the response** — body size, headers, cookies, response time. The change tells you what the client deployed (WAF rule? Hotfix? Geo block?).
-3. **The deployed mitigation is itself a finding** — positive operational observation about IR responsiveness.
-4. **Try alternative vectors** — slower-paced timing, encoded keywords, different injection contexts, cookie injection, header injection.
-5. **Document both states** — "vulnerable at T0, mitigated at T0+30min, response behavior changed; mitigation layer not established".
+1. **Original PoC artifacts are forever**; capture them BEFORE recheck. Screenshots, request/response pairs, timing samples.
+2. **Diff the response**; body size, headers, cookies, response time. The change tells you what the client deployed (WAF rule? Hotfix? Geo block?).
+3. **The deployed mitigation is itself a finding**; positive operational observation about IR responsiveness.
+4. **Try alternative vectors**; slower-paced timing, encoded keywords, different injection contexts, cookie injection, header injection.
+5. **Document both states**; "vulnerable at T0, mitigated at T0+30min, response behavior changed; mitigation layer not established".
 
 **Rule:** preserve earlier evidence and investigate differences; correct or retract findings when the evidence no longer supports them.
 
 ---
 
-## Mindset correction #2 — Sister-app pattern recognition
+## Mindset correction #2: Sister-app pattern recognition
 
 **Anti-pattern:**
 > "I confirmed SQLi on /app-a/. Moving on to other tasks."
@@ -92,22 +92,22 @@ When a defense suddenly appears mid-engagement:
 > "Same backend, same code template likely → /app-b/, /app-c/, /app-d/, /app-e/ (sibling apps on the same employee-portal host) are all probable. Test them with the SAME payload."
 
 When you confirm a vuln on app A:
-1. **Identify shared infrastructure** — same IP, same load balancer, same TLS cert, same response headers, same session cookie name, same login form HTML.
-2. **Identify shared code template** — same form fields, same error messages, same view structure, same framework version.
+1. **Identify shared infrastructure**; same IP, same load balancer, same TLS cert, same response headers, same session cookie name, same login form HTML.
+2. **Identify shared code template**; same form fields, same error messages, same view structure, same framework version.
 3. Verify each sibling is in scope; use a harmless adapted control and record results separately.
-4. **Document the class of vulnerability** — "vulnerability is in shared form-handler template across N apps", not just one finding.
-5. **Recommend class-fix** — fix the shared template, not just one app.
+4. **Document the class of vulnerability**; "vulnerability is in shared form-handler template across N apps", not just one finding.
+5. **Recommend class-fix**; fix the shared template, not just one app.
 
-The authorized-engagement case: SQLi confirmed on one sub-app (`<app-A>`); four sibling sub-apps (`<app-B>`, `<app-C>`, `<app-D>`, `<app-E>`) sit on the same employee-app host with similar form patterns — likely all share the same vulnerable template. Should have been a multi-app finding.
+The authorized-engagement case: SQLi confirmed on one sub-app (`<app-A>`); four sibling sub-apps (`<app-B>`, `<app-C>`, `<app-D>`, `<app-E>`) sit on the same employee-app host with similar form patterns; likely all share the same vulnerable template. Should have been a multi-app finding.
 
 ---
 
-## Mindset correction #3 — WAPT vs Red Team scope discipline
+## Mindset correction #3: WAPT vs Red Team scope discipline
 
 **Skip these in red team scope (they don't yield access):**
-- IDOR (cross-user read/write *without* an ATO / privilege-escalation / sensitive-data-exfil chain — WAPT class). NOTE: IDOR is NOT a blanket-skip. IDOR on admin/role-assignment endpoints yields privilege escalation; on password-reset or session objects yields ATO; on file-download or PII handlers yields exfil; on token/key endpoints yields credential capture. Pursue those per the decision rule below.
-- CSRF (state-change-via-tricked-user — WAPT class)
-- Reflected XSS (without account-takeover chain — WAPT class)
+- IDOR (cross-user read/write *without* an ATO / privilege-escalation / sensitive-data-exfil chain; WAPT class). NOTE: IDOR is NOT a blanket-skip. IDOR on admin/role-assignment endpoints yields privilege escalation; on password-reset or session objects yields ATO; on file-download or PII handlers yields exfil; on token/key endpoints yields credential capture. Pursue those per the decision rule below.
+- CSRF (state-change-via-tricked-user; WAPT class)
+- Reflected XSS (without account-takeover chain; WAPT class)
 - Missing security headers (WAPT class)
 - Cookie hardening flags (WAPT class)
 - Verbose error messages without sensitive data (WAPT class)
@@ -128,11 +128,11 @@ The authorized-engagement case: SQLi confirmed on one sub-app (`<app-A>`); four 
 - ManageEngine / Confluence / Atlassian RCE CVEs (foothold)
 - Kerberoasting / AS-REP roasting (post-foothold, but enumerate from outside if possible)
 
-**Decision rule:** if the bug, exploited fully, doesn't lead to a session/token/foothold or sensitive data exfil, it's WAPT-class — note it briefly but don't burn time on it.
+**Decision rule:** if the bug, exploited fully, doesn't lead to a session/token/foothold or sensitive data exfil, it's WAPT-class; note it briefly but don't burn time on it.
 
 ---
 
-## Mindset correction #4 — Aggressive default, not conservative default
+## Mindset correction #4: Aggressive default, not conservative default
 
 **Anti-pattern:**
 > "Tested 30% of the websites and called it comprehensive."
@@ -146,13 +146,13 @@ Aggressive defaults:
 3. **For every JS bundle**, grep for hardcoded API keys, JWT, base URLs, hidden endpoints, admin paths
 4. **For every API endpoint**, check OPTIONS preflight, missing-auth response, alg=none JWT, X-Forwarded-User header injection
 5. **For every mobile app**, decompile + grep for secrets + check pinned certs + identify exported components
-6. **For every "out of scope" SaaS** that's on a corp subdomain, confirm with client — vendor-managed doesn't mean immune (CVE-2022-47966 went unpatched on many on-prem ME-SDP installs)
+6. **For every "out of scope" SaaS** that's on a corp subdomain, confirm with client; vendor-managed doesn't mean immune (CVE-2022-47966 went unpatched on many on-prem ME-SDP installs)
 
 **Rule:** report achieved coverage and gaps against the agreed plan; exhaustive probing is not always feasible or necessary.
 
 ---
 
-## Mindset correction #5 — Persistence beats elegance
+## Mindset correction #5: Persistence beats elegance
 
 **Anti-pattern:**
 > "Tesseract failed on 3 captchas, gave up, declared captcha bypass not feasible."
@@ -184,20 +184,20 @@ Decision-tree for blockers:
 
 ---
 
-## Mindset correction #6 — Real-time IR observation is a finding
+## Mindset correction #6: Real-time IR observation is a finding
 
 When the client SOC patches mid-engagement (you observe a vulnerability disappear during your test):
 - **Treat it as evidence**, not as a failure
 - **Capture timestamps** before and after the change
-- **Document as positive operational finding** — "client SOC detected and mitigated within X minutes; mitigation deployed at WAF/code level"
-- **Verify the mitigation depth** — identify the actual layer using evidence, not an assumed WAF/code distinction
-- **The original PoC remains the vulnerability finding** — patching doesn't erase it
+- **Document as positive operational finding**; "client SOC detected and mitigated within X minutes; mitigation deployed at WAF/code level"
+- **Verify the mitigation depth**; identify the actual layer using evidence, not an assumed WAF/code distinction
+- **The original PoC remains the vulnerability finding**; patching doesn't erase it
 
 This is its own skill: see `mid-engagement-ir-detection`.
 
 ---
 
-## Mindset correction #7 — Multi-technique cross-validation
+## Mindset correction #7: Multi-technique cross-validation
 
 For every "vulnerable" finding, prove via 2+ techniques:
 
@@ -216,7 +216,7 @@ A single signal can be coincidence (network jitter, server hiccup, cache). Indep
 
 ---
 
-## Mindset correction #8 — Engagement journal discipline
+## Mindset correction #8: Engagement journal discipline
 
 Real-time, append-only, structured:
 
@@ -235,14 +235,14 @@ Why:
 
 ---
 
-## Mindset correction #9 — Time is the constraint, not skill
+## Mindset correction #9: Time is the constraint, not skill
 
 A real adversary has months. You have an engagement window (weeks). Decisions:
-- **Don't pre-judge feasibility** — if a dumper would take 6 hours, schedule only explicitly authorized bounded work with a kill switch; do not run unattended extraction.
+- **Don't pre-judge feasibility**; if a dumper would take 6 hours, schedule only explicitly authorized bounded work with a kill switch; do not run unattended extraction.
 - **Parallelize.** Run multi-target tests concurrently. Burn CPU, not wall-clock.
 - **State persistence.** Engagements span multiple sessions. State files (`engagement_log/`) make Wednesday's work usable on Friday.
-- **Background long-running jobs** — kick them off, set monitors for events, do other work in parallel.
-- **Don't repeat yourself** — if you tested target X with payload Y on Tuesday, Wednesday you should know that without re-testing.
+- **Background long-running jobs**; kick them off, set monitors for events, do other work in parallel.
+- **Don't repeat yourself**; if you tested target X with payload Y on Tuesday, Wednesday you should know that without re-testing.
 
 ---
 
@@ -272,7 +272,7 @@ Every 30 minutes ask:
 - [ ] Is the IP I'm testing from logged?
 - [ ] If I confirmed a vuln: have I tested sister apps with same backend?
 - [ ] If I hit a blocker: did I try the next vector in the decision tree?
-- [ ] If I'm tempted to "stop" — am I sure scope is exhausted, or am I just tired?
+- [ ] If I'm tempted to "stop"; am I sure scope is exhausted, or am I just tired?
 
 ---
 
@@ -297,10 +297,10 @@ If you catch yourself thinking any of these, STOP and reconsider:
 
 - "It's not vulnerable" (have I tested 3 vectors? have I tested sister apps?)
 - "The defense is working" (have I tried alternative payloads? slower pace? different protocol?)
-- "Recheck failed so it must have been a false positive" (NO — investigate the delta)
+- "Recheck failed so it must have been a false positive" (NO; investigate the delta)
 - "OCR did not work" (record it honestly; paid services need their own authorization)
 - "Mobile app is years old, probably nothing useful" (hardcoded URLs and tokens often outlive the engineering team's memory)
-- "SaaS, so nothing to test" (vendor patches centrally — usually true, but tenant config gaps are NOT central)
+- "SaaS, so nothing to test" (vendor patches centrally; usually true, but tenant config gaps are NOT central)
 - "We've tested enough" (use the during-engagement checklist; if any answer is "no", keep going)
 - "The exfil would take too long" (prefer synthetic minimal proof and document the limitation)
 
@@ -315,11 +315,11 @@ Stop on user direction, scope uncertainty, expired window, spent budget/attempt 
 ## Bridge to neighboring skills
 
 After internalizing this mindset, layer the technique-specific skills:
-- `m365-entra-attack` — M365 credential attack chain
-- `mid-engagement-ir-detection` — turning client SOC patches into findings
-- `hunt-sqli` — SQL injection across techniques
-- `hunt-rce` — RCE across vectors
-- `bug-bounty` — for distinguishing red-team vs bb scope when working dual-track
+- `m365-entra-attack`; M365 credential attack chain
+- `mid-engagement-ir-detection`; turning client SOC patches into findings
+- `hunt-sqli`; SQL injection across techniques
+- `hunt-rce`; RCE across vectors
+- `bug-bounty`; for distinguishing red-team vs bb scope when working dual-track
 
 This skill is the operational discipline; those are the techniques.
 
@@ -327,13 +327,13 @@ This skill is the operational discipline; those are the techniques.
 
 ## Related Skills & Chains
 
-- **`recon-scope-triage`** — Before the "aggressive default, probe every live surface" directive can be applied safely, you must know which surfaces are actually the target's. Engagement flow: ASM/recon dataset received → `recon-scope-triage` clears namespace-collision noise + soft-404 false positives → only owned, verified assets enter the test queue. Skipping this wastes the engagement on other companies' assets (and risks attacking innocent third parties).
-- **`hunt-spa-api`** — Operationalizes the "harvest JS bundles" cadence line into a full play: SPA JS → backend API map → unauthenticated broken-access-control testing. On a real engagement this play (not any scanner) found the apex Critical. Engagement flow: live SPA/`console`/`app`/`api` host identified → `hunt-spa-api` → test each route family unauthenticated against a gated-sibling control.
-- **`hunt-dispatch`** — Once mindset is loaded, the `/hunt` command needs a mode answer (redteam vs wapt, blackbox vs greybox) before it routes to platform-specific skills. Engagement flow: red-team mindset triggered → confirm engagement mode (`bug-bounty` vs red-team vs pentest per project memory) → invoke `/hunt` → `hunt-dispatch` loads the right cluster (M365 / SharePoint / VPN / vCenter / APK).
-- **`mid-engagement-ir-detection`** — Red-team mindset says "behavior changes ARE findings"; this skill operationalizes that. Engagement flow: red-team engagement underway → baseline established at session start → response patterns shift mid-test → `mid-engagement-ir-detection` captures the SOC-patch state as a NEW finding (defensive-action observed = client capability metric). Don't dismiss it as "the bug got fixed."
-- **`redteam-report-template`** — Red-team deliverable is NOT a bug-bounty report; different audience, different tone, different cadence. Engagement flow: findings collected throughout engagement → at session close, package via `redteam-report-template` (Subject / Observations / Description / Impact / Recommendation / PoC) for client-facing DOCX, not `report-writing` which is for H1/Bugcrowd/Intigriti platforms.
-- **`triage-validation`** — Red-team mindset includes "don't retract too fast" — the 4 retractions from an authorized engagement were mindset failures, not validation failures. Engagement flow: every finding through `triage-validation` 7-Question Gate, but with the red-team adjustment that "exploitable only with chain" is still a finding, not a no-finding.
-- **`evidence-hygiene`** — Red-team engagements often span weeks; without disciplined evidence capture the deliverable suffers. Engagement flow: red-team mindset triggered → set up `evidence-hygiene` capture cadence (screenshots, request/response dumps, timestamped logs) at session start, not at session close.
+- **`recon-scope-triage`**; Before the "aggressive default, probe every live surface" directive can be applied safely, you must know which surfaces are actually the target's. Engagement flow: ASM/recon dataset received → `recon-scope-triage` clears namespace-collision noise + soft-404 false positives → only owned, verified assets enter the test queue. Skipping this wastes the engagement on other companies' assets (and risks attacking innocent third parties).
+- **`hunt-spa-api`**; Operationalizes the "harvest JS bundles" cadence line into a full play: SPA JS → backend API map → unauthenticated broken-access-control testing. On a real engagement this play (not any scanner) found the apex Critical. Engagement flow: live SPA/`console`/`app`/`api` host identified → `hunt-spa-api` → test each route family unauthenticated against a gated-sibling control.
+- **`hunt-dispatch`**; Once mindset is loaded, the `/hunt` command needs a mode answer (redteam vs wapt, blackbox vs greybox) before it routes to platform-specific skills. Engagement flow: red-team mindset triggered → confirm engagement mode (`bug-bounty` vs red-team vs pentest per project memory) → invoke `/hunt` → `hunt-dispatch` loads the right cluster (M365 / SharePoint / VPN / vCenter / APK).
+- **`mid-engagement-ir-detection`**; Red-team mindset says "behavior changes ARE findings"; this skill operationalizes that. Engagement flow: red-team engagement underway → baseline established at session start → response patterns shift mid-test → `mid-engagement-ir-detection` captures the SOC-patch state as a NEW finding (defensive-action observed = client capability metric). Don't dismiss it as "the bug got fixed."
+- **`redteam-report-template`**; Red-team deliverable is NOT a bug-bounty report; different audience, different tone, different cadence. Engagement flow: findings collected throughout engagement → at session close, package via `redteam-report-template` (Subject / Observations / Description / Impact / Recommendation / PoC) for client-facing DOCX, not `report-writing` which is for H1/Bugcrowd/Intigriti platforms.
+- **`triage-validation`**; Red-team mindset includes "don't retract too fast"; the 4 retractions from an authorized engagement were mindset failures, not validation failures. Engagement flow: every finding through `triage-validation` 7-Question Gate, but with the red-team adjustment that "exploitable only with chain" is still a finding, not a no-finding.
+- **`evidence-hygiene`**; Red-team engagements often span weeks; without disciplined evidence capture the deliverable suffers. Engagement flow: red-team mindset triggered → set up `evidence-hygiene` capture cadence (screenshots, request/response dumps, timestamped logs) at session start, not at session close.
 
 ## Limitations
 

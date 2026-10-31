@@ -1,8 +1,8 @@
 # EAS Observe CLI
 
-EAS Observe collects app performance telemetry and custom events from Expo apps and exposes them through six EAS CLI commands. Pass the `--help` flag to any command for the latest API — the flags below were verified against `eas-cli` 21.8.0.
+EAS Observe collects app performance telemetry and custom events from Expo apps and exposes them through six EAS CLI commands. Pass the `--help` flag to any command for the latest API; the flags below were verified against `eas-cli` 21.8.0.
 
-> Source: https://docs.expo.dev/eas/observe/eas-cli/ — the canonical CLI page. This reference adds table layouts, JSON output shapes, and pagination details that the docs page does not cover.
+> Source: https://docs.expo.dev/eas/observe/eas-cli/; the canonical CLI page. This reference adds table layouts, JSON output shapes, and pagination details that the docs page does not cover.
 
 ## Commands Overview
 
@@ -11,7 +11,7 @@ EAS Observe collects app performance telemetry and custom events from Expo apps 
 | `eas observe:metrics-summary` | Per-version statistical aggregates for startup and navigation metrics (median, p90, etc.) |
 | `eas observe:metrics` | Individual metric samples ordered by value or timestamp (paginated) |
 | `eas observe:routes` | Per-route statistical aggregates for navigation metrics (Nav Cold TTR, Nav Warm TTR, Nav TTI) |
-| `eas observe:events` | Custom events emitted by the app via `logEvent` — name summary, all events, or filtered by event name (paginated) |
+| `eas observe:events` | Custom events emitted by the app via `logEvent`; name summary, all events, or filtered by event name (paginated) |
 | `eas observe:session` | Full timeline of metric and log events for one session |
 | `eas observe:versions` | App version hierarchy with build numbers, OTA update IDs, and event counts |
 
@@ -19,11 +19,11 @@ EAS Observe collects app performance telemetry and custom events from Expo apps 
 
 All six commands share these flags:
 
-- `--start <ISO date>` and `--end <ISO date>` — explicit time range
-- `--days <N>` — show data from the last N days (mutually exclusive with `--start`/`--end`, minimum 1)
-- `--project-id <id>` — run against a specific project without needing a project directory. When passed, the command will not try to create a new EAS project where one is unneeded.
-- `--json` — machine-readable output (implies `--non-interactive`)
-- `--non-interactive` — fail instead of prompting
+- `--start <ISO date>` and `--end <ISO date>`; explicit time range
+- `--days <N>`; show data from the last N days (mutually exclusive with `--start`/`--end`, minimum 1)
+- `--project-id <id>`; run against a specific project without needing a project directory. When passed, the command will not try to create a new EAS project where one is unneeded.
+- `--json`; machine-readable output (implies `--non-interactive`)
+- `--non-interactive`; fail instead of prompting
 
 `--platform ios` / `--platform android` (default: both) is on every command **except `observe:session`**, which is scoped to one session already.
 
@@ -54,7 +54,7 @@ Emitted only when a navigation integration is enabled (SDK 56+). Measured per ro
 | `nav_warm_ttr` | `expo.navigation.warm_ttr` | Nav Warm TTR |
 | `nav_tti` | `expo.navigation.tti` | Nav TTI |
 
-**Which command takes which alias.** `observe:metrics` (positional argument) and `observe:metrics-summary --metric` accept **all nine** aliases — startup and navigation. `observe:routes --metric` accepts only the three navigation aliases. Use the `nav_` prefix everywhere; there are no bare `cold_ttr` / `warm_ttr` aliases.
+**Which command takes which alias.** `observe:metrics` (positional argument) and `observe:metrics-summary --metric` accept **all nine** aliases; startup and navigation. `observe:routes --metric` accepts only the three navigation aliases. Use the `nav_` prefix everywhere; there are no bare `cold_ttr` / `warm_ttr` aliases.
 
 `observe:metrics` also accepts a full metric name in place of an alias, for example `eas observe:metrics expo.app_startup.tti`. Use `observe:routes --metric` with supported aliases; it has no positional metric argument. The `--metric` flags on `metrics-summary` and `routes` are strict oclif options, so they take aliases only.
 
@@ -69,7 +69,7 @@ eas observe:metrics-summary
 # Single metric
 eas observe:metrics-summary --metric tti
 
-# Multiple metrics — each renders as its own table
+# Multiple metrics: each renders as its own table
 eas observe:metrics-summary --metric tti --metric cold_launch
 
 # Navigation metrics aggregate per version here, per route in observe:routes
@@ -82,7 +82,7 @@ eas observe:metrics-summary --metric tti --stat median --stat p90 --stat eventCo
 eas observe:metrics-summary --metric tti --days 14 --platform ios
 ```
 
-**Stat flags:** exactly `min`, `median`, `max`, `average`, `p80`, `p90`, `p99`, `eventCount`. This command takes **no aliases** — `med`, `avg`, and `count` are rejected here (they work only on `observe:routes`).
+**Stat flags:** exactly `min`, `median`, `max`, `average`, `p80`, `p90`, `p99`, `eventCount`. This command takes **no aliases**; `med`, `avg`, and `count` are rejected here (they work only on `observe:routes`).
 
 **Default stats:** `median` + `eventCount` in the table; all eight in JSON.
 
@@ -132,19 +132,19 @@ eas observe:metrics nav_tti --sort slowest
 # Filter by version or update, sort by slowest
 eas observe:metrics tti --app-version 1.2.0 --sort slowest --limit 20
 
-# Pagination — pass the endCursor from the previous run
+# Pagination: pass the endCursor from the previous run
 eas observe:metrics tti --after <cursor>
 ```
 
 **Sample-specific flags:**
-- `--sort <oldest|newest|slowest|fastest>` — defaults to `oldest`
-- `--limit <N>` — samples per page (default 10, max 100)
-- `--after <cursor>` — pagination cursor from the previous run
-- `--app-version <version>` — filter by app version string
-- `--update-id <id>` — filter by EAS update ID
+- `--sort <oldest|newest|slowest|fastest>`; defaults to `oldest`
+- `--limit <N>`; samples per page (default 10, max 100)
+- `--after <cursor>`; pagination cursor from the previous run
+- `--app-version <version>`; filter by app version string
+- `--update-id <id>`; filter by EAS update ID
 
 **Table layout:**
-- Summary header shows the metric name, time range, and total sample count across all versions (e.g. `TTI samples for the last 60 days — 1,234 total events`)
+- Summary header shows the metric name, time range, and total sample count across all versions (e.g. `TTI samples for the last 60 days; 1,234 total events`)
 - Columns: Value, App Version (with build number), Update (only when any sample has one), Platform, Device, Country, Timestamp
 - When `hasNextPage` is true, prints `Next page: --after <endCursor>` hint below the table
 - JSON output also includes `sessionId`, `easClientId`, and a `customParams` object per sample
@@ -169,19 +169,19 @@ eas observe:routes --app-version 1.2.0 --build-number 42
 # Narrow to specific routes (repeat the flag for multiple routes)
 eas observe:routes --route-name /new --route-name /settings
 
-# Pagination — each platform has its own cursor; pass the relevant endCursor
+# Pagination: each platform has its own cursor; pass the relevant endCursor
 eas observe:routes --after <cursor>
 ```
 
 **Routes-specific flags:**
-- `--metric <nav_cold_ttr|nav_warm_ttr|nav_tti>` — navigation metric(s) to display, can be repeated. Defaults to all three.
-- `--stat <median|p90|count>` — statistic(s) per metric. Aliases: `med` → `median`, `event_count` / `eventCount` → `count`.
-- `--limit <N>` — routes per page (default **50**, max **200**, different from `metrics`/`events` which default to 10).
-- `--after <cursor>` — pagination cursor from the previous run.
-- `--app-version <version>` — filter by app version string.
-- `--build-number <number>` — filter by app build number (routes-only).
-- `--route-name <name>` — filter by route name. Repeatable; only the listed routes are returned across both platforms. Duplicates are de-duplicated; omitting the flag returns all routes.
-- `--update-id <id>` — filter by EAS update ID.
+- `--metric <nav_cold_ttr|nav_warm_ttr|nav_tti>`; navigation metric(s) to display, can be repeated. Defaults to all three.
+- `--stat <median|p90|count>`; statistic(s) per metric. Aliases: `med` → `median`, `event_count` / `eventCount` → `count`.
+- `--limit <N>`; routes per page (default **50**, max **200**, different from `metrics`/`events` which default to 10).
+- `--after <cursor>`; pagination cursor from the previous run.
+- `--app-version <version>`; filter by app version string.
+- `--build-number <number>`; filter by app build number (routes-only).
+- `--route-name <name>`; filter by route name. Repeatable; only the listed routes are returned across both platforms. Duplicates are de-duplicated; omitting the flag returns all routes.
+- `--update-id <id>`; filter by EAS update ID.
 
 **Default stats:** `median` + `count` in the table; `median`, `p90`, `count` in JSON.
 
@@ -239,19 +239,19 @@ eas observe:events login_failed --after <cursor>
 ```
 
 **Events-specific flags:**
-- `--all-events` — when no event name argument is given, list all events instead of the name summary. Cannot be combined with an event name argument.
-- `--session-id <id>` — filter to events from a single session (events-only). With no event name argument, this lists the session's events instead of the event-name summary. For the full timeline — metrics as well as log events — use `observe:session`.
-- `--app-version <version>` — filter by app version string
-- `--update-id <id>` — filter by EAS update ID
-- `--limit <N>` — events per page (default 10, max 100)
-- `--after <cursor>` — pagination cursor
+- `--all-events`; when no event name argument is given, list all events instead of the name summary. Cannot be combined with an event name argument.
+- `--session-id <id>`; filter to events from a single session (events-only). With no event name argument, this lists the session's events instead of the event-name summary. For the full timeline; metrics as well as log events; use `observe:session`.
+- `--app-version <version>`; filter by app version string
+- `--update-id <id>`; filter by EAS update ID
+- `--limit <N>`; events per page (default 10, max 100)
+- `--after <cursor>`; pagination cursor
 
 **Table layout (event listings):**
 - Summary header: `<event-name> events <time range>` or `Custom events <time range>` for `--all-events`, with a total event count when available
 - Columns: Timestamp, Event (only when listing across multiple names), Severity (only when at least one event in the page has a severity), App Version (with build number), Platform, Device, Country
 - `Next page: --after <endCursor>` hint below the table when there is a next page
 
-**Empty-result helper:** if a specific event name is queried and returns no events, the command prints a yellow `No events found matching "<name>"` warning followed by the available event names + counts in the same time range — useful for fixing typos.
+**Empty-result helper:** if a specific event name is queried and returns no events, the command prints a yellow `No events found matching "<name>"` warning followed by the available event names + counts in the same time range; useful for fixing typos.
 
 **Truncation note:** the event-names summary may flag `Result is truncated; not all event names are shown.` when there are more names than the server returns in a single response.
 
@@ -287,7 +287,7 @@ The name-summary mode returns `{ "names": [{ "eventName": "...", "count": 123 }]
 
 ## `eas observe:session`
 
-Shows the full timeline of metric and log events for a single session — the CLI equivalent of the dashboard's session view. Use it after `observe:metrics` surfaces a slow sample: take that sample's `sessionId` (present in `--json` output) and replay everything that session recorded.
+Shows the full timeline of metric and log events for a single session; the CLI equivalent of the dashboard's session view. Use it after `observe:metrics` surfaces a slow sample: take that sample's `sessionId` (present in `--json` output) and replay everything that session recorded.
 
 ```bash
 # Interactive: pick a metric, then pick a session from the candidate list
@@ -301,9 +301,9 @@ eas observe:session --event-name tti --sort slowest --days 7
 ```
 
 **Session-specific flags:**
-- `[SESSIONID]` — positional. Omit it in interactive mode to choose from a list. **Required in non-interactive mode**, including under `--json`.
-- `--event-name <name>` — metric or log event used to build the candidate session list (for example `tti`, `cold_launch`, `login_pressed`). Prompts when omitted in interactive mode.
-- `--sort <slowest|fastest|newest|oldest>` — orders the candidate events. Prompts when omitted in interactive mode. No default, unlike `observe:metrics`.
+- `[SESSIONID]`; positional. Omit it in interactive mode to choose from a list. **Required in non-interactive mode**, including under `--json`.
+- `--event-name <name>`; metric or log event used to build the candidate session list (for example `tti`, `cold_launch`, `login_pressed`). Prompts when omitted in interactive mode.
+- `--sort <slowest|fastest|newest|oldest>`; orders the candidate events. Prompts when omitted in interactive mode. No default, unlike `observe:metrics`.
 
 **The picker flags and the session ID are mutually exclusive.** `--event-name`, `--sort`, `--days`, `--start`, and `--end` describe how to *find* a session, so passing any of them together with a session ID throws. Query a known session with the ID alone.
 

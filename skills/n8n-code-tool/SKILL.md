@@ -19,20 +19,20 @@ Use this skill specifically for code executed by the AI-agent-callable n8n Custo
 
 Do not hardcode secrets or accept arbitrary executable code from untrusted input. Constrain inputs with a schema, validate outputs, allowlist any network destinations, and ask before testing a tool whose code can write data or invoke an external service.
 
-Expert guidance for writing code inside `@n8n/n8n-nodes-langchain.toolCode` — the tool an AI Agent can invoke, **not** the regular workflow Code node.
+Expert guidance for writing code inside `@n8n/n8n-nodes-langchain.toolCode`; the tool an AI Agent can invoke, **not** the regular workflow Code node.
 
 ---
 
 ## ⚠️ This is NOT the Code node
 
-The Custom Code Tool looks like a Code node in the editor — same JavaScript editor, similar layout — but it is a **completely different node** from a different package with a **different runtime contract**.
+The Custom Code Tool looks like a Code node in the editor; same JavaScript editor, similar layout; but it is a **completely different node** from a different package with a **different runtime contract**.
 
 | | Code node | Custom Code Tool |
 |---|---|---|
 | **Node type** | `n8n-nodes-base.code` | `@n8n/n8n-nodes-langchain.toolCode` |
 | **Package** | `n8n-nodes-base` | `@n8n/n8n-nodes-langchain` |
 | **Invoked by** | Previous node (workflow flow) | AI Agent (LangChain) |
-| **Input** | `$input.all()` — item stream | `query` — string or object from LLM |
+| **Input** | `$input.all()`; item stream | `query`; string or object from LLM |
 | **Return** | `[{json: {...}}]` (items array) | **A string** |
 | **`$fromAI()`** | N/A | **Not available** (see Errors) |
 | **HTTP helper** | `this.helpers.httpRequest` (auth helpers blocked) | Not exposed to the tool sandbox |
@@ -62,10 +62,10 @@ return f"You asked: {_query}"
 
 1. **Return a string.** Numbers are auto-converted. Anything else throws `"The response property should be a string, but it is an object"`.
 2. **Input variable is fixed**: `query` (JS), `_query` (Python). You cannot rename it.
-3. **Do NOT use `$fromAI()`** inside the Code Tool sandbox — it throws `"No execution data available"`.
-4. **Do NOT use `[{json: {...}}]`** return format — that's for Code nodes. Throws `"Wrong output type returned"`.
+3. **Do NOT use `$fromAI()`** inside the Code Tool sandbox; it throws `"No execution data available"`.
+4. **Do NOT use `[{json: {...}}]`** return format; that's for Code nodes. Throws `"Wrong output type returned"`.
 5. **Use a descriptive tool name** (letters/numbers/underscores, v1.1+). The agent calls the tool by its name.
-6. **Write a precise description** — the LLM decides whether to invoke the tool based on it.
+6. **Write a precise description**; the LLM decides whether to invoke the tool based on it.
 
 ---
 
@@ -92,7 +92,7 @@ return JSON.stringify({ monthly_payment: /* ... */ });
 ```
 
 **Pros**: simplest to set up, one field to describe.
-**Cons**: no schema validation — if the LLM forgets a field, the tool throws at runtime.
+**Cons**: no schema validation; if the LLM forgets a field, the tool throws at runtime.
 
 **Best for**: quick prototypes, tools with one natural input (a question, a URL, a text blob).
 
@@ -111,8 +111,8 @@ return JSON.stringify({ monthly_payment: monthly });
 ```
 
 Schema is defined via either:
-- `schemaType: "fromJson"` + `jsonSchemaExample` (n8n v≥1.3) — paste an example JSON, n8n infers the schema
-- `schemaType: "manual"` + `inputSchema` — write a full JSON Schema yourself
+- `schemaType: "fromJson"` + `jsonSchemaExample` (n8n v≥1.3); paste an example JSON, n8n infers the schema
+- `schemaType: "manual"` + `inputSchema`; write a full JSON Schema yourself
 
 **Pros**: LLM gets type hints, invalid calls rejected before your code runs, cleaner code.
 **Cons**: a little more setup; requires n8n version with schema support.
@@ -163,13 +163,13 @@ The LLM parses JSON reliably and can pick the fields it needs to present to the 
 
 ### Error handling: the agent reads your failures
 
-Errors don't just stop the workflow — they go back to the LLM, which usually corrects its call and retries. Use that:
+Errors don't just stop the workflow; they go back to the LLM, which usually corrects its call and retries. Use that:
 
 ```javascript
-// Option A: throw — n8n surfaces the message to the agent
+// Option A: throw; n8n surfaces the message to the agent
 if (!isFinite(price)) throw new Error('price must be a number, e.g. 439900');
 
-// Option B: return an error string — agent reads it like any tool result
+// Option B: return an error string; agent reads it like any tool result
 if (!isFinite(price)) return JSON.stringify({ error: 'price must be a number, e.g. 439900' });
 ```
 
@@ -179,17 +179,17 @@ Either way, write error messages **for the LLM**: state what was wrong and what 
 
 ## Tool Name and Description
 
-These fields are NOT documentation — they are the **tool contract the LLM sees**. Treat them as prompt engineering.
+These fields are NOT documentation; they are the **tool contract the LLM sees**. Treat them as prompt engineering.
 
 ### Name
 - Must match `[A-Za-z0-9_]+` (v1.1+). No spaces, no hyphens, no emoji.
 - Use a verb-y descriptive name: `calculate_car_loan`, `get_weather`, `search_orders`.
-- The agent calls the tool by this name. `Code Tool` (the default) is useless — the agent won't know when to call it.
+- The agent calls the tool by this name. `Code Tool` (the default) is useless; the agent won't know when to call it.
 
 ### Description
 - Explain **when** to use it and **what** to send.
 - If unstructured mode, **include an example of the JSON string** the LLM should send.
-- If structured mode, the schema speaks for itself — just describe purpose.
+- If structured mode, the schema speaks for itself; just describe purpose.
 
 **Unstructured example (JSON-in-string pattern):**
 ```
@@ -213,7 +213,7 @@ monthly cost, total credit cost, or loan breakdown.
 
 **Cause**: you called `$fromAI()` inside the Code Tool sandbox.
 
-**Fix**: `$fromAI()` is a helper for **other** tool-enabled nodes (HTTP Request Tool, SendGrid Tool, `toolWorkflow`, etc.) — it's not exposed inside `toolCode`. Read the AI's input from `query` directly (or use `specifyInputSchema` for structured fields).
+**Fix**: `$fromAI()` is a helper for **other** tool-enabled nodes (HTTP Request Tool, SendGrid Tool, `toolWorkflow`, etc.); it's not exposed inside `toolCode`. Read the AI's input from `query` directly (or use `specifyInputSchema` for structured fields).
 
 ### Error 2: `"Wrong output type returned"`
 
@@ -315,13 +315,13 @@ Wire it into an AI Agent via the `ai_tool` connection type.
 
 ## Integration with Other Skills
 
-**n8n-code-javascript**: the Code **node** skill. Most JavaScript patterns (arrays, map/filter, DateTime) transfer — but I/O contract is different. Don't copy data-access code.
+**n8n-code-javascript**: the Code **node** skill. Most JavaScript patterns (arrays, map/filter, DateTime) transfer; but I/O contract is different. Don't copy data-access code.
 
 **n8n-node-configuration**: `specifyInputSchema` is a classic displayOptions-driven conditional field. Use `get_node({detail: "standard"})` on `@n8n/n8n-nodes-langchain.toolCode` to see schema-related properties.
 
 **n8n-workflow-patterns**: Code Tool sits inside the "AI Agent with tools" pattern. An agent typically has several tools; Code Tool is the "local compute" option.
 
-**n8n-validation-expert**: the three Code Tool errors listed above have clear signatures — if validation surfaces "Wrong output type returned", you know to switch from array-of-items to a string.
+**n8n-validation-expert**: the three Code Tool errors listed above have clear signatures; if validation surfaces "Wrong output type returned", you know to switch from array-of-items to a string.
 
 ---
 
@@ -334,7 +334,7 @@ Before deploying a Code Tool:
 - [ ] **Description** states when to use the tool and (if unstructured) shows a JSON example
 - [ ] **Input** read from `query` (JS) or `_query` (Python)
 - [ ] **No `$fromAI()`** in the code body
-- [ ] **No `$input` / `$json` / `$helpers`** — those aren't in the sandbox
+- [ ] **No `$input` / `$json` / `$helpers`**; those aren't in the sandbox
 - [ ] **Return** is a string (use `JSON.stringify()` for structured output)
 - [ ] **Wired** into an AI Agent via `ai_tool` connection
 - [ ] **Tested** with the exact kind of input the LLM will send (JSON in a string, or schema-validated object)
@@ -343,13 +343,13 @@ Before deploying a Code Tool:
 
 ## Additional Resources
 
-- [references/INPUT_SCHEMA.md](references/INPUT_SCHEMA.md) — structured input (DynamicStructuredTool) in depth
-- [references/ERROR_PATTERNS.md](references/ERROR_PATTERNS.md) — full error catalog with causes and fixes
+- [references/INPUT_SCHEMA.md](references/INPUT_SCHEMA.md); structured input (DynamicStructuredTool) in depth
+- [references/ERROR_PATTERNS.md](references/ERROR_PATTERNS.md); full error catalog with causes and fixes
 
 ### Official sources
 - [n8n Custom Code Tool docs](https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolcode/)
-- [ToolCode source](https://github.com/n8n-io/n8n/blob/master/packages/%40n8n/nodes-langchain/nodes/tools/ToolCode/ToolCode.node.ts) — the sandbox contract
-- [LangChain tool docs](https://js.langchain.com/docs/modules/agents/tools/) — DynamicTool / DynamicStructuredTool
+- [ToolCode source](https://github.com/n8n-io/n8n/blob/master/packages/%40n8n/nodes-langchain/nodes/tools/ToolCode/ToolCode.node.ts); the sandbox contract
+- [LangChain tool docs](https://js.langchain.com/docs/modules/agents/tools/); DynamicTool / DynamicStructuredTool
 
 ---
 

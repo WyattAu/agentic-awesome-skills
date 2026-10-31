@@ -102,7 +102,7 @@ istioctl dashboard jaeger
 ### VirtualService (Routing Rules)
 
 ```yaml
-# virtualservice.yaml — canary deployment with traffic split
+# virtualservice.yaml: canary deployment with traffic split
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -175,7 +175,7 @@ spec:
 ### Gateway (Ingress Traffic)
 
 ```yaml
-# gateway.yaml — expose service to external traffic
+# gateway.yaml: expose service to external traffic
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
@@ -267,7 +267,7 @@ istioctl authn tls-check <pod-name>.default my-app.default.svc.cluster.local
 ## Authorization Policies
 
 ```yaml
-# authz-policy.yaml — only allow frontend to call API
+# authz-policy.yaml: only allow frontend to call API
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:

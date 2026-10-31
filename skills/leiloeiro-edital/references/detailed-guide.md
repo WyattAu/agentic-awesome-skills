@@ -1,4 +1,4 @@
-# SKILL DE EDITAL — ANÁLISE PERICIAL DE EDITAIS DE LEILÃO - Detailed Guide
+# SKILL DE EDITAL: ANÁLISE PERICIAL DE EDITAIS DE LEILÃO - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -22,12 +22,12 @@ Ao receber um edital (ou informações dele), execute SEMPRE os 8 blocos abaixo:
 ---
 
 
-## Bloco 1 — Identificação E Enquadramento
+## Bloco 1: Identificação E Enquadramento
 
 **Extrair do edital:**
 - Número do processo (se judicial)
 - Nome do leiloeiro e matrícula/habilitação na Junta Comercial e credenciamento aplicável
-- Plataforma de leilão (presencial / online — qual portal)
+- Plataforma de leilão (presencial / online; qual portal)
 - Data, hora e local do 1º leilão
 - Data, hora e local do 2º leilão
 - Comitente (quem manda leiloar): banco, exequente, cartório
@@ -44,7 +44,7 @@ Data/Hora: ___________
 ---
 
 
-## Bloco 2 — Descrição E Localização Do Imóvel
+## Bloco 2: Descrição E Localização Do Imóvel
 
 **Verificar:**
 - Endereço completo e preciso (CEP, número, complemento)
@@ -64,7 +64,7 @@ Data/Hora: ___________
 ---
 
 
-## Bloco 3 — Valor De Avaliação E Lance Mínimo
+## Bloco 3: Valor De Avaliação E Lance Mínimo
 
 **Extrair e calcular:**
 ```
@@ -81,7 +81,7 @@ Avaliador responsável:             _______________
 - Deságio real (comparado ao valor de mercado estimado): ____%
 
 **Alertas:**
-- ⚠️ Avaliação com mais de 12 meses → risco de defasagem — pedir reavaliação possível (Art. 873 CPC)
+- ⚠️ Avaliação com mais de 12 meses → risco de defasagem; pedir reavaliação possível (Art. 873 CPC)
 - ⚠️ VAN muito abaixo do mercado → investigar laudos ou favorecimento
 - ⚠️ VAN muito acima do mercado → leilão não vai arrematar no 1º; aguardar 2º
 - ⚠️ Leilão extrajudicial: conferir arts. 26-A/27 após Lei 14.711/2023; dívida, encargos e hipóteses de mínimo diferem, sem oportunidade garantida
@@ -89,7 +89,7 @@ Avaliador responsável:             _______________
 ---
 
 
-## Bloco 4 — Situação Do Imóvel (Posse E Ocupação)
+## Bloco 4: Situação Do Imóvel (Posse E Ocupação)
 
 **Verificar no edital:**
 - [ ] Imóvel desocupado (pronto para uso)
@@ -115,11 +115,11 @@ Avaliador responsável:             _______________
 
 ---
 
-### 5.1 Responsabilidade Por Débitos — O Que Diz O Edital?
+### 5.1 Responsabilidade Por Débitos: O Que Diz O Edital?
 
 **Verificar especificamente:**
-- [ ] IPTU — valor dos débitos e quem responde
-- [ ] Condomínio — valor dos débitos e quem responde
+- [ ] IPTU; valor dos débitos e quem responde
+- [ ] Condomínio; valor dos débitos e quem responde
 - [ ] Taxa de lixo, iluminação pública
 - [ ] Débitos de água/esgoto (SABESP, CEDAE etc.)
 - [ ] Taxas de melhoria e obras municipais
@@ -130,7 +130,7 @@ Avaliador responsável:             _______________
 |-------------------|---------------|-------|
 | "O imóvel é vendido no estado em que se encontra" | Débitos podem acompanhar | Alto |
 | "Livre de ônus" | Conferir alcance, matrícula, modalidade e decisão; não é garantia absoluta | Pendente de conferência |
-| "Débitos a cargo do arrematante" | Verificar validade legal e quais débitos, sem prevalência automática sobre norma obrigatória | Alto — revisar |
+| "Débitos a cargo do arrematante" | Verificar validade legal e quais débitos, sem prevalência automática sobre norma obrigatória | Alto; revisar |
 | "Edital silente sobre débitos" | Distinguir CTN art. 130 parágrafo único/CPC art. 908 §1º e modalidade | Pendente |
 | "Débitos a serem pagos com o produto da arrematação" | Juiz reserva verba | Baixo |
 
@@ -148,8 +148,8 @@ Antes de arrematar, obter:
 - [ ] Usufruto registrado (quem é o usufrutuário? vida útil estimada?)
 - [ ] Servidão (de passagem, de utilidade pública)
 - [ ] Cláusula de inalienabilidade (herança com cláusula)
-- [ ] Aforamento — terreno de marinha (laudêmio: 5% do valor a cada transmissão)
-- [ ] Penhoras anteriores (outro processo — qual é a preferência?)
+- [ ] Aforamento; terreno de marinha (laudêmio: 5% do valor a cada transmissão)
+- [ ] Penhoras anteriores (outro processo; qual é a preferência?)
 
 **Atenção especial:**
 - Usufruto vitalício → arrematante não tem direito de uso enquanto o usufrutuário viver
@@ -159,18 +159,18 @@ Antes de arrematar, obter:
 ---
 
 
-## Bloco 6 — Condições De Pagamento
+## Bloco 6: Condições De Pagamento
 
 **Extrair do edital:**
 - Forma de pagamento aceita (dinheiro, TED, cheque, carta de crédito)
 - Prazo para pagamento à vista
-- Possibilidade de parcelamento — Art. 895 CPC:
+- Possibilidade de parcelamento; Art. 895 CPC:
   - 25% à vista no ato da arrematação
   - Saldo em até 30 meses na proposta do art. 895, observadas garantias e aceitação judicial
 - Financiamento bancário aceito? Qual banco?
 - Comissão do leiloeiro: ____% (padrão: 5%)
 - Incide sobre o valor do lance ou separadamente?
-- ITBI (imposto municipal de transmissão): ___% (varia por município — média 2-3%)
+- ITBI (imposto municipal de transmissão): ___% (varia por município; média 2-3%)
   - São Paulo: 3%
   - Rio de Janeiro: 3%
   - Belo Horizonte: 3%
@@ -192,7 +192,7 @@ Lance arrematado:                  R$ _____________
 ---
 
 
-## Bloco 7 — Regularidade Documental E Jurídica
+## Bloco 7: Regularidade Documental E Jurídica
 
 **Verificar itens de conformidade do edital:**
 
@@ -272,10 +272,10 @@ PRINCIPAIS ALERTAS:
 ⚠️ _______________
 
 AÇÃO RECOMENDADA:
-[ ] ARREMATAR — Oportunidade clara
+[ ] ARREMATAR; Oportunidade clara
 [ ] ARREMATAR com cautelas (descrever)
 [ ] AGUARDAR 2º LEILÃO
-[ ] NÃO ARREMATAR — Risco supera oportunidade
+[ ] NÃO ARREMATAR; Risco supera oportunidade
 [ ] DILIGÊNCIAS NECESSÁRIAS ANTES DE DECIDIR
 ```
 
@@ -301,12 +301,12 @@ CPC art. 887: publicação do edital judicial com antecedência mínima de cinco
 | Recife (PE) | 3% |
 | Manaus (AM) | 2% |
 
-*Verificar sempre no site da prefeitura — alíquotas podem mudar*
+*Verificar sempre no site da prefeitura; alíquotas podem mudar*
 
 ---
 
 
-## Bloco Extra — Editais De Venda Direta (Cef, Bb, Santander)
+## Bloco Extra: Editais De Venda Direta (Cef, Bb, Santander)
 
 Os editais de venda direta bancária têm formato diferente dos judiciais. Pontos específicos:
 
@@ -316,7 +316,7 @@ Os editais de venda direta bancária têm formato diferente dos judiciais. Ponto
 **Estrutura do edital CEF:**
 ```
 1. Identificação do lote (número, endereço, matrícula)
-2. Valor mínimo de venda (VMAV — Valor Mínimo de Aquisição e Venda)
+2. Valor mínimo de venda (VMAV; Valor Mínimo de Aquisição e Venda)
 3. Forma de pagamento aceita:
    - À vista (desconto de 5-10%)
    - Financiamento apenas quando disponível no lote e após aprovação de crédito
@@ -366,7 +366,7 @@ Preencher para cada lote analisado:
 
 ```
 ╔══════════════════════════════════════════════════════════╗
-║             PLANILHA DE CUSTOS — LOTE #_______          ║
+║             PLANILHA DE CUSTOS; LOTE #_______          ║
 ╠══════════════════════════════════════════════════════════╣
 ║                                                          ║
 ║  VALOR DO LANCE PRETENDIDO:          R$ ______________   ║
@@ -405,7 +405,7 @@ Preencher para cada lote analisado:
 
 Orquestrador, scan_registry.py, match_skills.py e skill-sentinel não estão incluídos. scripts/governance.py contém helpers manuais sem integração automática, confirmação humana efetiva ou controle atômico de taxa. Não alegar auditoria skill-sentinel ou ausência de retenção pelo cliente/serviço. Nenhum alerta ou aprovação decorre apenas de calcular o score.
 
-## Armadilhas Comuns Em Editais — Top 10
+## Armadilhas Comuns Em Editais: Top 10
 
 | # | Armadilha | Como Detectar | Impacto |
 |---|-----------|---------------|---------|
@@ -416,7 +416,7 @@ Orquestrador, scan_registry.py, match_skills.py e skill-sentinel não estão inc
 | 5 | Imóvel em faixa de marinha | Descrição menciona "aforamento" ou "terreno de marinha" | Laudêmio de 5% |
 | 6 | Fração ideal de garagem separada | Edital diz "exceto box" ou "garagem não inclusa" | Perde a vaga |
 | 7 | Área construída não averbada | Matrícula com área menor que a real | Custo de regularização |
-| 8 | 2º leilão = valor da dívida (não do mercado) | Extrajudicial — mínimo pode ser 20% do VMP | Parece ótimo, mas verificar débitos |
+| 8 | 2º leilão = valor da dívida (não do mercado) | Extrajudicial; mínimo pode ser 20% do VMP | Parece ótimo, mas verificar débitos |
 | 9 | Comissão não incluída no lance | "Comissão a cargo do arrematante ALÉM do lance" | 5% extra sobre o valor |
 | 10 | Parcelamento com juros altíssimos | Ler cláusula de parcelamento (IGP-M, IPCA, 1% a.m.) | Custo financeiro oculto |
 

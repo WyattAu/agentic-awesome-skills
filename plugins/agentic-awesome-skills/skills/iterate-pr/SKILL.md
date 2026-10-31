@@ -60,7 +60,7 @@ Returns JSON with feedback categorized as:
 - `bot` - Informational automated comments (Codecov, Dependabot, etc.)
 - `resolved` - Already resolved threads
 
-Review bot feedback (from Sentry, Warden, Cursor, Bugbot, CodeQL, etc.) appears in `high`/`medium`/`low` with `review_bot: true` — it is NOT placed in the `bot` bucket.
+Review bot feedback (from Sentry, Warden, Cursor, Bugbot, CodeQL, etc.) appears in `high`/`medium`/`low` with `review_bot: true`; it is NOT placed in the `bot` bucket.
 
 Each feedback item may also include:
 - `thread_id` - GraphQL node ID for inline review comments (used for replies)
@@ -95,7 +95,7 @@ When fixing feedback:
 This includes review bot feedback (items with `review_bot: true`). Treat it the same as human feedback:
 - Real issue found → fix it
 - False positive → skip, but explain why in a brief comment
-- Never silently ignore review bot feedback — always verify the finding
+- Never silently ignore review bot feedback; always verify the finding
 
 **Prompt user for selection:**
 - `low` - present numbered list and ask which to address:
@@ -111,39 +111,39 @@ Which would you like to address? (e.g., "1,3" or "all" or "none")
 
 **Skip silently:**
 - `resolved` threads
-- `bot` comments (informational only — Codecov, Dependabot, etc.)
+- `bot` comments (informational only; Codecov, Dependabot, etc.)
 
 #### Replying to Comments
 
 After processing each inline review comment, reply on the PR thread only when the user authorized review replies as part of the task. Otherwise prepare the proposed reply and report the finding. Only reply to items with a `thread_id` (inline review comments).
 
 **When to reply:**
-- `high` and `medium` items — whether fixed or determined to be false positives
-- `low` items — whether fixed or declined by the user
+- `high` and `medium` items; whether fixed or determined to be false positives
+- `low` items; whether fixed or declined by the user
 
 **How to reply:** Use the `addPullRequestReviewThreadReply` GraphQL mutation with `pullRequestReviewThreadId` and `body` inputs.
 
 **Reply format:**
 - 1-2 sentences: what was changed, why it's not an issue, or acknowledgment of declined items
 - Attribute automated replies truthfully to the actual client/agent; do not impersonate Claude Code from another host.
-- Before replying, check if the thread already has a reply ending with `*- Claude Code*` or `*— Claude Code*` to avoid duplicates on re-loops
-- If the `gh api` call fails, log and continue — do not block the workflow
+- Before replying, check if the thread already has a reply ending with `*- Claude Code*` or `*- Claude Code*` to avoid duplicates on re-loops
+- If the `gh api` call fails, log and continue; do not block the workflow
 
 ### 4. Check CI Status
 
 Run `${CLAUDE_SKILL_ROOT}/scripts/fetch_pr_checks.py` to get structured failure data.
 
-**Wait if pending:** If review bot checks (sentry, warden, cursor, bugbot, seer, codeql) are still running, wait before proceeding—they post actionable feedback that must be evaluated. Informational bots (codecov) are not worth waiting for.
+**Wait if pending:** If review bot checks (sentry, warden, cursor, bugbot, seer, codeql) are still running, wait before proceeding-they post actionable feedback that must be evaluated. Informational bots (codecov) are not worth waiting for.
 
 ### 5. Fix CI Failures
 
 For each failure in the script output:
-1. Read the `log_snippet` and trace backwards from the error to understand WHY it failed — not just what failed
+1. Read the `log_snippet` and trace backwards from the error to understand WHY it failed; not just what failed
 2. Read the relevant code and check for related issues (e.g., if a type error in one call site, check other call sites)
 3. Fix the root cause with minimal, targeted changes
 4. Find existing tests for the affected code and run them. If the fix introduces behavior not covered by existing tests, extend them to cover it (add a test case, not a whole new test file)
 
-Do NOT assume what failed based on check name alone—always read the logs. Do NOT "quick fix and hope" — understand the failure thoroughly before changing code.
+Do NOT assume what failed based on check name alone-always read the logs. Do NOT "quick fix and hope"; understand the failure thoroughly before changing code.
 
 ### 6. Verify Locally, Then Commit and Push
 
@@ -152,7 +152,7 @@ Before committing, verify your fixes locally:
 - If you fixed a lint/type error: re-run the linter or type checker on affected files
 - For any code fix: run existing tests covering the changed code
 
-If local verification fails, fix before proceeding — do not push known-broken code.
+If local verification fails, fix before proceeding; do not push known-broken code.
 
 ```bash
 git add <files>
@@ -172,7 +172,7 @@ Poll CI status and review feedback in a loop instead of blocking:
    b. Address any new high/medium feedback immediately (same as step 3)
    c. If changes were needed, commit and push (this restarts CI), then continue polling
    d. Sleep 30 seconds, then repeat from sub-step 1
-5. After all checks pass, do a final feedback check: `sleep 10`, then run `uv run ${CLAUDE_SKILL_ROOT}/scripts/fetch_pr_feedback.py`. Address any new high/medium feedback — if changes are needed, return to step 6.
+5. After all checks pass, do a final feedback check: `sleep 10`, then run `uv run ${CLAUDE_SKILL_ROOT}/scripts/fetch_pr_feedback.py`. Address any new high/medium feedback; if changes are needed, return to step 6.
 
 ### 8. Repeat
 

@@ -95,27 +95,27 @@ Controle o enquadramento e perspectiva:
 ## Estilos Artisticos
 
 ### Por Movimento
-- `art nouveau` — Curvas organicas, decorativo
-- `art deco` — Geometrico, luxuoso
-- `impressionism` — Pinceladas visiveis
-- `surrealism` — Surrealista, onírico
-- `baroque` — Dramatico, ornamentado
-- `romanticism` — Emocional, natureza
+- `art nouveau`; Curvas organicas, decorativo
+- `art deco`; Geometrico, luxuoso
+- `impressionism`; Pinceladas visiveis
+- `surrealism`; Surrealista, onírico
+- `baroque`; Dramatico, ornamentado
+- `romanticism`; Emocional, natureza
 
 ### Por Midia
-- `oil painting` — Classico, textural
-- `watercolor` — Suave, fluido
-- `pencil sketch` — Monocromatico, linhas
-- `digital painting` — Limpo, detalhado
-- `vector art` — Formas limpas, flat
-- `pixel art` — Retro, blocky
-- `3d render` — Volumetrico, realista
+- `oil painting`; Classico, textural
+- `watercolor`; Suave, fluido
+- `pencil sketch`; Monocromatico, linhas
+- `digital painting`; Limpo, detalhado
+- `vector art`; Formas limpas, flat
+- `pixel art`; Retro, blocky
+- `3d render`; Volumetrico, realista
 
 ### Por Referencia
-- `trending on artstation` — Alta qualidade digital
-- `unreal engine 5` — Fotorrealista 3D
-- `octane render` — Render premium
-- `studio ghibli` — Anime japones classico
+- `trending on artstation`; Alta qualidade digital
+- `unreal engine 5`; Fotorrealista 3D
+- `octane render`; Render premium
+- `studio ghibli`; Anime japones classico
 
 ## Negative Prompts
 
@@ -174,12 +174,12 @@ fantasy art, dramatic clouds, volumetric lighting
 
 ### Mood Words
 Palavras que definem o tom emocional:
-- `serene, peaceful, calm` — Tranquilo
-- `epic, grand, majestic` — Epico
-- `dark, moody, ominous` — Sombrio
-- `whimsical, playful, fun` — Divertido
-- `ethereal, dreamy, mystical` — Onirico
-- `gritty, raw, intense` — Intenso
+- `serene, peaceful, calm`; Tranquilo
+- `epic, grand, majestic`; Epico
+- `dark, moody, ominous`; Sombrio
+- `whimsical, playful, fun`; Divertido
+- `ethereal, dreamy, mystical`; Onirico
+- `gritty, raw, intense`; Intenso
 
 ## Exemplos por Categoria
 

@@ -14,7 +14,7 @@ compatibility: Process guidance; no tooling required. Docs-only; upstream templa
 sources: bugcrowd, community
 ---
 
-# BUGCROWD REPORTING — Program-Specific Tactics
+# BUGCROWD REPORTING: Program-Specific Tactics
 
 > Companion to the generic `report-writing` skill. Use when working specifically on Bugcrowd submissions where VRT mapping, OOS-clause rebuttals, or per-program target selection matter.
 
@@ -22,21 +22,21 @@ This skill encodes patterns that apply specifically to Bugcrowd's submission flo
 
 ---
 
-## 1. VRT Category Selection — Search & Fallback Strategy
+## 1. VRT Category Selection: Search & Fallback Strategy
 
-Bugcrowd's submission form requires a single VRT (Vulnerability Rating Taxonomy) selection. The dropdown's default severity is bound to the chosen node — pick wrong and the form auto-suggests a lower priority (often P4) when the actual impact is P3 or P2.
+Bugcrowd's submission form requires a single VRT (Vulnerability Rating Taxonomy) selection. The dropdown's default severity is bound to the chosen node; pick wrong and the form auto-suggests a lower priority (often P4) when the actual impact is P3 or P2.
 
-> Note: VRT default severities are not fixed constants. Bugcrowd revises the VRT schema across versions, and individual programs can remap defaults via their own priority configuration. The P-values shown in the examples below (e.g., "No Rate Limiting on Form → Login" defaulting to P4) are the typical baseline at time of writing — always read the severity the *current* form actually auto-suggests for *this* program rather than assuming the value here.
+> Note: VRT default severities are not fixed constants. Bugcrowd revises the VRT schema across versions, and individual programs can remap defaults via their own priority configuration. The P-values shown in the examples below (e.g., "No Rate Limiting on Form → Login" defaulting to P4) are the typical baseline at time of writing; always read the severity the *current* form actually auto-suggests for *this* program rather than assuming the value here.
 
 ### 1.1 Search hierarchy (try in order, pick the most specific accurate match)
 
 For any finding, search the VRT dropdown with these terms in this order:
 
-1. **The bug's primary class** — e.g., `IDOR`, `XSS`, `SSRF`, `auth bypass`, `2FA bypass`
-2. **The data category exposed** — e.g., `PII`, `sensitive data exposure`, `disclosure of secrets`
-3. **The control bypassed** — e.g., `broken access control`, `authentication bypass`
-4. **The endpoint type** — e.g., `no rate limiting on form > login`, `no rate limiting on form > change password`
-5. **The generic parent node** — e.g., `Server Security Misconfiguration > Other`, `Broken Access Control > Other`
+1. **The bug's primary class**; e.g., `IDOR`, `XSS`, `SSRF`, `auth bypass`, `2FA bypass`
+2. **The data category exposed**; e.g., `PII`, `sensitive data exposure`, `disclosure of secrets`
+3. **The control bypassed**; e.g., `broken access control`, `authentication bypass`
+4. **The endpoint type**; e.g., `no rate limiting on form > login`, `no rate limiting on form > change password`
+5. **The generic parent node**; e.g., `Server Security Misconfiguration > Other`, `Broken Access Control > Other`
 
 ### 1.2 Pick the most specific accurate match
 
@@ -85,20 +85,20 @@ P1 inflation is the fastest way to lose triager trust. Reserve P1 for ATO withou
 
 ---
 
-## 3. Severity-Request Paragraph — Always First in the Body
+## 3. Severity-Request Paragraph: Always First in the Body
 
 When the VRT default underrates impact, use a concise evidence-based severity rationale where the program template permits; do not displace reproduction and demonstrated impact. No evidence here establishes automatic closure behavior or a wording that prevents it.
 
 ### 3.1 Template
 
 ```markdown
-## Severity request — please review carefully before applying VRT default
+## Severity request: please review carefully before applying VRT default
 
 The closest VRT category for this finding is "[chosen VRT]," which Bugcrowd defaults to **P[N] ($X-$Y in [program]'s rubric)**. **I am requesting evaluation at P[M] [standalone | in chain with submission XXXX]** for the following reasons:
 
-1. **[Impact axis 1]** — [specific reason this finding exceeds the VRT default's example]
-2. **[Impact axis 2]** — [specific reason, often citing the program's own Focus Areas]
-3. **[Impact axis 3]** — [specific reason, often comparing to historical bounty payouts for the same data class]
+1. **[Impact axis 1]**; [specific reason this finding exceeds the VRT default's example]
+2. **[Impact axis 2]**; [specific reason, often citing the program's own Focus Areas]
+3. **[Impact axis 3]**; [specific reason, often comparing to historical bounty payouts for the same data class]
 
 [Optional: one paragraph contrasting the VRT default's typical example with this finding's actual impact, e.g., "P4 = No Rate Limiting on Login Form" applies to ordinary login pages where brute force is bounded by lockout policies; this endpoint has neither lockout nor throttle.]
 ```
@@ -106,20 +106,20 @@ The closest VRT category for this finding is "[chosen VRT]," which Bugcrowd defa
 ### 3.2 Worked example pattern
 
 ```markdown
-## Severity request — please review carefully before applying VRT default
+## Severity request: please review carefully before applying VRT default
 
 The closest VRT category for this finding is "No Rate Limiting on Form → Login," which Bugcrowd defaults to **P4 ($XX–$YY in this program's rubric)**. **I am requesting evaluation at P3 standalone, P2 in chain with submission XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX** for the following reasons:
 
-1. **[Endpoint] is a password-disclosure oracle, not a generic rate-limit gap.** The endpoint returns true/false for a supplied password — combined with cookie theft, it is the exact primitive an attacker uses to learn the victim's *durable* credential from a stolen *transient* session.
+1. **[Endpoint] is a password-disclosure oracle, not a generic rate-limit gap.** The endpoint returns true/false for a supplied password; combined with cookie theft, it is the exact primitive an attacker uses to learn the victim's *durable* credential from a stolen *transient* session.
 2. **The chained outcome is "Account Takeover,"** explicitly listed under the program → Focus Areas → Critical (P1) examples. This finding is one of two independent links that make that chain work; the other is submission XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX.
 3. **The two findings have independent fix surfaces.** Per the program's "one fix = one bounty" rule they should be evaluated as two separate findings whose chain raises the joint severity.
 
-The "P4 = No Rate Limiting on Login Form" default applies to ordinary login pages where brute-force is bounded by lockout policies. This endpoint has neither lockout nor throttle, and the result of brute force is the *user's actual password* (not a session) — making the impact significantly higher than the default VRT severity assumes.
+The "P4 = No Rate Limiting on Login Form" default applies to ordinary login pages where brute-force is bounded by lockout policies. This endpoint has neither lockout nor throttle, and the result of brute force is the *user's actual password* (not a session); making the impact significantly higher than the default VRT severity assumes.
 ```
 
 ### 3.3 Tone guidelines
 
-- Open with *"Severity request — please review carefully before applying VRT default"* (literal phrase). This wording has no guaranteed effect on triage.
+- Open with *"Severity request; please review carefully before applying VRT default"* (literal phrase). This wording has no guaranteed effect on triage.
 - Use **bold** sparingly; one or two phrases per reason at most.
 - State demonstrated impact directly and label uncertainty/prerequisites explicitly; do not remove accurate qualifiers to seek higher priority.
 - Cite the program's own Focus Areas / accepted-impact list by exact name.
@@ -127,7 +127,7 @@ The "P4 = No Rate Limiting on Login Form" default applies to ordinary login page
 
 ---
 
-## 4. OOS-Clause Rebuttals — Templates
+## 4. OOS-Clause Rebuttals: Templates
 
 Bugcrowd triagers sometimes auto-close findings by mapping them to an OOS clause without reading the report. Pre-empt this by including an **In-scope justification** section that quotes the OOS clause and explains why your finding doesn't fit it.
 
@@ -138,7 +138,7 @@ When the finding is on an authentication endpoint (login, password change, passw
 ```markdown
 ## In-scope justification
 
-The program OOS list excludes "Rate limiting or brute-force issues on **non-authentication** endpoints." `[endpoint name]` is the canonical authentication endpoint — it accepts a password/token/OTP and returns whether it matches the user's stored credential. By definition this is an authentication primitive. The OOS clause's "non-authentication" qualifier therefore does NOT apply.
+The program OOS list excludes "Rate limiting or brute-force issues on **non-authentication** endpoints." `[endpoint name]` is the canonical authentication endpoint; it accepts a password/token/OTP and returns whether it matches the user's stored credential. By definition this is an authentication primitive. The OOS clause's "non-authentication" qualifier therefore does NOT apply.
 ```
 
 ### 4.2 "Debug information disclosure" rebuttal (for schema/introspection findings)
@@ -148,7 +148,7 @@ When the finding involves schema disclosure that's actually a control bypass (e.
 ```markdown
 ## In-scope justification
 
-This is not a "debug information" finding. The [persisted-query allowlist | introspection gate | etc.] is acting as an authorization control on the [GraphQL surface | API tree | etc.]. The bypass converts that gate into a no-op — multiple [mutations | endpoints] become reachable that the official clients cannot invoke. The schema disclosure is incidental; the impact is **mutation-surface unlock**, not information leakage.
+This is not a "debug information" finding. The [persisted-query allowlist | introspection gate | etc.] is acting as an authorization control on the [GraphQL surface | API tree | etc.]. The bypass converts that gate into a no-op; multiple [mutations | endpoints] become reachable that the official clients cannot invoke. The schema disclosure is incidental; the impact is **mutation-surface unlock**, not information leakage.
 ```
 
 ### 4.3 "User enumeration with low-risk information" rebuttal
@@ -177,7 +177,7 @@ If you only have an "API behavior" observation without a fully demonstrated expl
 
 ---
 
-## 5. Chained Findings — Cross-Reference Strategy
+## 5. Chained Findings: Cross-Reference Strategy
 
 Many high-impact findings are chains of two or more standalone primitives (oracle + missing step-up = ATO). Bugcrowd's program rule: *"Submit one vulnerability per report. If multiple vulnerabilities must be chained to demonstrate impact, you may include them together, but please clearly explain the chain."*
 
@@ -192,8 +192,8 @@ In the chain consumer's body, near the top:
 ```markdown
 ## Chain partners (filed as separate reports)
 
-- **submission [UUID-1]** — [primitive 1: e.g., `me.verify_password` no rate limit]
-- **submission [UUID-2]** — [primitive 2: e.g., GraphQL APQ allowlist bypass]
+- **submission [UUID-1]**; [primitive 1: e.g., `me.verify_password` no rate limit]
+- **submission [UUID-2]**; [primitive 2: e.g., GraphQL APQ allowlist bypass]
 
 These primitives have independent fix surfaces and are filed separately per the program's "one fix = one bounty" rule. The chained impact described here requires both primitives to be exploited end-to-end.
 ```
@@ -209,12 +209,12 @@ This finding is the [N]th of [M] independent primitives that together produce [i
 ### 5.3 What NOT to do
 
 - Don't paste the entire chain narrative into every primitive's body. Cross-reference instead.
-- Don't claim each primitive is independently P1 — overclaiming damages credibility for all linked reports.
+- Don't claim each primitive is independently P1; overclaiming damages credibility for all linked reports.
 - Don't ask for a single combined bounty for the chain. No universal "one fix = one bounty" entitlement exists; the program decides grouping and rewards. Frame the chain as a severity-amplifier, not a merge request.
 
 ---
 
-## 6. Target Selection — QA vs. Production
+## 6. Target Selection: QA vs. Production
 
 Programs that scope both production and QA assets (e.g., `app.target.com` vs. `app-qa.target.com`) require careful target selection.
 
@@ -233,7 +233,7 @@ Programs that scope both production and QA assets (e.g., `app.target.com` vs. `a
 ## Notes for triagers
 
 - Tested in the QA environment ([qa-host]) per the program's instruction for non-US researchers / per the program's QA-testing scope.
-- Production may enforce additional controls that QA does not — please confirm whether the same resolver code path runs on production.
+- Production may enforce additional controls that QA does not; please confirm whether the same resolver code path runs on production.
 - All testing limited to my own QA test account; no other accounts were interacted with.
 - Selected target: `[chosen-target]`. Selected VRT: `[chosen-VRT]`. Both selected as closest available matches; please reassign if more appropriate options exist.
 ```
@@ -244,7 +244,7 @@ Programs that scope both production and QA assets (e.g., `app.target.com` vs. `a
 
 These are program-rule items that affect submission quality even though they're not part of the report body itself.
 
-### 7.1 Account email — Bugcrowdninja alias
+### 7.1 Account email: Bugcrowdninja alias
 
 Some programs may ask researchers to use their `@bugcrowdninja.com` alias as the account email on the target. This flags traffic as friendly-tester to the target's fraud team. Steps:
 
@@ -258,7 +258,7 @@ Some programs may ask researchers to use their `@bugcrowdninja.com` alias as the
 After demonstrating any state-changing action (password change, email change, device removal, money transfer):
 
 1. Restore approved non-secret test state when safe; replace exposed passwords with fresh values and revoke test sessions rather than restoring exposed secrets
-2. Document the restoration in the report — *"Account state was restored immediately after the PoC."*
+2. Document the restoration in the report; *"Account state was restored immediately after the PoC."*
 3. If restoration is impossible (e.g., a sent email cannot be unsent), document the residual state honestly
 
 ### 7.3 Cookie / session rotation after submission
@@ -267,11 +267,11 @@ After submitting any report that includes session-cookie-derived evidence:
 
 1. Log out and log back in to rotate the session cookie
 2. Verify server-side revocation or expiration; logging out and back in alone does not prove old credentials are invalid
-3. Optionally, rotate the test-account password to a fresh value not used elsewhere — that way passwords visible in PoC screenshots are also dead
+3. Optionally, rotate the test-account password to a fresh value not used elsewhere; that way passwords visible in PoC screenshots are also dead
 
 ### 7.4 If the test account gets locked
 
-1. Don't create a second account to bypass the lock — that looks like fraud
+1. Don't create a second account to bypass the lock; that looks like fraud
 2. Email the program-specific contact (if provided) with your Bugcrowd username and the report ID
 3. Wait for the program team to unblock you; testing during the lock period damages credibility
 
@@ -314,17 +314,17 @@ Maintain a simple text file with each submission's UUID, severity, and one-line 
 
 ## Notes on usage
 
-This skill is small and focused. It does NOT duplicate content from `report-writing` (per-platform templates, CVSS scoring, downgrade counters, 60-second pre-submit checklist) — load both skills together when filing a Bugcrowd report. The two skills' content composes naturally because their boundaries are clean: `report-writing` is the body templates, `bugcrowd-reporting` is the program-specific tactics layered on top.
+This skill is small and focused. It does NOT duplicate content from `report-writing` (per-platform templates, CVSS scoring, downgrade counters, 60-second pre-submit checklist); load both skills together when filing a Bugcrowd report. The two skills' content composes naturally because their boundaries are clean: `report-writing` is the body templates, `bugcrowd-reporting` is the program-specific tactics layered on top.
 
 ---
 
 ## Related Skills & Chains
 
-- **`report-writing`** — Always load this skill alongside `bugcrowd-reporting`. Workflow primitive: `report-writing` provides the body skeleton; this skill layers VRT selection + severity-request paragraph + OOS-clause rebuttals on top of that skeleton.
-- **`triage-validation`** — When deciding if a Bugcrowd-bound finding will pass triage. Workflow primitive: 7Q gate runs first; only validated findings reach this skill for VRT mapping.
-- **`evidence-hygiene`** — When attaching screenshots / HARs to a Bugcrowd submission. Workflow primitive: Bugcrowd's private attachment system requires redacted evidence; route everything through `evidence-hygiene` before clicking attach.
-- **`security-arsenal`** — When the PoC step needs payloads cited verbatim. Workflow primitive: the "Steps to Reproduce" section in this skill's report bodies pulls exact payloads from `security-arsenal` so the triager can paste-and-run.
-- **`bb-methodology`** — When confirming engagement mode is bug-bounty (not red-team). Workflow primitive: PART 0 of `bb-methodology` answers "bug bounty?"; if yes AND the target is Bugcrowd, this skill becomes the reporting overlay.
+- **`report-writing`**; Always load this skill alongside `bugcrowd-reporting`. Workflow primitive: `report-writing` provides the body skeleton; this skill layers VRT selection + severity-request paragraph + OOS-clause rebuttals on top of that skeleton.
+- **`triage-validation`**; When deciding if a Bugcrowd-bound finding will pass triage. Workflow primitive: 7Q gate runs first; only validated findings reach this skill for VRT mapping.
+- **`evidence-hygiene`**; When attaching screenshots / HARs to a Bugcrowd submission. Workflow primitive: Bugcrowd's private attachment system requires redacted evidence; route everything through `evidence-hygiene` before clicking attach.
+- **`security-arsenal`**; When the PoC step needs payloads cited verbatim. Workflow primitive: the "Steps to Reproduce" section in this skill's report bodies pulls exact payloads from `security-arsenal` so the triager can paste-and-run.
+- **`bb-methodology`**; When confirming engagement mode is bug-bounty (not red-team). Workflow primitive: PART 0 of `bb-methodology` answers "bug bounty?"; if yes AND the target is Bugcrowd, this skill becomes the reporting overlay.
 
 ## When to Use
 
@@ -333,7 +333,7 @@ This skill is small and focused. It does NOT duplicate content from `report-writ
 
 ## Limitations
 
-- Process guidance only; it does not authorize probing or exploitation — those steps need their own authorized skill and confirmation gate.
+- Process guidance only; it does not authorize probing or exploitation; those steps need their own authorized skill and confirmation gate.
 - Docs-only import: upstream templates, commands, and research assets are not bundled.
 
 ### Example

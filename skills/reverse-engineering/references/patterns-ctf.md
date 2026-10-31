@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Hidden Emulator Opcodes + LD_PRELOAD Key Extraction (0xFun 2026)](#hidden-emulator-opcodes--ld_preload-key-extraction-0xfun-2026)
-- [Spectre-RSB SPN Cipher — Static Parameter Extraction (0xFun 2026)](#spectre-rsb-spn-cipher--static-parameter-extraction-0xfun-2026)
+- [Spectre-RSB SPN Cipher; Static Parameter Extraction (0xFun 2026)](#spectre-rsb-spn-cipher--static-parameter-extraction-0xfun-2026)
 - [Image XOR Mask Recovery via Smoothness (VuwCTF 2025)](#image-xor-mask-recovery-via-smoothness-vuwctf-2025)
 - [Shellcode in Data Section via mmap RWX (VuwCTF 2025)](#shellcode-in-data-section-via-mmap-rwx-vuwctf-2025)
 - [Recursive execve Subtraction (VuwCTF 2025)](#recursive-execve-subtraction-vuwctf-2025)
@@ -49,7 +49,7 @@ LD_PRELOAD=./hook.so ./emulator rom.ch8
 
 ---
 
-## Spectre-RSB SPN Cipher — Static Parameter Extraction (0xFun 2026)
+## Spectre-RSB SPN Cipher: Static Parameter Extraction (0xFun 2026)
 
 **Pattern:** Binary uses cache side channels to implement S-boxes, but ALL cipher parameters (round keys, S-box tables, permutation) are in the binary's data section.
 
@@ -173,7 +173,7 @@ for r in range(len(bits) // WIDTH):
 
 ## Windows PE XOR Bitmap Extraction + OCR (srdnlenCTF 2026)
 
-**Pattern (Artistic Warmup):** Binary renders input text, compares rendered bitmap against expected pixel data stored XOR'd with constant in `.rdata`. No need to compute — extract expected pixels directly.
+**Pattern (Artistic Warmup):** Binary renders input text, compares rendered bitmap against expected pixel data stored XOR'd with constant in `.rdata`. No need to compute; extract expected pixels directly.
 
 **Attack:**
 1. Reverse the core check function to identify rendering and comparison logic
@@ -214,9 +214,9 @@ print(result.stdout)
 
 ## Two-Stage Loader: RC4 Gate + VM Constraints (srdnlenCTF 2026)
 
-**Pattern (Cornflake v3.5):** Two-stage malware loader — stage 1 uses RC4 username gate, stage 2 downloaded from C2 contains VM-based password validation.
+**Pattern (Cornflake v3.5):** Two-stage malware loader; stage 1 uses RC4 username gate, stage 2 downloaded from C2 contains VM-based password validation.
 
-**Stage 1 — RC4 username recovery:**
+**Stage 1; RC4 username recovery:**
 ```python
 def rc4(key, data):
     s = list(range(256))
@@ -237,7 +237,7 @@ def rc4(key, data):
 username = rc4(b"s3cr3t_k3y_v1", bytes.fromhex("46f5289437bc009c17817e997ae82bfbd065545d"))
 ```
 
-**Stage 2 — VM constraint extraction:**
+**Stage 2; VM constraint extraction:**
 1. Obtain stage 2 from an authorized captured artifact or inert lab fixture; do not contact a live C2 automatically
 2. Reverse VM bytecode interpreter (typically 15-20 opcodes)
 3. Extract linear equality constraints over flag characters
@@ -276,7 +276,7 @@ void dfs(int fd, int x, int y, int z) {
 
     int status = ioctl_get_status(fd);
     if (status == 1) { read_flag(fd); exit(0); }
-    if (status == 2) { bad[x][y][z] = 1; return; }  // decoy — mark bad
+    if (status == 2) { bad[x][y][z] = 1; return; }  // decoy; mark bad
 
     int walls = ioctl_get_walls(fd);
     int dx[] = {1,-1,0,0,0,0}, dy[] = {0,0,1,-1,0,0}, dz[] = {0,0,0,0,1,-1};
@@ -335,7 +335,7 @@ def solve_flag(scramble_vals, lookup_table, initial_state, target_state):
     # Trace back from target_state to recover flag
 ```
 
-**Key insight:** Multi-threaded VMs require tracing data flow across thread boundaries. Channel-based communication creates a pipeline — identify each thread's role (input, transform, validate, output) by watching which channels it reads/writes. Constants that affect computation may come from unexpected sources (futex return values, thread IDs).
+**Key insight:** Multi-threaded VMs require tracing data flow across thread boundaries. Channel-based communication creates a pipeline; identify each thread's role (input, transform, validate, output) by watching which channels it reads/writes. Constants that affect computation may come from unexpected sources (futex return values, thread IDs).
 
 ---
 
@@ -378,9 +378,9 @@ gdb /lib/libc/libc.so.6
 **Pattern (Private Binary):** A custom Linux kernel module (`.ko`) registers a `binfmt` handler for non-standard binary formats. When a file with a specific magic number is executed, the kernel module intercepts it, decrypts the contents in memory, and jumps to the entry point.
 
 **Reverse engineering approach:**
-1. **Analyze the `.ko`:** Look for `register_binfmt()` call — it registers a `struct linux_binfmt` with a `load_binary` callback
+1. **Analyze the `.ko`:** Look for `register_binfmt()` call; it registers a `struct linux_binfmt` with a `load_binary` callback
 2. **Find the magic number:** The `load_binary` function checks the file's first bytes against a specific magic number to identify its format
-3. **Extract the encryption key:** Look for `movabs` instructions loading 8-byte constants — these are often RC4 key bytes
+3. **Extract the encryption key:** Look for `movabs` instructions loading 8-byte constants; these are often RC4 key bytes
 4. **Identify the encryption scheme:** Common choices are RC4, XOR, or AES-ECB. RC4 is identifiable by the S-box initialization loop (256-byte array, swap pattern)
 5. **Decrypt the flat binary:** Apply the recovered key to the encrypted file contents, skipping any header
 
@@ -417,7 +417,7 @@ decrypted = cipher.decrypt(encrypted)
 
 ## Hash-Resolved Imports / No-Import Ransomware (BSidesSF 2026)
 
-**Pattern (Ran Somewhere):** Malware binary has zero visible imports — all API calls are resolved at runtime by hashing symbol names and comparing against pre-computed hash values. The binary uses `dlopen` + a custom hash table to find libc and libcrypto functions.
+**Pattern (Ran Somewhere):** Malware binary has zero visible imports; all API calls are resolved at runtime by hashing symbol names and comparing against pre-computed hash values. The binary uses `dlopen` + a custom hash table to find libc and libcrypto functions.
 
 **Identification:**
 - `readelf -d` shows no dynamic symbols or very few (just `dlopen`/`dlsym`)
@@ -458,7 +458,7 @@ if idx >= 0:
     print(decrypted.decode(errors='ignore'))
 ```
 
-**Key insight:** ELF execution requires **program headers** (PT_LOAD segments), NOT section headers. Section headers are metadata for debuggers and analysis tools — they're optional at runtime. Corrupting `e_shoff`, `e_shnum`, or `e_shstrndx` in the ELF header breaks tools but not execution. When tools fail, parse the binary manually or patch the ELF header to zero out section header references before loading in a disassembler.
+**Key insight:** ELF execution requires **program headers** (PT_LOAD segments), NOT section headers. Section headers are metadata for debuggers and analysis tools; they're optional at runtime. Corrupting `e_shoff`, `e_shnum`, or `e_shstrndx` in the ELF header breaks tools but not execution. When tools fail, parse the binary manually or patch the ELF header to zero out section header references before loading in a disassembler.
 
 **Recovery approach:**
 ```bash

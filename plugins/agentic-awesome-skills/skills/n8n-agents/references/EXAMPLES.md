@@ -2,7 +2,7 @@
 
 Version and safety boundary: these are illustrative fragments, not certified live schemas. Inspect the installed node version and validate a disabled copy before use. Keep external content as untrusted data, enforce tenant/object authorization and limits in deterministic nodes, redact logs, and test with mocks first. Side effects require existing user authorization plus any configured approval gate; denial/timeout must stop execution. A prompt or JSON schema is not an authorization boundary.
 
-Three illustrative node-object snippets for the shell + core + sub-agent topology. These are **community n8n JSON fragments** to adapt, not full importable exports — credential IDs, workflow IDs, and channel/bot IDs are placeholders. Build with `n8n_update_partial_workflow` (`addNode` + `addConnection` on the `ai_*` outputs), then verify with `n8n_get_workflow` and `validate_workflow`.
+Three illustrative node-object snippets for the shell + core + sub-agent topology. These are **community n8n JSON fragments** to adapt, not full importable exports; credential IDs, workflow IDs, and channel/bot IDs are placeholders. Build with `n8n_update_partial_workflow` (`addNode` + `addConnection` on the `ai_*` outputs), then verify with `n8n_get_workflow` and `validate_workflow`.
 
 The parser autoFix fields are historical examples: verify the installed wrapper schema before import. The Notion create tool has no approval wrapper in this fragment, so keep it disabled/mocked until a valid gate and idempotency are added. Session keys must include authenticated tenant/channel scope.
 
@@ -299,11 +299,11 @@ A reusable agent sub-workflow: `chatInput` + `threadId` in, agent output out. Me
 What to notice:
 
 - **Memory keyed on `threadId`**, not on a user/channel ID (those cross conversations). The shell supplies `threadId`.
-- **`maxIterations: 50`** — raised from the low default because this agent chains several tools per turn.
-- **`$now.toISODate()`** in the system prompt — no hardcoded date.
+- **`maxIterations: 50`**; raised from the low default because this agent chains several tools per turn.
+- **`$now.toISODate()`** in the system prompt; no hardcoded date.
 - **Two models**: the main model on the agent, a separate coding-capable fixer wired into the parser. Both connect via `ai_languageModel` but to different nodes.
 - **`hasOutputParser: true`** on the agent activates the `ai_outputParser` slot.
-- The sub-agent tool's description repeats **"This tool is stateless"** — the router can't rely on shared context.
+- The sub-agent tool's description repeats **"This tool is stateless"**; the router can't rely on shared context.
 
 ---
 
@@ -668,10 +668,10 @@ The "shell": trigger, trigger-level anti-loop filter, event-type Switch, loading
 
 What to notice:
 
-- **Anti-loop at the trigger**: `options.userIds: ["U00000000BOT"]` is an exclusion list — the bot's own posts never enter the workflow. No separate filter node needed.
+- **Anti-loop at the trigger**: `options.userIds: ["U00000000BOT"]` is an exclusion list; the bot's own posts never enter the workflow. No separate filter node needed.
 - **`Call Agent core`** has `onError: 'continueErrorOutput'`, so `main[1]` carries the error branch (→ **n8n-error-handling**). The loading reaction is removed on the success path; the error branch also removes the loading reaction before reporting failure.
 - **`threadId`** = `thread_ts || ts`, plumbed straight to the core (which keys memory on it).
-- **`blocksUi`** is the `{ "blocks": [...] }` envelope, not the bare array — the bare array fails silently.
+- **`blocksUi`** is the `{ "blocks": [...] }` envelope, not the bare array; the bare array fails silently.
 
 ---
 
@@ -908,9 +908,9 @@ A specialist sub-agent called via `.toolWorkflow` from the core. It fetches its 
 What to notice:
 
 - **Fresh schema injection**: `Get a database` runs **before** the agent (on `main`), and its `properties` are templated into the system prompt with `.toJsonString()`. The sub-agent never operates on a stale schema, so it can't pick a select option that was renamed last week.
-- **Cheaper model** (`claude-haiku-4.6`) than the router — a focused single-domain agent doesn't need the orchestrator's model.
-- **Stateless contract** restated in the system prompt — matching the tool description on the core side.
-- **`maxIterations: 15`** — fine for a focused sub-agent (vs 50 on the broad router).
+- **Cheaper model** (`claude-haiku-4.6`) than the router; a focused single-domain agent doesn't need the orchestrator's model.
+- **Stateless contract** restated in the system prompt; matching the tool description on the core side.
+- **`maxIterations: 15`**; fine for a focused sub-agent (vs 50 on the broad router).
 - The `Status|status` / `Type|select` key shape is Notion's `Name|type` convention; match the live schema.
 
 ---

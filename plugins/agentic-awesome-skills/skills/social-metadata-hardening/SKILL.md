@@ -44,7 +44,7 @@ Fix social sharing so every important URL unfurls as a rich card across all plat
 Every shareable page needs ALL of these in static HTML:
 
 ```js
-// Next.js App Router — lib/socialMetadata.js
+// Next.js App Router; lib/socialMetadata.js
 export function buildSocialMetadata({
   title,
   description,
@@ -88,7 +88,7 @@ export function buildSocialMetadata({
       }],
     },
     twitter: {
-      card: 'summary_large_image',  // NOT 'summary' — that shows a tiny image
+      card: 'summary_large_image',  // NOT 'summary'; that shows a tiny image
       title,
       description,
       images: [imageUrl],
@@ -138,7 +138,7 @@ export async function generateMetadata({ params }) {
 export const metadata = {
   metadataBase: new URL('https://www.yourdomain.com'), // REQUIRED for absolute URLs
   ...buildSocialMetadata({
-    title: 'My Site — Tagline Here',
+    title: 'My Site; Tagline Here',
     description: 'Site-wide description.',
     path: '/',
     image: '/images/og/home.jpg',
@@ -170,7 +170,7 @@ curl -sI https://www.yourdomain.com/images/og/home.jpg | grep -i "content-type\|
 ## Platform-Specific Notes
 
 ### Facebook / Meta
-- Caches aggressively — use the [Sharing Debugger](https://developers.facebook.com/tools/debug/) to force recrawl
+- Caches aggressively; use the [Sharing Debugger](https://developers.facebook.com/tools/debug/) to force recrawl
 - Minimum image: 200×200px (but use 1200×630 for quality)
 - Needs: `og:title`, `og:description`, `og:image`, `og:url`
 
@@ -180,7 +180,7 @@ curl -sI https://www.yourdomain.com/images/og/home.jpg | grep -i "content-type\|
 - Use the [Card Validator](https://cards-dev.twitter.com/validator) to test
 
 ### LinkedIn
-- Caches hard — use [Post Inspector](https://www.linkedin.com/post-inspector/) to refresh
+- Caches hard; use [Post Inspector](https://www.linkedin.com/post-inspector/) to refresh
 - Respects `og:` tags; ignores `twitter:` tags
 - Image must be ≥1.91:1 aspect ratio
 

@@ -33,8 +33,8 @@ It decides:
 
 This meta-skill coordinates the following:
 
-- `brainstorming` — design generation
-- `multi-agent-brainstorming` — design validation
+- `brainstorming`; design generation
+- `multi-agent-brainstorming`; design validation
 - downstream implementation or planning skills
 
 ---
@@ -50,7 +50,7 @@ Invoke this skill when:
 
 ## Routing Logic
 
-### Step 1 — Brainstorming (Mandatory)
+### Step 1: Brainstorming (Mandatory)
 
 If no validated design exists:
 
@@ -64,7 +64,7 @@ You may NOT proceed without these artifacts.
 
 ---
 
-### Step 2 — Risk Assessment
+### Step 2: Risk Assessment
 
 After brainstorming completes, classify the design as:
 
@@ -82,7 +82,7 @@ Use factors such as:
 
 ---
 
-### Step 3 — Conditional Escalation
+### Step 3: Conditional Escalation
 
 - **Low risk**  
   → Proceed to implementation planning
@@ -97,7 +97,7 @@ Do not silently skip a required substantive review. Review depth is not permissi
 
 ---
 
-### Step 4 — Multi-Agent Review (If Invoked)
+### Step 4: Multi-Agent Review (If Invoked)
 
 If `multi-agent-brainstorming` is run:
 
@@ -115,7 +115,7 @@ Only critique, revision, and decision resolution are allowed.
 
 ---
 
-### Step 5 — Execution Readiness Check
+### Step 5: Execution Readiness Check
 
 Before allowing implementation:
 

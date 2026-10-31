@@ -10,7 +10,7 @@ license: Apache-2.0
 license_source: https://github.com/chaunsin/agent-skills/blob/master/LICENSE
 ---
 
-# redis-cli — Redis Command Line Interface
+# redis-cli: Redis Command Line Interface
 ## When to Use
 
 Use this skill when you need redis command-line interface (redis-cli) reference and usage guide. Use this skill whenever the user mentions redis-cli, Redis CLI, or any task involving querying, inspecting, debugging, or managing Redis from the command line. Use it for scoped key/value operations, keyspace inspection and Redis administration.
@@ -53,10 +53,10 @@ docker run -it --rm redis redis-cli -h <host> -p <port> PING
 > **IMPORTANT**: Redis provides powerful operations that can irreversibly modify or delete data.
 > Pay close attention to the following safety guidelines:
 
-- **Never pass passwords via `-a` in production** — visible in shell history and process listings. Use `REDISCLI_AUTH` environment variable instead.
-- **`KEYS *` blocks the server** on large databases — always use `SCAN` in production code.
-- **`MONITOR` logs all commands** including sensitive data — use cautiously, and never for extended periods on production servers.
-- **`FLUSHALL` / `FLUSHDB` are irreversible** — verify target database with `CLIENT LIST` or `INFO keyspace` first.
+- **Never pass passwords via `-a` in production**; visible in shell history and process listings. Use `REDISCLI_AUTH` environment variable instead.
+- **`KEYS *` blocks the server** on large databases; always use `SCAN` in production code.
+- **`MONITOR` logs all commands** including sensitive data; use cautiously, and never for extended periods on production servers.
+- **`FLUSHALL` / `FLUSHDB` are irreversible**; verify target database with `CLIENT LIST` or `INFO keyspace` first.
 - **`--rdb` produces a point-in-time snapshot**, not a continuous backup. Concurrent writes after the snapshot are absent; check exit status and test restore compatibility.
 
 ## Quick Reference
@@ -160,7 +160,7 @@ ZSCAN key 0 [MATCH pat]                 # Iterate members       O(1) per call
 
 **Key inspection**:
 ```
-EXISTS key [key ...]           # Check existence (O(N) for multi) — returns count
+EXISTS key [key ...]           # Check existence (O(N) for multi); returns count
 TYPE key                       # Data type: string|list|set|zset|hash|stream  O(1)
 TTL key                        # Seconds until expiry (-1=none, -2=not exists)  O(1)
 PTTL key                       # Milliseconds until expiry                      O(1)
@@ -192,7 +192,7 @@ SCAN 0 MATCH user:* COUNT 100
 redis-cli --scan --pattern 'session:*' | wc -l
 ```
 
-SCAN guarantees: a full iteration (cursor 0 → cursor 0) always returns all elements that existed for the entire duration. Elements may appear multiple times — handle duplicates in your application.
+SCAN guarantees: a full iteration (cursor 0 → cursor 0) always returns all elements that existed for the entire duration. Elements may appear multiple times; handle duplicates in your application.
 
 ### Server Inspection
 
@@ -222,7 +222,7 @@ redis-cli --intrinsic-latency 5   # System baseline latency (run on Redis host)
 ### Output Control
 
 ```bash
-# Raw output (no type prefixes) — default when piping
+# Raw output (no type prefixes): default when piping
 redis-cli --raw GET mykey
 redis-cli GET mykey > /tmp/output.txt    # auto raw mode
 
@@ -312,7 +312,7 @@ redis-cli -c -h cluster-node PING                     # Cluster-aware connection
 |------|---------|-------------|
 | `references/connection-and-options.md` | Full connection options, CLI flags, SSL/TLS, environment variables, interactive mode features (completion, history, preferences), RESP protocol versions | Configuring connections, setting up TLS, customizing CLI behavior |
 | `references/data-query-commands.md` | Core data type commands: Strings, Hashes, Lists, Sets, Sorted Sets, Streams, Bitmaps, HyperLogLog, Geospatial, plus Key Operations, Database Operations, and Transactions | Looking up core command syntax, understanding command options and return values |
-| `references/module-data-types.md` | Module data types: JSON (RedisJSON), Vector Sets (Redis 8.0+), Bloom Filter, Cuckoo Filter, Top-K, Count-Min Sketch, T-Digest, TimeSeries (TS.*), Full-Text Search / RediSearch (FT.*) — with full command syntax and behavioral notes | Working with Redis module data types, similarity search, probabilistic data structures, time series data, full-text search |
+| `references/module-data-types.md` | Module data types: JSON (RedisJSON), Vector Sets (Redis 8.0+), Bloom Filter, Cuckoo Filter, Top-K, Count-Min Sketch, T-Digest, TimeSeries (TS.*), Full-Text Search / RediSearch (FT.*); with full command syntax and behavioral notes | Working with Redis module data types, similarity search, probabilistic data structures, time series data, full-text search |
 | `references/key-management.md` | SCAN family details (SCAN/SSCAN/HSCAN/ZSCAN), big keys analysis (--bigkeys, --memkeys, --keystats), key expiration (EXPIRE, TTL, PERSIST), key space patterns, mass insertion | Scanning databases, analyzing key distribution, managing key lifecycles |
 | `references/inspection-and-monitoring.md` | INFO sections, MONITOR, --stat mode, latency tools (--latency, --latency-history, --latency-dist, --intrinsic-latency), RDB backup, replica mode, LRU simulation | Monitoring Redis instances, debugging performance, creating backups |
 | `references/advanced-features.md` | Lua scripting (--eval, --ldb), Pub/Sub mode, pipe mode, CSV/JSON output, string quoting and escaping, get input from stdin, remote RDB transfer, Cluster management (--cluster subcommands, cluster commands) | Running scripts, subscribing to channels, bulk data operations, managing Redis Cluster |

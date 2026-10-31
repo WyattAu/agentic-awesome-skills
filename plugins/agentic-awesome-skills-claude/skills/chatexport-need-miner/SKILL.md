@@ -187,7 +187,7 @@ Before emitting any market research summary or opportunity report, verify:
 *Problems: Zero verbatim quotes, zero date citations, zero chat distribution count, ungrounded speculation, generic meaningless advice.*
 
 ### Good (Production ChatExport Need Miner Output):
-> ### 1. Schema Migration Rollbacks for Flyway in CI/CD — 38 hits across 4 chats ($U=4, H=38, \text{Score}=24.66$)
+> ### 1. Schema Migration Rollbacks for Flyway in CI/CD; 38 hits across 4 chats ($U=4, H=38, \text{Score}=24.66$)
 > - **Chat Distribution**: `k8s_ru` (14 hits), `devops_community` (12 hits), `backend_pro` (8 hits), `java_chat` (4 hits).
 > - **Evidence 1**: *"бесит когда flyway падает на миграции в CI и приходится вручную чистить schema_version таблицу на стейдже"* (2026-07-19T09:12:44, `devops_community`).
 > - **Evidence 2**: *"is there a tool to safely dry-run flyway down migrations before merging to master?"* (2026-08-04T16:21:09, `k8s_ru`).

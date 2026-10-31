@@ -22,7 +22,7 @@ Apply with the **design** skill on every design task. Do this before coding.
 ## Design thinking (before coding)
 
 - **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme and execute with intention — e.g. brutally minimal, maximalist, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian.
+- **Tone**: Pick an extreme and execute with intention; e.g. brutally minimal, maximalist, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian.
 - **Constraints**: Framework, performance, accessibility.
 - **Differentiation**: One thing that makes it unforgettable.
 
@@ -30,12 +30,12 @@ Commit to one bold direction. Intentionality over intensity.
 
 ## Reserve impact for punctuation (use sparingly for effect)
 
-High-impact devices — full-bleed media, dramatic motion, oversized type, a saturated accent, parallax — lose their force the moment they become the default. If every section is a full-screen video, none of them land. Choose 1–2 moments to go big (the hero, the payoff) and make everything else quiet and contained, so the big moments read as deliberate punctuation rather than noise. Restraint is what gives the rare full-bleed beat its hit; wall-to-wall intensity reads as flat. This is the luxury of reduction — a single bold gesture in generous negative space beats maximalism. Applies equally to scale, color (one accent, not five), and motion (one signature move, not constant animation).
+High-impact devices; full-bleed media, dramatic motion, oversized type, a saturated accent, parallax; lose their force the moment they become the default. If every section is a full-screen video, none of them land. Choose 1–2 moments to go big (the hero, the payoff) and make everything else quiet and contained, so the big moments read as deliberate punctuation rather than noise. Restraint is what gives the rare full-bleed beat its hit; wall-to-wall intensity reads as flat. This is the luxury of reduction; a single bold gesture in generous negative space beats maximalism. Applies equally to scale, color (one accent, not five), and motion (one signature move, not constant animation).
 
 ## Domain and color
 
 - **Domain**: 5+ concepts, metaphors, or vocabulary from the product's world (territory, not features).
-- **Color world**: 5+ colors that "belong" in that world — what you'd see if this product were a physical space. Not "warm" or "cool"; name actual colors from that domain.
+- **Color world**: 5+ colors that "belong" in that world; what you'd see if this product were a physical space. Not "warm" or "cool"; name actual colors from that domain.
 - **Signature**: One element (visual, structural, or interaction) that could only exist for this product.
 
 ## Review bar

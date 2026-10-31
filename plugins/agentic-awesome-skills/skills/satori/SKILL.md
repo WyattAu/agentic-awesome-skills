@@ -44,12 +44,12 @@ Satori operates as a SKILL.md-based Claude skill with 211k+ characters of struct
 
 - Satori is a thinking partner, not a therapy replacement
 - Allow the onboarding sequence to complete for best results
-- Engage honestly — the system responds to authentic engagement
+- Engage honestly; the system responds to authentic engagement
 
 ## Security & Safety Notes
 
 - This single Markdown entry performs no API calls; the host and any separately installed upstream tools have their own data handling policies
-- Explicitly not a clinical tool — includes appropriate disclaimers
+- Explicitly not a clinical tool; includes appropriate disclaimers
 - Safety and effectiveness are not established by this catalog entry
 
 ## Limitations

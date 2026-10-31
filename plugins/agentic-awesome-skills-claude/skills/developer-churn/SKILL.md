@@ -21,7 +21,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 Use this skill when the user wants to understand, reduce, or recover from developer churn. Trigger phrases include "why developers leave," "churn rate," "win-back campaign," "at-risk users," "developer retention," "preventing churn," or "competitor switching.".
 
 
-This skill helps you understand why developers leave, identify at-risk users before they churn, and win back those who've already left. No guilt trips or desperate discounts — just honest understanding and genuine value.
+This skill helps you understand why developers leave, identify at-risk users before they churn, and win back those who've already left. No guilt trips or desperate discounts; just honest understanding and genuine value.
 
 ---
 

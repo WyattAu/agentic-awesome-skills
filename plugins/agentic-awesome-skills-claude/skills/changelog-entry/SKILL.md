@@ -139,5 +139,5 @@ Print a reviewable entry. Merge into an existing Unreleased section rather than 
 
 - Relies on commit message quality; vague messages produce vague entries.
 - Inspect public behavior and actual diff; do not invent CVEs, contributors, counts or release proof from commit subjects. Verify a provided tag/range and use documented empty-repository/no-tag behavior rather than choosing unrelated marketing numbers.
-- Does not write to CHANGELOG.md automatically — output is for manual review and paste.
+- Does not write to CHANGELOG.md automatically; output is for manual review and paste.
 - Stop and ask for clarification if the version number, date, or commit range is ambiguous.

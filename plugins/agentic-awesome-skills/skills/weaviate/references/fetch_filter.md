@@ -12,12 +12,12 @@ uv run scripts/fetch_filter.py "CollectionName" [--id "UUID"] [--filters 'JSON']
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `collection_name` | — | Yes (positional) | — | Collection name |
-| `--id` | — | No | — | Fetch a specific object by UUID |
-| `--filters` | `-f` | No | — | JSON string defining filters (see filter syntax below) |
+| `collection_name` | - | Yes (positional) | - | Collection name |
+| `--id` | - | No | - | Fetch a specific object by UUID |
+| `--filters` | `-f` | No | - | JSON string defining filters (see filter syntax below) |
 | `--limit` | `-l` | No | `10` | Number of objects to fetch |
 | `--properties` | `-p` | No | all | Comma-separated properties to include in output |
-| `--json` | — | No | `false` | Output in JSON format |
+| `--json` | - | No | `false` | Output in JSON format |
 
 ## Modes
 

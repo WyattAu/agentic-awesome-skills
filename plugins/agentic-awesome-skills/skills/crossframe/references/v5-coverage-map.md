@@ -29,7 +29,7 @@
 | `v5-anchor-dynamics-structure-process-pack` | 138 | 模型仍然要做什么；1.0 解释对象：人类结构化世界；2.2 框架教条化的防范；基线与响应分离；结构变量增益原则 | 按 read-routing-map.md 场景读取 |
 | `v5-root-assumptions-meta-rules-pack` | 56 | 模型仍然要做什么；2.2 框架教条化的防范；弱信号保护规则；2.3.2 证据追踪与判断降级准则；过程性产物边界规则 | 框架自诊 / 证伪 / 版本治理: protocols/framework-boundary-protocol.md; references/framework-ontology-protection.md |
 | `v5-state-coordinate-lifecycle-pack` | 77 | 常见误用；第三部分：传导层：核心概念、根假设与状态坐标；四、核心概念；4.1 概念层级与改动规则；概念保真原则 | 生命周期 / 阶段判断 / 长期演化: protocols/lifecycle-diagnosis-protocol.md; protocols/progression-protocol.md |
-| `v5-long-evolution-progression-field-pack` | 52 | 高尺度环境势场；4.5 过程组；A6 嵌套耦合根假设；判断作为开放性承担行动；阶段3：圈层初期————扰动壁垒成型，带束缚发展（局部状态坐标） | 生命周期 / 阶段判断 / 长期演化: protocols/lifecycle-diagnosis-protocol.md; protocols/progression-protocol.md |
+| `v5-long-evolution-progression-field-pack` | 52 | 高尺度环境势场；4.5 过程组；A6 嵌套耦合根假设；判断作为开放性承担行动；阶段3：圈层初期----扰动壁垒成型，带束缚发展（局部状态坐标） | 生命周期 / 阶段判断 / 长期演化: protocols/lifecycle-diagnosis-protocol.md; protocols/progression-protocol.md |
 | `v5-governance-continuity-multicenter-pack` | 27 | 反过度自缚规则；六个元约束索引；承接再生产推论；偿付约束推论；判断作为开放性承担行动 | 组织复盘 / 修复: protocols/governance-continuity-protocol.md; protocols/healing-transfer-protocol.md |
 | `v5-action-healing-transfer-pack` | 118 | 诊断准入、降级与退出条件；来源-证据-判断-行动上限输出栏；第二部分：供给层：使用准则、边界与盲区；弱信号保护规则；2.3.1 观测参与与反身性准则 | 组织复盘 / 修复: protocols/governance-continuity-protocol.md; protocols/healing-transfer-protocol.md<br>亲密关系 / 无法退出 / 创伤: protocols/intimate-relationship-protocol.md; protocols/healing-transfer-protocol.md |
 | `v5-responsibility-intervention-separation-pack` | 83 | 什么时候可以使用；1.0 解释对象：人类结构化世界；观测递归收束原则；反模型殖民规则；小尺度亲密关系轻量入口 | 组织复盘 / 修复: protocols/governance-continuity-protocol.md; protocols/healing-transfer-protocol.md |

@@ -47,7 +47,7 @@ Output as a structured briefing card.
 ## Example Output
 
 ```
-Illustrative briefing format — not a news claim
+Illustrative briefing format; not a news claim
 
 1. [Verified article title]
    Source: [publisher and direct URL] | Published: [date] | Event: [date]

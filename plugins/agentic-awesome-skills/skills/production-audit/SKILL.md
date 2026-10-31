@@ -18,7 +18,7 @@ license_source: "https://github.com/commitshow/production-audit/blob/main/LICENS
 
 ## Overview
 
-A skill that runs an external audit on a shipped repo's deployed state — live URL, GitHub signals, secrets exposure, RLS gaps, webhook idempotency, indexes, observability, prompt injection, and ten other failure modes that AI-assisted projects routinely miss.
+A skill that runs an external audit on a shipped repo's deployed state; live URL, GitHub signals, secrets exposure, RLS gaps, webhook idempotency, indexes, observability, prompt injection, and ten other failure modes that AI-assisted projects routinely miss.
 
 This is **complementary** to in-session security skills (`security-review`, OWASP-style, VibeSec, Trail of Bits). Those scan the editor buffer at write-time. This scans the deployed product after you commit. Different timing, different inputs, different findings. Run both for serious launches.
 
@@ -33,10 +33,10 @@ The skill wraps the [commit.show](https://commit.show) audit engine via the publ
 
 ### Skip when
 
-- During active in-session coding — use `security-review` / OWASP-style for line-level patterns. This skill is for post-merge / pre-ship review.
-- For library / scaffold-form repos — the engine handles **app form** best; libraries get a partial-substitute score.
+- During active in-session coding; use `security-review` / OWASP-style for line-level patterns. This skill is for post-merge / pre-ship review.
+- For library / scaffold-form repos; the engine handles **app form** best; libraries get a partial-substitute score.
 - If `.commitshow/audit.json` already exists and is < 1 hour old, read that instead of re-running. Audit is rate-limited (anonymous: 20/IP/day · 5/repo/day · 2000/day global).
-- Inside a private / non-GitHub repo — the audit pulls public GitHub signals, so private repos return a `not_found` error.
+- Inside a private / non-GitHub repo; the audit pulls public GitHub signals, so private repos return a `not_found` error.
 
 ## How It Works
 
@@ -55,7 +55,7 @@ npx commitshow@0.3.23 audit . --json \
 
 This also writes a human-readable `.commitshow/audit.md` next to it. Subsequent invocations should diff against the prior `audit.json` if it exists, so you can lead with "+5 since yesterday's audit" instead of just an absolute number.
 
-If the user pointed at a remote URL instead of `.`, swap `.` for the URL — keep the same `mkdir -p` + version pin + stderr split:
+If the user pointed at a remote URL instead of `.`, swap `.` for the URL; keep the same `mkdir -p` + version pin + stderr split:
 
 ```bash
 mkdir -p .commitshow
@@ -88,17 +88,17 @@ Lead with score + trajectory in **one sentence**, then the top concerns. Do not 
 Score: 82/100 (+5 since yesterday) · band: strong
 
 Top concerns:
-  ↓ [Security] No API rate limiting on /auth — IP cap missing
-  ↓ [Infrastructure] webhook handler at api/stripe.ts — signature verified, but no
+  ↓ [Security] No API rate limiting on /auth; IP cap missing
+  ↓ [Infrastructure] webhook handler at api/stripe.ts; signature verified, but no
     idempotency-key check (replay attack window open)
 
 Want me to fix the webhook idempotency gap first?
 ```
 
 Rules:
-- Use the exact bullet from `concerns[].bullet` — the audit engine already wrote action-oriented copy.
+- Use the exact bullet from `concerns[].bullet`; the audit engine already wrote action-oriented copy.
 - Don't list strengths unless the user explicitly asks. They're not actionable in this context.
-- Always end with a follow-up question that names a specific concern. Don't ask "what do you want to do?" — ask "fix X first?".
+- Always end with a follow-up question that names a specific concern. Don't ask "what do you want to do?"; ask "fix X first?".
 - If `score.delta_since_last` is negative or null, lead with the absolute score only.
 
 ### Step 4: If the user picks a concern, scope a fix
@@ -106,7 +106,7 @@ Rules:
 For the chosen concern:
 1. Read the file(s) cited in the bullet.
 2. Confirm the gap matches the description (the engine occasionally over-flags when the issue is mitigated elsewhere).
-3. Propose a minimal patch — single-file when possible.
+3. Propose a minimal patch; single-file when possible.
 4. **Don't apply without explicit approval.** Show the diff first. The user is deciding what to ship; you're a lens.
 
 After applying a fix, suggest re-running with `--refresh` (same canonical form as Step 1, so `audit.json` stays the source of truth for delta calculations):
@@ -136,9 +136,9 @@ Score: 67/100 · band: mid
 
 Top concerns:
   ↓ [Security] members table uses column-level GRANT but paid_audits_credit
-    column lacks SELECT grant — silent 42501 on every read
+    column lacks SELECT grant; silent 42501 on every read
   ↓ [Infrastructure] stripe.checkout.sessions.create called without
-    idempotencyKey — duplicate-charge surface
+    idempotencyKey; duplicate-charge surface
 
 Want me to fix the column GRANT first? Single SQL line.
 ```
@@ -155,21 +155,21 @@ Find the file path in the bullet, read it, confirm the gap matches.
 
 ## Best Practices
 
-- ✅ Always cite the exact bullet from `concerns[].bullet` — they're already action-oriented
+- ✅ Always cite the exact bullet from `concerns[].bullet`; they're already action-oriented
 - ✅ Lead with score + delta in a single sentence, then concerns
 - ✅ End with a specific follow-up question naming a concern
 - ✅ Read prior `.commitshow/audit.json` before re-running (within 1h)
 - ✅ Use `--refresh` after the user merges a fix so the next audit reflects it
 - ❌ Don't dump full JSON to the user
 - ❌ Don't list strengths unless the user explicitly asks
-- ❌ Don't apply fixes without approval — show diff first
+- ❌ Don't apply fixes without approval; show diff first
 - ❌ Don't fault private repos for not auditing or suggest publishing them to obtain a score; use approved local review instead
 
 ## Limitations
 
 - This skill does not replace environment-specific validation, testing, or expert review.
-- The audit engine is calibrated for **deployed apps** with a live URL. CLI / library / scaffold form gets a partial-substitute score (max ~45/50 on the audit pillar) — fair but not flattering.
-- Behind a corporate firewall blocking `*.supabase.co`, the API call fails. There is no offline mode — the audit relies on the public engine.
+- The audit engine is calibrated for **deployed apps** with a live URL. CLI / library / scaffold form gets a partial-substitute score (max ~45/50 on the audit pillar); fair but not flattering.
+- Behind a corporate firewall blocking `*.supabase.co`, the API call fails. There is no offline mode; the audit relies on the public engine.
 - Cold audit takes 60-90s. Cached audits (within 7 days) return instantly. `--refresh` force-bypasses cache (counts against rate limits).
 
 ## Security & Safety Notes
@@ -196,10 +196,10 @@ Find the file path in the bullet, read it, confirm the gap matches.
 
 ## Related Skills
 
-- `@security-review` — In-session line-level security patterns. Run alongside this skill, not in place of.
-- `@vibesec` — Editor-buffer security review for vibe-coded projects. Different lens.
-- `@owasp-security` — OWASP Top 10 coverage during coding. Companion.
-- `@trail-of-bits-skills` — CodeQL / Semgrep static analysis. Different layer.
+- `@security-review`; In-session line-level security patterns. Run alongside this skill, not in place of.
+- `@vibesec`; Editor-buffer security review for vibe-coded projects. Different lens.
+- `@owasp-security`; OWASP Top 10 coverage during coding. Companion.
+- `@trail-of-bits-skills`; CodeQL / Semgrep static analysis. Different layer.
 
 ## Additional Resources
 

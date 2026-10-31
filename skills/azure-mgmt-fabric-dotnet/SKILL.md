@@ -281,12 +281,12 @@ await foreach (var skuDetails in capacity.Value.GetSkusForCapacityAsync())
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** when you want to poll manually or run operations in parallel
-3. **Always use `DefaultAzureCredential`** — never hardcode credentials
+3. **Always use `DefaultAzureCredential`**; never hardcode credentials
 4. **Handle `RequestFailedException`** for ARM API errors
 5. **Use `CreateOrUpdateAsync`** for idempotent operations
-6. **Suspend when not in use** — Fabric capacities bill for compute even when idle
+6. **Suspend when not in use**; Fabric capacities bill for compute even when idle
 7. **Check provisioning state** before performing operations on a capacity
-8. **Use appropriate SKU** — Start small (F2/F4) for dev/test, scale up for production
+8. **Use appropriate SKU**; Start small (F2/F4) for dev/test, scale up for production
 
 ## Error Handling
 
@@ -318,12 +318,12 @@ catch (RequestFailedException ex)
 
 ## Common Pitfalls
 
-1. **Capacity names must be globally unique** — Fabric capacity names must be unique across all Azure subscriptions
-2. **Suspend doesn't delete** — Suspended capacities still exist but don't bill for compute
-3. **SKU changes may require downtime** — Scaling operations can take several minutes
-4. **Admin UPNs must be valid** — Capacity administrators must be valid Azure AD users
-5. **Location constraints** — Not all SKUs are available in all regions; use `GetSkusFabricCapacitiesAsync` to check
-6. **Long provisioning times** — Capacity creation can take 5-15 minutes
+1. **Capacity names must be globally unique**; Fabric capacity names must be unique across all Azure subscriptions
+2. **Suspend doesn't delete**; Suspended capacities still exist but don't bill for compute
+3. **SKU changes may require downtime**; Scaling operations can take several minutes
+4. **Admin UPNs must be valid**; Capacity administrators must be valid Azure AD users
+5. **Location constraints**; Not all SKUs are available in all regions; use `GetSkusFabricCapacitiesAsync` to check
+6. **Long provisioning times**; Capacity creation can take 5-15 minutes
 
 ## Related SDKs
 

@@ -20,7 +20,7 @@ Use this skill when you need generate a new UI component following the StyleSeed
 
 - For full-page scaffolding → use `/ss-page`
 - For composed multi-component patterns → use `/ss-pattern`
-- For tweaking an existing component — just edit the file directly
+- For tweaking an existing component; just edit the file directly
 - For non-StyleSeed projects (no `components/ui/` directory or no Tailwind v4)
 
 Generate a new component: **$0**
@@ -40,7 +40,7 @@ Description: $ARGUMENTS
    - Use `React.ComponentProps<>` for prop typing
    - Always support `className` prop for overrides
    - Use CVA (`class-variance-authority`) if the component has variants
-   - Use semantic color tokens (`bg-card`, `text-foreground`) — never inline hex
+   - Use semantic color tokens (`bg-card`, `text-foreground`); never inline hex
 
 3. Design token usage:
    - Colors: `text-foreground`, `bg-card`, `text-brand`, `text-muted-foreground`, `border-border`

@@ -1,4 +1,4 @@
-# AGENTS.md — Template (Full Mode)
+# AGENTS.md: Template (Full Mode)
 
 Replace `{{PLACEHOLDER}}` markers with detected project values. Remove sections whose condition is not met.
 
@@ -7,7 +7,7 @@ This template produces the **rich** AGENTS.md. For minimal (agents.md standard),
 ````markdown
 # AGENTS.md
 
-> Compatible with the [agents.md](https://agents.md) standard (60k+ projects). Specific rules in `.agents/rules/` — {{RULE_CATEGORIES_LIST}}.
+> Compatible with the [agents.md](https://agents.md) standard (60k+ projects). Specific rules in `.agents/rules/`; {{RULE_CATEGORIES_LIST}}.
 
 ## Project Overview
 
@@ -176,7 +176,7 @@ Table with 3 columns: Command | Purpose | **When**. Add a "when to run" decision
 ### `{{PRE_VALIDATE}}`
 Commands to run EXACTLY what the pre-commit hook runs, to avoid slow CI lint-staged failures. Format:
 ```
-- Run `{{PRE_COMMIT_CMD}}` on changed files before committing — this is what CI runs.
+- Run `{{PRE_COMMIT_CMD}}` on changed files before committing; this is what CI runs.
 ```
 Detect from: `.githooks/pre-commit`, `lint-staged` config, `.husky/pre-commit`. Read the actual hook to get exact commands.
 
@@ -267,8 +267,8 @@ For CLI tools or APIs:
 
 ```
 ## I/O contract
-- **stdout** is data — JSON, structured output, machine-readable.
-- **stderr** is everything else — progress, warnings, hints.
+- **stdout** is data; JSON, structured output, machine-readable.
+- **stderr** is everything else; progress, warnings, hints.
 - Never mix them. Mixing corrupts pipe chains.
 ```
 
@@ -280,7 +280,7 @@ If the project has build output directories (dist/, build/, .next/):
 ## Generated artifacts
 
 Source-first: edit files in `src/`, `lib/`, `app/`. Generated output in `dist/`
-and `build/` is rebuilt — never edit it directly. Stage generated files only
+and `build/` is rebuilt; never edit it directly. Stage generated files only
 for release PRs or when the build output itself is the change.
 ```
 
@@ -316,9 +316,9 @@ If the project has multiple documentation surfaces:
 ## Documentation checklist
 
 When adding or changing user-facing features, update ALL:
-1. `cli/src/output.rs` — help output
-2. `README.md` — options table, examples
-3. `docs/` — MDX pages
+1. `cli/src/output.rs`; help output
+2. `README.md`; options table, examples
+3. `docs/`; MDX pages
 4. Inline doc comments in source
 ```
 
@@ -348,7 +348,7 @@ For CLI/API projects with structured errors:
 |---------|------------|
 | Invalid flag/arg | `errs.NewValidationError(...).WithParam("--flag")` |
 | Network failure | `errs.NewNetworkError(...)` |
-| API error | Return as-is — never re-wrap |
+| API error | Return as-is; never re-wrap |
 ```
 
 ### `{{WRITING_STYLE_GUIDE}}`
@@ -361,7 +361,7 @@ For projects that produce documentation or AI-facing content:
 - Structure: H2/H3 hierarchy, short paragraphs (2-4 sentences)
 - Tone: direct, instructional, second person
 - Clarity: active voice, specific over vague, one idea per section
-- Budget: challenge each paragraph — does it justify its token cost?
+- Budget: challenge each paragraph; does it justify its token cost?
 ```
 
 ### `{{GOTCHAS}}`
@@ -370,8 +370,8 @@ If platform-specific issues exist (Windows, NTFS, Docker, sandbox):
 
 ```
 ## Gotchas
-- `npx vite build` hangs on NTFS — use `node node_modules/vite/bin/vite.js build`
-- Server startup takes 30-60s — don't assume failure immediately
+- `npx vite build` hangs on NTFS; use `node node_modules/vite/bin/vite.js build`
+- Server startup takes 30-60s; don't assume failure immediately
 ```
 
 ### `{{SSH_TROUBLESHOOTING}}`
@@ -410,7 +410,7 @@ If the project has multiple independently-versioned components:
 |-----------|-------------|---------|
 | Root | `package.json` | Breaking changes |
 | Skills | `skills/*/SKILL.md` | Any change (unbumped = invisible) |
-Do not bump versions in feature PRs — versioning is a release step.
+Do not bump versions in feature PRs; versioning is a release step.
 ```
 
 ### `{{RELEASING_SECTION}}`
@@ -427,7 +427,7 @@ If the project has existing documentation (CONTRIBUTING.md, docs/\*.md, style gu
 
 - **@import** for docs the agent should ALWAYS have in context (conventions, patterns, style rules).
 - **Plain markdown link** `[Topic](path)` for docs only needed occasionally.
-- **Warn about large imports**: if a doc is over ~300 lines (~1500 tokens), flag it: "⚠️ Large file — consider importing only key sections."
+- **Warn about large imports**: if a doc is over ~300 lines (~1500 tokens), flag it: "⚠️ Large file; consider importing only key sections."
 - Never duplicate content that already exists in project docs.
 
 ### `{{RELEASING_SECTION}}`
@@ -444,7 +444,7 @@ Only if `.codegraph/` exists.
 
 ### `{{CLAUDE_MD_NOTE}}`
 
-If Claude Code is detected (`.claude/` directory or `CLAUDE.md` exists), also generate a thin `CLAUDE.md` at project root using `assets/claude.md`. AGENTS.md is the universal standard — CLAUDE.md only points to it and adds Claude-specific config if any exists.
+If Claude Code is detected (`.claude/` directory or `CLAUDE.md` exists), also generate a thin `CLAUDE.md` at project root using `assets/claude.md`. AGENTS.md is the universal standard; CLAUDE.md only points to it and adds Claude-specific config if any exists.
 
 ## Post-generation limits
 

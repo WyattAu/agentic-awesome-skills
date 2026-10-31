@@ -1,6 +1,6 @@
 # C++20 Coroutine Style (Boost ≥ 1.77)
 
-The preferred style when the toolchain allows it. Read `SKILL.md` first — the rules there (write queue, buffer lifetime, version floors) apply here and are not repeated.
+The preferred style when the toolchain allows it. Read `SKILL.md` first; the rules there (write queue, buffer lifetime, version floors) apply here and are not repeated.
 
 ## Core Architecture
 
@@ -16,7 +16,7 @@ Program → I/O Object → Execution Context → OS → (completion) → Handler
 
 Examples that omit completion tokens require a release/executor with a suitable default. For the older releases in the matrix, pass `asio::use_awaitable` explicitly.
 
-**Completion tokens:** Control how async results are delivered — `use_awaitable`, `deferred` (default), `detached`, callbacks, futures.
+**Completion tokens:** Control how async results are delivered; `use_awaitable`, `deferred` (default), `detached`, callbacks, futures.
 
 ## C++20 Coroutines (Preferred Style)
 
@@ -36,7 +36,7 @@ asio::awaitable<void> echo_session(tcp::socket socket) {
             co_await async_write(socket, asio::buffer(data, n));
         }
     } catch (std::exception&) {
-        // Connection closed or error — coroutine ends
+        // Connection closed or error; coroutine ends
     }
 }
 
@@ -71,7 +71,7 @@ auto [ec, n] = co_await socket.async_read_some(
     asio::buffer(data), asio::as_tuple(asio::use_awaitable));
 if (ec) { /* handle error, no exception */ }
 ```
-**Wrap, don't use bare `as_tuple`.** Always write `as_tuple(use_awaitable)`. Bare `asio::as_tuple` resolves against the operation's *default* completion token (often `deferred`), which compiles in some contexts but fails in others — wrapping an explicit base token is unambiguous everywhere.
+**Wrap, don't use bare `as_tuple`.** Always write `as_tuple(use_awaitable)`. Bare `asio::as_tuple` resolves against the operation's *default* completion token (often `deferred`), which compiles in some contexts but fails in others; wrapping an explicit base token is unambiguous everywhere.
 
 **With `redirect_error`:**
 ```cpp
@@ -95,7 +95,7 @@ socket.async_read_some(asio::buffer(data),
 ```
 
 **Implicit strands (no explicit strand needed):**
-- Single-threaded `io_context::run()` — all handlers are sequential
+- Single-threaded `io_context::run()`; all handlers are sequential
 - Single chain of async ops on one connection (half-duplex)
 
 **Explicit strand required when:**
@@ -105,12 +105,12 @@ socket.async_read_some(asio::buffer(data),
 
 ## Full-Duplex: Strand + Write Queue
 
-**A strand serializes handler *execution*, NOT whole composed operations.** Two `async_write`s started "concurrently" on the same strand still overlap and **interleave bytes on the wire** — the strand only orders the intermediate handlers, not the byte stream. For full-duplex (a read loop plus pushes/replies writing at the same time on one socket), a strand alone is **not** enough: you must serialize outbound writes yourself with a queue.
+**A strand serializes handler *execution*, NOT whole composed operations.** Two `async_write`s started "concurrently" on the same strand still overlap and **interleave bytes on the wire**; the strand only orders the intermediate handlers, not the byte stream. For full-duplex (a read loop plus pushes/replies writing at the same time on one socket), a strand alone is **not** enough: you must serialize outbound writes yourself with a queue.
 
 ```cpp
 // Give each accepted socket its OWN strand, then run every chain (read loop,
 // pushes, replies) on that strand. Passing an executor to async_accept means you
-// must ALSO pass an explicit completion token — the default-deferred shortcut on
+// must ALSO pass an explicit completion token; the default-deferred shortcut on
 // the zero-arg form no longer applies.
 auto socket = co_await acceptor.async_accept(asio::make_strand(io), asio::use_awaitable);
 std::make_shared<connection>(std::move(socket))->start();
@@ -155,15 +155,15 @@ private:
 - One strand per connection → read loop and write loop never run their handlers concurrently.
 - Write queue + `writing_` flag → at most one `async_write` in flight, so frames never interleave.
 - `enable_shared_from_this` + capturing `self` in every `co_spawn` → the connection survives until all of its read/write/timer chains finish.
-- The accepted socket from `async_accept(make_strand(...))` is `basic_stream_socket<tcp, strand<...>>`, **not** `tcp::socket`. Take it **by value** (`connection(tcp::socket s)`, store `tcp::socket socket_`) — the strand executor type-erases into `any_io_executor` on the move. Passing that accepted socket to a `tcp::socket&` (by reference) instead will **fail to compile** — use `auto` or accept by value.
+- The accepted socket from `async_accept(make_strand(...))` is `basic_stream_socket<tcp, strand<...>>`, **not** `tcp::socket`. Take it **by value** (`connection(tcp::socket s)`, store `tcp::socket socket_`); the strand executor type-erases into `any_io_executor` on the move. Passing that accepted socket to a `tcp::socket&` (by reference) instead will **fail to compile**; use `auto` or accept by value.
 
-**Strand from inside a coroutine** (when `io` isn't a captured local): get the executor from the coroutine and make a strand off it — no `io_context&` needed:
+**Strand from inside a coroutine** (when `io` isn't a captured local): get the executor from the coroutine and make a strand off it; no `io_context&` needed:
 ```cpp
 auto ex = co_await asio::this_coro::executor;
 auto socket = co_await acceptor.async_accept(asio::make_strand(ex), asio::use_awaitable);
 ```
 
-**Run the read loop and idle watch together** — two `awaitable<void>` branches; don't inspect the result, the first to finish unwinds the other:
+**Run the read loop and idle watch together**; two `awaitable<void>` branches; don't inspect the result, the first to finish unwinds the other:
 ```cpp
 using namespace asio::experimental::awaitable_operators;
 co_await (read_loop() || idle_watch(socket_, timer_));   // either returning tears down the connection
@@ -195,14 +195,14 @@ asio::awaitable<void> with_timeout(tcp::socket& socket) {
     );
 
     if (result.index() == 0) { /* read completed */ }
-    else { /* timeout — cancel the socket */ socket.close(); }
+    else { /* timeout; cancel the socket */ socket.close(); }
 }
 ```
 
-**Re-armable idle timeout** (reset on every received frame — the common server pattern):
+**Re-armable idle timeout** (reset on every received frame; the common server pattern):
 ```cpp
 // Run as a long-lived parallel branch. Calling expires_after() again cancels the
-// pending wait, resolving the in-flight async_wait with operation_aborted — that
+// pending wait, resolving the in-flight async_wait with operation_aborted; that
 // is the signal to keep waiting, NOT an error. Genuine expiry resolves with no error.
 asio::awaitable<void> idle_watch(tcp::socket& sock, asio::steady_timer& timer) {
     for (;;) {
@@ -221,22 +221,22 @@ asio::awaitable<void> idle_watch(tcp::socket& sock, asio::steady_timer& timer) {
 #include <boost/asio/experimental/awaitable_operators.hpp>
 using namespace asio::experimental::awaitable_operators;
 
-// Wait for both (AND) — cancels other on failure
+// Wait for both (AND); cancels other on failure
 auto [read_n, write_n] = co_await (
     async_read(sock, in_buf, use_awaitable) &&
     async_write(sock, out_buf, use_awaitable)
 );
 
-// Wait for first (OR) — cancels other on success
+// Wait for first (OR); cancels other on success
 auto result = co_await (
     async_read(sock, buf, use_awaitable) ||
     timer.async_wait(use_awaitable)
 );
 ```
 
-**Note:** `||` and `&&` operators require explicit `use_awaitable` token, and the `awaitable_operators.hpp` header (Boost ≥ 1.77 — see the version floors in SKILL.md).
+**Note:** `||` and `&&` operators require explicit `use_awaitable` token, and the `awaitable_operators.hpp` header (Boost ≥ 1.77; see the version floors in SKILL.md).
 
-**Void branches:** when a branch returns `void` (e.g. two `awaitable<void>` chains), that arm contributes `std::monostate` to the result variant. If *both* branches are void the result is `variant<monostate, monostate>` — don't inspect `.index()`; just `co_await` the expression and let whichever finishes first unwind the other.
+**Void branches:** when a branch returns `void` (e.g. two `awaitable<void>` chains), that arm contributes `std::monostate` to the result variant. If *both* branches are void the result is `variant<monostate, monostate>`; don't inspect `.index()`; just `co_await` the expression and let whichever finishes first unwind the other.
 
 ## Cancellation
 
@@ -365,7 +365,7 @@ buf.erase(0, n);
 
 ## Length-Prefixed Binary Framing
 
-For binary protocols, read the fixed-size header fully, then the body fully — two sequential **composed** reads (`async_read` fills the whole buffer, handling short reads). Do NOT use `async_read_some` for framing.
+For binary protocols, read the fixed-size header fully, then the body fully; two sequential **composed** reads (`async_read` fills the whole buffer, handling short reads). Do NOT use `async_read_some` for framing.
 
 ```cpp
 // Frame: [4-byte big-endian length N][N-byte body]

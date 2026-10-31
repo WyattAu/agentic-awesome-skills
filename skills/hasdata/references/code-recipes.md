@@ -1,4 +1,4 @@
-# Code recipes — wiring HasData into your code
+# Code recipes: wiring HasData into your code
 
 ## Ground rules
 
@@ -15,12 +15,12 @@
 | Code | Meaning | Action |
 |---|---|---|
 | 200 + `status:"ok"` | OK | Use body |
-| 401 | Bad/missing key | Fix — don't retry |
+| 401 | Bad/missing key | Fix; don't retry |
 | 403 | Quota exhausted | Don't retry |
 | 429 | Concurrency cap | Backoff + retry |
 | 500 | Server error | Retry |
 
-## Python — minimal client
+## Python: minimal client
 
 ```python
 import os, requests
@@ -54,7 +54,7 @@ serp = hd.get("/scrape/google/serp", q="coffee", num=20)["organicResults"]
 md   = hd.post("/scrape/web", {"url": "https://example.com", "outputFormat": ["markdown", "json"]})["markdown"]
 ```
 
-## Python — retry + bounded concurrency
+## Python: retry + bounded concurrency
 
 ```python
 import time, random
@@ -86,9 +86,9 @@ def scrape_many(urls, workers=1):
     return out
 ```
 
-The retry example is for idempotent synchronous extraction, not async job submission. It creates a client per worker rather than sharing a mutable Requests Session. Cap `workers` at your plan's concurrency — anything higher just generates `429`s.
+The retry example is for idempotent synchronous extraction, not async job submission. It creates a client per worker rather than sharing a mutable Requests Session. Cap `workers` at your plan's concurrency; anything higher just generates `429`s.
 
-## TypeScript — minimal client
+## TypeScript: minimal client
 
 ```typescript
 const BASE = "https://api.hasdata.com";

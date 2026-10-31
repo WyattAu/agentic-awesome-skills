@@ -1,6 +1,6 @@
-# Communication Templates — Carrier Relationship Management
+# Communication Templates: Carrier Relationship Management
 
-> **Reference Type:** Tier 3 — Load on demand when composing or reviewing carrier communications.
+> **Reference Type:** Tier 3; Load on demand when composing or reviewing carrier communications.
 >
 > **Usage:** Each template includes variable placeholders in `{{double_braces}}` for direct substitution. Templates are organized by communication type and business context. Select the template matching your scenario, substitute variables, review tone guidance, and return a draft. Send only after explicit authorization for the recipients and final message.
 
@@ -11,8 +11,8 @@
 1. [RFP Invitation Letter](#1-rfp-invitation-letter)
 2. [Rate Negotiation Opening](#2-rate-negotiation-opening)
 3. [Rate Counter-Offer](#3-rate-counter-offer)
-4. [Carrier Performance Review — Positive](#4-carrier-performance-review--positive)
-5. [Carrier Performance Review — Corrective](#5-carrier-performance-review--corrective)
+4. [Carrier Performance Review; Positive](#4-carrier-performance-review--positive)
+5. [Carrier Performance Review; Corrective](#5-carrier-performance-review--corrective)
 6. [Carrier Onboarding Welcome](#6-carrier-onboarding-welcome)
 7. [Carrier Warning Letter](#7-carrier-warning-letter)
 8. [Carrier Exit Notification](#8-carrier-exit-notification)
@@ -66,7 +66,7 @@ Common variables used across templates:
 
 ---
 
-**Subject:** `Invitation to Bid — {{our_company}} Freight RFP — {{contract_start}} Award`
+**Subject:** `Invitation to Bid; {{our_company}} Freight RFP; {{contract_start}} Award`
 
 {{carrier_contact}},
 
@@ -108,7 +108,7 @@ Best regards,
 
 ---
 
-**Subject:** `Rate Review Discussion — {{lane_origin}} to {{lane_destination}} | {{our_company}}`
+**Subject:** `Rate Review Discussion; {{lane_origin}} to {{lane_destination}} | {{our_company}}`
 
 {{carrier_contact}},
 
@@ -120,7 +120,7 @@ I'd like to schedule a call to discuss rate alignment on our {{lane_origin}} to 
 - **Your current volume on this lane:** {{volume_loads_week}}
 - **Your performance:** {{otd_percentage}} OTD, {{tender_acceptance}} tender acceptance
 
-We recognize that {{carrier_name}} has delivered strong service on this lane, and our goal is to find a rate that keeps this lane attractive for both of us. We're not looking to drive rates to a level that compromises your service or driver compensation — we are looking for alignment with where the market has moved.
+We recognize that {{carrier_name}} has delivered strong service on this lane, and our goal is to find a rate that keeps this lane attractive for both of us. We're not looking to drive rates to a level that compromises your service or driver compensation; we are looking for alignment with where the market has moved.
 
 Could you check availability for a 30-minute call this week? I'd like to walk through the data together and explore options.
 
@@ -139,7 +139,7 @@ Best regards,
 
 ---
 
-**Subject:** `Re: Rate Proposal — {{lane_origin}} to {{lane_destination}}`
+**Subject:** `Re: Rate Proposal; {{lane_origin}} to {{lane_destination}}`
 
 {{carrier_contact}},
 
@@ -153,7 +153,7 @@ After reviewing your proposal against our market data and total cost model, I'd 
 **Rationale:**
 - DAT 90-day contract average for this lane is {{market_rate}}, which puts your proposal {{percentage_above_market}}% above the current market benchmark.
 - We modeled total cost including your proposed fuel surcharge schedule at diesel prices of $3.25, $3.85, and $4.50/gal. At current diesel ({{current_diesel}}), your total cost per mile is {{total_cost_per_mile}}, which is {{total_cost_vs_market}}% above our benchmark total cost.
-- Our counter rate of {{our_counter_rate}} reflects the market benchmark plus a {{premium_percentage}}% premium for your service quality — which we genuinely value. Your {{otd_percentage}} OTD is among the best in our portfolio.
+- Our counter rate of {{our_counter_rate}} reflects the market benchmark plus a {{premium_percentage}}% premium for your service quality; which we genuinely value. Your {{otd_percentage}} OTD is among the best in our portfolio.
 
 **What We're Offering in Return:**
 - Volume commitment: {{volume_commitment}} loads/week guaranteed (vs. your current {{current_volume}} loads/week)
@@ -169,7 +169,7 @@ Best regards,
 
 ---
 
-## 4. Carrier Performance Review — Positive
+## 4. Carrier Performance Review: Positive
 
 **Channel:** Email + formal quarterly business review meeting
 **Audience:** Carrier account manager, VP of Sales, and operations leadership
@@ -177,13 +177,13 @@ Best regards,
 
 ---
 
-**Subject:** `Q{{quarter}} Performance Review — {{carrier_name}} | Outstanding Results`
+**Subject:** `Q{{quarter}} Performance Review; {{carrier_name}} | Outstanding Results`
 
 {{carrier_contact}},
 
-I want to formally recognize {{carrier_name}}'s performance during {{review_period}}. Your team has been exceptional across every metric we track, and we want to make sure you know it — and that we're backing up that recognition with action.
+I want to formally recognize {{carrier_name}}'s performance during {{review_period}}. Your team has been exceptional across every metric we track, and we want to make sure you know it; and that we're backing up that recognition with action.
 
-**Performance Summary — {{review_period}}:**
+**Performance Summary; {{review_period}}:**
 
 | Metric | Target | Your Performance | Portfolio Average |
 |--------|--------|-----------------|-------------------|
@@ -193,14 +193,14 @@ I want to formally recognize {{carrier_name}}'s performance during {{review_peri
 | Invoice Accuracy | ≥97% | {{invoice_accuracy}} | {{portfolio_avg_invoice}} |
 
 **Specific Highlights:**
-- Your team's performance on the {{highlight_lane}} lane was particularly strong — {{highlight_detail}}.
+- Your team's performance on the {{highlight_lane}} lane was particularly strong; {{highlight_detail}}.
 - Driver {{driver_name}} received compliments from our {{facility_name}} receiving team for consistent professionalism and efficient dock operations.
 - Your operations team's proactive communication during {{event}} prevented what could have been a significant service disruption.
 
 **What This Means for Our Partnership:**
 Based on this performance, we're making the following allocation changes effective {{effective_date}}:
 - **{{lane_1}}:** Increasing your allocation from {{old_allocation_1}}% to {{new_allocation_1}}%
-- **{{lane_2}}:** Adding you as primary carrier (new lane award — {{volume_2}} loads/week)
+- **{{lane_2}}:** Adding you as primary carrier (new lane award; {{volume_2}} loads/week)
 - **Contract extension:** We'd like to discuss extending our agreement through {{extended_end_date}} at current terms
 
 Thank you for making our operation better. We value this partnership and look forward to continuing to grow together.
@@ -212,21 +212,21 @@ Best regards,
 
 ---
 
-## 5. Carrier Performance Review — Corrective
+## 5. Carrier Performance Review: Corrective
 
 **Channel:** Email followed by in-person or video meeting
 **Audience:** Carrier account manager and operations leadership
-**Tone:** Professional, direct, data-driven. Not punitive — corrective. Present the data, state the impact, set clear expectations with a timeline, and define the consequence. Avoid emotional language.
+**Tone:** Professional, direct, data-driven. Not punitive; corrective. Present the data, state the impact, set clear expectations with a timeline, and define the consequence. Avoid emotional language.
 
 ---
 
-**Subject:** `Performance Review — {{carrier_name}} | Corrective Action Required`
+**Subject:** `Performance Review; {{carrier_name}} | Corrective Action Required`
 
 {{carrier_contact}},
 
 I'm reaching out regarding {{carrier_name}}'s performance during {{review_period}} on lanes serviced for {{our_company}}. Several metrics have fallen below our minimum standards, and I want to address this directly so we can work together on a resolution.
 
-**Performance Summary — {{review_period}}:**
+**Performance Summary; {{review_period}}:**
 
 | Metric | Our Standard | Your Performance | Gap |
 |--------|-------------|-----------------|-----|
@@ -250,7 +250,7 @@ We value our relationship with {{carrier_name}} and want to find a path forward.
 Please send your CAP document by {{cap_due_date}} outlining the root causes you've identified and the specific operational changes you're implementing.
 
 **If Targets Are Not Met:**
-If the 60-day checkpoint targets are not achieved, we will need to reduce your allocation on affected lanes by 50% and reassign volume to alternate carriers. This is not our preferred outcome — we'd much rather see improvement and continue building this partnership.
+If the 60-day checkpoint targets are not achieved, we will need to reduce your allocation on affected lanes by 50% and reassign volume to alternate carriers. This is not our preferred outcome; we'd much rather see improvement and continue building this partnership.
 
 I'd like to schedule a call for {{proposed_call_date}} to discuss your initial assessment. Please let me know your availability.
 
@@ -269,7 +269,7 @@ Regards,
 
 ---
 
-**Subject:** `Welcome to {{our_company}}'s Carrier Network — Onboarding Information`
+**Subject:** `Welcome to {{our_company}}'s Carrier Network; Onboarding Information`
 
 {{carrier_contact}},
 
@@ -298,7 +298,7 @@ This draft lists the proposed onboarding items; confirm applicable requirements 
 - **Day 30 review:** We'll review trial performance together. If targets are met, you'll move to full allocation. If not, we'll discuss what adjustments are needed.
 - **Ongoing:** Quarterly performance reviews, annual rate review aligned with our RFP cycle.
 
-**Our Facilities — Key Operational Notes:**
+**Our Facilities; Key Operational Notes:**
 
 | Facility | Dock Hours | Appointment Required? | Avg Load/Unload Time | Detention Policy |
 |----------|-----------|----------------------|---------------------|-----------------|
@@ -310,7 +310,7 @@ This draft lists the proposed onboarding items; confirm applicable requirements 
 - **Daily operations / tendering:** {{ops_contact_name}}, {{ops_contact_title}} ({{ops_contact_email}}, {{ops_contact_phone}})
 - **Accounts payable / invoicing:** {{ap_contact_name}} ({{ap_contact_email}})
 
-Welcome aboard. We believe in rewarding performance — carriers who deliver consistent, high-quality service earn more volume, longer contracts, and priority consideration for new lanes.
+Welcome aboard. We believe in rewarding performance; carriers who deliver consistent, high-quality service earn more volume, longer contracts, and priority consideration for new lanes.
 
 Best regards,
 {{our_contact_name}}
@@ -322,11 +322,11 @@ Best regards,
 
 **Channel:** Formal email with read receipt requested; copy to carrier's VP of Sales
 **Audience:** Carrier account manager + carrier senior leadership
-**Tone:** Formal and serious. This is a documentation event as much as a communication — it creates the paper trail for a potential exit decision. Factual, not emotional. Cite specific contract provisions.
+**Tone:** Formal and serious. This is a documentation event as much as a communication; it creates the paper trail for a potential exit decision. Factual, not emotional. Cite specific contract provisions.
 
 ---
 
-**Subject:** `FORMAL NOTICE: Performance Deficiency — {{carrier_name}} / {{our_company}} Account`
+**Subject:** `FORMAL NOTICE: Performance Deficiency; {{carrier_name}} / {{our_company}} Account`
 
 {{carrier_contact}},
 
@@ -371,11 +371,11 @@ CC: {{our_director_name}}, {{our_director_title}}, {{our_company}}
 
 **Channel:** Formal email followed by phone call
 **Audience:** Carrier account manager and carrier senior leadership
-**Tone:** Respectful and final. This is a business decision, not a punishment. Leave the door open for future consideration. Avoid burning bridges — the carrier community is smaller than you think.
+**Tone:** Respectful and final. This is a business decision, not a punishment. Leave the door open for future consideration. Avoid burning bridges; the carrier community is smaller than you think.
 
 ---
 
-**Subject:** `Notice of Routing Guide Removal — {{carrier_name}} / {{our_company}}`
+**Subject:** `Notice of Routing Guide Removal; {{carrier_name}} / {{our_company}}`
 
 {{carrier_contact}},
 
@@ -405,23 +405,23 @@ Regards,
 
 **Channel:** Email or phone, depending on relationship depth
 **Audience:** Carrier account manager
-**Tone:** Collegial and transparent. This is a market discussion, not a negotiation — you're sharing data and inviting dialogue. Use when market conditions have shifted and you want to proactively discuss alignment before it becomes a formal renegotiation.
+**Tone:** Collegial and transparent. This is a market discussion, not a negotiation; you're sharing data and inviting dialogue. Use when market conditions have shifted and you want to proactively discuss alignment before it becomes a formal renegotiation.
 
 ---
 
-**Subject:** `Market Check-In — {{lane_origin}} to {{lane_destination}} Corridor`
+**Subject:** `Market Check-In; {{lane_origin}} to {{lane_destination}} Corridor`
 
 {{carrier_contact}},
 
 I wanted to reach out proactively about what we're seeing in the {{lane_origin}} to {{lane_destination}} market. As you know, we track lane-level benchmarks quarterly, and the latest data suggests some movement worth discussing.
 
 **What We're Seeing:**
-- DAT contract average for this lane has moved from {{old_benchmark}} to {{new_benchmark}} over the last {{timeframe}} — a {{percentage_change}} {{direction}} shift.
+- DAT contract average for this lane has moved from {{old_benchmark}} to {{new_benchmark}} over the last {{timeframe}}; a {{percentage_change}} {{direction}} shift.
 - Our spot procurement on overflow loads in this corridor has averaged {{spot_average}} over the last 30 days.
 - Load-to-truck ratios in the {{region}} region are currently {{ltt_ratio}}, compared to {{ltt_previous}} last quarter.
 
 **Our Perspective:**
-We're not sending this as a formal rate request — it's a market conversation. We want to understand how you're seeing the same data and whether there's an opportunity to align proactively rather than waiting for contract renewal.
+We're not sending this as a formal rate request; it's a market conversation. We want to understand how you're seeing the same data and whether there's an opportunity to align proactively rather than waiting for contract renewal.
 
 If the market has moved in a way that affects our lane economics, I'd rather discuss it now and find a mutually workable solution than have it surface as a surprise during our annual review.
 
@@ -442,7 +442,7 @@ Best regards,
 
 ---
 
-**Subject:** `Strategic Partnership Proposal — {{our_company}} and {{carrier_name}}`
+**Subject:** `Strategic Partnership Proposal; {{our_company}} and {{carrier_name}}`
 
 {{carrier_contact}},
 
@@ -479,11 +479,11 @@ Best regards,
 
 **Channel:** Email with supporting documentation attached
 **Audience:** Carrier billing / accounts receivable team, cc carrier account manager
-**Tone:** Factual and cooperative. Detention disputes get adversarial quickly — lead with data and a willingness to pay what's legitimate while disputing what's not.
+**Tone:** Factual and cooperative. Detention disputes get adversarial quickly; lead with data and a willingness to pay what's legitimate while disputing what's not.
 
 ---
 
-**Subject:** `Detention Invoice Dispute — PRO# {{pro_number}} / {{dispute_date}}`
+**Subject:** `Detention Invoice Dispute; PRO# {{pro_number}} / {{dispute_date}}`
 
 {{carrier_contact}},
 
@@ -501,7 +501,7 @@ We've reviewed the detention invoice for PRO# {{pro_number}} ({{lane_origin}} to
 - Free time: {{free_time_hours}} hours per contract Section {{contract_section}}
 
 **Discrepancy Analysis:**
-- The driver arrived {{early_minutes}} minutes before the scheduled appointment of {{appointment_time}}. Per our contract, detention begins at the later of appointment time or arrival time — not early arrival time.
+- The driver arrived {{early_minutes}} minutes before the scheduled appointment of {{appointment_time}}. Per our contract, detention begins at the later of appointment time or arrival time; not early arrival time.
 - Our records show actual dock dwell time (from check-in to BOL signature) of {{actual_dwell}} hours, of which {{free_time_hours}} hours is free time. Billable detention per our records: {{adjusted_detention}} hours.
 
 **Our Proposed Resolution:**
@@ -524,7 +524,7 @@ Best regards,
 
 ---
 
-**Subject:** `Accessorial Charge Review — {{accessorial_type}} | PRO# {{pro_number}}`
+**Subject:** `Accessorial Charge Review; {{accessorial_type}} | PRO# {{pro_number}}`
 
 {{carrier_contact}},
 
@@ -576,12 +576,12 @@ Best regards,
 | Situation | Primary Channel | When to Escalate Channel |
 |-----------|----------------|------------------------|
 | Rate discussion (routine) | Email → phone follow-up | If email exchange exceeds 3 rounds without resolution |
-| Performance review (positive) | Email + QBR meeting | N/A — always share good news broadly |
+| Performance review (positive) | Email + QBR meeting | N/A; always share good news broadly |
 | Performance review (corrective) | Email first (documentation), then phone/meeting | If carrier doesn't respond within 5 business days |
 | Warning letter | Formal email with read receipt | If carrier doesn't respond within 3 business days, follow up via carrier VP phone call |
-| Exit notification | Formal email + same-day phone call | N/A — always deliver exit decisions via both channels |
+| Exit notification | Formal email + same-day phone call | N/A; always deliver exit decisions via both channels |
 | Detention/accessorial dispute | Email with documentation | If not resolved in 15 business days, escalate to carrier account manager |
-| Partnership proposal | Formal letter/email → in-person meeting | N/A — partnership proposals require in-person discussion |
+| Partnership proposal | Formal letter/email → in-person meeting | N/A; partnership proposals require in-person discussion |
 
 ## Before releasing a draft
 

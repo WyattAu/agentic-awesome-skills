@@ -12,7 +12,7 @@ date_added: "2026-02-27"
 
 # Game Development
 
-> **Orchestrator skill** — principles plus routing to specialized sub-skills.
+> **Orchestrator skill**; principles plus routing to specialized sub-skills.
 
 ---
 

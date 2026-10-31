@@ -16,9 +16,9 @@ tools: [claude, cursor, gemini]
 ## Overview
 
 Modern web apps ship a lot of code and config to the browser. When credentials
-leak into that client-visible surface — hardcoded in JavaScript, tucked into HTML
+leak into that client-visible surface; hardcoded in JavaScript, tucked into HTML
 `meta`/`data-*` attributes or comments, or served as raw source/config/deploy
-files that were never meant to be public — anyone can read them with `curl` and a
+files that were never meant to be public; anyone can read them with `curl` and a
 browser. This skill is a **defensive, read-only** workflow for finding that class
 of exposure on a web app **you are authorized to assess**.
 
@@ -26,7 +26,7 @@ It maps to OWASP **A02:2021 Cryptographic Failures** (sensitive data exposure),
 **A05:2021 Security Misconfiguration**, and CWE-798 (hardcoded credentials),
 CWE-200 (sensitive information exposure), CWE-540 (source code in a production
 build). It only fetches resources the server already hands to any anonymous
-visitor — it does not exploit, brute-force, or mutate anything.
+visitor; it does not exploit, brute-force, or mutate anything.
 
 ## When to Use This Skill
 
@@ -82,7 +82,7 @@ keys and placeholders require contextual classification.
 
 Do not automatically fetch discovered URLs. Extract candidates as inert data with an HTML parser and URL parser, resolve against the authorized base, and reject any scheme other than HTTPS, embedded credentials, unexpected ports or origins. Before a request, verify all resolved destination addresses are public (not loopback, link-local, private, multicast, reserved or unspecified), pin the approved address for that connection to prevent DNS rebinding, and disable redirects. A redirect or additional origin requires separate scope validation. Use a trusted network client that enforces these checks, or stop at an inventory of candidate scripts. Never follow `require`/`import` paths or sourcemaps without the same validation. Store responses privately and redact secret values before terminal or model output.
 
-Also scan any sourcemaps (`*.js.map`) — they can rebuild original source with
+Also scan any sourcemaps (`*.js.map`); they can rebuild original source with
 comments intact.
 
 ### Step 4: Probe for publicly reachable source / config / deploy files
@@ -118,7 +118,7 @@ Rate each finding by blast radius, not by where it was found:
 | **Low / Info** | Public keys correctly client-side, analytics IDs, non-secret config, stack fingerprinting |
 
 A key being "test/demo" does not make it safe if the *pattern* would ship a live
-key the same way — report the pattern.
+key the same way; report the pattern.
 
 ### Step 6: Report
 
@@ -177,15 +177,15 @@ A full worked report for this target is in [references/example-report.md](refere
 - ✅ Compare normalized fallback content, status and type; size is only a triage hint.
 - ✅ Follow `require`/`import` chains in any exposed source file to find more files.
 - ✅ Redact real secret values in the report; record enough to identify, not reuse.
-- ✅ Flag secrets for **rotation** — served/committed secrets are already burned.
+- ✅ Flag secrets for **rotation**; served/committed secrets are already burned.
 - ❌ Don't use discovered credentials to authenticate, pivot, or access data.
 - ❌ Don't run this against sites you don't own or aren't authorized to test.
-- ❌ Don't treat "it's a test/demo key" as safe — report the shipping pattern.
+- ❌ Don't treat "it's a test/demo key" as safe; report the shipping pattern.
 
 ## Limitations
 
 - Read-only reconnaissance of client-served assets; it does not test injection,
-  auth logic, IDOR, or server-side flaws — pair with `@web-security-testing`.
+  auth logic, IDOR, or server-side flaws; pair with `@web-security-testing`.
 - Path probing uses a wordlist; it finds common exposures, not every file.
 - This skill does not replace environment-specific validation, testing, or expert
   review.
@@ -197,10 +197,10 @@ A full worked report for this target is in [references/example-report.md](refere
 - **Authorized targets only.** Run exclusively against systems you own or have
   explicit written permission to assess. Unauthorized scanning may be illegal.
 - Every command here performs only unauthenticated `GET` requests for resources
-  the server already serves publicly — no exploitation, brute force, or mutation.
+  the server already serves publicly; no exploitation, brute force, or mutation.
 - Handle any real secrets you uncover as sensitive: store findings in an access-
   controlled location, redact them in shared reports, and recommend rotation.
-- Do not exfiltrate data or reuse discovered credentials — locating an exposure is
+- Do not exfiltrate data or reuse discovered credentials; locating an exposure is
   the deliverable; using it is out of scope.
 
 ## Common Pitfalls
@@ -212,11 +212,11 @@ A full worked report for this target is in [references/example-report.md](refere
   **Solution:** Also scan `<meta>`, `data-*`, `hidden` elements, and every
   `<!-- comment -->`, not just `<script>` bodies.
 - **Problem:** Dismissing a finding because the key is labeled "test/demo."
-  **Solution:** Report the pattern — the same code path would ship a live key.
+  **Solution:** Report the pattern; the same code path would ship a live key.
 
 ## Related Skills
 
-- `@web-security-testing` — broader OWASP Top 10 workflow; use for injection,
+- `@web-security-testing`; broader OWASP Top 10 workflow; use for injection,
   auth, and access-control testing this skill does not cover.
-- `@dependency-management-deps-audit` — pairs well for supply-chain/component risk
+- `@dependency-management-deps-audit`; pairs well for supply-chain/component risk
   once client exposure is triaged.

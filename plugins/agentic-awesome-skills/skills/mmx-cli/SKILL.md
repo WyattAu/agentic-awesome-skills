@@ -6,7 +6,7 @@ source: "https://github.com/MiniMax-AI/cli"
 date_added: "2026-04-14"
 ---
 
-# MiniMax CLI — Agent Skill Guide
+# MiniMax CLI: Agent Skill Guide
 
 Use `mmx` to generate text, images, video, speech, music, and perform web search via the MiniMax AI platform.
 

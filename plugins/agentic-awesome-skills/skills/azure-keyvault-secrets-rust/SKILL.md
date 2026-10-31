@@ -8,7 +8,7 @@ date_added: '2026-02-27'
 
 # Azure Key Vault Secrets SDK for Rust
 
-Client library for Azure Key Vault Secrets — secure storage for passwords, API keys, and other secrets.
+Client library for Azure Key Vault Secrets; secure storage for passwords, API keys, and other secrets.
 
 The examples below require a reviewed compatible crate set and replacement of every resource placeholder. Do not use production data for demonstration writes.
 
@@ -122,19 +122,19 @@ let secret = client
 
 ## Best Practices
 
-1. **Use Entra ID auth** — `DeveloperToolsCredential` for dev, `ManagedIdentityCredential` for production
-2. **Use `into_model()?`** — to deserialize responses
-3. **Use `ResourceExt` trait** — for extracting names from IDs
-4. **Handle soft delete** — deleted secrets can be recovered within retention period
-5. **Set content type** — helps identify secret format
-6. **Use tags** — for organizing and filtering secrets
-7. **Version secrets** — new values create new versions automatically
+1. **Use Entra ID auth**; `DeveloperToolsCredential` for dev, `ManagedIdentityCredential` for production
+2. **Use `into_model()?`**; to deserialize responses
+3. **Use `ResourceExt` trait**; for extracting names from IDs
+4. **Handle soft delete**; deleted secrets can be recovered within retention period
+5. **Set content type**; helps identify secret format
+6. **Use tags**; for organizing and filtering secrets
+7. **Version secrets**; new values create new versions automatically
 
 ## RBAC Permissions
 
 Assign these Key Vault roles:
-- `Key Vault Secrets User` — get and list
-- `Key Vault Secrets Officer` — full CRUD
+- `Key Vault Secrets User`; get and list
+- `Key Vault Secrets Officer`; full CRUD
 
 The reviewed example set uses `azure_security_keyvault_secrets 1.0.1` and compatible Azure core/credential crates. Record and commit Cargo.lock; source/API review is not a compiler or live-service test.
 

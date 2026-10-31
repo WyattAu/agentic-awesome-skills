@@ -1,17 +1,17 @@
 # Import Data
 
-Import one or more CSV, JSON, JSONL, or PDF files into a Weaviate collection with automatic type conversion and column mapping. Multiple supported tabular files can be passed in a single invocation — all objects are appended to the same collection. PDF files are converted page-by-page to base64-encoded JPEG images; the collection is created automatically on first import and reused on subsequent runs.
+Import one or more CSV, JSON, JSONL, or PDF files into a Weaviate collection with automatic type conversion and column mapping. Multiple supported tabular files can be passed in a single invocation; all objects are appended to the same collection. PDF files are converted page-by-page to base64-encoded JPEG images; the collection is created automatically on first import and reused on subsequent runs.
 
 ## Usage
 
 ```bash
-# CSV/JSON/JSONL — collection must already exist
+# CSV/JSON/JSONL: collection must already exist
 uv run scripts/import.py --allow-write "data.csv" --collection "CollectionName" [--mapping '{}'] [--tenant "name"] [--batch-size 100] [--json]
 
 # Multiple supported tabular files
 uv run scripts/import.py --allow-write a.csv b.csv c.csv --collection "CollectionName"
 
-# PDF — collection is created automatically on first run; appended to on subsequent runs
+# PDF: collection is created automatically on first run; appended to on subsequent runs
 uv run scripts/import.py --allow-write "document.pdf" --collection "CollectionName" [--image-field "doc_page"] [--batch-size 100] [--json]
 
 # Multiple PDFs into the same collection
@@ -22,20 +22,20 @@ uv run scripts/import.py --allow-write page1.pdf page2.pdf page3.pdf --collectio
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `files` | — | Yes (positional, one or more) | — | One or more CSV, JSON, JSONL, or PDF files (CSV/JSON/JSONL may be mixed; PDFs imported separately) |
-| `--collection` | `-c` | Yes | — | Target collection name (must already exist for CSV/JSON/JSONL; created automatically for PDF if absent, otherwise appended to) |
-| `--mapping` | `-m` | No | — | JSON object mapping file columns/keys to collection properties (CSV/JSON/JSONL only) |
-| `--tenant` | `-t` | No | — | Tenant name for multi-tenant collections (required if collection has multi-tenancy enabled) |
+| `files` | - | Yes (positional, one or more) | - | One or more CSV, JSON, JSONL, or PDF files (CSV/JSON/JSONL may be mixed; PDFs imported separately) |
+| `--collection` | `-c` | Yes | - | Target collection name (must already exist for CSV/JSON/JSONL; created automatically for PDF if absent, otherwise appended to) |
+| `--mapping` | `-m` | No | - | JSON object mapping file columns/keys to collection properties (CSV/JSON/JSONL only) |
+| `--tenant` | `-t` | No | - | Tenant name for multi-tenant collections (required if collection has multi-tenancy enabled) |
 | `--batch-size` | `-b` | No | `100` | Number of objects per batch |
 | `--image-field` | `-i` | No | `doc_page` | BLOB property name to store base64 page images (PDF imports only) |
-| `--skip-fields` | — | No | — | Comma-separated field names to exclude from import (e.g. `vector`) |
-| `--json` | — | No | `false` | Output in JSON format |
+| `--skip-fields` | - | No | - | Comma-separated field names to exclude from import (e.g. `vector`) |
+| `--json` | - | No | `false` | Output in JSON format |
 
 ## File Formats
 
 ### CSV
 
-- First row must be a header — column names must match collection property names (case-sensitive)
+- First row must be a header; column names must match collection property names (case-sensitive)
 - Delimiter and quoting auto-detected via `csv.Sniffer`
 - Missing/duplicate/empty headers and inconsistent row widths are rejected. A heuristic warning cannot reliably distinguish all headerless text files; confirm the header manually.
 
@@ -43,13 +43,13 @@ uv run scripts/import.py --allow-write page1.pdf page2.pdf page3.pdf --collectio
 
 - Must be an array of objects: `[{"prop1": "value1"}, {"prop2": "value2"}]`
 - Keys must match collection property names
-- The entire file is loaded into memory — for large datasets, always prefer JSONL
+- The entire file is loaded into memory; for large datasets, always prefer JSONL
 
 ### JSONL
 
 - One JSON object per line
 - Each object's keys must match collection property names
-- Streamed line-by-line — preferred format for large datasets
+- Streamed line-by-line; preferred format for large datasets
 
 ### PDF
 
@@ -58,7 +58,7 @@ uv run scripts/import.py --allow-write page1.pdf page2.pdf page3.pdf --collectio
   - `doc_page` (or `--image-field` value): base64-encoded JPEG image of the page
   - `page_number`: 1-indexed page number (int)
   - `file_name`: PDF filename without extension (text)
-- The collection is **created automatically** with `multi2vec_weaviate` (`ModernVBERT/colmodernvbert` + MUVERA encoding) if it does not already exist. If the collection already exists, pages are appended to it — allowing multiple PDFs to be loaded into the same collection across multiple runs.
+- The collection is **created automatically** with `multi2vec_weaviate` (`ModernVBERT/colmodernvbert` + MUVERA encoding) if it does not already exist. If the collection already exists, pages are appended to it; allowing multiple PDFs to be loaded into the same collection across multiple runs.
 - Requires `poppler` to be installed on the system (for Mac, simply run `brew install poppler`)
 
 ## Type Conversion
@@ -67,13 +67,13 @@ For CSV, JSON, and JSONL imports the script uses the collection schema to guide 
 
 | Schema type | Conversion |
 |---|---|
-| `int` / `int[]` | `int(value)` — invalid values fail |
-| `number` / `number[]` | `float(value)` — invalid values fail |
-| `boolean` / `boolean[]` | `"true"`/`"false"` → bool — invalid values fail |
+| `int` / `int[]` | `int(value)`; invalid values fail |
+| `number` / `number[]` | `float(value)`; invalid values fail |
+| `boolean` / `boolean[]` | `"true"`/`"false"` → bool; invalid values fail |
 | `date` / `date[]` | `"YYYY-MM-DD"` → `"YYYY-MM-DDT00:00:00Z"`, timestamps must carry an explicit timezone; never silently reinterpret local times as UTC |
-| `text[]`, `int[]`, `number[]`, `boolean[]`, `date[]`, `uuid[]`, `object`, `object[]`, `geoCoordinates`, `phoneNumber` | JSON/JSONL: native arrays/objects must match the declared container type. CSV: cell is parsed with `json.loads()` — invalid values fail |
+| `text[]`, `int[]`, `number[]`, `boolean[]`, `date[]`, `uuid[]`, `object`, `object[]`, `geoCoordinates`, `phoneNumber` | JSON/JSONL: native arrays/objects must match the declared container type. CSV: cell is parsed with `json.loads()`; invalid values fail |
 | `text`, `uuid` | kept as string |
-| `blob` | kept as string — must already be base64-encoded in the source data |
+| `blob` | kept as string; must already be base64-encoded in the source data |
 | field not in schema | rejected unless explicitly skipped |
 
 `None` and empty strings are skipped. This is not an atomic migration: validate whether those omissions are intended before import.

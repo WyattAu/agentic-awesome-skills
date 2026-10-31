@@ -9,10 +9,10 @@
 
 - Vendor / CERT advisories: CISA/NSA/CSA joint advisories, CERT-EU, NCSC-UK, JPCERT/CC, CERT-UA.
 - [MISP Project](https://www.misp-project.org/) and public MISP feeds.
-- [OpenCTI](https://www.opencti.io/) — CTI knowledge graph.
-- [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/) — malware families, YARA, references.
+- [OpenCTI](https://www.opencti.io/); CTI knowledge graph.
+- [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/); malware families, YARA, references.
 - [ThreatFox](https://threatfox.abuse.ch/), [URLHaus](https://urlhaus.abuse.ch/), [SSLBL](https://sslbl.abuse.ch/).
-- [MalwareBazaar](https://bazaar.abuse.ch/) — hash-based sample sharing.
+- [MalwareBazaar](https://bazaar.abuse.ch/); hash-based sample sharing.
 - [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/).
 
 ### 29.1 Malware Analysis & Sandboxes
@@ -20,7 +20,7 @@
 - Static: [pefile](https://github.com/erocarrera/pefile), [FLOSS](https://github.com/mandiant/flare-floss), [capa](https://github.com/mandiant/capa).
 - Similarity: SSDEEP, TLSH.
 - Sandboxes: [ANY.RUN](https://any.run/), [Hybrid Analysis](https://www.hybrid-analysis.com/), [CAPE](https://capesandbox.com/), [Tria.ge](https://tria.ge/).
-- Intelligence: [Intezer](https://analyze.intezer.com/) (code reuse), [VirusTotal](https://www.virustotal.com/) — **caution: verify the selected product’s sharing and retention mode; never upload private samples without explicit approval**.
+- Intelligence: [Intezer](https://analyze.intezer.com/) (code reuse), [VirusTotal](https://www.virustotal.com/); **caution: verify the selected product’s sharing and retention mode; never upload private samples without explicit approval**.
 - TLS: [JA3](https://github.com/salesforce/ja3), [JA4](https://github.com/FingerprinTLS/ja4).
 
 ### 29.2 Vulnerability Prioritization Data Sources
@@ -109,17 +109,17 @@ The example is a small, bounded illustration; for a larger approved list, fetch 
 
 ### 30.3 Transaction Tracking & Analytics
 
-- [Arkham](https://www.arkhamintelligence.com/) — multichain, entity labels, graphs, alerts.
-- [TRM](https://www.trmlabs.com/) — address/tx graphs.
-- [MetaSleuth](https://metasleuth.io/) — visual flow.
-- [Breadcrumbs](https://www.breadcrumbs.app/) (freemium) — visual graphing + labels.
-- [Bubblemaps](https://bubblemaps.io/) — holder concentration.
-- [Whale Alert](https://whale-alert.io/) — large transaction monitoring.
-- [Chainalysis](https://www.chainalysis.com/) / [Crystal Blockchain](https://crystalblockchain.com/) — pro analytics.
-- [GraphSense](https://graphsense.info/) — open-source crypto analytics.
-- [Nansen](https://www.nansen.ai/) — Smart Money labels (paid).
-- [Dune](https://dune.com/) — custom queries.
-- [Token Sniffer](https://tokensniffer.com/) — honeypot/scam detection.
+- [Arkham](https://www.arkhamintelligence.com/); multichain, entity labels, graphs, alerts.
+- [TRM](https://www.trmlabs.com/); address/tx graphs.
+- [MetaSleuth](https://metasleuth.io/); visual flow.
+- [Breadcrumbs](https://www.breadcrumbs.app/) (freemium); visual graphing + labels.
+- [Bubblemaps](https://bubblemaps.io/); holder concentration.
+- [Whale Alert](https://whale-alert.io/); large transaction monitoring.
+- [Chainalysis](https://www.chainalysis.com/) / [Crystal Blockchain](https://crystalblockchain.com/); pro analytics.
+- [GraphSense](https://graphsense.info/); open-source crypto analytics.
+- [Nansen](https://www.nansen.ai/); Smart Money labels (paid).
+- [Dune](https://dune.com/); custom queries.
+- [Token Sniffer](https://tokensniffer.com/); honeypot/scam detection.
 
 ### 30.4 NFT / Exchange / Bridges
 
@@ -158,7 +158,7 @@ The example is a small, bounded illustration; for a larger approved list, fetch 
 
 - [Google Maps](https://www.google.com/maps), [Bing Maps](https://www.bing.com/maps/).
 - [Sentinel Hub EO Browser](https://apps.sentinel-hub.com/eo-browser/), [NASA Worldview](https://worldview.earthdata.nasa.gov/), [Zoom Earth](https://zoom.earth/).
-- [Wayback Imagery](https://livingatlas.arcgis.com/wayback/) — historical satellite.
+- [Wayback Imagery](https://livingatlas.arcgis.com/wayback/); historical satellite.
 - [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/map/), [Open Infrastructure Map](https://openinframap.org/), [Windy](https://www.windy.com/).
 
 ### 32.2 Geolocation Tools
@@ -170,14 +170,14 @@ The example is a small, bounded illustration; for a larger approved list, fetch 
 ### 32.3 Flight OSINT
 
 - [FlightRadar24](https://www.flightradar24.com/), [FlightAware](https://www.flightaware.com/), [RadarBox](https://www.radarbox.com/).
-- [ADSBExchange](https://www.adsbexchange.com/) — unfiltered.
-- [Planespotters](https://www.planespotters.net/) — fleet/airframe history.
+- [ADSBExchange](https://www.adsbexchange.com/); unfiltered.
+- [Planespotters](https://www.planespotters.net/); fleet/airframe history.
 - [AirFrames](https://www.airframes.org/), [JetPhotos](https://www.jetphotos.com/).
 
 ### 32.4 Maritime OSINT
 
 - [MarineTraffic](https://www.marinetraffic.com/), [VesselFinder](https://www.vesselfinder.com/), [FleetMon](https://www.fleetmon.com/).
-- [Global Fishing Watch](https://globalfishingwatch.org/map/) — vessel behavior + AIS gap analysis.
+- [Global Fishing Watch](https://globalfishingwatch.org/map/); vessel behavior + AIS gap analysis.
 
 ---
 
@@ -193,12 +193,12 @@ The example is a small, bounded illustration; for a larger approved list, fetch 
 
 ## 38. Telegram & Messaging Intelligence
 
-- [TGStat](https://tgstat.com/) — channel analytics + search.
-- [Telemetr](https://telemetr.io/) — channel growth, overlaps, forwards.
-- [Combot](https://combot.org/) — group analytics (partial paid).
-- [TelegramDB Search Bot](https://t.me/TGdb_bot) — basic Telegram OSINT.
-- [Discord ID](https://discord.id/) — basic Discord account info.
-- [Sogou Weixin search](https://weixin.sogou.com/) — WeChat Official Accounts.
+- [TGStat](https://tgstat.com/); channel analytics + search.
+- [Telemetr](https://telemetr.io/); channel growth, overlaps, forwards.
+- [Combot](https://combot.org/); group analytics (partial paid).
+- [TelegramDB Search Bot](https://t.me/TGdb_bot); basic Telegram OSINT.
+- [Discord ID](https://discord.id/); basic Discord account info.
+- [Sogou Weixin search](https://weixin.sogou.com/); WeChat Official Accounts.
 - View public Telegram channels: `https://t.me/s/<channel>`.
 
 ---

@@ -43,7 +43,7 @@ This skill determines which Monte Carlo skill or workflow best fits the user's c
 > `mcp__plugin_mc-agent-toolkit_monte-carlo-mcp__<tool>` (e.g.
 > `mcp__plugin_mc-agent-toolkit_monte-carlo-mcp__get_alerts`). Bare tool names used in this skill
 > (`get_alerts`, `search`, `get_table`, …) refer to that bundled server. If the session also has a
-> separately-configured `monte-carlo-mcp` server, do **not** route to it — it may point at a
+> separately-configured `monte-carlo-mcp` server, do **not** route to it; it may point at a
 > different endpoint or credentials.
 
 This catalog tree does not bundle that server, routing CLAUDE.md, hooks, or companion skills. Verify availability and account identity; do not invent tools or silently use a different tenant. Routing does not authorize monitor creation, deployment, or other writes beyond the user's request.
@@ -54,28 +54,28 @@ Reference file for signal definitions: `references/signal-definitions.md` (relat
 
 This skill is activated by the CLAUDE.md routing table when:
 
-- The user's message relates to data quality, alerts, incidents, coverage, or Monte Carlo — but doesn't clearly match a single skill in the routing table
+- The user's message relates to data quality, alerts, incidents, coverage, or Monte Carlo; but doesn't clearly match a single skill in the routing table
 - The user's intent is ambiguous or could span multiple skills
 - The user asks a broad question like "help me with my data" or "what's going on?"
 
 ## When NOT to activate this skill
 
-- A skill or workflow is already active in the conversation — the active skill owns the conversation, do not intercept
-- The user's message clearly matches a single skill in the CLAUDE.md routing table — route directly, no need for context detection
-- The user is editing a dbt model — defer to the `prevent` skill only when its hooks are verified active
+- A skill or workflow is already active in the conversation; the active skill owns the conversation, do not intercept
+- The user's message clearly matches a single skill in the CLAUDE.md routing table; route directly, no need for context detection
+- The user is editing a dbt model; defer to the `prevent` skill only when its hooks are verified active
 - The user's message is not data-related at all
 
 ---
 
 ## Workflow: Reactive Routing
 
-This skill is purely reactive — it activates for ambiguous or multi-step data-related messages and routes them.
+This skill is purely reactive; it activates for ambiguous or multi-step data-related messages and routes them.
 
 Follow these steps in order.
 
 ### Step 0: Fast-path clear intent (stop early if matched)
 
-Before doing anything else, check whether the user's message unambiguously matches a single existing skill. If so, **skip the rest of this workflow** and immediately load that skill — do NOT read `references/signal-definitions.md`, do NOT make API probes.
+Before doing anything else, check whether the user's message unambiguously matches a single existing skill. If so, **skip the rest of this workflow** and immediately load that skill; do NOT read `references/signal-definitions.md`, do NOT make API probes.
 
 | Clear user intent | Skill to load immediately |
 |---|---|
@@ -117,7 +117,7 @@ Only make API calls when you have enough context to scope them:
 - **Coverage/monitoring** → skip API probe, route directly to proactive monitoring workflow (it handles its own API calls)
 - **If MCP tool calls fail** → report the actual failure and missing evidence; use conversation intent only for routing, never infer healthy assets or configured authentication.
 
-**Always scope MCP calls tightly.** Unscoped `get_alerts`, `search`, or `get_monitors` on large accounts can return hundreds of results, overflow the tool-result token limit, spill to disk, and force expensive chunk reads — burning user tokens and risking workflow failure. Minimum scoping:
+**Always scope MCP calls tightly.** Unscoped `get_alerts`, `search`, or `get_monitors` on large accounts can return hundreds of results, overflow the tool-result token limit, spill to disk, and force expensive chunk reads; burning user tokens and risking workflow failure. Minimum scoping:
 
 - `get_alerts` → time filter (`created_after`, default last 7 days) + at least one of `warehouse`, `table_names`, `severity`
 - `search` → needed to resolve a table name to its MCON (`get_table` requires MCON). ALWAYS pass `limit` (e.g. 5), the table name as `query`, and filter by `warehouse_uuid` or `database`/`schema`. `warehouse_types` alone ("snowflake") matches thousands of tables. Disambiguation rules when multiple matches return:
@@ -146,8 +146,8 @@ Based on the combined signals from Steps 1-3:
 **Low confidence = suggest.** Present 2-3 options with brief descriptions and let the user choose. Example:
 
 > "Based on what you've described, I can:
-> 1. **Investigate alerts** — triage and fix active data issues (incident response workflow)
-> 2. **Improve monitoring** — find coverage gaps and create monitors (proactive monitoring workflow)
+> 1. **Investigate alerts**; triage and fix active data issues (incident response workflow)
+> 2. **Improve monitoring**; find coverage gaps and create monitors (proactive monitoring workflow)
 >
 > Which would be most helpful?"
 

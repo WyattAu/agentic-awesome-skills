@@ -143,7 +143,7 @@ ios plist cat Info.plist          # 读取 plist
 
 ## 免 Root/越狱部署
 
-### Android — Frida Gadget 注入
+### Android: Frida Gadget 注入
 
 ```bash
 # 1. 解包 APK
@@ -164,7 +164,7 @@ uber-apk-signer -a app_patched.apk
 objection patchapk --source app.apk --skip-resources
 ```
 
-### iOS — Frida Gadget 注入
+### iOS: Frida Gadget 注入
 
 ```bash
 # 1. 解密 App Store IPA

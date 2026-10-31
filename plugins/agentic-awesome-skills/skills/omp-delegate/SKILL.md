@@ -44,7 +44,7 @@ Pi CLI is a different binary (`pi`) with a different skill (`pi-delegate`). If `
 
 - The task is small enough to do inline; delegation overhead is not worth it.
 - The `omp` CLI is not installed or authenticated.
-- The user asked for the original Pi CLI (`pi`) — use `pi-delegate`.
+- The user asked for the original Pi CLI (`pi`); use `pi-delegate`.
 - You need a sandboxed implementer. Oh My Pi has no sandbox. `--read-only` restricts the tool
   surface; a write-capable run executes without prompts (`--yolo`).
 
@@ -60,17 +60,17 @@ Pi CLI is a different binary (`pi`) with a different skill (`pi-delegate`). If `
 ## Choose the model (optional)
 
 Omit `--model` (and `--provider`) to use omp's configured default for this project / profile. The
-catalog is **this install's** authenticated providers — not a fixed list in this skill.
+catalog is **this install's** authenticated providers; not a fixed list in this skill.
 
 To pick another model:
 
-1. **List what this install can actually run.** Do **not** pass `omp --list-models` — that flag is
+1. **List what this install can actually run.** Do **not** pass `omp --list-models`; that flag is
    gone and omp treats it as an unknown flag (exit 2). Use the `models` subcommand:
-   - `omp models` — every available model, grouped by provider
-   - `omp models --json` — the same catalog, machine-readable
-   - `omp models find <substring>` — filter by provider, id, or name (example:
+   - `omp models`; every available model, grouped by provider
+   - `omp models --json`; the same catalog, machine-readable
+   - `omp models find <substring>`; filter by provider, id, or name (example:
      `omp models find sonnet`)
-   - `omp models <provider>` — one provider's models
+   - `omp models <provider>`; one provider's models
 2. **Pass that id to the relay.** `--model <pattern>` is omp's own `--model`: a fuzzy match against
    the catalog (provider/id, a bare id, or a unique substring). `--provider <name>` pins the
    provider when the pattern is ambiguous.
@@ -78,7 +78,7 @@ To pick another model:
 
 `--thinking <level>` is a separate reasoning dial, not a model id. Allowed values: `off`, `auto`,
 `minimal`, `low`, `medium`, `high`, `xhigh`, `max`. The relay rejects anything else (including
-`inherit`) before dispatch — omp would otherwise warn and ignore a bad value.
+`inherit`) before dispatch; omp would otherwise warn and ignore a bad value.
 
 A fleet lane (`--lane`) can set `provider`, `model`, and `effort`. Lane `effort` becomes
 `--thinking`; an explicit `--thinking` / `--model` / `--provider` flag wins over the lane.
@@ -151,7 +151,7 @@ pass and the diff holds, and commit is authorized. If rework is needed, send a d
 ## Autonomy and permissions
 
 Oh My Pi has **no sandbox**. Print mode has no approval UI, so a write-capable relay run always
-passes `--yolo` (`tools.approvalMode: yolo`) — otherwise a user's `always-ask` or `write` config
+passes `--yolo` (`tools.approvalMode: yolo`); otherwise a user's `always-ask` or `write` config
 would stall until the watchdog. The other controls are:
 
 1. `--read-only` restricts omp's callable tools to `--tools read,grep,glob`. It does not pass
@@ -185,6 +185,6 @@ expanding the mandate). See [references/review-and-land.md](references/review-an
 ## Limitations
 
 - Runtime helper `scripts/relay.mjs` is bundled from the revision recorded in `UPSTREAM-NOTICE.md`. Requires the corresponding installed and authenticated CLI, Node 18+, and git.
-- Relay never commits — it only returns structured result JSON; you review and land the commit.
+- Relay never commits; it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — MIT; relay runtime bundled with local changes in UPSTREAM-NOTICE.md.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); MIT; relay runtime bundled with local changes in UPSTREAM-NOTICE.md.

@@ -17,7 +17,7 @@ license_source: "https://github.com/target1m/footval-mcp/blob/e852de8dd9b714a8b1
 # Value a player, then explain the number
 
 Tools: `get_player` (one profile), `compare_players` (2–4 players), and `search_football` only
-when a name is ambiguous or partial — `get_player` and `compare_players` take plain names
+when a name is ambiguous or partial; `get_player` and `compare_players` take plain names
 directly. Full argument list: [`references/tools.md`](references/tools.md).
 
 ## When to Use
@@ -32,11 +32,11 @@ directly. Full argument list: [`references/tools.md`](references/tools.md).
 - **FootVal value** is FootVal's estimate; **market value** is the provider-labelled reference figure it is
   anchored to. The gap (`deltaPct`) is the point: positive means FootVal sees more than the market
   under FootVal's model), negative means FootVal estimates less than the reference figure. This gap does not establish actual market mispricing.
-- Inside **±5 %** the model label is **fair** — say "in line with the market", not "slightly
+- Inside **±5 %** the model label is **fair**; say "in line with the market", not "slightly
   undervalued".
 - Values are in **euros**. Quote them the way the card does (€85M, €1.2M). Convert only when
   asked, and say that it is a conversion.
-- It is an estimate, not a price tag and not a forecast of a fee — clubs pay what a negotiation
+- It is an estimate, not a price tag and not a forecast of a fee; clubs pay what a negotiation
   produces. Never present it as betting or investment advice.
 
 ## Explain the gap with the factors
@@ -44,24 +44,24 @@ directly. Full argument list: [`references/tools.md`](references/tools.md).
 The documented model uses multiplicative factors; these are model assumptions, not biological prime-age facts or causal evidence. Check the returned version/breakdown instead of reverse-engineering missing factors. Each factor multiplies the value: above ×1.00 pushes it up, below pulls it down. Explain the two
 or three that move most, in plain words:
 
-- **performance** — output against price inside the player's position and league-strength
+- **performance**; output against price inside the player's position and league-strength
   cohort. Performing above his price lifts the value; below it, discounts it. With few minutes
   the effect is deliberately scaled down.
-- **potential** — the age curve around each position's prime (forwards 25, midfielders 26,
+- **potential**; the age curve around each position's prime (forwards 25, midfielders 26,
   defenders 27, goalkeepers 29): younger and performing earns a development premium; past the
   prime, a discount.
-- **contract** — close to expiry the selling club loses leverage (a soft Bosman discount).
-- **durability** — injuries and availability over the last two seasons.
-- **reputation** — international caps and trophies; a small band.
-- **form** — the latest season against the previous one, capped at ±15 %.
+- **contract**; close to expiry the selling club loses leverage (a soft Bosman discount).
+- **durability**; injuries and availability over the last two seasons.
+- **reputation**; international caps and trophies; a small band.
+- **form**; the latest season against the previous one, capped at ±15 %.
 
 When a player has little or no recent data, FootVal keeps the value close to the market. Say so
 instead of inventing reasons for a gap that isn't there.
 
 ## Comparing
 
-`compare_players` puts 2–4 players on one card. Lead with the value-for-money story — value
-against market, age, contract — rather than reading every row aloud. If a name can't be resolved
+`compare_players` puts 2–4 players on one card. Lead with the value-for-money story; value
+against market, age, contract; rather than reading every row aloud. If a name can't be resolved
 the tool says which; offer the `search_football` matches for that one.
 
 ## Follow-ups that work

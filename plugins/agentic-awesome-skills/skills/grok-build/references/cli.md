@@ -1,7 +1,7 @@
-# Grok Build CLI — headless reference
+# Grok Build CLI: headless reference
 
 Verified against `grok` 0.2.93 (stable channel), 2026-07-09. Re-verify with
-`grok --help` after major version bumps — flags mirror Claude Code's.
+`grok --help` after major version bumps; flags mirror Claude Code's.
 
 ## One-shot headless run
 
@@ -10,7 +10,7 @@ grok -p "prompt" --output-format json
 grok --prompt-file task.md --output-format json   # preferred: no shell-quoting issues
 ```
 
-⚠️ `grok agent` is NOT a one-shot command — it runs the agent as a stdio/WebSocket
+⚠️ `grok agent` is NOT a one-shot command; it runs the agent as a stdio/WebSocket
 server for SDK/ACP integrations. Always use top-level `grok -p` / `--prompt-file`.
 
 ## JSON output shape (verified)
@@ -31,21 +31,21 @@ server for SDK/ACP integrations. Always use top-level `grok -p` / `--prompt-file
 - Windows (PowerShell): `grok --prompt-file task.md --output-format json | ConvertFrom-Json | Select-Object -ExpandProperty sessionId`
 
 `stopReason: "Cancelled"` with empty `text` means a tool call hit a permission gate and
-was auto-cancelled headlessly — you forgot `--always-approve` (see below).
+was auto-cancelled headlessly; you forgot `--always-approve` (see below).
 
-## Permissions — the headless gotcha
+## Permissions: the headless gotcha
 
 **Use `--always-approve` for headless dispatch. Do NOT rely on
 `--permission-mode acceptEdits`.**
 
-Verified 2026-07-09: `--permission-mode acceptEdits` FAILS headlessly — the edit tool
+Verified 2026-07-09: `--permission-mode acceptEdits` FAILS headlessly; the edit tool
 hits a permission gate with no interactive approver, and the run returns
 `stopReason: "Cancelled"` with no file change. `--always-approve` auto-approves BOTH
 edits AND shell commands in one flag (Grok ran the acceptance test itself in the same
 run). A clean tree, prompt constraints and later diff review are not a sandbox. The flag also authorizes shell commands and their side effects, including access outside the worktree. Require a separately verified OS/container sandbox, minimal credentials/network and explicit approval for the whole effective capability scope; otherwise do not dispatch headlessly.
 
 Optional hardening: `--sandbox <profile>` (env `GROK_SANDBOX`) restricts filesystem and
-network access — layer it on for untrusted repos.
+network access; layer it on for untrusted repos.
 
 ## Resume / fix-up
 
@@ -53,16 +53,16 @@ network access — layer it on for untrusted repos.
 grok --resume <sessionId> -p "specific feedback" --always-approve --output-format json
 ```
 
-Verified: the resumed session retains full context — it knows the repo and files touched
+Verified: the resumed session retains full context; it knows the repo and files touched
 without re-explanation. Pass only the specific feedback, not the whole task again.
 
-## Self-verification (`--check`) — opt-in only
+## Self-verification (`--check`): opt-in only
 
 `--check` appends a self-verification loop: Grok spawns a verifier subagent that emits a
 checklist, action trace, scope/edge-case evaluation, and its own `VERDICT: PASS`.
 
 Verified: correct but ~doubles wall-clock (a trivial task went from a few seconds to
-~48s) and adds token cost, undercutting Grok's speed/cost advantage. Skip it by default —
+~48s) and adds token cost, undercutting Grok's speed/cost advantage. Skip it by default -
 the orchestrator's review gate is the authority. Add `--check` only for high-stakes tasks
 where you want Grok to self-correct before review.
 
@@ -79,9 +79,9 @@ grok update        # installs latest stable
 | Flag | Purpose |
 |---|---|
 | `--always-approve` | Auto-approve all tool executions (edits + shell). **Required for headless.** |
-| `--permission-mode <m>` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan` — but see gotcha above |
+| `--permission-mode <m>` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan`; but see gotcha above |
 | `--allow` / `--deny` | Fine-grained permission rules (Claude Code `--allowedTools` syntax) |
-| `--max-turns <N>` | Turn cap — always set for headless runs |
+| `--max-turns <N>` | Turn cap; always set for headless runs |
 | `--check` | Appends a self-verification loop (opt-in; see above) |
 | `--worktree[=name]` | Run in a fresh git worktree (parallel tasks) |
 | `--json-schema '<schema>'` | Constrain final output to a JSON Schema |

@@ -10,7 +10,7 @@ license: Apache-2.0
 license_source: https://github.com/chaunsin/agent-skills/blob/master/LICENSE
 ---
 
-# rclone — The Swiss Army Knife of Cloud Storage
+# rclone: The Swiss Army Knife of Cloud Storage
 ## When to Use
 
 Use this skill when you need rclone command-line cloud storage manager reference and usage guide. Use this skill whenever the user mentions rclone, or any task involving terminal-based cloud file operations such as upload, download, sync, copy, move, mount, or remote management. Triggers on S3-compatible storage,...
@@ -40,9 +40,9 @@ If missing, stop the executable workflow and report the prerequisite. A separate
 - **Always use `--dry-run` first** when running `sync`, `move`, `delete`, or `purge` commands. This shows what would happen without actually doing it.
 - **Use `--interactive` / `-i` flag** while learning rclone to avoid accidental data loss. It asks for confirmation before each destructive operation.
 - **Never expose credentials in plain text** on the command line. Use an interactive configuration flow and restrict access to its file; default password obscuring is reversible, not secure encryption. Environment variables can also leak through logs or process inspection.
-- **Private keys and tokens** (S3 secret keys, service account JSON, OAuth tokens) must never be committed to version control or logged. The config file `~/.config/rclone/rclone.conf` contains sensitive data — protect it with `chmod 600`.
-- **`rclone purge` ignores all filters** — it deletes everything under the specified path. Use with extreme caution.
-- **`rclone sync` makes dest identical to source** — files in dest that are not in source will be DELETED. Always verify with `--dry-run` first.
+- **Private keys and tokens** (S3 secret keys, service account JSON, OAuth tokens) must never be committed to version control or logged. The config file `~/.config/rclone/rclone.conf` contains sensitive data; protect it with `chmod 600`.
+- **`rclone purge` ignores all filters**; it deletes everything under the specified path. Use with extreme caution.
+- **`rclone sync` makes dest identical to source**; files in dest that are not in source will be DELETED. Always verify with `--dry-run` first.
 - **Remote control API** (`--rc`) should bind to loopback. For deliberate remote access, require authentication (for example `--rc-htpasswd`), TLS and network restrictions; it can expose powerful operations.
 - **Mount operations** can cause data loss if the mount is interrupted during writes. `--vfs-cache-mode full` can support writes but requires adequate local disk and successful upload/flush; it is not a durability guarantee.
 
@@ -94,7 +94,7 @@ rclone copy /local/path remote:path      # local to remote
 rclone copy remote:path /local/path      # remote to local
 rclone copy remote1:path remote2:path    # remote to remote (server-side if possible)
 
-# Sync (makes destination identical to source — DELETES extra files at dest)
+# Sync (makes destination identical to source: DELETES extra files at dest)
 rclone sync --dry-run /local/path remote:path    # ALWAYS dry-run first!
 rclone sync -i /local/path remote:path           # interactive mode
 
@@ -224,7 +224,7 @@ rclone serve docker remote:path           # Docker volume plugin API (not a regi
 rclone config
 # Choose "crypt" type, point to an existing remote (e.g., "drive:private")
 
-# Use crypt remote — files are encrypted/decrypted transparently
+# Use crypt remote: files are encrypted/decrypted transparently
 rclone copy /local/files crypt:path
 rclone ls crypt:path
 
@@ -267,28 +267,28 @@ For configuring specific cloud storage providers, read the corresponding file in
 `crypt`, `cache`, `chunker`, `union`, `combine`, and `hasher`, live as top-level
 files in `references/` because they are cross-provider backends rather than
 single cloud services.
-- `s3.md` — Amazon S3 / compatible ([Official](https://rclone.org/s3/))
-- `drive.md` — Google Drive ([Official](https://rclone.org/drive/))
-- `dropbox.md` — Dropbox ([Official](https://rclone.org/dropbox/))
-- `onedrive.md` — Microsoft OneDrive ([Official](https://rclone.org/onedrive/))
-- `azureblob.md` — Azure Blob Storage ([Official](https://rclone.org/azureblob/))
-- `b2.md` — Backblaze B2 ([Official](https://rclone.org/b2/))
-- `googlecloudstorage.md` — Google Cloud Storage ([Official](https://rclone.org/googlecloudstorage/))
-- `sftp.md` — SFTP ([Official](https://rclone.org/sftp/))
-- `webdav.md` — WebDAV ([Official](https://rclone.org/webdav/))
-- `swift.md` — OpenStack Swift ([Official](https://rclone.org/swift/))
-- `ftp.md` — FTP ([Official](https://rclone.org/ftp/))
-- And 60+ more providers — each has a page at `https://rclone.org/<name>/`
+- `s3.md`; Amazon S3 / compatible ([Official](https://rclone.org/s3/))
+- `drive.md`; Google Drive ([Official](https://rclone.org/drive/))
+- `dropbox.md`; Dropbox ([Official](https://rclone.org/dropbox/))
+- `onedrive.md`; Microsoft OneDrive ([Official](https://rclone.org/onedrive/))
+- `azureblob.md`; Azure Blob Storage ([Official](https://rclone.org/azureblob/))
+- `b2.md`; Backblaze B2 ([Official](https://rclone.org/b2/))
+- `googlecloudstorage.md`; Google Cloud Storage ([Official](https://rclone.org/googlecloudstorage/))
+- `sftp.md`; SFTP ([Official](https://rclone.org/sftp/))
+- `webdav.md`; WebDAV ([Official](https://rclone.org/webdav/))
+- `swift.md`; OpenStack Swift ([Official](https://rclone.org/swift/))
+- `ftp.md`; FTP ([Official](https://rclone.org/ftp/))
+- And 60+ more providers; each has a page at `https://rclone.org/<name>/`
 
 ### Command References
 
 For detailed command documentation, read the corresponding file in `references/commands/`:
-- `rclone_copy.md`, `rclone_sync.md`, `rclone_move.md` — transfer commands
-- `rclone_mount.md` — FUSE mount
-- `rclone_serve_*.md` — various serve modes
-- `rclone_config*.md` — configuration management
-- `rclone_bisync.md` — bidirectional sync
-- And 80+ more commands — each has a page at `https://rclone.org/commands/<command>/`
+- `rclone_copy.md`, `rclone_sync.md`, `rclone_move.md`; transfer commands
+- `rclone_mount.md`; FUSE mount
+- `rclone_serve_*.md`; various serve modes
+- `rclone_config*.md`; configuration management
+- `rclone_bisync.md`; bidirectional sync
+- And 80+ more commands; each has a page at `https://rclone.org/commands/<command>/`
 
 ## Common Workflows
 

@@ -19,11 +19,11 @@ You are generating output schema files for an Apify Actor. The output schema tel
 
 ## Core principles
 
-- **Analyze code first**: Read the Actor's source to understand what data it actually pushes to the dataset — never guess
+- **Analyze code first**: Read the Actor's source to understand what data it actually pushes to the dataset; never guess
 - **Derive nullability from evidence**: Missing, null and guaranteed fields differ; preserve actual type/runtime contracts and verify Apify validator support.
 - **Anonymize examples**: Never use real user IDs, usernames, or personal data in examples
 - **Verify against code**: If TypeScript types exist, cross-check the schema against both the type definition AND the code that produces the values
-- **Reuse existing patterns**: Before generating schemas, check if other Actors in the same repository already have output schemas — match their structure, naming conventions, description style, and formatting
+- **Reuse existing patterns**: Before generating schemas, check if other Actors in the same repository already have output schemas; match their structure, naming conventions, description style, and formatting
 - **Don't reinvent the wheel**: Reuse existing type definitions, interfaces, and utilities from the codebase instead of creating duplicate definitions
 
 ---
@@ -39,17 +39,17 @@ Initial request: $ARGUMENTS
 2. Find the `.actor/` directory containing `actor.json`
 3. Read `actor.json` to understand the Actor's configuration
 4. Check if `dataset_schema.json`, `output_schema.json`, and `key_value_store_schema.json` already exist
-5. **Search for existing schemas in the repository**: Look for other `.actor/` directories or schema files (e.g., `**/dataset_schema.json`, `**/output_schema.json`, `**/key_value_store_schema.json`) to learn the repo's conventions — match their description style, field naming, example formatting, and overall structure
+5. **Search for existing schemas in the repository**: Look for other `.actor/` directories or schema files (e.g., `**/dataset_schema.json`, `**/output_schema.json`, `**/key_value_store_schema.json`) to learn the repo's conventions; match their description style, field naming, example formatting, and overall structure
 6. Find all places where data is pushed to the dataset:
    - **JavaScript/TypeScript**: Search for `Actor.pushData(`, `dataset.pushData(`, `Dataset.pushData(`
    - **Python**: Search for `Actor.push_data(`, `dataset.push_data(`, `Dataset.push_data(`
 7. Find all places where data is stored in the key-value store:
    - **JavaScript/TypeScript**: Search for `Actor.setValue(`, `keyValueStore.setValue(`, `KeyValueStore.setValue(`
    - **Python**: Search for `Actor.set_value(`, `key_value_store.set_value(`, `KeyValueStore.set_value(`
-8. Find output type definitions — **reuse them directly** instead of recreating from scratch:
-   - **TypeScript**: Look for output type interfaces/types (e.g., in `src/types/`, `src/types/output.ts`). If an interface or type already defines the output shape, derive the schema fields from it — do not create a parallel definition
+8. Find output type definitions; **reuse them directly** instead of recreating from scratch:
+   - **TypeScript**: Look for output type interfaces/types (e.g., in `src/types/`, `src/types/output.ts`). If an interface or type already defines the output shape, derive the schema fields from it; do not create a parallel definition
    - **Python**: Look for TypedDict, dataclass, or Pydantic model definitions. Use the existing field names, types, and docstrings as the source of truth
-9. Check for existing shared schema utilities or helper functions in the codebase that handle schema generation or validation — reuse them rather than creating new logic
+9. Check for existing shared schema utilities or helper functions in the codebase that handle schema generation or validation; reuse them rather than creating new logic
 10. If inline `storages.dataset` or `storages.keyValueStore` config exists in `actor.json`, note it for migration
 
 Present findings to user: list all discovered dataset output fields, key-value store keys, their types, and where they come from.
@@ -69,7 +69,7 @@ Present findings to user: list all discovered dataset output fields, key-value s
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
-            // ALL output fields here — every field the Actor can produce,
+            // ALL output fields here; every field the Actor can produce,
             // not just the ones shown in the overview view
         },
         "required": [],
@@ -99,10 +99,10 @@ Present findings to user: list all discovered dataset output fields, key-value s
 
 If existing output schemas were found in the repository during Phase 1 (step 5), follow their conventions:
 - Match the **description writing style** (sentence case vs. lowercase, period vs. no period, etc.)
-- Match the **field naming convention** (camelCase vs. snake_case) — this must also match the actual keys produced by the Actor code
+- Match the **field naming convention** (camelCase vs. snake_case); this must also match the actual keys produced by the Actor code
 - Match the **example value style** (e.g., date formats, URL patterns, placeholder names)
 - Match the **view structure** (number of fields in overview, display format choices)
-- Match the **JSON formatting** (indentation, property ordering, spacing) — all schemas in the same repository must use identical formatting, including standalone Actors
+- Match the **JSON formatting** (indentation, property ordering, spacing); all schemas in the same repository must use identical formatting, including standalone Actors
 
 When the Actor code already has well-defined TypeScript interfaces or Python type classes, derive fields directly from those types rather than re-analyzing pushData/push_data calls from scratch. Types guide inference, but verify serialized output and all runtime branches; annotations may be stale.
 
@@ -110,14 +110,14 @@ When the Actor code already has well-defined TypeScript interfaces or Python typ
 
 | Rule | Detail |
 |------|--------|
-| **All fields in `properties`** | The `fields.properties` object must contain **every** field the Actor can output, not just the fields shown in the overview view. The views section selects a subset for display — the `properties` section must be the complete superset |
+| **All fields in `properties`** | The `fields.properties` object must contain **every** field the Actor can output, not just the fields shown in the overview view. The views section selects a subset for display; the `properties` section must be the complete superset |
 | Nullability | Represent actual nullability; do not weaken guaranteed fields automatically |
 | `additionalProperties` | Choose from the actual extensibility contract; permissiveness is not always correct |
 | `required` | Derived from actual guaranteed fields; optional and nullable are separate |
 | Anonymized examples | No real user IDs, usernames, or content |
 | `"type"` required with `"nullable"` | AJV rejects `nullable` without a `type` on the same field |
 
-> **Warning — most common mistakes**:
+> **Warning; most common mistakes**:
 > 1. Only including fields that appear in the overview view. The `fields.properties` must list ALL output fields, even if they are not in the `views` section.
 > 2. Only adding `"required": []` and `"additionalProperties": true` on nested object-type properties but forgetting them on the top-level `fields` object. Both levels need them.
 
@@ -237,7 +237,7 @@ Pick fields that give users the most useful at-a-glance summary of the data.
 ```json
 {
     "actorKeyValueStoreSchemaVersion": 1,
-    "title": "<Descriptive title — what the key-value store contains>",
+    "title": "<Descriptive title; what the key-value store contains>",
     "description": "<One sentence describing the stored data>",
     "collections": {
         "<collectionName>": {
@@ -253,8 +253,8 @@ Pick fields that give users the most useful at-a-glance summary of the data.
 
 Group the discovered `setValue` / `set_value` calls by key pattern:
 
-1. **Fixed keys** (e.g., `"RESULTS"`, `"summary"`) — use `"key"` (exact match)
-2. **Dynamic keys with a prefix** (e.g., `"screenshot-${id}"`, `f"image-{name}"`) — use `"keyPrefix"`
+1. **Fixed keys** (e.g., `"RESULTS"`, `"summary"`); use `"key"` (exact match)
+2. **Dynamic keys with a prefix** (e.g., `"screenshot-${id}"`, `f"image-{name}"`); use `"keyPrefix"`
 
 Each group becomes a collection.
 
@@ -322,7 +322,7 @@ For most Actors that push data to a dataset, this is a minimal file:
 ```json
 {
     "actorOutputSchemaVersion": 1,
-    "title": "<Descriptive title — what the Actor returns>",
+    "title": "<Descriptive title; what the Actor returns>",
     "description": "<One sentence describing the output data>",
     "properties": {
         "dataset": {
@@ -335,7 +335,7 @@ For most Actors that push data to a dataset, this is a minimal file:
 }
 ```
 
-> **Critical**: Each property entry **must** include `"type": "string"` — this is an Apify-specific convention. The Apify meta-validator rejects properties without it (and rejects `"type": "object"` — only `"string"` is valid here).
+> **Critical**: Each property entry **must** include `"type": "string"`; this is an Apify-specific convention. The Apify meta-validator rejects properties without it (and rejects `"type": "object"`; only `"string"` is valid here).
 
 If `key_value_store_schema.json` was generated in Phase 3, add a second property:
 ```jsonc
@@ -349,14 +349,14 @@ If `key_value_store_schema.json` was generated in Phase 3, add a second property
 
 ### Available template variables
 
-- `{{links.apiDefaultDatasetUrl}}` — API URL of default dataset
-- `{{links.apiDefaultKeyValueStoreUrl}}` — API URL of default key-value store
-- `{{links.publicRunUrl}}` — Public run URL
-- `{{links.consoleRunUrl}}` — Console run URL
-- `{{links.apiRunUrl}}` — API run URL
-- `{{links.containerRunUrl}}` — URL of webserver running inside the run
-- `{{run.defaultDatasetId}}` — ID of the default dataset
-- `{{run.defaultKeyValueStoreId}}` — ID of the default key-value store
+- `{{links.apiDefaultDatasetUrl}}`; API URL of default dataset
+- `{{links.apiDefaultKeyValueStoreUrl}}`; API URL of default key-value store
+- `{{links.publicRunUrl}}`; Public run URL
+- `{{links.consoleRunUrl}}`; Console run URL
+- `{{links.apiRunUrl}}`; API run URL
+- `{{links.containerRunUrl}}`; URL of webserver running inside the run
+- `{{run.defaultDatasetId}}`; ID of the default dataset
+- `{{run.defaultKeyValueStoreId}}`; ID of the default key-value store
 
 ---
 
@@ -392,7 +392,7 @@ If `key_value_store_schema.json` was generated in Phase 3, add a second property
 **Goal**: Ensure correctness and completeness
 
 **Checklist**:
-- [ ] **Every** output field from the source code is in `dataset_schema.json` `fields.properties` — not just the overview view fields but ALL fields the Actor can produce
+- [ ] **Every** output field from the source code is in `dataset_schema.json` `fields.properties`; not just the overview view fields but ALL fields the Actor can produce
 - [ ] Nullability matches actual emitted data and the installed validator
 - [ ] Top-level required and extensibility rules match the output contract
 - [ ] Nested objects preserve their actual required/extensibility contract
@@ -406,7 +406,7 @@ If `key_value_store_schema.json` was generated in Phase 3, add a second property
 - [ ] `actor.json` references all generated schema files
 - [ ] Schema field names match the actual keys in the code (camelCase/snake_case consistency)
 - [ ] If existing schemas were found in the repo, the new schema follows their conventions (description style, example format, view structure)
-- [ ] Schema fields are derived from existing type definitions (interfaces, TypedDicts, dataclasses) where available — no duplicated or divergent field definitions
+- [ ] Schema fields are derived from existing type definitions (interfaces, TypedDicts, dataclasses) where available; no duplicated or divergent field definitions
 
 When schema edits were requested, write a reviewable local source diff and report unresolved fields; obtain publication/deployment approval only if it is not already authorized.
 

@@ -395,7 +395,7 @@ cipher = AES.new(key, AES.MODE_CBC, iv=iv)
 plaintext = cipher.decrypt(ct)
 ```
 
-**Key insight:** When `RijndaelManaged` appears in .NET decompilation, check if Key and IV are set to the same value — this is a common CTF pattern. The XOR stage often serves as a simple obfuscation layer before the real crypto.
+**Key insight:** When `RijndaelManaged` appears in .NET decompilation, check if Key and IV are set to the same value; this is a common CTF pattern. The XOR stage often serves as a simple obfuscation layer before the real crypto.
 
 ---
 
@@ -462,11 +462,11 @@ for insn in md.disasm(code[TEXT_OFFSET:TEXT_OFFSET + TEXT_SIZE], TEXT_VADDR):
 - `addiw` → 32-bit add (W-suffix = word operations)
 
 **Key differences from x86:**
-- No flags register — comparisons are inline with branch instructions
+- No flags register; comparisons are inline with branch instructions
 - Arguments in a0-a7 (not rdi/rsi/rdx)
 - Return value in a0
 - Saved registers s0-s11 (callee-saved)
-- Compressed instructions (2 bytes) mixed with standard (4 bytes) — use `CS_MODE_RISCVC`
+- Compressed instructions (2 bytes) mixed with standard (4 bytes); use `CS_MODE_RISCVC`
 
 **Anti-RE tricks in RISC-V:**
 - Fake flags as string constants (check for `"n0t_th3_r34l"` patterns)
@@ -512,8 +512,8 @@ for func in bv.functions:
 **Supported decompilers:** Hex-Rays (IDA), Ghidra, Binary Ninja, angr, RetDec, Snowman, dewolf, Reko, Relyze.
 
 **When to use:**
-- Decompiler output is confusing — compare with alternatives for clarity
-- One decompiler mishandles a construct — another may get it right
+- Decompiler output is confusing; compare with alternatives for clarity
+- One decompiler mishandles a construct; another may get it right
 - Quick triage without installing every tool locally
 - Validate decompiler correctness by cross-referencing outputs
 

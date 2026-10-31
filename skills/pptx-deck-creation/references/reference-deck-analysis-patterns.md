@@ -1,7 +1,7 @@
 # Reference-Deck Analysis Patterns
 
 It describes how to approach PPTX extraction and style analysis with `python-pptx`, using short illustrative
-snippets — not a packaged module to copy wholesale.
+snippets; not a packaged module to copy wholesale.
 
 - Do not treat these snippets as bundled runtime modules.
 - Do not import from this file or recreate `.py` files under this skill as packaged resources.
@@ -55,7 +55,7 @@ def analyze(presentation) -> dict:
 
 ### Key helper patterns
 
-- **Recursive shape walk** — yield each shape, then recurse when it exposes `.shapes`:
+- **Recursive shape walk**; yield each shape, then recurse when it exposes `.shapes`:
 
   ```python
   def _iter_shapes(shapes):
@@ -65,12 +65,12 @@ def analyze(presentation) -> dict:
               yield from _iter_shapes(shape.shapes)
   ```
 
-- **Color normalization** — read `color.rgb`, fall back to `theme_color`, and
+- **Color normalization**; read `color.rgb`, fall back to `theme_color`, and
   normalize to `#RRGGBB` or `theme:<token>`.
-- **Region/flow classification** — bucket each shape's bbox center into
+- **Region/flow classification**; bucket each shape's bbox center into
   `top/middle/bottom` × `left/center/right`, and infer `row` / `column` / `grid`
   from the spread of centers.
-- **Neutral filtering** — treat colors with low channel spread (`max-min <= 18`)
+- **Neutral filtering**; treat colors with low channel spread (`max-min <= 18`)
   as neutrals so brand accents rank above grays.
 
 ## Extractor: structured deck capture
@@ -112,23 +112,23 @@ def _kind(shape, shape_type: str) -> str:
 
 ### Kind-specific content notes
 
-- **text** — capture `text` plus rich paragraphs (runs with font size, bold,
+- **text**; capture `text` plus rich paragraphs (runs with font size, bold,
   italic, color, hyperlink, paragraph alignment/level).
-- **table** — emit `rows`, plus row/col counts, widths/heights, banding flags,
+- **table**; emit `rows`, plus row/col counts, widths/heights, banding flags,
   and merged-cell origins (`span_rows` / `span_cols`).
-- **image** — record alt text, crop fractions, and either a written asset path
+- **image**; record alt text, crop fractions, and either a written asset path
   or base64 blob; flag `missing_embedded_image` when the blob is absent.
-- **chart** — record `chart_type`, optional title, categories, and series values.
-- **line / connector** — derive endpoints from the bbox plus flip flags, and read
+- **chart**; record `chart_type`, optional title, categories, and series values.
+- **line / connector**; derive endpoints from the bbox plus flip flags, and read
   arrow head/tail types from the `<a:ln>` element.
 
 ### Media & notes helpers
 
-- **Embedded relationship ids** — iterate the shape element and collect attributes
+- **Embedded relationship ids**; iterate the shape element and collect attributes
   ending in `}embed`, then resolve via `shape.part.related_part(rid)`.
-- **Package media counts** — open the `.pptx` with `zipfile` and count names under
+- **Package media counts**; open the `.pptx` with `zipfile` and count names under
   `ppt/media/` and `ppt/embeddings/`.
-- **Notes** — parse each `ppt/slides/_rels/slideN.xml.rels`, follow the
+- **Notes**; parse each `ppt/slides/_rels/slideN.xml.rels`, follow the
   `notesSlide` relationship, and join `<a:t>` text nodes.
 
 ## Safe attribute access

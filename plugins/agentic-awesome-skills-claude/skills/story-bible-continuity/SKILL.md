@@ -27,8 +27,8 @@ drifted. A modern smartphone appears in a scene set in 1998. A planted key is ne
 author discovers it at chapter 60 while the reader noticed at chapter 20.
 
 Re-reading the draft does not catch these, because re-reading is the same
-memory that produced them. The fix is a **story bible** — the story's facts as
-data — plus a checker that compares prose against it mechanically. Facts are
+memory that produced them. The fix is a **story bible**; the story's facts as
+data; plus a checker that compares prose against it mechanically. Facts are
 cheap to check. Vibes are not.
 
 This skill is the checker and the adjudication discipline around it. It does
@@ -48,7 +48,7 @@ Use this skill when:
 - a model-written draft has to be checked against facts the writer established
   earlier, not against what the model believes the story is.
 
-Do **not** use it to judge quality, pacing, voice, or plot logic — see
+Do **not** use it to judge quality, pacing, voice, or plot logic; see
 Limitations.
 
 ## The bible
@@ -92,7 +92,7 @@ python3 sbc.py check bible.json manuscript/ --fail-on warn
 ```
 
 Exit 0 = clean or warnings only, 1 = errors, 2 = usage. Chapter files are
-recognised as `ch01.md`, `003_draft.txt`, `第3章.md` — anything with a number,
+recognised as `ch01.md`, `003_draft.txt`, `第3章.md`; anything with a number,
 `.md`/`.txt`, sorted by that number.
 
 | Check | Severity | What it proves |
@@ -106,7 +106,7 @@ recognised as `ch01.md`, `003_draft.txt`, `第3章.md` — anything with a numbe
 
 ## The adjudication
 
-Every hit is one of three things, and the skill decides which — never silently
+Every hit is one of three things, and the skill decides which; never silently
 picks one:
 
 1. **Manuscript bug** → fix the prose. The bible is the record of what earlier
@@ -128,7 +128,7 @@ Say this out loud rather than implying full coverage. It does not judge plot
 logic, motivation, pacing, voice, or whether a name is *deliberately* reused.
 `name-drift` only fires on declared spellings and on speaker position, so a
 mistyped name mid-sentence passes. `pov-leak` is heuristic. Continuity that
-needs semantic judgement — "would this character know that by now?" — is a
+needs semantic judgement; "would this character know that by now?"; is a
 reading task, and the honest answer is to read the two chapters side by side,
 not to claim the script covered it.
 
@@ -145,7 +145,7 @@ reports exactly those two issues and exits 1 (deterministic, ~1s, no model).
 Then run `python3 sbc.py check` on the real manuscript and paste the summary line
 (`N error(s), M warning(s)`) with the verdicts you assigned. A clean run on an
 empty folder, or a run whose only output is "0 errors" on a bible with no
-characters, proves nothing — check that the bible actually has entries and the
+characters, proves nothing; check that the bible actually has entries and the
 chapter count matches the folder.
 
 ## Checker input and coverage limits

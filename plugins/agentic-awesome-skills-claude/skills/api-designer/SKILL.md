@@ -58,12 +58,12 @@ First list down all the endpoints one after another as output then expand each i
 **Request Body** *(omit for GET/DELETE if no body)*
 ```json
 {
-  "field": "type — description",
-  "field2": "type — description"
+  "field": "type; description",
+  "field2": "type; description"
 }
 ```
 
-**Success Response** — `STATUS_CODE Description`
+**Success Response**; `STATUS_CODE Description`
 ```json
 {
   "field": "value or type"
@@ -73,12 +73,12 @@ First list down all the endpoints one after another as output then expand each i
 **Error Codes**
 | Code | Meaning |
 |------|---------|
-| `400` | Bad Request — invalid or missing fields |
-| `401` | Unauthorized — missing or invalid token |
-| `403` | Forbidden — insufficient permissions |
+| `400` | Bad Request; invalid or missing fields |
+| `401` | Unauthorized; missing or invalid token |
+| `403` | Forbidden; insufficient permissions |
 | `404` | Not Found |
-| `409` | Conflict — e.g. duplicate resource |
-| `422` | Unprocessable Entity — validation failed |
+| `409` | Conflict; e.g. duplicate resource |
+| `422` | Unprocessable Entity; validation failed |
 | `500` | Internal Server Error |
 
 ---
@@ -95,7 +95,7 @@ Specify object/tenant authorization, input and size bounds, rate limits, sensiti
 4. **Auth**: Default to Bearer token (JWT) for protected routes. Add API key header where relevant (e.g. third-party integrations). Mark public endpoints clearly.
 5. **Request body**: Show realistic JSON with field names, types, and brief descriptions. Mark required versus optional fields in prose tables or JSON Schema, not comments inside JSON.
 6. **Responses**: Show the success response shape with realistic fields. Always include the HTTP status code.
-7. **Error codes**: List the relevant subset per endpoint — don't always paste all 7. Use judgement.
+7. **Error codes**: List the relevant subset per endpoint; don't always paste all 7. Use judgement.
 8. **Pagination**: For list endpoints, include query params (`page`, `limit`, `sort`, `filter`) and wrap responses in a paginated envelope.
 9. **Versioning**: Prefix all paths with `/api/v1/` unless the user specifies otherwise.
 10. **Group endpoints** by resource (e.g. "Authentication", "Hotels", "Rooms", "Bookings", "Payments", "Reviews").
@@ -168,7 +168,7 @@ If the user says **no**:
 
 ## Tone & Length
 
-- Be **comprehensive but scannable** — use tables and code blocks consistently.
+- Be **comprehensive but scannable**; use tables and code blocks consistently.
 - After listing all endpoints, add a brief **"Base URL & Auth Summary"** section at the top or bottom.
 - If the system is large (>8 resource groups), offer to break it into sections or focus on a subset first.
 - Ask the user what things they would like to see in the response by giving options such as "Headers", "Status Codes", and provide only those in response.

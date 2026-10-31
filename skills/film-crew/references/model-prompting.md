@@ -49,7 +49,7 @@ rewriting ("prompt enhancement") turned on.
 ## Veo (and other models that generate audio)
 
 - Write sound explicitly, as its own sentence(s):
-  - Dialogue: `The barista says, "Sorry — my fault."`
+  - Dialogue: `The barista says, "Sorry; my fault."`
   - SFX: `SFX: paper cup hits tile, liquid splash.`
   - Ambience: `Ambient café murmur, espresso machine hiss.`
 - Keep dialogue short (one line per shot). Long lines drift out of sync.

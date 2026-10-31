@@ -171,9 +171,9 @@ class ProjectService:
 
 ### Security Requirements
 
-1. **RBAC Authentication**: Use `DefaultAzureCredential` in Azure — never store keys in code
+1. **RBAC Authentication**: Use `DefaultAzureCredential` in Azure; never store keys in code
 2. **Emulator-Only Keys**: Hardcode the well-known emulator key only for local development
-3. **Parameterized Queries**: Always use `@parameter` syntax — never string concatenation
+3. **Parameterized Queries**: Always use `@parameter` syntax; never string concatenation
 4. **Partition Key Validation**: Validate partition key access matches user authorization
 
 ### Clean Code Conventions

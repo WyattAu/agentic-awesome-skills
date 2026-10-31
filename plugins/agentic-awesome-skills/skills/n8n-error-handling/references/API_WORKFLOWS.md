@@ -1,6 +1,6 @@
 # API Workflows
 
-When a workflow is an HTTP API — a Webhook trigger that ends at a `Respond to Webhook` — error handling stops being optional. The caller is a machine waiting on a response, and the failure modes are unforgiving: a hanging branch becomes a timeout, a wrong status code breaks the caller's error handling, a leaked stack trace becomes a security finding.
+When a workflow is an HTTP API; a Webhook trigger that ends at a `Respond to Webhook`; error handling stops being optional. The caller is a machine waiting on a response, and the failure modes are unforgiving: a hanging branch becomes a timeout, a wrong status code breaks the caller's error handling, a leaked stack trace becomes a security finding.
 
 This file covers wiring that pattern so it behaves under failure, not just on the happy path. For the per-node mechanics, see **NODE_ERROR_OUTPUTS.md**; for body conventions and status codes, **RESPONSE_SHAPES.md**.
 
@@ -17,9 +17,9 @@ Webhook (responseMode: "responseNode")
             → optional: Log redacted diagnostics privately / notify
 ```
 
-The non-negotiable: **every path ends at a Respond node.** Success, validation failure, execution failure — all of them. A path that doesn't reach a Respond is a hanging branch, and a hanging branch is a caller timeout.
+The non-negotiable: **every path ends at a Respond node.** Success, validation failure, execution failure; all of them. A path that doesn't reach a Respond is a hanging branch, and a hanging branch is a caller timeout.
 
-Set `responseMode: "responseNode"` on the Webhook trigger — without it the trigger acknowledges immediately (`onReceived`) and the caller never sees your computed response. (See **n8n-node-configuration** NODE_FAMILY_GOTCHAS.md for the Webhook/Respond traps.)
+Set `responseMode: "responseNode"` on the Webhook trigger; without it the trigger acknowledges immediately (`onReceived`) and the caller never sees your computed response. (See **n8n-node-configuration** NODE_FAMILY_GOTCHAS.md for the Webhook/Respond traps.)
 
 ---
 
@@ -42,7 +42,7 @@ A two-node processing chain, both fallible, both routing to one responder:
 { type: "addConnection", source: "Fetch User",   target: "Call External",   sourceIndex: 0 }
 { type: "addConnection", source: "Call External",target: "Respond Success", sourceIndex: 0 }
 
-// Error paths — both fan in to one responder
+// Error paths; both fan in to one responder
 { type: "addConnection", source: "Fetch User",   target: "Respond Error",   sourceIndex: 1 }
 { type: "addConnection", source: "Call External",target: "Respond Error",   sourceIndex: 1 }
 ```
@@ -50,7 +50,7 @@ A two-node processing chain, both fallible, both routing to one responder:
 Three things to notice:
 
 1. **One `Respond Error` for many sources.** Fan-in keeps it readable.
-2. **Both nodes have `onError` set.** Miss it on either and that node's failure halts the workflow instead of routing — and the caller times out.
+2. **Both nodes have `onError` set.** Miss it on either and that node's failure halts the workflow instead of routing; and the caller times out.
 3. **If you surface the error message in the body, sanitize it.** See "Don't leak internals" below.
 
 The error Respond node, in JSON:
@@ -70,7 +70,7 @@ The error Respond node, in JSON:
 }
 ```
 
-Always set `Content-Type: application/json` explicitly — the default depends on the body shape and isn't reliable.
+Always set `Content-Type: application/json` explicitly; the default depends on the body shape and isn't reliable.
 
 ---
 
@@ -92,7 +92,7 @@ Webhook
   → Processing stage (HTTP / DB / etc.) ←── this is where 5xx errors originate
 ```
 
-That's not over-engineering — it's the difference between the caller getting an actionable `validation_error` and getting a generic 500 they can't act on.
+That's not over-engineering; it's the difference between the caller getting an actionable `validation_error` and getting a generic 500 they can't act on.
 
 ---
 
@@ -100,7 +100,7 @@ That's not over-engineering — it's the difference between the caller getting a
 
 For structured input validation, don't hand-roll an IF chain per field. Run the whole check as an **IIFE inside a single Set node**, branch on its result with one IF, and respond. One node does the work, and validate the actual constraints; no performance advantage is established here.
 
-The validator node assigns one object field, `result`, computed by the expression below. The expression is **schema-specific** — edit the `REQUIRED_SCHEMA` constant and the per-field checks for your endpoint. The *output keys* are a contract the Respond node consumes — don't rename them.
+The validator node assigns one object field, `result`, computed by the expression below. The expression is **schema-specific**; edit the `REQUIRED_SCHEMA` constant and the per-field checks for your endpoint. The *output keys* are a contract the Respond node consumes; don't rename them.
 
 ```json
 {
@@ -148,7 +148,7 @@ The output contract:
 - Valid: `{ valid: true, validationError: null }`
 - Invalid: `{ valid: false, validationError: <summary string>, details: { <field>: <message> }, requiredSchema: <schema echoed back> }`
 
-Echoing the schema back lets the caller — or an LLM driving the call — self-correct.
+Echoing the schema back lets the caller; or an LLM driving the call; self-correct.
 
 ### Constraint cookbook
 
@@ -165,7 +165,7 @@ Echoing the schema back lets the caller — or an LLM driving the call — self-
 
 ### The escaping gotcha (regex backslashes)
 
-Inside a JSON `responseBody`/`value` string, a regex like `\S` in the `REQUIRED_SCHEMA` literal needs **four** backslashes (`^\\\\S+...`) because it survives two layers of escaping — JSON string → JS string. The regex literal *executed* inside the IIFE (`/^\\S+@\\S+\\.\\S+$/`) needs only two per `\S`. If your email validation silently never matches, this is why.
+Inside a JSON `responseBody`/`value` string, a regex like `\S` in the `REQUIRED_SCHEMA` literal needs **four** backslashes (`^\\\\S+...`) because it survives two layers of escaping; JSON string → JS string. The regex literal *executed* inside the IIFE (`/^\\S+@\\S+\\.\\S+$/`) needs only two per `\S`. If your email validation silently never matches, this is why.
 
 ---
 
@@ -224,10 +224,10 @@ The caller sees a clean message; the detail stays internal. Full do-not-leak lis
 
 If you run distributed tracing or log correlation, add a `request_id` consistently across **every** success and error response (partial coverage is worse than none). Two sources:
 
-- **Caller-supplied** — read an `X-Request-ID` header, pass it through. Better for tracing across systems.
-- **Generated** — use `{{ $execution.id }}` or a UUID. Easier.
+- **Caller-supplied**; read an `X-Request-ID` header, pass it through. Better for tracing across systems.
+- **Generated**; use `{{ $execution.id }}` or a UUID. Easier.
 
-Don't conflate this with the `job_id` an async (202) endpoint returns — that's how the caller polls for work later, not a correlation field.
+Don't conflate this with the `job_id` an async (202) endpoint returns; that's how the caller polls for work later, not a correlation field.
 
 ---
 
@@ -239,7 +239,7 @@ If the work takes longer than the caller wants to wait, persist or enqueue the w
 Webhook → validate → durable enqueue → Respond (202, { job_id }); worker → process → callback / queue / email on completion
 ```
 
-It has its own gotchas (idempotency, callback retries, status tracking) — build it deliberately. The `job_id` is intrinsic (it's how the work is found later), distinct from the optional `request_id`.
+It has its own gotchas (idempotency, callback retries, status tracking); build it deliberately. The `job_id` is intrinsic (it's how the work is found later), distinct from the optional `request_id`.
 
 ---
 
@@ -247,8 +247,8 @@ It has its own gotchas (idempotency, callback retries, status tracking) — buil
 
 Before activating:
 
-1. **Test the success path** with `n8n_test_workflow`. Confirm shape and code. **API workflows almost always have side effects (DB writes, third-party calls, comms) — ask the user before running a test that triggers them.**
-2. **Trigger an error path** — feed input that breaks a processing node, run, confirm the error Respond fires with the right code and body.
+1. **Test the success path** with `n8n_test_workflow`. Confirm shape and code. **API workflows almost always have side effects (DB writes, third-party calls, comms); ask the user before running a test that triggers them.**
+2. **Trigger an error path**; feed input that breaks a processing node, run, confirm the error Respond fires with the right code and body.
 3. **Verify connections** with `n8n_get_workflow`: every fallible node has `onError: "continueErrorOutput"` AND `main[1]` wired. (NODE_ERROR_OUTPUTS.md.)
 4. **Confirm no internal detail leaks** in the error body.
 5. **Inspect real failures** afterward with `n8n_executions` to confirm the codes you expected are what actually went out.

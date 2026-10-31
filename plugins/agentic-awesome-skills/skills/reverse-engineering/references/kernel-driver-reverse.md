@@ -70,9 +70,9 @@ decode_ioctl(0x80002034)
 
 ### 参考文章
 
-- [Windows Drivers RE Methodology (VoidSec)](https://voidsec.com/windows-drivers-reverse-engineering-methodology/) — 最完整的 WDM 驱动逆向方法论
-- [Driver Reversing 101](https://eversinc33.com/posts/driver-reversing.html) — WDM vs KMDF 对比
-- [Methodology of Reversing Vulnerable Killer Drivers](https://whiteknightlabs.com/2025/10/28/methodology-of-reversing-vulnerable-killer-drivers/) — 漏洞驱动分析
+- [Windows Drivers RE Methodology (VoidSec)](https://voidsec.com/windows-drivers-reverse-engineering-methodology/); 最完整的 WDM 驱动逆向方法论
+- [Driver Reversing 101](https://eversinc33.com/posts/driver-reversing.html); WDM vs KMDF 对比
+- [Methodology of Reversing Vulnerable Killer Drivers](https://whiteknightlabs.com/2025/10/28/methodology-of-reversing-vulnerable-killer-drivers/); 漏洞驱动分析
 
 ---
 

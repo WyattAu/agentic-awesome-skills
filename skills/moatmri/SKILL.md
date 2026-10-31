@@ -6,7 +6,7 @@ source: community
 date_added: "2026-05-31"
 ---
 
-# MoatMRI — AI Disruption Pressure Analysis
+# MoatMRI: AI Disruption Pressure Analysis
 
 *Where does intelligence pressure break this system first?*
 
@@ -15,17 +15,17 @@ date_added: "2026-05-31"
 - "Is my business at risk from AI? Where am I most exposed?"
 - "How would an AI-native startup take over my market?"
 - "What should I do in the next 90 days to defend against AI disruption?"
-- "I'm doing due diligence on [company] — what's their AI displacement risk?"
+- "I'm doing due diligence on [company]; what's their AI displacement risk?"
 - "Where does my competitive moat actually hold against AI pressure?"
 
 ## How It Works
 
-### Step 1 — Gather Inputs
+### Step 1: Gather Inputs
 
 Ask if not provided:
 - **Industry** (e.g., "real estate", "community banking", "retail pharmacy", "law firm")
 - **Entity type** (e.g., "independent broker", "solo practitioner", "regional franchise")
-- **Target name** (optional — specific organization for named analysis)
+- **Target name** (optional; specific organization for named analysis)
 
 ## Example
 
@@ -39,7 +39,7 @@ Ask if not provided:
 - Depends on current company, market, regulatory, and competitive context supplied by the user or gathered from reliable sources.
 - Treats disruption scenarios as planning tools; scores should be revisited as new evidence appears.
 
-### Step 2 — 10-Vector Pressure Map
+### Step 2: 10-Vector Pressure Map
 
 Score AI disruption pressure across exactly these 10 vectors (0–10):
 
@@ -60,7 +60,7 @@ Use a consistent direction: 0 = little evidenced disruption pressure; 10 = high 
 
 **Aggregate planning score:** mean of all 10 vectors only when all have evidence-backed scores; otherwise report missing coverage. This equal-weight heuristic is not a calibrated probability or valuation. Flag any vector ≥ 7 for priority review.
 
-### Step 3 — AI Front-Door Takeover Storyboard
+### Step 3: AI Front-Door Takeover Storyboard
 
 6-step narrative of how an AI-native competitor displaces this entity:
 1. The entry point
@@ -70,21 +70,21 @@ Use a consistent direction: 0 = little evidenced disruption pressure; 10 = high 
 5. The aftermath
 6. The survivor profile
 
-### Step 4 — 90-Day Counterstrike Plan
+### Step 4: 90-Day Counterstrike Plan
 
-- **Track A (Days 0–30):** Immediate defense — what to stop, what to protect
-- **Track B (Days 31–60):** Intelligence-layer build — data/relationships to fortify
-- **Track C (Days 61–90):** Offensive positioning — use AI pressure as competitive weapon
+- **Track A (Days 0–30):** Immediate defense; what to stop, what to protect
+- **Track B (Days 31–60):** Intelligence-layer build; data/relationships to fortify
+- **Track C (Days 61–90):** Offensive positioning; use AI pressure as competitive weapon
 
 ## Best Practices
 
-- ✅ Score all 10 vectors before calculating aggregate — resist stopping at obvious ones
+- ✅ Score all 10 vectors before calculating aggregate; resist stopping at obvious ones
 - ✅ Keep the storyboard specific to industry/entity, not generic disruption narrative
 - ✅ Track C should be actionable within 90 days, not aspirational 3-year strategy
-- ❌ Don't conflate data_moat with trust_relationship_moat — they protect differently
+- ❌ Don't conflate data_moat with trust_relationship_moat; they protect differently
 
 ## Additional Resources
 
 - Repository: [thebrierfox/moatmri-skill](https://github.com/thebrierfox/moatmri-skill)
 - Full BYOK tool: [ace-license-server-production.up.railway.app/byok/moatmri](https://ace-license-server-production.up.railway.app/byok/moatmri)
-- Built by [IntuiTek¹](https://intuitek.ai) (~K¹) — MIT License
+- Built by [IntuiTek¹](https://intuitek.ai) (~K¹); MIT License

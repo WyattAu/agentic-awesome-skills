@@ -11,7 +11,7 @@ Undo and redo gives people easy ways to reverse many types of actions, which can
 
 ![A sketch of an arrow that starts right, curves upward, and points to the left, suggesting a return to the start. The image is overlaid with rectangular and circular grid lines and is tinted orange to subtly reflect the orange in the original six-color Apple logo.](https://docs-assets.developer.apple.com/published/768e64b5954af63fd6f4e9e4a3c5275a/patterns-undo-redo-intro%402x.png)
 
-People expect undo and redo to let them reverse their recent actions, so they’re likely to try undoing — often multiple times — until something changes. In a situation like this, people might not remember which of their previous actions an undo is targeting, which can lead to unintended changes and frustration. To help people remain in control, it’s essential to help people predict the outcome of undoing and redoing and to highlight the results.
+People expect undo and redo to let them reverse their recent actions, so they’re likely to try undoing; often multiple times; until something changes. In a situation like this, people might not remember which of their previous actions an undo is targeting, which can lead to unintended changes and frustration. To help people remain in control, it’s essential to help people predict the outcome of undoing and redoing and to highlight the results.
 
 ## [Best practices](https://developer.apple.com/design/human-interface-guidelines/undo-and-redo#Best-practices)
 
@@ -21,7 +21,7 @@ People expect undo and redo to let them reverse their recent actions, so they’
 
 **Let people undo multiple times.** Avoid placing unnecessary limits on the number of times people can undo or redo. People generally expect to undo every action they’ve performed since taking a logical step like opening a document or saving their work.
 
-**Consider giving people the option to revert multiple changes at once.** In some scenarios, people might appreciate the ability to undo a batch of discrete but related actions — like incremental adjustments to a single property or attribute — so they don’t have to undo each individual adjustment. In other cases, it can make sense to give people a convenient way to undo all the changes they made since opening a document or saving their work.
+**Consider giving people the option to revert multiple changes at once.** In some scenarios, people might appreciate the ability to undo a batch of discrete but related actions; like incremental adjustments to a single property or attribute; so they don’t have to undo each individual adjustment. In other cases, it can make sense to give people a convenient way to undo all the changes they made since opening a document or saving their work.
 
 **Provide undo and redo buttons only when necessary.** People generally expect to initiate undo and redo in system-supported ways, such as choosing the items in a macOS app’s Edit menu, using keyboard shortcuts on a Mac or iPad, or shaking their iPhone. If it’s important to provide dedicated undo and redo buttons in your app, use the standard system-provided symbols and put the buttons in a toolbar.
 
@@ -53,7 +53,7 @@ People expect undo and redo to let them reverse their recent actions, so they’
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/undo-and-redo#Developer-documentation)
 
-[`UndoManager`](https://developer.apple.com/documentation/Foundation/UndoManager) — Foundation
+[`UndoManager`](https://developer.apple.com/documentation/Foundation/UndoManager); Foundation
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/undo-and-redo#Videos)
 

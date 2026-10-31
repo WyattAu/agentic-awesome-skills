@@ -2,7 +2,7 @@
 # Workflow Details
 
 Detailed step-by-step instructions for the Monte Carlo Asset Health skill.
-Referenced from the main SKILL.md — consult when executing the workflow.
+Referenced from the main SKILL.md; consult when executing the workflow.
 
 ---
 
@@ -10,7 +10,7 @@ Referenced from the main SKILL.md — consult when executing the workflow.
 
 When the user asks about the health or status of a data asset, run this sequence.
 
-### Phase 1 — Resolve the asset
+### Phase 1: Resolve the asset
 
 Run both calls in parallel:
 
@@ -37,7 +37,7 @@ or make assumptions.
 
 Every row must include the Warehouse column.
 
-### Phase 2 — Gather health metrics (ALL in parallel)
+### Phase 2: Gather health metrics (ALL in parallel)
 
 Run all 4 calls in a single turn:
 
@@ -49,20 +49,20 @@ get_alerts(created_after="<7 days ago>", created_before="<now>", table_mcons=["<
 → active alerts on this asset
 
 get_monitors(mcons=["<mcon>"])
-→ monitor configs — check status field for paused vs active
+→ monitor configs; check status field for paused vs active
 
 get_asset_lineage(mcons=["<mcon>"], direction="UPSTREAM", hops=1)
 → 1-hop upstream parent assets
 ```
 
 For the `get_alerts` time range, compute ISO 8601 timestamps from the current
-date — e.g. `created_before` = now (`2026-07-10T00:00:00Z`) and `created_after`
+date; e.g. `created_before` = now (`2026-07-10T00:00:00Z`) and `created_after`
 = 7 days earlier (`2026-07-03T00:00:00Z`), using the actual current date.
 
-### Phase 3 — Check upstream health (ALL parents in parallel)
+### Phase 3: Check upstream health (ALL parents in parallel)
 
 Check at most **10** upstream parents. If there are more than 10, check the first
-10 and note: "N more upstream parents not checked — ask to see more."
+10 and note: "N more upstream parents not checked; ask to see more."
 
 For each upstream parent, run both calls in parallel:
 
@@ -77,21 +77,21 @@ get_alerts(created_after="<7 days ago>", created_before="<now>", table_mcons=["<
 All parents are checked in parallel with each other. Each parent's `get_table` and
 `get_alerts` are also parallel (no dependency between them).
 
-### Phase 4 — Synthesize the health report
+### Phase 4: Synthesize the health report
 
 Assemble findings into the report format defined in SKILL.md:
 
-1. **Tags** — from `search` properties. Show None only after a successful result confirms no tags; otherwise Unknown.
-2. **Status** — determine from alerts and monitoring:
+1. **Tags**; from `search` properties. Show None only after a successful result confirms no tags; otherwise Unknown.
+2. **Status**; determine from alerts and monitoring:
    - 🔴 if any alerts returned (the statuses filter already limits to active alerts)
    - 🟡 if no alerts but 0 active monitors on a high-importance asset
    - 🟢 only when required queries succeed, coverage is present and no observed issue exists
    - Unknown/Unmonitored for other cases; do not turn missing data into green
-4. **Metrics table** — Last Activity (only if returned), alerts, monitoring, upstream; put importance and read/write averages in the header
-5. **Active Alerts** — list each with type and status
-6. **Upstream Issues** — list each checked parent with observed alerts/metadata and identify unchecked parents; no-alert results do not prove health
+4. **Metrics table**; Last Activity (only if returned), alerts, monitoring, upstream; put importance and read/write averages in the header
+5. **Active Alerts**; list each with type and status
+6. **Upstream Issues**; list each checked parent with observed alerts/metadata and identify unchecked parents; no-alert results do not prove health
    - If any parent is unhealthy, ask: "Want me to check further upstream for **\<parent\>**?"
-7. **Recommendations** — only facts derivable from data:
+7. **Recommendations**; only facts derivable from data:
    - Upstream issues that may explain this asset's problems
    - Alerts needing attention
 
@@ -110,14 +110,14 @@ When evaluating monitors from `get_monitors`:
 
 When the user requests deeper upstream investigation for a specific parent:
 
-### Phase 1 — Get upstream of the specified parent
+### Phase 1: Get upstream of the specified parent
 
 ```
 get_asset_lineage(mcons=["<parent_mcon>"], direction="UPSTREAM", hops=1)
 → 1-hop upstream of the parent (grandparents of the original asset)
 ```
 
-### Phase 2 — Check grandparent health (ALL in parallel)
+### Phase 2: Check grandparent health (ALL in parallel)
 
 For each grandparent:
 
@@ -126,7 +126,7 @@ get_table(mcon="<grandparent_mcon>")
 get_alerts(created_after="<7 days ago>", created_before="<now>", table_mcons=["<grandparent_mcon>"], statuses=["NOT_ACKNOWLEDGED", "ACKNOWLEDGED", "WORK_IN_PROGRESS"])
 ```
 
-### Phase 3 — Report
+### Phase 3: Report
 
 Present findings for this hop. If any grandparent has issues, again ask:
 "Want me to check further upstream for **\<grandparent\>**?"

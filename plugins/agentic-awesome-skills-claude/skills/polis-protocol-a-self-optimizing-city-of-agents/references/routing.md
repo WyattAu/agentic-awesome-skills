@@ -130,7 +130,7 @@ ucb(citizen) = score(citizen) + c * sqrt(ln(max(1, total_n)) / n)
 - `total_n` is the sum of `n` across all citizens.
 - `c` is the exploration constant (`sqrt(2)`, the textbook UCB1 value). It is fixed rather than CLI-tunable to keep the flag surface small; tune `weights`/`explore_rate` in `polis.yml` instead.
 
-An **unplayed citizen** (`n = 0`) has an infinite bonus, so UCB tries every untried citizen before repeating anyone — its cold-start behavior. Once everyone has history, the bonus favours citizens whose lead is not yet backed by many samples, and it fades as evidence accumulates.
+An **unplayed citizen** (`n = 0`) has an infinite bonus, so UCB tries every untried citizen before repeating anyone; its cold-start behavior. Once everyone has history, the bonus favours citizens whose lead is not yet backed by many samples, and it fades as evidence accumulates.
 
 **Tradeoff.** UCB is fully deterministic: the same state always yields the same pick (ties, including ties between unplayed citizens, break by citizen id ascending), which makes it reproducible in tests and audits. Epsilon-greedy is stochastic, so it can spread work more evenly across near-equal citizens over many contracts but needs a seed to reproduce. UCB explores more aggressively early (every new citizen gets a turn) and then commits harder to leaders; epsilon-greedy keeps a constant background exploration rate. `--adaptive` applies only to epsilon-greedy.
 
@@ -145,14 +145,14 @@ sample(citizen) ~ Normal(mean = score(citizen), sigma = c / sqrt(n))
 pick = argmax over citizens of sample(citizen)
 ```
 
-- `score(citizen)` is the same combined score used everywhere else — the posterior mean.
+- `score(citizen)` is the same combined score used everywhere else; the posterior mean.
 - `n` is the citizen's total `contracts_completed` across the contract's `required_tags` (the same count UCB uses).
 - `c` is the exploration scale (`sqrt(2)`, mirroring the UCB constant). Fixed rather than CLI-tunable to keep the flag surface small.
 - An **unplayed citizen** (`n = 0`) gets a wide fixed prior (`sigma = 2.0`, wider than the `n = 1` width of `sqrt(2)`), so cold-start samples every untried citizen broadly and each has a real shot at the top draw. The posterior width is monotonically decreasing in `n`.
 
-**Cold-start behavior.** With everyone unplayed, the wide prior means picks spread across *all* citizens over successive contracts (weighted toward higher means but never locked to the top one) — similar in spirit to UCB trying every arm, but smoothed: a slightly-lower-mean newcomer still wins a healthy share of early draws instead of strictly waiting its turn. As evidence accumulates the posteriors tighten and the policy commits to the leader.
+**Cold-start behavior.** With everyone unplayed, the wide prior means picks spread across *all* citizens over successive contracts (weighted toward higher means but never locked to the top one); similar in spirit to UCB trying every arm, but smoothed: a slightly-lower-mean newcomer still wins a healthy share of early draws instead of strictly waiting its turn. As evidence accumulates the posteriors tighten and the policy commits to the leader.
 
-**Determinism.** Thompson sampling is stochastic, so like epsilon-greedy it needs a seed to reproduce: pass `--seed N` (or `seed=` through `recommend(...)`). Citizens are sampled in citizen-id order, so a given `(state, seed)` always yields the same pick and the same `--explain` sampled values — reproducible in tests and audits despite the randomness. Without `--seed`, the RNG is entropy-seeded (same as epsilon-greedy).
+**Determinism.** Thompson sampling is stochastic, so like epsilon-greedy it needs a seed to reproduce: pass `--seed N` (or `seed=` through `recommend(...)`). Citizens are sampled in citizen-id order, so a given `(state, seed)` always yields the same pick and the same `--explain` sampled values; reproducible in tests and audits despite the randomness. Without `--seed`, the RNG is entropy-seeded (same as epsilon-greedy).
 
 **Tradeoff vs epsilon-greedy and UCB.** Epsilon-greedy explores a *fixed fraction* of the time regardless of how certain the ranking is. UCB is deterministic and explores via an additive bonus that decays like `sqrt(ln(total_n)/n)`. Thompson explores in proportion to *posterior overlap*: when two citizens are genuinely close it splits work between them smoothly, and when one is a clear, well-sampled leader the overlap vanishes and it exploits. It tends to spread early work across near-equal citizens more evenly than UCB's turn-taking, at the cost of being non-deterministic without a seed. `--adaptive` applies only to epsilon-greedy.
 

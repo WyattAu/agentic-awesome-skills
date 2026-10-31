@@ -93,15 +93,15 @@ class HospitalPatient(models.Model):
 - ✅ **Do:** Use `_inherit = ['mail.thread']` to add chatter/logging automatically.
 - ✅ **Do:** Specify `version` in manifest as `{odoo_version}.{major}.{minor}.{patch}`.
 - ✅ **Do:** Set `'author'` and `'website'` in `__manifest__.py` so your module is identifiable in the Apps list.
-- ❌ **Don't:** Modify core Odoo model files directly — always use `_inherit`.
+- ❌ **Don't:** Modify core Odoo model files directly; always use `_inherit`.
 - ❌ **Don't:** Forget to add new models to `ir.model.access.csv` or users will get access errors.
-- ❌ **Don't:** Use spaces or uppercase in folder names — Odoo requires snake_case module names.
+- ❌ **Don't:** Use spaces or uppercase in folder names; Odoo requires snake_case module names.
 
 ## Limitations
 
-- Does not cover **OWL JavaScript components** or frontend widget development — use `@odoo-xml-views-builder` for view XML.
+- Does not cover **OWL JavaScript components** or frontend widget development; use `@odoo-xml-views-builder` for view XML.
 - The manifest example targets Odoo 17; verify the exact version and supported module/view syntax. Older Odoo releases also use module manifests; do not infer a nonexistent manifest cutoff.
 - Does not cover **multi-company** or **multi-website** configuration; those require additional model fields (`company_id`, `website_id`).
-- Does not generate automated test files — use `@odoo-automated-tests` for that.
+- Does not generate automated test files; use `@odoo-automated-tests` for that.
 
 The displayed tree is a scaffold, not a complete installable module: supply imports, XML views, named groups, ACLs and record rules before claiming it works. Avoid default broad patient-data access; chatter/tracking can disclose sensitive values, so select fields and followers deliberately. Test installation, multi-record compute/constraints and unauthorized access in a disposable database, never through an unrequested production module upgrade.

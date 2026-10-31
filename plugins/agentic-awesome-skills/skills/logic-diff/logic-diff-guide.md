@@ -1,4 +1,4 @@
-# Semantic Diff — Step-by-Step Guide
+# Semantic Diff: Step-by-Step Guide
 
 ## Step 1: Identify the Shared Specification
 
@@ -17,19 +17,19 @@ Apply the full **Premises Construction Checklist** at `../_shared/semiformal-che
 - State preconditions: same preconditions required?
 - Control flow: same branches for same inputs?
 
-This step often surfaces the divergence before the trace begins — a renamed import, a changed conditional, a different default value.
+This step often surfaces the divergence before the trace begins; a renamed import, a changed conditional, a different default value.
 
 ## Step 3: Trace Both Versions for the Common Case
 
 ```
 Scenario: [describe the input]
 
-Version A — Trace:
+Version A; Trace:
 1. [step]
 2. [step]
 Result: [value / side effect]
 
-Version B — Trace:
+Version B; Trace:
 1. [step]
 2. [step]
 Result: [value / side effect]
@@ -54,7 +54,7 @@ Default budget: trace the common case plus at most three boundary scenarios. Exp
 A semantic divergence is any scenario where A and B produce different behavior. Classify each:
 - Bug in A corrected in B (intended)
 - Regression: B breaks something A handled (unintended)
-- Behavioral change: both work, but differently — user must decide which is correct
+- Behavioral change: both work, but differently; user must decide which is correct
 - Scope expansion: B handles inputs A didn't
 
 For each divergence, write a five-field finding (Premises → Trace → Divergence → Trigger → Remedy) with the L-code that best describes the cause.
@@ -62,7 +62,7 @@ For each divergence, write a five-field finding (Premises → Trace → Divergen
 ## Step 6: Classify Equivalence
 
 - **✅ Semantically Equivalent:** No divergence found for all traced scenarios.
-- **⚠️ Conditionally Equivalent:** Equivalent for all common cases; diverges only when [specific condition — state precisely].
+- **⚠️ Conditionally Equivalent:** Equivalent for all common cases; diverges only when [specific condition; state precisely].
 - **❌ Semantically Divergent:** Confirmed behavioral difference at [location] for [scenario].
 
 Note: "No divergence found" is not "provably equivalent." State which scenarios were traced and acknowledge untested scenarios may still diverge.

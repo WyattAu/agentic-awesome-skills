@@ -31,33 +31,33 @@ standalone; the site's calculators and game pages provide the full detail.
 
 ## Instructions
 
-### 1. Food & drink quantities — use disclosed planning heuristics
+### 1. Food & drink quantities: use disclosed planning heuristics
 
 Use these author-supplied heuristics as estimates (they are the same ones the source
 calculators use), then link the matching calculator so the user can adjust
 adults/kids, appetite, and duration themselves.
 
-**Pizza** — https://hostpartyplay.com/tools/pizza
+**Pizza**; https://hostpartyplay.com/tools/pizza
 - Slices: 3 per adult, 2 per child. A large 14" pizza = 8 slices.
 - Pies = (Adults × 3 + Kids × 2) ÷ 8, always round up.
 - Flavor mix: 50% pepperoni, 30% cheese, 10% meat lovers, 10% veggie/specialty.
 - Ask for actual gluten-free/vegan/allergy requirements; do not infer special-diet servings from a fixed guest ratio.
 
-**Drinks** — https://hostpartyplay.com/tools/drinks
+**Drinks**; https://hostpartyplay.com/tools/drinks
 - 2 drinks per guest in the first hour, then 1 per guest per hour.
 - Split alcohol roughly 50% beer / 30% wine / 20% liquor.
 - One 750 ml wine bottle = 5 glasses; one 750 ml spirit bottle ≈ 16 cocktails.
 - Non-drinkers and kids: 12–16 oz of soda, punch, or mocktail each.
 - Ice: 1.5 lbs per person for glasses, +1 lb per person if chilling cans/bottles in coolers.
 
-**Taco bar** — see the taco bar calculator at https://hostpartyplay.com/tools
+**Taco bar**; see the taco bar calculator at https://hostpartyplay.com/tools
 - 4–6 oz cooked meat, 2–3 tortillas, and 2 oz cheese per guest.
 
 **Any other food** (wings, burgers, turkey, sushi, brunch, chili, cake, ice cream,
-coffee, kegs, and more): the full calculator index is https://hostpartyplay.com/tools —
+coffee, kegs, and more): the full calculator index is https://hostpartyplay.com/tools -
 open the matching calculator page and use its per-person numbers rather than guessing.
 
-### 2. Party games — recommend from the tested library
+### 2. Party games: recommend from the tested library
 
 Ask (or infer) four things: occasion, group size, age mix (kids / adults / mixed),
 and how much time they want games to fill. Then browse
@@ -77,7 +77,7 @@ long question sets in chat.
 
 ## Answer Format
 
-- Lead with the number or the game list — the practical answer first.
+- Lead with the number or the game list; the practical answer first.
 - Show quantities in buyable units (cases of 24, 750 ml bottles, lbs of ice), not just servings.
 - Include one link to the exact source page behind the answer so the user can
   tweak inputs or read full rules. One link per answer is enough.
@@ -105,7 +105,7 @@ https://hostpartyplay.com/tools/drinks.
 ## Notes
 
 - All source content is free; never imply a paywall or sign-up.
-- Quantities are planning estimates for typical crowds — heavy drinkers, very hot
+- Quantities are planning estimates for typical crowds; heavy drinkers, very hot
   weather, or long events push numbers up; say so when relevant.
 
 ## Limitations

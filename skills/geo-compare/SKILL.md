@@ -93,7 +93,7 @@ Generate the following document:
 
 ```markdown
 # GEO Monthly Progress Report
-## [COMPANY NAME] — [MONTH YEAR]
+## [COMPANY NAME]: [MONTH YEAR]
 
 **Reporting period:** [BASELINE DATE] → [CURRENT DATE]
 **Prepared by:** [AGENCY NAME]
@@ -109,7 +109,7 @@ Example: "Electron Srl's GEO Score improved from 32 to 44 this month (+12 points
 placing the site firmly in the 'Below Average' tier and on track to reach 'Moderate'
 by May. The biggest wins were AI crawler access (+3 crawlers now allowed) and schema
 implementation (+Organization and LocalBusiness schemas live). Next month's focus is
-content citability — the highest-weighted remaining gap."
+content citability; the highest-weighted remaining gap."
 
 ---
 
@@ -169,19 +169,19 @@ OVERALL GEO SCORE
 
 ## Action Plan Progress
 
-### Quick Wins — Status Update
+### Quick Wins: Status Update
 
 | # | Action | Assigned | Status | Impact |
 |---|--------|---------|--------|--------|
 | 1 | Allow all AI crawlers in robots.txt | Client dev | ✅ Done | +3 crawlers |
 | 2 | Add Organization schema to homepage | Client dev | ✅ Done | Schema score +15 |
 | 3 | Create llms.txt | Agency | ✅ Done | AI visibility +8 |
-| 4 | Add author bylines to all articles | Client content | 🔄 In Progress | — |
-| 5 | Fix meta descriptions (47 pages missing) | Client dev | ❌ Not started | — |
+| 4 | Add author bylines to all articles | Client content | 🔄 In Progress | - |
+| 5 | Fix meta descriptions (47 pages missing) | Client dev | ❌ Not started | - |
 
 **Quick wins completed: [X]/[Y] ([%])**
 
-### Medium-Term — Status Update
+### Medium-Term: Status Update
 
 | # | Action | Target Month | Status |
 |---|--------|-------------|--------|
@@ -190,7 +190,7 @@ OVERALL GEO SCORE
 | 3 | Register Bing Webmaster Tools | Month 1 | ✅ Done |
 | 4 | Implement IndexNow | Month 2 | 🔄 In Progress |
 
-### Strategic — Status Update
+### Strategic: Status Update
 
 | # | Action | Target | Status |
 |---|--------|--------|--------|
@@ -202,11 +202,11 @@ OVERALL GEO SCORE
 
 ## This Month's Wins
 
-> Use this section to celebrate — clients need to see the value clearly.
+> Use this section to celebrate; clients need to see the value clearly.
 
-✅ **[WIN 1]:** [Specific, tangible result — e.g., "GPTBot and ClaudeBot are now allowed. ChatGPT can now crawl and cite your content."]
+✅ **[WIN 1]:** [Specific, tangible result; e.g., "GPTBot and ClaudeBot are now allowed. ChatGPT can now crawl and cite your content."]
 ✅ **[WIN 2]:** [e.g., "Organization schema implemented on homepage. Your brand entity is now machine-readable."]
-✅ **[WIN 3]:** [e.g., "llms.txt created and deployed at electron-srl.com/llms.txt — one of only ~12% of sites in your industry to have this."]
+✅ **[WIN 3]:** [e.g., "llms.txt created and deployed at electron-srl.com/llms.txt; one of only ~12% of sites in your industry to have this."]
 
 ---
 
@@ -237,15 +237,15 @@ OVERALL GEO SCORE
 
 | Month | Date | Score | Delta | Key Achievement |
 |-------|------|-------|-------|----------------|
-| Baseline | [Date] | [Score] | — | Initial audit |
+| Baseline | [Date] | [Score] | - | Initial audit |
 | Month 1 | [Date] | [Score] | [+X] | Quick wins implemented |
 | Month 2 | [Date] | [Score] | [+X] | *Current month* |
-| Month 3 | [Date] | — | — | Content citability |
-| Month 4 | — | — | — | Brand authority |
-| Month 5 | — | — | — | Strategic initiatives |
-| Month 6 | — | **Target: [X]** | — | Full review |
+| Month 3 | [Date] | - |; | Content citability |
+| Month 4 | - |; | - | Brand authority |
+| Month 5 | - |; | - | Strategic initiatives |
+| Month 6 | - | **Target: [X]** | - | Full review |
 
-[Only fill rows that have happened. Show projected rows as "—"]
+[Only fill rows that have happened. Show projected rows as "-"]
 
 ---
 
@@ -263,7 +263,7 @@ as AI platforms re-index and update their knowledge bases.*
 
 ---
 
-*GEO Monthly Report — [COMPANY NAME] — [DATE]*
+*GEO Monthly Report; [COMPANY NAME]; [DATE]*
 *Questions or comments? [CONTACT EMAIL]*
 ```
 
@@ -299,9 +299,9 @@ If exact scores or a compatible scoring method are absent, report the metric as 
 | +1 to +4 | ▲ | Improvement |
 | 0 | ── | No change |
 | -1 to -4 | ▼ | Slight decline |
-| -5 or more | ▼▼ | Significant decline — needs discussion |
+| -5 or more | ▼▼ | Significant decline; needs discussion |
 
-A decline is not necessarily bad — it can mean new issues were discovered in the
+A decline is not necessarily bad; it can mean new issues were discovered in the
 fresh audit that weren't visible before. Report declines neutrally with evidence; distinguish changed methodology, newly discovered issues and actual regressions without concealing negative results.
 
 ---

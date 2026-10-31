@@ -8,7 +8,7 @@ date_added: '2026-02-27'
 
 # Azure Key Vault Keys SDK for Rust
 
-Client library for Azure Key Vault Keys — secure storage and management of cryptographic keys.
+Client library for Azure Key Vault Keys; secure storage and management of cryptographic keys.
 
 The examples below require a reviewed compatible crate set and replacement of every resource placeholder. Do not use production data for demonstration writes.
 
@@ -146,19 +146,19 @@ Key Vault can perform crypto operations without exposing the private key:
 
 ## Best Practices
 
-1. **Use Entra ID auth** — `DeveloperToolsCredential` for dev, `ManagedIdentityCredential` for production
-2. **Use HSM keys for sensitive workloads** — hardware-protected keys
-3. **Use EC for signing** — more efficient than RSA
-4. **Use envelope encryption** — RSA can wrap a symmetric data key; do not encrypt arbitrary bulk data directly with RSA
-5. **Backup keys** — for disaster recovery
-6. **Enable soft delete** — required for production vaults
-7. **Use key rotation** — create new versions periodically
+1. **Use Entra ID auth**; `DeveloperToolsCredential` for dev, `ManagedIdentityCredential` for production
+2. **Use HSM keys for sensitive workloads**; hardware-protected keys
+3. **Use EC for signing**; more efficient than RSA
+4. **Use envelope encryption**; RSA can wrap a symmetric data key; do not encrypt arbitrary bulk data directly with RSA
+5. **Backup keys**; for disaster recovery
+6. **Enable soft delete**; required for production vaults
+7. **Use key rotation**; create new versions periodically
 
 ## RBAC Permissions
 
 Assign these Key Vault roles:
-- `Key Vault Crypto User` — use keys for crypto operations
-- `Key Vault Crypto Officer` — full CRUD on keys
+- `Key Vault Crypto User`; use keys for crypto operations
+- `Key Vault Crypto Officer`; full CRUD on keys
 
 The reviewed example set uses `azure_security_keyvault_keys 1.0.1` and compatible Azure core/credential crates. Record and commit Cargo.lock; source/API review is not a compiler or live-service test.
 

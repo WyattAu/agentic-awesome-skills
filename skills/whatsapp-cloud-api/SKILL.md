@@ -398,7 +398,7 @@ O WhatsApp monitora a qualidade das suas mensagens e atribui um rating:
 
 | Rating    | Significado                        | Acao                              |
 |-----------|------------------------------------|-----------------------------------|
-| Verde     | Boa qualidade, poucos bloqueios    | Manter — elegivel para upgrade    |
+| Verde     | Boa qualidade, poucos bloqueios    | Manter; elegivel para upgrade    |
 | Amarelo   | Qualidade media, atencao necessaria| Revisar conteudo e frequencia     |
 | Vermelho  | Qualidade baixa, risco de suspensao| Acao imediata: reduzir volume     |
 
@@ -447,7 +447,7 @@ python scripts/validate_config.py
 
 | Arquivo                        | Quando ler                                        |
 |--------------------------------|---------------------------------------------------|
-| `references/setup-guide.md`    | Setup inicial — criar conta Meta, configurar API  |
+| `references/setup-guide.md`    | Setup inicial; criar conta Meta, configurar API  |
 | `references/message-types.md`  | Exemplos completos de todos os tipos de mensagem   |
 | `references/webhook-setup.md`  | Configurar webhooks com seguranca HMAC             |
 | `references/automation-patterns.md` | Chatbot, filas, state machine, integracao IA  |

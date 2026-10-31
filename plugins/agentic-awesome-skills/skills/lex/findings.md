@@ -1,4 +1,4 @@
-# LEX — Findings & Research
+# LEX: Findings & Research
 
 ## Legal Constraints & Structure
 * The application must cover 29 specific jurisdictions (USA, Canada, +27 EU Member States).

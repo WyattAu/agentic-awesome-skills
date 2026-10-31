@@ -20,7 +20,7 @@ metadata:
 
 # AI Pipeline Orchestration
 
-Build reliable, observable AI workflows — from document ingestion to batch inference to model training pipelines.
+Build reliable, observable AI workflows; from document ingestion to batch inference to model training pipelines.
 
 ## When to Use This Skill
 
@@ -44,7 +44,7 @@ These are application design fragments: adapters, datasets, model files, secrets
 | **Dagster** | Asset-centric; strong data lineage | Medium | Excellent |
 | **Temporal** | Long-running workflows; reliability-first | Medium | Good |
 
-## Prefect — Quick Start
+## Prefect: Quick Start
 
 ```bash
 pip install prefect prefect-kubernetes
@@ -96,7 +96,7 @@ def upsert_to_vector_store(chunks: list[dict]) -> int:
 
 @flow(name="rag-ingestion", log_prints=True)
 def rag_ingestion_pipeline(sources: list[str]):
-    """Full RAG ingestion flow — runs daily."""
+    """Full RAG ingestion flow; runs daily."""
     logger = get_run_logger()
     total = 0
     for source in sources:
@@ -283,7 +283,7 @@ nightly_refresh = ScheduleDefinition(
 - Cache expensive steps (embedding generation, data fetching) to speed up reruns.
 - Emit custom metrics from pipelines (chunk count, error rate, cost) to your observability stack.
 - Use `concurrency` limits in Prefect or `pool` slots in Airflow to respect external rate limits.
-- Separate ingestion, training, and deployment pipelines — don't couple them in one giant DAG.
+- Separate ingestion, training, and deployment pipelines; don't couple them in one giant DAG.
 
 ## Related Skills
 

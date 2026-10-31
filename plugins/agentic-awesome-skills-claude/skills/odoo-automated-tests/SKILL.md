@@ -40,7 +40,7 @@ class TestHospitalPatient(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        # Use setUpClass for performance — runs once per class, not per test
+        # Use setUpClass for performance: runs once per class, not per test
         super().setUpClass()
         cls.Patient = cls.env['hospital.patient']
         cls.doctor = cls.env['res.users'].browse(cls.env.uid)
@@ -109,17 +109,17 @@ class TestPatientController(HttpCase):
 
 ## Best Practices
 
-- ✅ **Do:** Use `setUpClass()` with `cls.env` instead of `setUp()` — it is dramatically faster for large test suites.
+- ✅ **Do:** Use `setUpClass()` with `cls.env` instead of `setUp()`; it is dramatically faster for large test suites.
 - ✅ **Do:** Use `@tagged('post_install', '-at_install')` to run tests after all modules are installed.
 - ✅ **Do:** Test both the happy path and error conditions (`ValidationError`, `AccessError`, `UserError`).
 - ✅ **Do:** Use `recordset.with_user(user)` to test access control without `sudo()`; a TransactionCase instance is not the model recordset.
-- ❌ **Don't:** Use a production database for tests — always use a dedicated test database.
-- ❌ **Don't:** Rely on test execution order — each `TransactionCase` test is rolled back in isolation.
+- ❌ **Don't:** Use a production database for tests; always use a dedicated test database.
+- ❌ **Don't:** Rely on test execution order; each `TransactionCase` test is rolled back in isolation.
 - ❌ **Don't:** Assume a user’s password equals their login. Create isolated fixture users with explicit test-only credentials and required groups/ACLs; never use real account passwords.
 
 ## Limitations
 
-- **JavaScript tour tests** require a running browser (via `phantomjs` or `Chrome headless`) and a live Odoo server — not covered in depth here.
-- `HttpCase` tests are significantly slower than `TransactionCase` — use them only for controller/route verification.
+- **JavaScript tour tests** require a running browser (via `phantomjs` or `Chrome headless`) and a live Odoo server; not covered in depth here.
+- `HttpCase` tests are significantly slower than `TransactionCase`; use them only for controller/route verification.
 - Does not cover **mocking external services** (e.g., mocking an SMTP server or payment gateway in tests).
-- Test isolation is at the **transaction level**, not database level — tests that commit data (e.g., via `cr.commit()`) can leak state between tests.
+- Test isolation is at the **transaction level**, not database level; tests that commit data (e.g., via `cr.commit()`) can leak state between tests.

@@ -281,7 +281,7 @@ var connectionString = $"Server=tcp:{serverFqdn},1433;" +
 
 1. **Use `WaitUntil.Completed`** for operations that must finish before proceeding
 2. **Use `WaitUntil.Started`** when you want to poll manually or run operations in parallel
-3. **Always use `DefaultAzureCredential`** — never hardcode passwords in production
+3. **Always use `DefaultAzureCredential`**; never hardcode passwords in production
 4. **Handle `RequestFailedException`** for ARM API errors
 5. **Use `CreateOrUpdateAsync`** for idempotent operations
 6. **Navigate hierarchy** via `Get*` methods (e.g., `server.GetSqlDatabases()`)

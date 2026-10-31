@@ -31,7 +31,7 @@ Options:
 
 ---
 
-## `quant run` — run an indicator script
+## `quant run`: run an indicator script
 
 ```
 Run a quant indicator script against historical K-line data on the server
@@ -127,7 +127,7 @@ longbridge quant run TSLA.US --start 2024-01-01 --end 2024-12-31 --script "..." 
 ## Notes
 
 - Script language: **Navi** (`.nv`) by default; `--language pine` for PineScript compatibility. Any unrecognised value falls back to Navi.
-- Navi syntax and standard library: <https://navi-lang.org> is authoritative. Install its CLI (<https://navi-lang.org/docs/install.md>) and run `navi lint script.nv` before sending — the API only reports script errors as an opaque error code.
+- Navi syntax and standard library: <https://navi-lang.org> is authoritative. Install its CLI (<https://navi-lang.org/docs/install.md>) and run `navi lint script.nv` before sending; the API only reports script errors as an opaque error code.
 - `--format json` sets `exclude_chart`, so series values are absent from the JSON response; backtest metrics still come back via `.report_json`.
 - Run `longbridge quant run --help` for all current flags
 - Use `longbridge kline` to preview the underlying OHLCV data first

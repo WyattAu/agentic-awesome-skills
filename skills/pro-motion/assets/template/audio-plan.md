@@ -1,4 +1,4 @@
-# Audio plan — <brand> · <duration>s · <BPM> BPM (bar = <s>s)
+# Audio plan: <brand> · <duration>s · <BPM> BPM (bar = <s>s)
 
 ## 1 · Campaign brain (one line each)
 - Truth (what the film proves):

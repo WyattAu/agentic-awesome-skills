@@ -1,6 +1,6 @@
 ---
 name: drizzle-orm-expert
-description: "Expert in Drizzle ORM for TypeScript — schema design, relational queries, migrations, and serverless database integration. Use when building type-safe database layers with Drizzle."
+description: "Expert in Drizzle ORM for TypeScript; schema design, relational queries, migrations, and serverless database integration. Use when building type-safe database layers with Drizzle."
 risk: critical
 source: community
 date_added: "2026-03-04"
@@ -83,7 +83,7 @@ export const postsRelations = relations(posts, ({ one }) => ({
 ### Type Inference
 
 ```typescript
-// Infer types directly from your schema — no separate type files needed
+// Infer types directly from your schema; no separate type files needed
 import type { InferSelectModel, InferInsertModel } from "drizzle-orm";
 
 export type User = InferSelectModel<typeof users>;
@@ -135,7 +135,7 @@ const postCounts = await db
 ### Relational Queries (Prisma-like API)
 
 ```typescript
-// Nested includes — Drizzle resolves in a single query
+// Nested includes; Drizzle resolves in a single query
 const usersWithPosts = await db.query.users.findMany({
   with: {
     posts: {
@@ -209,7 +209,7 @@ export default defineConfig({
 # Generate migration SQL from schema changes
 npx drizzle-kit generate
 
-# Push schema directly to database (development only — skips migration files)
+# Push schema directly to database (development only: skips migration files)
 npx drizzle-kit push
 
 # Run pending migrations (production)
@@ -350,10 +350,10 @@ export async function createUser(formData: FormData) {
 - ✅ **Do:** Use prepared statements for frequently executed queries in production
 - ✅ **Do:** Use `drizzle-kit generate` + `migrate` in production (never `push`)
 - ✅ **Do:** Pass `{ schema }` to `drizzle()` to enable the relational query API
-- ❌ **Don't:** Use `drizzle-kit push` in production — it can cause data loss
+- ❌ **Don't:** Use `drizzle-kit push` in production; it can cause data loss
 - ❌ **Don't:** Write raw SQL when the Drizzle query builder supports the operation
 - ❌ **Don't:** Forget to define `relations()` if you want to use `db.query.*` with `with`
-- ❌ **Don't:** Create a new database connection per request in serverless — use connection pooling
+- ❌ **Don't:** Create a new database connection per request in serverless; use connection pooling
 
 ## Troubleshooting
 

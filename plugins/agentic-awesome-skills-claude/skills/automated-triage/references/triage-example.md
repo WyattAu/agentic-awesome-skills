@@ -4,8 +4,8 @@
 
 This is a complete triage workflow that supports two modes:
 
-- **Recommendation mode** — runs the full investigation and tells you what it would do, without writing anything to your environment. Use this while tuning your triage prompt.
-- **Action mode** — runs the full workflow and applies actions (comments, status updates) for real.
+- **Recommendation mode**; runs the full investigation and tells you what it would do, without writing anything to your environment. Use this while tuning your triage prompt.
+- **Action mode**; runs the full workflow and applies actions (comments, status updates) for real.
 
 Run in recommendation mode first. Once the classifications and recommendations match how your team would respond manually, switch to action mode.
 
@@ -18,7 +18,7 @@ Run in recommendation mode first. Once the classifications and recommendations m
 3. Scores every alert by incident likelihood and potential impact (in parallel)
 4. Fires deep troubleshooting on all high-signal alerts simultaneously, classifying each as results arrive
 5. In **action mode**: posts a triage comment on every alert and updates statuses
-   In **recommendation mode**: outputs what it would comment and what status it would set — no writes
+   In **recommendation mode**: outputs what it would comment and what status it would set; no writes
 
 ---
 
@@ -26,9 +26,9 @@ Run in recommendation mode first. Once the classifications and recommendations m
 
 ### Step 1: Choose mode
 
-Ask: "Run in **recommendation mode** (no writes — I'll show you what actions would be taken) or **action mode** (comments and status updates applied for real)?"
+Ask: "Run in **recommendation mode** (no writes; I'll show you what actions would be taken) or **action mode** (comments and status updates applied for real)?"
 
-Also ask: "Run all stages **straight through**, or **step by step** — pausing after each stage to show results before continuing?"
+Also ask: "Run all stages **straight through**, or **step by step**; pausing after each stage to show results before continuing?"
 
 Wait for both answers before proceeding. In step-by-step mode, after each stage completes, summarise what it produced, proactively suggest alternatives or adjustments based on what you observed, and wait for confirmation before moving to the next.
 
@@ -44,11 +44,11 @@ Call `alert_assessment` in parallel for every alert from step 2, in batches of u
 
 ### Step 4: Troubleshoot and classify high-signal alerts
 
-For each alert where BOTH `incident_likelihood` AND `alert_impact` are MEDIUM or HIGH, call `run_troubleshooting_agent` (default `async_mode=True`). Use a bounded, approved concurrency for eligible alerts — each call returns immediately with one of: `success` (previous results available immediately), `queued` (accepted, not started yet), or `running` (in progress).
+For each alert where BOTH `incident_likelihood` AND `alert_impact` are MEDIUM or HIGH, call `run_troubleshooting_agent` (default `async_mode=True`). Use a bounded, approved concurrency for eligible alerts; each call returns immediately with one of: `success` (previous results available immediately), `queued` (accepted, not started yet), or `running` (in progress).
 
-Skip any alert where either value is LOW — troubleshooting is expensive and not warranted for low-signal alerts.
+Skip any alert where either value is LOW; troubleshooting is expensive and not warranted for low-signal alerts.
 
-For each job that returned `queued` or `running`, poll with `get_troubleshooting_agent_results(incident_id=...)` — start at ~30 seconds, then increase to 60s intervals. Classify each alert as its result arrives (`success`), before moving on. If a job returns `failed`, note it and continue.
+For each job that returned `queued` or `running`, poll with `get_troubleshooting_agent_results(incident_id=...)`; start at ~30 seconds, then increase to 60s intervals. Classify each alert as its result arrives (`success`), before moving on. If a job returns `failed`, note it and continue.
 
 **Classifications:**
 
@@ -82,7 +82,7 @@ Then call `update_alert` for each classified alert:
 | Possible data incident      | *(no change)*        |
 | Other                       | *(no change)*        |
 
-For alerts classified as **natural data variation**, also call `mark_event_as_normal` — this signals the ML threshold detector to recalibrate and avoid re-alerting on the same pattern. Only has an effect on monitors using automated (ML-based) thresholds.
+For alerts classified as **natural data variation**, also call `mark_event_as_normal`; this signals the ML threshold detector to recalibrate and avoid re-alerting on the same pattern. Only has an effect on monitors using automated (ML-based) thresholds.
 
 Do not update status for untroubleshot alerts.
 
@@ -102,7 +102,7 @@ After completing all steps, produce a summary table:
 | Alert ID | Type | Incident Likelihood | Potential Impact | Classification | Action Taken |
 |----------|------|---------------------|------------------|----------------|--------------|
 
-Include every alert from step 1. For untroubleshot alerts, leave Classification blank and set Action Taken to "Comment only" only after a successful authorized write; in recommendation mode use "No write — recommendation".
+Include every alert from step 1. For untroubleshot alerts, leave Classification blank and set Action Taken to "Comment only" only after a successful authorized write; in recommendation mode use "No write; recommendation".
 
 ---
 
@@ -114,4 +114,4 @@ Common adjustments:
 - **Adjust the troubleshooting filter** in step 4
 - **Add Slack or ticket creation** in step 5 for confirmed incidents
 - **Customise `alert_assessment` scoring** via `user_instructions` to tune emphasis for your environment (see `triage-stages.md`)
-- **Run step-by-step when tuning** — a useful pattern is to run the full workflow straight through first to see end-to-end behaviour, then re-run in step-by-step mode to inspect each stage's output and make decisions before proceeding
+- **Run step-by-step when tuning**; a useful pattern is to run the full workflow straight through first to see end-to-end behaviour, then re-run in step-by-step mode to inspect each stage's output and make decisions before proceeding

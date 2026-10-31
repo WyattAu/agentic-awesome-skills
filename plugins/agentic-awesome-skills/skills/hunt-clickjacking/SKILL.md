@@ -34,7 +34,7 @@ report_count: 6
 Clickjacking (UI Redressing) lets an attacker load a target page inside a transparent iframe on a malicious site. The victim sees the attacker's decoy UI but clicks the hidden target UI beneath it. No JavaScript on the target is required.
 
 **Highest-value targets:**
-- Login / authentication pages — force login with attacker credentials
+- Login / authentication pages; force login with attacker credentials
 - Money transfer / checkout / "confirm payment" buttons
 - Account settings (email change, password change, 2FA disable)
 - OAuth / social-login "Authorize app" confirmation dialogs
@@ -45,7 +45,7 @@ Clickjacking (UI Redressing) lets an attacker load a target page inside a transp
 Two mechanisms prevent framing:
 
 ```
-X-Frame-Options: DENY              # strongest — blocks all framing
+X-Frame-Options: DENY              # strongest; blocks all framing
 X-Frame-Options: SAMEORIGIN        # allows same-origin frames only
 Content-Security-Policy: frame-ancestors 'none'     # CSP equivalent of DENY
 Content-Security-Policy: frame-ancestors 'self'     # CSP equivalent of SAMEORIGIN
@@ -57,33 +57,33 @@ If neither effective framing policy is present, investigate actual framing behav
 
 Header-absence is the **trigger for investigation, not the finding**. Two steps:
 
-**Step 1 — Header check (screening).** Fetch the target page and inspect the response headers:
+**Step 1; Header check (screening).** Fetch the target page and inspect the response headers:
 
 ```
 curl -sI https://target.example/account/transfer | grep -iE 'x-frame-options|content-security-policy'
 ```
 If BOTH `X-Frame-Options` and CSP `frame-ancestors` are absent, the page is a *candidate*. If either appears restrictive, verify the effective enforced policy in the target browser before concluding protection. An enforced frame-ancestors policy takes precedence over X-Frame-Options in supporting browsers; report-only policies and meta tags do not provide the same protection.
 
-**Step 2 — Prove it actually frames and clicks (required for a real finding).** Build a minimal PoC and load it in a real browser:
+**Step 2; Prove it actually frames and clicks (required for a real finding).** Build a minimal PoC and load it in a real browser:
 
 ```html
 <!doctype html>
-<h1>Win a prize — click below</h1>
+<h1>Win a prize; click below</h1>
 <iframe src="https://target.example/account/transfer"
         style="opacity:0.1;position:absolute;top:0;left:0;width:1000px;height:800px"></iframe>
 ```
 Confirm ALL of the following, or it is not exploitable:
-- The page **actually renders inside the iframe** (no framebusting JS that blanks/redirects it — e.g. `if(top!==self)` breakout, or a `Sec-Fetch-Dest`/JS frame check).
-- The **sensitive action still works while framed** — critically, the action must succeed *cross-site*. If it relies on a session cookie set `SameSite=Lax` or `SameSite=Strict` (the modern default), the cookie is **not** sent on the cross-site framed request, and the clickjack fails. Verify the victim's authenticated state carries into the frame.
+- The page **actually renders inside the iframe** (no framebusting JS that blanks/redirects it; e.g. `if(top!==self)` breakout, or a `Sec-Fetch-Dest`/JS frame check).
+- The **sensitive action still works while framed**; critically, the action must succeed *cross-site*. If it relies on a session cookie set `SameSite=Lax` or `SameSite=Strict` (the modern default), the cookie is **not** sent on the cross-site framed request, and the clickjack fails. Verify the victim's authenticated state carries into the frame.
 - The target is a **state-changing action** (transfer, settings/email/password change, 2FA disable, OAuth authorize, admin action), not a read-only page.
 
-**Strategy:** target the most sensitive action pages first — severity scales directly with what the victim is tricked into doing.
+**Strategy:** target the most sensitive action pages first; severity scales directly with what the victim is tricked into doing.
 
 ## False Positives
 
-- Public, read-only pages (home/marketing) lacking frame protection are low/informational — no sensitive action to redress.
+- Public, read-only pages (home/marketing) lacking frame protection are low/informational; no sensitive action to redress.
 - APIs and non-HTML endpoints (JSON, images) are not clickjacking targets.
-- **Header-absence alone is NOT a finding.** SameSite cookies, framebusting JS, or the lack of any sensitive framed action can each fully defeat it — which is why Step 2 is mandatory.
+- **Header-absence alone is NOT a finding.** SameSite cookies, framebusting JS, or the lack of any sensitive framed action can each fully defeat it; which is why Step 2 is mandatory.
 
 ## Proof Requirements
 
@@ -92,7 +92,7 @@ A valid clickjacking report shows: (1) the target page rendered inside an attack
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

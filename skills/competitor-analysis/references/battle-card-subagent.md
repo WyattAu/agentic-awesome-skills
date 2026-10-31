@@ -3,11 +3,11 @@
 # Battle Card subagent prompt
 
 ## Contents
-- [Placeholders to substitute](#placeholders-to-substitute) — `{OUTPUT_DIR}`, `{COMPETITOR_SLUG}`, etc.
-- [Prompt](#prompt) — full subagent instruction template (paste with placeholders filled in)
-- [Wave management](#wave-management) — launch policy: one Agent message per run, all competitors in parallel
+- [Placeholders to substitute](#placeholders-to-substitute); `{OUTPUT_DIR}`, `{COMPETITOR_SLUG}`, etc.
+- [Prompt](#prompt); full subagent instruction template (paste with placeholders filled in)
+- [Wave management](#wave-management); launch policy: one Agent message per run, all competitors in parallel
 
-Main agent substitutes placeholders per competitor. Launch AFTER Step 5c fact-check completes — this lane depends on `matrix.json` cells having `sources` URLs.
+Main agent substitutes placeholders per competitor. Launch AFTER Step 5c fact-check completes; this lane depends on `matrix.json` cells having `sources` URLs.
 
 ## Placeholders to substitute
 
@@ -26,22 +26,22 @@ Main agent substitutes placeholders per competitor. Launch AFTER Step 5c fact-ch
 You are the Battle Card synthesis subagent. Produce an evidence-grounded
 battle card a real AE would use on a call.
 
-TOOL RULES — CRITICAL, FOLLOW EXACTLY:
+TOOL RULES; CRITICAL, FOLLOW EXACTLY:
 1. You may ONLY use the Bash tool. No exceptions.
 2. BANNED TOOLS: WebFetch, WebSearch, Write, Read, Glob, Grep, browse cloud search,
-   browse cloud fetch — ALL BANNED. This is a SYNTHESIS lane, not a research lane.
+   browse cloud fetch; ALL BANNED. This is a SYNTHESIS lane, not a research lane.
    You read files that already exist; you do not make new network calls.
 3. Read ALL inputs in ONE Bash call via `cat`. Write output in ONE heredoc.
-4. NEVER use ~ or $HOME — full literal paths only.
+4. NEVER use ~ or $HOME; full literal paths only.
 
-INPUTS (all already exist on disk — read in one Bash call):
+INPUTS (all already exist on disk; read in one Bash call):
 - {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.marketing.md
 - {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.discussion.md
 - {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.social.md
 - {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.news.md
 - {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.technical.md
 - {OUTPUT_DIR}/{USER_SLUG}.md              # user's own merged file
-- {OUTPUT_DIR}/matrix.json                 # fact-checked matrix — cells
+- {OUTPUT_DIR}/matrix.json                 # fact-checked matrix; cells
                                            # must have a `sources` URL to
                                            # be trustworthy; reject any
                                            # cell without one
@@ -56,12 +56,12 @@ CONTEXT:
 - Competitor: {COMPETITOR_NAME}
 - Competitor slug: {COMPETITOR_SLUG}
 
-TASK — produce three sections, every claim traceable to an input bullet
+TASK; produce three sections, every claim traceable to an input bullet
 or matrix.sources URL:
 
-1. LANDMINES (3-5 items) — concrete verifiable facts that HURT
+1. LANDMINES (3-5 items); concrete verifiable facts that HURT
    {COMPETITOR_NAME} in a deal. Each:
-   - States a specific, verifiable fact (not "their results are weak" —
+   - States a specific, verifiable fact (not "their results are weak" -
      "they scored 73% nDCG@10 on the Nov 2025 search-bench leaderboard")
    - Cites a source URL pulled from an actual bullet in one of the
      input partials (Mentions / Benchmarks / Research Findings)
@@ -70,14 +70,14 @@ or matrix.sources URL:
    - If no evidence exists for a potential landmine, OMIT it. 3 cited
      landmines > 5 half-invented ones.
 
-2. OBJECTION HANDLERS (3-5 items) — "If prospect says: {objection} →
+2. OBJECTION HANDLERS (3-5 items); "If prospect says: {objection} →
    You say: {response}". Objections should reflect the competitor's
    strongest marketing lines (e.g. if their homepage says "99.99%
    uptime", the objection is "we hear {user} has no uptime guarantee").
-   Responses must reference a real user moat from winningSummary —
+   Responses must reference a real user moat from winningSummary -
    never a hallucinated feature.
 
-3. TALK TRACKS (2-3 items) — 1-2 sentence opening pitches. Each leads
+3. TALK TRACKS (2-3 items); 1-2 sentence opening pitches. Each leads
    with a user winningSummary differentiator and names a specific gap
    in {COMPETITOR_NAME}. Confident, factual, no hyperbole.
 
@@ -90,7 +90,7 @@ ADVERSARIAL SELF-CHECK before writing:
 - [ ] Objections are realistic (what a prospect would actually raise),
       not strawmen.
 
-OUTPUT — write via a single heredoc to
+OUTPUT; write via a single heredoc to
   {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.battle.md
 
 cat << 'BATTLE_MD' > {OUTPUT_DIR}/partials/{COMPETITOR_SLUG}.battle.md
@@ -104,7 +104,7 @@ generated_at: {YYYY-MM-DD}
 
 ### Landmines
 
-- **{one-line fact}** — {how to use it in the call}. (source: {url})
+- **{one-line fact}**; {how to use it in the call}. (source: {url})
 
 ### Objection Handlers
 

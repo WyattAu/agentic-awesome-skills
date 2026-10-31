@@ -46,11 +46,11 @@ The upstream plugin describes these 3 MCP servers; this skill alone does not pro
 - Monitor resource utilization
 
 > **Note**: The following servers are available separately via the Full AWS MCP Server (see `aws-mcp-setup` skill) and are not bundled with this plugin:
-> - AWS Billing and Cost Management MCP — Real-time billing details
-> - CloudWatch Application Signals MCP — APM and SLOs
-> - AWS Managed Prometheus MCP — PromQL queries for containers
-> - AWS CloudTrail MCP — API activity audit
-> - AWS Well-Architected Security Assessment MCP — Security posture assessment
+> - AWS Billing and Cost Management MCP; Real-time billing details
+> - CloudWatch Application Signals MCP; APM and SLOs
+> - AWS Managed Prometheus MCP; PromQL queries for containers
+> - AWS CloudTrail MCP; API activity audit
+> - AWS Well-Architected Security Assessment MCP; Security posture assessment
 
 ## When to Use This Skill
 

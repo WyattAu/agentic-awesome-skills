@@ -114,11 +114,11 @@ The `$-strip` sanitizer enforces this at output time, but the prompt should also
 
 ### Match the user's framework version
 
-Stable `'use cache'`, cacheLife and cacheTag require Next 16+ with Cache Components; Next 15 variants were experimental. The recommender prompt receives only the citation subset valid for the user's stack — but the LLM can still hallucinate. The `version-mismatch` sanitizer catches stragglers.
+Stable `'use cache'`, cacheLife and cacheTag require Next 16+ with Cache Components; Next 15 variants were experimental. The recommender prompt receives only the citation subset valid for the user's stack; but the LLM can still hallucinate. The `version-mismatch` sanitizer catches stragglers.
 
 ## The 12 sanitizers
 
-Each sanitizer records its action in `rec.sanitizerTrail` when it mutates a field. Tag format: `tag:detail`. Tags are lexically stable — downstream consumers grep them.
+Each sanitizer records its action in `rec.sanitizerTrail` when it mutates a field. Tag format: `tag:detail`. Tags are lexically stable; downstream consumers grep them.
 
 | # | Sanitizer | Trigger | Action | Trail tag |
 |---|---|---|---|---|
@@ -137,7 +137,7 @@ Each sanitizer records its action in `rec.sanitizerTrail` when it mutates a fiel
 
 The sanitizer order matters: dollar-strip runs first (cheap, deterministic), then content sanitizers, then citation sanitizers last. This guarantees citation count is computed against the final state.
 
-The `recordSanitizer(rec, tag)` helper is the single entry point — sanitizers MUST call it before mutating fields. Otherwise the audit trail rots.
+The `recordSanitizer(rec, tag)` helper is the single entry point; sanitizers MUST call it before mutating fields. Otherwise the audit trail rots.
 
 ### Provider rate limits
 
@@ -147,7 +147,7 @@ Bound both throughput and concurrency, and respect Retry-After with bounded retr
 
 ## Envelope-unwrap recovery
 
-Not a sanitizer — a recovery step. LLMs occasionally wrap their JSON output in an envelope:
+Not a sanitizer; a recovery step. LLMs occasionally wrap their JSON output in an envelope:
 
 ```json
 { "data": { "recommendations": [...] } }

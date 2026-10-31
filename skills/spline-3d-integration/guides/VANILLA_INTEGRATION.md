@@ -4,12 +4,12 @@ Two methods depending on how much control you need.
 
 ---
 
-## Method A — Web Component (Recommended for most cases)
+## Method A: Web Component (Recommended for most cases)
 
 No npm required. Just add to HTML. Supports lazy loading, transparent backgrounds, and mouse interactivity.
 
 ```html
-<!-- In <head> — loads the web component -->
+<!-- In <head>; loads the web component -->
 <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
 
 <!-- Basic embed -->
@@ -30,7 +30,7 @@ No npm required. Just add to HTML. Supports lazy loading, transparent background
 
 ---
 
-## Method B — Runtime API (When you need programmatic control)
+## Method B: Runtime API (When you need programmatic control)
 
 Use when you need to manipulate objects, trigger animations, or respond to events from your own JS.
 
@@ -93,7 +93,7 @@ spline.load(sceneUrl).then(() => {
 
 ## Full-Page Background Setup
 
-The most common use case — Spline scene behind all content.
+The most common use case; Spline scene behind all content.
 
 ```html
 <!DOCTYPE html>
@@ -104,7 +104,7 @@ The most common use case — Spline scene behind all content.
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      /* DO NOT add overflow: hidden here — it will break page scroll */
+      /* DO NOT add overflow: hidden here; it will break page scroll */
       position: relative;
     }
 
@@ -115,8 +115,8 @@ The most common use case — Spline scene behind all content.
       width: 100%;
       height: 100%;
       z-index: 0;
-      /* pointer-events: none — use this if scene is decorative only */
-      /* pointer-events: all — use this if you want mouse interaction */
+      /* pointer-events: none; use this if scene is decorative only */
+      /* pointer-events: all; use this if you want mouse interaction */
       pointer-events: all;
     }
 

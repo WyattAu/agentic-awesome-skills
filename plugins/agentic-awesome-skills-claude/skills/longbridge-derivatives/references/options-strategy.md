@@ -10,7 +10,7 @@ Run `longbridge <subcommand> --help` to verify exact flags.
 # Underlying spot and context
 longbridge quote <SYMBOL> --format json
 
-# Option chain — expiry dates
+# Option chain: expiry dates
 longbridge option chain <SYMBOL> --format json
 
 # Strikes for a specific expiry
@@ -48,7 +48,7 @@ longbridge option volume <SYMBOL> --format json
 ## Output template
 
 ```
-{Symbol} options strategy recommendation — Source: Longbridge Securities
+{Symbol} options strategy recommendation; Source: Longbridge Securities
 
 [Market context]
 - Spot: ${S}  |  Nearest expiry: {date}  |  ATM IV: ~X%
@@ -78,5 +78,5 @@ Why this fits: {2-sentence rationale linking market view + IV}
 | ------------------------------- | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------- |
 | `command not found: longbridge` | 切换到 MCP；若不可用，请安装 longbridge-terminal | 切換至 MCP；若不可用，請安裝 longbridge-terminal | Fall back to MCP; if unavailable, install longbridge-terminal |
 | stderr `not logged in`          | 请执行 `longbridge auth login`                   | 請執行 `longbridge auth login`                   | Run `longbridge auth login`                                   |
-| No liquid options (HK stock)    | 流动性不足，先确认可成交报价及流动性，不能据此推荐策略           | 流動性不足，先確認可成交報價及流動性，不能據此推薦策略           | Low liquidity — do not suggest a strategy until usable quotes/liquidity are established  |
+| No liquid options (HK stock)    | 流动性不足，先确认可成交报价及流动性，不能据此推荐策略           | 流動性不足，先確認可成交報價及流動性，不能據此推薦策略           | Low liquidity; do not suggest a strategy until usable quotes/liquidity are established  |
 | User view unclear               | 请说明看涨、看跌还是中性                         | 請說明看漲、看跌還是中性                         | Please clarify: bullish, bearish, or neutral?                 |

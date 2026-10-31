@@ -11,7 +11,7 @@ date_added: "2026-03-04"
 
 ## Overview
 
-This skill transforms flawed writing — whether pasted text or uploaded documents — into publication-ready prose without altering the author’s intent.
+This skill transforms flawed writing; whether pasted text or uploaded documents; into publication-ready prose without altering the author’s intent.
 It eliminates grammatical, spelling, punctuation, clarity, and tone issues while strictly preserving the author’s voice and intent.
 Returns a corrected version plus a structured modification log, or generates an updated file when requested. Not for code editing or technical refactoring.
 

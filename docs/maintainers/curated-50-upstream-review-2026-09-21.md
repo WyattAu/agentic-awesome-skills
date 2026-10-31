@@ -1,4 +1,5 @@
 # Curated 50: maintainer review ledger
+Date: 2026-09-21
 - `jev-social`; OK; risk=critical; source_repo=socai-io/jev-social
 - `apify-generate-output-schema`; OK; risk=unknown; source_repo=apify/agent-skills
 - `apify-integration-development`; OK; risk=unknown; source_repo=apify/agent-skills

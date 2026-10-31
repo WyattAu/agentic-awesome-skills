@@ -44,7 +44,7 @@ When you tell [Claude Code](https://github.com/anthropics/claude-code) to "searc
 
 ## The Solution
 
-This Claude Code Skill lets [Claude Code](https://github.com/anthropics/claude-code) chat directly with [**NotebookLM**](https://notebooklm.google/) — Google's **source-grounded knowledge base** powered by Gemini 2.5 that provides intelligent, synthesized answers grounded in your uploaded documents.
+This Claude Code Skill lets [Claude Code](https://github.com/anthropics/claude-code) chat directly with [**NotebookLM**](https://notebooklm.google/); Google's **source-grounded knowledge base** powered by Gemini 2.5 that provides intelligent, synthesized answers grounded in your uploaded documents.
 
 ```
 Your Task → Claude asks NotebookLM → Gemini synthesizes answer → Claude writes correct code
@@ -66,7 +66,7 @@ Your Task → Claude asks NotebookLM → Gemini synthesizes answer → Claude wr
 ### What Makes NotebookLM Superior?
 
 1. **Pre-processed by Gemini**: Upload docs once, get instant expert knowledge
-2. **Natural language Q&A**: Not just retrieval — actual understanding and synthesis
+2. **Natural language Q&A**: Not just retrieval; actual understanding and synthesis
 3. **Multi-source correlation**: Connects information across 50+ documents
 4. **Citation-backed**: Every answer includes source references
 5. **No infrastructure**: No vector DBs, embeddings, or chunking strategies needed
@@ -367,7 +367,7 @@ pip install -r requirements.txt
 This tool automates browser interactions with NotebookLM to make your workflow more efficient. However, a few friendly reminders:
 
 **About browser automation:**
-While I've built in humanization features (realistic typing speeds, natural delays, mouse movements) to make the automation behave more naturally, I can't guarantee Google won't detect or flag automated usage. I recommend using a dedicated Google account for automation rather than your primary account—think of it like web scraping: probably fine, but better safe than sorry!
+While I've built in humanization features (realistic typing speeds, natural delays, mouse movements) to make the automation behave more naturally, I can't guarantee Google won't detect or flag automated usage. I recommend using a dedicated Google account for automation rather than your primary account-think of it like web scraping: probably fine, but better safe than sorry!
 
 **About CLI tools and AI agents:**
 CLI tools like Claude Code, Codex, and similar AI-powered assistants are incredibly powerful, but they can make mistakes. Please use them with care and awareness:

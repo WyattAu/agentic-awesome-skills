@@ -55,7 +55,7 @@ See [benchmarks/results/](benchmarks/results/) for full methodology and solution
 
 ## What is Loki Mode?
 
-Loki Mode is a Claude Code skill that orchestrates **37 specialized AI agent types** across **7 swarms** to autonomously build, test, deploy, and scale complete startups. It dynamically spawns only the agents you need—**5-10 for simple projects, 100+ for complex startups**—working in parallel with continuous self-verification.
+Loki Mode is a Claude Code skill that orchestrates **37 specialized AI agent types** across **7 swarms** to autonomously build, test, deploy, and scale complete startups. It dynamically spawns only the agents you need-**5-10 for simple projects, 100+ for complex startups**-working in parallel with continuous self-verification.
 
 ```
 PRD → Research → Architecture → Development → Testing → Deployment → Marketing → Revenue
@@ -83,7 +83,7 @@ PRD → Research → Architecture → Development → Testing → Deployment →
 
 1. **Truly Autonomous**: RARV (Reason-Act-Reflect-Verify) cycle with self-verification achieves 2-3x quality improvement
 2. **Massively Parallel**: 100+ agents working simultaneously, not sequential single-agent bottlenecks
-3. **Production-Ready**: Not just code—handles deployment, monitoring, incident response, and business operations
+3. **Production-Ready**: Not just code-handles deployment, monitoring, incident response, and business operations
 4. **Self-Improving**: Learns from mistakes, updates continuity logs, prevents repeated errors
 5. **Zero Babysitting**: Auto-resumes on rate limits, recovers from failures, runs until completion
 6. **Efficiency Optimized**: ToolOrchestra-inspired metrics track cost per task, reward signals drive continuous improvement
@@ -161,7 +161,7 @@ Auto-refreshes every 3 seconds. Works with any modern browser.
 
 ### **RARV Cycle: Reason-Act-Reflect-Verify**
 
-Loki Mode doesn't just write code—it **thinks, acts, learns, and verifies**:
+Loki Mode doesn't just write code-it **thinks, acts, learns, and verifies**:
 
 ```
 1. REASON
@@ -210,7 +210,7 @@ There is **NEVER** a "finished" state. After completing the PRD, Loki Mode:
 
 **Rate limits?** Exponential backoff and automatic resume.
 **Errors?** Circuit breakers, dead letter queues, retry logic.
-**Interruptions?** State checkpoints every 5 seconds—just restart.
+**Interruptions?** State checkpoints every 5 seconds-just restart.
 
 ```bash
 # Start autonomous mode
@@ -289,7 +289,7 @@ Seriously. Go get coffee. It'll be deployed when you get back.
 
 ## Agent Swarms (37 Types)
 
-Loki Mode has **37 predefined agent types** organized into **7 specialized swarms**. The orchestrator spawns only what you need—simple projects use 5-10 agents, complex startups spawn 100+.
+Loki Mode has **37 predefined agent types** organized into **7 specialized swarms**. The orchestrator spawns only what you need-simple projects use 5-10 agents, complex startups spawn 100+.
 
 <img width="5309" height="979" alt="Agent Swarms Visualization" src="https://github.com/user-attachments/assets/7d18635d-a606-401f-8d9f-430e6e4ee689" />
 

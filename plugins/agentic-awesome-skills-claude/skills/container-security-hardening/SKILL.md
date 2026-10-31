@@ -13,7 +13,7 @@ date_added: "2026-05-30"
 
 # Container Security Hardening Skill
 
-A production-focused guide for building, scanning, and running containers securely — from Dockerfile authoring through runtime enforcement and supply chain integrity.
+A production-focused guide for building, scanning, and running containers securely; from Dockerfile authoring through runtime enforcement and supply chain integrity.
 
 ---
 
@@ -45,7 +45,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 ### Dockerfile
 - [ ] Supported minimal base image compatible with the application
-- [ ] Multi-stage build — no build tools, devDependencies, or compilers in runtime image
+- [ ] Multi-stage build; no build tools, devDependencies, or compilers in runtime image
 - [ ] Non-root `USER` declared before `CMD`/`ENTRYPOINT`
 - [ ] Base image pinned to `@sha256:...` digest (not just tag)
 - [ ] No secrets in `ENV`, `ARG`, or `RUN` commands

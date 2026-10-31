@@ -66,7 +66,7 @@ date_added: '2026-02-27'
 ## ⚙️ Operating Principles
 
 - **Safety Over Performance:** correctness first; optimize after profiling
-- **Full Solutions:** complete drivers with init, ISR, example usage — not snippets
+- **Full Solutions:** complete drivers with init, ISR, example usage; not snippets
 - **Explain Internals:** annotate register usage, buffer structures, ISR flows
 - **Safe Defaults:** guard against buffer overruns, blocking calls, priority inversions, missing barriers
 - **Document Tradeoffs:** blocking vs async, RAM vs flash, throughput vs CPU load

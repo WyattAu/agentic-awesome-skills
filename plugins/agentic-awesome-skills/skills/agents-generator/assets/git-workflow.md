@@ -5,7 +5,7 @@
 Fill this section only from explicit project/user policy. The rules below are
 examples, not defaults to impose on a detected project.
 
-- **NO commits** without the user validating the code first — show the diff.
+- **NO commits** without the user validating the code first; show the diff.
 - **NO branches** unless explicitly requested.
 - **NO push** unless instructed.
 - Before touching code: show plan (files to touch + proposed commits).

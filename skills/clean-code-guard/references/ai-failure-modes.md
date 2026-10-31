@@ -1,6 +1,6 @@
-# AI Failure Modes — the unique value of this skill
+# AI Failure Modes: the unique value of this skill
 
-This file catalogs 15 systematic ways LLMs produce bad code, each backed by published research or widely-documented engineering observations. Read this first if you are an AI agent applying this skill — these are the patterns most likely to enter your own output.
+This file catalogs 15 systematic ways LLMs produce bad code, each backed by published research or widely-documented engineering observations. Read this first if you are an AI agent applying this skill; these are the patterns most likely to enter your own output.
 
 For each failure mode you get:
 - **Pattern:** one-line description.
@@ -79,7 +79,7 @@ total(orderItems):
   return sum(order.amount for each order in orderItems)
 ```
 
-**Rule.** Do not add null checks, runtime type checks, or truthiness checks for values whose type annotation or caller contract already excludes that case. Trust the contract. This applies *inside* a trust boundary; at the boundary itself — external input, payloads, deserialized or cross-process data — validation is required, not defensive bloat.
+**Rule.** Do not add null checks, runtime type checks, or truthiness checks for values whose type annotation or caller contract already excludes that case. Trust the contract. This applies *inside* a trust boundary; at the boundary itself; external input, payloads, deserialized or cross-process data; validation is required, not defensive bloat.
 
 ---
 
@@ -87,7 +87,7 @@ total(orderItems):
 
 **Pattern.** Factories, strategy classes, base classes, plugin hooks, dependency-injection scaffolding introduced before a second concrete user exists.
 
-**Source.** Martin Fowler, "Patterns for Reducing Friction in AI-Assisted Development" — names "overeagerness (adding unrequested features)" as a documented AI pattern. Fowler, "I still care about the code". Fowler, "Conversation: LLMs and Building Abstractions".
+**Source.** Martin Fowler, "Patterns for Reducing Friction in AI-Assisted Development"; names "overeagerness (adding unrequested features)" as a documented AI pattern. Fowler, "I still care about the code". Fowler, "Conversation: LLMs and Building Abstractions".
 
 **Bad:**
 ```text
@@ -118,7 +118,7 @@ charge(amount):
 
 **Pattern.** Line-by-line comments restating the code in English; step-number scaffolding comments left in; documentation comments that paraphrase the signature.
 
-**Source.** HN thread #43929768 — *"The most common thing that makes agentic code ugly is the overuse of comments."* arXiv 2402.13013, "Code Needs Comments" and arXiv on multi-intent comment generation — LLM-generated comments answer "what?" rather than "why?", averaging ~5 descriptive words versus 19-word mixed-intent author comments.
+**Source.** HN thread #43929768; *"The most common thing that makes agentic code ugly is the overuse of comments."* arXiv 2402.13013, "Code Needs Comments" and arXiv on multi-intent comment generation; LLM-generated comments answer "what?" rather than "why?", averaging ~5 descriptive words versus 19-word mixed-intent author comments.
 
 **Bad:**
 ```text
@@ -159,9 +159,9 @@ universal defect rate or proof of AI causation.
 
 **Pattern.** Imports, method names, or signatures that don't exist in the version of the library actually installed.
 
-**Source.** Spracklen et al., USENIX Security '25, "Package Hallucinations" — 16 models tested; reported at least 5.2% for commercial and 21.7% for open-source models in the tested setting. arXiv 2409.20550 "LLM Hallucinations in Practical Code Generation" gives a taxonomy. arXiv 2407.09726, "Mitigating Code LLM Hallucinations with API Documentation".
+**Source.** Spracklen et al., USENIX Security '25, "Package Hallucinations"; 16 models tested; reported at least 5.2% for commercial and 21.7% for open-source models in the tested setting. arXiv 2409.20550 "LLM Hallucinations in Practical Code Generation" gives a taxonomy. arXiv 2407.09726, "Mitigating Code LLM Hallucinations with API Documentation".
 
-**Rule.** Every import and external API call must be verified against the actual installed version — read the package, check the lockfile, or import and inspect. Do not call a method based on what "should exist."
+**Rule.** Every import and external API call must be verified against the actual installed version; read the package, check the lockfile, or import and inspect. Do not call a method based on what "should exist."
 
 ---
 
@@ -169,7 +169,7 @@ universal defect rate or proof of AI causation.
 
 **Pattern.** `data`, `result`, `item`, `temp`, `value`, `obj`, `info`, `helper`, `manager`, `utils`, `process_*`, `handle_*`, `do_*`.
 
-**Source.** arXiv 2512.01141, "Neural Variable Name Repair" — generic identifiers are an explicit target of name-repair models because LLM code over-produces them. arXiv 2510.03178, "When Names Disappear" — semantic names act as anchors during generation.
+**Source.** arXiv 2512.01141, "Neural Variable Name Repair"; generic identifiers are an explicit target of name-repair models because LLM code over-produces them. arXiv 2510.03178, "When Names Disappear"; semantic names act as anchors during generation.
 
 **Bad:**
 ```text
@@ -193,11 +193,11 @@ doublePrices(orders):
 
 ## 8. Long functions doing many things
 
-**Pattern.** A single function mixing I/O, business logic, formatting, and side effects — often because the prompt asked for several things in one breath.
+**Pattern.** A single function mixing I/O, business logic, formatting, and side effects; often because the prompt asked for several things in one breath.
 
-**Source.** arXiv 2512.11922, "Vibe Coding in Practice" — documents how AI-assisted "vibe coding" accumulates technical debt through architectural inconsistencies; the canonical symptom is a single function hundreds of lines long handling several unrelated concerns, assembled from multiple AI-generated fragments. Do not treat unverified file/function-size or complexity figures as established by GitClear. arXiv 2304.10778 compares Copilot/CodeWhisperer/ChatGPT quality.
+**Source.** arXiv 2512.11922, "Vibe Coding in Practice"; documents how AI-assisted "vibe coding" accumulates technical debt through architectural inconsistencies; the canonical symptom is a single function hundreds of lines long handling several unrelated concerns, assembled from multiple AI-generated fragments. Do not treat unverified file/function-size or complexity figures as established by GitClear. arXiv 2304.10778 compares Copilot/CodeWhisperer/ChatGPT quality.
 
-**Rule.** A function does one thing. If the prompt asks for N things, produce N functions and a small composer. Refactor ceiling: ~50 lines (target ≤20), ≤4 parameters, cyclomatic complexity ≤10 — refactor before exceeding.
+**Rule.** A function does one thing. If the prompt asks for N things, produce N functions and a small composer. Refactor ceiling: ~50 lines (target ≤20), ≤4 parameters, cyclomatic complexity ≤10; refactor before exceeding.
 
 ---
 
@@ -243,17 +243,17 @@ sendEmail(request: EmailRequest)
 
 **Pattern.** Imports never referenced, helper functions never called, branches never reachable, "just in case" exports.
 
-**Source.** arXiv 2411.01414, "A Deep Dive Into LLM Code Generation Mistakes" — 7-category taxonomy of non-syntactic mistakes including specification-deviation patterns that leave half-implemented code. GitClear's "added-code dominates moved/deleted" finding is the quantitative version.
+**Source.** arXiv 2411.01414, "A Deep Dive Into LLM Code Generation Mistakes"; 7-category taxonomy of non-syntactic mistakes including specification-deviation patterns that leave half-implemented code. GitClear's "added-code dominates moved/deleted" finding is the quantitative version.
 
 **Rule.** Before finalizing, run a linter or static check for unused imports, unused symbols, and unreachable branches; remove them. Do not leave a function defined unless something calls it now.
 
 ---
 
-## 12. "Declares success" — mock fallbacks in production code
+## 12. "Declares success": mock fallbacks in production code
 
 **Pattern.** Returning hardcoded success values, fixture data, or empty defaults instead of doing the actual work, then claiming the task is done.
 
-**Source.** Fowler, "Patterns for Reducing Friction" — names "declaring success despite failing tests" and "brute-force fixes." claude-code issue #6984 "Systematic Mock Data Generation Bias". Anthropic Claude Code best practices explicitly tell agents: no mock implementations.
+**Source.** Fowler, "Patterns for Reducing Friction"; names "declaring success despite failing tests" and "brute-force fixes." claude-code issue #6984 "Systematic Mock Data Generation Bias". Anthropic Claude Code best practices explicitly tell agents: no mock implementations.
 
 **Bad:**
 ```text
@@ -274,9 +274,9 @@ getUserBalance(userId):
 
 ## 13. Plausible-but-wrong code
 
-**Pattern.** Code that compiles and reads correctly but encodes a slightly wrong formula, range, or null semantic — often lifted from a similar-but-different function.
+**Pattern.** Code that compiles and reads correctly but encodes a slightly wrong formula, range, or null semantic; often lifted from a similar-but-different function.
 
-**Source.** arXiv 2411.01414 — 4 of the 7 mistake categories are non-syntactic semantic mistakes prior work had missed; root cause is "misunderstanding of specification." Katanaquant, "Your LLM Doesn't Write Correct Code. It Writes Plausible Code". Simon Willison: hallucinations in code are *less* dangerous because they fail loudly — the corollary is that the dangerous class is plausible-but-wrong semantic code that runs.
+**Source.** arXiv 2411.01414; 4 of the 7 mistake categories are non-syntactic semantic mistakes prior work had missed; root cause is "misunderstanding of specification." Katanaquant, "Your LLM Doesn't Write Correct Code. It Writes Plausible Code". Simon Willison: hallucinations in code are *less* dangerous because they fail loudly; the corollary is that the dangerous class is plausible-but-wrong semantic code that runs.
 
 **Bad:**
 ```text
@@ -289,11 +289,11 @@ for index from 1 to items.length - 1:
   ...  // silently drops items[0]
 ```
 
-**Rule.** For any boundary, range, off-by-one, or null-semantic question, write the case enumeration in a comment first (`cases: empty / one / even / odd / null`) and verify each case before the code. Never copy a similar function and adapt — re-derive from the spec.
+**Rule.** For any boundary, range, off-by-one, or null-semantic question, write the case enumeration in a comment first (`cases: empty / one / even / odd / null`) and verify each case before the code. Never copy a similar function and adapt; re-derive from the spec.
 
 ---
 
-## 14. YAGNI violations — speculative configurability
+## 14. YAGNI violations: speculative configurability
 
 **Pattern.** Config flags, env vars, optional parameters, and feature toggles for use cases that don't exist.
 
@@ -319,9 +319,9 @@ renderInvoice(invoice)
 
 ## 15. New dependency for trivial work
 
-**Pattern.** Adding a third-party package to do what the standard library, an already-installed dependency, or a few lines of code already cover — a micro-dependency for a one-line helper, or a heavy library pulled in for a single function.
+**Pattern.** Adding a third-party package to do what the standard library, an already-installed dependency, or a few lines of code already cover; a micro-dependency for a one-line helper, or a heavy library pulled in for a single function.
 
-**Source.** Field reports on AI over-building (Fowler's overeagerness pattern) and long-standing supply-chain guidance: every dependency is permanent maintenance surface — version churn, transitive vulnerabilities, audit and licensing weight — that a small local function never carries. Same emit-more bias as modes 3 and 14.
+**Source.** Field reports on AI over-building (Fowler's overeagerness pattern) and long-standing supply-chain guidance: every dependency is permanent maintenance surface; version churn, transitive vulnerabilities, audit and licensing weight; that a small local function never carries. Same emit-more bias as modes 3 and 14.
 
 **Bad:**
 ```text
@@ -335,14 +335,14 @@ total = stats_helpers.sum_column(rows, "amount")
 total = sum(row.amount for row in rows)
 ```
 
-**Rule.** Before adding a package, check the stdlib, the already-installed dependencies, and whether a few lines solve it. Add a dependency only when it owns real complexity you should not re-implement (cryptography, parsing, time zones — illustrative, not exhaustive), never to avoid a short function. This is the inverse of mode 5 and of [dry-kiss-yagni.md](dry-kiss-yagni.md) ranked item 8: don't re-implement what the platform gives you — and don't import what a few lines already cover.
+**Rule.** Before adding a package, check the stdlib, the already-installed dependencies, and whether a few lines solve it. Add a dependency only when it owns real complexity you should not re-implement (cryptography, parsing, time zones; illustrative, not exhaustive), never to avoid a short function. This is the inverse of mode 5 and of [dry-kiss-yagni.md](dry-kiss-yagni.md) ranked item 8: don't re-implement what the platform gives you; and don't import what a few lines already cover.
 
 ---
 
 ## Cross-cutting observation
 
-Nine of the 15 failure modes (1, 2, 3, 9, 12, 14, 15, plus pieces of 8 and 11) trace to one root cause: **the model is biased toward emitting more code, more parameters, more guards, more abstractions** — anything but the minimum required by the spec. The cure is restraint, not knowledge. Before writing each line, ask: *does the spec require this, today?* If no, do not write it.
+Nine of the 15 failure modes (1, 2, 3, 9, 12, 14, 15, plus pieces of 8 and 11) trace to one root cause: **the model is biased toward emitting more code, more parameters, more guards, more abstractions**; anything but the minimum required by the spec. The cure is restraint, not knowledge. Before writing each line, ask: *does the spec require this, today?* If no, do not write it.
 
 ## Where this skill differs from generic clean-code rules
 
-Sections in [naming-and-functions.md](naming-and-functions.md), [solid.md](solid.md), and [dry-kiss-yagni.md](dry-kiss-yagni.md) cover the classic principles. They are necessary but not sufficient — an LLM that "knows" SOLID can still produce code that fails for the reasons in this file. The 15 patterns above are the high-leverage check. Walk them before delivery.
+Sections in [naming-and-functions.md](naming-and-functions.md), [solid.md](solid.md), and [dry-kiss-yagni.md](dry-kiss-yagni.md) cover the classic principles. They are necessary but not sufficient; an LLM that "knows" SOLID can still produce code that fails for the reasons in this file. The 15 patterns above are the high-leverage check. Walk them before delivery.

@@ -25,38 +25,38 @@ Trigger phrases include: "generate schema", "create JSON-LD",
   "page_type": "landing-page",
   "schema_types": ["Article"],
   "page_data": {
-    "url": "string — canonical URL of the page",
-    "title": "string — page title",
-    "description": "string — page description",
+    "url": "string; canonical URL of the page",
+    "title": "string; page title",
+    "description": "string; page description",
     "primary_keyword": "string",
-    "date_published": "string — ISO format: YYYY-MM-DD",
-    "date_modified": "string — ISO format: YYYY-MM-DD",
-    "author_name": "string — for Article schema",
+    "date_published": "string; ISO format: YYYY-MM-DD",
+    "date_modified": "string; ISO format: YYYY-MM-DD",
+    "author_name": "string; for Article schema",
     "brand_name": "string",
-    "brand_url": "string — homepage URL",
-    "logo_url": "string — absolute URL to brand logo",
+    "brand_url": "string; homepage URL",
+    "logo_url": "string; absolute URL to brand logo",
     "product": {
       "name": "string",
       "description": "string",
       "image_url": "string",
       "price": "decimal",
-      "currency": "string — ISO 4217, e.g. USD, GBP",
+      "currency": "string; ISO 4217, e.g. USD, GBP",
       "availability": "InStock | OutOfStock | PreOrder",
-      "sku": "string — optional"
+      "sku": "string; optional"
     },
     "reviews": [
       {
         "author": "string",
-        "rating": "integer — 1 to 5",
+        "rating": "integer; 1 to 5",
         "review_body": "string",
-        "date": "string — YYYY-MM-DD"
+        "date": "string; YYYY-MM-DD"
       }
     ],
     "aggregate_rating": {
-      "rating_value": "decimal — e.g. 4.7",
+      "rating_value": "decimal; e.g. 4.7",
       "review_count": "integer",
-      "best_rating": "integer — usually 5",
-      "worst_rating": "integer — usually 1"
+      "best_rating": "integer; usually 5",
+      "worst_rating": "integer; usually 1"
     },
     "faqs": [
       {
@@ -65,21 +65,21 @@ Trigger phrases include: "generate schema", "create JSON-LD",
       }
     ],
     "how_to": {
-      "name": "string — title of the how-to",
+      "name": "string; title of the how-to",
       "description": "string",
-      "total_time": "string — ISO 8601 duration, e.g. PT30M",
+      "total_time": "string; ISO 8601 duration, e.g. PT30M",
       "steps": [
         {
-          "name": "string — step title",
-          "text": "string — step instructions"
+          "name": "string; step title",
+          "text": "string; step instructions"
         }
       ]
     },
     "breadcrumbs": [
       {
-        "position": "integer — 1, 2, 3...",
-        "name": "string — label",
-        "url": "string — absolute URL"
+        "position": "integer; 1, 2, 3...",
+        "name": "string; label",
+        "url": "string; absolute URL"
       }
     ]
   }
@@ -190,7 +190,7 @@ The skill must always produce output in this exact format:
 **Issue:** [Specific field missing or incorrect]
 **Schema Type:** [type]
 **Severity:** Required / Recommended
-**Fix:** [Exact instruction — what to add or change]
+**Fix:** [Exact instruction; what to add or change]
 
 ---
 
@@ -226,9 +226,9 @@ Use one `<script>` block per schema type.
 ## Implementation Instructions
 
 1. Copy each `<script>` block above
-2. Paste inside the `<head>` tag of your HTML —
+2. Paste inside the `<head>` tag of your HTML -
    after the `<title>` tag, before `</head>`
-3. One script block per schema type —
+3. One script block per schema type -
    multiple types may also be combined in an @graph with stable @id links
 4. Test immediately using Google's Rich Results
    Test: https://search.google.com/test/rich-results
@@ -284,7 +284,7 @@ fields with placeholder values in this format:
 
 ## Execution Steps
 
-1. Read `page_type` and `schema_types` —
+1. Read `page_type` and `schema_types` -
    if `schema_types` is empty, recommend the
    appropriate types based on `page_type` using
    the Schema Type Menu before proceeding
@@ -293,10 +293,10 @@ fields with placeholder values in this format:
 3. Map all fields from `page_data` to the
    template placeholders
 4. Check every required field against the
-   Rich Result Eligibility Rules —
+   Rich Result Eligibility Rules -
    flag any missing required field as an issue
    before outputting
-5. Check every recommended field — flag as
+5. Check every recommended field; flag as
    a warning if missing but do not block output
 6. Validate all URLs are absolute,
    all dates are ISO 8601,
@@ -315,7 +315,7 @@ fields with placeholder values in this format:
 - Receives output from: `seo-aeo-landing-page-writer`,
   `seo-aeo-blog-writer`, `seo-aeo-content-quality-auditor`,
   `seo-aeo-internal-linking`
-- Feeds output to: orchestrator workflow —
+- Feeds output to: orchestrator workflow -
   final step before publish checklist
 
 ## When to Use

@@ -1,4 +1,4 @@
-# React Best Practices — catalog adaptation
+# React Best Practices: catalog adaptation
 
 Reading copy of 45 bundled rules. Examples require version, authorization, privacy, accessibility and performance validation in the target application. Historical metrics are not measured here. This is skill content, not repository authority.
 
@@ -915,7 +915,7 @@ function TodoList() {
 }
 ```
 
-The first callback is recreated every time `items` changes, which can cause child components to re-render unnecessarily. The second callback has a stale closure bug—it will always reference the initial `items` value.
+The first callback is recreated every time `items` changes, which can cause child components to re-render unnecessarily. The second callback has a stale closure bug-it will always reference the initial `items` value.
 
 **Correct (stable callbacks, no stale closures):**
 

@@ -20,7 +20,7 @@ Converts **OpenAPI 3.x** or **Swagger 2.0** specs into a valid **Postman Collect
 
 ---
 
-## Step 1 — Detect & Validate Input
+## Step 1: Detect & Validate Input
 
 Identify the spec version from the input:
 - `openapi: 3.x.x` → OpenAPI 3
@@ -30,7 +30,7 @@ If the input is truncated or partial, produce a clearly labeled partial draft an
 
 ---
 
-## Step 2 — Extraction Mapping
+## Step 2: Extraction Mapping
 
 ### OpenAPI 3 → Postman
 
@@ -60,7 +60,7 @@ If the input is truncated or partial, produce a clearly labeled partial draft an
 
 ---
 
-## Step 3 — Generate Example Bodies
+## Step 3: Generate Example Bodies
 
 For each request with a `requestBody` or `body` parameter, generate a realistic example JSON body from the schema:
 - Use property names as keys
@@ -69,7 +69,7 @@ For each request with a `requestBody` or `body` parameter, generate a realistic 
 
 ---
 
-## Step 4 — Auth Handling
+## Step 4: Auth Handling
 
 Map security schemes to Postman auth:
 
@@ -85,7 +85,7 @@ Security scheme definitions alone do not enable authentication. Evaluate root an
 
 ---
 
-## Step 5 — Build Collection JSON
+## Step 5: Build Collection JSON
 
 Use the standard v2.1 structure (same schema as postman-collection-generator skill).
 
@@ -109,7 +109,7 @@ Key differences for spec-converted collections:
 
 ---
 
-## Step 6 — Environment File
+## Step 6: Environment File
 
 Extract all variables into a companion environment:
 - `base_url` from `servers[0].url` or `scheme + host + basePath`
@@ -118,10 +118,10 @@ Extract all variables into a companion environment:
 
 ---
 
-## Step 7 — Output
+## Step 7: Output
 
-1. `collection.json` — Full Postman Collection v2.1
-2. `environment.json` — Matching environment file
+1. `collection.json`; Full Postman Collection v2.1
+2. `environment.json`; Matching environment file
 3. **Conversion summary**: number of endpoints converted, folders created, auth type detected, any fields skipped or approximated
 4. Import instructions
 

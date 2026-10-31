@@ -97,7 +97,7 @@ Approval: Pending | Approved by <user> on <date>
 ### Definition of Done
 
 ## Acceptance Criteria
-### AC-001 — <observable outcome>
+### AC-001: <observable outcome>
 - Related FRs: FR-001
 - Blocking: Yes | No
 - Scenario:
@@ -130,7 +130,7 @@ Plan owner: Main agent
 | Task ID | Allowed paths | Forbidden paths | Overlap check |
 
 ## Tasks
-### TASK-001 — <vertical outcome>
+### TASK-001: <vertical outcome>
 - Objective:
 - Related FRs:
 - Related ACs:
@@ -162,7 +162,7 @@ Blocking issue:
 Next action:
 Last updated:
 
-## Current Loop — LOOP-001
+## Current Loop: LOOP-001
 - Objective:
 - Related FRs/ACs:
 - Agent assignments:

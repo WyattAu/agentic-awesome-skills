@@ -1,4 +1,4 @@
-# astropy.coordinates — Reference
+# astropy.coordinates: Reference
 
 This file is a placeholder for the extended `astropy.coordinates` reference promised in the skill workflow.
 

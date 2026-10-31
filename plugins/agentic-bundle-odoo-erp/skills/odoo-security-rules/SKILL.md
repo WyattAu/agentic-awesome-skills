@@ -45,7 +45,7 @@ access_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,
 > </record>
 > ```
 
-### Example 2: Record Rule — Users See Only Their Own Records
+### Example 2: Record Rule: Users See Only Their Own Records
 
 ```xml
 <record id="rule_hospital_patient_own" model="ir.rule">
@@ -79,12 +79,12 @@ access_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,
 ## Best Practices
 
 - ✅ **Do:** Start with the most restrictive access and open up as needed.
-- ✅ **Do:** Use `company_ids` (plural) in multi-company rules — it reflects the companies active in the current environment; test company switching.
-- ✅ **Do:** Test rules using a non-admin user in debug mode — `sudo()` bypasses all record rules entirely.
+- ✅ **Do:** Use `company_ids` (plural) in multi-company rules; it reflects the companies active in the current environment; test company switching.
+- ✅ **Do:** Test rules using a non-admin user in debug mode; `sudo()` bypasses all record rules entirely.
 - ✅ **Do:** Create dedicated security groups per module rather than reusing core Odoo groups.
 - ❌ **Don't:** Give `perm_unlink = 1` to regular users unless deletion is explicitly required by the business process.
 - ❌ **Don't:** Leave `group_id` blank in `ir.model.access.csv` unless you intend to grant public (unauthenticated) access.
-- ❌ **Don't:** Use `base.group_system` for module managers — that grants full technical access including server configurations.
+- ❌ **Don't:** Use `base.group_system` for module managers; that grants full technical access including server configurations.
 
 ## Validation and sources
 
@@ -94,5 +94,5 @@ Test as ordinary users with overlapping groups: own/other records, every CRUD op
 
 - Field access can be restricted using the ORM field `groups` attribute; hiding a field only in OWL/views is not server-side access control.
 - **Portal and public user** access rules have additional nuances not fully covered here; test carefully with `base.group_portal`.
-- Record rules are **bypassed by `sudo()`** — any code running in superuser context ignores all `ir.rule` entries.
-- Does not cover **row-level security via PostgreSQL** (RLS) — Odoo manages all security at the ORM layer.
+- Record rules are **bypassed by `sudo()`**; any code running in superuser context ignores all `ir.rule` entries.
+- Does not cover **row-level security via PostgreSQL** (RLS); Odoo manages all security at the ORM layer.

@@ -17,14 +17,14 @@ Function Duration dominates (every request is a function invocation). Edge Reque
 ## Frequent gotchas
 
 - **No `Cache-Control` on the public GETs.** This is the most common finding in this profile, and the easiest fix.
-- **Auth check serialized with data load.** `await checkAuth()` then `await loadData()` — private data access must remain after its authorizing guard unless the data query independently enforces the same user/tenant predicate.
+- **Auth check serialized with data load.** `await checkAuth()` then `await loadData()`; private data access must remain after its authorizing guard unless the data query independently enforces the same user/tenant predicate.
 - **External API fan-out for one user.** A "build me a profile" endpoint that calls 5 third parties sequentially. Even small latency improvements multiplied by every user are huge.
 - **Long-running async operations on the request path.** Image generation, PDF rendering, big report computation. Use a durable queue/workflow with idempotency and retry handling; `after()` is bounded by function lifetime and is not a durable job runner.
 
 ## Cross-references
 
-- `https://vercel.com/docs/caching/cdn-cache` — the GET-handler Cache-Control fix
-- `vercel-react-best-practices:async-parallel` — parallelize external API calls
-- `vercel-react-best-practices:server-after-nonblocking` — `after()` for post-response work
-- `https://vercel.com/docs/fluid-compute` — when cold starts on infrequently-called endpoints hurt
-- `https://nextjs.org/docs/app/building-your-application/routing/middleware` — for rate-limit middleware
+- `https://vercel.com/docs/caching/cdn-cache`; the GET-handler Cache-Control fix
+- `vercel-react-best-practices:async-parallel`; parallelize external API calls
+- `vercel-react-best-practices:server-after-nonblocking`; `after()` for post-response work
+- `https://vercel.com/docs/fluid-compute`; when cold starts on infrequently-called endpoints hurt
+- `https://nextjs.org/docs/app/building-your-application/routing/middleware`; for rate-limit middleware

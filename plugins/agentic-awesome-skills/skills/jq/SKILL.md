@@ -10,7 +10,7 @@ tags: [jq, json, shell, cli, data-transformation, bash]
 tools: [claude, cursor, gemini]
 ---
 
-# jq — JSON Querying and Transformation
+# jq: JSON Querying and Transformation
 
 ## Overview
 
@@ -238,7 +238,7 @@ jq -n 'env.DISPLAY_REGION'  # use a non-sensitive example; do not print secrets
 ## Best Practices
 
 - Always use `-r` (raw output) when passing `jq` results to shell variables or other commands to strip JSON string quotes
-- Use `--arg` / `--argjson` to inject shell variables safely — never interpolate shell variables directly into filter strings
+- Use `--arg` / `--argjson` to inject shell variables safely; never interpolate shell variables directly into filter strings
 - Prefer `map(f)` over `[.[] | f]` for readability
 - Use `-c` (compact) for newline-delimited JSON pipelines; omit it for human-readable debugging
 - Test filters interactively with `jq -n` and literal input before embedding in scripts
@@ -268,9 +268,9 @@ jq -n 'env.DISPLAY_REGION'  # use a non-sensitive example; do not print secrets
 
 ## Related Skills
 
-- `@bash-pro` — Wrapping jq calls in robust shell scripts
-- `@bash-linux` — General shell pipeline patterns
-- `@github-automation` — Using jq with GitHub CLI JSON output
+- `@bash-pro`; Wrapping jq calls in robust shell scripts
+- `@bash-linux`; General shell pipeline patterns
+- `@github-automation`; Using jq with GitHub CLI JSON output
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

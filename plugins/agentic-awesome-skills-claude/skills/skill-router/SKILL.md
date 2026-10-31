@@ -19,30 +19,30 @@ Use this skill when:
 
 Help users who are unsure of what they want to do or which skill to use.
 Interview them with a short structured conversation, then recommend the most
-relevant skill(s) from the installed library — with a clear explanation of
+relevant skill(s) from the installed library; with a clear explanation of
 why each skill fits and exactly how to invoke it.
 
 ---
 
 ## Instructions
 
-### Step 1 — Acknowledge and open the interview
+### Step 1: Acknowledge and open the interview
 
 Respond warmly and tell the user you'll ask a few quick questions to find
 the right skill for them. Do NOT suggest any skills yet.
 
 Example opener:
-> "No problem — let me ask you a few quick questions so I can point you to
+> "No problem; let me ask you a few quick questions so I can point you to
 > exactly the right skill."
 
 ---
 
-### Step 2 — Ask the Funnel Questions (one at a time, in order)
+### Step 2: Ask the Funnel Questions (one at a time, in order)
 
 Ask only what you need. If an earlier answer makes a later question
 irrelevant, skip it.
 
-**Q1 — What is the broad area of the task?**
+**Q1; What is the broad area of the task?**
 Present these as numbered options:
 1. Building / coding something (app, feature, component, script)
 2. Fixing or debugging something that's broken
@@ -54,24 +54,24 @@ Present these as numbered options:
 8. Planning, strategy, or documentation
 9. Something else (ask them to describe it)
 
-**Q2 — How specific is the task?**
+**Q2; How specific is the task?**
 1. I have a clear spec / I know exactly what I want built
 2. I have a rough idea but need help shaping it
 3. I'm totally starting from scratch with no clear direction
 
-**Q3 — What tech stack or domain is involved?** (only ask if relevant)
+**Q3; What tech stack or domain is involved?** (only ask if relevant)
 Examples: React / Next.js, Node.js, Python, AWS, Stripe, AI/LLM, no-code, etc.
-If they say "not sure" or "any", that's fine — move on.
+If they say "not sure" or "any", that's fine; move on.
 
-**Q4 — Do you want to work autonomously (agent does everything) or
+**Q4; Do you want to work autonomously (agent does everything) or
 collaboratively (you stay in the loop)?**
-1. Fully autonomous — just go
-2. Collaborative — I want to review/approve steps
+1. Fully autonomous; just go
+2. Collaborative; I want to review/approve steps
 3. Not sure yet
 
 ---
 
-### Step 3 — Recommend skills
+### Step 3: Recommend skills
 
 Based on their answers, recommend **1 primary skill** and up to **2 secondary
 skills**. Structure your recommendation exactly like this:
@@ -84,12 +84,12 @@ skills**. Structure your recommendation exactly like this:
 ```
 
 **🔁 Also consider:**
-- `@skill-name-2` — [one sentence on when to layer this in]
-- `@skill-name-3` — [one sentence on when to layer this in]
+- `@skill-name-2`; [one sentence on when to layer this in]
+- `@skill-name-3`; [one sentence on when to layer this in]
 
 ---
 
-### Step 4 — Offer a ready-made prompt
+### Step 4: Offer a ready-made prompt
 
 After the recommendation, offer to write them a ready-to-use prompt they
 can paste directly into Antigravity. Ask:
@@ -106,7 +106,7 @@ everything you learned about their goal from the interview.
 ```
 User: @skill-router I want to build something but I'm not sure where to start
 
-Agent: No problem — let me ask a few quick questions.
+Agent: No problem; let me ask a few quick questions.
        What is the broad area?
        (1) Building  (2) Debugging  (3) Security  (4) AI/LLM
        (5) Marketing  (6) DevOps  (7) Design  (8) Planning
@@ -118,7 +118,7 @@ Agent: How specific is the task?
 
 User: 2 - rough idea
 
-Agent: What tech stack? (React, Node, Python, etc. — or "not sure")
+Agent: What tech stack? (React, Node, Python, etc.; or "not sure")
 
 User: Next.js
 
@@ -129,8 +129,8 @@ Agent: ✅ Primary Skill: @brainstorming
        @brainstorming help me design a [your app idea] using Next.js
 
        🔁 Also consider:
-       - @plan-writing — once brainstorming produces a spec, break it into tasks
-       - @senior-fullstack — when you are ready to start building
+       - @plan-writing; once brainstorming produces a spec, break it into tasks
+       - @senior-fullstack; when you are ready to start building
 
        Want me to write the full prompt for you?
 ```
@@ -250,7 +250,7 @@ Treat the names below as candidates. Check the live installed catalog and read t
   installed, the recommendation may not work.
 - Routing is based on natural language matching. Highly ambiguous goals
   may require follow-up clarification.
-- Does not execute the recommended skill — it only recommends it. The user
+- Does not execute the recommended skill; it only recommends it. The user
   must invoke the skill themselves.
 - The routing reference covers the most common skills but does not include
   every skill in the library.

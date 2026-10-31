@@ -84,12 +84,12 @@ iOS 专项：
 ### Phase 3: 动态分析
 
 ```text
-Frida — 通用动态插桩：
+Frida; 通用动态插桩：
 □ frida-ps -U: 列出设备进程
 □ frida-trace -U -i "open*" com.app: 追踪函数调用
 □ 自定义 Hook 脚本: 修改参数/返回值、调用私有方法
 
-Objection — Frida 增强层（无需写脚本）：
+Objection; Frida 增强层（无需写脚本）：
 □ objection -g "com.app" explore
 □ android root disable / ios jailbreak disable
 □ android sslpinning disable / ios sslpinning disable
@@ -159,7 +159,7 @@ frida -U -l ios_anti_debug.js -f com.app
 ## 移动端加密提取
 
 ```javascript
-// Android — Hook Cipher.getInstance 获取密钥+算法
+// Android; Hook Cipher.getInstance 获取密钥+算法
 Java.perform(function() {
     var Cipher = Java.use("javax.crypto.Cipher");
     Cipher.getInstance.overload('java.lang.String').implementation = function(algo) {
@@ -173,7 +173,7 @@ Java.perform(function() {
     };
 });
 
-// iOS — Hook CCCrypt
+// iOS; Hook CCCrypt
 Interceptor.attach(Module.findExportByName("libcommonCrypto.dylib", "CCCrypt"), {
     onEnter: function(args) {
         console.log("CCCrypt op: " + args[0] + " alg: " + args[1]);
@@ -203,9 +203,9 @@ Interceptor.attach(Module.findExportByName("libcommonCrypto.dylib", "CCCrypt"), 
 
 ## 参考
 
-- `references/frida-objection-deep.md` — Frida + Objection 深度用法
-- `references/ios-reverse-guide.md` — iOS 逆向专项
-- `references/anti-detection-bypass.md` — Root/越狱/反调试/SSL Pinning 绕过
+- `references/frida-objection-deep.md`; Frida + Objection 深度用法
+- `references/ios-reverse-guide.md`; iOS 逆向专项
+- `references/anti-detection-bypass.md`; Root/越狱/反调试/SSL Pinning 绕过
 
 
 ## 任务完成自检（声称完成前 MUST 通过）

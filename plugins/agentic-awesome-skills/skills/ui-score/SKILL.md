@@ -1,6 +1,6 @@
 ---
 name: ui-score
-description: Score a UI file's design quality 0-100 against StyleSeed's design language — per-category breakdown, the worst offenders, and a prioritized fix list. A quantified version of /ss-review.
+description: Score a UI file's design quality 0-100 against StyleSeed's design language; per-category breakdown, the worst offenders, and a prioritized fix list. A quantified version of /ss-review.
 risk: critical
 source: https://github.com/bitjaru/styleseed/tree/main/engine/.claude/skills/ss-score
 source_repo: bitjaru/styleseed
@@ -13,18 +13,18 @@ license_source: https://github.com/bitjaru/styleseed/blob/main/LICENSE
 # Design Score
 ## When to Use
 
-Use this skill when you need score a UI file's design quality 0-100 against StyleSeed's design language — per-category breakdown, the worst offenders, and a prioritized fix list. A quantified version of /ss-review.
+Use this skill when you need score a UI file's design quality 0-100 against StyleSeed's design language; per-category breakdown, the worst offenders, and a prioritized fix list. A quantified version of /ss-review.
 
 
 `/ss-review` tells you *what's wrong*. `/ss-score` tells you *how good it is
-overall* and *what to fix first* — a single number plus a category breakdown, so
+overall* and *what to fix first*; a single number plus a category breakdown, so
 you can track UI quality like you track test coverage.
 
 ## When NOT to use
 
 - For a quick pass/fail before committing → use `/ss-lint`
 - For a full prose audit with fixes → use `/ss-review`
-- For non-UI files (logic, config) — scoring is meaningless
+- For non-UI files (logic, config); scoring is meaningless
 
 ## Reference availability
 
@@ -48,9 +48,9 @@ map to the design language. Total = 100.
 ## How to score each category
 
 For each category, start at full marks and **subtract** for violations you find by
-reading the code. Be specific and evidence-based — cite the line.
+reading the code. Be specific and evidence-based; cite the line.
 
-**Color discipline (18)** — deduct for: any `#000`/`text-black` (−4 each, cap −8);
+**Color discipline (18)**; deduct for: any `#000`/`text-black` (−4 each, cap −8);
 more than one accent hue used decoratively (−5); **emoji used as UI icons** (multi-color,
 breaks single accent) (−5); **a normal/OK/"보통" state shown in a status color** instead of
 neutral grey (−4); **status color on most/every row** (no severity hierarchy) (−4);
@@ -58,35 +58,35 @@ neutral grey (−4); **status color on most/every row** (no severity hierarchy) 
 hardcoded hex where a semantic token exists (−2 each, cap −6); status conveyed by color
 alone (−4).
 
-**Hierarchy & typography (18)** — deduct for: number/unit not ~2:1 (−4); font
+**Hierarchy & typography (18)**; deduct for: number/unit not ~2:1 (−4); font
 sizes off the Font Size table / `text-[var(--…)]` for size (−5); everything the
 same weight, no clear primary (−5); cramped or wrong line-height on body (−3).
 
-**Layout & rhythm (14)** — deduct for: content on bare background, not in cards
+**Layout & rhythm (14)**; deduct for: content on bare background, not in cards
 (−6); `px-4`/`px-8`/`mx-4` instead of `px-6`/`mx-6` (−3); same section type
 repeated in a row (−4); no `space-y-6` rhythm (−3).
 
-**Cards & elevation (12)** — deduct for: 1px borders doing separation work that
+**Cards & elevation (12)**; deduct for: 1px borders doing separation work that
 tone+shadow should (−4); shadows over ~8% opacity / visibly heavy (−4); no
 card/background tone separation (−5).
 
-**States & a11y (18)** — deduct for: missing empty/loading/error state on a data
+**States & a11y (18)**; deduct for: missing empty/loading/error state on a data
 surface (−5 each, cap −10); contrast below 4.5:1 body / 3:1 large (−6); touch
 target < 44px (−4); no visible focus / `outline:none` (−5); icon-only control
 without `aria-label` (−3).
 
-**Motion & interaction (8)** — deduct for: random/ad-hoc fades instead of a named
+**Motion & interaction (8)**; deduct for: random/ad-hoc fades instead of a named
 seed/keyword (−3); motion that delays content or blocks an action (−4); no
 `prefers-reduced-motion` handling on custom motion (−3); scroll-linked/parallax
 (forbidden, §59) (−5).
 
-**Coherence (12)** — the "one choice per axis" laws (VISUAL-CRAFT §C0). Deduct for
+**Coherence (12)**; the "one choice per axis" laws (VISUAL-CRAFT §C0). Deduct for
 each axis that is *mixed* rather than unified across the file: mixed radius
 personalities, e.g. sharp panel + pill buttons (−5); two+ competing accent hues used
 for emphasis (−4); mixed shadow languages / light directions (−3); mixed icon
 families, fill modes, or stroke weights (−3); same radius on a nested element instead
 of `inner = outer − padding` (−2); inconsistent control heights for buttons/inputs
-(−2). This is the category that most predicts "looks AI-generated" — weight evidence
+(−2). This is the category that most predicts "looks AI-generated"; weight evidence
 of system-wide consistency, not per-component prettiness.
 
 Clamp each category at 0. Sum to a total.
@@ -125,20 +125,20 @@ The Quality Gate (CLAUDE.md / AGENTS.md) is `/ss-score` run as a loop, not a one
 3. Repeat up to ~3×, or until ≥ 80.
 4. Present the UI with the final score and a one-line "fixed: …".
 
-The pass bar is a **floor, not a ceiling** — get to ≥ 80 and stop; don't chase 100. The point
+The pass bar is a **floor, not a ceiling**; get to ≥ 80 and stop; don't chase 100. The point
 is that no first-draft, obviously-incoherent UI reaches the user. Especially never ship below
-80 with a rainbow status list, emoji icons, two accents, or missing states — those are the
+80 with a rainbow status list, emoji icons, two accents, or missing states; those are the
 exact tells the gate exists to catch.
 
 ## Rules
 
-- **Read the file** — score from real evidence (line numbers), never guess.
+- **Read the file**; score from real evidence (line numbers), never guess.
 - Prioritize accessibility and task-blocking defects before cosmetic score gain. The number is an aesthetic heuristic, not validated quality, authorship detection or permission to ship.
 - For a directory, print a one-line score per file, then the lowest-scoring file's
   full breakdown.
 - Don't auto-edit in plain scoring. `/ss-score` measures; `/ss-review` and `/ss-motion` fix.
   In **Gate mode** (above) you do fix-and-re-score until the floor is met.
-- As a *gate*, ≥ 80 is a floor before showing the user — but don't over-polish: chasing 95→100
+- As a *gate*, ≥ 80 is a floor before showing the user; but don't over-polish: chasing 95→100
   to delay shipping is worse than shipping a clean 85.
 
 ## Limitations

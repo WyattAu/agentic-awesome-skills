@@ -40,7 +40,7 @@ license_source: "https://github.com/zhaoxuya520/reverse-skill/blob/main/LICENSE"
 
 ## 工作流
 
-### Phase 1 — 身份与边界
+### Phase 1: 身份与边界
 
 ```text
 □ 当前身份：云 AK/SK、K8s SA、节点 SSH？
@@ -48,7 +48,7 @@ license_source: "https://github.com/zhaoxuya520/reverse-skill/blob/main/LICENSE"
 □ 网络档：authorized_target_only
 ```
 
-### Phase 2 — 云控制面
+### Phase 2: 云控制面
 
 ```bash
 # 示例（按厂商替换；MUST 在授权账号内）
@@ -63,7 +63,7 @@ aws s3 ls
 □ 角色可扮演（PassRole）与横向
 ```
 
-### Phase 3 — 容器
+### Phase 3: 容器
 
 ```text
 □ 是否 privileged / hostPath / hostNetwork
@@ -72,7 +72,7 @@ aws s3 ls
 □ 镜像历史与已知 CVE → Trivy
 ```
 
-### Phase 4 — Kubernetes
+### Phase 4: Kubernetes
 
 ```bash
 kubectl auth can-i --list

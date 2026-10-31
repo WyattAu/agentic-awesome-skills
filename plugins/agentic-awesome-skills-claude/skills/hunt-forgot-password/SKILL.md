@@ -31,23 +31,23 @@ report_count: 6
 
 ## Autonomous Testing Priority
 
-**Start with username enumeration — it's the fastest win and gates the rest.**
+**Start with username enumeration; it's the fastest win and gates the rest.**
 
-**Pattern 1 — Username enumeration (response difference for valid vs invalid email):**
-1. POST to the forgot-password endpoint with a clearly invalid email (e.g. `nonexistent@fakedomain12345.com`) — record the response body, status code, and length
+**Pattern 1; Username enumeration (response difference for valid vs invalid email):**
+1. POST to the forgot-password endpoint with a clearly invalid email (e.g. `nonexistent@fakedomain12345.com`); record the response body, status code, and length
 2. POST with an email you know exists (or try common patterns like `admin@target.com`, `test@target.com`, `user@target.com`)
 3. Compare responses: different message ("Email sent" vs "Email not found"), different HTTP status, or meaningfully different body length = username enumeration confirmed
 4. Proof: enumeration is confirmed when the two responses differ measurably (baseline vs probe) in message text, status code, or body length
 
-**Pattern 2 — Reset token exposed in the API response:**
+**Pattern 2; Reset token exposed in the API response:**
 Some APIs return the reset token directly in the response body (instead of only emailing it). POST to the forgot-password endpoint and look for a token, link, or code in the JSON/HTML response. If a token appears that lets you reset the password, that's an immediate account-takeover vector.
 
-**Pattern 3 — Reset token replay (reuse after use):**
+**Pattern 3; Reset token replay (reuse after use):**
 1. Complete a full password reset cycle: request token → use it to reset password
 2. Immediately try submitting the same token again to the reset-password endpoint
 3. If the second submission returns 200 or "success" → token not invalidated after use
 
-**Pattern 4 — No rate limit on reset requests:**
+**Pattern 4; No rate limit on reset requests:**
 Submit the forgot-password endpoint 10-20 times rapidly with the same email. A short run without a 429 does not prove limits are absent: inspect email delivery/cooldowns and authorized thresholds, and report only the measured rate/window. Do not flood real inboxes.
 
 **Content-type:** Forgot-password endpoints are often JSON-based REST APIs. Use `application/x-www-form-urlencoded` only if the endpoint is a traditional HTML form (check the login page's HTML to determine form encoding).
@@ -65,9 +65,9 @@ High-value targets: admin accounts, employee email patterns, API keys derived fr
 
 ### 2. Weak / Predictable Reset Tokens
 A reset token derived from timestamp, username, or sequential IDs can be brute-forced:
-- `base64(email + timestamp)` — decodable
-- 4-6 digit numeric code — 10,000 to 1,000,000 possibilities before considering expiry and server-side attempt limits
-- Sequential `token=1234`, `token=1235` — trivially enumerable
+- `base64(email + timestamp)`; decodable
+- 4-6 digit numeric code; 10,000 to 1,000,000 possibilities before considering expiry and server-side attempt limits
+- Sequential `token=1234`, `token=1235`; trivially enumerable
 
 ### 3. Token Scope and Account Binding
 Email reset links commonly work across browsers and networks. This alone is not a vulnerability. Verify that the token is unguessable, short-lived, single-use and bound to the intended account/reset purpose; demonstrate a concrete unauthorized path using only approved test accounts.
@@ -87,16 +87,16 @@ An uncapped reset endpoint enables:
 
 ## Related Skills
 
-- **`hunt-ato`** — owns the account-takeover CHAIN (password-reset is its path #1). This skill finds/proves the recovery-flow primitive; hand off to hunt-ato to assemble the full takeover.
-- **`hunt-cache-poison`** — host-header injection during reset email generation (different vulnerability, same flow)
-- **`hunt-brute-force`** — rate-limit testing pattern applies to the reset endpoint too
-- **`hunt-auth-bypass`** — if the reset flow can be skipped entirely (go to `/reset-password?token=` with empty/null token)
-- **`hunt-mfa-bypass`** — if MFA is required after reset, test the bypass there
+- **`hunt-ato`**; owns the account-takeover CHAIN (password-reset is its path #1). This skill finds/proves the recovery-flow primitive; hand off to hunt-ato to assemble the full takeover.
+- **`hunt-cache-poison`**; host-header injection during reset email generation (different vulnerability, same flow)
+- **`hunt-brute-force`**; rate-limit testing pattern applies to the reset endpoint too
+- **`hunt-auth-bypass`**; if the reset flow can be skipped entirely (go to `/reset-password?token=` with empty/null token)
+- **`hunt-mfa-bypass`**; if MFA is required after reset, test the bypass there
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

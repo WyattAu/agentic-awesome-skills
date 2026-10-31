@@ -59,7 +59,7 @@ Feature: User Login
       | bad@test.com    | wrong       | Error      |
 ```
 
-### Step Definitions — Java
+### Step Definitions: Java
 
 ```java
 import io.cucumber.java.en.*;
@@ -102,7 +102,7 @@ public class LoginSteps {
 }
 ```
 
-### Step Definitions — JavaScript
+### Step Definitions: JavaScript
 
 ```javascript
 const { Given, When, Then } = require('@cucumber/cucumber');

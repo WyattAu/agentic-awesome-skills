@@ -64,7 +64,7 @@ codex exec \
 - Wrap the command in a background/Bash subagent if your host agent has one
   (Cursor: Task tool with a shell subagent) so Codex's verbose stream stays out
   of the parent context. Fallback: a plain background terminal.
-- Runs take minutes and have no built-in timeout — background it and monitor.
+- Runs take minutes and have no built-in timeout; background it and monitor.
 - Optional: `-m <model>` to override the model, `--json` for JSONL event stream.
 
 ## Collect results
@@ -74,7 +74,7 @@ cat "$OUT"                            # final message = the deliverable
 git -C /path/to/repo status --short   # see what Codex actually changed
 ```
 
-Follow-up in the same session (run from the same cwd — resume filters by cwd):
+Follow-up in the same session (run from the same cwd; resume filters by cwd):
 
 ```bash
 codex exec resume --last "follow-up instruction" </dev/null
@@ -83,7 +83,7 @@ codex exec resume --last "follow-up instruction" </dev/null
 ## Parallel runs
 
 Parallelize only genuinely independent tasks, and assign file ownership upfront so
-results merge cleanly. One git worktree per Codex run — never two in the same tree:
+results merge cleanly. One git worktree per Codex run; never two in the same tree:
 
 ```bash
 git worktree add /tmp/wt-taskA -b codex/task-a
@@ -108,7 +108,7 @@ codex exec --cd /tmp/wt-taskA --sandbox workspace-write -o /tmp/outA.md "task A"
 
 ## Cursor-native wrapper (optional)
 
-For auto-routing and `/codex` invocation inside Cursor, add `~/.cursor/agents/codex.md` —
+For auto-routing and `/codex` invocation inside Cursor, add `~/.cursor/agents/codex.md` -
 a custom subagent whose description is "delegates coding tasks to Codex CLI" and whose
 body points at this skill.
 

@@ -212,4 +212,4 @@ IMPACT: GITHUB_TOKEN with [permissions] exfiltrated; attacker can [actions]
 ## References
 
 - [GitHub Security Lab: Keeping your GitHub Actions and workflows secure (pwn requests)](https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/)
-- [HackerBot Claw campaign — awesome-go and trivy attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)
+- [HackerBot Claw campaign; awesome-go and trivy attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)

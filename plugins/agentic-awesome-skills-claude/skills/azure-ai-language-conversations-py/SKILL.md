@@ -39,11 +39,11 @@ When responding to requests about Azure AI Language Conversations:
 >
 > Snippets may abbreviate this setup, but production code should always follow both rules.
 
-`ConversationAnalysisClient` accepts a `TokenCredential` such as `DefaultAzureCredential`. Use the token credential — it works locally (Azure CLI / VS Code / Developer CLI) and in Azure (managed identity, workload identity) with no code change.
+`ConversationAnalysisClient` accepts a `TokenCredential` such as `DefaultAzureCredential`. Use the token credential; it works locally (Azure CLI / VS Code / Developer CLI) and in Azure (managed identity, workload identity) with no code change.
 
 ### Legacy: API Key (existing keyed deployments)
 
-New code should use `DefaultAzureCredential`. Use `AzureKeyCredential` only if you have an existing keyed deployment that hasn't been migrated to Entra ID yet — for example, regulated environments still completing their Entra rollout.
+New code should use `DefaultAzureCredential`. Use `AzureKeyCredential` only if you have an existing keyed deployment that hasn't been migrated to Entra ID yet; for example, regulated environments still completing their Entra rollout.
 
 ```python
 import os

@@ -59,7 +59,7 @@ Before auditing, gather context:
 ### Priority Order for Legal & Forensic Sites
 
 1. **Google Business Profile & Local Pack** (highest impact for local queries)
-2. **E-E-A-T & Trust Signals** (critical for YMYL — legal is a Your Money or Your Life category)
+2. **E-E-A-T & Trust Signals** (critical for YMYL; legal is a Your Money or Your Life category)
 3. **On-Page Optimization** (practice area pages, location pages)
 4. **Technical Foundations** (crawlability, mobile, speed)
 5. **Directory & Citation Consistency** (NAP, legal directories)
@@ -232,10 +232,10 @@ Focus on issues most common in legal site CMS platforms (WordPress, Wix, Squares
 For local legal SEO, citations in authoritative directories are a significant ranking factor.
 
 **Core Legal Directories (Brazil)**
-- OAB (Ordem dos Advogados do Brasil) — official listing
-- Jusbrasil — attorney profile and articles
-- Escavador — academic and professional profile
-- ORCID — for forensic experts with publications
+- OAB (Ordem dos Advogados do Brasil); official listing
+- Jusbrasil; attorney profile and articles
+- Escavador; academic and professional profile
+- ORCID; for forensic experts with publications
 
 **Core Legal Directories (International)**
 - Avvo

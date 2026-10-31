@@ -41,7 +41,7 @@ Use the configured model and effort settings, respecting the user’s budget and
 
 A build session that starts from a blank context has exactly two sources of truth: the repo and this blueprint. Whatever is missing, vague, or wrong in the blueprint becomes a guess in code. So the whole skill is organized around three habits:
 
-1. **Evidence or silence.** Every claim about the outside world (a library, a version, a competitor, a regulation, a market figure, a service's availability in a country) carries an evidence tag: `[VERIFIED — <source>, <date>]`, `[ASSUMED — <why>]`, or `[UNKNOWN → OQ-nn]` (routed to Open Questions). You never fill a gap with a plausible-sounding guess, because the reader has no way to tell your guess from a fact.
+1. **Evidence or silence.** Every claim about the outside world (a library, a version, a competitor, a regulation, a market figure, a service's availability in a country) carries an evidence tag: `[VERIFIED; <source>, <date>]`, `[ASSUMED; <why>]`, or `[UNKNOWN → OQ-nn]` (routed to Open Questions). You never fill a gap with a plausible-sounding guess, because the reader has no way to tell your guess from a fact.
 2. **Decide, don't hedge.** "Use X or Y" pushes the decision onto an agent with less context than you have now. Make the call, record the alternatives and why they lost.
 3. **Write for zero context.** No "as discussed", no "the usual way". Every ID (persona, flow, screen, copy line, story, criterion) is unique and cross-referenced so a fresh session can resolve everything by search.
 
@@ -62,49 +62,49 @@ Use phases 0 and 2 to resolve material unknowns. Reuse answers and authorization
 
 Talk to the user in the language they wrote in. Persian in → Persian out for all chat and for the human-facing prose of the document (see Language convention).
 
-### Phase 0 — Intake
+### Phase 0: Intake
 
 Read `references/intake-questions.md` before asking anything. The rules that matter most:
 
-- **Warm up first.** Run 2–5 quick searches on the idea so the questions are concrete ("I see three products in this space — A, B, C — which is closest to what you mean?") instead of generic.
+- **Warm up first.** Run 2–5 quick searches on the idea so the questions are concrete ("I see three products in this space; A, B, C; which is closest to what you mean?") instead of generic.
 - **One batch, defaults on every question.** Group the questions, put a sensible default next to each, and say that answering "defaults" or skipping any question is fine. Never ask in dribs and drabs.
 - **Never ask what is already answered or inferable.** Cues from the message decide: language, currency, city names, local services, ".ir" domains, Jalali dates, "کاربر ایرانی" → the users are probably Iranian, so ask to *confirm* it in one line rather than asking "where are your users?".
 - **Ask only what changes the architecture, the personas, or the scope.** A big product needs about 10–15 questions; a single feature needs 3–6.
 - Where an elicitation UI tool exists (tappable options), use it for the closed questions; put open questions in prose right after.
 
-When the answers arrive, write every unanswered item as an `[ASSUMED — …]` row in your notes; those rows become the Assumptions section later.
+When the answers arrive, write every unanswered item as an `[ASSUMED; …]` row in your notes; those rows become the Assumptions section later.
 
-### Phase 1 — Deep research and benchmarking
+### Phase 1: Deep research and benchmarking
 
 Read `references/research-protocol.md` and follow its seven tracks **in order**:
 
-- **A. Understand the idea** — domain concepts, vocabulary (this becomes the Glossary), how the problem is solved today, adjacent regulation to flag (never legal advice).
-- **B. Benchmark** — 5–10 direct and indirect competitors (global, plus local ones when the market is Iran or another specific country), a feature matrix, best-in-class behaviour per key flow, common user complaints (paraphrased from reviews, never quoted), the gap this product fills, a positioning statement.
-- **C. Architecture drivers and shape** (`references/architecture-decisions.md`) — derive ranked, *measurable* quality-attribute drivers from the personas, the scale ceiling, the failure cost of the core loop and the hosting reality; name the explicit non-drivers; score 2–3 candidate architecture styles against them; decide the shape, the module boundaries and the exit triggers that would justify revisiting it. Verify the framework's own recommended structure and whether boundary rules can be enforced mechanically in the candidate languages.
-- **D. Stack for agentic engineering** — choose the language, framework, database, testing and tooling using the weighted criteria in the protocol (mainstream + heavily documented, strict static typing, one-command deterministic `check`, fast tests, LTS/stable, few dependencies, hosting fit for the market) **and** the drivers from C. Verify current stable versions, deprecations and licenses, and pin them.
-- **E. Quality bar and tooling** (`references/code-quality-and-review.md`) — verify the tools that make the gate real for the chosen stack (formatter, strict lint config, typechecker flags, test runner, coverage, mutation testing if a maintained one exists, SAST and dependency audit, secret scanning, duplication detection, accessibility checks, architecture-rule library), the language's official style guide, the CI capability of the chosen host, the current security baseline for the category, and — only if the document will quote them — the current delivery-metric definitions and the current evidence on AI-authored code quality.
-- **F. Integrations and locale realities** — payments, SMS/OTP, email, maps, push, app stores, hosting/CDN. For Iran, availability of foreign services changes with sanctions and filtering; verify today's status for each one you rely on and record the date.
-- **G. UX benchmarks** — onboarding, empty states, error handling and accessibility norms from the best products in the space.
+- **A. Understand the idea**; domain concepts, vocabulary (this becomes the Glossary), how the problem is solved today, adjacent regulation to flag (never legal advice).
+- **B. Benchmark**; 5–10 direct and indirect competitors (global, plus local ones when the market is Iran or another specific country), a feature matrix, best-in-class behaviour per key flow, common user complaints (paraphrased from reviews, never quoted), the gap this product fills, a positioning statement.
+- **C. Architecture drivers and shape** (`references/architecture-decisions.md`); derive ranked, *measurable* quality-attribute drivers from the personas, the scale ceiling, the failure cost of the core loop and the hosting reality; name the explicit non-drivers; score 2–3 candidate architecture styles against them; decide the shape, the module boundaries and the exit triggers that would justify revisiting it. Verify the framework's own recommended structure and whether boundary rules can be enforced mechanically in the candidate languages.
+- **D. Stack for agentic engineering**; choose the language, framework, database, testing and tooling using the weighted criteria in the protocol (mainstream + heavily documented, strict static typing, one-command deterministic `check`, fast tests, LTS/stable, few dependencies, hosting fit for the market) **and** the drivers from C. Verify current stable versions, deprecations and licenses, and pin them.
+- **E. Quality bar and tooling** (`references/code-quality-and-review.md`); verify the tools that make the gate real for the chosen stack (formatter, strict lint config, typechecker flags, test runner, coverage, mutation testing if a maintained one exists, SAST and dependency audit, secret scanning, duplication detection, accessibility checks, architecture-rule library), the language's official style guide, the CI capability of the chosen host, the current security baseline for the category, and; only if the document will quote them; the current delivery-metric definitions and the current evidence on AI-authored code quality.
+- **F. Integrations and locale realities**; payments, SMS/OTP, email, maps, push, app stores, hosting/CDN. For Iran, availability of foreign services changes with sanctions and filtering; verify today's status for each one you rely on and record the date.
+- **G. UX benchmarks**; onboarding, empty states, error handling and accessibility norms from the best products in the space.
 
 C before D matters. Choosing the framework first and then writing drivers that happen to justify it is the most common silent failure in a document like this, and it is undetectable in the finished file unless you ask whether any driver could have changed the answer.
 
 Log every source (URL, title, access date) as you go; the Sources section is built from this log, not reconstructed afterwards. Expect 20–60 searches for a whole product; post a one-line progress note to the user every few searches ("benchmarking local competitors…", "verifying gateway sandbox…") so a long research phase never looks stalled. If web tools are unavailable, stop and tell the user: a blueprint written from memory alone cannot meet the no-hallucination bar, so either they enable web access or the document is delivered with every external fact marked `[UNVERIFIED]` and a warning on the cover.
 
-### Phase 2 — Decision brief (checkpoint)
+### Phase 2: Decision brief (checkpoint)
 
 Before writing the document, post a brief in chat, roughly one screen long, in the user's language:
 
 ```
-## Decision brief — <product name>
+## Decision brief: <product name>
 **How I read the idea:** 2–3 sentences. What it is, for whom, and the single outcome it delivers.
 **Users are:** <market/country>, <B2C/B2B>, <language(s)>. (confirmed / assumed)
-**Personas:** P1 <name> — one line. P2 … (3–5 max, plus anti-personas if useful)
+**Personas:** P1 <name>; one line. P2 … (3–5 max, plus anti-personas if useful)
 **Benchmark in one paragraph:** who exists, what the best of them do, the gap we take.
-**Architecture drivers (top 3):** AD-1 … (target), AD-2 …, AD-3 … — and what we are explicitly NOT optimising for.
-**Shape (locked unless you object):** <style> — one line on why it beat <runner-up>, and the trigger that would make us revisit it.
-**Stack (locked unless you object):** language · framework · DB · hosting · testing — one line each with the deciding reason and what the runner-up would have bought.
+**Architecture drivers (top 3):** AD-1 … (target), AD-2 …, AD-3 …; and what we are explicitly NOT optimising for.
+**Shape (locked unless you object):** <style>; one line on why it beat <runner-up>, and the trigger that would make us revisit it.
+**Stack (locked unless you object):** language · framework · DB · hosting · testing; one line each with the deciding reason and what the runner-up would have bought.
 **Quality gate:** `check` = … (expected runtime …); critical e2e paths: …; what we will measure: …
-**Design direction:** reference-based (<their reference>) or chosen (<system/style>) — one line.
+**Design direction:** reference-based (<their reference>) or chosen (<system/style>); one line.
 **Epics in order:** E00 Foundation, E01 …, E02 … (titles only, 6–14 typical)
 **Needs your answer before I write:** only genuinely blocking questions, numbered OQ-01…
 **Everything else I will assume** as written in the Assumptions table.
@@ -113,7 +113,7 @@ Reply "go" to write the full blueprint, or correct any line.
 
 If the user pre-authorised ("don't stop to ask, just write"), still post the brief and continue without waiting. Otherwise wait for the reply and fold corrections into the research notes.
 
-### Phase 3 — Write the blueprint
+### Phase 3: Write the blueprint
 
 Read `references/blueprint-template.md` and keep it open; it has the full section skeleton, the depth target per section, table formats and the ID schemes. Before writing the relevant sections, read the topic references it points to:
 
@@ -135,9 +135,9 @@ Writing mechanics that matter:
 - **Decide the shape before the tools.** Architecture drivers → architecture style → technology. If a driver could not have changed the technology choice, the drivers are decoration.
 - **Quality is specified, not assumed.** The gate, the review checklist and the metrics go in the document with concrete commands and thresholds, because the reviewer is often one person reading a diff an agent produced in a minute, and a standard invented at review time is a different standard every time.
 
-### Phase 4 — Lint and deliver
+### Phase 4: Lint and deliver
 
-Run the linter and fix everything it reports as an error (warnings are judgement calls — resolve or justify them):
+Run the linter and fix everything it reports as an error (warnings are judgement calls; resolve or justify them):
 
 ```bash
 python3 <this skill's folder>/scripts/lint_blueprint.py <path/to/blueprint.md>
@@ -156,9 +156,9 @@ Deliver:
 ### Language convention
 
 - **Chat and human-facing prose** (executive summary, research narrative, persona descriptions, rationale columns, risks): the user's language.
-- **Machine-facing text**: English, always — epic titles, story sentences, acceptance criteria, edge cases, test names, task lists, Definition of Done, architecture, data model, API contracts, conventions, session protocol, file names, IDs. This text is pasted into or read by a coding agent; English keeps it unambiguous.
+- **Machine-facing text**: English, always; epic titles, story sentences, acceptance criteria, edge cases, test names, task lists, Definition of Done, architecture, data model, API contracts, conventions, session protocol, file names, IDs. This text is pasted into or read by a coding agent; English keeps it unambiguous.
 - **Product copy** (UX writing tables, notification/SMS/email templates): the product's language(s), with an English gloss column so the agent understands intent. Iranian users → Persian copy following the Persian pack.
-- **Headings**: bilingual when prose is not English, e.g. `## 11. راهنمای UX Writing (UX Writing)` — the English anchor must be present.
+- **Headings**: bilingual when prose is not English, e.g. `## 11. راهنمای UX Writing (UX Writing)`; the English anchor must be present.
 - State this convention once in the document's "How to use this document" section so the reader knows why the language switches.
 
 If the user asks for a different split (all English, all Persian), honour it, but keep IDs and code-facing identifiers in English regardless.
@@ -169,7 +169,7 @@ Look for: the language of the message, currency words (تومان، ریال، I
 
 ### Design reference handling
 
-If the user provides a reference (Figma, URL, screenshots, brand kit): extract tokens and patterns from it and document them as the design direction, noting where you deviate for usability or RTL. If not: choose a direction yourself — mobile-first, minimal, standard components, a well-documented design system verified via search — and say so in the Decision brief so they can object once. Never leave design "to be decided later"; the build sessions need concrete tokens and component decisions.
+If the user provides a reference (Figma, URL, screenshots, brand kit): extract tokens and patterns from it and document them as the design direction, noting where you deviate for usability or RTL. If not: choose a direction yourself; mobile-first, minimal, standard components, a well-documented design system verified via search; and say so in the Decision brief so they can object once. Never leave design "to be decided later"; the build sessions need concrete tokens and component decisions.
 
 ### Guardrails that override everything else
 
@@ -217,7 +217,7 @@ Exit code 0 means no errors (warnings may remain); add `--strict` to fail on war
 ## Best Practices
 
 - ✅ Ask one batch of intake questions with a default next to each, then wait for the answers.
-- ✅ Tag every external claim `[VERIFIED — source, date]`, `[ASSUMED — why]` or `[UNKNOWN → OQ-nn]`.
+- ✅ Tag every external claim `[VERIFIED; source, date]`, `[ASSUMED; why]` or `[UNKNOWN → OQ-nn]`.
 - ✅ Derive the architecture drivers before choosing the stack, and name what each rejected option would have bought.
 - ✅ Write the document in chunks, one major section per write, and run the linter before delivering.
 - ❌ Don't skip the decision brief checkpoint before writing a long document.

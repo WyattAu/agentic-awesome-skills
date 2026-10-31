@@ -1,4 +1,4 @@
-# Example Audit Report — Client-Side Secret & Sensitive-File Exposure
+# Example Audit Report: Client-Side Secret & Sensitive-File Exposure
 
 **Illustrative target:** `https://authorized-demo.example/` (fictional placeholder)
 **Template date:** 2026-09-10; no live verification asserted by this example
@@ -11,7 +11,7 @@ any credential was validated. Obtain authorization before any target requests.
 
 The site is a static/SPA deployment that ships a large amount of server-side
 source, config, and deployment material to the browser, with credentials
-scattered across **every layer** — HTML meta tags, hidden DOM elements, HTML
+scattered across **every layer**; HTML meta tags, hidden DOM elements, HTML
 comments, JavaScript bundles, and publicly reachable `server/`, `src/`, and
 container files. Additionally, response headers omit the standard security header
 set and use permissive CORS.
@@ -31,7 +31,7 @@ set and use permissive CORS.
 
 ## Findings
 
-### 1 — Critical: Admin token, JWT secret, DB password shipped to the browser
+### 1: Critical: Admin token, JWT secret, DB password shipped to the browser
 
 - **Location:** `public/assets/js/config.js` (loaded on every page); mirrored in
   `src/config/app.config.js`.
@@ -40,13 +40,13 @@ set and use permissive CORS.
   `DATABASE_PASSWORD = "Vista#…!" (16 chars)`, plus a hidden `<div>` JSON blob
   containing `mongodb+srv://hvh-backend:****@cluster0.…/hvh_prod`.
 - **Impact:** Anyone can read an admin bearer token, the JWT signing secret
-  (allowing forged tokens for any role), the API secret, and DB credentials — potential access within the credential's effective permissions if live; network
+  (allowing forged tokens for any role), the API secret, and DB credentials; potential access within the credential's effective permissions if live; network
   reachability, expiry and server validation still constrain impact.
 - **Remediation:** Never place secrets in client bundles. Keep secrets server-side
   in a secrets manager / env vars; expose only publishable keys to the browser.
-  **Rotate every value** — anything served is already compromised.
+  **Rotate every value**; anything served is already compromised.
 
-### 2 — Critical: Cloud & payment provider secrets exposed
+### 2: Critical: Cloud & payment provider secrets exposed
 
 - **Location:** HTML hidden `<div data-aws-access / data-aws-secret>` and
   `data-webhook-secret`; `src/services/payment.service.js`; `docker-compose.yml`.
@@ -54,11 +54,11 @@ set and use permissive CORS.
   Khalti `live_secret_key_…`; `whsec_a9f4…`; Redis `redis://…:7fK9…@cache:6379`.
 - **Impact:** Server-side payment secret keys and a webhook signing secret in the
   client allow forging payment intents and spoofing signed webhook events; the
-  Redis password enables cache/session tampering — if live.
+  Redis password enables cache/session tampering; if live.
 - **Remediation:** Move all provider secret keys server-side; only `pk_*`
   publishable keys belong in the browser. Rotate all exposed keys and secrets.
 
-### 3 — High: Server-side source, config & deploy files publicly reachable
+### 3: High: Server-side source, config & deploy files publicly reachable
 
 - **Location (candidate paths; size differences require content validation):** `/server/index.js`,
   `/server/routes/{booking,payment,review,webhook}.routes.js`,
@@ -68,12 +68,12 @@ set and use permissive CORS.
   contains real source/config (route definitions, internal service tokens such as
   `hvh_svc_…`, container build details).
 - **Impact:** Exposes internal architecture, endpoints, auth/rate-limit middleware
-  names, and embedded credentials — a blueprint for further attack.
+  names, and embedded credentials; a blueprint for further attack.
 - **Remediation:** Deploy only build output (`public/` + `index.html`). Exclude
   `server/`, `src/`, and deploy files from the published artifact (`.vercelignore`
   / correct build root). Serve 404 for non-asset paths instead of leaking files.
 
-### 4 — High: reCAPTCHA secret key in an HTML meta tag
+### 4: High: reCAPTCHA secret key in an HTML meta tag
 
 - **Location:** `<meta name="recaptcha-secret" content="6LcVo3kq…">` in `index.html`.
 - **Evidence:** The **secret** (server-verification) key is in page markup
@@ -83,19 +83,19 @@ set and use permissive CORS.
 - **Remediation:** Remove the secret from all client output; keep only the site
   key client-side. Regenerate the reCAPTCHA keypair.
 
-### 5 — Medium: Missing security headers
+### 5: Medium: Missing security headers
 
 - **Location:** Main response headers for `/`.
 - **Evidence:** No `Content-Security-Policy`, `X-Frame-Options`/`frame-ancestors`,
   `X-Content-Type-Options: nosniff`, `Referrer-Policy`, or `Permissions-Policy`.
-  (`Strict-Transport-Security` **is** present — good.)
+  (`Strict-Transport-Security` **is** present; good.)
 - **Impact:** Increased XSS, clickjacking, MIME-sniffing, and referrer-leak risk.
 - **Remediation:** Add a strict CSP, `X-Content-Type-Options: nosniff`,
   `X-Frame-Options: DENY` (or CSP `frame-ancestors 'none'`), `Referrer-Policy:
   strict-origin-when-cross-origin`, and a least-privilege `Permissions-Policy`
   (e.g. via `vercel.json` headers).
 
-### 6 — Medium: Permissive CORS
+### 6: Medium: Permissive CORS
 
 - **Location:** Response header `Access-Control-Allow-Origin: *`.
 - **Impact:** Wildcard CORS permits noncredentialed public reads. It is not a finding
@@ -103,16 +103,16 @@ set and use permissive CORS.
 - **Remediation:** Restrict `Access-Control-Allow-Origin` to trusted origins;
   never combine `*` with credentialed requests.
 
-### 7 — Medium: Insecure randomness for booking references
+### 7: Medium: Insecure randomness for booking references
 
-- **Location:** `src/services/booking.service.js` — `randomRef()` uses
+- **Location:** `src/services/booking.service.js`; `randomRef()` uses
   `Math.random()`; `fetchAvailabilityHold` builds predictable `HOLD-<room>-<date>`
   ids.
 - **Impact:** Predictable/guessable references enable enumeration of bookings/holds.
 - **Remediation:** Use a CSPRNG (`crypto.randomUUID()` / `crypto.randomBytes`) for
   any security-relevant identifier.
 
-### 8 — Low/Info: Third-party tokens & noisy logging
+### 8: Low/Info: Third-party tokens & noisy logging
 
 - **Location:** `main.js` (Mixpanel/Hotjar/OpenWeather/Freshdesk/Zendesk tokens,
   `console.log` of keys); `api/client.js` (`console.log` note, static

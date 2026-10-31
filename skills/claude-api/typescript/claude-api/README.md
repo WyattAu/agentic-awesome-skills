@@ -1,4 +1,4 @@
-# Claude API — TypeScript
+# Claude API: TypeScript
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -179,7 +179,7 @@ for (const block of response.content) {
 
 ## Error Handling
 
-Use the SDK's typed exception classes — never check error messages with string matching:
+Use the SDK's typed exception classes; never check error messages with string matching:
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -205,7 +205,7 @@ HTTP status exceptions extend `Anthropic.APIError`; connection errors may not ha
 
 ## Multi-Turn Conversations
 
-The API is stateless — send the full conversation history each time. Use `Anthropic.MessageParam[]` to type the messages array:
+The API is stateless; send the full conversation history each time. Use `Anthropic.MessageParam[]` to type the messages array:
 
 ```typescript
 const messages: Anthropic.MessageParam[] = [
@@ -225,13 +225,13 @@ const response = await client.messages.create({
 
 - Preserve valid role/content structure; consecutive same-role inputs may be combined by the API
 - First message must be `user`
-- Use SDK types (`Anthropic.MessageParam`, `Anthropic.Message`, `Anthropic.Tool`, etc.) for all API data structures — don't redefine equivalent interfaces
+- Use SDK types (`Anthropic.MessageParam`, `Anthropic.Message`, `Anthropic.Tool`, etc.) for all API data structures; don't redefine equivalent interfaces
 
 ---
 
 ### Compaction (long conversations)
 
-> **Version-sensitive compaction example.** Verify the selected model, context limit, trigger and required beta header before enabling server-side history summarization. The API returns a `compaction` block; you must pass it back on subsequent requests — append `response.content`, not just the text.
+> **Version-sensitive compaction example.** Verify the selected model, context limit, trigger and required beta header before enabling server-side history summarization. The API returns a `compaction` block; you must pass it back on subsequent requests; append `response.content`, not just the text.
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -252,7 +252,7 @@ async function chat(userMessage: string): Promise<string> {
     },
   });
 
-  // Append full content — compaction blocks must be preserved
+  // Append full content; compaction blocks must be preserved
   messages.push({ role: "assistant", content: response.content });
 
   const textBlock = response.content.find((block) => block.type === "text");
@@ -276,9 +276,9 @@ The `stop_reason` field in the response indicates why the model stopped generati
 | `end_turn`      | Claude finished its response naturally                          |
 | `max_tokens`    | Output is truncated; review and adjust within the selected model and budget limits       |
 | `stop_sequence` | Hit a custom stop sequence                                      |
-| `tool_use`      | Claude wants to call a tool — execute it and continue           |
+| `tool_use`      | Claude wants to call a tool; execute it and continue           |
 | `pause_turn`    | Model paused and can be resumed (agentic flows)                 |
-| `refusal`       | Claude refused for safety reasons — output may not match schema |
+| `refusal`       | Claude refused for safety reasons; output may not match schema |
 
 ---
 
@@ -287,7 +287,7 @@ The `stop_reason` field in the response indicates why the model stopped generati
 ### 1. Use Prompt Caching for Repeated Context
 
 ```typescript
-// Automatic caching (simplest — caches the last cacheable block)
+// Automatic caching (simplest; caches the last cacheable block)
 const response = await client.messages.create({
   model: "claude-opus-5-5",
   max_tokens: 1024,

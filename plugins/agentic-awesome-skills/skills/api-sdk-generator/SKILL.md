@@ -24,15 +24,15 @@ Generate API-specific client drafts; production readiness requires the actual co
 
 ```
 sdk/
-├── client.{ext}          — main client class with base URL, auth, retry
+├── client.{ext}         ; main client class with base URL, auth, retry
 ├── resources/
-│   ├── users.{ext}       — one file per API resource
+│   ├── users.{ext}      ; one file per API resource
 │   ├── orders.{ext}
 │   └── ...
 ├── models/
-│   ├── user.{ext}        — request/response data models
+│   ├── user.{ext}       ; request/response data models
 │   └── ...
-├── errors.{ext}          — typed error classes
+├── errors.{ext}         ; typed error classes
 └── utils/
     ├── retry.{ext}
     └── pagination.{ext}

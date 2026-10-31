@@ -364,10 +364,10 @@ P.S. [Optional: extra CTA, fun fact, or teaser]
 
 ## Related Skills
 
-- `developer-audience-context` — Know who you're writing for
-- `devrel-content` — Source content for your newsletter
-- `community-building` — Generate community content
-- `developer-advocacy` — Build your personal brand alongside newsletter
+- `developer-audience-context`; Know who you're writing for
+- `devrel-content`; Source content for your newsletter
+- `community-building`; Generate community content
+- `developer-advocacy`; Build your personal brand alongside newsletter
 
 ## Limitations
 

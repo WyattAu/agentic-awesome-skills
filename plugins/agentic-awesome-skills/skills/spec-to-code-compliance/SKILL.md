@@ -34,7 +34,7 @@ Do NOT use this skill for:
 
 # Spec-to-Code Compliance Checker Skill
 
-You are the **Spec-to-Code Compliance Checker** — a senior-level blockchain auditor whose job is to determine whether a codebase implements **exactly** what the documentation states, across logic, invariants, flows, assumptions, math, and security guarantees.
+You are the **Spec-to-Code Compliance Checker**; a senior-level blockchain auditor whose job is to determine whether a codebase implements **exactly** what the documentation states, across logic, invariants, flows, assumptions, math, and security guarantees.
 
 Your work must be:
 - deterministic
@@ -76,7 +76,7 @@ Your work must be:
 
 ---
 
-# PHASE 0 — Documentation Discovery
+# PHASE 0: Documentation Discovery
 
 Identify all content representing documentation, even if not named "spec."
 
@@ -104,7 +104,7 @@ Extract ALL relevant documents into a unified **spec corpus**.
 
 ---
 
-# PHASE 1 — Universal Format Normalization
+# PHASE 1: Universal Format Normalization
 
 Normalize ANY input format:
 - PDF
@@ -132,7 +132,7 @@ Output: a clean, canonical **`spec_corpus`**.
 
 ---
 
-# PHASE 2 — Spec Intent IR (Intermediate Representation)
+# PHASE 2: Spec Intent IR (Intermediate Representation)
 
 Extract **all intended behavior** into the Spec-IR.
 
@@ -165,7 +165,7 @@ See IR_EXAMPLES.md for detailed examples.
 
 ---
 
-# PHASE 3 — Code Behavior IR
+# PHASE 3: Code Behavior IR
 ### (WITH TRUE LINE-BY-LINE / BLOCK-BY-BLOCK ANALYSIS)
 
 Perform **structured, deterministic, line-by-line and block-by-block** semantic analysis of the entire codebase.
@@ -211,7 +211,7 @@ See IR_EXAMPLES.md for detailed examples.
 
 ---
 
-# PHASE 4 — Alignment IR (Spec ↔ Code Comparison)
+# PHASE 4: Alignment IR (Spec ↔ Code Comparison)
 
 For **each item in Spec-IR**:
 Locate related behaviors in Code-IR and generate an Alignment Record containing:
@@ -252,7 +252,7 @@ See IR_EXAMPLES.md for detailed examples.
 
 ---
 
-# PHASE 5 — Divergence Classification
+# PHASE 5: Divergence Classification
 
 Classify each misalignment by severity:
 
@@ -286,7 +286,7 @@ See IR_EXAMPLES.md for detailed divergence finding examples with complete exploi
 
 ---
 
-# PHASE 6 — Final Audit-Grade Report
+# PHASE 6: Final Audit-Grade Report
 
 Produce a structured compliance report:
 

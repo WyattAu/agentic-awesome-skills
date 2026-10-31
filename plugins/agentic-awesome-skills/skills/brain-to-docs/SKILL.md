@@ -22,21 +22,21 @@ license_source: "https://github.com/davidondrej/skills/blob/main/LICENSE"
 - Use when README and ADRs should be built through a back-and-forth interview.
 
 The whole purpose: extract as much of the user's taste, judgment, knowledge, vision,
-preferences, and decisions as possible into text — saved as clear, concise
+preferences, and decisions as possible into text; saved as clear, concise
 markdown docs for the project. README holds the vision; `docs/adr/` holds the
 decisions.
 
 ## The loop
 
 1. **Check docs first, every time.** Read `docs/adr/` (and `README.md`) before
-   doing anything — other agents and people add/edit ADRs constantly.
-2. **Ask a small set of focused questions** through the host's supported question interface or plain text — default 2–3
+   doing anything; other agents and people add/edit ADRs constantly.
+2. **Ask a small set of focused questions** through the host's supported question interface or plain text; default 2–3
    unless the user asks for a different number. Make them high-variety: a wide,
    creative spectrum of unique angles, not all the same type (e.g. not all "tech
    stack" or all "product" or all "monetization"). Exception: if the user asks for a
    specific focus area, follow it. The user answers whichever they find most useful.
 3. **Integrate confirmed answers into the authorized docs.** Preserve unanswered questions and distinguish tentative ideas from accepted decisions. You decide whether it
-   updates `README.md` or becomes a new ADR — whatever makes sense.
+   updates `README.md` or becomes a new ADR; whatever makes sense.
 4. Repeat until the user says "we're done" (or similar).
 
 ## Rules

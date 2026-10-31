@@ -5,7 +5,7 @@
 
 > Reference content for the `offensive-osint` skill. Originally §40 of the monolithic SKILL.md (refactored 2026-05-02 for size/load efficiency).
 
-## 40. Severity Decision Matrix — Worked Examples
+## 40. Severity Decision Matrix: Worked Examples
 
 These upstream examples are historical triage prompts, not measured AAS findings. Assess intended exposure, authentication, exact affected version, data sensitivity and demonstrable impact first. No testing has been performed by this document. A port, login page, public function, schema, source map, CORS/header setting, mobile manifest flag, CVE association or breach count alone does not establish a vulnerability or its severity.
 

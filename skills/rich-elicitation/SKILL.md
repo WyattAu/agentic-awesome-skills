@@ -15,7 +15,7 @@ tools: [antigravity]
 
 ## Overview
 
-This skill governs how Antigravity resolves task ambiguity before starting work. When a user's request has too many unanswered dimensions — each with several reasonable answers — Antigravity asks targeted clarifying questions across multiple rounds rather than silently picking defaults.
+This skill governs how Antigravity resolves task ambiguity before starting work. When a user's request has too many unanswered dimensions; each with several reasonable answers; Antigravity asks targeted clarifying questions across multiple rounds rather than silently picking defaults.
 
 The goal is a correct first draft, not a generic answer that requires three revision cycles. Rounds are capped at three; anything still unclear after Round 3 gets a stated assumption and Antigravity proceeds.
 
@@ -66,12 +66,12 @@ After Round 1 answers, re-run the checklist on what's still unresolved. If 2+ ro
 
 | Round | Purpose | Max questions |
 |---|---|---|
-| Round 1 | Blocking questions — shape the entire output | 3 |
+| Round 1 | Blocking questions; shape the entire output | 3 |
 | Round 2 | Follow-ups unlocked by Round 1 answers | 3 |
-| Round 3 | Final details — use sparingly | 2 |
+| Round 3 | Final details; use sparingly | 2 |
 
 Transition between rounds naturally. Don't announce "Round 2" mechanically. Use phrasing like:
-> "Got it — that helps a lot. One more thing before I start:"
+> "Got it; that helps a lot. One more thing before I start:"
 
 ### Step 5: Proceed
 
@@ -81,11 +81,11 @@ After Round 3 (or earlier, if enough context exists), state any remaining assump
 
 ## Examples
 
-### Example 1: Multi-Round — Investor Pitch Deck
+### Example 1: Multi-Round: Investor Pitch Deck
 
 **User:** "Help me create a presentation for my project."
 
-**Round 1** — Three blocking questions:
+**Round 1**; Three blocking questions:
 
 ```
 Framing: "This could go a lot of different ways. Quick questions before I start:"
@@ -105,16 +105,16 @@ Q2: What's the primary goal?
 Q3: How much content do you already have?
   - Starting from scratch
   - Rough notes or an outline (Recommended)
-  - Full draft — just needs polish
+  - Full draft; just needs polish
   - Previous version to update
 ```
 
 *User answers: Investors | Pitch | Rough notes → Round 2 is warranted.*
 
-**Round 2** — Unlocked by Round 1:
+**Round 2**; Unlocked by Round 1:
 
 ```
-Framing: "Perfect — investor pitch it is. A couple more things:"
+Framing: "Perfect; investor pitch it is. A couple more things:"
 
 Q1: What stage is this raise?
   - Pre-seed / idea stage
@@ -128,11 +128,11 @@ Q2: How long should the deck be?
   - Comprehensive, 20+ slides
 ```
 
-*No Round 3 needed — proceed.*
+*No Round 3 needed; proceed.*
 
 ---
 
-### Example 2: Single-Round — Business Email
+### Example 2: Single-Round: Business Email
 
 **User:** "Write a business email to follow up on a proposal."
 
@@ -163,7 +163,7 @@ Q2: What's the primary goal?
 - ✅ Always mark one option per question as **(Recommended)**
 - ✅ Lead with a 1–2 sentence framing before the question widget
 - ✅ Group up to 3 related questions in a single `ask_user_input_v0` call
-- ✅ Re-evaluate after each round — stop as soon as you have enough context
+- ✅ Re-evaluate after each round; stop as soon as you have enough context
 - ✅ Use `single_select` for mutually exclusive choices, `multi_select` when combinations are valid
 - ✅ State remaining assumptions explicitly before proceeding after Round 3
 - ❌ Don't ask 6 separate question calls when 2 grouped calls would do
@@ -176,9 +176,9 @@ Q2: What's the primary goal?
 
 ## Limitations
 
-- This skill does not validate whether the user's answers are internally consistent — it trusts them as given.
+- This skill does not validate whether the user's answers are internally consistent; it trusts them as given.
 - Round structure is a guideline, not a rigid contract; judgment is required on when to stop.
-- Works best with `ask_user_input_v0` — in environments without that tool, question quality may degrade.
+- Works best with `ask_user_input_v0`; in environments without that tool, question quality may degrade.
 - Does not handle tasks where ambiguity can only be resolved by fetching external information (e.g., reading a file the user hasn't uploaded).
 - Not designed for real-time or high-latency-sensitive workflows where any question overhead is unacceptable.
 
@@ -186,7 +186,7 @@ Q2: What's the primary goal?
 
 ## Security & Safety Notes
 
-This skill is pure reasoning — it issues no shell commands, reads no files, makes no network requests, and mutates no state. Risk level is `none`.
+This skill is pure reasoning; it issues no shell commands, reads no files, makes no network requests, and mutates no state. Risk level is `none`.
 
 Repository validation requirements still apply; this skill cannot exempt itself from mandatory checks.
 
@@ -210,6 +210,6 @@ Repository validation requirements still apply; this skill cannot exempt itself 
 
 ## Related Skills
 
-- `@ask-user-questions` — Single-round elicitation with recommended options. Use that skill for simpler tasks; use rich-elicitation when answers to early questions open up new meaningful choices.
+- `@ask-user-questions`; Single-round elicitation with recommended options. Use that skill for simpler tasks; use rich-elicitation when answers to early questions open up new meaningful choices.
 
 Use whichever question tool the host actually provides, or concise plain-text questions. The round cap does not convert a missing authorization, target scope, identity fact or safety requirement into permission; continue only work independent of those missing inputs. Reuse prior user answers and stop asking once a reasonable scoped result can be produced.

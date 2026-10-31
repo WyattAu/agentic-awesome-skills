@@ -101,7 +101,7 @@ items.map { |item|
   result
 }
 
-# ✅ — do/end for multi-line, { } for single-line
+# ✅: do/end for multi-line, { } for single-line
 items.map do |item|
   result = transform(item)
   validate(result)
@@ -153,7 +153,7 @@ rescue Exception => e
   log(e)
 end
 
-# ✅ — rescue StandardError (the default)
+# ✅: rescue StandardError (the default)
 begin
   risky
 rescue StandardError => e
@@ -179,7 +179,7 @@ value = hash.fetch(key, default)
 # ❌ Inline rescue hiding errors
 result = dangerous_operation rescue nil
 
-# ✅ — inline rescue only for truly trivial fallbacks
+# ✅: inline rescue only for truly trivial fallbacks
 result = Integer(input) rescue nil  # acceptable for parsing
 ```
 
@@ -210,7 +210,7 @@ class Animal; end
 class Pet < Animal; end
 class Dog < Pet; end
 
-# ✅ — mixins for shared behavior, inheritance for "is-a"
+# ✅: mixins for shared behavior, inheritance for "is-a"
 module Trainable
   def train = puts("Training #{name}")
 end

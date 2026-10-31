@@ -1,6 +1,6 @@
 ---
 name: sveltekit
-description: "Build full-stack web applications with SvelteKit — file-based routing, SSR, SSG, API routes, and form actions in one framework."
+description: "Build full-stack web applications with SvelteKit; file-based routing, SSR, SSG, API routes, and form actions in one framework."
 category: frontend
 risk: safe
 source: community
@@ -14,7 +14,7 @@ tools: [claude, cursor, gemini]
 
 ## Overview
 
-SvelteKit is the official full-stack framework built on top of Svelte. It provides file-based routing, server-side rendering (SSR), static site generation (SSG), API routes, and progressive form actions — all with Svelte's compile-time reactivity model that reduces some runtime work through compilation; client-side features still ship runtime JavaScript. Use this skill when building fast, modern web apps where both DX and performance matter.
+SvelteKit is the official full-stack framework built on top of Svelte. It provides file-based routing, server-side rendering (SSR), static site generation (SSG), API routes, and progressive form actions; all with Svelte's compile-time reactivity model that reduces some runtime work through compilation; client-side features still ship runtime JavaScript. Use this skill when building fast, modern web apps where both DX and performance matter.
 
 ## When to Use This Skill
 
@@ -128,7 +128,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 ### Step 5: Form Actions
 
-Form actions are the SvelteKit-native way to handle mutations — no client-side fetch required:
+Form actions are the SvelteKit-native way to handle mutations; no client-side fetch required:
 
 ```typescript
 // src/routes/contact/+page.server.ts
@@ -200,8 +200,8 @@ Control per-route rendering with page options:
 
 ```typescript
 // src/routes/docs/+page.ts
-export const prerender = true;   // Static — generated at build time
-export const ssr = true;         // Default — rendered on server per request
+export const prerender = true;   // Static; generated at build time
+export const ssr = true;         // Default; rendered on server per request
 export const csr = false;        // Disable client-side hydration entirely
 ```
 
@@ -224,7 +224,7 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 };
 ```
 
-### Example 2: Hooks — Session Middleware
+### Example 2: Hooks: Session Middleware
 
 ```typescript
 // src/hooks.server.ts
@@ -256,22 +256,22 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 ## Best Practices
 
-- ✅ Use `+page.server.ts` for database/auth logic — it never ships to the client
+- ✅ Use `+page.server.ts` for database/auth logic; it never ships to the client
 - ✅ Use `$lib/server/` for shared server-only modules (DB client, auth helpers)
-- ✅ Use form actions for mutations instead of client-side `fetch` — works without JS
+- ✅ Use form actions for mutations instead of client-side `fetch`; works without JS
 - ✅ Type all `load` return values with generated `$types` (`PageData`, `LayoutData`)
 - ✅ Use `event.locals` in hooks to pass server-side context to load functions
 - ❌ Don't import server-only code in `+page.svelte` or `+layout.svelte` directly
-- ❌ Don't store sensitive state in stores — use `locals` on the server
-- ❌ Don't skip `use:enhance` on forms — without it, forms lose progressive enhancement
+- ❌ Don't store sensitive state in stores; use `locals` on the server
+- ❌ Don't skip `use:enhance` on forms; without it, forms lose progressive enhancement
 
 ## Security & Safety Notes
 
-- All code in `+page.server.ts`, `+server.ts`, and `$lib/server/` runs exclusively on the server — safe for DB queries, secrets, and session validation.
+- All code in `+page.server.ts`, `+server.ts`, and `$lib/server/` runs exclusively on the server; safe for DB queries, secrets, and session validation.
 - Always validate and sanitize form data before database writes.
 - Use `error(403)` or `redirect(303)` from `@sveltejs/kit` rather than returning raw error objects.
 - Set `httpOnly: true` and `secure: true` on all auth cookies.
-- CSRF protection is built-in for form actions — do not disable `checkOrigin` in production.
+- CSRF protection is built-in for form actions; do not disable `checkOrigin` in production.
 
 ## Common Pitfalls
 
@@ -289,10 +289,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 ## Related Skills
 
-- `@nextjs-app-router-patterns` — When you prefer React over Svelte for SSR/SSG
-- `@trpc-fullstack` — Add end-to-end type safety to SvelteKit API routes
-- `@auth-implementation-patterns` — Authentication patterns usable with SvelteKit hooks
-- `@tailwind-patterns` — Styling SvelteKit apps with Tailwind CSS
+- `@nextjs-app-router-patterns`; When you prefer React over Svelte for SSR/SSG
+- `@trpc-fullstack`; Add end-to-end type safety to SvelteKit API routes
+- `@auth-implementation-patterns`; Authentication patterns usable with SvelteKit hooks
+- `@tailwind-patterns`; Styling SvelteKit apps with Tailwind CSS
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

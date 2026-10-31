@@ -56,7 +56,7 @@ The `asset_selection` object defines which tables the monitor covers. It must in
 
 **Use database and schema scoping to select which tables to monitor.** This is the reliable approach and covers most use cases.
 
-> **Known limitation:** The MCP tool supports `filters` and `exclusions` parameters, but the tool's schema describes the wrong format for them. Until this is fixed ([K2-269](https://linear.app/montecarlodata/issue/K2-269)), **do not pass `filters` or `exclusions`** — they will cause errors. Use database/schema scoping instead to narrow the set of monitored tables. If the user needs regex or pattern-based filtering, explain this limitation and suggest either (a) using schema-level scoping to get close, or (b) creating individual metric monitors for specific tables.
+> **Known limitation:** The MCP tool supports `filters` and `exclusions` parameters, but the tool's schema describes the wrong format for them. Until this is fixed ([K2-269](https://linear.app/montecarlodata/issue/K2-269)), **do not pass `filters` or `exclusions`**; they will cause errors. Use database/schema scoping instead to narrow the set of monitored tables. If the user needs regex or pattern-based filtering, explain this limitation and suggest either (a) using schema-level scoping to get close, or (b) creating individual metric monitors for specific tables.
 
 ### Database-Level Selection
 

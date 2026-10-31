@@ -23,9 +23,9 @@ layout: arxiv
 
 ---
 
-**Abstract**—{{ABSTRACT}}
+**Abstract**-{{ABSTRACT}}
 
-**Index Terms**—Machine Learning, Deep Learning, Neural Networks
+**Index Terms**-Machine Learning, Deep Learning, Neural Networks
 
 ---
 

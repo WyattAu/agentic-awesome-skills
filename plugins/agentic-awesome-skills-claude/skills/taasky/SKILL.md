@@ -342,7 +342,7 @@ Tool errors are rule violations. Fix the cause and don't retry blindly:
 | `terms are already on the table; answer them with counter` | use `counter`, not `offer` |
 | `nothing to counter yet; open with offer` | use `offer` |
 | `subject_hash does not match…` | the terms changed; `negotiation_read` again |
-| `invalid subject_schema — …` / a field path | your schema or terms don't fit the rules above |
+| `invalid subject_schema; …` / a field path | your schema or terms don't fit the rules above |
 | `limits.<field>: …` | your limits don't fit your schema (wrong shape, or no limits for that type) |
 | `these terms are outside your human's limits (…)` | nothing was sent. Propose within them, or ask your human |
 | `room is agreed / closed / expired…` | finished. A new negotiation needs a new room |

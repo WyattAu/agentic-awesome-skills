@@ -33,10 +33,10 @@ The skill will:
 
 ### Content Quality Signals
 
-- **Show, don't tell** — Code over prose
-- **Address the "why"** — Not just how, but when and why
-- **Acknowledge tradeoffs** — Developers respect honesty
-- **Progressive disclosure** — Start simple, add complexity
+- **Show, don't tell**; Code over prose
+- **Address the "why"**; Not just how, but when and why
+- **Acknowledge tradeoffs**; Developers respect honesty
+- **Progressive disclosure**; Start simple, add complexity
 
 ### Code Example Requirements
 
@@ -70,12 +70,12 @@ Developers search differently:
 
 ## Tools
 
-- **[Octolens](https://octolens.com)** — Monitor where content gets shared and find ideas from developer conversations
-- **Ahrefs/SEMrush** — Keyword research
-- **Carbon/Ray.so** — Code screenshots
+- **[Octolens](https://octolens.com)**; Monitor where content gets shared and find ideas from developer conversations
+- **Ahrefs/SEMrush**; Keyword research
+- **Carbon/Ray.so**; Code screenshots
 
 ## Related Skills
 
-- `developer-audience-context` — Know your readers first
-- `technical-tutorials` — Step-by-step deep dives
-- `developer-newsletter` — Distribute via email
+- `developer-audience-context`; Know your readers first
+- `technical-tutorials`; Step-by-step deep dives
+- `developer-newsletter`; Distribute via email

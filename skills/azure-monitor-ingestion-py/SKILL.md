@@ -34,10 +34,10 @@ AZURE_DCR_STREAM_NAME=Custom-MyTable_CL
 
 Before using this SDK, you need:
 
-1. **Log Analytics Workspace** — Target for your logs
-2. **Data Collection Endpoint (DCE)** — Ingestion endpoint
-3. **Data Collection Rule (DCR)** — Defines schema and destination
-4. **Custom Table** — In Log Analytics (created via DCR or manually)
+1. **Log Analytics Workspace**; Target for your logs
+2. **Data Collection Endpoint (DCE)**; Ingestion endpoint
+3. **Data Collection Rule (DCR)**; Defines schema and destination
+4. **Custom Table**; In Log Analytics (created via DCR or manually)
 
 ## Authentication
 
@@ -173,27 +173,27 @@ SDK chunking does not bound the application's input memory or total ingestion co
 
 | Concept | Description |
 |---------|-------------|
-| **DCE** | Data Collection Endpoint — ingestion URL |
-| **DCR** | Data Collection Rule — defines schema, transformations, destination |
+| **DCE** | Data Collection Endpoint; ingestion URL |
+| **DCR** | Data Collection Rule; defines schema, transformations, destination |
 | **Stream** | Named data flow within a DCR |
 | **Custom Table** | Target table in Log Analytics (ends with `_CL`) |
 
 ## DCR Stream Name Format
 
 Stream names follow patterns:
-- `Custom-<TableName>_CL` — For custom tables
-- `Microsoft-<TableName>` — For built-in tables
+- `Custom-<TableName>_CL`; For custom tables
+- `Microsoft-<TableName>`; For built-in tables
 
 ## Best Practices
 
 1. **Use DefaultAzureCredential** for authentication
-2. **Handle errors gracefully** — use `on_error` callback for partial failures
-3. **Include TimeGenerated** — Required field for all logs
-4. **Match DCR schema** — Log fields must match DCR column definitions
+2. **Handle errors gracefully**; use `on_error` callback for partial failures
+3. **Include TimeGenerated**; Required field for all logs
+4. **Match DCR schema**; Log fields must match DCR column definitions
 5. **Use async client** for high-throughput scenarios
-6. **Batch uploads** — SDK handles batching, but send reasonable chunks
-7. **Monitor ingestion** — Check Log Analytics for ingestion status
-8. **Use context manager** — Ensures proper client cleanup
+6. **Batch uploads**; SDK handles batching, but send reasonable chunks
+7. **Monitor ingestion**; Check Log Analytics for ingestion status
+8. **Use context manager**; Ensures proper client cleanup
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

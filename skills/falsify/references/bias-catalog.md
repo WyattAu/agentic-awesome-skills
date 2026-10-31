@@ -1,6 +1,6 @@
 # Bias Catalog · 认知偏差速查表
 
-Companion to the Stage 4 bias audit in `SKILL.md`. The six-quick-check audit covers the high-frequency six; this catalog indexes 25 for deeper review. Detection question first, remediation second — naming a bias is not evidence that it was measured or corrected.
+Companion to the Stage 4 bias audit in `SKILL.md`. The six-quick-check audit covers the high-frequency six; this catalog indexes 25 for deeper review. Detection question first, remediation second; naming a bias is not evidence that it was measured or corrected.
 
 ## Quick reference
 
@@ -29,7 +29,7 @@ Companion to the Stage 4 bias audit in `SKILL.md`. The six-quick-check audit cov
 | Clustering Illusion | Pattern | Am I seeing patterns in noise? | Test statistical significance |
 | Gambler's Fallacy | Pattern | Am I expecting short-term balancing? | Use the actual dependence model; do not assume independence |
 | Base Rate Neglect | Bayesian | Did I start with the prior? | Always anchor on the base rate first |
-| Conjunction Fallacy | Pattern/Bayesian | Is "specific" rated more likely than "general"? | P(A∧B) ≤ P(A) — always |
+| Conjunction Fallacy | Pattern/Bayesian | Is "specific" rated more likely than "general"? | P(A∧B) ≤ P(A); always |
 | Halo / Authority | Social | One trait or credential coloring everything? | Assess dimensions separately; weigh evidence, not titles |
 
 ## How to use with falsify
@@ -37,6 +37,6 @@ Companion to the Stage 4 bias audit in `SKILL.md`. The six-quick-check audit cov
 1. Run the Stage 4 six-quick-check (confirmation / availability / anchoring / affect / overconfidence / sunk cost).
 2. If a suspicion survives, find the matching row here for its detection question and remediation.
 3. State the plausible direction and seek independent evidence or a design change; do not invent a magnitude or probability correction.
-4. Track your own susceptibility over time — a bias you have corrected once is one you will meet again.
+4. Track your own susceptibility over time; a bias you have corrected once is one you will meet again.
 
 *Distilled from Galef's scout-mindset cognitive-bias-catalog and lex-bias; 25 entries, detection-first.*

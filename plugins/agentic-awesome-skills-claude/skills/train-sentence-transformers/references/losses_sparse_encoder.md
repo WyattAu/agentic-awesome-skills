@@ -3,7 +3,7 @@
 AAS adaptation: follow the root execution/data contract. Examples are version-sensitive sketches; verify APIs in a reviewed lockfile and cached revisions. Local-only/no publication/no remote telemetry defaults override older Hub/tracker recipes below. Numerical hardware, speed, quality, data-volume and loss-ranking claims are illustrative hypotheses, not guaranteed thresholds.
 All losses live in `sentence_transformers.sparse_encoder.losses`.
 
-This reference targets the **SPLADE** architecture (Transformer + SpladePooling). The sparse-encoder package also exports `CSRLoss` and `CSRReconstructionLoss` for the CSR architecture (Transformer + Pooling + SparseAutoEncoder); those are out of scope here — see the sbert.net docs if you're training a CSR model.
+This reference targets the **SPLADE** architecture (Transformer + SpladePooling). The sparse-encoder package also exports `CSRLoss` and `CSRReconstructionLoss` for the CSR architecture (Transformer + Pooling + SparseAutoEncoder); those are out of scope here; see the sbert.net docs if you're training a CSR model.
 
 Choosing a loss means (a) pick a base loss (contrastive, regression, distillation) and (b) wrap it in `SpladeLoss` to add FLOPS regularization.
 
@@ -89,7 +89,7 @@ Margin MSE from a cross-encoder teacher.
 
 ### `SparseDistillKLDivLoss`
 
-Listwise KL-div distillation — student's softmax distribution over candidates should match teacher's.
+Listwise KL-div distillation; student's softmax distribution over candidates should match teacher's.
 
 ## Independent regularizer
 
@@ -103,5 +103,5 @@ For regularizer-weight tuning and dense-output recovery, see `troubleshooting.md
 
 - **`SparseMultipleNegativesRankingLoss` without `SpladeLoss` wrapping on a SPLADE model**: no FLOPS regularization -> dense outputs defeating the purpose of SPLADE. Always wrap.
 - **`CachedSpladeLoss` + `gradient_checkpointing=True`**: crash. Pick one.
-- **Starting training with full FLOPS regularization at step 0**: the model outputs zero everywhere and gets stuck. The built-in scheduler avoids this — don't override it unless you know why.
+- **Starting training with full FLOPS regularization at step 0**: the model outputs zero everywhere and gets stuck. The built-in scheduler avoids this; don't override it unless you know why.
 - **`query_regularizer_weight` == `document_regularizer_weight`**: usually wrong. Queries should be sparser than documents (fewer terms per query). Since higher regularization drives more zeros, give the query weight the larger value. `query_regularizer_weight=5e-5`, `document_regularizer_weight=3e-5` is a good starting ratio.

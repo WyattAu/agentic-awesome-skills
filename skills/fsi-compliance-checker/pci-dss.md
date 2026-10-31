@@ -1,8 +1,8 @@
-# PCI-DSS v4.0.1 — Engineering Control Reference
+# PCI-DSS v4.0.1: Engineering Control Reference
 
-Engineering-relevant controls from PCI-DSS v4.0.1, organized by what a code/architecture change typically touches. Control numbers follow the official standard (PCI Security Standards Council). This is a working summary for triage, not the standard itself — for formal scoping consult the full standard and a QSA.
+Engineering-relevant controls from PCI-DSS v4.0.1, organized by what a code/architecture change typically touches. Control numbers follow the official standard (PCI Security Standards Council). This is a working summary for triage, not the standard itself; for formal scoping consult the full standard and a QSA.
 
-**Version context:** v3.2.1 retired on 31 March 2024 and v4.0 retired on 31 December 2024; verify the applicable current v4.0.1 document and program scope. the ~50 future-dated requirements (marked FD below) became mandatory **31 March 2025** — they are now in force.
+**Version context:** v3.2.1 retired on 31 March 2024 and v4.0 retired on 31 December 2024; verify the applicable current v4.0.1 document and program scope. the ~50 future-dated requirements (marked FD below) became mandatory **31 March 2025**; they are now in force.
 
 ## Contents
 
@@ -19,7 +19,7 @@ Engineering-relevant controls from PCI-DSS v4.0.1, organized by what a code/arch
 | Control | Requirement (summary) | Engineering check |
 |---------|----------------------|-------------------|
 | 3.2.1 | Account data storage kept to minimum: retention/disposal policies covering all storage locations | New stores/caches must update the data-flow inventory; retention defined |
-| 3.3.1 | Don't store sensitive authentication data (CVV/CVC, full track, PIN) after authorization — ever, even encrypted | grep for CVV/CVC fields in models, logs, caches, analytics events |
+| 3.3.1 | Don't store sensitive authentication data (CVV/CVC, full track, PIN) after authorization; ever, even encrypted | grep for CVV/CVC fields in models, logs, caches, analytics events |
 | 3.4.1 | Mask PAN when displayed (BIN + last 4 max visible) | UI components, receipts, admin screens, support tooling |
 | 3.5.1 | Render PAN unreadable anywhere stored (strong crypto, truncation, tokens) | DB columns, backups, object storage, message queues, data lakes |
 | 3.6 / 3.7 | Key management: documented procedures, key rotation, split knowledge for manual operations | KMS usage, key rotation schedules, no keys in code/config |
@@ -55,8 +55,8 @@ Engineering-relevant controls from PCI-DSS v4.0.1, organized by what a code/arch
 | 10.2.1 | Audit logs capture: individual user access to cardholder data, admin actions, auth attempts (success/failure), log access, security event types | Audit events emitted for these actions with user identity |
 | 10.2.1.2 | All actions by accounts with admin access logged | Admin tooling, support backdoors |
 | 10.3.1-10.3.4 | Logs protected from modification, access limited, integrity monitored | Append-only/immutable log storage, restricted access |
-| 10.4.1 / 10.4.1.1 (FD: automated) | Daily review of security events — automated mechanisms required in v4.0 | Alerting rules exist for new security-relevant events |
-| — | **Never log:** full PAN, CVV, passwords, full track data | grep logging statements in payment/auth paths |
+| 10.4.1 / 10.4.1.1 (FD: automated) | Daily review of security events; automated mechanisms required in v4.0 | Alerting rules exist for new security-relevant events |
+| - | **Never log:** full PAN, CVV, passwords, full track data | grep logging statements in payment/auth paths |
 
 ## 5. Network & Segmentation
 

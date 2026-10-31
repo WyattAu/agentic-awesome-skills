@@ -28,7 +28,7 @@ The `#Preview` macro (Swift 5.9+, Xcode 15+) is the modern way to declare previe
         .preferredColorScheme(.dark)
 }
 
-// Legacy: PreviewProvider — still valid, but verbose for new code
+// Legacy: PreviewProvider; still valid, but verbose for new code
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -178,7 +178,7 @@ Inject any environment values the view depends on so the preview reflects a real
 
 ### Mocking Async Data Sources
 
-When a view depends on a network or data service, give the dependency a protocol abstraction so previews can inject a synchronous mock that returns sample data immediately. This is one approach — adapt it to whatever pattern the surrounding codebase already uses.
+When a view depends on a network or data service, give the dependency a protocol abstraction so previews can inject a synchronous mock that returns sample data immediately. This is one approach; adapt it to whatever pattern the surrounding codebase already uses.
 
 ```swift
 protocol DataFetching {

@@ -1,4 +1,4 @@
-# Tipos de Conta Instagram — Business vs Creator
+# Tipos de Conta Instagram: Business vs Creator
 
 > Historical reference, not current Meta documentation. This bundle implements Facebook Login with a linked Page for both Business and Creator accounts. Verify the selected API version, permissions, media types, metrics, quotas and app-review requirements before use. Local scripts and their documented limitations take precedence over examples below.
 

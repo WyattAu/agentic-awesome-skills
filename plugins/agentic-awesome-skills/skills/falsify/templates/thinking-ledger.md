@@ -1,12 +1,12 @@
 # Thinking Ledger · 思维台账
 
-> Fill this in when falsify depth mode is active. Record concise findings, evidence and decisions, not private internal reasoning. Dead hypotheses are assets — keep them.
+> Fill this in when falsify depth mode is active. Record concise findings, evidence and decisions, not private internal reasoning. Dead hypotheses are assets; keep them.
 
-**Mode check (MODE SELECTION):** confirmed this is a **Depth** question? (Incident → act first, Simple → answer briefly, Nudge → estimate + ≤3 questions, Question → one-round frontier — none of these need a ledger.)
+**Mode check (MODE SELECTION):** confirmed this is a **Depth** question? (Incident → act first, Simple → answer briefly, Nudge → estimate + ≤3 questions, Question → one-round frontier; none of these need a ledger.)
 
 **Question / 问题:**
 **Stakes / 代价 (who acts on this, what if wrong):**
-**Orientation check (Stage 0):** conclusion already sealed? (conclusion-preserving / completion-seeking / authority-preserving — name it, compensate)
+**Orientation check (Stage 0):** conclusion already sealed? (conclusion-preserving / completion-seeking / authority-preserving; name it, compensate)
 
 ## Stage 1 · Axiomatize (公理化)
 | 公理 Established facts (sourced) | 假设 Assumptions (unchecked) | 传闻 Hearsay (no evidence) |
@@ -22,7 +22,7 @@ Falsifiable prediction: If H, we should observe [O]. If [¬O] occurs, reassess H
 
 ## Stage 3 · Adversarialize (对抗)
 Strongest counter-argument (steelman):
-Pre-mortem: a year later this failed — why?
+Pre-mortem: a year later this failed; why?
 Three ways my hypothesis could be wrong:
 1.
 2.
@@ -33,17 +33,17 @@ Evidence that would change the conclusion, with validity criteria:
 | Evidence | Grade (direct/indirect/hearsay/inference) | Source #2 (triangulation) | Supports / Contradicts |
 |---|---|---|---|
 |  |  |  |  |
-Diagnostic? (score each row against ALL candidates: C/I/N/NA — count the I's, not the C's):
+Diagnostic? (score each row against ALL candidates: C/I/N/NA; count the I's, not the C's):
 Disconfirming evidence found:
 Cheapest real test that could break H (and its result):
 
 ## Stage 5 · Converge (收束)
 Verdict (only what evidence supports):
 Checkable claim (what the user can verify):
-Sensitivity check (remove the load-bearing evidence — does the verdict flip?):
+Sensitivity check (remove the load-bearing evidence; does the verdict flip?):
 Confidence: qualified assessment (numeric only with justified event/model), and I could be wrong if [residual risk]:
 Request-uncertainty signal: 0 fully specified / 0.5 open parameters / 1 critical info missing
-Multi-perspective check: executor / stakeholder / skeptic — agree?
+Multi-perspective check: executor / stakeholder / skeptic; agree?
 Kill criteria (what would move this probability down):
 Remaining unknowns:
 Hard-to-reverse? → decision log / ADR entry:
@@ -52,34 +52,34 @@ Lesson for the next time (复盘):
 ---
 *Format: markdown table, compact. If the question is simple, skip the ledger. The ledger serves the answer, not the reverse.*
 
-## Argument map (Stage 2/3) — fill for claims with hidden assumptions
+## Argument map (Stage 2/3): fill for claims with hidden assumptions
 Contention:
 Reasons:
 Co-premises (hidden assumptions):
 Warrant (principle connecting reason → claim):
 Weak links flagged:
 
-## Causal check (Stage 4) — for observational "X causes Y" claims
+## Causal check (Stage 4): for observational "X causes Y" claims
 Ladder rung: association / intervention / counterfactual
 Confounder I might have missed (backdoor):
 Collider I conditioned on that could create bias:
 
 ## Verification check (Stage 4/5)
 External signal that changed confidence (test / lookup / independent source):
-If none — the re-read was drift, not verification.
+If none; the re-read was drift, not verification.
 
-## Routing decision (Stage 0) — set BEFORE depth
+## Routing decision (Stage 0): set BEFORE depth
 Effort budget (automatic/fluent/effortful/strained/depleted):
 Route: System 1 (low-stakes/reversible) or System 2 (high-stakes/irreversible/correctness gate)?
 Aspiration threshold for satisfice (if search is unbounded):
 
 ## Reversal test (Stage 3)
-Would I accept the same evidence reversed? [yes / no / unsure] — if no/unsure, reassess evidence standards; do not apply an arbitrary numeric shift.
+Would I accept the same evidence reversed? [yes / no / unsure]; if no/unsure, reassess evidence standards; do not apply an arbitrary numeric shift.
 
 ## Bias audit (Stage 4)
 Hits (direction → magnitude): confirmation / availability / anchoring / affect / overconfidence / sunk cost → correction applied:
 
-## Decision rule (Stage 5) — when the verdict feeds a choice
+## Decision rule (Stage 5): when the verdict feeds a choice
 EV = Σ(pᵢ×vᵢ):
 Rule chosen (max EV / max EU / minimax regret / satisfice):
 Risk note (one-shot high-stakes → utility):
@@ -89,7 +89,7 @@ Cynefin domain (clear / complicated / complex / chaotic / disorder):
 Method demanded (runbook / analyze / probe / stabilize first / decompose):
 Time pressure? → authorized bounded mitigation/runbook or full protocol:
 
-## IS/IS-NOT bounding (Stage 1) — for selective defects
+## IS/IS-NOT bounding (Stage 1): for selective defects
 | Dimension | IS | Closest IS-NOT | Distinction |
 |---|---|---|---|
 | WHAT |  |  |  |
@@ -100,5 +100,5 @@ Changes near first occurrence:
 Surviving cause must explain BOTH sides:
 
 ## Pre-registered update rule (Stage 2/4)
-"If I observe Z → I update to W%" — written BEFORE evidence:
+"If I observe Z → I update to W%"; written BEFORE evidence:
 Acceptance criteria for Z (source quality / sample / freshness):

@@ -29,7 +29,7 @@ create policy orders_policy on orders
 
 Use security definer functions for complex checks:
 
-`SECURITY DEFINER` functions run with their owner's privileges; RLS bypass depends on ownership/BYPASSRLS/FORCE RLS, not SECURITY DEFINER alone — which is what makes them useful for internal lookups, but also what makes them dangerous if misused. Always include an explicit `auth.uid()` check inside the function body, keep them in a non-exposed schema, and revoke `EXECUTE` from any role that shouldn't call them directly.
+`SECURITY DEFINER` functions run with their owner's privileges; RLS bypass depends on ownership/BYPASSRLS/FORCE RLS, not SECURITY DEFINER alone; which is what makes them useful for internal lookups, but also what makes them dangerous if misused. Always include an explicit `auth.uid()` check inside the function body, keep them in a non-exposed schema, and revoke `EXECUTE` from any role that shouldn't call them directly.
 
 ```sql
 -- Create helper function in a private schema

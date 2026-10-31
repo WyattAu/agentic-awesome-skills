@@ -32,7 +32,7 @@ These are partial design sketches, not a working security boundary. Regexes/clas
 - Familiarity with your agent framework (LangChain, CrewAI, Autogen, custom)
 - Access to policy engine (OPA/Cedar) for permission boundaries
 
-## Threat Model — STRIDE for AI Agents
+## Threat Model: STRIDE for AI Agents
 
 AI agents introduce a unique threat surface. Apply STRIDE specifically to agentic components:
 
@@ -47,15 +47,15 @@ AI agents introduce a unique threat surface. Apply STRIDE specifically to agenti
 
 ### Key Threat Categories
 
-**Prompt Injection** — Untrusted content (user input, web scrapes, document contents) manipulates the agent's system prompt or reasoning chain to execute unintended actions.
+**Prompt Injection**; Untrusted content (user input, web scrapes, document contents) manipulates the agent's system prompt or reasoning chain to execute unintended actions.
 
-**Tool Abuse** — The agent calls tools in sequences or with parameters the designer did not anticipate, achieving effects beyond its intended scope.
+**Tool Abuse**; The agent calls tools in sequences or with parameters the designer did not anticipate, achieving effects beyond its intended scope.
 
-**Data Exfiltration** — The agent encodes sensitive data (credentials, PII, internal IPs) into its responses, tool calls, or outbound HTTP requests.
+**Data Exfiltration**; The agent encodes sensitive data (credentials, PII, internal IPs) into its responses, tool calls, or outbound HTTP requests.
 
-**Cross-Tenant Leakage** — In multi-tenant deployments, context from one tenant's session bleeds into another through shared memory, vector stores, or cache.
+**Cross-Tenant Leakage**; In multi-tenant deployments, context from one tenant's session bleeds into another through shared memory, vector stores, or cache.
 
-**Privilege Escalation** — The agent chains low-privilege tool calls to achieve high-privilege outcomes (e.g., read config -> extract credentials -> call admin API).
+**Privilege Escalation**; The agent chains low-privilege tool calls to achieve high-privilege outcomes (e.g., read config -> extract credentials -> call admin API).
 
 ## Input Validation
 

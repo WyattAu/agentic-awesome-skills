@@ -17,14 +17,14 @@
 | `resolutionStatus` | see table in SKILL.md | `pending` when nothing has resolved yet |
 | `createdAt` | ISO date | Publication time |
 
-`pagination` = `{ limit, skip, total, hasMore }`. `total` is the count matching the filter — it is
+`pagination` = `{ limit, skip, total, hasMore }`. `total` is the count matching the filter; it is
 the size of the whole public archive when no filter is given, not "signals today".
 
 ## `get_signal_details` adds
 
 | Field | Notes |
 | --- | --- |
-| `livePrice` | Current price of the pair at call time — the number that decides whether the idea still stands |
+| `livePrice` | Current price of the pair at call time; the number that decides whether the idea still stands |
 | `indicatorValues` | Readings captured at trigger time. Common keys: `rsi`, `macd_histogram`, `adx`, `obv_slope`, `obv_flow_pct`, `volume_ratio`, `williams_r`, plus `validation_*` keys written by the publisher's scoring pass (`validation_score` 0–100, `validation_confidence`, `validation_rsi`, `validation_atr_pct`, `validation_btc_trend_1d`, `validation_btc_rsi_4h`, `validation_directional_move_pct` = how far price had already moved in the trade's direction when it was published) |
 | `aiReview` | `{ score, decision, analysis }` or null. Null is the normal case |
 | `history.entryPrice` | Price at entry (equals `price` unless recalibrated) |
@@ -37,7 +37,7 @@ Interpretation notes:
 - `validation_score` around 70–80 has historically been the sweet spot; the very highest scores
   were claimed to be late entries by the upstream description. No reproducible sample is bundled; treat this as an unverified hypothesis, not a trading rule. Do not rank by score alone.
 - `validation_directional_move_pct` above ~1.5% means the move was already under way at
-  publication — worth mentioning as "the entry chased the move".
+  publication; worth mentioning as "the entry chased the move".
 - The published TP2/TP3 are a ladder (≈1.7× and 2.4× TP1); they exist so a winner can be
   graded beyond TP1, not as three independent forecasts.
 

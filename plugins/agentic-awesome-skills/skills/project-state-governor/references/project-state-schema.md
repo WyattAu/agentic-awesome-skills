@@ -73,7 +73,7 @@ Keep terminal task records long enough to preserve the verified lifecycle transi
 - ...
 
 ## Negative Evidence / Rejected Directions
-- [what] — [why] — [evidence] — [permanent or conditional]
+- [what]; [why]; [evidence]; [permanent or conditional]
 
 ## Lessons / Pitfalls
 - [validated recurring mistake or owner correction worth preserving]
@@ -104,14 +104,14 @@ Keep it short. It is the routing index, not a summary dump.
 # Project Memory Manifest
 
 ## Read First
-- STATE.md — mission, phase, current workstreams and tasks, recent terminal transitions, blockers, next actions
+- STATE.md; mission, phase, current workstreams and tasks, recent terminal transitions, blockers, next actions
 
 ## Read When Relevant
-- DECISIONS.md — durable owner/project decisions
-- CONSTRAINTS.md — technical/business/research invariants
-- NEGATIVE_EVIDENCE.md — costly rejected directions and important lessons
-- areas/execution.md — execution subsystem state
-- areas/research.md — research subsystem state
+- DECISIONS.md; durable owner/project decisions
+- CONSTRAINTS.md; technical/business/research invariants
+- NEGATIVE_EVIDENCE.md; costly rejected directions and important lessons
+- areas/execution.md; execution subsystem state
+- areas/research.md; research subsystem state
 ```
 
 ### `.project/STATE.md`

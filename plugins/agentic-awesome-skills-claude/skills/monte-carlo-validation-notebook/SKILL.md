@@ -29,18 +29,18 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 Use this skill when the user wants to validate dbt model or snapshot changes with Monte Carlo SQL Notebook queries, either from a GitHub PR or a local dbt repository.
 
 Parse the arguments:
-- **Target** (required): first argument — a GitHub PR URL or local dbt repo path
-- **MC Base URL** (optional): `--mc-base-url <URL>` — defaults to `https://getmontecarlo.com`
-- **Models** (optional): `--models <model1,model2,...>` — comma-separated list of model filenames (without `.sql` extension) to generate queries for. Only these models will be included. By default, all changed models are included up to a maximum of 10.
+- **Target** (required): first argument; a GitHub PR URL or local dbt repo path
+- **MC Base URL** (optional): `--mc-base-url <URL>`; defaults to `https://getmontecarlo.com`
+- **Models** (optional): `--models <model1,model2,...>`; comma-separated list of model filenames (without `.sql` extension) to generate queries for. Only these models will be included. By default, all changed models are included up to a maximum of 10.
 
 ---
 
 # Setup
 
 **Prerequisites:**
-- **`gh`** (GitHub CLI) — required for PR mode. Must be authenticated (`gh auth status`).
-- **`python3`** — required for helper scripts.
-- **`pyyaml`** — install with `pip3 install pyyaml` (or `pip install pyyaml`, `uv pip install pyyaml`, etc.)
+- **`gh`** (GitHub CLI); required for PR mode. Must be authenticated (`gh auth status`).
+- **`python3`**; required for helper scripts.
+- **`pyyaml`**; install with `pip3 install pyyaml` (or `pip install pyyaml`, `uv pip install pyyaml`, etc.)
 
 **Dialect gate:** These templates require warehouse-specific review for identifiers, composite distinct, timestamps and intervals. LIMIT bounds returned rows, not scan cost. Use read-only credentials, timeouts and scan budgets; do not execute queries as part of notebook generation.
 

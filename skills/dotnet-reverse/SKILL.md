@@ -82,7 +82,7 @@ file target.exe                       # "PE32 executable ... for MS Windows" 不
 # 关键：看有没有 CLR
 powershell -c "[System.Reflection.AssemblyName]::GetAssemblyName('target.exe')"
 # 或
-dnSpyEx 直接拖进去 —— 能打开就是托管
+dnSpyEx 直接拖进去 -- 能打开就是托管
 
 # 通用
 strings target.exe | grep -iE "mscoree|_CorExeMain|mscorlib|System\\."
@@ -94,7 +94,7 @@ strings target.exe | grep -iE "mscoree|_CorExeMain|mscorlib|System\\."
 - `#~`、`#Strings`、`#US`、`#GUID`、`#Blob` metadata 流
 - `mscorlib` / `System.Private.CoreLib` 字符串
 
-**NativeAOT 例外：** 编译成 native，没有 CLR 头，但有 `System.Private.CoreLib` 字符串和重构过的类型元数据 —— 这类走 `reverse-engineering/`（IDA/r2），本 skill 仅做识别提示。
+**NativeAOT 例外：** 编译成 native，没有 CLR 头，但有 `System.Private.CoreLib` 字符串和重构过的类型元数据 -- 这类走 `reverse-engineering/`（IDA/r2），本 skill 仅做识别提示。
 
 ### 2. Detect（检测混淆器）
 
@@ -151,7 +151,7 @@ dnSpyEx 调试器：附加进程 / 启动调试，在关键方法下断点，观
 - C2 地址、配置解密结果
 - 异常驱动的控制流（anti-debug 常用 `try/catch` 隐藏真实路径）
 
-> .NET 动态调试比 native 友好得多 —— 能直接看到对象值、字符串内容。优先动态而非死磕静态。
+> .NET 动态调试比 native 友好得多 -- 能直接看到对象值、字符串内容。优先动态而非死磕静态。
 
 ### 6. Patch（按需修改）
 
@@ -197,9 +197,9 @@ File → Save Module → 另存 target-patched.exe，保留原始样本
 
 ## 参考文档
 
-- [references/obfuscators.md](references/obfuscators.md) — ConfuserEx / SmartAssembly / Babel / Eazfuscator / .NET Reactor 脱混淆详解 + anti-tamper 绕过
-- [references/common-workflow.md](references/common-workflow.md) — 完整工作流、IL patch 可靠性、字符串解密器提取、状态机识别
-- [references/sharp-tools.md](references/sharp-tools.md) — 红队 Sharp* 工具分析、工具安装矩阵、dnSpy MCP 集成、社区资源索引
+- [references/obfuscators.md](references/obfuscators.md); ConfuserEx / SmartAssembly / Babel / Eazfuscator / .NET Reactor 脱混淆详解 + anti-tamper 绕过
+- [references/common-workflow.md](references/common-workflow.md); 完整工作流、IL patch 可靠性、字符串解密器提取、状态机识别
+- [references/sharp-tools.md](references/sharp-tools.md); 红队 Sharp* 工具分析、工具安装矩阵、dnSpy MCP 集成、社区资源索引
 
 ## 任务完成自检
 

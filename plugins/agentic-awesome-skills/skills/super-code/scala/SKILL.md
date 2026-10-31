@@ -145,7 +145,7 @@ case class Success(value: Int) extends Result
 case class Failure(error: String) extends Result
 case object Unknown extends Result // what does "Unknown" mean?
 
-// ✅ — each variant should carry the data it represents
+// ✅; each variant should carry the data it represents
 sealed trait Result[+A]
 case class Success[A] (value: A) extends Result[A]
 case class Failure(error: Throwable) extends Result[Nothing]
@@ -207,7 +207,7 @@ def findUser(id: String): User = {
   user
 }
 
-// ✅ — Option for absence, Either for expected errors
+// ✅; Option for absence, Either for expected errors
 def findUser(id: String): Option[User] = Option(db.query(id)) // wraps a nullable result
 // or:
 def findUser(id: String): Either[AppError, User]
@@ -221,7 +221,7 @@ def findUser(id: String): Either[AppError, User]
 // ❌ (Scala 2) Implicit conversion that hides bugs
 implicit def stringToInt(s: String): Int = s.toInt
 
-// ✅ — extension methods instead of implicit conversions
+// ✅; extension methods instead of implicit conversions
 extension (s: String)
   def toIntSafe: Option[Int] = s.toIntOption
 ```
@@ -238,7 +238,7 @@ def query(sql: String)(using conn: Connection): ResultSet
 // ❌ Importing implicits from everywhere
 import com.lib.implicits._
 
-// ✅ — import only what you need
+// ✅; import only what you need
 import com.lib.given
 // or specific: import com.lib.{given ExecutionContext}
 ```
@@ -251,7 +251,7 @@ import com.lib.given
 // ❌ Thread.sleep in production code
 Thread.sleep(5000)
 
-// ✅ — use scheduler / timer abstraction
+// ✅; use scheduler / timer abstraction
 import scala.concurrent.duration._
 system.scheduler.scheduleOnce(5.seconds)(doWork())
 ```

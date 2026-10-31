@@ -1,4 +1,4 @@
-# Local Config — YOUR MACHINE (private, not tracked)
+# Local Config: YOUR MACHINE (private, not tracked)
 
 Copy this file to `local-config.md` and fill in YOUR values before first use.
 本文件为模板；复制为 `local-config.md` 后填入你自己的值。
@@ -23,4 +23,4 @@ Self-check before launch: python points to target env / toolchain versions / `gi
 - Probe before launch: `curl -s -H 'Authorization: Bearer <key>' <base>/models | head -c 200`
 
 ## Scratch Workspace 临时工作区
-`<path>/worktree/` — worktrees / subagent dirs / temp builds MUST stay here; never scatter into `~`.
+`<path>/worktree/`; worktrees / subagent dirs / temp builds MUST stay here; never scatter into `~`.

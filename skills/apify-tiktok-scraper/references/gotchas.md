@@ -1,4 +1,4 @@
-# Gotchas — harshmaur/tiktok-scraper
+# Gotchas: harshmaur/tiktok-scraper
 
 ## Counts
 
@@ -39,7 +39,7 @@ TikTok's own video and image links expire within hours. When the user needs the 
 | `mcpConnector` | Connector ID that the user created in Apify Console. |
 | `mcpTarget` | Channel, page or sheet. |
 | `mcpMode` | `perPost` (default) or `summary`. |
-| `mcpMessage` | Template with `{{field}}` placeholders, for example `*@{{authorMeta.name}}* — {{diggCount}} likes\n{{webVideoUrl}}`. |
+| `mcpMessage` | Template with `{{field}}` placeholders, for example `*@{{authorMeta.name}}*; {{diggCount}} likes\n{{webVideoUrl}}`. |
 | `mcpMaxItems` | Most videos to send. Default 50. |
 
 Verify scrape and delivery status independently; a dataset is not delivery evidence.

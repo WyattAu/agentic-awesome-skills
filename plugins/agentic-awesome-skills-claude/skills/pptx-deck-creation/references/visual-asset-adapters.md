@@ -7,7 +7,7 @@ ability inline** using public APIs and short, self-contained snippets you run at
 How to use a guideline:
 
 1. Pick the ability you need below.
-2. Review and adapt the illustrative snippet (adjust inputs and guards) before running in an ephemeral scratch file or terminal — do not save it
+2. Review and adapt the illustrative snippet (adjust inputs and guards) before running in an ephemeral scratch file or terminal; do not save it
    into the skill, since the skill keeps only `references/`.
 3. Place the returned local asset path into `layout_tree.objects` with `content.path`, `content.alt`,
    `bbox`, `z_index`, and `classification`.
@@ -29,7 +29,7 @@ Shared rules:
 
 ## 1. Icon Search
 
-Use the public Iconify API — no key required.
+Use the public Iconify API; no key required.
 
 - Search: `https://api.iconify.design/search?query=<q>&limit=<n>`
 - Download SVG: `https://api.iconify.design/<prefix>/<name>.svg?color=%23<hex>`

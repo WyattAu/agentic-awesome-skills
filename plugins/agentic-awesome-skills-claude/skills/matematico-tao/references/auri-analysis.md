@@ -1,6 +1,6 @@
 > Legacy illustrative case study. Architecture, private-project facts, latency distributions, memory figures, security ticks and invariants below are unverified historical inputs, not current audit findings. Rebuild the model from the authorized target and measure it; no access to the original private workspace is implied.
 
-# Auri/EarLLM — Contexto Completo para Análise Matemática
+# Auri/EarLLM: Contexto Completo para Análise Matemática
 
 ## Visão Geral do Sistema
 
@@ -16,7 +16,7 @@
 ```
 app (orquestrador)
 ├── core-logging (cross-cutting: logging, métricas)
-├── bluetooth (conectividade BT — A2DP, HFP, SCO)
+├── bluetooth (conectividade BT; A2DP, HFP, SCO)
 ├── audio (captura PCM, roteamento, botões hardware)
 ├── voice (STT, TTS, pipeline de voz)
 ├── llm (clients: OpenAI, Claude, Gemini, Ollama, RPA)
@@ -73,7 +73,7 @@ Model properties to verify against real code (not independently verified here):
 ✅ Sem estados inalcançáveis (todos estados têm caminho de IDLE)
 Outgoing transitions alone do not prove deadlock freedom or callback progress
 A timeout transition is intended to return ERROR to IDLE; scheduling/cancellation can prevent progress
-⚠️  SPEAKING não tem cancel — bloqueio possível se TTS travar
+⚠️  SPEAKING não tem cancel; bloqueio possível se TTS travar
 ```
 
 ### BluetoothController States
@@ -112,18 +112,18 @@ Riscos potenciais:
 - withContext(Dispatchers.IO) aninhado: overhead desnecessário de contexto
 ```
 
-### AuriToolExecutor — Análise de Idempotência
+### AuriToolExecutor: Análise de Idempotência
 ```
 9 ferramentas:
-1. alarm    — NÃO idempotente (cria alarmes duplicados)
-2. calendar — NÃO idempotente (cria eventos duplicados)
-3. reminder — NÃO idempotente
-4. time     — Idempotente (read-only)
-5. email    — NÃO idempotente (pode enviar duplicado)
-6. draft    — Quase idempotente (draft com mesmo conteúdo)
-7. call     — NÃO idempotente (inicia chamada)
-8. whatsapp — NÃO idempotente
-9. app      — Idempotente se app já aberto
+1. alarm   ; NÃO idempotente (cria alarmes duplicados)
+2. calendar; NÃO idempotente (cria eventos duplicados)
+3. reminder; NÃO idempotente
+4. time    ; Idempotente (read-only)
+5. email   ; NÃO idempotente (pode enviar duplicado)
+6. draft   ; Quase idempotente (draft com mesmo conteúdo)
+7. call    ; NÃO idempotente (inicia chamada)
+8. whatsapp; NÃO idempotente
+9. app     ; Idempotente se app já aberto
 
 Risco: sem deduplicação, retry logic pode causar ações duplas
 Recomendação: implementar idempotency keys por ferramenta
@@ -139,7 +139,7 @@ Componente          Latência típica    Modelo
 ──────────────────────────────────────────────
 Audio capture       ~100ms             determinístico
 STT (online)        200-800ms          distribuição log-normal
-STT (Vosk offline)  N/A (stub)         —
+STT (Vosk offline)  N/A (stub)         -
 LLM (Ollama A04)    10-15s             alta variância (~3 tok/s)
 LLM (OpenAI API)    1-3s               distribuição gamma
 TTS                 50-200ms           determinístico
@@ -176,9 +176,9 @@ Total com Ollama local: ~850MB → crítico em dispositivos 2GB RAM
 1. API Keys: EncryptedSharedPreferences (AES-256-GCM) ✅
 2. Bluetooth SCO security depends on pairing/link/version; do not assume all voice links are unencrypted ⚠️
 3. HTTP cleartext (Ollama localhost): permitido explicitamente via network_security_config ⚠️
-4. LAN access: cleartext permitido para 192.168.*.* — risco em redes públicas ❌
-5. Gmail OAuth2 tokens: persistidos em token store — verificar criptografia
-6. Audio recording: exige permissão RECORD_AUDIO — verificar escopo temporal
+4. LAN access: cleartext permitido para 192.168.*.*; risco em redes públicas ❌
+5. Gmail OAuth2 tokens: persistidos em token store; verificar criptografia
+6. Audio recording: exige permissão RECORD_AUDIO; verificar escopo temporal
 ```
 
 ---

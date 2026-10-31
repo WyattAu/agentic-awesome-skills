@@ -12,7 +12,7 @@ license_source: https://github.com/neondatabase/agent-skills/blob/main/LICENSE
 
 # Neon AI Gateway
 
-Confirm current project/region availability in the official quickstart. The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from Anthropic, OpenAI, Google, Meta, Alibaba, DeepSeek, and Databricks — powered by Databricks. SDK integrations require the matching dialect, explicit gateway credential and a model supporting the requested features.
+Confirm current project/region availability in the official quickstart. The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from Anthropic, OpenAI, Google, Meta, Alibaba, DeepSeek, and Databricks; powered by Databricks. SDK integrations require the matching dialect, explicit gateway credential and a model supporting the requested features.
 
 Use this skill to help the user send model calls through the gateway, wire it into the AI SDK or Mastra, and switch providers without rewiring code. Deliver a working inference request, a configured agent, or a precise answer from the official Neon docs.
 
@@ -21,18 +21,18 @@ Use this skill to help the user send model calls through the gateway, wire it in
 Reach for the AI Gateway whenever an app or agent needs to call an LLM and the user would rather not manage model providers themselves:
 
 - **One credential instead of many provider accounts.** A single Neon credential reaches the entire model catalog across seven providers. No separate OpenAI / Anthropic / Google billing, keys, or signups to provision and rotate.
-- **Switch models without rewiring.** The unified endpoint is OpenAI-compatible and works with every model in the catalog — change one `model` field to move between Claude, GPT, and Gemini. Standard SDKs require matching routes, credentials and feature validation.
-- **AI follows your branches.** Each branch has its own gateway endpoint, scoped with the same lineage as your database. AI requests from a preview/feature branch are isolated to that branch — the same isolation your data already gets — which makes preview, CI, and agent environments self-contained.
+- **Switch models without rewiring.** The unified endpoint is OpenAI-compatible and works with every model in the catalog; change one `model` field to move between Claude, GPT, and Gemini. Standard SDKs require matching routes, credentials and feature validation.
+- **AI follows your branches.** Each branch has its own gateway endpoint, scoped with the same lineage as your database. AI requests from a preview/feature branch are isolated to that branch; the same isolation your data already gets; which makes preview, CI, and agent environments self-contained.
 - **No extra infrastructure, and it's already next to your data.** The gateway lives inside your Neon project (and is injected into Neon Functions automatically), runs on the same Databricks infrastructure that serves trillions of tokens a month, and supports streaming (SSE) out of the box.
 
-If the user already has a deep, single-provider integration and no interest in Neon branching or multi-model routing, a direct provider SDK is fine — but the moment they want one credential, model portability, or branch-scoped AI, this is the reason to use it.
+If the user already has a deep, single-provider integration and no interest in Neon branching or multi-model routing, a direct provider SDK is fine; but the moment they want one credential, model portability, or branch-scoped AI, this is the reason to use it.
 
 ## What It Does
 
-- **One API for all models** — Frontier and open-source models behind a single endpoint, addressed by their catalog ID (e.g. `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-2-5-flash`).
-- **Standard SDKs, one URL change** — OpenAI SDK and AI SDK (OpenAI-compatible MLflow/Responses routes), Anthropic SDK (native Messages), google-genai (native Gemini).
-- **Branch-scoped** — Each branch gets its own gateway host; the Neon credential authorizes requests for that branch and its descendants.
-- **Streaming** — Verify streaming and event handling for the selected endpoint/model.
+- **One API for all models**; Frontier and open-source models behind a single endpoint, addressed by their catalog ID (e.g. `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-2-5-flash`).
+- **Standard SDKs, one URL change**; OpenAI SDK and AI SDK (OpenAI-compatible MLflow/Responses routes), Anthropic SDK (native Messages), google-genai (native Gemini).
+- **Branch-scoped**; Each branch gets its own gateway host; the Neon credential authorizes requests for that branch and its descendants.
+- **Streaming**; Verify streaming and event handling for the selected endpoint/model.
 
 ## Setup
 
@@ -55,7 +55,7 @@ neon deploy   # provisions the gateway on the linked branch
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
-The `preview.aiGateway` toggle above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares the gateway alongside every other branch service, in version control (see the `neon` skill for the full reference). Reconcile it against a branch the Terraform way:
+The `preview.aiGateway` toggle above is part of `neon.ts`, Neon's infrastructure-as-code file; one TypeScript file declares the gateway alongside every other branch service, in version control (see the `neon` skill for the full reference). Reconcile it against a branch the Terraform way:
 
 ```bash
 neon config status   # print the branch's live config (is the gateway on?)
@@ -63,9 +63,9 @@ neon config plan     # dry-run diff of what apply would change
 neon config apply    # enable the gateway on the branch  (neon deploy is an alias)
 ```
 
-The gateway is **branch-scoped**: each branch gets its own gateway host. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the gateway already enabled. Checking out an _existing_ branch doesn't reconcile it — run `neon deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's gateway credentials into your local `.env.local`, so local runs hit the same branch gateway as the deployed function (no manual `env pull` needed).
+The gateway is **branch-scoped**: each branch gets its own gateway host. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the gateway already enabled. Checking out an _existing_ branch doesn't reconcile it; run `neon deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's gateway credentials into your local `.env.local`, so local runs hit the same branch gateway as the deployed function (no manual `env pull` needed).
 
-For typed, validated access to the injected credentials, pass the same config object to `parseEnv` from `@neon/env` — it returns an `env.aiGateway` namespace (`apiKey`, `baseUrl`) derived from your `neon.ts`.
+For typed, validated access to the injected credentials, pass the same config object to `parseEnv` from `@neon/env`; it returns an `env.aiGateway` namespace (`apiKey`, `baseUrl`) derived from your `neon.ts`.
 
 ## Environment variables
 
@@ -109,7 +109,7 @@ const { text } = await generateText({
 });
 ```
 
-To build an **agent** — a model that calls tools in a loop and then answers — add `tools` and a `stopWhen` budget. The loop runs in-process, but still needs request deadlines, cancellation, concurrency and cost limits:
+To build an **agent**; a model that calls tools in a loop and then answers; add `tools` and a `stopWhen` budget. The loop runs in-process, but still needs request deadlines, cancellation, concurrency and cost limits:
 
 ```typescript
 import { neon } from "@neon/ai-sdk-provider";
@@ -134,7 +134,7 @@ For a full AI SDK agent deployed as a Neon Function (streaming, tool calling, im
 
 ## Build agents with Mastra (recommended)
 
-[Mastra](https://mastra.ai) is the recommended framework when you want batteries-included agents — built-in memory, tools, workflows, and tracing — with the model still pointed at the gateway. A memory-backed agent (threads/messages in Postgres via `@mastra/pg`) running as a Neon Function reads `env.aiGateway` from `parseEnv` and uses the **chat-completions** (MLflow) dialect:
+[Mastra](https://mastra.ai) is the recommended framework when you want batteries-included agents; built-in memory, tools, workflows, and tracing; with the model still pointed at the gateway. A memory-backed agent (threads/messages in Postgres via `@mastra/pg`) running as a Neon Function reads `env.aiGateway` from `parseEnv` and uses the **chat-completions** (MLflow) dialect:
 
 ```typescript
 import { Agent } from "@mastra/core/agent";
@@ -160,7 +160,7 @@ export const personalAssistant = new Agent({
 
 ## Use with plain SDKs (lower-level)
 
-When you don't need an agent framework — a single completion, an existing provider-SDK integration, or native provider features — call the gateway with the plain SDKs. Use an explicit gateway token and dialect; do not accidentally fall back to a direct provider credential:
+When you don't need an agent framework; a single completion, an existing provider-SDK integration, or native provider features; call the gateway with the plain SDKs. Use an explicit gateway token and dialect; do not accidentally fall back to a direct provider credential:
 
 ```typescript
 import OpenAI from "openai";
@@ -187,13 +187,13 @@ const res = await client.chat.completions.create({
 });
 ```
 
-The Anthropic SDK and google-genai work the same way for native provider features — point them at the `/anthropic` and `/gemini` routes on the bare gateway host (`${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`, `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini`).
+The Anthropic SDK and google-genai work the same way for native provider features; point them at the `/anthropic` and `/gemini` routes on the bare gateway host (`${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`, `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini`).
 
 ## Model identifiers
 
-Use a model's catalog ID directly in the `model` field — e.g. `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-2-5-flash`. No provider prefix is needed. To look up the exact identifiers the gateway serves, which underlying model each maps to, and their context windows, pricing, and capabilities, use any of:
+Use a model's catalog ID directly in the `model` field; e.g. `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-2-5-flash`. No provider prefix is needed. To look up the exact identifiers the gateway serves, which underlying model each maps to, and their context windows, pricing, and capabilities, use any of:
 
-- **models.dev Neon provider page: https://models.dev/providers/neon** — the external catalog; cross-check against the gateway model list and official docs of the Neon provider's model IDs and their underlying models. The machine-readable catalog is at https://models.dev/api.json (the `neon` key).
+- **models.dev Neon provider page: https://models.dev/providers/neon**; the external catalog; cross-check against the gateway model list and official docs of the Neon provider's model IDs and their underlying models. The machine-readable catalog is at https://models.dev/api.json (the `neon` key).
 - **Models doc:** see Further reading.
 
 ## Availability

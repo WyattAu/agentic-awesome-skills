@@ -10,7 +10,7 @@ tags: [memory, context, rag, summarization, compression, long-context, agent-inf
 tools: [claude, cursor, codex, gemini, copilot, windsurf, antigravity, grok]
 ---
 
-# RecallMax — Conversation Handoff
+# RecallMax: Conversation Handoff
 
 ## Scope
 

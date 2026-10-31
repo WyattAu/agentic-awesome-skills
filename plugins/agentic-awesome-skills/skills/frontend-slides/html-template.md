@@ -21,7 +21,7 @@ Reference architecture, with controller methods and editor implementation intent
            Change these to change the whole look
            =========================================== */
         :root {
-            /* Colors — from chosen style preset */
+            /* Colors; from chosen style preset */
             --bg-primary: #0a0f1c;
             --bg-secondary: #111827;
             --text-primary: #ffffff;
@@ -29,14 +29,14 @@ Reference architecture, with controller methods and editor implementation intent
             --accent: #00ffcc;
             --accent-glow: rgba(0, 255, 204, 0.3);
 
-            /* Typography — MUST use clamp() */
+            /* Typography; MUST use clamp() */
             --font-display: 'Clash Display', sans-serif;
             --font-body: 'Satoshi', sans-serif;
             --title-size: clamp(2rem, 6vw, 5rem);
             --subtitle-size: clamp(0.875rem, 2vw, 1.25rem);
             --body-size: clamp(0.75rem, 1.2vw, 1rem);
 
-            /* Spacing — MUST use clamp() */
+            /* Spacing; MUST use clamp() */
             --slide-padding: clamp(1.5rem, 4vw, 4rem);
             --content-gap: clamp(1rem, 2vw, 2rem);
 
@@ -146,14 +146,14 @@ Reference architecture, with controller methods and editor implementation intent
 
 Every presentation must include:
 
-1. **SlidePresentation Class** — Main controller with:
+1. **SlidePresentation Class**; Main controller with:
    - Keyboard navigation (arrows, space, page up/down)
    - Touch/swipe support
    - Mouse wheel navigation
    - Progress bar updates
    - Navigation dots
 
-2. **Intersection Observer** — For scroll-triggered animations:
+2. **Intersection Observer**; For scroll-triggered animations:
    - Add `.visible` class when slides enter viewport
    - Trigger CSS transitions efficiently
 
@@ -165,7 +165,7 @@ Every presentation must include:
    - Magnetic buttons
    - Counter animations
 
-4. **Inline Editing** (only if user opted in during Phase 1 — skip entirely if they said No):
+4. **Inline Editing** (only if user opted in during Phase 1; skip entirely if they said No):
    - Edit toggle button (hidden by default, revealed via hover hotzone or `E` key)
    - Auto-save to localStorage
    - Export/save file functionality

@@ -96,9 +96,9 @@ Do not infer blanket macOS unavailability from this older HIG summary: AppShortc
 
 [SiriKit](https://developer.apple.com/documentation/SiriKit)
 
-[Making actions and content discoverable and widely available](https://developer.apple.com/documentation/AppIntents/Making-actions-and-content-discoverable-and-widely-available) — App Intents
+[Making actions and content discoverable and widely available](https://developer.apple.com/documentation/AppIntents/Making-actions-and-content-discoverable-and-widely-available); App Intents
 
-[Integrating custom data types into your intents](https://developer.apple.com/documentation/AppIntents/Integrating-custom-types-into-your-intents) — App Intents
+[Integrating custom data types into your intents](https://developer.apple.com/documentation/AppIntents/Integrating-custom-types-into-your-intents); App Intents
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/app-shortcuts#Videos)
 

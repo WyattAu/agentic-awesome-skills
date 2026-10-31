@@ -37,7 +37,7 @@ The Lost in the Middle paper reports position-sensitive performance on its evalu
 Models allocate massive attention to the first token (often the BOS token) to stabilize internal states. This creates an "attention sink" that soaks up attention budget. As context grows, the limited budget is stretched thinner, and middle tokens fail to garner sufficient attention weight for reliable retrieval.
 
 **Practical Implications**
-Design context placement with attention patterns in mind. Place critical information at the beginning or end of context. Consider whether information will be queried directly or needs to support reasoning—if the latter, placement matters less but overall signal quality matters more.
+Design context placement with attention patterns in mind. Place critical information at the beginning or end of context. Consider whether information will be queried directly or needs to support reasoning-if the latter, placement matters less but overall signal quality matters more.
 
 For long documents or conversations, use summary structures that surface key information at attention-favored positions. Use explicit section headers and transitions to help models navigate structure.
 
@@ -60,7 +60,7 @@ Recovery requires removing or replacing poisoned content. This may involve trunc
 Context distraction emerges when context grows so long that models over-focus on provided information at the expense of their training knowledge. The model attends to everything in context regardless of relevance, and this creates pressure to use provided information even when internal knowledge is more accurate.
 
 **The Distractor Effect**
-Research shows that even a single irrelevant document in context reduces performance on tasks involving relevant documents. Multiple distractors compound degradation. The effect is not about noise in absolute terms but about attention allocation—irrelevant information competes with relevant information for limited attention budget.
+Research shows that even a single irrelevant document in context reduces performance on tasks involving relevant documents. Multiple distractors compound degradation. The effect is not about noise in absolute terms but about attention allocation-irrelevant information competes with relevant information for limited attention budget.
 
 Irrelevant tokens can interfere with retrieval and reasoning, but the extent depends on architecture and inference implementation; do not infer a mandatory equal allocation of attention to every token.
 
@@ -69,7 +69,7 @@ Mitigate distraction through careful curation of what enters context. Apply rele
 
 ### Context Confusion
 
-Context confusion arises when irrelevant information influences responses in ways that degrade quality. This is related to distraction but distinct—confusion concerns the influence of context on model behavior rather than attention allocation.
+Context confusion arises when irrelevant information influences responses in ways that degrade quality. This is related to distraction but distinct-confusion concerns the influence of context on model behavior rather than attention allocation.
 
 If you put something in context, the model has to pay attention to it. The model may incorporate irrelevant information, use inappropriate tool definitions, or apply constraints that came from different contexts. Confusion is especially problematic when context contains multiple task types or when switching between tasks within a single session.
 
@@ -81,7 +81,7 @@ Architectural solutions include explicit task segmentation where different tasks
 
 ### Context Clash
 
-Context clash develops when accumulated information directly conflicts, creating contradictory guidance that derails reasoning. This differs from poisoning where one piece of information is incorrect—in clash, multiple correct pieces of information contradict each other.
+Context clash develops when accumulated information directly conflicts, creating contradictory guidance that derails reasoning. This differs from poisoning where one piece of information is incorrect-in clash, multiple correct pieces of information contradict each other.
 
 **Sources of Clash**
 Clash commonly arises from multi-source retrieval where different sources have contradictory information, version conflicts where outdated and current information both appear in context, and perspective conflicts where different viewpoints are valid but incompatible.

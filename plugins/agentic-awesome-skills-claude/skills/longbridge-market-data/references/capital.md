@@ -4,14 +4,14 @@ Today's capital flow time-series and order-size distribution for a single securi
 
 ## Subcommands
 
-> A single `capital` command handles both modes — distribution snapshot (default) and time-series (`--flow`). Run `longbridge capital --help` to confirm.
+> A single `capital` command handles both modes; distribution snapshot (default) and time-series (`--flow`). Run `longbridge capital --help` to confirm.
 
 | CLI command                                        | Returns                                                                                |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `longbridge capital <SYMBOL> --format json`        | Cross-section snapshot: large / medium / small / super-large order buy & sell amounts. |
 | `longbridge capital <SYMBOL> --flow --format json` | Today's main-capital net inflow / outflow time series.                                 |
 
-**Single symbol per call.** Today's data only — no historical range.
+**Single symbol per call.** Today's data only; no historical range.
 
 ## Workflow
 

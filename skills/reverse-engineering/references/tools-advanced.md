@@ -64,15 +64,15 @@ readelf -S binary | grep ".vmp"
 ### Approach
 
 ```text
-1. Identify VM entry points — look for pushad/pushaq-like sequences
-2. Find the handler table — large indirect jump (jmp [reg + offset])
-3. Trace handler execution — each handler ends with jump to next
+1. Identify VM entry points; look for pushad/pushaq-like sequences
+2. Find the handler table; large indirect jump (jmp [reg + offset])
+3. Trace handler execution; each handler ends with jump to next
 4. Identify handlers:
    - vAdd, vSub, vMul, vXor, vNot (arithmetic)
    - vPush, vPop (stack operations)
    - vLoad, vStore (memory access)
    - vJmp, vJcc (control flow)
-   - vRet (VM exit — restores real registers)
+   - vRet (VM exit; restores real registers)
 5. Build disassembler for VM bytecode
 6. Simplify / deobfuscate the lifted IL
 ```
@@ -127,7 +127,7 @@ Similar to VMProtect but with additional anti-debug layers.
 # x64dbg workflow for Themida:
 1. Load binary
 2. Enable ScyllaHide → Profile: Themida
-3. Run to OEP (Original Entry Point) — may need several attempts
+3. Run to OEP (Original Entry Point); may need several attempts
 4. Dump with Scylla: OEP → IAT Autosearch → Get Imports → Dump
 5. Fix dump: Scylla → Fix Dump
 6. Analyze fixed dump in Ghidra/IDA
@@ -148,7 +148,7 @@ Critical for patch analysis, 1-day exploit development, and CTF challenges that 
 
 # Command line diffing
 bindiff primary.BinExport secondary.BinExport
-# Opens in BinDiff GUI — shows matched/unmatched functions
+# Opens in BinDiff GUI: shows matched/unmatched functions
 ```
 
 **Key metrics:**
@@ -176,7 +176,7 @@ Free, open-source alternative to BinDiff, runs as IDA plugin.
 
 > OLLVM 脱密的完整工作流、变种生态和社区工具调研见 [ollvm-deobfuscation.md](ollvm-deobfuscation.md)。
 
-### d810-ng (IDA) — 本地首选
+### d810-ng (IDA): 本地首选
 
 D-810 的现代维护版（Next Generation），集成 **Z3 SMT** 求解器，覆盖 OLLVM / Tigress / Hodur(PlugX) / Approov 多种变种。
 
@@ -198,7 +198,7 @@ Installation: clone → 复制到 IDA plugins 目录 → Ctrl-Shift-D 加载
 Source: https://github.com/w00tzenheimer/d810-ng
 ```
 
-### obpo-plugin (IDA) — 效果最强，云插件
+### obpo-plugin (IDA): 效果最强，云插件
 
 基于 Hex-Rays **microcode** + 数据流跟踪 + 程序切片 + 混合执行（concolic）。社区公认效果最强之一。
 
@@ -211,7 +211,7 @@ Source: https://github.com/w00tzenheimer/d810-ng
 Source: https://github.com/obpo-project/obpo-plugin
 ```
 
-### ollvm-unflattener — Miasm 纯脚本
+### ollvm-unflattener: Miasm 纯脚本
 
 无 IDA 依赖，基于 Miasm 符号执行，BFS 多层处理，支持 x86/x64 Win/Linux。
 
@@ -225,11 +225,11 @@ python unflattener -i <input> -o <output> -t <func_addr> -a   # -a 自动多层
 
 Binary Ninja 去平坦化，仓库自带 Android 加固样本 `libvdog.so` 实战。Source: amimo/ollvm-breaker
 
-### DeObfBR — BR 混淆专项
+### DeObfBR: BR 混淆专项
 
 专门去除 Goron/Arkari 风格的 BR（间接分支）混淆。简易技巧：设置数据段只读可部分对抗。Source: Mrack/DeObfBR
 
-### deollvm — ARM64 Unicorn
+### deollvm: ARM64 Unicorn
 
 无 IDA 时处理 ARM64 .so 的备选，基于 Unicorn。Source: GeT1t/deollvm
 
@@ -359,7 +359,7 @@ while pc:
 | API | C++ / Python | Python |
 | Best for | Single-path deobfuscation, taint tracking | Multi-path exploration |
 
-**Key use:** Triton excels at deobfuscation — run the program concretely, but track symbolic state, then simplify the collected constraints.
+**Key use:** Triton excels at deobfuscation; run the program concretely, but track symbolic state, then simplify the collected constraints.
 
 ---
 
@@ -533,7 +533,7 @@ def bruteforce_flag(check_addr, success_addr, fail_addr, flag_len):
 ### Watchpoints
 
 ```bash
-# Hardware watchpoint — break when memory changes
+# Hardware watchpoint: break when memory changes
 (gdb) watch *(int*)0x601050        # Break on write to address
 (gdb) rwatch *(int*)0x601050       # Break on read
 (gdb) awatch *(int*)0x601050       # Break on read or write
@@ -599,7 +599,7 @@ gef> pattern create 100   # De Bruijn pattern
 ## Advanced Ghidra Scripting
 
 ```python
-# Ghidra Python (Jython) — run via Script Manager or headless
+# Ghidra Python (Jython): run via Script Manager or headless
 
 # Batch rename functions matching a pattern
 from ghidra.program.model.symbol import SourceType
@@ -744,7 +744,7 @@ class CmpLogger(gdb.Breakpoint):
 
 ## GDB Position-Encoded Input with Zero Flag Monitoring (EKOPARTY 2017)
 
-Send input where `input[i] = i` (position-encoded). Single-step through the binary monitoring the CPU zero flag (ZF). When ZF is set at a comparison involving a specific position's value, the comparison matched — log the expected value for that position.
+Send input where `input[i] = i` (position-encoded). Single-step through the binary monitoring the CPU zero flag (ZF). When ZF is set at a comparison involving a specific position's value, the comparison matched; log the expected value for that position.
 
 ```python
 import gdb
@@ -779,7 +779,7 @@ A binary has execute-only permissions (mode `--x`, no read bit). The file cannot
 LD_PRELOAD a shared library with a constructor that runs inside the process and reads its own memory via `/proc/self/mem`:
 
 ```c
-// dump_xo.c — compile: gcc -shared -fPIC -o dump_xo.so dump_xo.c
+// dump_xo.c; compile: gcc -shared -fPIC -o dump_xo.so dump_xo.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

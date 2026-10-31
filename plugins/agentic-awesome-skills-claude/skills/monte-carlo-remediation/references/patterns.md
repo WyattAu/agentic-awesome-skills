@@ -2,7 +2,7 @@
 
 # Remediation Patterns
 
-Common data quality issue patterns with example remediation workflows. These are illustrative examples for reasoning — not rigid step-by-step procedures. Real incidents often combine multiple patterns or present unique variations. Use these as a starting point, then adapt based on the specific TSA findings and available tools.
+Common data quality issue patterns with example remediation workflows. These are illustrative examples for reasoning; not rigid step-by-step procedures. Real incidents often combine multiple patterns or present unique variations. Use these as a starting point, then adapt based on the specific TSA findings and available tools.
 
 ---
 
@@ -23,13 +23,13 @@ Stale data usually means the pipeline that feeds this table has either failed or
 
 ### Investigation steps
 
-1. Check upstream lineage — is the source table also stale?
+1. Check upstream lineage; is the source table also stale?
    ```
    getAssetLineage(mcons=["<table_mcon>"], direction="UPSTREAM")
    getTable(mcon="<upstream_mcon>")  # check freshness
    ```
 
-2. Check recent write queries — what pipeline usually updates this table?
+2. Check recent write queries; what pipeline usually updates this table?
    ```
    getQueriesForTable(mcon="<table_mcon>", query_type="destination", limit=5)
    ```
@@ -60,8 +60,8 @@ Stale data usually means the pipeline that feeds this table has either failed or
 
 After triggering the pipeline:
 - Wait for the job to complete (check status via the orchestrator MCP)
-- Re-check table freshness: `getTable(mcon="<table_mcon>")` — has `last_updated_on` moved forward?
-- Re-check the alert: `getAlerts(alert_ids=["<alert_id>"])` — has it resolved?
+- Re-check table freshness: `getTable(mcon="<table_mcon>")`; has `last_updated_on` moved forward?
+- Re-check the alert: `getAlerts(alert_ids=["<alert_id>"])`; has it resolved?
 
 ---
 
@@ -72,7 +72,7 @@ After triggering the pipeline:
 - "dbt run failed with error..."
 - "Compilation error in model..."
 - "Database error during model execution"
-- "Dependency failed — upstream model did not complete"
+- "Dependency failed; upstream model did not complete"
 
 ### Reasoning
 
@@ -80,14 +80,14 @@ dbt failures can be compilation errors (code issues), database errors (permissio
 
 ### Investigation steps
 
-1. Read the TSA `full_response` carefully — it often contains the actual dbt error message.
+1. Read the TSA `full_response` carefully; it often contains the actual dbt error message.
 
 2. Check if the issue is the table itself or an upstream dependency:
    ```
    getAssetLineage(mcons=["<table_mcon>"], direction="UPSTREAM")
    ```
 
-3. If upstream models also have alerts, the root cause is likely further upstream — remediate that first.
+3. If upstream models also have alerts, the root cause is likely further upstream; remediate that first.
 
 ### Remediation by available tools
 
@@ -109,7 +109,7 @@ dbt failures can be compilation errors (code issues), database errors (permissio
 ### Verification
 
 - Check dbt job status via dbt Cloud MCP (if available)
-- Re-check table: `getTable(mcon="<table_mcon>")` — has the model been rebuilt?
+- Re-check table: `getTable(mcon="<table_mcon>")`; has the model been rebuilt?
 - Verify downstream tables are also refreshing
 
 ---
@@ -133,7 +133,7 @@ Schema changes can be intentional (upstream team made a planned change) or accid
    getTable(mcon="<table_mcon>", include_fields=true)
    ```
 
-2. Check blast radius — who consumes this table?
+2. Check blast radius; who consumes this table?
    ```
    getAssetLineage(mcons=["<table_mcon>"], direction="DOWNSTREAM")
    ```
@@ -254,7 +254,7 @@ Volume anomalies can indicate: data loss (rows missing), data duplication (rows 
 
 ### Reasoning
 
-Not every issue has a clear, automatable fix. When the root cause is unclear or complex, the best approach is to present full context to the user and ask for direction — not guess at a fix.
+Not every issue has a clear, automatable fix. When the root cause is unclear or complex, the best approach is to present full context to the user and ask for direction; not guess at a fix.
 
 ### Context package
 

@@ -10,7 +10,7 @@ GitHub Actions runners, caches, and artifacts form the infrastructure layer of C
 
 ### Persistence Between Jobs
 
-GitHub-hosted runners are ephemeral — each job gets a fresh VM that's destroyed after use. Self-hosted runners are **persistent** — files, processes, and credentials from one job remain available to the next.
+GitHub-hosted runners are ephemeral; each job gets a fresh VM that's destroyed after use. Self-hosted runners are **persistent**; files, processes, and credentials from one job remain available to the next.
 
 ```yaml
 # DANGEROUS: Self-hosted runner with pull_request trigger
@@ -96,7 +96,7 @@ A normal `pull_request` cache is scoped to its merge ref; matching its key does 
 `actions/upload-artifact` and `actions/download-artifact` pass data between workflows. If an untrusted workflow uploads an artifact, a trusted workflow that downloads it may execute poisoned content.
 
 ```yaml
-# Workflow 1: Build (on pull_request — fork code)
+# Workflow 1: Build (on pull_request: fork code)
 on: pull_request
 steps:
   - uses: actions/checkout@v4
@@ -106,7 +106,7 @@ steps:
       name: build-output
       path: dist/  # Fork code controls what's in dist/
 
-# Workflow 2: Deploy (on workflow_run — trusted)
+# Workflow 2: Deploy (on workflow_run: trusted)
 on:
   workflow_run:
     workflows: [Build]

@@ -1,4 +1,4 @@
-# AI Studio Image — Guia Avancado de Prompt Engineering
+# AI Studio Image: Guia Avancado de Prompt Engineering
 
 ## Principio Fundamental (da Google)
 
@@ -124,7 +124,7 @@ slightly pushed-up sleeves. Her hair is naturally styled, not perfect.
 Background shows blurred cafe interior with other customers. Taken with a
 smartphone camera, natural depth of field, no professional lighting or flash.
 Real skin texture visible, subtle freckles. The image feels warm, authentic,
-and completely unposed — like a friend snapped this photo across the table.
+and completely unposed; like a friend snapped this photo across the table.
 ```
 
 ## Erros Comuns a Evitar
@@ -153,7 +153,7 @@ Envie ate 14 imagens de referencia:
 - 5 para pessoas (consistencia de personagem)
 
 ### Thinking Mode (Gemini Pro)
-O modelo "pensa" antes de gerar — cria composicoes intermediarias
+O modelo "pensa" antes de gerar; cria composicoes intermediarias
 para refinar o resultado final. Ideal para cenas complexas.
 
 ### Search Grounding (Gemini Pro)

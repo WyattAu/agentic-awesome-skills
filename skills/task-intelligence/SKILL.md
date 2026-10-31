@@ -1,6 +1,6 @@
 ---
 name: task-intelligence
-description: "Protocolo de Inteligência Pré-Tarefa — planeja a tarefa e consulta apenas agentes disponíveis, relevantes e autorizados quando o benefício justificar o custo."
+description: "Protocolo de Inteligência Pré-Tarefa; planeja a tarefa e consulta apenas agentes disponíveis, relevantes e autorizados quando o benefício justificar o custo."
 risk: critical
 source: community
 date_added: '2026-03-06'
@@ -18,11 +18,11 @@ tools:
 - codex-cli
 ---
 
-# Task Intelligence — Protocolo de Amplificação Pré-Tarefa
+# Task Intelligence: Protocolo de Amplificação Pré-Tarefa
 
 ## Overview
 
-Protocolo de Inteligência Pré-Tarefa — planeja a tarefa e consulta apenas agentes disponíveis, relevantes e autorizados quando o benefício justificar o custo. Enriquece o contexto com análise paralela multi-agente, produz estimativa real de tempo (início→fim), mapeia problemas prováveis e improvável, e formula um plano de execução antecipado com estratégias de contingência.
+Protocolo de Inteligência Pré-Tarefa; planeja a tarefa e consulta apenas agentes disponíveis, relevantes e autorizados quando o benefício justificar o custo. Enriquece o contexto com análise paralela multi-agente, produz estimativa real de tempo (início→fim), mapeia problemas prováveis e improvável, e formula um plano de execução antecipado com estratégias de contingência.
 
 ## When to Use This Skill
 
@@ -43,7 +43,7 @@ Protocolo de Inteligência Pré-Tarefa — planeja a tarefa e consulta apenas ag
 
 Antes de qualquer execução, este agente realiza um **briefing inteligente completo**:
 
-1. **Seleciona consultas limitadas e autorizadas** — cada um analisa a tarefa pela sua ótica
+1. **Seleciona consultas limitadas e autorizadas**; cada um analisa a tarefa pela sua ótica
 2. **Sintetiza o conhecimento coletivo** em um plano unificado
 3. **Estima tempo real** do início ao fim (com breakdown por etapa)
 4. **Mapeia problemas prováveis** e os resolve antecipadamente
@@ -54,7 +54,7 @@ A análise pode reduzir retrabalho, mas também custa tempo/tokens; não há gan
 
 ---
 
-## Fase 1 — Classificação Da Tarefa (5-10 Segundos)
+## Fase 1: Classificação Da Tarefa (5-10 Segundos)
 
 Antes de qualquer coisa, classifique a tarefa em uma das categorias:
 
@@ -70,7 +70,7 @@ Para **Moderada**, **Complexa** e **Crítica**, execute o protocolo completo aba
 
 ---
 
-## Fase 2 — Scan E Match Paralelo
+## Fase 2: Scan E Match Paralelo
 
 Os scripts `agent-orchestrator/scripts/scan_registry.py`, `match_skills.py`, `orchestrate.py` e `scripts/pre_task_check.py` não estão incluídos. Não execute arquivos homônimos de outro projeto nem invente resultados. Use a descoberta real do host e instruções do projeto; sem orquestrador disponível, faça um briefing local claramente identificado. Dependências entre scan/match exigem sequência, não leitura concorrente de um registry que está sendo alterado.
 
@@ -78,7 +78,7 @@ Subagentes só quando autorizados pelo usuário/host, com escopo e orçamento; n
 
 ---
 
-## Fase 3 — Briefing Dos Agentes Especializados
+## Fase 3: Briefing Dos Agentes Especializados
 
 Para cada agente relevante identificado no match, faça uma pergunta direcionada:
 
@@ -92,16 +92,16 @@ Para cada agente relevante identificado no match, faça uma pergunta direcionada
 - **advogado-especialista/criminal (Legal)**: "Há implicações legais, LGPD, ou riscos regulatórios?"
 - **leiloeiro-ia (Leilões)**: "Esta tarefa envolve dados ou lógica do domínio de leilões?"
 
-Não consulte todos os agentes cegamente — escolha os **3-5 mais relevantes** para a tarefa.
+Não consulte todos os agentes cegamente; escolha os **3-5 mais relevantes** para a tarefa.
 
 ---
 
-## Fase 4 — Estimativa De Tempo Real
+## Fase 4: Estimativa De Tempo Real
 
 Construa um breakdown de tempo honesto com base na complexidade real:
 
 ```
-ESTIMATIVA DE TEMPO — [Nome da Tarefa]
+ESTIMATIVA DE TEMPO; [Nome da Tarefa]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Etapa 1: [nome]          ~X min   [motivo do tempo]
 Etapa 2: [nome]          ~X min   [motivo do tempo]
@@ -109,18 +109,18 @@ Etapa 3: [nome]          ~X min   [motivo do tempo]
 Contingência (problemas) +X min   [buffer para imprevistos típicos]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 TOTAL ESTIMADO:          ~X min
-Confiança: Alta/Média/Baixa — [justificativa]
+Confiança: Alta/Média/Baixa; [justificativa]
 ```
 
 **Regras de estimativa honesta:**
-- Nunca subestime para agradar — o usuário precisa saber o tempo real
+- Nunca subestime para agradar; o usuário precisa saber o tempo real
 - Considere um buffer justificado por dependências e incerteza; 20-30% é apenas exemplo para problemas típicos
 - Se a confiança for Baixa, explique por quê e o que aumentaria ela
 - Diferencie "tempo de execução do agente" vs "tempo de espera do usuário"
 
 ---
 
-## Fase 5 — Mapa De Problemas (Antecipação Proativa)
+## Fase 5: Mapa De Problemas (Antecipação Proativa)
 
 Pense em TRÊS camadas de problemas:
 
@@ -147,7 +147,7 @@ Estratégia: backup preventivo, confirmação explícita, rollback plan.
 **Template de mapa de problemas:**
 
 ```
-MAPA DE PROBLEMAS — [Nome da Tarefa]
+MAPA DE PROBLEMAS; [Nome da Tarefa]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 PROVÁVEIS (resolver antes de começar):
   ⚠ [problema] → [solução preventiva aplicada agora]
@@ -163,12 +163,12 @@ CRÍTICOS (baixa prob, alto impacto):
 
 ---
 
-## Fase 6 — Plano De Execução Enriquecido
+## Fase 6: Plano De Execução Enriquecido
 
 Depois de coletar análises dos agentes + estimativas + mapa de problemas, produza:
 
 ```
-BRIEFING PRÉ-EXECUÇÃO — [Nome da Tarefa]
+BRIEFING PRÉ-EXECUÇÃO; [Nome da Tarefa]
 ════════════════════════════════════════════
 CONTEXTO COLETADO:
   • [insight do agente 1]
@@ -176,9 +176,9 @@ CONTEXTO COLETADO:
   • [insight do agente 3]
 
 PLANO DE EXECUÇÃO:
-  1. [etapa] (~Xmin) — [por quê esta ordem]
-  2. [etapa] (~Xmin) — [dependência da anterior]
-  3. [etapa] (~Xmin) — [verificação de qualidade]
+  1. [etapa] (~Xmin); [por quê esta ordem]
+  2. [etapa] (~Xmin); [dependência da anterior]
+  3. [etapa] (~Xmin); [verificação de qualidade]
 
 TEMPO TOTAL: ~Xmin | CONFIANÇA: Alta/Média/Baixa
 
@@ -200,7 +200,7 @@ ROLLBACK PLAN (se algo der errado):
 
 ## Integração Com O Ecossistema
 
-Este agente **complementa** o agent-orchestrator — não substitui:
+Este agente **complementa** o agent-orchestrator; não substitui:
 
 - **agent-orchestrator**: identifica QUAIS skills usar (routing)
 - **task-intelligence**: enriquece COMO usar + quando + com que riscos (briefing)
@@ -216,15 +216,15 @@ Integre apenas quando o orquestrador realmente existir e as instruções locais 
 - Iterações simples dentro de uma tarefa já planejada
 - Quando o usuário pede "só responde rápido" / "vibe comigo"
 
-O objetivo não é burocracia — é inteligência a serviço da velocidade real.
+O objetivo não é burocracia; é inteligência a serviço da velocidade real.
 
 ---
 
 ## Referências
 
-- `references/problem-catalog.md` — Catálogo de problemas típicos por domínio
-- `references/time-patterns.md` — Padrões históricos de tempo por tipo de tarefa
-- `scripts/pre_task_check.py` — referência upstream ausente, não executável neste pacote
+- `references/problem-catalog.md`; Catálogo de problemas típicos por domínio
+- `references/time-patterns.md`; Padrões históricos de tempo por tipo de tarefa
+- `scripts/pre_task_check.py`; referência upstream ausente, não executável neste pacote
 
 ---
 
@@ -235,25 +235,24 @@ Os agentes, consultas, tempos e verificações abaixo são exemplos de formato; 
 **Tarefa do usuário:** "Crie uma skill para integração com Stripe"
 
 ```
-BRIEFING PRÉ-EXECUÇÃO — Skill: stripe-integration
+BRIEFING PRÉ-EXECUÇÃO; Skill: stripe-integration
 ════════════════════════════════════════════════════
 
 CONTEXTO COLETADO (3 agentes consultados):
-  • 007: CRÍTICO — API keys do Stripe NÃO devem ir para SKILL.md ou git.
+  • 007: CRÍTICO; API keys do Stripe NÃO devem ir para SKILL.md ou git.
     Usar segredo protegido; validar assinatura pelo SDK oficial e contrato Stripe.
-  • skill-sentinel: whatsapp-cloud-api já implementa padrão HMAC-SHA256 para webhooks
-    — comparar contratos, sem assumir equivalência. Estrutura hipotética:: config.py + client.py + SKILL.md.
+  • skill-sentinel: whatsapp-cloud-api já implementa padrão HMAC-SHA256 para webhooks: comparar contratos, sem assumir equivalência. Estrutura hipotética:: config.py + client.py + SKILL.md.
   • agent-orchestrator: 3 skills similares (whatsapp, telegram, instagram) como referência
     de arquitetura. Nenhuma conflita com Stripe.
 
 PLANO DE EXECUÇÃO:
-  1. Criar estrutura de diretórios (~2min) — base para os demais arquivos
-  2. Escrever SKILL.md com workflow (~5min) — define comportamento do agente
-  3. Criar config.py com variáveis de ambiente (~3min) — sem hardcode de keys
-  4. Criar stripe_client.py com autenticação (~10min) — métodos principais
-  5. Criar webhook_handler.py com HMAC-SHA256 (~5min) — implementar o contrato específico de assinatura Stripe
-  6. Instalar via skill-installer (~2min) — validação + registro
-  7. Gerar ZIP (~1min) — para backup/upload manual
+  1. Criar estrutura de diretórios (~2min); base para os demais arquivos
+  2. Escrever SKILL.md com workflow (~5min); define comportamento do agente
+  3. Criar config.py com variáveis de ambiente (~3min); sem hardcode de keys
+  4. Criar stripe_client.py com autenticação (~10min); métodos principais
+  5. Criar webhook_handler.py com HMAC-SHA256 (~5min); implementar o contrato específico de assinatura Stripe
+  6. Instalar via skill-installer (~2min); validação + registro
+  7. Gerar ZIP (~1min); para backup/upload manual
 
 TEMPO TOTAL: ~28min | CONFIANÇA: Alta
 (estrutura clara, dependências conhecidas, sem APIs externas incertas)

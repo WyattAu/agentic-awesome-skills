@@ -1,6 +1,6 @@
 # Anti-Sycophancy
 
-A skill for OpenCode that detects and eliminates sycophantic patterns in AI responses. Sycophancy is when an AI prioritises affirming a user's stated or implied beliefs over epistemic integrity — an RLHF structural artifact, not an attitude problem.
+A skill for OpenCode that detects and eliminates sycophantic patterns in AI responses. Sycophancy is when an AI prioritises affirming a user's stated or implied beliefs over epistemic integrity; an RLHF structural artifact, not an attitude problem.
 
 ## Installation
 
@@ -60,7 +60,7 @@ With the anti-sycophancy skill active, review this architecture:
 No pattern matching. A single procedural discipline applied to every response:
 
 1. **Extract** the user's core claim from their framing. State it stripped of premises.
-2. **Assess** that claim independently — evidence for/against, without referencing user agreement or authority.
+2. **Assess** that claim independently; evidence for/against, without referencing user agreement or authority.
 3. **Conclude** based solely on step 2.
 4. **Respond** with the conclusion first, evidence second.
 

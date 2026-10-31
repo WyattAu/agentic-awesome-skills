@@ -16,7 +16,7 @@ Numeric improvements, customer counts, deadlines and guarantees in the examples 
 
 ## Core Philosophy
 
-Good copy editing isn't about rewriting—it's about enhancing. Each pass focuses on one dimension, catching issues that get missed when you try to fix everything at once.
+Good copy editing isn't about rewriting-it's about enhancing. Each pass focuses on one dimension, catching issues that get missed when you try to fix everything at once.
 
 **Key principles:**
 - Don't change the core message; focus on enhancing it
@@ -49,7 +49,7 @@ Edit copy through seven sequential passes, each focusing on one dimension. After
 
 **Process:**
 1. Read through quickly, highlighting unclear parts
-2. Don't correct yet—just note problem areas
+2. Don't correct yet-just note problem areas
 3. After marking issues, recommend specific edits
 4. Verify edits maintain the original intent
 
@@ -98,7 +98,7 @@ For every statement, ask "Okay, so what?" If the copy doesn't answer that questi
 
 ❌ "Our platform uses AI-powered analytics"
 *So what?*
-✅ "Our AI-powered analytics surface insights you'd miss manually—so you can make better decisions in half the time"
+✅ "Our AI-powered analytics surface insights you'd miss manually-so you can make better decisions in half the time"
 
 **Common So What failures:**
 - Feature lists without benefit connections
@@ -213,7 +213,7 @@ For every statement, ask "Okay, so what?" If the copy doesn't answer that questi
 - Ask questions that prompt reflection
 
 **Process:**
-1. Read for emotional impact—does it move you?
+1. Read for emotional impact-does it move you?
 2. Identify flat sections that should resonate
 3. Add emotional texture while staying authentic
 4. Ensure emotion serves the message (not manipulation)

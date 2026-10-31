@@ -12,7 +12,7 @@ tools: [claude, cursor, gemini, claude-code]
 version: 1.0.0
 ---
 
-# Vibe-Code Cleanup — Production Refactor Skill
+# Vibe-Code Cleanup: Production Refactor Skill
 
 A safe, incremental cleanup workflow for AI-generated / vibe-coded fullstack apps.
 The goal is to make the codebase production-ready **without** breaking anything that already works.
@@ -42,7 +42,7 @@ Always:
 
 ---
 
-## Step 1 — Reconnaissance (read before touching)
+## Step 1: Reconnaissance (read before touching)
 
 Before changing anything, map the codebase:
 
@@ -65,7 +65,7 @@ Document what you find. Do NOT change yet.
 
 ---
 
-## Step 2 — Fix Broken Imports First
+## Step 2: Fix Broken Imports First
 
 Broken imports cause build failures and should be fixed before anything else.
 
@@ -83,7 +83,7 @@ npx tsc --noEmit 2>&1
 
 ---
 
-## Step 3 — Identify Dead Code (verify before removing)
+## Step 3: Identify Dead Code (verify before removing)
 
 These checks identify candidates, not proof of dead code. Also inspect dynamic imports, framework conventions, runtime strings, package exports and external consumers before removal. A file/export is a candidate **only if**:
 1. No other file imports it (grep-confirmed)
@@ -100,7 +100,7 @@ grep -r "MyComponent" --include="*.{js,ts,jsx,tsx}" .
 
 ---
 
-## Step 4 — Consolidate Repeated Logic into Helpers
+## Step 4: Consolidate Repeated Logic into Helpers
 
 Look for repeated patterns (metadata blocks, API fetch wrappers, error handlers) that appear in 3+ places.
 
@@ -145,7 +145,7 @@ export function buildPageMetadata({ title, description, path, image }) {
 
 ---
 
-## Step 5 — Environment Variable Audit
+## Step 5: Environment Variable Audit
 
 ```bash
 # List all env vars used in code
@@ -160,7 +160,7 @@ Flag any env vars used in code but missing from `.env.example`. Never add secret
 
 ---
 
-## Step 6 — Validate After Every Batch
+## Step 6: Validate After Every Batch
 
 Run this after every meaningful batch of cleanup changes:
 
@@ -182,7 +182,7 @@ If build or typecheck breaks → **revert the last batch** before continuing.
 
 ---
 
-## Step 7 — Commit Strategy
+## Step 7: Commit Strategy
 
 Each commit should be a single logical unit:
 

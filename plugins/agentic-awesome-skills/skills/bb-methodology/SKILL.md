@@ -41,7 +41,7 @@ Follow the actual written program/SoW, scoped assets, testing methods, request/c
 
 ## PART 0: MODE CONFIRMATION (Before Anything Else)
 
-**Confirm the engagement type before deciding what counts as a finding.** The same target produces a different report shape depending on which mode applies. Getting this wrong is the single biggest waste of time in this workflow — answer it explicitly before Phase 0.
+**Confirm the engagement type before deciding what counts as a finding.** The same target produces a different report shape depending on which mode applies. Getting this wrong is the single biggest waste of time in this workflow; answer it explicitly before Phase 0.
 
 | Engagement type | What counts as a finding | What gets rejected |
 |---|---|---|
@@ -50,7 +50,7 @@ Follow the actual written program/SoW, scoped assets, testing methods, request/c
 | **Pentest** (signed SoW / WAPT) | Depends on SoW. Read scope explicitly. Usually accepts hygiene + impact + recon | Out-of-scope assets, unsigned testing |
 | **Internal audit** | Compliance-mapped findings (PCI / ISO / NIST / DPDPA / GDPR) | Findings without a control-mapping |
 
-**Hard rule:** Before Phase 0 runs, write the engagement type as the first line in your hunt notes. If you can't answer it from the user's instruction, ASK once. Don't assume — the mistake costs both you and the triager.
+**Hard rule:** Before Phase 0 runs, write the engagement type as the first line in your hunt notes. If you can't answer it from the user's instruction, ASK once. Don't assume; the mistake costs both you and the triager.
 
 **Lesson from an authorized engagement:** First-pass on this target produced 5 hygiene findings (SP2013 EoL, permissive CSP, stack traces) shipped in red-team format. The engagement was bug-bounty. Findings would have been N/A'd as "informational, no impact demonstrated." After the corrected pass with hygiene-as-context-not-finding, the same target yielded 11 impact-demonstrated bugs including 3 Critical.
 
@@ -310,7 +310,7 @@ Examples of independent reproductions:
 - Python `requests` + raw socket via `ssl.wrap_socket` (one library normalises, one doesn't)
 - Burp Repeater + Python `urllib` (same wire result expected from both)
 
-The reproduction commands MUST be paste-into-shell ready in the report — a triager copies them verbatim. If the curl version requires special flags or breaks on certain systems, include a Python alternative.
+The reproduction commands MUST be paste-into-shell ready in the report; a triager copies them verbatim. If the curl version requires special flags or breaks on certain systems, include a Python alternative.
 
 **Unverified imported anecdote, not a severity precedent:** All three purported Critical findings (Authentication.asmx brute-force, TE.CL smuggling, NTLM Type-2 disclosure) were each independently reproduced via curl + Python raw sockets + Burp tooling. The cross-tool consistency was what convinced the triage write-up that the findings were not artefacts.
 
@@ -356,7 +356,7 @@ Every 20 minutes ask yourself: **"Am I making progress?"**
 
 ### Pushback Protocol (When the User Says "Find More")
 
-When the user disagrees with your stopping point — e.g., "I've found 10+ bugs, you should find the same," or "look harder," or "you're missing things":
+When the user disagrees with your stopping point; e.g., "I've found 10+ bugs, you should find the same," or "look harder," or "you're missing things":
 
 Reassess the tested surface and any specific missed evidence against the scope, remaining budget and stop conditions. A requested finding count is not evidence that those bugs exist. Report attempted tests, failures, uncertainty and untested coverage honestly; propose a bounded next pass only if authorized. Never label a negative probe exhaustive coverage or invent a required number of findings.
 
@@ -401,7 +401,7 @@ Reassess the tested surface and any specific missed evidence against the scope, 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

@@ -131,7 +131,7 @@ struct NeuButton: View {
     }
 }
 ```
-- The key trick: two `.shadow()` modifiers — one white (top-left), one dark (bottom-right).
+- The key trick: two `.shadow()` modifiers; one white (top-left), one dark (bottom-right).
 - Recent SwiftUI supports ShapeStyle.shadow(.inner(...)); the overlay example is a fallback for older targets, not the only implementation.
 - The view's background color MUST match its parent's background exactly.
 
@@ -186,12 +186,12 @@ const NeuCard = () => (
     padding: 32,
     backgroundColor: '#E6E2DD',
     borderRadius: 20,
-    // Light shadow (top-left) — iOS only supports one shadow
+    // Light shadow (top-left); iOS only supports one shadow
     shadowColor: '#FFFFFF',
     shadowOffset: { width: -8, height: -8 },
     shadowOpacity: 0.7,
     shadowRadius: 10,
-    // Android — use elevation for basic shadow
+    // Android; use elevation for basic shadow
     elevation: 8,
   }}>
     <Text style={{ fontSize: 20, fontWeight: '600' }}>Neumorphic Card</Text>
@@ -203,7 +203,7 @@ const NeuCard = () => (
 ```
 - **Legacy API limitation**: The shadowColor/shadowOffset family provides one shadow per view. New Architecture boxShadow supports multiple/inset shadows on supported OS versions; verify the target version before adding a dependency.
 - **Workaround**: Use `react-native-shadow-2` or `react-native-neomorph-shadows` which provide multi-shadow support.
-- Alternative: Wrap two nested `View`s — the outer one has the dark shadow, the inner one has the light shadow.
+- Alternative: Wrap two nested `View`s; the outer one has the dark shadow, the inner one has the light shadow.
 - Inner shadows for pressed states require SVG-based solutions or pre-rendered images.
 
 ### Jetpack Compose
@@ -237,7 +237,7 @@ fun NeuCard() {
 - **Compose limitation**: Like React Native, Compose `Modifier.shadow()` only supports a single directional shadow.
 - For true dual-shadow neumorphism, use a custom `Modifier.drawBehind { }` with `drawIntoCanvas` to paint two separate shadow paths (one light, one dark).
 - The `neumorphic-compose` library provides a pre-built `Modifier.neumorphic()` that handles both shadows.
-- Set the `Scaffold` background to the same `baseColor` — this is non-negotiable.
+- Set the `Scaffold` background to the same `baseColor`; this is non-negotiable.
 
 ## Do's and Don'ts
 - **DO**: Use inset shadows for "active" states (like pressed buttons or filled form fields).

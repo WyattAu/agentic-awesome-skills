@@ -2,7 +2,7 @@
 
 Version and safety boundary: these are illustrative fragments, not certified live schemas. Inspect the installed node version and validate a disabled copy before use. Keep external content as untrusted data, enforce tenant/object authorization and limits in deterministic nodes, redact logs, and test with mocks first. Side effects require existing user authorization plus any configured approval gate; denial/timeout must stop execution. A prompt or JSON schema is not an authorization boundary.
 
-Memory is a sub-node on the agent, wired via `ai_memory`. Without it, every invocation is stateless. With it, the agent holds a conversation across turns — and across executions, depending on type — keyed by whatever expression you bind to `sessionKey`.
+Memory is a sub-node on the agent, wired via `ai_memory`. Without it, every invocation is stateless. With it, the agent holds a conversation across turns; and across executions, depending on type; keyed by whatever expression you bind to `sessionKey`.
 
 Memory node availability shifts between n8n versions, so confirm what's installed with `search_nodes({ query: 'memory' })`.
 
@@ -34,11 +34,11 @@ Temporary in-process context keyed by session; durability and worker sharing are
 }
 ```
 
-`contextWindowLength` is the number of exchanges retained. **The default is 5 — very low** for modern chat expectations, where users assume a conversation feels close to endless. **50 is a reasonable starting point.** Higher = more context but more tokens per turn.
+`contextWindowLength` is the number of exchanges retained. **The default is 5; very low** for modern chat expectations, where users assume a conversation feels close to endless. **50 is a reasonable starting point.** Higher = more context but more tokens per turn.
 
 **Messages past the window are removed entirely.** Once the buffer fills, the oldest exchanges are dropped and the agent can't recall, search, or even know they existed. If a user said something 60 turns ago and the window is 50, that's gone from the agent's perspective. For recall beyond the window, raise `contextWindowLength`, or persist key facts in a Data Table that's read and injected into the system prompt.
 
-The "window" is a sliding cap on how many messages stay in context — **not** a scope on persistence. With `sessionIdType: 'customKey'` you bind the key to any expression (`{{ $json.sessionId }}`, a Slack `thread_ts`, a multi-tenant composite). Each user/thread/context gets its own bucket.
+The "window" is a sliding cap on how many messages stay in context; **not** a scope on persistence. With `sessionIdType: 'customKey'` you bind the key to any expression (`{{ $json.sessionId }}`, a Slack `thread_ts`, a multi-tenant composite). Each user/thread/context gets its own bucket.
 
 ### `memoryPostgresChat` / `memoryRedisChat`
 
@@ -64,9 +64,9 @@ Appropriate when durable history or multiple workers are required; enforce reten
 
 Most agents don't need this. But when a fixed window isn't enough, the `@n8n/n8n-nodes-langchain.memoryManager` node operates against any wired memory backend and exposes three modes:
 
-- **`load`** (default) — read current memory into the workflow (for inspection, branching on size, feeding a summarizer).
-- **`insert`** — append a message. An optional `hideFromUI` flag covers messages that should affect the agent but not show in the chat UI.
-- **`delete`** — remove some or all messages.
+- **`load`** (default); read current memory into the workflow (for inspection, branching on size, feeding a summarizer).
+- **`insert`**; append a message. An optional `hideFromUI` flag covers messages that should affect the agent but not show in the chat UI.
+- **`delete`**; remove some or all messages.
 
 ### Pattern: rolling summarization
 
@@ -82,7 +82,7 @@ The agent now sees `[summary of turns 1-40] + [recent 5 turns]`, paying far fewe
 
 Other patterns built the same way: **prune by relevance** (`load` → filter → `delete` → `insert` the keepers), **inject runtime facts** (`insert` with `hideFromUI: true`), **reset on command** (`delete` all on `/clear`).
 
-The Memory Manager node is more recent than the rest of n8n's memory tooling — verify the modes against your installed version before relying on them in production.
+The Memory Manager node is more recent than the rest of n8n's memory tooling; verify the modes against your installed version before relying on them in production.
 
 ---
 
@@ -98,30 +98,30 @@ Sets `sessionId` automatically. Wire it everywhere consistently:
 You manage it: the caller passes a header or body field (`body.sessionId`) and you forward it, or you issue one on first call and expect it back. Either way, it must be consistent across the whole conversation, including reconnections.
 
 ### Manual / scheduled
-Usually no session. Use a stable identifier per "conversation" if one exists (ticket ID, thread ID); otherwise memory adds nothing — omit it.
+Usually no session. Use a stable identifier per "conversation" if one exists (ticket ID, thread ID); otherwise memory adds nothing; omit it.
 
 ---
 
 ## Memory and tools
 
-When a tool is invoked, the tool's sub-workflow does **NOT** see conversation memory — memory is the agent's context, not the tool's input. Pass needed context through `$fromAI` parameters explicitly. For session-keyed state, plumb `sessionId` and have the tool look up state from a Data Table or storage keyed by session.
+When a tool is invoked, the tool's sub-workflow does **NOT** see conversation memory; memory is the agent's context, not the tool's input. Pass needed context through `$fromAI` parameters explicitly. For session-keyed state, plumb `sessionId` and have the tool look up state from a Data Table or storage keyed by session.
 
 ---
 
 ## Memory and binary
 
-Memory stores **text turns**. Binary uploaded mid-conversation is NOT in memory — it's in the Chat Trigger's `files[]` for that turn only. The text memory captures that "the user mentioned uploading a file," but to actually use the file in a later tool call it must still be in storage and its key must be in **that** turn's system prompt. In practice, inject the session's file inventory into the system prompt every turn (loaded by `sessionId`). → **n8n-binary-and-data**.
+Memory stores **text turns**. Binary uploaded mid-conversation is NOT in memory; it's in the Chat Trigger's `files[]` for that turn only. The text memory captures that "the user mentioned uploading a file," but to actually use the file in a later tool call it must still be in storage and its key must be in **that** turn's system prompt. In practice, inject the session's file inventory into the system prompt every turn (loaded by `sessionId`). → **n8n-binary-and-data**.
 
 ---
 
 ## Common mistakes
 
-- **Hardcoding `sessionId: 'default'`** — all conversations share one bucket; memory becomes meaningless.
-- **Different `sessionId` on memory vs tools** — memory looks right but tools can't find related state.
-- **Unbounded `memoryBuffer` for chat** — token cost grows until timeout. Use BufferWindow with a sane limit.
-- **Adding memory where there's no session** — a "summarize this article" workflow doesn't need it.
-- **Expecting tools to see memory** — they see only their `$fromAI` parameters and plumbed context.
-- **Drift between the surface and memory** — if anything posts to the conversation outside the agent (a scheduled reply, a human writing directly), the agent operates on an incomplete view and will contradict messages it can't see. Whatever shows on the user-facing surface must also be `insert`ed into memory.
+- **Hardcoding `sessionId: 'default'`**; all conversations share one bucket; memory becomes meaningless.
+- **Different `sessionId` on memory vs tools**; memory looks right but tools can't find related state.
+- **Unbounded `memoryBuffer` for chat**; token cost grows until timeout. Use BufferWindow with a sane limit.
+- **Adding memory where there's no session**; a "summarize this article" workflow doesn't need it.
+- **Expecting tools to see memory**; they see only their `$fromAI` parameters and plumbed context.
+- **Drift between the surface and memory**; if anything posts to the conversation outside the agent (a scheduled reply, a human writing directly), the agent operates on an incomplete view and will contradict messages it can't see. Whatever shows on the user-facing surface must also be `insert`ed into memory.
 
 ---
 

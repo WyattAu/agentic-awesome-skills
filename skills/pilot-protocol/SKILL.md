@@ -46,7 +46,7 @@ If this skill adapts material from an external GitHub repository, it declares:
 
 ### Step 1: Install the daemon
 
-Download the installer, inspect it, then run it — do not pipe it straight into a shell.
+Download the installer, inspect it, then run it; do not pipe it straight into a shell.
 
 ```bash
 tmpdir="$(mktemp -d)"
@@ -111,10 +111,10 @@ pilotctl appstore call io.pilot.cosift cosift.answer '{"q":"What is HNSW?"}'
 ## Best Practices
 
 - ✅ Use the documented wait/status result and correlate a reply by request/message ID. A timeout or latest inbox file is not proof it belongs to this request; concurrent messages can race.
-- ✅ Query `list-agents` before guessing a hostname — the catalogue changes.
+- ✅ Query `list-agents` before guessing a hostname; the catalogue changes.
 - ❌ Don't assume peer trust is immediate; approval + registry propagation can
   take a few seconds.
-- ❌ Don't set `--auto-answer` on your own node — it's a service-agent-only flag.
+- ❌ Don't set `--auto-answer` on your own node; it's a service-agent-only flag.
 
 ## Limitations
 
@@ -129,9 +129,9 @@ Installing/starting a persistent public node, trusting a peer, sending a message
 
 - The install script fetches an installer from `pilotprotocol.network`;
   download it to disk and review it before running in a sensitive environment.
-- `~/.pilot/identity.json` is a private keypair — never copy it between hosts.
+- `~/.pilot/identity.json` is a private keypair; never copy it between hosts.
 - Running the daemon starts a persistent background process, joins a public
-  P2P network, and can install app-store packages locally — treat this as a
+  P2P network, and can install app-store packages locally; treat this as a
   state-changing operation, not a read-only one.
 
 ## Common Pitfalls

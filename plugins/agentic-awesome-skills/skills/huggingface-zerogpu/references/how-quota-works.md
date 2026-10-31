@@ -2,7 +2,7 @@
 
 Mechanism for `duration` validation and quota pre-checks. Useful when choosing `duration` values, debugging `illegal duration` vs `quota exceeded` errors, and understanding why the default 60s is pessimistic for short tasks.
 
-For per-tier numerical thresholds (free vs Pro vs Team vs Enterprise quota minutes), the daily quota window length, runs-per-day limits, and pay-as-you-go pricing, see [the ZeroGPU docs](https://huggingface.co/docs/hub/spaces-zerogpu) — those values change over time and are deliberately kept out of this skill.
+For per-tier numerical thresholds (free vs Pro vs Team vs Enterprise quota minutes), the daily quota window length, runs-per-day limits, and pay-as-you-go pricing, see [the ZeroGPU docs](https://huggingface.co/docs/hub/spaces-zerogpu); those values change over time and are deliberately kept out of this skill.
 
 ## What `duration` actually requests
 
@@ -12,7 +12,7 @@ Whatever value is passed to `@spaces.GPU(duration=N)` (or the default 60s when u
 requested = N * 2 if size == "xlarge" else N
 ```
 
-So `@spaces.GPU(duration=60, size="xlarge")` is internally a 120-second request — both for the tier-max check and the quota pre-check below.
+So `@spaces.GPU(duration=60, size="xlarge")` is internally a 120-second request; both for the tier-max check and the quota pre-check below.
 
 ## Two distinct error modes
 
@@ -30,7 +30,7 @@ You have exceeded your Pro ZeroGPU quota
 (60s requested vs. 30s left). Try again in 1:23:45.
 ```
 
-The comparison is **`requested` vs `remaining`** — not `actual run time` vs `remaining`. A 10-second task left at the default 60s requests 60s of quota; once `remaining < 60s` the call fails even though the actual work would have fit.
+The comparison is **`requested` vs `remaining`**; not `actual run time` vs `remaining`. A 10-second task left at the default 60s requests 60s of quota; once `remaining < 60s` the call fails even though the actual work would have fit.
 
 ## Why the default 60s is pessimistic for short tasks
 
@@ -39,7 +39,7 @@ The comparison is **`requested` vs `remaining`** — not `actual run time` vs `r
 For a task that actually takes ~10 seconds:
 
 - The user's 60s quota gets reserved up front.
-- Once their remaining quota drops below 60s, your Space fails for them — even though they could have run many more 10s tasks if the request matched reality.
+- Once their remaining quota drops below 60s, your Space fails for them; even though they could have run many more 10s tasks if the request matched reality.
 - Your call also ranks lower in the queue than equivalent calls declaring smaller durations.
 
 The fix is to declare the realistic duration explicitly:
@@ -65,10 +65,10 @@ This preserves quota for light inputs and reserves more only when needed.
 
 ## Quota window: 24h fixed from first use
 
-The quota window's TTL is set when the first call of a fresh window lands and counts down unconditionally — it is not a sliding window, not a calendar-day reset, and not extended by subsequent use. A user who runs a call at 14:00 sees their next reset at 14:00 the following day, regardless of how heavily or lightly they use the Space in between.
+The quota window's TTL is set when the first call of a fresh window lands and counts down unconditionally; it is not a sliding window, not a calendar-day reset, and not extended by subsequent use. A user who runs a call at 14:00 sees their next reset at 14:00 the following day, regardless of how heavily or lightly they use the Space in between.
 
 For exact tier thresholds, runs-per-day caps, and pay-as-you-go billing rates, see the [ZeroGPU docs](https://huggingface.co/docs/hub/spaces-zerogpu).
 
 ## Queue priority
 
-The queue is **node-level** — requests from every Space scheduled on the same physical node compete for that node's GPU slots. Among queued requests, **shorter declared `duration` ranks higher**. So tight per-request `duration` estimates serve two goals at once: they preserve the user's quota and move the request up the queue.
+The queue is **node-level**; requests from every Space scheduled on the same physical node compete for that node's GPU slots. Among queued requests, **shorter declared `duration` ranks higher**. So tight per-request `duration` estimates serve two goals at once: they preserve the user's quota and move the request up the queue.

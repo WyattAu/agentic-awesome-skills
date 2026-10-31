@@ -43,13 +43,13 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 ### 1. Always Declare Permissions (Least Privilege)
 
 ```yaml
-# Workflow-level default — restrict everything
+# Workflow-level default: restrict everything
 permissions:
   contents: read
 
 jobs:
   publish:
-    # Job-level override — only expand what's needed
+    # Job-level override: only expand what's needed
     permissions:
       contents: write        # Only for release/publish jobs
       packages: write        # Only for container push jobs
@@ -60,7 +60,7 @@ jobs:
 ### 2. Pin Third-Party Actions to Full Commit SHA
 
 ```yaml
-# ❌ UNSAFE — tag can be mutated or hijacked
+# ❌ UNSAFE: tag can be mutated or hijacked
 - uses: actions/checkout@v4
 
 # Full SHA prevents tag movement; verify its origin and content (not a safety certification)
@@ -74,15 +74,15 @@ jobs:
 ### 3. Prevent Script Injection
 
 ```yaml
-# ❌ UNSAFE — attacker controls PR title, which gets expanded in shell
+# ❌ UNSAFE: attacker controls PR title, which gets expanded in shell
 - run: echo "${{ github.event.pull_request.title }}"
 
-# ✅ SAFE — pass through environment variable (shell doesn't evaluate it)
+# ✅ SAFE: pass through environment variable (shell doesn't evaluate it)
 - env:
     PR_TITLE: ${{ github.event.pull_request.title }}
   run: echo "$PR_TITLE"
 
-# ✅ SAFE — expressions in if: conditions are evaluated by Actions, not shell
+# ✅ SAFE: expressions in if: conditions are evaluated by Actions, not shell
 - if: github.event.pull_request.draft == false
   run: echo "Not a draft"
 ```

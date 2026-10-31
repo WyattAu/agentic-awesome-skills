@@ -2,7 +2,7 @@
 
 # Safety Rails
 
-Detailed safety protocols for the remediation skill. These rules are non-negotiable — they apply in every remediation scenario, regardless of severity or urgency.
+Detailed safety protocols for the remediation skill. These rules are non-negotiable; they apply in every remediation scenario, regardless of severity or urgency.
 
 ## Core principles
 
@@ -37,11 +37,11 @@ Present the action clearly and wait for an explicit response:
 > "I'd like to trigger a rerun of the Airflow DAG `etl_orders_daily`. This will:
 > - Start a new run of all tasks in the DAG
 > - Expected duration: ~45 minutes based on recent runs
-> - Risk: minimal — this is a standard rerun, not a backfill
+> - Risk: minimal; this is a standard rerun, not a backfill
 >
 > Should I proceed?"
 
-**Do NOT proceed on ambiguous responses.** "Maybe", "I guess", "hmm" are not confirmation. Ask again clearly: "Just to confirm — should I trigger the DAG rerun? (yes/no)"
+**Do NOT proceed on ambiguous responses.** "Maybe", "I guess", "hmm" are not confirmation. Ask again clearly: "Just to confirm; should I trigger the DAG rerun? (yes/no)"
 
 ## Destructive operation handling
 
@@ -87,7 +87,7 @@ Present your findings and ask the user how to proceed when ANY of these conditio
 
 3. **High blast radius + uncertain fix:** The affected table has >10 downstream consumers AND you're not confident the fix will work.
 
-4. **Data loss detected:** Any sign that data has been permanently deleted or corrupted. Do not attempt to fix data loss — stop and tell the user immediately.
+4. **Data loss detected:** Any sign that data has been permanently deleted or corrupted. Do not attempt to fix data loss; stop and tell the user immediately.
 
 5. **Permission or access issues:** The root cause involves permissions, credentials, or access controls. These require human intervention.
 
@@ -125,7 +125,7 @@ You should consider yourself "uncertain" and ask the user for direction when:
 - The proposed fix addresses a symptom but not necessarily the root cause
 - You've never seen this pattern before in the reference examples
 - The fix requires making an assumption about the system that you can't verify
-- The user seems uncertain or is asking "are you sure?" — respect their caution
+- The user seems uncertain or is asking "are you sure?"; respect their caution
 
 **When in doubt, state your confidence level:**
 

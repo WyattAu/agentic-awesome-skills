@@ -1,4 +1,4 @@
-# YANN LECUN — MÓDULO TÉCNICO v3.0 - Detailed Guide
+# YANN LECUN: MÓDULO TÉCNICO v3.0 - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -122,7 +122,7 @@ L_JEPA = ||s_y - s_hat_y||^2    # MSE no espaço de representações
 theta_bar <- m * theta_bar + (1-m) * theta   # m ~ 0.996
 ```
 
-**Comparação conceitual de objetivos — não prova de superioridade universal**:
+**Comparação conceitual de objetivos; não prova de superioridade universal**:
 
 | Abordagem | Prevê | Capacidade gasta em | Semântica |
 |-----------|-------|---------------------|-----------|
@@ -147,7 +147,7 @@ O exemplo anterior estava truncado e usava funções/variáveis não definidas. 
 
 Valide shapes, índices, ausência de vazamento e variância dos embeddings. EMA sozinha não prova ausência de colapso; máscaras, arquitetura e normalização importam. V-JEPA estende a predição de features a vídeo com máscaras espaço-temporais; não se reduz à previsão causal de frames futuros. Uma hierarquia de world models é uma proposta arquitetural, não uma propriedade demonstrada de todo JEPA.
 
-## Seção Ami — Advanced Machinery Of Intelligence
+## Seção Ami: Advanced Machinery Of Intelligence
 
 Paper: "A Path Towards Autonomous Machine Intelligence" (2022)
 
@@ -177,11 +177,11 @@ Paper: "A Path Towards Autonomous Machine Intelligence" (2022)
 +----------------------------------------------------------+
 ```
 
-**Módulo 1 — Configurator**: Configura os outros módulos para a tarefa atual.
+**Módulo 1; Configurator**: Configura os outros módulos para a tarefa atual.
 
-**Módulo 2 — Perception**: Encoders sensório-motores que alimentam o world model.
+**Módulo 2; Perception**: Encoders sensório-motores que alimentam o world model.
 
-**Módulo 3 — World Model** (coração do sistema):
+**Módulo 3; World Model** (coração do sistema):
 ```
 
 ## Simulação Interna: "O Que Acontece Se Eu Fizer X?"
@@ -193,7 +193,7 @@ cost_predicted = cost_module(predicted_next_state)
 
 ```
 
-**Módulo 4 — Cost Module**:
+**Módulo 4; Cost Module**:
 ```
 
 ## Dois Tipos De Custo:
@@ -204,9 +204,9 @@ E(s) = alpha * intrinsic_cost(s) + beta * task_cost(s)
 
 ```
 
-**Módulo 5 — Short-term Memory**: Buffer de estados, simulações, contexto imediato.
+**Módulo 5; Short-term Memory**: Buffer de estados, simulações, contexto imediato.
 
-**Módulo 6 — Actor**:
+**Módulo 6; Actor**:
 - Modo reativo: ações diretas do estado atual
 - Modo deliberativo: simula múltiplos futuros, escolhe mínimo custo
 
@@ -215,7 +215,7 @@ E(s) = alpha * intrinsic_cost(s) + beta * task_cost(s)
 
 A proposta AMI separa percepção, modelo de mundo, custos, memória, configurador e ator. É uma arquitetura de pesquisa, não um sistema completo implementado por este documento. LLMs variam em modalidades, ferramentas, memória e planejamento; não é correto afirmar que todos são apenas texto, não possuem nenhuma representação de mundo ou não podem planejar. Predição de features também não demonstra causalidade por si só.
 
-## Seção Ebm — Energy-Based Models
+## Seção Ebm: Energy-Based Models
 
 Contribuição subestimada que vai ser mais influente a longo prazo.
 
@@ -233,7 +233,7 @@ Z = integral exp(-E(x)) dx   # intratável em alta dimensão!
 class EnergyBasedModel(nn.Module):
     """
     EBM: F(x) = energia de x
-    P(x) ~ exp(-F(x)) / Z  — mas nunca calculamos Z!
+    P(x) ~ exp(-F(x)) / Z ; mas nunca calculamos Z!
     Vantagem: sem partition function intratável.
     """
     def __init__(self, latent_dim=512):
@@ -301,7 +301,7 @@ class SimCLRLoss(nn.Module):
 
     def forward(self, z1, z2):
         """
-        z1, z2: [B, D] — duas views do mesmo batch
+        z1, z2: [B, D]; duas views do mesmo batch
         z1[i] e z2[i]: positive pair
         Todos outros pares: negatives
         """
@@ -369,26 +369,26 @@ class LeNet5Modern(nn.Module):
 
 ## Papers Fundamentais (Lecun)
 
-- LeCun et al. (1998). "Gradient-Based Learning Applied to Document Recognition" — IEEE 86(11)
-- LeCun et al. (2015). "Deep Learning" — Nature 521:436-444
-- LeCun (2022). "A Path Towards Autonomous Machine Intelligence" — OpenReview preprint
+- LeCun et al. (1998). "Gradient-Based Learning Applied to Document Recognition"; IEEE 86(11)
+- LeCun et al. (2015). "Deep Learning"; Nature 521:436-444
+- LeCun (2022). "A Path Towards Autonomous Machine Intelligence"; OpenReview preprint
 
 ## Jepa Papers
 
-- Assran et al. (2023). "Self-Supervised Learning from Images with a JEPA" — [I-JEPA, 2023](https://arxiv.org/abs/2301.08243)
-- Bardes et al. (2024). "Revisiting Feature Prediction for Learning Visual Representations from Video" — [2024 preprint](https://arxiv.org/abs/2404.08471)
-- LeCun (2016). "Predictive Learning" — NIPS Keynote (The Cake Analogy)
+- Assran et al. (2023). "Self-Supervised Learning from Images with a JEPA"; [I-JEPA, 2023](https://arxiv.org/abs/2301.08243)
+- Bardes et al. (2024). "Revisiting Feature Prediction for Learning Visual Representations from Video"; [2024 preprint](https://arxiv.org/abs/2404.08471)
+- LeCun (2016). "Predictive Learning"; NIPS Keynote (The Cake Analogy)
 
 ## Ssl Relevantes
 
-- He et al. (2022). "Masked Autoencoders Are Scalable Vision Learners" — CVPR 2022
-- Chen et al. (2020). "A Simple Framework for Contrastive Learning" (SimCLR) — ICML 2020
-- Grill et al. (2020). "Bootstrap Your Own Latent" (BYOL) — NeurIPS 2020
+- He et al. (2022). "Masked Autoencoders Are Scalable Vision Learners"; CVPR 2022
+- Chen et al. (2020). "A Simple Framework for Contrastive Learning" (SimCLR); ICML 2020
+- Grill et al. (2020). "Bootstrap Your Own Latent" (BYOL); NeurIPS 2020
 
 ## Energy-Based Models
 
-- LeCun et al. (2006). "A Tutorial on Energy-Based Learning" — tutorial, 2006 (verifique a edição bibliográfica antes de citar)
-- LeCun (2021). "Energy-Based Models for Autonomous and Predictive Learning" — ICLR Keynote
+- LeCun et al. (2006). "A Tutorial on Energy-Based Learning"; tutorial, 2006 (verifique a edição bibliográfica antes de citar)
+- LeCun (2021). "Energy-Based Models for Autonomous and Predictive Learning"; ICLR Keynote
 
 Os fragmentos PyTorch exigem imports e tensores do formato indicado; não incluem dados, otimizador ou loop de treino. A perda SimCLR tem custo de memória O(B²); valide B≥2, temperatura positiva e shapes iguais. O exemplo EBM não define uma distribuição negativa nem um amostrador e não é um algoritmo de treino completo. Não faça download, execute checkpoints/código remoto ou inicie treino em GPU compartilhada sem escopo autorizado.
 

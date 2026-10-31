@@ -18,7 +18,7 @@ Index the transcribed speech content of a video for semantic and keyword search:
 ```python
 video = coll.get_video(video_id)
 
-# force=True makes indexing idempotent — skips if already indexed
+# force=True makes indexing idempotent: skips if already indexed
 video.index_spoken_words(force=True)
 ```
 
@@ -130,7 +130,7 @@ except InvalidRequestError as e:
 
 **Important notes:**
 
-- Use `SearchType.semantic` with `index_type=IndexType.scene` — this is the most reliable combination and depends on the account plan and SDK version.
+- Use `SearchType.semantic` with `index_type=IndexType.scene`; this is the most reliable combination and depends on the account plan and SDK version.
 - `SearchType.scene` exists but may not be available on all plans (e.g. Free tier). Prefer `SearchType.semantic` with `IndexType.scene`.
 - The `scene_index_id` parameter is optional. If omitted, the search runs against all scene indexes on the video. Pass it to target a specific index.
 - You can create multiple scene indexes per video (with different prompts or extraction types) and search them independently using `scene_index_id`.

@@ -17,7 +17,7 @@ Pick the cheapest update mechanism that fits the change. Going one rung too high
 
 `hf spaces hot-reload <id> -f app.py` patches the running Python process in place via `jurigged` (vendored inside the `spaces` package), then commits the change to the repo with a hot-reload marker that tells the platform to skip its usual restart. Seconds, no rebuild.
 
-Applies cleanly to function-body changes and new top-level symbols. Does **not** rerun module-level imports or one-time init — the model was loaded when `app.py` first ran and jurigged won't re-execute that load. New pip deps, README frontmatter, `Dockerfile`, and hardware changes need a full rebuild (rung 3).
+Applies cleanly to function-body changes and new top-level symbols. Does **not** rerun module-level imports or one-time init; the model was loaded when `app.py` first ran and jurigged won't re-execute that load. New pip deps, README frontmatter, `Dockerfile`, and hardware changes need a full rebuild (rung 3).
 
 Independent of dev mode. Marked experimental in the CLI. Requires Gradio SDK 6.1+.
 
@@ -34,7 +34,7 @@ Independent of dev mode. Marked experimental in the CLI. Requires Gradio SDK 6.1
 hf spaces info <id> --expand runtime           # stage at a glance
 hf spaces logs <id> --build --follow           # build log, live
 hf spaces logs <id> --follow                   # run log, live
-hf spaces logs <id> --build --tail 500         # bigger window — default is small
+hf spaces logs <id> --build --tail 500         # bigger window; default is small
 ```
 
 Find the **first** error in the build log, not the last. Cascading errors after the first are noise.
@@ -52,7 +52,7 @@ For stage-specific lookups, see [`known-errors.md`](known-errors.md).
 
 ## Smoke-test patterns
 
-A Space isn't done until a `gradio_client` call against the live URL exercises the endpoint end-to-end. Four steps in order — keep `hf spaces logs <id> --follow` running in another terminal throughout, so any silent fallback (model snapping to a different size, missing optional dep, dtype downgrade) surfaces.
+A Space isn't done until a `gradio_client` call against the live URL exercises the endpoint end-to-end. Four steps in order; keep `hf spaces logs <id> --follow` running in another terminal throughout, so any silent fallback (model snapping to a different size, missing optional dep, dtype downgrade) surfaces.
 
 ### A. Alive?
 
@@ -71,11 +71,11 @@ If `requested_hardware` is `cpu-basic` when you wanted GPU, your `--flavor` was 
 hf spaces logs <id> --tail 200
 ```
 
-Confirm the model finished loading, no import warnings, no "falling back to CPU" / dtype-downgrade messages, no failing health checks the platform forgave. Do this before calling the API — many silent failures (a config typo loading the wrong model, a missing optional dep, a one-time init that errored but didn't crash boot) are only visible here.
+Confirm the model finished loading, no import warnings, no "falling back to CPU" / dtype-downgrade messages, no failing health checks the platform forgave. Do this before calling the API; many silent failures (a config typo loading the wrong model, a missing optional dep, a one-time init that errored but didn't crash boot) are only visible here.
 
 ### C. API actually functions?
 
-Default — sync `gr.Interface` / `gr.Blocks` / `gr.ChatInterface` / `gr.Server` `@app.api`:
+Default; sync `gr.Interface` / `gr.Blocks` / `gr.ChatInterface` / `gr.Server` `@app.api`:
 
 ```python
 from gradio_client import Client, handle_file
@@ -84,7 +84,7 @@ import os
 c = Client("<ns>/<name>", token=os.environ["HF_TOKEN"],
            httpx_kwargs={"timeout": 600})   # ≥ @spaces.GPU duration + 60s
 
-print(c.view_api())                          # discover endpoints — don't guess api_name
+print(c.view_api())                          # discover endpoints; don't guess api_name
 
 result = c.predict(
     handle_file("test.png"),                 # file inputs need handle_file()
@@ -93,7 +93,7 @@ result = c.predict(
 )
 ```
 
-**Streaming endpoints** (function uses `yield` or `TextIteratorStreamer`) — `.predict()` returns only the final value. Iterate chunks via `.submit()`:
+**Streaming endpoints** (function uses `yield` or `TextIteratorStreamer`); `.predict()` returns only the final value. Iterate chunks via `.submit()`:
 
 ```python
 job = c.submit("short prompt", api_name="/chat")
@@ -110,9 +110,9 @@ r = httpx.post(f"https://<subdomain>.hf.space/your_route",
                headers={"Authorization": f"Bearer {os.environ['HF_TOKEN']}"})
 ```
 
-**OAuth-gated Spaces** (`hf_oauth: true` + `gr.LoginButton`) — anonymous `Client` can't authenticate. Test interactively after sign-in, or capture a session token and pass via `httpx_kwargs={"headers": {...}}`.
+**OAuth-gated Spaces** (`hf_oauth: true` + `gr.LoginButton`); anonymous `Client` can't authenticate. Test interactively after sign-in, or capture a session token and pass via `httpx_kwargs={"headers": {...}}`.
 
-**MCP server mode** (`launch(mcp_server=True)`) — different protocol. Use an MCP client.
+**MCP server mode** (`launch(mcp_server=True)`); different protocol. Use an MCP client.
 
 ### D. Output bytes AND logs look right?
 
@@ -131,13 +131,13 @@ head = open(path, "rb").read(16)
 
 For text: non-empty, not all `<think>...</think>` (thinking-model leak), length reasonable. For images: returned dimensions match what was requested (some models snap to nearest preset).
 
-Look at the tailed run log alongside — silent fallbacks (model snapping resolution, missing optional dep falling back to a slower path, dtype downgrade) only show up there.
+Look at the tailed run log alongside; silent fallbacks (model snapping resolution, missing optional dep falling back to a slower path, dtype downgrade) only show up there.
 
 ### What NOT to do
 
-- **Don't launch Playwright / headless browser** to verify backend logic. The Gradio UI calls the same API `gradio_client` does — a `predict` call checks the API path; separately verify browser layout, authentication and event wiring when relevant.
+- **Don't launch Playwright / headless browser** to verify backend logic. The Gradio UI calls the same API `gradio_client` does; a `predict` call checks the API path; separately verify browser layout, authentication and event wiring when relevant.
 - **Don't build mock-mode + local-server harnesses** before pushing. Local-green ≠ Space-green.
-- **Don't smoke-test with full-budget inputs.** Smallest input that exercises the GPU code path — short prompt, small image, low step count. You're verifying wiring, not quality.
+- **Don't smoke-test with full-budget inputs.** Smallest input that exercises the GPU code path; short prompt, small image, low step count. You're verifying wiring, not quality.
 
 ## Iterating on the Space, not locally
 
@@ -145,7 +145,7 @@ The Space env is the only one that matters: Python, torch, CUDA, file paths, env
 
 Workflow:
 
-1. Decide SDK + hardware. Write the smallest `app.py` / `Dockerfile` + `requirements.txt` + README frontmatter — just enough that the entry point loads.
+1. Decide SDK + hardware. Write the smallest `app.py` / `Dockerfile` + `requirements.txt` + README frontmatter; just enough that the entry point loads.
 2. Deploy the reviewed candidate within the agreed scope after useful local checks.
 3. Once `RUNNING`: verify with `gradio_client` against the real Space. That's your test loop.
 4. Iterate via the cheapest rung.
@@ -164,16 +164,16 @@ Reading logs + grepping [`known-errors.md`](known-errors.md) + a tight `gradio_c
 
 ### Prerequisites
 
-1. **PRO / Team / Enterprise plan** — dev mode is a paid feature.
+1. **PRO / Team / Enterprise plan**; dev mode is a paid feature.
 2. **An SSH key registered on the user's HF profile.** Without this, SSH refuses the connection. If the user doesn't have one yet, they need to:
    - Generate a keypair locally: `ssh-keygen -t ed25519 -f ~/.ssh/hf_dev` (protect the private key with a passphrase and agent where practical; do not overwrite an existing key).
    - Add the **public** key (`~/.ssh/hf_dev.pub`) at https://huggingface.co/settings/keys.
    - Keep the **private** key (`~/.ssh/hf_dev`) on the machine they'll SSH from.
-3. **The Space must be in `RUNNING` or `RUNTIME_ERROR`** before dev mode lets you in — not `BUILD_ERROR`. If it's in build error, push a stub `app.py` that boots cleanly first (e.g. `import gradio as gr; gr.Interface(lambda: 'ok', None, 'text').launch()`), then enable dev mode.
+3. **The Space must be in `RUNNING` or `RUNTIME_ERROR`** before dev mode lets you in; not `BUILD_ERROR`. If it's in build error, push a stub `app.py` that boots cleanly first (e.g. `import gradio as gr; gr.Interface(lambda: 'ok', None, 'text').launch()`), then enable dev mode.
 
 ### Enable
 
-No `huggingface_hub` Python wrapper yet — use the REST endpoint:
+No `huggingface_hub` Python wrapper yet; use the REST endpoint:
 
 ```bash
 curl -s -X POST \
@@ -196,7 +196,7 @@ Username is `<namespace>-<space>` **lowercase**, with `-` replacing `/`. Dots in
 
 It's a normal container at `/home/user/app/`. You can edit files, `pip install`, run repros, call `@spaces.GPU`-decorated functions interactively (they get a real GPU window).
 
-**`nvidia-smi` in the bare terminal will fail** with `NVML: Unknown Error`. Expected — ZeroGPU only exposes the real GPU inside `@spaces.GPU` calls. Don't assume the GPU is broken.
+**`nvidia-smi` in the bare terminal will fail** with `NVML: Unknown Error`. Expected; ZeroGPU only exposes the real GPU inside `@spaces.GPU` calls. Don't assume the GPU is broken.
 
 **Edits in `/home/user/app/` don't survive** a restart, sleep, or dev-mode-disable. Only commits persist.
 
@@ -231,4 +231,4 @@ from huggingface_hub import HfApi
 HfApi(token=HF_TOKEN).restart_space("<ns>/<space>", factory_reboot=True)
 ```
 
-Then re-run the outside-the-container smoke test. Dev-mode success does **not** guarantee post-rebuild success — different image, different process tree.
+Then re-run the outside-the-container smoke test. Dev-mode success does **not** guarantee post-rebuild success; different image, different process tree.

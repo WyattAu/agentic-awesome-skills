@@ -1,6 +1,6 @@
 # The CDN / URL Requirement for Chat Surfaces
 
-When a workflow generates an image and the user wants it shown inside a chat message — Slack, Discord, Teams, Telegram, embedded webhook chat — the image in `$binary` is not enough. Chat clients render messages that reference images by **URL** (or push bytes through the platform's own file-upload API). None of them read the `$binary` slot. The bytes have to live somewhere a URL can fetch them over HTTPS, and n8n does not bundle a CDN — the user provides the storage.
+When a workflow generates an image and the user wants it shown inside a chat message; Slack, Discord, Teams, Telegram, embedded webhook chat; the image in `$binary` is not enough. Chat clients render messages that reference images by **URL** (or push bytes through the platform's own file-upload API). None of them read the `$binary` slot. The bytes have to live somewhere a URL can fetch them over HTTPS, and n8n does not bundle a CDN; the user provides the storage.
 
 ## Contents
 
@@ -22,7 +22,7 @@ A chat message is HTML or a JSON block. An embedded image is a reference to a UR
 <img src="https://cdn.example.com/img/abc123.png">
 ```
 
-Some surfaces accept bytes directly through a platform file API instead of a URL — Slack's two-step `files.getUploadURLExternal` + `files.completeUploadExternal`, Discord attachments, Telegram `sendPhoto`. Either way, the bytes have to be reachable: either at a URL the client fetches, or handed to the platform's upload endpoint. The raw `$binary` slot inside an n8n execution is neither — it's internal to the workflow run.
+Some surfaces accept bytes directly through a platform file API instead of a URL; Slack's two-step `files.getUploadURLExternal` + `files.completeUploadExternal`, Discord attachments, Telegram `sendPhoto`. Either way, the bytes have to be reachable: either at a URL the client fetches, or handed to the platform's upload endpoint. The raw `$binary` slot inside an n8n execution is neither; it's internal to the workflow run.
 
 ---
 
@@ -59,10 +59,10 @@ Concretely, uploading to an S3-compatible store (R2 here) via the HTTP Request n
    ↓
 [Set: { imageUrl: "https://pub-<id>.r2.dev/<key>" }]
    ↓
-[Send to chat surface: imageUrl embedded — markdown, Block Kit image block, adaptive card, etc.]
+[Send to chat surface: imageUrl embedded; markdown, Block Kit image block, adaptive card, etc.]
 ```
 
-Upload mechanics vary by provider; some expose S3-compatible APIs usable through n8n's S3 node or HTTP Request with AWS auth. Confirm the upload node's field names (`contentType`, `binaryPropertyName`) with `get_node`, and **error-branch the upload** so a failed write surfaces instead of producing a reply that references a URL that was never written — see **n8n-error-handling**. The exact reply shape per platform is surface-specific (see `AGENT_TOOL_BINARY.md`).
+Upload mechanics vary by provider; some expose S3-compatible APIs usable through n8n's S3 node or HTTP Request with AWS auth. Confirm the upload node's field names (`contentType`, `binaryPropertyName`) with `get_node`, and **error-branch the upload** so a failed write surfaces instead of producing a reply that references a URL that was never written; see **n8n-error-handling**. The exact reply shape per platform is surface-specific (see `AGENT_TOOL_BINARY.md`).
 
 ---
 
@@ -70,9 +70,9 @@ Upload mechanics vary by provider; some expose S3-compatible APIs usable through
 
 Don't quietly ship a workflow that generates images "but they don't display." Surface the requirement before building:
 
-> "I can generate the image, but the chat surface can't display raw binary — it embeds images by URL. So I'll need to upload the image somewhere that serves a public URL first. What do you use for image/file storage today (R2, S3, GCS, Dropbox, Google Drive, …)? If you don't have anything set up, Cloudflare R2 is the lowest-friction starting point."
+> "I can generate the image, but the chat surface can't display raw binary; it embeds images by URL. So I'll need to upload the image somewhere that serves a public URL first. What do you use for image/file storage today (R2, S3, GCS, Dropbox, Google Drive, …)? If you don't have anything set up, Cloudflare R2 is the lowest-friction starting point."
 
-There is no fallback that hides this — n8n won't host the file. If the user has no storage, pause until they pick a service and provision a bucket and credentials, then resume. (Posting the URL as a plain link rather than an inline image is a lighter option if inline rendering isn't critical — but that link still has to come from somewhere.)
+There is no fallback that hides this; n8n won't host the file. If the user has no storage, pause until they pick a service and provision a bucket and credentials, then resume. (Posting the URL as a plain link rather than an inline image is a lighter option if inline rendering isn't critical; but that link still has to come from somewhere.)
 
 ---
 
@@ -103,7 +103,7 @@ Avoid user-controlled filenames (path traversal, collisions) and sequential IDs 
 
 Without it, storage costs grow:
 
-- **Lifecycle rules** — object stores (S3, R2, GCS, Azure Blob) auto-delete objects after N days. 7–30 days is usually plenty for chat use cases.
-- **Scheduled cleanup workflow** — for drive-style backends that have no TTL, run a workflow that lists and deletes old files.
+- **Lifecycle rules**; object stores (S3, R2, GCS, Azure Blob) auto-delete objects after N days. 7–30 days is usually plenty for chat use cases.
+- **Scheduled cleanup workflow**; for drive-style backends that have no TTL, run a workflow that lists and deletes old files.
 
-Ask the user's retention preference rather than picking a window for them — chat artifacts are often disposable, but some surfaces (audit, support transcripts) need them kept.
+Ask the user's retention preference rather than picking a window for them; chat artifacts are often disposable, but some surfaces (audit, support transcripts) need them kept.

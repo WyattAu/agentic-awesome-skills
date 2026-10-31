@@ -5,7 +5,7 @@
 
 > Reference content for the `offensive-osint` skill. Originally §17 of the monolithic SKILL.md (refactored 2026-05-02 for size/load efficiency).
 
-## 17. Secret-Pattern Catalog — 48 candidate patterns (29 base + 19 modern)
+## 17. Secret-Pattern Catalog: 48 candidate patterns (29 base + 19 modern)
 
 The catalog runs against any text source: GitHub code, Postman workspaces, JS bodies, sourcesContent blobs, mobile-app strings, Wayback HTML, paste sites, Stack Exchange code blocks. **Order matters: most-specific patterns first** so generic catches don't pre-empt typed ones.
 
@@ -63,9 +63,9 @@ The catalog runs against any text source: GitHub code, Postman workspaces, JS bo
 **Interpretation:** The severity column records upstream triage priority, not confirmed impact. AWS access IDs, Twilio SIDs, Firebase URLs, Sentry DSNs, OAuth client IDs and service-account `type` markers can be public identifiers or non-secret metadata. Require the actual secret material, context and owner-confirmed exposure; do not authenticate to prove a regex match. Key formats evolve and the catalog is not exhaustive.
 
 **False-positive notes:**
-- Patterns 22 (JWT), 23 (Bearer), 29 (Generic) trigger on test/example data frequently. Always look at *context* — a JWT in a `README.md` example block ≠ a JWT in a production `.env` file.
+- Patterns 22 (JWT), 23 (Bearer), 29 (Generic) trigger on test/example data frequently. Always look at *context*; a JWT in a `README.md` example block ≠ a JWT in a production `.env` file.
 - Pattern 16 (Mailgun loose) and pattern 11 (Stripe test) are noisy. The table’s upstream priority is not a finding severity; test credentials can still expose test data or consume quota.
-- Pattern 24 (Basic auth in URL) catches monitoring-tool URLs and CI-debug URLs as well as real creds — verify before alerting.
+- Pattern 24 (Basic auth in URL) catches monitoring-tool URLs and CI-debug URLs as well as real creds; verify before alerting.
 - For GitHub's Fine-grained PAT (pattern 7), the fixed length is a historical heuristic; consult current provider documentation rather than rejecting other token formats.
 
 ---

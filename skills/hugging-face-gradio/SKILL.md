@@ -124,7 +124,7 @@ Creates a component with arbitrary HTML.
 
 ## Custom HTML Components
 
-If a task requires significant customization of an existing component or a component that doesn't exist in Gradio, you can create one with `gr.HTML`. It supports `html_template` (with `${}` JS expressions and `{{}}` Handlebars syntax), `css_template` for scoped styles, and `js_on_load` for interactivity — where `props.value` updates the component value and `trigger('event_name')` fires Gradio events. For reuse, subclass `gr.HTML` and define `api_info()` for API/MCP support. See the [full guide](https://www.gradio.app/guides/custom-HTML-components).
+If a task requires significant customization of an existing component or a component that doesn't exist in Gradio, you can create one with `gr.HTML`. It supports `html_template` (with `${}` JS expressions and `{{}}` Handlebars syntax), `css_template` for scoped styles, and `js_on_load` for interactivity; where `props.value` updates the component value and `trigger('event_name')` fires Gradio events. For reuse, subclass `gr.HTML` and define `api_info()` for API/MCP support. See the [full guide](https://www.gradio.app/guides/custom-HTML-components).
 
 Here's an example that shows how to create and use these kinds of components:
 
@@ -259,7 +259,7 @@ Supported events per component:
 
 The `gradio` CLI includes `info` and `predict` commands for interacting with Gradio apps programmatically. These are especially useful for coding agents that need to use Spaces in their workflows.
 
-### `gradio info` — Discover endpoints and parameters
+### `gradio info`: Discover endpoints and parameters
 
 ```bash
 gradio info <space_id_or_url>
@@ -282,9 +282,9 @@ gradio info gradio/calculator
 # }
 ```
 
-File-type parameters show `"type": "filepath"` with instructions to include `"meta": {"_type": "gradio.FileData"}` — this signals the file will be uploaded to the remote server.
+File-type parameters show `"type": "filepath"` with instructions to include `"meta": {"_type": "gradio.FileData"}`; this signals the file will be uploaded to the remote server.
 
-### `gradio predict` — Send predictions
+### `gradio predict`: Send predictions
 
 ```bash
 gradio predict <space_id_or_url> <endpoint> <json_payload>
@@ -310,7 +310,7 @@ Verify authentication options for the installed CLI; avoid passing tokens in arg
 
 ## Additional Reference
 
-- [End-to-End Examples](examples.md) — complete working apps
+- [End-to-End Examples](examples.md); complete working apps
 
 ## Limitations
 

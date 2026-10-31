@@ -54,7 +54,7 @@ Description: $ARGUMENTS
    - `components/ui/` for available primitives
    - `components/patterns/` for existing patterns
 
-2. Compose the pattern from existing components — DO NOT recreate primitives.
+2. Compose the pattern from existing components; DO NOT recreate primitives.
 
 3. Follow the design system layout rules:
    - Cards: `bg-card rounded-2xl p-6 shadow-[var(--shadow-card)]`

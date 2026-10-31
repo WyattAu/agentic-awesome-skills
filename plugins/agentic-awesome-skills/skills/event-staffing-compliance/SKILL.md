@@ -1,6 +1,6 @@
 ---
 name: event-staffing-compliance
-description: Assess worker-classification and compliance risk for temporary event staffing in the US and Canada — W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.
+description: Assess worker-classification and compliance risk for temporary event staffing in the US and Canada; W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.
 risk: safe
 source: community
 date_added: "2026-06-05"
@@ -14,7 +14,7 @@ joint-employer liability, uninsured on-site injuries, and wage/hour
 violations. Use this skill to help a user evaluate a staffing arrangement.
 
 ## When to Use
-- Use this skill when the task matches this description: Assess worker-classification and compliance risk for temporary event staffing in the US and Canada — W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.
+- Use this skill when the task matches this description: Assess worker-classification and compliance risk for temporary event staffing in the US and Canada; W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.
 
 ## Live data
 
@@ -41,7 +41,7 @@ Walk through these for any event staffing arrangement:
    as additional insured before staff can work. Confirm who issues it and
    whether it will arrive before load-in.
 4. **Joint-employer exposure.** Directing day-to-day work of another
-   company's 1099 contractors can make the organizer a joint employer —
+   company's 1099 contractors can make the organizer a joint employer -
    inheriting wage/hour and injury liability.
 5. **Wage/hour.** Check state overtime thresholds and minimum wage against
    the planned shifts via `get_compliance_by_state`. Multi-day festivals
@@ -67,7 +67,7 @@ available when the event or venue requires them. COIs are standard. These are pr
 
 **User request:**
 
-> Assess worker-classification and compliance risk for temporary event staffing in the US and Canada — W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.
+> Assess worker-classification and compliance risk for temporary event staffing in the US and Canada; W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.
 
 ## Limitations
 
@@ -83,7 +83,7 @@ available when the event or venue requires them. COIs are standard. These are pr
 
 ## Limitations
 
-- Provides general compliance information only — not legal advice. Users should consult employment counsel for binding determinations.
+- Provides general compliance information only; not legal advice. Users should consult employment counsel for binding determinations.
 - Coverage is limited to US and Canadian markets. Not applicable for events outside this geography.
 - Does not assess compliance for permanent employment, industrial/warehouse work, or non-event temp staffing.
 - State compliance data (minimum wage, overtime rules) reflects published regulations; always verify against current law for high-stakes decisions.

@@ -18,7 +18,7 @@ tools:
 - codex-cli
 ---
 
-# LEILOEIRO JURÍDICO, PERICIAL E DE MERCADO — IA
+# LEILOEIRO JURÍDICO, PERICIAL E DE MERCADO: IA
 
 ## Overview
 
@@ -75,14 +75,14 @@ e aplique o conhecimento da skill correspondente:
 
 Quando o usuário apresentar um lote ou edital para análise, siga SEMPRE esta estrutura:
 
-## Etapa 1 — Enquadramento Jurídico
+## Etapa 1: Enquadramento Jurídico
 
 - Tipo de leilão (judicial / extrajudicial / banco / venda direta)
 - Base legal aplicável (CPC, Lei 9.514/97, outra)
 - Fase processual (se judicial): execução, penhora, avaliação, praça
 - Responsável pelo leilão: juiz, leiloeiro judicial, banco, leiloeiro extrajudicial
 
-## Etapa 2 — Análise Do Tipo De Leilão
+## Etapa 2: Análise Do Tipo De Leilão
 
 **Leilão judicial:** confira decisão e edital. O art. 891, parágrafo único,
 veda preço inferior ao mínimo judicial; apenas sem mínimo fixado aplica-se o
@@ -99,35 +99,35 @@ regras de transição; confirme com advogado a aplicação ao contrato concreto.
 **Venda Direta / Banco:**
 - Imóvel já consolidado pelo banco (pós-leilão não arrematado ou retomado)
 - Negociação direta com a instituição financeira
-- Sem concorrência pública — valor fixado pelo banco
+- Sem concorrência pública; valor fixado pelo banco
 
-## Etapa 3 — Riscos Jurídicos
+## Etapa 3: Riscos Jurídicos
 
 *(Detalhamento no módulo leiloeiro-juridico)*
 
 Verificar sempre:
-- [ ] Bem de família (Lei 8.009/90) — impenhorabilidade relativa
-- [ ] Cônjuge intimado (Art. 842 CPC) — risco de nulidade
+- [ ] Bem de família (Lei 8.009/90); impenhorabilidade relativa
+- [ ] Cônjuge intimado (Art. 842 CPC); risco de nulidade
 - [ ] Prazos de nulidade e preclusão
 - [ ] Ônus reais pendentes (hipoteca, usufruto, servidão)
-- [ ] Débitos que acompanham o imóvel (IPTU, condomínio — propter rem)
+- [ ] Débitos que acompanham o imóvel (IPTU, condomínio; propter rem)
 - [ ] Existência de recursos ou embargos suspensivos
 - [ ] Regularidade do edital e publicações
 - [ ] Situação dominial: matrícula limpa vs. gravames
 
-## Etapa 4 — Riscos Financeiros E Operacionais
+## Etapa 4: Riscos Financeiros E Operacionais
 
 *(Detalhamento no módulo leiloeiro-risco)*
 
 - Débitos de IPTU acumulados
-- Débitos de condomínio (responsabilidade propter rem — STJ Súmula 478)
+- Débitos de condomínio (responsabilidade propter rem; STJ Súmula 478)
 - Custo de desocupação / ação de imissão na posse
 - Obras e regularização necessárias
 - Custos de cartório (ITBI, escritura, registro)
 - Comissão do leiloeiro (geralmente 5%)
 - Timeline realista até liquidez
 
-## Etapa 5 — Análise De Mercado Do Imóvel
+## Etapa 5: Análise De Mercado Do Imóvel
 
 *(Detalhamento no módulo leiloeiro-mercado e leiloeiro-avaliacao)*
 
@@ -137,7 +137,7 @@ Verificar sempre:
 - Tempo médio de revenda
 - Perfil do comprador final
 
-## Etapa 6 — Estratégia Recomendada
+## Etapa 6: Estratégia Recomendada
 
 Baseado nos dados anteriores, recomendar:
 - **Teto de lance estimado, condicionado à documentação** (com base no VMP - custos - margem de segurança)
@@ -145,7 +145,7 @@ Baseado nos dados anteriores, recomendar:
 - **Estratégia pós-arrematação** (revenda rápida / reforma + revenda / renda)
 - **Condições de saída** (quando NÃO arrematar)
 
-## Etapa 7 — Conclusão Objetiva
+## Etapa 7: Conclusão Objetiva
 
 ```
 CENÁRIO: [DADOS INSUFICIENTES / EXCLUIR / CONSIDERAR APENAS SE...]
@@ -169,7 +169,7 @@ AÇÃO RECOMENDADA: ___________
 
 ## Legislação Principal
 
-- **CPC/2015** (Lei 13.105/2015): Arts. 774-925 — Execução Civil
+- **CPC/2015** (Lei 13.105/2015): Arts. 774-925; Execução Civil
   - Arts. 829-854: Penhora
   - Arts. 870-878: Avaliação
   - Arts. 879-903: Expropriação (Hasta Pública / Leilão)
@@ -253,7 +253,7 @@ Antes de responder, identifique o perfil do interlocutor e adapte:
 
 ---
 
-## Integração Entre Módulos — Como Orquestrar
+## Integração Entre Módulos: Como Orquestrar
 
 Quando receber uma solicitação complexa (análise de edital, por exemplo), use os módulos em cascata:
 
@@ -266,11 +266,11 @@ Passo 5: RISCO → Score final integrado (leiloeiro-risco)
 Passo 6: VEREDICTO → Unificar tudo no template da Etapa 7
 ```
 
-Cada módulo alimenta o próximo. A análise deve ser coesa — não repita informações entre etapas.
+Cada módulo alimenta o próximo. A análise deve ser coesa; não repita informações entre etapas.
 
 ---
 
-## Exemplo 1 — Pergunta Simples
+## Exemplo 1: Pergunta Simples
 
 **Usuário:** "O que é vil preço em leilão?"
 **Ação:** Responder direto (sem acionar módulos):
@@ -279,12 +279,12 @@ Cada módulo alimenta o próximo. A análise deve ser coesa — não repita info
 > Não transporte esse critério automaticamente à alienação fiduciária; a modalidade
 > e a versão aplicável dos arts. 26-A/27 precisam ser identificadas primeiro.
 
-## Exemplo 2 — Análise De Lote
+## Exemplo 2: Análise De Lote
 
 **Usuário:** "Analisa esse leilão pra mim" + envia edital ou dados
 **Ação:** Acionar workflow completo de 7 etapas + módulos em cascata
 
-## Exemplo 3 — Estratégia
+## Exemplo 3: Estratégia
 
 **Usuário:** "Vale a pena comprar apartamento em leilão da Caixa pra alugar?"
 **Ação:** Acionar módulos mercado + risco + avaliação sem precisar de edital específico
@@ -304,18 +304,18 @@ ser declarada ausente, sem inventar consulta ou score de risco.
 ## Referências
 
 Fontes e referências normativas:
-- CPC/2015 (Lei 13.105/2015) — Arts. 774-925 (Execução)
-- Lei 9.514/1997 — Alienação Fiduciária de Imóvel
-- Lei 8.009/1990 — Bem de Família
-- ABNT NBR 14653 — Avaliação de Imóveis
-- STJ — Jurisprudência consolidada sobre arrematação
+- CPC/2015 (Lei 13.105/2015); Arts. 774-925 (Execução)
+- Lei 9.514/1997; Alienação Fiduciária de Imóvel
+- Lei 8.009/1990; Bem de Família
+- ABNT NBR 14653; Avaliação de Imóveis
+- STJ; Jurisprudência consolidada sobre arrematação
 
 Módulos de referência:
-- `leiloeiro-juridico/SKILL.md` — CPC completo, Lei 9.514, bem de família, nulidades
-- `leiloeiro-edital/SKILL.md` — 8 blocos de auditoria de edital, matriz de risco
-- `leiloeiro-avaliacao/SKILL.md` — ABNT NBR 14653, métodos de avaliação, CUB, margem
-- `leiloeiro-mercado/SKILL.md` — Deságio, liquidez, ROI, estratégias, timing
-- `leiloeiro-risco/SKILL.md` — Score integrado 36 pontos, due diligence, árvore de decisão
+- `leiloeiro-juridico/SKILL.md`; CPC completo, Lei 9.514, bem de família, nulidades
+- `leiloeiro-edital/SKILL.md`; 8 blocos de auditoria de edital, matriz de risco
+- `leiloeiro-avaliacao/SKILL.md`; ABNT NBR 14653, métodos de avaliação, CUB, margem
+- `leiloeiro-mercado/SKILL.md`; Deságio, liquidez, ROI, estratégias, timing
+- `leiloeiro-risco/SKILL.md`; Score integrado 36 pontos, due diligence, árvore de decisão
 
 ## Best Practices
 
@@ -342,4 +342,4 @@ Módulos de referência:
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
-Fonte de correção: [STJ Súmula 478](https://scon.stj.jus.br/SCON/sumstj/toc.jsp?livre=%27478%27.num.) — preferência do crédito condominial, não regra geral de assunção de dívidas.
+Fonte de correção: [STJ Súmula 478](https://scon.stj.jus.br/SCON/sumstj/toc.jsp?livre=%27478%27.num.); preferência do crédito condominial, não regra geral de assunção de dívidas.

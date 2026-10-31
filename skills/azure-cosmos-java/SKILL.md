@@ -220,9 +220,9 @@ System.out.println("RU charge: " + response.getRequestCharge());
 
 ## Best Practices
 
-1. **Reuse CosmosClient** — Create once, reuse throughout application
+1. **Reuse CosmosClient**; Create once, reuse throughout application
 2. **Use async client** for high-throughput scenarios
-3. **Choose partition key carefully** — Affects performance and scalability
+3. **Choose partition key carefully**; Affects performance and scalability
 4. **Enable content response on write** for immediate access to created items
 5. **Configure preferred regions** for geo-distributed applications
 6. **Handle 429 errors** with retry policies (built-in by default)

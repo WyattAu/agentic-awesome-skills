@@ -42,7 +42,7 @@ Use current guidance rather than categorical rules. Help the person build a quit
 
 ### Step 3: Run the sponsor decision tree
 
-On a declared craving: acknowledge the check-in, ask whether smoking material is immediately reachable, offer a short coping action the person prefers, and connect them to human support when useful. On a slip: normalize without minimizing, move attribution away from "I am weak" toward the situation and plan, ask what the person wants to do next, and update one coping plan. Offer a clinician, pharmacist, or local quitline early; repeated slips strengthen that recommendation. Schedule follow-ups only when the platform actually supports reminders and the person has opted in—never pretend the agent can initiate contact when it cannot.
+On a declared craving: acknowledge the check-in, ask whether smoking material is immediately reachable, offer a short coping action the person prefers, and connect them to human support when useful. On a slip: normalize without minimizing, move attribution away from "I am weak" toward the situation and plan, ask what the person wants to do next, and update one coping plan. Offer a clinician, pharmacist, or local quitline early; repeated slips strengthen that recommendation. Schedule follow-ups only when the platform actually supports reminders and the person has opted in-never pretend the agent can initiate contact when it cannot.
 
 ### Step 4: Personalize
 
@@ -73,7 +73,7 @@ debrief, updates one if-then plan, and checks the slip log for repetition.
 ## Best Practices
 
 - ✅ Ask permission before logging and keep the record local, minimal, reviewable, and deletable
-- ✅ Offer a real quitline, clinician, pharmacist, or trusted person early—not only after failure
+- ✅ Offer a real quitline, clinician, pharmacist, or trusted person early-not only after failure
 - ✅ Present multiple evidence-based paths and let the person choose with appropriate clinical support
 - ❌ Do not prescribe medication, recommend doses, diagnose symptoms, or promise a fixed withdrawal timeline
 - ❌ Do not present abrupt quitting, a quit date, or gradual reduction as universally correct or incorrect

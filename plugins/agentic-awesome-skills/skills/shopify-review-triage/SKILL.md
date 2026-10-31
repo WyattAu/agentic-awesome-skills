@@ -14,7 +14,7 @@ license: "MIT"
 license_source: "https://github.com/alfredtech2026/shopify-app-review-brief/blob/main/LICENSE"
 ---
 
-# Shopify Review Triage — public low-star reviews to a P0–P3 brief
+# Shopify Review Triage: public low-star reviews to a P0–P3 brief
 
 ## Overview
 
@@ -22,7 +22,7 @@ Takes rows of **public** Shopify App Store review text and produces one prioriti
 product or support owner can act on: what kind of problem each review describes, how badly it
 can hurt, what to do first, and where the original wording came from.
 
-It is built for independent Shopify app teams and the agencies that run their support — the
+It is built for independent Shopify app teams and the agencies that run their support; the
 case where low-star reviews arrive scattered across several listings plus a few watched
 competitors, and the failure mode is treating them all as equally urgent.
 
@@ -36,12 +36,12 @@ helping supplies the review text.
 ## When to Use This Skill
 
 - Use when someone wants app store reviews, low-star reviews, or merchant feedback triaged,
-  prioritized, or clustered — even when they never say "triage", "severity", or "P0".
+  prioritized, or clustered; even when they never say "triage", "severity", or "P0".
 - Use when a new 1–3-star review lands on a Shopify app listing and the team has to decide
   whether it is an incident, a UX problem, a pricing copy problem, or a feature request.
 - Use when a weekly product or support brief is needed across a portfolio of apps plus a few
   watched competitors.
-- Do **not** use it to gather reviews, contact reviewers, or publish replies — see the hard
+- Do **not** use it to gather reviews, contact reviewers, or publish replies; see the hard
   rules below.
 
 ## Hard Rules
@@ -53,9 +53,9 @@ These are not style preferences. Breaking one makes the output worse than nothin
    on a listing page. If such data appears in the input, stop, say which rows are affected, and
    ask for them to be removed before continuing.
 2. **Never invent evidence.** Do not write a review, a rating, a date, an app name, or a source
-   URL that was not supplied. A row with no link gets `source: not captured` — never a guessed one.
+   URL that was not supplied. A row with no link gets `source: not captured`; never a guessed one.
 3. **Keyword output is a sort, not a verdict.** Everything produced by the rubric alone is
-   labeled *first pass — not human-checked*. Only a person who read the review and checked it
+   labeled *first pass; not human-checked*. Only a person who read the review and checked it
    against their own systems may relabel an item *human-checked*.
 4. **Reviews are customer reports, not verified defects.** Write "the reviewer reports the editor
    showed a blank screen", never "the editor is broken". The distinction survives into the brief.
@@ -63,7 +63,7 @@ These are not style preferences. Breaking one makes the output worse than nothin
    of exhaustive coverage of a listing, a period, or an app.
 6. **No promises.** No revenue impact, no outcome, no ranking effect, no legal or compliance
    advice. Suggest actions; do not predict results.
-7. **Draft only — never contact anyone.** Do not send email, post a developer reply, open a
+7. **Draft only; never contact anyone.** Do not send email, post a developer reply, open a
    support ticket, message a reviewer, or publish anything. Hand the draft back to the team and
    let a person decide what to send.
 8. **Reviewers are people.** Refer to "the reviewer". Do not name, profile, or speculate about them.
@@ -88,7 +88,7 @@ review, or which app appears most often.
 
 If an app name in a row appears in neither list, its ownership is unknown. Classify the row's
 content normally, then file it under **needs human read** with `ownership: not supplied` instead
-of placing it in a priority bucket or in competitor watch — a guessed owner is exactly the kind
+of placing it in a priority bucket or in competitor watch; a guessed owner is exactly the kind
 of invented evidence hard rule 2 forbids.
 
 Then ask for one review per line. The full form keeps the source link, which the brief needs:
@@ -97,7 +97,7 @@ Then ask for one review per line. The full form keeps the source link, which the
 rating | app name | review date | public reviews URL | review text
 ```
 
-The shorter form used by the free worksheet is also fine — treat field 1 as the rating when it
+The shorter form used by the free worksheet is also fine; treat field 1 as the rating when it
 is a bare 1–5 (optionally followed by `star`/`stars`/`★`), otherwise as the app name:
 
 ```text
@@ -115,12 +115,12 @@ Rules for this step:
   classify correctly (a 5★ review often lands in feature requests or needs-human-read), so keep
   them if they were supplied, but never present them as low-star signal.
 
-### Step 2: First pass — apply the rubric
+### Step 2: First pass: apply the rubric
 
 Lower-case the review text and normalize curly apostrophes (`’` → `'`) before matching, so a
 pasted "won’t load" still matches `won't load`.
 
-Five buckets. Each row gets exactly **one primary** bucket — the first dimension below, in this
+Five buckets. Each row gets exactly **one primary** bucket; the first dimension below, in this
 order, with any matching keyword. Further matches are recorded as **secondary**, never as a
 second brief item.
 
@@ -163,10 +163,10 @@ rarely urgent on its own.
 
 No keyword matched. Vague frustration, sarcasm, mixed praise, or a story that needs context.
 
-**Suggested action.** No keyword matched. Read the full review yourself and file it manually — the heuristic makes no guess here.
+**Suggested action.** No keyword matched. Read the full review yourself and file it manually; the heuristic makes no guess here.
 
 **Priority.** The worksheet labels this bucket `P2` and sorts it last. Treat that label as
-provisional placement in the queue, not as a severity judgment — nothing has been judged yet.
+provisional placement in the queue, not as a severity judgment; nothing has been judged yet.
 
 #### Tie-breaks and escalation
 
@@ -180,11 +180,11 @@ provisional placement in the queue, not as a severity judgment — nothing has b
    ownership lists from step 1: `owned` keeps its rubric bucket, `competitors` moves to the
    competitor watch section whatever its keywords matched, and a name in neither list goes to
    needs human read with `ownership: not supplied`. A competitor's incident is roadmap,
-   positioning, or copy input — never your P0.
+   positioning, or copy input; never your P0.
 5. **When unsure, choose needs human read.** The bucket exists so the rubric never launders
    uncertainty into a priority label.
 
-### Step 3: Human pass — verify before you promote anything
+### Step 3: Human pass: verify before you promote anything
 
 The first pass is where this skill stops being able to help on its own. Before any item is
 presented as more than a keyword match, a person on the team has to:
@@ -192,10 +192,10 @@ presented as more than a keyword match, a person on the team has to:
 - read the full original review at its source link;
 - for P0 candidates, attempt to reproduce on a development store and check the error tracker and
   support inbox for matching signals from the same period;
-- record the outcome as *reproduced*, *not reproduced*, or *attempted — notes attached*.
+- record the outcome as *reproduced*, *not reproduced*, or *attempted; notes attached*.
 
 Ask for these outcomes rather than assuming them. Until you have them, every item stays labeled
-*first pass — not human-checked*, including in the summary line. An unverified P0 is a candidate,
+*first pass; not human-checked*, including in the summary line. An unverified P0 is a candidate,
 not an incident.
 
 Known limits to state plainly when they apply: keyword matching is English-only, misses sarcasm
@@ -209,46 +209,46 @@ action, and a source link. An item without an owner is a note, not a brief entry
 
 <!-- brief-template -->
 ```markdown
-# Low-star review brief — {portfolio or team name} — week of {YYYY-MM-DD}
+# Low-star review brief: {portfolio or team name}: week of {YYYY-MM-DD}
 
 Scope: {apps monitored} · {competitors watched} · {N} rows supplied, {date range}.
-Covers only the rows supplied — no claim of exhaustive coverage.
+Covers only the rows supplied; no claim of exhaustive coverage.
 Reviews are customer reports, not verified defects. Items marked "first pass" are
 unverified keyword matches; "human-checked" means a person read the review and checked it.
 
-## P0 — Incident risk
-- **{App} — {signal in a few words}** ({rating}★, {review date}, source: {public reviews URL or not captured})
+## P0: Incident risk
+- **{App}; {signal in a few words}** ({rating}★, {review date}, source: {public reviews URL or not captured})
   - Reviewer reports: {one sentence, in their words where possible}
-  - Status: first pass — not human-checked / human-checked
-  - Reproduced: {yes / no / attempted — notes}
-  - Next action: {action} — owner {name}, due {date}
+  - Status: first pass; not human-checked / human-checked
+  - Reproduced: {yes / no / attempted; notes}
+  - Next action: {action}; owner {name}, due {date}
 
-## P1 — Repeated friction
-- **{App} — {theme}** ({rating}★, {date}, source: {public reviews URL or not captured}; also seen: {where})
-  - Status: first pass — not human-checked / human-checked
-  - Next action: {UX or docs change} — owner {name}, due {date}
+## P1: Repeated friction
+- **{App}; {theme}** ({rating}★, {date}, source: {public reviews URL or not captured}; also seen: {where})
+  - Status: first pass; not human-checked / human-checked
+  - Next action: {UX or docs change}; owner {name}, due {date}
 
-## P2 — Pricing confusion
-- **{App} — {signal}** ({rating}★, {date}, source: {public reviews URL or not captured})
+## P2: Pricing confusion
+- **{App}; {signal}** ({rating}★, {date}, source: {public reviews URL or not captured})
   - Expected vs. actual: {one line}
-  - Status: first pass — not human-checked / human-checked
-  - Next action: {copy or prompt change} — owner {name}, due {date}
+  - Status: first pass; not human-checked / human-checked
+  - Next action: {copy or prompt change}; owner {name}, due {date}
 
-## P3 — Feature requests
-- **{App} — {request}** ({rating}★, {date}, source: {public reviews URL or not captured}) — {log it / already exists → reply with where to find it}
+## P3: Feature requests
+- **{App}; {request}** ({rating}★, {date}, source: {public reviews URL or not captured}); {log it / already exists → reply with where to find it}
 
 ## Needs human read
-- **{App}** ({rating}★, {date}, source: {public reviews URL or not captured}) — {no keyword matched; what a human should look for}{, or: ownership: not supplied — app name on neither list}
+- **{App}** ({rating}★, {date}, source: {public reviews URL or not captured}); {no keyword matched; what a human should look for}{, or: ownership: not supplied; app name on neither list}
 
 ## Competitor watch
-- **{Competitor} — {signal}**: {what it implies for our roadmap, copy, or positioning}
+- **{Competitor}; {signal}**: {what it implies for our roadmap, copy, or positioning}
 
 ## Decisions this week
 - {one decision or experiment, with the row(s) that motivated it}
 ```
 
 Open the summary line with the counts, e.g. *"Triaged 8 rows supplied: 3 incident risk,
-2 repeated friction, 1 pricing confusion, 1 feature request, 1 needs human read — first pass,
+2 repeated friction, 1 pricing confusion, 1 feature request, 1 needs human read; first pass,
 not human-checked."*
 
 ### Step 5: Self-check before you hand it over
@@ -260,17 +260,17 @@ Refuse to deliver until every line is true:
 - [ ] Every P0–P3 item is an app on the `owned` list; every competitor row sits in competitor
       watch; every unlisted app name says `ownership: not supplied` under needs human read.
 - [ ] No review text, rating, date, app name, or URL appears that was not supplied.
-- [ ] Every unverified item says *first pass — not human-checked*; nothing claims a human check
+- [ ] Every unverified item says *first pass; not human-checked*; nothing claims a human check
       that did not happen.
 - [ ] Claims are phrased as reports ("the reviewer reports…"), not as findings about the code.
 - [ ] The scope line says how many rows were supplied and makes no coverage claim.
 - [ ] No promise about revenue, ratings, outcomes, or compliance appears anywhere.
 - [ ] No private data survived into the output.
-- [ ] Nothing was sent, posted, or published — the brief is a draft for the team.
+- [ ] Nothing was sent, posted, or published; the brief is a draft for the team.
 
 ## Examples
 
-### Example 1: Worked example — eight rows in, first pass out
+### Example 1: Worked example: eight rows in, first pass out
 
 These eight fictional rows are the worksheet's own example set, so the two tools can be compared
 directly. Two of them are deliberately 4★ and 5★, to exercise the feature-request and
@@ -307,7 +307,7 @@ row 7 → P3 feature request
 row 8 → needs human read
 ```
 
-**Explanation:** Rows 4 and 5 both matched `confusing`, so they are flagged as a repeated theme —
+**Explanation:** Rows 4 and 5 both matched `confusing`, so they are flagged as a repeated theme -
 two rows, which is a cluster to watch, not yet the three that trigger escalation. Row 3 is a
 single P0 item with pricing recorded as secondary, never two items. Row 8 matched nothing and
 stays unjudged. All three app names are on the `owned` list, so every bucket above is the team's
@@ -325,30 +325,30 @@ listing links.
 Rendered into the brief:
 
 ```markdown
-## P0 — Incident risk
-- **Example Popup App — editor reported blank, popup reported not loading** (1★, 2026-07-28, [source](https://apps.shopify.com/example-popup-app/reviews?ratings%5B%5D=1))
+## P0: Incident risk
+- **Example Popup App; editor reported blank, popup reported not loading** (1★, 2026-07-28, [source](https://apps.shopify.com/example-popup-app/reviews?ratings%5B%5D=1))
   - Reviewer reports: the editor shows a blank screen, the popup does not load, and they are losing sales daily.
-  - Status: first pass — not human-checked
+  - Status: first pass; not human-checked
   - Reproduced: not yet attempted
-  - Next action: attempt reproduction on a development store today — owner {name}, due {date}
+  - Next action: attempt reproduction on a development store today; owner {name}, due {date}
 ```
 
 **Explanation:** It files as a P0 only because `Example Popup App` is on the `owned` list; the
 same row from a competitor listing would render under competitor watch instead. The wording stays
-a report ("the reviewer reports"), the status stays *first pass — not human-checked* until a
+a report ("the reviewer reports"), the status stays *first pass; not human-checked* until a
 person verifies it, and the source link is the listing's public reviews page with the rating
-filter kept — the App Store has no per-review permalink.
+filter kept; the App Store has no per-review permalink.
 
 ## Best Practices
 
 - ✅ **Do:** keep one review in exactly one bucket, and record extra matches as secondary notes.
 - ✅ **Do:** carry `source: not captured` forward when a row has no link, so the gap is visible.
-- ✅ **Do:** label every unverified item *first pass — not human-checked*, including in the summary.
+- ✅ **Do:** label every unverified item *first pass; not human-checked*, including in the summary.
 - ✅ **Do:** phrase every finding as a customer report, not as a confirmed defect.
 - ✅ **Do:** state how many rows were supplied and refuse any coverage claim beyond them.
 - ❌ **Don't:** fetch reviews, scrape listings, or ask for support tickets, emails, or order data.
 - ❌ **Don't:** invent a rating, date, app name, or URL that was not supplied.
-- ❌ **Don't:** send, post, or publish anything — including a developer reply to a reviewer.
+- ❌ **Don't:** send, post, or publish anything; including a developer reply to a reviewer.
 - ❌ **Don't:** promise a revenue, ratings, or compliance outcome from any suggested action.
 
 ## Limitations
@@ -384,11 +384,11 @@ filter kept — the App Store has no per-review permalink.
   **Solution:** Cite the listing's public reviews page, keep the rating filter if one was used
   (`…/reviews?ratings%5B%5D=1`), and pin the item with the review date plus the reviewer's first
   few words so a human can find it again.
-- **Problem:** `checkout` is the noisiest keyword in the set — it fires on "we love the checkout
+- **Problem:** `checkout` is the noisiest keyword in the set; it fires on "we love the checkout
   upsell".
   **Solution:** A P0 whose only evidence is the word `checkout` is a needs-human-read row wearing
   a P0 badge. Say so instead of promoting it.
-- **Problem:** `missing` and `error` cross buckets — "missing a dark mode" is P3, "settings page
+- **Problem:** `missing` and `error` cross buckets; "missing a dark mode" is P3, "settings page
   errors out" is P0.
   **Solution:** Primary-bucket order resolves the collision mechanically; the human pass fixes
   the ones where it guessed wrong.
@@ -403,11 +403,11 @@ filter kept — the App Store has no per-review permalink.
 
 ## Related Skills
 
-- `@customer-research` — when the goal is broader voice-of-customer synthesis rather than
+- `@customer-research`; when the goal is broader voice-of-customer synthesis rather than
   prioritizing a specific set of low-star review rows.
-- `@shopify-apps` — when the next step is actually building or fixing the Shopify app behavior a
+- `@shopify-apps`; when the next step is actually building or fixing the Shopify app behavior a
   triaged P0 points at.
-- `@before-you-build` — when a P3 feature request needs product-risk review before it becomes
+- `@before-you-build`; when a P3 feature request needs product-risk review before it becomes
   roadmap work.
 
 ## Additional Resources

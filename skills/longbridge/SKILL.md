@@ -1,6 +1,6 @@
 ---
 name: longbridge
-description: "Guide to using a separately installed Longbridge integration — real-time quotes, charts, fundamentals, portfolio analysis, options, and more for HK/US/A-share/SG markets. Trilingual: Simplified Chinese, Traditional Chinese, English."
+description: "Guide to using a separately installed Longbridge integration; real-time quotes, charts, fundamentals, portfolio analysis, options, and more for HK/US/A-share/SG markets. Trilingual: Simplified Chinese, Traditional Chinese, English."
 category: finance
 risk: critical
 source: official
@@ -46,7 +46,7 @@ AAS bundles this guide only, not the upstream collection or CLI. Inspect the act
 longbridge --help
 ```
 
-List all available subcommands. Never hard-code subcommand names — the CLI evolves.
+List all available subcommands. Never hard-code subcommand names; the CLI evolves.
 
 ### Step 2: Check Subcommand Options
 
@@ -83,7 +83,7 @@ npx skills add https://github.com/longbridge/skills
 
 ## MCP Fallback
 
-If the `longbridge` CLI binary is not installed, fall back to MCP tools. Inspect available MCP tools at runtime — do not hard-code MCP tool names as they change with server versions.
+If the `longbridge` CLI binary is not installed, fall back to MCP tools. Inspect available MCP tools at runtime; do not hard-code MCP tool names as they change with server versions.
 
 ## Limitations
 

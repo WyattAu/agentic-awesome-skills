@@ -18,10 +18,10 @@ Use when doing ANY task involving Supabase. Triggers: Supabase products (Databas
 
 ## Core Principles
 
-**1. Supabase changes frequently — verify against changelog and current docs before implementing.**
+**1. Supabase changes frequently; verify against changelog and current docs before implementing.**
 Do not rely on training data for Supabase features. Function signatures, config.toml settings, and API conventions change between versions.
 
-First, fetch `https://supabase.com/changelog.md` (a lightweight summary index — not a heavy pull), scan for `breaking-change` tags relevant to your task, and follow the linked page for any that apply. Then look up the relevant topic using the documentation access methods below.
+First, fetch `https://supabase.com/changelog.md` (a lightweight summary index; not a heavy pull), scan for `breaking-change` tags relevant to your task, and follow the linked page for any that apply. Then look up the relevant topic using the documentation access methods below.
 
 **2. Verify your work.**
 Verify with the smallest relevant check in an authorized local/test environment; use role-specific positive and negative policy tests for access changes. A SQL query is not appropriate verification for every UI, auth or docs change. State any unavailable check rather than issuing production mutations for verification.
@@ -51,14 +51,14 @@ When working on any Supabase task that touches auth, RLS, views, storage, or use
 
 - **RLS, views, and privileged database code**
   - **Views bypass RLS by default.** In Postgres 15 and above, use `CREATE VIEW ... WITH (security_invoker = true)`. In older versions of Postgres, protect your views by revoking access from the `anon` and `authenticated` roles, or by putting them in an unexposed schema.
-  - **UPDATE requires a SELECT policy.** In Postgres RLS, an UPDATE needs to first SELECT the row. Without a SELECT policy, updates silently return 0 rows — no error, just no change.
-  - **`auth.role()` is deprecated — use the `TO` clause instead.** Supabase has deprecated `auth.role()` in favour of specifying the target role directly on the policy with `TO authenticated` or `TO anon`. Beyond deprecation, `auth.role() = 'authenticated'` breaks silently when anonymous sign-ins are enabled, because anonymous sign-in users carry the `authenticated` Postgres role, including with `TO authenticated`. If guest accounts must be excluded, check the verified `is_anonymous` claim too; role targeting alone does not distinguish guest from permanent users.
+  - **UPDATE requires a SELECT policy.** In Postgres RLS, an UPDATE needs to first SELECT the row. Without a SELECT policy, updates silently return 0 rows; no error, just no change.
+  - **`auth.role()` is deprecated; use the `TO` clause instead.** Supabase has deprecated `auth.role()` in favour of specifying the target role directly on the policy with `TO authenticated` or `TO anon`. Beyond deprecation, `auth.role() = 'authenticated'` breaks silently when anonymous sign-ins are enabled, because anonymous sign-in users carry the `authenticated` Postgres role, including with `TO authenticated`. If guest accounts must be excluded, check the verified `is_anonymous` claim too; role targeting alone does not distinguish guest from permanent users.
     ```sql
     -- Deprecated (do not use)
     create policy "example" on table_name for select
     using ( auth.role() = 'authenticated' );
     ```
-  - **`TO authenticated` alone is authentication without authorization (BOLA / IDOR).** Using `TO authenticated` only checks the role — it does not restrict which rows a user can access. The correct pattern combines `TO authenticated` with an ownership predicate in `USING`:
+  - **`TO authenticated` alone is authentication without authorization (BOLA / IDOR).** Using `TO authenticated` only checks the role; it does not restrict which rows a user can access. The correct pattern combines `TO authenticated` with an ownership predicate in `USING`:
     ```sql
     create policy "example" on table_name for select
     to authenticated
@@ -84,7 +84,7 @@ For any security concern not covered above, fetch the Supabase product security 
 
 ## Supabase CLI
 
-Always discover commands via `--help` — never guess. The CLI structure changes between versions.
+Always discover commands via `--help`; never guess. The CLI structure changes between versions.
 
 ```bash
 supabase --help                    # All top-level commands
@@ -104,7 +104,7 @@ supabase <group> <command> --help  # Flags for a specific command
 
 For setup instructions, server URL, and configuration, see the [MCP setup guide](https://supabase.com/docs/guides/getting-started/mcp).
 
-**Troubleshooting connection issues** — follow these steps in order:
+**Troubleshooting connection issues**; follow these steps in order:
 
 1. **Check if the server is reachable:**
    `curl -so /dev/null -w "%{http_code}" https://mcp.supabase.com/mcp`
@@ -114,14 +114,14 @@ For setup instructions, server URL, and configuration, see the [MCP setup guide]
    Verify the project root has a valid `.mcp.json` with the correct server URL. If missing, prepare the configuration for the user’s actual client and authorized project scope; do not automatically add a connector or expose every project. Prefer read-only, project-scoped access where sufficient.
 
 3. **Authenticate the MCP server:**
-   If the server is reachable and `.mcp.json` is correct but tools aren't visible, the user needs to authenticate. The Supabase MCP server uses OAuth 2.1 — tell the user to trigger the auth flow in their agent, complete it in the browser, and reload the session.
+   If the server is reachable and `.mcp.json` is correct but tools aren't visible, the user needs to authenticate. The Supabase MCP server uses OAuth 2.1; tell the user to trigger the auth flow in their agent, complete it in the browser, and reload the session.
 
 ## Supabase Documentation
 
 Before implementing any Supabase feature, find the relevant documentation. Use these methods in priority order:
 
-1. **MCP `search_docs` tool** (preferred — returns relevant snippets directly)
-2. **Fetch docs pages as markdown** — any docs page can be fetched by appending `.md` to the URL path.
+1. **MCP `search_docs` tool** (preferred; returns relevant snippets directly)
+2. **Fetch docs pages as markdown**; any docs page can be fetched by appending `.md` to the URL path.
 3. **Web search** for Supabase-specific topics when you don't know which page to look at.
 
 ## Making and Committing Schema Changes

@@ -236,11 +236,11 @@ Here's why:
 ```
 [X things I learned about [topic] after [credibility builder]:
 
-1. [Point] — [Brief explanation]
+1. [Point]; [Brief explanation]
 
-2. [Point] — [Brief explanation]
+2. [Point]; [Brief explanation]
 
-3. [Point] — [Brief explanation]
+3. [Point]; [Brief explanation]
 
 [Wrap-up insight]
 
@@ -335,7 +335,7 @@ The first line determines whether anyone reads the rest. Use these patterns:
 ### Curiosity Hooks
 - "I was wrong about [common belief]."
 - "The real reason [outcome] happens isn't what you think."
-- "[Impressive result] — and it only took [surprisingly short time]."
+- "[Impressive result]; and it only took [surprisingly short time]."
 - "Nobody talks about [insider knowledge]."
 
 ### Story Hooks
@@ -411,8 +411,8 @@ Turn one piece of content into many:
 | Wed | Educational | Tips tweet | Reel |
 | Thu | Story post | Thread | Educational |
 | Fri | Hot take | Engagement | Story |
-| Sat | — | Curated RT | User content |
-| Sun | — | Personal | Behind-scenes |
+| Sat | - | Curated RT | User content |
+| Sun | - | Personal | Behind-scenes |
 
 ### Monthly Content Mix
 
@@ -438,7 +438,7 @@ Turn one piece of content into many:
 
 ### Proactive Engagement
 
-Engagement isn't just responding—it's actively participating:
+Engagement isn't just responding-it's actively participating:
 
 **Daily engagement routine (30 min):**
 1. Respond to all comments on your posts (5 min)
@@ -610,7 +610,7 @@ Instead of guessing what works, systematically analyze top-performing content in
 
 ### The 6-Step Framework
 
-#### 1. NICHE ID — Find Top Creators
+#### 1. NICHE ID: Find Top Creators
 
 Identify 10-20 creators in your space who consistently get high engagement:
 
@@ -626,15 +626,15 @@ Identify 10-20 creators in your space who consistently get high engagement:
 - Use tools like SparkToro, Followerwonk, or manual research
 - Look at who gets featured in industry newsletters
 
-#### 2. SCRAPE — Collect Posts at Scale
+#### 2. SCRAPE: Collect Posts at Scale
 
 Collect a justified, authorized sample using permitted exports/APIs or manual review; do not bypass access controls or platform restrictions:
 
 **Tools:**
-- **Apify** — LinkedIn scraper, Twitter scraper actors
-- **Phantom Buster** — Multi-platform automation
-- **Export tools** — Platform-specific export features
-- **Manual collection** — For smaller datasets, copy/paste into spreadsheet
+- **Apify**; LinkedIn scraper, Twitter scraper actors
+- **Phantom Buster**; Multi-platform automation
+- **Export tools**; Platform-specific export features
+- **Manual collection**; For smaller datasets, copy/paste into spreadsheet
 
 **Data to collect:**
 - Post text/content
@@ -645,7 +645,7 @@ Collect a justified, authorized sample using permitted exports/APIs or manual re
 - CTA used
 - Topic/theme
 
-#### 3. ANALYZE — Extract What Actually Works
+#### 3. ANALYZE: Extract What Actually Works
 
 Sort and analyze the data to find patterns:
 
@@ -669,7 +669,7 @@ Sort and analyze the data to find patterns:
 - What CTAs drive most comments?
 - What topics get saved/shared most?
 
-#### 4. PLAYBOOK — Codify Patterns
+#### 4. PLAYBOOK: Codify Patterns
 
 Document repeatable patterns you can use:
 
@@ -699,7 +699,7 @@ Why it works: Pattern interrupt + invites debate
 - Share: "Tag someone who needs this"
 - Save: "Save this for later"
 
-#### 5. LAYER VOICE — Apply Direct Response Principles
+#### 5. LAYER VOICE: Apply Direct Response Principles
 
 Take proven patterns and make them yours with these voice principles:
 
@@ -756,7 +756,7 @@ My hands were shaking when I sent the email.
 Here's what happened..."
 ```
 
-#### 6. CONVERT — Turn Attention into Action
+#### 6. CONVERT: Turn Attention into Action
 
 Bridge from engagement to business results:
 

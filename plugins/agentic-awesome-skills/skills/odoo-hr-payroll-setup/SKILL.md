@@ -69,16 +69,16 @@ Reconcile actual localization, employer liabilities and posted entries separatel
 
 ## Best Practices
 
-- ✅ **Do:** Install your country's **payroll localization** (`l10n_us_hr_payroll`, `l10n_mx_hr_payroll`, etc.) before building custom rules — it provides pre-configured tax structures.
+- ✅ **Do:** Install your country's **payroll localization** (`l10n_us_hr_payroll`, `l10n_mx_hr_payroll`, etc.) before building custom rules; it provides pre-configured tax structures.
 - ✅ **Do:** Use **salary rule inputs** (`inputs.ALLOWANCE.amount`) to pass variable values (bonuses, allowances, withholding rates) rather than hardcoding them in the rule formula.
-- ✅ **Do:** Archive old salary structures rather than deleting them — active payslips reference their structure and will break if the structure is deleted.
+- ✅ **Do:** Archive old salary structures rather than deleting them; active payslips reference their structure and will break if the structure is deleted.
 - ✅ **Do:** Always set an active **Employee Contract** with correct dates and salary before generating payslips.
 - ❌ **Don't:** Rewrite posted payroll/accounting history. Follow the installed localization’s approved reversal/correction process and preserve the audit trail.
-- ❌ **Don't:** Use `contract.wage` in deduction rules without verifying whether the structure is monthly or annual — always check the contract wage period.
+- ❌ **Don't:** Use `contract.wage` in deduction rules without verifying whether the structure is monthly or annual; always check the contract wage period.
 
 ## Limitations
 
-- **Odoo Payroll is Enterprise-only** — the Community Edition does not include the Payroll module (`hr_payroll`).
+- **Odoo Payroll is Enterprise-only**; the Community Edition does not include the Payroll module (`hr_payroll`).
 - US filing capabilities vary by localization/version/provider; verify current supported forms and jurisdiction requirements rather than assuming this guide supplies legal compliance.
 - Does not cover **multi-country payroll** (employees in different countries require separate structures and localizations).
 - **Expense reimbursements** via payslip (e.g., mileage, home office) require a custom salary rule input and are not covered in standard HR Payroll documentation.

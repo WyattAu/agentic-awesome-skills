@@ -1,17 +1,17 @@
-# SHOT LIST — <title>
+# SHOT LIST: <title>
 
 **Format:** <aspect> · <total length> · target model: <model>
 **Mode:** text-to-video | image-to-video (reference: <file/description>)
-**Brand / product:** <name, or "none given — generic">
+**Brand / product:** <name, or "none given; generic">
 **Logline:** <one sentence>
 
 ## Crew notes
-**Director** — intent, hook, beats
-**Production designer** — continuity bible (C1…, L1…, P1…)
-**DP / Gaffer** — look summary in two lines
-**Editor** — timeline summary
-**Sound** — (if applicable)
-**Script supervisor** — flags resolved
+**Director**; intent, hook, beats
+**Production designer**; continuity bible (C1…, L1…, P1…)
+**DP / Gaffer**; look summary in two lines
+**Editor**; timeline summary
+**Sound**; (if applicable)
+**Script supervisor**; flags resolved
 
 ## Shots
 | # | Time | Size · Lens · Move | Action (one) | Gen length | Risk |
@@ -35,4 +35,4 @@ Negative (if supported): `<negative prompt>`
 |---|---|---|
 | S1 | … | … |
 
-**Highest-risk shot:** S? — <why>
+**Highest-risk shot:** S?; <why>

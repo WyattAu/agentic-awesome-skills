@@ -25,8 +25,8 @@ intent across the dual-role tool surface: 9 `candidate.*` tools (job search,
 job detail, applications, apply, invitations, saved jobs) and the
 `employer.*` tools (job lifecycle, candidate discovery, invitations,
 applicant review). Employer candidate discovery returns tiered rankings
-(best/good/weak) with a white-box match explanation per candidate — fit
-score, skills proven in interview, gaps, and a quotable rationale — instead
+(best/good/weak) with a white-box match explanation per candidate; fit
+score, skills proven in interview, gaps, and a quotable rationale; instead
 of a black-box score.
 
 ## When to Use This Skill
@@ -105,12 +105,12 @@ Agent: employer.search_candidates_for_job(jobId)
 ## Best Practices
 
 - ✅ Confirm with the user before applying, inviting, or changing job
-  status — these are visible, stateful marketplace actions.
+  status; these are visible, stateful marketplace actions.
 - ✅ Quote the white-box match explanation when recommending a candidate,
   so the employer sees why, not just a score.
 - ✅ Use `request_access` for key onboarding instead of asking users to
   paste credentials into chat.
-- ❌ Don't fabricate fit scores or ranks — only report what the tools
+- ❌ Don't fabricate fit scores or ranks; only report what the tools
   return.
 - ❌ Don't apply to jobs or send invitations in bulk without explicit
   user approval.
@@ -134,6 +134,6 @@ Agent: employer.search_candidates_for_job(jobId)
 
 ## Additional Resources
 
-- [Source repository](https://github.com/work0r-ai/agent-kit) — full skill
+- [Source repository](https://github.com/work0r-ai/agent-kit); full skill
   with reference files and agents (npm: `@workorai/agent-kit`)
 - [WorkorAI MCP endpoint](https://workorai.com/mcp)

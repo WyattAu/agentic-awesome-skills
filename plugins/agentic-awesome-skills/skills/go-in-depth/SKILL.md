@@ -1,6 +1,6 @@
 ---
 name: go-in-depth
-description: Go in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.
+description: Go in depth harness; fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.
 risk: safe
 source: self
 source_type: self
@@ -11,11 +11,11 @@ date_added: "2026-07-07"
 
 ## Overview
 
-Go in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. Run the "go-in-depth" workflow.
+Go in depth harness; fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. Run the "go-in-depth" workflow.
 
 ## When to Use
 
-When the user wants a deep, multi-source, fact-checked research report on any topic. BEFORE invoking, check if the question is specific enough to research directly — if underspecified (e.g., "what car to buy" without budget/use-case/region), ask 2-3 clarifying questions to narrow scope. Then pass the refined question as args, weaving the answers in.
+When the user wants a deep, multi-source, fact-checked research report on any topic. BEFORE invoking, check if the question is specific enough to research directly; if underspecified (e.g., "what car to buy" without budget/use-case/region), ask 2-3 clarifying questions to narrow scope. Then pass the refined question as args, weaving the answers in.
 
 ## How It Works
 

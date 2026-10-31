@@ -309,7 +309,7 @@ ropgadget              # 内嵌 gadget 搜索
 ## 注意事项
 
 - **NX 关 + ASLR 关**才能直接 shellcode；现代二进制基本都开 NX
-- **canary 在 fork 子进程里不变** — forking server 可以一次 byte 一次 byte 爆破（1/256 × 7 字节）
-- **格式化字符串可以同时 leak canary 和 libc** — 用 `%p %p ... %p` 扫栈
-- **DynELF 慢但万能** — 完全没给 libc 时，pwntools 的 `DynELF` 可以纯靠程序自己的 IO 原语逐字节 leak 符号表
-- **静态链接的程序没有 libc.got** — 走 SROP（sigreturn-oriented programming）或直接 syscall
+- **canary 在 fork 子进程里不变**; forking server 可以一次 byte 一次 byte 爆破（1/256 × 7 字节）
+- **格式化字符串可以同时 leak canary 和 libc**; 用 `%p %p ... %p` 扫栈
+- **DynELF 慢但万能**; 完全没给 libc 时，pwntools 的 `DynELF` 可以纯靠程序自己的 IO 原语逐字节 leak 符号表
+- **静态链接的程序没有 libc.got**; 走 SROP（sigreturn-oriented programming）或直接 syscall

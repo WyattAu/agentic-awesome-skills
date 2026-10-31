@@ -23,7 +23,7 @@ metadata:
 Create effective operational runbooks, standard operating procedures, and
 troubleshooting guides that any on-call engineer can follow under pressure.
 
-## Runbook Template — Full Structure
+## Runbook Template: Full Structure
 
 ````markdown
 # Runbook: [Service / Process Name]
@@ -49,7 +49,7 @@ use it.
 
 ## Procedure
 
-### Step 1 — [Action Name]
+### Step 1: [Action Name]
 
 [Explanation of what this step does and why.]
 
@@ -59,7 +59,7 @@ use it.
 
 **Expected output:** [describe what success looks like]
 
-### Step 2 — [Action Name]
+### Step 2: [Action Name]
 
 ```bash
 # command here
@@ -73,9 +73,9 @@ use it.
 
 How to confirm the procedure succeeded:
 
-- [ ] [Check 1 — e.g., health endpoint returns 200]
-- [ ] [Check 2 — e.g., no errors in logs for 5 minutes]
-- [ ] [Check 3 — e.g., metrics return to baseline]
+- [ ] [Check 1; e.g., health endpoint returns 200]
+- [ ] [Check 2; e.g., no errors in logs for 5 minutes]
+- [ ] [Check 3; e.g., metrics return to baseline]
 
 ## Rollback
 
@@ -101,8 +101,8 @@ If the procedure fails or causes unexpected issues:
 ## Escalation
 
 If unresolved after [X] minutes:
-- **Primary:** @[team-lead] — [phone/Slack]
-- **Secondary:** @[manager] — [phone/Slack]
+- **Primary:** @[team-lead]; [phone/Slack]
+- **Secondary:** @[manager]; [phone/Slack]
 
 ## Related Runbooks
 
@@ -132,7 +132,7 @@ the primary is unreachable or degraded. This runbook covers both planned
 
 ## Procedure
 
-### Step 1 — Verify Replica Health
+### Step 1: Verify Replica Health
 
 ```bash
 psql -h replica.db.internal -U dba -d postgres -c \
@@ -141,7 +141,7 @@ psql -h replica.db.internal -U dba -d postgres -c \
 
 **Expected output:** `pg_is_in_recovery = t`, LSN advancing.
 
-### Step 2 — Stop Application Writes
+### Step 2: Stop Application Writes
 
 ```bash
 kubectl scale deployment api-server --replicas=0 -n production
@@ -150,7 +150,7 @@ kubectl scale deployment worker --replicas=0 -n production
 
 **Expected output:** Deployments scaled to 0 pods.
 
-### Step 3 — Fence the Old Primary and Confirm Write Quiescence
+### Step 3: Fence the Old Primary and Confirm Write Quiescence
 
 Before promotion, use the documented failover manager/fencing mechanism to ensure the old primary cannot accept writes, including after network recovery. Scaling two deployments and observing zero active queries is not proof of fencing or absence of other writers. If the primary is unreachable and fencing cannot be confirmed, stop and escalate; do not risk two primaries. Capture original replica counts/configuration for restoration.
 
@@ -161,7 +161,7 @@ psql -h primary.db.internal -U dba -d postgres -c \
 
 **Expected output:** Count = 0 (no active queries).
 
-### Step 4 — Promote Replica
+### Step 4: Promote Replica
 
 ```bash
 psql -h replica.db.internal -U dba -d postgres -c "SELECT pg_promote();"
@@ -175,7 +175,7 @@ psql -h replica.db.internal -U dba -d postgres -c "SELECT pg_is_in_recovery();"
 
 **Expected output:** `pg_is_in_recovery = f` (no longer a replica).
 
-### Step 5 — Update DNS
+### Step 5: Update DNS
 
 ```bash
 aws route53 change-resource-record-sets \
@@ -193,7 +193,7 @@ aws route53 change-resource-record-sets \
   }'
 ```
 
-### Step 6 — Restart Application
+### Step 6: Restart Application
 
 ```bash
 kubectl scale deployment api-server --replicas=6 -n production
@@ -221,8 +221,8 @@ aws rds restore-db-instance-from-db-snapshot \
 ## Escalation
 
 If unresolved after 15 minutes:
-- **Primary:** @dba-lead — +1-555-0101
-- **Secondary:** @platform-oncall — +1-555-0102
+- **Primary:** @dba-lead; +1-555-0101
+- **Secondary:** @platform-oncall; +1-555-0102
 ````
 
 The shell fragments assume Linux/GNU date, curl, jq/openssl and authorized cluster/cloud access. Use bounded timeouts for network probes and protect collected logs/queries; a fresh temporary directory does not make raw incident data safe to publish.
@@ -233,7 +233,7 @@ The shell fragments assume Linux/GNU date, curl, jq/openssl and authorized clust
 
 ```bash
 #!/usr/bin/env bash
-# health-check.sh — Check health of critical services
+# health-check.sh: Check health of critical services
 set -euo pipefail
 
 SERVICES=(
@@ -263,7 +263,7 @@ exit $EXIT_CODE
 
 ```bash
 #!/usr/bin/env bash
-# collect-logs.sh — Gather logs from multiple sources for incident review
+# collect-logs.sh: Gather logs from multiple sources for incident review
 set -euo pipefail
 
 INCIDENT_ID="${1:?Usage: collect-logs.sh <incident-id>}"
@@ -300,7 +300,7 @@ echo "Archive: ${OUTDIR}.tar.gz"
 
 ```bash
 #!/usr/bin/env bash
-# cert-check.sh — Warn if TLS certificates expire within 30 days
+# cert-check.sh: Warn if TLS certificates expire within 30 days
 set -euo pipefail
 
 DOMAINS=(
@@ -327,7 +327,7 @@ for domain in "${DOMAINS[@]}"; do
     printf "  WARN  %s expires in %d days (%s)\n" "$domain" "$DAYS_LEFT" "$EXPIRY"
     EXIT_CODE=1
   else
-    printf "  OK    %s — %d days remaining\n" "$domain" "$DAYS_LEFT"
+    printf "  OK    %s; %d days remaining\n" "$domain" "$DAYS_LEFT"
   fi
 done
 
@@ -338,7 +338,7 @@ exit $EXIT_CODE
 
 ```bash
 #!/usr/bin/env bash
-# disk-cleanup.sh — Free disk space on a host
+# disk-cleanup.sh: Free disk space on a host
 set -euo pipefail
 
 echo "=== Disk Usage Before ==="

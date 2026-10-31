@@ -14,7 +14,7 @@ license: "MIT"
 license_source: "https://github.com/jack-reson8/post-skill/blob/main/LICENSE"
 ---
 
-# Post — share images that look native and sell
+# Post: share images that look native and sell
 
 The bar: someone scrolling sees a real app screen and a funny line, not a designed slide. Every set also does a job for the account (promote a product, grow the series, earn a follow).
 

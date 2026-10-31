@@ -147,6 +147,6 @@ expanding the mandate). See [references/review-and-land.md](references/review-an
 ## Limitations
 
 - Runtime helper `scripts/relay.mjs` is bundled from the revision recorded in `UPSTREAM-NOTICE.md`. Requires the corresponding installed and authenticated CLI, Node 18+, and git.
-- Relay never commits — it only returns structured result JSON; you review and land the commit.
+- Relay never commits; it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — MIT; the relay runtime is bundled with local changes documented in UPSTREAM-NOTICE.md.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); MIT; the relay runtime is bundled with local changes documented in UPSTREAM-NOTICE.md.

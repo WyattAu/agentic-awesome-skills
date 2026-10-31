@@ -38,7 +38,7 @@ Your job is to **help the right reader take the right action**.
 
 ---
 
-## Phase 1 — Context Gathering (Mandatory)
+## Phase 1: Context Gathering (Mandatory)
 
 Before writing any copy, gather or confirm the following.
 If information is missing, ask for it **before proceeding**.
@@ -72,7 +72,7 @@ If information is missing, ask for it **before proceeding**.
 
 ---
 
-## Phase 2 — Copy Brief Lock (Hard Gate)
+## Phase 2: Copy Brief Lock (Hard Gate)
 
 Before writing any copy, you MUST present a **Copy Brief Summary** and pause.
 
@@ -99,7 +99,7 @@ Then ask:
 
 ---
 
-## Phase 3 — Copywriting Principles
+## Phase 3: Copywriting Principles
 
 ### Core Principles (Non-Negotiable)
 
@@ -134,7 +134,7 @@ Always connect:
 
 ---
 
-## Phase 4 — Page Structure Framework
+## Phase 4: Page Structure Framework
 
 ### Above the Fold
 
@@ -169,7 +169,7 @@ Avoid stacking features without narrative flow.
 
 ---
 
-## Phase 5 — Writing the Copy
+## Phase 5: Writing the Copy
 
 When writing copy, provide:
 

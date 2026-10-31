@@ -14,11 +14,11 @@ compatibility: Process guidance; no tooling required. Docs-only; upstream templa
 sources: community, operator_experience
 ---
 
-# EVIDENCE HYGIENE — PoC Capture & Redaction Discipline
+# EVIDENCE HYGIENE: PoC Capture & Redaction Discipline
 
 > Use this skill BEFORE capturing any screenshot, exporting any HAR, or attaching any evidence to a bug-bounty submission. It catches the most common evidence-hygiene mistakes that cause cookies to leak, PII to be shared without consent, or screenshots to be unsuitable for triage.
 
-The core principle: **Bug-bounty evidence is meant to convince a triager. Anything beyond that — live cookies, real-user PII, internal trace IDs that aren't useful — should not be in the evidence.**
+The core principle: **Bug-bounty evidence is meant to convince a triager. Anything beyond that; live cookies, real-user PII, internal trace IDs that aren't useful; should not be in the evidence.**
 
 ---
 
@@ -28,9 +28,9 @@ Every PoC artifact (screenshot, HAR, raw HTTP request, terminal transcript) pote
 
 | Category | Examples | Treatment |
 |---|---|---|
-| **Your-account secrets** | Session cookies, OAuth tokens, refresh tokens, API keys | Always redact. Even in private bug-bounty platform attachments. Your account, your session — protect it. |
+| **Your-account secrets** | Session cookies, OAuth tokens, refresh tokens, API keys | Always redact. Even in private bug-bounty platform attachments. Your account, your session; protect it. |
 | **Other users' PII** | Real names, emails, phone numbers, addresses, profile photos, account IDs | Redact unless explicitly demonstrating cross-account impact. Even then, mask faces and minimize the data you display. |
-| **Triager-useful metadata** | Trace IDs (`x-datadog-trace-id`), request IDs, server timestamps, your test account UID/email, GraphQL operation names, response shapes | **Review and minimize** — selected nonsecret values help the triager correlate to logs and reproduce. |
+| **Triager-useful metadata** | Trace IDs (`x-datadog-trace-id`), request IDs, server timestamps, your test account UID/email, GraphQL operation names, response shapes | **Review and minimize**; selected nonsecret values help the triager correlate to logs and reproduce. |
 | **Test-account passwords (limited use)** | Throwaway passwords on a test account (e.g., `Testing@5678`) | Redact passwords before sharing, including throwaway accounts. Rotate/revoke any exposed value; do not rely on later rotation to justify disclosure. |
 
 ---
@@ -41,7 +41,7 @@ Every PoC artifact (screenshot, HAR, raw HTTP request, terminal transcript) pote
 
 The session cookie value is the highest-value secret in any PoC. Mask:
 
-- The session cookie (`authn`, `session`, `sid`, `__Secure-id`, etc. — name varies per target)
+- The session cookie (`authn`, `session`, `sid`, `__Secure-id`, etc.; name varies per target)
 - `csrf-token` if it's bound to your session
 - `Authorization` headers (Bearer tokens, JWT)
 - `Cookie` request header values for any session-bearing cookie
@@ -57,17 +57,17 @@ The session cookie value is the highest-value secret in any PoC. Mask:
 
 ### 2.3 Redaction methods (ranked by practicality)
 
-**Method A — Don't capture the cookies in the first place** (preferred when possible)
+**Method A; Don't capture the cookies in the first place** (preferred when possible)
 - For DevTools Console PoCs: use `credentials: 'include'` so the browser sends cookies automatically. Console output won't echo the cookie. Screenshot the Console output, never the Network tab Headers panel.
 - For Burp Repeater PoCs: drag the bottom request/response panel divider DOWN to hide the request body before screenshotting. Capture only the Results table for Intruder runs.
 
-**Method B — Destructive redaction on a flattened copy** (when capture includes cookies)
+**Method B; Destructive redaction on a flattened copy** (when capture includes cookies)
 - An editable rectangle overlay may be removable. Export a new flattened raster, strip metadata, reopen it and verify pixels/OCR at full resolution; never attach the editable original.
 - macOS: Open screenshot in Preview → Tools → Annotate → Rectangle → set fill color to black → drag rectangle over the cookie value → save
 - Windows: Use Snip & Sketch's annotation tools or any image editor (Paint.NET, etc.)
 - Redact a COPY of captured evidence offline; do not alter live Proxy Match and Replace rules merely to sanitize a screenshot, since they can change requests and invalidate reproduction.
 
-**Method C — Find/replace in raw text** (for HAR files, terminal transcripts)
+**Method C; Find/replace in raw text** (for HAR files, terminal transcripts)
 - See §4 for the jq commands
 
 ### 2.4 Pre-screenshot checklist
@@ -86,9 +86,9 @@ After capturing:
 
 ```
 [ ] Open the screenshot at full resolution before saving
-[ ] Search for the session cookie name substring in any visible text — if present, redact
-[ ] Search for the literal first 6 chars of your cookie value — if present, redact
-[ ] Compare to the previous PoC screenshot in the same engagement — same redaction discipline
+[ ] Search for the session cookie name substring in any visible text; if present, redact
+[ ] Search for the literal first 6 chars of your cookie value; if present, redact
+[ ] Compare to the previous PoC screenshot in the same engagement; same redaction discipline
 ```
 
 ---
@@ -104,7 +104,7 @@ When a PoC necessarily exposes another user's data (e.g., demonstrating IDOR by 
 - Phone number (mask the last 7 digits, optionally leave country code)
 - Physical address (mask everything below city)
 - Date of birth (mask the year, optionally the month)
-- Government IDs (SSN, passport — mask everything)
+- Government IDs (SSN, passport; mask everything)
 - Profile photos / face images (black-bar the face entirely)
 - Account IDs that the user could correlate to public profiles
 
@@ -112,11 +112,11 @@ When a PoC necessarily exposes another user's data (e.g., demonstrating IDOR by 
 
 - The fact that the field was returned (the JSON key name)
 - The shape / type of the field (`"first_name": "<REDACTED>"`)
-- Your own (attacker session's) UID / email — this proves cross-account
+- Your own (attacker session's) UID / email; this proves cross-account
 - The endpoint URL and request method
 - The trace ID
 
-### 3.3 Worked example — IDOR PoC body
+### 3.3 Worked example: IDOR PoC body
 
 **Bad (leaks victim's full PII):**
 ```json
@@ -125,7 +125,7 @@ When a PoC necessarily exposes another user's data (e.g., demonstrating IDOR by 
 
 **Good (proves the bug, masks the PII):**
 ```json
-{"data":{"contact":{"first_name":"<REDACTED — real first name>","last_name":"<REDACTED — real last name>","email":"<REDACTED>@example.com","phone":"<REDACTED>"}}}
+{"data":{"contact":{"first_name":"<REDACTED; real first name>","last_name":"<REDACTED; real last name>","email":"<REDACTED>@example.com","phone":"<REDACTED>"}}}
 ```
 
 In screenshot form, black-bar each value with a rectangle annotation labeled "REAL PII REDACTED" if there's space.
@@ -195,7 +195,7 @@ minimum separately approved evidence. Regex replacement alone cannot certify it.
 
 ### 5.1 Repeater (single request demo)
 
-1. In the Repeater request panel, the Cookie header is on its own line — drag the panel divider DOWN to hide everything below the request line / target line
+1. In the Repeater request panel, the Cookie header is on its own line; drag the panel divider DOWN to hide everything below the request line / target line
 2. Or: temporarily delete the Cookie header text from the Repeater pane (it doesn't affect the original captured request) before screenshotting, then restore
 3. Capture only the response panel (right side) showing the JSON / HTML response that demonstrates the bug
 
@@ -205,15 +205,15 @@ The Results window is the strongest evidence for rate-limit findings. To capture
 
 1. After the attack finishes, drag the horizontal divider between the Results table and the Request/Response panels DOWN, until only the Results table is visible
 2. Screenshot only the columns: `Request#`, `Payload`, `Status code`, `Response received`, `Length`
-3. Don't include the Request / Response sub-panels — they contain the cookie
+3. Don't include the Request / Response sub-panels; they contain the cookie
 
 ### 5.3 Proxy HTTP history (capture demo)
 
-Almost never the right screenshot — it shows entire request/response pairs with cookies. Use Repeater for demos instead.
+Almost never the right screenshot; it shows entire request/response pairs with cookies. Use Repeater for demos instead.
 
 ### 5.4 Scanner findings (if applicable)
 
-The Scanner tab's Issues panel may contain sensitive URLs/evidence; inspect it before screenshotting — it shows finding summaries without the underlying request bodies. Click into a specific finding before screenshotting only if you've redacted its evidence first.
+The Scanner tab's Issues panel may contain sensitive URLs/evidence; inspect it before screenshotting; it shows finding summaries without the underlying request bodies. Click into a specific finding before screenshotting only if you've redacted its evidence first.
 
 ---
 
@@ -225,7 +225,7 @@ The Scanner tab's Issues panel may contain sensitive URLs/evidence; inspect it b
 fetch('/api/endpoint', {
   method: 'POST',
   headers: {'content-type': 'application/json'},
-  credentials: 'include',  // sends cookies automatically — they won't appear in your code
+  credentials: 'include',  // sends cookies automatically; they won't appear in your code
   body: JSON.stringify({ /* your payload */ })
 }).then(r => r.json()).then(j => console.log("LABEL:", {hasData: !!j.data}))
 ```
@@ -242,7 +242,7 @@ For a 4-step PoC (verify before / change / verify after / revert), clear the con
 - Mac: `Cmd+K`
 - Windows / Linux: `Ctrl+L`
 
-Take the screenshot immediately after the response prints — don't wait for unrelated framework warnings to appear.
+Take the screenshot immediately after the response prints; don't wait for unrelated framework warnings to appear.
 
 ### 6.3 Long responses (truncate for screenshot)
 
@@ -254,7 +254,7 @@ fetch('/api/endpoint', { /* ... */ })
   .then(j => {
     console.log("RESPONSE SHAPE:", Object.keys(j.data || {}));
     console.log("FIELD PRESENCE:", {hasEmail: typeof j.data?.email === 'string'});
-    // (Don't dump the full j — your screenshot becomes unreadable)
+    // (Don't dump the full j; your screenshot becomes unreadable)
   })
 ```
 
@@ -275,11 +275,11 @@ no new requests or account changes.
 
 For findings like "password change without step-up," the canonical 5-screenshot pattern is:
 
-1. **Pre-state verification** — `verify_password("current") → true`. Proves you knew the starting state.
-2. **The bug itself** — `update_password(...)` succeeds without step-up. THE most important screenshot.
-3. **Post-state verification (negative)** — `verify_password("old") → false`. Proves the change took effect.
-4. **Post-state verification (positive)** — `verify_password("new") → true`. Proves the new credential is active.
-5. **Out-of-band side effects** — inbox screenshot showing whether a notification email arrived. Proves whether passive defense exists.
+1. **Pre-state verification**; `verify_password("current") → true`. Proves you knew the starting state.
+2. **The bug itself**; `update_password(...)` succeeds without step-up. THE most important screenshot.
+3. **Post-state verification (negative)**; `verify_password("old") → false`. Proves the change took effect.
+4. **Post-state verification (positive)**; `verify_password("new") → true`. Proves the new credential is active.
+5. **Out-of-band side effects**; inbox screenshot showing whether a notification email arrived. Proves whether passive defense exists.
 
 ### 7.2 Filename conventions
 
@@ -299,11 +299,11 @@ Examples:
 In the report body, reference each by filename:
 
 ```markdown
-- **Screenshot 1 (`04-step1-verify-true-before.png`)** — verify_password returns true with the current password.
-- **Screenshot 2 (`04-step2-update-password-no-stepup.png`)** — update_password returns User with no StepUpRequiredError. THIS IS THE BUG.
-- **Screenshot 3 (`04-step3-verify-false-after.png`)** — verify_password with old password returns false.
-- **Screenshot 4 (`04-step4-verify-true-new-pw.png`)** — verify_password with new password returns true.
-- **Screenshot 5 (`04-step5-inbox-notification-check.png`)** — inbox showing whether out-of-band notification was sent.
+- **Screenshot 1 (`04-step1-verify-true-before.png`)**; verify_password returns true with the current password.
+- **Screenshot 2 (`04-step2-update-password-no-stepup.png`)**; update_password returns User with no StepUpRequiredError. THIS IS THE BUG.
+- **Screenshot 3 (`04-step3-verify-false-after.png`)**; verify_password with old password returns false.
+- **Screenshot 4 (`04-step4-verify-true-new-pw.png`)**; verify_password with new password returns true.
+- **Screenshot 5 (`04-step5-inbox-notification-check.png`)**; inbox showing whether out-of-band notification was sent.
 ```
 
 ### 7.3 Capture timing
@@ -327,7 +327,7 @@ After clicking Submit on the bug-bounty platform:
 
 ### 8.2 Save the unredacted artifacts privately
 
-Keep your unredacted HARs / screenshots in a local folder accessible only to you. The triager may ask for the unredacted version during verification. **Never share unredacted artifacts via email — use the platform's private attachment system on the existing submission thread.**
+Keep your unredacted HARs / screenshots in a local folder accessible only to you. The triager may ask for the unredacted version during verification. **Never share unredacted artifacts via email; use the platform's private attachment system on the existing submission thread.**
 
 ### 8.3 Don't post about the finding publicly
 
@@ -335,7 +335,7 @@ Most platforms' confidentiality applies to BOTH unresolved and resolved issues. 
 
 ### 8.4 Audit your local artifacts
 
-Quarterly, sweep your `~/security-research/` and `~/Downloads/` for stale HARs / screenshots from old engagements. Either move them to a properly-encrypted archive or delete them. Bug-bounty engagement artifacts are sensitive — they accumulate fast and become a liability.
+Quarterly, sweep your `~/security-research/` and `~/Downloads/` for stale HARs / screenshots from old engagements. Either move them to a properly-encrypted archive or delete them. Bug-bounty engagement artifacts are sensitive; they accumulate fast and become a liability.
 
 ---
 
@@ -356,9 +356,9 @@ Quarterly, sweep your `~/security-research/` and `~/Downloads/` for stale HARs /
 
 This skill is meant to be loaded together with `report-writing` and (for Bugcrowd) `bugcrowd-reporting` when preparing a submission. It does NOT cover:
 
-- **What** to capture (that's `triage-validation` and `report-writing`'s job — they tell you what evidence is required for the report to be accepted)
-- **How** to demonstrate exploitation (that's `security-arsenal`'s job — payloads to send)
-- **Where** to find the assets (that's `offensive-osint`'s job — recon)
+- **What** to capture (that's `triage-validation` and `report-writing`'s job; they tell you what evidence is required for the report to be accepted)
+- **How** to demonstrate exploitation (that's `security-arsenal`'s job; payloads to send)
+- **Where** to find the assets (that's `offensive-osint`'s job; recon)
 
 This skill covers ONLY the redaction / sanitization / hygiene layer that sits between "I have evidence" and "I'm attaching it to the platform."
 
@@ -366,11 +366,11 @@ This skill covers ONLY the redaction / sanitization / hygiene layer that sits be
 
 ## Related Skills & Chains
 
-- **`report-writing`** — When evidence is redacted and ready for the report body. Workflow primitive: after redaction passes the pre-screenshot checklist, hand off to `report-writing` for the platform-specific report template (H1 / Bugcrowd / Intigriti / Immunefi).
-- **`bugcrowd-reporting`** — When the redacted evidence is destined for Bugcrowd specifically. Workflow primitive: redacted screenshots + sanitized HARs become attachments referenced in `bugcrowd-reporting`'s VRT-mapped submission body.
-- **`triage-validation`** — When deciding which evidence is required at all. Workflow primitive: `triage-validation` says "you need a 5-screenshot PoC for password-change-without-step-up"; this skill says "here's how to capture and redact those 5 screenshots cleanly."
-- **`security-arsenal`** — When the payload that produced the evidence is being documented. Workflow primitive: the payload (from `security-arsenal`) goes in the report verbatim; its output / response (handled by this skill) gets cookie / PII redacted before screenshotting.
-- **`bb-methodology`** — When Phase 5 (Validate & Report) needs evidence captured. Workflow primitive: Phase 5's evidence-capture step routes through this skill before the report is drafted.
+- **`report-writing`**; When evidence is redacted and ready for the report body. Workflow primitive: after redaction passes the pre-screenshot checklist, hand off to `report-writing` for the platform-specific report template (H1 / Bugcrowd / Intigriti / Immunefi).
+- **`bugcrowd-reporting`**; When the redacted evidence is destined for Bugcrowd specifically. Workflow primitive: redacted screenshots + sanitized HARs become attachments referenced in `bugcrowd-reporting`'s VRT-mapped submission body.
+- **`triage-validation`**; When deciding which evidence is required at all. Workflow primitive: `triage-validation` says "you need a 5-screenshot PoC for password-change-without-step-up"; this skill says "here's how to capture and redact those 5 screenshots cleanly."
+- **`security-arsenal`**; When the payload that produced the evidence is being documented. Workflow primitive: the payload (from `security-arsenal`) goes in the report verbatim; its output / response (handled by this skill) gets cookie / PII redacted before screenshotting.
+- **`bb-methodology`**; When Phase 5 (Validate & Report) needs evidence captured. Workflow primitive: Phase 5's evidence-capture step routes through this skill before the report is drafted.
 
 ## When to Use
 
@@ -379,7 +379,7 @@ This skill covers ONLY the redaction / sanitization / hygiene layer that sits be
 
 ## Limitations
 
-- Process guidance only; it does not authorize probing or exploitation — those steps need their own authorized skill and confirmation gate.
+- Process guidance only; it does not authorize probing or exploitation; those steps need their own authorized skill and confirmation gate.
 - Docs-only import: upstream templates, commands, and research assets are not bundled.
 
 ### Example

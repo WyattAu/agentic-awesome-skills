@@ -1,6 +1,6 @@
 Part of the psql meta-command reference. See also: meta-commands-inspection.md, meta-commands-formatting.md
 
-# psql Meta-Commands — Core Reference
+# psql Meta-Commands: Core Reference
 
 Comprehensive reference for all psql backslash commands, organized by category. This covers every meta-command from the official PostgreSQL documentation.
 
@@ -20,14 +20,14 @@ Comprehensive reference for all psql backslash commands, organized by category. 
 
 ## The Query Buffer
 
-psql maintains an internal **query buffer** — a working area where SQL commands are assembled before being sent to the server. Understanding how the buffer works clarifies the behavior of many meta-commands:
+psql maintains an internal **query buffer**; a working area where SQL commands are assembled before being sent to the server. Understanding how the buffer works clarifies the behavior of many meta-commands:
 
 - **Typing SQL** (without a terminating semicolon) appends text to the query buffer.
 - **Semicolon (`;`)** sends the buffer contents to the server and clears it.
 - **`\r` / `\reset`** discards the buffer without executing it.
 - **`\p` / `\print`** displays the current buffer contents.
 - **`\w` / `\write`** writes the buffer to a file or pipe.
-- **`\e` / `\edit`** opens the buffer in an external editor; when the editor closes, the modified content is re-parsed — complete queries (those ending with `;`) are executed immediately, and any remaining text stays in the buffer.
+- **`\e` / `\edit`** opens the buffer in an external editor; when the editor closes, the modified content is re-parsed; complete queries (those ending with `;`) are executed immediately, and any remaining text stays in the buffer.
 - **`\g`** sends the buffer like a semicolon but accepts optional formatting and output-redirection arguments.
 - Many meta-commands that operate on "the query buffer" fall back to the most recently executed query if the buffer is empty (e.g., `\g`, `\gdesc`, `\p`).
 
@@ -41,8 +41,8 @@ Most meta-commands accept arguments. Understanding how psql parses these argumen
 
 Arguments are separated by whitespace. To include whitespace in an argument:
 
-- **Single quotes**: `'hello world'` — the argument is `hello world`. Single quotes prevent variable interpolation and backquote expansion.
-- **Double quotes**: `"hello world"` — the argument is `hello world`. Variable interpolation (`:varname`) IS performed inside double quotes, but backquote expansion is NOT.
+- **Single quotes**: `'hello world'`; the argument is `hello world`. Single quotes prevent variable interpolation and backquote expansion.
+- **Double quotes**: `"hello world"`; the argument is `hello world`. Variable interpolation (`:varname`) IS performed inside double quotes, but backquote expansion is NOT.
 - **Unquoted**: Arguments are delimited by whitespace; no quoting needed for single tokens.
 
 ### C-like Escape Sequences
@@ -120,7 +120,7 @@ Some meta-commands take arguments that describe database objects (e.g., `\df`, `
 ### Argument Parsing Stop Rules
 
 - The entire remainder of the line is taken as the argument for commands like `\!`, `\copy`, `\o |command`, `\echo` (after processing quoting and interpolation).
-- A `\\` (double backslash) anywhere in the argument text causes psql to stop parsing at that point — everything before `\\` is the argument, everything after is ignored. This is useful for adding inline comments:
+- A `\\` (double backslash) anywhere in the argument text causes psql to stop parsing at that point; everything before `\\` is the argument, everything after is ignored. This is useful for adding inline comments:
   ```sql
   \echo hello \\ this is a comment
   -- outputs: hello
@@ -142,7 +142,7 @@ All three statements are sent in one request when the non-backslashed semicolon 
 
 ### `\! [command]`
 
-With no argument, escapes to a sub-shell (psql resumes when sub-shell exits). With an argument, executes the shell command. The entire remainder of the line is taken as the command — no variable interpolation or backquote expansion.
+With no argument, escapes to a sub-shell (psql resumes when sub-shell exits). With an argument, executes the shell command. The entire remainder of the line is taken as the command; no variable interpolation or backquote expansion.
 
 ```sql
 \! ls -la /tmp
@@ -211,7 +211,7 @@ Sends the current query buffer to the server for execution.
 - With a filename: output written to file (only if the query succeeds and returns zero or more tuples)
 - With `|command`: output piped to shell command (no variable interpolation in command). Only written if the query succeeds and returns zero or more tuples.
 
-**Note**: The file or command is written to only if the query successfully returns zero or more tuples — not if the query fails or is a non-data-returning SQL command. This means even an empty result set (0 rows) will trigger output.
+**Note**: The file or command is written to only if the query successfully returns zero or more tuples; not if the query fails or is a non-data-returning SQL command. This means even an empty result set (0 rows) will trigger output.
 
 ```sql
 SELECT * FROM users \g (format=csv footer=off) /tmp/users.csv
@@ -241,7 +241,7 @@ SELECT 'hello' AS var1, 10 AS var2
 
 ### `\gexec`
 
-Executes the current query, then treats each column of each row as a SQL statement to execute. NULL fields are ignored. Generated queries are sent literally — no psql meta-commands or variable references. Execution continues on error unless `ON_ERROR_STOP` is set. Setting `ECHO` to `all` or `queries` is recommended when using `\gexec` to see what's being executed.
+Executes the current query, then treats each column of each row as a SQL statement to execute. NULL fields are ignored. Generated queries are sent literally; no psql meta-commands or variable references. Execution continues on error unless `ON_ERROR_STOP` is set. Setting `ECHO` to `all` or `queries` is recommended when using `\gexec` to see what's being executed.
 
 ```sql
 SELECT format('CREATE INDEX ON my_table(%I)', attname)
@@ -255,10 +255,10 @@ ORDER BY attnum
 
 Executes the query and displays results as a crosstab (pivot table). The query must return at least three columns. Column specs can be column numbers (1-based) or names.
 
-- `colV` — vertical header (default: column 1)
-- `colH` — horizontal header (default: column 2, must differ from colV)
-- `colD` — data displayed in the grid (default: the remaining column)
-- `sortcolH` — optional sort column for horizontal header (must be integers)
+- `colV`; vertical header (default: column 1)
+- `colH`; horizontal header (default: column 2, must differ from colV)
+- `colD`; data displayed in the grid (default: the remaining column)
+- `sortcolH`; optional sort column for horizontal header (must be integers)
 
 Error is reported if multiple rows map to the same cell.
 
@@ -357,7 +357,7 @@ Deletes the large object with the specified OID.
 
 Reads and executes input from the file. Relative to current working directory. Use `-` for stdin.
 
-**stdin behavior**: When using `\i -`, psql reads from standard input until an EOF indication or `\q` meta-command. This can be used to intersperse interactive input with input from files. Note that Readline editing is only available at the outermost level — it is not active when reading from a nested file.
+**stdin behavior**: When using `\i -`, psql reads from standard input until an EOF indication or `\q` meta-command. This can be used to intersperse interactive input with input from files. Note that Readline editing is only available at the outermost level; it is not active when reading from a nested file.
 
 ### `\ir` / `\include_relative` filename
 
@@ -367,7 +367,7 @@ Like `\i`, but resolves relative paths from the directory of the currently execu
 
 Redirects query output to file or pipe. `\o` without arguments resets to stdout. When argument starts with `|`, the rest is passed literally to the shell (no variable interpolation).
 
-**What gets redirected**: "Query results" includes tables, command responses, notices, and output from `\d` commands — but **not error messages**. Error messages always go to stderr.
+**What gets redirected**: "Query results" includes tables, command responses, notices, and output from `\d` commands; but **not error messages**. Error messages always go to stderr.
 
 **What doesn't get redirected**: `\echo` outputs to stdout (not affected by `\o`); use `\qecho` for redirected output.
 
@@ -455,12 +455,12 @@ Variable references in skipped lines are NOT expanded. Backquote expansion is NO
 ### `\? [ topic ]`
 
 Shows psql help. Topics:
-- `commands` (default) — backslash commands
-- `options` — command-line options
-- `variables` — configuration variables
+- `commands` (default); backslash commands
+- `options`; command-line options
+- `variables`; configuration variables
 
 ### `\h` / `\help [ command ]`
 
 SQL syntax help. Without arguments, lists available commands. `*` shows help for all commands. Multi-word commands don't need quoting: `\h ALTER TABLE`.
 
-Unlike most meta-commands, the entire line is the argument — no variable interpolation.
+Unlike most meta-commands, the entire line is the argument; no variable interpolation.

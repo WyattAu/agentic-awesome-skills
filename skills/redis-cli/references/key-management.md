@@ -41,24 +41,24 @@ SCAN 42 MATCH user:* COUNT 100
 
 ### SCAN Options
 
-**MATCH pattern** — Glob filtering is performed by the server after it scans candidates:
+**MATCH pattern**; Glob filtering is performed by the server after it scans candidates:
 - `*` matches any sequence
 - `?` matches single character
 - `[ae]` matches one of the characters
 - Important: because MATCH is applied post-retrieval, some iterations may return empty results. Increase `COUNT` to compensate.
 
-**COUNT n** — Hint for number of elements per call (default: 10):
+**COUNT n**; Hint for number of elements per call (default: 10):
 - This is a *hint*, not a guarantee
 - For small collections encoded as ziplists/intsets, all elements may be returned in one call regardless of COUNT
 - The key space (SCAN) always uses hash tables and respects COUNT more predictably
 - You can change COUNT between calls without affecting iteration correctness
 
-**TYPE type** — Filter by data type (SCAN only, Redis 6.0+):
+**TYPE type**; Filter by data type (SCAN only, Redis 6.0+):
 - `SCAN 0 TYPE hash` returns only hash keys
 - Type is the same string that `TYPE` command returns: `string`, `list`, `set`, `zset`, `hash`, `stream`
 - Like MATCH, this is applied post-retrieval
 
-**NOVALUES** — Return field names only, without values (HSCAN only):
+**NOVALUES**; Return field names only, without values (HSCAN only):
 - `HSCAN myhash 0 NOVALUES` returns just field names, saving bandwidth for large hashes
 
 ### SCAN Guarantees
@@ -70,8 +70,8 @@ A full iteration (cursor 0 → 0) provides:
 
 ### SCAN Limitations
 
-- Elements may be returned **multiple times** — handle deduplication in your application
-- Elements added or removed during iteration may or may not appear — undefined behavior
+- Elements may be returned **multiple times**; handle deduplication in your application
+- Elements added or removed during iteration may or may not appear; undefined behavior
 - Only valid cursors are `0` (start) or values returned by previous SCAN calls
 - An iteration over a collection that grows faster than SCAN progresses may never terminate
 

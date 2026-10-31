@@ -23,7 +23,7 @@ scripts and tests that run locally or on TestMu AI cloud.
 
 This catalog tree contains only this file: all `reference/` paths below are upstream prerequisites, not bundled playbooks. Do not claim to have read them or invent their contents. Use authorized test accounts and sandbox targets; browser actions can send messages, buy or delete. Cloud/Grid choice needs the applicable data/account/cost authority, and provider logs/video/network capture may expose secrets or personal data. Verify real supported browser/OS combinations instead of assuming that naming a combination makes it available; keep credentials out of emitted URLs/logs and clean up remote sessions.
 
-## Step 1 — Execution Target
+## Step 1: Execution Target
 
 ```
 User says "automate" / "test my site"
@@ -40,7 +40,7 @@ User says "automate" / "test my site"
 └─ Ambiguous? → Default local, mention cloud for broader coverage
 ```
 
-## Step 2 — Language Detection
+## Step 2: Language Detection
 
 | Signal | Language | Config |
 |--------|----------|--------|
@@ -53,7 +53,7 @@ User says "automate" / "test my site"
 
 For non-Java languages → read `reference/<language>-patterns.md`
 
-## Step 3 — Scope
+## Step 3: Scope
 
 | Request Type | Action |
 |-------------|--------|
@@ -62,7 +62,7 @@ For non-Java languages → read `reference/<language>-patterns.md`
 | "Fix/debug test" | Read `reference/debugging-common-issues.md` |
 | "Run on cloud" | Read `reference/cloud-integration.md` |
 
-## Core Patterns — Java (Default)
+## Core Patterns: Java (Default)
 
 ### Locator Priority
 
@@ -75,7 +75,7 @@ For non-Java languages → read `reference/<language>-patterns.md`
 
 **NEVER use:** fragile XPaths like `//div[3]/span[2]/a`, absolute paths.
 
-### Wait Strategy — CRITICAL
+### Wait Strategy: CRITICAL
 
 ```java
 // ✅ ALWAYS use explicit waits
@@ -137,7 +137,7 @@ public class LoginTest {
 }
 ```
 
-### Page Object Model — Quick Example
+### Page Object Model: Quick Example
 
 ```java
 // pages/LoginPage.java
@@ -163,7 +163,7 @@ public class LoginPage {
 }
 ```
 
-### TestMu AI Cloud — Quick Setup
+### TestMu AI Cloud: Quick Setup
 
 ```java
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -192,7 +192,7 @@ WebDriver driver = new RemoteWebDriver(new URL(hub), caps);
 ### Test Status Reporting
 
 ```java
-// After test — report to TestMu AI dashboard
+// After test; report to TestMu AI dashboard
 ((JavascriptExecutor) driver).executeScript(
     "lambda-status=" + (testPassed ? "passed" : "failed")
 );

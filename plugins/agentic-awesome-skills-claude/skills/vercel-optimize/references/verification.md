@@ -12,7 +12,7 @@ How claims in recommendations are mechanically verified, and when the recommende
 
 ## Why mechanical verification
 
-The recommender is an LLM. LLMs hallucinate counts, miscount file occurrences, and confuse code snippets between similar-looking files. Mechanical verification — grep + filesystem reads + JSON checks against `signals.json` and `references/docs-library.json` — catches these failures before the customer sees them.
+The recommender is an LLM. LLMs hallucinate counts, miscount file occurrences, and confuse code snippets between similar-looking files. Mechanical verification; grep + filesystem reads + JSON checks against `signals.json` and `references/docs-library.json`; catches these failures before the customer sees them.
 
 The checker covers explicit structured verifiableClaims, listed files/citations, and selected prose triggers. It does not extract or prove every numeric claim, arbitrary snippet, causal statement or contradiction. A passing disposition means that specific mechanical check passed, not that the recommendation is runtime-safe. Review source and test the change before applying.
 
@@ -24,7 +24,7 @@ The verifier uses selected triggers in these fields and accepts explicit structu
 |---|---|---|---|
 | 1 | `pattern_count` | "N fetch() calls in file X" | grep/ast-grep in X, exact count match |
 | 2 | `pattern_exists` | "uses JSON.parse(JSON.stringify())" | grep, boolean |
-| 3 | `pattern_absent` | "no Cache-Control header" | grep, verify absence (with guards — see below) |
+| 3 | `pattern_absent` | "no Cache-Control header" | grep, verify absence (with guards; see below) |
 | 4 | `file_exists` | "app/not-found.tsx exists" | File boundary, existence and cited-line bounds |
 | 7 | `code_snippet` | Code fence labeled "Before:" | substring search in cited file |
 | 9 | `repo_count` | "11 unstable_cache usages across 8 files" | grep repo, count distinct files |
@@ -93,6 +93,6 @@ If re-gen makes things worse, keep the original output unless the trigger was ha
 
 ## Verifier implementation
 
-`scripts/verify-and-regen.mjs` invokes `lib/extract-claims.mjs` and `lib/verify-claim.mjs` in-process for each verifiable claim. Pure functions, no network, no LLM — deterministic.
+`scripts/verify-and-regen.mjs` invokes `lib/extract-claims.mjs` and `lib/verify-claim.mjs` in-process for each verifiable claim. Pure functions, no network, no LLM; deterministic.
 
 For `citation_in_library` and `citation_applies_to_version`, the script uses `lib/citations.mjs`'s `isKnownUrl()` and `sanitizeCitations()` helpers (already tested). Other handlers use filesystem/string checks; rg is used for invalidation-file discovery. No AST analysis or runtime verification is performed.

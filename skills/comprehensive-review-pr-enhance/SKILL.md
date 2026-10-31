@@ -49,7 +49,7 @@ date_added: "2026-01-28"
 ## Risks & Rollback
 - **Breaking?** yes / no
 - **Rollback**: revert this commit; no migration needed
-- **Risk level**: low / medium / high — because ___
+- **Risk level**: low / medium / high; because ___
 ```
 
 ## Review Checklist Rules
@@ -75,7 +75,7 @@ git cherry-pick <commits-for-part-1>
 
 ## Resources
 
-- `resources/implementation-playbook.md` — Python helpers for automated PR analysis, coverage reports, and risk scoring
+- `resources/implementation-playbook.md`; Python helpers for automated PR analysis, coverage reports, and risk scoring
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

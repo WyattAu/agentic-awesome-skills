@@ -14,7 +14,7 @@ license_source: https://github.com/addyosmani/agent-skills/blob/main/LICENSE
 
 ## Overview
 
-Security-first development practices for web applications. Treat every external input as hostile, every secret as sacred, and every authorization check as mandatory. Security isn't a phase — it's a constraint on every line of code that touches user data, authentication, or external systems.
+Security-first development practices for web applications. Treat every external input as hostile, every secret as sacred, and every authorization check as mandatory. Security isn't a phase; it's a constraint on every line of code that touches user data, authentication, or external systems.
 
 ## When to Use
 
@@ -35,7 +35,7 @@ Controls bolted on without a threat model are guesses. Before hardening, spend f
 
 1. **Map the trust boundaries.** Where does untrusted data cross into your system? HTTP requests, form fields, file uploads, webhooks, third-party APIs, message queues, and **LLM output**. Every boundary is attack surface.
 2. **Name the assets.** What's worth stealing or breaking? Credentials, PII, payment data, admin actions, money movement.
-3. **Run STRIDE over each boundary** — a quick lens, not a ceremony:
+3. **Run STRIDE over each boundary**; a quick lens, not a ceremony:
 
 | Threat | Ask | Typical mitigation |
 |---|---|---|
@@ -46,7 +46,7 @@ Controls bolted on without a threat model are guesses. Before hardening, spend f
 | **D**enial of service | Can it be overwhelmed? | Rate limiting, input size caps, timeouts |
 | **E**levation of privilege | Can a user gain rights they shouldn't? | Authorization checks, least privilege |
 
-4. **Write abuse cases next to use cases.** For each feature, ask "how would I misuse this?" — then make that your first test.
+4. **Write abuse cases next to use cases.** For each feature, ask "how would I misuse this?"; then make that your first test.
 
 If you can't name the trust boundaries for a feature, you're not ready to secure it. Insecure design is a relevant risk category; the exact OWASP edition/category numbering must be verified before citing it. No majority-of-breaches claim is established here.
 
@@ -55,7 +55,7 @@ If you can't name the trust boundaries for a feature, you're not ready to secure
 ### Always Do (No Exceptions)
 
 - **Validate all external input** at the system boundary (API routes, form handlers)
-- **Parameterize all database queries** — never concatenate user input into SQL
+- **Parameterize all database queries**; never concatenate user input into SQL
 - **Encode output** to prevent XSS (use framework auto-escaping, don't bypass it)
 - **Use HTTPS** for all external communication
 - **Hash passwords** with bcrypt/scrypt/argon2 (never store plaintext)
@@ -185,7 +185,7 @@ app.use(helmet.contentSecurityPolicy({
   },
 }));
 
-// CORS — restrict to known origins
+// CORS; restrict to known origins
 app.use(cors({
   origin: approvedOrigins, // validate an explicit nonempty production list at startup
   // No implicit development-origin fallback in production.
@@ -208,7 +208,7 @@ if (!API_KEY) throw new Error('STRIPE_API_KEY not configured');
 
 ### Server-Side Request Forgery (SSRF)
 
-Any time the server fetches a URL the user influenced — webhooks, "import from URL", image proxies, link previews — an attacker can aim it at internal services (cloud metadata, `localhost`, private IPs).
+Any time the server fetches a URL the user influenced; webhooks, "import from URL", image proxies, link previews; an attacker can aim it at internal services (cloud metadata, `localhost`, private IPs).
 
 ```typescript
 // BAD: fetch whatever the user gives you
@@ -240,7 +240,7 @@ await fetch(await assertSafeUrl(req.body.webhookUrl), { redirect: 'error' });
 
 The `range() !== 'unicast'` check covers loopback, link-local `169.254.169.254` (cloud metadata, the #1 SSRF target), private, and unique-local ranges across IPv4 and IPv6.
 
-**Caveat — this still has a TOCTOU gap.** `fetch` resolves DNS again after the check, so an attacker using a short-TTL record can rebind to an internal IP between validation and connection. For any surface exposed to untrusted DNS, use a reviewed transport that connects only to approved resolved addresses while preserving TLS hostname validation, and enforce network egress restrictions. Bound response bytes/time/concurrency and revalidate every permitted redirect. Named third-party filtering packages require current compatibility/security review; their names are not a guarantee.
+**Caveat; this still has a TOCTOU gap.** `fetch` resolves DNS again after the check, so an attacker using a short-TTL record can rebind to an internal IP between validation and connection. For any surface exposed to untrusted DNS, use a reviewed transport that connects only to approved resolved addresses while preserving TLS hostname validation, and enforce network egress restrictions. Bound response bytes/time/concurrency and revalidate every permitted redirect. Named third-party filtering packages require current compatibility/security review; their names are not a guarantee.
 
 ## Input Validation Patterns
 
@@ -327,10 +327,10 @@ When you defer a fix, document the reason and set a review date.
 
 `npm audit` reports advisories known to its selected registry/database; it won't catch a malicious or typosquatted package. Also:
 
-- **Commit the lockfile** and install with `npm ci` (not `npm install`) in CI — reproducible builds, no silent version drift.
-- **Review new dependencies before adding them** — maintenance, download counts, and whether they truly earn their place. Every dependency is attack surface (OWASP **A06: Vulnerable Components**, **LLM03: Supply Chain**).
-- **Be wary of `postinstall` scripts** in unfamiliar packages — they run arbitrary code at install time.
-- **Watch for typosquats** — `cross-env` vs `crossenv`, `react-dom` vs `reactdom`.
+- **Commit the lockfile** and install with `npm ci` (not `npm install`) in CI; reproducible builds, no silent version drift.
+- **Review new dependencies before adding them**; maintenance, download counts, and whether they truly earn their place. Every dependency is attack surface (OWASP **A06: Vulnerable Components**, **LLM03: Supply Chain**).
+- **Be wary of `postinstall` scripts** in unfamiliar packages; they run arbitrary code at install time.
+- **Watch for typosquats**; `cross-env` vs `crossenv`, `react-dom` vs `reactdom`.
 
 ## Rate Limiting
 
@@ -376,14 +376,14 @@ git diff --cached --name-only
 # secret values into shared terminal/tool logs. A keyword search cannot prove absence.
 ```
 
-**If a secret is ever committed, rotate it.** Deleting the line or rewriting history is not enough — assume it's compromised the moment it reaches a remote. Revoke and reissue the key first; coordinate any history rewrite separately with the owner and collaborators. Do not rewrite shared history automatically.
+**If a secret is ever committed, rotate it.** Deleting the line or rewriting history is not enough; assume it's compromised the moment it reaches a remote. Revoke and reissue the key first; coordinate any history rewrite separately with the owner and collaborators. Do not rewrite shared history automatically.
 
 ## Securing AI / LLM Features
 
-If your app calls an LLM — chatbots, summarizers, agents, RAG — it inherits a new attack surface. Map it to the [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/):
+If your app calls an LLM; chatbots, summarizers, agents, RAG; it inherits a new attack surface. Map it to the [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/):
 
 - **Treat all model output as untrusted input (LLM05: Improper Output Handling).** Never pass LLM output straight into `eval`, SQL, a shell, `innerHTML`, or a file path. Validate and encode it exactly as you would raw user input.
-- **Assume prompts can be hijacked (LLM01: Prompt Injection).** Untrusted text in the context window — a user message, a fetched web page, a PDF — can carry instructions. The system prompt is not a security boundary; enforce permissions in code, not in the prompt.
+- **Assume prompts can be hijacked (LLM01: Prompt Injection).** Untrusted text in the context window; a user message, a fetched web page, a PDF; can carry instructions. The system prompt is not a security boundary; enforce permissions in code, not in the prompt.
 - **Keep secrets and other users' data out of prompts (LLM02 / LLM07).** Anything in the context can be echoed back. Don't put API keys, cross-tenant data, or the full system prompt where the model can repeat it.
 - **Constrain tool and agent permissions (LLM06: Excessive Agency).** Scope tools to the minimum, require confirmation for destructive or irreversible actions, and validate every tool argument.
 - **Bound consumption (LLM10: Unbounded Consumption).** Cap tokens, request rate, and loop/recursion depth so a crafted input can't run up cost or hang the system.
@@ -395,7 +395,7 @@ const sql = await llm.generate(`Write SQL for: ${userQuestion}`);
 await db.query(sql);                                   // arbitrary query execution
 container.innerHTML = await llm.reply(userMessage);   // stored XSS, via the model
 
-// GOOD: model output is data — parse defensively, then validate, then encode
+// GOOD: model output is data; parse defensively, then validate, then encode
 let intent;
 try {
   intent = CommandSchema.parse(JSON.parse(await llm.replyJson(userMessage)));

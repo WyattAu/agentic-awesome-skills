@@ -1,6 +1,6 @@
 # Persistent storage with Buckets
 
-Spaces are stateless. All data is wiped on restart / rebuild. For state that must survive (user uploads, generations, dynamic feeds, logs, growing databases): mount an HF **Bucket** — S3-like object storage living at `hf://buckets/<ns>/<bucket>`.
+Spaces are stateless. All data is wiped on restart / rebuild. For state that must survive (user uploads, generations, dynamic feeds, logs, growing databases): mount an HF **Bucket**; S3-like object storage living at `hf://buckets/<ns>/<bucket>`.
 
 Buckets are paid (per-TB storage). Check `whoami.canPay` and confirm with the user before creating one. Pricing + free tier: https://huggingface.co/storage.
 
@@ -15,7 +15,7 @@ hf spaces volumes set <ns>/<space> -v hf://buckets/<ns>/<bucket-name>:/data
 
 After a successful write/close and backend synchronization, verify persistence across a restart; do not treat an unclosed local write or application response as durability proof. Reads come from the bucket via the Xet storage backend.
 
-To make the bucket files publicly addressable: leave the bucket public. Public bucket files are served at `https://huggingface.co/buckets/<ns>/<bucket>/resolve/<path>` (HTTP 302 redirect to a signed CDN URL). The resolve URL remains usable only while the object, visibility and service policy remain available — no streaming proxy needed.
+To make the bucket files publicly addressable: leave the bucket public. Public bucket files are served at `https://huggingface.co/buckets/<ns>/<bucket>/resolve/<path>` (HTTP 302 redirect to a signed CDN URL). The resolve URL remains usable only while the object, visibility and service policy remain available; no streaming proxy needed.
 
 ## Write-durable, read-fast pattern
 
@@ -52,7 +52,7 @@ def save(audio_bytes: bytes, title: str):
             "url": f"{BUCKET_URL}/songs/{sid}/audio.wav",
             "created_at": datetime.now(timezone.utc).isoformat()}
     json.dump(meta, open(f"{d}/meta.json", "w"))
-    _feed.insert(0, meta)                          # cache stays current — no re-scan
+    _feed.insert(0, meta)                          # cache stays current; no re-scan
     return meta
 
 @app.api(name="feed", concurrency_limit=10)
@@ -65,7 +65,7 @@ Reference Space using this pattern: https://huggingface.co/spaces/victor/ace-ste
 
 **Do NOT** `snapshot_download(..., local_dir="/data/weights")` and load checkpoints from there. Bucket I/O is S3-paced; reading a 22 GB `safetensors` from `/data` during `from_pretrained` stalls past any `@spaces.GPU` duration cap.
 
-For model weights, let HF Hub re-download to local container disk on each cold start. Use the current Hub Xet transfer backend; the legacy `HF_HUB_ENABLE_HF_TRANSFER` setting is deprecated — typically much faster than streaming the same bytes through bucket I/O at request time.
+For model weights, let HF Hub re-download to local container disk on each cold start. Use the current Hub Xet transfer backend; the legacy `HF_HUB_ENABLE_HF_TRANSFER` setting is deprecated; typically much faster than streaming the same bytes through bucket I/O at request time.
 
 Bucket I/O is fine for occasional metadata reads (the feed pattern above) or saving user information. It is *not* fine as the path your model loader streams gigabytes through every cold start.
 

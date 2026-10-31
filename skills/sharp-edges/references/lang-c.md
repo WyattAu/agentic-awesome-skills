@@ -18,7 +18,7 @@ size_t size = user_count * sizeof(struct User);
 void *buf = malloc(size);
 ```
 
-**The Problem**: Signed integer overflow is undefined behavior. Compilers assume it never happens and optimize accordingly—including removing overflow checks.
+**The Problem**: Signed integer overflow is undefined behavior. Compilers assume it never happens and optimize accordingly-including removing overflow checks.
 
 **Detection**: Look for arithmetic on signed integers, especially in size calculations, loop bounds, and allocation sizes.
 

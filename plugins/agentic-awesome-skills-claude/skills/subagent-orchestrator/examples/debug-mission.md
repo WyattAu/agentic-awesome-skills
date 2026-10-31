@@ -3,7 +3,7 @@
 ## Scenario
 User: "My Vercel deploy is failing. Build error: Cannot find module '@/components/ProposalResult'"
 
-This is a targeted repair — minimum agents, minimum quota.
+This is a targeted repair; minimum agents, minimum quota.
 
 ---
 
@@ -23,7 +23,7 @@ AGENTS:
     Scope: ONLY the file containing the broken import + the missing file (if it needs creating)
     Model: Gemini Flash
     Input: Exact error message, file path of the import
-    Output: Fixed import OR created missing file — nothing else
+    Output: Fixed import OR created missing file; nothing else
     Depends on: none
 ─────────────────────────────────────────
 ```
@@ -33,7 +33,7 @@ AGENTS:
 ## Repair Protocol
 
 ```
-Step 1: Read the exact error — don't assume context
+Step 1: Read the exact error; don't assume context
   Error: "Cannot find module '@/components/ProposalResult'"
 
 Step 2: Check if the file exists
@@ -44,7 +44,7 @@ Step 3: Run the available targeted build/typecheck; label inspection-only if una
   → Check all other files that import the same module
   → Confirm tsconfig.json paths alias is correct
 
-Step 4: Report what was changed and why — one sentence each
+Step 4: Report what was changed and why; one sentence each
 ```
 
 ---
@@ -69,4 +69,4 @@ Step 4: Report what was changed and why — one sentence each
 | **Total estimated** | **< 5% sprint** |
 
 > Repair missions should almost never exceed 10% sprint quota.
-> If a repair is growing complex, stop — decompose it as a new full mission instead.
+> If a repair is growing complex, stop; decompose it as a new full mission instead.

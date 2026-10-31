@@ -29,7 +29,7 @@ something.
 ```
 CLASS: Ignored action
 EVIDENCE: in 4/4 clips the cup lands upright; no liquid leaves it
-CHANGE (one): lead with the action — "Black coffee sloshes out of a tipping paper cup…" —
+CHANGE (one): lead with the action; "Black coffee sloshes out of a tipping paper cup…" -
               and cut the barista from the frame
 KEEP: lens, light, seed policy
 ```

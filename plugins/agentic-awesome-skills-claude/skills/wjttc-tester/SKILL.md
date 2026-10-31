@@ -14,7 +14,7 @@ license_source: https://github.com/Wolfe-Jam/faf-skills/blob/main/LICENSE
 
 **"We break things so others never have to know they were broken."**
 
-Apply F1-inspired standards to software testing. When brakes must work flawlessly at race pace, so must the code in production. This skill **executes** test plans and **files reports** — it is the driver, not the engineer. To plan and generate the suite, use **wjttc-builder**.
+Apply F1-inspired standards to software testing. When brakes must work flawlessly at race pace, so must the code in production. This skill **executes** test plans and **files reports**; it is the driver, not the engineer. To plan and generate the suite, use **wjttc-builder**.
 
 ## When to use this skill
 
@@ -30,34 +30,34 @@ Triage every test by blast radius. The first three set severity; Tyre and Pit co
 
 | Tier | Symbol | Meaning | Examples |
 |------|--------|---------|----------|
-| **Brake** | 🚨 | Life-critical — failure is catastrophic | data loss, auth bypass, payment errors, destructive ops without confirm |
-| **Engine** | ⚡ | Performance-critical — wrong results / poor UX | API accuracy, data transforms, calculations, format compliance, perf |
-| **Aero** | 🏁 | Polish & edge cases — minor inconvenience | UI quirks, rare message formatting, optional-feature edges, docs |
-| **Tyre** | 🛞 | Durability under load — degradation over time | stress/volume, concurrency, memory growth, large inputs |
-| **Pit** | 🔧 | Release gate — the stop that lets you go | smoke/regression suite, CI green, the WJTTC report filed |
+| **Brake** | 🚨 | Life-critical; failure is catastrophic | data loss, auth bypass, payment errors, destructive ops without confirm |
+| **Engine** | ⚡ | Performance-critical; wrong results / poor UX | API accuracy, data transforms, calculations, format compliance, perf |
+| **Aero** | 🏁 | Polish & edge cases; minor inconvenience | UI quirks, rare message formatting, optional-feature edges, docs |
+| **Tyre** | 🛞 | Durability under load; degradation over time | stress/volume, concurrency, memory growth, large inputs |
+| **Pit** | 🔧 | Release gate; the stop that lets you go | smoke/regression suite, CI green, the WJTTC report filed |
 
 Test Brake first. If the brakes don't work, nothing else matters.
 
-## Step 0 — Signal Integrity pre-audit (run BEFORE adding/running anything new)
+## Step 0: Signal Integrity pre-audit (run BEFORE adding/running anything new)
 
-**Red CI is a contract: it must always mean "stop, look, fix."** A suite with high coverage but flaky reds is *less* trustworthy than a smaller suite with zero false alarms — because the team has stopped reading the reds. Fix the signal before you add more tests.
+**Red CI is a contract: it must always mean "stop, look, fix."** A suite with high coverage but flaky reds is *less* trustworthy than a smaller suite with zero false alarms; because the team has stopped reading the reds. Fix the signal before you add more tests.
 
-**Method** — classify the last 30 days of CI failures:
+**Method**; classify the last 30 days of CI failures:
 
 | Bucket | Definition | Verdict |
 |--------|-----------|---------|
 | **Real bug** | Red mapped to a real defect; fixed by a code change | ✓ Signal worked |
 | **Flake** | Timing/network/concurrency noise; passed on rerun, no code change | ✗ Test design defect |
-| **Infra** | Missing secret, runner image change, upstream dep — not the code | ✗ Workflow design defect |
+| **Infra** | Missing secret, runner image change, upstream dep; not the code | ✗ Workflow design defect |
 
 **Signal Integrity Score:** `SI = Real bugs / (Real bugs + Flakes + Infra) × 100`. If the denominator is zero, report N/A; a passing rerun alone does not establish a flake.
 
 | SI % | Verdict | Action |
 |------|---------|--------|
-| 100% | ✪ | Maintain — exemplary signal |
+| 100% | ✪ | Maintain; exemplary signal |
 | 95–99% | ★ Championship | Annotate any flake immediately |
 | 85–94% | ◇ Acceptable | Schedule the flake-class fix this sprint |
-| 70–84% | ● Eroding | Stop adding tests — fix flakes first |
+| 70–84% | ● Eroding | Stop adding tests; fix flakes first |
 | <70% | ○ Dead signal | Block merges until signal restored |
 
 **Eliminate on sight:** hard absolute-time perf asserts on shared runners (`expect(t).toBeLessThan(30)`) → move to a non-gating workflow; network calls in the main suite → mock at the boundary; concurrency tests without explicit ordering; optional secret-dependent tests → explicitly report blocked/not-run. Missing required evidence must fail closed; never grey-skip a required release gate.
@@ -68,16 +68,16 @@ Test Brake first. If the brakes don't work, nothing else matters.
 
 ## Execution loop
 
-1. **Scope** — what should it do? happy path, edges, failure modes, perf targets, tier of each.
+1. **Scope**; what should it do? happy path, edges, failure modes, perf targets, tier of each.
 2. **Audit signal** (Step 0) before trusting or extending the suite.
 3. **Run** each test: set up, prepare data, execute, observe actual vs expected, record pass/fail/blocked, capture evidence on failure.
 4. **Reproduce** every failure deterministically; root-cause it; note the fix.
-5. **Tier coverage check** — confirm every test is tiered:
+5. **Tier coverage check**; confirm every test is tiered:
    ```bash
    faf wjttc --path tests          # audit tier coverage (vendor-neutral)
    faf wjttc --strict --json       # CI gate: non-zero if any test is untiered
    ```
-6. **Report** — file the WJTTC report (below), then surface the tier verdict.
+6. **Report**; file the WJTTC report (below), then surface the tier verdict.
 
 ## WJTTC report format
 
@@ -148,13 +148,13 @@ Map the pass rate (or SI score) to the single canonical FAF tier ladder. No seco
 | 1% | Red | ○ |
 | 0% | White | ♡ |
 
-The FAF score is **deterministic** — same input, same score. A test report should be just as falsifiable: every verdict traces to a reproducible run. **FAF doesn't lie.**
+The FAF score is **deterministic**; same input, same score. A test report should be just as falsifiable: every verdict traces to a reproducible run. **FAF doesn't lie.**
 
 ## WJTTC method notes
 
-- **Test with real data**, not just sanitized inputs — anonymized production data, messy inputs, production-like volume.
+- **Test with real data**, not just sanitized inputs; anonymized production data, messy inputs, production-like volume.
 - **Document every failure** so it can be reproduced: what failed, how to repro, why it matters, how to fix.
-- **Tier before you test** — severity is the tier, so triage first; `faf wjttc` enforces that nothing ships untiered.
+- **Tier before you test**; severity is the tier, so triage first; `faf wjttc` enforces that nothing ships untiered.
 - **Wire it into CI** with TAF receipts so the report is part of the record, not a one-off:
   ```bash
   faf taf setup --write     # create .github/workflows/taf.yml (test receipts)
@@ -164,10 +164,10 @@ The FAF score is **deterministic** — same input, same score. A test report sho
 ## Quick checklist (before release)
 
 - [ ] Signal Integrity audited (SI ≥ 85%)
-- [ ] Brake tests pass — zero tolerance
+- [ ] Brake tests pass; zero tolerance
 - [ ] Edges + error handling tested
 - [ ] Tyre: behaves under load / concurrency
-- [ ] `faf wjttc --strict` green — every test tiered
+- [ ] `faf wjttc --strict` green; every test tiered
 - [ ] Regression (Pit) suite passes
 - [ ] WJTTC report filed in `./wjttc-reports/`
 - [ ] Pass rate recorded; every required test passes and required release criteria are met. No aggregate pass rate establishes production readiness.
@@ -180,7 +180,7 @@ The FAF score is **deterministic** — same input, same score. A test report sho
 
 ---
 
-*Made with 🧡 by wolfejam.dev — "We break things so others never have to know they were broken."*
+*Made with 🧡 by wolfejam.dev; "We break things so others never have to know they were broken."*
 
 ## Limitations
 

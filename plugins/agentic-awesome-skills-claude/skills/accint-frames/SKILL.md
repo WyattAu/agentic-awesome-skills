@@ -1,6 +1,6 @@
 ---
 name: accint-frames
-description: Drain acc's deliberation queue — open/waiting brain_frames checkpointed by headless runs — via acc_act(runtime="continue").
+description: Drain acc's deliberation queue; open/waiting brain_frames checkpointed by headless runs; via acc_act(runtime="continue").
 risk: critical
 source: https://github.com/maxbaluev/accreted-intelligence/tree/main/plugins/claude/skills/frames
 source_repo: maxbaluev/accreted-intelligence
@@ -13,10 +13,10 @@ license_source: https://github.com/maxbaluev/accreted-intelligence/blob/main/LIC
 # frames
 ## When to Use
 
-Use this skill when you need drain acc's deliberation queue — open/waiting brain_frames checkpointed by headless runs — via acc_act(runtime="continue").
+Use this skill when you need drain acc's deliberation queue; open/waiting brain_frames checkpointed by headless runs; via acc_act(runtime="continue").
 
 
-Routing sugar over the two MCP verbs — no logic lives here.
+Routing sugar over the two MCP verbs; no logic lives here.
 
 1. List the queue: `acc frames` (CLI, read-only observation).
 2. For each open/waiting frame: read its typed hole + retrieved context, deliberate,
@@ -31,7 +31,7 @@ Routing sugar over the two MCP verbs — no logic lives here.
 
 **User request:**
 
-> Use @accint-frames for this task: Drain acc's deliberation queue — open/waiting brain_frames checkpointed by headless runs — via acc_act(runtime="continue").
+> Use @accint-frames for this task: Drain acc's deliberation queue; open/waiting brain_frames checkpointed by headless runs; via acc_act(runtime="continue").
 
 ## Limitations
 

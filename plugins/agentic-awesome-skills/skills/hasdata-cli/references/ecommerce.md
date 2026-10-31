@@ -15,10 +15,10 @@ hasdata amazon-search --q "wireless earbuds" [--domain amazon.com] --raw | jq '.
 
 - `--q TEXT` (required)
 - `--domain amazon.com|amazon.co.uk|amazon.de|amazon.in|amazon.co.jp|amazon.fr|amazon.it|amazon.es|amazon.com.br|amazon.com.mx|amazon.ca|amazon.com.au`
-- `--page N` — pagination
+- `--page N`; pagination
 - `--sort featured|price-asc-rank|price-desc-rank|review-rank|date-desc-rank`
-- `--node ID` — restrict to category node
-- `--customer-reviews` — only items with reviews
+- `--node ID`; restrict to category node
+- `--customer-reviews`; only items with reviews
 
 Per-result fields: `asin`, `title`, `price`, `link`, `image`, `rating`, `reviews_count`, `prime`.
 
@@ -30,8 +30,8 @@ hasdata amazon-product --asin B08N5WRWNW [--domain amazon.com] --raw | jq .
 
 - `--asin ASIN` (required)
 - `--domain` as above
-- `--include-reviews` — include first page of reviews
-- `--include-html` — return raw HTML alongside parsed data
+- `--include-reviews`; include first page of reviews
+- `--include-html`; return raw HTML alongside parsed data
 
 Returns: title, price, availability, features, descriptions, variants, images, ratings, top reviews, A+ content.
 
@@ -49,7 +49,7 @@ Seller profile: name, ratings, review count, returns policy, shipping policy, "A
 hasdata amazon-seller-products --seller-id A1234567890ABC [--domain amazon.com] [--page 1] --raw
 ```
 
-List of products from a specific seller — useful for competitor analysis or storefront crawling.
+List of products from a specific seller; useful for competitor analysis or storefront crawling.
 
 ---
 
@@ -73,25 +73,25 @@ For drilling into a specific collection, append `/collections/SLUG` to the URL o
 
 ## Non-obvious use cases
 
-- **Cross-marketplace price arbitrage** — same `--asin` across `--domain amazon.com|amazon.co.uk|amazon.de` shows regional prices in their original currencies; normalize exchange rates, taxes, shipping and comparable variants yourself; useful for grey-market resellers and buyers shipping internationally.
-- **"Is this product still available?"** — `amazon-product --asin X --raw | jq '.availability'`. Avoids hallucinating an answer based on stale training data.
-- **Variant matrix dump** — `amazon-product --asin X --raw | jq '.variants[] | {asin, color, size, price}'` returns the full color/size/etc. lattice with current prices.
-- **Counterfeit-listing detection** — `amazon-search --q "BRAND PRODUCT" --raw` then check `.results[].seller_name` for non-authorized sellers; pivot to `amazon-seller` to inspect their other listings.
-- **Storefront catalog** — `amazon-seller-products --seller-id X --page 1..N` paginates a seller's full catalog; useful for competitor analysis or due diligence on a vendor.
-- **"What were the bestsellers in category X?"** — `amazon-search --q "CATEGORY KEYWORD" --sort featured` returns Amazon's own ranking (`--sort review-rank` for review-weighted).
-- **Lead enrichment for a Shopify store** — `shopify-products --url store.example.com --raw` exposes vendor names, tags, product types, SKUs — useful for competitor product-line audits.
-- **Stock check** — `shopify-products` returns each variant's `available` boolean; can power "notify me when X is back" without scraping the cart UI.
-- **Price-drop monitoring** — schedule `amazon-product --asin X` daily; persist `.price` to a file; alert when delta > N%.
-- **A/B-test detection** — same `--asin` from two different `--proxy-country` settings (via web-scraping fallback if amazon-product doesn't support it) sometimes may show different price/title; this alone does not identify an A/B experiment.
-- **Gift-card / coupon discovery** — `google-shopping --q "PRODUCT"` often surfaces resellers offering rebates Amazon doesn't show.
-- **Product-image extraction for a moodboard** — `amazon-product --asin X --raw | jq -r '.images[]'` returns CDN URLs you can download separately.
-- **Compare reviews summary** — `amazon-product --asin X --include-reviews --raw | jq '.reviews[] | {rating, title, body}'` gives a quick sentiment sample without scraping the review page.
-- **Build a Shopify product feed for ads** — `shopify-products --url X --raw | jq --arg store "$STORE_HOST" -c '.products[] | {id, title, price: .variants[0].price, url: ("https://" + $store + "/products/" + .handle)}'`.
+- **Cross-marketplace price arbitrage**; same `--asin` across `--domain amazon.com|amazon.co.uk|amazon.de` shows regional prices in their original currencies; normalize exchange rates, taxes, shipping and comparable variants yourself; useful for grey-market resellers and buyers shipping internationally.
+- **"Is this product still available?"**; `amazon-product --asin X --raw | jq '.availability'`. Avoids hallucinating an answer based on stale training data.
+- **Variant matrix dump**; `amazon-product --asin X --raw | jq '.variants[] | {asin, color, size, price}'` returns the full color/size/etc. lattice with current prices.
+- **Counterfeit-listing detection**; `amazon-search --q "BRAND PRODUCT" --raw` then check `.results[].seller_name` for non-authorized sellers; pivot to `amazon-seller` to inspect their other listings.
+- **Storefront catalog**; `amazon-seller-products --seller-id X --page 1..N` paginates a seller's full catalog; useful for competitor analysis or due diligence on a vendor.
+- **"What were the bestsellers in category X?"**; `amazon-search --q "CATEGORY KEYWORD" --sort featured` returns Amazon's own ranking (`--sort review-rank` for review-weighted).
+- **Lead enrichment for a Shopify store**; `shopify-products --url store.example.com --raw` exposes vendor names, tags, product types, SKUs; useful for competitor product-line audits.
+- **Stock check**; `shopify-products` returns each variant's `available` boolean; can power "notify me when X is back" without scraping the cart UI.
+- **Price-drop monitoring**; schedule `amazon-product --asin X` daily; persist `.price` to a file; alert when delta > N%.
+- **A/B-test detection**; same `--asin` from two different `--proxy-country` settings (via web-scraping fallback if amazon-product doesn't support it) sometimes may show different price/title; this alone does not identify an A/B experiment.
+- **Gift-card / coupon discovery**; `google-shopping --q "PRODUCT"` often surfaces resellers offering rebates Amazon doesn't show.
+- **Product-image extraction for a moodboard**; `amazon-product --asin X --raw | jq -r '.images[]'` returns CDN URLs you can download separately.
+- **Compare reviews summary**; `amazon-product --asin X --include-reviews --raw | jq '.reviews[] | {rating, title, body}'` gives a quick sentiment sample without scraping the review page.
+- **Build a Shopify product feed for ads**; `shopify-products --url X --raw | jq --arg store "$STORE_HOST" -c '.products[] | {id, title, price: .variants[0].price, url: ("https://" + $store + "/products/" + .handle)}'`.
 
 ## Common patterns
 
 ```bash
-# Price tracking — pull current price for a known ASIN
+# Price tracking: pull current price for a known ASIN
 hasdata amazon-product --asin "$ASIN" --raw | jq '.price'
 
 # Product discovery → details fan-out

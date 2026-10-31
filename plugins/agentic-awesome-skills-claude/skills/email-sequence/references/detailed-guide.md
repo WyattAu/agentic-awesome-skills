@@ -107,7 +107,7 @@ Consider:
 ### Welcome Sequence (Post-Signup)
 
 **Email 1: Welcome (Immediate)**
-- Subject: Welcome to [Product] — here's your first step
+- Subject: Welcome to [Product]; here's your first step
 - Deliver what was promised (lead magnet, access, etc.)
 - Single next action
 - Set expectations for future emails
@@ -131,7 +131,7 @@ Consider:
 - Soft CTA to explore
 
 **Email 5: Overcome Objection (Day 7-8)**
-- Subject: "I don't have time for X" — sound familiar?
+- Subject: "I don't have time for X"; sound familiar?
 - Address common hesitation
 - Reframe the obstacle
 - Show easy path forward
@@ -211,7 +211,7 @@ Consider:
 - Quick CTA
 
 **Email 3: Incentive (Day 5-7 after)**
-- Subject: We miss you — here's something special
+- Subject: We miss you; here's something special
 - Offer if appropriate
 - Limited time
 - Clear CTA
@@ -295,12 +295,12 @@ A comprehensive guide to lifecycle and campaign emails. Use this as an audit che
 **Typical sequence**: 3-5 emails over 14 days
 
 - Email 1: Thank you + what's next (immediate)
-- Email 2: Getting full value — setup checklist (day 2)
+- Email 2: Getting full value; setup checklist (day 2)
 - Email 3: Pro tips for paid features (day 5)
 - Email 4: Success story from similar customer (day 7)
 - Email 5: Check-in + introduce support resources (day 14)
 
-**Key point**: Different from new user series—they've committed. Focus on reinforcement and expansion, not conversion.
+**Key point**: Different from new user series-they've committed. Focus on reinforcement and expansion, not conversion.
 
 ---
 
@@ -395,7 +395,7 @@ A comprehensive guide to lifecycle and campaign emails. Use this as an audit che
 - Mention specific value/milestone if possible
 - Explain why reviews matter (help others decide)
 - Direct link to review platform
-- Keep it short—this is an ask
+- Keep it short-this is an ask
 
 ---
 
@@ -415,7 +415,7 @@ A comprehensive guide to lifecycle and campaign emails. Use this as an audit che
 - Specific: "I noticed you..." (if data allows)
 - Offer direct help (not just link to docs)
 - Personal from support or CSM
-- No sales pitch—pure help
+- No sales pitch-pure help
 
 ---
 
@@ -657,7 +657,7 @@ A comprehensive guide to lifecycle and campaign emails. Use this as an audit che
 - Scannable format
 - Mix of content types
 - One primary CTA focus
-- Unsubscribe is okay—keeps list healthy
+- Unsubscribe is okay-keeps list healthy
 
 ---
 
@@ -798,7 +798,7 @@ Use this to audit your current email program:
 - First-person (I/we) and second-person (you)
 - Active voice
 - Match your brand but lean friendly
-- Read it out loud—does it sound human?
+- Read it out loud-does it sound human?
 
 ### Length
 - Shorter is usually better

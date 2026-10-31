@@ -1,4 +1,4 @@
-# Full Walkthrough — "I'm thinking about dropping out of my CS degree to join a startup"
+# Full Walkthrough: "I'm thinking about dropping out of my CS degree to join a startup"
 
 > **User input:** "I'm thinking about dropping out of my CS degree to join a startup full-time. The CEO offered me equity and a junior dev role. Help me think through this from first principles."
 
@@ -6,7 +6,7 @@
 
 ## 【Phase 1: Problem Reframing】
 
-You said "dropping out to join a startup" — before decomposing assumptions, let's make sure the question itself is correctly framed.
+You said "dropping out to join a startup"; before decomposing assumptions, let's make sure the question itself is correctly framed.
 
 A few clarifications:
 
@@ -22,7 +22,7 @@ A few clarifications:
 
 **Reframed core question:**
 
-> "Given my current skills, financial situation, and risk tolerance, is joining this specific startup now — at the cost of delaying/abandoning my degree — a better path to my goals than completing the degree first? And do I have enough information to make this decision today?"
+> "Given my current skills, financial situation, and risk tolerance, is joining this specific startup now; at the cost of delaying/abandoning my degree; a better path to my goals than completing the degree first? And do I have enough information to make this decision today?"
 
 Does this capture what you're really trying to figure out?
 
@@ -33,7 +33,7 @@ Does this capture what you're really trying to figure out?
 Here are the hidden assumptions embedded in your framing:
 
 **Surface assumptions (obvious):**
-- A1. A CS degree is just a piece of paper — the real learning happens on the job
+- A1. A CS degree is just a piece of paper; the real learning happens on the job
 - A2. This startup opportunity won't come again if I don't take it now
 
 **Middle-layer assumptions (industry conventional wisdom):**
@@ -59,7 +59,7 @@ Here are the hidden assumptions embedded in your framing:
 | A3 | Early equity is worth more than salary | 🟡 Convention + ⚫ Interest-driven | Equity value depends on financials, vesting, dilution, preferences and exit scenarios; no probability is established here |
 | A4 | The startup world values skills over credentials | 🟡 Convention | Check the user’s target employers; credentials and experience requirements vary |
 | A5 | I can always go back and finish later | 🔴 Subjective belief | Based on intention, not evidence. Verify the actual institution’s leave/re-entry terms |
-| A6 | A startup will accelerate my career faster | 🔴 Subjective belief | Survivorship bias — you see dropouts who succeeded, not the majority who struggled |
+| A6 | A startup will accelerate my career faster | 🔴 Subjective belief | Survivorship bias; you see dropouts who succeeded, not the majority who struggled |
 | A7 | I'm ready for startup intensity | 🔴 Subjective belief | Self-assessment often overestimates readiness for ambiguity and stress |
 | A8 | The CEO is competent and trustworthy | 🔴 Subjective belief | Based on limited interactions. Have you done due diligence on the founder? |
 | A9 | Failed startup experience is still valuable | 🟡 Convention | Accepted wisdom in startup culture, but ask target employers how they evaluate the experience |
@@ -67,7 +67,7 @@ Here are the hidden assumptions embedded in your framing:
 
 ---
 
-## 【Phase 4: Risk Matrix — Top 3】
+## 【Phase 4: Risk Matrix: Top 3】
 
 | Rank | Assumption | Fragility | Impact | Risk Score | Verification Question |
 |------|-----------|-----------|--------|------------|----------------------|
@@ -99,6 +99,6 @@ A3 has the highest illustrative priority score, not a measured probability. The 
 | Risk assessment | "I can always go back" | Re-enrollment is not guaranteed; quantify the actual cost |
 | Information basis | Excitement + CEO's pitch | Due diligence on founder, financials, legal review of equity |
 
-### If you don't have time for full reconstruction — the one thing to verify first:
+### If you don't have time for full reconstruction: the one thing to verify first:
 
 > **Ask the CEO for the company's current revenue, burn rate, and runway. If they cannot share them, ask why and whether an NDA, summary or independent review is possible; treat remaining uncertainty as a decision factor, not definitive evidence of misconduct.**

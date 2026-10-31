@@ -34,11 +34,11 @@ report_count: 34
 SSRF is highest-value when the target runs on cloud infrastructure (AWS, GCP, Azure) where metadata services expose credentials, or when the server sits inside a complex internal network (Kubernetes clusters, microservice meshes, internal APIs). Priority targets:
 
 - **Cloud-hosted SaaS products** (GCP metadata at `169.254.169.254` or `metadata.google.internal`, AWS IMDSv1)
-- **Kubernetes/orchestration platforms** — aggregated API servers, metrics-server, kubelet endpoints expose privileged cluster operations
-- **Internal developer tooling** — CI/CD, workflow orchestration (Flyte, Argo), admin panels not exposed externally
-- **Link preview / URL fetching features** — Reddit-style preview APIs, Slack-style unfurling, media processors
-- **Dataset/file import pipelines** — anything that fetches remote URLs on behalf of a user
-- **Enterprise self-hosted software** (GitHub Enterprise, GitLab) — SSRF frequently chains to RCE via internal services
+- **Kubernetes/orchestration platforms**; aggregated API servers, metrics-server, kubelet endpoints expose privileged cluster operations
+- **Internal developer tooling**; CI/CD, workflow orchestration (Flyte, Argo), admin panels not exposed externally
+- **Link preview / URL fetching features**; Reddit-style preview APIs, Slack-style unfurling, media processors
+- **Dataset/file import pipelines**; anything that fetches remote URLs on behalf of a user
+- **Enterprise self-hosted software** (GitHub Enterprise, GitLab); SSRF frequently chains to RCE via internal services
 
 Payouts are highest when SSRF reaches: cloud credentials → account takeover, internal admin APIs → data exfil, or chains to RCE.
 
@@ -52,7 +52,7 @@ OOB means: a Burp Collaborator domain, an `interactsh-client` listener, a canary
 
 ### What is NOT confirmation of SSRF
 
-- The server **echoing your URL back in an error message**. Example: `"The Web application at http://evil.example.com/x could not be found"` — this is the server formatting your input into an error string, NOT making an outbound HTTP request. The error came from string formatting, not from network failure.
+- The server **echoing your URL back in an error message**. Example: `"The Web application at http://evil.example.com/x could not be found"`; this is the server formatting your input into an error string, NOT making an outbound HTTP request. The error came from string formatting, not from network failure.
 - The server returning a different status code for an external URL vs `localhost`. Different error responses can come from URL-scheme validators, not from actual fetching.
 - A delayed response when the URL is sent. Delay can come from DNS resolution attempts within the parser, not from completed HTTP fetches.
 
@@ -66,7 +66,7 @@ OOB means: a Burp Collaborator domain, an `interactsh-client` listener, a canary
 
 1. **Plant the Collaborator payload first.** Sub-tagging (`dlsrcurl.<collab>`,
    `import.<collab>`) only works if your listener actually reports the queried
-   subdomain back to you — **verify that before relying on it.** Burp's
+   subdomain back to you; **verify that before relying on it.** Burp's
    `get_collaborator_interactions` keys results by **payload ID, not by subdomain**,
    so several sub-tags generated from one payload are indistinguishable in the
    output. When that is the case, **generate a fresh payload per candidate
@@ -84,10 +84,10 @@ A callback proves the server made a request. It does **not** tell you which
 parameter caused it, and the fix depends entirely on that.
 
 ```
-BAD   — four candidate fields, one payload, fired in one batch
+BAD  ; four candidate fields, one payload, fired in one batch
         -> callbacks arrive, attribution impossible, retest required
 
-GOOD  — fresh payload per field, one request each, poll between
+GOOD ; fresh payload per field, one request each, poll between
         url      -> callbacks    <- this is the sink
         apiUrl   -> none
         endpoint -> none
@@ -95,24 +95,24 @@ GOOD  — fresh payload per field, one request each, poll between
 ```
 
 **Run the negative control.** A parameter that produces *no* callback is evidence,
-and it belongs in the report — it is what lets the client fix the right field
+and it belongs in the report; it is what lets the client fix the right field
 instead of allowlisting the wrong one.
 
 **Lesson from an authorized engagement.** A server-side request-forwarding endpoint
 accepted both `url` and `apiUrl`. The application's own stored config used `apiUrl`,
-so that was the obvious suspect — but `apiUrl` was inert and **`url` was the live
+so that was the obvious suspect; but `apiUrl` was inert and **`url` was the live
 sink**.
 Batch-firing both had produced callbacks with no attribution; only per-payload
 isolation identified the real parameter. A report naming `apiUrl` would have sent
 the client to patch a field that does nothing.
 
-### Blind vs full-read — establish which before scoring
+### Blind vs full-read: establish which before scoring
 
 After a callback confirms the request leaves the server, **check whether the
 upstream response body is returned to you.** These are different findings:
 
 - **Blind** (callback only, no body): assess according to the program policy and concrete reachable impact; no universal never-submit rule applies.
-- **Full-read** (upstream body in the response): substantially higher severity —
+- **Full-read** (upstream body in the response): substantially higher severity -
   read arbitrary internal endpoints directly.
 
 ```bash
@@ -181,11 +181,11 @@ X-Cache headers revealing internal hostnames
 ```
 
 ### Tech Stack Signals
-- **Kubernetes** — any public-facing aggregated API, metrics endpoints
-- **GCP** — any service fetching URLs that runs on Compute Engine/GKE
+- **Kubernetes**; any public-facing aggregated API, metrics endpoints
+- **GCP**; any service fetching URLs that runs on Compute Engine/GKE
 - **Node.js/Python** with URL-fetching libraries (`requests`, `node-fetch`, `axios`)
-- **Headless browsers** (Puppeteer, PhantomJS) used for screenshots/PDF — extremely high value
-- **XML/DSPL/CSV import features** — XXE-style SSRF vector
+- **Headless browsers** (Puppeteer, PhantomJS) used for screenshots/PDF; extremely high value
+- **XML/DSPL/CSV import features**; XXE-style SSRF vector
 - **OAuth/webhook registration** endpoints
 
 ---
@@ -194,7 +194,7 @@ X-Cache headers revealing internal hostnames
 
 1. **Map all URL-input parameters** across the target: spider JS files for fetch calls, check all API docs, look for file-import, link-preview, webhook, image-proxy, and redirect features.
 
-2. **Set up an out-of-band detection server** using Burp Collaborator, interactsh, or `https://canarytokens.org` — you need a unique per-test DNS/HTTP callback domain.
+2. **Set up an out-of-band detection server** using Burp Collaborator, interactsh, or `https://canarytokens.org`; you need a unique per-test DNS/HTTP callback domain.
 
 3. **Send your callback URL as the parameter value first** (blind SSRF check before anything else):
    ```
@@ -217,7 +217,7 @@ X-Cache headers revealing internal hostnames
    http://127.0.0.1:9200/  (Elasticsearch)
    ```
 
-6. **Check for redirect-based SSRF** — if the endpoint validates the initial URL but follows 30x redirects, host a redirect server pointing to internal addresses. Kubernetes report (Report 3) was specifically triggered by hijacked API servers returning 30x responses.
+6. **Check for redirect-based SSRF**; if the endpoint validates the initial URL but follows 30x redirects, host a redirect server pointing to internal addresses. Kubernetes report (Report 3) was specifically triggered by hijacked API servers returning 30x responses.
 
 7. **Test JavaScript-execution contexts** (headless browsers, PDF renderers):
    - Inject `<script>` tags that make `XMLHttpRequest` or `fetch()` calls to internal services
@@ -227,7 +227,7 @@ X-Cache headers revealing internal hostnames
    - Port scan via response time (`connection refused` vs timeout)
    - Check error messages for hostname/IP leakage
 
-9. **Chain findings** — if you have SSRF to internal services, look for:
+9. **Chain findings**; if you have SSRF to internal services, look for:
    - Unauthenticated admin endpoints
    - Redis, memcached (protocol smuggling)
    - Internal OAuth token endpoints
@@ -333,19 +333,19 @@ ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt \
 
 ## Common Root Causes
 
-1. **"The user said it was safe"** — Developers trust user-supplied URLs for fetching remote resources (link previews, thumbnails, webhooks) without validating the destination. The feature is legitimate; the missing validation is the bug.
+1. **"The user said it was safe"**; Developers trust user-supplied URLs for fetching remote resources (link previews, thumbnails, webhooks) without validating the destination. The feature is legitimate; the missing validation is the bug.
 
-2. **Allowlist bypass via redirects** — Developers validate the initial URL against an allowlist but configure HTTP clients to follow redirects automatically. An attacker's server on the allowlist redirects to an internal address.
+2. **Allowlist bypass via redirects**; Developers validate the initial URL against an allowlist but configure HTTP clients to follow redirects automatically. An attacker's server on the allowlist redirects to an internal address.
 
-3. **Aggregated/proxy API trust** — Kubernetes-style architectures where an API aggregation layer blindly proxies 30x responses from registered extension servers. Compromising a single extension server gives SSRF into the core API.
+3. **Aggregated/proxy API trust**; Kubernetes-style architectures where an API aggregation layer blindly proxies 30x responses from registered extension servers. Compromising a single extension server gives SSRF into the core API.
 
-4. **Server-side rendering without sandboxing** — Headless browser features (PDF generation, link preview screenshots) execute attacker-controlled JavaScript in a network-privileged context with access to metadata services.
+4. **Server-side rendering without sandboxing**; Headless browser features (PDF generation, link preview screenshots) execute attacker-controlled JavaScript in a network-privileged context with access to metadata services.
 
-5. **XML/DSPL/file parsers fetching external entities** — Import features that parse structured files (XML, DSPL, CSV with remote schemas) fetch attacker-controlled URLs, often with no URL validation at all.
+5. **XML/DSPL/file parsers fetching external entities**; Import features that parse structured files (XML, DSPL, CSV with remote schemas) fetch attacker-controlled URLs, often with no URL validation at all.
 
-6. **Internal hostname leakage via response differences** — Services return different error messages, timing, or response sizes for internal vs. external hosts, enabling blind enumeration even when content isn't returned.
+6. **Internal hostname leakage via response differences**; Services return different error messages, timing, or response sizes for internal vs. external hosts, enabling blind enumeration even when content isn't returned.
 
-7. **Metadata reachability** — AWS IMDSv2 requires a session-token exchange; GCP normally requires `Metadata-Flavor: Google`. URL-only SSRF does not automatically satisfy these constraints or imply credential access.
+7. **Metadata reachability**; AWS IMDSv2 requires a session-token exchange; GCP normally requires `Metadata-Flavor: Google`. URL-only SSRF does not automatically satisfy these constraints or imply credential access.
 
 ---
 
@@ -355,13 +355,13 @@ ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt \
 - [Bypass Techniques](references/details.md)
 - [Gate 0 Validation](references/details.md)
 - [Real Impact Examples](references/details.md)
-- [Disclosed Report Citations (Backfill +6 — 2018-2024)](references/details.md)
+- [Disclosed Report Citations (Backfill +6; 2018-2024)](references/details.md)
 - [Related Skills & Chains](references/details.md)
 
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

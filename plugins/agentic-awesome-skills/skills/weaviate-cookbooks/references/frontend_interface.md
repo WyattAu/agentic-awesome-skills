@@ -20,7 +20,7 @@
 - **Result:** TypeScript, ESLint, Tailwind v4, App Router, Turbopack, `@/*` → `./*`, no `src/`. App in `app/`, static in `public/`.
 - **Scripts:** `dev` | `build` | `start` | `lint`. Dev server: http://localhost:3000.
 - **Routes:** `app/layout.tsx`, `app/page.tsx`. Imports: `@/` = project root.
-- **Ref:** [Next.js App Router Installation](https://nextjs.org/docs/app/getting-started/installation) — verify against current docs.
+- **Ref:** [Next.js App Router Installation](https://nextjs.org/docs/app/getting-started/installation); verify against current docs.
 
 ### 2. shadcn/ui
 
@@ -44,7 +44,7 @@ Note: Install only when create a conversational user interface for your chatbot 
 
 - **When:** Add this step only if the app needs a chat UI (e.g. query-agent or chatbot flows).
 - **Stack:** Use the [Vercel AI SDK](https://ai-sdk.dev/docs/introduction) (`ai` + `@ai-sdk/*`). Use `useChat` and SDK UI primitives for the chat view.
-- **Ref:** [AI SDK – useChat](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) | [Next.js App Router setup](https://ai-sdk.dev/docs/getting-started/nextjs-app-router) — follow current docs for install and wiring.
+- **Ref:** [AI SDK – useChat](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) | [Next.js App Router setup](https://ai-sdk.dev/docs/getting-started/nextjs-app-router); follow current docs for install and wiring.
 
 ```bash
 npm i ai @ai-sdk/react zod
@@ -67,14 +67,14 @@ Use the actual backend host when not local.
 ### Stack and structure
 
 - **UI:** Use **shadcn components only** for layout and interactive elements (buttons, cards, inputs, dialogs, etc.). Do not add another UI library.
-- **Architecture:** **SPA** — one main page, update main view in place. Avoid full-page navigations unless necessary.
+- **Architecture:** **SPA**; one main page, update main view in place. Avoid full-page navigations unless necessary.
 - **Icons:** Use **react-icons** only; prefer one set (e.g. `react-icons/fa` or `react-icons/hi`) for consistency.
 - **Animation:** Use **Framer Motion** only. Do not add another animation library.
 
 ### Visual style
 
 - **Goal:** Minimal, sleek, clean. No clutter, heavy borders, or noisy backgrounds.
-- **Aesthetic:** “Liquid glass” — frosted, translucent; soft blur; light borders and shadows; depth without heaviness. Use `backdrop-blur`, semi-transparent fills, subtle gradients where they support this.
+- **Aesthetic:** “Liquid glass”; frosted, translucent; soft blur; light borders and shadows; depth without heaviness. Use `backdrop-blur`, semi-transparent fills, subtle gradients where they support this.
 
 ### Motion
 

@@ -33,7 +33,7 @@ file binary                    # "Mach-O 64-bit executable arm64" or "x86_64"
 otool -l binary               # Load commands (segments, dylibs, entry point)
 otool -L binary               # Linked dynamic libraries
 
-# Universal (fat) binaries — multiple architectures in one file
+# Universal (fat) binaries: multiple architectures in one file
 lipo -info universal_binary    # List architectures
 lipo universal_binary -thin arm64 -output binary_arm64  # Extract one arch
 
@@ -98,8 +98,8 @@ objc_msgSend(obj, "checkPassword:", input)
 ```
 
 **class-dump alternatives:**
-- `dsdump` — faster, supports Swift + Objective-C
-- `otool -oV binary` — dump Objective-C segments
+- `dsdump`; faster, supports Swift + Objective-C
+- `otool -oV binary`; dump Objective-C segments
 - Ghidra: Enable "Objective-C" analyzer in Analysis Options
 
 ### Swift Binary Reversing
@@ -199,7 +199,7 @@ dyld_shared_cache_util -list /System/Cryptexes/OS/System/Library/dyld/dyld_share
 ### Firmware Extraction
 
 ```bash
-# binwalk — firmware analysis and extraction
+# binwalk: firmware analysis and extraction
 binwalk firmware.bin                        # Identify embedded filesystems, compressed data
 binwalk -e firmware.bin                     # Extract all identified components
 binwalk -Me firmware.bin                    # Recursive extraction (matryoshka)
@@ -213,19 +213,19 @@ hexdump -C firmware.bin | grep "UBI#"       # UBI magic
 
 **Hardware extraction methods (physical access):**
 ```text
-UART:  Serial console — often gives root shell or bootloader access
+UART:  Serial console; often gives root shell or bootloader access
        Tools: USB-UART adapter, baudrate detection (usually 115200)
        Identify: 4 pins (GND, TX, RX, VCC), use multimeter
 
-JTAG:  Direct CPU debug — read/write flash, halt CPU, set breakpoints
+JTAG:  Direct CPU debug; read/write flash, halt CPU, set breakpoints
        Tools: OpenOCD, J-Link, Bus Pirate
        Identify: 10/14/20-pin header, use JTAGulator for auto-detection
 
-SPI Flash: Direct chip read — dump entire firmware
+SPI Flash: Direct chip read; dump entire firmware
            Tools: flashrom, CH341A programmer
            Identify: 8-pin SOIC chip (Winbond, Macronix, etc.)
 
-eMMC:  Embedded MMC — common in routers, phones
+eMMC:  Embedded MMC; common in routers, phones
        Tools: eMMC reader, direct solder to test pads
 ```
 
@@ -276,7 +276,7 @@ gdb-multiarch -ex 'target remote :1234' ./arm_binary
 
 **MIPS (routers, embedded):**
 ```bash
-# Big-endian vs little-endian — check ELF header or file command
+# Big-endian vs little-endian: check ELF header or file command
 file binary    # "MIPS, MIPS32 rel2 (MIPS-II), big-endian" or "little-endian"
 
 # Emulation
@@ -284,9 +284,9 @@ qemu-mips -L /usr/mips-linux-gnu/ ./mips_binary         # Big-endian
 qemu-mipsel -L /usr/mipsel-linux-gnu/ ./mipsel_binary   # Little-endian
 
 # Key MIPS patterns:
-# Branch delay slots — classic delay-slot behavior is instruction/version dependent; branch-likely and newer MIPS variants differ
-# $gp (global pointer) — used for PIC, points to .got
-# lui + addiu pair — loads 32-bit constant (upper 16 + lower 16)
+# Branch delay slots: classic delay-slot behavior is instruction/version dependent; branch-likely and newer MIPS variants differ
+# $gp (global pointer): used for PIC, points to .got
+# lui + addiu pair: loads 32-bit constant (upper 16 + lower 16)
 ```
 
 **RISC-V:** See main [tools.md](tools.md#risc-v-binary-analysis-ehax-2026) for Capstone disassembly and [platforms-hardware.md](platforms-hardware.md#risc-v-advanced) for advanced extensions and debugging.
@@ -352,7 +352,7 @@ long my_ioctl(struct file *f, unsigned int cmd, unsigned long arg) {
     }
 }
 
-// copy_from_user / copy_to_user — data transfer with userspace
+// copy_from_user / copy_to_user; data transfer with userspace
 copy_from_user(kernel_buf, (void __user *)arg, size);
 copy_to_user((void __user *)arg, kernel_buf, size);
 ```
@@ -396,7 +396,7 @@ llvm-objdump -d ebpf_prog.o
 ### Windows Kernel Drivers
 
 ```bash
-# .sys files are PE format — load in IDA/Ghidra as normal PE
+# .sys files are PE format: load in IDA/Ghidra as normal PE
 # Entry point: DriverEntry(PDRIVER_OBJECT, PUNICODE_STRING)
 
 # Key patterns:
@@ -425,7 +425,7 @@ cansniffer can0                            # Filter/highlight changes
 canplayer -I logfile.log vcan0=can0  # isolated virtual CAN fixture only
 cansend vcan0 7DF#0201000000000000          # Send single frame (OBD-II request)
 
-# UDS (Unified Diagnostic Services) — common in automotive CTF
+# UDS (Unified Diagnostic Services): common in automotive CTF
 # Service 0x27: Security Access (seed-key authentication)
 # Service 0x2E: Write Data By Identifier
 # Service 0x31: Routine Control

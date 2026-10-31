@@ -37,7 +37,7 @@ on:                          # Triggers (see Triggers section)
   push:
     branches: [main]
 
-permissions:                 # Always declare — principle of least privilege
+permissions:                 # Always declare; principle of least privilege
   contents: read
 
 env:                         # Workflow-level env vars
@@ -50,8 +50,8 @@ concurrency:                 # Prevent duplicate runs
 jobs:
   job-id:
     name: Human-readable name
-    runs-on: ubuntu-24.04    # Pin OS version — never use -latest in prod
-    timeout-minutes: 15      # Always set — prevents runaway jobs
+    runs-on: ubuntu-24.04    # Pin OS version; never use -latest in prod
+    timeout-minutes: 15      # Always set; prevents runaway jobs
     environment: production  # Links to GitHub Environment (approvals/secrets)
 
     steps:
@@ -104,7 +104,7 @@ on:
   release:
     types: [published]                   # Trigger only on published releases
 
-  pull_request_target:                   # Runs with repo secrets — use with care!
+  pull_request_target:                   # Runs with repo secrets; use with care!
     types: [labeled]                     # Gate with label + author_association check
 ```
 
@@ -240,7 +240,7 @@ jobs:
 
 ## Caching Strategies
 
-### Language Setup Actions (Preferred — No Extra Step Needed)
+### Language Setup Actions (Preferred: No Extra Step Needed)
 
 ```yaml
 # Node.js
@@ -383,11 +383,11 @@ jobs:
 ```
 
 **Configure in Settings → Environments:**
-- **Required reviewers** — manual approval gate before run
-- **Wait timer** — delay after approval (e.g., 10-minute buffer)
-- **Branch/tag restrictions** — only `main` or `v*` tags can deploy to prod
-- **Environment-specific secrets** — override repo-level secrets per environment
-- **Deployment branches** — whitelist which branches can target this environment
+- **Required reviewers**; manual approval gate before run
+- **Wait timer**; delay after approval (e.g., 10-minute buffer)
+- **Branch/tag restrictions**; only `main` or `v*` tags can deploy to prod
+- **Environment-specific secrets**; override repo-level secrets per environment
+- **Deployment branches**; whitelist which branches can target this environment
 
 ---
 
@@ -399,7 +399,7 @@ jobs:
 env:
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
-# Auto-provided token — no setup needed
+# Auto-provided token: no setup needed
 - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
   with:
     github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -527,7 +527,7 @@ jobs:
 | **Security** | Disable fork PR access to self-hosted runners in Settings |
 
 ```bash
-# Actions Runner Controller (Kubernetes) — recommended for ephemeral runners
+# Actions Runner Controller (Kubernetes): recommended for ephemeral runners
 helm install arc \
   --namespace arc-systems \
   --create-namespace \
@@ -976,8 +976,8 @@ Before merging any workflow to `main`, verify:
 
 ## Related Skills
 
-- `gha-security-review` — Deep security audit of existing workflow files
-- `github-actions-templates` — Copy-paste ready workflow templates
-- `docker-expert` — Container build optimization and Dockerfile best practices
-- `kubernetes-architect` — Deploying to Kubernetes from GitHub Actions
-- `gitlab-ci-patterns` — GitLab CI/CD equivalent patterns
+- `gha-security-review`; Deep security audit of existing workflow files
+- `github-actions-templates`; Copy-paste ready workflow templates
+- `docker-expert`; Container build optimization and Dockerfile best practices
+- `kubernetes-architect`; Deploying to Kubernetes from GitHub Actions
+- `gitlab-ci-patterns`; GitLab CI/CD equivalent patterns

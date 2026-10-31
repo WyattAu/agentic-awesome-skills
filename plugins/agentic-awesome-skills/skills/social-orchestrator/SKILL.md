@@ -1,6 +1,6 @@
 ---
 name: social-orchestrator
-description: "Orquestrador unificado de canais sociais — coordena Instagram, Telegram e WhatsApp em um unico fluxo de trabalho. Publicacao cross-channel, metricas unificadas, reutilizacao de conteudo por formato, agendamento sincronizado e gestao centralizada de campanhas em todos os canais simultaneamente."
+description: "Orquestrador unificado de canais sociais; coordena Instagram, Telegram e WhatsApp em um unico fluxo de trabalho. Publicacao cross-channel, metricas unificadas, reutilizacao de conteudo por formato, agendamento sincronizado e gestao centralizada de campanhas em todos os canais simultaneamente."
 risk: critical
 source: community
 date_added: '2026-03-06'
@@ -22,7 +22,7 @@ tools:
 
 ## Overview
 
-Orquestrador unificado de canais sociais — coordena Instagram, Telegram e WhatsApp em um unico fluxo de trabalho. Publicacao cross-channel, metricas unificadas, reutilizacao de conteudo por formato, agendamento sincronizado e gestao centralizada de campanhas em todos os canais simultaneamente.
+Orquestrador unificado de canais sociais; coordena Instagram, Telegram e WhatsApp em um unico fluxo de trabalho. Publicacao cross-channel, metricas unificadas, reutilizacao de conteudo por formato, agendamento sincronizado e gestao centralizada de campanhas em todos os canais simultaneamente.
 
 ## When to Use This Skill
 
@@ -36,7 +36,7 @@ Orquestrador unificado de canais sociais — coordena Instagram, Telegram e What
 
 ## How It Works
 
-> Voce e o **Diretor de Comunicacao Digital** — orquestra Instagram,
+> Voce e o **Diretor de Comunicacao Digital**; orquestra Instagram,
 > Telegram e WhatsApp como uma sinfonia coerente, nao como ilhas.
 > Um conteudo, multiplos formatos, multiplos canais, uma voz.
 
@@ -72,12 +72,12 @@ tags   keyboard
 
 ---
 
-## /Publish_All — Publicar Em Todos Os Canais
+## /Publish_All: Publicar Em Todos Os Canais
 
 **Fluxo:**
 1. Receber: conteudo, midia (opcional), objetivo
 2. Adaptar para cada canal automaticamente
-3. Executar em sequencia (Instagram primeiro — mais restritivo)
+3. Executar em sequencia (Instagram primeiro; mais restritivo)
 4. Confirmar sucesso em cada canal
 5. Reportar metricas iniciais
 
@@ -102,7 +102,7 @@ WhatsApp Business:
 - Maximo 1.024 chars
 ```
 
-## /Campaign — Campanha Multi-Canal
+## /Campaign: Campanha Multi-Canal
 
 **Fluxo de Campanha:**
 ```
@@ -115,12 +115,12 @@ WhatsApp Business:
 7. Relatorio consolidado
 ```
 
-## /Insights_All — Metricas Unificadas
+## /Insights_All: Metricas Unificadas
 
 Consolida metricas de todos os canais em um relatorio:
 
 ```
-SOCIAL REPORT — [periodo]
+SOCIAL REPORT; [periodo]
 
 Instagram:
   Alcance: X | Impressoes: Y | Engajamento: Z%
@@ -141,7 +141,7 @@ CONSOLIDADO:
   Recomendacao: [acao]
 ```
 
-## /Content_Plan — Plano De Conteudo Multi-Canal
+## /Content_Plan: Plano De Conteudo Multi-Canal
 
 Gera plano semanal/mensal com:
 - Calendario editorial por canal
@@ -155,11 +155,11 @@ Gera plano semanal/mensal com:
 
 | Tipo | Dimensao | Duracao | Ideal Para |
 |------|----------|---------|------------|
-| Feed Foto | 1080x1080 ou 1080x1350 | — | Produto, retrato |
+| Feed Foto | 1080x1080 ou 1080x1350 | - | Produto, retrato |
 | Feed Video | 1080x1080 ou 4:5 | < 60s | Demos, bastidores |
 | Reels | 1080x1920 | 15-90s | Viralizacao |
 | Stories | 1080x1920 | 15s | Engajamento, CTA |
-| Carrossel | 10 slides | — | Tutorial, lista |
+| Carrossel | 10 slides | - | Tutorial, lista |
 
 ## Telegram
 
@@ -190,7 +190,7 @@ Nao e traducao, e reformulacao para o contexto do canal:
 
 ```
 CONTEUDO CENTRAL:
-"Lançamos a Auri — Alexa com Claude integrado"
+"Lançamos a Auri; Alexa com Claude integrado"
 
 ↓ Instagram:
 [Imagem produto elegante]
@@ -231,7 +231,7 @@ Responda para saber mais 😊"
 Para cada operacao cross-canal, reportar:
 
 ```
-SOCIAL-ORCHESTRATOR — [acao]
+SOCIAL-ORCHESTRATOR; [acao]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ✅ Instagram: [status + url/id do post]

@@ -14,11 +14,11 @@ GitHub Actions workflows depend on third-party actions referenced by `uses:`. If
 
 | Source | Classification | Pinning finding? |
 |--------|----------------|------------------|
-| `actions/*` (GitHub official) | First-party | Hardening candidate — version tags remain mutable |
-| `github/*` (GitHub org) | First-party | Hardening candidate — version tags remain mutable |
+| `actions/*` (GitHub official) | First-party | Hardening candidate; version tags remain mutable |
+| `github/*` (GitHub org) | First-party | Hardening candidate; version tags remain mutable |
 | Same-repo / vendored (`./.github/actions/...`) | Not third-party supply chain | **No** as supply-chain pinning (still review in pwn-request context) |
 | Org-owned / internal first-party actions when reviewing that org's repos | First-party for that org | **No** unless the action is external to the org's trust boundary |
-| External orgs (aws-actions, docker, tj-actions, community, unknown) | Third-party | **Yes** — pin to full SHA when privilege makes it relevant |
+| External orgs (aws-actions, docker, tj-actions, community, unknown) | Third-party | **Yes**; pin to full SHA when privilege makes it relevant |
 
 When org ownership is unclear, treat non-`actions/*` / non-`github/*` / non-local refs as third-party.
 
@@ -30,10 +30,10 @@ When org ownership is unclear, treat non-`actions/*` / non-`github/*` / non-loca
 
 ```yaml
 # REPORT when third-party and the job is privileged enough (see severity)
-- uses: some-org/some-action@v1     # Tag — mutable third-party
+- uses: some-org/some-action@v1     # Tag; mutable third-party
 - uses: tj-actions/changed-files@v44
 - uses: docker/build-push-action@v6
-- uses: some-org/some-action@main   # Branch — mutable
+- uses: some-org/some-action@main   # Branch; mutable
 ```
 
 Tags are **mutable Git references**. The maintainer (or attacker with write access) can delete and recreate a tag pointing to a different commit. When the tag is updated, every workflow using that tag runs the new code.
@@ -46,7 +46,7 @@ Tags are **mutable Git references**. The maintainer (or attacker with write acce
 - uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502  # v4.0.2
 ```
 
-SHAs are **immutable** — once a commit exists, its SHA cannot change. Pin third-party actions to the full 40-character SHA and add a comment with the version for readability.
+SHAs are **immutable**; once a commit exists, its SHA cannot change. Pin third-party actions to the full 40-character SHA and add a comment with the version for readability.
 
 ### Do Not Report: First-Party Version Tags
 
@@ -59,7 +59,7 @@ SHAs are **immutable** — once a commit exists, its SHA cannot change. Pin thir
 - uses: ./.github/actions/local-build
 ```
 
-First-party tags are mutable too; report them as hardening unless a concrete exploit path warrants a finding. Same-repo or vendored actions are not third-party supply-chain findings (they can still be unsafe if loaded from a PR-controlled checkout — that is a pwn-request / trust-crossing issue, not pinning).
+First-party tags are mutable too; report them as hardening unless a concrete exploit path warrants a finding. Same-repo or vendored actions are not third-party supply-chain findings (they can still be unsafe if loaded from a PR-controlled checkout; that is a pwn-request / trust-crossing issue, not pinning).
 
 ---
 
@@ -72,7 +72,7 @@ First-party tags are mutable too; report them as hardening unless a concrete exp
 3. Creates a new `v1` tag pointing to a malicious commit
 4. Every workflow using `@v1` now runs the attacker's code
 
-This is not theoretical — CVE-2025-30066 (`tj-actions/changed-files`) and related incidents showed tag rewrites can leak secrets at scale.
+This is not theoretical; CVE-2025-30066 (`tj-actions/changed-files`) and related incidents showed tag rewrites can leak secrets at scale.
 
 ### Account Takeover / Org Compromise
 
@@ -92,7 +92,7 @@ If a third-party action author's GitHub account is compromised:
 Some actions download and execute external scripts at runtime:
 
 ```yaml
-# Action's action.yml — RISKY even when SHA-pinned
+# Action's action.yml: RISKY even when SHA-pinned
 runs:
   using: composite
   steps:
@@ -177,9 +177,9 @@ steps:
 
 Tools that can pin and update **third-party** action SHAs:
 
-- **Dependabot** — GitHub native, updates action SHAs
-- **Renovate** — Can pin and update actions
-- **StepSecurity Secure Workflows** — Can pin actions to SHAs (configure to match third-party-only policy if you do not want first-party pins)
+- **Dependabot**; GitHub native, updates action SHAs
+- **Renovate**; Can pin and update actions
+- **StepSecurity Secure Workflows**; Can pin actions to SHAs (configure to match third-party-only policy if you do not want first-party pins)
 
 ### Vendoring Critical Actions
 
@@ -221,5 +221,5 @@ IMPACT: [RCE with workflow permissions, secret theft, etc.]
 
 ## References
 
-- [GitHub Docs: Security hardening — Using third-party actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)
+- [GitHub Docs: Security hardening; Using third-party actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)
 - [GitHub Blog: Four tips to keep your GitHub Actions workflows secure](https://github.blog/security/supply-chain-security/four-tips-to-keep-your-github-actions-workflows-secure/)

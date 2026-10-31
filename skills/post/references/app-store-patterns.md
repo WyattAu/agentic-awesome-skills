@@ -1,4 +1,4 @@
-# App Store screenshot sets — patterns worth stealing
+# App Store screenshot sets: patterns worth stealing
 
 Studied: ChatGPT, Claude, X, Threads, Perplexity, Notion, Things 3, Arc Search, Opal, Revolut, Structured, Duolingo, Airbnb. Read at step 2; write 3 takeaways into refs.md.
 
@@ -13,5 +13,5 @@ Studied: ChatGPT, Claude, X, Threads, Perplexity, Notion, Things 3, Arc Search, 
 | Social proof on frame 1 (rating, award laurel, quote) | Opal, Structured, Arc, X | honest version: "real data, updated daily" |
 | Small icon above the headline | Airbnb | consistency across a set |
 | Mascot + streak | Duolingo | series assets: progress bar, streak calendar |
-| Stacked cards = "many" | — | batch outputs |
+| Stacked cards = "many" | - | batch outputs |
 | One background system for the whole set | every app | brand recognition in the feed |

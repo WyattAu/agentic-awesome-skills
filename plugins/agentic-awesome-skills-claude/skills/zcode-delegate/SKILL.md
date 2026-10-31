@@ -12,7 +12,7 @@ license: MIT
 license_source: https://github.com/amElnagdy/delegate-skills/blob/master/LICENSE
 compatibility: Requires the `zcode` CLI (Z.AI ZCode) with a configured model provider,
   Node 18+, and git. ZCode ships its CLI inside the desktop app rather than on PATH
-  or npm — see Prerequisites. The orchestrating agent must be able to run shell commands
+  or npm; see Prerequisites. The orchestrating agent must be able to run shell commands
   and read files. Shell examples assume bash/zsh (macOS/Linux, or Git Bash/WSL on
   Windows).
 metadata:
@@ -30,7 +30,7 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 - The user explicitly asked for delegation to this implementer.
 
 You are the **orchestrator**. This skill lets you hand a bounded coding task to a separate
-**implementer** — the Z.AI ZCode CLI — then review what it produced and land it yourself. You write
+**implementer**; the Z.AI ZCode CLI; then review what it produced and land it yourself. You write
 the brief and own the judgment; ZCode does the typing; you verify and commit.
 
 Nothing here is specific to one orchestrating agent. The loop needs only the ability to run a shell
@@ -39,18 +39,18 @@ designed-for, not yet proven.)
 
 ## When NOT to use this
 
-- The task is small enough to just do inline — delegation overhead is not worth it.
+- The task is small enough to just do inline; delegation overhead is not worth it.
 - ZCode is not installed, or its CLI has no model provider configured.
 - You want to write the code yourself, or you only need a review.
 
 ## Prerequisites (check once)
 
-1. **ZCode is installed.** The CLI ships **inside the desktop app** — it is not on PATH and not on
+1. **ZCode is installed.** The CLI ships **inside the desktop app**; it is not on PATH and not on
    npm. The relay resolves it in this order: `--zcode-path <file>` or `ZCODE_CLI` first, then PATH,
    then the installed app bundle. On Linux the app is an AppImage with no fixed install path, so
-   the flag or the environment variable is required there — the relay guesses nothing.
+   the flag or the environment variable is required there; the relay guesses nothing.
 2. **A model provider is configured for the CLI**, with a key it can actually reach. Being signed
-   into the desktop app is *not* enough — see below.
+   into the desktop app is *not* enough; see below.
 3. You are in (or will point `--cd` at) the target git repository.
 
 The relay records the CLI version and how it was resolved into `result.json`, so a surprising
@@ -66,7 +66,7 @@ not valid JSON` the way in is a Z.AI API key.
 Two pieces are needed, and they are separate:
 
 1. **The provider block** must exist in `~/.zcode/cli/config.json`. It defines the provider, its
-   endpoint and its models — the environment cannot supply this:
+   endpoint and its models; the environment cannot supply this:
 
    ```jsonc
    {
@@ -83,12 +83,12 @@ Two pieces are needed, and they are separate:
 
 2. **The key** can live either in `provider.zai.options.apiKey` in that file, or in the
    environment as any one of `ZAI_API_KEY`, `ZCODE_API_KEY`, or `ANTHROPIC_API_KEY`. Prefer the
-   environment — it keeps the secret off disk.
+   environment; it keeps the secret off disk.
 
 If a run fails with `Model provider is missing an API key: <provider>`, the provider block resolved
 but no key was found: set one of those variables and re-run.
 
-## Autonomy — read this before dispatching
+## Autonomy: read this before dispatching
 
 ZCode's own term is **mode**. It has four values; only two are usable headlessly.
 
@@ -105,7 +105,7 @@ Two limits stated plainly, because ZCode cannot enforce them:
   takes a Git fingerprint before the run and reports a tri-state `readOnlyViolation` afterwards.
   Compare against the pre-run Git baseline and inspect `readOnlyViolation`; pre-existing dirty files can legitimately remain. Ignored files and paths outside the repository are not covered.
 - **ZCode has no `--allowed-tools`.** Only the `--disallowed-tools` denylist exists, and it *is*
-  genuinely enforced. An explicit allowlisted tool surface is therefore impossible here — do not
+  genuinely enforced. An explicit allowlisted tool surface is therefore impossible here; do not
   assume one.
 
 ## The loop
@@ -114,11 +114,11 @@ Run these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are 
 
 ### 1. Write the brief
 
-ZCode sees **only** what you send — no repo memory, no chat history. Everything the task needs goes
+ZCode sees **only** what you send; no repo memory, no chat history. Everything the task needs goes
 in the brief: the goal, the current state, what to change, what to leave untouched, the project's
-**actual** gate commands (discover them from the repo's CLAUDE.md/AGENTS.md/Makefile — do not
+**actual** gate commands (discover them from the repo's CLAUDE.md/AGENTS.md/Makefile; do not
 assume), and a report contract. Tell ZCode it will **not** commit. One task per brief. The relay
-delivers the brief as an attached file, so the command line no longer bounds its length — the
+delivers the brief as an attached file, so the command line no longer bounds its length; the
 model's context window still does. Full guidance and a template:
 [references/writing-the-brief.md](references/writing-the-brief.md).
 
@@ -135,10 +135,10 @@ node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
 # see all options:                          node .../relay.mjs --help
 ```
 
-(`<skill-dir>` is this skill's installed directory — the folder containing this `SKILL.md`.)
+(`<skill-dir>` is this skill's installed directory; the folder containing this `SKILL.md`.)
 
 The relay writes its artifacts to a temp dir, so the repo under review stays clean. It **never
-commits** — see step 5. Mechanics, flags, and the `result.json` shape:
+commits**; see step 5. Mechanics, flags, and the `result.json` shape:
 [references/dispatch-and-poll.md](references/dispatch-and-poll.md).
 
 ### 3. Wait for completion
@@ -153,7 +153,7 @@ The relay blocks until ZCode finishes, so back it with whatever your orchestrato
 
 Do not trust progress trackers over reality: read the working tree, not a status line.
 
-### 4. Review — do not trust the self-report
+### 4. Review: do not trust the self-report
 
 - **Re-run the project's gates yourself.** Never take "gates passed" on faith.
 - **Read the diff** against the brief: did ZCode do what was asked, nothing more and nothing less?
@@ -188,13 +188,13 @@ correct completion needs going beyond the brief, ask). The full treatment is in
 
 ## References
 
-- [references/writing-the-brief.md](references/writing-the-brief.md) — how to write a brief ZCode can
+- [references/writing-the-brief.md](references/writing-the-brief.md); how to write a brief ZCode can
   execute blind: structure, the report contract, embedding the real gate commands.
-- [references/dispatch-and-poll.md](references/dispatch-and-poll.md) — `relay.mjs` flags, the
+- [references/dispatch-and-poll.md](references/dispatch-and-poll.md); `relay.mjs` flags, the
   `result.json` contract, how the CLI is resolved, backgrounding, and recovery.
-- [references/review-and-land.md](references/review-and-land.md) — the review checklist, the commit
+- [references/review-and-land.md](references/review-and-land.md); the review checklist, the commit
   boundary, and the exact-session rework cycle.
-- [references/multi-task-queues.md](references/multi-task-queues.md) — running a sequential queue:
+- [references/multi-task-queues.md](references/multi-task-queues.md); running a sequential queue:
   carrying constraints forward, progress tracking, and the end-of-run coherence check.
 
 
@@ -203,7 +203,7 @@ correct completion needs going beyond the brief, ask). The full treatment is in
 - `.cmd`/`.bat` shell shims are refused before version probing or dispatch. On Windows select a reviewed ZCode Node CLI entry (`.cjs`/`.mjs`/`.js`) or native executable using `--zcode-path`; arguments are passed directly with shell execution disabled. Local refusal regressions do not prove native Windows execution.
 
 - Runtime helper `scripts/relay.mjs` is bundled from the revision recorded in `UPSTREAM-NOTICE.md`. Requires the corresponding installed and authenticated CLI, Node 18+, and git.
-- Relay never commits — it only returns structured result JSON; you review and land the commit.
+- Relay never commits; it only returns structured result JSON; you review and land the commit.
 
 > Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT). The relay runtime and support references are bundled; the authenticated ZCode CLI is not.
 

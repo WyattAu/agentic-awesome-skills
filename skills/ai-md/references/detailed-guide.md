@@ -1,4 +1,4 @@
-# AI.MD v4 — The Complete AI-Native Conversion System - Detailed Guide
+# AI.MD v4: The Complete AI-Native Conversion System - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -32,7 +32,7 @@ for Chinese and does not establish per-turn billable tokens or caching behavior.
 
 Here's the exact mental model I use when converting natural language instructions to AI.MD format.
 
-### Phase 1: UNDERSTAND — Read Like a Compiler, Not a Human
+### Phase 1: UNDERSTAND: Read Like a Compiler, Not a Human
 
 I read the CLAUDE.md **as if I'm building a state machine**, not reading a document.
 
@@ -56,7 +56,7 @@ Decomposition:
   └─ EXCEPTION:  "例外: signals命中「處理一下」=直接執行" → exception: signal=處理一下 → skip
 ```
 
-### Phase 2: DECOMPOSE — Break Every `|` and `()` Into Atomic Rules
+### Phase 2: DECOMPOSE: Break Every `|` and `()` Into Atomic Rules
 
 Compound rules can be hard to audit; splitting is a readability technique, not an established universal cause.
 Consider separate labeled clauses while preserving their dependencies and qualifiers.
@@ -81,7 +81,7 @@ self-serve: 禁反問user(自己查)
 compare: "覺得A比B好" → A/B實測先行
 ```
 
-### Phase 3: LABEL — Assign Function Labels
+### Phase 3: LABEL: Assign Function Labels
 
 Every atomic rule gets a label that declares its function.
 I use a standard vocabulary of ~12 label types:
@@ -106,7 +106,7 @@ I use a standard vocabulary of ~12 label types:
 If `trigger:` clearly tells you "this is what activates the rule" without reading anything else,
 it's the right label.
 
-### Phase 4: STRUCTURE — Build the Architecture
+### Phase 4: STRUCTURE: Build the Architecture
 
 I organize rules into a hierarchy:
 
@@ -114,7 +114,7 @@ I organize rules into a hierarchy:
 <gates>    = Hard stops (MUST check before any action)
 <rules>    = Behavioral guidelines (HOW to act)
 <rhythm>   = Workflow patterns (WHEN to do what)
-<conn>     = Connection strings (FACTS — never compress)
+<conn>     = Connection strings (FACTS; never compress)
 <ref>      = On-demand references (don't load until needed)
 <learn>    = Evolution rules (how the system improves)
 ```
@@ -149,7 +149,7 @@ OUTPUT:                 ← domain: format
   format: tables+numbers
 ```
 
-### Phase 5: RESOLVE — Handle Conflicts and Edge Cases
+### Phase 5: RESOLVE: Handle Conflicts and Edge Cases
 
 This is the most critical and least obvious phase. Natural language instructions
 often contain **hidden conflicts** that humans resolve with intuition but AI cannot.
@@ -187,7 +187,7 @@ GATE-4 報結論:
 This was discovered because Gemini 2.5 Pro kept triggering GATE-4 on simple number queries
 like "成功率怎麼樣?". Adding `not-triggered: 純指標查詢` fixed it immediately.
 
-### Phase 6: TEST — Multi-Model Validation (Non-Negotiable)
+### Phase 6: TEST: Multi-Model Validation (Non-Negotiable)
 
 Recommended evaluation: use the target model first; additional models need available access, data-sharing approval and a cost budget. If unavailable, deliver a draft marked unvalidated rather than inventing scores or making paid calls automatically.
 
@@ -318,7 +318,7 @@ Deleted bytes may reduce length but may also remove necessary context; measure a
 
 ## Two-Stage Workflow
 
-### Stage 1: PREVIEW — Measure, Don't Touch
+### Stage 1: PREVIEW: Measure, Don't Touch
 
 ```bash
 echo "=== Current Token Burn ==="
@@ -336,7 +336,7 @@ Then: Read all auto-loaded files. Identify redundancy, prose overhead, and dupli
 
 If the user already authorized conversion, prepare a reviewable draft within that scope; otherwise request approval before replacing active instructions. Never overwrite an existing backup; preserve exact bytes privately with a unique name.
 
-### Stage 2: DISTILL — Convert with Safety Net
+### Stage 2: DISTILL: Convert with Safety Net
 
 1. **Backup**: `cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.bak-pre-distill`
 2. **Phase 1-5**: Run the full conversion process above
@@ -421,7 +421,7 @@ how system evolves over time
 | Same rule in 3 places | Single source + cross-ref | Duplicates can diverge and confuse |
 | 20+ flat rules | 5-7 domains with sub-items | Hierarchy helps model organize behavior |
 | Compress without testing | Validate with 2+ models | What works for Claude might fail for GPT |
-| Assume format doesn't matter | Test it — it does | Same content, different format = different compliance |
+| Assume format doesn't matter | Test it; it does | Same content, different format = different compliance |
 | Chinese-only labels | English labels + native output | English labels are more universal across models |
 | Flat rule list | State machine with priorities | Clear execution order prevents missed rules |
 

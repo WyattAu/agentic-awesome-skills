@@ -1,6 +1,6 @@
 # longbridge-quant-stats
 
-Apply rigorous statistical methods to financial time-series data retrieved from Longbridge — test assumptions before modelling, diagnose residuals, and produce statistically sound inferences.
+Apply rigorous statistical methods to financial time-series data retrieved from Longbridge; test assumptions before modelling, diagnose residuals, and produce statistically sound inferences.
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ pip install statsmodels scipy numpy pandas
 
 ## Workflow and test catalogue
 
-### Step 1 — Fetch price data
+### Step 1: Fetch price data
 
 ```bash
 longbridge kline --help
@@ -19,9 +19,9 @@ longbridge kline <SYMBOL> --period day --count 252 --format json
 
 Extract the `close` price series. Compute log returns: `r_t = ln(P_t / P_{t-1})`.
 
-### Step 2 — Stationarity: ADF Unit Root Test
+### Step 2: Stationarity: ADF Unit Root Test
 
-**When to use**: Before regression or time-series modelling — most models require stationary series.
+**When to use**: Before regression or time-series modelling; most models require stationary series.
 
 **Python (statsmodels)**:
 
@@ -37,7 +37,7 @@ result = adfuller(series, autolag='AIC')
 - p ≥ 0.05 → fail to reject the unit-root null; this does not prove a unit root. Check power, trend, breaks and sample size before transformation.
 - Log prices: usually non-stationary. Log returns: usually stationary.
 
-### Step 3 — Cointegration Test
+### Step 3: Cointegration Test
 
 **When to use**: Two non-stationary series may share a long-run equilibrium (pairs trading).
 
@@ -59,7 +59,7 @@ result = coint_johansen(df, det_order=0, k_ar_diff=1)
 
 Report: test statistic, p-value, critical values, and cointegrating vector.
 
-### Step 4 — GARCH Volatility Modelling
+### Step 4: GARCH Volatility Modelling
 
 **When to use**: Financial returns show volatility clustering (ARCH effects).
 
@@ -81,7 +81,7 @@ from statsmodels.stats.diagnostic import het_arch
 lm_stat, p_value, f_stat, f_p = het_arch(residuals)
 ```
 
-### Step 5 — Regression Diagnostics
+### Step 5: Regression Diagnostics
 
 After running OLS (`statsmodels.api.OLS`), check:
 
@@ -94,7 +94,7 @@ After running OLS (`statsmodels.api.OLS`), check:
 
 Interpret Durbin-Watson: ~2.0 = no autocorrelation; < 1.5 = positive autocorrelation; > 2.5 = negative autocorrelation.
 
-### Step 6 — Bootstrap Confidence Intervals
+### Step 6: Bootstrap Confidence Intervals
 
 **When to use**: Estimating uncertainty when the sampling assumptions are justified. IID resampling below is illustrative for independent observations; financial time series generally need a block/stationary bootstrap that preserves dependence. Small samples do not become reliable merely by bootstrapping.
 
@@ -112,7 +112,7 @@ def bootstrap_ci(data, stat_fn, n_boot=10000, ci=0.95):
 sharpe_lo, sharpe_hi = bootstrap_ci(returns, lambda x: x.mean() / x.std() * np.sqrt(252))
 ```
 
-### Step 7 — Hypothesis Tests
+### Step 7: Hypothesis Tests
 
 | Test                | Use case                                    | Function                                     |
 | ------------------- | ------------------------------------------- | -------------------------------------------- |

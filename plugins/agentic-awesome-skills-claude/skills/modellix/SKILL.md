@@ -90,7 +90,7 @@ modellix-cli model run \
 - Prefer CLI `model run --wait` over hand-rolled polling
 - Before a paid submission, disclose the provider, model, prompt or source media that will leave the machine, expected cost, and output path; obtain explicit user approval
 - Prefer session-scoped API-key use; run `modellix-cli auth login` only when the user approves persistent local credential storage
-- Do not blindly retry paid submissions after unknown outcomes — check `task history`
+- Do not blindly retry paid submissions after unknown outcomes; check `task history`
 - Confirm the destination and overwrite policy before `task download`; never replace an existing file without explicit approval
 - Download results before they expire; hosted result URLs are retained for about 7 days
 - Fetch request schemas from `model describe` `docs_url` or https://docs.modellix.ai/llms.txt

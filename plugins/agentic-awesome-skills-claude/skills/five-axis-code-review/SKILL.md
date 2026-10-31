@@ -29,16 +29,16 @@ One review answers a single question: "Will this code become someone else's prob
 2. **Check axis by axis** (order = priority):
    - **Correctness**: edge cases (null, empty, zero, negative, oversized), concurrency/timing assumptions, error handling (are exceptions swallowed?). Correctness and security defects can both block a merge; actual repository policy and evidenced impact determine other blocking requirements.
    - **Security**: is user input concatenated into SQL / shell commands / HTML; are secrets or tokens hard-coded; does logging leak sensitive data.
-   - **Readability**: do names say what things are; does each function do one thing; are magic numbers named. Flag only what you can't understand — not "I'd write it differently."
+   - **Readability**: do names say what things are; does each function do one thing; are magic numbers named. Flag only what you can't understand; not "I'd write it differently."
    - **Performance**: repeated queries or recomputation inside loops; N+1 problems; avoidable large-object copies. No data-free performance speculation ("this might get slow" is not a comment).
    - **Test coverage**: does new logic have tests; do edge cases have cases. All-green tests with the critical path uncovered still get sent back.
-3. **Write the comments**: fixed format — `[axis] file:line problem → suggested fix`. Only actionable suggestions; "could be optimized" is not one.
+3. **Write the comments**: fixed format; `[axis] file:line problem → suggested fix`. Only actionable suggestions; "could be optimized" is not one.
 4. **Triage**: `Must fix` (correctness / security) vs `Should fix` (readability / performance / tests). "Should fix" doesn't block the merge, but say so explicitly.
 
 ## Rules
 
 - Prioritize and group related findings, but do not suppress evidenced defects to satisfy a numeric comment cap. Summarize systemic issues with representative locations and explicit remaining scope.
-- No style policing: indentation, quotes, semicolons — that's the linter's job, not a human's.
+- No style policing: indentation, quotes, semicolons; that's the linter's job, not a human's.
 - Speak with the diff: every comment must cite a concrete line of code. A comment without a code reference is invalid.
 
 ## Checklist (minimal executable version)
@@ -71,8 +71,8 @@ Example review comments:
 
 ## Anti-patterns
 
-- ❌ Drive-by LGTM: approving before reading the whole diff — the review is theater.
+- ❌ Drive-by LGTM: approving before reading the whole diff; the review is theater.
 - ❌ Style police: 18 of 20 comments about quotes and line breaks while a null-pointer dereference slips through.
-- ❌ Comments without code: "this logic looks off" — which logic? Which line? Unsaid means invalid.
-- ❌ Performance speculation: "this loop might be slow at scale" — a performance comment without data is noise.
+- ❌ Comments without code: "this logic looks off"; which logic? Which line? Unsaid means invalid.
+- ❌ Performance speculation: "this loop might be slow at scale"; a performance comment without data is noise.
 - ❌ Grading 50 items: when there are too many problems to list, the right move is "rewrite and resubmit", not playing teacher.

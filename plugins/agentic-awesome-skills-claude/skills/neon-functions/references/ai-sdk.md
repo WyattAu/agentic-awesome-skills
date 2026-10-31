@@ -1,6 +1,6 @@
 # AI SDK agents on Neon Functions
 
-A Neon Function is a long-lived Node.js 24 process, which makes it a natural host for a [Vercel AI SDK](https://ai-sdk.dev) agent: the handler keeps streaming for the life of the request (15-minute budget, see [Timeouts](../SKILL.md#timeouts-and-runtime-limits)), so multi-step tool loops and image/video generation don't get cut off the way they do on lambda-style serverless. Point the model at the **Neon AI Gateway** (see the `neon-ai-gateway` skill) and there are no extra provider keys to manage — one Neon credential reaches the whole catalog.
+A Neon Function is a long-lived Node.js 24 process, which makes it a natural host for a [Vercel AI SDK](https://ai-sdk.dev) agent: the handler keeps streaming for the life of the request (15-minute budget, see [Timeouts](../SKILL.md#timeouts-and-runtime-limits)), so multi-step tool loops and image/video generation don't get cut off the way they do on lambda-style serverless. Point the model at the **Neon AI Gateway** (see the `neon-ai-gateway` skill) and there are no extra provider keys to manage; one Neon credential reaches the whole catalog.
 
 The AI SDK is the **recommended** way to build agents on Functions from TypeScript: one set of primitives (`streamText`, `generateText`, tool calling, structured output) over every catalog model. For a memory- and workflow-heavy agent with built-in tracing, use Mastra instead (see [references/mastra-studio.md](mastra-studio.md)); both point at the same gateway.
 
@@ -8,7 +8,7 @@ The pattern below is an incomplete integration sketch; it requires authenticatio
 
 ## 1. Declare the gateway and the function
 
-The agent needs the AI Gateway (and, for the image example, an Object Storage bucket). Declare both in `neon.ts` alongside the function — `neon deploy` provisions them and injects the credentials at runtime (see the `neon-ai-gateway` and `neon-object-storage` skills):
+The agent needs the AI Gateway (and, for the image example, an Object Storage bucket). Declare both in `neon.ts` alongside the function; `neon deploy` provisions them and injects the credentials at runtime (see the `neon-ai-gateway` and `neon-object-storage` skills):
 
 ```typescript
 // neon.ts
@@ -27,7 +27,7 @@ export default defineConfig({
 
 ## 2. The handler: stream a tool-calling agent
 
-The function's default export is a web-standard `{ fetch }` handler. The `@neon/ai-sdk-provider` reads the injected gateway credentials automatically, so `neon("<model>")` is all the model config you need — it routes each model to the right dialect (Anthropic → Messages, OpenAI/Codex → Responses, everything else → MLflow). Return `result.toUIMessageStreamResponse()` so the AI SDK's `useChat` hooks can consume the stream:
+The function's default export is a web-standard `{ fetch }` handler. The `@neon/ai-sdk-provider` reads the injected gateway credentials automatically, so `neon("<model>")` is all the model config you need; it routes each model to the right dialect (Anthropic → Messages, OpenAI/Codex → Responses, everything else → MLflow). Return `result.toUIMessageStreamResponse()` so the AI SDK's `useChat` hooks can consume the stream:
 
 ```typescript
 // src/index.ts
@@ -60,7 +60,7 @@ export default {
         }),
       },
       // Let the model call tools and then summarize, instead of stopping after
-      // the first tool call. The loop runs in-process — no host timeout.
+      // the first tool call. The loop runs in-process; no host timeout.
       stopWhen: stepCountIs(5),
       onError({ error }) {
         console.error("[streamText] error:", error);
@@ -74,11 +74,11 @@ export default {
 };
 ```
 
-`tool({ inputSchema, execute })` is the AI SDK v5+ shape (the parameter is `inputSchema`, not the old `parameters`). The tool's `execute` runs **inside the function**, right next to Postgres — no extra network hop.
+`tool({ inputSchema, execute })` is the AI SDK v5+ shape (the parameter is `inputSchema`, not the old `parameters`). The tool's `execute` runs **inside the function**, right next to Postgres; no extra network hop.
 
 ## 3. Generate images and persist them
 
-The gateway exposes the OpenAI Responses **`image_generation`** built-in tool (GPT-5 models only; the image comes back inline as base64). Persist generated assets to Object Storage and index them in Postgres so they branch together — the **recommended** storage client is the Files SDK `neon` adapter (see the `neon-object-storage` skill):
+The gateway exposes the OpenAI Responses **`image_generation`** built-in tool (GPT-5 models only; the image comes back inline as base64). Persist generated assets to Object Storage and index them in Postgres so they branch together; the **recommended** storage client is the Files SDK `neon` adapter (see the `neon-object-storage` skill):
 
 ```typescript
 import { neon } from "@neon/ai-sdk-provider";
@@ -96,7 +96,7 @@ const result = streamText({
   tools: {
     image_generation: neon.tools.imageGeneration({
       outputFormat: "jpeg",
-      quality: "low", // the gateway caps a response near 640 KB — keep images small
+      quality: "low", // the gateway caps a response near 640 KB; keep images small
       size: "1024x1024",
     }),
   },
@@ -117,7 +117,7 @@ Keep generated images small: the gateway caps a single response near 640 KB and 
 
 ## 4. Call it directly from the client (don't proxy the stream)
 
-So the long stream isn't cut off by your web host's serverless limits, have the **browser call the function directly** and authenticate at the top of the handler — see [Functions as an agent backend](../SKILL.md#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the JWT-verify + CORS pattern and the AI SDK `DefaultChatTransport` wiring.
+So the long stream isn't cut off by your web host's serverless limits, have the **browser call the function directly** and authenticate at the top of the handler; see [Functions as an agent backend](../SKILL.md#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the JWT-verify + CORS pattern and the AI SDK `DefaultChatTransport` wiring.
 
 ## 5. Run and deploy
 

@@ -16,22 +16,22 @@ license_source: https://github.com/stareezy-1/frontend-architecture-skill/blob/m
 Use this skill when you need a portable, framework-agnostic discipline for the write path of any React or React Native app using a query/cache layer. Codifies the optimistic-update lifecycle (cancel in-flight queries → snapshot every affected cache → patch instantly → roll back verbatim on error → invalidate on...
 
 
-> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
-> This skill describes the **discipline of the write path** — optimistic updates, rollback,
-> idempotency, cache coherence — not a UI library or a styling system. It builds directly on the
+> Portable skill; readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
+> This skill describes the **discipline of the write path**; optimistic updates, rollback,
+> idempotency, cache coherence; not a UI library or a styling system. It builds directly on the
 > **frontend-data-contracts** skill (writes go through the typed client) and the
 > **frontend-architecture** skill (mutations live in `modules/{feature}/hooks/`, keyed by a factory).
 
 The goal: a write **feels instant** (the UI reflects it before the server confirms), is **safe**
 (a failure reconciles with authoritative state, and retries require server-enforced deduplication), and leaves the cache
-**coherent** (the detail view and every list page agree). All three at once — that's the craft.
+**coherent** (the detail view and every list page agree). All three at once; that's the craft.
 
 ---
 
 ## 0. The five core ideas
 
 1. **The optimistic lifecycle is fixed.** cancel → snapshot → patch → (error: roll back) → (settle: invalidate). Every optimistic mutation follows the same five beats.
-2. **Roll back verbatim.** On failure, restore the exact snapshot taken before the patch — not a "best guess" re-derivation. Keep the snapshot in mutation context.
+2. **Roll back verbatim.** On failure, restore the exact snapshot taken before the patch; not a "best guess" re-derivation. Keep the snapshot in mutation context.
 3. **Idempotency is generated once, not per attempt.** The key is created at form init (or first intent), so a network retry replays the original server response instead of performing the action twice.
 4. **Caches move in lock-step.** A status change patches the detail cache **and** every list page that contains the entity, so badges never disagree across surfaces.
 5. **Server state never enters the client store.** Optimistic state lives in the query cache, not Zustand/Redux. The cache is the single source of truth for server data (per frontend-architecture §4).
@@ -42,9 +42,9 @@ The goal: a write **feels instant** (the UI reflects it before the server confir
 
 | Situation                                                                     | Strategy                                                                                                                       |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| High-confidence, low-conflict write (toggle nonfinancial status, like, reorder) | **Optimistic** — patch immediately, roll back on error.                                                                        |
+| High-confidence, low-conflict write (toggle nonfinancial status, like, reorder) | **Optimistic**; patch immediately, roll back on error.                                                                        |
 | Create that returns a server-generated id/number/total                        | **Pending state**, then `setQueryData` from the server response. A temporary optimistic row is optional; reconcile on success. |
-| Destructive or hard-to-reverse write (delete with cascade, send money)        | **Confirm first**, then optimistic _or_ pending — never silent-optimistic.                                                     |
+| Destructive or hard-to-reverse write (delete with cascade, send money)        | **Confirm first**, then optimistic _or_ pending; never silent-optimistic.                                                     |
 | Write whose result the user can't see yet (background job)                    | **Pending + toast**, invalidate when done. No optimistic patch.                                                                |
 
 Optimism is a UX tool for writes you're confident will succeed. If failure is common or expensive to
@@ -123,11 +123,11 @@ export function useMarkInvoicePaid() {
 
 **Why each beat:**
 
-- **cancel** — without it, a query that was already in flight can resolve _after_ your patch and overwrite the optimistic state.
-- **snapshot** — the only safe rollback source; never reconstruct prior state by hand.
-- **patch** — the instant UX; mutate detail **and** lists together (§4).
-- **failure** — revalidate and surface the typed ApiError; this concurrent example deliberately does not restore whole-cache snapshots. Use pending UI while authoritative data reloads.
-- **invalidate on settle** — success or failure, refetch so server-computed fields (timestamps, totals) are authoritative. Settle, not just success: a failed write may still have changed server state.
+- **cancel**; without it, a query that was already in flight can resolve _after_ your patch and overwrite the optimistic state.
+- **snapshot**; the only safe rollback source; never reconstruct prior state by hand.
+- **patch**; the instant UX; mutate detail **and** lists together (§4).
+- **failure**; revalidate and surface the typed ApiError; this concurrent example deliberately does not restore whole-cache snapshots. Use pending UI while authoritative data reloads.
+- **invalidate on settle**; success or failure, refetch so server-computed fields (timestamps, totals) are authoritative. Settle, not just success: a failed write may still have changed server state.
 
 ---
 
@@ -187,7 +187,7 @@ user intent), carry it through retries, and let the client send it as a header. 
 the original response for a repeated key within its window.
 
 ```ts
-// at form initialisation — stable for the lifetime of this attempt
+// at form initialisation; stable for the lifetime of this attempt
 const [idempotencyKey] = useState(() => crypto.randomUUID());
 // Start a fresh key for a NEW logical intent/payload; persist the old key for retries.
 
@@ -205,9 +205,9 @@ apiClient.post<Invoice>("/invoices", document, { idempotencyKey });
 
 ## 6. Retry policy
 
-- **Reads:** retry a few times with backoff (default in most query libs) — safe and idempotent.
+- **Reads:** retry a few times with backoff (default in most query libs); safe and idempotent.
 - **Writes:** do **not** auto-retry non-idempotent mutations. Retry only when an idempotency key guarantees replay, and retryable failures have been classified. A network error can occur after the server committed; it is never sufficient by itself.
-- **Conflicts (409):** don't retry — surface the typed error, invalidate, and let the user re-decide on fresh data.
+- **Conflicts (409):** don't retry; surface the typed error, invalidate, and let the user re-decide on fresh data.
 
 ```ts
 useMutation({
@@ -225,7 +225,7 @@ The five-beat lifecycle is the same; the hooks differ.
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **TanStack Query** | `onMutate` (cancel + snapshot + patch) → `onError` (rollback) → `onSettled` (invalidate). The reference shape above.                                       |
 | **RTK Query**      | `onQueryStarted`: `updateQueryData` returns a `patchResult`; `await queryFulfilled` and call `patchResult.undo()` in `catch`. `invalidatesTags` on settle. |
-| **SWR**            | `mutate(key, optimisticData, { rollbackOnError: true, populateCache, revalidate: true })` — optimistic data + automatic rollback + revalidate.             |
+| **SWR**            | `mutate(key, optimisticData, { rollbackOnError: true, populateCache, revalidate: true })`; optimistic data + automatic rollback + revalidate.             |
 
 For **React Native**, all three libraries work unchanged; the cache is the source of truth on
 native too. Keep mutation hooks DOM-free so they're shareable across web and native.
@@ -242,7 +242,7 @@ native too. Keep mutation hooks DOM-free so they're shareable across web and nat
 - [ ] Idempotency key is generated at intent time and replayed across retries, not regenerated per attempt.
 - [ ] Money-moving / destructive writes confirm first and disable the trigger while pending.
 - [ ] Non-idempotent writes don't auto-retry; 409s surface rather than retry.
-- [ ] Server state stays in the query cache — never copied into a client store.
+- [ ] Server state stays in the query cache; never copied into a client store.
 - [ ] Query keys come from a hierarchical factory; invalidation is scoped, not global-blunt.
 
 ---
@@ -270,7 +270,7 @@ keys generated inside `mutationFn` (no longer protect retries).
 This skill follows the Anthropic `SKILL.md` format and is portable across agents.
 
 1. Keep it under `skills/frontend-optimistic-mutations/SKILL.md` in a public GitHub repo.
-2. Keep the frontmatter `name` and high-signal `description` — discovery indexes match against it.
+2. Keep the frontmatter `name` and high-signal `description`; discovery indexes match against it.
 3. Install with: `npx skills add <org>/<repo> --skill "frontend-optimistic-mutations"`.
 4. Non-`SKILL.md` agents can be pointed here from `AGENTS.md` / `CLAUDE.md`; Kiro can mirror it as a steering file.
 

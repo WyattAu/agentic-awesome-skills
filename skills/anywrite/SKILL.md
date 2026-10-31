@@ -1,6 +1,6 @@
 ---
 name: anywrite
-description: "Compiled CLI covering all 52 endpoints of the Anytype local API — objects, properties, tags, search, chat, files — one binary, no MCP server needed."
+description: "Compiled CLI covering all 52 endpoints of the Anytype local API; objects, properties, tags, search, chat, files; one binary, no MCP server needed."
 category: productivity
 risk: critical
 source: community
@@ -26,7 +26,7 @@ plugin:
 
 ## Overview
 
-`anywrite` is a single compiled Bun/TypeScript CLI for the [Anytype](https://anytype.io) desktop app's local HTTP API — **all 52 endpoints** across spaces, objects, properties, tags, types, templates, lists, chat, files, members, search, and auth — as one binary with zero runtime dependencies. It exists as a low-context alternative to Anytype's official MCP server: rather than exposing 52 always-loaded tools to every agent session, `anywrite` is a normal CLI wired as a skill that costs zero context until it's actually invoked, and is equally usable from a terminal or any script.
+`anywrite` is a single compiled Bun/TypeScript CLI for the [Anytype](https://anytype.io) desktop app's local HTTP API; **all 52 endpoints** across spaces, objects, properties, tags, types, templates, lists, chat, files, members, search, and auth; as one binary with zero runtime dependencies. It exists as a low-context alternative to Anytype's official MCP server: rather than exposing 52 always-loaded tools to every agent session, `anywrite` is a normal CLI wired as a skill that costs zero context until it's actually invoked, and is equally usable from a terminal or any script.
 
 ## When to Use This Skill
 
@@ -44,7 +44,7 @@ The Anytype desktop app must be running locally (default `http://localhost:31009
 
 ```bash
 "/absolute/path/to/anywrite" auth --status        # shows configured yes/no and where the key came from
-"/absolute/path/to/anywrite" auth                 # challenge flow — a 4-digit code appears in the app
+"/absolute/path/to/anywrite" auth                 # challenge flow; a 4-digit code appears in the app
 "/absolute/path/to/anywrite" auth --code 1234     # non-interactive form of the same exchange
 ```
 
@@ -56,7 +56,7 @@ The key is written to `~/.anywrite/config.json` and is never printed by any comm
 anywrite <resource> <action> [positionals] [--flag value]
 ```
 
-Resources: `spaces`, `objects`, `properties`, `tags`, `types`, `templates`, `lists`, `files`, `members`, `search`, `chat`, `auth`. Output is JSON by default; add `--pretty` for a human view, `--json` as an escape hatch for anything the typed flags don't model yet. `space`/`type`/`property` positionals accept a name or an id — names are resolved to ids automatically.
+Resources: `spaces`, `objects`, `properties`, `tags`, `types`, `templates`, `lists`, `files`, `members`, `search`, `chat`, `auth`. Output is JSON by default; add `--pretty` for a human view, `--json` as an escape hatch for anything the typed flags don't model yet. `space`/`type`/`property` positionals accept a name or an id; names are resolved to ids automatically.
 
 Resolve names to IDs and confirm the exact space/object before mutations; duplicate names must not select an arbitrary object. Whole-body replacements can erase content, so preserve a revision and review the complete replacement. Search requests do not authorize uploads/chat/deletes. Bound chat/search pages and payload sizes instead of using --all indiscriminately, and verify the resulting state after writes.
 
@@ -88,7 +88,7 @@ Resolve names to IDs and confirm the exact space/object before mutations; duplic
 - ✅ Use default JSON output for scripting and `--pretty` for human review.
 - ✅ Reach for `--json` when a brand-new API field isn't yet covered by a typed flag.
 - ❌ Don't set an empty-string emoji `--icon`; omit the flag entirely instead.
-- ❌ Don't expect `lists add`/`remove` to work on sets — they only apply to collections.
+- ❌ Don't expect `lists add`/`remove` to work on sets; they only apply to collections.
 
 ## Limitations
 
@@ -109,7 +109,7 @@ Resolve names to IDs and confirm the exact space/object before mutations; duplic
 - **Problem:** `lists add`/`remove` silently does nothing on a set.
   **Solution:** These only work on collections, not sets.
 - **Problem:** Re-uploading an identical file returns an existing object id instead of a new one.
-  **Solution:** This is intentional — file upload dedupes by content hash.
+  **Solution:** This is intentional; file upload dedupes by content hash.
 - **Problem:** Chat messages don't paginate like everything else.
   **Solution:** Chat paginates by cursor; every other resource paginates by offset.
 

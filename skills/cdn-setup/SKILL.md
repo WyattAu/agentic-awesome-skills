@@ -119,7 +119,7 @@ aws cloudfront list-invalidations --distribution-id E1A2B3C4D5E6F7
 ### CloudFront Functions (Lightweight Edge Logic)
 
 ```javascript
-// URL rewrite function — add index.html to directory requests
+// URL rewrite function; add index.html to directory requests
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
@@ -287,13 +287,13 @@ location ~* \.(jpg|jpeg|png|gif|ico|svg|webp|woff2|ttf)$ {
     add_header Cache-Control "public, must-revalidate";
 }
 
-# HTML — always revalidate
+# HTML: always revalidate
 location ~* \.html$ {
     expires -1;
     add_header Cache-Control "no-cache, must-revalidate";
 }
 
-# API responses — no caching
+# API responses: no caching
 location /api/ {
     add_header Cache-Control "no-store, no-cache";
     add_header Vary "Authorization, Accept";

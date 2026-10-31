@@ -50,7 +50,7 @@ WebSocket delivery can disconnect; use bounded waits and authoritative status re
     - Trigger alerts when specific keywords appear in `transcript`
     - Track application usage from screen descriptions
 
-11. **Stop capture** when done — send SIGTERM to the capture process. It should call `client.stop_capture()` and `client.shutdown()` in its signal handler.
+11. **Stop capture** when done; send SIGTERM to the capture process. It should call `client.stop_capture()` and `client.shutdown()` in its signal handler.
 
 12. **Wait for export** by reading events until you see `capture_session.exported`. This event contains `exported_video_id`, `stream_url`, and `player_url`. This may take several seconds after stopping capture.
 
@@ -62,9 +62,9 @@ WebSocket delivery can disconnect; use bounded waits and authoritative status re
 
 Proper shutdown order is important to ensure all events are captured:
 
-1. **Stop the capture session** — `client.stop_capture()` then `client.shutdown()`
-2. **Wait for export event** — poll `$VIDEODB_EVENTS_DIR/videodb_events.jsonl` for `capture_session.exported`
-3. **Stop the WebSocket listener** — `kill -- "$(cat "$VIDEODB_EVENTS_DIR/videodb_ws_pid")"`
+1. **Stop the capture session**; `client.stop_capture()` then `client.shutdown()`
+2. **Wait for export event**; poll `$VIDEODB_EVENTS_DIR/videodb_events.jsonl` for `capture_session.exported`
+3. **Stop the WebSocket listener**; `kill -- "$(cat "$VIDEODB_EVENTS_DIR/videodb_ws_pid")"`
 
 Do NOT kill the WebSocket listener before receiving the export event, or you will miss the final video URLs.
 

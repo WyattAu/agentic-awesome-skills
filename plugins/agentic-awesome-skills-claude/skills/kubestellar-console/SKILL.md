@@ -52,14 +52,14 @@ This bridges the active kubeconfig context to any MCP-compatible coding agent. D
 
 The project ships with agent skills accessible via `CLAUDE.md` and `AGENTS.md`:
 
-- **@perf-test** — Dashboard performance testing and TTFI analysis
-- **@cache-test** — Card cache compliance testing (IndexedDB warm return)
-- **@nav-test** — Navigation performance testing
-- **@ui-compliance-test** — Card loading compliance (8 criteria, 150+ cards)
-- **@ci-status** — CI pipeline monitoring and status checks
-- **@rca** — Root cause analysis for CI/test failures
-- **@tdd** — Test-driven development workflow
-- **@k8s-debug** — Kubernetes debugging and troubleshooting
+- **@perf-test**; Dashboard performance testing and TTFI analysis
+- **@cache-test**; Card cache compliance testing (IndexedDB warm return)
+- **@nav-test**; Navigation performance testing
+- **@ui-compliance-test**; Card loading compliance (8 criteria, 150+ cards)
+- **@ci-status**; CI pipeline monitoring and status checks
+- **@rca**; Root cause analysis for CI/test failures
+- **@tdd**; Test-driven development workflow
+- **@k8s-debug**; Kubernetes debugging and troubleshooting
 
 ## Key Features
 

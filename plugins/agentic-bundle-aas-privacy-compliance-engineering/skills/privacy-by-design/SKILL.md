@@ -1,6 +1,6 @@
 ---
 name: privacy-by-design
-description: Use when building apps that collect user data. Ensures privacy protections are built in from the start—data minimization, consent, encryption.
+description: Use when building apps that collect user data. Ensures privacy protections are built in from the start-data minimization, consent, encryption.
 metadata:
   aas-risk: safe
   aas-source: community
@@ -18,15 +18,15 @@ Integrate privacy protections into software architecture from the beginning, not
 - Use when building apps that collect personal data (names, emails, locations, preferences)
 - Use when designing database schemas, APIs, or authentication flows
 - Use when the user mentions forms, user accounts, analytics, or third-party integrations
-- Use when deploying to production—verify privacy controls before launch
+- Use when deploying to production-verify privacy controls before launch
 
 ## Legal Frameworks
 
-**GDPR (EU)** — Primary reference. Article 25 mandates "data protection by design and by default." Applies to EU users and often adopted globally.
+**GDPR (EU)**; Primary reference. Article 25 mandates "data protection by design and by default." Applies to EU users and often adopted globally.
 
-**CCPA (California)** — Right to know, delete, opt-out of sale. Similar principles: minimize, disclose, allow control.
+**CCPA (California)**; Right to know, delete, opt-out of sale. Similar principles: minimize, disclose, allow control.
 
-**LGPD (Brazil)** — Aligned with GDPR. Purpose limitation, necessity, transparency. Applies to Brazil users.
+**LGPD (Brazil)**; Aligned with GDPR. Purpose limitation, necessity, transparency. Applies to Brazil users.
 
 Map each applicable jurisdiction and processing purpose separately; compliance with one framework does not establish compliance with another.
 
@@ -69,21 +69,21 @@ Ensure these are implementable from day one:
 
 ## Deep Dive: Why It Matters
 
-**Data minimization** — Less data = less breach impact, lower storage cost, simpler compliance. Each field is a liability.
+**Data minimization**; Less data = less breach impact, lower storage cost, simpler compliance. Each field is a liability.
 
-**Purpose limitation** — Assess the lawful basis and compatibility of reuse under GDPR; consent is not universally required for every processing activity. Document purpose in schema or metadata.
+**Purpose limitation**; Assess the lawful basis and compatibility of reuse under GDPR; consent is not universally required for every processing activity. Document purpose in schema or metadata.
 
-**Retention** — Indefinite storage increases risk and violates GDPR. Define `retention_days` per data type; automate cleanup.
+**Retention**; Indefinite storage increases risk and violates GDPR. Define `retention_days` per data type; automate cleanup.
 
-**Logging** — Logs often leak PII. Redact emails, IDs, tokens. Use structured logging with allowlists.
+**Logging**; Logs often leak PII. Redact emails, IDs, tokens. Use structured logging with allowlists.
 
-**Third parties** — Every SDK (analytics, crash reporting, ads) may send data elsewhere. Audit dependencies and establish the applicable consent/lawful-basis requirements before loading optional tracking.
+**Third parties**; Every SDK (analytics, crash reporting, ads) may send data elsewhere. Audit dependencies and establish the applicable consent/lawful-basis requirements before loading optional tracking.
 
 ---
 
 ## Code Examples
 
-### JavaScript/Node — Minimal User Model
+### JavaScript/Node: Minimal User Model
 
 ```javascript
 // BAD: Collecting everything "just in case"
@@ -97,7 +97,7 @@ const user = {
 };
 ```
 
-### JavaScript — Consent Before Tracking
+### JavaScript: Consent Before Tracking
 
 ```javascript
 // BAD: Track first, ask later
@@ -109,7 +109,7 @@ if (userConsent.analytics) {
 }
 ```
 
-### Python — Safe Logging
+### Python: Safe Logging
 
 ```python
 # BAD: Logging PII in plain text
@@ -120,7 +120,7 @@ logger.info(f"User {hash_user_id(user.id)} logged in")
 # Or: logger.info("User login", extra={"user_id_hash": hash_id(user.id)})
 ```
 
-### SQL — Schema with Purpose and Retention
+### SQL: Schema with Purpose and Retention
 
 ```sql
 -- GOOD: Document purpose and retention in schema
@@ -136,7 +136,7 @@ CREATE TABLE users (
 -- Schedule job to anonymize/delete last_login_at after 90 days
 ```
 
-### API — Return Only Needed Fields
+### API: Return Only Needed Fields
 
 ```python
 # BAD: Returning full user object
@@ -200,7 +200,7 @@ When building a feature that touches user data:
 - ✅ Document purpose and retention in schema or metadata
 - ❌ Don't log passwords, tokens, or PII in plain text
 - ❌ Don't share personal data without a documented lawful basis, appropriate safeguards and applicable consent
-- ❌ Don't assume "we'll add privacy later"—it rarely happens
+- ❌ Don't assume "we'll add privacy later"-it rarely happens
 - ❌ Don't expose stack traces or internal errors to clients
 
 ---

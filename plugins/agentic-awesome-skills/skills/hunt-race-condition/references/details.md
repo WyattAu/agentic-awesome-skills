@@ -1,4 +1,4 @@
-# Race-condition synchronization — technical boundaries
+# Race-condition synchronization: technical boundaries
 
 Read the root skill's scope and confirmation gate before any active test. Prefer
 provided labs, tester-owned accounts, synthetic balances and an agreed concurrency

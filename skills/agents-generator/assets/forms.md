@@ -33,7 +33,7 @@
     - `register("fieldName")` for simple inputs, `control` + `Controller` for custom components.
     - `formState: { errors, isSubmitting }` for state.
     - If using Zod resolver: `zodResolver(schema)` in `useForm`.
-    - Do not mix `useState` with react-hook-form — use `watch()` or `getValues()`.
+    - Do not mix `useState` with react-hook-form; use `watch()` or `getValues()`.
   - **formik**:
     - `useFormik<T>()` or `<Formik>` component.
     - `validationSchema` for Yup; Zod needs a reviewed adapter or custom `validate` function.

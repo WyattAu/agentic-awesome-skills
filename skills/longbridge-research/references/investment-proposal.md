@@ -91,7 +91,7 @@ Describe hypothetical valuation scenarios, downside sensitivity and review trigg
 
 | Situation                       | 简体回复                                     | 繁體回復                                     | English reply                                             |
 | ------------------------------- | -------------------------------------------- | -------------------------------------------- | --------------------------------------------------------- |
-| Symbol not found                | 未找到该代码，请确认市场和代码格式。         | 找不到該代碼，請確認市場和代碼格式。         | Symbol not found — verify the exchange and ticker.        |
-| Financials unavailable          | 财务数据暂不可用，提案中该部分留空。         | 財務數據暫不可用，提案中該部分留空。         | Financials unavailable — that section will be left blank. |
+| Symbol not found                | 未找到该代码，请确认市场和代码格式。         | 找不到該代碼，請確認市場和代碼格式。         | Symbol not found; verify the exchange and ticker.        |
+| Financials unavailable          | 财务数据暂不可用，提案中该部分留空。         | 財務數據暫不可用，提案中該部分留空。         | Financials unavailable; that section will be left blank. |
 | `command not found: longbridge` | 请安装 longbridge-terminal 或通过 MCP 连接。 | 請安裝 longbridge-terminal 或透過 MCP 連線。 | Install longbridge-terminal or connect via MCP.           |
 | `not logged in`                 | 请运行 `longbridge auth login`。             | 請執行 `longbridge auth login`。             | Run `longbridge auth login`.                              |

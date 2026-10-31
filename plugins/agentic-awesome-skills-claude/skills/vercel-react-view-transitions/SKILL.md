@@ -21,7 +21,7 @@ Evaluate applicable patterns in this order; implement only those needed for the 
 
 | Priority | Pattern | What it communicates |
 |----------|---------|---------------------|
-| 1 | **Shared element** (`name`) | "Same thing — going deeper" |
+| 1 | **Shared element** (`name`) | "Same thing; going deeper" |
 | 2 | **Suspense reveal** | "Data loaded" |
 | 3 | **List identity** (per-item `key`) | "Same items, new arrangement" |
 | 4 | **State change** (`enter`/`exit`) | "Something appeared/disappeared" |
@@ -36,9 +36,9 @@ Keep the change scoped. Animation is optional, and continuity, focus and reduced
 | Hierarchical navigation (list → detail) | Type-keyed `nav-forward` / `nav-back` | Communicates spatial depth |
 | Lateral navigation (tab-to-tab) | Bare `<ViewTransition>` (fade) or `default="none"` | No depth to communicate |
 | Suspense reveal | `enter`/`exit` string props | Content arriving |
-| Revalidation / background refresh | `default="none"` | Silent — no animation needed |
+| Revalidation / background refresh | `default="none"` | Silent; no animation needed |
 
-Reserve directional slides for hierarchical navigation (list → detail) and ordered sequences (prev/next photo, carousel, paginated results). For ordered sequences, the direction communicates position: "next" slides from right, "previous" from left. Lateral/unordered navigation (tab-to-tab) should not use directional slides — it falsely implies spatial depth.
+Reserve directional slides for hierarchical navigation (list → detail) and ordered sequences (prev/next photo, carousel, paginated results). For ordered sequences, the direction communicates position: "next" slides from right, "previous" from left. Lateral/unordered navigation (tab-to-tab) should not use directional slides; it falsely implies spatial depth.
 
 ---
 
@@ -49,7 +49,7 @@ Verify the installed React/React DOM/Next.js versions and their documented ViewT
 
 ## Implementation Workflow
 
-When adding view transitions to an existing app, **follow `references/implementation.md` step by step.** Start with the audit — do not skip it. Copy the CSS recipes from `references/css-recipes.md` into the global stylesheet — do not write your own animation CSS.
+When adding view transitions to an existing app, **follow `references/implementation.md` step by step.** Start with the audit; do not skip it. Copy the CSS recipes from `references/css-recipes.md` into the global stylesheet; do not write your own animation CSS.
 
 ---
 
@@ -88,7 +88,7 @@ Enter/exit depends on the inserted/deleted subtree boundary, not a blanket prohi
   <div>Content</div>
 </ViewTransition>
 
-// Broken — div wraps the VT, suppressing enter/exit
+// Broken; div wraps the VT, suppressing enter/exit
 <div>
   <ViewTransition enter="auto" exit="auto">
     <div>Content</div>
@@ -112,10 +112,10 @@ If `default` is `"none"`, all triggers are off unless explicitly listed.
 
 ### CSS Pseudo-Elements
 
-- `::view-transition-old(.class)` — outgoing snapshot
-- `::view-transition-new(.class)` — incoming snapshot
-- `::view-transition-group(.class)` — container
-- `::view-transition-image-pair(.class)` — old + new pair
+- `::view-transition-old(.class)`; outgoing snapshot
+- `::view-transition-new(.class)`; incoming snapshot
+- `::view-transition-group(.class)`; container
+- `::view-transition-image-pair(.class)`; old + new pair
 
 See `references/css-recipes.md` for ready-to-use animation recipes.
 
@@ -123,7 +123,7 @@ See `references/css-recipes.md` for ready-to-use animation recipes.
 
 ## Transition Types
 
-Tag transitions with `addTransitionType` so VTs can pick different animations based on context. Call it multiple times to stack types — different VTs in the tree react to different types:
+Tag transitions with `addTransitionType` so VTs can pick different animations based on context. Call it multiple times to stack types; different VTs in the tree react to different types:
 
 ```jsx
 startTransition(() => {
@@ -186,22 +186,22 @@ Types are available during navigation but **not** during subsequent Suspense rev
 
 ## Shared Element Transitions
 
-Same `name` on two VTs — one unmounting, one mounting — creates a shared element morph:
+Same `name` on two VTs; one unmounting, one mounting; creates a shared element morph:
 
 ```jsx
 <ViewTransition name="hero-image">
   <img src="/thumb.jpg" onClick={() => startTransition(() => onSelect())} />
 </ViewTransition>
 
-// On the other view — same name
+// On the other view; same name
 <ViewTransition name="hero-image">
   <img src="/full.jpg" />
 </ViewTransition>
 ```
 
-- Only one VT with a given `name` can be mounted at a time — use unique names (`photo-${id}`). Watch for reusable components: if a component with a named VT is rendered in both a modal/popover *and* a page, both mount simultaneously and break the morph. Either make the name conditional (via a prop) or move the named VT out of the shared component into the specific consumer.
+- Only one VT with a given `name` can be mounted at a time; use unique names (`photo-${id}`). Watch for reusable components: if a component with a named VT is rendered in both a modal/popover *and* a page, both mount simultaneously and break the morph. Either make the name conditional (via a prop) or move the named VT out of the shared component into the specific consumer.
 - `share` takes precedence over `enter`/`exit`. Think through each navigation path: when no matching pair forms (e.g., the target page doesn't have the same name), `enter`/`exit` fires instead. Consider whether the element needs a fallback animation for those paths.
-- Never use a fade-out exit on pages with shared morphs — use a directional slide instead.
+- Never use a fade-out exit on pages with shared morphs; use a directional slide instead.
 
 ---
 
@@ -227,7 +227,7 @@ Trigger inside `startTransition`. Avoid wrapper `<div>`s between list and VT.
 
 ### Composing Shared Elements with List Identity
 
-Shared elements and list identity are independent concerns — don't confuse one for the other. When a list item contains a shared element (e.g., an image that morphs into a detail view), use two nested `<ViewTransition>` boundaries:
+Shared elements and list identity are independent concerns; don't confuse one for the other. When a list item contains a shared element (e.g., an image that morphs into a detail view), use two nested `<ViewTransition>` boundaries:
 
 ```jsx
 {items.map(item => (
@@ -280,18 +280,18 @@ Every VT matching the trigger fires simultaneously in a single `document.startVi
 
 ### Use `default="none"` Liberally
 
-Without it, every VT fires the browser cross-fade on **every** transition — Suspense resolves, `useDeferredValue` updates, background revalidations. Always use `default="none"` and explicitly enable only desired triggers.
+Without it, every VT fires the browser cross-fade on **every** transition; Suspense resolves, `useDeferredValue` updates, background revalidations. Always use `default="none"` and explicitly enable only desired triggers.
 
 ### Two Patterns Coexist
 
-**Pattern A — Directional slides:** Type-keyed VT on each page, fires during navigation.
-**Pattern B — Suspense reveals:** Simple string props, fires when data loads (no type).
+**Pattern A; Directional slides:** Type-keyed VT on each page, fires during navigation.
+**Pattern B; Suspense reveals:** Simple string props, fires when data loads (no type).
 
 They coexist because they fire at different moments. `default="none"` on both prevents cross-interference. Always pair `enter` with `exit`. Place directional VTs in page components, not layouts.
 
 ### Nested VT Limitation
 
-When a parent VT exits, nested VTs inside it do **not** fire their own enter/exit — only the outermost VT animates. Per-item staggered animations during page navigation are not possible today. See [react#36135](https://github.com/facebook/react/pull/36135) for an experimental opt-in fix.
+When a parent VT exits, nested VTs inside it do **not** fire their own enter/exit; only the outermost VT animates. Per-item staggered animations during page navigation are not possible today. See [react#36135](https://github.com/facebook/react/pull/36135) for an experimental opt-in fix.
 
 ---
 
@@ -309,10 +309,10 @@ Always add the reduced motion CSS from `references/css-recipes.md` to your globa
 
 ## Reference Files
 
-- **`references/implementation.md`** — Step-by-step implementation workflow.
-- **`references/patterns.md`** — Patterns, animation timing, events API, troubleshooting.
-- **`references/css-recipes.md`** — Ready-to-use CSS animation recipes.
-- **`references/nextjs.md`** — Next.js App Router patterns and Server Component details.
+- **`references/implementation.md`**; Step-by-step implementation workflow.
+- **`references/patterns.md`**; Patterns, animation timing, events API, troubleshooting.
+- **`references/css-recipes.md`**; Ready-to-use CSS animation recipes.
+- **`references/nextjs.md`**; Next.js App Router patterns and Server Component details.
 
 ## Full Compiled Document
 

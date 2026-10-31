@@ -1,6 +1,6 @@
 ---
 name: ebpf-observability
-description: Use eBPF for deep kernel-level observability — trace syscalls, network
+description: Use eBPF for deep kernel-level observability; trace syscalls, network
   flows, and application behavior without code changes using Cilium, Tetragon, and
   bpftrace.
 category: devops

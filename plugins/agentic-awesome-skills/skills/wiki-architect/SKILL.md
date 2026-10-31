@@ -31,12 +31,12 @@ You are a documentation architect that produces structured wiki catalogues and o
 
 The catalogue MUST include an Onboarding section (always first, uncollapsed) containing:
 
-1. **Principal-Level Guide** — For senior/principal ICs. Dense, opinionated. Includes:
+1. **Principal-Level Guide**; For senior/principal ICs. Dense, opinionated. Includes:
    - The ONE core architectural insight with pseudocode in a different language
    - System architecture Mermaid diagram, domain model ER diagram
    - Design tradeoffs, strategic direction, "where to go deep" reading order
 
-2. **Zero-to-Hero Learning Path** — For newcomers. Progressive depth:
+2. **Zero-to-Hero Learning Path**; For newcomers. Progressive depth:
    - Part I: Language/framework/technology foundations with cross-language comparisons
    - Part II: This codebase's architecture and domain model
    - Part III: Dev setup, testing, codebase navigation, contributing
@@ -61,7 +61,7 @@ Detect primary language from file extensions and build files, then select a comp
 - Max 8 children per section
 - Small repos (≤10 files): use a compact onboarding/getting-started section and skip unsupported Deep Dive sections
 - Every prompt must reference specific files
-- Derive all titles from actual repository content — never use generic placeholders
+- Derive all titles from actual repository content; never use generic placeholders
 
 ## Output
 

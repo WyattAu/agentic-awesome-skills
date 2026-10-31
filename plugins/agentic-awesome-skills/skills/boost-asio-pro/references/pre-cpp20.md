@@ -1,10 +1,10 @@
 # Pre-C++20 Styles (C++11–17, Boost ≥ 1.74)
 
 
-If you can't use C++20 `co_await`, the **same Asio library** (modern Boost or standalone) still works — only the *async style* changes. Compile with C++11 or later. Two pre-C++20 styles:
+If you can't use C++20 `co_await`, the **same Asio library** (modern Boost or standalone) still works; only the *async style* changes. Compile with C++11 or later. Two pre-C++20 styles:
 
-1. **Completion handlers (callbacks)** — header-only, C++11, no extra dependencies. The recommended baseline.
-2. **Stackful coroutines** (`asio::spawn` + `yield_context`) — synchronous-looking like `co_await`, but built on Boost.Coroutine/Boost.Context, so it **must be linked** (not header-only) — see build note below.
+1. **Completion handlers (callbacks)**; header-only, C++11, no extra dependencies. The recommended baseline.
+2. **Stackful coroutines** (`asio::spawn` + `yield_context`); synchronous-looking like `co_await`, but built on Boost.Coroutine/Boost.Context, so it **must be linked** (not header-only); see build note below.
 
 **Unchanged from the coroutine style** (these are library, not language, features): `io_context`, `make_strand`, `bind_executor`, `steady_timer`, `ssl::stream`, `signal_set`, `async_read`/`async_write`/`async_read_until`, buffers, `resolver`. Use them exactly as shown in [coroutines.md](coroutines.md).
 
@@ -25,7 +25,7 @@ If you can't use C++20 `co_await`, the **same Asio library** (modern Boost or st
 
 ### Callback style: full-duplex + write queue
 
-The full-duplex write-queue rule is identical — a strand alone doesn't stop interleaved writes — just expressed with chained handlers. Capture a previously declared `self` (`auto self = shared_from_this();`) in **every** handler to keep the connection alive.
+The full-duplex write-queue rule is identical; a strand alone doesn't stop interleaved writes; just expressed with chained handlers. Capture a previously declared `self` (`auto self = shared_from_this();`) in **every** handler to keep the connection alive.
 
 ```cpp
 class connection : public std::enable_shared_from_this<connection> {
@@ -107,10 +107,10 @@ void arm_timeout() {
 
 ### Callback multi-step reads + recurring side-tasks
 
-**Lifetime shift:** coroutine *stack locals* become *member variables* in callback style — a header/body buffer must outlive each async op or it dangles. Chain a composed read of the length, then the body:
+**Lifetime shift:** coroutine *stack locals* become *member variables* in callback style; a header/body buffer must outlive each async op or it dangles. Chain a composed read of the length, then the body:
 
 ```cpp
-// members, NOT locals — they must survive until the handler runs
+// members, NOT locals; they must survive until the handler runs
 uint32_t len_be_;
 std::string body_;
 static constexpr std::uint32_t max_frame_size = 1U << 20; // protocol limit: 1 MiB
@@ -137,7 +137,7 @@ void read_frame() {
 }
 ```
 
-**Recurring side-task** (e.g. push every 250ms) running concurrently with the read loop — there is no detached coroutine to stop, so use a self-rescheduling timer and `cancel()` it to stop:
+**Recurring side-task** (e.g. push every 250ms) running concurrently with the read loop; there is no detached coroutine to stop, so use a self-rescheduling timer and `cancel()` it to stop:
 
 ```cpp
 void schedule_tick(std::string symbol, std::shared_ptr<asio::steady_timer> t) {
@@ -162,11 +162,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)     # else CMake emits -std=gnu++NN, not literal -
 target_link_libraries(app PRIVATE Boost::headers Threads::Threads)
 target_compile_definitions(app PRIVATE BOOST_ERROR_CODE_HEADER_ONLY)
 ```
-Stackful `spawn` additionally requires Boost.Coroutine (which uses Boost.Context) — **not header-only**:
+Stackful `spawn` additionally requires Boost.Coroutine (which uses Boost.Context); **not header-only**:
 ```cmake
 find_package(Boost REQUIRED COMPONENTS coroutine)
 target_link_libraries(app PRIVATE Boost::coroutine)   # pulls in Boost.Context
 ```
-> Standalone Asio's `spawn` also depends on Boost.Coroutine/Context — it drags Boost into an otherwise Boost-free build. If you want zero Boost, use the **callback** style.
+> Standalone Asio's `spawn` also depends on Boost.Coroutine/Context; it drags Boost into an otherwise Boost-free build. If you want zero Boost, use the **callback** style.
 >
-> The 3-arg `spawn(ex, fn, token)` form needs **Boost ≥ 1.80** (older Boost has only `spawn(ex, fn)`). On old distros like Debian bookworm (Boost 1.74), the **callback** style compiles cleanly while stackful `spawn` does not — verified.
+> The 3-arg `spawn(ex, fn, token)` form needs **Boost ≥ 1.80** (older Boost has only `spawn(ex, fn)`). On old distros like Debian bookworm (Boost 1.74), the **callback** style compiles cleanly while stackful `spawn` does not; verified.

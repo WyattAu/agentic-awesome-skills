@@ -277,7 +277,7 @@ if queryset.exists():
     do_thing()
 ```
 
-**Measure first** — runtime depends on database, query shape, cache state and whether the queryset is already evaluated.
+**Measure first**; runtime depends on database, query shape, cache state and whether the queryset is already evaluated.
 
 ### Pattern: len(queryset) vs count()
 

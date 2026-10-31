@@ -23,20 +23,20 @@ link opportunities", "link these pages together", "internal link map",
 {
   "pages": [
     {
-      "title": "string — page or post title",
-      "url": "string — URL if published, leave blank if not yet live",
-      "primary_keyword": "string — the keyword this page targets",
+      "title": "string; page or post title",
+      "url": "string; URL if published, leave blank if not yet live",
+      "primary_keyword": "string; the keyword this page targets",
       "page_type": "pillar | cluster-article | landing-page |
                     blog-post | product-page",
-      "content_summary": "string — 1-2 sentences describing the page"
+      "content_summary": "string; 1-2 sentences describing the page"
     }
   ],
-  "focus_page": "string — title of the page you most want to
+  "focus_page": "string; title of the page you most want to
                   boost with incoming links",
-  "cluster_context": "string — optional, paste content cluster
+  "cluster_context": "string; optional, paste content cluster
                        output to inform link map",
-  "product_pages": ["string — product, signup, pricing, or demo pages that should receive relevant CTAs"],
-  "audit_findings": "string — optional orphan, cannibalization, or priority findings"
+  "product_pages": ["string; product, signup, pricing, or demo pages that should receive relevant CTAs"],
+  "audit_findings": "string; optional orphan, cannibalization, or priority findings"
 }
 ```
 
@@ -52,7 +52,7 @@ Every suggestion must be labelled with one:
 | Link Type               | Direction                          | SEO Purpose                                 |
 |-------------------------|------------------------------------|---------------------------------------------|
 | Pillar → Cluster        | Pillar page links to cluster post  | Distributes authority downward              |
-| Cluster → Pillar        | Cluster post links back to pillar  | Consolidates authority upward — highest priority |
+| Cluster → Pillar        | Cluster post links back to pillar  | Consolidates authority upward; highest priority |
 | Cluster → Cluster       | Cluster post links to related post | Builds semantic depth across the topic      |
 | Contextual Boost        | Any page → focus page              | Concentrates link equity on target page     |
 
@@ -92,7 +92,7 @@ The skill must always produce output in this exact format:
 
 ## Orphan Page Alert
 
-Pages with no incoming internal links — these may be harder to discover, but can still be found through sitemaps or external links; confirm crawl scope before calling them site-wide orphans:
+Pages with no incoming internal links; these may be harder to discover, but can still be found through sitemaps or external links; confirm crawl scope before calling them site-wide orphans:
 
 | Page Title                  | URL                  | Fix                              |
 |-----------------------------|----------------------|----------------------------------|
@@ -102,11 +102,11 @@ Pages with no incoming internal links — these may be harder to discover, but c
 
 ## Link Opportunities
 
-Listed in priority order — highest impact first.
+Listed in priority order; highest impact first.
 
 ---
 
-### 🔴 High Priority — Do These First
+### 🔴 High Priority: Do These First
 
 **Link [n]**
 | Field              | Value                                             |
@@ -116,7 +116,7 @@ Listed in priority order — highest impact first.
 | Target Page        | [title]                                           |
 | Anchor Text        | [suggested anchor text]                           |
 | Anchor Type        | Partial match / Exact match / Branded             |
-| Placement          | [Where in the source page — intro / body / CTA]   |
+| Placement          | [Where in the source page; intro / body / CTA]   |
 | Context Sentence   | "[Write the sentence the anchor should appear in, |
 |                    |  with anchor text in brackets like [this]]"       |
 | Impact             | [Why this link matters for SEO or AEO]            |
@@ -128,14 +128,14 @@ Listed in priority order — highest impact first.
 
 ---
 
-### 🟡 Medium Priority — Do These Second
+### 🟡 Medium Priority: Do These Second
 
 **Link [n]**
 [same format]
 
 ---
 
-### 🟢 Low Priority — Polish Round
+### 🟢 Low Priority: Polish Round
 
 **Link [n]**
 [same format]
@@ -160,17 +160,17 @@ Visual representation of how authority flows across the content:
 
 [Focus Page / Pillar: {page title}]
     ↑ receives links from:
-    ├── [Cluster Article 1] — anchor: [text]
-    ├── [Cluster Article 2] — anchor: [text]
-    └── [Cluster Article 3] — anchor: [text]
+    ├── [Cluster Article 1]; anchor: [text]
+    ├── [Cluster Article 2]; anchor: [text]
+    └── [Cluster Article 3]; anchor: [text]
 
     ↓ sends links to:
-    ├── [Cluster Article 1] — anchor: [text]
-    └── [Cluster Article 2] — anchor: [text]
+    ├── [Cluster Article 1]; anchor: [text]
+    └── [Cluster Article 2]; anchor: [text]
 
 Cross-links between cluster articles:
-    [Article 1] ↔ [Article 3] — anchor: [text]
-    [Article 2] → [Article 4] — anchor: [text]
+    [Article 1] ↔ [Article 3]; anchor: [text]
+    [Article 2] → [Article 4]; anchor: [text]
 
 ---
 
@@ -200,29 +200,29 @@ Cross-links between cluster articles:
 
 ## Execution Steps
 
-1. Read `cluster_context` if provided — use it to understand
+1. Read `cluster_context` if provided; use it to understand
    the pillar/cluster relationships before mapping any links
-2. Index all pages by `page_type` — pillar pages should receive
+2. Index all pages by `page_type`; pillar pages should receive
    the most incoming links by default
-3. Run orphan detection — flag any page with zero incoming
+3. Run orphan detection; flag any page with zero incoming
    links from other pages in the input set
-4. Build semantic overlap matrix — match pages by
+4. Build semantic overlap matrix; match pages by
    `primary_keyword` similarity and `content_summary`
    to identify natural linking opportunities
 5. Assign each opportunity a link type from the
    Link Type Definitions table
-6. Write a context sentence for every suggestion —
+6. Write a context sentence for every suggestion -
    the sentence should flow naturally and make the anchor
    text feel editorially placed, not forced
-7. Check anchor text across all suggestions — flag any
+7. Check anchor text across all suggestions; flag any
    exact-match anchor used more than once for the same
    target page for editorial review, not automatically as cannibalization
 8. Sort all opportunities into High, Medium, and Low
    priority tiers based on link type and focus page impact
 9. Build the Link Equity Map showing authority flow
-10. Run the Links Per Page check — flag any page
+10. Run the Links Per Page check; flag any page
     with excessive or irrelevant links for its purpose
-11. Check product-page paths separately — confirm each
+11. Check product-page paths separately; confirm each
     foundational article has at least one relevant conversion route
 12. Verify the map against the actual page inventory and links. If the project already provides a semantic-link helper, use it as a supplementary check; otherwise complete the checks manually and record the evidence used.
 

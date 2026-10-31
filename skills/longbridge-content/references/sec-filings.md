@@ -10,7 +10,7 @@ Run `longbridge <subcommand> --help` to verify exact flags.
 # List recent filings for a symbol
 longbridge filing <SYMBOL> --format json
 
-# Filter by filing type (if supported — verify with --help)
+# Filter by filing type (if supported: verify with --help)
 longbridge filing <SYMBOL> --type 10-K --format json
 longbridge filing <SYMBOL> --type 10-Q --format json
 longbridge filing <SYMBOL> --type 8-K  --format json
@@ -18,7 +18,7 @@ longbridge filing <SYMBOL> --type 8-K  --format json
 # Financial data (structured KPIs from filings)
 longbridge financial-report <SYMBOL> --format json
 
-# News — supplement for 8-K summaries and insider trade coverage
+# News: supplement for 8-K summaries and insider trade coverage
 longbridge news <SYMBOL> --format json
 ```
 
@@ -77,13 +77,13 @@ longbridge news <SYMBOL> --format json
 ## Output template
 
 ```
-{Symbol} {Filing type} analysis — Source: Longbridge Securities
+{Symbol} {Filing type} analysis; Source: Longbridge Securities
 
 [Filing metadata]
 - Form: {type}  |  Filed: {date}  |  Period: {period}
 
 [Key findings]
-1. {Finding — max 2 sentences}
+1. {Finding; max 2 sentences}
 2. {Finding}
 3. {Finding}
 
@@ -98,7 +98,7 @@ longbridge news <SYMBOL> --format json
 - Management tone: {cautious / neutral / optimistic}
 
 [Investment signal]
-{Bullish / Bearish / Neutral} — {1-sentence rationale}
+{Bullish / Bearish / Neutral}; {1-sentence rationale}
 
 ⚠️ 以上分析仅供参考，不构成投资建议。/ 以上分析僅供參考，不構成投資建議。/ For reference only. Not investment advice.
 ```

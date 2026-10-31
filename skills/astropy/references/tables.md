@@ -1,4 +1,4 @@
-# astropy.table — Reference
+# astropy.table: Reference
 
 This file is a placeholder for the extended `astropy.table` reference promised in the skill workflow.
 

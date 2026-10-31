@@ -14,8 +14,8 @@ Create "[Competitor] alternative" and comparison pages for developer tools that 
 
 ## Recommended Tools
 
-- **Social listening tools** — Monitor competitor conversations and developer pain points
-- **SEO tools** (Ahrefs, Semrush) — Keyword research and search volume
+- **Social listening tools**; Monitor competitor conversations and developer pain points
+- **SEO tools** (Ahrefs, Semrush); Keyword research and search volume
 
 ## Quick Start
 

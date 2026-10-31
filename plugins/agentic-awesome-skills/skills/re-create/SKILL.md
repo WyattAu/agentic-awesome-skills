@@ -6,11 +6,11 @@ source: community
 date_added: "2026-06-27"
 ---
 
-# re-create — Controlled Erasure & Rebuild Protocol
+# re-create: Controlled Erasure & Rebuild Protocol
 
 ## Overview
 
-> Hollow Purple is Gojo's most destructive technique — blue and red combined into total erasure of the target. But Gojo doesn't use it carelessly. He knows exactly what he's erasing and why. Same here: this skill is the nuclear option, invoked only when patching is the wrong call, executed with full control over what gets erased and what must survive.
+> Hollow Purple is Gojo's most destructive technique; blue and red combined into total erasure of the target. But Gojo doesn't use it carelessly. He knows exactly what he's erasing and why. Same here: this skill is the nuclear option, invoked only when patching is the wrong call, executed with full control over what gets erased and what must survive.
 
 Rewrites are dangerous not because rebuilding is hard, but because it is easy to silently erase behavior that was working and expected. This skill enforces a complete inventory of what must survive before a single line is deleted, and a full verification that everything survived after the rebuild.
 
@@ -28,51 +28,51 @@ Rewrites are dangerous not because rebuilding is hard, but because it is easy to
 
 ## How It Works
 
-### PHASE 1 — Justify the Erasure
+### PHASE 1: Justify the Erasure
 
 The AI must prove that a full rewrite is necessary. It must answer all of the following:
 
 1. **What specifically is broken or unsalvageable?**
-   - Not "it's messy" — specific structural problems that make targeted fixes impossible or counterproductive
+   - Not "it's messy"; specific structural problems that make targeted fixes impossible or counterproductive
 2. **Why would targeted edits make things worse, not better?**
    - Patching on top of rot, compounding complexity, architectural mismatch
 3. **What is the concrete cost of keeping the current implementation?**
    - Maintenance burden, bug surface, performance, developer velocity
 
-If the AI cannot clearly answer all three, it must fall back to targeted edits instead of a rewrite. A rewrite is not a reward for messy code — it is a last resort.
+If the AI cannot clearly answer all three, it must fall back to targeted edits instead of a rewrite. A rewrite is not a reward for messy code; it is a last resort.
 
 > **The bar is high.** "This code is ugly" does not justify hollow purple. "The architecture assumes X but the system now requires Y and every patch makes the mismatch worse" does.
 
 ---
 
-### PHASE 2 — Read the Target Completely
+### PHASE 2: Read the Target Completely
 
 Before proposing deletion, the AI must read the entire target (file, module, or component) in full.
 
 The AI must identify and catalog:
 
-1. **Public interfaces** — functions, classes, types, or exports that other parts of the codebase call
-2. **Implicit contracts** — behaviors that other files depend on even if not formally typed
-3. **Working behaviors** — things the current implementation does correctly that must continue to work
-4. **Non-obvious logic** — edge cases, guards, or special handling that looks incidental but is intentional
-5. **Blast radius** — every file in the codebase that imports from or depends on the target
+1. **Public interfaces**; functions, classes, types, or exports that other parts of the codebase call
+2. **Implicit contracts**; behaviors that other files depend on even if not formally typed
+3. **Working behaviors**; things the current implementation does correctly that must continue to work
+4. **Non-obvious logic**; edge cases, guards, or special handling that looks incidental but is intentional
+5. **Blast radius**; every file in the codebase that imports from or depends on the target
 
-> **The AI cannot skip this phase even if it has read the file before.** The purpose is not familiarity — it is building the Preservation List.
+> **The AI cannot skip this phase even if it has read the file before.** The purpose is not familiarity; it is building the Preservation List.
 
 ---
 
-### PHASE 3 — Erasure Declaration (User Must Confirm)
+### PHASE 3: Erasure Declaration (User Must Confirm)
 
 The AI outputs a complete erasure plan and **waits for user confirmation before deleting or writing anything.**
 
 ```
-HOLLOW PURPLE — ERASURE PLAN
+HOLLOW PURPLE; ERASURE PLAN
 ─────────────────────────────────────────
 TARGET FOR ERASURE:
   [file path or module name]
 
 WHY TARGETED FIXES ARE WRONG:
-  [specific justification — architectural rot, fundamental mismatch, etc.]
+  [specific justification; architectural rot, fundamental mismatch, etc.]
 
 PRESERVATION LIST (must survive the rewrite):
   - [public interface / export 1] → [what it does, who depends on it]
@@ -85,10 +85,10 @@ BLAST RADIUS (files that depend on the target):
   - [file path] → depends on [what specifically]
 
 NEW IMPLEMENTATION PLAN:
-  [Description of what the rebuild will look like — structure, approach, key decisions]
+  [Description of what the rebuild will look like; structure, approach, key decisions]
 
 WHAT WILL NOT BE PRESERVED:
-  [Anything intentionally dropped and why — dead code, deprecated behavior, etc.]
+  [Anything intentionally dropped and why; dead code, deprecated behavior, etc.]
 ─────────────────────────────────────────
 Confirm to proceed with erasure and rebuild.
 ```
@@ -97,24 +97,24 @@ Confirm to proceed with erasure and rebuild.
 
 ---
 
-### PHASE 4 — Controlled Erasure
+### PHASE 4: Controlled Erasure
 
 User confirms → the target is deleted. Rules for this phase:
 
-- **Delete cleanly.** Not commented out, not renamed to `_old`, not archived in place — deleted.
+- **Delete cleanly.** Not commented out, not renamed to `_old`, not archived in place; deleted.
 - **Delete only the declared target.** Nothing outside the declared scope is touched during erasure.
 - **Pause if scope expands.** If deletion reveals unexpected dependencies not in the blast radius list, the AI stops and reports before continuing.
 
 ---
 
-### PHASE 5 — Rebuild Against the Preservation List
+### PHASE 5: Rebuild Against the Preservation List
 
 The AI writes the new implementation. Rules:
 
 1. **Every item on the Preservation List is an obligation.** The rebuild is not complete until every preserved interface, behavior, and edge case is implemented and checked off.
-2. **Match the blast radius expectations.** Files that depended on the old implementation must be able to use the new one without changes — unless changes to dependent files were declared in Phase 3.
+2. **Match the blast radius expectations.** Files that depended on the old implementation must be able to use the new one without changes; unless changes to dependent files were declared in Phase 3.
 3. **No bonus features.** The rebuild implements what was declared. New improvements, extra functionality, and cleanup of adjacent things are a separate task.
-4. **Follow existing codebase conventions.** The new implementation must use the same patterns, naming conventions, and style as the surrounding codebase — not whatever the AI prefers.
+4. **Follow existing codebase conventions.** The new implementation must use the same patterns, naming conventions, and style as the surrounding codebase; not whatever the AI prefers.
 
 The AI tracks preservation progress explicitly:
 
@@ -130,18 +130,18 @@ Preservation List:
 
 ---
 
-### PHASE 6 — Blast Radius Verification
+### PHASE 6: Blast Radius Verification
 
 After the rebuild is complete, the AI checks every file in the blast radius:
 
 1. **Re-read each dependent file** and confirm it can still use the new implementation
-2. **Verify each dependency** — the function signatures, exports, and behaviors it relied on are present in the rebuild
-3. **Flag any breakage** — if a dependent file now has a mismatch, report it and propose a fix before declaring done
+2. **Verify each dependency**; the function signatures, exports, and behaviors it relied on are present in the rebuild
+3. **Flag any breakage**; if a dependent file now has a mismatch, report it and propose a fix before declaring done
 
 Final verification report:
 
 ```
-HOLLOW PURPLE — VERIFICATION
+HOLLOW PURPLE; VERIFICATION
 ─────────────────────────────────────────
 Preservation List:          ALL ITEMS ✓
 Blast radius files checked:
@@ -160,10 +160,10 @@ The AI must answer all four before Phase 4 begins:
 
 | # | Question | Required |
 |---|---|---|
-| 1 | Have I read the entire target and built a complete Preservation List? | Yes — or read more |
-| 2 | Have I identified the full blast radius? | Yes — or search more |
-| 3 | Has the user confirmed the erasure plan? | Yes — or wait |
-| 4 | Is the erasure scoped exactly to what was declared? | Yes — or re-declare |
+| 1 | Have I read the entire target and built a complete Preservation List? | Yes; or read more |
+| 2 | Have I identified the full blast radius? | Yes; or search more |
+| 3 | Has the user confirmed the erasure plan? | Yes; or wait |
+| 4 | Is the erasure scoped exactly to what was declared? | Yes; or re-declare |
 
 ---
 
@@ -192,12 +192,12 @@ The AI must answer all four before Phase 4 begins:
 
 | Phase | Action | Deletes/Writes Code? |
 |---|---|---|
-| 1 — Justify | Prove erasure is necessary | ❌ No |
-| 2 — Read | Read target fully, build Preservation List | ❌ No |
-| 3 — Declare | Output erasure plan, wait for confirmation | ❌ No |
-| 4 — Erase | Delete the declared target | 🗑️ Deletes only |
-| 5 — Rebuild | Write new implementation against Preservation List | ✅ Writes |
-| 6 — Verify | Check Preservation List + blast radius | ❌ No |
+| 1; Justify | Prove erasure is necessary | ❌ No |
+| 2; Read | Read target fully, build Preservation List | ❌ No |
+| 3; Declare | Output erasure plan, wait for confirmation | ❌ No |
+| 4; Erase | Delete the declared target | 🗑️ Deletes only |
+| 5; Rebuild | Write new implementation against Preservation List | ✅ Writes |
+| 6; Verify | Check Preservation List + blast radius | ❌ No |
 
 ---
 
@@ -214,7 +214,7 @@ The AI must answer all four before Phase 4 begins:
 ```text
 User: "The authentication module is beyond saving. Rewrite this from scratch."
 
-AI: [Outputs HOLLOW PURPLE — ERASURE PLAN]
+AI: [Outputs HOLLOW PURPLE; ERASURE PLAN]
 "Confirm to proceed with erasure and rebuild."
 
 User: "Confirmed."

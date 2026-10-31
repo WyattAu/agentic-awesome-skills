@@ -1,6 +1,6 @@
 # Base Image Comparison Reference
 
-Quick decision guide for choosing the right container base image — balancing security, compatibility, size, and debuggability.
+Quick decision guide for choosing the right container base image; balancing security, compatibility, size, and debuggability.
 
 ---
 
@@ -8,8 +8,8 @@ Quick decision guide for choosing the right container base image — balancing s
 
 | Runtime / Need | Best Choice | Fallback |
 |---|---|---|
-| Go / Rust — fully static binary | `scratch` | `gcr.io/distroless/static-debian12` |
-| Go / Rust — with CGO or dynamic libs | `gcr.io/distroless/base-debian12` | `alpine:3.20` |
+| Go / Rust; fully static binary | `scratch` | `gcr.io/distroless/static-debian12` |
+| Go / Rust; with CGO or dynamic libs | `gcr.io/distroless/base-debian12` | `alpine:3.20` |
 | Node.js app (production) | `gcr.io/distroless/nodejs20-debian12` | `node:20-slim` |
 | Python app (production) | `gcr.io/distroless/python3-debian12` | `python:3.12-slim` |
 | Java app (production) | `gcr.io/distroless/java21-debian12` | `eclipse-temurin:21-jre-alpine` |
@@ -51,7 +51,7 @@ Quick decision guide for choosing the right container base image — balancing s
 - ✅ No base userspace packages; application and kernel attack surfaces remain
 - ✅ Smallest possible image
 - ✅ No package manager to exploit
-- ❌ No libc, no shell, no CA certs, no timezone data — must `COPY` them in
+- ❌ No libc, no shell, no CA certs, no timezone data; must `COPY` them in
 - ❌ Cannot exec into for debugging (no shell at all)
 
 ```dockerfile
@@ -80,24 +80,24 @@ ENTRYPOINT ["/app"]
 ### `gcr.io/distroless` (Google)
 **Best for:** Production Node.js, Python, Java, Go (with CGO)
 
-- ✅ No shell, no package manager — dramatically reduced attack surface
+- ✅ No shell, no package manager; dramatically reduced attack surface
 - ✅ Includes CA certs and tzdata by default
 - ✅ Built-in `nonroot` user (UID 65532)
-- ✅ Based on Debian — glibc compatibility (no musl issues)
+- ✅ Based on Debian; glibc compatibility (no musl issues)
 - ✅ Regularly patched by Google
-- ❌ Cannot exec into with `docker exec -it` (no shell) — use `:debug` variant for staging
+- ❌ Cannot exec into with `docker exec -it` (no shell); use `:debug` variant for staging
 
 ```bash
 # Available distroless variants
-gcr.io/distroless/static-debian12       # No libc — for fully static binaries
-gcr.io/distroless/base-debian12         # glibc + openssl — for dynamic Go/Rust
+gcr.io/distroless/static-debian12       # No libc; for fully static binaries
+gcr.io/distroless/base-debian12         # glibc + openssl; for dynamic Go/Rust
 gcr.io/distroless/nodejs20-debian12     # Node.js 20 runtime
 gcr.io/distroless/nodejs22-debian12     # Node.js 22 runtime
 gcr.io/distroless/python3-debian12      # Python 3 runtime
 gcr.io/distroless/java21-debian12       # JRE 21
 gcr.io/distroless/cc-debian12           # C/C++ runtime
 
-# Debug variants — include busybox shell for staging only
+# Debug variants: include busybox shell for staging only
 gcr.io/distroless/nodejs20-debian12:debug
 gcr.io/distroless/python3-debian12:debug
 ```
@@ -117,9 +117,9 @@ kubectl debug -it deploy/myapp \
 **Best for:** Images where a shell is required, or when image size is a primary concern
 
 - ✅ Very small (~3.5 MB)
-- ✅ Has shell (ash) and package manager (apk) — great for debugging
+- ✅ Has shell (ash) and package manager (apk); great for debugging
 - ✅ Regularly patched, active community
-- ⚠️ Uses **musl libc** — some Python C extensions, Node.js native modules, or glibc-dependent binaries may fail
+- ⚠️ Uses **musl libc**; some Python C extensions, Node.js native modules, or glibc-dependent binaries may fail
 - ⚠️ CVE counts depend on image digest, packages, scanner coverage and database date.
 
 **musl compatibility check:**
@@ -138,7 +138,7 @@ docker run -it --rm -v $(pwd):/app node:20-alpine sh -c "cd /app && npm ci && np
 ### `slim` variants (Debian-based)
 **Best for:** Apps with glibc dependencies that can't use distroless
 
-- ✅ glibc compatibility — no musl issues
+- ✅ glibc compatibility; no musl issues
 - ✅ Familiar `apt` ecosystem
 - ✅ Smaller than full image (~60–90 MB vs 300–400 MB)
 - ⚠️ Scan the actual digest; package count alone does not establish exploitable risk.
@@ -159,7 +159,7 @@ RUN apt-get update && \
 **Usually prefer smaller runtime images:** full images can be justified by tested runtime requirements; assess their actual contents.
 
 - ❌ Massive attack surface (50–200+ CVEs)
-- ❌ Includes compilers, build tools, package managers — not needed at runtime
+- ❌ Includes compilers, build tools, package managers; not needed at runtime
 - ❌ Huge size increases pull time and storage costs
 
 Use as a build stage only:

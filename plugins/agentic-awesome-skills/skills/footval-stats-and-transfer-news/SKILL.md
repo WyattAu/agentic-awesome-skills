@@ -30,10 +30,10 @@ Full argument list:
 
 - `metric`: `goals` (default), `assists`, `contributions` (goals + assists), `minutes`,
   `appearances`.
-- `competition`: a code or name — leagues (`GB1`, `ES1`, `IT1`, `L1`, `FR1`, `TR1`…), cups
+- `competition`: a code or name; leagues (`GB1`, `ES1`, `IT1`, `L1`, `FR1`, `TR1`…), cups
   (`UCL`, `UEL`, `UECL`, `FAC`…), `NT` for all national-team competitions together, or `all`
   (the default) for every competition combined. A player who moved mid-season counts once.
-- `season` is the start year (2025 = 2025/26). Without it you get the latest season with data —
+- `season` is the start year (2025 = 2025/26). Without it you get the latest season with data -
   say which season your answer covers.
 - Leaderboards include players outside the leagues FootVal values; such a player simply has no
   valuation to show.
@@ -43,12 +43,12 @@ Full argument list:
 - Narrow with `query` (a player or club name) and `type`: `confirmed`, `rumors` or `all`.
 - Every item carries a **reliability**. Report a rumour as a rumour ("reported", "linked with"),
   never as a done deal. A `confirmed` label is still FootVal's report: attribute it and check an official club/league source before making an independently confirmed claim. Missing reliability or source timestamps remain unknown.
-- Fees are as reported. Undisclosed fees and loans stay undisclosed — don't fill the gap with a
+- Fees are as reported. Undisclosed fees and loans stay undisclosed; don't fill the gap with a
   guess.
 - The feed covers recent items. If nothing matches, say FootVal has no recent item, not that no
   transfer happened.
 
-After a reported fee, `get_player` shows whether FootVal thinks the price is fair — see the
+After a reported fee, `get_player` shows whether FootVal thinks the price is fair; see the
 `value-and-compare-players` skill.
 
 ## Examples

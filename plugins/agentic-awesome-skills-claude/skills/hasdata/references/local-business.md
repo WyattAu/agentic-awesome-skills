@@ -1,4 +1,4 @@
-# Local Business APIs — Google Maps, Yelp, YellowPages
+# Local Business APIs: Google Maps, Yelp, YellowPages
 
 | Endpoint | Returns |
 |---|---|
@@ -31,11 +31,11 @@ resp = requests.get(
 | Param | Notes |
 |---|---|
 | `q` | **Required.** Free-form query. |
-| `ll` | `@LAT,LNG,ZOOMz` viewport — **lat/lng + zoom, not a city name**. Required for tight pagination. |
+| `ll` | `@LAT,LNG,ZOOMz` viewport; **lat/lng + zoom, not a city name**. Required for tight pagination. |
 | `domain`, `gl`, `hl` | Standard. |
 | `start` | Pagination offset, **steps of 20**. |
 
-Response: `localResults` — each entry has `position`, `title`, `placeId`, `dataId`, `kgmid`, `thumbnail`, `phone`, `address`, `website`, `description`, `workingHours` (object with `timezone` + `days[]`), `openState`, `rating`, `reviews`, `type` + `types[]` (categories), `price`, `priceDescription`, `gpsCoordinates`, `serviceOptions[]`, `extensions` (offerings, accessibility, payments, …), `menu`. Feed `placeId`/`dataId` into `/place` and `/reviews`.
+Response: `localResults`; each entry has `position`, `title`, `placeId`, `dataId`, `kgmid`, `thumbnail`, `phone`, `address`, `website`, `description`, `workingHours` (object with `timezone` + `days[]`), `openState`, `rating`, `reviews`, `type` + `types[]` (categories), `price`, `priceDescription`, `gpsCoordinates`, `serviceOptions[]`, `extensions` (offerings, accessibility, payments, …), `menu`. Feed `placeId`/`dataId` into `/place` and `/reviews`.
 
 ## Google Maps Place
 
@@ -43,7 +43,7 @@ Response: `localResults` — each entry has `position`, `title`, `placeId`, `dat
 params = {"placeId": "ChIJFU2bda4SM4cRKSCRyb6pOB8"}
 ```
 
-Returns full place detail — coordinates, hours by day, phone, website, popular times, attributes (delivery, dine-in), photo summary.
+Returns full place detail; coordinates, hours by day, phone, website, popular times, attributes (delivery, dine-in), photo summary.
 
 ## Google Maps Reviews
 
@@ -96,7 +96,7 @@ params = {"keyword": "McDonald's", "location": "New York, NY", "start": 0}  # st
 params = {"keyword": "Plumbers", "location": "New York, NY", "page": 1}
 ```
 
-YellowPages is US-only — EU/APAC searches return nothing useful.
+YellowPages is US-only; EU/APAC searches return nothing useful.
 
 ## Patterns
 
@@ -141,5 +141,5 @@ Search the brand name; verify each result belongs to the chain before treating i
 
 - **`ll` is a viewport, not a city.** `@lat,lng,zoom`. Pasting "Brooklyn" fails.
 - **Pagination steps differ.** Maps `start` = +20, Yelp `start` = +10, Maps Reviews uses `nextPageToken`.
-- **`placeId` vs `dataId`** — Place prefers `placeId`; Reviews accepts either.
+- **`placeId` vs `dataId`**; Place prefers `placeId`; Reviews accepts either.
 - **YellowPages is US-only.**

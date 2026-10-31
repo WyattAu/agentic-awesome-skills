@@ -14,7 +14,7 @@ license_source: https://github.com/addyosmani/agent-skills/blob/main/LICENSE
 
 ## Overview
 
-Document decisions, not just code. The most valuable documentation captures the *why* — the context, constraints, and trade-offs that led to a decision. Code shows *what* was built; documentation explains *why it was built this way* and *what alternatives were considered*. This context is essential for future humans and agents working in the codebase.
+Document decisions, not just code. The most valuable documentation captures the *why*; the context, constraints, and trade-offs that led to a decision. Code shows *what* was built; documentation explains *why it was built this way* and *what alternatives were considered*. This context is essential for future humans and agents working in the codebase.
 
 ## When to Use
 
@@ -248,10 +248,10 @@ For shipped features:
 
 Special consideration for AI agent context:
 
-- **CLAUDE.md / rules files** — Document project conventions so agents follow them
-- **Spec files** — Keep specs updated so agents build the right thing
-- **ADRs** — Help agents understand why past decisions were made (prevents re-deciding)
-- **Inline gotchas** — Prevent agents from falling into known traps
+- **CLAUDE.md / rules files**; Document project conventions so agents follow them
+- **Spec files**; Keep specs updated so agents build the right thing
+- **ADRs**; Help agents understand why past decisions were made (prevents re-deciding)
+- **Inline gotchas**; Prevent agents from falling into known traps
 
 ## Common Rationalizations
 
@@ -261,7 +261,7 @@ Special consideration for AI agent context:
 | "We'll write docs when the API stabilizes" | APIs stabilize faster when you document them. The doc is the first test of the design. |
 | "Nobody reads docs" | Agents do. Future engineers do. Your 3-months-later self does. |
 | "ADRs are overhead" | A 10-minute ADR prevents a 2-hour debate about the same decision six months later. |
-| "Comments get outdated" | Comments on *why* are stable. Comments on *what* get outdated — that's why you only write the former. |
+| "Comments get outdated" | Comments on *why* are stable. Comments on *what* get outdated; that's why you only write the former. |
 
 ## Red Flags
 

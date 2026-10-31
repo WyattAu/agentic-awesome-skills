@@ -10,10 +10,10 @@ license: MIT
 license_source: https://github.com/hyhmrright/logic-lens/blob/main/LICENSE
 ---
 
-# Logic-Lens — Logic Fix All
+# Logic-Lens: Logic Fix All
 ## When to Use
 
-Use this skill when you need autonomous repository-wide audit-and-fix pipeline: health → review → locate/explain → fix → diff-verify → iterate until clean. Starts with a mandatory consent prompt (token-intensive); after consent runs hands-free. Trigger when the user wants ALL logic issues found and fixed — for example "fix all confirmed logic defects within this repository".
+Use this skill when you need autonomous repository-wide audit-and-fix pipeline: health → review → locate/explain → fix → diff-verify → iterate until clean. Starts with a mandatory consent prompt (token-intensive); after consent runs hands-free. Trigger when the user wants ALL logic issues found and fixed; for example "fix all confirmed logic defects within this repository".
 
 
 ## Setup
@@ -27,19 +27,19 @@ Use phase-gated lazy loading per `../_shared/common.md` §13:
 
 **Step 0. Language + scope routing.** Detect language per `common.md` §1. Default scope is the repo root; honor a user-named subpath or pasted snippet. For a pasted snippet, skip the consent prompt and run the fix pipeline directly. Read `.logic-lens.yaml` for `ignore:`, `custom_risks`, `severity:`, `focus:`, and `fix_all.max_iterations`.
 
-**Step 1. Consent + scope enumeration** (guide Phase 0–1) — for repo/directory scope: mandatory consent prompt displaying scope / method / cost / iteration cap; on consent, enumerate runtime-affecting files (source / config / constraint / doc), exclude `.git` and build artifacts, classify by risk tier. For a pasted snippet: skip consent, enumerate the snippet's functions directly.
+**Step 1. Consent + scope enumeration** (guide Phase 0–1); for repo/directory scope: mandatory consent prompt displaying scope / method / cost / iteration cap; on consent, enumerate runtime-affecting files (source / config / constraint / doc), exclude `.git` and build artifacts, classify by risk tier. For a pasted snippet: skip consent, enumerate the snippet's functions directly.
 
-**Step 2. Health pass** (guide Phase 2) — apply logic-health methodology to map per-module Logic Scores and L-code patterns.
+**Step 2. Health pass** (guide Phase 2); apply logic-health methodology to map per-module Logic Scores and L-code patterns.
 
-**Step 3. Deep review** (guide Phase 3) — apply logic-review per file to collect full Premises → Trace → Divergence findings.
+**Step 3. Deep review** (guide Phase 3); apply logic-review per file to collect full Premises → Trace → Divergence findings.
 
-**Step 4. Conditional clarification** (guide Phase 4–5) — apply logic-locate where concrete failures exist; apply logic-explain when a finding's path is unclear (call depth > 3, cross-module, or async).
+**Step 4. Conditional clarification** (guide Phase 4–5); apply logic-locate where concrete failures exist; apply logic-explain when a finding's path is unclear (call depth > 3, cross-module, or async).
 
-**Step 5. Fix queue + remedy** (guide Phase 6) — sort by severity; write a paste-ready Remedy per finding; route cross-file contradictions to the correct edit target (code / constraint / config / doc).
+**Step 5. Fix queue + remedy** (guide Phase 6); sort by severity; write a paste-ready Remedy per finding; route cross-file contradictions to the correct edit target (code / constraint / config / doc).
 
-**Step 6. Apply + verify** (guide Phase 7) — apply each fix, then apply logic-diff methodology comparing original vs. fixed code. Expected verdict: `⚠️ Conditionally Equivalent` where the differing condition is exactly the bug scenario. Investigate a Semantically Equivalent verdict; it can be appropriate for a behavior-preserving safety/refactor change, and an LLM verdict is not proof or shows new divergences outside the bug scenario (regression). Retry up to 3×.
+**Step 6. Apply + verify** (guide Phase 7); apply each fix, then apply logic-diff methodology comparing original vs. fixed code. Expected verdict: `⚠️ Conditionally Equivalent` where the differing condition is exactly the bug scenario. Investigate a Semantically Equivalent verdict; it can be appropriate for a behavior-preserving safety/refactor change, and an LLM verdict is not proof or shows new divergences outside the bug scenario (regression). Retry up to 3×.
 
-**Step 7. Iterate + report** (guide Phase 8–9) — re-run health + review on modified files and their consumers; Critical findings use the same finite run budget; Warning/Suggestion rounds capped by `fix_all.max_iterations` with user-escalation prompt at the cap. Output the Fix Report.
+**Step 7. Iterate + report** (guide Phase 8–9); re-run health + review on modified files and their consumers; Critical findings use the same finite run budget; Warning/Suggestion rounds capped by `fix_all.max_iterations` with user-escalation prompt at the cap. Output the Fix Report.
 
 **Mode line in report:** `Logic Fix All` (Chinese: `逻辑全修`).
 

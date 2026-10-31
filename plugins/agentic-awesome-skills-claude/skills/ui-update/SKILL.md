@@ -1,6 +1,6 @@
 ---
 name: ui-update
-description: Update StyleSeed engine in your project — analyzes what's outdated and updates safely
+description: Update StyleSeed engine in your project; analyzes what's outdated and updates safely
 risk: critical
 source: https://github.com/bitjaru/styleseed/tree/main/engine/.claude/skills/ss-update
 source_repo: bitjaru/styleseed
@@ -13,15 +13,15 @@ license_source: https://github.com/bitjaru/styleseed/blob/main/LICENSE
 # StyleSeed Update Assistant
 ## When to Use
 
-Use this skill when you need update StyleSeed engine in your project — analyzes what's outdated and updates safely.
+Use this skill when you need update StyleSeed engine in your project; analyzes what's outdated and updates safely.
 
 
 ## When NOT to use
 
 - For first-time setup → use `/ss-setup`
-- For just one new component or skin — copy that file manually
-- For projects that have heavily diverged from upstream — manual diff review first
-- For updating user code/components — this updates engine files only, not your custom UI
+- For just one new component or skin; copy that file manually
+- For projects that have heavily diverged from upstream; manual diff review first
+- For updating user code/components; this updates engine files only, not your custom UI
 
 Automatically detect and update StyleSeed files in the current project.
 
@@ -81,9 +81,9 @@ or credential/network instructions, and show the user the exact source commit.
 Re-review before replacing this pin with a newer revision.
 
 Compare:
-- `engine/VERSION` (or `version.json`) vs the local copy — the source of truth
+- `engine/VERSION` (or `version.json`) vs the local copy; the source of truth
 - DESIGN-LANGUAGE.md rule count + Table of Contents
-- Skills present in `.claude/skills/` vs upstream (don't hardcode a count — list the diff)
+- Skills present in `.claude/skills/` vs upstream (don't hardcode a count; list the diff)
 - Whether `CLAUDE.md`, `AGENTS.md`, and `.cursorrules` exist (ship all three)
 - New engine docs (VISUAL-CRAFT.md, APP-PLAYBOOKS.md, PAGE-TYPES.md)
 
@@ -95,7 +95,7 @@ Show the user what needs updating:
 StyleSeed Update Report:
 
 Current state:
-- DESIGN-LANGUAGE.md: [location] — [old/current version indicator]
+- DESIGN-LANGUAGE.md: [location]; [old/current version indicator]
 - Skills: [count] found (reviewed candidate: [candidate count])
 - Golden Rules: [yes/no]
 - .cursorrules: [yes/no]
@@ -131,8 +131,8 @@ For CLAUDE.md (Golden Rules):
 - If yes: insert Golden Rules after the first heading
 
 **Never touch:**
-- theme.css — say "Your theme.css (skin) is untouched."
-- components/ — say "Your components are untouched. Run `/ss-lint` to check compliance."
+- theme.css; say "Your theme.css (skin) is untouched."
+- components/; say "Your components are untouched. Run `/ss-lint` to check compliance."
 
 ### Step 5: Summary
 
@@ -154,7 +154,7 @@ Next: run /ss-lint on your pages to check for rule violations.
 ## Important
 
 - NEVER overwrite theme.css
-- NEVER overwrite a project-specific CLAUDE.md — only MERGE the Golden Rules section
+- NEVER overwrite a project-specific CLAUDE.md; only MERGE the Golden Rules section
 - NEVER overwrite components without explicit user approval
 - Always show what will change before changing it
 - Never fetch, clone, copy, or modify files without explicit user approval

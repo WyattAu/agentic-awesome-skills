@@ -106,11 +106,11 @@ Write DESIGN.md at the project root (or update the existing one) in
 this order:
 
 ```
-# <Product> — Style Reference
+# <Product>: Style Reference
 
-## Tokens — Colors        role · value · where it's used
-## Tokens — Typography    families, then the type scale
-## Tokens — Spacing & Shapes   spacing steps, radii, borders, shadows
+## Tokens: Colors        role · value · where it's used
+## Tokens: Typography    families, then the type scale
+## Tokens: Spacing & Shapes   spacing steps, radii, borders, shadows
 ## Components             one short entry per component, with states
 ## Layout                 widths, grid, breakpoints
 ## Do's and Don'ts        the rules that keep new work consistent

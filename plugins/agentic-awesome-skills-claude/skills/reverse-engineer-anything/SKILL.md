@@ -21,7 +21,7 @@ Use only an already installed tool whose exact version, complete dependency tree
 
 ## Current upstream location
 
-The active authored skill is at [morluto/rea — reverse-engineer-anything](https://github.com/morluto/rea/tree/main/.agents/skills/reverse-engineer-anything). The `source` frontmatter retains the historical import location to preserve provenance identity; that old path is not a current installation URL. Use the active link for upstream inspection and retain the reviewed local reference bundle. A moving upstream branch is reference material, not approval to install or execute it.
+The active authored skill is at [morluto/rea; reverse-engineer-anything](https://github.com/morluto/rea/tree/main/.agents/skills/reverse-engineer-anything). The `source` frontmatter retains the historical import location to preserve provenance identity; that old path is not a current installation URL. Use the active link for upstream inspection and retain the reviewed local reference bundle. A moving upstream branch is reference material, not approval to install or execute it.
 
 ## When to Use
 

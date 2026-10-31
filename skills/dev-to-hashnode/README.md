@@ -1,6 +1,6 @@
 # dev-to-hashnode
 
-**Content platform skill** — Publish on developer blogging platforms effectively.
+**Content platform skill**; Publish on developer blogging platforms effectively.
 
 ## What It Does
 
@@ -25,12 +25,12 @@ maximize reach without hurting my SEO?
 
 ## Key Sections
 
-1. **Platform Comparison** — Dev.to vs Hashnode differences
-2. **Cross-Posting Strategy** — Canonical URL decisions
-3. **Dev.to Optimization** — Frontmatter, tags, what performs
-4. **Hashnode Optimization** — Settings, features, audience
-5. **Content Formatting** — Structure that works on both
-6. **Building Followers** — Consistency and engagement
+1. **Platform Comparison**; Dev.to vs Hashnode differences
+2. **Cross-Posting Strategy**; Canonical URL decisions
+3. **Dev.to Optimization**; Frontmatter, tags, what performs
+4. **Hashnode Optimization**; Settings, features, audience
+5. **Content Formatting**; Structure that works on both
+6. **Building Followers**; Consistency and engagement
 
 ## Platform Comparison
 
@@ -51,14 +51,14 @@ maximize reach without hurting my SEO?
 
 ## Tools
 
-- **[Octolens](https://octolens.com)** — Monitor platforms for trends and mentions
-- **Carbon** — Beautiful code screenshots
-- **Canva** — Cover image design
+- **[Octolens](https://octolens.com)**; Monitor platforms for trends and mentions
+- **Carbon**; Beautiful code screenshots
+- **Canva**; Cover image design
 
 ## Related Skills
 
-- `developer-audience-context` — Know who you're writing for
-- `hacker-news-strategy` — Drive traffic from HN
-- `x-devs` — Promote posts on Twitter/X
+- `developer-audience-context`; Know who you're writing for
+- `hacker-news-strategy`; Drive traffic from HN
+- `x-devs`; Promote posts on Twitter/X
 
 Platform features, audience sizes, tag counts, performance rankings and cadence outcomes above are illustrative historical assumptions, not verified current measurements or growth guarantees. Verify current account features and UI before use. Canonical URLs are search-engine hints, not guarantees of indexing or ranking. Prepare drafts first; publish, create accounts, subscribe users or send newsletters only with explicit authorization. Respect consent, image licensing and content rights.

@@ -1,4 +1,4 @@
-# AGENTS.md — Nested Template (monorepo sub-package)
+# AGENTS.md: Nested Template (monorepo sub-package)
 
 Generate for each sub-package in a monorepo. Lightweight, package-specific. No YAML frontmatter. Format follows the agents.md standard.
 

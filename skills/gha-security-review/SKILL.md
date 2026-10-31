@@ -16,9 +16,9 @@ by StepSecurity (2026): https://www.stepsecurity.io/blog/hackerbot-claw-github-a
 
 # GitHub Actions Security Review
 
-Find exploitable vulnerabilities in GitHub Actions workflows. Every finding MUST include a concrete exploitation scenario — if you cannot trace an attack path, do not report it as confirmed. Use harmless PoC sketches only; do not trigger workflows, exfiltrate secrets or post attacker content without explicit test authorization.
+Find exploitable vulnerabilities in GitHub Actions workflows. Every finding MUST include a concrete exploitation scenario; if you cannot trace an attack path, do not report it as confirmed. Use harmless PoC sketches only; do not trigger workflows, exfiltrate secrets or post attacker content without explicit test authorization.
 
-This skill encodes attack patterns from real GitHub Actions exploits — not generic CI/CD theory.
+This skill encodes attack patterns from real GitHub Actions exploits; not generic CI/CD theory.
 
 ## When to Use
 - You are reviewing GitHub Actions workflows for exploitable security issues.
@@ -31,9 +31,9 @@ Review the workflows provided (file, diff, or repo). Research the codebase as ne
 
 ### Files to Review
 
-- `.github/workflows/*.yml` — all workflow definitions
-- `action.yml` / `action.yaml` — composite actions in the repo
-- `.github/actions/*/action.yml` — local reusable actions
+- `.github/workflows/*.yml`; all workflow definitions
+- `action.yml` / `action.yaml`; composite actions in the repo
+- `.github/actions/*/action.yml`; local reusable actions
 - Config files loaded by workflows: `CLAUDE.md`, `AGENTS.md`, `Makefile`, shell scripts under `.github/`
 
 ### Out of Scope
@@ -43,10 +43,10 @@ Review the workflows provided (file, diff, or repo). Research the codebase as ne
 
 ## Threat Model
 
-Only report vulnerabilities exploitable by an **external attacker** — someone **without** write access to the repository. The attacker can open PRs from forks, create issues, and post comments. They cannot push to branches, trigger `workflow_dispatch`, or trigger manual workflows.
+Only report vulnerabilities exploitable by an **external attacker**; someone **without** write access to the repository. The attacker can open PRs from forks, create issues, and post comments. They cannot push to branches, trigger `workflow_dispatch`, or trigger manual workflows.
 
 **Do not flag** vulnerabilities that require write access to exploit:
-- `workflow_dispatch` input injection — requires write access to trigger
+- `workflow_dispatch` input injection; requires write access to trigger
 - Expression injection in `push`-only workflows on protected branches
 - `workflow_call` input injection where all callers are internal
 - Secrets in `workflow_dispatch`/`schedule`-only workflows
@@ -63,11 +63,11 @@ Report only **HIGH** and **MEDIUM** confidence findings. Do not report theoretic
 
 For each HIGH finding, provide all five elements:
 
-1. **Entry point** — How does the attacker get in? (fork PR, issue comment, branch name, etc.)
-2. **Payload** — What does the attacker send? (actual code/YAML/input)
-3. **Execution mechanism** — How does the payload run? (expression expansion, checkout + script, etc.)
-4. **Impact** — What does the attacker gain? (token theft, code execution, repo write access)
-5. **PoC sketch** — Concrete steps an attacker would follow
+1. **Entry point**; How does the attacker get in? (fork PR, issue comment, branch name, etc.)
+2. **Payload**; What does the attacker send? (actual code/YAML/input)
+3. **Execution mechanism**; How does the payload run? (expression expansion, checkout + script, etc.)
+4. **Impact**; What does the attacker gain? (token theft, code execution, repo write access)
+5. **PoC sketch**; Concrete steps an attacker would follow
 
 If you cannot construct all five, report as MEDIUM (needs verification).
 
@@ -89,7 +89,7 @@ For each workflow, identify triggers and load the appropriate reference:
 | Self-hosted runners, cache/artifact usage | `references/runner-infrastructure.md` |
 | Any confirmed finding | `references/real-world-attacks.md` |
 
-Load references selectively — only what's relevant to the triggers found.
+Load references selectively; only what's relevant to the triggers found.
 
 ## Step 2: Check for Vulnerability Classes
 
@@ -104,7 +104,7 @@ Does the workflow use `pull_request_target` AND check out fork code?
 
 Are `${{ }}` expressions used inside `run:` blocks in externally-triggerable workflows?
 - Map every `${{ }}` expression in every `run:` step
-- Confirm the value is attacker-controlled (PR title, branch name, comment body — not numeric IDs, SHAs, or repository names)
+- Confirm the value is attacker-controlled (PR title, branch name, comment body; not numeric IDs, SHAs, or repository names)
 - Confirm the expression is in a `run:` block, not `if:`, `with:`, or job-level `env:`
 
 ### Check 3: Unauthorized Command Execution
@@ -145,14 +145,14 @@ Before reporting, check if the pattern is actually safe:
 | Pattern | Why Safe |
 |---|---|
 | `pull_request_target` WITHOUT checkout of fork code | Still inspect metadata injection, actions, artifacts and other untrusted inputs |
-| `${{ github.event.pull_request.number }}` in `run:` | Numeric only — not injectable |
+| `${{ github.event.pull_request.number }}` in `run:` | Numeric only; not injectable |
 | `${{ github.repository }}` / `github.repository_owner` | Repo owner controls this |
 | `${{ secrets.* }}` | Not an expression injection vector |
 | `${{ }}` in `if:` conditions | Evaluated by Actions runtime, not shell |
 | `${{ }}` in `with:` inputs | No automatic shell interpolation here; trace how the action consumes the input |
 | Actions pinned to full SHA | Pins that action source; not proof of safe code or immutable runtime downloads |
 | `pull_request` trigger (not `_target`) | Fork token/secrets are normally restricted; same-repo PRs, settings and self-hosted infrastructure still need review |
-| Any expression in `workflow_dispatch`/`schedule`/`push` to protected branches | Requires write access — outside threat model |
+| Any expression in `workflow_dispatch`/`schedule`/`push` to protected branches | Requires write access; outside threat model |
 
 **Key distinction:** `${{ }}` is dangerous in `run:` blocks (shell expansion) while `if:`, `with:` and `env:` avoid that direct substitution sink; downstream `eval`, shell-built commands, JavaScript execution and unsafe action inputs can reintroduce injection.
 
@@ -160,11 +160,11 @@ Before reporting, check if the pattern is actually safe:
 
 Before including any finding, read the actual workflow YAML and trace the complete attack path:
 
-1. **Read the full workflow** — don't rely on grep output alone
-2. **Trace the trigger** — confirm the event and check `if:` conditions that gate execution
-3. **Trace the expression/checkout** — confirm it's in a `run:` block or actually references fork code
-4. **Confirm attacker control** — verify the value maps to something an external attacker sets
-5. **Check existing mitigations** — env var wrapping, author_association checks, restricted permissions, SHA pinning
+1. **Read the full workflow**; don't rely on grep output alone
+2. **Trace the trigger**; confirm the event and check `if:` conditions that gate execution
+3. **Trace the expression/checkout**; confirm it's in a `run:` block or actually references fork code
+4. **Confirm attacker control**; verify the value maps to something an external attacker sets
+5. **Check existing mitigations**; env var wrapping, author_association checks, restricted permissions, SHA pinning
 
 If any link is broken, mark MEDIUM (needs verification) or drop the finding.
 
@@ -180,7 +180,7 @@ If any link is broken, mark MEDIUM (needs verification) or drop the finding.
 #### [GHA-001] [Title] (Severity: Critical/High/Medium)
 - **Workflow**: `.github/workflows/release.yml:15`
 - **Trigger**: `pull_request_target`
-- **Confidence**: HIGH — confirmed through attack path tracing
+- **Confidence**: HIGH; confirmed through attack path tracing
 - **Exploitation Scenario**:
   1. [Step-by-step attack]
 - **Impact**: [What attacker gains]

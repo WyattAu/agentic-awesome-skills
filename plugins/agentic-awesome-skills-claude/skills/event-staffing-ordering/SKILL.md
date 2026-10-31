@@ -55,19 +55,19 @@ human-reviewed submission and contracting process instead.
 
 ### 2. Validate with the MCP tools
 
-1. `get_cities` — confirm coverage and market tier.
-2. `check_availability` — confirm the date is inside realistic lead time.
+1. `get_cities`; confirm coverage and market tier.
+2. `check_availability`; confirm the date is inside realistic lead time.
     Confirmation timing and tight-turnaround feasibility require current vendor verification.
-3. `get_role_pricing` for each requested role — build a budget range
+3. `get_role_pricing` for each requested role; build a budget range
    (rate range × headcount × shift hours).
-4. `get_compliance_by_state` — surface anything that affects the plan
+4. `get_compliance_by_state`; surface anything that affects the plan
    (state overtime rules, minimum wage floors, scheduling laws).
 
 ### 3. Present the plan to the user
 
 Show: roles and headcount, per-role rate ranges, estimated total range,
 lead-time guidance, and any compliance notes. Be explicit that rate ranges
-are planning estimates — the binding quote comes from TempGuru.
+are planning estimates; the binding quote comes from TempGuru.
 
 ### 4. Submit the request
 
@@ -84,7 +84,7 @@ Treat response/confirmation times and billing terms as vendor estimates to verif
 
 ## Limitations
 
-- Rate ranges are planning estimates — not final quotes. Binding pricing comes from TempGuru after human review.
+- Rate ranges are planning estimates; not final quotes. Binding pricing comes from TempGuru after human review.
 - Availability responses are lead-time guidance, not reservations.
 - Coverage is limited to US and Canadian markets (300+ cities). Not applicable for events outside this geography.
 - Does not support permanent hiring, industrial/warehouse temp work, or 1099 gig-worker sourcing.

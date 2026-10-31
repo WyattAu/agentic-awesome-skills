@@ -1,6 +1,6 @@
 ---
 name: image-studio
-description: "Studio de geracao de imagens inteligente — roteamento automatico entre ai-studio-image (fotos humanizadas/influencer) e stability-ai (arte/ ilustracao/edicao). Detecta o tipo de imagem solicitada e escolhe o modelo ideal automaticamente."
+description: "Studio de geracao de imagens inteligente; roteamento automatico entre ai-studio-image (fotos humanizadas/influencer) e stability-ai (arte/ ilustracao/edicao). Detecta o tipo de imagem solicitada e escolhe o modelo ideal automaticamente."
 risk: safe
 source: community
 date_added: '2026-03-06'
@@ -24,7 +24,7 @@ tools:
 
 Os scripts `generate.py`, templates e diretórios Windows citados não estão incluídos nesta árvore. Descubra as ferramentas realmente disponíveis e respeite o gerador escolhido pelo usuário/host. As versões, limites gratuitos, tempos e preços abaixo são exemplos históricos, não garantias atuais. Verifique documentação oficial antes de escolher um serviço; não troque para um fallback pago sem orçamento/autorização. Só envie imagens pessoais ou privadas a provedores autorizados. Informe falhas e caminhos/dimensões reais retornados pela ferramenta; não apresente um prompt como imagem gerada.
 
-Studio de geracao de imagens inteligente — roteamento automatico entre ai-studio-image (fotos humanizadas/influencer) e stability-ai (arte/ ilustracao/edicao). Detecta o tipo de imagem solicitada e escolhe o modelo ideal automaticamente. Geracao, edicao, upscale, remocao de fundo, inpainting e geracao de fotos realistas de pessoas em um unico workflow.
+Studio de geracao de imagens inteligente; roteamento automatico entre ai-studio-image (fotos humanizadas/influencer) e stability-ai (arte/ ilustracao/edicao). Detecta o tipo de imagem solicitada e escolhe o modelo ideal automaticamente. Geracao, edicao, upscale, remocao de fundo, inpainting e geracao de fotos realistas de pessoas em um unico workflow.
 
 ## When to Use This Skill
 
@@ -38,7 +38,7 @@ Studio de geracao de imagens inteligente — roteamento automatico entre ai-stud
 
 ## How It Works
 
-> Voce e o **Diretor Criativo Visual** — escolhe o pincel certo para
+> Voce e o **Diretor Criativo Visual**; escolhe o pincel certo para
 > cada obra. Fotos humanizadas com Gemini, arte e edicao com Stability.
 > Um comando, o modelo ideal, o resultado perfeito.
 
@@ -90,7 +90,7 @@ E uma FOTO REALISTA de pessoa/influencer?
 
 ---
 
-## Stability-Ai (Sd3.5 Large — Community)
+## Stability-Ai (Sd3.5 Large: Community)
 
 **Especialidade:** Arte, ilustracao, edicao e manipulacao de imagens
 
@@ -221,7 +221,7 @@ extra fingers, bad anatomy, worst quality"
 ## 2. Formato De Resposta
 
 ```
-IMAGE-STUDIO — [tipo de geracao]
+IMAGE-STUDIO; [tipo de geracao]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🎨 Modelo: [ai-studio-image / stability-ai]

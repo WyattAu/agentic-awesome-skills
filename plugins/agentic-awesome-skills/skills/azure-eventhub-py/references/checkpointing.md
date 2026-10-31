@@ -7,9 +7,9 @@ Patterns for reliable event processing with checkpoint stores.
 A checkpoint records progress, not an atomic transaction with application side effects. Retention can expire events; failover can replay them. Do not checkpoint beyond an unprocessed failure in the same partition: stop/retry that partition or durably quarantine the event under an explicit policy. Swallowing one failure and checkpointing a later event skips it.
 
 Checkpointing tracks which events have been processed, enabling:
-- **Resume after failure** — Pick up where you left off
-- **Scalable consumers** — Multiple consumers share partition ownership; replay still requires idempotency
-- **At-least-once delivery** — Resume from retained events after failure; not an unlimited no-loss guarantee
+- **Resume after failure**; Pick up where you left off
+- **Scalable consumers**; Multiple consumers share partition ownership; replay still requires idempotency
+- **At-least-once delivery**; Resume from retained events after failure; not an unlimited no-loss guarantee
 
 ## Blob Checkpoint Store (Recommended)
 
@@ -294,14 +294,14 @@ async def on_event_with_retry(partition_context, event, max_retries: int = 3):
 
 ## Best Practices
 
-1. **Use dedicated container** — Separate checkpoint data from application data
-2. **Match consumer groups** — Each consumer group needs its own checkpoints
-3. **Balance frequency** — Too frequent = overhead, too rare = reprocessing on failure
-4. **Handle idempotency** — Design for at-least-once delivery (events may replay)
-5. **Monitor checkpoint lag** — Track time between event enqueue and checkpoint
-6. **Test failure scenarios** — Verify resume works correctly after crashes
-7. **Use async store** — The async BlobCheckpointStore is more performant
-8. **Checkpoint on success only** — Don't checkpoint failed events
+1. **Use dedicated container**; Separate checkpoint data from application data
+2. **Match consumer groups**; Each consumer group needs its own checkpoints
+3. **Balance frequency**; Too frequent = overhead, too rare = reprocessing on failure
+4. **Handle idempotency**; Design for at-least-once delivery (events may replay)
+5. **Monitor checkpoint lag**; Track time between event enqueue and checkpoint
+6. **Test failure scenarios**; Verify resume works correctly after crashes
+7. **Use async store**; The async BlobCheckpointStore is more performant
+8. **Checkpoint on success only**; Don't checkpoint failed events
 
 ## Checkpoint Frequency Guidelines
 

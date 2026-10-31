@@ -129,7 +129,7 @@ Estimate:
 Before entering the Execution Readiness Gate below, run through this checklist to make "Tracking is verified" mean something concrete:
 
 1. **Event firing:** Trigger each event the primary and secondary metrics depend on (sign-up, add-to-cart, custom event) on staging or a debug page, and confirm it arrives within that pipeline’s documented latency; record the observed delay.
-2. **Variant attribution:** Verify that the variant assignment ID is attached to every fired event — not just the entry event. Use your analytics' raw event view to compare a sample of 5+ events per variant.
+2. **Variant attribution:** Verify that the variant assignment ID is attached to every fired event; not just the entry event. Use your analytics' raw event view to compare a sample of 5+ events per variant.
 3. **De-duplication:** Confirm that a user reloading the page does not cause double-counted events. Use a stable event/transaction ID and document cross-client/server deduplication; a variant label alone is not a unique event key.
 4. **Sample randomization:** Check sample-ratio mismatch against the configured allocation with a pre-specified statistical check and adequate records. A fixed ±5% band on 100 records is not a valid universal randomization test. Inspect assignment stability, unit independence and missing exposure records.
 5. **Guardrail metric pipeline:** Each guardrail metric defined in §6️⃣ must have a working dashboard or alert by the time the test launches.

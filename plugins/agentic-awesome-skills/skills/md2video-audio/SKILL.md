@@ -16,7 +16,7 @@ license_source: "https://github.com/70v-Yoyo/md2video-audio-skill/blob/main/LICE
 
 # Md2video-audio
 
-## Missing bundled runtime — stop before execution
+## Missing bundled runtime: stop before execution
 
 This entry bundles no conversion scripts. The historical command names below describe upstream interfaces only; do not execute them relative to the working directory or substitute project files. Until a separately reviewed complete runtime is installed at a verified absolute path, return a conversion plan and report the missing runtime. Do not download or execute helpers as part of a conversion request.
 

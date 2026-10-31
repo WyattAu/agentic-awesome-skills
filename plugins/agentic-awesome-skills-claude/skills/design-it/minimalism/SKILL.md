@@ -68,7 +68,7 @@ struct MinimalView: View {
                     .foregroundColor(.secondary)
                     .lineSpacing(6)
                 
-                // Minimal button — just a thin border, no fill
+                // Minimal button; just a thin border, no fill
                 Button(action: {}) {
                     Text("Continue")
                         .font(.system(size: 14, weight: .medium))
@@ -91,7 +91,7 @@ struct MinimalView: View {
 ```
 - Use `VStack(spacing: 40...64)` for generous separation between elements.
 - Never use `.shadow()` or `Card`-like containers. Let whitespace define grouping.
-- Use `Divider()` sparingly — only when two adjacent sections need separation.
+- Use `Divider()` sparingly; only when two adjacent sections need separation.
 
 ### Flutter
 ```dart
@@ -125,7 +125,7 @@ class MinimalScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 48),
-            // Minimal button — outlined, no elevation
+            // Minimal button; outlined, no elevation
             OutlinedButton(
               onPressed: () {},
               style: OutlinedButton.styleFrom(

@@ -118,5 +118,5 @@ Agent: fetch rows, group by `shop_name` / `shop_id`, report slot counts and exam
 
 ## Related Skills
 
-- `@etsy-shop-sales-history` — after shops are known, check sales counters and deltas
-- `@apify-ecommerce` — broader multi-marketplace extraction via Apify
+- `@etsy-shop-sales-history`; after shops are known, check sales counters and deltas
+- `@apify-ecommerce`; broader multi-marketplace extraction via Apify

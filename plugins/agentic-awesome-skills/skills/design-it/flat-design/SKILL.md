@@ -71,13 +71,13 @@ struct FlatCard: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
                     .background(Color.blue)
-                    // No cornerRadius — sharp edges
+                    // No cornerRadius; sharp edges
             }
         }
         .padding(24)
         .background(Color(.secondarySystemBackground))
-        // NO .shadow() — ever
-        // NO .cornerRadius() — sharp rectangles
+        // NO .shadow(); ever
+        // NO .cornerRadius(); sharp rectangles
         .overlay(
             Rectangle().stroke(Color.primary.opacity(0.2), lineWidth: 1)
         )
@@ -98,8 +98,8 @@ class FlatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[100],
         border: Border.all(color: Colors.black26, width: 1),
-        // borderRadius: NONE — sharp corners
-        // boxShadow: NONE — zero depth
+        // borderRadius: NONE; sharp corners
+        // boxShadow: NONE; zero depth
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

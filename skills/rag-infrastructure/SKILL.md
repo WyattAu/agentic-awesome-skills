@@ -94,7 +94,7 @@ def ingest_documents(docs: list[dict]):
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 def chunk_text(text: str, chunk_size: int = 512, overlap: int = 50) -> list[str]:
-    """Recursive character splitter — best general-purpose strategy."""
+    """Recursive character splitter; best general-purpose strategy."""
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=overlap,
@@ -102,7 +102,7 @@ def chunk_text(text: str, chunk_size: int = 512, overlap: int = 50) -> list[str]
     )
     return splitter.split_text(text)
 
-# For code/markdown — use language-aware splitter
+# For code/markdown: use language-aware splitter
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 
 headers = [("#", "H1"), ("##", "H2"), ("###", "H3")]
@@ -257,7 +257,7 @@ volumes:
 ## Best Practices
 
 - Use `BAAI/bge-large-en-v1.5` or `nomic-embed-text` for strong free embeddings.
-- Always rerank before passing to LLM — 5 precise chunks beat 20 noisy ones.
+- Always rerank before passing to LLM; 5 precise chunks beat 20 noisy ones.
 - Store source metadata (URL, page, section) in vector payloads for citations.
 - Use namespace/tenant isolation in the vector store for multi-tenant RAG.
 - Evaluate with RAGAS metrics: faithfulness, answer relevancy, context precision.

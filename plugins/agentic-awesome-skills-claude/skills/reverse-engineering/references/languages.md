@@ -191,7 +191,7 @@ import re
 
 bf_code = open('challenge.bf', 'r').read()
 
-# Split on comma (input read) — each segment handles one character
+# Split on comma (input read): each segment handles one character
 segments = bf_code.split(',')
 expected = []
 
@@ -214,11 +214,11 @@ print(f"Flag: {flag}")
 - `-` operations: character value = `256 - minus_count`
 - Mixed `+`/`-`: net increment determines value
 - Cell reset (`[-]`) between characters: each segment is independent
-- Loop-based multiplication: `[->>+++<<]` multiplies by 3 — count the inner operations
+- Loop-based multiplication: `[->>+++<<]` multiplies by 3; count the inner operations
 
 **Detection:** Large BF file with repeating pattern of `,` followed by many `+` or `-` characters, then a comparison structure (`[-]` or `[->+<]` patterns).
 
-**Key insight:** BF programs that check input are structurally simple — each input byte is compared against a constant built by incrementing a cell. Extract the increment counts to recover the expected input without running the program.
+**Key insight:** BF programs that check input are structurally simple; each input byte is compared against a constant built by incrementing a cell. Extract the increment counts to recover the expected input without running the program.
 
 **References:** BSidesSF 2026 "i-love-my-bf-part1"
 
@@ -276,7 +276,7 @@ for pos in range(50):  # max flag length
 print(bytes(flag).decode())
 ```
 
-**Key insight:** BF input validation programs are sequential — they read one character, check it, and only read the next if it matches. The character causing more reads is correct because the program advances past the validation gate to check the next position.
+**Key insight:** BF input validation programs are sequential; they read one character, check it, and only read the next if it matches. The character causing more reads is correct because the program advances past the validation gate to check the next position.
 
 **References:** BSidesSF 2026 "i-love-my-bf-part2"
 
@@ -311,9 +311,9 @@ def instrumented_bf_run(bf_code, dummy_input):
 **Key insight:** Compiled BF programs reuse fixed idioms for operations like equality comparison, conditional branching, and loops. Pattern-matching these idioms in the BF source or during execution lets you extract constants without fully understanding the program logic.
 
 **Common BF idioms:**
-- `[-]` — clear cell (set to 0)
-- `[->+<]` — move cell right
-- `<[-<->] +<[>-<[-]]>[-<+>]` — equality comparison of two cells
+- `[-]`; clear cell (set to 0)
+- `[->+<]`; move cell right
+- `<[-<->] +<[>-<[-]]>[-<+>]`; equality comparison of two cells
 
 **References:** BSidesSF 2026 "i-love-my-bf-part3"
 
@@ -386,7 +386,7 @@ for pos in range(len(ciphertext)):
     # Combined with known plaintext prefix, this uniquely determines key
 ```
 
-**Key insight:** Code coverage is a powerful oracle — it tells you which conditional paths were taken. Any encryption with data-dependent branching leaks information through coverage.
+**Key insight:** Code coverage is a powerful oracle; it tells you which conditional paths were taken. Any encryption with data-dependent branching leaks information through coverage.
 
 **Mitigation detection:** Look for branchless/constant-time crypto implementations that defeat this attack.
 
@@ -435,7 +435,7 @@ for total_offset_S in range(256):
 
 **Pattern (A New Machine):** Challenge targets specific Python version (e.g., 3.14.0 alpha).
 
-**Key requirement:** Compile that exact Python version to disassemble bytecode — alpha/beta versions have different opcodes than stable releases.
+**Key requirement:** Compile that exact Python version to disassemble bytecode; alpha/beta versions have different opcodes than stable releases.
 
 ```bash
 # Build specific Python version

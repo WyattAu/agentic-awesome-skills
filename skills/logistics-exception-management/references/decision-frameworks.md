@@ -1,4 +1,4 @@
-# Decision frameworks — logistics exceptions
+# Decision frameworks: logistics exceptions
 
 ## Triage and authority
 

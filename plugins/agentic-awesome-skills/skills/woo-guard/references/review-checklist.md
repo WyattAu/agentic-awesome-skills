@@ -1,6 +1,6 @@
-# Woo Guard — Review Checklist
+# Woo Guard: Review Checklist
 
-Structured walk for review mode. First sweep the security floor on the same files — output escaping, source-appropriate validation, form capability/nonce and webhook raw-signature/replay checks, prepared queries — money code gets zero security slack (wp-guard covers the full WordPress layer when installed). Cite file:line.
+Structured walk for review mode. First sweep the security floor on the same files; output escaping, source-appropriate validation, form capability/nonce and webhook raw-signature/replay checks, prepared queries; money code gets zero security slack (wp-guard covers the full WordPress layer when installed). Cite file:line.
 
 ## Contents
 
@@ -23,7 +23,7 @@ Run the violation table in [hpos-and-crud.md](hpos-and-crud.md):
 ## Pass 2: Checkout and money (must fix)
 
 - Checkout rules enforced server-side (`woocommerce_checkout_process` or Store API schema)? JS-only validation is a finding.
-- Which checkout does the code target — and does that match what it claims to support?
+- Which checkout does the code target; and does that match what it claims to support?
 - Money: `wc_format_decimal()` on inputs, `wc_price()` on display, store rounding on totals; flag float arithmetic, `number_format()`, hardcoded symbols, float `==`.
 - Webhook/gateway callbacks: signature verified before order access? Idempotent on retries?
 

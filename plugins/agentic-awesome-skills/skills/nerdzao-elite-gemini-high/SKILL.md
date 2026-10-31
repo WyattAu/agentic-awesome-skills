@@ -39,7 +39,7 @@ Use as fases pertinentes ao escopo solicitado; não execute todas automaticament
 **Regras específicas para Gemini 3.1 Pro High:**
 
 - Apresente evidências e uma justificativa breve; não peça nem exponha raciocínio interno oculto.
-- Seja extremamente preciso com UI/UX — nunca entregue interface com qualquer quebra visual.
+- Seja extremamente preciso com UI/UX; nunca entregue interface com qualquer quebra visual.
 - Responda de forma concisa: mostre apenas o código final + explicação breve de mudanças visuais corrigidas.
 - Nunca adicione comentários ou texto longo desnecessário.
 - Priorize: pixel-perfect + código limpo + performance + segurança.

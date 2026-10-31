@@ -120,7 +120,7 @@ Once all phases are complete, generate a markdown blueprint for the project usin
 
 ## Best Practices
 
-- ✅ Ask questions incrementally—never dump all six phases in a single response to avoid cognitive overload.
+- ✅ Ask questions incrementally-never dump all six phases in a single response to avoid cognitive overload.
 - ✅ Propose logical defaults (e.g., recommending responsive Tailwind/CSS Grid and standard semantic HTML) if the user is unsure.
 - ✅ Ensure semantic HTML layout hierarchy (one `<h1>` per page, sequential `<section>`, `<article>`, `<header>`, `<footer>` elements) is planned from the start.
 - ✅ Document explicit non-goals to prevent feature creep.

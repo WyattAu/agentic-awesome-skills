@@ -56,7 +56,7 @@ frida --version
 ### Basic Function Hooking
 
 ```javascript
-// hook.js — intercept a function and log arguments/return value
+// hook.js; intercept a function and log arguments/return value
 Interceptor.attach(Module.getGlobalExportByName("strcmp"), {
     onEnter: function(args) {
         this.arg0 = args[0].readUtf8String();
@@ -89,7 +89,7 @@ Interceptor.attach(Module.getGlobalExportByName("strcmp"), {
 ### Anti-Debug Bypass
 
 ```javascript
-// Bypass ptrace(PTRACE_TRACEME) — returns 0 (success) without calling
+// Bypass ptrace(PTRACE_TRACEME); returns 0 (success) without calling
 Interceptor.attach(Module.getGlobalExportByName("ptrace"), {
     onEnter: function(args) {
         this.request = args[0].toInt32();
@@ -110,7 +110,7 @@ Interceptor.attach(isDbg, {
     }
 });
 
-// Bypass timing checks — hook clock_gettime to return constant
+// Bypass timing checks; hook clock_gettime to return constant
 Interceptor.attach(Module.getGlobalExportByName("clock_gettime"), {
     onEnter(args) { this.ts = args[1]; },
     onLeave(retval) {
@@ -159,7 +159,7 @@ Interceptor.replace(checkFlag, new NativeCallback(function(input) {
 ### Tracing and Stalker
 
 ```javascript
-// Trace all calls in a function (Stalker — instruction-level tracing)
+// Trace all calls in a function (Stalker; instruction-level tracing)
 var targetAddr = Module.getGlobalExportByName("main");
 Stalker.follow(Process.getCurrentThreadId(), {
     transform: function(iterator) {
@@ -202,7 +202,7 @@ frida -U -f com.example.app -l hook_android.js
 ```
 
 ```javascript
-// hook_android.js — hook Java method
+// hook_android.js; hook Java method
 Java.perform(function() {
     var MainActivity = Java.use("com.example.app.MainActivity");
     MainActivity.checkPassword.implementation = function(input) {
@@ -214,7 +214,7 @@ Java.perform(function() {
 });
 ```
 
-**Key insight:** Frida excels where static analysis fails — obfuscated code, packed binaries, and runtime-generated data. Hook comparison functions (`strcmp`, `memcmp`, custom validators) to extract expected values without reversing the algorithm. Use `Interceptor.attach` for observation, `Interceptor.replace` for modification.
+**Key insight:** Frida excels where static analysis fails; obfuscated code, packed binaries, and runtime-generated data. Hook comparison functions (`strcmp`, `memcmp`, custom validators) to extract expected values without reversing the algorithm. Use `Interceptor.attach` for observation, `Interceptor.replace` for modification.
 
 **When to use:** Anti-debugging bypass, extracting runtime-computed keys, hooking crypto functions to dump plaintext, mobile app analysis, packed binary inspection.
 
@@ -223,7 +223,7 @@ Java.perform(function() {
 Hook a recursive function with Frida, memoize results, and replay cached values to skip redundant computation. Fibonacci-like recursive challenges with exponential complexity become instant with memoization.
 
 ```javascript
-// memo_hook.js — memoize a recursive function to skip redundant calls
+// memo_hook.js; memoize a recursive function to skip redundant calls
 var memo = {};
 var funcAddr = ptr("0x400abc");    // Address of the recursive function
 var retAddr = ptr("0x400def");     // Address of the function's ret instruction
@@ -594,7 +594,7 @@ from qiling import Qiling
 
 ql = Qiling(["./binary"], "rootfs/x8664_linux")
 
-# Hook ptrace syscall — return 0 (success)
+# Hook ptrace syscall: return 0 (success)
 def hook_ptrace(ql, ptrace_request, pid, addr, data):
     ql.log.info("ptrace bypassed")
     return 0
@@ -696,7 +696,7 @@ for position in range(128):  # bounded fixture length; require an observed stopp
     print(f"Found: {key}")
 ```
 
-**Key insight:** Movfuscated binaries (compiled with `movfuscator`) expand every instruction into sequences of `mov` operations, making static analysis impractical. However, character-by-character comparison still creates measurable instruction count differences. Pin's `inscount0.so` counts total executed instructions — the correct character at each position causes ~1000+ more instructions (proceeding further in the comparison). Also works for obfuscated binaries with sequential input checks.
+**Key insight:** Movfuscated binaries (compiled with `movfuscator`) expand every instruction into sequences of `mov` operations, making static analysis impractical. However, character-by-character comparison still creates measurable instruction count differences. Pin's `inscount0.so` counts total executed instructions; the correct character at each position causes ~1000+ more instructions (proceeding further in the comparison). Also works for obfuscated binaries with sequential input checks.
 
 ---
 
@@ -756,7 +756,7 @@ for generation in range(10000):
 **Modified Pin for Go binaries (table-lookup flag checking):**
 When standard `inscount` fails because counter increments don't correlate with correctness (e.g., table-lookup comparison), modify Pin's icount tool to only count executions at the success-branch address. Brute-force character-by-character with this targeted counter:
 ```cpp
-// Modified inscount0.cpp — count only executions of a specific address
+// Modified inscount0.cpp; count only executions of a specific address
 static ADDRINT target_addr = 0x401234;  // success-branch address
 static UINT64 target_count = 0;
 
@@ -795,7 +795,7 @@ Given an execution trace with only opcodes (no register/memory values), reconstr
 Override `time()` via LD_PRELOAD to return a constant value, freezing any timestamp-seeded PRNG. Once the binary's cipher becomes deterministic, brute-force each output byte without understanding the VM or cipher internals.
 
 ```c
-// freeze_time.c — compile: gcc -shared -fPIC -o freeze.so freeze_time.c
+// freeze_time.c; compile: gcc -shared -fPIC -o freeze.so freeze_time.c
 #include <time.h>
 
 time_t time(time_t *t) {
@@ -810,7 +810,7 @@ gcc -shared -fPIC -o freeze.so freeze_time.c
 LD_PRELOAD=./freeze.so ./binary
 
 # Byte-at-a-time oracle: run with frozen time, try each candidate byte,
-# observe output — correct byte produces expected output character.
+# observe output: correct byte produces expected output character.
 for byte in $(seq 0 255); do
     output=$(echo -n "$(printf '\x%02x' $byte)" | LD_PRELOAD=./freeze.so ./binary)
     # Check output against known/expected

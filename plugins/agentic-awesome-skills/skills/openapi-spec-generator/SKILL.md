@@ -24,7 +24,7 @@ This tree does not bundle the named reference/security-schemes.md or common-patt
 
 ## Workflow
 
-### Step 1 — Gather Context
+### Step 1: Gather Context
 
 Before writing any YAML/JSON, ask (or infer from context) the following:
 
@@ -34,15 +34,15 @@ Before writing any YAML/JSON, ask (or infer from context) the following:
 | Output format: YAML or JSON? | YAML default unless user specifies JSON |
 | What does this API do? | Sets `info.title`, `info.description`, tags |
 | List of endpoints (or code to extract from)? | Core paths object |
-| Authentication type(s)? | `securitySchemes` — see reference |
+| Authentication type(s)? | `securitySchemes`; see reference |
 | Common data models or entities? | `components/schemas` / `definitions` |
 | Any existing partial spec to extend? | Merge rather than overwrite |
 
-If the user provides code (Express routes, FastAPI, Django URLs, Spring controllers, etc.), **extract endpoints automatically** — do not ask what the user already told you.
+If the user provides code (Express routes, FastAPI, Django URLs, Spring controllers, etc.), **extract endpoints automatically**; do not ask what the user already told you.
 
-### Step 2 — Build the Spec
+### Step 2: Build the Spec
 
-Follow the structure guide for the chosen version. Always produce a **complete, valid spec** — never leave placeholder comments like `# TODO: add schema`.
+Follow the structure guide for the chosen version. Always produce a **complete, valid spec**; never leave placeholder comments like `# TODO: add schema`.
 
 #### OpenAPI 3.x Skeleton
 
@@ -123,7 +123,7 @@ definitions: {}
 securityDefinitions: {}
 ```
 
-### Step 3 — Schemas and Models
+### Step 3: Schemas and Models
 
 - **Always use `$ref`** for any schema used in more than one place.
 - Include `example` or `examples` on every schema and response body.
@@ -183,7 +183,7 @@ Timestamps:
       format: date-time
 ```
 
-### Step 4 — Security Schemes
+### Step 4: Security Schemes
 
 Read `reference/security-schemes.md` for detailed patterns. Quick reference:
 
@@ -191,16 +191,16 @@ Read `reference/security-schemes.md` for detailed patterns. Quick reference:
 |---|---|---|
 | Bearer JWT | `http`, scheme `bearer` | Most common for REST APIs |
 | API Key (header) | `apiKey`, in `header` | e.g. `X-API-Key` |
-| API Key (query) | `apiKey`, in `query` | Avoid — leaks in logs |
+| API Key (query) | `apiKey`, in `query` | Avoid; leaks in logs |
 | OAuth 2 | `oauth2` | Use `flows` to define grant types |
 | Basic Auth | `http`, scheme `basic` | Only over HTTPS |
 | OpenID Connect | `openIdConnect` | Provide `openIdConnectUrl` |
 
 Apply security **globally** at the root and **override per-operation** only where it differs (e.g., public endpoints use `security: []`).
 
-### Step 5 — Parameters
+### Step 5: Parameters
 
-**Path parameters** — always `required: true`:
+**Path parameters**; always `required: true`:
 ```yaml
 parameters:
   - name: userId
@@ -212,7 +212,7 @@ parameters:
     example: 123e4567-e89b-12d3-a456-426614174000
 ```
 
-**Query parameters** — document defaults and enums:
+**Query parameters**; document defaults and enums:
 ```yaml
   - name: status
     in: query
@@ -222,9 +222,9 @@ parameters:
       default: active
 ```
 
-**Headers** — include `X-Request-ID`, correlation IDs, etc. as common parameters defined under `components/parameters`.
+**Headers**; include `X-Request-ID`, correlation IDs, etc. as common parameters defined under `components/parameters`.
 
-### Step 6 — Response Codes
+### Step 6: Response Codes
 
 Always include at minimum:
 
@@ -244,7 +244,7 @@ Always include at minimum:
 
 Use `$ref` to `components/responses` for `401`, `403`, `404`, `429`, `500` to avoid repetition.
 
-### Step 7 — Quality Checklist
+### Step 7: Quality Checklist
 
 Before delivering the spec, verify:
 
@@ -260,7 +260,7 @@ Before delivering the spec, verify:
 - [ ] Tags defined at root level to match operation tags
 - [ ] No orphaned schemas (everything in `components/schemas` is referenced)
 
-### Step 8 — Output
+### Step 8: Output
 
 1. Emit the complete YAML (or JSON) spec in a code block labeled `yaml` or `json`.
 2. After the spec, provide a brief **summary table** of endpoints generated.
@@ -304,8 +304,8 @@ When the user provides source code, extract:
 
 ## Reference Files
 
-- `reference/security-schemes.md` — Detailed security scheme examples for all auth types
-- `reference/common-patterns.md` — Pagination, HATEOAS, problem+json, webhooks, file upload patterns
+- `reference/security-schemes.md`; Detailed security scheme examples for all auth types
+- `reference/common-patterns.md`; Pagination, HATEOAS, problem+json, webhooks, file upload patterns
 
 Read these when the user asks about a specific pattern or when generating complex auth/pagination setups.
 

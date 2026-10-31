@@ -55,7 +55,7 @@ In iOS, iPadOS, and macOS, Spotlight helps people find content across all apps i
 
 #### [Developer documentation](https://developer.apple.com/design/human-interface-guidelines/searching#Developer-documentation)
 
-[Adding your app’s content to Spotlight indexes](https://developer.apple.com/documentation/CoreSpotlight/adding-your-app-s-content-to-spotlight-indexes) — Core Spotlight
+[Adding your app’s content to Spotlight indexes](https://developer.apple.com/documentation/CoreSpotlight/adding-your-app-s-content-to-spotlight-indexes); Core Spotlight
 
 #### [Videos](https://developer.apple.com/design/human-interface-guidelines/searching#Videos)
 

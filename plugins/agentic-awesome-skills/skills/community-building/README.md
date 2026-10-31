@@ -93,12 +93,12 @@ Illustrative starting targets; define cohorts/windows and calibrate against the 
 
 ## Tools
 
-- **[Octolens](https://octolens.com)** — Monitor community mentions across platforms
-- **MEE6 / Carl-bot** — Discord moderation
-- **Luma** — Event management
+- **[Octolens](https://octolens.com)**; Monitor community mentions across platforms
+- **MEE6 / Carl-bot**; Discord moderation
+- **Luma**; Event management
 
 ## Related Skills
 
-- `developer-audience-context` — Know your members
-- `open-source-marketing` — OSS community
-- `developer-advocacy` — Personal brand in community
+- `developer-audience-context`; Know your members
+- `open-source-marketing`; OSS community
+- `developer-advocacy`; Personal brand in community

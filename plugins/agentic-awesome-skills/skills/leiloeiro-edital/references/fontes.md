@@ -1,8 +1,8 @@
-# Fontes e Referências — Leiloeiro Edital
+# Fontes e Referências: Leiloeiro Edital
 
 ## Legislação
-- CPC/2015 — Arts. 887-903 (Edital e Arrematação)
-- Lei 9.514/1997 — Art. 27 (Leilão Extrajudicial)
+- CPC/2015; Arts. 887-903 (Edital e Arrematação)
+- Lei 9.514/1997; Art. 27 (Leilão Extrajudicial)
 
 ## Portais de Venda Direta
 - CAIXA: https://www.caixa.gov.br/voce/habitacao/imoveis-venda/Paginas/default.aspx
@@ -12,4 +12,4 @@
 ## Referências de Custos
 - Tabelas ITBI por município
 - Tabelas de custas cartorárias por estado
-- SINDUSCON — CUB regional
+- SINDUSCON; CUB regional

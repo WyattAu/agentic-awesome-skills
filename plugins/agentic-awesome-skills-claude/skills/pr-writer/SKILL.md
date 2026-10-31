@@ -33,7 +33,7 @@ If intended files are uncommitted, prepare only those files using the repository
 ### Step 1: Verify Branch State
 
 ```bash
-# Detect the default branch — note the output for use in subsequent commands
+# Detect the default branch: note the output for use in subsequent commands
 gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
 ```
 

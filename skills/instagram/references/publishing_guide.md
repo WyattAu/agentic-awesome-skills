@@ -1,4 +1,4 @@
-# Guia de Publicação — Specs de Mídia e Fluxos
+# Guia de Publicação: Specs de Mídia e Fluxos
 
 > Historical reference, not current Meta documentation. This bundle implements Facebook Login with a linked Page for both Business and Creator accounts. Verify the selected API version, permissions, media types, metrics, quotas and app-review requirements before use. Local scripts and their documented limitations take precedence over examples below.
 
@@ -8,7 +8,7 @@
 ### Foto (IMAGE)
 | Propriedade | Requisito |
 |-------------|-----------|
-| Formato | JPEG (obrigatório — PNG/WebP são convertidos automaticamente pelo publish.py via Pillow) |
+| Formato | JPEG (obrigatório; PNG/WebP são convertidos automaticamente pelo publish.py via Pillow) |
 | Resolução mínima | 320 x 320 px |
 | Resolução máxima | 1080 x 1350 px (recomendado) |
 | Aspect ratio | 4:5 (portrait) a 1.91:1 (landscape) |

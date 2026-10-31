@@ -191,7 +191,7 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    // GET — serve file from R2
+    // GET; serve file from R2
     if (request.method === "GET") {
       const key = url.pathname.slice(1); // strip leading /
       const object = await env.ASSETS.get(key);

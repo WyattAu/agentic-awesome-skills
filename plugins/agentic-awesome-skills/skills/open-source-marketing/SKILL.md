@@ -284,7 +284,7 @@ We follow [Conventional Commits](https://conventionalcommits.org/):
 
 ## Good First Issues
 
-Look for issues labeled `good first issue` — these are great starting points!
+Look for issues labeled `good first issue`; these are great starting points!
 
 ## Questions?
 
@@ -343,7 +343,7 @@ For each good first issue:
 ### Platform-Specific Tactics
 
 **Hacker News:**
-- Title: Descriptive, no hype ("Show HN: X — a Y for Z")
+- Title: Descriptive, no hype ("Show HN: X; a Y for Z")
 - First comment: Explain motivation, tech decisions
 - Be available to respond for hours
 - Don't ask for upvotes (instant death)
@@ -455,11 +455,11 @@ For each good first issue:
 
 ## Related Skills
 
-- `developer-audience-context` — Know who your users are
-- `community-building` — Build Discord/Slack community
-- `devrel-content` — Create supporting content
-- `developer-advocacy` — Conference talks, podcasts
-- `hacker-news-strategy` — Launch and engage on HN
+- `developer-audience-context`; Know who your users are
+- `community-building`; Build Discord/Slack community
+- `devrel-content`; Create supporting content
+- `developer-advocacy`; Conference talks, podcasts
+- `hacker-news-strategy`; Launch and engage on HN
 
 ## Limitations
 

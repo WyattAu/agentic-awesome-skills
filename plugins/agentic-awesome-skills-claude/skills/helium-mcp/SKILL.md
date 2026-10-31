@@ -111,7 +111,7 @@ get_top_trading_strategies({ ticker: "TSLA" })
 ### Memes
 
 #### `search_memes`
-Semantic meme search — find memes by meaning rather than exact keywords.
+Semantic meme search; find memes by meaning rather than exact keywords.
 
 ```
 search_memes({ query: "debugging at 3am" })
@@ -155,10 +155,10 @@ The assistant will call `get_bias_from_url` to return source-level and article-l
 ## Common Pitfalls
 
 - **Problem:** Tool calls return empty results for very niche queries
-  **Solution:** Broaden the search terms — Helium indexes mainstream and mid-tier sources, so hyper-local topics may have limited coverage
+  **Solution:** Broaden the search terms; Helium indexes mainstream and mid-tier sources, so hyper-local topics may have limited coverage
 
 - **Problem:** Options data unavailable for a ticker
-  **Solution:** Verify the ticker has listed options — some small-cap stocks and most crypto assets do not have options markets
+  **Solution:** Verify the ticker has listed options; some small-cap stocks and most crypto assets do not have options markets
 
 ## Related Skills
 

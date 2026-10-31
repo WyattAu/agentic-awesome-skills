@@ -2,13 +2,13 @@
 
 > Reference scope: this imported guide mixes release-era and later branch documentation; its `1.0.0+` annotations are not verified introduction versions. Match the installed `container --version` and subcommand `--help` to the same upstream release tag before using flags or defaults. Current branch documentation can describe unreleased behavior. No container runtime was executed for this static review.
 
-Admin guide for Apple's `container` CLI runtime (Apple silicon macOS). This is **not Docker** —
+Admin guide for Apple's `container` CLI runtime (Apple silicon macOS). This is **not Docker** -
 the CLI is Docker-like but the runtime is a per-container lightweight VM. For exhaustive
 flags/subcommands see `commands.md`; this file covers the operator surface only.
 
 The runtime is a set of launchd-managed services (`container-apiserver` + machine API server +
 background helpers). Almost everything below drives those services. Every command accepts
-`--debug` (env `CONTAINER_DEBUG`). Most `list`/`status` commands accept `--format` — commonly
+`--debug` (env `CONTAINER_DEBUG`). Most `list`/`status` commands accept `--format`; commonly
 `json`, `table`, `yaml`, and `toml` (the exact value set and default vary by command, e.g. `table`
 for `container list` but `toml` for `system property list`; check `<command> --help`).
 
@@ -74,12 +74,12 @@ One `ContainerSystemConfig` drives the runtime. **Configure it by editing `confi
   first-match-wins across `~/.config/container/config.toml` then
   `<installRoot>/etc/container/config.toml`. Missing keys fall back to hardcoded defaults.
 - **Flat property IDs** (e.g. `build.rosetta`, `dns.domain`) are how the same values are named
-  and reported. `container system property` has only the `list` subcommand — there is **no**
+  and reported. `container system property` has only the `list` subcommand; there is **no**
   per-key `get`, `set`, or `clear`. To change a value edit `config.toml`; to revert one, remove
   its key.
 
 Property ID ⇄ TOML mapping is direct: `build.rosetta` ⇄ `[build] rosetta`, etc. (exceptions:
-the builder/vminit image IDs — see table).
+the builder/vminit image IDs; see table).
 
 ```bash
 # View effective values (read-only)
@@ -113,9 +113,9 @@ container system stop && container system start   # apply; remove a key to rever
 | `kernel.url` | `[kernel] url` | URL | kata-static release URL | Kernel file or archive to install (§3) |
 | `kernel.binaryPath` | `[kernel] binaryPath` | String | `opt/kata/share/kata-containers/vmlinux-<ver>` | Archive-member path of the kernel |
 | `network.subnet` | `[network] subnet` | CIDRv4? | unset | Default IPv4 subnet for networks; auto-allocates when unset (§7) |
-| — | `[network] subnetv6` | CIDRv6? | unset | Default IPv6 prefix for networks; auto-allocates when unset (§7) |
+| - | `[network] subnetv6` | CIDRv6? | unset | Default IPv6 prefix for networks; auto-allocates when unset (§7) |
 | `image.init` | `[vminit] image` | String | `ghcr.io/apple/containerization/vminit:<ver>` | `vminitd` image booting container VMs |
-| — | `[plugin.<id>]` | — | — | Plugin-scoped config; each plugin reads only its own section |
+| - | `[plugin.<id>]` | - |; | Plugin-scoped config; each plugin reads only its own section |
 
 > Exact defaults (kernel version, image tags) drift per release. Confirm with
 > `container system property list`; do not assume a specific version.
@@ -153,11 +153,11 @@ container system kernel set --tar https://ex.com/kata-static.tar.xz \
 
 | Flag | Purpose | Default |
 |------|---------|---------|
-| `--recommended` | Download+install recommended kernel. **Overrides `--arch`/`--binary`/`--tar`** | — |
+| `--recommended` | Download+install recommended kernel. **Overrides `--arch`/`--binary`/`--tar`** | - |
 | `--arch <amd64\|arm64>` | Kernel architecture | `arm64` |
-| `--binary <path>` | Kernel file, or archive-member name when used with `--tar` | — |
-| `--tar <path\|url>` | Tar archive (local or remote) containing the kernel | — |
-| `--force` | Overwrite an existing kernel of the same name | — |
+| `--binary <path>` | Kernel file, or archive-member name when used with `--tar` | - |
+| `--tar <path\|url>` | Tar archive (local or remote) containing the kernel | - |
+| `--force` | Overwrite an existing kernel of the same name | - |
 
 - Persist a custom source by editing `config.toml`:
   ```toml
@@ -166,7 +166,7 @@ container system kernel set --tar https://ex.com/kata-static.tar.xz \
   binaryPath = "<member>"
   ```
 - Kernel install is also toggled at startup via `system start --enable/--disable-kernel-install`.
-- Per-machine kernel override is separate — see §7 (`machine set kernel=<path>`).
+- Per-machine kernel override is separate; see §7 (`machine set kernel=<path>`).
 
 ---
 
@@ -192,7 +192,7 @@ container system stop && container system start
 ```
 
 - `--localhost` must be a valid **IPv4** address; it installs a pf redirect rule to `127.0.0.1`.
-- Registering a domain is not enough — set `[dns] domain` in `config.toml` to activate it for
+- Registering a domain is not enough; set `[dns] domain` in `config.toml` to activate it for
   unqualified names.
 - If domain deactivation misbehaves: `sudo killall -HUP mDNSResponder`.
 
@@ -210,7 +210,7 @@ Bare image refs resolve against the default registry (`registry.domain`, default
 domain = "ghcr.io"
 ```
 
-**Auth** (`container registry`, alias `r`) — credentials are stored in the macOS keychain:
+**Auth** (`container registry`, alias `r`); credentials are stored in the macOS keychain:
 
 ```bash
 container registry login registry.example.com            # prompts user + password
@@ -223,16 +223,16 @@ container registry logout ghcr.io
 | Command | Key flags | Notes |
 |---------|-----------|-------|
 | `login <server>` | `-u/--username`, `--password-stdin`, `--scheme <http\|https\|auto>` | `--password-stdin` **requires** `--username`. On success pings the registry then saves to keychain |
-| `logout <registry>` | — | Deletes keychain creds for the resolved host |
+| `logout <registry>` | - | Deletes keychain creds for the resolved host |
 | `list` (`ls`) | `--format`, `-q/--quiet` | `-q` prints hostnames only |
 
-**Insecure / HTTP registries** — `--scheme` (default `auto`):
+**Insecure / HTTP registries**; `--scheme` (default `auto`):
 - `auto` → `http` for internal/private hosts (`localhost`, the internal DNS domain, and RFC-1918
   ranges `10/8`, `127/8`, `192.168/16`, `172.16/12`); `https` for everything else.
 - Force plaintext against a local registry: `container registry login --scheme http localhost:5000`.
 - `--scheme` also applies to image `pull`/`push` and `machine create` (same enum).
 
-> `registry list` only lists saved logins. There is no `default-registry get/set` subcommand —
+> `registry list` only lists saved logins. There is no `default-registry get/set` subcommand -
 > the default registry lives in the `registry.domain` property (above).
 
 ---
@@ -259,7 +259,7 @@ container builder stop && container builder delete && container builder start --
 |---------|-------|-------|
 | `start` | `-c/--cpus <n>`, `-m/--memory <size>` (K/M/G/T/P suffix) | Falls back to `build.cpus`/`build.memory` (defaults 2 CPUs / 2048 MiB). Reuses an existing matching builder; recreates if image/cpu/mem/env/DNS changed |
 | `status` | `--format`, `-q/--quiet` | Prints `builder is not running` when absent |
-| `stop` | — | No-op warning if not running |
+| `stop` | - | No-op warning if not running |
 | `delete` (`rm`) | `-f/--force` | Errors unless stopped; `--force` stops then deletes |
 
 - Image comes from `image.builder` / `[build] image`; Rosetta-vs-QEMU for amd64 builds is
@@ -273,10 +273,10 @@ container builder stop && container builder delete && container builder start --
 
 ### Machines (`container machine`, alias `m`)
 
-> **⚠️ Requires 1.0.0+ — the `container machine` group was added in 1.0.0 (not in 0.7.1).**
+> **⚠️ Requires 1.0.0+; the `container machine` group was added in 1.0.0 (not in 0.7.1).**
 
 A **container machine** is a persistent, bootable Linux **environment** (not a one-shot
-container) — it runs the image's init system, auto-mounts your macOS `$HOME` and username, and
+container); it runs the image's init system, auto-mounts your macOS `$HOME` and username, and
 persists across restarts. Ideal for "edit on Mac, build inside Linux" and running long-lived
 services. Distinct from the transient per-container VMs that back `container run`.
 
@@ -300,7 +300,7 @@ container machine logs -f -n 100 dev  # --boot for boot log
 | `set [-n]` | `cpus=`, `memory=`, `home-mount=`, `virtualization=<bool>`, `kernel=<path>` (empty `kernel=` resets to default) | `key=value`; last dupe wins; unknown key errors. Changes apply after stop/start |
 | `run` | `-d/--detach`, `--root`, `-e/--env`, `-i`, `-t`, `-u/--user`, `-w/--workdir`, `--ulimit` | Boots machine if stopped; forwards `SSH_AUTH_SOCK` |
 | `logs` | `--boot`, `-f/--follow`, `-n <lines>` | `-n` is short-only |
-| `list`/`inspect`/`stop`/`delete`(`rm`)/`set-default` | ID optional (uses default) except `set-default`/`delete` | — |
+| `list`/`inspect`/`stop`/`delete`(`rm`)/`set-default` | ID optional (uses default) except `set-default`/`delete` | - |
 
 **Nested virtualization / custom kernel** (per-machine): requires Apple Silicon **M3+** on
 **macOS 15+** and a kernel with `CONFIG_KVM=y` (the default kernel does not qualify).
@@ -311,7 +311,7 @@ container machine run -n kvm-dev -- ls -l /dev/kvm     # verify /dev/kvm exposed
 Any Linux image with `/sbin/init` works. Override first-boot user provisioning by adding an
 executable `/etc/machine/create-user.sh` (runs once as root; env `CONTAINER_{UID,GID,USER,HOME,MACHINE_ID}`).
 
-### Custom networks (`container network`, alias `n`) — **macOS 26+**
+### Custom networks (`container network`, alias `n`): **macOS 26+**
 
 `system start` always creates a builtin vmnet network `default`. On **macOS 26+** you can create
 additional **isolated** networks (no cross-network connectivity). Builtin networks cannot be deleted.
@@ -330,7 +330,7 @@ container network prune                                        # remove networks
 |-----------------|---------|---------|
 | `--subnet <cidr4>` / `--subnet-v6 <cidr6>` | Custom subnets (validated non-overlapping) | auto-allocate / `network.subnet(v6)` |
 | `--internal` | Host-only network (no NAT) | NAT |
-| `--label k=v` / `--option k=v` | Metadata / plugin option (repeatable) | — |
+| `--label k=v` / `--option k=v` | Metadata / plugin option (repeatable) | - |
 | `--plugin <name>` | Network plugin | `container-network-vmnet` |
 
 `delete --all` skips builtin networks; deleting a network fails if any IP is still in use.
@@ -369,7 +369,7 @@ resource errors, while `--all` tolerates an empty set.
 
 One underlying `ContainerSystemConfig` is configured by editing a **`config.toml`** file with
 `[section]` tables loaded once at service startup. The same values are also named as flat
-**property IDs** (`build.rosetta`, `dns.domain`, …) — view them read-only with
+**property IDs** (`build.rosetta`, `dns.domain`, …); view them read-only with
 `container system property list` (its only subcommand; there is no `get`/`set`/`clear`). Property
 IDs map onto TOML sections directly (`build.rosetta` ⇄ `[build] rosetta`), with two naming
 exceptions: the builder image is `image.builder` ⇄ `[build] image`, and the vminitd image is
@@ -380,8 +380,8 @@ exceptions: the builder image is `image.builder` ⇄ `[build] image`, and the vm
 TOML is loaded **first-match-wins**, then any key absent from both files falls back to a
 hardcoded default:
 
-1. User file — `~/.config/container/config.toml`
-2. Package file (optional) — `<installRoot>/etc/container/config.toml`
+1. User file; `~/.config/container/config.toml`
+2. Package file (optional); `<installRoot>/etc/container/config.toml`
    (e.g. `/usr/local/etc/container/config.toml`)
 
 The file is read **once at startup**; restart after edits
@@ -403,16 +403,16 @@ The file is read **once at startup**; restart after edits
 All sections are optional; an omitted section falls back to its defaults wholesale. (The Swift
 source also defines an internal `[machine]` section, not part of the documented user schema.)
 
-### `[build]` — builder VM (runs `container build`)
+### `[build]`: builder VM (runs `container build`)
 
 | Key | Property ID | Type | Default | Description |
 |-----|-------------|------|---------|-------------|
 | `rosetta` | `build.rosetta` | Bool | `true` | Build amd64 images on arm64 using Rosetta translation, instead of QEMU. |
 | `cpus` | `build.cpus` | Int | `2` | CPU count for the builder VM. |
 | `memory` | `build.memory` | MemorySize | `"2048mb"` | RAM allocation for the builder VM. |
-| `image` | `image.builder` | String | `ghcr.io/apple/container-builder-shim/builder:<tag>` | Reference for the builder image; `<tag>` tracks the bundled `container-builder-shim` version. (Property ID is `image.builder`, not `build.image` — see the naming exception above.) |
+| `image` | `image.builder` | String | `ghcr.io/apple/container-builder-shim/builder:<tag>` | Reference for the builder image; `<tag>` tracks the bundled `container-builder-shim` version. (Property ID is `image.builder`, not `build.image`; see the naming exception above.) |
 
-### `[container]` — default per-container resources
+### `[container]`: default per-container resources
 
 Applied when `container run` / `container create` runs without `--cpus` / `--memory`.
 
@@ -421,13 +421,13 @@ Applied when `container run` / `container create` runs without `--cpus` / `--mem
 | `cpus` | `container.cpus` | Int | `4` | Default CPU count per container. |
 | `memory` | `container.memory` | MemorySize | `"1g"` | Default RAM per container. |
 
-### `[dns]` — local DNS domain
+### `[dns]`: local DNS domain
 
 | Key | Property ID | Type | Default | Description |
 |-----|-------------|------|---------|-------------|
 | `domain` | `dns.domain` | String? | unset | Local DNS domain appended to unqualified container hostnames. `"test"` makes `my-web` resolvable as `my-web.test`. Unset → no domain appended. See §4 for the register-then-activate workflow. |
 
-### `[kernel]` — default guest kernel
+### `[kernel]`: default guest kernel
 
 Defaults change per release as kernels are bumped; confirm with
 `container system property list`.
@@ -437,7 +437,7 @@ Defaults change per release as kernels are bumped; confirm with
 | `binaryPath` | `kernel.binaryPath` | String | `opt/kata/share/kata-containers/vmlinux-<ver>` | Archive-member pathname of the kernel, when the URL points at an archive. |
 | `url` | `kernel.url` | URL | kata-static release `.tar.xz`/`.tar.zst` | URL of the kernel file to install, or of an archive containing it. |
 
-### `[network]` — default subnets
+### `[network]`: default subnets
 
 Used when creating networks without explicit `--subnet` / `--subnet-v6`. See §7 for the
 macOS 15 vs macOS 26+ behavior.
@@ -445,21 +445,21 @@ macOS 15 vs macOS 26+ behavior.
 | Key | Property ID | Type | Default | Description |
 |-----|-------------|------|---------|-------------|
 | `subnet` | `network.subnet` | CIDRv4? | unset | IPv4 CIDR, e.g. `"192.168.100.0/24"`. Unset → system auto-allocates a non-overlapping subnet. |
-| `subnetv6` | — | CIDRv6? | unset | IPv6 CIDR, e.g. `"fd00:abcd::/64"`. Unset → system auto-allocates. |
+| `subnetv6` | - | CIDRv6? | unset | IPv6 CIDR, e.g. `"fd00:abcd::/64"`. Unset → system auto-allocates. |
 
-### `[registry]` — default registry
+### `[registry]`: default registry
 
 | Key | Property ID | Type | Default | Description |
 |-----|-------------|------|---------|-------------|
 | `domain` | `registry.domain` | String | `"docker.io"` | Default registry for image references that omit a registry host (`alpine` → `docker.io/library/alpine`). See §5. |
 
-### `[vminit]` — default vminitd image
+### `[vminit]`: default vminitd image
 
 | Key | Property ID | Type | Default | Description |
 |-----|-------------|------|---------|-------------|
 | `image` | `image.init` | String | `ghcr.io/apple/containerization/vminit:<tag>` | Reference for the `vminitd` image used to boot container VMs; `<tag>` tracks the bundled `containerization` version. |
 
-### `[plugin.<id>]` — plugin-scoped config
+### `[plugin.<id>]`: plugin-scoped config
 
 Plugins ship their own schemas under `[plugin.<id>]` (`<id>` = plugin identifier). Each plugin
 defines and reads only its own section; this section naming convention is not a confidentiality or sandbox guarantee. A plugin executable may still access host data permitted to its process. Consult the specific
@@ -467,7 +467,7 @@ plugin's documentation for its keys.
 
 ### Type formats
 
-**MemorySize** — a quoted string: numeric prefix + binary unit suffix (case-insensitive). All
+**MemorySize**; a quoted string: numeric prefix + binary unit suffix (case-insensitive). All
 units are **binary** (powers of 1024) even when written `kb`/`mb`/`gb`. A bare integer (`"2048"`)
 parses as bytes. Encoded form uses lowercase `b`/`kb`/`mb`/`gb`/`tb`/`pb` (so `"2g"` re-emits as
 `"2gb"`).
@@ -481,7 +481,7 @@ parses as bytes. Encoded form uses lowercase `b`/`kb`/`mb`/`gb`/`tb`/`pb` (so `"
 | `t`, `tb`, `tib` | tebibytes | `"1t"` |
 | `p`, `pb`, `pib` | pebibytes | `"1p"` |
 
-**CIDRv4 / CIDRv6** — quoted strings, e.g. `"192.168.100.0/24"` and `"fd00:abcd::/64"`. Invalid
+**CIDRv4 / CIDRv6**; quoted strings, e.g. `"192.168.100.0/24"` and `"fd00:abcd::/64"`. Invalid
 CIDR strings are rejected at decode time.
 
 ### Data locations
@@ -493,8 +493,8 @@ Reported by `container system status`:
 | Application data root | `~/Library/Application Support/com.apple.container/` | `container system start --app-root <path>` |
 | Application install root | `/usr/local/` | `container system start --install-root <path>` |
 | Log root | macOS unified log facility (if unset) | `container system start --log-root <path>` |
-| User config file | `~/.config/container/config.toml` | — |
-| Package config file | `<installRoot>/etc/container/config.toml` (e.g. `/usr/local/etc/container/config.toml`) | — |
+| User config file | `~/.config/container/config.toml` | - |
+| Package config file | `<installRoot>/etc/container/config.toml` (e.g. `/usr/local/etc/container/config.toml`) | - |
 
 The data root contains subdirectories such as `apiserver/`, `builder/`, `containers/`,
 `content/`, `kernels/`, `networks/`, `plugin-state/`, `snapshots/`, `user-plugins/`, `volumes/`,

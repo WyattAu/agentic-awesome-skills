@@ -34,9 +34,9 @@ longbridge valuation <SYMBOL> --format json
 
 Structure the competitive analysis report:
 
-**1. Company profile** — anchor company name, sector, primary market, brief business description
+**1. Company profile**; anchor company name, sector, primary market, brief business description
 
-**2. Competitive universe** — list of identified peers with rationale for inclusion
+**2. Competitive universe**; list of identified peers with rationale for inclusion
 
 **3. Porter five-forces summary**:
 
@@ -55,7 +55,7 @@ Structure the competitive analysis report:
 | Anchor          |        |            |            |              |     |     |     |
 | Peer 1          |        |            |            |              |     |     |     |
 | ...             |        |            |            |              |     |     |     |
-| Industry median | —      | —          |            |              |     |     |     |
+| Industry median | - |;          |            |              |     |     |     |
 
 **5. Moat assessment**:
 

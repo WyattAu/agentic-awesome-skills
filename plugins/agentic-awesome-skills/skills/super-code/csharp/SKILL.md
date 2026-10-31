@@ -123,7 +123,7 @@ var result = await GetDataAsync();
 // ❌ async void (exceptions are unobservable)
 async void OnButtonClick() { await DoWork(); }
 
-// ✅ — async Task; only async void for event handlers that truly require it
+// ✅; async Task; only async void for event handlers that truly require it
 async Task OnButtonClick() { await DoWork(); }
 ```
 
@@ -148,7 +148,7 @@ var b = await taskB;
 // ❌ Wrapping synchronous code in Task.Run inside a library
 public Task<int> GetValue() => Task.Run(() => ComputeSync());
 
-// ✅ — let the caller decide; expose sync method
+// ✅; let the caller decide; expose sync method
 public int GetValue() => ComputeSync();
 ```
 
@@ -202,7 +202,7 @@ if (score is >= 0 and <= 100) { ... }
 try { Process(); }
 catch (Exception ex) { logger.LogError(ex, "error"); }
 
-// ✅ — catch specific, rethrow if you can't handle
+// ✅; catch specific, rethrow if you can't handle
 try { Process(); }
 catch (HttpRequestException ex) {
     throw new ServiceException("upstream failure", ex);

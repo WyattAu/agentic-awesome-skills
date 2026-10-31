@@ -158,7 +158,7 @@ export default function HeroSection() {
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
 
-      {/* Fallback background — always rendered, hidden once Spline loads */}
+      {/* Fallback background; always rendered, hidden once Spline loads */}
       <div style={{
         position: 'absolute', inset: 0,
         background: '#0a0a0a',
@@ -167,7 +167,7 @@ export default function HeroSection() {
         transition: 'opacity 0.5s ease'
       }} />
 
-      {/* Spline scene — only load on capable devices */}
+      {/* Spline scene; only load on capable devices */}
       {!isMobile && !isLowEnd && (
         <Spline
           scene="https://prod.spline.design/REPLACE_ME/scene.splinecode"

@@ -1,13 +1,13 @@
 ---
 name: blueprint
-description: "Turn a one-line objective into a step-by-step construction plan any coding agent can execute cold. Each step has a self-contained context brief — a fresh agent in a new session can pick up any step without reading prior steps."
+description: "Turn a one-line objective into a step-by-step construction plan any coding agent can execute cold. Each step has a self-contained context brief; a fresh agent in a new session can pick up any step without reading prior steps."
 category: planning
 risk: critical
 source: community
 date_added: "2026-03-10"
 ---
 
-# Blueprint — Construction Plan Generator
+# Blueprint: Construction Plan Generator
 
 Turn a one-line objective into a step-by-step plan any coding agent can execute cold.
 
@@ -24,11 +24,11 @@ Blueprint is for multi-session, multi-agent engineering projects where each step
 
 ## How It Works
 
-1. **Research** — Scans the codebase, reads project memory, runs pre-flight checks
-2. **Design** — Breaks the objective into one-PR-sized steps, identifies parallelism, records the user’s selected model constraints
-3. **Draft** — Generates the plan from a structured template with branch workflow rules, CI policy, and rollback strategies inline
-4. **Review** — Reviews the plan against acceptance criteria; delegate only when the user or applicable instructions explicitly authorize sub-agents, and use their model constraints
-5. **Register** — Saves the plan/task ledger in an authorized project location; global memory updates require an explicit request
+1. **Research**; Scans the codebase, reads project memory, runs pre-flight checks
+2. **Design**; Breaks the objective into one-PR-sized steps, identifies parallelism, records the user’s selected model constraints
+3. **Draft**; Generates the plan from a structured template with branch workflow rules, CI policy, and rollback strategies inline
+4. **Review**; Reviews the plan against acceptance criteria; delegate only when the user or applicable instructions explicitly authorize sub-agents, and use their model constraints
+5. **Register**; Saves the plan/task ledger in an authorized project location; global memory updates require an explicit request
 
 ## Examples
 
@@ -45,7 +45,7 @@ Blueprint is for multi-session, multi-agent engineering projects where each step
 ## Best Practices
 
 - ✅ Use for tasks requiring 3+ PRs or multiple sessions
-- ✅ Let Blueprint auto-detect git/gh availability — it degrades gracefully
+- ✅ Let Blueprint auto-detect git/gh availability; it degrades gracefully
 - ❌ Don't invoke for tasks completable in a single PR
 - ❌ Don't invoke when the user says "just do it"
 

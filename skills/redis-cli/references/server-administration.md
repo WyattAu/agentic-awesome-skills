@@ -68,7 +68,7 @@ allkeys                               # Alias for ~*
 &pattern                              # Allow channel pattern
 allchannels                          # Allow all channels
 
-# Selectors (Redis 7.0+) — independent permission sets
+# Selectors (Redis 7.0+): independent permission sets
 (+command ~pattern)                   # Additional permission scope
 ```
 
@@ -258,9 +258,9 @@ redis-cli WAITAOF 1 1 5000
 ```
 
 Parameters:
-- `numlocal` — required local AOF fsync count (0 = don't wait for local)
-- `numreplicas` — required replica AOF fsync count (0 = don't wait for replicas)
-- `timeout` — milliseconds (0 = wait forever)
+- `numlocal`; required local AOF fsync count (0 = don't wait for local)
+- `numreplicas`; required replica AOF fsync count (0 = don't wait for replicas)
+- `timeout`; milliseconds (0 = wait forever)
 
 ## Persistence
 
@@ -271,7 +271,7 @@ Parameters:
 redis-cli BGSAVE
 # Background saving started
 
-# Synchronous save (blocks the server — avoid in production)
+# Synchronous save (blocks the server: avoid in production)
 redis-cli SAVE
 
 # Check last save time

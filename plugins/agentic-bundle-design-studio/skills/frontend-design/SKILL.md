@@ -32,7 +32,7 @@ For new visual directions, consider all four; existing product constraints take 
    A named, explicit design stance (e.g. *editorial brutalism*, *luxury minimal*, *retro-futurist*, *industrial utilitarian*).
 
 2. **Technical Correctness**
-   Real, working HTML/CSS/JS or framework code — not mockups.
+   Real, working HTML/CSS/JS or framework code; not mockups.
 
 3. **Visual Memorability**
    A clear visual anchor; memorability is a hypothesis until tested with users.

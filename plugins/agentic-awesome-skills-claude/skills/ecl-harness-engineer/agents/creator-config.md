@@ -17,10 +17,10 @@ You will receive:
 The runtime ecosystem contract. Describes what the application needs to run.
 
 **REQUIRED FIELDS** (functional verification depends on these):
-- `runtime.dev_command` — How to start the server in dev mode
-- `runtime.build_command` — How to build the project
-- `test_environment.env_vars` — Environment variables for test mode
-- `functional_scenarios[]` — List of verification scenarios
+- `runtime.dev_command`; How to start the server in dev mode
+- `runtime.build_command`; How to build the project
+- `test_environment.env_vars`; Environment variables for test mode
+- `functional_scenarios[]`; List of verification scenarios
 
 ```json
 {
@@ -244,10 +244,10 @@ defined, leave the capability out of the generated harness.
 
 ## Scripts Must Be
 
-- `chmod +x` — executable
-- Self-contained — no external dependencies beyond Docker
-- Idempotent — safe to run multiple times
-- With error handling — `set -euo pipefail`
+- `chmod +x`; executable
+- Self-contained; no external dependencies beyond Docker
+- Idempotent; safe to run multiple times
+- With error handling; `set -euo pipefail`
 
 ## ECL Change Management Scripts
 

@@ -1,4 +1,4 @@
-# Naming and Functions — Clean Code Chapters 2 and 3
+# Naming and Functions: Clean Code Chapters 2 and 3
 
 Source: Robert C. Martin, *Clean Code*. Sample chapters online at the Pearson PDF; chapter summaries at Vivek Khatri's Ch. 2 notes and Herberto Graça's Ch. 3 summary.
 
@@ -54,17 +54,17 @@ No Hungarian notation (`strName`, `iCount`). No interface-prefix `I` (`IUserServ
 
 ### N3. Meaningful distinctions
 
-Do not differentiate names by adding noise words. `ProductInfo`, `ProductData`, `Product` — what's the difference? Same with `getActiveAccount` vs. `getActiveAccountInfo`. If the distinction is real, name the distinction.
+Do not differentiate names by adding noise words. `ProductInfo`, `ProductData`, `Product`; what's the difference? Same with `getActiveAccount` vs. `getActiveAccountInfo`. If the distinction is real, name the distinction.
 
 ### N4. Searchable, pronounceable
 
 Single-letter names are acceptable inside short loop scope (`for i in range(...)`). Anywhere else they hurt grep. `MAX_RETRIES` is searchable; `7` is not.
 
-If you can't read the name aloud in a code review, it's a bad name. `genymdhms` is a real-world example from the book — `generation_timestamp` is the fix.
+If you can't read the name aloud in a code review, it's a bad name. `genymdhms` is a real-world example from the book; `generation_timestamp` is the fix.
 
 ### N5. Class names are nouns, method names are verbs
 
-`User`, `Invoice`, `Account` — classes are things. `saveInvoice`, `computeTotal`, `notifyUser` — methods are actions. A class named `ProcessInvoice` and a method named `Invoice` are both wrong.
+`User`, `Invoice`, `Account`; classes are things. `saveInvoice`, `computeTotal`, `notifyUser`; methods are actions. A class named `ProcessInvoice` and a method named `Invoice` are both wrong.
 
 ### N6. Banned generic names
 
@@ -92,7 +92,7 @@ A function does one thing when you cannot extract another function from it with 
 
 ### F3. One level of abstraction per function
 
-Mixing levels is the most common subtle defect. Do not put an HTTP call, a SQL query, a regex parse, and a business rule in the same function — those are four levels.
+Mixing levels is the most common subtle defect. Do not put an HTTP call, a SQL query, a regex parse, and a business rule in the same function; those are four levels.
 
 **Bad:**
 ```text
@@ -118,7 +118,7 @@ Read a file top-to-bottom; each function is followed by functions one level of a
 
 ### F5. Few arguments
 
-Zero is best. One is fine. Two is OK. Three "should be avoided." Four or more "requires very special justification" — usually means you should pass a config object.
+Zero is best. One is fine. Two is OK. Three "should be avoided." Four or more "requires very special justification"; usually means you should pass a config object.
 
 At five parameters, stop and extract a request/config object: record, struct, DTO, or equivalent.
 
@@ -170,7 +170,7 @@ A getter-style, finder-style, or predicate-style function must not mutate state.
 
 ### F10. Duplication is the root evil
 
-If two functions share a non-trivial block, extract it. But — see [dry-kiss-yagni.md](dry-kiss-yagni.md) for when this is wrong (Sandi Metz's "wrong abstraction" caveat).
+If two functions share a non-trivial block, extract it. But; see [dry-kiss-yagni.md](dry-kiss-yagni.md) for when this is wrong (Sandi Metz's "wrong abstraction" caveat).
 
 ---
 

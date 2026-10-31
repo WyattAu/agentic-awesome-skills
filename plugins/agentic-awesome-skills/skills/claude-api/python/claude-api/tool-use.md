@@ -1,4 +1,4 @@
-# Tool Use — Python
+# Tool Use: Python
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -44,7 +44,7 @@ For async usage, use `@beta_async_tool` with `async def` functions.
 
 **Key benefits of the tool runner:**
 
-- No manual loop — the SDK handles calling tools and feeding results back
+- No manual loop; the SDK handles calling tools and feeding results back
 - Type-safe tool inputs via decorators
 - Tool schemas are generated automatically from function signatures
 - Iteration stops automatically when Claude has no more tool calls
@@ -436,7 +436,7 @@ For full implementation examples, use WebFetch:
 
 ## Structured Outputs
 
-### JSON Outputs (Pydantic — Recommended)
+### JSON Outputs (Pydantic: Recommended)
 
 ```python
 from pydantic import BaseModel

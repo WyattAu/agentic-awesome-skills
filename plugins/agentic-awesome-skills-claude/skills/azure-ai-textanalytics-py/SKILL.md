@@ -226,7 +226,7 @@ async def analyze():
 1. **Use batch operations** for multiple documents (up to 10 per request)
 2. **Enable opinion mining** for detailed aspect-based sentiment
 3. **Use async client** for high-throughput scenarios
-4. **Handle document errors** — results list may contain errors for some docs
+4. **Handle document errors**; results list may contain errors for some docs
 5. **Specify language** when known to improve accuracy
 6. **Use context manager** or close client explicitly
 

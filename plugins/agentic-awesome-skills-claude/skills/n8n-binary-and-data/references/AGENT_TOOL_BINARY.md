@@ -2,8 +2,8 @@
 
 The hard wall: an AI Agent and its tools talk to each other in JSON. Binary doesn't fit through that pipe in either direction, and it catches people twice.
 
-1. **Inbound** — a user uploads a file. The agent can *see* an image via vision, but tool calls don't carry the file.
-2. **Outbound** — a tool generates a file. Its result back to the agent is JSON, so it can't return raw bytes.
+1. **Inbound**; a user uploads a file. The agent can *see* an image via vision, but tool calls don't carry the file.
+2. **Outbound**; a tool generates a file. Its result back to the agent is JSON, so it can't return raw bytes.
 
 The workaround has the same shape both ways: **stage the bytes in storage, pass a key or URL through the JSON boundary, fetch on the other side.**
 
@@ -24,13 +24,13 @@ The workaround has the same shape both ways: **stage the bytes in storage, pass 
 
 ## Why the boundary exists
 
-A tool call is a function call the LLM makes by emitting JSON arguments; the result comes back as a JSON observation. Tool parameters are filled by `$fromAI()`, which only produces strings, numbers, booleans, and objects — never file bytes. And a tool's return is a string/JSON the model reads as text. Base64-stuffing a 2 MB image into a JSON field would bloat every tool call and the agent's context window, and some runtimes reject oversized observations outright. So in practice: **binary never crosses the boundary.**
+A tool call is a function call the LLM makes by emitting JSON arguments; the result comes back as a JSON observation. Tool parameters are filled by `$fromAI()`, which only produces strings, numbers, booleans, and objects; never file bytes. And a tool's return is a string/JSON the model reads as text. Base64-stuffing a 2 MB image into a JSON field would bloat every tool call and the agent's context window, and some runtimes reject oversized observations outright. So in practice: **binary never crosses the boundary.**
 
 ---
 
 ## Inbound: an uploaded file into a tool
 
-The user pastes an image into chat. The chat trigger exposes a `files[]` array. If the agent only needs to *look* at the image, `passthroughBinaryImages: true` on the agent handles that (vision). But the moment a **tool** must operate on the file — OCR, image edit, document parse — the tool can't receive it directly. You pre-stage it.
+The user pastes an image into chat. The chat trigger exposes a `files[]` array. If the agent only needs to *look* at the image, `passthroughBinaryImages: true` on the agent handles that (vision). But the moment a **tool** must operate on the file; OCR, image edit, document parse; the tool can't receive it directly. You pre-stage it.
 
 ```
 [Chat Trigger]
@@ -59,19 +59,19 @@ The user pastes an image into chat. The chat trigger exposes a `files[]` array. 
             [Upload result, return JSON { key, url }]
 ```
 
-Building this with the community MCP server, the wiring goes in as `n8n_update_partial_workflow` operations — `addNode` for each step, `addConnection` to thread them, and `updateNode`/`patchNodeField` to set `executeOnce` and the system prompt. The agent's tool is a `Call n8n Workflow Tool` node pointed at the sub-workflow; the sub-workflow itself is a normal workflow that starts with an Execute Workflow Trigger.
+Building this with the community MCP server, the wiring goes in as `n8n_update_partial_workflow` operations; `addNode` for each step, `addConnection` to thread them, and `updateNode`/`patchNodeField` to set `executeOnce` and the system prompt. The agent's tool is a `Call n8n Workflow Tool` node pointed at the sub-workflow; the sub-workflow itself is a normal workflow that starts with an Execute Workflow Trigger.
 
-> The Execute Workflow Trigger's input mode matters here. The default typed-input mode carries only named JSON fields and **drops `$binary`** at the boundary; for a sub-workflow that needs to receive binary directly, use the passthrough input mode. (When the sub-workflow downloads by key instead of receiving bytes, this is moot — which is exactly why the key pattern is cleaner.)
+> The Execute Workflow Trigger's input mode matters here. The default typed-input mode carries only named JSON fields and **drops `$binary`** at the boundary; for a sub-workflow that needs to receive binary directly, use the passthrough input mode. (When the sub-workflow downloads by key instead of receiving bytes, this is moot; which is exactly why the key pattern is cleaner.)
 
 ---
 
 ## The two pieces of plumbing that look optional
 
-Both of these are silent-failure traps — leave them out and the workflow runs, then misbehaves.
+Both of these are silent-failure traps; leave them out and the workflow runs, then misbehaves.
 
 **The Merge is a synchronization barrier, not decoration.** The chat trigger fans out to the IF branch and the upload branch in parallel. Without merging the upload branch back before the agent, the agent fires while uploads are still in flight. The system prompt's key template then renders against partial state, the model gets keys that don't exist in storage yet, and the tool's download 404s. The Merge forces the agent to wait for the upload to finish.
 
-**`executeOnce: true` on the AI Agent node.** When files split out and merge back, the merged item count equals the file count. Without `executeOnce`, the agent runs once per file — N agent runs, N replies, N times the token cost — for what is one logical user message. Set it on the agent node:
+**`executeOnce: true` on the AI Agent node.** When files split out and merge back, the merged item count equals the file count. Without `executeOnce`, the agent runs once per file; N agent runs, N replies, N times the token cost; for what is one logical user message. Set it on the agent node:
 
 ```json
 { "executeOnce": true }
@@ -101,7 +101,7 @@ CRITICAL: Use EXACTLY the `storageKey` value above when calling a tool. Do not p
 Two details earn their keep:
 
 1. **Both names are listed.** The original (`photo.png`) tells the model what kind of file it is; the storage key is what the tool can actually resolve.
-2. **The "use EXACTLY".** Without it, the model paraphrases — "the user's image", "photo.png" — and the tool can't find the file.
+2. **The "use EXACTLY".** Without it, the model paraphrases; "the user's image", "photo.png"; and the tool can't find the file.
 
 On the tool side, the storage-key parameter is bound with `$fromAI` and described so the model fills it correctly:
 
@@ -109,9 +109,9 @@ On the tool side, the storage-key parameter is bound with `$fromAI` and describe
 $fromAI('imageKey', 'Storage key of an existing uploaded image to operate on, taken verbatim from the system prompt (e.g. "sess12-abc123.png"). Leave empty to generate a new image. Do not invent or reconstruct keys.', 'string')
 ```
 
-The description is the model's only guidance on the value's shape — match it to the storage backend the workflow actually uses, and name only that one shape (not a menu of possibilities).
+The description is the model's only guidance on the value's shape; match it to the storage backend the workflow actually uses, and name only that one shape (not a menu of possibilities).
 
-**Generate vs edit in one tool.** If the tool serves both "make a new image" and "edit this one", branch inside the sub-workflow on whether `imageKey` is empty — empty means generate, present means download-then-edit. One tool with an internal IF is usually clearer for the model than two near-identical tools. If the model keeps misfiring on that discriminator, the viable alternative is two `Call n8n Workflow Tool` nodes pointing at the **same** sub-workflow with different parameter wiring (one hardcodes an empty key, the other lets the model fill it) — one sub-workflow, two front doors with sharply different descriptions.
+**Generate vs edit in one tool.** If the tool serves both "make a new image" and "edit this one", branch inside the sub-workflow on whether `imageKey` is empty; empty means generate, present means download-then-edit. One tool with an internal IF is usually clearer for the model than two near-identical tools. If the model keeps misfiring on that discriminator, the viable alternative is two `Call n8n Workflow Tool` nodes pointing at the **same** sub-workflow with different parameter wiring (one hardcodes an empty key, the other lets the model fill it); one sub-workflow, two front doors with sharply different descriptions.
 
 ---
 
@@ -144,7 +144,7 @@ A tool generates a PDF, image, or document. Its result to the agent is JSON, so 
    ↓
    [Respond with JSON: { ok, key, url, mimeType, sizeBytes, expiresAt }]
    ▼
-[Agent receives JSON — embeds the URL in its reply, or passes the key to another tool]
+[Agent receives JSON; embeds the URL in its reply, or passes the key to another tool]
 ```
 
 A useful return shape:
@@ -160,7 +160,7 @@ A useful return shape:
 }
 ```
 
-Then tell the agent how to present it, in the system prompt — and be explicit about images vs video, because the model will copy the image pattern onto video and produce a broken thumbnail:
+Then tell the agent how to present it, in the system prompt; and be explicit about images vs video, because the model will copy the image pattern onto video and produce a broken thumbnail:
 
 ```
 ## Display Protocol
@@ -168,9 +168,9 @@ Show generated images inline using markdown: ![alt text](url)
 Share generated VIDEO as a plain link, NOT an embed: [title](url)
 ```
 
-(The `![]()` markdown is the canvas chat trigger's syntax — production surfaces differ; see [Surface-specific seams](#surface-specific-seams).)
+(The `![]()` markdown is the canvas chat trigger's syntax; production surfaces differ; see [Surface-specific seams](#surface-specific-seams).)
 
-**When you don't need any of this:** if one node generates binary and another consumes it *in the same workflow* with no agent involved, just pass binary through normally — there's no boundary. And a plain webhook API that returns a file can use `Respond to Webhook` with binary in the body. The upload-and-return-key dance is specifically for the agent-calls-tool-and-tool-produces-a-file case.
+**When you don't need any of this:** if one node generates binary and another consumes it *in the same workflow* with no agent involved, just pass binary through normally; there's no boundary. And a plain webhook API that returns a file can use `Respond to Webhook` with binary in the body. The upload-and-return-key dance is specifically for the agent-calls-tool-and-tool-produces-a-file case.
 
 ---
 
@@ -183,7 +183,7 @@ Share generated VIDEO as a plain link, NOT an embed: [title](url)
 - **Self-hosted / FTP / SFTP:** when the user has on-prem infrastructure.
 - **Caller-supplied URL:** the agent's caller provides the storage location as input.
 
-A common production split: a **private** bucket/folder for inbound user files, and a **public** (or signed-URL) bucket/folder for outbound results so the agent can return a fetchable URL. The choice changes credential setup, URL shape, and how the tool's `$fromAI` description should explain the key/URL format — don't pick on the user's behalf.
+A common production split: a **private** bucket/folder for inbound user files, and a **public** (or signed-URL) bucket/folder for outbound results so the agent can return a fetchable URL. The choice changes credential setup, URL shape, and how the tool's `$fromAI` description should explain the key/URL format; don't pick on the user's behalf.
 
 ---
 
@@ -191,14 +191,14 @@ A common production split: a **private** bucket/folder for inbound user files, a
 
 **Hash strategy differs by direction:**
 
-- **Inbound** files may be referenced repeatedly within a session, so use a stable key — re-uploading the same file lands at the same key and the agent's reference doesn't break. Use a server-generated tenant/session-scoped key that includes a verified content digest or fresh upload ID; a filename hash alone collides when different contents share a name. Keys are not authorization: enforce ownership on every read/write.
+- **Inbound** files may be referenced repeatedly within a session, so use a stable key; re-uploading the same file lands at the same key and the agent's reference doesn't break. Use a server-generated tenant/session-scoped key that includes a verified content digest or fresh upload ID; a filename hash alone collides when different contents share a name. Keys are not authorization: enforce ownership on every read/write.
 - **Outbound** artifacts are single-use, so use a fresh random key every time, or concurrent generations overwrite each other. Pattern: `<session-suffix>-<random-hex>.<ext>`.
 
-Two `Crypto` nodes in one of these workflows is usually deliberate, not a copy-paste error — one for the inbound stable hash, one for the outbound unique suffix.
+Two `Crypto` nodes in one of these workflows is usually deliberate, not a copy-paste error; one for the inbound stable hash, one for the outbound unique suffix.
 
-**Cleanup** keeps the bill down. Object storage has lifecycle rules (auto-delete after 7–30 days). Drive-style backends need a scheduled cleanup workflow. For precise control, track live keys in a Data Table (the `n8n_manage_datatable` surface — see **n8n-mcp-tools-expert**) and delete unreferenced files.
+**Cleanup** keeps the bill down. Object storage has lifecycle rules (auto-delete after 7–30 days). Drive-style backends need a scheduled cleanup workflow. For precise control, track live keys in a Data Table (the `n8n_manage_datatable` surface; see **n8n-mcp-tools-expert**) and delete unreferenced files.
 
-**Long-running tools** (video generation, large batches): timeouts can exist at the workflow, execution, hosting, proxy and HTTP layers. Inspect the deployed limits; use polling/job IDs for work that exceeds them. If the tool is an HTTP Request Tool calling a slow external API, bump `options.timeout` past the expected duration, or the HTTP call aborts mid-job while the work keeps running and the agent gets nothing. Error-branch these steps so a failed upload or a storage 404 surfaces instead of vanishing — see **n8n-error-handling**.
+**Long-running tools** (video generation, large batches): timeouts can exist at the workflow, execution, hosting, proxy and HTTP layers. Inspect the deployed limits; use polling/job IDs for work that exceeds them. If the tool is an HTTP Request Tool calling a slow external API, bump `options.timeout` past the expected duration, or the HTTP call aborts mid-job while the work keeps running and the agent gets nothing. Error-branch these steps so a failed upload or a storage 404 surfaces instead of vanishing; see **n8n-error-handling**.
 
 ---
 
@@ -206,8 +206,8 @@ Two `Crypto` nodes in one of these workflows is usually deliberate, not a copy-p
 
 The examples above use the canvas Chat Trigger's conventions: `$('Chat Trigger').first().json.files[]` inbound, `![]()` markdown outbound. **These shapes are not universal.** Production surfaces (Slack, Discord, Microsoft Teams, Telegram, WhatsApp Business, custom webhooks) each differ on:
 
-- **Inbound file event shape** — where the file lives in the trigger payload, and whether the file URL needs a bearer/bot token to download.
-- **Outbound rendering** — markdown image, Block Kit image block, adaptive card, Discord embed, or a dedicated file-upload API that pushes bytes natively.
+- **Inbound file event shape**; where the file lives in the trigger payload, and whether the file URL needs a bearer/bot token to download.
+- **Outbound rendering**; markdown image, Block Kit image block, adaptive card, Discord embed, or a dedicated file-upload API that pushes bytes natively.
 
 Before wiring an inbound or outbound binary path on a real surface, check the platform's official API docs and the n8n node docs for two things: the exact path to the file in the trigger event (and whether downloading it needs auth), and the exact shape the platform expects for an image/file in a reply. Get those right and the patterns here carry over; guess from the canvas examples and the workflow ships looking correct, then fails on real messages.
 

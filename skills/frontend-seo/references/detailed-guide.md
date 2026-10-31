@@ -8,7 +8,7 @@
 2. **URLs are always absolute and canonical.** A single `canonicalUrl(path)` function turns any path into an absolute, trailing-slash-normalized URL. Every sitemap entry, RSS link, OG URL, and JSON-LD `@id` flows through it.
 3. **Builders are pure; the adapter is thin.** Metadata, sitemap, robots, RSS, and JSON-LD are produced by pure functions that take data and return plain objects. Only one small function touches the framework's metadata type. Pure functions are trivially unit-testable.
 4. **Structured data is typed and reused.** JSON-LD objects share a `JsonLd` type and a small set of `schema.org` builders (`Person`, `WebSite`, `BlogPosting`, `CreativeWork`, `BreadcrumbList`, `FAQPage`). Entities cross-reference each other by stable `@id`.
-5. **Discovery surfaces are generated from content.** `sitemap.xml`, `robots.txt`, and the RSS feed are built from the same content collections the app renders — never maintained by hand, never drifting.
+5. **Discovery surfaces are generated from content.** `sitemap.xml`, `robots.txt`, and the RSS feed are built from the same content collections the app renders; never maintained by hand, never drifting.
 
 Everything below is the mechanical application of these five ideas.
 
@@ -40,7 +40,7 @@ src/
 ```
 
 Rule of thumb: **builders never import the framework** (except the one `buildMetadata` adapter);
-**route files never build SEO data inline** — they call a builder and mount the result.
+**route files never build SEO data inline**; they call a builder and mount the result.
 
 ---
 
@@ -57,7 +57,7 @@ export const SITE_NAME = "Jane Doe";
 export const SITE_HANDLE = "@janedoe";
 export const SITE_LOCALE = "en_US";
 
-export const SITE_TITLE_DEFAULT = "Jane Doe — Senior Engineer";
+export const SITE_TITLE_DEFAULT = "Jane Doe; Senior Engineer";
 export const SITE_TITLE_TEMPLATE = "%s | Jane Doe"; // child pages fill %s
 
 export const SITE_DESCRIPTION =
@@ -149,7 +149,7 @@ export interface JsonLd {
 
 Note the `I`-prefix convention from `frontend-architecture` applies to **stateful UI interfaces**;
 these SEO data models are plain DTOs and follow the source project's existing convention
-(here, unprefixed). Keep whichever convention the host project already uses — consistency wins.
+(here, unprefixed). Keep whichever convention the host project already uses; consistency wins.
 
 ---
 
@@ -177,7 +177,7 @@ export function canonicalUrl(path: string): string {
 
 **Hard rules:**
 
-- Never concatenate `SITE_URL + path` by hand — always `canonicalUrl(path)`.
+- Never concatenate `SITE_URL + path` by hand; always `canonicalUrl(path)`.
 - Pick one trailing-slash policy (this skill: **no trailing slash**) and apply it everywhere.
 - Every OG `url`, sitemap `url`, RSS `link`, and JSON-LD `@id`/`url` goes through `canonicalUrl`.
 
@@ -192,7 +192,7 @@ export function canonicalUrl(path: string): string {
 Everything else is framework-free.
 
 ```ts
-// services/seo/index.ts  (Next.js example — swap the return type for other frameworks)
+// services/seo/index.ts  (Next.js example; swap the return type for other frameworks)
 import type { Metadata } from "next";
 import { OG_IMAGE_PATH } from "@/constants/seo";
 import type { RouteDescriptor } from "@/types/seo";
@@ -220,7 +220,7 @@ Set the title template, default OG/Twitter cards, robots policy, icons, manifest
 verification **once** at the root. Child routes only override what differs.
 
 ```tsx
-// app/layout.tsx — global metadata, all values from constants/seo
+// app/layout.tsx; global metadata, all values from constants/seo
 import type { Metadata } from "next";
 import {
   SITE_URL,
@@ -307,7 +307,7 @@ export async function generateMetadata({ params }) {
 
 - Set defaults once in the layout; override per route only where it differs.
 - Use a title **template** so child pages don't repeat the site name.
-- Every page resolves a single `canonical` — never emit duplicate or relative canonicals.
+- Every page resolves a single `canonical`; never emit duplicate or relative canonicals.
 
 ---
 
@@ -370,7 +370,7 @@ export function sitemapEntries(options: {
 ```
 
 ```ts
-// app/sitemap.ts — thin adapter
+// app/sitemap.ts; thin adapter
 import type { MetadataRoute } from "next";
 import { sitemapEntries } from "@/services/seo";
 
@@ -430,7 +430,7 @@ export function rssItems(posts: BlogPost[]): RssItem[] {
 ```
 
 ```ts
-// app/feed.xml/route.ts — sort newest-first, CDATA-wrap free text
+// app/feed.xml/route.ts; sort newest-first, CDATA-wrap free text
 import { rssItems } from "@/services/seo";
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "@/constants/seo";
 
@@ -634,7 +634,7 @@ The builders are framework-free. Only the mounting layer changes.
 | **Expo Router (web)**  | static head config / `expo-router` head; SEO matters only on the web target                     | a small web-only build step calling `sitemapEntries`/`rssItems`                            |
 
 For a `buildMetadata` that must stay framework-neutral, return a plain shape
-(`{ title, description, canonical, ogImage }`) and let each adapter translate it — keep the
+(`{ title, description, canonical, ogImage }`) and let each adapter translate it; keep the
 Next.js `Metadata` return type only in a Next.js project.
 
 ---
@@ -642,8 +642,8 @@ Next.js `Metadata` return type only in a Next.js project.
 
 ## 9. Conventions checklist (enforce in review)
 
-- [ ] All site identity (URL, name, description, keywords, author, handles, OG image, verification) lives in **one** `constants/seo` module — no duplicates, no hardcoded base URL.
-- [ ] Every absolute URL is produced by `canonicalUrl()` — no manual `SITE_URL + path`.
+- [ ] All site identity (URL, name, description, keywords, author, handles, OG image, verification) lives in **one** `constants/seo` module; no duplicates, no hardcoded base URL.
+- [ ] Every absolute URL is produced by `canonicalUrl()`; no manual `SITE_URL + path`.
 - [ ] One trailing-slash policy, applied everywhere.
 - [ ] Global metadata (title template, default OG/Twitter, robots, verification, manifest) is set **once** in the root layout.
 - [ ] Dynamic routes override metadata via `buildMetadata` (or the framework adapter), passing only what differs.
@@ -684,6 +684,6 @@ instead of referencing a stable `@id`.
 This skill follows the Anthropic `SKILL.md` format and is portable across agents.
 
 1. Keep it under `skills/frontend-seo/SKILL.md` in a public GitHub repo.
-2. Keep the frontmatter `name` and high-signal `description` — discovery indexes match against it.
+2. Keep the frontmatter `name` and high-signal `description`; discovery indexes match against it.
 3. Install with: `npx skills add <org>/<repo> --skill "frontend-seo"`.
 4. Non-`SKILL.md` agents can be pointed here from `AGENTS.md` / `CLAUDE.md`; Kiro can mirror it as a steering file.

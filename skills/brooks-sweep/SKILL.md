@@ -1,6 +1,6 @@
 ---
 name: brooks-sweep
-description: "Full-sweep mode: runs a unified analysis across all quality dimensions — code decay, architecture, tech debt, and test quality — then applies fixes directly to the codebase. Safe changes are auto-applied; risky changes are confirmed before execution."
+description: "Full-sweep mode: runs a unified analysis across all quality dimensions; code decay, architecture, tech debt, and test quality; then applies fixes directly to the codebase. Safe changes are auto-applied; risky changes are confirmed before execution."
 risk: critical
 source: https://github.com/hyhmrright/brooks-lint/tree/main/skills/brooks-sweep
 source_repo: hyhmrright/brooks-lint
@@ -10,10 +10,10 @@ license: MIT
 license_source: https://github.com/hyhmrright/brooks-lint/blob/main/LICENSE
 ---
 
-# Brooks-Lint — Full Sweep & Auto-Fix
+# Brooks-Lint: Full Sweep & Auto-Fix
 ## When to Use
 
-Use this skill when you need full-sweep mode: runs a unified analysis across all quality dimensions — code decay, architecture, tech debt, and test quality — then applies fixes directly to the codebase. Safe changes are auto-applied; risky changes are confirmed before execution. Drawing on twelve classic...
+Use this skill when you need full-sweep mode: runs a unified analysis across all quality dimensions; code decay, architecture, tech debt, and test quality; then applies fixes directly to the codebase. Safe changes are auto-applied; risky changes are confirmed before execution. Drawing on twelve classic...
 
 
 ## Supporting material availability
@@ -35,7 +35,7 @@ from `../_shared/common.md` to determine the review scope before proceeding.
 
 1. Show pre-flight consent notice and wait for the user's one-time approval (Step 0 of the guide)
 2. Enumerate scope and initialize the `unresolvable` / `non_critical_rounds` / `fix_log` state (Step 1 of the guide)
-3. Run the four dimensions in sequence — review, test, debt, audit — each scanning, classifying, applying Safe + Extended-Safe fixes, and verifying via the project test command (Steps 2–5 of the guide)
+3. Run the four dimensions in sequence; review, test, debt, audit; each scanning, classifying, applying Safe + Extended-Safe fixes, and verifying via the project test command (Steps 2–5 of the guide)
 4. Iterate: re-scan modified files + same-module + static consumers; converge on a clean round, retire 3-retry failures to the `unresolvable` set, cap non-critical rounds at 3 (Step 6 of the guide)
 5. Aggregate residual and unresolvable items and output the Full Sweep Report (Steps 7–8 of the guide)
 

@@ -9,7 +9,7 @@ date_added: "2026-03-05"
 
 # Bug Hunter
 
-Systematically hunt down and fix bugs using proven debugging techniques. No guessing—follow the evidence.
+Systematically hunt down and fix bugs using proven debugging techniques. No guessing-follow the evidence.
 
 ## When to Use This Skill
 

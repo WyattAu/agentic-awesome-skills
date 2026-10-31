@@ -52,7 +52,7 @@ Agente de contexto para continuidade entre sessoes. Salva resumos, decisoes, tar
 ## Como Funciona
 
 Continuidade assistida entre sessões do Claude Code. Captura, comprime e
-restaura contexto por comandos manuais — tópicos, decisões, tarefas, erros,
+restaura contexto por comandos manuais; tópicos, decisões, tarefas, erros,
 arquivos modificados e descobertas técnicas.
 
 ## Localização
@@ -129,7 +129,7 @@ Resumo em poucas linhas: projetos, pendências críticas, bloqueadores.
 python C:\Users\renat\skills\context-agent\scripts\context_manager.py search "rate limit"
 ```
 
-Busca full-text (SQLite FTS5) em todas as sessões — tópicos, decisões,
+Busca full-text (SQLite FTS5) em todas as sessões; tópicos, decisões,
 erros, arquivos, etc.
 
 ## Manutenção

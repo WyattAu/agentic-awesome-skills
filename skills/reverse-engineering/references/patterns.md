@@ -192,7 +192,7 @@ Run: `LD_PRELOAD=./hook.so ./binary`
 **Key insight:** Anti-debugging checks are the first obstacle in most reversing challenges. Look for `ptrace`, `IsDebuggerPresent`, or timing checks early in `main()` and patch or hook them before attempting deeper analysis.
 
 ### pwntools Binary Patching (Crypto-Cat)
-Patch out anti-debug calls directly using pwntools — replaces function with `ret` instruction:
+Patch out anti-debug calls directly using pwntools; replaces function with `ret` instruction:
 ```python
 from pwn import *
 
@@ -669,7 +669,7 @@ for pos in range(flag_length):
 | Thread 3 | Memory eraser: zeros out flag data after computation | Prevents memory dumping |
 | Main | rdtsc-based anti-debug timing check | Penalizes debugger-attached execution |
 
-**Solving approach — pure Python emulation of MBA logic:**
+**Solving approach; pure Python emulation of MBA logic:**
 ```python
 # MBA helpers (extracted from assembly)
 def mba_add(a, b): return (a + b) & 0xff
@@ -704,7 +704,7 @@ for i in range(40):  # flag length
 print(''.join(flag))
 ```
 
-**Key insight:** The real flag logic is in the signal handler (SIGSEGV/SIGILL), not the main thread. Thread 1's AES-like code and `ud2` crash are intentional misdirection. The `rdtsc` timing check detects debuggers and corrupts output. Bypass by extracting the MBA logic from assembly and reimplementing in Python — never run the binary under a debugger.
+**Key insight:** The real flag logic is in the signal handler (SIGSEGV/SIGILL), not the main thread. Thread 1's AES-like code and `ud2` crash are intentional misdirection. The `rdtsc` timing check detects debuggers and corrupts output. Bypass by extracting the MBA logic from assembly and reimplementing in Python; never run the binary under a debugger.
 
 **Detection indicators:**
 - Multiple `pthread_create` calls with different handler functions

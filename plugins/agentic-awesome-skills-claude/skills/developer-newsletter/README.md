@@ -72,13 +72,13 @@ What works:
 
 ## Tools
 
-- **[Octolens](https://octolens.com)** — Find trending topics for newsletter content
-- **Buttondown/Beehiiv** — Newsletter platforms
-- **SparkLoop** — Referral programs
-- **Mail-Tester** — Spam score checking
+- **[Octolens](https://octolens.com)**; Find trending topics for newsletter content
+- **Buttondown/Beehiiv**; Newsletter platforms
+- **SparkLoop**; Referral programs
+- **Mail-Tester**; Spam score checking
 
 ## Related Skills
 
-- `developer-audience-context` — Know your readers
-- `devrel-content` — Source newsletter content
-- `community-building` — Community-driven content ideas
+- `developer-audience-context`; Know your readers
+- `devrel-content`; Source newsletter content
+- `community-building`; Community-driven content ideas

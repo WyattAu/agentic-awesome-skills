@@ -113,11 +113,11 @@ Exclude optional advanced dimensions when not requested. This score is advisory,
 
 | Score | Status | Action |
 |-------|--------|--------|
-| 0-20% | Critical | Use Create Mode — build from scratch |
-| 21-40% | Poor | Major gaps — extensive improvement needed |
-| 41-60% | Fair | Multiple gaps — targeted improvement |
-| 61-80% | Good | Minor gaps — polish and expand |
-| 81-100% | Excellent | Maintenance mode — keep current |
+| 0-20% | Critical | Use Create Mode; build from scratch |
+| 21-40% | Poor | Major gaps; extensive improvement needed |
+| 41-60% | Fair | Multiple gaps; targeted improvement |
+| 61-80% | Good | Minor gaps; polish and expand |
+| 81-100% | Excellent | Maintenance mode; keep current |
 
 ---
 
@@ -195,7 +195,7 @@ go list ./... | grep -v vendor
 **Rules in lint-quality.go:** [count]
 
 **Missing enforcement:**
-- Rule 5: "No hardcoded timeouts" — not checked by linter
+- Rule 5: "No hardcoded timeouts"; not checked by linter
 ```
 
 ### Eval Coverage Report
@@ -245,25 +245,25 @@ go list ./... | grep -v vendor
 
 ### Priority Gaps
 
-#### P0 — Critical (Fix Immediately)
+#### P0: Critical (Fix Immediately)
 1. [Gap description]
    - Impact: [Why this matters]
    - Fix: [Specific action]
    - Effort: [Hours estimate]
 
-#### P1 — High (Fix This Sprint)
+#### P1: High (Fix This Sprint)
 1. [Gap description]
    - Impact: [Why this matters]
    - Fix: [Specific action]
    - Effort: [Hours estimate]
 
-#### P2 — Medium (Fix Next Sprint)
+#### P2: Medium (Fix Next Sprint)
 1. [Gap description]
    - Impact: [Why this matters]
    - Fix: [Specific action]
    - Effort: [Hours estimate]
 
-#### P3 — Low (Backlog)
+#### P3: Low (Backlog)
 1. [Gap description]
    - Impact: [Why this matters]
    - Fix: [Specific action]

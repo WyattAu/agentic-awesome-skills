@@ -18,7 +18,7 @@ tools:
 - codex-cli
 ---
 
-# BILL GATES — AGENTE DE SIMULACAO PROFUNDA v2.0
+# BILL GATES: AGENTE DE SIMULACAO PROFUNDA v2.0
 
 ## Detailed Guide
 

@@ -1,21 +1,21 @@
 > Review contract: follow the current SKILL.md authority and budget rules. Recipes below are illustrative; use a private run directory, quote paths, do not change global permissions, and use only authorized tools/parallelism. Unknown evidence stays unknown (never false); snippets and synthetic named-vendor examples are not verified facts. Do not publish, contact anyone or infer approval from silence. Dates must be observed, not invented from a year in a URL.
 
-# Competitor Analysis — Research Patterns
+# Competitor Analysis: Research Patterns
 
 ## Contents
-- [Overview](#overview) — two research contexts (self vs target)
-- [Self-Research (User's Company)](#self-research-users-company) — sub-questions, page discovery, synthesis output (precise_category, include keywords, exclusion list)
-- [Competitor Research — 4 Research Lanes](#competitor-research--4-research-lanes) — Marketing / External / Benchmarks / Strategic Diff
-- [Depth Mode Behavior](#depth-mode-behavior) — quick / deep / deeper budgets and scope
-- [Finding Format (per lane)](#finding-format-per-lane) — JSON shape, confidence levels
-- [Research Loop Rules](#research-loop-rules) — 7 meta-rules for the research phase
-- [Synthesis Instructions](#synthesis-instructions) — turn findings into matrix cells
+- [Overview](#overview); two research contexts (self vs target)
+- [Self-Research (User's Company)](#self-research-users-company); sub-questions, page discovery, synthesis output (precise_category, include keywords, exclusion list)
+- [Competitor Research; 4 Research Lanes](#competitor-research--4-research-lanes); Marketing / External / Benchmarks / Strategic Diff
+- [Depth Mode Behavior](#depth-mode-behavior); quick / deep / deeper budgets and scope
+- [Finding Format (per lane)](#finding-format-per-lane); JSON shape, confidence levels
+- [Research Loop Rules](#research-loop-rules); 7 meta-rules for the research phase
+- [Synthesis Instructions](#synthesis-instructions); turn findings into matrix cells
 
 ## Overview
 
 Two research contexts:
-1. **Self-Research** (Step 1) — Deep research on the user's company so we know what "competitor" means for this run.
-2. **Competitor Research** (Step 4) — For each discovered/seeded competitor, run the 4-lane enrichment below.
+1. **Self-Research** (Step 1); Deep research on the user's company so we know what "competitor" means for this run.
+2. **Competitor Research** (Step 4); For each discovered/seeded competitor, run the 4-lane enrichment below.
 
 Both use the Plan → Research → Synthesize pattern. Self-research is identical in shape to the one in `company-research`, so profiles can be reused across skills.
 
@@ -29,8 +29,8 @@ Both use the Plan → Research → Synthesize pattern. Self-research is identica
 - "What features, integrations, and differentiators does {company}'s marketing emphasize?"
 
 ### Page Discovery
-Dynamic via sitemap — do NOT hardcode `/about` or `/pricing`:
-1. `browse cloud fetch "{company website}/sitemap.xml"` — primary source
+Dynamic via sitemap; do NOT hardcode `/about` or `/pricing`:
+1. `browse cloud fetch "{company website}/sitemap.xml"`; primary source
 2. Scan for URLs with keywords: `pricing`, `customer`, `compare`, `vs`, `about`, `features`, `integrations`
 3. Optionally fetch `/llms.txt` for page descriptions
 4. Pick 3-5 most relevant URLs
@@ -43,19 +43,19 @@ Dynamic via sitemap — do NOT hardcode `/about` or `/pricing`:
 ### Synthesis Output
 Produce a profile with:
 - **Company**, **Product**, **Existing Customers**, **Competitors** (seed list), **Use Cases**
-- **precise_category** — one clear sentence that describes what category this product competes in. Avoid fuzzy words like "tools" or "platform". Good: "AI web search API for agents with neural + keyword retrieval". Bad: "search tools". This becomes the anchor for discovery queries and the gate.
-- **category_include_keywords** — 8-15 phrases that a *direct competitor's* marketing would very likely contain (title or hero). Include semantic variants. e.g. for Exa: `web search api`, `search api`, `neural search`, `semantic search`, `retrieval api`, `search for ai agents`, `search for llms`, `serp api`, `embeddings search`, `live crawling`, `answer api`, `research api`.
-- **exclusion_list** — phrases that indicate a *different* category, used by the gate to reject false positives. e.g. `vector database`, `enterprise search appliance`, `site search widget`, `observability`, `analytics platform`, `data warehouse`, `scraping platform` (full ETL/scraping suites, not retrieval APIs), `internal knowledge base`.
+- **precise_category**; one clear sentence that describes what category this product competes in. Avoid fuzzy words like "tools" or "platform". Good: "AI web search API for agents with neural + keyword retrieval". Bad: "search tools". This becomes the anchor for discovery queries and the gate.
+- **category_include_keywords**; 8-15 phrases that a *direct competitor's* marketing would very likely contain (title or hero). Include semantic variants. e.g. for Exa: `web search api`, `search api`, `neural search`, `semantic search`, `retrieval api`, `search for ai agents`, `search for llms`, `serp api`, `embeddings search`, `live crawling`, `answer api`, `research api`.
+- **exclusion_list**; phrases that indicate a *different* category, used by the gate to reject false positives. e.g. `vector database`, `enterprise search appliance`, `site search widget`, `observability`, `analytics platform`, `data warehouse`, `scraping platform` (full ETL/scraping suites, not retrieval APIs), `internal knowledge base`.
 
 The same `profiles/{company-slug}.json` shape used by `company-research`, extended with the three new fields. The `competitors` array becomes the seed list and the first inputs to the comparison-graph expansion in Step 3.
 
 ---
 
-## Competitor Research — 4 Research Lanes
+## Competitor Research: 4 Research Lanes
 
 For each competitor, run these four lanes (depth-gated):
 
-### Lane 1 — Marketing Surface (ALL depth modes)
+### Lane 1: Marketing Surface (ALL depth modes)
 Goal: extract what the competitor says about themselves from their own site.
 
 **Sub-questions**:
@@ -63,7 +63,7 @@ Goal: extract what the competitor says about themselves from their own site.
 - "What are {competitor}'s pricing tiers and pricing model?"
 - "What key features, integrations, and platforms does {competitor} list?"
 
-**Pages to fetch** (via sitemap discovery — do NOT hardcode):
+**Pages to fetch** (via sitemap discovery; do NOT hardcode):
 1. Homepage
 2. `/pricing` (or equivalent from sitemap)
 3. `/features`, `/product`, `/platform`, `/solutions`
@@ -71,7 +71,7 @@ Goal: extract what the competitor says about themselves from their own site.
 
 **Extract into frontmatter fields**: `tagline`, `positioning`, `product_description`, `target_customer`, `pricing_model`, `pricing_tiers`, `key_features`, `integrations`.
 
-### Lane 2 — External Signal (deep + deeper)
+### Lane 2: External Signal (deep + deeper)
 Goal: what the rest of the internet says about them.
 
 **Sub-questions**:
@@ -105,9 +105,9 @@ Goal: what the rest of the internet says about them.
 - `twitter.com` / `x.com` → `X`
 - `spotify.com/episode` / transistor/simplecast → `Podcast`
 
-For LinkedIn and YouTube, the snippet + URL from `browse cloud search` is enough. Do NOT try to deep-fetch individual LinkedIn posts (auth walls) — list them with title/snippet.
+For LinkedIn and YouTube, the snippet + URL from `browse cloud search` is enough. Do NOT try to deep-fetch individual LinkedIn posts (auth walls); list them with title/snippet.
 
-### Lane 3 — Public Benchmarks (deeper only)
+### Lane 3: Public Benchmarks (deeper only)
 Goal: find third-party benchmarks that measured this competitor's product.
 
 **Sub-questions**:
@@ -130,10 +130,10 @@ Goal: find third-party benchmarks that measured this competitor's product.
 - Public retrieval-quality leaderboards (e.g. BEIR / MTEB-style repos) when a vendor publishes scores
 - Category-specific benchmark repos discovered via the first search wave
 
-### Lane 4 — Strategic Diff vs User's Company (deeper only)
+### Lane 4: Strategic Diff vs User's Company (deeper only)
 Goal: explicitly compare this competitor to the user's company.
 
-**Inputs**: `{user_company_profile}` (from Step 1) — specifically `product`, `use_cases`, `key_features` if available.
+**Inputs**: `{user_company_profile}` (from Step 1); specifically `product`, `use_cases`, `key_features` if available.
 
 **Sub-questions**:
 - "What features does {competitor} have that {user_company} does not?"
@@ -141,7 +141,7 @@ Goal: explicitly compare this competitor to the user's company.
 - "Who does {competitor} serve that {user_company} does not (and vice versa)?"
 - "Where does each one win on the marketing surface (price, feature depth, DX, ecosystem)?"
 
-**No new fetches required** for this lane — it's a synthesis step over Lane 1 + 2 + 3 findings plus the user's profile. Write as:
+**No new fetches required** for this lane; it's a synthesis step over Lane 1 + 2 + 3 findings plus the user's profile. Write as:
 
 ```markdown
 ## Comparison vs {user_company}
@@ -195,13 +195,13 @@ Every finding is a factual statement tied to a source:
 
 ## Research Loop Rules
 
-1. **Lane 1 first** — always start with the competitor's own site
-2. **Use sitemap, not hardcoded paths** — `/pricing` might be `/plans` or `/pricing-plans`
-3. **Rephrase, don't retry** — if a search returns generic junk, switch keywords
-4. **Fetch selectively** — pick the 1-2 most promising URLs per query
-5. **For LinkedIn/YouTube: search only, don't fetch** — snippet is enough, avoid auth walls
+1. **Lane 1 first**; always start with the competitor's own site
+2. **Use sitemap, not hardcoded paths**; `/pricing` might be `/plans` or `/pricing-plans`
+3. **Rephrase, don't retry**; if a search returns generic junk, switch keywords
+4. **Fetch selectively**; pick the 1-2 most promising URLs per query
+5. **For LinkedIn/YouTube: search only, don't fetch**; snippet is enough, avoid auth walls
 6. **Respect step budget** per depth mode
-7. **Deduplicate mentions** — same URL should only appear once in `## Mentions`
+7. **Deduplicate mentions**; same URL should only appear once in `## Mentions`
 
 ## Synthesis Instructions
 

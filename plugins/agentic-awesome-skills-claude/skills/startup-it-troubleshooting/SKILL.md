@@ -171,7 +171,7 @@ powercfg /batteryreport /output "$env:USERPROFILE\Desktop\battery.html"
 profiles status -type enrollment          # MDM enrollment check
 sudo systemsetup -getremotelogin          # inspect; enabling SSH changes remote access
 
-# Homebrew fleet setup — standard Brewfile
+# Homebrew fleet setup: standard Brewfile
 cat > Brewfile <<'EOF'
 brew "git"; brew "node"; brew "python@3.12"; brew "awscli"; brew "jq"; brew "gh"
 cask "google-chrome"; cask "slack"; cask "1password"; cask "visual-studio-code"; cask "docker"; cask "zoom"
@@ -215,10 +215,10 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 ## Linux Desktop
 
 ```bash
-# Ubuntu — fix broken packages
+# Ubuntu: fix broken packages
 sudo apt --fix-broken install && sudo dpkg --configure -a && sudo apt update && sudo apt upgrade -y
 
-# Fedora — fix broken packages
+# Fedora: fix broken packages
 sudo dnf check && sudo dnf distro-sync && sudo dnf update -y
 
 # Service failures

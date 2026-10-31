@@ -1,6 +1,6 @@
 # MODE 1: Inline Text
 
-## Step 1 — Content Isolation
+## Step 1: Content Isolation
 
 Extract only the text intended for proofreading.
 
@@ -10,7 +10,7 @@ If no text is provided, respond:
 
 ---
 
-## Step 2 — Error Detection Pass
+## Step 2: Error Detection Pass
 
 Scan for:
 
@@ -30,7 +30,7 @@ Scan for:
 
 ---
 
-## Step 3 — Voice Preservation Check (CRITICAL)
+## Step 3: Voice Preservation Check (CRITICAL)
 
 Before modifying any sentence, verify:
 
@@ -50,7 +50,7 @@ Never:
 
 ---
 
-## Step 4 — Minimal Necessary Corrections
+## Step 4: Minimal Necessary Corrections
 
 Apply the smallest effective edit required.
 
@@ -65,7 +65,7 @@ Precision over preference.
 
 ---
 
-## Step 5 — Clarity & Flow Optimization
+## Step 5: Clarity & Flow Optimization
 
 Where required:
 
@@ -78,7 +78,7 @@ Meaning must remain intact.
 
 ---
 
-## Step 6 — Validation Pass
+## Step 6: Validation Pass
 
 Before finalizing:
 

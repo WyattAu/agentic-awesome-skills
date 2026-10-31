@@ -24,7 +24,7 @@ disable-model-invocation: true
 
 DeepSWE (deepswe.datacurve.ai) is a 113-task Harbor-compatible coding-agent benchmark. It runs via **Pier** (Harbor fork) driving **mini-swe-agent** (model-agnostic). Any model reachable through OpenRouter can be scored.
 
-## Prerequisites — state-check first
+## Prerequisites: state-check first
 
 ```bash
 which uv git docker || echo "MISSING: install uv, git, docker"
@@ -32,7 +32,7 @@ docker info >/dev/null 2>&1 || echo "MISSING: Docker daemon not running (Pier's 
 echo "OPENROUTER_API_KEY set? ${OPENROUTER_API_KEY:+YES}"
 ```
 
-**Docker must be running** — Pier sandboxes each task in Docker by default (`--env modal` for cloud instead).
+**Docker must be running**; Pier sandboxes each task in Docker by default (`--env modal` for cloud instead).
 
 `OPENROUTER_API_KEY` must already be present in the environment. If it is unset,
 ask the user to configure their preferred secret-management path; do not read
@@ -53,13 +53,13 @@ Run all `pier` commands from inside `deep-swe/`, using relative `-p tasks/...`.
 
 mini-swe-agent has a native OpenRouter model class. Both routes below use `OPENROUTER_API_KEY` and the OpenRouter slug (`vendor/model`, e.g. `minimax/minimax-m3`):
 
-**Route A — native OpenRouter class (preferred, hits openrouter.ai/api/v1 directly):**
+**Route A; native OpenRouter class (preferred, hits openrouter.ai/api/v1 directly):**
 ```bash
 pier run -p tasks --agent mini-swe-agent \
   --model minimax/minimax-m3 --model-class openrouter
 ```
 
-**Route B — LiteLLM provider prefix (fallback; same key):**
+**Route B; LiteLLM provider prefix (fallback; same key):**
 ```bash
 pier run -p tasks --agent mini-swe-agent \
   --model openrouter/minimax/minimax-m3
@@ -68,9 +68,9 @@ pier run -p tasks --agent mini-swe-agent \
 Notes:
 - Slug = the exact OpenRouter slug. Verify it at openrouter.ai/models before running.
 - Free/zero-cost models: OpenRouter cost tracking can error. Set `export MSWEA_COST_TRACKING=ignore_errors`.
-- Flag spelling can vary by version — confirm with `pier run --help` and `mini --help`.
+- Flag spelling can vary by version; confirm with `pier run --help` and `mini --help`.
 
-## Smoke test FIRST (1 task — do this before any full run)
+## Smoke test FIRST (1 task: do this before any full run)
 
 Always validate end-to-end wiring on a single task before spending tokens on the corpus:
 
@@ -91,7 +91,7 @@ pier run -p tasks --agent mini-swe-agent \
   --n-tasks 10 --sample-seed 0
 ```
 
-## Full 113-task corpus (costs tokens + time — confirm with user first)
+## Full 113-task corpus (costs tokens + time: confirm with user first)
 
 ```bash
 pier run -p tasks --agent mini-swe-agent \

@@ -142,7 +142,7 @@ Based on the monitor type, read the detailed reference for parameter guidance:
 
 #### Step 5: Ask about scheduling
 
-**Skip this step for table monitors.** Table monitors do not support the `schedule` field in MaC YAML — adding it will cause a validation error on `montecarlo monitors apply`. Table monitor scheduling is managed automatically by Monte Carlo.
+**Skip this step for table monitors.** Table monitors do not support the `schedule` field in MaC YAML; adding it will cause a validation error on `montecarlo monitors apply`. Table monitor scheduling is managed automatically by Monte Carlo.
 
 For other monitor types, check the loaded reference and connected tool schema
 for valid scheduling defaults. Metric aggregation can require a longer interval;

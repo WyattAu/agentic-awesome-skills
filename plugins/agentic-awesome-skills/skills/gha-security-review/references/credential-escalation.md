@@ -2,7 +2,7 @@
 
 ## Overview
 
-GitHub Actions workflows have access to credentials (GITHUB_TOKEN, PATs, deploy keys, cloud credentials) that vary in scope and blast radius. When untrusted code can access these credentials — via pwn requests, expression injection, or missing permission boundaries — attackers can escalate from "open a PR" to "own the repository."
+GitHub Actions workflows have access to credentials (GITHUB_TOKEN, PATs, deploy keys, cloud credentials) that vary in scope and blast radius. When untrusted code can access these credentials; via pwn requests, expression injection, or missing permission boundaries; attackers can escalate from "open a PR" to "own the repository."
 
 ---
 
@@ -209,8 +209,8 @@ echo $GITHUB_TOKEN > token.txt
 ```
 ATTACK: Credential Escalation via [vector]
 ENTRY: [How attacker triggers the workflow]
-CREDENTIAL: [Which credential is accessible — PAT, GITHUB_TOKEN, cloud key]
-SCOPE: [What the credential can do — write to repo, publish packages, etc.]
+CREDENTIAL: [Which credential is accessible; PAT, GITHUB_TOKEN, cloud key]
+SCOPE: [What the credential can do; write to repo, publish packages, etc.]
 EXFILTRATION: [How the attacker extracts the credential]
 POST-EXPLOITATION: [What attacker does with the credential]
 IMPACT: [Full blast radius]
@@ -222,4 +222,4 @@ IMPACT: [Full blast radius]
 
 - [GitHub Docs: Automatic token authentication](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)
 - [GitHub Docs: Using fine-grained PATs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
-- [HackerBot Claw — trivy PAT theft and full repo compromise](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)
+- [HackerBot Claw; trivy PAT theft and full repo compromise](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)

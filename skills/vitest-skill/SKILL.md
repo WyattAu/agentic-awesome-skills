@@ -69,7 +69,7 @@ vi.useRealTimers();
 ### In-Source Testing
 
 ```typescript
-// src/math.ts — tests alongside code!
+// src/math.ts; tests alongside code!
 export function add(a: number, b: number) { return a + b; }
 export function multiply(a: number, b: number) { return a * b; }
 

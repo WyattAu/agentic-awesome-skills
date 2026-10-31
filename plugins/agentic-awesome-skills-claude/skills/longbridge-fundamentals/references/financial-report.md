@@ -6,15 +6,15 @@ Prompt-only analysis skill. Fetches complete three-statement financials from Lon
 
 Run `longbridge --help` to see all available subcommands, then `longbridge <subcommand> --help` before calling. Types of data needed:
 
-- Financial statements (income statement, balance sheet, cash flow) — single statement or all three at once
-- Period selection (annual, semi-annual, quarterly — exact flag values differ by CLI version; check `--help`)
+- Financial statements (income statement, balance sheet, cash flow); single statement or all three at once
+- Period selection (annual, semi-annual, quarterly; exact flag values differ by CLI version; check `--help`)
 - Raw line-item access with field-level hierarchy (a separate subcommand may exist for this)
 
 ```bash
 # Always check available flags first:
 longbridge <subcommand> --help
 
-# Then fetch financials — example structure (verify flags with --help):
+# Then fetch financials: example structure (verify flags with --help):
 longbridge <subcommand> TSLA.US --format json
 longbridge <subcommand> 700.HK --format json
 ```
@@ -39,7 +39,7 @@ longbridge <subcommand> 700.HK --format json
 ## Output template
 
 ```
-{Symbol} ({code}) Financial Statements — Source: Longbridge Securities
+{Symbol} ({code}) Financial Statements; Source: Longbridge Securities
 Period: {report_period} | Report date: {rpt_date}
 
 [Income Statement (IS)]
@@ -70,7 +70,7 @@ Period: {report_period} | Report date: {rpt_date}
 ROE {X%} = Net margin {Y%} × Asset turnover {Z×} × Equity multiplier {W×}
 
 [Earnings quality]
-- Accrual ratio: X% — {low / medium / high} accrual, earnings are {cash-backed / partly accrual-driven / accrual-heavy}
+- Accrual ratio: X%; {low / medium / high} accrual, earnings are {cash-backed / partly accrual-driven / accrual-heavy}
 
 ⚠️ 以上数据仅供参考，不构成投资建议。/ 以上數據僅供參考，不構成投資建議。/ For reference only. Not investment advice.
 ```
@@ -85,4 +85,4 @@ ROE {X%} = Net margin {Y%} × Asset turnover {Z×} × Equity multiplier {W×}
 | stderr `not logged in`              | 请运行 `longbridge auth login` 登录。                         | 請執行 `longbridge auth login`。/ Run `longbridge auth login`.                                                                              |
 | Returns empty / no data             | "{symbol} 暂无财务报表数据（可能为新上市或未覆盖标的）。"     | "{symbol} 暫無財務報表數據。" / "{symbol} has no financial statement data (newly listed or not covered)."                                   |
 | Only one or two statements returned | 仅展示已返回的报表，注明缺失部分，不做勾稽。                  | 僅展示已返回報表，注明缺失。/ Show available statements only; note missing ones; skip reconciliation.                                       |
-| Other stderr                        | 直接显示原始错误，不静默重试。                                | 顯示原始錯誤。/ Surface a redacted error summary — do not retry silently.                                                                                   |
+| Other stderr                        | 直接显示原始错误，不静默重试。                                | 顯示原始錯誤。/ Surface a redacted error summary; do not retry silently.                                                                                   |

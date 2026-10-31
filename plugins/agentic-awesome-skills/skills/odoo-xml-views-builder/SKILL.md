@@ -94,11 +94,11 @@ These examples target Odoo 17 and require the custom model, fields and methods. 
 ## Best Practices
 
 - ✅ **Do:** Use inline `invisible="condition"` (Odoo 17+) instead of `attrs` for show/hide logic.
-- ✅ **Do:** Use `attrs="{'invisible': [...]}"` only if you are targeting Odoo 14–16 — it is no longer supported in v17.
+- ✅ **Do:** Use `attrs="{'invisible': [...]}"` only if you are targeting Odoo 14–16; it is no longer supported in v17.
 - ✅ **Do:** Set the `ir.ui.view` record's `name` field; use supported `string` attributes on the architecture elements that accept them.
 - ✅ **Do:** For Odoo 17, use the `oe_chatter` block and ensure the model inherits the required mail mixins; verify syntax against the exact target version.
-- ❌ **Don't:** Use `attrs` in Odoo 17 — it is unsupported and can prevent view loading.
-- ❌ **Don't:** Put business logic in view XML — keep it in Python model methods.
+- ❌ **Don't:** Use `attrs` in Odoo 17; it is unsupported and can prevent view loading.
+- ❌ **Don't:** Put business logic in view XML; keep it in Python model methods.
 - ❌ **Don't:** Use hardcoded `domain` strings in views when a `domain` field on the model can be used dynamically.
 
 Reference: [Odoo 17 view architectures](https://www.odoo.com/documentation/17.0/developer/reference/user_interface/view_architectures.html).
@@ -106,6 +106,6 @@ Reference: [Odoo 17 view architectures](https://www.odoo.com/documentation/17.0/
 ## Limitations
 
 - Does not cover **OWL JavaScript widgets** or client-side component development.
-- **Search panel views** (`<searchpanel>`) are not fully covered — those require frontend knowledge.
-- Does not address **website QWeb views** — use `@odoo-qweb-templates` for those.
+- **Search panel views** (`<searchpanel>`) are not fully covered; those require frontend knowledge.
+- Does not address **website QWeb views**; use `@odoo-qweb-templates` for those.
 - **Cohort and Map views** (Enterprise-only) are not covered by this skill.

@@ -17,17 +17,17 @@ long-form content piece for SEO and AEO purposes. Trigger phrases include:
 ## Input Format
 ```json
 {
-  "topic": "string — the main subject of the article",
-  "primary_keyword": "string — exact keyword to rank for",
+  "topic": "string; the main subject of the article",
+  "primary_keyword": "string; exact keyword to rank for",
   "secondary_keywords": ["string", "string"],
-  "target_audience": "string — who is reading this",
+  "target_audience": "string; who is reading this",
   "tone": "informational | conversational | authoritative | persuasive",
-  "word_count": "integer — minimum 800, maximum 3000, default 1500",
-  "cluster_context": "string — optional, paste content cluster output here",
-  "internal_link_targets": ["string — page/post titles to link to"],
-  "product_cta": "string — optional CTA and destination",
-  "search_intent_evidence": "string — optional observed SERP/API evidence",
-  "distribution_platforms": ["string — optional external platforms"]
+  "word_count": "integer; minimum 800, maximum 3000, default 1500",
+  "cluster_context": "string; optional, paste content cluster output here",
+  "internal_link_targets": ["string; page/post titles to link to"],
+  "product_cta": "string; optional CTA and destination",
+  "search_intent_evidence": "string; optional observed SERP/API evidence",
+  "distribution_platforms": ["string; optional external platforms"]
 }
 ```
 
@@ -40,7 +40,7 @@ The skill must always produce a blog post in this exact section order:
 # [H1: Primary Keyword-Optimised Title]
 
 > **TL;DR:** [2–3 sentence direct answer to the article's core question.
-> This is the AEO extraction block — write it to be lifted by AI engines.]
+> This is the AEO extraction block; write it to be lifted by AI engines.]
 
 ## Introduction
 [Hook sentence. State the problem or question clearly in the first 2 lines.
@@ -49,7 +49,7 @@ Mention the primary keyword naturally within the first 100 words.]
 ---
 
 ## [H2: What Is {Topic}]
-[Definition block — write a single, clean, extractable definition sentence
+[Definition block; write a single, clean, extractable definition sentence
 as the very first line of this section. Follow with 2–3 paragraphs of context.]
 
 ---
@@ -69,12 +69,12 @@ one comparison block formatted as a table if comparing two or more things.]
 
 ---
 
-## [H2: Practical Steps / How To Section — if applicable]
+## [H2: Practical Steps / How To Section: if applicable]
 [Numbered list of steps. Each step max 2 sentences. Scannable.]
 
 ---
 
-## [H2: Common Mistakes / What To Avoid — if applicable]
+## [H2: Common Mistakes / What To Avoid: if applicable]
 [Bullet list format. Short, punchy, extractable by AI.]
 
 ---
@@ -147,10 +147,10 @@ Every blog post produced by this skill MUST contain:
 
 ## Execution Steps
 
-1. Read `cluster_context` if provided — use it to decide which sub-topics
+1. Read `cluster_context` if provided; use it to decide which sub-topics
    to cover and which to leave for linked cluster articles
 2. Review `search_intent_evidence` if provided and state the problem the article solves
-3. Write the TL;DR block first — this anchors the whole article's direction
+3. Write the TL;DR block first; this anchors the whole article's direction
 4. Build the heading skeleton before writing body content
 5. Write the definition block in the "What Is" section as a single sentence
 6. Write the FAQ section using long-tail and secondary keywords as questions

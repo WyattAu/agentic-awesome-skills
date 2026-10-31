@@ -185,11 +185,11 @@ Minimal proposal template:
 
 ## Accepted Candidates
 
-- [candidate] — evidence: `harness/changes/archive/.../summary.md`
+- [candidate]; evidence: `harness/changes/archive/.../summary.md`
 
 ## Rejected Candidates
 
-- [candidate] — reason: [no archive evidence / not project-relevant / too broad / too costly]
+- [candidate]; reason: [no archive evidence / not project-relevant / too broad / too costly]
 
 ## Evidence
 

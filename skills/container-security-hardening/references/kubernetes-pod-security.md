@@ -1,15 +1,15 @@
 # Kubernetes Pod Security Reference
 
-Full reference for hardening workloads in Kubernetes — NetworkPolicy, RBAC, Pod Security Admission, admission controllers (Kyverno/OPA), and service account hardening.
+Full reference for hardening workloads in Kubernetes; NetworkPolicy, RBAC, Pod Security Admission, admission controllers (Kyverno/OPA), and service account hardening.
 
 ## Table of Contents
 
 1. [Pod Security Admission (PSA)](#pod-security-admission)
-2. [NetworkPolicy — Zero-Trust Networking](#networkpolicy)
-3. [RBAC — Least Privilege](#rbac)
+2. [NetworkPolicy; Zero-Trust Networking](#networkpolicy)
+3. [RBAC; Least Privilege](#rbac)
 4. [Admission Controllers (Kyverno / OPA Gatekeeper)](#admission-controllers)
 5. [Service Account Hardening](#service-account-hardening)
-6. [Runtime Security — Falco](#runtime-security--falco)
+6. [Runtime Security; Falco](#runtime-security--falco)
 7. [Secrets Management in K8s](#secrets-management-in-k8s)
 
 ---
@@ -39,7 +39,7 @@ Built-in K8s 1.25+ policy engine (replaces deprecated PodSecurityPolicy).
 ### Applying PSA Labels
 
 ```bash
-# Audit before enforcing — find what would fail
+# Audit before enforcing: find what would fail
 kubectl label namespace production \
   pod-security.kubernetes.io/audit=restricted \
   pod-security.kubernetes.io/audit-version=latest
@@ -94,11 +94,11 @@ spec:
 
 ---
 
-## NetworkPolicy — Zero-Trust Networking
+## NetworkPolicy: Zero-Trust Networking
 
 By default all pods in a cluster can reach all other pods on any port. Lock down with NetworkPolicy.
 
-> **Prerequisite:** Your CNI plugin must support NetworkPolicy (Calico, Cilium, Weave Net — but NOT Flannel by default).
+> **Prerequisite:** Your CNI plugin must support NetworkPolicy (Calico, Cilium, Weave Net; but NOT Flannel by default).
 
 ### Step 1: Default Deny All
 
@@ -188,21 +188,21 @@ egress:
 ### Validate NetworkPolicy with Cilium or Calico CLI
 
 ```bash
-# Cilium — test connectivity between pods
+# Cilium: test connectivity between pods
 cilium connectivity test
 
-# Calico — list effective policies
+# Calico: list effective policies
 calicoctl get networkpolicy -n production  # Run from an authorized admin environment
 ```
 
 ---
 
-## RBAC — Least Privilege
+## RBAC: Least Privilege
 
 ### Principle: Scope Narrowly, Avoid Wildcards
 
 ```yaml
-# ❌ DANGEROUS — grants everything to everything
+# ❌ DANGEROUS: grants everything to everything
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -217,7 +217,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ---
-# ✅ CORRECT — minimal namespace-scoped role with specific resource names
+# ✅ CORRECT: minimal namespace-scoped role with specific resource names
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -275,7 +275,7 @@ kubectl rbac-tool who-can get secrets -n production
 
 ### Kyverno (Policy as Kubernetes Resources)
 
-Kyverno validates, mutates, and generates resources — no Rego knowledge required.
+Kyverno validates, mutates, and generates resources; no Rego knowledge required.
 
 ```bash
 # Install Kyverno
@@ -400,7 +400,7 @@ kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/
 ```
 
 ```yaml
-# ConstraintTemplate — define the Rego policy
+# ConstraintTemplate: define the Rego policy
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
 metadata:
@@ -431,7 +431,7 @@ spec:
         }
 
 ---
-# Constraint — apply the policy
+# Constraint: apply the policy
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
@@ -458,14 +458,14 @@ metadata:
   name: myapp-sa
   namespace: production
   annotations:
-    # EKS — IAM Roles for Service Accounts (IRSA)
+    # EKS: IAM Roles for Service Accounts (IRSA)
     eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/myapp-role
-    # GKE — Workload Identity
+    # GKE: Workload Identity
     iam.gke.io/gcp-service-account: myapp@my-project.iam.gserviceaccount.com
 automountServiceAccountToken: false    # Disable unless app calls K8s API
 
 ---
-# In the pod spec — also disable token mounting
+# In the pod spec: also disable token mounting
 spec:
   serviceAccountName: myapp-sa
   automountServiceAccountToken: false
@@ -478,7 +478,7 @@ spec:
 
 ---
 
-## Runtime Security — Falco
+## Runtime Security: Falco
 
 Falco detects anomalous runtime behaviour (unexpected syscalls, network connections, file reads).
 
@@ -526,13 +526,13 @@ helm install falco falcosecurity/falco \
 
 | Solution | Mechanism | Best For |
 |---|---|---|
-| **External Secrets Operator** | Sync from AWS Secrets Manager / GCP Secret Manager / Vault | Production — synchronizes Kubernetes Secrets, which are normally stored in etcd |
+| **External Secrets Operator** | Sync from AWS Secrets Manager / GCP Secret Manager / Vault | Production; synchronizes Kubernetes Secrets, which are normally stored in etcd |
 | **Sealed Secrets (Bitnami)** | Asymmetric encryption of secrets in Git | GitOps workflows |
 | **HashiCorp Vault** | Dynamic secrets, PKI, lease management | Complex multi-cloud setups |
 | **SOPS + Age/GPG** | Encrypted secret files in Git | Small teams, simple workflows |
 
 ```yaml
-# External Secrets Operator — sync from AWS Secrets Manager
+# External Secrets Operator: sync from AWS Secrets Manager
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:

@@ -120,7 +120,7 @@ Search modes:
 - `--granularity all --group-by document` for bounded mixed recall.
 
 Resolve exact span text with `span get`; widen locally with `span expand`. A
-`stale_span` is a revision boundary—inspect prior/current metadata instead of
+`stale_span` is a revision boundary-inspect prior/current metadata instead of
 guessing a replacement.
 
 Search is private/read-only by default. Add `--record` only when the query itself

@@ -2,7 +2,7 @@
 
 Version and safety boundary: these are illustrative fragments, not certified live schemas. Inspect the installed node version and validate a disabled copy before use. Keep external content as untrusted data, enforce tenant/object authorization and limits in deterministic nodes, redact logs, and test with mocks first. Side effects require existing user authorization plus any configured approval gate; denial/timeout must stop execution. A prompt or JSON schema is not an authorization boundary.
 
-Human review gates a tool behind explicit human approval. Until a human approves, the wrapped tool does not run — no matter how confident the agent is. This is the default safety pattern for any agent tool with user-visible side effects.
+Human review gates a tool behind explicit human approval. Until a human approves, the wrapped tool does not run; no matter how confident the agent is. This is the default safety pattern for any agent tool with user-visible side effects.
 
 n8n names this **HITL** / human-in-the-loop in the node IDs (`slackHitlTool`, `discordHitlTool`, …) and "Human Review" in the UI. Same concept.
 
@@ -32,27 +32,27 @@ In workflow JSON, the wrapped tool's `ai_tool` output points at the **review nod
 }
 ```
 
-Do NOT wire the wrapped tool into the agent's `main` input — that flags the wrapped tool as a disconnected node in `validate_workflow`. The wrapped-tool-into-review wiring happens through `ai_tool` only.
+Do NOT wire the wrapped tool into the agent's `main` input; that flags the wrapped tool as a disconnected node in `validate_workflow`. The wrapped-tool-into-review wiring happens through `ai_tool` only.
 
 ---
 
 ## Tell the agent the review is there
 
-Because the agent doesn't see the review node, it doesn't know its tool is gated. Models with safety priors hedge on destructive-looking tools (send, delete, refund, charge): they refuse, ask the user for confirmation first, or pick a less-direct option. With review wrapping the tool, that caution doubles up — the model self-censors AND a human reviews, and sometimes the model never even reaches the review step.
+Because the agent doesn't see the review node, it doesn't know its tool is gated. Models with safety priors hedge on destructive-looking tools (send, delete, refund, charge): they refuse, ask the user for confirmation first, or pick a less-direct option. With review wrapping the tool, that caution doubles up; the model self-censors AND a human reviews, and sometimes the model never even reaches the review step.
 
 If you see the agent over-hedging on a wrapped tool, add a note to the **wrapped tool's description** (per the modular-prompt principle in **SYSTEM_PROMPT.md**):
 
 > This tool is gated by a human review step. Invoke only within the authorized task scope. A human will see the exact parameters and approve before anything is sent. Don't ask the user for confirmation first.
 
-Don't pre-emptively add this to every wrapped tool — many agents use the tool freely without it. Deploy when the symptom (hedging, refusing, talking itself out of trying) actually shows up.
+Don't pre-emptively add this to every wrapped tool; many agents use the tool freely without it. Deploy when the symptom (hedging, refusing, talking itself out of trying) actually shows up.
 
 ---
 
 ## When to default to / recommend human review
 
-- **Sends, pays, refunds, account changes** — anything user-visible and hard to roll back.
-- **The approver differs from the chatter** — a customer triggers a workflow; support staff approves the refund. The customer never sees the approval.
-- **Non-chat triggers** — order received, form submitted, schedule fired. The action is taken on someone's behalf, and a person approves before it runs.
+- **Sends, pays, refunds, account changes**; anything user-visible and hard to roll back.
+- **The approver differs from the chatter**; a customer triggers a workflow; support staff approves the refund. The customer never sees the approval.
+- **Non-chat triggers**; order received, form submitted, schedule fired. The action is taken on someone's behalf, and a person approves before it runs.
 - **Production agent tools** where the cost of a wrong call (money, trust, reputation) outweighs a one-step delay.
 
 Skip review when the tool is read-only, idempotent and cheap to undo, or the deployment is internal/exploratory with mocked services.
@@ -71,7 +71,7 @@ Skip review when the tool is read-only, idempotent and cheap to undo, or the dep
 | `n8n-nodes-base.googleChatHitlTool` | Approval in Google Chat |
 | `n8n-nodes-base.microsoftOutlookHitlTool` | Approval via Outlook |
 
-More platforms are added over time — verify with `search_nodes({ query: 'hitl' })`.
+More platforms are added over time; verify with `search_nodes({ query: 'hitl' })`.
 
 ---
 
@@ -79,11 +79,11 @@ More platforms are added over time — verify with `search_nodes({ query: 'hitl'
 
 `responseType` chooses the response shape the human sees:
 
-- **`approval`** — button-based, sub-configured via `approvalOptions.values.approvalType`:
+- **`approval`**; button-based, sub-configured via `approvalOptions.values.approvalType`:
   - `'single'` (default): one Approve button. The approver acts or ignores.
   - `'double'`: Approve / Disapprove. For actions where disapproval should be a loud, recordable choice.
-- **`freeText`** — the human types a free-form response. For when the agent is genuinely asking a question and any answer is valid.
-- **`customForm`** — a multi-field form (text, dropdown, radio, checkbox, file). **This is the practical answer to "editable parameters"**: define a form whose fields match the wrapped tool's parameters and the human can override what the agent picked.
+- **`freeText`**; the human types a free-form response. For when the agent is genuinely asking a question and any answer is valid.
+- **`customForm`**; a multi-field form (text, dropdown, radio, checkbox, file). **This is the practical answer to "editable parameters"**: define a form whose fields match the wrapped tool's parameters and the human can override what the agent picked.
 
 Do not relabel disapproval as an alternative approved action. Use a validated form/choice step for today versus tomorrow, then approve the exact resulting parameters.
 
@@ -91,11 +91,11 @@ Do not relabel disapproval as an alternative approved action. Use a validated fo
 
 ## Wait timeout
 
-`options.limitWaitTime` (seconds) bounds how long the workflow pauses before erroring out. Timeout units/defaults vary by installed node schema. **Set it explicitly on production workflows** — without it, paused executions sit indefinitely if approvers don't act, and the queue piles up.
+`options.limitWaitTime` (seconds) bounds how long the workflow pauses before erroring out. Timeout units/defaults vary by installed node schema. **Set it explicitly on production workflows**; without it, paused executions sit indefinitely if approvers don't act, and the queue piles up.
 
 ---
 
-## Approval message content — show the ACTUAL parameters
+## Approval message content: show the ACTUAL parameters
 
 The model picked the parameters; the human approves the literal call. Reference the real values via `{{ $tool.parameters.<name> }}`:
 
@@ -117,13 +117,13 @@ The agent wants to call {{ $tool.name }}:
 
 ### Never fill the approval message via `$fromAI()`
 
-`$fromAI()` asks the *model* to produce a value — including, if you let it, the approval text itself. The human would then approve a model-paraphrased description instead of the literal parameters about to be sent. That defeats the entire point of review.
+`$fromAI()` asks the *model* to produce a value; including, if you let it, the approval text itself. The human would then approve a model-paraphrased description instead of the literal parameters about to be sent. That defeats the entire point of review.
 
 ```
-// ❌ WRONG — the model paraphrases what it's about to do
+// ❌ WRONG; the model paraphrases what it's about to do
 message: ={{ $fromAI('approvalText', 'describe the action for approval') }}
 
-// ✅ RIGHT — the literal call is visible
+// ✅ RIGHT; the literal call is visible
 message: =Refund {{ $tool.parameters.amount }} to {{ $tool.parameters.customerId }}?
 ```
 
@@ -153,13 +153,13 @@ A common production shape: a customer chats with an agent on a website (or via e
        → [Slack review tool]  →  [refund / cancel / escalate tool]
 ```
 
-The customer never sees the Slack channel. The Slack review message routes via `slackHitlTool.parameters.user` (a resource locator). On approval, the wrapped tool fires and the agent's response goes back to the customer via the original path. This works without any chat at all — the trigger can be a webhook, schedule, form, or queue; the review tool is the only human-facing surface.
+The customer never sees the Slack channel. The Slack review message routes via `slackHitlTool.parameters.user` (a resource locator). On approval, the wrapped tool fires and the agent's response goes back to the customer via the original path. This works without any chat at all; the trigger can be a webhook, schedule, form, or queue; the review tool is the only human-facing surface.
 
 ---
 
 ## Editable parameters: use customForm
 
-For "approve, but at $40 instead of $50" workflows, use `responseType: 'customForm'`. Verify how the installed node maps form responses: do not assume edits automatically replace the wrapped call. Explicitly validate and bind edited values, then approve the final call; reject mismatches. Don't try to build editable approvals on top of the `approval` type — the form mode is the supported path.
+For "approve, but at $40 instead of $50" workflows, use `responseType: 'customForm'`. Verify how the installed node maps form responses: do not assume edits automatically replace the wrapped call. Explicitly validate and bind edited values, then approve the final call; reject mismatches. Don't try to build editable approvals on top of the `approval` type; the form mode is the supported path.
 
 > Note: the form mode UX is reported to feel like a workaround. Sometimes it's better UX to have the user decline and respond with the change in chat.
 
@@ -167,7 +167,7 @@ For "approve, but at $40 instead of $50" workflows, use `responseType: 'customFo
 
 ## UI quirk: test-data autofill
 
-When building a review tool, click "Approve" once on the canvas test execution. Use mock tool effects; never persist an approval fixture as reusable production authorization. New builders often think the tool is broken because `$tool.parameters.<name>` shows red — that's just missing test data.
+When building a review tool, click "Approve" once on the canvas test execution. Use mock tool effects; never persist an approval fixture as reusable production authorization. New builders often think the tool is broken because `$tool.parameters.<name>` shows red; that's just missing test data.
 
 ---
 

@@ -10,7 +10,7 @@ The subject line determines whether the email gets read. The data is counterintu
 - 2-word subject lines get **60% more opens** than 5-word (Lavender).
 - Going from 2 to 4 words reduces replies by **17.5%**.
 - 2–4 words yield **46% open rates** vs 34% for 10 words (Belkins, 5.5M emails).
-- Mobile truncates at 30–35 characters — brevity is practical necessity.
+- Mobile truncates at 30–35 characters; brevity is practical necessity.
 
 ## Plain, Honest Subject Lines
 
@@ -28,7 +28,7 @@ Personalized subject lines boost opens **26–50%**, but type matters:
 
 - **First name in subject line → 12% fewer replies.** Signals automation.
 - **Contextual personalization works:** pain points, competitors, trigger events, industry challenges.
-- Use {{painPoint}}, {{competitor}}, {{commonGround}} — not {{firstName}}.
+- Use {{painPoint}}, {{competitor}}, {{commonGround}}; not {{firstName}}.
 
 ## Questions: only when highly specific
 

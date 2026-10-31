@@ -1,4 +1,4 @@
-# Customs & Trade Compliance — Communication Templates
+# Customs & Trade Compliance: Communication Templates
 
 > Tier 2 reference. Load when drafting communications with customs brokers, regulatory authorities, internal stakeholders, or trade partners.
 
@@ -14,7 +14,7 @@ evidence and keep the actual submission/approval record.
 
 ## How to Use This File
 
-Select the template closest to your communication need. Fill in all variables. Adjust tone based on the communication patterns guidance in the main SKILL.md. All templates assume US jurisdiction unless otherwise noted — adapt regulatory references for EU, UK, or other jurisdictions as needed.
+Select the template closest to your communication need. Fill in all variables. Adjust tone based on the communication patterns guidance in the main SKILL.md. All templates assume US jurisdiction unless otherwise noted; adapt regulatory references for EU, UK, or other jurisdictions as needed.
 
 ---
 
@@ -27,13 +27,13 @@ Select the template closest to your communication need. Fill in all variables. A
 **To:** {broker_contact_name}, {brokerage_firm}
 **From:** {compliance_contact}, {company}
 **Date:** {date}
-**Re:** Entry Instructions — {PO_number} / {shipment_reference} — {origin_country} to {destination_port}
+**Re:** Entry Instructions; {PO_number} / {shipment_reference}; {origin_country} to {destination_port}
 
 **Shipment Details:**
 
 | Field | Value |
 |---|---|
-| Importer of Record | {IOR_name} — IOR# {IOR_number} |
+| Importer of Record | {IOR_name}; IOR# {IOR_number} |
 | Exporter / Seller | {exporter_name}, {exporter_country} |
 | Ultimate Consignee | {consignee_name}, {consignee_address} |
 | Bill of Lading / AWB | {BOL_or_AWB_number} |
@@ -65,7 +65,7 @@ Select the template closest to your communication need. Fill in all variables. A
 - {If USMCA: "USMCA certification attached with all nine required data elements per Article 5.2."}
 
 **PGA Requirements:**
-- FDA: {Prior notice filed — confirmation # {PN_number} / Not applicable}
+- FDA: {Prior notice filed; confirmation # {PN_number} / Not applicable}
 - EPA/TSCA: {TSCA positive certification attached / Exemption: {basis} / N/A}
 - FCC: {verified applicable equipment authorisation / Supplier Declaration of Conformity; FCC ID only where applicable / N/A}
 - CPSC: {General Certificate of Conformity attached / N/A}
@@ -101,7 +101,7 @@ Office of Trade
 90 K Street NE, 10th Floor
 Washington, DC 20229-1177
 
-**Re: Request for Binding Ruling — Tariff Classification of {product_name}**
+**Re: Request for Binding Ruling; Tariff Classification of {product_name}**
 
 Dear Sir or Madam:
 
@@ -187,7 +187,7 @@ U.S. Customs and Border Protection
 {OR, if CEE has jurisdiction:}
 
 Center Director
-Center of Excellence and Expertise — {CEE_name}
+Center of Excellence and Expertise; {CEE_name}
 {CEE_address}
 
 **Re: Prior Disclosure Pursuant to 19 CFR § 162.74**
@@ -282,7 +282,7 @@ Fines, Penalties and Forfeitures Officer
 U.S. Customs and Border Protection
 {Port/CEE Address}
 
-**Re: Response to {Pre-Penalty Notice / Penalty Notice} — Case No. {case_number}
+**Re: Response to {Pre-Penalty Notice / Penalty Notice}; Case No. {case_number}
 Penalty Claim: ${penalty_amount}
 Entry/Entries: {entry_numbers}**
 
@@ -292,7 +292,7 @@ Dear Sir or Madam:
 
 **1. Summary of CBP's Allegations**
 
-{Concisely restate what CBP alleges. Do not argue yet — demonstrate that you understand the issue.}
+{Concisely restate what CBP alleges. Do not argue yet; demonstrate that you understand the issue.}
 
 **2. Response to Allegations**
 
@@ -321,13 +321,13 @@ Pursuant to CBP's Mitigation Guidelines, {company_name} submits the following mi
 
 Based on the foregoing, {company_name} respectfully requests that CBP:
 
-{Option A — if acknowledging negligence:}
+{Option A; if acknowledging negligence:}
 "Apply the supported statutory treatment or discretionary mitigation identified by counsel: {verified_legal_basis_and_requested_amount}. Do not present prior-disclosure treatment as a general negligence minimum."
 
-{Option B — if contesting entirely:}
+{Option B; if contesting entirely:}
 "Cancel the proposed penalty in its entirety. The entry information, as submitted, was {correct / supported by a reasonable interpretation of the tariff schedule / consistent with prior CBP treatment of this merchandise}."
 
-{Option C — if seeking settlement:}
+{Option C; if seeking settlement:}
 "Accept a settlement in the amount of ${proposed_amount}, representing {calculation basis}, in full resolution of this matter."
 
 Respectfully submitted,
@@ -367,7 +367,7 @@ cc: {Legal counsel}
    Name: {producer_name}
    Company: {company_name}
    Address: {address}
-   {If multiple producers: "Various — see attached list" OR "Available upon request"}
+   {If multiple producers: "Various; see attached list" OR "Available upon request"}
 
 **4. Importer:**
    Name: {importer_name}
@@ -409,15 +409,15 @@ The goods described in this document qualify as originating and the information 
 **To:** {distribution_list: Import Operations, Procurement, Product Development, Legal}
 **From:** {Trade Compliance Team / compliance_officer_name}
 **Date:** {date}
-**Subject:** COMPLIANCE ACTION REQUIRED: {topic} — Effective {effective_date}
+**Subject:** COMPLIANCE ACTION REQUIRED: {topic}; Effective {effective_date}
 
 **BUSINESS IMPACT:**
-{Lead with the operational impact — what changes for the business:}
+{Lead with the operational impact; what changes for the business:}
 
 {Example: "Effective {date}, all imports of {product_category} from {country} will require {new documentation / additional testing / modified classification}. Failure to comply will result in {shipment detention, penalties up to $X per entry, import refusal}. Estimated cost impact: {$X per shipment / $Y annually}."}
 
 **WHAT CHANGED:**
-{Brief regulatory background — 2-3 sentences maximum:}
+{Brief regulatory background; 2-3 sentences maximum:}
 
 {Example: "CBP issued CSMS Message #{number} on {date} implementing {regulation/ruling}. This modifies the requirements for {specific area} under {statutory reference}."}
 
@@ -436,11 +436,11 @@ The goods described in this document qualify as originating and the information 
 - {If applicable: import refusal, product recall, licence revocation}
 
 **QUESTIONS / ESCALATION:**
-Contact {compliance_officer_name} at {email} / {phone}. Do NOT attempt to self-resolve classification or entry questions — route all inquiries to the trade compliance team.
+Contact {compliance_officer_name} at {email} / {phone}. Do NOT attempt to self-resolve classification or entry questions; route all inquiries to the trade compliance team.
 
 ---
 
-## Template 7: Supplier Questionnaire — Origin Determination
+## Template 7: Supplier Questionnaire: Origin Determination
 
 **Use when:** Collecting information from suppliers to determine whether imported goods qualify for preferential treatment under an FTA.
 
@@ -448,13 +448,13 @@ Contact {compliance_officer_name} at {email} / {phone}. Do NOT attempt to self-r
 
 **SUPPLIER ORIGIN QUESTIONNAIRE**
 
-**From:** {importer_company} — Trade Compliance Department
+**From:** {importer_company}; Trade Compliance Department
 **To:** {supplier_company}
 **Date:** {date}
 **Product(s):** {product_description}
 **Applicable FTA:** {USMCA / EU-UK TCA / RCEP / other}
 
-We are evaluating whether the above product(s) qualify for preferential duty treatment under {FTA}. Your responses to the following questions will be used to prepare the required origin certification. Please provide accurate and complete information — incorrect origin claims can result in penalties for both the importer and the exporter.
+We are evaluating whether the above product(s) qualify for preferential duty treatment under {FTA}. Your responses to the following questions will be used to prepare the required origin certification. Please provide accurate and complete information; incorrect origin claims can result in penalties for both the importer and the exporter.
 
 **SECTION A: PRODUCT INFORMATION**
 
@@ -534,13 +534,13 @@ Pursuant to 19 CFR § 177.12, {company_name} respectfully requests reconsiderati
 
 {State the specific grounds:}
 
-{Option A — Error of law:}
+{Option A; Error of law:}
 "The ruling incorrectly applied GRI {X} by {specific error}. The correct application of GRI {X} yields classification under heading {XXXX} because {analysis}."
 
-{Option B — Error of fact:}
+{Option B; Error of fact:}
 "The ruling was based on an incomplete or inaccurate description of the merchandise. Specifically, {identify the factual error and provide the correct facts with supporting evidence}."
 
-{Option C — Changed circumstances:}
+{Option C; Changed circumstances:}
 "Since the issuance of the ruling, {identify the change: new WCO classification opinion, new Explanatory Note, product modification, new CBP ruling on analogous goods} has occurred, warranting reconsideration."
 
 **2. Detailed Analysis**
@@ -578,7 +578,7 @@ cc: {Legal counsel}
 
 ---
 
-## Template 9: Restricted Party Screening — Hit Adjudication Memorandum
+## Template 9: Restricted Party Screening: Hit Adjudication Memorandum
 
 **Use when:** Documenting the adjudication of a restricted party screening hit (false positive clearance or true positive block).
 
@@ -623,15 +623,15 @@ cc: {Legal counsel}
 
 {Select one:}
 
-**[ ] FALSE POSITIVE** — The screened entity is NOT the listed entity. Basis: {specific reasons — e.g., "Different country (screened entity is in Germany; listed entity is in Iran), different industry sector (screened entity is a pharmaceutical distributor; listed entity is an individual designated for terrorism support), no address correlation."}
+**[ ] FALSE POSITIVE**; The screened entity is NOT the listed entity. Basis: {specific reasons; e.g., "Different country (screened entity is in Germany; listed entity is in Iran), different industry sector (screened entity is a pharmaceutical distributor; listed entity is an individual designated for terrorism support), no address correlation."}
 
 **Disposition:** Identity hit cleared by the authorised owner on the documented evidence; transaction release still requires all remaining ownership, destination, item, end-use and licensing checks.
 
-**[ ] TRUE POSITIVE** — Reliable identifiers establish that the screened entity is the listed entity. An unresolved identity belongs in INCONCLUSIVE below.
+**[ ] TRUE POSITIVE**; Reliable identifiers establish that the screened entity is the listed entity. An unresolved identity belongs in INCONCLUSIVE below.
 
 **Disposition:** Operational hold pending authorised compliance/legal decision on the applicable list entry/order, nexus, ownership, prohibition, licence or exception, and any blocking/rejection/reporting duties. Decision basis: {verified_basis}; deadline: {actual_deadline}; owner: {owner}.
 
-**[ ] INCONCLUSIVE** — Cannot determine with confidence. Escalated to {compliance officer} for additional investigation on {date}.
+**[ ] INCONCLUSIVE**; Cannot determine with confidence. Escalated to {compliance officer} for additional investigation on {date}.
 
 **Approved by:** _______________________ Date: ___________
 {Compliance Officer / Manager}

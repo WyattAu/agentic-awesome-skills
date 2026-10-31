@@ -20,7 +20,7 @@ packages/
     package.json  # missing react-native-reanimated
 ```
 
-Autolinking fails—native code not linked.
+Autolinking fails-native code not linked.
 
 **Correct (native dep in app directory):**
 

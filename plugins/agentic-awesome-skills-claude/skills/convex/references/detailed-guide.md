@@ -7,7 +7,7 @@
 Convex is a **document-relational** database with a fully managed backend. Key differentiators:
 
 - **Reactive by default**: Queries automatically re-run and push updates to all connected clients when underlying data changes
-- **TypeScript-first**: All backend logic — queries, mutations, actions, schemas — is written in TypeScript
+- **TypeScript-first**: All backend logic; queries, mutations, actions, schemas; is written in TypeScript
 - **ACID transactions**: Serializable isolation with optimistic concurrency control
 - **No infrastructure to manage**: Serverless, scales automatically, zero config
 - **End-to-end type safety**: Types flow from schema → backend functions → client hooks
@@ -154,13 +154,13 @@ defineTable({ embedding: v.array(v.float64()), text: v.string() }).vectorIndex(
 
 ### Queries (Read Data)
 
-Queries are reactive — clients automatically get updates when data changes.
+Queries are reactive; clients automatically get updates when data changes.
 
 ```typescript
 import { query } from "./_generated/server";
 import { v } from "convex/values";
 
-// Simple query — list all tasks
+// Simple query; list all tasks
 export const list = query({
   args: {},
   handler: async (ctx) => {
@@ -280,7 +280,7 @@ export const transferCredits = mutation({
 
 ### Actions (External APIs & Side Effects)
 
-Actions can call third-party services but cannot directly access the database — they must use `ctx.runQuery` and `ctx.runMutation`.
+Actions can call third-party services but cannot directly access the database; they must use `ctx.runQuery` and `ctx.runMutation`.
 
 ```typescript
 import { action } from "./_generated/server";
@@ -393,7 +393,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
 ```
 
 ```typescript
-// app/layout.tsx — wrap children
+// app/layout.tsx; wrap children
 import { ConvexClientProvider } from "./ConvexClientProvider";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -414,7 +414,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 export function TaskList() {
-  // Reactive query — auto-updates when data changes
+  // Reactive query; auto-updates when data changes
   const tasks = useQuery(api.tasks.list);
   const addTask = useMutation(api.tasks.create);
   const toggleTask = useMutation(api.tasks.update);
@@ -538,7 +538,7 @@ npx convex env set BETTER_AUTH_SECRET  # secure interactive input
 npx convex env set SITE_URL http://localhost:3000
 ```
 
-Better Auth provides email/password, social logins, two-factor authentication, and session management — all running inside Convex functions rather than an external auth server.
+Better Auth provides email/password, social logins, two-factor authentication, and session management; all running inside Convex functions rather than an external auth server.
 
 ### Angular Integration
 
@@ -555,7 +555,7 @@ import { FunctionReturnType } from "convex/server";
 export class ConvexService implements OnDestroy {
   private client = new ConvexClient(environment.convexUrl);
 
-  // Reactive signal — updates automatically when data changes
+  // Reactive signal; updates automatically when data changes
   tasks = signal<FunctionReturnType<typeof api.tasks.list> | undefined>(
     undefined,
   );
@@ -723,14 +723,14 @@ npx convex logs
 
 ## Best Practices
 
-- ✅ Define schemas — adds type safety across your entire stack
-- ✅ Use indexes for queries — avoids full table scans
+- ✅ Define schemas; adds type safety across your entire stack
+- ✅ Use indexes for queries; avoids full table scans
 - ✅ Use compound indexes with equality filters first, range filter last
-- ✅ Rely on native determinism — `Date.now()` and `Math.random()` are handled deterministically by the runtime, but query time does not itself create a timer subscription; do not use Math.random for secrets!
+- ✅ Rely on native determinism; `Date.now()` and `Math.random()` are handled deterministically by the runtime, but query time does not itself create a timer subscription; do not use Math.random for secrets!
 - ✅ Use `v.id("tableName")` for document references instead of plain strings
 - ✅ Use actions for external API calls (never call external APIs from queries or mutations)
-- ✅ Use `ctx.runQuery` / `ctx.runMutation` from actions — never access `ctx.db` directly in actions
-- ✅ Add argument validators to all functions — they enforce runtime type safety
+- ✅ Use `ctx.runQuery` / `ctx.runMutation` from actions; never access `ctx.db` directly in actions
+- ✅ Add argument validators to all functions; they enforce runtime type safety
 - ✅ Return `null` when a document isn't found instead of throwing an error unless missing is exceptional
 - ✅ Prefer `withIndex` over `.filter()` for query performance
 
@@ -747,7 +747,7 @@ npx convex logs
 ## Common Pitfalls
 
 - **Problem:** "Query returns `undefined` on first render"
-  **Solution:** This is expected — Convex queries are async. Check for `undefined` before rendering (this means loading, not empty).
+  **Solution:** This is expected; Convex queries are async. Check for `undefined` before rendering (this means loading, not empty).
 
 - **Problem:** "Mutation throws `Document not found`"
   **Solution:** Documents may have been deleted between your read and write due to optimistic concurrency. Re-read inside the mutation.
@@ -763,13 +763,13 @@ npx convex logs
 
 ## Related Skills
 
-- `@firebase` — Alternative BaaS with Firestore (compare: Convex is TypeScript-first with ACID transactions)
-- `@supabase-automation` — Alternative with PostgreSQL backend (compare: Convex is document-relational with built-in reactivity)
-- `@prisma-expert` — ORM for traditional databases (Convex replaces both ORM and database)
-- `@react-patterns` — Frontend patterns that pair well with Convex React hooks
-- `@nextjs-app-router` — Next.js App Router integration patterns
-- `@authentication-oauth` — Auth patterns (Convex supports Clerk, Auth0, Convex Auth)
-- `@stripe` — Payment integration via Convex actions and HTTP webhooks
+- `@firebase`; Alternative BaaS with Firestore (compare: Convex is TypeScript-first with ACID transactions)
+- `@supabase-automation`; Alternative with PostgreSQL backend (compare: Convex is document-relational with built-in reactivity)
+- `@prisma-expert`; ORM for traditional databases (Convex replaces both ORM and database)
+- `@react-patterns`; Frontend patterns that pair well with Convex React hooks
+- `@nextjs-app-router`; Next.js App Router integration patterns
+- `@authentication-oauth`; Auth patterns (Convex supports Clerk, Auth0, Convex Auth)
+- `@stripe`; Payment integration via Convex actions and HTTP webhooks
 
 ## Resources
 

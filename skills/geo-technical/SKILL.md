@@ -1,6 +1,6 @@
 ---
 name: geo-technical
-description: Technical SEO audit with GEO-specific checks — crawlability, indexability,
+description: Technical SEO audit with GEO-specific checks; crawlability, indexability,
   security, performance, SSR, and AI crawler access
 category: seo
 risk: safe
@@ -30,7 +30,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 
 ## Purpose
 
-Technical SEO forms the foundation of both traditional search visibility and AI search citation. A technically broken site cannot be crawled, indexed, or cited by any platform. This skill audits 8 categories of technical health with specific attention to GEO requirements — including content available in raw HTML and platform-specific crawler access. Rendering and retrieval capabilities vary; crawler permission alone does not ensure indexing or citation.
+Technical SEO forms the foundation of both traditional search visibility and AI search citation. A technically broken site cannot be crawled, indexed, or cited by any platform. This skill audits 8 categories of technical health with specific attention to GEO requirements; including content available in raw HTML and platform-specific crawler access. Rendering and retrieval capabilities vary; crawler permission alone does not ensure indexing or citation.
 
 
 ## Contents
@@ -42,7 +42,7 @@ Technical SEO forms the foundation of both traditional search visibility and AI 
 - [Category 4: URL Structure (8 points)](references/details.md)
 - [Category 5: Mobile Optimization (10 points)](references/details.md)
 - [Category 6: Core Web Vitals (15 points)](references/details.md)
-- [Category 7: Server-Side Rendering (15 points) — CRITICAL FOR GEO](references/details.md)
+- [Category 7: Server-Side Rendering (15 points); CRITICAL FOR GEO](references/details.md)
 - [Category 8: Page Speed & Server Performance (15 points)](references/details.md)
 - [Category 9: Agent-Readiness Signals (non-scoring)](references/details.md)
 - [IndexNow Protocol](references/details.md)

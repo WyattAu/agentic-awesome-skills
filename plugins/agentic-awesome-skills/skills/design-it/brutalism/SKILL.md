@@ -212,7 +212,7 @@ const BrutalistScreen = () => {
 };
 ```
 - Strip away all native feel. Do not use `react-native-elements` or `react-native-paper`.
-- Set `activeOpacity={1}` on `TouchableOpacity` so there is no smooth fade — it should just click instantly.
+- Set `activeOpacity={1}` on `TouchableOpacity` so there is no smooth fade; it should just click instantly.
 - Use pure hex colors: `#FFFFFF`, `#000000`, `#0000FF`.
 
 ### Jetpack Compose

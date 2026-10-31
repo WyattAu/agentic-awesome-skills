@@ -195,7 +195,7 @@ On disconnection, redis-cli automatically attempts to reconnect. It re-selects t
 
 ### Editing and History
 
-- **Line editing**: Built-in linenoise library — no external dependencies
+- **Line editing**: Built-in linenoise library; no external dependencies
 - **History**: Arrow keys (up/down) access previous commands. Stored in `~/.rediscli_history`
 - **Tab completion**: Press TAB to complete command names
 - **Syntax hints**: Shown after entering a command name (toggle with `:set hints` / `:set nohints`)

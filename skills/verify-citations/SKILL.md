@@ -40,15 +40,15 @@ Verify that citations in a document actually resolve and support the claims they
    The anonymous free tier works without the Authorization header. Deep mode (`?deep=true`) costs more credits but cross-checks citations against live web sources.
 
 3. **Interpret the response.** The result includes:
-   - `verification_coverage` — percentage of claims verified (e.g. "78%")
-   - `citations[]` — per-citation status: resolved and matching, resolved but mismatched, or unresolvable, with the issue explained
-   - `arithmetic[]` — recomputed figures vs stated figures (flags decimal shifts, wrong sums)
-   - `unsupported_claims[]` — claims with no citation at all
+   - `verification_coverage`; percentage of claims verified (e.g. "78%")
+   - `citations[]`; per-citation status: resolved and matching, resolved but mismatched, or unresolvable, with the issue explained
+   - `arithmetic[]`; recomputed figures vs stated figures (flags decimal shifts, wrong sums)
+   - `unsupported_claims[]`; claims with no citation at all
 
 4. **Report honestly.** Present results as *verification coverage*, not a truth verdict:
    - "21/27 citations resolve and match"
    - "[x] FY24+FY25 revenue stated $4.2m, actual $3.7m"
-   - "[!] 'industry-leading accuracy' — no source in document"
+   - "[!] 'industry-leading accuracy'; no source in document"
    - Unverified ≠ false. The goal is telling the user *which* claims are backed and which aren't.
 
 5. **Offer remediation.** For failed citations, suggest: fixing the decimal shift, finding the correct source, or removing the unsupported claim.
@@ -59,14 +59,14 @@ Verify that citations in a document actually resolve and support the claims they
 Verification coverage: 78%
 
 Citations: 21/27 resolve and match
-  [+] "ABS unemployment 4.1% April 2026" — matches abs.gov.au
-  [-] "AI adoption grew 340% in 2025" — source states 34%, decimal shifted
+  [+] "ABS unemployment 4.1% April 2026"; matches abs.gov.au
+  [-] "AI adoption grew 340% in 2025"; source states 34%, decimal shifted
 
 Arithmetic: 12/13 recompute correctly
-  [x] FY24 + FY25 revenue — stated $4.2m, actual $3.7m
+  [x] FY24 + FY25 revenue; stated $4.2m, actual $3.7m
 
 Unsupported claims: 2
-  [!] "industry-leading accuracy" — no source in document
+  [!] "industry-leading accuracy"; no source in document
 ```
 
 ## Limitations and Safety

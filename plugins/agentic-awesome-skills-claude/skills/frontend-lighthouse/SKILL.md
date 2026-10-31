@@ -16,8 +16,8 @@ license_source: "https://github.com/stareezy-1/frontend-architecture-skill/blob/
 
 # Frontend Lighthouse (portable performance gate)
 
-> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
-> This skill describes a **CI performance gate** — a Lighthouse CI config plus a workflow — not a
+> Portable skill; readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
+> This skill describes a **CI performance gate**; a Lighthouse CI config plus a workflow; not a
 > component library or a visual style. It pairs with the **frontend-seo** and
 > **frontend-architecture** skills: SEO writes the metadata, Lighthouse supplies a reproducible lab performance signal.
 
@@ -38,7 +38,7 @@ Lighthouse category scores and navigation lab metrics are not field Core Web Vit
 
 ## 0. The five core ideas
 
-1. **One config, one source of truth.** All budgets and assertions live in a single `lighthouserc.cjs`. Named constants for each budget — no magic numbers buried in assertion objects.
+1. **One config, one source of truth.** All budgets and assertions live in a single `lighthouserc.cjs`. Named constants for each budget; no magic numbers buried in assertion objects.
 2. **Gate the production build, never dev.** Lighthouse runs against `build` + `start` (the real, optimized output). Dev-server numbers are meaningless for a budget.
 3. **Multiple runs reduce noise.** Run 3+ times and assert on the median run, to reduce per-run jitter; repeated runs do not eliminate CI noise.
 4. **Separate lab budgets from field thresholds.** Use LCP/CLS lab budgets plus a chosen TBT budget; field INP ≤200 ms needs separate representative field monitoring. Lab category scores do not certify field CWV.
@@ -67,11 +67,11 @@ pnpm add -D @lhci/cli        # or npm i -D / yarn add -D
 ## 2. The config (`lighthouserc.cjs`)
 
 `.cjs` (CommonJS) so it loads without ESM/TS transpilation. Every budget is a **named constant**
-with a comment explaining the threshold — never a bare number inside an assertion.
+with a comment explaining the threshold; never a bare number inside an assertion.
 
 ```js
 /**
- * Lighthouse CI configuration — Core Web Vitals budgets for the marketing surface.
+ * Lighthouse CI configuration; Core Web Vitals budgets for the marketing surface.
  *
  * Enforces Google's mobile "good" CWV thresholds:
  *   - Largest Contentful Paint (LCP) ≤ 2500 ms
@@ -94,7 +94,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 const MARKETING_URLS = [`${BASE_URL}/`];
 
 /**
- * Core Web Vitals budgets on mobile — Google's "good" thresholds.
+ * Core Web Vitals budgets on mobile; Google's "good" thresholds.
  * These are the values that earn the best Lighthouse scores.
  */
 const LCP_BUDGET_MS = 2500; // good
@@ -154,10 +154,10 @@ module.exports = {
 **Hard rules:**
 
 - Every budget is a named constant with a unit in its name (`LCP_BUDGET_MS`) and a comment.
-- `aggregationMethod: "median"` is non-negotiable — single-run gates flake constantly.
+- `aggregationMethod: "median"` is non-negotiable; single-run gates flake constantly.
 - `numberOfRuns` ≥ 3 (odd numbers give a clean median).
 - TBT is a lab diagnostic correlated with responsiveness, not an INP threshold guarantee. Do not configure a nonexistent INP audit; measure field INP separately.
-- Keep `onlyCategories` to exactly what you gate — fewer audits, faster, less noise.
+- Keep `onlyCategories` to exactly what you gate; fewer audits, faster, less noise.
 
 ---
 
@@ -175,7 +175,7 @@ module.exports = {
 | `categories:best-practices` | `error`  | ≥ 0.9     | green band                                            |
 
 Use `error` for contracts that must hold and `warn` for audits that are environment-dependent or
-aspirational. **Start strict and only loosen with a recorded reason** — a budget you keep raising
+aspirational. **Start strict and only loosen with a recorded reason**; a budget you keep raising
 to make CI pass is a budget that no longer protects anything.
 
 ---
@@ -266,7 +266,7 @@ jobs:
 **Hard rules:**
 
 - Trigger on the app path **and** the workflow file so config changes are self-testing.
-- `if: always()` on the upload step — you need the report most when the gate fails.
+- `if: always()` on the upload step; you need the report most when the gate fails.
 - Gate on the **production** build (`pnpm build` then the `start` server in `collect`).
 - Match the CI Node/pnpm versions to the repo's pinned versions to avoid lockfile drift.
 
@@ -285,7 +285,7 @@ The config is framework-neutral except `startServerCommand` and `startServerRead
 | **Vite SPA**  | `npx vite preview --port 3100`                                    | `"Local:"`                                  |
 
 For purely static output you can skip the server and point `collect.staticDistDir` at the build
-folder instead of `startServerCommand` — Lighthouse serves it internally.
+folder instead of `startServerCommand`; Lighthouse serves it internally.
 
 ---
 
@@ -294,14 +294,14 @@ folder instead of `startServerCommand` — Lighthouse serves it internally.
 - **Flaky LCP/TBT** → raise `numberOfRuns` (5), confirm `median`, and make sure nothing else is competing for CPU on the runner.
 - **Unknown audit errors** → remove unsupported audit assertions after checking the pinned Lighthouse audit list; warn does not make a missing audit valid.
 - **"server not ready" timeout** → fix `startServerReadyPattern` to match the framework's actual ready log, and raise `startServerReadyTimeout`.
-- **Real regressions** → open the uploaded report artifact, read the failed audit's "Opportunities"/"Diagnostics", fix the cause (oversized image, render-blocking JS, layout shift from unsized media) — don't just bump the budget.
+- **Real regressions** → open the uploaded report artifact, read the failed audit's "Opportunities"/"Diagnostics", fix the cause (oversized image, render-blocking JS, layout shift from unsized media); don't just bump the budget.
 - **Desktop vs mobile divergence** → run both form factors; mobile is the stricter gate and should be the default.
 
 ---
 
 ## 8. Conventions checklist (enforce in review)
 
-- [ ] All budgets are named constants with units and comments — no magic numbers in assertions.
+- [ ] All budgets are named constants with units and comments; no magic numbers in assertions.
 - [ ] Gate runs against the **production** build, never the dev server.
 - [ ] `aggregationMethod: "median"` with `numberOfRuns` ≥ 3.
 - [ ] Lab budgets explicitly named (LCP ≤2500, chosen TBT ≤200, CLS ≤0.1), with separate field CWV monitoring.
@@ -336,7 +336,7 @@ against the dev server (meaningless numbers) and single-run assertions (chronic 
 This skill follows the Anthropic `SKILL.md` format and is portable across agents.
 
 1. Keep it under `skills/frontend-lighthouse/SKILL.md` in a public GitHub repo.
-2. Keep the frontmatter `name` and high-signal `description` — discovery indexes match against it.
+2. Keep the frontmatter `name` and high-signal `description`; discovery indexes match against it.
 3. Install with: `npx skills add <org>/<repo> --skill "frontend-lighthouse"`.
 4. Non-`SKILL.md` agents can be pointed here from `AGENTS.md` / `CLAUDE.md`; Kiro can mirror it as a steering file.
 

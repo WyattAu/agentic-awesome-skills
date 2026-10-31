@@ -1,13 +1,13 @@
 # Writing the brief
 
 A brief is the entire task as Cursor will see it. It runs in a separate session with **no memory of
-your conversation, no access to prior notes, and no shared context** — only the text you send and
+your conversation, no access to prior notes, and no shared context**; only the text you send and
 whatever it can inspect in the workspace. If a constraint is not in the brief or discoverable in the
 repo, it does not exist for Cursor.
 
 ## Model choice and resumed sessions
 
-Omitting `--model` uses your Cursor default (usually `auto` — Cursor picks the model). Pass
+Omitting `--model` uses your Cursor default (usually `auto`; Cursor picks the model). Pass
 `--model <name>` only with a name from the account's live `cursor-agent models` output. Do not
 invent a name.
 
@@ -50,9 +50,9 @@ End with a report in this exact shape:
 
 Add extra blocks only when the task needs them:
 
-- **Debugging or open-ended fixes** — add `<completeness_contract>` (resolve fully, not just the first
+- **Debugging or open-ended fixes**; add `<completeness_contract>` (resolve fully, not just the first
   plausible cause) and `<missing_context_gating>` (find missing repo facts or state what is unknown).
-- **Research or recommendations** — add `<research_mode>` (separate observed facts, inferences, and
+- **Research or recommendations**; add `<research_mode>` (separate observed facts, inferences, and
   open questions).
 
 ## Always ask for the report explicitly
@@ -81,10 +81,10 @@ dispatches.
 ## Premises freeze at dispatch
 
 The implementer starts from the brief's facts and there is no steering channel mid-run. Audit the
-fact block before sending — ownership, target branch, constraints, anything a judgment call rests
+fact block before sending; ownership, target branch, constraints, anything a judgment call rests
 on. If a premise turns out wrong while the run is live, stop the run and re-dispatch a corrected
 brief rather than discounting the output afterward; for a write-capable run, inspect the working
-tree and reconcile any partial or premise-contaminated edits — keep or revert them — before the
+tree and reconcile any partial or premise-contaminated edits; keep or revert them; before the
 re-dispatch.
 
 ## A worked example
@@ -117,7 +117,7 @@ Report: (1) the root cause and fix, (2) files touched, (3) pytest and ruff outco
 
 ## Delivery
 
-The relay reads the brief from a file or stdin and feeds it to `cursor-agent` on stdin — it never
+The relay reads the brief from a file or stdin and feeds it to `cursor-agent` on stdin; it never
 rides argv, so it is not visible in the host process list and has no OS argument-size cap. Large
 context is still better referenced than inlined: put it in the workspace and tell Cursor which file
 to read.

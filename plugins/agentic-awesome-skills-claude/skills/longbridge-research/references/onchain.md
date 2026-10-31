@@ -2,7 +2,7 @@
 
 Scope: read-only research template; verify current CLI flags/entitlements, cite actual sources and timestamps, and distinguish estimates from observations. Never expose account credentials or raw sensitive error output. Examples and thresholds are illustrative, not current quotes or validated trading signals. Account-specific data is optional and requires user-authorized minimum read access.
 
-On-chain data analysis framework — MVRV, NVT, SOPR, whale behaviour, TVL, and DEX liquidity.
+On-chain data analysis framework; MVRV, NVT, SOPR, whale behaviour, TVL, and DEX liquidity.
 
 ## Workflow
 
@@ -37,7 +37,7 @@ Supported crypto symbols use the `.HAS` suffix (e.g. `BTCUSD.HAS`, `ETHUSD.HAS`,
 ## Output structure
 
 ```
-ON-CHAIN ANALYSIS — <TOKEN>  <Date>
+ON-CHAIN ANALYSIS; <TOKEN>  <Date>
 
 PRICE CONTEXT (Longbridge)
 Current: $xx,xxx   7d: +x.x%   30d: +x.x%

@@ -1,4 +1,4 @@
-# Gotchas — harshmaur/linkedin-jobs-scraper
+# Gotchas: harshmaur/linkedin-jobs-scraper
 
 ## Filters that are exact and filters that are not
 
@@ -42,7 +42,7 @@ Set these only when the user asks to send jobs to an app:
 | `mcpConnector` | The connector ID that the user created in Apify Console (Slack, Notion, Google Sheets and others). |
 | `mcpTarget` | Channel, page or sheet to write to. |
 | `mcpMode` | `perPost` (one message per job, default) or `summary` (one message for the run). |
-| `mcpMessage` | Template with `{{field}}` placeholders, for example `*{{title}}* — {{company}}\n{{url}}`. |
+| `mcpMessage` | Template with `{{field}}` placeholders, for example `*{{title}}*; {{company}}\n{{url}}`. |
 | `mcpMaxItems` | Most jobs to send. Default 50. |
 
 Check scrape and delivery status separately; a successful dataset does not prove delivery succeeded.

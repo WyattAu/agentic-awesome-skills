@@ -5,9 +5,9 @@
 
 > Reference content for the `offensive-osint` skill. Originally §18 + §19 of the monolithic SKILL.md (refactored 2026-05-02 for size/load efficiency).
 
-## 18. Dork Corpus — 80+ templates, 9 categories
+## 18. Dork Corpus: 80+ templates, 9 categories
 
-Substitute `{domain}` with the target domain (e.g., `example.com`) and `{company}` with the company name (e.g., `Acme Corporation`). Run via Google, Bing, Brave, DuckDuckGo, Yandex, Baidu — engines surface different results.
+Substitute `{domain}` with the target domain (e.g., `example.com`) and `{company}` with the company name (e.g., `Acme Corporation`). Run via Google, Bing, Brave, DuckDuckGo, Yandex, Baidu; engines surface different results.
 
 ### 18.1 Files
 
@@ -151,7 +151,7 @@ After running, prioritize each result via URL signature → title hint → snipp
 
 ---
 
-## 19. GitHub Code-Search Dorks for Targets — 13 dorks
+## 19. GitHub Code-Search Dorks for Targets: 13 dorks
 
 Apply each template to `{target}` (root domain stem like `acme`), `{domain}` (full root domain like `acme.com`), and optionally `{company}` (`Acme Corporation`):
 

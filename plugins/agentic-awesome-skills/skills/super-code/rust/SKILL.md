@@ -31,7 +31,7 @@ fn get_name(user: &User) -> String {
     user.name.clone()
 }
 
-// ✅ — return a reference when the data lives long enough
+// ✅; return a reference when the data lives long enough
 fn get_name(user: &User) -> &str {
     &user.name
 }
@@ -54,7 +54,7 @@ fn print_name(name: &str) {
 let key = id.to_string();
 map.get(&key)
 
-// ✅ — use Borrow trait; HashMap<String, V> accepts &str as key
+// ✅; use Borrow trait; HashMap<String, V> accepts &str as key
 map.get(id)
 ```
 
@@ -80,7 +80,7 @@ match do_thing() {
     Err(e) => return Err(e),
 }
 
-// ✅ — the ? operator
+// ✅; the ? operator
 let v = do_thing()?;
 ```
 
@@ -88,7 +88,7 @@ let v = do_thing()?;
 // ❌ Box<dyn Error> everywhere (loses type info)
 fn run() -> Result<(), Box<dyn std::error::Error>> { ... }
 
-// ✅ — use thiserror for library errors, anyhow for application errors
+// ✅; use thiserror for library errors, anyhow for application errors
 use anyhow::{Context, Result};
 fn run() -> Result<()> {
     do_thing().context("failed during run")?;
@@ -100,7 +100,7 @@ fn run() -> Result<()> {
 // ❌ Separate error enum variant for every call site
 enum Error { FileOpen, FileRead, Parse, Network, ... }
 
-// ✅ — use thiserror with #[from] for automatic conversion
+// ✅; use thiserror with #[from] for automatic conversion
 #[derive(thiserror::Error, Debug)]
 enum Error {
     #[error("io error")] Io(#[from] std::io::Error),
@@ -199,7 +199,7 @@ fn area(shape: &Shape) -> f64 {
     }
 }
 
-// ✅ — destructure in pattern
+// ✅; destructure in pattern
 match shape {
     Shape::Circle(Circle { radius, .. }) => radius * radius * PI,
     Shape::Rect(Rect { width, height })  => width * height,
@@ -214,7 +214,7 @@ match shape {
 // ❌ Enum variant carrying bool for binary state
 enum State { Running(bool) } // true = paused?
 
-// ✅ — explicit variants
+// ✅; explicit variants
 enum State { Running, Paused, Stopped }
 ```
 
@@ -226,7 +226,7 @@ struct Config {
     base_url: Option<String>,
 }
 
-// ✅ — use Default + builder pattern or #[derive(Default)] with sensible defaults
+// ✅; use Default + builder pattern or #[derive(Default)] with sensible defaults
 #[derive(Default)]
 struct Config {
     timeout: u64,      // default 0 = no timeout
@@ -239,7 +239,7 @@ struct Config {
 // ❌ pub fields on a type that needs invariants
 pub struct Percentage { pub value: f64 }
 
-// ✅ — private field, constructor enforces invariant
+// ✅; private field, constructor enforces invariant
 pub struct Percentage(f64);
 impl Percentage {
     pub fn new(v: f64) -> Option<Self> {
@@ -256,7 +256,7 @@ impl Percentage {
 // ❌ Arc<Mutex<T>> for read-heavy data
 let data = Arc::new(Mutex::new(vec![...]));
 
-// ✅ — RwLock for read-heavy
+// ✅; RwLock for read-heavy
 let data = Arc::new(RwLock::new(vec![...]));
 ```
 
@@ -266,7 +266,7 @@ for item in items {
     std::thread::spawn(|| process(item));
 }
 
-// ✅ — use rayon for CPU-bound parallel iteration
+// ✅; use rayon for CPU-bound parallel iteration
 use rayon::prelude::*;
 items.par_iter().for_each(|item| process(item));
 ```

@@ -1,6 +1,6 @@
-# Communication Templates — Returns & Reverse Logistics
+# Communication Templates: Returns & Reverse Logistics
 
-> **Reference Type:** Tier 3 — Load on demand when composing or reviewing returns-related communications.
+> **Reference Type:** Tier 3; Load on demand when composing or reviewing returns-related communications.
 >
 > **Usage:** Each template includes variable placeholders in `{{double_braces}}` for direct substitution. Templates are organized by audience and stage. Select the template matching your scenario, substitute variables and prepare a draft for the authorised sender.
 
@@ -76,7 +76,7 @@ Common variables used across templates:
 - Send immediately upon RMA approval to minimise the time the customer holds the product.
 
 ### Tone Guidance
-Warm and efficient. The customer made a decision to return — make it easy. Lead with the actionable information (RMA number, shipping instructions), not the policy.
+Warm and efficient. The customer made a decision to return; make it easy. Lead with the actionable information (RMA number, shipping instructions), not the policy.
 
 ### What NOT to Say
 - Do not ask "are you sure?" or attempt to dissuade the return at this stage.
@@ -85,7 +85,7 @@ Warm and efficient. The customer made a decision to return — make it easy. Lea
 
 ### Template
 
-**Subject:** Your Return Has Been Approved — RMA# {{rma_number}}
+**Subject:** Your Return Has Been Approved; RMA# {{rma_number}}
 
 ---
 
@@ -103,7 +103,7 @@ Your return for **{{product_name}}** (Order {{order_number}}) has been approved.
 4. Drop off the package at any {{carrier_name}} location.
 
 **Important Details:**
-- Please ship your return by **{{rma_expiry}}** — the RMA expires after this date.
+- Please ship your return by **{{rma_expiry}}**; the RMA expires after this date.
 - Once we receive and inspect your return, your refund of **{{refund_amount}}** will be processed to your {{payment_method}} within {{business_days}} business days.
 
 If you have any questions, reply to this email or call us at {{our_contact_phone}}.
@@ -125,12 +125,12 @@ Empathetic but clear. The customer will be disappointed. Acknowledge their situa
 ### What NOT to Say
 - Do not use "unfortunately" more than once.
 - Do not cite policy section numbers or legalistic language.
-- Do not close the door completely — always provide an alternative or escalation path.
+- Do not close the door completely; always provide an alternative or escalation path.
 - Never say "there's nothing we can do."
 
 ### Template
 
-**Subject:** Regarding Your Return Request — Order {{order_number}}
+**Subject:** Regarding Your Return Request; Order {{order_number}}
 
 ---
 
@@ -176,11 +176,11 @@ Neutral and professional. Do not allege fraud without evidence or invent a quali
 - Never say "your return has been flagged."
 - Never reference fraud, theft, or abuse.
 - Never imply the customer has done something wrong.
-- Do not give an indefinite timeline — always commit to a specific review window.
+- Do not give an indefinite timeline; always commit to a specific review window.
 
 ### Template
 
-**Subject:** Your Return is Being Processed — Order {{order_number}}
+**Subject:** Your Return is Being Processed; Order {{order_number}}
 
 ---
 
@@ -203,7 +203,7 @@ Thank you for your patience,
 
 ### Internal Companion Note (Not Sent to Customer)
 
-**Fraud Review — RMA# {{rma_number}}**
+**Fraud Review; RMA# {{rma_number}}**
 
 | Field | Detail |
 |---|---|
@@ -232,7 +232,7 @@ Professional and evidence-based. Vendors respond to data, not complaints. Lead w
 
 ### Template
 
-**Subject:** RTV Claim — {{vendor_account}} — {{claim_number}}
+**Subject:** RTV Claim; {{vendor_account}}; {{claim_number}}
 
 ---
 
@@ -288,7 +288,7 @@ Warm and concise. Lead with the refund amount and timeline. The customer wants t
 
 ### Template
 
-**Subject:** Your Refund Has Been Processed — {{refund_amount}}
+**Subject:** Your Refund Has Been Processed; {{refund_amount}}
 
 ---
 
@@ -326,7 +326,7 @@ Transparent and factual. Explain what the fee covers. Do not be apologetic about
 
 ### Template
 
-**Subject:** Re: Your Return — Restocking Fee Details
+**Subject:** Re: Your Return; Restocking Fee Details
 
 ---
 
@@ -346,7 +346,7 @@ Here's a breakdown:
 
 Under the applicable, verified policy and legal basis {{fee_basis}}, a {{restocking_fee_pct}}% restocking fee applies to this return because {{verified_condition_reason}}. This fee covers the cost of inspecting, testing, and repackaging the product so it can be offered to the next customer at a reduced "open box" price. Once an item has been opened and used, it can no longer be sold as new, and the restocking fee helps offset this value difference.
 
-**Please note:** Restocking fees are waived for defective products and fulfilment errors. If you believe your product was defective, please let us know and we'll review — if a defect is confirmed, we'll refund the restocking fee.
+**Please note:** Restocking fees are waived for defective products and fulfilment errors. If you believe your product was defective, please let us know and we'll review; if a defect is confirmed, we'll refund the restocking fee.
 
 If you'd like to discuss further, please call us at {{our_contact_phone}} or reply to this email.
 
@@ -366,7 +366,7 @@ Formal and thorough. Manufacturers process warranty claims based on documentatio
 
 ### Template
 
-**Subject:** Warranty Claim — {{claim_number}} — {{product_name}}
+**Subject:** Warranty Claim; {{claim_number}}; {{product_name}}
 
 ---
 
@@ -423,7 +423,7 @@ Data-first, concise. Management reads these for trends and exceptions, not prose
 
 ### Template
 
-**Subject:** Returns Disposition Report — {{report_period}}
+**Subject:** Returns Disposition Report; {{report_period}}
 
 ---
 
@@ -491,7 +491,7 @@ Customer-facing version: warm, conveys that you went above and beyond. Internal 
 
 ### Customer-Facing Template
 
-**Subject:** Good News — Your Return Has Been Approved
+**Subject:** Good News; Your Return Has Been Approved
 
 ---
 

@@ -77,7 +77,7 @@ Avoid weak keywords like:
 
 # WORKFLOW
 
-## Step 1 — Analyze
+## Step 1: Analyze
 
 Identify:
 - main subject
@@ -90,7 +90,7 @@ Ignore filler words.
 
 ---
 
-## Step 2 — Generate Keywords
+## Step 2: Generate Keywords
 
 Generate up to 50 strictly SEO-friendly keywords directly from the text.
 
@@ -116,7 +116,7 @@ Keywords must not exceed 4 words.
 
 ---
 
-## Step 3 — Rank
+## Step 3: Rank
 
 Order keywords by SEO importance using these signals:
 1. main topic of the text
@@ -129,7 +129,7 @@ Most important keywords should always appear first.
 
 ---
 
-## Step 4 — Normalize
+## Step 4: Normalize
 
 Ensure:
 - lowercase, comma separated, no duplicates
@@ -140,7 +140,7 @@ Ensure:
 
 ---
 
-## Step 5 — Validate
+## Step 5: Validate
 
 Before returning output ensure:
 - keyword_count <= 50

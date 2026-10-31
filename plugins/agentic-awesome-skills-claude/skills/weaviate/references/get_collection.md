@@ -12,8 +12,8 @@ uv run scripts/get_collection.py --name "CollectionName" [--json]
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `--name` | `-n` | Yes | — | Collection name |
-| `--json` | — | No | `false` | Output in JSON format |
+| `--name` | `-n` | Yes | - | Collection name |
+| `--json` | - | No | `false` | Output in JSON format |
 
 ## Output
 

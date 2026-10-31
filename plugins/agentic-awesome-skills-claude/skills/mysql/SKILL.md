@@ -41,7 +41,7 @@ MySQL and MariaDB are not interchangeable: select exact server/tool versions and
 ## Installation and Setup
 
 ```bash
-# Debian / Ubuntu — MySQL 8
+# Debian / Ubuntu: MySQL 8
 sudo apt update
 sudo apt install -y mysql-server
 

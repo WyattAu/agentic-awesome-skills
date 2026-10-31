@@ -271,7 +271,7 @@ Subject: Quick question about your [PRODUCT] experience
 
 Hey [NAME],
 
-I noticed you've stopped using [PRODUCT]. No worries — these things happen.
+I noticed you've stopped using [PRODUCT]. No worries; these things happen.
 
 If you have 30 seconds, I'd genuinely love to know:
 
@@ -288,14 +288,14 @@ Your feedback directly shapes our roadmap.
 
 Thanks for giving us a try.
 
-— [NAME], [TITLE] at [COMPANY]
+- [NAME], [TITLE] at [COMPANY]
 ```
 
 ### Exit Interview Questions
 
 If they agree to a call (offer a $50 gift card or donation to their choice):
 
-1. **Opening**: "Thanks for chatting. I'm not here to win you back — just want to understand your experience."
+1. **Opening**: "Thanks for chatting. I'm not here to win you back; just want to understand your experience."
 
 2. **Journey**: "Walk me through your experience with [PRODUCT], from signup to today."
 
@@ -358,9 +358,9 @@ Quick update: We [SPECIFIC IMPROVEMENT RELEVANT TO THEIR CHURN REASON].
 [1-2 sentence details with link to changelog/announcement]
 
 If your situation has changed, we'd be happy to have you back.
-If not, no worries — hope you're building great things.
+If not, no worries; hope you're building great things.
 
-— [NAME]
+- [NAME]
 ```
 
 **Email 2: Social proof (Day 45)**
@@ -370,14 +370,14 @@ Subject: How [COMPANY SIMILAR TO THEIRS] uses [PRODUCT] now
 
 Hey [NAME],
 
-Thought you might find this interesting — [SIMILAR COMPANY]
+Thought you might find this interesting; [SIMILAR COMPANY]
 just shared how they're using [PRODUCT] to [RELEVANT USE CASE].
 
 [Link to case study or technical post]
 
 Might spark some ideas for your current project.
 
-— [NAME]
+- [NAME]
 ```
 
 **Email 3: Direct offer (Day 60)**
@@ -396,7 +396,7 @@ Just reply and I'll make it happen.
 
 If not, I'll stop emailing. Thanks for reading this far.
 
-— [NAME]
+- [NAME]
 ```
 
 ### Win-Back Offers
@@ -484,7 +484,7 @@ Measure payment-failure churn separately; its share depends on your customer bas
 **Email 1: Immediate**
 
 ```
-Subject: Payment failed — update your card
+Subject: Payment failed; update your card
 
 Hey [NAME],
 
@@ -494,13 +494,13 @@ Update your card: [LINK]
 
 Your account is still active. We'll retry in 3 days.
 
-— [PRODUCT]
+- [PRODUCT]
 ```
 
 **Email 2: Day 3**
 
 ```
-Subject: Second attempt failed — action needed
+Subject: Second attempt failed; action needed
 
 Hey [NAME],
 
@@ -511,7 +511,7 @@ Update now: [LINK]
 
 Having trouble? Reply and we'll help.
 
-— [PRODUCT]
+- [PRODUCT]
 ```
 
 **Email 3: Day 7**
@@ -530,7 +530,7 @@ This means:
 
 Update your payment: [LINK]
 
-— [PRODUCT]
+- [PRODUCT]
 ```
 
 **Email 4: Day 10**
@@ -550,7 +550,7 @@ Data retention follows [ACTUAL APPROVED POLICY AND DATE].
 
 Questions? Reply to this email.
 
-— [PRODUCT]
+- [PRODUCT]
 ```
 
 ### Recovery Tactics
@@ -634,8 +634,8 @@ Trend: At-risk increased 3% this week (investigate)
 
 ## Related Skills
 
-- `developer-audience-context` — Understand alternatives and pain points
-- `developer-email-sequences` — Re-engagement and win-back emails
-- `competitor-tracking` — Monitor competitive landscape
-- `developer-listening` — Capture feedback before churn
-- `developer-onboarding` — Prevent churn at the source
+- `developer-audience-context`; Understand alternatives and pain points
+- `developer-email-sequences`; Re-engagement and win-back emails
+- `competitor-tracking`; Monitor competitive landscape
+- `developer-listening`; Capture feedback before churn
+- `developer-onboarding`; Prevent churn at the source

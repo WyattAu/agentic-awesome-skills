@@ -131,7 +131,7 @@ ERROR: Cannot find ...\share\format\dll\*.sdb
 
 适合刚拿到一个二进制文件时。
 
-### 硬门禁（MUST — 未满足禁止进入工作流 2 及后续）
+### 硬门禁（MUST: 未满足禁止进入工作流 2 及后续）
 
 对 PE/ELF/Mach-O 等含导入表的二进制，**MUST** 先完成导入表检查并落成 Evidence，再进入函数级分析或动态步骤：
 
@@ -321,7 +321,7 @@ rax2 -s hello
 
 1. `rabin2 -I` 看格式、架构、入口点
 2. `rabin2 -z` 看字符串
-3. `rabin2 -i` 看导入函数 — **MUST + Evidence（硬门，见工作流 1）**
+3. `rabin2 -i` 看导入函数; **MUST + Evidence（硬门，见工作流 1）**
 4. 如需交互分析，再进 `r2`（仅当步骤 3 的 Evidence 已落盘）
 5. 先 `aaa`，再 `afl` / `iz` / `pdf`
 6. 通过字符串引用、导入调用、入口流程逐步定位关键函数

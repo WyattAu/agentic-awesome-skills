@@ -103,13 +103,13 @@ Each prospect is stored as a JSON record:
 Read `~/.geo-prospects/prospects.json` and render a summary table:
 
 ```
-GEO Prospect Pipeline — March 2026
+GEO Prospect Pipeline; March 2026
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ID       Domain                  Company           Status      Score  Value
 ───────  ──────────────────────  ────────────────  ──────────  ─────  ──────
 PRO-001  electron-srl.com        Electron Srl      Qualified   32/100  €4.5K
-PRO-002  acme.com                ACME Corp         Lead        —       —
+PRO-002  acme.com                ACME Corp         Lead       ;       -
 PRO-003  bigshop.it              BigShop           Won         41/100  €6.0K
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -147,7 +147,7 @@ Visual revenue-focused pipeline summary:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-GEO AGENCY PIPELINE SUMMARY — March 2026
+GEO AGENCY PIPELINE SUMMARY; March 2026
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 STAGE          COUNT   POTENTIAL VALUE   NOTES
@@ -156,15 +156,15 @@ Lead             2      €8,000/mo        New discoveries
 Qualified        1      €4,500/mo        Ready for proposal
 Proposal Sent    1      €6,000/mo        Awaiting signature
 Won              3      €18,500/mo       Active clients (MRR)
-Lost             1      —                Budget freeze
+Lost             1     ;                Budget freeze
 
 COMMITTED MRR:        €18,500
 PIPELINE (qualified+): €10,500
 TOTAL POTENTIAL:      €29,000/mo → €348,000/yr
 
 Next actions:
-→ PRO-003 (acme.com): Send proposal — score 38/100 (strong case)
-→ PRO-007 (shop.it): Follow up — proposal sent 8 days ago
+→ PRO-003 (acme.com): Send proposal; score 38/100 (strong case)
+→ PRO-007 (shop.it): Follow up; proposal sent 8 days ago
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 

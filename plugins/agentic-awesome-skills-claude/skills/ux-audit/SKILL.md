@@ -21,7 +21,7 @@ Use this skill when you need audit screens for UX issues using Nielsen's heurist
 - For accessibility-only issues → use `/ss-a11y`
 - For design system token/golden-rule compliance → use `/ss-review`
 - For copy/microcopy quality → use `/ss-copy`
-- For brand new screens that don't exist yet — design first with `/ss-page` or `/ss-flow`
+- For brand new screens that don't exist yet; design first with `/ss-page` or `/ss-flow`
 
 Target: **$ARGUMENTS**
 

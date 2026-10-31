@@ -1,6 +1,6 @@
-# Communication Templates — Quality & Non-Conformance Management
+# Communication Templates: Quality & Non-Conformance Management
 
-> **Reference Type:** Tier 3 — Load on demand when composing or reviewing quality communications.
+> **Reference Type:** Tier 3; Load on demand when composing or reviewing quality communications.
 >
 > **Usage:** Each template includes variable placeholders in `{{double_braces}}` for direct substitution. Templates are organized by audience and situation. Select the template matching your scenario, substitute verified variables and prepare a draft for the authorized owner.
 
@@ -38,7 +38,7 @@ Common variables used across templates:
 | `{{capa_number}}` | CAPA record number | `CAPA-2025-0023` |
 | `{{scar_number}}` | Supplier corrective action request number | `SCAR-2025-0089` |
 | `{{part_number}}` | Part number and revision | `7832-A Rev D` |
-| `{{part_description}}` | Part description | `Shaft, Output — Titanium` |
+| `{{part_description}}` | Part description | `Shaft, Output; Titanium` |
 | `{{lot_number}}` | Lot or batch number | `LOT-2025-4471` |
 | `{{po_number}}` | Purchase order number | `PO-2025-08832` |
 | `{{wo_number}}` | Work order number | `WO-2025-1104` |
@@ -59,7 +59,7 @@ Common variables used across templates:
 | `{{our_company}}` | Our company name | `Advanced Manufacturing Solutions` |
 | `{{date_discovered}}` | Date non-conformance was discovered | `2025-03-15` |
 | `{{response_deadline}}` | Deadline for response | `2025-03-25 (10 business days)` |
-| `{{severity_level}}` | NCR severity classification | `Major — Dimensional non-conformance on key characteristic` |
+| `{{severity_level}}` | NCR severity classification | `Major; Dimensional non-conformance on key characteristic` |
 
 ---
 
@@ -71,11 +71,11 @@ Common variables used across templates:
 - Material has been quarantined; disposition pending
 
 ### Tone Guidance
-Factual and direct. Internal teams need to know what happened, what the scope is, and what the immediate impact is. No blame, no speculation — data only. Include enough detail for engineering to begin their assessment and for planning to evaluate the production impact.
+Factual and direct. Internal teams need to know what happened, what the scope is, and what the immediate impact is. No blame, no speculation; data only. Include enough detail for engineering to begin their assessment and for planning to evaluate the production impact.
 
 ### Template
 
-**Subject:** `{{ncr_number}}: {{part_number}} — {{defect_description}}`
+**Subject:** `{{ncr_number}}: {{part_number}}; {{defect_description}}`
 
 **To:** Manufacturing Engineering, Production Planning, Procurement (if supplier-related), Quality Manager
 **Cc:** Quality file
@@ -86,7 +86,7 @@ Factual and direct. Internal teams need to know what happened, what the scope is
 
 **Date Discovered:** {{date_discovered}}
 **Discovered By:** {{inspector_name}}, {{inspection_stage}} (incoming / in-process / final)
-**Part Number:** {{part_number}} — {{part_description}}
+**Part Number:** {{part_number}}; {{part_description}}
 **Lot/Batch:** {{lot_number}} | Work Order: {{wo_number}} | PO: {{po_number}} (if incoming)
 
 **Non-Conformance Description:**
@@ -124,7 +124,7 @@ MRB meeting scheduled: {{mrb_date_time}}.
 - Audit-trail document; this is what auditors review
 
 ### Tone Guidance
-Formal, precise, and complete. This is a controlled document. Every required field must have verified information or an explicit pending/not-applicable status with rationale. Engineering justification must be technically sound and specific — not "acceptable per engineering review" but a detailed rationale citing functional requirements.
+Formal, precise, and complete. This is a controlled document. Every required field must have verified information or an explicit pending/not-applicable status with rationale. Engineering justification must be technically sound and specific; not "acceptable per engineering review" but a detailed rationale citing functional requirements.
 
 ### Template
 
@@ -150,10 +150,10 @@ Formal, precise, and complete. This is a controlled document. Every required fie
 Example: "The OD measurement of 12.52mm (USL 12.50mm) exceeds the drawing tolerance by 0.02mm. Per engineering analysis EA-2025-0034, this dimension interfaces with bore ID 12.60 +0.05/-0.00mm on mating part 7833-B. Minimum clearance at worst-case stack-up (shaft 12.52mm, bore 12.60mm) is 0.08mm. Assembly requirement per DWG 100-ASSY-Rev C specifies minimum 0.05mm clearance. The 0.08mm clearance meets the functional requirement. No impact to form, fit, or function."
 
 **Risk Assessment (scope and approval per applicable requirements):**
-{{risk_assessment_reference}} (e.g., "Per ISO 14971 risk assessment RA-2025-0012, risk level is acceptable — severity [minor], probability [remote]")
+{{risk_assessment_reference}} (e.g., "Per ISO 14971 risk assessment RA-2025-0012, risk level is acceptable; severity [minor], probability [remote]")
 
 **Customer/Design Authority Approval (as required by the applicable contract, standard and delegated authority):**
-☐ Not required — documented applicability rationale: {{approval_not_required_rationale}} ☐ Requested — Reference: {{customer_approval_ref}} ☐ Approved — Date: {{approval_date}} ☐ Denied
+☐ Not required; documented applicability rationale: {{approval_not_required_rationale}} ☐ Requested; Reference: {{customer_approval_ref}} ☐ Approved; Date: {{approval_date}} ☐ Denied
 
 **Cost Impact:**
 | Item | Amount |
@@ -164,7 +164,7 @@ Example: "The OD measurement of 12.52mm (USL 12.50mm) exceeds the drawing tolera
 | Expedite / replacement | {{expedite_cost}} |
 | **Total NCR cost** | **{{total_cost}}** |
 
-**CAPA Required:** ☐ Yes — {{capa_number}} ☐ No — Rationale: {{no_capa_rationale}}
+**CAPA Required:** ☐ Yes; {{capa_number}} ☐ No; Rationale: {{no_capa_rationale}}
 
 **MRB Attendees and Signatures:**
 
@@ -185,16 +185,16 @@ Example: "The OD measurement of 12.52mm (USL 12.50mm) exceeds the drawing tolera
 - Supplier escalation Level 1 (SCAR issuance)
 
 ### Tone Guidance
-Professional, specific, and structured. Provide all data the supplier needs to investigate. Set clear expectations for the response format and timeline. Do not be accusatory — present the facts and ask for investigation. The supplier's willingness and quality of response will tell you whether this is a fixable issue or a systemic problem.
+Professional, specific, and structured. Provide all data the supplier needs to investigate. Set clear expectations for the response format and timeline. Do not be accusatory; present the facts and ask for investigation. The supplier's willingness and quality of response will tell you whether this is a fixable issue or a systemic problem.
 
 ### What NOT to Say
 - Do not threaten ASL removal in a first-time CAR (save escalation language for Level 2+)
-- Do not speculate on the root cause — that's the supplier's job
+- Do not speculate on the root cause; that's the supplier's job
 - Do not include internal financial impact numbers (the supplier doesn't need to know your downstream costs at this stage)
 
 ### Template
 
-**Subject:** `SCAR-{{scar_number}}: Non-Conformance on PO# {{po_number}} — Response Required by {{response_deadline}}`
+**Subject:** `SCAR-{{scar_number}}: Non-Conformance on PO# {{po_number}}; Response Required by {{response_deadline}}`
 
 **To:** {{supplier_contact}}, {{supplier_name}}
 **Cc:** {{our_quality_contact}}, Procurement buyer
@@ -214,7 +214,7 @@ Professional, specific, and structured. Provide all data the supplier needs to i
 - Contact: {{supplier_contact}}
 
 **Non-Conformance Details:**
-- Part Number: {{part_number}} — {{part_description}}
+- Part Number: {{part_number}}; {{part_description}}
 - PO Number: {{po_number}}
 - Lot/Batch: {{lot_number}}
 - Quantity Received: {{quantity_total}}
@@ -238,15 +238,15 @@ Professional, specific, and structured. Provide all data the supplier needs to i
 {{impact_summary}} (e.g., "Production line held pending disposition. Estimated 3-day impact to customer delivery schedule.")
 
 **Required Response (use 8D format or equivalent):**
-1. **Containment actions** — immediate actions to protect our inventory and any other customers who may have received material from the same lot. Confirm whether other lots from the same production run may be affected.
-2. **Root cause analysis** — we require a rigorous root cause investigation, not a surface-level explanation. "Operator error" or "inspection escape" are not acceptable root causes. Identify the systemic process or system failure that allowed this non-conformance.
-3. **Corrective actions** — specific, measurable actions addressing the verified root cause. Include implementation dates and responsible personnel.
-4. **Effectiveness verification plan** — how and when will you verify that the corrective actions are effective?
+1. **Containment actions**; immediate actions to protect our inventory and any other customers who may have received material from the same lot. Confirm whether other lots from the same production run may be affected.
+2. **Root cause analysis**; we require a rigorous root cause investigation, not a surface-level explanation. "Operator error" or "inspection escape" are not acceptable root causes. Identify the systemic process or system failure that allowed this non-conformance.
+3. **Corrective actions**; specific, measurable actions addressing the verified root cause. Include implementation dates and responsible personnel.
+4. **Effectiveness verification plan**; how and when will you verify that the corrective actions are effective?
 
 **Disposition of Nonconforming Material:**
-☐ Return to Vendor — please issue RMA# and shipping instructions
-☐ Sort at our facility — proposed sort cost allocation requires contractual review and approval
-☐ Scrap at our facility — proposed material credit requires contractual review and approval
+☐ Return to Vendor; please issue RMA# and shipping instructions
+☐ Sort at our facility; proposed sort cost allocation requires contractual review and approval
+☐ Scrap at our facility; proposed material credit requires contractual review and approval
 
 **Contact for Questions:**
 {{our_quality_contact}} | {{our_quality_email}} | {{our_quality_phone}}
@@ -278,7 +278,7 @@ Structured and factual. The initiation record sets the scope and expectations fo
 **Problem Statement:**
 {{problem_statement}}
 
-Example: "Recurring dimensional non-conformance on Part 7832-A Rev D — bore diameter out of tolerance (>USL of 12.50mm). Three NCRs in the last 60 days (NCR-2025-0398, -0412, -0456) affecting lots from three different production runs. Total scrap cost to date: $14,200. No customer impact confirmed, but risk of escape exists based on inspection sampling rates."
+Example: "Recurring dimensional non-conformance on Part 7832-A Rev D; bore diameter out of tolerance (>USL of 12.50mm). Three NCRs in the last 60 days (NCR-2025-0398, -0412, -0456) affecting lots from three different production runs. Total scrap cost to date: $14,200. No customer impact confirmed, but risk of escape exists based on inspection sampling rates."
 
 **Scope:**
 - Product(s) affected: {{products_affected}}
@@ -318,7 +318,7 @@ Example: "Recurring dimensional non-conformance on Part 7832-A Rev D — bore di
 - Documents the evidence of effectiveness and the closure/extension decision
 
 ### Tone Guidance
-Data-driven and conclusive. The effectiveness review is where the CAPA either closes with evidence of success or reopens with evidence of failure. Auditors specifically review effectiveness evidence — it must be quantitative and linked to the original problem statement.
+Data-driven and conclusive. The effectiveness review is where the CAPA either closes with evidence of success or reopens with evidence of failure. Auditors specifically review effectiveness evidence; it must be quantitative and linked to the original problem statement.
 
 ### Template
 
@@ -349,9 +349,9 @@ Data-driven and conclusive. The effectiveness review is where the CAPA either cl
 | Recurrence count | {{baseline_recurrence}} | {{approved_recurrence_criterion}} | {{actual_recurrence}} | ☐ Pass ☐ Fail |
 
 **Conclusion:**
-☐ **CAPA Effective — Recommend authorized closure.** Approved effectiveness criteria met with adequate exposure and stated uncertainty; implementation and adverse-effect checks documented.
-☐ **CAPA Partially Effective — Extend monitoring.** Improvement demonstrated but monitoring period insufficient for definitive conclusion. Extend by {{extension_days}} days.
-☐ **CAPA Not Effective — Recommend controlled reassessment/reopening or linked investigation.** Recurrence observed during monitoring period. Root cause re-investigation required. See {{reopened_investigation_ref}}.
+☐ **CAPA Effective; Recommend authorized closure.** Approved effectiveness criteria met with adequate exposure and stated uncertainty; implementation and adverse-effect checks documented.
+☐ **CAPA Partially Effective; Extend monitoring.** Improvement demonstrated but monitoring period insufficient for definitive conclusion. Extend by {{extension_days}} days.
+☐ **CAPA Not Effective; Recommend controlled reassessment/reopening or linked investigation.** Recurrence observed during monitoring period. Root cause re-investigation required. See {{reopened_investigation_ref}}.
 
 **Reviewed By:**
 
@@ -418,10 +418,10 @@ We acknowledge receipt of the finding. {{verified_response_and_any_supported_dis
 
 ### When to Use
 - Non-conformance discovered on product already shipped to the customer
-- Proactive notification — the customer should hear about it from you before they discover it themselves
+- Proactive notification; the customer should hear about it from you before they discover it themselves
 
 ### Tone Guidance
-Transparent, action-oriented, and structured. Lead with what you know and what you've done (containment), not with excuses. Provide the specific traceability data the customer needs to identify and segregate affected product in their inventory. The customer will judge your quality system based on how you handle this notification — transparency and speed build trust; delay and vagueness destroy it.
+Transparent, action-oriented, and structured. Lead with what you know and what you've done (containment), not with excuses. Provide the specific traceability data the customer needs to identify and segregate affected product in their inventory. The customer will judge your quality system based on how you handle this notification; transparency and speed build trust; delay and vagueness destroy it.
 
 ### What NOT to Say
 - Do not minimize: "A minor issue was detected" when you don't yet know the scope
@@ -430,7 +430,7 @@ Transparent, action-oriented, and structured. Lead with what you know and what y
 
 ### Template
 
-**Subject:** `Quality Notification: {{part_number}} — {{defect_description}} — Action Required`
+**Subject:** `Quality Notification: {{part_number}}; {{defect_description}}; Action Required`
 
 **To:** {{customer_contact}}, {{customer_name}}
 **Cc:** {{our_quality_contact}}, Account Manager
@@ -448,7 +448,7 @@ Dear {{customer_contact}},
 We are contacting you to notify you of a quality concern with material we have supplied.
 
 **Affected Product:**
-- Part Number: {{part_number}} — {{part_description}}
+- Part Number: {{part_number}}; {{part_description}}
 - Lot Number(s): {{lot_numbers}}
 - Serial Number(s): {{serial_numbers}} (if applicable)
 - Ship Date(s): {{ship_dates}}
@@ -538,7 +538,7 @@ Objective and balanced. Report what was observed, both strengths and deficiencie
 - Temporary enhanced inspection or containment measure
 
 ### Tone Guidance
-Urgent, clear, and actionable. This goes to the production floor — operators, supervisors, inspectors. Use plain language. Include photographs if possible. Specify exactly what to do and what to look for. This is not a request for analysis; it's an instruction for immediate action.
+Urgent, clear, and actionable. This goes to the production floor; operators, supervisors, inspectors. Use plain language. Include photographs if possible. Specify exactly what to do and what to look for. This is not a request for analysis; it's an instruction for immediate action.
 
 ### Template
 
@@ -546,10 +546,10 @@ Urgent, clear, and actionable. This goes to the production floor — operators, 
 
 **Alert Number:** QA-{{alert_number}}
 **Date Issued:** {{date_issued}}
-**Effective Immediately — Until Rescinded**
+**Effective Immediately; Until Rescinded**
 
-**Affected Part(s):** {{part_number}} — {{part_description}}
-**Affected Area(s):** {{production_areas}} (e.g., "Line 3 — CNC Turning, Incoming Inspection, Final Inspection, Shipping")
+**Affected Part(s):** {{part_number}}; {{part_description}}
+**Affected Area(s):** {{production_areas}} (e.g., "Line 3; CNC Turning, Incoming Inspection, Final Inspection, Shipping")
 
 **Issue:**
 {{issue_description_plain_language}}
@@ -559,7 +559,7 @@ Urgent, clear, and actionable. This goes to the production floor — operators, 
 
 **Required Action:**
 1. {{action_1}} (e.g., "100% inspect all WIP on this part number for the affected dimension before releasing to the next operation")
-2. {{action_2}} (e.g., "Segregate and tag any nonconforming parts found — do NOT scrap without Quality Engineering authorization")
+2. {{action_2}} (e.g., "Segregate and tag any nonconforming parts found; do NOT scrap without Quality Engineering authorization")
 3. {{action_3}} (e.g., "Notify Quality Engineering immediately if any additional nonconforming parts are found: {{contact_info}}")
 
 **This alert remains in effect until:** {{rescind_condition}} (e.g., "written notification from Quality Engineering that the root cause has been addressed and verified")
@@ -575,11 +575,11 @@ Urgent, clear, and actionable. This goes to the production floor — operators, 
 - Summarizes key metrics, significant quality events, CAPA status, and cost of quality
 
 ### Tone Guidance
-Executive-level. Lead with the headline — is quality performance improving, stable, or deteriorating? Then provide the supporting data. Managers need to understand trend direction and business impact, not individual NCR details. Use charts and tables; minimize narrative.
+Executive-level. Lead with the headline; is quality performance improving, stable, or deteriorating? Then provide the supporting data. Managers need to understand trend direction and business impact, not individual NCR details. Use charts and tables; minimize narrative.
 
 ### Template
 
-**QUALITY MANAGEMENT REVIEW — {{review_period}}**
+**QUALITY MANAGEMENT REVIEW; {{review_period}}**
 
 **Prepared By:** {{quality_manager}}
 **Date:** {{date}}
@@ -606,8 +606,8 @@ Executive-level. Lead with the headline — is quality performance improving, st
 
 | Status | Count |
 |---|---|
-| Open — On Track | {{on_track}} |
-| Open — Overdue | {{overdue}} |
+| Open; On Track | {{on_track}} |
+| Open; Overdue | {{overdue}} |
 | Closed This Period | {{closed}} |
 | Effectiveness Verified | {{verified}} |
 
@@ -629,7 +629,7 @@ Executive-level. Lead with the headline — is quality performance improving, st
 | **Total COQ** | **{{total_coq}}** | **{{total_coq_pct}}** |
 
 **Actions Required from Management:**
-1. {{action_request_1}} (e.g., "Approve capital expenditure for automated inspection system — ROI analysis attached")
+1. {{action_request_1}} (e.g., "Approve capital expenditure for automated inspection system; ROI analysis attached")
 2. {{action_request_2}} (e.g., "Decision needed on Supplier X escalation to Level 3 / alternate source qualification")
 
 ---
@@ -639,15 +639,15 @@ Executive-level. Lead with the headline — is quality performance improving, st
 ### When to Use
 - Formal response to FDA Form 483 observations
 - Prepare promptly under current FDA instructions and applicable response expectations; verify the trigger/date and distinguish response from completion of all corrective actions.
-- This is a critical document — it becomes part of the public FDA inspection record
+- This is a critical document; it becomes part of the public FDA inspection record
 
 ### Tone Guidance
 Respectful, thorough, and accountable. Acknowledge each observation. Do not argue, minimize, or blame individuals. Demonstrate that you understand the intent of the regulations, not just the words. FDA reviewers specifically evaluate whether your response addresses the systemic issue, not just the specific observation.
 
 ### What NOT to Say
-- Unsupported disagreement or automatic admissions — acknowledge receipt and explain any evidence-supported position accurately
-- "This was an isolated incident" — FDA explicitly looks for systemic issues
-- "Employee has been terminated" — this is punitive, not corrective; FDA wants system fixes
+- Unsupported disagreement or automatic admissions; acknowledge receipt and explain any evidence-supported position accurately
+- "This was an isolated incident"; FDA explicitly looks for systemic issues
+- "Employee has been terminated"; this is punitive, not corrective; FDA wants system fixes
 - "We will address this" without specific actions, dates, and responsible parties
 
 ### Template

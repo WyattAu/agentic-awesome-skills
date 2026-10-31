@@ -15,7 +15,7 @@ Work like Manus: Use persistent markdown files as your "working memory on disk."
 When using this skill:
 
 - **Templates** are stored in the skill directory at `${CLAUDE_PLUGIN_ROOT}/templates/`
-- **Your planning files** (`task_plan.md`, `findings.md`, `progress.md`) should be created in **your project directory** — the folder where you're working
+- **Your planning files** (`task_plan.md`, `findings.md`, `progress.md`) should be created in **your project directory**; the folder where you're working
 
 | Location | What Goes There |
 |----------|-----------------|
@@ -28,11 +28,11 @@ This ensures your planning files live alongside your code, not buried in the ski
 
 For an authorized complex task, reuse its existing plan/state or create these files only if appropriate:
 
-1. **Create `task_plan.md`** in your project — Use [templates/task_plan.md](templates/task_plan.md) as reference
-2. **Create `findings.md`** in your project — Use [templates/findings.md](templates/findings.md) as reference
-3. **Create `progress.md`** in your project — Use [templates/progress.md](templates/progress.md) as reference
-4. **Re-read plan before decisions** — Refreshes goals in attention window
-5. **Update after each phase** — Mark complete, log errors
+1. **Create `task_plan.md`** in your project; Use [templates/task_plan.md](templates/task_plan.md) as reference
+2. **Create `findings.md`** in your project; Use [templates/findings.md](templates/findings.md) as reference
+3. **Create `progress.md`** in your project; Use [templates/progress.md](templates/progress.md) as reference
+4. **Re-read plan before decisions**; Refreshes goals in attention window
+5. **Update after each phase**; Mark complete, log errors
 
 > **Note:** All three planning files should be created in your current working directory (your project root), not in the skill's installation folder.
 
@@ -159,16 +159,16 @@ If you can answer these, your context management is solid:
 
 Copy these templates to start:
 
-- [templates/task_plan.md](templates/task_plan.md) — Phase tracking
-- [templates/findings.md](templates/findings.md) — Research storage
-- [templates/progress.md](templates/progress.md) — Session logging
+- [templates/task_plan.md](templates/task_plan.md); Phase tracking
+- [templates/findings.md](templates/findings.md); Research storage
+- [templates/progress.md](templates/progress.md); Session logging
 
 ## Scripts
 
 Helper scripts for automation:
 
-- `scripts/init-session.sh` — Initialize all planning files
-- `scripts/check-complete.sh` — Verify all phases complete
+- `scripts/init-session.sh`; Initialize all planning files
+- `scripts/check-complete.sh`; Verify all phases complete
 
 ## Advanced Topics
 

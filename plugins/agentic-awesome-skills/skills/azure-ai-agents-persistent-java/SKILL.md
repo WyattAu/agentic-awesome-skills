@@ -126,9 +126,9 @@ administration.deleteAgent(agent.getId());
 ## Best Practices
 
 1. **Use DefaultAzureCredential** for production authentication
-2. **Poll with appropriate delays** — 500ms recommended between status checks
-3. **Clean up resources** — Delete threads and agents when done
-4. **Handle all run statuses** — Check for RequiresAction, Failed, Cancelled
+2. **Poll with appropriate delays**; 500ms recommended between status checks
+3. **Clean up resources**; Delete threads and agents when done
+4. **Handle all run statuses**; Check for RequiresAction, Failed, Cancelled
 5. **Use async client** for better throughput in high-concurrency scenarios
 
 ## Error Handling

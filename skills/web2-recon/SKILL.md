@@ -82,14 +82,14 @@ which subfinder httpx dnsx nuclei katana waybackurls gau dalfox ffuf anew gf int
 ```bash
 TARGET="target.com"
 
-# Step 0: Passive — crt.sh certificate transparency (no API key needed)
+# Step 0: Passive: crt.sh certificate transparency (no API key needed)
 curl -s "https://crt.sh/?q=%.${TARGET}&output=json" \
   | jq -r '.[].name_value' \
   | sed 's/\*\.//g' \
   | sort -u > /tmp/subs.txt
 echo "[+] crt.sh: $(wc -l < /tmp/subs.txt) subdomains"
 
-# Step 1: Chaos API (ProjectDiscovery — most comprehensive source)
+# Step 1: Chaos API (ProjectDiscovery: most comprehensive source)
 curl -s "https://dns.projectdiscovery.io/dns/$TARGET/subdomains" \
   -H "Authorization: $CHAOS_API_KEY" \
   | jq -r '.[]' >> /tmp/subs.txt
@@ -210,7 +210,7 @@ deactivate
 
 ## DIRECTORY FUZZING
 
-### ffuf — Standard Fuzzing
+### ffuf: Standard Fuzzing
 
 ```bash
 # Directory discovery on a live host
@@ -240,7 +240,7 @@ ffuf -request /tmp/req.txt \
 
 ---
 
-## TARGET SCORING — GO / NO-GO
+## TARGET SCORING: GO / NO-GO
 
 Score before spending time. Skip if score < 4.
 
@@ -258,8 +258,8 @@ Score before spending time. Skip if score < 4.
 
 **< 4:** Skip
 **4-5:** Only if nothing better available
-**6-8:** Good — spend 1-3 days
-**>= 9:** Excellent — spend up to 1 week
+**6-8:** Good; spend 1-3 days
+**>= 9:** Excellent; spend up to 1 week
 
 ### Pre-Dive Hard Kill Signals
 
@@ -358,10 +358,10 @@ fi
 
 ---
 
-## PORT SCANNING (often skipped — don't skip)
+## PORT SCANNING (often skipped: don't skip)
 
 ```bash
-# naabu — fast port scanner from ProjectDiscovery
+# naabu: fast port scanner from ProjectDiscovery
 # Finds non-standard ports: 8080, 8443, 3000, 8888, 9000, etc.
 cat /tmp/live.txt | awk '{print $1}' | naabu -port 80,443,8080,8443,3000,4000,5000,8000,8888,9000,9090,9200,6379 -silent | tee /tmp/open-ports.txt
 
@@ -372,12 +372,12 @@ cat /tmp/live.txt | awk '{print $1}' | naabu -port 80,443,8080,8443,3000,4000,50
 ## SECRET SCANNING IN JS BUNDLES
 
 ```bash
-# trufflehog — high-signal secret detection with entropy analysis
+# trufflehog: high-signal secret detection with entropy analysis
 # Scans JS files and git repos
 # Install a separately reviewed official TruffleHog version if authorized; trufflehog3 is a different package.
 # Disable credential verification/network use for a static inventory; never test discovered secrets without separate scope.
 
-# SecretFinder — manual JS bundle scan (already in tools/)
+# SecretFinder: manual JS bundle scan (already in tools/)
 source ~/tools/SecretFinder/.venv/bin/activate
 cat /tmp/urls.txt | grep "\.js$" | head -100 | while read url; do
   python3 ~/tools/SecretFinder/SecretFinder.py -i "$url" -o cli 2>/dev/null
@@ -422,7 +422,7 @@ python3 ~/tools/GitDorker/GitDorker.py -t GITHUB_TOKEN -d ~/tools/GitDorker/Dork
 ## When to Use
 
 - You have explicit, written authorization to assess the target in scope, and the task matches this skill's vulnerability class or technique within a bug-bounty or penetration-test engagement.
-- You need the recon, exploitation, or validation workflow described below — executed strictly inside the approved scope.
+- You need the recon, exploitation, or validation workflow described below; executed strictly inside the approved scope.
 
 ## Limitations
 

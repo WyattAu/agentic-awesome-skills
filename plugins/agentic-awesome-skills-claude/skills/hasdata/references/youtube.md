@@ -2,7 +2,7 @@
 
 | Endpoint | Returns |
 |---|---|
-| `/scrape/youtube/search` | Search results — videos, shorts, channels, playlists |
+| `/scrape/youtube/search` | Search results; videos, shorts, channels, playlists |
 | `/scrape/youtube/video` | Single video metadata (stats, captions, related) |
 | `/scrape/youtube/channel` | Channel home / videos / shorts / playlists / community |
 | `/scrape/youtube/transcript` | Full transcript with millisecond offsets |
@@ -41,7 +41,7 @@ for v in resp.json().get("videoResults", []):
 
 Response: `videoResults`, `shortsResults`, `channelResults`, `playlistResults`, `adsResults`, `sponsoredResults`, `searchInformation`, `pagination`.
 
-Per-video result keys (illustrative snapshot; verify current schema): `videoId`, `title`, `link`, `channel`, `description`, `length`, `views`, `viewsOriginal`, `publishedDate`, `thumbnail`, `positionOnPage`. `channel` is an object — read `.channel.name` and `.channel.link`.
+Per-video result keys (illustrative snapshot; verify current schema): `videoId`, `title`, `link`, `channel`, `description`, `length`, `views`, `viewsOriginal`, `publishedDate`, `thumbnail`, `positionOnPage`. `channel` is an object; read `.channel.name` and `.channel.link`.
 
 ## YouTube Video
 
@@ -56,7 +56,7 @@ resp = requests.get(
 
 | Param | Notes |
 |---|---|
-| `v` | **Required.** 11-character YouTube video ID — the `v=` query value. |
+| `v` | **Required.** 11-character YouTube video ID; the `v=` query value. |
 | `gl` / `hl` | Country / language. |
 | `deviceType` | `desktop` / `mobile`. |
 
@@ -86,7 +86,7 @@ Response: `channelInfo`, `featuredVideo`, `sections[]`.
 
 `channelInfo` (illustrative snapshot; verify current schema): `name`, `handle`, `channelId`, `channelUrl`, `avatar`, `banner`, `description`, `subscribers`, `extractedSubscribers`, `videosCount`, `extractedVideosCount`, `keywords[]`, `availableTabs[]`, `verified`, `websiteUrl`, `rssUrl`, `isFamilySafe`.
 
-`sections[]` each have `title` + `items[]` — shape depends on the tab. Iterate generically:
+`sections[]` each have `title` + `items[]`; shape depends on the tab. Iterate generically:
 
 ```python
 for sec in resp.json().get("sections", []):
@@ -181,6 +181,6 @@ def mentions(video_id, needle):
 - **`languageCode` must exist on the video.** Inspect `availableTranscripts[]` if a fetch fails, then retry.
 - **`type=asr` is required when no human-authored caption track exists.** Otherwise the API errors on videos with auto-only captions.
 - **`@handle` resolves to the same channel as the canonical `UC…` ID.** Prefer handles for readability.
-- **Pagination tokens are opaque** — pass them back verbatim via `paginationToken`.
+- **Pagination tokens are opaque**; pass them back verbatim via `paginationToken`.
 - **`extractedViews` / `extractedLikes`** are integers; `views` / `likes` are formatted strings. Use the integer fields for arithmetic.
-- **`channelInfo.rssUrl`** is the canonical RSS feed for the channel — use it to subscribe in podcast clients without scraping.
+- **`channelInfo.rssUrl`** is the canonical RSS feed for the channel; use it to subscribe in podcast clients without scraping.

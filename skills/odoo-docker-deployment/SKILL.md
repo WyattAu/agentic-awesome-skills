@@ -99,8 +99,8 @@ log_level = warn
 ; Illustrative worker count; size HTTP+cron+PostgreSQL+OS within measured RAM:
 workers = 4
 max_cron_threads = 2
-limit_memory_soft = 1610612736   ; 1.5 GB — soft kill threshold
-limit_memory_hard = 2147483648   ; 2.0 GB — hard kill threshold
+limit_memory_soft = 1610612736   ; 1.5 GB; soft kill threshold
+limit_memory_hard = 2147483648   ; 2.0 GB; hard kill threshold
 limit_time_cpu = 600
 limit_time_real = 1200
 limit_request = 8192
@@ -115,7 +115,7 @@ docker compose up -d
 # Stream Odoo logs in real time
 docker compose logs -f odoo
 
-# Restart Odoo only (not DB — avoids data risk)
+# Restart Odoo only (not DB: avoids data risk)
 docker compose restart odoo
 
 # Stop all services
@@ -132,17 +132,17 @@ Compose expands `${VAR}` in the Compose file, not arbitrary mounted application 
 
 ## Best Practices
 
-- ✅ **Do:** Store all secrets in a `.env` file and reference them with `${VAR}` — never hardcode passwords in `docker-compose.yml`.
+- ✅ **Do:** Store all secrets in a `.env` file and reference them with `${VAR}`; never hardcode passwords in `docker-compose.yml`.
 - ✅ **Do:** Use `depends_on: condition: service_healthy` with a PostgreSQL healthcheck to prevent Odoo starting before the DB is ready.
-- ✅ **Do:** Put Nginx in front of Odoo for SSL termination (Let's Encrypt / Certbot) — never expose Odoo directly on port 80/443.
+- ✅ **Do:** Put Nginx in front of Odoo for SSL termination (Let's Encrypt / Certbot); never expose Odoo directly on port 80/443.
 - ✅ **Do:** Measure worker memory and concurrency; a CPU heuristic alone cannot guarantee a safe RAM budget.
-- ❌ **Don't:** Expose port 5432 (PostgreSQL) to the public internet — keep it on the internal Docker network only.
-- ❌ **Don't:** Use the `latest` or `17` Docker image tags in production — pin a reviewed image digest; `odoo:17.0` is a mutable series tag, not an immutable patch identity.
-- ❌ **Don't:** Mount `odoo.conf` and rely on it for secrets in CI/CD — use Docker secrets or environment variables instead.
+- ❌ **Don't:** Expose port 5432 (PostgreSQL) to the public internet; keep it on the internal Docker network only.
+- ❌ **Don't:** Use the `latest` or `17` Docker image tags in production; pin a reviewed image digest; `odoo:17.0` is a mutable series tag, not an immutable patch identity.
+- ❌ **Don't:** Mount `odoo.conf` and rely on it for secrets in CI/CD; use Docker secrets or environment variables instead.
 
 ## Limitations
 
-- This skill covers **self-hosted Docker deployments** — Odoo.sh (cloud-managed hosting) has a completely different deployment model.
+- This skill covers **self-hosted Docker deployments**; Odoo.sh (cloud-managed hosting) has a completely different deployment model.
 - **Horizontal scaling** (multiple Odoo containers behind a load balancer) requires shared filestore (NFS or S3-compatible storage) not covered here.
-- Does not include an Nginx configuration template — consult the [official Odoo Nginx docs](https://www.odoo.com/documentation/17.0/administration/install/deploy.html) for the full reverse proxy config.
-- The `addons_path` inside the Docker image may change with new base image versions — always verify after upgrading the Odoo image.
+- Does not include an Nginx configuration template; consult the [official Odoo Nginx docs](https://www.odoo.com/documentation/17.0/administration/install/deploy.html) for the full reverse proxy config.
+- The `addons_path` inside the Docker image may change with new base image versions; always verify after upgrading the Odoo image.

@@ -24,7 +24,7 @@ metadata:
 # Mobile Device Management (MDM) for Startups & Small Teams
 
 A practical guide to enrolling, securing, and managing company devices across
-macOS, Windows, iOS, and Android — from zero-touch onboarding to remote wipe.
+macOS, Windows, iOS, and Android; from zero-touch onboarding to remote wipe.
 
 ---
 
@@ -32,18 +32,18 @@ macOS, Windows, iOS, and Android — from zero-touch onboarding to remote wipe.
 
 MDM becomes essential when any of the following apply:
 
-- **Team size crosses ~10 people** — manual laptop setup no longer scales.
-- **Compliance requirements** — SOC 2, HIPAA, ISO 27001, or customer security
+- **Team size crosses ~10 people**; manual laptop setup no longer scales.
+- **Compliance requirements**; SOC 2, HIPAA, ISO 27001, or customer security
   questionnaires demand proof that endpoints are encrypted and patched.
-- **Remote / hybrid workforce** — you cannot walk over to someone's desk to
+- **Remote / hybrid workforce**; you cannot walk over to someone's desk to
   fix a configuration or verify disk encryption.
-- **Contractor or BYOD devices** — you need a way to separate corporate data
+- **Contractor or BYOD devices**; you need a way to separate corporate data
   from personal data and revoke access on offboarding.
-- **Insurance or investor due diligence** — cyber-insurance carriers and VCs
+- **Insurance or investor due diligence**; cyber-insurance carriers and VCs
   increasingly ask for evidence of endpoint management.
 
 If you are still under 10 people and everyone is in-office, a simple checklist
-plus a configuration management tool (Ansible) may suffice — but plan for MDM
+plus a configuration management tool (Ansible) may suffice; but plan for MDM
 early so enrollment is painless when you scale.
 
 ---
@@ -74,7 +74,7 @@ else:
 
 ---
 
-## 3. Fleet (Open Source MDM) — Self-Hosted Deployment
+## 3. Fleet (Open Source MDM): Self-Hosted Deployment
 
 Fleet is the leading open-source MDM. It uses osquery under the hood and
 supports macOS, Windows, Linux, iOS, and Android.
@@ -186,7 +186,7 @@ msiexec /i fleet-osquery.msi /quiet /norestart
 ### 3.5 osquery policy examples in Fleet
 
 ```yaml
-# fleet-policies.yml — apply with: fleetctl apply -f fleet-policies.yml
+# fleet-policies.yml: apply with: fleetctl apply -f fleet-policies.yml
 apiVersion: v1
 kind: policy
 spec:
@@ -257,7 +257,7 @@ fleetctl get mdm-apple
 # Generate enrollment profile URL (Fleet example)
 fleetctl get enrollment-profile > enrollment.mobileconfig
 
-# Distribute to user — they open the .mobileconfig file
+# Distribute to user: they open the .mobileconfig file
 # Then approve in System Settings > Profiles
 ```
 
@@ -382,11 +382,11 @@ New-NetFirewallRule -DisplayName "Allow RDP from VPN" `
 
 ## Contents
 
-- [6. Security Policies — Cross-Platform](references/details.md)
+- [6. Security Policies; Cross-Platform](references/details.md)
 - [7. Software Deployment](references/details.md)
 - [8. Compliance Checks with osquery](references/details.md)
 - [9. Remote Wipe & Lock](references/details.md)
-- [10. Onboarding Automation — Zero-Touch Enrollment](references/details.md)
+- [10. Onboarding Automation; Zero-Touch Enrollment](references/details.md)
 - [Quick Reference](references/details.md)
 
 ## When to Use

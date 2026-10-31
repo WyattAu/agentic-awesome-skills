@@ -12,7 +12,7 @@ date_added: "2026-06-19"
 
 **Before generating API request bodies:** check the [Contacts OpenAPI spec](https://github.com/mailtrap/mailtrap-openapi/blob/main/specs/contacts.openapi.yml) for current field names, required parameters, and nested structures.
 
-**Contacts** are the marketing database: lists, segments, custom fields, and imports for **campaign audiences** and related workflows. The **Contacts API** automates create/update and can feed **CRM or CDP sync** (your code, or tools like Zapier, Make, n8n — see [Import contacts](https://docs.mailtrap.io/email-marketing/contacts/import-contacts.md)).
+**Contacts** are the marketing database: lists, segments, custom fields, and imports for **campaign audiences** and related workflows. The **Contacts API** automates create/update and can feed **CRM or CDP sync** (your code, or tools like Zapier, Make, n8n; see [Import contacts](https://docs.mailtrap.io/email-marketing/contacts/import-contacts.md)).
 
 **Suppressions** (hard bounces, spam complaints, unsubscribes on the **sending** side) live in the sending product and **block delivery** for those addresses on your streams. That is applied separately from **marketing** filters (segments, list membership, consent flags) that decide who is eligible for campaigns. For sending-side blocks, see [Suppressions](https://docs.mailtrap.io/developers/email-sending/suppressions.md) and `mailtrap-sending-emails`.
 
@@ -41,7 +41,7 @@ All endpoints below need `Authorization: Bearer $MAILTRAP_API_TOKEN` and an `$MA
 | Custom events                          | `POST`  | `https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/contacts/{contact_identifier}/events` | [Contact events](https://docs.mailtrap.io/developers/promotional/contacts/contact-events.md)   |
 | Export contacts                        | various | `https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/contacts/exports`                  | [Export contacts](https://docs.mailtrap.io/developers/promotional/contacts/export-contacts.md) |
 
-- Rate limit (typical): **200 requests per 60 seconds** per account — prefer bulk import for large loads.
+- Rate limit (typical): **200 requests per 60 seconds** per account; prefer bulk import for large loads.
 - **Bulk import limit:** up to **50,000** contacts per import request (async job); poll import status with `GET .../contacts/imports/{import_id}`. See [Bulk import](https://docs.mailtrap.io/developers/promotional/contacts/bulk-import.md).
 
 ## Examples (`curl`)
@@ -86,10 +86,10 @@ curl -X POST "https://mailtrap.io/api/accounts/$MAILTRAP_ACCOUNT_ID/contacts/{co
 
 ## Concepts
 
-- **Lists** — explicitly defined list of contacts.
-- **Segments** — dynamic groups; see [Segments](https://docs.mailtrap.io/email-marketing/contacts/segments.md).
-- **Custom fields** — properties like first and last name or membership level; see [Custom fields](https://docs.mailtrap.io/email-marketing/contacts/custom-fields.md).
-- **Custom events** — `POST .../events` with an event `name` and `params` object for [automations](https://docs.mailtrap.io/email-marketing/automations.md).
+- **Lists**; explicitly defined list of contacts.
+- **Segments**; dynamic groups; see [Segments](https://docs.mailtrap.io/email-marketing/contacts/segments.md).
+- **Custom fields**; properties like first and last name or membership level; see [Custom fields](https://docs.mailtrap.io/email-marketing/contacts/custom-fields.md).
+- **Custom events**; `POST .../events` with an event `name` and `params` object for [automations](https://docs.mailtrap.io/email-marketing/automations.md).
 
 ## CRM and sync
 

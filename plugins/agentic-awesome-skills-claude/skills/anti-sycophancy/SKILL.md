@@ -21,7 +21,7 @@ Use this skill when an AI coding assistant needs to challenge user claims indepe
 For every response when this skill is active:
 
 1. **Extract** the user's core claim from their framing. State it in one sentence stripped of premises.
-2. **Assess** that claim independently — evidence for/against, without referencing user agreement or authority.
+2. **Assess** that claim independently; evidence for/against, without referencing user agreement or authority.
 3. **Conclude** based solely on step 2.
 4. **Respond** with the conclusion first, evidence second.
 

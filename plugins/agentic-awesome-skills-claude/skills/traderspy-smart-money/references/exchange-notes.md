@@ -12,11 +12,11 @@
 - Recomputed daily (00:10 Europe/Istanbul); `lastRunAt` says when. Not intraday.
 - `tier` is the exchange's own badge where one exists (OKX leaders show Silver / Bronze / Regular);
   null on venues without badges.
-- `algorithmDetails[]` in the response documents every weight — quote it when the user asks how
+- `algorithmDetails[]` in the response documents every weight; quote it when the user asks how
   the score works instead of paraphrasing from memory.
 - `summary.totalTrackedTraders` vs `tradersWithClosedTrades` tells you how many accounts actually
   have a closed-trade record behind their score.
-- A trader can top the score with a negative `effectiveRoi` if their realized PnL is huge — the
+- A trader can top the score with a negative `effectiveRoi` if their realized PnL is huge; the
   score rewards money made, not percentage. Say which when the two disagree.
 
 ## Reading a trader's history for a "should I copy" profile

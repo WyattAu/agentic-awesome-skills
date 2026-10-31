@@ -19,7 +19,7 @@ Use this skill when you need generates production-grade Appium mobile automation
 You are a senior mobile QA architect. You write production-grade Appium tests
 for Android and iOS apps that run locally or on TestMu AI cloud real devices.
 
-## Step 1 — Execution Target
+## Step 1: Execution Target
 
 ```
 User says "test mobile app" / "automate app"
@@ -36,19 +36,19 @@ User says "test mobile app" / "automate app"
 └─ Ambiguous? → Default local emulator, mention cloud for real devices
 ```
 
-## Step 2 — Platform Detection
+## Step 2: Platform Detection
 
 ```
 ├─ Mentions "Android", "APK", "Play Store", "Pixel", "Samsung", "Galaxy"?
-│  └─ Android — automationName: UiAutomator2
+│  └─ Android; automationName: UiAutomator2
 │
 ├─ Mentions "iOS", "iPhone", "iPad", "IPA", "App Store", "Swift"?
-│  └─ iOS — automationName: XCUITest
+│  └─ iOS; automationName: XCUITest
 │
 └─ Both? → Create separate capability sets for each
 ```
 
-## Step 3 — Language Detection
+## Step 3: Language Detection
 
 | Signal | Language | Client |
 |--------|----------|--------|
@@ -58,9 +58,9 @@ User says "test mobile app" / "automate app"
 
 For non-Java languages, obtain and inspect the upstream `reference/<language>-patterns.md`; the reference files listed below are not bundled in this catalog copy.
 
-## Core Patterns — Java (Default)
+## Core Patterns: Java (Default)
 
-### Desired Capabilities — Android
+### Desired Capabilities: Android
 
 ```java
 UiAutomator2Options options = new UiAutomator2Options()
@@ -77,7 +77,7 @@ AndroidDriver driver = new AndroidDriver(
 );
 ```
 
-### Desired Capabilities — iOS
+### Desired Capabilities: iOS
 
 ```java
 XCUITestOptions options = new XCUITestOptions()
@@ -104,21 +104,21 @@ IOSDriver driver = new IOSDriver(
 ```
 
 ```java
-// ✅ Best — cross-platform
+// ✅ Best; cross-platform
 driver.findElement(AppiumBy.accessibilityId("loginButton"));
 
-// ✅ Good — Android resource ID
+// ✅ Good; Android resource ID
 driver.findElement(AppiumBy.id("com.example:id/login_btn"));
 
-// ✅ Good — iOS predicate
+// ✅ Good; iOS predicate
 driver.findElement(AppiumBy.iOSNsPredicateString("label == 'Login'"));
 
-// ✅ Good — Android UiAutomator
+// ✅ Good; Android UiAutomator
 driver.findElement(AppiumBy.androidUIAutomator(
     "new UiSelector().text(\"Login\")"
 ));
 
-// ❌ Avoid — slow, fragile
+// ❌ Avoid; slow, fragile
 driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Login']"));
 ```
 
@@ -222,7 +222,7 @@ public class LoginTest {
 }
 ```
 
-### TestMu AI Cloud — Quick Setup
+### TestMu AI Cloud: Quick Setup
 
 ```java
 // Upload app first:

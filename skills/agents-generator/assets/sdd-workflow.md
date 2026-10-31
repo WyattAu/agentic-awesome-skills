@@ -1,6 +1,6 @@
 # SDD Workflow
 
-Software Design Document — design before implementing.
+Software Design Document; design before implementing.
 
 ## Preflight Defaults (cached, do not re-ask)
 
@@ -12,7 +12,7 @@ Software Design Document — design before implementing.
 
 ## Rules
 
-- Sub-agents can make errors (duplicate blocks, wrong types) — always review their output.
+- Sub-agents can make errors (duplicate blocks, wrong types); always review their output.
 - After each SDD phase: run the full verification cycle.
 - On archive: verify all tasks marked done, delta specs synced to main specs.
 

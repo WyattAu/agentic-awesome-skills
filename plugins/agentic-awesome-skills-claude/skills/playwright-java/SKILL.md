@@ -53,7 +53,7 @@ Use this matrix to pick the right pattern before writing any code:
 
 | User Request | Approach |
 |---|---|
-| New project from scratch | Full scaffold — see `config.md` |
+| New project from scratch | Full scaffold; see `config.md` |
 | Single feature test | POM page class + JUnit5 test class |
 | API + UI hybrid | `APIRequestContext` alongside `Page` |
 | Cross-browser | `@MethodSource` parameterized over browser names |
@@ -104,7 +104,7 @@ Use the bundled `BaseTest.java`, with the matching `ConfigReader` from `config.m
 ```java
 public class LoginPage extends BasePage {
 
-    // Declare ALL locators as fields — never inline in action methods
+    // Declare ALL locators as fields; never inline in action methods
     private final Locator emailInput;
     private final Locator passwordInput;
     private final Locator loginButton;
@@ -121,7 +121,7 @@ public class LoginPage extends BasePage {
 
     @Override protected String getUrl() { return "/login"; }
 
-    // Navigation methods return the next Page Object — enables fluent chaining
+    // Navigation methods return the next Page Object; enables fluent chaining
     public DashboardPage loginAs(String email, String password) {
         fill(emailInput, email);
         fill(passwordInput, password);
@@ -203,7 +203,7 @@ class LoginTest extends BaseTest {
 ```java
 @Test
 void shouldDisplayNewlyCreatedOrder() {
-    // Arrange via API — faster than navigating through UI
+    // Arrange via API; faster than navigating through UI
     APIRequestContext api = page().context().request();
     APIResponse response = api.post("/api/orders",
         RequestOptions.create()
@@ -286,13 +286,13 @@ Use an authorized test origin and disposable test data/accounts. Order/API/UI ac
 - ✅ Use `ThreadLocal<Page>` for every parallel-safe test suite
 - ✅ Declare all `Locator` fields at the top of the Page Object class
 - ✅ Return the next Page Object from navigation methods (fluent chaining)
-- ✅ Use `assertThat(locator)` — it auto-retries until timeout
+- ✅ Use `assertThat(locator)`; it auto-retries until timeout
 - ✅ Use `getByRole`, `getByLabel`, `getByTestId` as first-choice locators
 - ✅ Start tracing in `@BeforeEach` and stop with a file path in `@AfterEach`
 - ✅ Use `SoftAssertions` when validating multiple fields on a single page
 - ✅ Set up saved auth state (`storageState`) to skip login across test classes
-- ❌ Never use `Thread.sleep()` — replace with `waitFor()` or `waitForResponse()`
-- ❌ Never hardcode base URLs — always use `ConfigReader.getBaseUrl()`
+- ❌ Never use `Thread.sleep()`; replace with `waitFor()` or `waitForResponse()`
+- ❌ Never hardcode base URLs; always use `ConfigReader.getBaseUrl()`
 - ❌ Never create a `Playwright` instance inside a Page Object
 - ❌ Never use XPath for dynamic or frequently changing elements
 
@@ -310,10 +310,10 @@ Use an authorized test origin and disposable test data/accounts. Order/API/UI ac
   **Solution:** Replace with `page.waitForResponse("**/api/endpoint", () -> action())` or `assertThat(locator).hasText("Done")` which polls automatically.
 
 - **Problem:** Playwright trace zip is empty or missing
-  **Solution:** Ensure `tracing().start()` is called before test actions and `tracing().stop()` is in `@AfterEach` — not `@AfterAll`.
+  **Solution:** Ensure `tracing().start()` is called before test actions and `tracing().stop()` is in `@AfterEach`; not `@AfterAll`.
 
 - **Problem:** Allure report is blank or missing steps
-  **Solution:** Add the AspectJ agent to `maven-surefire-plugin` `<argLine>` in `pom.xml` — see `config.md` for the exact snippet.
+  **Solution:** Add the AspectJ agent to `maven-surefire-plugin` `<argLine>` in `pom.xml`; see `config.md` for the exact snippet.
 
 - **Problem:** `storageState` auth file is stale and tests redirect to login
   **Solution:** Re-run `AuthSetup` to regenerate `target/auth/user-state.json` before the suite, or add a `@BeforeAll` that conditionally refreshes it.
@@ -322,11 +322,11 @@ Use an authorized test origin and disposable test data/accounts. Order/API/UI ac
 
 ## Related Skills
 
-- `@rest-assured-java` — Use for pure API test suites without any UI interaction
-- `@selenium-java` — Legacy alternative; prefer Playwright for all new projects
-- `@allure-reporting` — Deep-dive into Allure annotations, categories, and history trends
-- `@testcontainers-java` — Use alongside this skill when tests need a live database or service
-- `@github-actions-ci` — For building complete multi-browser matrix CI pipelines
+- `@rest-assured-java`; Use for pure API test suites without any UI interaction
+- `@selenium-java`; Legacy alternative; prefer Playwright for all new projects
+- `@allure-reporting`; Deep-dive into Allure annotations, categories, and history trends
+- `@testcontainers-java`; Use alongside this skill when tests need a live database or service
+- `@github-actions-ci`; For building complete multi-browser matrix CI pipelines
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

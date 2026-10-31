@@ -18,7 +18,7 @@ tools:
 - codex-cli
 ---
 
-# Claude Monitor — Diagnóstico de Performance
+# Claude Monitor: Diagnóstico de Performance
 
 ## Overview
 

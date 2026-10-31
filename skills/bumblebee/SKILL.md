@@ -24,7 +24,7 @@ This skill drives a single Bumblebee scan from start to finish:
 2. Verify or install the `bumblebee` binary.
 3. Run the requested scan profile (`baseline`, `project`, or `deep`).
 4. Save raw NDJSON output plus a Markdown report into the user's workspace.
-5. Summarize findings — especially exposure-catalog matches — in the chat reply.
+5. Summarize findings; especially exposure-catalog matches; in the chat reply.
 
 Communicate with the user in the language they used (German for Stefan). Code, commit messages, and on-disk file contents stay in English to match existing project conventions.
 
@@ -37,18 +37,18 @@ macOS or Linux developer endpoint.
 Use it for read-only inventory and exposure checks. Do not use it to patch, uninstall, quarantine,
 or otherwise mutate the scanned machine.
 
-## Step 1 — Clarify the scan request
+## Step 1: Clarify the scan request
 
 Before running anything, confirm two things with the user via `AskUserQuestion`, unless the message already pins them down:
 
 - **Profile**: `baseline` (global package roots), `project` (specific dev folders like `~/code`), or `deep` (explicit `--root` paths, including `$HOME` for incident response).
 - **Roots**: For `project` and `deep` profiles, ask which directories to scan. `deep` is the only profile that accepts a bare-home root.
 
-If the user has an advisory or exposure-catalog file ready, also ask whether they want to pass it via `--exposure-catalog`. The skill does not ship its own catalogs — point them at `threat_intel/` in the Bumblebee repo if they ask where to find ready-made ones.
+If the user has an advisory or exposure-catalog file ready, also ask whether they want to pass it via `--exposure-catalog`. The skill does not ship its own catalogs; point them at `threat_intel/` in the Bumblebee repo if they ask where to find ready-made ones.
 
-Skip the questions for one-liner asks like "lauf mal ne Baseline-Scan" — just run a baseline.
+Skip the questions for one-liner asks like "lauf mal ne Baseline-Scan"; just run a baseline.
 
-## Step 2 — Check Go
+## Step 2: Check Go
 
 Run `command -v go && go version` in bash. Three outcomes:
 
@@ -61,7 +61,7 @@ Run `command -v go && go version` in bash. Three outcomes:
 
 After installation, the user must ensure `$GOBIN` (or `$HOME/go/bin`) is on `$PATH` so `bumblebee` is found later.
 
-## Step 3 — Check or install Bumblebee
+## Step 3: Check or install Bumblebee
 
 Run `command -v bumblebee && bumblebee version`. If missing:
 
@@ -70,18 +70,18 @@ Run `command -v bumblebee && bumblebee version`. If missing:
 go install github.com/perplexityai/bumblebee/cmd/bumblebee@APPROVED_VERSION
 ```
 
-Then re-check `bumblebee version`. If the binary still cannot be located, the user's `GOBIN`/`PATH` is likely misconfigured — surface the resolved `go env GOPATH` and `go env GOBIN` so they can fix it. Do not fall back to running the binary by absolute path silently; explain what is happening.
+Then re-check `bumblebee version`. If the binary still cannot be located, the user's `GOBIN`/`PATH` is likely misconfigured; surface the resolved `go env GOPATH` and `go env GOBIN` so they can fix it. Do not fall back to running the binary by absolute path silently; explain what is happening.
 
 Once installed, also run `bumblebee selftest` as a sanity check. A non-zero exit means the local install is broken and the scan should not proceed.
 
-## Step 4 — Run the scan
+## Step 4: Run the scan
 
 All scans write NDJSON to a file. Use the workspace folder for output so the user can open the results afterwards.
 
 Output filenames (use the user's workspace path; the example below assumes `$OUT` is set):
 
-- `bumblebee-<profile>-<UTC-timestamp>.ndjson` — raw records.
-- `bumblebee-<profile>-<UTC-timestamp>.report.md` — Markdown report (generated in Step 5).
+- `bumblebee-<profile>-<UTC-timestamp>.ndjson`; raw records.
+- `bumblebee-<profile>-<UTC-timestamp>.report.md`; Markdown report (generated in Step 5).
 
 Pick a sensible `--max-duration` so a runaway scan does not hang the session. Reasonable defaults:
 
@@ -89,7 +89,7 @@ Pick a sensible `--max-duration` so a runaway scan does not hang the session. Re
 - `project`: 10m
 - `deep`: 15m (warn the user that scanning `$HOME` can still take longer; offer to raise the limit)
 
-Always stream stderr to a sibling `.log` file — Bumblebee emits diagnostic NDJSON there that helps explain partial scans.
+Always stream stderr to a sibling `.log` file; Bumblebee emits diagnostic NDJSON there that helps explain partial scans.
 
 ### Baseline
 
@@ -108,7 +108,7 @@ bumblebee scan --profile baseline --ecosystem npm,pypi ...
 
 ### Project
 
-Each `--root` must be an existing absolute path. Reject bare `$HOME` for this profile (Bumblebee will reject it too — surface the message clearly).
+Each `--root` must be an existing absolute path. Reject bare `$HOME` for this profile (Bumblebee will reject it too; surface the message clearly).
 
 ```bash
 bumblebee scan --profile project \
@@ -121,7 +121,7 @@ bumblebee scan --profile project \
 
 ### Deep
 
-Used for incident response — broad roots are allowed but should be paired with an exposure catalog and `--findings-only` whenever possible, so the output stays focused.
+Used for incident response; broad roots are allowed but should be paired with an exposure catalog and `--findings-only` whenever possible, so the output stays focused.
 
 ```bash
 bumblebee scan --profile deep \
@@ -135,7 +135,7 @@ bumblebee scan --profile deep \
 
 If the user has no catalog, run deep without `--findings-only` but warn them that the NDJSON file can grow large (hundreds of MB on dense developer machines).
 
-## Step 5 — Generate the Markdown report
+## Step 5: Generate the Markdown report
 
 Run the bundled helper to turn the NDJSON into a human-readable report. Resolve
 the helper from the installed Bumblebee skill directory; never run a
@@ -149,19 +149,19 @@ python3 "$BUMBLEBEE_SKILL_DIR/scripts/render_report.py" \
   "$OUT/bumblebee-<profile>-$TS.report.md"
 ```
 
-The helper groups records by type and ecosystem, lists every `finding` record with its catalog entry and severity, and embeds the `scan_summary` for traceability. It is dependency-free Python 3 — no `pip install` needed. Run it with the output workspace as the working directory: CLI input/output paths are confined to that directory.
+The helper groups records by type and ecosystem, lists every `finding` record with its catalog entry and severity, and embeds the `scan_summary` for traceability. It is dependency-free Python 3; no `pip install` needed. Run it with the output workspace as the working directory: CLI input/output paths are confined to that directory.
 
 If `render_report.py` exits non-zero (malformed NDJSON, missing summary), surface stderr to the user instead of silently producing an empty report.
 
-## Step 6 — Present results
+## Step 6: Present results
 
 End the turn with:
 
-- A short summary in chat: profile, root(s), record counts, and — most importantly — any findings with their severity. If there are zero findings, say so explicitly; silence on findings is the kind of thing that gets misread.
+- A short summary in chat: profile, root(s), record counts, and; most importantly; any findings with their severity. If there are zero findings, say so explicitly; silence on findings is the kind of thing that gets misread.
 - absolute local file links to both the NDJSON and the Markdown report so the user can open them directly.
 - If diagnostics in the `.log` file indicate skipped roots or read errors, mention it and link the log too.
 
-Do not paste large chunks of NDJSON into the chat — it is noisy and not where the user will read it.
+Do not paste large chunks of NDJSON into the chat; it is noisy and not where the user will read it.
 
 ## Safety and privacy notes
 
@@ -184,7 +184,7 @@ Do not paste large chunks of NDJSON into the chat — it is noisy and not where 
 
 ## Reference
 
-See `scripts/render_report.py` for the report layout. Bumblebee's own documentation lives at https://github.com/perplexityai/bumblebee — consult `docs/inventory-sources.md`, `docs/transport.md`, and `docs/state-model.md` when a question goes beyond what this skill covers.
+See `scripts/render_report.py` for the report layout. Bumblebee's own documentation lives at https://github.com/perplexityai/bumblebee; consult `docs/inventory-sources.md`, `docs/transport.md`, and `docs/state-model.md` when a question goes beyond what this skill covers.
 
 ## Credit
 

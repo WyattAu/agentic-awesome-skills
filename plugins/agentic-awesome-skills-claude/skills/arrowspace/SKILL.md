@@ -112,7 +112,7 @@ spectral_order = [index for index, score in aspace.search(items[0], graph, tau=0
 
 ## Related Skills
 
-- `vector-database-engineer` — General vector database expertise
-- `embedding-strategies` — Embedding model selection and chunking
-- `similarity-search-patterns` — Semantic search implementation patterns
-- `hybrid-search-implementation` — Combined semantic + keyword search
+- `vector-database-engineer`; General vector database expertise
+- `embedding-strategies`; Embedding model selection and chunking
+- `similarity-search-patterns`; Semantic search implementation patterns
+- `hybrid-search-implementation`; Combined semantic + keyword search

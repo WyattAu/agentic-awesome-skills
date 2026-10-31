@@ -40,9 +40,9 @@ Use this skill when writing code that calls the Gemini API for text generation, 
 
 ### Current Agents
 
-- `antigravity-preview-05-2026`: Antigravity Agent — general-purpose managed agent with code execution, file management, and web access in a sandboxed Linux environment
-- `deep-research-preview-04-2026`: Deep Research — fast, interactive
-- `deep-research-max-preview-04-2026`: Deep Research Max — maximum exhaustiveness
+- `antigravity-preview-05-2026`: Antigravity Agent; general-purpose managed agent with code execution, file management, and web access in a sandboxed Linux environment
+- `deep-research-preview-04-2026`: Deep Research; fast, interactive
+- `deep-research-max-preview-04-2026`: Deep Research Max; maximum exhaustiveness
 - **Custom agents**: Create your own via `client.agents.create()`
 
 ### Current SDKs
@@ -111,7 +111,7 @@ interaction1 = client.interactions.create(
     model="gemini-3.5-flash",
     input="Hi, my name is Phil."
 )
-# Second turn — server remembers context
+# Second turn: server remembers context
 interaction2 = client.interactions.create(
     model="gemini-3.5-flash",
     input="What is my name?",
@@ -251,7 +251,7 @@ agent = client.agents.create(
     },
 )
 
-# Invoke — each call forks the base environment
+# Invoke: each call forks the base environment
 result = client.interactions.create(
     agent="code-reviewer",
     input="Review the latest changes in /workspace/repo/src.",
@@ -330,7 +330,7 @@ For streaming with tools, thinking, agents, and image generation see the full [S
 
 ## Documentation Pages
 
-**You MUST fetch the matching page below before writing code.** These hosted docs are the source of truth for parameters, types, and edge cases — do not rely solely on the examples above.
+**You MUST fetch the matching page below before writing code.** These hosted docs are the source of truth for parameters, types, and edge cases; do not rely solely on the examples above.
 
 **Core Documentation:**
 - [Interactions API Overview](https://ai.google.dev/gemini-api/docs/interactions.md.txt)

@@ -1,4 +1,4 @@
-# Tool Use — TypeScript
+# Tool Use: TypeScript
 
 > AAS-reviewed adaptation of the upstream Anthropic skill; see the root SKILL.md for authorization and resource boundaries. SDK/model feature claims below are version-sensitive examples; verify the selected model and pinned SDK before running. No live API or agent execution was performed during this catalog review.
 
@@ -43,7 +43,7 @@ console.log(finalMessage.content);
 
 **Key benefits of the tool runner:**
 
-- No manual loop — the SDK handles calling tools and feeding results back
+- No manual loop; the SDK handles calling tools and feeding results back
 - Type-safe tool inputs via Zod schemas
 - Tool schemas are generated automatically from Zod definitions
 - Iteration stops automatically when Claude has no more tool calls
@@ -125,7 +125,7 @@ for (let iteration = 0; iteration < 8; iteration++) {
     process.stdout.write(delta);
   });
 
-  // finalMessage() resolves with the complete Message — no need to
+  // finalMessage() resolves with the complete Message; no need to
   // manually wire up .on("message") / .on("error") / .on("abort")
   const message = await stream.finalMessage();
 
@@ -159,9 +159,9 @@ for (let iteration = 0; iteration < 8; iteration++) {
 if (!completed) throw new Error("Tool loop budget exhausted; preserve state for review");
 ```
 
-> **Important:** Don't wrap `.on()` events in `new Promise()` to collect the final message — use `stream.finalMessage()` instead. The SDK handles all error/abort/completion states internally.
+> **Important:** Don't wrap `.on()` events in `new Promise()` to collect the final message; use `stream.finalMessage()` instead. The SDK handles all error/abort/completion states internally.
 
-> **Error handling in the loop:** Use the SDK's typed exceptions (e.g., `Anthropic.RateLimitError`, `Anthropic.APIError`) — see [Error Handling](./README.md#error-handling) for examples. Don't check error messages with string matching.
+> **Error handling in the loop:** Use the SDK's typed exceptions (e.g., `Anthropic.RateLimitError`, `Anthropic.APIError`); see [Error Handling](./README.md#error-handling) for examples. Don't check error messages with string matching.
 
 > **SDK types:** Use `Anthropic.MessageParam`, `Anthropic.Tool`, `Anthropic.ToolUseBlock`, `Anthropic.ToolResultBlockParam`, `Anthropic.Message`, etc. for all API-related data structures. Don't redefine equivalent interfaces.
 
@@ -381,7 +381,7 @@ For full implementation examples, use WebFetch:
 
 ## Structured Outputs
 
-### JSON Outputs (Zod — Recommended)
+### JSON Outputs (Zod: Recommended)
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";

@@ -1,7 +1,7 @@
 # Protocolo de Extracao Detalhado
 
 Guia passo a passo para extrair TODAS as informacoes criticas de uma sessao
-antes da compactacao. Siga na ordem — cada secao depende da anterior.
+antes da compactacao. Siga na ordem; cada secao depende da anterior.
 
 ## Passo 1: Inventario de Arquivos
 
@@ -64,12 +64,12 @@ Para cada bug encontrado e corrigido:
 ## Passo 5: Codigo Critico
 
 Trechos de codigo que sao FUNDAMENTAIS para o entendimento do projeto.
-Nao copiar arquivos inteiros — apenas os trechos que representam decisoes
+Nao copiar arquivos inteiros; apenas os trechos que representam decisoes
 ou logica nao-obvia.
 
 ```markdown
 ### Trechos Criticos
-**match_skills.py:40-119** — Categorias de capacidade:
+**match_skills.py:40-119**; Categorias de capacidade:
 - legal: ~70 keywords cobrindo todas as areas do direito brasileiro
 - auction: leilao judicial/extrajudicial
 - security: owasp, pentest, vulnerabilidades
@@ -81,7 +81,7 @@ ou logica nao-obvia.
 
 ```markdown
 ### Padroes Observados
-- [padrao]: [descricao] — [onde se aplica]
+- [padrao]: [descricao]; [onde se aplica]
 ```
 
 Exemplos: "ZIPs devem conter {skill-name}/ E .claude/skills/{skill-name}/",
@@ -115,7 +115,7 @@ O arquivo `snapshot-YYYYMMDD-HHMMSS.md` deve conter TODAS as secoes acima
 nesta ordem, precedidas por um cabecalho:
 
 ```markdown
-# Context Guardian Snapshot — YYYY-MM-DD HH:MM:SS
+# Context Guardian Snapshot: YYYY-MM-DD HH:MM:SS
 **Sessao**: [identificador ou slug]
 **Projeto**: [nome do projeto]
 **Modelo**: [claude-opus-4-6 etc]

@@ -38,12 +38,12 @@ Values for `--model`, `--profile`, and `--conversation` are token-validated. `--
 
 Written to `--out-dir`:
 
-- `brief.txt` — exactly what was sent.
-- `events.jsonl` — the raw ndjson stream, byte for byte. The fallback whenever a parsed field looks
+- `brief.txt`; exactly what was sent.
+- `events.jsonl`; the raw ndjson stream, byte for byte. The fallback whenever a parsed field looks
   wrong.
-- `final.txt` — the assembled report, when one was captured.
-- `stderr.txt` — everything Warp wrote to stderr.
-- `result.json` — the structured result, written atomically via a temp file and rename, so a polling
+- `final.txt`; the assembled report, when one was captured.
+- `stderr.txt`; everything Warp wrote to stderr.
+- `result.json`; the structured result, written atomically via a temp file and rename, so a polling
   reader never sees a half-written file.
 
 ## `result.json`
@@ -75,16 +75,16 @@ Schema id `delegate-relay.result.v1`. Synthetic example:
 
 Field notes:
 
-- **`status`** — `completed`, `failed`, `timeout`, `aborted`, or `warp_unavailable`.
-- **`touchedFiles`** — `git status --porcelain` lines. `null` when git cannot report (not a
+- **`status`**; `completed`, `failed`, `timeout`, `aborted`, or `warp_unavailable`.
+- **`touchedFiles`**; `git status --porcelain` lines. `null` when git cannot report (not a
   repository, git missing); `[]` when the tree is genuinely clean. `[]` and `null` mean different
-  things — do not collapse them.
-- **`runId` / `runUrl`** — from Warp's `run_started` system event. `runUrl` opens the run in Warp.
-- **`conversationId`** — the handle to pass back as `--conversation` for rework. Present only when
+  things; do not collapse them.
+- **`runId` / `runUrl`**; from Warp's `run_started` system event. `runUrl` opens the run in Warp.
+- **`conversationId`**; the handle to pass back as `--conversation` for rework. Present only when
   Warp emitted it on the stream.
-- **`finalMessage`** — Warp's own report. Assembled from the text-bearing events in the stream; see
+- **`finalMessage`**; Warp's own report. Assembled from the text-bearing events in the stream; see
   the caveat below.
-- **`stderrTail`** — last 20 stderr lines, included on every non-clean outcome.
+- **`stderrTail`**; last 20 stderr lines, included on every non-clean outcome.
 
 ### What `finalMessage` actually contains
 
@@ -101,14 +101,14 @@ Confirmed against a live edit run on oz 0.2026.05.27. The stream carries:
 Two consequences:
 
 - **`finalMessage` is the whole narration, not just the closing report.** Warp emits no distinct
-  final-message event, so every `agent` chunk is concatenated — including running commentary like
+  final-message event, so every `agent` chunk is concatenated; including running commentary like
   "Now let me run both gates." This is why the brief must specify a report contract: `FILES:` /
   `GATES:` / `NOTES:` at the end gives you a stable anchor to read instead of parsing prose.
 - **`agent_reasoning` must stay excluded.** It carries a `text` field of exactly the same shape, so
   matching on `text` alone splices the model's reasoning into the report.
 
-Past those two rules the extraction stays tolerant — it also accepts `agent_output`, `content`, and
-a nested `message.content` — so a renamed output event still reports rather than yielding an empty
+Past those two rules the extraction stays tolerant; it also accepts `agent_output`, `content`, and
+a nested `message.content`; so a renamed output event still reports rather than yielding an empty
 `finalMessage`. If one ever does come back empty on a successful run, `events.jsonl` holds the raw
 stream and `collectText` is the one place to correct.
 
@@ -118,7 +118,7 @@ stream and `collectText` is the one place to correct.
 | --- | --- |
 | `0` | Warp exited 0 and reported no stream error. |
 | `1` | Generic failure, or a stream-reported agent error even when `oz` exited 0. |
-| `2` | Usage error — bad flag, bad `--timeout`, missing or empty brief. **No result file is written.** |
+| `2` | Usage error; bad flag, bad `--timeout`, missing or empty brief. **No result file is written.** |
 | `124` | The bounded `oz --version` preflight timed out; Warp was never dispatched. |
 | `127` | `oz` is not on PATH. A result file **is** written, with `status: "warp_unavailable"`. |
 | `128 + n` | The child died on signal *n*; `signal` records which. |
@@ -134,7 +134,7 @@ until [ -f /tmp/warp-run-1/result.json ]; do sleep 5; done
 ```
 
 Completion means the process exited **and** `result.json` exists. Do not infer completion from
-stdout going quiet — a long tool call looks identical to a finished run.
+stdout going quiet; a long tool call looks identical to a finished run.
 
 ## Timeouts and aborts
 
@@ -148,7 +148,7 @@ SIGTERM, so the aborted path cannot be driven there.
 
 **A timed-out or aborted run leaves a partially edited tree.** Inspect `git status` and `git diff`
 before re-dispatching. If the state is incoherent, discard it against the recorded baseline rather
-than stashing — a bare `git stash` leaves behind every file the run created. See
+than stashing; a bare `git stash` leaves behind every file the run created. See
 [review-and-land.md](review-and-land.md#rework-through-a-conversation).
 
 ## Failure recovery

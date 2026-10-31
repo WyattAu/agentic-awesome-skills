@@ -1,4 +1,4 @@
-# astropy.time — Reference
+# astropy.time: Reference
 
 This file is a placeholder for the extended `astropy.time` reference promised in the skill workflow.
 

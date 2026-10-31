@@ -1,4 +1,13 @@
 # Individual complete-tree review: batch 15
+
+Reviewed 150 frozen inventory roots, 629 tracked files: 146 corrected, 4 retained.
+
+Original inventory base: `dee7acce0658c35cb276154892700811affcfdb2`. PR integration base: `a7843f4af0ac43a55c01185fe57d3898db0547c9`. No source drift in assigned trees between these bases. Existing 126 per-tree reviews were resumed from external receipts; the remaining24 trees were read completely, including nested roots and every bundled file.
+
+Static semantic review, not runtime certification or independent upstream license audit. No Tessl review result; manual-review-required exact-head maintainer attestation remains pending. No merge/release authorized. Plugin mirrors are release-owned.
+
+## Per-tree findings
+
 - **hunt-subdomain**; corrected: Corrected same-origin/cookie and claimability certainty; constrained resource claims and downstream proof, removed scope/rate-limit bypass and arbitrary severity rules.
 - **mental-health-analyzer**; corrected: Removed unvalidated crisis risk algorithm/false low-risk example and delayed emergency thresholds; replaced with individualized safety support, verified resource requirement and synthetic-data/privacy limits in complete guide.
 - **cloud-iam-deep**; corrected: Fixed missing-ExternalId and AMI-profile misconceptions, constrained credential scope, corrected guest-access false positives and unsafe bundle-search examples.
@@ -149,3 +158,13 @@
 - **pwn-chain**; corrected: Read all four files; removed persistent setuid payload/automatic bootstrap and unlimited remote reliability runs; fixed tcache introduction, ABI alignment and binary strip; qualified nonworking kernel/heap templates and modern mitigation/version assumptions.
 - **api-design-principles**; corrected: Read all six files; fixed mock FastAPI production claim, error-detail validation/headers, loopback defaults, nullable PATCH, GraphQL directive misuse/cursor repeat, Pydantic underscore field and absent bundled resources; constrained auth/loaders/batching/limiter/idempotency assumptions.
 - **idea-refine**; corrected: Read all five files; repaired truncated activation/missing question-tool fallback, limited ideation scope and fabricated case evidence, qualified locking/competition/zero-cost claims, added initializer symlink boundary.
+
+## Validation
+
+- `validate`, `validate:references`, `security:docs` passed before final report commit.
+- Four offline helper regressions passed (zero interval, explicit memory reset, symlink writes, syntax).
+- Final committed-head `pr:evidence` and `pr:preflight` results are recorded in the PR; no passing Tessl review is claimed.
+
+Large removals in the Bill Gates and Brazilian legal references remove unsourced fabricated quotations and incorrect legal tables; retained workflows now require cited evidence instead of preserving misleading assertions.
+
+Final suite repair: updated the exact reviewed `agent-observability` trusted source fixture and added a regression proving numeric log interpolation survives redaction while raw exception/stack fields are removed. Existing PII event-drop assertions remain intact;16 security boundary tests passed.

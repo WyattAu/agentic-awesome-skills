@@ -1,6 +1,6 @@
 ---
 name: debugging-code
-description: "Interactively debug source code — set breakpoints, step through execution line by line, inspect live variable state, evaluate expressions against the running program, and navigate the call stack to trace root causes."
+description: "Interactively debug source code; set breakpoints, step through execution line by line, inspect live variable state, evaluate expressions against the running program, and navigate the call stack to trace root causes."
 risk: critical
 source: https://github.com/AlmogBaku/debug-skill/tree/master/skills/debugging-code
 source_repo: AlmogBaku/debug-skill
@@ -13,16 +13,16 @@ license_source: https://github.com/AlmogBaku/debug-skill/blob/master/LICENSE
 # Interactive Debugger
 ## When to Use
 
-Use this skill when you need interactively debug source code — set breakpoints, step through execution line by line, inspect live variable state, evaluate expressions against the running program, and navigate the call stack to trace root causes. Use when a program crashes, raises unexpected exceptions, produces...
+Use this skill when you need interactively debug source code; set breakpoints, step through execution line by line, inspect live variable state, evaluate expressions against the running program, and navigate the call stack to trace root causes. Use when a program crashes, raises unexpected exceptions, produces...
 
 
 Use when a program crashes, produces wrong output, or you need to understand exactly
-how execution reached a particular state — and running it again with more print statements
+how execution reached a particular state; and running it again with more print statements
 won't give you the answer fast enough.
 
 You can pause a running program at any point, read live variable values and the call stack
 at that exact moment, step forward line by line or jump to the next breakpoint, and
-evaluate arbitrary expressions against the live process — all without restarting.
+evaluate arbitrary expressions against the live process; all without restarting.
 
 ## Setup
 
@@ -74,15 +74,15 @@ No debugger or language adapter is bundled; verify actual CLI help/version.
 
 Choose your starting strategy based on what you know:
 
-- **Have a hypothesis** — set a breakpoint where you expect the bug: `dap debug script.py --break script.py:42`
-- **Conditional breakpoint** — only stop when a condition is met: `dap debug script.py --break "script.py:42:x > 5"` (
+- **Have a hypothesis**; set a breakpoint where you expect the bug: `dap debug script.py --break script.py:42`
+- **Conditional breakpoint**; only stop when a condition is met: `dap debug script.py --break "script.py:42:x > 5"` (
   always quote specs with conditions)
-- **Multi-file app** — breakpoints across modules: `--break src/api/routes.py:55 --break src/models/user.py:30`
-- **No hypothesis, small program** — walk from entry: `dap debug script.py --stop-on-entry` (avoid for large projects —
+- **Multi-file app**; breakpoints across modules: `--break src/api/routes.py:55 --break src/models/user.py:30`
+- **No hypothesis, small program**; walk from entry: `dap debug script.py --stop-on-entry` (avoid for large projects -
   startup code is noisy; bisect with breakpoints instead)
-- **Exception, location unknown** — `dap debug script.py --break-on-exception raised` (Python) / `all` (Go/JS)
-- **Remote process** — `dap debug --attach host:port --backend <name>`
-- **Process already running (stuck server, live issue)** — attach without restarting:
+- **Exception, location unknown**; `dap debug script.py --break-on-exception raised` (Python) / `all` (Go/JS)
+- **Remote process**; `dap debug --attach host:port --backend <name>`
+- **Process already running (stuck server, live issue)**; attach without restarting:
   `dap debug --pid <PID> --backend <name>`
   > Debugger attachment permissions vary by OS signing, process and backend.
   > Do not disable SIP or other platform protections to make attachment work;
@@ -106,7 +106,7 @@ Re-read the code, form a *completely different* theory with different breakpoint
 to filter noise. Fall back to full breakpoints + stepping only when you need interactive control.
 
 **Mimic the user journey.** If you're debugging a user flow, set breakpoints along the path you expect the code to take.
-If you expected `compute()` to be called, but it never is, then the bug is in the caller — not `compute()`, but whatever
+If you expected `compute()` to be called, but it never is, then the bug is in the caller; not `compute()`, but whatever
 was supposed to call it.
 
 **Set breakpoints instead of prints.** When you feel the urge to print something, set a breakpoint instead.
@@ -121,7 +121,7 @@ output. At each stop, ask:
 - Does the output so far reveal anything unexpected?
 
 **Trace causation up the stack.** If a value is wrong at frame 0, check `dap eval "<expr>" --frame 1` to see what the
-caller passed. Keep going up (`--frame 2`, `--frame 3`) until you find the frame where the value first became wrong —
+caller passed. Keep going up (`--frame 2`, `--frame 3`) until you find the frame where the value first became wrong -
 that's the origin of the bug, not the symptom.
 
 Example output at a stop:
@@ -146,28 +146,28 @@ Program terminated · Exit code: 1
 
 ## Forming a Hypothesis
 
-Before setting a breakpoint: *"I believe the bug is in X because Y."* A good hypothesis is falsifiable — your next
+Before setting a breakpoint: *"I believe the bug is in X because Y."* A good hypothesis is falsifiable; your next
 observation will confirm or disprove it. No hypothesis yet? Bisect with two breakpoints to narrow the search space, or
 see starting strategies above.
 
 ## Setting Breakpoints Strategically
 
 - Set where the problem *begins*, not where it *manifests*
-- Exception at line 80? Root cause is upstream — start earlier
-- Uncertain? Bisect: `--break f:20 --break f:60` — wrong state before or after halves the search space
+- Exception at line 80? Root cause is upstream; start earlier
+- Uncertain? Bisect: `--break f:20 --break f:60`; wrong state before or after halves the search space
 
 **Where to break:**
 
-- **Boundaries** — where data crosses a format, representation, or module boundary; state is cleanest here
-- **State transitions** — the line that assigns or mutates the corrupted value
-- **Wrong branch** — the condition whose inputs led to the bad path
-- **Antipatterns** — don't break inside library code; break at the call site instead. Don't use unconditional breaks in
-  tight loops — use conditions.
+- **Boundaries**; where data crosses a format, representation, or module boundary; state is cleanest here
+- **State transitions**; the line that assigns or mutates the corrupted value
+- **Wrong branch**; the condition whose inputs led to the bad path
+- **Antipatterns**; don't break inside library code; break at the call site instead. Don't use unconditional breaks in
+  tight loops; use conditions.
 
 ### Managing Breakpoints Mid-Session
 
 As you learn more, add breakpoints deeper in the suspect code and remove ones that have
-served their purpose — progressive narrowing without restarting:
+served their purpose; progressive narrowing without restarting:
 
 ```bash
 dap continue --break app.py:50              # add breakpoint deeper, then continue
@@ -181,7 +181,7 @@ If a breakpoint is on an invalid line or the adapter adjusts it, `dap` warns you
 
 ### Conditional Breakpoints
 
-Stop only when a condition is true — essential for loops, hot paths, and specific input values.
+Stop only when a condition is true; essential for loops, hot paths, and specific input values.
 Syntax: `"file:line:condition"` (always quote).
 
 ```bash
@@ -192,7 +192,7 @@ dap continue --break "app.py:50:len(items) == 0"         # catch the empty-list 
 
 ### Invariant Breakpoints
 
-Conditional breakpoints as runtime assertions — stop the *moment* something goes wrong:
+Conditional breakpoints as runtime assertions; stop the *moment* something goes wrong:
 
 ```bash
 dap debug app.py --break "bank.py:68:balance < 0"          # catch the overdraft
@@ -206,9 +206,9 @@ At each stop, choose how to advance based on what you suspect:
 If you're stepping more than 3 times in a row, you need a breakpoint, not more steps.
 
 ```bash
-dap step                         # step over — trust this call, advance to next line
-dap step in                      # step into — suspect what's inside this function
-dap step out                     # step out — you're in the wrong place, return to caller
+dap step                         # step over; trust this call, advance to next line
+dap step in                      # step into; suspect what's inside this function
+dap step out                     # step out; you're in the wrong place, return to caller
 dap continue                     # jump to next breakpoint
 dap continue --to file:line      # run to line (temp breakpoint, auto-removed)
 dap context                      # re-inspect current state without stepping
@@ -231,18 +231,18 @@ dap eval "expected == actual"       # test hypothesis on live state
 dap eval "self.config" --frame 1    # frame 1 = caller (may be a different file)
 ```
 
-Avoid eval expressions that call methods with side effects — they mutate program state and can corrupt your debugging
+Avoid eval expressions that call methods with side effects; they mutate program state and can corrupt your debugging
 session. Stick to read-only access unless you're intentionally testing a fix.
 
 ## Skipping Ahead
 
 When you need a quick look at a specific line without committing to a permanent breakpoint, use
-`dap continue --to file:line`. It's a disposable breakpoint — stops once, then vanishes. Good for
+`dap continue --to file:line`. It's a disposable breakpoint; stops once, then vanishes. Good for
 "I just want to see what `x` looks like at line 50" without managing breakpoint lifecycle.
 
 ## Advanced Scenarios
 
-For advanced scenarios — hangs, concurrency bugs, deeply nested state, loop bisection —
+For advanced scenarios; hangs, concurrency bugs, deeply nested state, loop bisection -
 see `${CLAUDE_SKILL_DIR}/references/advanced-techniques.md`.
 
 ## Walkthrough
@@ -278,7 +278,7 @@ Root cause: None passed where list expected.
 While paused at the bug, use `eval` to test your proposed fix expression against the live state. A successful eval tests only that paused state; it does not establish correctness in normal execution. Then edit and `dap restart` to confirm end-to-end.
 
 After applying a fix, re-run the same scenario to verify. `dap restart` re-runs with the same args and
-breakpoints — a fast feedback loop. Don't trust that a fix works until you've observed the correct
+breakpoints; a fast feedback loop. Don't trust that a fix works until you've observed the correct
 behavior at the same breakpoint where you found the bug.
 
 ## Cleanup

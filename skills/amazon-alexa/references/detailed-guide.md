@@ -1,4 +1,4 @@
-# AMAZON ALEXA — Voz Inteligente com Claude - Detailed Guide
+# AMAZON ALEXA: Voz Inteligente com Claude - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -528,7 +528,7 @@ def get_secret(secret_name):
 
 ---
 
-## Fase 1 — Setup (Dia 1)
+## Fase 1: Setup (Dia 1)
 
 ```
 [ ] Conta Amazon Developer criada
@@ -538,7 +538,7 @@ def get_secret(secret_name):
 [ ] Anthropic API key armazenada em Secrets Manager
 ```
 
-## Fase 2 — Skill Base (Dia 2-3)
+## Fase 2: Skill Base (Dia 2-3)
 
 ```
 [ ] ask new --template hello-world --skill-name auri
@@ -549,7 +549,7 @@ def get_secret(secret_name):
 [ ] Teste basico no ASK simulator
 ```
 
-## Fase 3 — Persistencia (Dia 4)
+## Fase 3: Persistencia (Dia 4)
 
 ```
 [ ] DynamoDB table criada
@@ -558,7 +558,7 @@ def get_secret(secret_name):
 [ ] Preferencias do usuario salvas
 ```
 
-## Fase 4 — Polly + Apl (Dia 5-6)
+## Fase 4: Polly + Apl (Dia 5-6)
 
 ```
 [ ] Polly integrado com voz Vitoria (neural)
@@ -566,7 +566,7 @@ def get_secret(secret_name):
 [ ] APL renderizando em Echo Show simulator
 ```
 
-## Fase 5 — Smart Home (Opcional)
+## Fase 5: Smart Home (Opcional)
 
 ```
 [ ] Smart Home skill habilitada
@@ -575,7 +575,7 @@ def get_secret(secret_name):
 [ ] Teste com device real
 ```
 
-## Fase 6 — Publicacao
+## Fase 6: Publicacao
 
 ```
 [ ] Teste completo de todas funcionalidades

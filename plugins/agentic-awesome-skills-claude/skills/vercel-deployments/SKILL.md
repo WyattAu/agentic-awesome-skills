@@ -112,22 +112,22 @@ vercel env rm SECRET_KEY production
 ### Environment Separation Pattern
 
 ```bash
-# Production — real credentials
+# Production: real credentials
 vercel env add DATABASE_URL production <<< "postgresql://prod-host:5432/app"
 vercel env add STRIPE_SECRET_KEY production
 
-# Preview — staging/test credentials
+# Preview: staging/test credentials
 vercel env add DATABASE_URL preview <<< "postgresql://staging-host:5432/app"
 vercel env add STRIPE_SECRET_KEY preview   # Use test mode key
 
-# Development — local values
+# Development: local values
 vercel env add DATABASE_URL development <<< "postgresql://localhost:5432/app"
 ```
 
 ## Edge Functions
 
 ```typescript
-// app/api/geo/route.ts — Edge API route (Next.js App Router)
+// app/api/geo/route.ts; Edge API route (Next.js App Router)
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -146,7 +146,7 @@ export function GET(request: NextRequest) {
 ```
 
 ```typescript
-// middleware.ts — Deployment geolocation routing example (not authentication)
+// middleware.ts; Deployment geolocation routing example (not authentication)
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -242,7 +242,7 @@ vercel inspect <deployment-url>
 ## Production Guardrails
 
 - Require preview checks before merge (GitHub branch protection)
-- Separate preview and production environment variables — never share API keys
+- Separate preview and production environment variables; never share API keys
 - Use branch protection with required deployment status checks
 - Monitor function duration and cold start behavior in Vercel Analytics
 - Set spend limits in Vercel dashboard to prevent cost surprises
@@ -289,9 +289,9 @@ export default function RootLayout({ children }) {
 
 ## Related Skills
 
-- github-actions (`github-actions`) — Automated deployment gates
-- cloudflare-pages (`cloudflare-pages`) — Alternative edge hosting
-- ssl-tls-management (`ssl-tls-management`) — Custom certificate setup
+- github-actions (`github-actions`); Automated deployment gates
+- cloudflare-pages (`cloudflare-pages`); Alternative edge hosting
+- ssl-tls-management (`ssl-tls-management`); Custom certificate setup
 
 ## Limitations
 

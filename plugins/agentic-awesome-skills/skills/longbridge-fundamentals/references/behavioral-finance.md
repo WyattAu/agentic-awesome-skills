@@ -1,6 +1,6 @@
 # longbridge-behavioral-finance
 
-Apply behavioral finance theory to identify exploitable market inefficiencies — map common cognitive biases to measurable price/volume patterns using Longbridge data.
+Apply behavioral finance theory to identify exploitable market inefficiencies; map common cognitive biases to measurable price/volume patterns using Longbridge data.
 
 ## Bias catalogue and tradeable signals
 

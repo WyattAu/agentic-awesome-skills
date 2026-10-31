@@ -73,27 +73,27 @@ VINFO key                              # Vector set metadata                   O
 ```
 
 **VADD vector input:**
-- `VALUES 3 0.1 1.2 0.5 my-element` — string floats, platform-independent
-- `FP32 <blob> my-element` — binary 32-bit float blob, must be little-endian
+- `VALUES 3 0.1 1.2 0.5 my-element`; string floats, platform-independent
+- `FP32 <blob> my-element`; binary 32-bit float blob, must be little-endian
 
 **VADD quantization options** (mutually exclusive, set on first VADD):
-- `NOQUANT` — no quantization, full precision (most memory)
-- `Q8` — signed 8-bit int quantization (default, good balance)
-- `BIN` — binary quantization (fastest, least memory, lower recall)
+- `NOQUANT`; no quantization, full precision (most memory)
+- `Q8`; signed 8-bit int quantization (default, good balance)
+- `BIN`; binary quantization (fastest, least memory, lower recall)
 
 **VSIM input modes:**
-- `ELE element` — search by existing element in the set
-- `VALUES num v1 v2 ...` — search by float vector
-- `FP32 <blob>` — search by binary vector
+- `ELE element`; search by existing element in the set
+- `VALUES num v1 v2 ...`; search by float vector
+- `FP32 <blob>`; search by binary vector
 
 **VSIM key options:**
-- `WITHSCORES` — include similarity score (1 = identical, 0 = opposite)
-- `WITHATTRIBS` — include JSON attributes for each result
-- `COUNT n` — limit results (default 10)
-- `EPSILON delta` — only return elements with distance < delta (similarity > 1-delta)
-- `EF ef` — search exploration factor (higher = better recall, slower)
-- `FILTER expr` — filter by attribute expression (e.g., `".year > 2020"`)
-- `TRUTH` — exact linear scan (O(N)), for benchmarking recall quality
+- `WITHSCORES`; include similarity score (1 = identical, 0 = opposite)
+- `WITHATTRIBS`; include JSON attributes for each result
+- `COUNT n`; limit results (default 10)
+- `EPSILON delta`; only return elements with distance < delta (similarity > 1-delta)
+- `EF ef`; search exploration factor (higher = better recall, slower)
+- `FILTER expr`; filter by attribute expression (e.g., `".year > 2020"`)
+- `TRUTH`; exact linear scan (O(N)), for benchmarking recall quality
 
 **VRANGE iteration** (Redis 8.4+):
 Stateless lexicographic iteration. `start`/`end` use `[` inclusive, `(` exclusive, `-` min, `+` max:
@@ -108,7 +108,7 @@ VRANGE mykey - + -1        # All elements (caution: may be slow)
 Probabilistic data structure for membership testing. Returns "possibly in set" or "definitely not in set". Space-efficient with a configurable false-positive rate.
 
 ```
-# Create with custom parameters (optional — auto-created on first ADD)
+# Create with custom parameters (optional: auto-created on first ADD)
 BF.RESERVE key error_rate capacity [EXPANSION expansion] [NONSCALING]
 
 # Write
@@ -138,7 +138,7 @@ BF.LOADCHUNK key iter data             # Incremental restore
 Alternative to Bloom filters with the additional ability to delete items and count occurrences. A positive membership result may be a false positive; a negative means absent under correct use. Delete only items known to have been inserted, because fingerprint collisions can otherwise affect other entries.
 
 ```
-# Create (optional — auto-created on first ADD)
+# Create (optional: auto-created on first ADD)
 CF.RESERVE key capacity [BUCKETSIZE bucketsize] [MAXITERATIONS maxiterations] [EXPANSION expansion]
 
 # Write
@@ -193,7 +193,7 @@ TOPK.INFO key                          # Sketch metadata (k, width, depth, decay
 **Behavioral notes:**
 - `TOPK.RESERVE` parameters: `topk` = number of top elements to track, `width`/`depth` = sketch dimensions, `decay` = probability decay
 - `TOPK.ADD` returns the expelled element for each addition that enters the top-K, or nil
-- Results are approximate — items in the top-K list are not guaranteed to be the actual top-K
+- Results are approximate; items in the top-K list are not guaranteed to be the actual top-K
 
 ## Count-Min Sketch
 
@@ -218,8 +218,8 @@ CMS.MERGE destkey numkeys key [key ...] [WEIGHTS weight [weight ...]]  # Merge s
 ```
 
 **Behavioral notes:**
-- `CMS.INITBYPROB` is preferred — specify desired `error_rate` (accuracy) and `probability` (confidence)
-- `CMS.QUERY` returns overestimates (never underestimates) — the count includes false positives from hash collisions
+- `CMS.INITBYPROB` is preferred; specify desired `error_rate` (accuracy) and `probability` (confidence)
+- `CMS.QUERY` returns overestimates (never underestimates); the count includes false positives from hash collisions
 - `CMS.MERGE` combines multiple sketches; useful for aggregating distributed counters
 
 ## T-Digest
@@ -316,10 +316,10 @@ TS.DEL key from to                                                # Delete range
 **Label filter syntax:** `label=value` (exact), `label!=(value1,value2)` (exclude), `label=(v1,v2)` (OR), `label!=` (exists), `label=` (absent). Filters are conjunctive (AND).
 
 **DUPLICATE_POLICY** (on TS.CREATE): How to handle duplicate timestamps:
-- `BLOCK` — reject duplicate (default)
-- `FIRST` — keep first value
-- `LAST` — keep latest value
-- `MIN` / `MAX` / `SUM` — aggregate
+- `BLOCK`; reject duplicate (default)
+- `FIRST`; keep first value
+- `LAST`; keep latest value
+- `MIN` / `MAX` / `SUM`; aggregate
 
 **Compaction:** `TS.CREATERULE` automatically computes aggregation as data arrives. Only data added *after* rule creation is processed. Destination key must already exist.
 
@@ -399,23 +399,23 @@ FT.CURSOR DEL index cursor                                      # Delete cursor
 ```
 
 **FT.CREATE field types:**
-- `TEXT` — full-text searchable, supports stemming, phonetic matching
-- `TAG` — exact match labels (categories, IDs)
-- `NUMERIC` — range queries (prices, timestamps)
-- `GEO` — geographic coordinates (lon, lat)
-- `VECTOR` — vector similarity (KNN, cosine/L2/IP)
-- `GEOSHAPE` — geometric shapes (SPHERICAL|FLAT)
+- `TEXT`; full-text searchable, supports stemming, phonetic matching
+- `TAG`; exact match labels (categories, IDs)
+- `NUMERIC`; range queries (prices, timestamps)
+- `GEO`; geographic coordinates (lon, lat)
+- `VECTOR`; vector similarity (KNN, cosine/L2/IP)
+- `GEOSHAPE`; geometric shapes (SPHERICAL|FLAT)
 
 **Query syntax (DIALECT 2+):**
-- `hello world` — intersection (AND) of terms; `hello|world` expresses OR
-- `"hello world"` — exact phrase
-- `@field:term` — field-specific search
-- `@price:[100 200]` — numeric range
-- `@location:[-122.41 37.77 5 km]` — geo radius
-- `*=>[KNN 10 @vec $blob]` — vector similarity (KNN)
-- `-term` — exclude term
-- `~term` — optional term
-- `*` — match all documents
+- `hello world`; intersection (AND) of terms; `hello|world` expresses OR
+- `"hello world"`; exact phrase
+- `@field:term`; field-specific search
+- `@price:[100 200]`; numeric range
+- `@location:[-122.41 37.77 5 km]`; geo radius
+- `*=>[KNN 10 @vec $blob]`; vector similarity (KNN)
+- `-term`; exclude term
+- `~term`; optional term
+- `*`; match all documents
 
 **FT.AGGREGATE pipeline stages:** `GROUPBY` + `REDUCE` → `SORTBY` → `APPLY` → `LIMIT` → `FILTER`. Available reducers: `COUNT`, `SUM`, `MIN`, `MAX`, `AVG`, `COUNT_DISTINCT`, `COUNT_DISTINCTISH`, `QUANTILE`, `STDDEV`, `FIRST_VALUE`, `RANDOM_SAMPLE`, `TOLIST`.
 

@@ -89,9 +89,9 @@ Menu: Inventory → Configuration → Warehouses → [Your Warehouse]
 Outgoing Shipments: Pick + Pack + Ship (3 steps)
 
 Operations created automatically:
-  PICK  — Move goods from storage shelf to packing area
-  PACK  — Package items and print shipping label
-  OUT   — Hand off to carrier / mark as shipped
+  PICK ; Move goods from storage shelf to packing area
+  PACK ; Package items and print shipping label
+  OUT  ; Hand off to carrier / mark as shipped
 ```
 
 ## Best Practices
@@ -99,14 +99,14 @@ Operations created automatically:
 - ✅ **Do:** Use **Lots/Serial Numbers** for high-value or regulated items (medical devices, electronics).
 - ✅ **Do:** Run a **physical inventory adjustment** at least quarterly (Inventory → Operations → Physical Inventory) to correct drift.
 - ✅ **Do:** Set reordering rules on fast-moving items so purchase orders are generated automatically.
-- ✅ **Do:** Enable **Putaway Rules** on warehouses with multiple storage zones — verify suggested destinations and exceptions; rules do not eliminate all handling errors.
-- ❌ **Don't:** Switch stock valuation method (FIFO ↔ AVCO) after recording transactions — it produces incorrect historical cost data.
-- ❌ **Don't:** Use "Update Quantity" to fix stock errors — always use Inventory Adjustments to maintain a proper audit trail.
+- ✅ **Do:** Enable **Putaway Rules** on warehouses with multiple storage zones; verify suggested destinations and exceptions; rules do not eliminate all handling errors.
+- ❌ **Don't:** Switch stock valuation method (FIFO ↔ AVCO) after recording transactions; it produces incorrect historical cost data.
+- ❌ **Don't:** Use "Update Quantity" to fix stock errors; always use Inventory Adjustments to maintain a proper audit trail.
 - ❌ **Don't:** Mix product categories with different costing methods in the same storage location without understanding the valuation impact.
 
 ## Limitations
 
 - **Serial number tracking** at the individual unit level (SN per line) adds significant UI overhead; test performance with large volumes before enabling.
-- Does not cover **landed costs** (import duties, freight allocation to product cost) — that requires the `stock_landed_costs` module.
+- Does not cover **landed costs** (import duties, freight allocation to product cost); that requires the `stock_landed_costs` module.
 - **Cross-warehouse stock transfers** have routing complexities (transit locations, intercompany invoicing) not fully covered here.
 - Automated inventory valuation requires the **Accounting** module; Community Edition installations without it cannot post stock journal entries.

@@ -1,6 +1,6 @@
-# Communication Templates — Energy Procurement
+# Communication Templates: Energy Procurement
 
-> **Reference Type:** Tier 3 — Load on demand when composing or reviewing energy procurement communications.
+> **Reference Type:** Tier 3; Load on demand when composing or reviewing energy procurement communications.
 >
 > **Usage:** Each template includes variable placeholders in `{{double_braces}}` for direct substitution. Templates are organized by communication type and business context. Select the template matching your scenario, substitute variables, review tone guidance, and return a draft; external sending/filing/enrollment requires explicit authorization.
 
@@ -13,7 +13,7 @@
 3. [Utility Rate Case Intervention Comment](#3-utility-rate-case-intervention-comment)
 4. [Demand Response Program Enrollment](#4-demand-response-program-enrollment)
 5. [Budget Forecast Presentation](#5-budget-forecast-presentation)
-6. [Sustainability Report — Energy Section](#6-sustainability-report--energy-section)
+6. [Sustainability Report; Energy Section](#6-sustainability-report--energy-section)
 7. [Internal Energy Cost Variance Analysis](#7-internal-energy-cost-variance-analysis)
 8. [Supplier Contract Renewal Negotiation](#8-supplier-contract-renewal-negotiation)
 9. [Regulatory Filing Comment](#9-regulatory-filing-comment)
@@ -65,11 +65,11 @@ Common variables used across templates:
 
 **Channel:** Email with attached RFP document
 **Audience:** Retail energy provider sales/pricing team
-**Tone:** Professional, data-rich, competitive. You're offering a significant commercial opportunity — present it as such.
+**Tone:** Professional, data-rich, competitive. You're offering a significant commercial opportunity; present it as such.
 
 ---
 
-**Subject:** `Invitation to Bid — {{our_company}} Electricity Supply RFP — {{contract_start}} Start`
+**Subject:** `Invitation to Bid; {{our_company}} Electricity Supply RFP; {{contract_start}} Start`
 
 {{supplier_contact}},
 
@@ -93,7 +93,7 @@ Common variables used across templates:
 - Total cost across three price scenarios (40%)
 - Supplier credit quality and financial stability (20%)
 - Contract flexibility including volume tolerance and early termination provisions (15%)
-- Sustainability services — REC sourcing, carbon reporting, PPA advisory (15%)
+- Sustainability services; REC sourcing, carbon reporting, PPA advisory (15%)
 - Market intelligence and advisory capabilities (10%)
 
 **Key requirements:**
@@ -124,18 +124,18 @@ We look forward to {{supplier_name}}'s participation.
 
 **Channel:** Email to developer's commercial team
 **Audience:** Renewable energy project developer
-**Tone:** Collaborative but commercially rigorous. PPAs are 10-25 year commitments — every term matters.
+**Tone:** Collaborative but commercially rigorous. PPAs are 10-25 year commitments; every term matters.
 
 ---
 
-**Subject:** `{{our_company}} Response to {{ppa_project_name}} Term Sheet — Commercial Feedback`
+**Subject:** `{{our_company}} Response to {{ppa_project_name}} Term Sheet; Commercial Feedback`
 
 {{developer_contact}},
 
 Thank you for the term sheet for {{ppa_project_name}} ({{ppa_capacity_mw}}). We've completed our initial review and have the following feedback organized by commercial, financial, and operational terms.
 
 **Commercial Terms:**
-- **Strike price:** The proposed {{ppa_strike_price}} is within our target range based on current forward curves. We would like to discuss a price escalator structure — 0% escalation for years 1-5 with a [CPI-linked / fixed 1.5%] escalator beginning year 6.
+- **Strike price:** The proposed {{ppa_strike_price}} is within our target range based on current forward curves. We would like to discuss a price escalator structure; 0% escalation for years 1-5 with a [CPI-linked / fixed 1.5%] escalator beginning year 6.
 - **Settlement point:** We request settlement at the {{iso_name}} [load zone / hub] rather than the project node, to reduce our basis risk exposure. We understand this may require a price adjustment and are prepared to discuss.
 - **Contract volume:** We would like to discuss a partial offtake ({{our_offtake_mw}} MW of the {{ppa_capacity_mw}} project) with right of first refusal on additional capacity.
 
@@ -162,7 +162,7 @@ We would welcome a call this week to discuss these points. Please suggest availa
 **Tone Notes:**
 - PPA negotiations are multi-round. The first response should establish your key positions without ultimatums.
 - Always frame risk allocation as "fair to both parties" rather than "we won't accept your risk."
-- Developers receive dozens of term sheet responses — be specific and organized to stand out as a serious offtaker.
+- Developers receive dozens of term sheet responses; be specific and organized to stand out as a serious offtaker.
 
 ---
 
@@ -170,11 +170,11 @@ We would welcome a call this week to discuss these points. Please suggest availa
 
 **Channel:** Formal filing with state Public Utility Commission
 **Audience:** PUC commissioners, administrative law judge, utility regulatory staff
-**Tone:** Formal, data-driven, legally precise. This is a regulatory proceeding — opinions must be supported by evidence.
+**Tone:** Formal, data-driven, legally precise. This is a regulatory proceeding; opinions must be supported by evidence.
 
 ---
 
-**Re:** {{docket_number}} — {{utility_name}} Application for Rate Increase
+**Re:** {{docket_number}}; {{utility_name}} Application for Rate Increase
 
 **Before the {{state}} Public Utilities Commission**
 
@@ -212,11 +212,11 @@ We would welcome a call this week to discuss these points. Please suggest availa
 
 **Channel:** Formal enrollment application
 **Audience:** Utility or ISO demand response program administrator
-**Tone:** Technical, precise. DR enrollment documents are contractual — accuracy matters.
+**Tone:** Technical, precise. DR enrollment documents are contractual; accuracy matters.
 
 ---
 
-**Subject:** `Demand Response Program Enrollment Application — {{facility_name}}`
+**Subject:** `Demand Response Program Enrollment Application; {{facility_name}}`
 
 To: {{dr_program_administrator}}
 
@@ -253,11 +253,11 @@ We are available for an enrollment verification test during the week of {{test_w
 
 **Channel:** Internal presentation (PowerPoint / memo)
 **Audience:** CFO, VP Finance, Budget Committee
-**Tone:** Precise, scenario-based, action-oriented. Finance wants numbers, ranges, and decision points — not energy market tutorials.
+**Tone:** Precise, scenario-based, action-oriented. Finance wants numbers, ranges, and decision points; not energy market tutorials.
 
 ---
 
-### {{budget_year}} Energy Cost Forecast — {{our_company}}
+### {{budget_year}} Energy Cost Forecast: {{our_company}}
 
 **Prepared by:** {{our_contact_name}}, {{our_contact_title}}
 **Date:** {{forecast_date}}
@@ -268,10 +268,10 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 
 | Component | {{prior_year}} Actual | {{budget_year}} Base Case | Change |
 |-----------|---------------------|--------------------------|--------|
-| Electricity — supply | ${{elec_supply_prior}} | ${{elec_supply_forecast}} | {{elec_supply_change}} |
-| Electricity — delivery (T&D) | ${{elec_delivery_prior}} | ${{elec_delivery_forecast}} | {{elec_delivery_change}} |
-| Electricity — demand charges | ${{demand_charges_prior}} | ${{demand_charges_forecast}} | {{demand_change}} |
-| Electricity — capacity charges | ${{capacity_prior}} | ${{capacity_forecast}} | {{capacity_change}} |
+| Electricity; supply | ${{elec_supply_prior}} | ${{elec_supply_forecast}} | {{elec_supply_change}} |
+| Electricity; delivery (T&D) | ${{elec_delivery_prior}} | ${{elec_delivery_forecast}} | {{elec_delivery_change}} |
+| Electricity; demand charges | ${{demand_charges_prior}} | ${{demand_charges_forecast}} | {{demand_change}} |
+| Electricity; capacity charges | ${{capacity_prior}} | ${{capacity_forecast}} | {{capacity_change}} |
 | Natural gas | ${{gas_prior}} | ${{gas_forecast}} | {{gas_change}} |
 | RECs / sustainability | ${{rec_prior}} | ${{rec_forecast}} | {{rec_change}} |
 | **Total** | **${{prior_year_total}}** | **${{base_case_total}}** | **{{total_change}}** |
@@ -287,7 +287,7 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 
 | Scenario | Electricity Cost | Gas Cost | Total | vs. Base Case |
 |----------|-----------------|----------|-------|---------------|
-| Base case | ${{elec_base}} | ${{gas_base}} | ${{base_case_total}} | — |
+| Base case | ${{elec_base}} | ${{gas_base}} | ${{base_case_total}} | - |
 | Mild winter / cool summer | ${{elec_low}} | ${{gas_low}} | ${{low_case_total}} | {{low_delta}} |
 | Severe winter / hot summer | ${{elec_high}} | ${{gas_high}} | ${{high_case_total}} | {{high_delta}} |
 | Market stress (2× forward) | ${{elec_stress}} | ${{gas_stress}} | ${{stress_total}} | {{stress_delta}} |
@@ -299,23 +299,23 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 
 ---
 
-## 6. Sustainability Report — Energy Section
+## 6. Sustainability Report: Energy Section
 
 **Channel:** Annual sustainability / ESG report
 **Audience:** Investors, customers, ESG rating agencies, RE100, CDP
-**Tone:** Transparent, data-backed, forward-looking. Avoid greenwashing — ESG audiences are sophisticated.
+**Tone:** Transparent, data-backed, forward-looking. Avoid greenwashing; ESG audiences are sophisticated.
 
 ---
 
-### Energy and Climate — {{report_year}}
+### Energy and Climate: {{report_year}}
 
 **Scope 2 Emissions:**
 
 | Metric | {{prior_year}} | {{report_year}} | Change |
 |--------|---------------|-----------------|--------|
 | Total electricity consumed (MWh) | {{elec_prior_mwh}} | {{elec_current_mwh}} | {{elec_change_pct}} |
-| Scope 2 — Location-based (MT CO₂e) | {{scope 2_loc_prior}} | {{scope 2_loc_current}} | {{scope 2_loc_change}} |
-| Scope 2 — Market-based (MT CO₂e) | {{scope 2_mkt_prior}} | {{scope 2_mkt_current}} | {{scope 2_mkt_change}} |
+| Scope 2; Location-based (MT CO₂e) | {{scope 2_loc_prior}} | {{scope 2_loc_current}} | {{scope 2_loc_change}} |
+| Scope 2; Market-based (MT CO₂e) | {{scope 2_mkt_prior}} | {{scope 2_mkt_current}} | {{scope 2_mkt_change}} |
 | Renewable electricity (%) | {{re_pct_prior}} | {{re_pct_current}} | {{re_change}} |
 
 **Renewable Energy Procurement:**
@@ -345,15 +345,15 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 
 ---
 
-**Subject:** `Energy Cost Variance Report — {{month}} {{year}}`
+**Subject:** `Energy Cost Variance Report; {{month}} {{year}}`
 
-**Summary:** Total energy cost of ${{actual_total}} vs. budget of ${{budget_total}} — variance of ${{variance}} ({{variance_pct}}).
+**Summary:** Total energy cost of ${{actual_total}} vs. budget of ${{budget_total}}; variance of ${{variance}} ({{variance_pct}}).
 
 **Variance Decomposition:**
 
 | Driver | Impact | Explanation |
 |--------|--------|-------------|
-| Weather (HDD/CDD vs. normal) | ${{weather_impact}} | {{month}} was {{weather_description}} — {{hdd_cdd_actual}} vs. {{hdd_cdd_budget}} budgeted HDD/CDD |
+| Weather (HDD/CDD vs. normal) | ${{weather_impact}} | {{month}} was {{weather_description}}; {{hdd_cdd_actual}} vs. {{hdd_cdd_budget}} budgeted HDD/CDD |
 | Market price (index exposure) | ${{market_impact}} | Day-ahead LMP averaged ${{actual_lmp}}/MWh vs. budget assumption of ${{budget_lmp}}/MWh |
 | Demand charges | ${{demand_impact}} | Peak demand of {{actual_peak_kw}} kW vs. budget of {{budget_peak_kw}} kW at {{facility_name}} |
 | Production volume | ${{volume_impact}} | Production hours {{production_description}} vs. plan |
@@ -372,11 +372,11 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 
 **Channel:** Email
 **Audience:** Incumbent energy supplier's commercial team
-**Tone:** Relationship-forward, data-informed. You want to renew if terms are fair — make that clear while establishing competitive tension.
+**Tone:** Relationship-forward, data-informed. You want to renew if terms are fair; make that clear while establishing competitive tension.
 
 ---
 
-**Subject:** `Contract Renewal Discussion — {{our_company}} / {{supplier_name}} — {{contract_end}} Expiration`
+**Subject:** `Contract Renewal Discussion; {{our_company}} / {{supplier_name}}; {{contract_end}} Expiration`
 
 {{supplier_contact}},
 
@@ -390,7 +390,7 @@ To frame the discussion, here is our perspective on renewal:
 - The account management team has been responsive and proactive
 
 **Where we'd like to see improvement:**
-- Our current rate of {{current_rate}} was competitive at signing but the forward curve for the renewal period ({{contract_start}} through {{new_contract_end}}) is currently {{market_rate}} — we need renewal pricing that reflects current market conditions
+- Our current rate of {{current_rate}} was competitive at signing but the forward curve for the renewal period ({{contract_start}} through {{new_contract_end}}) is currently {{market_rate}}; we need renewal pricing that reflects current market conditions
 - We'd like to discuss [block-and-index structure / increased volume tolerance / REC bundling] for the renewal term
 
 **Our process:**
@@ -408,7 +408,7 @@ We would welcome a call on {{proposed_call_date}} to discuss {{supplier_name}}'s
 
 **Tone Notes:**
 - Name the competitive process but don't bluff about the number of bidders.
-- Lead with what's worked well — the incumbent relationship has value and you should acknowledge it.
+- Lead with what's worked well; the incumbent relationship has value and you should acknowledge it.
 - Be transparent about timeline so the supplier can allocate pricing resources.
 
 ---
@@ -421,7 +421,7 @@ We would welcome a call on {{proposed_call_date}} to discuss {{supplier_name}}'s
 
 ---
 
-**Re:** {{docket_number}} — Proposed Modifications to {{program_or_rule}}
+**Re:** {{docket_number}}; Proposed Modifications to {{program_or_rule}}
 
 {{our_company}} appreciates the opportunity to comment on the proposed modifications to {{program_or_rule}}.
 
@@ -450,11 +450,11 @@ Respectfully submitted,
 
 **Channel:** Board meeting memo / presentation
 **Audience:** Board of Directors, CEO, CFO
-**Tone:** Strategic, concise, decision-focused. The board cares about risk, cost trajectory, sustainability commitments, and capital allocation — not market mechanics.
+**Tone:** Strategic, concise, decision-focused. The board cares about risk, cost trajectory, sustainability commitments, and capital allocation; not market mechanics.
 
 ---
 
-### Energy Strategy Update — {{quarter}} {{year}}
+### Energy Strategy Update: {{quarter}} {{year}}
 
 **For the Board of Directors, {{our_company}}**
 
@@ -473,8 +473,8 @@ Respectfully submitted,
 3. **Risk management:** [1-2 sentence summary of hedge position and market outlook]
 
 **Decisions Requested:**
-1. Approve execution of a {{ppa_term_years}}-year virtual PPA with {{ppa_project_name}} at {{ppa_strike_price}} for {{ppa_capacity_mw}} MW — projected NPV of ${{ppa_npv}} over the contract term, delivering {{ppa_annual_recs}} RECs annually toward our RE100 commitment.
-2. Authorize ${{capex_amount}} in capital expenditure for battery energy storage at {{capex_facilities}} — projected {{payback_years}}-year payback with stacked value of ${{annual_savings}}/year in demand charge and capacity cost reduction.
+1. Approve execution of a {{ppa_term_years}}-year virtual PPA with {{ppa_project_name}} at {{ppa_strike_price}} for {{ppa_capacity_mw}} MW; projected NPV of ${{ppa_npv}} over the contract term, delivering {{ppa_annual_recs}} RECs annually toward our RE100 commitment.
+2. Authorize ${{capex_amount}} in capital expenditure for battery energy storage at {{capex_facilities}}; projected {{payback_years}}-year payback with stacked value of ${{annual_savings}}/year in demand charge and capacity cost reduction.
 
 **Risk Summary:**
 - Market risk: {{hedge_pct}}% hedged through {{hedge_end}}. Unhedged exposure: ${{unhedged_exposure}} at current forwards.
@@ -487,7 +487,7 @@ Respectfully submitted,
 
 **Tone Notes:**
 - Board communication must be under 2 pages. Provide appendices for detail.
-- Lead with the "ask" — if you need board approval for a PPA or capital project, put it in the executive summary.
+- Lead with the "ask"; if you need board approval for a PPA or capital project, put it in the executive summary.
 - Quantify everything. "Good progress on sustainability" means nothing. "38% RE, on track for 50% by year-end" means everything.
 - Acknowledge risks explicitly. A board that discovers unmentioned risks loses trust in management.
 

@@ -12,14 +12,14 @@ uv run scripts/create_collection.py --allow-write CollectionName --properties '[
 
 | Parameter | Flag | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `name` | — | Yes (positional) | — | Collection name (must be the exact approved name beginning with uppercase) |
-| `--properties` | `-p` | Yes | — | JSON array of property definitions |
-| `--description` | `-d` | No | — | Collection description — **strongly recommended**. Weaviate agents (Query Agent, Personalization Agent) read this to understand what the collection contains and decide which collection to query |
+| `name` | - | Yes (positional) | - | Collection name (must be the exact approved name beginning with uppercase) |
+| `--properties` | `-p` | Yes | - | JSON array of property definitions |
+| `--description` | `-d` | No | - | Collection description; **strongly recommended**. Weaviate agents (Query Agent, Personalization Agent) read this to understand what the collection contains and decide which collection to query |
 | `--vectorizer` | `-v` | No | `none` | Vectorizer module to use |
-| `--replication-factor` | `-r` | No | — | Replication factor (defers to server default when not set) |
+| `--replication-factor` | `-r` | No | - | Replication factor (defers to server default when not set) |
 | `--multi-tenancy` | `-m` | No | `false` | Enable multi-tenancy for data isolation |
 | `--auto-tenant-creation` | `-a` | No | `false` | Auto-create tenants on insert (requires `--multi-tenancy`) |
-| `--json` | — | No | `false` | Output in JSON format |
+| `--json` | - | No | `false` | Output in JSON format |
 
 ## Property Definition Format
 
@@ -38,12 +38,12 @@ uv run scripts/create_collection.py --allow-write CollectionName --properties '[
 
 - `name` (required): Property name
 - `data_type` (required): One of the supported data types below
-- `description` (optional): Human-readable description — **strongly recommended**. The Query Agent reads property descriptions to understand your schema, choose the right collection, and construct accurate queries. Good descriptions include units, formats, and valid values (e.g., `"Price in US dollars (USD)"`, `"ISO two-character country code"`, `"Date the paper was published on arXiv"`)
-- `tokenization` (optional): For text types — `word`, `lowercase`, `whitespace`, or `field`
+- `description` (optional): Human-readable description; **strongly recommended**. The Query Agent reads property descriptions to understand your schema, choose the right collection, and construct accurate queries. Good descriptions include units, formats, and valid values (e.g., `"Price in US dollars (USD)"`, `"ISO two-character country code"`, `"Date the paper was published on arXiv"`)
+- `tokenization` (optional): For text types; `word`, `lowercase`, `whitespace`, or `field`
 - `index_filterable` (optional): Enable roaring-bitmap filter index for `where` clauses. Default `true` for all types except `blob`, `geoCoordinates`, `object`, `object[]`, `phoneNumber`
 - `index_searchable` (optional): Enable BM25/inverted index for keyword and hybrid search. Only applies to `text` and `text[]`. Default `true`
-- `index_range_filters` (optional): Enable range-comparison index (`>`, `<`, `>=`, `<=`, `between`) for supported scalar numeric/date types (check the pinned server; array support is not implied). Default `false` — **set to `true` for any numeric or date field you plan to range-filter**
-- `nested_properties` (optional): For `object` / `object[]` types — array of nested property definitions
+- `index_range_filters` (optional): Enable range-comparison index (`>`, `<`, `>=`, `<=`, `between`) for supported scalar numeric/date types (check the pinned server; array support is not implied). Default `false`; **set to `true` for any numeric or date field you plan to range-filter**
+- `nested_properties` (optional): For `object` / `object[]` types; array of nested property definitions
 
 ## Supported Data Types
 
@@ -61,7 +61,7 @@ provider only after approving its data handling and cost.
 
 ## Inferring Schema from Data Files
 
-Before creating a collection, inspect a few rows from the source file to understand field names and value types. Use the commands below — CSV and JSONL examples below read only three records; JSON parses the entire file and must be bounded before loading.
+Before creating a collection, inspect a few rows from the source file to understand field names and value types. Use the commands below; CSV and JSONL examples below read only three records; JSON parses the entire file and must be bounded before loading.
 
 **CSV:**
 ```bash
@@ -108,7 +108,7 @@ From the sample, map each field to a Weaviate data type:
 | List of numbers | `int[]` or `number[]` |
 | Nested object | `object` |
 
-**Important:** `id`, `_id`, and `_additional` are reserved by Weaviate — never use them as property names. If they appear in your data, use `--skip-fields` or `--mapping` in `import.py` to handle them.
+**Important:** `id`, `_id`, and `_additional` are reserved by Weaviate; never use them as property names. If they appear in your data, use `--skip-fields` or `--mapping` in `import.py` to handle them.
 
 ## Examples
 

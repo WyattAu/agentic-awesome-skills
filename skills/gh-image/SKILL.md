@@ -33,7 +33,7 @@ plugin:
 
 # Upload images to GitHub (gh-image)
 
-GitHub has **no public API** for image uploads — the web UI uses an internal
+GitHub has **no public API** for image uploads; the web UI uses an internal
 endpoint that mints `user-attachments` URLs scoped to the repo's visibility.
 [`gh-image`](https://github.com/drogers0/gh-image) (MIT, © drogers0) replicates
 that flow as a `gh` CLI extension, so an agent can upload a local image from the
@@ -84,7 +84,7 @@ gh image "/abs/path/screenshot.png" --repo <owner>/<repo>
 ![screenshot.png](https://github.com/user-attachments/assets/<uuid>)
 ```
 
-Capture that output — it is the embeddable reference.
+Capture that output; it is the embeddable reference.
 
 ### Step 3: Embed into the PR / issue / comment
 
@@ -122,10 +122,10 @@ gh pr view <pr> --repo owner/repo --json body -q .body   # confirm URL present
 ## Limitations
 
 - **Session cookie required.** A `user_session` cookie grants full account access
-  (not scoped like a PAT) — treat it like a password; use a bot account in CI.
+  (not scoped like a PAT); treat it like a password; use a bot account in CI.
 - **Write access to the target repo is required**; orgs that enforce SAML SSO need
   the session authorized at `https://github.com/orgs/<org>/sso` first.
 - **Attachment access must be verified:** do not promise private-repository attachment confidentiality from URL shape alone; check the current GitHub behavior and actual audience before uploading sensitive content.
-- **Windows + Chrome 127+** cannot read cookies (library limitation) — use another
+- **Windows + Chrome 127+** cannot read cookies (library limitation); use another
   browser or `GH_SESSION_TOKEN`.
 - The skill embeds the Markdown itself; `gh-image` only prints the URL.

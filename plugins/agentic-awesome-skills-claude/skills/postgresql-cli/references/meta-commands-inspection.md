@@ -1,6 +1,6 @@
 Part of the psql meta-command reference. See also: meta-commands-core.md, meta-commands-formatting.md
 
-# psql Meta-Commands — Object Inspection (\d family)
+# psql Meta-Commands: Object Inspection (\d family)
 
 This document covers all `\d` family commands for inspecting database objects, including tables, indexes, functions, schemas, and more.
 
@@ -14,9 +14,9 @@ This document covers all `\d` family commands for inspecting database objects, i
 ## Object Inspection (\d family)
 
 All `\d` commands accept these common modifiers:
-- `+` — extra info (size, description, ownership)
-- `S` — include system objects
-- `x` — expanded display (must follow `S` or `+`, NOT immediately after `\d`)
+- `+`; extra info (size, description, ownership)
+- `S`; include system objects
+- `x`; expanded display (must follow `S` or `+`, NOT immediately after `\d`)
 
 **Important**: The `x` modifier for expanded display must appear after `S` or `+` (e.g., `\dt+x`), because `\dx` is a separate command that lists installed extensions. Writing `\dx` when you meant expanded display will show extensions instead.
 
@@ -32,7 +32,7 @@ With a pattern: shows columns, types, tablespace, special attributes (NOT NULL, 
 
 ### Table-type listing commands
 
-`\dE` / `\di` / `\dm` / `\ds` / `\dt` / `\dv` — List foreign tables, indexes, materialized views, sequences, tables, or views. Combine letters: `\dti` lists both tables and indexes.
+`\dE` / `\di` / `\dm` / `\ds` / `\dt` / `\dv`; List foreign tables, indexes, materialized views, sequences, tables, or views. Combine letters: `\dti` lists both tables and indexes.
 
 `\d+` adds: persistence status (permanent/temporary/unlogged), physical size on disk, description.
 
@@ -52,7 +52,7 @@ With a pattern: shows columns, types, tablespace, special attributes (NOT NULL, 
 | `\dT[Sx+] [pattern]` | Data types (`\dT+` shows internal name, size, enum values, permissions) |
 | `\dC[x+] [pattern]` | Type casts (`\dC+` shows leakproof status and description) |
 | `\dD[Sx+] [pattern]` | Domains (`\dD+` shows permissions and description) |
-| `\dO[Sx+] [pattern]` | Collations (only collations usable with current database encoding — results vary by database) |
+| `\dO[Sx+] [pattern]` | Collations (only collations usable with current database encoding; results vary by database) |
 
 ### Access method and operator listings
 

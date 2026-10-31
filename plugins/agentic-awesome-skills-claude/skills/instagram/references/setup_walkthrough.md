@@ -1,4 +1,4 @@
-# Setup Walkthrough — Meta App e OAuth
+# Setup Walkthrough: Meta App e OAuth
 
 > Historical reference, not current Meta documentation. This bundle implements Facebook Login with a linked Page for both Business and Creator accounts. Verify the selected API version, permissions, media types, metrics, quotas and app-review requirements before use. Local scripts and their documented limitations take precedence over examples below.
 
@@ -39,7 +39,7 @@
 ### Obter Credenciais
 1. Anote o **App ID** (visível no topo do dashboard)
 2. Vá em Settings → Basic → **App Secret** (clique "Show")
-3. Guarde ambos — serão usados no setup
+3. Guarde ambos; serão usados no setup
 
 ## Passo 4: Adicionar Testers (Modo de Desenvolvimento)
 

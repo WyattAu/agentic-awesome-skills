@@ -68,7 +68,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 }
 ```
 
-## State Management (Riverpod — alternative)
+## State Management (Riverpod: alternative)
 
 ```dart
 @riverpod

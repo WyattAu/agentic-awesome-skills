@@ -40,7 +40,7 @@ planned -> in_progress -> implemented -> tested -> deployed
 
 ### Session Handoff
 
-Each TC stores: progress summary, next steps, blockers, key context, and files in progress — so the next bot session picks up exactly where the last left off.
+Each TC stores: progress summary, next steps, blockers, key context, and files in progress; so the next bot session picks up exactly where the last left off.
 
 ### Non-Blocking
 
@@ -52,12 +52,12 @@ This entrypoint bundles no runtime, commands or background agents. Use an alread
 - Test cases with log snippet evidence
 - WCAG AA+ accessible HTML output (dark theme, rem-based fonts)
 - CSS-only dashboard with status filters
-- Python stdlib only — zero external dependencies
+- Python stdlib only; zero external dependencies
 - Retroactive bulk creation from git history via `/tc retro`
 
 ## Full Repository
 
-https://github.com/Elkidogz/technical-change-skill — MIT License
+https://github.com/Elkidogz/technical-change-skill; MIT License
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

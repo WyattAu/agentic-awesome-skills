@@ -28,7 +28,7 @@ This 2026-08-23 snapshot covers all 28 tools assigned to `automations` in the ca
 | `list_automations` | Read | `automations:read or calls:read` | Immediate | List native workspace automations (graph workflows). |
 | `list_calendly_connections` | Read | `integrations:read or assistants:read` | Immediate | List Calendly accounts connected to this workspace through OAuth. Tokens and secrets are never returned. |
 | `list_crm_syncs` | Read | `automations:read or calls:read` | Immediate | List CRM sync configurations and their current status. Provider credentials are never returned. |
-| `list_routine_runs` | Read | `routines:read` | Immediate | List recent runs of one routine, most recent first — status, trigger, credits charged, and timing. |
+| `list_routine_runs` | Read | `routines:read` | Immediate | List recent runs of one routine, most recent first; status, trigger, credits charged, and timing. |
 | `list_routines` | Read | `routines:read` | Immediate | List this workspace's scheduled AI copilot routines: schedule, enabled state, next run, and the last run's status. |
 | `run_crm_sync` | Write/action | `automations:write or calls:write` | Immediate | Queue a durable manual run for a CRM sync. |
 | `run_routine` | Write/action | `routines:write` | Immediate | Trigger one routine right now as a background run, independent of its schedule. Starts an unattended AI copilot turn billed like a normal copilot turn, and returns immediately with the new run's id and status while it keeps executing in the background. |
@@ -36,4 +36,4 @@ This 2026-08-23 snapshot covers all 28 tools assigned to `automations` in the ca
 | `update_automation` | Write/action | `automations:write or calls:write` | Immediate | Update name, status, trigger, graph, or tags of an automation. |
 | `update_automation_connection` | Write/action | `automations:write or calls:write` | Immediate | Patch an automation connection. Sending '•••' for a secret keeps the stored value; omit to leave a field unchanged. |
 | `update_crm_sync` | Write/action | `automations:write or calls:write` | Immediate | Update composed mapping, source, default phone country, interval, direction, outbound create, policies, or active/paused status. |
-| `update_routine` | Write/action | `routines:write` | Immediate | Update a routine's name, prompt, schedule, timezone, or enabled state — only pass the fields that change. |
+| `update_routine` | Write/action | `routines:write` | Immediate | Update a routine's name, prompt, schedule, timezone, or enabled state; only pass the fields that change. |

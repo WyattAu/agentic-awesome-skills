@@ -1,4 +1,4 @@
-# astropy.units — Reference
+# astropy.units: Reference
 
 This file is a placeholder for the extended `astropy.units` reference promised in the skill workflow.
 

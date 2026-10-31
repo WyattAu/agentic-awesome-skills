@@ -7,7 +7,7 @@ risk: safe
 reports-to: monopoly
 ---
 
-# MONOPOLY — Technology Decision Matrix
+# MONOPOLY: Technology Decision Matrix
 
 ## When to Use
 - Use this skill when the task matches this description: Reference document for monopoly tech-matrix.
@@ -37,7 +37,7 @@ Use this as a qualitative candidate list. Verify exact editions, versions, servi
 | **PostgreSQL** | Complex queries, JSONB, GIS, strong consistency, most default use cases | Ultra-high write throughput (>100K writes/s) | ~10TB single node; use Citus for horizontal |
 | **MySQL / MariaDB** | Read-heavy apps, legacy systems, WordPress/Drupal ecosystem | Complex queries, full ACID at scale | ~10TB; use Vitess for sharding |
 | **CockroachDB** | Global distributed SQL, geo-partitioning, multi-region | Simple single-region apps (overkill) | Petabyte-scale |
-| **PlanetScale** | MySQL-compatible, serverless, branch-based workflow | Check current product/engine support for required joins and foreign keys | Very high — Vitess based |
+| **PlanetScale** | MySQL-compatible, serverless, branch-based workflow | Check current product/engine support for required joins and foreign keys | Very high; Vitess based |
 | **Amazon Aurora** | AWS-native apps, managed PostgreSQL/MySQL, high availability | Non-AWS environments | Up to 128TB, 15 replicas |
 
 ### NoSQL
@@ -87,7 +87,7 @@ Is it search?
 | **Varnish** | HTTP reverse proxy cache, full-page caching | RAM bound | Limited |
 | **CloudFront / CDN** | Static assets, edge caching globally | N/A (distributed) | Built-in global distribution |
 
-**Default recommendation: Redis** — more features, better ecosystem, active development.
+**Default recommendation: Redis**; more features, better ecosystem, active development.
 
 Use **Memcached** only when: you need multi-threading for CPU-bound caching workloads and don't need data structures beyond string.
 

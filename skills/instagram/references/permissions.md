@@ -1,4 +1,4 @@
-# Permissões OAuth — Scopes por Feature
+# Permissões OAuth: Scopes por Feature
 
 > Historical reference, not current Meta documentation. This bundle implements Facebook Login with a linked Page for both Business and Creator accounts. Verify the selected API version, permissions, media types, metrics, quotas and app-review requirements before use. Local scripts and their documented limitations take precedence over examples below.
 
@@ -63,11 +63,11 @@ Pesquisa de hashtag   → instagram_basic
 ### Produção (App Review)
 Para uso além dos testers, cada scope precisa de aprovação:
 
-1. **instagram_basic** — Aprovação simples (uso básico)
-2. **instagram_content_publish** — Requer justificativa de uso
-3. **instagram_manage_comments** — Requer justificativa
-4. **instagram_manage_insights** — Requer justificativa
-5. **instagram_manage_messages** — Aprovação mais rigorosa (privacidade)
+1. **instagram_basic**; Aprovação simples (uso básico)
+2. **instagram_content_publish**; Requer justificativa de uso
+3. **instagram_manage_comments**; Requer justificativa
+4. **instagram_manage_insights**; Requer justificativa
+5. **instagram_manage_messages**; Aprovação mais rigorosa (privacidade)
 
 ### Dicas para App Review
 - Gravar screencast mostrando o uso

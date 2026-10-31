@@ -26,13 +26,13 @@ Quando `archive/` acumula 5+ sessões individuais, elas são consolidadas
 em um único `ARCHIVE_YYYY.md` com formato ultra-compacto:
 
 ```markdown
-# Arquivo Consolidado — 2026
+# Arquivo Consolidado: 2026
 
-### Sessão 001 — 2026-01-15
+### Sessão 001: 2026-01-15
   - Decisão sobre arquitetura
   - Decisão sobre banco de dados
 
-### Sessão 002 — 2026-01-20
+### Sessão 002: 2026-01-20
   - Decisão sobre API
 ```
 

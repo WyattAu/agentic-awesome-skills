@@ -31,11 +31,11 @@ When a user's question matches a scenario type, use the corresponding checklist 
 15. 体制内一定比体制外稳定
 
 **推荐挖掘问题：**
-- "你说想换工作 — 如果当前公司环境改善 50%，你还想走吗？"
+- "你说想换工作; 如果当前公司环境改善 50%，你还想走吗？"
 - "你认为自己的核心竞争力是什么？你的同事/猎头也这么认为吗？"
-- "你说35岁是门槛 — 你认识几个35岁以上转型成功的案例？"
-- "你想进大厂 — 你了解大厂同级别的实际日常工作状态吗？"
-- "你说现在是好时机 — 好时机的判断依据是什么？是数据还是感觉？"
+- "你说35岁是门槛; 你认识几个35岁以上转型成功的案例？"
+- "你想进大厂; 你了解大厂同级别的实际日常工作状态吗？"
+- "你说现在是好时机; 好时机的判断依据是什么？是数据还是感觉？"
 
 ---
 
@@ -59,10 +59,10 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. 小范围验证的成功可以直接放大
 
 **推荐挖掘问题：**
-- "你说用户需要这个 — 有多少人实际掏了钱？愿望和付费之间差距有多大？"
-- "你说市场很大 — 你的可触达市场（SAM）是多少？你能触达的渠道是什么？"
-- "你说你们能做得更好 — '更好'具体是什么维度？用户真的在乎这个维度吗？"
-- "你说要快速行动 — 在这个领域，速度真的比深度重要吗？"
+- "你说用户需要这个; 有多少人实际掏了钱？愿望和付费之间差距有多大？"
+- "你说市场很大; 你的可触达市场（SAM）是多少？你能触达的渠道是什么？"
+- "你说你们能做得更好; '更好'具体是什么维度？用户真的在乎这个维度吗？"
+- "你说要快速行动; 在这个领域，速度真的比深度重要吗？"
 - "你的竞品分析里，有没有包括'用户目前的替代方案'（包括 Excel 和不作为）？"
 
 ---
@@ -86,9 +86,9 @@ When a user's question matches a scenario type, use the corresponding checklist 
 13. 早买早享受，晚买有折扣但错过了使用时间
 
 **推荐挖掘问题：**
-- "你说房价会涨 — 你参考的是过去20年的数据。未来20年的人口结构和经济增速一样吗？"
-- "你说学区房是刚需 — '孩子教育'具体需要学区房解决什么问题？有没有替代方案？"
-- "你说租房不值 — 你算过同地段租房+投资差额 vs 买房+还贷的 30 年总成本吗？"
+- "你说房价会涨; 你参考的是过去20年的数据。未来20年的人口结构和经济增速一样吗？"
+- "你说学区房是刚需; '孩子教育'具体需要学区房解决什么问题？有没有替代方案？"
+- "你说租房不值; 你算过同地段租房+投资差额 vs 买房+还贷的 30 年总成本吗？"
 - "这笔消费给你的满足感预计能持续多久？"
 - "如果你不做这笔消费，你最担心什么？这个担心是真实风险还是社会压力？"
 
@@ -114,10 +114,10 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. 理性决策一定优于直觉
 
 **推荐挖掘问题：**
-- "你说努力一定有回报 — 你指的是哪种努力？你怎么定义'回报'？"
-- "你说稳定最重要 — 稳定的成本是什么？你放弃了什么来换取稳定？"
-- "你说要延迟满足 — 延迟到什么时候？你怎么知道那个未来一定更好？"
-- "你说信息越多决策越好 — 你最近哪次重大决策是因为信息太多而犹豫不决的？"
+- "你说努力一定有回报; 你指的是哪种努力？你怎么定义'回报'？"
+- "你说稳定最重要; 稳定的成本是什么？你放弃了什么来换取稳定？"
+- "你说要延迟满足; 延迟到什么时候？你怎么知道那个未来一定更好？"
+- "你说信息越多决策越好; 你最近哪次重大决策是因为信息太多而犹豫不决的？"
 - "你从谁那里学到这个信念的？他们当时的处境和你现在一样吗？"
 
 ---
@@ -137,7 +137,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 5. My current skills are highly transferable to any industry
 6. Higher pay = better career move
 7. I need to "pay my dues" before I can lead
-8. The job market is either "hot" or "cold" — binary thinking
+8. The job market is either "hot" or "cold"; binary thinking
 9. My manager's opinion reflects the company's opinion of me
 10. Staying at one company too long looks bad on a resume
 11. I should follow my passion and the money will follow
@@ -146,10 +146,10 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. I need to have a 5-year plan
 
 **Recommended Probing Questions:**
-- "You say you want to switch jobs — if your current role improved 50%, would you still leave?"
-- "You say you're too old — how many people in your target industry are your age or older?"
-- "You say remote work hurts career growth — what evidence do you have beyond anecdotes?"
-- "You say higher pay is better — what's the total compensation including work-life balance, learning, and stress?"
+- "You say you want to switch jobs; if your current role improved 50%, would you still leave?"
+- "You say you're too old; how many people in your target industry are your age or older?"
+- "You say remote work hurts career growth; what evidence do you have beyond anecdotes?"
+- "You say higher pay is better; what's the total compensation including work-life balance, learning, and stress?"
 - "Who told you that you need an MBA? Do they have one? Did it work for them the way they claim?"
 
 ---
@@ -159,7 +159,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 **High-Frequency Hidden Assumptions:**
 
 1. If we build it, they will come
-2. The TAM (Total Addressable Market) is $X billion — therefore we'll get a slice
+2. The TAM (Total Addressable Market) is $X billion; therefore we'll get a slice
 3. We have a first-mover advantage
 4. Our technology is our moat
 5. Users will switch from their current solution because ours is "better"
@@ -174,10 +174,10 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. Monthly active users = product-market fit
 
 **Recommended Probing Questions:**
-- "You say users need this — how many have actually paid? Wishing and paying are very different."
-- "You say the market is huge — what's your SAM? What channels can you actually reach?"
-- "You say you have a moat — can a well-funded competitor replicate it in 6 months?"
-- "You say you validated with an MVP — how many users stayed after 3 months?"
+- "You say users need this; how many have actually paid? Wishing and paying are very different."
+- "You say the market is huge; what's your SAM? What channels can you actually reach?"
+- "You say you have a moat; can a well-funded competitor replicate it in 6 months?"
+- "You say you validated with an MVP; how many users stayed after 3 months?"
 - "Your competitor analysis includes 'doing nothing' as an alternative, right?"
 
 ---
@@ -202,11 +202,11 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. I need to own assets to build wealth
 
 **Recommended Probing Questions:**
-- "You say real estate always goes up — are you using 1980-2020 data? What about Japan 1990-2020?"
-- "You say renting is wasting money — have you calculated rent + invest vs buy + mortgage over 30 years?"
-- "You say you need $X to retire — how did you arrive at that number? What lifestyle does it assume?"
-- "You say index funds are safest — safest compared to what? Over what time horizon?"
-- "Your financial advisor — do they earn commissions on the products they recommend?"
+- "You say real estate always goes up; are you using 1980-2020 data? What about Japan 1990-2020?"
+- "You say renting is wasting money; have you calculated rent + invest vs buy + mortgage over 30 years?"
+- "You say you need $X to retire; how did you arrive at that number? What lifestyle does it assume?"
+- "You say index funds are safest; safest compared to what? Over what time horizon?"
+- "Your financial advisor; do they earn commissions on the products they recommend?"
 
 ---
 
@@ -227,13 +227,13 @@ When a user's question matches a scenario type, use the corresponding checklist 
 11. Being busy = being productive
 12. Feedback from others is essential for growth (which others? what kind of feedback?)
 13. You can learn anything with enough time
-14. Meritocracy exists — the best work gets recognized
+14. Meritocracy exists; the best work gets recognized
 
 **Recommended Probing Questions:**
-- "You say hard work pays off — in what domains? Can you name a case where hard work in the wrong direction made things worse?"
-- "You say follow your passion — how many people do you know who followed their passion and failed? How would you know?"
-- "You say more data is better — when was the last time you delayed a decision because you had too much data?"
-- "You say the best time to start was yesterday — what if starting too early, before you're ready, actually increases failure risk?"
+- "You say hard work pays off; in what domains? Can you name a case where hard work in the wrong direction made things worse?"
+- "You say follow your passion; how many people do you know who followed their passion and failed? How would you know?"
+- "You say more data is better; when was the last time you delayed a decision because you had too much data?"
+- "You say the best time to start was yesterday; what if starting too early, before you're ready, actually increases failure risk?"
 - "Where did you learn this belief? What was the context? Does that context match yours?"
 
 ---
@@ -241,7 +241,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 ## How to Use These Checklists / 使用方法
 
 1. **Identify the scenario type** from the user's question
-2. **Use the checklist as a mining guide** — not all assumptions will apply to every user, but scan through them systematically
-3. **Establish relevant context** — language does not determine nationality or beliefs; ask about the actual labor market, jurisdiction and personal goals
-4. **Combine with organic mining** — the checklist is a starting point, not a ceiling. Always mine for assumptions unique to the user's specific situation
+2. **Use the checklist as a mining guide**; not all assumptions will apply to every user, but scan through them systematically
+3. **Establish relevant context**; language does not determine nationality or beliefs; ask about the actual labor market, jurisdiction and personal goals
+4. **Combine with organic mining**; the checklist is a starting point, not a ceiling. Always mine for assumptions unique to the user's specific situation
 5. **Use the probing questions** to surface assumptions the user can't articulate directly

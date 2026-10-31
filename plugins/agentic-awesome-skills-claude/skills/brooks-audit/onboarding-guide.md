@@ -1,7 +1,7 @@
 # Codebase Onboarding Guide
 
 **Purpose:** Produce a newcomer-friendly tour of the codebase. This is NOT a diagnostic
-report — no Health Score, no Iron Law findings. Focus on explanation and orientation.
+report; no Health Score, no Iron Law findings. Focus on explanation and orientation.
 
 ---
 
@@ -19,9 +19,9 @@ Draw the same Mermaid dependency graph as architecture audit Step 1, but color n
 **recommended reading order** using a DISTINCT palette from the severity palette
 (which uses red/yellow/green). This avoids confusing "red = danger" with "red = read last":
 
-- 🔵 Blue (`#339af0`): start here — entry points, core domain
-- 🟣 Purple (`#9775fa`): read next — supporting modules
-- ⚪ Gray (`#ced4da`): read last — infrastructure, generated code, utilities
+- 🔵 Blue (`#339af0`): start here; entry points, core domain
+- 🟣 Purple (`#9775fa`): read next; supporting modules
+- ⚪ Gray (`#ced4da`): read last; infrastructure, generated code, utilities
 
 Add numbered labels: `CoreModule["1. CoreModule"]`
 
@@ -46,7 +46,7 @@ For each module with known complexity or coupling issues, add a brief warning:
 - "OrderService: high complexity, only modify with full test suite running"
 - "legacy/: no tests, use Characterization Tests before changing"
 
-Do NOT use Iron Law format — use plain warnings. This is orientation, not diagnosis.
+Do NOT use Iron Law format; use plain warnings. This is orientation, not diagnosis.
 
 ### Step 5: Build a Domain Glossary
 

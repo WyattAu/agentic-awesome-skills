@@ -28,8 +28,8 @@ allowed-tools: Read, Grep, Glob, Bash, Write
 
 ## Prerequisites
 
-- **pandoc** — `brew install pandoc`
-- **Google Chrome** — must be installed at `/Applications/Google Chrome.app/`
+- **pandoc**; `brew install pandoc`
+- **Google Chrome**; must be installed at `/Applications/Google Chrome.app/`
 
 No Python dependencies. No ReportLab. No JSON data wrangling.
 
@@ -116,19 +116,19 @@ Tell the user:
 
 ## What the PDF Contains
 
-- **Cover page** — Dark navy gradient, brand name, domain, GEO score badge (colored by score), audit date, business type, locations, CMS platform
-- **Score tables** — Cells containing `XX/100` are color-coded: ≥80 green, ≥65 blue, ≥50 amber, ≥35 orange, <35 red
-- **Finding sections** — `h3` headings containing "Critical / High / Medium / Low" get severity-colored left-border callout blocks (red / orange / yellow / green)
-- **Section page breaks** — Major sections (High Priority, 90-Day Roadmap, Component Score Summary, Generated Schema) break to new pages automatically
-- **Code blocks** — JSON schema templates render with dark theme monospace styling
-- **Page footer** — Brand name · GEO Audit · date + page numbers (via CSS `@page`)
+- **Cover page**; Dark navy gradient, brand name, domain, GEO score badge (colored by score), audit date, business type, locations, CMS platform
+- **Score tables**; Cells containing `XX/100` are color-coded: ≥80 green, ≥65 blue, ≥50 amber, ≥35 orange, <35 red
+- **Finding sections**; `h3` headings containing "Critical / High / Medium / Low" get severity-colored left-border callout blocks (red / orange / yellow / green)
+- **Section page breaks**; Major sections (High Priority, 90-Day Roadmap, Component Score Summary, Generated Schema) break to new pages automatically
+- **Code blocks**; JSON schema templates render with dark theme monospace styling
+- **Page footer**; Brand name · GEO Audit · date + page numbers (via CSS `@page`)
 
 ## Customizing the Report
 
-- **Colors / typography** — Edit `references/` templates in this skill or user-provided HTML
-- **Cover layout** — Edit `references/` templates in this skill or user-provided HTML
-- **Score thresholds for color-coding** — Edit the `scoreColor()` function in the template's `<script>` block
-- **Which sections get page breaks** — Edit the `breakBefore` array in the template's `<script>` block
+- **Colors / typography**; Edit `references/` templates in this skill or user-provided HTML
+- **Cover layout**; Edit `references/` templates in this skill or user-provided HTML
+- **Score thresholds for color-coding**; Edit the `scoreColor()` function in the template's `<script>` block
+- **Which sections get page breaks**; Edit the `breakBefore` array in the template's `<script>` block
 
 ## Troubleshooting
 
@@ -138,7 +138,7 @@ Tell the user:
 | Chrome not found | Check path: `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome` |
 | PDF is blank / empty | Increase `--virtual-time-budget` to 8000 |
 | Cover metadata missing | Check GEO-AUDIT-REPORT.md has the standard header format |
-| Fonts not loading | PDF is rendered offline; system fonts are used as fallback — this is expected |
+| Fonts not loading | PDF is rendered offline; system fonts are used as fallback; this is expected |
 
 ## When to Use
 

@@ -48,7 +48,7 @@ done < <(find . -name config -type f -print0)
 # ❌ Using backticks for command substitution
 result=`echo hello`
 
-# ✅ — $() nests cleanly
+# ✅: $() nests cleanly
 result=$(echo hello)
 ```
 
@@ -70,7 +70,7 @@ if [[ "$var" = "hello" ]]; then
 # ❌ Single bracket test (POSIX but fragile)
 if [ -f "$file" -a -r "$file" ]; then
 
-# ✅ — [[ is safer, supports &&/||, no word splitting inside
+# ✅: [[ is safer, supports &&/||, no word splitting inside
 if [[ -f "$file" && -r "$file" ]]; then
 ```
 
@@ -79,7 +79,7 @@ if [[ -f "$file" && -r "$file" ]]; then
 grep -q pattern file
 if [ $? -eq 0 ]; then echo "found"; fi
 
-# ✅ — test command directly
+# ✅: test command directly
 if grep -q pattern file; then echo "found"; fi
 ```
 
@@ -97,7 +97,7 @@ if [ "$a" = "$b" ]; then
 # ❌ Arithmetic with [ ] and string comparison
 if [ "$count" -gt 10 ]; then
 
-# ✅ — (( )) for arithmetic
+# ✅: (( )) for arithmetic
 if (( count > 10 )); then
 ```
 
@@ -109,7 +109,7 @@ if (( count > 10 )); then
 # ❌ Parsing ls output
 for f in $(ls *.txt); do process "$f"; done
 
-# ✅ — glob directly
+# ✅: glob directly
 for f in *.txt; do
     [[ -e "$f" ]] || continue  # handle no-match
     process "$f"
@@ -130,7 +130,7 @@ done < file.txt
 # ❌ Seq for counting
 for i in $(seq 1 10); do
 
-# ✅ — brace expansion (Bash)
+# ✅: brace expansion (Bash)
 for i in {1..10}; do
 # or C-style:
 for (( i = 1; i <= 10; i++ )); do
@@ -140,11 +140,11 @@ for (( i = 1; i <= 10; i++ )); do
 # ❌ Processing command output line-by-line with pipe (subshell trap)
 count=0
 cat file.txt | while read -r line; do
-    (( ++count ))  # count resets after loop — subshell
+    (( ++count ))  # count resets after loop; subshell
 done
 echo "$count"  # always 0
 
-# ✅ — redirect, not pipe
+# ✅: redirect, not pipe
 count=0
 while IFS= read -r line || [[ -n "$line" ]]; do
     (( ++count ))
@@ -160,14 +160,14 @@ echo "$count"
 # ❌ Chained grep | grep for AND
 grep "error" log.txt | grep "timeout"
 
-# ✅ — single grep with pattern
+# ✅: single grep with pattern
 grep -E "error.*timeout|timeout.*error" log.txt
 # or awk for complex logic:
 awk '/error/ && /timeout/' log.txt
 ```
 
 ```bash
-# ❌ cat + pipe (UUOC — Useless Use of Cat)
+# ❌ cat + pipe (UUOC: Useless Use of Cat)
 cat file.txt | grep pattern
 
 # ✅
@@ -181,14 +181,14 @@ cmd2 > /tmp/b.txt
 diff /tmp/a.txt /tmp/b.txt
 rm /tmp/a.txt /tmp/b.txt
 
-# ✅ — process substitution
+# ✅: process substitution
 diff <(cmd1) <(cmd2)
 ```
 
 ```bash
 # ❌ Ignoring pipe failures (only last command's exit code)
 false | true
-echo $?  # 0 — false's failure hidden
+echo $?  # 0; false's failure hidden
 
 # ✅
 set -o pipefail
@@ -206,7 +206,7 @@ get_name() {
     return "Alice"  # return is for exit codes (0-255)
 }
 
-# ✅ — echo + capture
+# ✅: echo + capture
 get_name() {
     echo "Alice"
 }
@@ -218,7 +218,7 @@ name=$(get_name)
 result=""
 compute() { result="done"; }
 
-# ✅ — use local, return via stdout
+# ✅: use local, return via stdout
 compute() {
     local tmp
     tmp=$(do_work)
@@ -240,7 +240,7 @@ my_func() {
 ## 6. Error Handling {#errors}
 
 ```bash
-# ❌ No error handling — script continues after failure
+# ❌ No error handling: script continues after failure
 cd /some/dir
 rm -rf *  # if cd fails, deletes from wrong directory
 
@@ -257,7 +257,7 @@ cd /some/dir || { echo "cd failed" >&2; exit 1; }
 tmpfile=$(mktemp)
 # ... script might exit early, leaving tmpfile
 
-# ✅ — trap for cleanup
+# ✅: trap for cleanup
 tmpfile=$(mktemp)
 trap 'rm -f "$tmpfile"' EXIT
 ```
@@ -266,7 +266,7 @@ trap 'rm -f "$tmpfile"' EXIT
 # ❌ Silencing errors blindly
 command 2>/dev/null
 
-# ✅ — redirect only when you know what you're suppressing
+# ✅: redirect only when you know what you're suppressing
 command 2>/dev/null || true  # explicit: we expect and accept failure
 ```
 

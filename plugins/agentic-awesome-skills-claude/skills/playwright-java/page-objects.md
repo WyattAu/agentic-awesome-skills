@@ -5,7 +5,7 @@
 For repeated UI components (navbars, modals, tables), create Component classes:
 
 ```java
-// Reusable table component — pass the locator root
+// Reusable table component; pass the locator root
 public class DataTable {
     private final Locator tableRoot;
 
@@ -100,10 +100,10 @@ public class ConfirmDialog extends BasePage {
 
 ## Navigation Chain Pattern
 
-Page methods should **return the next page object** — never return `void` for navigating actions:
+Page methods should **return the next page object**; never return `void` for navigating actions:
 
 ```java
-// CORRECT — enables fluent chaining
+// CORRECT; enables fluent chaining
 public DashboardPage loginAs(String email, String password) {
     fill(emailInput, email);
     fill(passwordInput, password);

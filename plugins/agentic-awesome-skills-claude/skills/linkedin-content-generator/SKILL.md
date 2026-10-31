@@ -20,7 +20,7 @@ license_source: "https://github.com/sarveshtalele/linkedin-content-skill/blob/ma
 
 A full LinkedIn content-creation suite for Claude Code that turns a topic and niche into
 publish-ready posts, multi-slide carousels, long-form newsletter editions, and 30-day content
-calendars — all wired through a personal feedback-based memory system so later prompts can reflect your feedback; improvement is not guaranteed.
+calendars; all wired through a personal feedback-based memory system so later prompts can reflect your feedback; improvement is not guaranteed.
 
 Seven coordinated commands cover the full content workflow:
 
@@ -88,7 +88,7 @@ Claude generates publish-ready output
         │
         ▼
 /feedback saves what worked → memory.md
-        (loop — every future output improves)
+        (loop; every future output improves)
 ```
 
 ### Step 1: Set Up Your Niche (One-Time)
@@ -122,7 +122,7 @@ generation prompts.
 
 ## Commands Reference
 
-### `/generate-post` — Single LinkedIn Post
+### `/generate-post`: Single LinkedIn Post
 
 Generates a scroll-stopping, SEO-optimised LinkedIn text post.
 
@@ -164,7 +164,7 @@ Generates a scroll-stopping, SEO-optimised LinkedIn text post.
 
 ---
 
-### `/generate-carousel` — LinkedIn Carousel
+### `/generate-carousel`: LinkedIn Carousel
 
 Generates numbered slide content plus a ready-to-use LinkedIn caption.
 
@@ -211,7 +211,7 @@ teaser context, "Swipe →" prompt, and hashtags.
 
 ---
 
-### `/generate-newsletter` — LinkedIn Newsletter Edition
+### `/generate-newsletter`: LinkedIn Newsletter Edition
 
 Generates a complete long-form newsletter edition structured for the LinkedIn Newsletter
 editor.
@@ -250,7 +250,7 @@ editor.
 
 ---
 
-### `/generate-calendar` — 30-Day Content Calendar
+### `/generate-calendar`: 30-Day Content Calendar
 
 Generates a Markdown table calendar with monthly theme, SEO keywords, and format breakdown.
 
@@ -293,7 +293,7 @@ top 5 SEO keywords + format breakdown summary.
 
 ---
 
-### `/show-memory` — Display Preferences
+### `/show-memory`: Display Preferences
 
 Displays current memory contents: niche, tone, style, and all saved feedback entries.
 
@@ -306,7 +306,7 @@ Displays current memory contents: niche, tone, style, and all saved feedback ent
 
 ---
 
-### `/feedback` — Save Successful Patterns
+### `/feedback`: Save Successful Patterns
 
 Appends a labelled feedback entry to `memory.md`. Future outputs automatically incorporate
 saved patterns.
@@ -332,7 +332,7 @@ saved patterns.
 
 ---
 
-### `/clear-memory` — Reset Memory
+### `/clear-memory`: Reset Memory
 
 Resets `memory.md` to factory defaults. The CLI requires `clear --confirm`; review and back up the file before resetting.
 
@@ -354,7 +354,7 @@ The skill injects these rules into every prompt via the bundled `scripts/utils.p
 
 ### Readability Rules
 - Maximum 2 sentences per paragraph.
-- Aggressive line breaks — white space wins on LinkedIn.
+- Aggressive line breaks; white space wins on LinkedIn.
 - Bold used sparingly, only for critical points.
 - Target reading level: Grade 8 or below.
 
@@ -367,14 +367,14 @@ The skill injects these rules into every prompt via the bundled `scripts/utils.p
 ## Best Practices
 
 - ✅ Set `Primary Niche` in `memory.md` before generating any content.
-- ✅ Run `/feedback` after any post that performs well — the memory compounds over time.
+- ✅ Run `/feedback` after any post that performs well; the memory compounds over time.
 - ✅ Use `/generate-calendar` first when planning a content sprint; it provides topics
   for `/generate-post` and `/generate-carousel` runs.
 - ✅ Mix carousel styles across a calendar period: listicle, myth-busting, and
   story-arc perform differently and prevent audience fatigue.
 - ✅ Test the `controversial` tone on topics where you have a genuine, defensible stance;
   avoid it for topics where nuance is more valuable than edge.
-- ❌ Do not skip the `/feedback` loop — without it, every output starts from generic
+- ❌ Do not skip the `/feedback` loop; without it, every output starts from generic
   LinkedIn best practices rather than your specific audience data.
 - ❌ Do not post more than 5 hashtags; this is an editorial preference; no penalty threshold is established here.
 - ❌ Do not use the `data-driven` style without real statistics to cite; fabricated
@@ -440,7 +440,7 @@ python3 "${SKILL_SCRIPTS}/memory_manager.py" clear --confirm
 - **Problem:** Memory is not being applied to generated content.
   **Solution:** Check that `memory.md` exists at
   `~/.claude/skills/linkedin-content-generator/scripts/memory.md`. Run `/show-memory`
-  to confirm. If missing, run any generator command once — it reports no memory; use the memory manager add operation to initialize intentionally.
+  to confirm. If missing, run any generator command once; it reports no memory; use the memory manager add operation to initialize intentionally.
 
 - **Problem:** Calendar output is missing days or the table is malformed.
   **Solution:** Verify the `--days` value is a positive integer and `--frequency` is
@@ -464,18 +464,18 @@ python3 "${SKILL_SCRIPTS}/memory_manager.py" clear --confirm
 
 ## Related Skills
 
-- `@content-creator` — Broader brand voice analysis, SEO optimisation, and
+- `@content-creator`; Broader brand voice analysis, SEO optimisation, and
   cross-platform content frameworks. Use when building a full content marketing system
   beyond LinkedIn alone.
-- `@content-strategy` — Topic cluster planning, editorial roadmap, and content mix
+- `@content-strategy`; Topic cluster planning, editorial roadmap, and content mix
   strategy. Use before running `/generate-calendar` when you need to define pillar topics
   first.
-- `@content-marketer` — Campaign-level content planning across channels. Complements
+- `@content-marketer`; Campaign-level content planning across channels. Complements
   this skill when LinkedIn is one channel in a broader multi-platform launch.
-- `@linkedin-automation` — Programmatic LinkedIn post publishing via the Composio/Rube
+- `@linkedin-automation`; Programmatic LinkedIn post publishing via the Composio/Rube
   MCP. Use alongside this skill when you want to automate the publishing step after
   generating content here.
-- `@linkedin-profile-optimizer` — LinkedIn profile and personal brand optimisation.
+- `@linkedin-profile-optimizer`; LinkedIn profile and personal brand optimisation.
   Use before running this skill to align generated content voice with your profile's
   headline, summary, and featured section.
 
@@ -483,4 +483,4 @@ python3 "${SKILL_SCRIPTS}/memory_manager.py" clear --confirm
 
 - [LinkedIn Algorithm Guide (Official)](https://www.linkedin.com/help/linkedin/answer/a522537)
 - [LinkedIn Newsletter Best Practices](https://www.linkedin.com/help/linkedin/answer/a544800)
-- [Source Repository — linkedin-content-skill](https://github.com/sarveshtalele/linkedin-content-skill)
+- [Source Repository; linkedin-content-skill](https://github.com/sarveshtalele/linkedin-content-skill)

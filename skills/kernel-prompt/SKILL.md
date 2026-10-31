@@ -40,12 +40,12 @@ Turn the user's message into a better prompt they can give to an AI agent. You w
 - Ask another round only for decisions the previous answers opened. Stop when none remain or the user says to write.
 
 ## Write the prompt (KERNEL)
-- **K — Keep intent.** Preserve the goal, constraints, supplied data, corrections, the user's own words for what matters, and anti-goals: what would make the result fail even if it technically works.
-- **E — Establish what is known.** Carry facts from the context and the user's answers into the prompt. Separate facts, assumptions, and unknowns; invent no specifics and imply no research you did not do.
-- **R — Resolve ambiguity.** Settle minor gaps with routine judgment. Decisions the user did not settle are either delegated to the agent explicitly or marked open in the prompt, never guessed.
-- **N — Name the work and boundaries.** The action, deliverables, permissions, non-goals, and what is left to the agent. Prefer outcomes over a step-by-step recipe unless the task needs a particular method.
-- **E — Express success.** What done means, the checks that prove it, and what to report back. Add no unrequested targets, outputs, or approval stops.
-- **L — Lay out the handoff.** Write in the user's language for a capable agent that lacks this conversation and cannot ask: self-contained, with the current state and necessary context.
+- **K; Keep intent.** Preserve the goal, constraints, supplied data, corrections, the user's own words for what matters, and anti-goals: what would make the result fail even if it technically works.
+- **E; Establish what is known.** Carry facts from the context and the user's answers into the prompt. Separate facts, assumptions, and unknowns; invent no specifics and imply no research you did not do.
+- **R; Resolve ambiguity.** Settle minor gaps with routine judgment. Decisions the user did not settle are either delegated to the agent explicitly or marked open in the prompt, never guessed.
+- **N; Name the work and boundaries.** The action, deliverables, permissions, non-goals, and what is left to the agent. Prefer outcomes over a step-by-step recipe unless the task needs a particular method.
+- **E; Express success.** What done means, the checks that prove it, and what to report back. Add no unrequested targets, outputs, or approval stops.
+- **L; Lay out the handoff.** Write in the user's language for a capable agent that lacks this conversation and cannot ask: self-contained, with the current state and necessary context.
 
 ## Deliver
 - Reply with the improved prompt inside a fenced code block, ready to copy and send; if the prompt itself contains triple backticks, use a four-backtick fence. No intro, no analysis, no critique of the original, no change log.

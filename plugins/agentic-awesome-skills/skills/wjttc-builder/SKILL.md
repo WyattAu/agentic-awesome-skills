@@ -128,7 +128,7 @@ The championship layer that catches what industry tests miss:
 
 **Before you measure coverage, measure signal trust.**
 
-Red CI is a contract: stop, look, fix. If red means *"shrug, runner had a noisy neighbor, just rerun,"* the signal is dead — and dead signal is worse than no signal at all. A test suite with 100% coverage but flaky reds is **less trustworthy** than one with 80% coverage and zero false alarms, because the team has stopped reading the reds.
+Red CI is a contract: stop, look, fix. If red means *"shrug, runner had a noisy neighbor, just rerun,"* the signal is dead; and dead signal is worse than no signal at all. A test suite with 100% coverage but flaky reds is **less trustworthy** than one with 80% coverage and zero false alarms, because the team has stopped reading the reds.
 
 **This is the parent doctrine. Every other testing principle serves it.**
 
@@ -140,7 +140,7 @@ For any test suite under review, classify the last 30 days of CI failures into t
 |--------|---------|--------|
 | **Real bug** | Red corresponded to an actual code defect that was fixed by a code change | ✓ Signal worked |
 | **Flake** | Failure suspected to be nondeterministic; rerun success alone does not distinguish a flaky test from a real intermittent product defect | ✗ Test design defect |
-| **Infra** | Red was missing secret, runner image change, dep upstream — not the code under test | ✗ Workflow design defect |
+| **Infra** | Red was missing secret, runner image change, dep upstream; not the code under test | ✗ Workflow design defect |
 
 ### Signal Integrity Score
 
@@ -150,7 +150,7 @@ SI = (Real bugs) / (Real bugs + Flakes + Infra) × 100
 
 | SI % | Verdict | Required Action |
 |------|---------|-----------------|
-| 100% | TROPHY ✪ | Maintain — exemplary signal |
+| 100% | TROPHY ✪ | Maintain; exemplary signal |
 | 95-99% | Championship | Annotate any flake immediately |
 | 85-94% | Acceptable | Schedule flake-class fix this sprint |
 | 70-84% | Eroding | Stop adding tests; fix flakes first |
@@ -160,11 +160,11 @@ SI = (Real bugs) / (Real bugs + Flakes + Infra) × 100
 
 ### Common Flake Sources to Eliminate on Sight
 
-- **Hard absolute-time perf assertions on shared CI runners** — `expect(time).toBeLessThan(30)`. Move to non-gating workflow with `continue-on-error: true`.
-- **Network-dependent tests in main suite** — mock at the boundary or route to integration tier.
-- **Concurrency tests without explicit ordering** — use deterministic schedulers.
-- **OS scheduler-dependent timing** — replace with statistical (P95 over N) or relative (vs same-run baseline) assertions.
-- **Secret-dependent steps** — skip only explicitly optional checks; required deployment/security gates must fail closed or remain blocked when prerequisites are absent.
+- **Hard absolute-time perf assertions on shared CI runners**; `expect(time).toBeLessThan(30)`. Move to non-gating workflow with `continue-on-error: true`.
+- **Network-dependent tests in main suite**; mock at the boundary or route to integration tier.
+- **Concurrency tests without explicit ordering**; use deterministic schedulers.
+- **OS scheduler-dependent timing**; replace with statistical (P95 over N) or relative (vs same-run baseline) assertions.
+- **Secret-dependent steps**; skip only explicitly optional checks; required deployment/security gates must fail closed or remain blocked when prerequisites are absent.
 
 ### The Inverse Rule
 
@@ -182,11 +182,11 @@ Automated CI is supporting infrastructure. **Human review complements the projec
 - When fixing a bug (write failing test first)
 - Building regression test suites
 
-## Test Tier System — the WJTTC Five
+## Test Tier System: the WJTTC Five
 
-WJTTC has **five** tiers: **Brake · Engine · Aero · Tyre · Pit**. The builder classifies every component into one of them. (`faf wjttc` audits a suite for the same five and flags untiered tests — name your tests with a tier word so the audit can place them.)
+WJTTC has **five** tiers: **Brake · Engine · Aero · Tyre · Pit**. The builder classifies every component into one of them. (`faf wjttc` audits a suite for the same five and flags untiered tests; name your tests with a tier word so the audit can place them.)
 
-### Tier 1: BRAKE (Safety — Critical)
+### Tier 1: BRAKE (Safety: Critical)
 **When failure = catastrophic consequences**
 
 Identify and test:
@@ -215,22 +215,22 @@ Identify and test:
 - Optional features
 - Documentation accuracy
 
-### Tier 4: TYRE (Live — the Real Road)
+### Tier 4: TYRE (Live: the Real Road)
 **Where the rubber meets the road: durability under real conditions over time**
 
 Identify and test:
 - Edge cases and boundary inputs against the real surface (live data shapes, large payloads)
-- Wear and durability — long-running sessions, repeated calls, soak/load behavior
-- Degraded conditions — slow networks, partial data, rate limits, retries
+- Wear and durability; long-running sessions, repeated calls, soak/load behavior
+- Degraded conditions; slow networks, partial data, rate limits, retries
 - Resource leaks (memory, file handles, connections) under sustained use
 
-### Tier 5: PIT (Operational — When Needed)
+### Tier 5: PIT (Operational: When Needed)
 **The pit stop: getting it onto the track and keeping it serviceable**
 
 Identify and test:
 - Integration and end-to-end wiring across components
 - Deploy / release checks (build, packaging, smoke tests, migrations)
-- Ops health — startup/shutdown, config loading, secrets present, observability
+- Ops health; startup/shutdown, config loading, secrets present, observability
 - Rollback and recovery paths
 
 ## Test Suite Generation Process
@@ -299,7 +299,7 @@ Pass rate maps to the canonical FAF tier system (the same tiers FAF uses everywh
 
 | Score | Tier | Symbol | Status |
 |-------|------|--------|--------|
-| 100% | Trophy | ✪ | Perfect — Gold Code |
+| 100% | Trophy | ✪ | Perfect; Gold Code |
 | 99% | Gold | ★ | Exceptional |
 | 95% | Silver | ◆ | Top tier |
 | 85% | Bronze | ◇ | Rubric label only; release readiness unestablished |
@@ -336,7 +336,7 @@ To generate a test suite for the current project:
 \`\`\`
 ```
 
-## Integration — where the builder hands off
+## Integration: where the builder hands off
 
 This skill is the **builder**: it plans and generates. It does **not** run the suite.
 

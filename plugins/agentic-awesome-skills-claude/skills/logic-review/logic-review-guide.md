@@ -1,4 +1,4 @@
-# Logic Review — Step-by-Step Guide
+# Logic Review: Step-by-Step Guide
 
 ## Step 1: Establish Claimed Behavior
 
@@ -14,7 +14,7 @@ Select the review entry point before tracing:
 
 ## Step 2: Build Premises
 
-Run through every applicable item in **`../_shared/semiformal-checklist.md`** — Name Resolution, Type Contracts, State Preconditions, Control Flow Assumptions. Read its "What is NOT a Premise" section before writing.
+Run through every applicable item in **`../_shared/semiformal-checklist.md`**; Name Resolution, Type Contracts, State Preconditions, Control Flow Assumptions. Read its "What is NOT a Premise" section before writing.
 
 Write premises **before** starting the trace.
 
@@ -37,8 +37,8 @@ Create a short internal ledger with one row per path:
 ```
 
 Tag each **retained** candidate with a **Reachability Class** (discarded candidates need no tag):
-- **Class A (Self-evident):** triggering condition is visible in local code — e.g., dereference after explicit nil check, index beyond bounds, unchecked type assertion, resource with no release on a visible exit path.
-- **Class B (Invariant-dependent):** triggering condition requires an implicit external assumption to be false — e.g., "all groups always contain at least one alias" or "callers never pass nil here." Requires a reachability probe in Step 5 before reporting.
+- **Class A (Self-evident):** triggering condition is visible in local code; e.g., dereference after explicit nil check, index beyond bounds, unchecked type assertion, resource with no release on a visible exit path.
+- **Class B (Invariant-dependent):** triggering condition requires an implicit external assumption to be false; e.g., "all groups always contain at least one alias" or "callers never pass nil here." Requires a reachability probe in Step 5 before reporting.
 
 Example ledger rows:
 ```
@@ -51,10 +51,10 @@ Minimum ledger coverage:
 - **Boundary paths (L3):** empty/null/zero, single item, first/last item, max/min, divide/slice/index boundaries.
 - **Type/name paths (L1/L2):** shadowed identifiers, dynamic dispatch, coercions, nullable values, deserialized input.
 - **Callee paths (L6):** local callees returning null/None/undefined, raising, mutating arguments, or returning a different shape.
-- **Control/resource paths (L5/L8):** every early return, throw/raise, catch/except, break/continue after acquisition or required post-condition. **L5 exhaustive enumeration:** when a required side-effect (audit log, metric, notification, state update) must run on every exit, verify EVERY exit path independently — `return`, explicit `raise`/`throw`, implicit raises from callees, `break`, `continue`. Name each skipped path separately in the finding; a finding that identifies only the first skipped path is incomplete. Example: "Two paths skip `audit_log.record`: (1) `return _unauthorized()` at line 3, (2) `raise BadRequest` at line 5." Note: if the skipped operation is a resource release or rollback, reclassify as L8 and apply the same exhaustive path logic there.
-- **State/concurrency paths (L4/L7):** mutation during iteration, shared mutable defaults, aliases, closures, await/callback/task boundaries. For L4 also check: does the function mutate its argument AND return it (aliased-return dual contract)? For L7: does the hazard require two concurrent execution contexts — if yes it is L7, not L4 (e.g. lock-order inversion between goroutines is L7 even though it involves mutation).
+- **Control/resource paths (L5/L8):** every early return, throw/raise, catch/except, break/continue after acquisition or required post-condition. **L5 exhaustive enumeration:** when a required side-effect (audit log, metric, notification, state update) must run on every exit, verify EVERY exit path independently; `return`, explicit `raise`/`throw`, implicit raises from callees, `break`, `continue`. Name each skipped path separately in the finding; a finding that identifies only the first skipped path is incomplete. Example: "Two paths skip `audit_log.record`: (1) `return _unauthorized()` at line 3, (2) `raise BadRequest` at line 5." Note: if the skipped operation is a resource release or rollback, reclassify as L8 and apply the same exhaustive path logic there.
+- **State/concurrency paths (L4/L7):** mutation during iteration, shared mutable defaults, aliases, closures, await/callback/task boundaries. For L4 also check: does the function mutate its argument AND return it (aliased-return dual contract)? For L7: does the hazard require two concurrent execution contexts; if yes it is L7, not L4 (e.g. lock-order inversion between goroutines is L7 even though it involves mutation).
   - **L4 aliased-return trap (high priority):** When a function BOTH mutates its input in-place AND returns the same object, investigate the documented/caller contract. This is an L4 finding only when mutation violates that contract; deliberate in-place APIs are valid. The caller may write `result = func(original)` and assume `original` is unchanged. Trace: (a) confirm mutation is in-place (e.g., `list.sort()`, `del arr[i]`, `arr[i], arr[j] = arr[j], arr[i]`); (b) confirm the function returns the SAME object (not a copy); (c) construct a Trigger showing `original` is unexpectedly modified. This is L4, not L3 or L7.
-  - **L7 async interleaving (critical for asyncio/coroutines):** When shared mutable state is accessed across `await`/`yield` boundaries, the bug is L7 even if no threads are involved — asyncio coroutines interleave on a single thread via the event loop. Key indicator: a check-then-act pattern with an `await` between the check and the act. Do NOT classify asyncio interleaving as L4.
+  - **L7 async interleaving (critical for asyncio/coroutines):** When shared mutable state is accessed across `await`/`yield` boundaries, the bug is L7 even if no threads are involved; asyncio coroutines interleave on a single thread via the event loop. Key indicator: a check-then-act pattern with an `await` between the check and the act. Do NOT classify asyncio interleaving as L4.
   - **L7 memory model hazards (Java/C++/Go):** For double-checked locking, volatile/atomic, happens-before: always check BOTH (a) the visibility hazard (missing volatile/atomic) AND (b) the initialization-before-publish ordering (is the object fully constructed before other threads can see it?). Two-step trace: step 1 = reordering/visibility, step 2 = consequence of observing partially-constructed object.
 - **Time/locale paths (L9):** naive/aware datetime, DST, locale-sensitive parse/sort/format, implicit encoding.
 
@@ -77,7 +77,7 @@ Trace the most common execution path step by step:
 
 **Good trace example:**
 ```
-1. [service.py:6] `result = charge(order)` — `charge` resolves to `payments.gateway.charge` (imported at line 1).
+1. [service.py:6] `result = charge(order)`; `charge` resolves to `payments.gateway.charge` (imported at line 1).
 2. [gateway.py:3] Inside `charge`: condition `order.amount == 0` evaluates to True for this input.
 3. [gateway.py:4] Returns `None` (early return; no dict constructed).
 4. [service.py:7] `result['transaction_id']` evaluates `None['transaction_id']` → raises `TypeError`.
@@ -95,9 +95,9 @@ Then trace each selected risk path separately:
   2. caller: result = quicksort(original)
   3. inside quicksort: arr is the SAME object as original (passed by reference)
   4. quicksort mutates arr in-place via swaps
-  5. quicksort returns arr — same object
-  6. caller: original is now [1, 2, 3] — mutated without caller's knowledge
-  7. caller: result is original — they are the same object (result is original == True)
+  5. quicksort returns arr; same object
+  6. caller: original is now [1, 2, 3]; mutated without caller's knowledge
+  7. caller: result is original; they are the same object (result is original == True)
   ```
 - For **L7 memory model**: trace two threads/goroutines/coroutines with numbered interleaving steps:
   ```
@@ -105,7 +105,7 @@ Then trace each selected risk path separately:
   T1-step2: thread A enters synchronized, creates object
   T1-step3: JIT reorders: reference published BEFORE constructor completes
   T2-step1: thread B checks instance == null → false (sees non-null)
-  T2-step2: thread B returns instance — but object.data is still null
+  T2-step2: thread B returns instance; but object.data is still null
   ```
 - Stop at a confirmed safe post-condition if the candidate is not a bug; do not turn safe paths into Suggestions.
 
@@ -120,12 +120,12 @@ For each point where a premise is violated, write a finding using the five-field
 
 For Class A candidates: if the trace does not conclusively confirm consequence (reachability is already self-evident for Class A), downgrade to Suggestion with `manual verification recommended` or omit it. A plausible code smell without a concrete execution path is not a logic-review finding.
 
-**Reachability gate — apply before writing any finding:**
+**Reachability gate; apply before writing any finding:**
 
 - **Class A:** report at the assigned severity (local code is sufficient evidence).
 - **Class B:** run a reachability probe first:
-  1. Search for invariant enforcement — constructor, validator, schema definition, or call sites visible in current scope.
-  2. Enforcement found and airtight (no code path bypasses it) → **drop the candidate; do not write a finding.** Optionally record in the report Summary: "Invariant enforced at [location] — no current bug; revisit if callers or schema change."
+  1. Search for invariant enforcement; constructor, validator, schema definition, or call sites visible in current scope.
+  2. Enforcement found and airtight (no code path bypasses it) → **drop the candidate; do not write a finding.** Optionally record in the report Summary: "Invariant enforced at [location]; no current bug; revisit if callers or schema change."
   3. No enforcement found → this does not prove reachability. Establish a concrete supported caller/input path, or mark the premise partial and cap at Warning.
   4. Enforcement partial or outside current scope → report at the assigned severity, capped at 🟡 Warning, with `manual verification recommended`.
 
@@ -133,15 +133,15 @@ Record the probe result in the finding's Trace (not Premises) so the reader can 
 
 Deduplicate by root cause: if one bad callee contract creates several caller symptoms, report one L6 finding at the callee/caller contract boundary and list representative call sites in the Trace or Remedy.
 
-**No-bug discipline:** When the user's question is framed as "does X cause bug Y?" and the trace conclusively shows Y does NOT apply (e.g., `defer` in Go runs on all exit paths so there is no lock leak), write a finding concluding **NO logic error** for Y with Premises → Trace → Divergence showing why. Do not fabricate unrelated findings to appear thorough — that undermines precision and triggers false positives. However, if the Risk Path Ledger from Step 3 surfaced a separate, concrete, reachable bug with a complete trace, report it as an independent finding; a no-bug verdict on Y does not suppress genuine findings on other risks. If the ledger produced no other findings, stop.
+**No-bug discipline:** When the user's question is framed as "does X cause bug Y?" and the trace conclusively shows Y does NOT apply (e.g., `defer` in Go runs on all exit paths so there is no lock leak), write a finding concluding **NO logic error** for Y with Premises → Trace → Divergence showing why. Do not fabricate unrelated findings to appear thorough; that undermines precision and triggers false positives. However, if the Risk Path Ledger from Step 3 surfaced a separate, concrete, reachable bug with a complete trace, report it as an independent finding; a no-bug verdict on Y does not suppress genuine findings on other risks. If the ledger produced no other findings, stop.
 
-**Correctness parity principle:** Correctly concluding "no bug" is equally valuable as correctly finding a bug. A Logic Score 100 report with "no confirmed logic errors" is a professional, high-value output — not a failure. Do not lower evidence standards to produce findings. If every path in the Risk Path Ledger terminates at a confirmed safe post-condition, output Score 100 immediately. Record each path's safe-termination reason (≥1 sentence) but do NOT wrap safe paths as Suggestion findings.
+**Correctness parity principle:** Correctly concluding "no bug" is equally valuable as correctly finding a bug. A Logic Score 100 report with "no confirmed logic errors" is a professional, high-value output; not a failure. Do not lower evidence standards to produce findings. If every path in the Risk Path Ledger terminates at a confirmed safe post-condition, output Score 100 immediately. Record each path's safe-termination reason (≥1 sentence) but do NOT wrap safe paths as Suggestion findings.
 
 ## Step 5.5: Adversarial Red Team
 
 For each candidate finding that survived Step 5, attempt to **disprove it** from the defender's perspective before writing the Remedy. This step reduces false positives by forcing an adversarial check.
 
-**Three Rebuttal Questions** (answer each explicitly — do not skip):
+**Three Rebuttal Questions** (answer each explicitly; do not skip):
 
 1. **Premise rebuttal:** Does any of my premises rest on an unverified assumption? Could callers guarantee the premise through schema validation, type checking, wrapper functions, middleware, or a constructor that enforces the invariant? Search the current scope for evidence.
 
@@ -150,18 +150,18 @@ For each candidate finding that survived Step 5, attempt to **disprove it** from
 3. **Consequence rebuttal:** Even if the divergence exists, is the consequence truly harmful? Could a downstream defense (catch/except, fallback value, retry logic, idempotency guard) neutralize the impact?
 
 **Ruling:**
-- Any question finds **conclusive evidence** (a defense locatable in code) → **withdraw the finding**. Record in Summary: "Candidate [L-code] at [location] withdrawn — defense confirmed at [defense location]."
+- Any question finds **conclusive evidence** (a defense locatable in code) → **withdraw the finding**. Record in Summary: "Candidate [L-code] at [location] withdrawn; defense confirmed at [defense location]."
 - Any question finds **partial evidence** (indirect defense, uncertain coverage) → **downgrade to Suggestion** with `manual verification recommended`.
 - All three questions find **no rebuttal evidence** → **retain at original severity**.
 
-**Async/concurrency protection clause:** For L7 findings involving async interleaving (asyncio, goroutines, coroutines) or memory model hazards (volatile, happens-before), apply stricter rebuttal thresholds — withdraw when a concrete defense excludes the harmful interleaving: synchronization, immutable state, exclusive ownership, or no suspension between check and act. A primitive’s mere presence is not proof; trace its scope and memory-model guarantees. Do NOT treat the GIL, event loop single-threading, or "unlikely timing" as a defense. The GIL does not prevent asyncio interleaving; single-threaded event loops DO interleave at await points.
+**Async/concurrency protection clause:** For L7 findings involving async interleaving (asyncio, goroutines, coroutines) or memory model hazards (volatile, happens-before), apply stricter rebuttal thresholds; withdraw when a concrete defense excludes the harmful interleaving: synchronization, immutable state, exclusive ownership, or no suspension between check and act. A primitive’s mere presence is not proof; trace its scope and memory-model guarantees. Do NOT treat the GIL, event loop single-threading, or "unlikely timing" as a defense. The GIL does not prevent asyncio interleaving; single-threaded event loops DO interleave at await points.
 
 **Recording:** Append the rebuttal conclusion to the Trace field:
-- `Rebuttal check: PASSED — no defense mechanism found in scope.`
-- `Rebuttal check: DOWNGRADED — partial defense found at [location].`
-- `Rebuttal check: WITHDRAWN — confirmed defense at [location].`
+- `Rebuttal check: PASSED; no defense mechanism found in scope.`
+- `Rebuttal check: DOWNGRADED; partial defense found at [location].`
+- `Rebuttal check: WITHDRAWN; confirmed defense at [location].`
 
-(Chinese: `反驳检查：已通过——范围内未发现防御机制。` / `反驳检查：已降级——在 [位置] 发现部分防御。` / `反驳检查：已撤回——在 [位置] 确认防御。`)
+(Chinese: `反驳检查：已通过--范围内未发现防御机制。` / `反驳检查：已降级--在 [位置] 发现部分防御。` / `反驳检查：已撤回--在 [位置] 确认防御。`)
 
 ## Step 6: Apply Iron Law (Five-Field Discipline)
 
@@ -177,7 +177,7 @@ Provide a **concrete input or state** that triggers the bug. The trigger must be
 ```
 Trigger: remove_inactive([User(active=False), User(active=False), User(active=True)])
   Expected: returns [User(active=True)]  (1 element)
-  Actual:   returns [User(active=False), User(active=True)]  (2 elements — second inactive user skipped)
+  Actual:   returns [User(active=False), User(active=True)]  (2 elements; second inactive user skipped)
 ```
 
 **Bad trigger (unacceptable):**
@@ -214,13 +214,13 @@ After writing the Remedy, mentally re-execute the Trigger input against the **fi
 
 **Recording:** Append to the Remedy field:
 ```
-Dry-run: ✅ Trigger input re-traced through fix — divergence eliminated, no regression, happy path preserved.
+Dry-run: ✅ Trigger input re-traced through fix; divergence eliminated, no regression, happy path preserved.
 ```
-(Chinese: `预演：✅ 触发输入已在修复代码中重新追踪——偏差已消除，无回归，正常路径行为保持不变。`)
+(Chinese: `预演：✅ 触发输入已在修复代码中重新追踪--偏差已消除，无回归，正常路径行为保持不变。`)
 
 If dry-run reveals a problem, record the issue and the corrected remedy:
 ```
-Dry-run: ⚠️ Initial remedy [description] failed check (b) — [new issue]. Revised remedy applied.
+Dry-run: ⚠️ Initial remedy [description] failed check (b); [new issue]. Revised remedy applied.
 ```
 
 ## Step 7: Compute Score and Output
@@ -229,9 +229,9 @@ Dry-run: ⚠️ Initial remedy [description] failed check (b) — [new issue]. R
 2. Fill in the Report Template from `report-template.md`.
 3. Summary: most critical finding, recommended next action, the scope and remaining uncertainty; a local score cannot certify shipping safety.
 
-## Step 8: Execution Verification Gate (Optional — when runtime is available)
+## Step 8: Execution Verification Gate (Optional: when runtime is available)
 
-When the environment supports code execution (CLI with shell access, sandbox, or REPL), apply this step to each **Critical** and **Warning** finding. Skip this step entirely if no runtime is available — mark findings as `unverified — no runtime available` and proceed.
+When the environment supports code execution (CLI with shell access, sandbox, or REPL), apply this step to each **Critical** and **Warning** finding. Skip this step entirely if no runtime is available; mark findings as `unverified; no runtime available` and proceed.
 
 **Prerequisite check:** Detect whether the target language runtime is available (e.g., `python3 --version`, `node --version`, `go version`). If unavailable, skip to output.
 
@@ -244,7 +244,7 @@ For each finding, generate a self-contained script based on the Trigger field:
 - The script must **FAIL** (assertion error or exception) when the bug is present.
 
 **Safety constraints:**
-- The script must contain only pure computation — NO network requests, file writes, database operations, or other side effects.
+- The script must contain only pure computation; NO network requests, file writes, database operations, or other side effects.
 - If the function depends on external state, create in-memory mocks/stubs.
 - Execution timeout: 10 seconds maximum.
 
@@ -253,31 +253,31 @@ For each finding, generate a self-contained script based on the Trigger field:
 Execute the reproducer script against the original code.
 - **Script FAILS (assertion error or expected exception):** Bug confirmed. Proceed to 8c.
 - **Script PASSES:** The proposed reproducer did not confirm the finding. Check fixture fidelity and reachability; withdraw only if the actual candidate is disproved, otherwise mark unverified.
-- **Script errors unexpectedly (syntax error, import failure):** Script needs fixing. Retry once with corrected script. If still broken, mark `unverified — reproducer generation failed`.
+- **Script errors unexpectedly (syntax error, import failure):** Script needs fixing. Retry once with corrected script. If still broken, mark `unverified; reproducer generation failed`.
 
 ### 8c. Apply Remedy and Re-run (Confirm Fix Works)
 
 Apply the Remedy to the code in the reproducer script, then re-execute.
 - **Script PASSES:** The fix passed this reproducer; broader regression freedom is not established. Mark finding as `✅ Execution-verified`.
-- **Script still FAILS:** Remedy is ineffective. Revise and retry (up to 3 attempts). After 3 failures, mark `unverified — remedy needs manual review`.
-- **Script throws NEW exception:** Remedy introduces regression. Revert, mark `⚠️ Remedy caused regression — manual fix recommended`.
+- **Script still FAILS:** Remedy is ineffective. Revise and retry (up to 3 attempts). After 3 failures, mark `unverified; remedy needs manual review`.
+- **Script throws NEW exception:** Remedy introduces regression. Revert, mark `⚠️ Remedy caused regression; manual fix recommended`.
 
 ### 8d. Update Report
 
 Add verification status to each finding:
 
 ```
-Verification: ✅ Execution-verified — reproducer FAIL → applied fix → PASS
-Verification: ⚠️ Unverified — [reason]
-Verification: ❌ False positive withdrawn — reproducer PASS on original code
+Verification: ✅ Execution-verified; reproducer FAIL → applied fix → PASS
+Verification: ⚠️ Unverified; [reason]
+Verification: ❌ False positive withdrawn; reproducer PASS on original code
 ```
 
-(Chinese: `验证：✅ 已执行验证——复现脚本 FAIL → 应用修复 → PASS` / `验证：⚠️ 未验证——[原因]` / `验证：❌ 假阳性已撤回——复现脚本在原始代码上 PASS`)
+(Chinese: `验证：✅ 已执行验证--复现脚本 FAIL → 应用修复 → PASS` / `验证：⚠️ 未验证--[原因]` / `验证：❌ 假阳性已撤回--复现脚本在原始代码上 PASS`)
 
 **Example reproducer (Python, L4 mutation-during-iteration):**
 
 ```python
-# 最小可复现脚本 — L4: 迭代中修改列表
+# 最小可复现脚本: L4: 迭代中修改列表
 class User:
     def __init__(self, active):
         self.is_active = active

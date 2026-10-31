@@ -1,6 +1,6 @@
 ---
 name: google-no-code
-description: "Design Google Forms and wire Apps Script triggers (onFormSubmit) for email alerts, spreadsheet logging, and dynamic questions — no code editor required."
+description: "Design Google Forms and wire Apps Script triggers (onFormSubmit) for email alerts, spreadsheet logging, and dynamic questions; no code editor required."
 category: automation
 risk: critical
 source: self

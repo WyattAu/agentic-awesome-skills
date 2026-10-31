@@ -85,7 +85,7 @@ Every `Must*` method has a corresponding error-returning version (without the `M
 | `input.Slash` | `/` key |
 | `input.ControlLeft` | Left Ctrl |
 | `input.ShiftLeft` | Left Shift |
-| `input.KeyA` — `input.KeyZ` | Letter keys |
+| `input.KeyA`; `input.KeyZ` | Letter keys |
 | `input.MouseLeft` | Left mouse button |
 
 ## Launcher (`rod/lib/launcher`)

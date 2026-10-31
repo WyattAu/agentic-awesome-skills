@@ -31,15 +31,15 @@ This is a documentation-only import: no Monte Carlo MCP server, hooks, credentia
 - References or opens a `.sql` file or dbt model (files in `models/`) → run Workflow 1
 - Mentions a table name, dataset, or dbt model name in passing → run Workflow 1
 
-- Describes a planned change to a model (new column, join update, filter change, refactor) → **STOP — run Workflow 4 before writing any code**
+- Describes a planned change to a model (new column, join update, filter change, refactor) → **STOP; run Workflow 4 before writing any code**
 -
 - Adds a new column, metric, or output expression to an existing
   model → run Workflow 4 first, then ALWAYS offer Workflow 2
-  regardless of risk tier — do not skip the monitor offer
+  regardless of risk tier; do not skip the monitor offer
 - Asks about data quality, freshness, row counts, or anomalies → run Workflow 1
 - Wants to triage or respond to a data quality alert → run Workflow 3
 
-Present the results as context the engineer needs before proceeding — not as a response to a question.
+Present the results as context the engineer needs before proceeding; not as a response to a question.
 
 ## When NOT to activate this skill
 
@@ -53,11 +53,11 @@ Do not invoke Monte Carlo tools for:
 
 Determine whether a file is a dbt model from project paths/configuration; valid models need not contain ref() or source().
 
-### Macros and snapshots — gate edits, skip auto-context
+### Macros and snapshots: gate edits, skip auto-context
 
 Macro files (`macros/`) and snapshot files (`snapshots/`) are **not** models, so
 do not auto-fetch Monte Carlo context (Workflow 1) when they are opened. However,
-macros are inlined into every model that calls them at compile time — a one-line
+macros are inlined into every model that calls them at compile time; a one-line
 macro change can silently alter dozens of models. Snapshots control historical
 tracking and are similarly sensitive.
 
@@ -71,7 +71,7 @@ for those models before proceeding with the edit.
 
 **Before editing or writing any SQL for a dbt model or pipeline, you MUST run Workflow 4.**
 
-This applies whenever the user expresses intent to modify a model — including phrases like:
+This applies whenever the user expresses intent to modify a model; including phrases like:
 
 - "I want to add a column…"
 - "Let me add / I'm adding…"
@@ -99,11 +99,11 @@ Parameter changes (threshold values, date constants, numeric limits) appear
 safe but silently change model output. Treat them the same as logic changes
 for impact assessment purposes.
 
-**Do not write or edit any SQL until the change impact assessment (Workflow 4) has been presented to the user.** The assessment must come first — not after the edit, not in parallel.
+**Do not write or edit any SQL until the change impact assessment (Workflow 4) has been presented to the user.** The assessment must come first; not after the edit, not in parallel.
 
 ---
 
-## Pre-edit gate — check before modifying any file
+## Pre-edit gate: check before modifying any file
 
 **Before calling Edit, Write, or MultiEdit on any `.sql` or dbt model
 file, you MUST check:**
@@ -115,7 +115,7 @@ file, you MUST check:**
    report with synthesis connected to this specific change.
    **If risk is High or Medium:** ask "Do you want me to proceed
    with the edit?" and wait for explicit confirmation.
-   **If risk is Low:** use judgment — proceed if straightforward
+   **If risk is Low:** use judgment; proceed if straightforward
    and no concerns found, otherwise ask before editing.
 
 **Important: "Workflow 4 already ran this session" is NOT sufficient
@@ -123,7 +123,7 @@ to proceed.** Each distinct change prompt requires its own synthesis
 step connecting the MC findings to that specific change.
 
 The synthesis must reference the specific columns, filters, or logic
-being changed in the current prompt — not just general table health.
+being changed in the current prompt; not just general table health.
 
 Example:
 
@@ -135,7 +135,7 @@ Example:
 
 The only exception: if the user explicitly acknowledges the risk
 and confirms they want to skip (e.g. "I know the risks, just make
-the change") — proceed but note the skipped assessment.
+the change"); proceed but note the skipped assessment.
 
 ## Available MCP tools
 
@@ -148,7 +148,7 @@ The upstream workflow expects these tools from a separately configured `monte-ca
 | `getTable`                   | Schema, stats, metadata for a table                                  |
 | `getAssetLineage`            | Upstream/downstream dependencies (call with mcons array + direction) |
 | `getAlerts`                  | Active incidents and alerts                                          |
-| `getMonitors`                | Monitor configs — filter by table using mcons array                  |
+| `getMonitors`                | Monitor configs; filter by table using mcons array                  |
 | `getQueriesForTable`         | Recent query history                                                 |
 | `getQueryData`               | Full SQL for a specific query                                        |
 | `createValidationMonitorMac` | Generate validation monitors-as-code YAML                            |
@@ -183,7 +183,7 @@ Each workflow has detailed step-by-step instructions in `references/workflows.md
 **When:** User is investigating an active data quality incident.
 **What:** Lists open alerts, checks table state, traces lineage for root cause, reviews recent queries.
 
-### 4. Change impact assessment — REQUIRED before modifying a model
+### 4. Change impact assessment: REQUIRED before modifying a model
 
 **When:** Any intent to modify a dbt model's logic, columns, joins, or filters.
 **What:** Surfaces blast radius, downstream dependencies, active incidents, monitor coverage, and query exposure. Produces a risk-tiered report with synthesis connecting findings to specific code recommendations. See `references/workflows.md` for the full assessment sequence, report format, and synthesis rules.
@@ -191,7 +191,7 @@ Each workflow has detailed step-by-step instructions in `references/workflows.md
 ### 5. Change validation queries
 
 **When:** Explicit engineer request only (e.g. "validate this change", "ready to commit").
-**What:** Generates 3-5 targeted SQL queries to verify the change behaved as intended. Uses Workflow 4 context — requires both impact assessment and file edit in session.
+**What:** Generates 3-5 targeted SQL queries to verify the change behaved as intended. Uses Workflow 4 context; requires both impact assessment and file edit in session.
 
 ---
 
@@ -204,7 +204,7 @@ Always end the synthesis with one clear, specific recommendation in plain Englis
 any file. You must ask the engineer and receive an explicit "yes", "go ahead",
 "proceed", or similar confirmation before making code changes.
 Say: "Do you want me to proceed with the edit?"
-Do NOT say: "Proceeding with the edit." — that skips the engineer's decision.
+Do NOT say: "Proceeding with the edit."; that skips the engineer's decision.
 
 **If the risk is Low:** Use your judgment based on the synthesis findings. If
 the change is straightforward and the synthesis found no concerns, you may
@@ -224,12 +224,12 @@ output one marker per assessed table. **IMPORTANT: use only the table/model name
 
 <!-- MC_IMPACT_CHECK_COMPLETE: <table_name> -->
 
-(Use the model filename without .sql extension — NOT "acme.analytics.orders" or "prod.public.client_hub")
+(Use the model filename without .sql extension; NOT "acme.analytics.orders" or "prod.public.client_hub")
 
 How many markers to emit depends on how the assessment was triggered:
 
 **Hook-triggered** (the pre-edit hook blocked an edit and instructed you to run
-the assessment): Be strict — only emit markers for tables whose lineage **and**
+the assessment): Be strict; only emit markers for tables whose lineage **and**
 monitor coverage were fetched directly via Monte Carlo tools in this session. If
 the engineer describes changes to multiple tables but only one was formally
 assessed, emit only one marker. The pre-edit hook will gate the other tables and
@@ -248,7 +248,7 @@ When Workflow 4 finds zero custom monitors on a table's affected columns, output
 
 Use only the table/model name (NOT the full MCON). This allows the plugin's hooks
 to remind the engineer about monitor coverage at commit time. Only output this
-marker when the gap is specifically about the columns or logic being changed —
+marker when the gap is specifically about the columns or logic being changed -
 not for general table-level monitor absence.
 
 ## Limitations

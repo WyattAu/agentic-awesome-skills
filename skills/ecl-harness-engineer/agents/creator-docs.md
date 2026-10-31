@@ -63,7 +63,7 @@ Line 96-120: Safety boundaries and generated harness notes
   the user's task requires it.
 - Every link must point to a doc that actually exists
 - Include real package names from architecture analysis
-- Don't embed detailed explanations — link to docs/
+- Don't embed detailed explanations; link to docs/
 - Link to `docs/ECL.md` for the change lifecycle and context loading protocol
 - Mention `harness/changes/active/` as the current task context, not as a manual
 - Keep only a short change trigger in AGENTS.md; put the detailed lifecycle in `docs/ECL.md`.
@@ -165,8 +165,8 @@ Development setup and commands.
 Component-level design documents.
 
 **For each key component** (from architecture analysis):
-1. `docs/design-docs/index.md` — Index table
-2. `docs/design-docs/{component}.md` — Detailed design doc
+1. `docs/design-docs/index.md`; Index table
+2. `docs/design-docs/{component}.md`; Detailed design doc
 
 **Each design doc must have**:
 - Overview
@@ -179,11 +179,11 @@ Component-level design documents.
 
 ### Additional docs (as needed)
 
-- `docs/QUALITY.md` — Quality standards
-- `docs/TESTING.md` — Testing strategy
-- `docs/SECURITY.md` — Security considerations
-- `docs/PRODUCT_SENSE.md` — Product context
-- `docs/references/index.md` — Reference index
+- `docs/QUALITY.md`; Quality standards
+- `docs/TESTING.md`; Testing strategy
+- `docs/SECURITY.md`; Security considerations
+- `docs/PRODUCT_SENSE.md`; Product context
+- `docs/references/index.md`; Reference index
 
 ## Quality Requirements
 

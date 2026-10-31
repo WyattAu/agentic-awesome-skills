@@ -211,7 +211,7 @@ curl https://api.example.com/usage \
 
 ### The Value Conversation
 
-Don't just communicate price—communicate value relative to alternatives.
+Don't just communicate price-communicate value relative to alternatives.
 
 **Alternative cost comparisons:**
 ```

@@ -53,7 +53,7 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 | `flavor = null` | 普通 APK/ELF/PE/Mach-O 逆向、算法/固件分析、渗透 / CTF / JS 签名 | 原任务模板 + Base 通用元素；不套 malware/APT 专属章节 |
 | thin `vuln` | 用户明确要求漏洞/补丁/CVE 技术分析 | 概述→影响/复现→崩溃与补丁分析→防护建议（叠加在 null 上，非第 3 默认全文 flavor） |
 
-原则：**模板在精不在多** —— 仅 2 个厂商全文 flavor；`vuln` 仅为可选 thin overlay，不另建第三套默认全文模板。
+原则：**模板在精不在多** -- 仅 2 个厂商全文 flavor；`vuln` 仅为可选 thin overlay，不另建第三套默认全文模板。
 与 §0 Evidence→Finding→Path **同时生效**；冲突时 Evidence 契约优先。
 
 ### 输出规范
@@ -179,12 +179,12 @@ For README, API endpoint, and file organization templates, see [references/templ
 - 手动：用户说"写报告"、"出文档"、"writeup"
 
 **同级关联模块**:
-- `apk-reverse/` — APK 逆向完成后生成逆向报告
-- `ida-reverse/` — 二进制分析完成后生成逆向报告
-- `radare2/` — CLI 分析完成后生成逆向报告
-- `js-reverse/` — JS 签名逆向完成后生成签名报告
-- `reverse-engineering/` — 通用逆向完成后生成逆向报告
-- `field-journal/` — 报告内容同时作为进化日志的数据来源
+- `apk-reverse/`; APK 逆向完成后生成逆向报告
+- `ida-reverse/`; 二进制分析完成后生成逆向报告
+- `radare2/`; CLI 分析完成后生成逆向报告
+- `js-reverse/`; JS 签名逆向完成后生成签名报告
+- `reverse-engineering/`; 通用逆向完成后生成逆向报告
+- `field-journal/`; 报告内容同时作为进化日志的数据来源
 
 **安全报告模板**: `references/security-report-templates.md`
 **厂商报告规则**: `references/vendor-report-rules.md`（flavor: malware | apt | null；optional overlay: vuln）

@@ -83,8 +83,8 @@ The following responses are illustrative formats, not verified live results or e
 ```
 You: "Find MCP servers that can convert PDF files to text"
 Agent (via Global Chat MCP): Searching across 6 registries...
-  - @anthropic/pdf-tools (mcpservers.org) — PDF parsing and text extraction
-  - pdf-converter-mcp (mcp.so) — Convert PDF to text, markdown, or HTML
+  - @anthropic/pdf-tools (mcpservers.org); PDF parsing and text extraction
+  - pdf-converter-mcp (mcp.so); Convert PDF to text, markdown, or HTML
   - ...
 ```
 
@@ -107,7 +107,7 @@ Agent (via Global Chat MCP): 4 registries carry Kubernetes-related agents (23 to
 - Use the MCP server for automated workflows and agent-to-agent discovery
 - Use the web directory for manual exploration and comparison
 - Validate syntax against the relevant current protocol; validation does not guarantee discoverability
-- Check multiple registries — coverage varies significantly by domain
+- Check multiple registries; coverage varies significantly by domain
 
 ## Common Pitfalls
 

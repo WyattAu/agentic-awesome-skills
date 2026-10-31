@@ -46,7 +46,7 @@ This is the canonical structure each finding follows:
 <One-line statement of the issue. Plain English, no jargon.>
 
 ### 2. Observations
-<Bulleted list of what was observed during testing. Concrete facts only — no interpretation yet.>
+<Bulleted list of what was observed during testing. Concrete facts only; no interpretation yet.>
 - <Observation 1>
 - <Observation 2>
 - ...
@@ -55,10 +55,10 @@ This is the canonical structure each finding follows:
 <Technical explanation of the vulnerability. 2-4 paragraphs. Reader should understand WHY the observations indicate a vulnerability, what the underlying flaw is.>
 
 ### 4. Impact
-<What an attacker could achieve. Concrete attacker outcomes, NOT generic CIA triad statements. Tie to the client's business — money, data, reputation, regulatory exposure.>
+<What an attacker could achieve. Concrete attacker outcomes, NOT generic CIA triad statements. Tie to the client's business; money, data, reputation, regulatory exposure.>
 
 ### 5. Recommendation
-<Specific, actionable remediation. Vendor patch, configuration change, code-level fix. Avoid "implement security best practices" — say what specifically.>
+<Specific, actionable remediation. Vendor patch, configuration change, code-level fix. Avoid "implement security best practices"; say what specifically.>
 
 ### 6. Proof of Concept (PoC)
 <Steps to reproduce, numbered. Include the exact HTTP requests, payloads, tools used.>
@@ -83,7 +83,7 @@ Before delivery, separate observed impact from plausible but untested impact; re
 
 ## Severity & status disciplines
 
-### Severity table (client-facing — different from CVSS-only)
+### Severity table (client-facing: different from CVSS-only)
 
 | Severity | Business definition | CVSS rough range |
 |---|---|---|
@@ -97,11 +97,11 @@ Before delivery, separate observed impact from plausible but untested impact; re
 
 This is the field that distinguishes red-team deliverables from bug-bounty reports. Use one of:
 
-- **Confirmed** — reproduced multiple times, with full PoC
-- **Confirmed; patched mid-engagement** — was reproducible, client patched during the test window (still ship the finding — see `mid-engagement-ir-detection`)
-- **Confirmed; partially reproducible** — works but needs specific conditions
-- **Suspected (1 signal)** — single indicator, not confirmed (rare — usually drop)
-- **Out-of-band** — finding from passive recon, not actively tested
+- **Confirmed**; reproduced multiple times, with full PoC
+- **Confirmed; patched mid-engagement**; was reproducible, client patched during the test window (still ship the finding; see `mid-engagement-ir-detection`)
+- **Confirmed; partially reproducible**; works but needs specific conditions
+- **Suspected (1 signal)**; single indicator, not confirmed (rare; usually drop)
+- **Out-of-band**; finding from passive recon, not actively tested
 
 ---
 
@@ -148,14 +148,14 @@ Each finding MUST have reproducible steps. The PoC section is what proves the fi
    | F01 | ... | Critical | Confirmed |
    ...
 
-4. Findings (one per ## section, in severity order — Critical first)
+4. Findings (one per ## section, in severity order; Critical first)
 
 5. Attack Surface / Recon Appendix
    - Subdomains discovered
    - Open ports / services
    - Technology fingerprints
    - APKs found
-   - Credentials in breach corpora (count + sample only — redact)
+   - Credentials in breach corpora (count + sample only; redact)
    - Identity-fabric map (IdP, MFA posture)
 
 6. Indicators of Compromise (IoCs)
@@ -216,7 +216,7 @@ Variants get letter suffixes (F02a, F02b). Always zero-pad finding number.
 
 ---
 
-## Writing tone — for client deliverables
+## Writing tone: for client deliverables
 
 | Section | Tone |
 |---|---|
@@ -234,14 +234,14 @@ Variants get letter suffixes (F02a, F02b). Always zero-pad finding number.
 - Number reproduction steps; never "first... then... also..."
 
 **Never:**
-- "Could potentially" — prove it or drop it
-- "It might be possible" — same
-- "We recommend implementing security best practices" — say which one specifically
+- "Could potentially"; prove it or drop it
+- "It might be possible"; same
+- "We recommend implementing security best practices"; say which one specifically
 - "The application is vulnerable to..." without saying what specifically
 
 ---
 
-## Audience translation — same finding, different framing
+## Audience translation: same finding, different framing
 
 Example: hardcoded JWT in APK
 
@@ -249,21 +249,21 @@ Example: hardcoded JWT in APK
 |---|---|---|---|
 | Impact | "JWT signing key extracted from APK enables forging admin tokens" | "Anyone with the customer-facing mobile app can read any customer's invoice" | "A leaked secret in our mobile app lets attackers impersonate users" |
 
-The same finding's Impact paragraph should cover both ends — start with the business outcome, then drop into technical detail.
+The same finding's Impact paragraph should cover both ends; start with the business outcome, then drop into technical detail.
 
 ---
 
 ## Findings that are sometimes wrongly excluded
 
-Red-team deliverables should include — not just bug-bounty payable bugs:
+Red-team deliverables should include; not just bug-bounty payable bugs:
 
-- **Information disclosure that helps attack mapping** (CodeIgniter debug toolbar leaking routes, version banners on appliances) — Medium
-- **User enumeration** (Microsoft OneDrive 302 vs 404 differential) — Medium
-- **Pre-existing security state observations** (247 accounts already locked by external attacker; weak password policies) — Informational with stakeholder relevance
-- **Defensive observations** (SOC patched our SQLi within 30 min — evidence of working detection) — Informational/positive
-- **Sister-app pattern issues** (same code template across 7 apps) — Medium (multiplied blast radius)
+- **Information disclosure that helps attack mapping** (CodeIgniter debug toolbar leaking routes, version banners on appliances); Medium
+- **User enumeration** (Microsoft OneDrive 302 vs 404 differential); Medium
+- **Pre-existing security state observations** (247 accounts already locked by external attacker; weak password policies); Informational with stakeholder relevance
+- **Defensive observations** (SOC patched our SQLi within 30 min; evidence of working detection); Informational/positive
+- **Sister-app pattern issues** (same code template across 7 apps); Medium (multiplied blast radius)
 
-Bug bounty would reject most of these. Red-team deliverables embrace them — the client paid for the assessment to know.
+Bug bounty would reject most of these. Red-team deliverables embrace them; the client paid for the assessment to know.
 
 ---
 
@@ -274,7 +274,7 @@ Beyond findings themselves, the deliverable should include:
 - Detected SOC responses (timestamps when defenses kicked in)
 - Concurrent external attacker activity (if any was observed)
 - Findings the client patched during the engagement (with PoC pre-patch as evidence)
-- Tooling failures (e.g., MCP timeout, CAPTCHA not solvable) — these affect what was/wasn't testable
+- Tooling failures (e.g., MCP timeout, CAPTCHA not solvable); these affect what was/wasn't testable
 
 Each gives the client context about their real-world detection capability, which often matters more than the findings themselves.
 
@@ -304,7 +304,7 @@ Pre-delivery checklist:
 - [ ] Every finding has at least one screenshot or HTTP-level evidence
 - [ ] Every PoC includes redactions for client PII (mask emails, phone numbers, IDs)
 - [ ] Every screenshot is referenced in the MD with a relative path that resolves
-- [ ] DOCX render check — image count matches MD reference count
+- [ ] DOCX render check; image count matches MD reference count
 - [ ] Severity ordering: Critical findings first, then High, etc.
 - [ ] Executive summary is updated to match final findings (count, themes)
 - [ ] Cleanup statement explicitly says what was created and what was removed
@@ -317,22 +317,22 @@ Pre-delivery checklist:
 
 ## Bridge to neighboring skills
 
-- `report-writing` — bug-bounty platform reports (different format, different audience)
-- `redteam-mindset` — informs what counts as a finding worth shipping
-- `mid-engagement-ir-detection` — informs the "patched mid-engagement" status pattern
-- `evidence-hygiene` — informs screenshot redaction discipline
-- `m365-entra-attack`, `enterprise-vpn-attack`, etc. — each provides finding-templates specific to its attack surface
+- `report-writing`; bug-bounty platform reports (different format, different audience)
+- `redteam-mindset`; informs what counts as a finding worth shipping
+- `mid-engagement-ir-detection`; informs the "patched mid-engagement" status pattern
+- `evidence-hygiene`; informs screenshot redaction discipline
+- `m365-entra-attack`, `enterprise-vpn-attack`, etc.; each provides finding-templates specific to its attack surface
 
 ---
 
 ## Anti-patterns
 
-- **DO NOT** write a 50-page report for 3 findings — pad-by-page erodes credibility
-- **DO NOT** use the same severity for everything — calibrate
+- **DO NOT** write a 50-page report for 3 findings; pad-by-page erodes credibility
+- **DO NOT** use the same severity for everything; calibrate
 - **DO NOT** copy-paste OWASP top-10 boilerplate into Description sections
-- **DO NOT** include findings without PoCs — they read as speculative
-- **DO NOT** skip the Recommendation section's specificity — "patch and review" doesn't help
-- **DO NOT** mix bug-bounty CVSS scoring with red-team severity unthinkingly — context differs (e.g., a Medium on a CVSS basis can be Critical for the client if it touches a regulated dataset)
+- **DO NOT** include findings without PoCs; they read as speculative
+- **DO NOT** skip the Recommendation section's specificity; "patch and review" doesn't help
+- **DO NOT** mix bug-bounty CVSS scoring with red-team severity unthinkingly; context differs (e.g., a Medium on a CVSS basis can be Critical for the client if it touches a regulated dataset)
 
 ---
 
@@ -352,15 +352,15 @@ These are an upstream anecdote, not a representative benchmark or expected deliv
 
 ## Related Skills & Chains
 
-- **`triage-validation`** — This template ingests findings that have ALREADY passed the 7-Question Gate. Engagement flow: every finding through `triage-validation` first → only validated findings → `redteam-report-template` packaging. Skipping triage produces a deliverable padded with informational noise that erodes client trust.
-- **`evidence-hygiene`** — The DOCX with 16 embedded screenshots only works if evidence was captured systematically throughout the engagement. Engagement flow: `evidence-hygiene` discipline at session start → timestamped, organized screenshot folder → `redteam-report-template` consumes that folder to populate Evidence blocks.
-- **`redteam-mindset`** — The Subject / Observations / Description / Impact / Recommendation / PoC structure assumes the operator already thinks like a red-teamer (impact-first, blast-radius framing). Engagement flow: `redteam-mindset` loaded at engagement start → findings collected with red-team framing baked in → `redteam-report-template` produces deliverable without rewriting every Impact section.
-- **`mid-engagement-ir-detection`** — Defensive-action findings (SOC patches mid-test, new IPS rules deployed, account lockouts triggered by external attacker) are first-class findings in red-team deliverables. Engagement flow: `mid-engagement-ir-detection` captures behavior-change events → each becomes its own Subject in the deliverable, framed as "client capability observation" not as "bug we missed."
-- **`report-writing`** + **`bugcrowd-reporting`** — Bug-bounty platform reports use DIFFERENT structure (one finding per submission, platform-specific severity scoring, OOS-clause counters). Engagement flow: if engagement mode is `bug-bounty` per project memory → use `report-writing` / `bugcrowd-reporting` instead. This template is ONLY for external red-team / enterprise client deliverables.
+- **`triage-validation`**; This template ingests findings that have ALREADY passed the 7-Question Gate. Engagement flow: every finding through `triage-validation` first → only validated findings → `redteam-report-template` packaging. Skipping triage produces a deliverable padded with informational noise that erodes client trust.
+- **`evidence-hygiene`**; The DOCX with 16 embedded screenshots only works if evidence was captured systematically throughout the engagement. Engagement flow: `evidence-hygiene` discipline at session start → timestamped, organized screenshot folder → `redteam-report-template` consumes that folder to populate Evidence blocks.
+- **`redteam-mindset`**; The Subject / Observations / Description / Impact / Recommendation / PoC structure assumes the operator already thinks like a red-teamer (impact-first, blast-radius framing). Engagement flow: `redteam-mindset` loaded at engagement start → findings collected with red-team framing baked in → `redteam-report-template` produces deliverable without rewriting every Impact section.
+- **`mid-engagement-ir-detection`**; Defensive-action findings (SOC patches mid-test, new IPS rules deployed, account lockouts triggered by external attacker) are first-class findings in red-team deliverables. Engagement flow: `mid-engagement-ir-detection` captures behavior-change events → each becomes its own Subject in the deliverable, framed as "client capability observation" not as "bug we missed."
+- **`report-writing`** + **`bugcrowd-reporting`**; Bug-bounty platform reports use DIFFERENT structure (one finding per submission, platform-specific severity scoring, OOS-clause counters). Engagement flow: if engagement mode is `bug-bounty` per project memory → use `report-writing` / `bugcrowd-reporting` instead. This template is ONLY for external red-team / enterprise client deliverables.
 
 ## Limitations
 
-- Process guidance only; it does not authorize probing or exploitation — those steps need their own authorized skill and confirmation gate.
+- Process guidance only; it does not authorize probing or exploitation; those steps need their own authorized skill and confirmation gate.
 - Docs-only import: upstream templates, commands, and research assets are not bundled.
 
 ### Example

@@ -22,7 +22,7 @@
 - **CSS_APPROACH_DESCRIPTION**: One sentence summarizing how styling works. E.g.: "Tailwind CSS v4 with utility-first classes. No separate CSS files except globals.css."
 - **STYLING_RULES**: Approach-specific rules:
   - **Tailwind**:
-    - No inline `style={{}}` — always Tailwind classes. Exception: dynamically computed values (mouse-position based).
+    - No inline `style={{}}`; always Tailwind classes. Exception: dynamically computed values (mouse-position based).
     - `cn()` for combining conditional classes. If `lib/utils.ts` has `cn`, document it.
     - Responsive: mobile-first with `sm:`, `md:`, `lg:` breakpoints.
     - Dark mode: if using `class="dark"` or `prefers-color-scheme`.

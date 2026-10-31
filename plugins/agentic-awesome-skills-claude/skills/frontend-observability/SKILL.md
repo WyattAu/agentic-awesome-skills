@@ -16,14 +16,14 @@ license_source: https://github.com/stareezy-1/frontend-architecture-skill/blob/m
 Use this skill when you need a portable, framework-agnostic field-side observability pattern for React or React Native integrations. Defines a typed taxonomy and best-effort provider dispatch with explicit consent, privacy and runtime limitations.
 
 
-> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
-> This skill describes a **field-side observability system** — event taxonomy, provider fan-out,
-> real-user vitals, error reporting, consent — not a dashboard or a specific vendor. It is the
+> Portable skill; readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.
+> This skill describes a **field-side observability system**; event taxonomy, provider fan-out,
+> real-user vitals, error reporting, consent; not a dashboard or a specific vendor. It is the
 > **field complement to the frontend-lighthouse skill**: Lighthouse is the _lab_ gate (synthetic,
 > pre-merge); this is the _field_ (what real users actually experience). It lives in a
 > `services/analytics/` module per the **frontend-architecture** skill.
 
-The goal: you can answer "what are real users doing, and what are they experiencing?" — with a
+The goal: you can answer "what are real users doing, and what are they experiencing?"; with a
 **typed event vocabulary** (no stringly-typed `track("clicked_thing")` scattered everywhere), a
 fan-out that is **best-effort** (provider exceptions are isolated where supported), real **Core Web Vitals
 from the field**, and **consent** respected before anything fires.
@@ -32,10 +32,10 @@ from the field**, and **consent** respected before anything fires.
 
 ## 0. The five core ideas
 
-1. **Events are a typed vocabulary.** Event names are canonical constants with a union type — never inline string literals. The taxonomy is reviewable in one file and the compiler rejects typos.
-2. **Fan-out is best-effort, not a scheduling guarantee.** `track()` dispatches to every provider, each with synchronous and asynchronous error handling. A missing global, a thrown provider, an unloaded script — ordinary caught exceptions/rejections do not propagate; synchronous vendor work can still block the thread.
+1. **Events are a typed vocabulary.** Event names are canonical constants with a union type; never inline string literals. The taxonomy is reviewable in one file and the compiler rejects typos.
+2. **Fan-out is best-effort, not a scheduling guarantee.** `track()` dispatches to every provider, each with synchronous and asynchronous error handling. A missing global, a thrown provider, an unloaded script; ordinary caught exceptions/rejections do not propagate; synchronous vendor work can still block the thread.
 3. **One entry point, SSR-safe.** A single `track(event, props)` is the only way to record. It's reached through a context hook that no-ops outside a provider and on the server, so instrumented components render safely anywhere.
-4. **Field vitals complement lab budgets.** Real-user LCP/INP/CLS are reported to the same fan-out. Lighthouse samples controlled conditions; field vitals estimate actual experiences for the observed population — together they close the loop.
+4. **Field vitals complement lab budgets.** Real-user LCP/INP/CLS are reported to the same fan-out. Lighthouse samples controlled conditions; field vitals estimate actual experiences for the observed population; together they close the loop.
 5. **Consent gates everything.** No telemetry (events, vitals, error reports with PII) fires before opt-in. Consent state is checked at the fan-out boundary, not sprinkled through call sites.
 
 ---
@@ -91,17 +91,17 @@ export type AnalyticsEvent =
 ```
 
 ```ts
-// CORRECT — typed constant, autocompletes, can't typo
+// CORRECT; typed constant, autocompletes, can't typo
 track(ANALYTICS_EVENTS.GITHUB_CLICK, { url });
 
-// WRONG — stringly-typed, drifts, no compile check
+// WRONG; stringly-typed, drifts, no compile check
 track("github-click"); // ❌ silently a different event from "github_click"
 ```
 
 **Hard rules:**
 
 - No inline event-name strings anywhere; only `ANALYTICS_EVENTS.*`.
-- Event names are snake_case and stable — renaming one breaks historical dashboards, so treat the catalog as a contract.
+- Event names are snake_case and stable; renaming one breaks historical dashboards, so treat the catalog as a contract.
 - Keep `props` shapes small and PII-light (see §6); prefer ids over names, never raw emails.
 
 ---
@@ -121,7 +121,7 @@ export function track(
   event: AnalyticsEvent,
   props?: Record<string, unknown>,
 ): void {
-  if (!hasConsent()) return; // §6 — nothing fires before opt-in
+  if (!hasConsent()) return; // §6; nothing fires before opt-in
   for (const adapter of analyticsAdapters) {
     try {
       void Promise.resolve(adapter(event, props)).catch(() => {
@@ -135,7 +135,7 @@ export function track(
 }
 ```
 
-Each adapter is a tiny `(event, props) => void` that **guards its provider global** — it no-ops on
+Each adapter is a tiny `(event, props) => void` that **guards its provider global**; it no-ops on
 the server (no `window`) and when the provider script is absent, so a missing or unloaded provider
 never throws.
 
@@ -172,15 +172,15 @@ export const analyticsAdapters: AnalyticsAdapter[] = [
 ];
 ```
 
-### 3.1 Firebase Analytics — one adapter, two platforms
+### 3.1 Firebase Analytics: one adapter, two platforms
 
 Firebase Analytics ships two SDKs that share the **same `logEvent(name, params)` contract**, so a
-single conceptual adapter covers both web and React Native — only the import and the "is it
+single conceptual adapter covers both web and React Native; only the import and the "is it
 available?" guard differ. On web the adapter never imports the SDK at module top level (it's
 browser-only and async), so it stays SSR-safe.
 
 ```ts
-// services/analytics/adapters.firebase.web.ts — Firebase JS SDK (web)
+// services/analytics/adapters.firebase.web.ts; Firebase JS SDK (web)
 import type { Analytics } from "firebase/analytics";
 import { hasConsent } from "./consent";
 import type { AnalyticsAdapter } from "./adapters";
@@ -201,7 +201,7 @@ export const firebaseAdapter: AnalyticsAdapter = (event, props) => {
 ```
 
 ```ts
-// services/analytics/firebase.init.ts — lazy, browser-only init (web)
+// services/analytics/firebase.init.ts; lazy, browser-only init (web)
 import { initializeApp, getApps } from "firebase/app";
 import { hasConsent } from "./consent";
 import { setFirebaseAnalytics } from "./adapters.firebase.web";
@@ -218,7 +218,7 @@ export async function initFirebaseAnalytics(): Promise<void> {
 ```
 
 ```ts
-// services/analytics/adapters.firebase.native.ts — @react-native-firebase/analytics (RN / Expo)
+// services/analytics/adapters.firebase.native.ts; @react-native-firebase/analytics (RN / Expo)
 import analytics from "@react-native-firebase/analytics";
 import type { AnalyticsAdapter } from "./adapters";
 
@@ -231,11 +231,11 @@ export const firebaseAdapter: AnalyticsAdapter = (event, props) => {
 **Same shape, two files.** Resolve the platform variant by file extension
 (`adapters.firebase.native.ts` via Metro's `.native.ts` resolution, or a `Platform.OS` switch) so
 the **registry, `track` fan-out, consent gate, taxonomy, and `useAnalytics` hook never change**
-across platforms. Verify Firebase event-name/parameter restrictions and reserved names for the pinned SDK. Snake_case is this taxonomy convention, not the full provider validation contract. Gate `initFirebaseAnalytics()` on consent (§6) — Firebase also exposes
+across platforms. Verify Firebase event-name/parameter restrictions and reserved names for the pinned SDK. Snake_case is this taxonomy convention, not the full provider validation contract. Gate `initFirebaseAnalytics()` on consent (§6); Firebase also exposes
 `setAnalyticsCollectionEnabled(false)` to harden the opt-out.
 
 **Why this shape:** analytics is the _last_ thing that should crash an app. A vendor script that
-fails to load, a global that isn't there yet, an adapter that throws on a malformed prop — all are
+fails to load, a global that isn't there yet, an adapter that throws on a malformed prop; all are
 contained. The registry being exported and mutable makes dispatch unit-testable without mounting any
 provider.
 
@@ -278,7 +278,7 @@ export function useAnalytics(): AnalyticsContextValue {
 ```
 
 ```tsx
-// a tracked leaf — Server Components can't use the hook, so wrap in a thin client component
+// a tracked leaf; Server Components can't use the hook, so wrap in a thin client component
 "use client";
 export function TrackedGithubLink({ href, children }: Props) {
   const { track } = useAnalytics();
@@ -293,8 +293,8 @@ export function TrackedGithubLink({ href, children }: Props) {
 }
 ```
 
-The provider does **no work during render** — `track` is stable and adapters guard their own
-`window` access — but still verify the framework-specific client boundary and actual initialization effects.
+The provider does **no work during render**; `track` is stable and adapters guard their own
+`window` access; but still verify the framework-specific client boundary and actual initialization effects.
 
 ---
 
@@ -327,13 +327,13 @@ export function reportWebVitals(): void {
 
 - Call `reportWebVitals()` once on the client (e.g. in the analytics provider's effect, or Next.js `useReportWebVitals`).
 - For field Core Web Vitals, assess LCP ≤2500ms, INP ≤200ms and CLS ≤0.1 at the relevant 75th percentile; do not compare a CLS×1000 value to0.1 or treat a single observation as the population. Lighthouse does not directly measure real-user INP.
-- Lab budget green + field "poor" = a gap between your test conditions and real devices/networks — exactly what field RUM exists to reveal.
+- Lab budget green + field "poor" = a gap between your test conditions and real devices/networks; exactly what field RUM exists to reveal.
 
 ---
 
 ## 6. Consent and privacy gating
 
-Telemetry fires only after opt-in, checked **once at the fan-out boundary** (§3) — not duplicated at
+Telemetry fires only after opt-in, checked **once at the fan-out boundary** (§3); not duplicated at
 every call site.
 
 ```ts
@@ -349,7 +349,7 @@ export function hasConsent(): boolean {
 
 **Hard rules:**
 
-- `track()` early-returns when consent is absent — no events, no vitals, no error PII before opt-in.
+- `track()` early-returns when consent is absent; no events, no vitals, no error PII before opt-in.
 - Keep `props` PII-light: ids and enums, not emails/names/free text. Treat anything user-entered as sensitive.
 - Respect "Do Not Track" / regional regimes (GDPR/CCPA) by defaulting consent to `false` where required.
 - Error reports must scrub PII before leaving the device.
@@ -359,7 +359,7 @@ export function hasConsent(): boolean {
 ## 7. Error reporting at boundaries
 
 Caught render errors and unhandled rejections go through the same fan-out (or a dedicated Sentry
-adapter), at **deliberate boundaries** — not a global swallow.
+adapter), at **deliberate boundaries**; not a global swallow.
 
 ```tsx
 // error/ErrorBoundary.tsx (essence)
@@ -394,22 +394,22 @@ The taxonomy + fan-out are constant; each provider needs a pinned-version adapte
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Next.js**              | `AnalyticsProvider` in the root layout (client boundary); call `initFirebaseAnalytics()` in a client effect; vitals via `useReportWebVitals`.                                                                                                                                                                                                                 |
 | **React + Vite / Remix** | provider at app root; `initFirebaseAnalytics()` + `reportWebVitals()` in a top-level effect.                                                                                                                                                                                                                                                                  |
-| **Expo / React Native**  | swap the web-vitals source for RN performance APIs and the web provider scripts for native SDKs (**`@react-native-firebase/analytics`**, Amplitude, PostHog-RN); the **taxonomy, `track` fan-out, consent gate, and `useAnalytics` hook are unchanged**. The Firebase adapter is the same shape — it guards the native module instead of `window` (see §3.1). |
+| **Expo / React Native**  | swap the web-vitals source for RN performance APIs and the web provider scripts for native SDKs (**`@react-native-firebase/analytics`**, Amplitude, PostHog-RN); the **taxonomy, `track` fan-out, consent gate, and `useAnalytics` hook are unchanged**. The Firebase adapter is the same shape; it guards the native module instead of `window` (see §3.1). |
 
 ---
 
 ## 9. Conventions checklist (enforce in review)
 
-- [ ] Event names are canonical constants with a union type — zero inline event strings.
+- [ ] Event names are canonical constants with a union type; zero inline event strings.
 - [ ] `track()` is the single entry point; reached via `useAnalytics()` (no-op outside a provider/SSR).
 - [ ] Every adapter guards its provider global and no-ops when absent or on the server.
-- [ ] Each adapter call is individually try/caught — one provider can't break the app or the others.
+- [ ] Each adapter call is individually try/caught; one provider can't break the app or the others.
 - [ ] Consent is checked once at the fan-out; nothing fires before opt-in.
 - [ ] `props` are PII-light (ids/enums, not emails/names); error reports scrub PII.
 - [ ] Real-user Web Vitals report through the same fan-out, with native units and a declared field population.
 - [ ] Error boundaries are placed per route/segment and report unexpected errors only.
 - [ ] The provider does no render-time work; the context value is memoized/stable.
-- [ ] Mutating the adapter registry (tests) is the dispatch-observation seam — no real provider mounted in tests.
+- [ ] Mutating the adapter registry (tests) is the dispatch-observation seam; no real provider mounted in tests.
 
 ---
 
@@ -425,7 +425,7 @@ at the interaction. Never inline the string.
 **Wiring Firebase Analytics (web + RN):** add a `firebaseAdapter` to the registry using the
 platform-resolved files in §3.1 (`firebase/analytics` on web behind a lazy browser-only
 `initFirebaseAnalytics()`; `@react-native-firebase/analytics` on native). Gate init on consent. The
-taxonomy and fan-out are untouched — Firebase is just one more entry in `analyticsAdapters`.
+taxonomy and fan-out are untouched; Firebase is just one more entry in `analyticsAdapters`.
 
 **Closing the lab/field loop:** wire `reportWebVitals()` and compare field ratings against the
 lighthouse skill's budgets; investigate any "lab green / field poor" gap.
@@ -441,7 +441,7 @@ firing before consent.
 This skill follows the Anthropic `SKILL.md` format and is portable across agents.
 
 1. Keep it under `skills/frontend-observability/SKILL.md` in a public GitHub repo.
-2. Keep the frontmatter `name` and high-signal `description` — discovery indexes match against it.
+2. Keep the frontmatter `name` and high-signal `description`; discovery indexes match against it.
 3. Install with: `npx skills add <org>/<repo> --skill "frontend-observability"`.
 4. Non-`SKILL.md` agents can be pointed here from `AGENTS.md` / `CLAUDE.md`; Kiro can mirror it as a steering file.
 

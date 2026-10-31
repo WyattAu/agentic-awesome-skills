@@ -1,4 +1,4 @@
-# SKILL DE RISCO — AUDITOR DE RISCO EM LEILÕES - Detailed Guide
+# SKILL DE RISCO: AUDITOR DE RISCO EM LEILÕES - Detailed Guide
 
 > This file contains the detailed procedure and reference material extracted from `SKILL.md` for focused loading. The root skill defines activation, examples, safety constraints, and limitations.
 
@@ -17,7 +17,7 @@ a decisão de investimento.
 ---
 
 
-## Categoria 1 — Riscos Jurídicos
+## Categoria 1: Riscos Jurídicos
 
 #### 1.1 Risco de Nulidade da Arrematação
 
@@ -44,13 +44,13 @@ a decisão de investimento.
 - [ ] Devedor reside no imóvel? → **Alto risco**
 - [ ] Imóvel foi arguido como bem de família nos autos? → **Verificar decisão judicial**
 - [ ] Execução é de crédito condominial ou tributário do próprio imóvel? → Exceção legal (pode penhorar)
-- [ ] Fiança locatícia? → Súmula 549 STJ (pode penhorar — mas há divergência)
+- [ ] Fiança locatícia? → Súmula 549 STJ (pode penhorar; mas há divergência)
 
 **Decisão:**
 ```
 Se o imóvel É bem de família E a execução NÃO é de débito do próprio imóvel
 ou crédito do art. 3º da Lei 8.009/90:
-→ RISCO MUITO ALTO — NÃO ARREMATAR sem análise profunda dos autos
+→ RISCO MUITO ALTO; NÃO ARREMATAR sem análise profunda dos autos
 ```
 
 #### 1.3 Risco de Ônus Reais Ocultos
@@ -68,7 +68,7 @@ ou crédito do art. 3º da Lei 8.009/90:
 **Ação:** Sempre obter certidão
 
 
-## Categoria 2 — Riscos Financeiros
+## Categoria 2: Riscos Financeiros
 
 #### 2.1 Risco de Débitos Acumulados
 
@@ -89,7 +89,7 @@ CONDOMÍNIO:
 
 ÁGUA/ESGOTO:
   - Verificar com concessionária (SABESP, CEDAE, Copasa etc.)
-  - Pode gerar suspensão do serviço — custo de religação
+  - Pode gerar suspensão do serviço; custo de religação
   - Em geral: dívida pessoal, não propter rem (mas varia por estado)
 
 ENERGIA ELÉTRICA:
@@ -129,7 +129,7 @@ Exemplo: R$ 300.000 × 10,5% × 12 meses / 12 = R$ 31.500/ano (custo de oportuni
 Sem tabela de preços fornecida: obter orçamento local com data, escopo, contingência e vistoria técnica; não inventar custo por m².
 
 
-## Categoria 3 — Riscos Operacionais
+## Categoria 3: Riscos Operacionais
 
 #### 3.1 Risco de Não Conseguir Finalizar a Arrematação
 
@@ -140,7 +140,7 @@ Sem tabela de preços fornecida: obter orçamento local com data, escopo, contin
 | Devedor paga antes da assinatura do auto | A qualquer momento antes | Baixo-Médio | Leilão desfeito, dinheiro devolvido |
 | Embargos com efeito suspensivo | Até o auto de arrematação | Baixo | Leilão suspenso |
 | Nulidade arguida no prazo de 10 dias | 10 dias após arrematação | Baixo | Anulação do leilão |
-| Bem de família reconhecido tardiamente | Após 10 dias — ação autônoma | Muito Baixo | Complexa defesa |
+| Bem de família reconhecido tardiamente | Após 10 dias; ação autônoma | Muito Baixo | Complexa defesa |
 | Ação de embargos de terceiro | CPC art. 675: na execução, até 5 dias após arrematação e antes da assinatura da carta; outras ações dependem do caso | Muito Baixo | Requer defesa judicial |
 
 #### 3.2 Risco de Fraude ou Manipulação
@@ -161,7 +161,7 @@ Sem tabela de preços fornecida: obter orçamento local com data, escopo, contin
 ---
 
 
-## Categoria 4 — Riscos De Mercado E Sistêmicos
+## Categoria 4: Riscos De Mercado E Sistêmicos
 
 #### 4.1 Risco de Liquidez no Momento da Saída
 
@@ -179,16 +179,16 @@ Sem tabela de preços fornecida: obter orçamento local com data, escopo, contin
 **Verificar antes de arrematar:**
 - [ ] Imóvel em área de risco de deslizamento (CEMADEN)
 - [ ] Imóvel em área de inundação (plano diretor municipal)
-- [ ] Imóvel em APP (Área de Preservação Permanente — margens de rios)
+- [ ] Imóvel em APP (Área de Preservação Permanente; margens de rios)
 - [ ] Contaminação do solo (áreas industriais, postos de gasolina)
 - [ ] Laudo geotécnico de terrenos em encosta
-- [ ] Histórico de sinistros (chuvas, enchentes) — INMET, prefeitura
+- [ ] Histórico de sinistros (chuvas, enchentes); INMET, prefeitura
 
 **Fontes de consulta:**
-- CEMADEN (cemaden.gov.br) — mapas de risco
-- IBGE Malha Digital — limites territoriais; zoneamento deve ser verificado no município
-- Prefeitura Municipal — alvará, habite-se, plano diretor
-- MDR/MCID — banco de dados de risco
+- CEMADEN (cemaden.gov.br); mapas de risco
+- IBGE Malha Digital; limites territoriais; zoneamento deve ser verificado no município
+- Prefeitura Municipal; alvará, habite-se, plano diretor
+- MDR/MCID; banco de dados de risco
 
 ---
 
@@ -220,17 +220,17 @@ RISCOS DE MERCADO:
 SCORE TOTAL: ___ / 40
 
 CLASSIFICAÇÃO:
-0-5:   POUCOS INDICADORES NO CHECKLIST — Não comprova segurança
-6-10:  MÉDIO RISCO ⚠️ — Mitigar os pontos identificados
-11-18: ALTO RISCO 🔴 — Só com expertise e desconto maior
-19+:   MUITO ALTO RISCO ❌ — Evitar, salvo especialista experiente
+0-5:   POUCOS INDICADORES NO CHECKLIST; Não comprova segurança
+6-10:  MÉDIO RISCO ⚠️; Mitigar os pontos identificados
+11-18: ALTO RISCO 🔴; Só com expertise e desconto maior
+19+:   MUITO ALTO RISCO ❌; Evitar, salvo especialista experiente
 ```
 
 ---
 
 ### Obrigatórias (Sempre, Para Qualquer Lote):
 
-- [ ] Certidão de ônus reais (matrícula atualizada) — R$ 50-150
+- [ ] Certidão de ônus reais (matrícula atualizada); R$ 50-150
 - [ ] Certidão negativa de IPTU (ou extrato de débitos)
 - [ ] Leitura completa do edital (Bloco 1-8 da SKILL de Edital)
 - [ ] Pesquisa do processo no sistema do TJ (ou cartório)
@@ -256,7 +256,7 @@ CLASSIFICAÇÃO:
 ---
 
 
-## Tomada De Decisão — Árvore De Decisão
+## Tomada De Decisão: Árvore De Decisão
 
 ```
 SCORE DE RISCO:
@@ -296,7 +296,7 @@ o valor efetivo da arrematação (lance). Isso aumenta o custo em até 3x.
 
 **Base legal para contestar:**
 - STJ Tema 1.113: valor em condições normais de mercado; valor declarado tem presunção relativa, afastável por processo administrativo próprio, sem valor de referência unilateral prévio
-- Em leilão judicial: a carta de arrematação é o título — valor = lance
+- Em leilão judicial: a carta de arrematação é o título; valor = lance
 - Em leilão extrajudicial: verificar o título aplicável e a situação registral; não presumir escritura em toda operação
 - Possível impugnar administrativamente ou via mandado de segurança
 
@@ -327,13 +327,13 @@ A assinatura do auto produz efeitos definidos no caput, sujeitos às hipóteses 
 |---------|----------------------|----------|
 | Devedor vendeu imóvel antes da penhora | Muito Baixo | Verificar título, registro, intimações e decisão; não presumir proteção automática |
 | Terceiro alega ter comprado antes da penhora | Médio | Depende de registro + boa-fé |
-| Imóvel objeto de ação de usucapião por terceiro | Alto | Conflito de títulos — pode anular |
+| Imóvel objeto de ação de usucapião por terceiro | Alto | Conflito de títulos; pode anular |
 | Devedor doou para parente (fraude contra credores) | Baixo | Arrematante em hasta protegido |
 
 **Verificação obrigatória:**
 - Certidão de distribuidor cível: verificar se há ação real (usucapião, reivindicatória)
   movida por terceiro sobre o imóvel
-- Se existir ação de terceiro reivindicando o imóvel: ALTO RISCO — evitar
+- Se existir ação de terceiro reivindicando o imóvel: ALTO RISCO; evitar
 
 ---
 
@@ -380,7 +380,7 @@ Se ROI ponderado < CDI → NÃO VALE O RISCO
 
 | Termo | Definição |
 |-------|-----------|
-| Propter Rem | Obrigação que segue o bem (IPTU, condomínio) — não desaparece com a venda |
+| Propter Rem | Obrigação que segue o bem (IPTU, condomínio); não desaparece com a venda |
 | Risco Jurídico | Possibilidade de anulação, nulidade ou impugnação da arrematação |
 | Risco Operacional | Dificuldade na execução (desocupação, reforma, regularização) |
 | Risco Tributário | ITBI sobre VMP vs. lance; IR sobre ganho de capital na revenda |
@@ -402,13 +402,13 @@ Guia estático: o orquestrador, scan_registry.py, match_skills.py e skill-sentin
 ## Referências
 
 Fontes normativas e referências de risco:
-- CEMADEN (cemaden.gov.br) — mapas de risco ambiental
-- IBGE — malha digital; prefeitura — zoneamento
-- CPC/2015 — Arts. 829-925 (Execução e Arrematação)
-- Lei 9.514/1997 — Alienação Fiduciária
-- Lei 8.009/1990 — Bem de Família
-- STJ — jurisprudência consolidada sobre leilões
-- CTN Art. 130 — responsabilidade tributária propter rem
+- CEMADEN (cemaden.gov.br); mapas de risco ambiental
+- IBGE; malha digital; prefeitura; zoneamento
+- CPC/2015; Arts. 829-925 (Execução e Arrematação)
+- Lei 9.514/1997; Alienação Fiduciária
+- Lei 8.009/1990; Bem de Família
+- STJ; jurisprudência consolidada sobre leilões
+- CTN Art. 130; responsabilidade tributária propter rem
 
 
 ## Best Practices

@@ -144,7 +144,7 @@ Clarity Gate **enforces** their presence where epistemically required ("Should u
 
 ### Relationship to Spec Suite
 
-The 9 Verification Points guide **semantic review** — content quality checks that require judgment (human or AI). They answer questions like "Should this claim be hedged?" and "Are these numbers consistent?"
+The 9 Verification Points guide **semantic review**; content quality checks that require judgment (human or AI). They answer questions like "Should this claim be hedged?" and "Are these numbers consistent?"
 
 When review completes, output a CGD file conforming to CLARITY_GATE_FORMAT_SPEC.md. The C/S rules in CLARITY_GATE_FORMAT_SPEC.md validate **file structure**, not semantic content.
 
@@ -297,7 +297,7 @@ Claim Extracted --> Does Source of Truth Exist?
 - User-provided connectors to structured sources
 - Financial systems, Git commits, CRM, etc.
 
-### Tier 2: Two-Round HITL Verification — MANDATORY
+### Tier 2: Two-Round HITL Verification: MANDATORY
 
 **Round A: Derived Data Confirmation**
 - Claims from sources found in session
@@ -361,14 +361,14 @@ Clarity Gate: CLEAR | REVIEWED
 
 **Required CGD Elements (per spec):**
 - YAML frontmatter with all required fields:
-  - `clarity-gate-version` — Tool version (no "v" prefix)
-  - `processed-date` — YYYY-MM-DD format
-  - `processed-by` — Processor name
-  - `clarity-status` — CLEAR or UNCLEAR
-  - `hitl-status` — PENDING, REVIEWED, or REVIEWED_WITH_EXCEPTIONS
-  - `hitl-pending-count` — Integer ≥ 0
-  - `points-passed` — e.g., `1-9` or `1-4,7,9`
-  - `hitl-claims` — List of verified claims (may be empty `[]`)
+  - `clarity-gate-version`; Tool version (no "v" prefix)
+  - `processed-date`; YYYY-MM-DD format
+  - `processed-by`; Processor name
+  - `clarity-status`; CLEAR or UNCLEAR
+  - `hitl-status`; PENDING, REVIEWED, or REVIEWED_WITH_EXCEPTIONS
+  - `hitl-pending-count`; Integer ≥ 0
+  - `points-passed`; e.g., `1-9` or `1-4,7,9`
+  - `hitl-claims`; List of verified claims (may be empty `[]`)
 - End marker (HTML comment + status line):
   ```
   <!-- CLARITY_GATE_END -->
@@ -377,9 +377,9 @@ Clarity Gate: CLEAR | REVIEWED
 - HITL verification record (if status is REVIEWED)
 
 **Optional/Computed Fields:**
-- `rag-ingestable` — **Computed by validators**, not manually set. Shows `true` only when `CLEAR | REVIEWED` with no exclusion blocks.
-- `document-sha256` — Required. 64-char lowercase hex hash for integrity verification. See spec §2 for computation rules.
-- `exclusions-coverage` — Optional. Fraction of body inside exclusion blocks (0.0–1.0).
+- `rag-ingestable`; **Computed by validators**, not manually set. Shows `true` only when `CLEAR | REVIEWED` with no exclusion blocks.
+- `document-sha256`; Required. 64-char lowercase hex hash for integrity verification. See spec §2 for computation rules.
+- `exclusions-coverage`; Optional. Fraction of body inside exclusion blocks (0.0–1.0).
 
 **Escape Mechanism:** To write about markers like `*(estimated)*` without triggering parsing, wrap in backticks: `` `*(estimated)*` ``
 
@@ -485,10 +485,10 @@ The 9 Verification Points apply to SOT content:
 - **Structured claims table:** `## Verified Claims` section with columns: Claim, Value, Source, Verified
 - **Table outside exclusions:** The verified claims table must NOT be inside an exclusion block
 - **Staleness markers:** Use `[STABLE]`, `[CHECK]`, `[VOLATILE]`, `[SNAPSHOT]` in content
-  - `[STABLE]` — Expected low drift; still verify when accuracy or current applicability matters
-  - `[CHECK]` — Verify before citing
-  - `[VOLATILE]` — Changes frequently; always verify
-  - `[SNAPSHOT]` — Point-in-time data; include date when citing
+  - `[STABLE]`; Expected low drift; still verify when accuracy or current applicability matters
+  - `[CHECK]`; Verify before citing
+  - `[VOLATILE]`; Changes frequently; always verify
+  - `[SNAPSHOT]`; Point-in-time data; include date when citing
 
 ---
 

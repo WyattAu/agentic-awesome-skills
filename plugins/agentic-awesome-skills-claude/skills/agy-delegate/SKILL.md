@@ -83,7 +83,7 @@ below means the reviewed upstream runtime directory; this installed catalog dire
 node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
 # choose a model label:                 add --model "<label from agy models>"
 # reasoning effort (low, medium, high): add --effort high
-# read-only (plan mode — no edits):     add --read-only
+# read-only (plan mode: no edits):     add --read-only
 # enable Antigravity terminal sandbox:  add --sandbox
 # resume the most recent conversation:  add --resume-last  (delta brief only)
 # see all options:                      node .../relay.mjs --help
@@ -170,7 +170,7 @@ going beyond the brief, ask - don't expand the mandate yourself). The full treat
 
 ## Limitations
 
-- Docs-only import — executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `agy` CLI, Node 18+, git.
-- Relay never commits — it only returns structured result JSON; you review and land the commit.
+- Docs-only import; executable `scripts/relay.mjs` not included; see upstream for full runtime. Requires `agy` CLI, Node 18+, git.
+- Relay never commits; it only returns structured result JSON; you review and land the commit.
 
-> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT) — docs-only, runtime not bundled.
+> Adapted from [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) (MIT); docs-only, runtime not bundled.
